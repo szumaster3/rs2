@@ -132268,6 +132268,7 @@
   {
     "destroy_message": "Drop",
     "shop_price": "9",
+    "examine": "A raw turkey.",
     "durability": null,
     "name": "Raw turkey",
     "destroy": "true",
@@ -132293,6 +132294,7 @@
   },
   {
     "shop_price": "1",
+    "examine": "Oh dear, it's totally burnt!",
     "durability": null,
     "name": "Burnt turkey",
     "archery_ticket_price": "0",
@@ -132330,6 +132332,7 @@
   },
   {
     "shop_price": "1",
+    "examine": "Oh dear, it's totally burnt!",
     "durability": null,
     "name": "Burnt turkey drumstick",
     "archery_ticket_price": "0",
@@ -133658,23 +133661,5 @@
     "examine": "You should not have this.",
     "name": "ASDT Slot",
     "id": "14430"
-  },
-  {
-    "examine": "A raw turkey.",
-    "name": "Raw turkey",
-    "weight": "0.25",
-    "id": "14431"
-  },
-  {
-    "examine": "Oh dear, it's totally burnt!",
-    "name": "Burnt turkey",
-    "weight": "0.17",
-    "id": "14432"
-  },
-  {
-    "examine": "Oh dear, it's totally burnt!",
-    "name": "Burnt turkey drumstick",
-    "weight": "\t0.17",
-    "id": "144303"
   }
 ]
