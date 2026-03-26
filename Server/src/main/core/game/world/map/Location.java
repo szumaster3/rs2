@@ -243,9 +243,10 @@ public final class Location extends Node {
             return false;
         }
 
-        int a = Math.abs(other.x - x);
-        int b = Math.abs(other.y - y);
-        return Math.max(a,b) <= dist;
+        int a = (other.x - x);
+        int b = (other.y - y);
+        double product = Math.sqrt((a * a) + (b * b));
+        return product <= dist;
     }
 
     /**

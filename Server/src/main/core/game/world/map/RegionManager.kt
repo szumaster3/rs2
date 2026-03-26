@@ -557,6 +557,26 @@ object RegionManager {
     }
 
     /**
+     * Gets the list of local players within a grid-based distance.
+     * @param n The entity.
+     * @param distance The distance to the entity.
+     * @return The list of local players.
+     */
+    @JvmStatic
+    fun getNearbyPlayers(n: Entity, distance: Int): List<Player> {
+        val players: MutableList<Player> = LinkedList()
+        for (r in n.viewport.viewingPlanes) {
+            for (p in r.players) {
+                if (p.location.withinMaxnormDistance(n.location, distance)) {
+                    players.add(p)
+                }
+            }
+        }
+
+        return players
+    }
+
+    /**
      * Gets the surrounding players.
      * @param n The node the players should be surrounding.
      * @param ignore The nodes not to add to the list.
@@ -659,25 +679,6 @@ object RegionManager {
             }
         }
         return npcs
-    }
-
-    /**
-     * Gets all nearby players within a configurable area around the given player.
-     *
-     * @param player the source player in the center of the area
-     * @param radius the search radius (e.g. 1)
-     * @return a list of nearby valid players within the given range
-     */
-    fun getNearbyPlayers(player: Player, radius: Int = 1): List<Player> {
-        return RegionManager
-            .getLocalPlayers(player, radius)
-            .filter { p ->
-                p != player &&
-                        p.username != player.username &&
-                        p.isActive &&
-                        !p.locks.isInteractionLocked() &&
-                        p.location.withinDistance(player.location, radius)
-            }
     }
 
     /**

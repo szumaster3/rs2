@@ -106,7 +106,7 @@ class LunarSpell : SpellListener("lunar") {
 
             curePoison(player)
 
-            for (acct in RegionManager.getLocalPlayers(player, 1)) {
+            for (acct in RegionManager.getNearbyPlayers(player, 1)) {
                 if (!acct.isActive || acct.locks.isInteractionLocked()) {
                     continue
                 }
@@ -685,7 +685,7 @@ class LunarSpell : SpellListener("lunar") {
 
             val doses = potion.getDose(item)
 
-            val nearby = RegionManager.getLocalPlayers(player, 1).filter {
+            val nearby = RegionManager.getNearbyPlayers(player, 1).filter {
                 it != player &&
                         it.isActive &&
                         (it.settings.isAcceptAid || it is AIPlayer)
@@ -751,7 +751,7 @@ class LunarSpell : SpellListener("lunar") {
 
             val doses = potion.getDose(item)
 
-            val nearby = RegionManager.getLocalPlayers(player, 1).filter {
+            val nearby = RegionManager.getNearbyPlayers(player, 1).filter {
                 it != player &&
                         it.isActive &&
                         (it.settings.isAcceptAid || it is AIPlayer)
@@ -944,7 +944,7 @@ class LunarSpell : SpellListener("lunar") {
                 return@onCast
             }
 
-            val players = RegionManager.getLocalPlayers(player, 1).filter {
+            val players = RegionManager.getNearbyPlayers(player, 1).filter {
                 it != player &&
                         it.isActive &&
                         it.settings.isAcceptAid &&
