@@ -662,6 +662,25 @@ object RegionManager {
     }
 
     /**
+     * Gets all nearby players within a configurable area around the given player.
+     *
+     * @param player the source player in the center of the area
+     * @param radius the search radius (e.g. 1)
+     * @return a list of nearby valid players within the given range
+     */
+    fun getNearbyPlayers(player: Player, radius: Int = 1): List<Player> {
+        return RegionManager
+            .getLocalPlayers(player, radius)
+            .filter { p ->
+                p != player &&
+                        p.username != player.username &&
+                        p.isActive &&
+                        !p.locks.isInteractionLocked() &&
+                        p.location.withinDistance(player.location, radius)
+            }
+    }
+
+    /**
      * Gets a list of scenery objects around the given entity within a specified distance.
      *
      * @param entity The entity to get scenery near.
