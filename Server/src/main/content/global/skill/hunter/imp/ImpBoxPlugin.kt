@@ -50,6 +50,11 @@ class ImpBoxPlugin : InteractionListener, InterfaceListener {
         fun open(player: Player) {
             if (findBox(player) == null) return
 
+            if (player.inCombat()) {
+                sendMessage(player, "You can't do this while in combat.")
+                return
+            }
+
             player.interfaceManager.open(Component(Components.IMP_BOX_478))?.apply {
                 closeEvent = CloseEvent { p, _ ->
                     p.interfaceManager.openDefaultTabs()
@@ -80,14 +85,14 @@ class ImpBoxPlugin : InteractionListener, InterfaceListener {
             val item = player.inventory.get(slot) ?: return false
 
             if (isImpBox(item.id)) {
-                sendMessage(player, "You cannot deposit this item here.")
+                sendMessage(player, "A magical force prevents you from banking this item.")
                 return false
             }
 
             val copy = Item(item.id, item.amount)
 
             if (!player.bank.canAdd(copy)) {
-                sendMessage(player, "You cannot add this item to your bank.")
+                sendMessage(player, "The imp can't send that item to your bank.")
                 return false
             }
 
@@ -113,7 +118,7 @@ class ImpBoxPlugin : InteractionListener, InterfaceListener {
         onUseWith(IntType.ITEM, IMP_BOXES) { player, used, _ ->
             val item = used.asItem()
             if (!player.bank.canAdd(item)) {
-                sendMessage(player, "You cannot add this item to your bank.")
+                sendMessage(player, "The imp can't send that item to your bank.")
                 return@onUseWith true
             }
             runWorldTask {
