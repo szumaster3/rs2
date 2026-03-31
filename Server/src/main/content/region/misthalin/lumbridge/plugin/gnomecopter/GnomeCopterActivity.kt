@@ -22,6 +22,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import shared.consts.Items
+import shared.consts.Music
 
 @Initializable
 class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) {
@@ -234,5 +235,15 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
 
     companion object {
         private val COPTER_ITEM = Item(Items.GNOMECOPTER_12842)
+
+        val SONG_TO_UNLOCK = arrayOf(
+            Music.FAR_AWAY_372,     // Lletya
+            Music.POLES_APART_548,  // Rellekka
+            Music.CASTLE_WARS_314,  // Castle wars
+            Music.HELLS_BELLS_4     // Trollweiss
+        )
+
+        val RETURN_INTERACTION_MESSAGE = "Please don't disturb the elves."
+        val DEATH_INSIDE = "The gnomecopter abadons you to your fate."
     }
 }

@@ -13,7 +13,7 @@ enum class GnomeCopterDestination(
     CASTLE_WARS(
         0,
         "Castle Wars",
-        Location.create(2440, 3089, 0),
+        Location.create(2017, 5395, 0),
         8020,
     ),
 
@@ -27,7 +27,7 @@ enum class GnomeCopterDestination(
 
     TROLLWEISS_RELLEKKA_HUNTER(
         2,
-        "Trollweiss & Rellekka Hunter",
+        "Trollweiss and Rellekka<br>Hunter area.",
         Location.create(2523, 5393, 0), // Location.create(2541, 5418, 1)
         10068,
     ),
