@@ -1,13 +1,19 @@
-package content.region.misthalin.lumbridge.plugin.gnomecopter.data
+package content.region.misthalin.lumbridge.plugin.gnomecopter.sign.impl
 
+import content.region.misthalin.lumbridge.plugin.gnomecopter.sign.InformationSign
+import core.api.openSingleTab
+import core.api.sendString
+import core.game.component.Component
+import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.tools.DARK_RED
+import shared.consts.Components
 import shared.consts.Quests
 
 // Completed
 enum class BurghDeRottInformationSign(
     val location: Location, vararg info: String,
-) {
+) : InformationSign {
     GENERAL_STORE(
         Location(2153, 5431, 0),
         "This player is stocking the",
@@ -58,5 +64,13 @@ enum class BurghDeRottInformationSign(
         "this player is fixing it. The",
         "hole in the bank's wall also",
         "needs patching."
-    )
+    );
+
+    private val info: Array<String> = info as Array<String>
+
+    override fun read(player: Player) {
+        openSingleTab(player, Components.CARPET_INFO_723)
+        val information = info.joinToString("<br>")
+        sendString(player, information, Components.CARPET_INFO_723, 10)
+    }
 }

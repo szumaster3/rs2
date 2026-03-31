@@ -1,11 +1,17 @@
-package content.region.misthalin.lumbridge.plugin.gnomecopter.data
+package content.region.misthalin.lumbridge.plugin.gnomecopter.sign.impl
 
+import content.region.misthalin.lumbridge.plugin.gnomecopter.sign.InformationSign
+import core.api.openSingleTab
+import core.api.sendString
+import core.game.component.Component
+import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.tools.DARK_RED
+import shared.consts.Components
 import shared.consts.Quests
 
 enum class  TrollweissAndRellekkaInformationSign(val location: Location, vararg info: String,
-) {
+) : InformationSign {
     RELLEKKA_EAGLES_SIGN(Location(2543, 5430, 1),
         "In the icy mountain, a small",
         "cavern contains the lair of",
@@ -40,6 +46,13 @@ enum class  TrollweissAndRellekkaInformationSign(val location: Location, vararg 
         "building a sled and taking it",
         "for a ride down this",
         "mountain!"
-    )
+    );
 
+    private val info: Array<String> = info as Array<String>
+
+    override fun read(player: Player) {
+        openSingleTab(player, Components.CARPET_INFO_723)
+        val information = info.joinToString("<br>")
+        sendString(player, information, Components.CARPET_INFO_723, 10)
+    }
 }

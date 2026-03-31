@@ -1,8 +1,8 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter
 
-import core.api.removeAttribute
-import core.api.sendGraphics
-import core.api.setAttribute
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformationManager
+import content.region.misthalin.lumbridge.plugin.gnomecopter.sign.impl.GnomeCopterSign
+import core.api.*
 import core.game.activity.ActivityPlugin
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.Option
@@ -62,37 +62,39 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
         if (player.location != scenery.location.transform(0, 1, 0)) return
 
         if (scenery.charge == 88) {
-            player.packetDispatch.sendMessage("That gnomecopter is occupied at the moment.")
+            sendMessage(player, "That gnomecopter is occupied at the moment.")
             return
         }
 
         if (player.equipment[EquipmentContainer.SLOT_HAT] != null ||
             player.equipment[EquipmentContainer.SLOT_CAPE] != null
         ) {
-            player.packetDispatch.sendMessage("You can't wear that on a Gnomecopter.")
+            sendMessage(player, "You can't wear that on a Gnomecopter.")
             return
         }
 
         if (player.equipment[3] != null || player.equipment[5] != null) {
-            player.packetDispatch.sendMessage("You need to have your hands free to use this.")
+            sendMessage(player, "You need to have your hands free to use this.")
             return
         }
 
-        if (!player.inventory.containsItem(Item(Items.GNOMECOPTER_TICKET_12843))) {
-            player.packetDispatch.sendMessage("You need to have gnomecopter ticket to use this.")
+        if (!inInventory(player, Items.GNOMECOPTER_TICKET_12843)) {
+            sendMessage(player, "You need to have gnomecopter ticket to use this.")
             return
         }
 
         val destination = GnomeCopterDestination.default()
         setAttribute(player, "gc:route", destination)
-
         setAttribute(player, "gc:flying", true)
-        player.lock()
-        player.inventory.remove(Item(Items.GNOMECOPTER_TICKET_12843))
+        setAttribute(player, "gc:page", 0)
 
-        player.packetDispatch.sendMessage(
-            "The gnomecopter accepts the ticket and sets off for ${destination.name}."
-        )
+
+        player.lock()
+        removeItem(player, Items.GNOMECOPTER_TICKET_12843)
+
+        sendMessage(player, "The gnomecopter accepts the ticket and sets off for ${destination.name}.")
+
+        PagedInformationManager.sendPage(player, destination.tab, 0)
 
         player.faceLocation(player.location.transform(0, 3, 0))
         scenery.charge = 88
@@ -171,7 +173,7 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
         val pad = index
         player.direction = Direction.SOUTH
 
-        player.properties.teleportLocation = destination.landingLocation
+        player.properties.teleportLocation = destination.startLocation
 
         Pulser.submit(object : Pulse(1, player) {
             var stage = 0
@@ -186,7 +188,7 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
                             player.walkingQueue.addPath(step.x, step.y, true)
                         }
                     } else {
-                        val base = destination.landingLocation
+                        val base = destination.startLocation
                         player.walkingQueue.addPath(base.x, base.y - 4, true)
                         player.walkingQueue.addPath(base.x - (pad shl 1), base.y - 16, true)
                     }

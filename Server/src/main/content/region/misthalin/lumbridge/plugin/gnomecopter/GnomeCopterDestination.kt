@@ -1,56 +1,58 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter
 
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl.*
 import core.game.world.map.Location
 
 enum class GnomeCopterDestination(
     val id: Int,
     val displayName: String,
-    val landingLocation: Location,
-    val region : Int,
+    val startLocation: Location,
+    val region: Int,
+    val tab: PagedInformation,
     val autoPilot: Array<Location> = emptyArray()
 ) {
-
     CASTLE_WARS(
-        0,
-        "Castle Wars",
-        Location.create(2017, 5395, 0),
-        8020,
+        id = 0,
+        displayName = "Castle Wars",
+        startLocation = Location.create(2017, 5395, 0),
+        region = 8020,
+        tab = CastleWarsInformationTab
     ),
-
     LLETYA(
-        1,
-        "Lletya",
-        Location.create(2778, 5468, 0),
-        11093
-
+        id = 1,
+        displayName = "Lletya",
+        startLocation = Location.create(2778, 5468, 0),
+        region = 11093,
+        tab = LletyaInformationTab
     ),
-
     TROLLWEISS_RELLEKKA_HUNTER(
-        2,
-        "Trollweiss and Rellekka<br>Hunter area.",
-        Location.create(2523, 5393, 0), // Location.create(2541, 5418, 1)
-        10068,
+        id = 2,
+        displayName = "Trollweiss and Rellekka<br>Hunter area.",
+        startLocation = Location.create(2523, 5393, 0),
+        region = 10068,
+        tab = TrollweissAndRellekkaInformationTab
     ),
-
     BURTHORPE_GAMES_ROOM(
-        3,
-        "Burthorpe Games Room",
-        Location.create(2399, 5407, 0),
-        9556,
+        id = 3,
+        displayName = "Burthorpe Games Room",
+        startLocation = Location.create(2399, 5407, 0),
+        region = 9556,
+        tab = CastleWarsInformationTab
     ),
-
     BURGH_DE_ROTT(
-        4,
-        "Burgh de Rott",
-        Location.create(2132, 5411, 0),
-        8532,
+        id = 4,
+        displayName = "Burgh de Rott",
+        startLocation = Location.create(2132, 5411, 0),
+        region = 8532,
+        tab = BurghDeRottInformationTab
     ),
-
     PEST_CONTROL(
-        5,
-        "Pest Control",
-        Location.create(2274, 5421, 0),
-        9044,
+        id = 5,
+        displayName = "Pest Control",
+        startLocation = Location.create(2274, 5421, 0),
+        region = 9044,
+        tab = PestControlInformationTab
     );
 
     companion object {

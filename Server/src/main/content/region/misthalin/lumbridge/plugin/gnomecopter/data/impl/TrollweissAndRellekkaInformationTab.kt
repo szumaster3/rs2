@@ -1,5 +1,6 @@
-package content.region.misthalin.lumbridge.plugin.gnomecopter.data
+package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
 import core.tools.DARK_RED
 
 enum class TrollweissAndRellekkaInformationTab(
@@ -133,5 +134,12 @@ enum class TrollweissAndRellekkaInformationTab(
         "carry items to the bnk in",
         "exchange for their freedom",
         "and far more besides."
-    )
+    );
+
+    val lines = info.toList()
+
+    companion object : PagedInformation {
+        override val pages: List<List<String>> =
+            BurghDeRottInformationTab.values().map { it.lines }
+    }
 }

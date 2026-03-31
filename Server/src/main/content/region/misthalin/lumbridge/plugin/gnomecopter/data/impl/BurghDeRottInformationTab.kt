@@ -1,5 +1,6 @@
-package content.region.misthalin.lumbridge.plugin.gnomecopter.data
+package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
 import core.tools.DARK_RED
 
 // Complete
@@ -130,5 +131,12 @@ enum class BurghDeRottInformationTab(vararg info: String) {
     ),
     LAST_PAGE(
         "before the nail beast kills you."
-    )
+    );
+
+    val lines = info.toList()
+
+    companion object : PagedInformation {
+        override val pages: List<List<String>> =
+            values().map { it.lines }
+    }
 }

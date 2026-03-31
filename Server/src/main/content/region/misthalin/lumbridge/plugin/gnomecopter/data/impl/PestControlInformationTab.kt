@@ -1,5 +1,6 @@
-package content.region.misthalin.lumbridge.plugin.gnomecopter.data
+package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
 import core.game.world.GameWorld
 import core.tools.DARK_RED
 
@@ -208,7 +209,14 @@ enum class PestControlInformationTab(
     ),
     EIGHTEEN_PAGE(
         "defilers can use their Magic", "and Ranged attacks to harm", "the Void Knight from there."
-    )
+    );
+
+    val lines = info.toList()
+
+    companion object : PagedInformation {
+        override val pages: List<List<String>> =
+            BurghDeRottInformationTab.values().map { it.lines }
+    }
 }
 
 // You have been temporarily muted due to breaking a rule.

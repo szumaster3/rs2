@@ -1,8 +1,7 @@
-package content.region.misthalin.lumbridge.plugin.gnomecopter
+package content.region.misthalin.lumbridge.plugin.gnomecopter.sign.impl
 
 import core.game.component.Component
 import core.game.node.entity.player.Player
-import core.tools.DARK_RED
 import shared.consts.Components
 
 enum class GnomeCopterSign(

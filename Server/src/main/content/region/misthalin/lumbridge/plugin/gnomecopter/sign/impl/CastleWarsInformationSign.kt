@@ -1,12 +1,18 @@
-package content.region.misthalin.lumbridge.plugin.gnomecopter.data
+package content.region.misthalin.lumbridge.plugin.gnomecopter.sign.impl
 
+import content.region.misthalin.lumbridge.plugin.gnomecopter.sign.InformationSign
+import core.api.openSingleTab
+import core.api.sendString
+import core.game.component.Component
+import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.tools.DARK_RED
+import shared.consts.Components
 
 // Completed.
 enum class CastleWarsInformationSign(
     val location: Location, vararg info: String,
-) {
+) : InformationSign {
     CENTER_ISLAND_SIGN(
         Location(2028, 5409, 0),
         "In the centre of this island,",
@@ -173,5 +179,13 @@ enum class CastleWarsInformationSign(
         "defender pursues him,",
         "retrieves the flag when he",
         "dies, then brings it back here."
-    ),
+    );
+
+    private val info: Array<String> = info as Array<String>
+
+    override fun read(player: Player) {
+        openSingleTab(player, Components.CARPET_INFO_723)
+        val information = info.joinToString("<br>")
+        sendString(player, information, Components.CARPET_INFO_723, 10)
+    }
 }
