@@ -7,12 +7,9 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.Components
 
-enum class LletyaInformationSign(
-    val location: Location, vararg info: String,
-) : InformationSign {
-    UNKNOWN_SIGN(Location(0, 0, 0),
-    "Not Implemented yet."
-    );
+enum class LletyaInformationSign(val location: Location, vararg info: String) : InformationSign {
+
+    UNKNOWN_SIGN(Location(0, 0, 0), "Not Implemented yet.");
 
     private val info: Array<String> = info as Array<String>
 

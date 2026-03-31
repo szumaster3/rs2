@@ -8,9 +8,7 @@ import core.game.world.map.Location
 import core.tools.DARK_RED
 import shared.consts.Components
 
-enum class PestControlInformationSign(
-    val location: Location, vararg info: String,
-) : InformationSign {
+enum class PestControlInformationSign(val location: Location, vararg info: String) : InformationSign {
     LANDER_SIGN(
         Location(2276, 5423, 0),
         "These landers are used to",
@@ -41,7 +39,6 @@ enum class PestControlInformationSign(
         "Outpost, but who'd ever",
         "want to do that?"
     ),
-
     CENTER_SIGN(
         Location(2281, 5410, 0),
         "In the centre of the island,",
@@ -65,7 +62,6 @@ enum class PestControlInformationSign(
         "If the Void Knight dies, the",
         "game is lost."
     ),
-
     PORTAL_SIGN(
         Location(2252, 5411, 0),
         "Four ${DARK_RED}portals</col> open up on",
@@ -92,7 +88,6 @@ enum class PestControlInformationSign(
         "world is taken over by",
         "pests."
     ),
-
     TOWER_SIGN(
         Location(2266, 5399, 0),
         "Players will commonly",

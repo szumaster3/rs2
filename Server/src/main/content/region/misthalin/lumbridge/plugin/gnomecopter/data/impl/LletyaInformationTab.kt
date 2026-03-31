@@ -1,13 +1,11 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
 import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
-import core.tools.DARK_BLUE
-import core.tools.DARK_RED
 
 enum class LletyaInformationTab(
     vararg info: String,
 ) {
-    FIRST_PAGE("");
+    UNKNOWN_PAGE("");
 
     val lines = info.toList()
 

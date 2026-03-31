@@ -10,9 +10,7 @@ import shared.consts.Components
 import shared.consts.Quests
 
 // Completed
-enum class BurghDeRottInformationSign(
-    val location: Location, vararg info: String,
-) : InformationSign {
+enum class BurghDeRottInformationSign(val location: Location, vararg info: String) : InformationSign {
     GENERAL_STORE(
         Location(2153, 5431, 0),
         "This player is stocking the",

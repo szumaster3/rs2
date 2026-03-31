@@ -92,7 +92,7 @@ enum class BurthorpeInformationTab(
         "diagonally. The first to",
         "achieve this is the winner.",
     ),
-    NINE_PAGE(
+    NINTH_PAGE(
         "${DARK_RED}Runesquares:</col>",
         "",
         "Players take it in turns to",
@@ -103,11 +103,11 @@ enum class BurthorpeInformationTab(
         "placing a rune in that square",
         "and draw another line.",
     ),
-    TEN_PAGE(
+    TENTH_PAGE(
         "${DARK_RED}Runeversi:</col>",
         "",
         "Although this game's rules are",
-        "simple enough, the stragy is",
+        "simple enough, the strategy is",
         "not.",
         "",
         "Players take it in turns to",
@@ -115,7 +115,7 @@ enum class BurthorpeInformationTab(
         "They 'capture' any of their",
         "opponent's runes that are",
     ),
-    ELEVEN_PAGE(
+    ELEVENTH_PAGE(
         "imprisoned between that new",
         "rune and another of their",
         "runes; such captured runes",
@@ -127,7 +127,7 @@ enum class BurthorpeInformationTab(
         "capture any more runes. The",
         "winner is whoever has the",
     ),
-    TWELVE_PAGE(
+    TWELFTH_PAGE(
         "most runes at that time.",
         "",
         "As runes are captured,",
@@ -138,7 +138,7 @@ enum class BurthorpeInformationTab(
         "making the game surprisingly",
         "unpredictable.",
     ),
-    THIRTEEN_PAGE(
+    THIRTEENTH_PAGE(
         "Outside the Games Room, the",
         "Imperial Guard stands",
         "protectively between the",
@@ -147,7 +147,7 @@ enum class BurthorpeInformationTab(
         "that inhabit the nearby",
         "mountains.",
     ),
-    FOURTEEN_PAGE(
+    FOURTEENTH_PAGE(
         "Several quests call for the",
         "player to venture into the troll",
         "lands, including {DARK_RED}${Quests.DEATH_PLATEAU}</col>,",
@@ -158,13 +158,13 @@ enum class BurthorpeInformationTab(
         "and the wacky odyssey {DARK_RED}My</col>,",
         "{DARK_RED}Arm's Big Adventure</col>.",
     ),
-    FIFTEEN_PAGE(
+    FIFTEENTH_PAGE(
         "Trolls are generally stupid but",
         "they know how to fight, so",
         "their domain should be",
         "approached with caution!",
     ),
-    SIXTEEN_PAGE(
+    SIXTEENTH_PAGE(
         "As if this Games Room",
         "weren't enough for one town,",
         "Burthorpe is also home to the",
@@ -175,7 +175,7 @@ enum class BurthorpeInformationTab(
         "providing rewards for the",
         "${DARK_RED}Agility</col> and ${DARK_RED}Thieving</col> skills.",
     ),
-    SEVENTEEN_PAGE(
+    SEVENTEENTH_PAGE(
         "Further to the west lies the",
         "${DARK_RED}Warriors' Guild</col>. This vast",
         "building is filled with",
@@ -187,7 +187,7 @@ enum class BurthorpeInformationTab(
         "your strength by balancing",
         "barrels on your head,",
     ),
-    EIGHTEEN_PAGE(
+    EIGHTEENTH_PAGE(
         "choosing the best attack",
         "styles for different dummies",
         "and the chance to pit your",
@@ -199,7 +199,7 @@ enum class BurthorpeInformationTab(
         "players receive reward tokens",
         "that buy them time to fight",
     ),
-    NINETEEN(
+    NINETEENTH_PAGE(
         "against the ${DARK_RED}cyclopes</col> on the",
         "top floor. These are the only",
         "creatures to drop {DARK_RED}defenders</col> -",

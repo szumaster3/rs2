@@ -88,7 +88,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "to catch them when they land",
         "on it."
     ),
-    EIGHT_PAGE(
+    EIGHTH_PAGE(
         "The birds arent completely",
         "stupid, so it helps if the",
         "hunter is wearing clothes",
@@ -98,7 +98,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "bird doesn't suspect anything's",
         "wrong."
     ),
-    NINE_PAGE(
+    NINTH_PAGE(
         "${DARK_RED}Sabre-Toothed Kyatts",
         "",
         "The only way to kill a kyatt",
@@ -110,11 +110,12 @@ enum class TrollweissAndRellekkaInformationTab(
         "",
         "The signposts in the southern"
     ),
-
-    TEN_PAGE(
-        "end of this are will let you", "get a closer look at this", "dangerous activity."
+    TENTH_PAGE(
+        "end of this are will let you",
+        "get a closer look at this",
+        "dangerous activity."
     ),
-    ELEVEN_PAGE(
+    ELEVENTH_PAGE(
         "Elsewhere in the world, there",
         "are Hunter areas in the woodland,",
         "jungle and desert regions, all",
@@ -126,7 +127,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "weapons, lure the colourful",
         "tropical wagtail to get brighter"
     ),
-    TWELVE_PAGE(
+    TWELFTH_PAGE(
         "feathers to help when fishing",
         "box up the volatiles",
         "chinchompas to throw as",

@@ -105,7 +105,7 @@ enum class BurghDeRottInformationTab(vararg info: String) {
         "in a similar minigame known",
         "as the ${DARK_RED}Burgh de Rott Ramble</col>."
     ),
-    TEN_PAGE(
+    TENTH_PAGE(
         "Burgh de Rott has a few",
         "useful features for",
         "adventurers looking to train",
@@ -117,7 +117,7 @@ enum class BurghDeRottInformationTab(vararg info: String) {
         "food for anyone skilled,",
         "enough to harpoon them and",
     ),
-    ELEVEN_PAGE(
+    ELEVENTH_PAGE(
         "cook them.",
         "",
         "The swamps of Morytania",
@@ -129,7 +129,7 @@ enum class BurghDeRottInformationTab(vararg info: String) {
         "you're tough enough to collect",
         "them from the nail beast"
     ),
-    LAST_PAGE(
+    TWELFTH_PAGE(
         "before the nail beast kills you."
     );
 

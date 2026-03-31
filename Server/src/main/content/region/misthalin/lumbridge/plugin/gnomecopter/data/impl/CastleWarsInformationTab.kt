@@ -19,7 +19,6 @@ enum class CastleWarsInformationTab(
         "seize the ${DARK_RED}red flag</col> from the",
         "roof and survive to drag it",
     ),
-
     SECOND_PAGE(
         "back to their own castle",
         "without letting their own flag",
@@ -32,7 +31,6 @@ enum class CastleWarsInformationTab(
         "survive to drag it back to",
         "their own castle."
     ),
-
     THIRD_PAGE(
         "This minigame is always",
         "popular, offering players the",
@@ -43,7 +41,6 @@ enum class CastleWarsInformationTab(
         "unleashing all their rage on",
         "their opponents.",
     ),
-
     FOURTH_PAGE(
         "The teams win points by",
         "getting their opponents' flag",
@@ -56,7 +53,6 @@ enum class CastleWarsInformationTab(
         "",
         "There's a man outside",
     ),
-
     FIFTH_PAGE(
         "Castle Wars arena who will",
         "exchange the tickets for",
@@ -64,8 +60,7 @@ enum class CastleWarsInformationTab(
         "keen players to show off",
         "their dedication and skill."
     ),
-
-    IDK_PAGE(
+    UNKNOWN_1_PAGE(
         "skirt the action and hop",
         "across the stepping-stones in",
         "the river.",
@@ -77,8 +72,7 @@ enum class CastleWarsInformationTab(
         "arrived. Check out the",
         "noticeboards around the",
     ),
-
-    SIXTH_PAGE(
+    UNKNOWN_2_PAGE(
         "castles to see how this may",
         "be achieved.",
         "",
@@ -90,8 +84,7 @@ enum class CastleWarsInformationTab(
         "enemy stronghold through the",
         "floor.",
     ),
-
-    LAST_PAGE(
+    UNKNOWN_3_PAGE(
         "This is a safe minigame.",
         "Although players die here all",
         "the time, they respawn",

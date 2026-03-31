@@ -4,10 +4,7 @@ import core.game.component.Component
 import core.game.node.entity.player.Player
 import shared.consts.Components
 
-enum class GnomeCopterSign(
-    private val button: String,
-    vararg info: String,
-) {
+enum class GnomeCopterSign(private val button: String, vararg info: String) {
     ENTRANCE(
         "~ Gnomecopter Tours ~",
         "Welcome to Gnomecopter",

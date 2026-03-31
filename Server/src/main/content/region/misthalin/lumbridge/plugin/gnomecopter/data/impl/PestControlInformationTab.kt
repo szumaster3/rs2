@@ -19,7 +19,6 @@ enum class PestControlInformationTab(
         "pour into this world from",
         "another realm."
     ),
-
     SECOND_PAGE(
         "In order to preserve the",
         "balance of the world, the",
@@ -28,7 +27,6 @@ enum class PestControlInformationTab(
         "to these islands in an attempt",
         "to shut the portals down."
     ),
-
     THIRD_PAGE(
         "Each expedition is led by an",
         "experienced ${DARK_RED}Void Knight</col>, who",
@@ -41,7 +39,6 @@ enum class PestControlInformationTab(
         "the priority for players is to",
         "protect the Void Knight from"
     ),
-
     FOURTH_PAGE(
         "anything that poses a threat.",
         "If the Void Knight dies before",
@@ -51,7 +48,6 @@ enum class PestControlInformationTab(
         "to the ${DARK_RED}Void Knights' Outpost</col>",
         "in defeat."
     ),
-
     FIFTH_PAGE(
         "The four portals appear at the",
         "west, south-west, south-east",
@@ -64,7 +60,6 @@ enum class PestControlInformationTab(
         "quicker by force, earning a",
         "${DARK_RED}nice cash reward</col> from the"
     ),
-
     SIXTH_PAGE(
         "Void Knights for their",
         "assistance, as well as some",
@@ -73,7 +68,6 @@ enum class PestControlInformationTab(
         "combat training, useful supplies and unique ${DARK_RED}Void",
         "${DARK_RED}Knight armour</col>."
     ),
-
     SEVENTH_PAGE(
         "The creatures pouring through",
         "the portals include:",
@@ -86,7 +80,6 @@ enum class PestControlInformationTab(
         "bypassing the defences of",
         "this island."
     ),
-
     EIGHTH_PAGE(
         "${DARK_RED}Spinners:",
         "",
@@ -99,7 +92,6 @@ enum class PestControlInformationTab(
         "distract them from this task if",
         "they want ny chance of"
     ),
-
     NINTH_PAGE(
         "destroying the portals. When a",
         "spinner dies, it explodes in a",
@@ -112,8 +104,7 @@ enum class PestControlInformationTab(
         "Ranged attacks over",
         "extremely long distances."
     ),
-
-    TEN_PAGE(
+    TENTH_PAGE(
         "Once they've locked their",
         "sights on the Void Knight, it's",
         "essential that they be",
@@ -124,8 +115,7 @@ enum class PestControlInformationTab(
         "walls, specifically targeting",
         "these creatures."
     ),
-
-    ELEVEN_PAGE(
+    ELEVENTH_PAGE(
         "${DARK_RED}Ravagers:",
         "",
         "Small and squat in",
@@ -137,7 +127,7 @@ enum class PestControlInformationTab(
         "quickly spelling disaster for",
         "the expedition, so players will"
     ),
-    TWELVE_PAGE(
+    TWELFTH_PAGE(
         "make a point of attacking any",
         "ravager that's taking too much",
         "of an interest in the gates.",
@@ -149,7 +139,7 @@ enum class PestControlInformationTab(
         "attacks to squish anyone who",
         "gets too close. Despite their"
     ),
-    THIRTEEN_PAGE(
+    THIRTEENTH_PAGE(
         "stupendous strength and",
         "weight, they don't pose much",
         "of a direct threat to the",
@@ -159,7 +149,7 @@ enum class PestControlInformationTab(
         "strategically attacking the Void",
         "Knight."
     ),
-    FOURTEEN_PAGE(
+    FOURTEENTH_PAGE(
         "${DARK_RED}Splatters:",
         "",
         "Bouncing merrily around the",
@@ -168,8 +158,7 @@ enum class PestControlInformationTab(
         "dealing considerable damage",
         "to everything in the area!"
     ),
-
-    FIFTHTEEN_PAGE(
+    FIFTEENTH_PAGE(
         "A typical Pest Control team",
         "will consist of three distinct",
         "classes of player:",
@@ -181,8 +170,7 @@ enum class PestControlInformationTab(
         "make this role suitable for",
         "only the best fighters."
     ),
-
-    SIXTHTEEN_PAGE(
+    SIXTEENTH_PAGE(
         "${DARK_RED}2.</col> Players who defend the",
         "Void Knight from any",
         "creatures that succeed in",
@@ -194,8 +182,7 @@ enum class PestControlInformationTab(
         "but additional creatures often",
         "manage to sneak through the",
     ),
-
-    SEVENTEEN_PAGE(
+    SEVENTEENTH_PAGE(
         "gates. It's usually best to",
         "keep the gates closed!",
         "",
@@ -207,8 +194,10 @@ enum class PestControlInformationTab(
         "around the gates of the",
         "fortress. The torchers and"
     ),
-    EIGHTEEN_PAGE(
-        "defilers can use their Magic", "and Ranged attacks to harm", "the Void Knight from there."
+    EIGHTEENTH_PAGE(
+        "defilers can use their Magic",
+        "and Ranged attacks to harm",
+        "the Void Knight from there."
     );
 
     val lines = info.toList()

@@ -9,9 +9,7 @@ import core.tools.DARK_RED
 import shared.consts.Components
 
 // Completed.
-enum class CastleWarsInformationSign(
-    val location: Location, vararg info: String,
-) : InformationSign {
+enum class CastleWarsInformationSign(val location: Location, vararg info: String) : InformationSign {
     CENTER_ISLAND_SIGN(
         Location(2028, 5409, 0),
         "In the centre of this island,",
@@ -25,7 +23,6 @@ enum class CastleWarsInformationSign(
         "mine through the rubble in",
         "order to proceed."
     ),
-
     WALL_SIGN(
         Location(2039, 5397, 0),
         "A determined player can scale",
@@ -37,7 +34,6 @@ enum class CastleWarsInformationSign(
         "chance that someone up there",
         "will swiftly kill them."
     ),
-
     MAIN_SIGN(
         Location.create(2023, 5392, 0), // Location of sign.
         "~ What is this? ~",
@@ -161,7 +157,6 @@ enum class CastleWarsInformationSign(
         "helping his friend to steal",
         "the flag."
     ),
-
     // Phew it's back!
     CASTLE_WARS_ROOF_ZAMORAK(
         Location.create(2023, 5392, 0), // Place location of transform to presents roof area.

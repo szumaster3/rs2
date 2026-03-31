@@ -7,9 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.Components
 
-enum class BurthorpeInformationSign(
-    val location: Location, vararg info: String,
-) : InformationSign {
+enum class BurthorpeInformationSign(val location: Location, vararg info: String) : InformationSign {
     CORRIDOR_SIGN(Location(2399, 5396, 0),
     "This corridor leads to a",
         "selection of waiting rooms,",

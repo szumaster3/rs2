@@ -9,8 +9,7 @@ import core.tools.DARK_RED
 import shared.consts.Components
 import shared.consts.Quests
 
-enum class  TrollweissAndRellekkaInformationSign(val location: Location, vararg info: String,
-) : InformationSign {
+enum class TrollweissAndRellekkaInformationSign(val location: Location, vararg info: String) : InformationSign {
     RELLEKKA_EAGLES_SIGN(Location(2543, 5430, 1),
         "In the icy mountain, a small",
         "cavern contains the lair of",
@@ -22,7 +21,6 @@ enum class  TrollweissAndRellekkaInformationSign(val location: Location, vararg 
         "them to other eagle nests,",
         "around the world."
     ),
-
     EAST_OF_TROLLWEISS_SIGN(Location(2543, 5422, 1),
         "East of the Trollweiss and",
         "Rellekka Hunter area lies a",
