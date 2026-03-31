@@ -1,6 +1,7 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data
 
 import content.region.misthalin.lumbridge.plugin.gnomecopter.GnomeCopterDestination
+import core.api.sendMessage
 import core.game.interaction.InterfaceListener
 import shared.consts.Components
 
@@ -23,6 +24,7 @@ class GnomeCopterTabInterface : InterfaceListener {
                 LAST_PAGE -> page = max
                 NEXT_PAGE -> if (page < max) page++
                 PREVIOUS_PAGE -> if (page > 0) page--
+                TOGGLE_AUTO_PILOT -> sendMessage(player, "The gnomecopter's autopilot function has been disabled.")
             }
             PagedInformationManager.sendPage(player, destination.tab, page)
             return@on true

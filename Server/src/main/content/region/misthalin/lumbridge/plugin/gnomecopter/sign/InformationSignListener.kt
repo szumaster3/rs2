@@ -7,7 +7,7 @@ import shared.consts.Scenery
 class InformationSignListener : InteractionListener {
 
     override fun defineListeners() {
-        on(Scenery.SIGNPOST_30039, IntType.SCENERY) { player, node ->
+        on(Scenery.SIGNPOST_30039, IntType.SCENERY, "read") { player, node ->
             return@on InformationSignManager.handle(player, node.location)
         }
     }

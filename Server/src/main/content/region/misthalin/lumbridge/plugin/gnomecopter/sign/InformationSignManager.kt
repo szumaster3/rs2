@@ -28,8 +28,15 @@ object InformationSignManager {
             put(it.location, it)
         }
 
+        // Burthorpe
+        BurthorpeInformationSign.values().forEach {
+            put(it.location, it)
+        }
+
         // Lletya
-        // TODO
+        LletyaInformationSign.values().forEach {
+            put(it.location, it)
+        }
     }
 
     fun handle(player: Player, location: Location): Boolean {

@@ -215,7 +215,7 @@ enum class PestControlInformationTab(
 
     companion object : PagedInformation {
         override val pages: List<List<String>> =
-            BurghDeRottInformationTab.values().map { it.lines }
+            values().map { it.lines }
     }
 }
 

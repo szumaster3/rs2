@@ -221,7 +221,7 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
                     usedLandingPads[pad] = false
                     removeAttribute(player, "gc:flying")
                     removeAttribute(player, "gc:route")
-
+                    sendMessage(player, "Returning to Lumbridge.")
                     return true
                 }
                 return false
