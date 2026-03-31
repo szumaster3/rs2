@@ -54,10 +54,10 @@ private val ITEMS =
  * Handles custom fur clothing interface.
  */
 class FurClothingInterface : InterfaceListener {
-
     override fun defineInterfaceListeners() {
         onOpen(FUR_CLOTHING_COMPONENT_ID) { player, _ ->
-            InterfaceContainer.generateItems(player, ITEMS, OPTIONS, FUR_CLOTHING_COMPONENT_ID, 26, 6, 11, 5000)
+            // 1190
+            InterfaceContainer.generateItems(player, ITEMS, OPTIONS, FUR_CLOTHING_COMPONENT_ID, 26, 6, 11, 482)
             repositionChild(player, FUR_CLOTHING_COMPONENT_ID, 26, 32, 97)
 
             val checkedFurs = arrayListOf<String>()
