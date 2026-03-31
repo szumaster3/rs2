@@ -3,7 +3,6 @@ package content.region.misthalin.lumbridge.plugin.gnomecopter.sign.impl
 import content.region.misthalin.lumbridge.plugin.gnomecopter.sign.InformationSign
 import core.api.openSingleTab
 import core.api.sendString
-import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.tools.DARK_RED

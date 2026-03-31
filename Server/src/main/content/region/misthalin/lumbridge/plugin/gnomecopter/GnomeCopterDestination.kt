@@ -38,7 +38,7 @@ enum class GnomeCopterDestination(
         displayName = "Burthorpe Games Room",
         startLocation = Location.create(2399, 5407, 0),
         region = 9556,
-        tab = CastleWarsInformationTab
+        tab = BurthropeInformationTab
     ),
     BURGH_DE_ROTT(
         id = 4,
