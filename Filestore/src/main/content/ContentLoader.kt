@@ -100,13 +100,13 @@ object ContentLoader {
         ModelDumper.dump()
     }
 
-    private fun maps(){
+    private fun maps() {
     }
 
     private fun worldmap() {}
 
     private fun dumpMaps() {
-        MapDumper.dump(Cache.getStore(), "../Dumps/maps/", Paths.get("../Server/data/configs/xteas.json"))
-        MapDumper.verify(Cache.getStore(), "../Dumps/maps/")
+        MapDumper.init(Paths.get("../Server/data/configs/xteas.json"));
+        MapDumper.verify(Cache.getStore())
     }
 }
