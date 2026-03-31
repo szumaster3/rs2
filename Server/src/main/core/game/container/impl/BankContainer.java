@@ -218,7 +218,7 @@ public final class BankContainer extends Container {
 		}
 
 		if (!item.getDefinition().getConfiguration(ItemConfigParser.BANKABLE, true)) {
-			player.sendMessage("A magical force prevents you from banking this item");
+			player.sendMessage("A magical force prevents you from banking this item.");
 			return;
 		}
 

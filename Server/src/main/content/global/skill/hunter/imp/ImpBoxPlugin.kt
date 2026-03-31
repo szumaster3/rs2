@@ -1,94 +1,167 @@
 package content.global.skill.hunter.imp
 
 import core.api.*
+import core.game.component.CloseEvent
+import core.game.component.Component
+import core.game.container.access.InterfaceContainer.generateItems
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
+import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
-import core.net.packet.out.ContainerPacket
 import shared.consts.Components
 import shared.consts.Items
 
-/**
- * Handles imp box related interactions.
- */
 class ImpBoxPlugin : InteractionListener, InterfaceListener {
 
-    override fun defineListeners() {
-        on(IMP_BOX_ITEM_IDS, IntType.ITEM, "talk-to", "bank") { player, node ->
-            val option = getUsedOption(player)
+    companion object {
+        private const val SESSION_KEY = "imp_session"
 
-            when (option.lowercase()) {
-                "bank" -> {
-                    if (player.interfaceManager.hasChatbox()) {
-                        closeAllInterfaces(player)
-                        openInterface(player, Components.IMP_BOX_478)
-                    }
+        private val IMP_BOXES = intArrayOf(
+            Items.IMP_IN_A_BOX1_10028,
+            Items.IMP_IN_A_BOX2_10027
+        )
+
+        private fun isImpBox(id: Int): Boolean =
+            id == Items.IMP_IN_A_BOX1_10028 ||
+                    id == Items.IMP_IN_A_BOX2_10027 ||
+                    id == Items.MAGIC_BOX_10025
+
+        private fun downgrade(box: Item): Item = when (box.id) {
+            Items.IMP_IN_A_BOX2_10027 -> Item(Items.IMP_IN_A_BOX1_10028)
+            Items.IMP_IN_A_BOX1_10028 -> Item(Items.MAGIC_BOX_10025)
+            else -> box
+        }
+
+        private fun findBox(player: Player): Pair<Int, Item>? {
+            for (slot in 0 until player.inventory.capacity()) {
+                val item = player.inventory.get(slot) ?: continue
+                if (isImpBox(item.id)) {
+                    return slot to item
                 }
-
-                "talk-to" -> {
-                    if (node.id == Items.IMP_IN_A_BOX1_10028) {
-                        openDialogue(player, ImpDialogue())
-                    } else {
-                        openDialogue(player, ImpDialogueExtension())
-                    }
-                }
-
             }
+            return null
+        }
+
+        private fun refresh(player: Player) {
+            player.inventory.refresh()
+        }
+
+        fun open(player: Player) {
+            if (findBox(player) == null) return
+
+            if (player.inCombat()) {
+                sendMessage(player, "You can't do this while in combat.")
+                return
+            }
+
+            player.interfaceManager.open(Component(Components.IMP_BOX_478))?.apply {
+                closeEvent = CloseEvent { p, _ ->
+                    p.interfaceManager.openDefaultTabs()
+                    true
+                }
+            }
+
+            removeTabs(player, 0, 1, 2, 3, 4, 5, 6)
+
+            player.generateItems(
+                Components.IMP_BOX_478,
+                14,
+                listOf("Deposit"),
+                5,
+                7,
+                93
+            )
+
+            sendString(
+                player,
+                "Select an item or stack of items to deposit.<br><col=ff7000>You can deposit 1 more item.",
+                Components.IMP_BOX_478,
+                13
+            )
+        }
+
+        private fun handleDeposit(player: Player, slot: Int): Boolean {
+            val item = player.inventory.get(slot) ?: return false
+
+            if (isImpBox(item.id)) {
+                sendMessage(player, "A magical force prevents you from banking this item.")
+                return false
+            }
+
+            val copy = Item(item.id, item.amount)
+
+            if (!player.bank.canAdd(copy)) {
+                sendMessage(player, "The imp can't send that item to your bank.")
+                return false
+            }
+
+            if (!player.inventory.remove(copy)) return false
+
+            player.bank.add(copy)
+            return true
+        }
+
+        private fun consumeCharge(player: Player) {
+            val (slot, box) = findBox(player) ?: return
+            player.inventory.replace(downgrade(box), slot)
+            player.inventory.update()
+        }
+    }
+
+    override fun defineListeners() {
+        on(IMP_BOXES, IntType.ITEM, "bank", "talk-to") { player, _ ->
+            open(player)
             return@on true
+        }
+
+        onUseWith(IntType.ITEM, IMP_BOXES) { player, used, _ ->
+            val item = used.asItem()
+            if (!player.bank.canAdd(item)) {
+                sendMessage(player, "The imp can't send that item to your bank.")
+                return@onUseWith true
+            }
+            runWorldTask {
+                player.bank.add(Item(item.id, item.amount))
+                player.inventory.remove(Item(item.id, item.amount))
+                consumeCharge(player)
+                refresh(player)
+            }
+            return@onUseWith true
         }
     }
 
     override fun defineInterfaceListeners() {
+        onOpen(Components.IMP_BOX_478) { _, _ -> true }
+        on(Components.IMP_BOX_478) { player, _, opcode, _, slot, _ ->
+            when (opcode) {
+                155 -> runWorldTask {
+                    val success = handleDeposit(player, slot)
+                    if (!success) return@runWorldTask
 
-        /*
-         * Handles opening the imp box.
-         */
-        onOpen(Components.IMP_BOX_478) { player, _ ->
-            PacketRepository.send(
-                ContainerPacket::class.java,
-                ContainerContext(player, Components.IMP_BOX_478, 61, 91, player.inventory, true)
-            )
-            return@onOpen true
-        }
+                    var count = player.getAttribute(SESSION_KEY, 0) as Int
+                    count++
 
-        /*
-         * Handles interaction with objects in the interface.
-         */
-        on(Components.IMP_BOX_478) { player, _, _, _, slot, _ ->
-            val item = player.inventory.get(slot) ?: return@on true
-            val boxSlot = player.inventory.getSlot(item)
-            if (boxSlot < 0) return@on true
+                    player.setAttribute(SESSION_KEY, count)
+                    refresh(player)
 
-            if (player.bank.canAdd(item) && item.id !in IMP_BOX_ITEM_IDS) {
-                player.dialogueInterpreter.close()
-                player.inventory.remove(item)
-                player.bank.add(item)
-
-                when (item.id) {
-                    IMP_BOX_ITEM_IDS[1] -> {
-                        replaceSlot(player, boxSlot, Item(IMP_BOX_ITEM_IDS[0]))
-                    }
-
-                    IMP_BOX_ITEM_IDS[0] -> {
-                        replaceSlot(player, boxSlot, Item(Items.MAGIC_BOX_10025))
-                        closeInterface(player)
+                    if (count >= 2) {
+                        player.removeAttribute(SESSION_KEY)
+                        if (findBox(player) == null) return@runWorldTask
+                        player.interfaceManager.close()
+                        consumeCharge(player)
                     }
                 }
-            } else {
-                sendMessage(player, "You cannot add this item to your bank.")
+
+                9 -> {
+                    val item = player.inventory.get(slot) ?: return@on true
+                    sendMessage(player, item.definition.examine)
+                }
             }
 
             return@on true
         }
+
     }
 
-    companion object {
-        private val IMP_BOX_ITEM_IDS = intArrayOf(
-            Items.IMP_IN_A_BOX1_10028,
-            Items.IMP_IN_A_BOX2_10027
-        )
-    }
 }

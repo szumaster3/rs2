@@ -15526,5 +15526,9 @@
   {
     "examine": "What kind of sick person keeps a skull on the wall?",
     "ids": "20061"
+  },
+  {
+    "examine": "A magical catching box.",
+    "ids": "19223"
   }
 ]
