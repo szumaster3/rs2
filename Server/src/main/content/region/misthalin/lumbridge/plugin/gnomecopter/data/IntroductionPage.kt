@@ -1,5 +1,5 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data
 
-interface PagedInformation {
+interface IntroductionPage {
     val pages: List<List<String>>
 }

@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
-import core.tools.DARK_RED
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
+import core.tools.RED
 
 // Complete
 enum class BurghDeRottInformationTab(vararg info: String) {
@@ -39,8 +39,8 @@ enum class BurghDeRottInformationTab(vararg info: String) {
     ),
     FOURTH_PAGE(
         "Adventures come here to do",
-        "a quest called ${DARK_RED}In Aid of the",
-        "${DARK_RED}Myreque. They are asked to",
+        "a quest called ${RED}In Aid of the",
+        "${RED}Myreque. They are asked to",
         "rebuild the town so that it can",
         "be used as a base by a",
         "brave group of humans who",
@@ -87,7 +87,7 @@ enum class BurghDeRottInformationTab(vararg info: String) {
         "to the Paterdomus Temple on",
         "the River Salve. This is a",
         "very dangerous minigame",
-        "known as ${DARK_RED}Temple Trekking</col>.",
+        "known as ${RED}Temple Trekking</col>.",
         "",
         "As news of this terrible",
         "situation reaches the civilised",
@@ -103,7 +103,7 @@ enum class BurghDeRottInformationTab(vararg info: String) {
         "bringing the mercenaries here",
         "from the Paterdomus Temple",
         "in a similar minigame known",
-        "as the ${DARK_RED}Burgh de Rott Ramble</col>."
+        "as the ${RED}Burgh de Rott Ramble</col>."
     ),
     TENTH_PAGE(
         "Burgh de Rott has a few",
@@ -135,7 +135,7 @@ enum class BurghDeRottInformationTab(vararg info: String) {
 
     val lines = info.toList()
 
-    companion object : PagedInformation {
+    companion object : IntroductionPage {
         override val pages: List<List<String>> =
             values().map { it.lines }
     }

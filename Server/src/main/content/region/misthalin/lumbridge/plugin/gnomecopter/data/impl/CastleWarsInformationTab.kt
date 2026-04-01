@@ -1,8 +1,8 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
-import core.tools.DARK_BLUE
-import core.tools.DARK_RED
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
+import core.tools.BLUE
+import core.tools.RED
 
 enum class CastleWarsInformationTab(
     vararg info: String,
@@ -14,9 +14,9 @@ enum class CastleWarsInformationTab(
         "arena.",
         "",
         "The saradomin team, wearing",
-        "${DARK_BLUE}blue</col> hoods, must attempt to",
+        "${BLUE}blue</col> hoods, must attempt to",
         "breach the Zamorak castle,",
-        "seize the ${DARK_RED}red flag</col> from the",
+        "seize the ${RED}red flag</col> from the",
         "roof and survive to drag it",
     ),
     SECOND_PAGE(
@@ -24,10 +24,10 @@ enum class CastleWarsInformationTab(
         "without letting their own flag",
         "be stolen.",
         "",
-        "The Zamorak team, in ${DARK_RED}red</col>",
+        "The Zamorak team, in ${RED}red</col>",
         "hoods, must breach the",
         "Saradomin castle seize the",
-        "${DARK_BLUE}blue flag</col> from the roof and",
+        "${BLUE}blue flag</col> from the roof and",
         "survive to drag it back to",
         "their own castle."
     ),
@@ -49,7 +49,7 @@ enum class CastleWarsInformationTab(
         "After 25 minutes, the game",
         "ends and everyone on the",
         "winning team is presented",
-        "with ${DARK_RED}Castle Wars tickets</col>.",
+        "with ${RED}Castle Wars tickets</col>.",
         "",
         "There's a man outside",
     ),
@@ -100,7 +100,7 @@ enum class CastleWarsInformationTab(
 
     val lines = info.toList()
 
-    companion object : PagedInformation {
+    companion object : IntroductionPage {
         override val pages: List<List<String>> =
             values().map { it.lines }
     }

@@ -1,6 +1,6 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
 
 enum class LletyaInformationTab(
     vararg info: String,
@@ -9,7 +9,7 @@ enum class LletyaInformationTab(
 
     val lines = info.toList()
 
-    companion object : PagedInformation {
+    companion object : IntroductionPage {
         override val pages: List<List<String>> =
             values().map { it.lines }
     }

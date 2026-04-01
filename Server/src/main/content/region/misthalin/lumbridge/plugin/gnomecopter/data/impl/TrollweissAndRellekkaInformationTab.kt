@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
-import core.tools.DARK_RED
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
+import core.tools.RED
 
 enum class TrollweissAndRellekkaInformationTab(
     vararg info: String,
@@ -19,7 +19,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "properties and valuable pelts"
     ),
     SECOND_PAGE(
-        "is to use the ${DARK_RED}Hunter skill</col>.",
+        "is to use the ${RED}Hunter skill</col>.",
         "",
         "This particular Hunter area",
         "features a wide variety of",
@@ -31,7 +31,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "sabre-toothed kyatts."
     ),
     THIRD_PAGE(
-        "$DARK_RED Polar kebbits</col>",
+        "$RED Polar kebbits</col>",
         "",
         "Kebbits tend to be timid",
         "creatures, using their",
@@ -55,7 +55,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "on creatures in this area."
     ),
     FIFTH_PAGE(
-        "${DARK_RED}Butterflies",
+        "${RED}Butterflies",
         "",
         "Two kinds of butterfly have",
         "adapted to life in this frozen",
@@ -78,7 +78,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "Hitpoints restored."
     ),
     SEVENTH_PAGE(
-        "${DARK_RED}Birds",
+        "${RED}Birds",
         "",
         "The cerulean twitch may be",
         "found in this area. Humans",
@@ -99,7 +99,7 @@ enum class TrollweissAndRellekkaInformationTab(
         "wrong."
     ),
     NINTH_PAGE(
-        "${DARK_RED}Sabre-Toothed Kyatts",
+        "${RED}Sabre-Toothed Kyatts",
         "",
         "The only way to kill a kyatt",
         "is to lure it into a pit. Hunters",
@@ -139,7 +139,7 @@ enum class TrollweissAndRellekkaInformationTab(
 
     val lines = info.toList()
 
-    companion object : PagedInformation {
+    companion object : IntroductionPage {
         override val pages: List<List<String>> =
             values().map { it.lines }
     }

@@ -1,6 +1,6 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
 import content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl.*
 import core.game.world.map.Location
 
@@ -9,7 +9,7 @@ enum class GnomeCopterDestination(
     val displayName: String,
     val startLocation: Location,
     val region: Int,
-    val tab: PagedInformation,
+    val tab: IntroductionPage,
     val autoPilot: Array<Location> = emptyArray()
 ) {
     CASTLE_WARS(
@@ -28,7 +28,7 @@ enum class GnomeCopterDestination(
     ),
     TROLLWEISS_RELLEKKA_HUNTER(
         id = 2,
-        displayName = "Trollweiss and Rellekka<br>Hunter area.",
+        displayName = "Trollweiss and Rellekka<br>Hunter area",
         startLocation = Location.create(2523, 5393, 0),
         region = 10068,
         tab = TrollweissAndRellekkaInformationTab
@@ -36,7 +36,7 @@ enum class GnomeCopterDestination(
     BURTHORPE_GAMES_ROOM(
         id = 3,
         displayName = "Burthorpe Games Room",
-        startLocation = Location.create(2399, 5407, 0),
+        startLocation = Location.create(2397, 5402, 0),
         region = 9556,
         tab = BurthorpeInformationTab
     ),

@@ -5,9 +5,11 @@ import core.game.interaction.InteractionListener
 import shared.consts.Scenery
 
 class InformationSignListener : InteractionListener {
-
+    companion object{
+        private val SIGN_POST_IDS = intArrayOf(Scenery.SIGNPOST_30040,Scenery.SIGNPOST_30039,Scenery.ENTRANCE_SIGN_30036)
+    }
     override fun defineListeners() {
-        on(Scenery.SIGNPOST_30039, IntType.SCENERY, "read") { player, node ->
+        on(SIGN_POST_IDS, IntType.SCENERY, "read") { player, node ->
             return@on InformationSignManager.handle(player, node.location)
         }
     }

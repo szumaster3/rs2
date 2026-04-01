@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformationManager
-import content.region.misthalin.lumbridge.plugin.gnomecopter.sign.impl.GnomeCopterSign
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPageManager
+
 import core.api.*
 import core.game.activity.ActivityPlugin
 import core.game.container.impl.EquipmentContainer
@@ -36,11 +36,6 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
 
             if (obj.id == 30032) {
                 flyGnomeCopter(e as Player, obj)
-                return true
-            }
-
-            if (obj.id == 30036) {
-                GnomeCopterSign.ENTRANCE.read((e as Player))
                 return true
             }
         } else if (target is Item && e.getAttribute("gc:flying", false)) {
@@ -94,7 +89,7 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
 
         sendMessage(player, "The gnomecopter accepts the ticket and sets off for ${destination.name}.")
 
-        PagedInformationManager.sendPage(player, destination.tab, 0)
+        IntroductionPageManager.sendPage(player, destination.tab, 0)
 
         player.faceLocation(player.location.transform(0, 3, 0))
         scenery.charge = 88

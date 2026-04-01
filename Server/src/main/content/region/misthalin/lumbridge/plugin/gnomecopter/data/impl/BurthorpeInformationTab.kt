@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
-import core.tools.DARK_RED
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
+import core.tools.RED
 import shared.consts.Quests
 
 enum class BurthorpeInformationTab(
@@ -45,20 +45,20 @@ enum class BurthorpeInformationTab(
     FOURTH_PAGE(
         "drinks while they challenge",
         "each other to games of",
-        "${DARK_RED}draughts</col>, ${DARK_RED}runelink</col>, ",
-        "${DARK_RED}runesquares</col> and ${DARK_RED}runeversi,",
+        "${RED}draughts</col>, ${RED}runelink</col>, ",
+        "${RED}runesquares</col> and ${RED}runeversi,",
         "using runes as the",
         "gamepieces.",
     ),
     FIFTH_PAGE(
         "You can watch some of the",
         "game in progress - look out",
-        "for the ${DARK_RED}View-game</col> option on",
+        "for the ${RED}View-game</col> option on",
         "the tables near the centre of",
         "the room.",
     ),
     SIXTH_PAGE(
-        "${DARK_RED}Draughts:</col>",
+        "${RED}Draughts:</col>",
         "",
         "In this traditional game,",
         "players must slide their runes",
@@ -81,7 +81,7 @@ enum class BurthorpeInformationTab(
         "and backwards.",
     ),
     EIGHTH_PAGE(
-        "${DARK_RED}Runelink:</col>",
+        "${RED}Runelink:</col>",
         "",
         "The simple game is very well",
         "known. Players take turns to",
@@ -93,7 +93,7 @@ enum class BurthorpeInformationTab(
         "achieve this is the winner.",
     ),
     NINTH_PAGE(
-        "${DARK_RED}Runesquares:</col>",
+        "${RED}Runesquares:</col>",
         "",
         "Players take it in turns to",
         "draw along the lines of the",
@@ -104,7 +104,7 @@ enum class BurthorpeInformationTab(
         "and draw another line.",
     ),
     TENTH_PAGE(
-        "${DARK_RED}Runeversi:</col>",
+        "${RED}Runeversi:</col>",
         "",
         "Although this game's rules are",
         "simple enough, the strategy is",
@@ -150,13 +150,13 @@ enum class BurthorpeInformationTab(
     FOURTEENTH_PAGE(
         "Several quests call for the",
         "player to venture into the troll",
-        "lands, including {DARK_RED}${Quests.DEATH_PLATEAU}</col>,",
-        "{DARK_RED}${Quests.TROLL_STRONGHOLD}</col>, the eccentric,",
-        "{DARK_RED}${Quests.EADGARS_RUSE}</col>, the romantic",
-        "drama {DARK_RED}${Quests.TROLL_ROMANCE}</col>, the",
-        "challenging {DARK_RED}${Quests.DESERT_TREASURE}</col>",
-        "and the wacky odyssey {DARK_RED}My</col>,",
-        "{DARK_RED}Arm's Big Adventure</col>.",
+        "lands, including {RED}${Quests.DEATH_PLATEAU}</col>,",
+        "{RED}${Quests.TROLL_STRONGHOLD}</col>, the eccentric,",
+        "{RED}${Quests.EADGARS_RUSE}</col>, the romantic",
+        "drama {RED}${Quests.TROLL_ROMANCE}</col>, the",
+        "challenging {RED}${Quests.DESERT_TREASURE}</col>",
+        "and the wacky odyssey {RED}My</col>,",
+        "{RED}Arm's Big Adventure</col>.",
     ),
     FIFTEENTH_PAGE(
         "Trolls are generally stupid but",
@@ -168,16 +168,16 @@ enum class BurthorpeInformationTab(
         "As if this Games Room",
         "weren't enough for one town,",
         "Burthorpe is also home to the",
-        "${DARK_RED}Rogues' Den</col>, a vast maze",
+        "${RED}Rogues' Den</col>, a vast maze",
         "filled with traps and puzzles,",
         "designed to test players'",
         "nerves to the limit while",
         "providing rewards for the",
-        "${DARK_RED}Agility</col> and ${DARK_RED}Thieving</col> skills.",
+        "${RED}Agility</col> and ${RED}Thieving</col> skills.",
     ),
     SEVENTEENTH_PAGE(
         "Further to the west lies the",
-        "${DARK_RED}Warriors' Guild</col>. This vast",
+        "${RED}Warriors' Guild</col>. This vast",
         "building is filled with",
         "innovative ways to train",
         "melee combat while earning",
@@ -200,9 +200,9 @@ enum class BurthorpeInformationTab(
         "that buy them time to fight",
     ),
     NINETEENTH_PAGE(
-        "against the ${DARK_RED}cyclopes</col> on the",
+        "against the ${RED}cyclopes</col> on the",
         "top floor. These are the only",
-        "creatures to drop {DARK_RED}defenders</col> -",
+        "creatures to drop {RED}defenders</col> -",
         "daggers that are worn in",
         "place of a shield for that",
         "extra Attack bonus in combat.",
@@ -213,7 +213,7 @@ enum class BurthorpeInformationTab(
 
     val lines = info.toList()
 
-    companion object : PagedInformation {
+    companion object : IntroductionPage {
         override val pages: List<List<String>> =
             values().map { it.lines }
     }

@@ -1,8 +1,8 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
-import content.region.misthalin.lumbridge.plugin.gnomecopter.data.PagedInformation
+import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
 import core.game.world.GameWorld
-import core.tools.DARK_RED
+import core.tools.RED
 
 // Completed
 enum class PestControlInformationTab(
@@ -10,8 +10,8 @@ enum class PestControlInformationTab(
 ) {
     FIRST_PAGE(
         "Deep in the southern waters",
-        "of ${GameWorld.settings?.name}, the ${DARK_RED}Void</col>",
-        "${DARK_RED}Knights</col>, devoted followers of",
+        "of ${GameWorld.settings?.name}, the ${RED}Void</col>",
+        "${RED}Knights</col>, devoted followers of",
         "the god Guthix, have",
         "discovered a series of islands",
         "where portals have opened,",
@@ -23,13 +23,13 @@ enum class PestControlInformationTab(
         "In order to preserve the",
         "balance of the world, the",
         "Knights are launching",
-        "expeditions from their ${DARK_RED}Outpost</col>",
+        "expeditions from their ${RED}Outpost</col>",
         "to these islands in an attempt",
         "to shut the portals down."
     ),
     THIRD_PAGE(
         "Each expedition is led by an",
-        "experienced ${DARK_RED}Void Knight</col>, who",
+        "experienced ${RED}Void Knight</col>, who",
         "stands in the centre of the",
         "island casting spells to",
         "weaken the portals.",
@@ -45,7 +45,7 @@ enum class PestControlInformationTab(
         "the portals can be destroyed",
         "the island is lost and the",
         "players re transported back",
-        "to the ${DARK_RED}Void Knights' Outpost</col>",
+        "to the ${RED}Void Knights' Outpost</col>",
         "in defeat."
     ),
     FIFTH_PAGE(
@@ -58,21 +58,21 @@ enum class PestControlInformationTab(
         "minutes, players will generally",
         "destroy the portals much",
         "quicker by force, earning a",
-        "${DARK_RED}nice cash reward</col> from the"
+        "${RED}nice cash reward</col> from the"
     ),
     SIXTH_PAGE(
         "Void Knights for their",
         "assistance, as well as some",
-        "${DARK_RED}Commendation Points</col> that can",
+        "${RED}Commendation Points</col> that can",
         "be traded at the Outpost for",
-        "combat training, useful supplies and unique ${DARK_RED}Void",
-        "${DARK_RED}Knight armour</col>."
+        "combat training, useful supplies and unique ${RED}Void",
+        "${RED}Knight armour</col>."
     ),
     SEVENTH_PAGE(
         "The creatures pouring through",
         "the portals include:",
         "",
-        "${DARK_RED}Shifters:",
+        "${RED}Shifters:",
         "These brightly coloured",
         "menaces have the ability to",
         "teleport through walls to reach",
@@ -81,7 +81,7 @@ enum class PestControlInformationTab(
         "this island."
     ),
     EIGHTH_PAGE(
-        "${DARK_RED}Spinners:",
+        "${RED}Spinners:",
         "",
         "Floating, delicately like a",
         "jellyfish, these disgusting",
@@ -97,7 +97,7 @@ enum class PestControlInformationTab(
         "spinner dies, it explodes in a",
         "cloud of poison.",
         "",
-        "${DARK_RED}Torchers and defilers:",
+        "${RED}Torchers and defilers:",
         "",
         "These vicious creatures can",
         "use powerful Magic and",
@@ -116,7 +116,7 @@ enum class PestControlInformationTab(
         "these creatures."
     ),
     ELEVENTH_PAGE(
-        "${DARK_RED}Ravagers:",
+        "${RED}Ravagers:",
         "",
         "Small and squat in",
         "appearance, these pests are",
@@ -132,7 +132,7 @@ enum class PestControlInformationTab(
         "ravager that's taking too much",
         "of an interest in the gates.",
         "",
-        "${DARK_RED}Brawlers:",
+        "${RED}Brawlers:",
         "",
         "These colossal pests like",
         "using their crushing melee",
@@ -150,7 +150,7 @@ enum class PestControlInformationTab(
         "Knight."
     ),
     FOURTEENTH_PAGE(
-        "${DARK_RED}Splatters:",
+        "${RED}Splatters:",
         "",
         "Bouncing merrily around the",
         "island, these beachball-like",
@@ -163,7 +163,7 @@ enum class PestControlInformationTab(
         "will consist of three distinct",
         "classes of player:",
         "",
-        "${DARK_RED}1.</col> Players who attack the",
+        "${RED}1.</col> Players who attack the",
         "portals directly as soon as",
         "their shields are down. The",
         "portals' high defence levels",
@@ -171,7 +171,7 @@ enum class PestControlInformationTab(
         "only the best fighters."
     ),
     SIXTEENTH_PAGE(
-        "${DARK_RED}2.</col> Players who defend the",
+        "${RED}2.</col> Players who defend the",
         "Void Knight from any",
         "creatures that succeed in",
         "breaching the defences and",
@@ -186,7 +186,7 @@ enum class PestControlInformationTab(
         "gates. It's usually best to",
         "keep the gates closed!",
         "",
-        "${DARK_RED}3.</col> Players who camp outside",
+        "${RED}3.</col> Players who camp outside",
         "the gates, targeting their",
         "attacks against anything that's",
         "threatening the Void Knight.",
@@ -202,12 +202,8 @@ enum class PestControlInformationTab(
 
     val lines = info.toList()
 
-    companion object : PagedInformation {
+    companion object : IntroductionPage {
         override val pages: List<List<String>> =
             values().map { it.lines }
     }
 }
-
-// You have been temporarily muted due to breaking a rule.
-// You will be un-muted within 24 hours.
-// To prevent further mutes please read the rules.

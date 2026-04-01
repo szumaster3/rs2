@@ -4,9 +4,9 @@ import core.api.sendString
 import core.game.node.entity.player.Player
 import shared.consts.Components
 
-object PagedInformationManager {
+object IntroductionPageManager {
 
-    fun sendPage(player: Player, data: PagedInformation, page: Int) {
+    fun sendPage(player: Player, data: IntroductionPage, page: Int) {
 
         val max = data.pages.size
         val pageNumber = page.coerceIn(0, max - 1)
@@ -27,7 +27,7 @@ object PagedInformationManager {
         // page info.
         sendString(
             player,
-            "Page ${pageNumber + 1} / $max",
+            "${pageNumber + 1} / $max",
             Components.CARPET_MAIN_728,
             14
         )
