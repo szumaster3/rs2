@@ -120,6 +120,28 @@ object DrawUtils {
         sound?.let { playAudio(player, it) }
     }
 
+    private fun getButtonName(buttonID: Int): String = when (buttonID) {
+        9 -> "Logs"
+        4 -> "Sandbag"
+        5 -> "Relax"
+        6 -> "Rope"
+        10 -> "Red rope"
+        else -> "unknown [$buttonID]"
+    }
+
+    fun debugNextMove(player: Player, sequence: List<Int>, stage: Int, index: Int) {
+        if (sequence.isEmpty()) {
+            player.debug("Stage $stage sequence not implemented.")
+            return
+        }
+        val next = sequence.getOrNull(index)
+        if (next != null) {
+            player.debug("Stage $stage | Step ${index + 1}/${sequence.size} -> Next: ${getButtonName(next)}")
+        } else {
+            player.debug("Stage $stage completed")
+        }
+    }
+
     fun clearBalloonState(player: Player, routeId: Int, step: Int) {
         removeAttributes(
             player,

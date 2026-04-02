@@ -5,9 +5,10 @@ import content.global.travel.balloon.utils.DrawUtils
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
+import core.game.system.command.Privilege
 import shared.consts.Components
 
-class BalloonFlightInterface : InterfaceListener {
+class BalloonFlightInterface : InterfaceListener, Commands {
 
     override fun defineInterfaceListeners() {
 
@@ -40,7 +41,6 @@ class BalloonFlightInterface : InterfaceListener {
             if (routeId == -1) return@on true
 
             val routeData = BalloonRoutes.routes[routeId] ?: return@on true
-
             val stepAttribute = "zep_current_step_$routeId"
             val step = getAttribute(player, stepAttribute, 1)
 
@@ -79,15 +79,51 @@ class BalloonFlightInterface : InterfaceListener {
             DrawUtils.getSoundForButton(player, buttonID)
             DrawUtils.drawBalloon(player, move, routeId, step)
 
-            setAttribute(player, sequenceProgressAttribute, index + 1)
-
-            if (index + 1 >= sequence.size) {
+            val newIndex = index + 1
+            setAttribute(player, sequenceProgressAttribute, newIndex)
+            DrawUtils.debugNextMove(player, sequence, step, newIndex)
+            if (newIndex >= sequence.size) {
                 DrawUtils.reset(player, Components.ZEP_INTERFACE_470)
                 removeAttribute(player, sequenceProgressAttribute)
                 DrawUtils.updateScreen(player, routeId, step, routeData)
             }
 
             return@on true
+        }
+    }
+
+    override fun defineCommands() {
+
+        define(
+            name = "balloon",
+            privilege = Privilege.ADMIN,
+            usage = "::balloon <routeId>",
+            description = "Opens balloon interface for tests."
+        ) { player, args ->
+
+            if (args.size < 2) {
+                reject(player, "Syntax: ::balloon <routeId>")
+                return@define
+            }
+
+            val routeId = args[1].toIntOrNull()
+            if (routeId == null || !BalloonRoutes.routes.containsKey(routeId)) {
+                reject(player, "Invalid routeId. Available: ${BalloonRoutes.routes.keys}")
+                return@define
+            }
+
+            val route = BalloonRoutes.routes[routeId]!!
+
+            setAttribute(player, "zep_current_route", routeId)
+            setAttribute(player, "zep_current_stage", 1)
+            setAttribute(player, "zep_current_step_$routeId", 1)
+
+            openInterface(player, Components.ZEP_INTERFACE_470)
+            DrawUtils.drawBaseBalloon(player, routeId, 1)
+
+            player.debug("Opened balloon route: $routeId")
+
+            DrawUtils.debugNextMove(player, route.firstSequence, 1, 0)
         }
     }
 }

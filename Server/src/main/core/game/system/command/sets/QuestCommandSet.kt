@@ -1,6 +1,5 @@
 package core.game.system.command.sets
 
-import core.api.finishQuest
 import core.api.sendString
 import core.api.updateQuestTab
 import core.game.component.Component
@@ -9,26 +8,11 @@ import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.system.command.Privilege
 import core.game.world.repository.Repository
 import core.plugin.Initializable
-import shared.consts.Quests
 
 @Initializable
 class QuestCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
-
-        /*
-         * Command for instantly completing the
-         * Enlightened Journey quest (balloon travel).
-         */
-
-        define(
-            name = "balloon",
-            privilege = Privilege.ADMIN,
-            usage = "::balloon",
-            description = "Toggle balloon travel",
-        ) { player, _ ->
-            finishQuest(player, Quests.ENLIGHTENED_JOURNEY)
-        }
 
         /*
          * Command for completing all quests for the player.

@@ -40,7 +40,7 @@ object BalloonRoutes {
 
     val taverleyRoute =
         RouteData(
-            firstSequence = listOf(9, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5), // Aug 8, 2008
+            firstSequence = listOf(9, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5, 5, 5, 5), // Aug 8, 2008
             secondSequence = listOf(9, 5, 9, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 9, 4, 5, 5, 5),
             thirdSequence = listOf(5, 5, 5, 5, 5, 5, 5, 10, 6, 5, 5, 5, 9, 5, 5, 5, 5, 6),
             firstOverlay = TaverleyRouteScreen::firstStage,
