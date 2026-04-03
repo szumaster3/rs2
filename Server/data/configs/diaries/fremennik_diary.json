@@ -1,0 +1,128 @@
+{
+  "easy": [
+    {
+      "varbit": 5648,
+      "task": "Kill a cave crawler in the Fremennik Slayer Dungeon."
+    },
+    {
+      "varbit": 5649,
+      "task": "Kill five rock crabs on the shore near Rellekka or on Waterbirth Island."
+    },
+    {
+      "varbit": 5650,
+      "task": "Find the highest tree on the Fremennik mainland."
+    },
+    {
+      "varbit": 5651,
+      "task": "View the rewards in the Barbarian Assault tutorial."
+    },
+    {
+      "varbit": 5652,
+      "task": "Speak to Otto Godblessed about barbarian training."
+    },
+    {
+      "varbit": 5653,
+      "task": "Collect three seaweed from the shore north-east of Rellekka."
+    },
+    {
+      "varbit": 5654,
+      "task": "Find the Hunting Expert on the northern ice plains."
+    },
+    {
+      "varbit": 5655,
+      "task": "Catch a fish off one of Rellekka's piers."
+    },
+    {
+      "varbit": 5656,
+      "task": "Recharge your Summoning points near Rellekka's gate."
+    },
+    {
+      "varbit": 5657,
+      "task": "Kill an adult black unicorn."
+    }
+  ],
+  "medium": [
+    {
+      "varbit": 5658,
+      "task": "Learn of the history of the Fremennik and the Outerlanders from Chieftain Brundt."
+    },
+    {
+      "varbit": 5659,
+      "task": "Watch a shouting match between Fremennik Isles tower guards (the guards can be found between Jatizso and Neitiznot in one of the towers)."
+    },
+    {
+      "varbit": 5660,
+      "task": "Interact with a Pet rock."
+    },
+    {
+      "varbit": 5661,
+      "task": "Make three vials in the furnace building at Rellekka."
+    },
+    {
+      "varbit": 5662,
+      "task": "Charm the Fossegrimen into accepting a raw bass."
+    },
+    {
+      "varbit": 5663,
+      "task": "Wear yak-hide armour and kill an ice troll."
+    },
+    {
+      "varbit": 5664,
+      "task": "Make cheese in the dairy churn in Rellekka."
+    },
+    {
+      "varbit": 5665,
+      "task": "Use a fairy ring to appear on a mountaintop near the windswept tree."
+    },
+    {
+      "varbit": 5666,
+      "task": "Look at Yrsa's options for recolouring your boots in her clothes shop in Rellekka."
+    },
+    {
+      "varbit": 5667,
+      "task": "Successfully hunt a sabre-toothed kyatt."
+    },
+    {
+      "varbit": 5668,
+      "task": "Steal a fish from the fishing stall in the Rellekka marketplace."
+    }
+  ],
+  "hard": [
+    {
+      "varbit": 5669,
+      "task": "Kill three dagannoths in the first layer of the Waterbirth Island Dungeon."
+    },
+    {
+      "varbit": 5670,
+      "task": "Wear rockshell, spined or skeletal armour and have the locals use an honorific with your Fremennik name."
+    },
+    {
+      "varbit": 5671,
+      "task": "Complete the Barbarian Outpost Agility Course."
+    },
+    {
+      "varbit": 5672,
+      "task": "Mine pure essence on Lunar Isle."
+    },
+    {
+      "varbit": 5673,
+      "task": "Make a barbarian pyre ship from arctic pine."
+    },
+    {
+      "varbit": 5674,
+      "task": "Catch a tuna without a harpoon."
+    },
+    {
+      "varbit": 5675,
+      "task": "Bake a pie using Magic."
+    },
+    {
+      "varbit": 5676,
+      "task": "Kill a Mithril dragon."
+    },
+    {
+      "varbit": 5677,
+      "task": "Get mahogany from your Etceterian subjects."
+    }
+  ]
+}

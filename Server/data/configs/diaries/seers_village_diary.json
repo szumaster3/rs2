@@ -1,0 +1,148 @@
+{
+  "easy": [
+    {
+      "varbit": 5782,
+      "task": "Pick five flax from the flax field."
+    },
+    {
+      "varbit": 5783,
+      "task": "Walk clockwise around the big mysterious statue."
+    },
+    {
+      "varbit": 5785,
+      "task": "Have Sir Galahad make you a cup of tea."
+    },
+    {
+      "varbit": 5787,
+      "task": "Take the poison chalice to King Arthur."
+    },
+    {
+      "varbit": 5786,
+      "task": "Spin 5 bow strings."
+    },
+    {
+      "varbit": 5788,
+      "task": "Fill five pots with flour from the Sinclair Mansion."
+    },
+    {
+      "varbit": 5790,
+      "task": "Give five locals a glass of cider in the Forester's Arms."
+    },
+    {
+      "varbit": 5789,
+      "task": "Plant jute seeds."
+    },
+    {
+      "varbit": 5791,
+      "task": "Use the churn in the Sinclair Mansion garden."
+    },
+    {
+      "varbit": 5793,
+      "task": "Buy a candle from the candle-maker."
+    },
+    {
+      "varbit": 5792,
+      "task": "Pray at the Seers' Village altar."
+    },
+    {
+      "varbit": 5784,
+      "task": "Catch a mackerel."
+    }
+  ],
+  "medium": [
+    {
+      "varbit": 5799,
+      "task": "Use the Sinclair Mansion to Fremennik agility shortcut."
+    },
+    {
+      "varbit": 5805,
+      "task": "Talk to Thormac the Sorcerer about making mystic staves."
+    },
+    {
+      "varbit": 5794,
+      "task": "Transport a full load of coal to Seers' Village."
+    },
+    {
+      "varbit": 5797,
+      "task": "Find the highest point in Seers' Village."
+    },
+    {
+      "varbit": 5795,
+      "task": "Defeat each type of elemental in the Elemental Workshop."
+    },
+    {
+      "varbit": 5800,
+      "task": "Teleport to Camelot."
+    },
+    {
+      "varbit": 5796,
+      "task": "Kill one guard on each tower of the Ranging Guild using a longbow."
+    },
+    {
+      "varbit": 5798,
+      "task": "Have the Ranging Guild competition judge congratulate you for acquiring over 1,000 Archery tickets."
+    },
+    {
+      "varbit": 5802,
+      "task": "Buy something from the ticket exchange in the Ranging Guild."
+    },
+    {
+      "varbit": 5803,
+      "task": "Use a familiar to make a fire from maple logs within Seers' Village."
+    },
+    {
+      "varbit": 5804,
+      "task": "Get a pet fish from Harry."
+    },
+    {
+      "varbit": 5801,
+      "task": "Catch and cook a bass in Catherby."
+    }
+  ],
+  "hard": [
+    {
+      "varbit": 5811,
+      "task": "Teleport to the Ranging Guild."
+    },
+    {
+      "varbit": 5806,
+      "task": "Cut five sets of yew logs."
+    },
+    {
+      "varbit": 5810,
+      "task": "Fletch a magic shortbow in the Seers' Village Bank."
+    },
+    {
+      "varbit": 5809,
+      "task": "Enter the Seers' Village courthouse with your Piety prayer turned on."
+    },
+    {
+      "varbit": 5807,
+      "task": "Use the fairy ring in McGrubor's Wood."
+    },
+    {
+      "varbit": 5808,
+      "task": "Burn a magic log in Seers' Village."
+    },
+    {
+      "varbit": 5812,
+      "task": "High Alch a magic shortbow in the Seers' Village bank."
+    },
+    {
+      "varbit": 5814,
+      "task": "Catch five sharks in Catherby."
+    },
+    {
+      "varbit": 5815,
+      "task": "Cook 5 sharks in Catherby using the Cooking gauntlets."
+    },
+    {
+      "varbit": 5816,
+      "task": "Charge five water orbs in one go."
+    },
+    {
+      "varbit": 5813,
+      "task": "Use the grapple shortcut to get from the water obelisk island to Catherby shore."
+    }
+  ]
+}

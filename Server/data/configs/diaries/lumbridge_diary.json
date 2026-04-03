@@ -1,0 +1,224 @@
+{
+  "beginner": [
+    {
+      "varbit": 4949,
+      "task": "Climb to the highest point in Lumbridge."
+    },
+    {
+      "varbit": 4950,
+      "task": "Raise the flag on the roof of the Lumbridge Bank."
+    },
+    {
+      "varbit": 4951,
+      "task": "Speak to the Duke of Lumbridge."
+    },
+    {
+      "varbit": 4952,
+      "task": "Speak with the Doomsayer about the Warning System."
+    },
+    {
+      "varbit": 4953,
+      "task": "Pass through the Al Kharid gate."
+    },
+    {
+      "varbit": 4954,
+      "task": "Mine some clay in the Mining patch north of the Champions' Guild."
+    },
+    {
+      "varbit": 4955,
+      "task": "Make some soft clay in the Barbarian Village."
+    },
+    {
+      "varbit": 4956,
+      "task": "Make a pot on the potter's wheel in the Barbarian Village."
+    },
+    {
+      "varbit": 4957,
+      "task": "Fire a pot in the kiln in the Barbarian Village potter's house."
+    },
+    {
+      "varbit": 4958,
+      "task": "Enter the courtyard of the spooky mansion in Draynor Village."
+    },
+    {
+      "varbit": 4959,
+      "task": "Visit the Draynor Village market."
+    },
+    {
+      "varbit": 4960,
+      "task": "Find out about the Rules of Conduct from the Draynor Town Crier."
+    },
+    {
+      "varbit": 4961,
+      "task": "Climb to the top of the Wizards' Tower."
+    },
+    {
+      "varbit": 4962,
+      "task": "Mine some copper in the Mining spot to the south-east of Lumbridge Swamp."
+    },
+    {
+      "varbit": 4963,
+      "task": "Catch some shrimp in the Fishing spot to the east of Lumbridge Swamp."
+    },
+    {
+      "varbit": 4964,
+      "task": "Have the Fishing Tutor send you on an errand."
+    },
+    {
+      "varbit": 4965,
+      "task": "Look through Father Aereck's selection of gravestones."
+    },
+    {
+      "varbit": 4966,
+      "task": "Play the organ in the Lumbridge church."
+    },
+    {
+      "varbit": 4967,
+      "task": "Ring the bell in the Lumbridge Church."
+    },
+    {
+      "varbit": 4968,
+      "task": "Find out about the Stronghold of Security from the Lumbridge Guide."
+    },
+    {
+      "varbit": 4969,
+      "task": "Browse the Lumbridge General Store."
+    },
+    {
+      "varbit": 4970,
+      "task": "Visit Fred the Farmer's chicken and sheep farm."
+    },
+    {
+      "varbit": 4971,
+      "task": "Grind some flour in the windmill north of Lumbridge."
+    }
+  ],
+  "easy": [
+    {
+      "varbit": 4972,
+      "task": "Mine some iron ore from the Al Kharid Mining spot."
+    },
+    {
+      "varbit": 4973,
+      "task": "Obtain a cow-hide from a cow in the field north-east of Lumbridge."
+    },
+    {
+      "varbit": 4974,
+      "task": "Have Ellis tan your cow-hide to make soft leather at his shop in Al Kharid."
+    },
+    {
+      "varbit": 4975,
+      "task": "Craft a pair of soft leather gloves."
+    },
+    {
+      "varbit": 4976,
+      "task": "Catch a pike in the river to the east of Lumbridge Castle."
+    },
+    {
+      "varbit": 4977,
+      "task": "Smelt a steel bar in the Lumbridge furnace."
+    },
+    {
+      "varbit": 4978,
+      "task": "Search the shed in Lumbridge Swamp."
+    },
+    {
+      "varbit": 4979,
+      "task": "Kill a giant rat in Lumbridge Swamp."
+    },
+    {
+      "varbit": 4980,
+      "task": "Cut down a dead tree in Lumbridge Swamp."
+    },
+    {
+      "varbit": 4981,
+      "task": "Light a campfire from normal logs in Lumbridge Swamp."
+    },
+    {
+      "varbit": 4982,
+      "task": "Cook some rat meat on a campfire in Lumbridge Swamp."
+    },
+    {
+      "varbit": 4983,
+      "task": "Craft a water rune at the Water Altar."
+    },
+    {
+      "varbit": 4984,
+      "task": "Get a replacement Ghostspeak Amulet from Father Urhney."
+    },
+    {
+      "varbit": 4985,
+      "task": "Taunt the demon at the top of the Wizard's Tower."
+    },
+    {
+      "varbit": 4986,
+      "task": "Have Sedridor teleport you to the Essence Mine."
+    },
+    {
+      "varbit": 4987,
+      "task": "Access the bank in Draynor Village."
+    },
+    {
+      "varbit": 4988,
+      "task": "Have the Wise Old man check your bank for unnecessary quest-related items."
+    },
+    {
+      "varbit": 4989,
+      "task": "Discover what the Wise Old man is watching through his telescope."
+    },
+    {
+      "varbit": 4991,
+      "task": "Defeat a zombie in the sewers under the jail."
+    }
+  ],
+  "medium": [
+    {
+      "varbit": 4992,
+      "task": "Smith a steel longsword on the anvil in the jailhouse sewers."
+    },
+    {
+      "varbit": 4993,
+      "task": "Take a ride on Gnomecopter."
+    },
+    {
+      "varbit": 4994,
+      "task": "Use the teleport Lumbridge spell."
+    },
+    {
+      "varbit": 4995,
+      "task": "Light a willow log fire in Lumbridge Castle courtyard."
+    },
+    {
+      "varbit": 4996,
+      "task": "Cook a lobster on the range in Lumbridge Castle kitchen."
+    },
+    {
+      "varbit": 4997,
+      "task": "Obtain an Anti-dragonbreath shield from Duke Horacio."
+    },
+    {
+      "varbit": 4998,
+      "task": "Cut a willow tree, east of Lumbridge Castle."
+    },
+    {
+      "varbit": 4999,
+      "task": "Smelt a silver bar in the Lumbridge furnace."
+    },
+    {
+      "varbit": 5000,
+      "task": "Craft a holy symbol in the Lumbridge furnace."
+    },
+    {
+      "varbit": 5001,
+      "task": "Catch a salmon in the river to the east of Lumbridge Castle."
+    },
+    {
+      "varbit": 5002,
+      "task": "Mine some silver from the mining spot north of Al Kharid."
+    },
+    {
+      "varbit": 5003,
+      "task": "Mine some coal in the Mining spot south-west of Lumbridge Swamp."
+    }
+  ]
+}

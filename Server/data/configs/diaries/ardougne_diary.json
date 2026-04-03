@@ -1,0 +1,232 @@
+{
+  "easy": [
+    {
+      "varbit": -1,
+      "task": "Have Wizard Cromperty teleport you to the essence mine."
+    },
+    {
+      "varbit": -1,
+      "task": "Attempt to steal from any stall in Ardougne Market, or from any guard."
+    },
+    {
+      "varbit": -1,
+      "task": "Sell silk to the silk trader in Ardougne for 60 coins each."
+    },
+    {
+      "varbit": -1,
+      "task": "Use the altar in West Ardougne's church."
+    },
+    {
+      "varbit": -1,
+      "task": "Enter the Castle Wars waiting room."
+    },
+    {
+      "varbit": -1,
+      "task": "Go out fishing on the Fishing Trawler."
+    },
+    {
+      "varbit": -1,
+      "task": "Enter the Combat Training Camp north of Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Talk to a civilian in West Ardougne about selling a cat."
+    },
+    {
+      "varbit": -1,
+      "task": "Kill a Unicow in the Tower of Life."
+    },
+    {
+      "varbit": -1,
+      "task": "Get a civilian to throw a tomato at the army recruiter in West Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Sail from East Ardougne to Karamja."
+    },
+    {
+      "varbit": -1,
+      "task": "Attempt to pick-lock a certain door east of the gem stall in Ardougne's marketplace."
+    },
+    {
+      "varbit": -1,
+      "task": "Spend some Penguin points with Larry at Ardougne Zoo."
+    },
+    {
+      "varbit": -1,
+      "task": "Use the Summoning obelisk to the east of the Fight Arena."
+    },
+    {
+      "varbit": -1,
+      "task": "Pop a balloon in the monastery south of Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Buy a water-filled vial from the general store run by Aemad and Kortan."
+    },
+    {
+      "varbit": -1,
+      "task": "Use the noticeboard near the Observatory to gather information about shooting stars."
+    },
+    {
+      "varbit": -1,
+      "task": "Kill something on the Khazard Battlefield."
+    },
+    {
+      "varbit": -1,
+      "task": "Buy a skewered kebab from the Poison Arrow pub."
+    },
+    {
+      "varbit": -1,
+      "task": "View the Hunter equipment in Aleck's shop."
+    },
+    {
+      "varbit": -1,
+      "task": "Talk to the head servant at the servants' guild to find out about servants for your house."
+    },
+    {
+      "varbit": -1,
+      "task": "Use a Ring of Dueling to teleport to Castle Wars."
+    },
+    {
+      "varbit": -1,
+      "task": "Talk to Tindel Merchant about identifying swords."
+    }
+  ],
+  "medium": [
+    {
+      "varbit": -1,
+      "task": "Enter the unicorn pen in Ardougne Zoo using the fairy rings."
+    },
+    {
+      "varbit": -1,
+      "task": "Teleport to the Wilderness using the lever in Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Grapple over Yanille's southern wall."
+    },
+    {
+      "varbit": -1,
+      "task": "Craft some runes (any kind) at Ourania Altar."
+    },
+    {
+      "varbit": -1,
+      "task": "Sell some rubium to Ezekial Lovecraft in the town of Witchaven."
+    },
+    {
+      "varbit": -1,
+      "task": "Pick watermelons from the Farming patch north of Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Cast the Watchtower Teleport spell."
+    },
+    {
+      "varbit": -1,
+      "task": "Travel to Castle Wars by hot-air balloon."
+    },
+    {
+      "varbit": -1,
+      "task": "Claim buckets of sand from Bert in Yanille."
+    },
+    {
+      "varbit": -1,
+      "task": "After Meeting History, return to the past and talk to Sarah about Herblore."
+    },
+    {
+      "varbit": -1,
+      "task": "Catch a fish at the Fishing Platform using either a net or rod."
+    },
+    {
+      "varbit": -1,
+      "task": "Cross the River Dougne using the log balance."
+    },
+    {
+      "varbit": -1,
+      "task": "Pickpocket the master farmer north of Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Attempt to steal a nature rune from a chest in Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Mine some coal from the rocks east of Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Kill a swordchick in the Tower of Life."
+    }
+  ],
+  "hard": [
+    {
+      "varbit": -1,
+      "task": "Recharge a bracelet of combat or a necklace of skills at the Legends' Guild."
+    },
+    {
+      "varbit": -1,
+      "task": "Kill a shadow warrior in the Legends' Guild basement."
+    },
+    {
+      "varbit": -1,
+      "task": "Enter the Magic Guild in Yanille."
+    },
+    {
+      "varbit": -1,
+      "task": "Use the portal in the Magic Guild to teleport to Thormac's tower (west portal)."
+    },
+    {
+      "varbit": -1,
+      "task": "Be on the winning side in a game of Castle Wars."
+    },
+    {
+      "varbit": -1,
+      "task": "Cast the Ourania Teleport spell."
+    },
+    {
+      "varbit": -1,
+      "task": "Pickpocket a watchman in Yanille while wearing gloves of silence."
+    },
+    {
+      "varbit": -1,
+      "task": "Kill a frogeel in the Tower of Life."
+    },
+    {
+      "varbit": -1,
+      "task": "Have a zookeeper put you in Ardougne Zoo's monkey cage."
+    },
+    {
+      "varbit": -1,
+      "task": "Kill your own jade vine after the Back to my Roots quest."
+    },
+    {
+      "varbit": -1,
+      "task": "Use the Air Guitar emote near the south-east of the monastery south of Ardougne."
+    },
+    {
+      "varbit": -1,
+      "task": "Cast the Ardougne Teleport spell."
+    },
+    {
+      "varbit": -1,
+      "task": "Cross the monkey bars in the Yanille Agility Dungeon."
+    },
+    {
+      "varbit": -1,
+      "task": "Catch a red salamander from the Hunter area outside of Ourania Altar."
+    },
+    {
+      "varbit": -1,
+      "task": "Pick a papaya or coconut from the fruit tree patch near Tree Gnome Village."
+    },
+    {
+      "varbit": -1,
+      "task": "Attempt to steal blood runes from the chest in the Chaos Druid Tower's dungeon."
+    },
+    {
+      "varbit": -1,
+      "task": "Use a catapult in Castle Wars after gaining the knowledge from the Catapult Construction quest."
+    }
+  ]
+}
