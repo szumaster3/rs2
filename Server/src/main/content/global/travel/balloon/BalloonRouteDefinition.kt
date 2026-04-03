@@ -261,4 +261,20 @@ object BalloonRouteDefinition {
     fun grand_tree_2(p: Player, c: Int) = balloonScreen(p, c) {
 
     }
+
+    /*
+     * Castle wars route stages.
+     */
+
+    fun castle_wars_0(p: Player, c: Int) = balloonScreen(p, c) {
+
+    }
+
+    fun castle_wars_1(p: Player, c: Int) = balloonScreen(p, c) {
+
+    }
+
+    fun castle_wars_2(p: Player, c: Int) = balloonScreen(p, c) {
+
+    }
 }

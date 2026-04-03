@@ -45,7 +45,7 @@ object BalloonRouteConfiguration {
         RouteData(
             stages = listOf(
                 RouteStage(
-                    sequence = listOf(4,9,5,5,5,5,5,5,5,5,5,10,5,5,6,5,5,5,5),
+                    sequence = listOf(4,9,5,5,5,5,5,5,5,5,5,10,5,5,6,5,5,5,5,5),
                     overlay = BalloonRouteDefinition::taverley_0,
                     position = BalloonPosition(118, 99)
                 ),
@@ -92,13 +92,13 @@ object BalloonRouteConfiguration {
                     position = BalloonPosition(138,118)
                 ),
                 RouteStage(
-                    sequence = emptyList(),
-                    overlay = { _, _ -> },
+                    sequence = listOf(5,5,5,5,5,5,9,9,6,6,6,6,5,5,4,5,5,5,5),
+                    overlay = BalloonRouteDefinition::varrock_1,
                     position = BalloonPosition(0, 0)
                 ),
                 RouteStage(
-                    sequence = emptyList(),
-                    overlay = { _, _ -> },
+                    sequence = listOf(5,5,5,4,5,6,6,4,5,6,6,4,5,10,5,10,5,6),
+                    overlay = BalloonRouteDefinition::varrock_2,
                     position = BalloonPosition(0, 0)
                 )
             )
@@ -107,18 +107,42 @@ object BalloonRouteConfiguration {
     private val CASTLE_WARS =
         RouteData(
             stages = listOf(
-                RouteStage(emptyList(), { _, _ -> }, BalloonPosition(0, 0)),
-                RouteStage(emptyList(), { _, _ -> }, BalloonPosition(0, 0)),
-                RouteStage(emptyList(), { _, _ -> }, BalloonPosition(0, 0))
+                RouteStage(
+                    sequence = listOf(4,4,9,5,5,5,5,5,10,9,5,5,10,5,5,9,9,5,5,5),
+                    overlay = BalloonRouteDefinition::castle_wars_0,
+                    BalloonPosition(0, 0)
+                ),
+                RouteStage(
+                    sequence = listOf(9,5,5,10,6,5,5,5,5,5,5,5,4,5,6,5,5,6,5),
+                    overlay = BalloonRouteDefinition::castle_wars_1,
+                    BalloonPosition(0, 0)
+                ),
+                RouteStage(
+                    sequence = listOf(9,5,5,6,5,5,5,9,10,5,5,5,5,4,10,5,5,6),
+                    overlay = BalloonRouteDefinition::castle_wars_2,
+                    BalloonPosition(0, 0)
+                )
             )
         )
 
     private val GRAND_TREE =
         RouteData(
             stages = listOf(
-                RouteStage(emptyList(), { _, _ -> }, BalloonPosition(0, 0)),
-                RouteStage(emptyList(), { _, _ -> }, BalloonPosition(0, 0)),
-                RouteStage(emptyList(), { _, _ -> }, BalloonPosition(0, 0))
+                RouteStage(
+                    sequence = listOf(5,5,5,5,5,5,5,6,5,5,5,5,5,5,5,5,5,5,5,5),
+                    { _, _ -> },
+                    BalloonPosition(0, 0)
+                ),
+                RouteStage(
+                    sequence = listOf(9,6,9,6,9,5,5,9,6,5,4,5,5,10,5,6,5,5,5),
+                    { _, _ -> },
+                    BalloonPosition(0, 0)
+                ),
+                RouteStage(
+                    sequence = listOf(9,9,9,5,5,6,9,5,5,5,5,5,10,5,10,6,5,5,6),
+                    { _, _ -> },
+                    BalloonPosition(0, 0)
+                )
             )
         )
 
