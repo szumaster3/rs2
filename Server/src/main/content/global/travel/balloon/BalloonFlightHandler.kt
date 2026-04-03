@@ -1,8 +1,6 @@
 package content.global.travel.balloon
 
 import content.data.GameAttributes
-import content.global.travel.balloon.dialogue.AssistantDialogue
-import content.global.travel.balloon.utils.FlightUtils
 import core.api.isQuestComplete
 import core.api.openDialogue
 import core.api.sendMessage
@@ -20,43 +18,42 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
 
     companion object {
         /**
-         * Represents the assistant npc.
+         * Represents the assistant npc transform ids.
          */
-        private val ASSISTANT_NPC_IDS = intArrayOf(
-            5062,
-            5063,
-            5064,
-            5065,
-            5066
-        )
+        private val ASSISTANT_NPC_IDS = intArrayOf(5062,5063,5064,5065,5066)
 
         /**
-         * Represents the basket ids.
+         * Represents the basket scenery ids.
          */
         private val BASKET_OBJECT_IDS = intArrayOf(Scenery.BASKET_19128, Scenery.BASKET_19129)
 
     }
 
     override fun defineInterfaceListeners() {
+
+        /*
+         * Handles opening the balloon flight overlay.
+         */
+
         on(Components.ZEP_BALLOON_MAP_469) { player, _, _, buttonID, _, _ ->
 
-            val destination = BalloonDefinition.fromButtonId(buttonID)
+            val destination = BalloonTravelDefinition.fromButtonId(buttonID)
                 ?: return@on true
 
-            val origin = player.getAttribute<BalloonDefinition>(
+            val origin = player.getAttribute<BalloonTravelDefinition>(
                 GameAttributes.BALLOON_ORIGIN
             )
 
-            if (!FlightUtils.canFly(player, origin, destination)) {
+            if (!BalloonUtils.checkRequirements(player, origin, destination)) {
                 return@on true
             }
 
-            if (FlightUtils.unlockNewLocation(player, destination)) {
+            if (BalloonUtils.unlockNewLocation(player, destination)) {
                 return@on true
             }
 
-            FlightUtils.payForFlight(player, origin, destination) {
-                FlightUtils.startFlight(player, destination)
+            BalloonUtils.payForFlight(player, origin, destination) {
+                BalloonUtils.startFlight(player, destination)
             }
 
             return@on true
@@ -71,9 +68,9 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
 
         on(BASKET_OBJECT_IDS, IntType.SCENERY, "use") { player, node ->
             val sceneryId = node.asScenery().wrapper.id
-            val location = BalloonDefinition.fromSceneryId(sceneryId)
+            val location = BalloonTravelDefinition.fromSceneryId(sceneryId)
             if (location != null) {
-                FlightUtils.openFlightMap(player, location)
+                BalloonUtils.openFlightOverlay(player, location)
             }
             return@on true
         }
@@ -97,9 +94,9 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            val location = BalloonDefinition.fromNpcId(node.id)
+            val location = BalloonTravelDefinition.fromNpcId(node.id)
             if (location != null) {
-                FlightUtils.openFlightMap(player, location)
+                BalloonUtils.openFlightOverlay(player, location)
             }
             return@on true
         }

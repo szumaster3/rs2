@@ -9,19 +9,24 @@ import shared.consts.Vars
 
 /**
  * Represents balloon travel data.
+ *
+ * # Relations
+ * - [BalloonFlightHandler]
+ * - [BalloonUtils]
+ * - [AssistantDialogue]
  */
-enum class BalloonDefinition(
+enum class BalloonTravelDefinition(
     val destName: String,
-    val npc: Int,
+    val npcId: Int,
     val destination: Location,
     val logId: Int,
-    val logCost: Int,
+    val logAmount: Int,
     val chargeCost: Int,
     val requiredLevel: Int,
     val varbitId: Int,
     val componentId: Int,
     val button: Int,
-    val wrapperId: Int
+    val sceneryId: Int
 ) {
     TAVERLEY("in Taverley", NPCs.ASSISTANT_STAN_5057, Location(2940, 3420), Items.LOGS_1511, 1, 1, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 22, 18, 19135),
     CRAFT_GUILD("at the Crafting Guild", NPCs.ASSISTANT_BROCK_5054, Location(2924, 3303), Items.OAK_LOGS_1521, 2, 2, 30, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CRAFTING_GUILD_BALLOON_2871, 20, 16, 19141),
@@ -31,14 +36,13 @@ enum class BalloonDefinition(
     ENTRANA("in Entrana", NPCs.AUGUSTE_5049, Location(2809, 3356), Items.LOGS_1511, 1, 1, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_ENTRANA_BALLOON_2867, 25, 17, 19133);
 
     companion object {
-
-        private val npcMap by lazy { values().associateBy { it.npc } }
+        private val npcMap by lazy { values().associateBy { it.npcId } }
         private val buttonToBalloon by lazy { values().associateBy { it.button } }
-        private val sceneryToBalloon by lazy { values().associateBy { it.wrapperId } }
+        private val sceneryToBalloon by lazy { values().associateBy { it.sceneryId } }
 
-        fun fromButtonId(buttonId: Int): BalloonDefinition? = buttonToBalloon[buttonId]
-        fun fromSceneryId(id: Int): BalloonDefinition? = sceneryToBalloon[id]
-        fun fromNpcId(npcId: Int): BalloonDefinition? = npcMap[npcId]
+        fun fromButtonId(buttonId: Int): BalloonTravelDefinition? = buttonToBalloon[buttonId]
+        fun fromSceneryId(id: Int): BalloonTravelDefinition? = sceneryToBalloon[id]
+        fun fromNpcId(npcId: Int): BalloonTravelDefinition? = npcMap[npcId]
 
         private val balloonInterfaceAnimation = mapOf(
             ENTRANA to TAVERLEY to 5110,
@@ -73,7 +77,7 @@ enum class BalloonDefinition(
             GRAND_TREE to VARROCK to 5139
         )
 
-        fun getAnimationId(from: BalloonDefinition, to: BalloonDefinition): Int {
+        fun getAnimationId(from: BalloonTravelDefinition, to: BalloonTravelDefinition): Int {
             return balloonInterfaceAnimation[from to to] ?: run {
                 log(this.javaClass, Log.WARN, "No animation for route [$from] -> [$to]")
                 0
