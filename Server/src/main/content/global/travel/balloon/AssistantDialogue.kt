@@ -1,6 +1,5 @@
-package content.global.travel.balloon.dialogue
+package content.global.travel.balloon
 
-import content.global.travel.balloon.utils.ChargeUtils
 import core.api.openInterface
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -12,6 +11,9 @@ import shared.consts.NPCs
 
 /**
  * Represents the assistant dialogue.
+ *
+ * # Relations
+ * - [BalloonTravelDefinition]
  */
 class AssistantDialogue : DialogueFile() {
 
@@ -24,7 +26,7 @@ class AssistantDialogue : DialogueFile() {
                 Topic("No.", END_DIALOGUE),
                 Topic("Who are you?", npc?.id),
                 Topic("Store-logs", 10),
-                IfTopic("Check charges", 11, ChargeUtils.getCharges(player!!) > 1)
+                IfTopic("Check charges", 11, BalloonUtils.getCharges(player!!) > 1)
             )
             2 -> {
                 end()
@@ -41,8 +43,8 @@ class AssistantDialogue : DialogueFile() {
             NPCs.ASSISTANT_STAN_5057 -> npcl(faceExpression, "I am Stan. Auguste hired me to look after this balloon. I make sure people are prepared to fly.").also { stage = 3 }
 
             10 -> {
-                val gained = ChargeUtils.handOverLogs(player!!)
-                val chargeAmount = ChargeUtils.getCharges(player!!)
+                val gained = BalloonUtils.handOverLogs(player!!)
+                val chargeAmount = BalloonUtils.getCharges(player!!)
                 if (gained > 0) {
                     npcl(FaceAnim.HAPPY, "Thanks! You now have $chargeAmount charges.").also { stage = END_DIALOGUE }
                 } else {
@@ -51,7 +53,7 @@ class AssistantDialogue : DialogueFile() {
             }
 
             11 -> {
-                val chargeAmount = ChargeUtils.getCharges(player!!)
+                val chargeAmount = BalloonUtils.getCharges(player!!)
                 npc("You have $chargeAmount charges.").also { stage = END_DIALOGUE }
             }
         }
