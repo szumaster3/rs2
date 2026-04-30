@@ -11,7 +11,6 @@ import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
@@ -20,7 +19,6 @@ import shared.consts.Quests
 /**
  * Represents the Merlin dialogue.
  */
-@Initializable
 class MerlinDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         // Merlin Crystal: Freeing Merlin: Finishing.
@@ -33,17 +31,23 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
                     val kwComplete = getAttribute(player, GameAttributes.KW_COMPLETE, false)
                     val hasGrail = player.hasItem(Item(Items.HOLY_GRAIL_19, 1))
 
-                    if (player.location.z == 2) {
+                    if (npc.id == NPCs.MERLIN_249) {
                         // Knight Waves training ground: Upon completion of Knight Waves.
                         if (!kwComplete) {
                             npc(FaceAnim.HAPPY, "Well done, young adventurer. You truly are a worthy", "knight.")
                             stage = 100
                         } else {
-                            end()
-                            sendMessage(player, "Nothing interesting happens.")
+                            player("Hello.")
+                            stage = 203
                         }
                     } else {
                         when {
+                            // Knight Waves training ground: after completion.
+                            kwComplete -> {
+                                npc(FaceAnim.HAPPY, "Well done, young adventurer. You truly are a worthy", "knight.")
+                                stage = 200
+                            }
+
                             // Holy Grail: Post-quest dialogue.
                             isQuestComplete(player, Quests.HOLY_GRAIL) -> {
                                 npcl(FaceAnim.NEUTRAL, "Congratulations, brave knight, on aiding Camelot in so many ways! If we ever require help again, I will make sure to call upon you!")
@@ -54,12 +58,6 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
                             questStage >= 50 && hasGrail -> {
                                 npcl(FaceAnim.NEUTRAL, "My magic powers tell me that you have discovered the Grail! Take it to Arthur immediately!")
                                 stage = END_DIALOGUE
-                            }
-
-                            // Knight Waves training ground: after completion.
-                            kwComplete -> {
-                                npc(FaceAnim.FRIENDLY, "Well done, young adventurer. You truly are a worthy knight.")
-                                stage = 200
                             }
 
                             // Holy Grail: Speaking to Merlin.
@@ -101,7 +99,7 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
                     stage = END_DIALOGUE
                 }
                 // Changing the Respawn point.
-                200 -> if (player.properties.spawnLocation == ServerConstants.HOME_LOCATION) {
+                200 -> if (player.getRespawnLocation() == ServerConstants.HOME_LOCATION) {
                     playerl(FaceAnim.HALF_ASKING, "I was wondering, can I change my respawn point to Camelot?").also { stage++ }
                 } else {
                     playerl(FaceAnim.HALF_ASKING, "Can I change my respawn point back to Lumbridge?").also {
@@ -122,11 +120,12 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
                     player.setRespawnLocation(RespawnPoint.LUMBRIDGE)
                     stage = END_DIALOGUE
                 }
+
+                203 -> npcl(FaceAnim.NEUTRAL, "Excuse me for rushing off like this, but I must get back to my workroom.").also { stage = END_DIALOGUE }
             }
         }
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue = MerlinDialogue(player)
-    override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_213)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_213, NPCs.MERLIN_249)
 }
