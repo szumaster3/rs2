@@ -82,7 +82,7 @@ class TrollStronghold :
     override fun finish(player: Player) {
         var ln = 10
         super.finish(player)
-        displayQuestItem(player, Items.MYSTERIOUS_LAMP_13227)
+        drawReward(player, Items.MYSTERIOUS_LAMP_13227)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "2 Reward lamps giving 10,000", ln++)
         drawReward(player, "XP each", ln)

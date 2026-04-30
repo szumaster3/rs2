@@ -1,7 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree
 
 import content.region.kandarin.gnome_stronghold.quest.grandtree.plugin.TheGrandTreeUtils
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.hasLevelStat
 import core.api.removeAttributes
 import core.api.rewardXP
@@ -94,7 +94,7 @@ class TheGrandTree : Quest(Quests.THE_GRAND_TREE, 71, 70, 5, Vars.VARP_QUEST_THE
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.DACONIA_ROCK_793)
+        drawReward(player, Items.DACONIA_ROCK_793)
         drawReward(player, "5 Quest Points", ln++)
         drawReward(player, "7900 Agility XP", ln++)
         drawReward(player, "18,400 Attack XP", ln++)

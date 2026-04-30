@@ -6,7 +6,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
-import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Quests
 import shared.consts.Vars
@@ -149,7 +148,7 @@ class WolfWhistle : Quest(Quests.WOLF_WHISTLE, 146, 145, 1) {
         drawReward(player, "Access to the Summoning", 12)
         drawReward(player, "skill.", 13)
         drawReward(player, "275 gold charms.", 14)
-        displayQuestItem(player, Items.SPIRIT_WOLF_POUCH_12047)
+        drawReward(player, Items.SPIRIT_WOLF_POUCH_12047)
         rewardXP(player, Skills.SUMMONING, 276.0)
         addItemOrBank(player, Items.GOLD_CHARM_12158, 275)
         removeAttribute(player, GameAttributes.WOLF_WHISTLE_STIKKLEBRIX)

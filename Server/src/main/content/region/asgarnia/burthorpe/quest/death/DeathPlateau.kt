@@ -1,7 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.death
 
 import core.api.addItemOrDrop
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.getAttribute
 import core.api.rewardXP
 import core.game.node.entity.player.Player
@@ -209,7 +209,7 @@ class DeathPlateau : Quest(Quests.DEATH_PLATEAU, 44, 43, 1, Vars.VARBIT_QUEST_DE
     override fun finish(player: Player) {
         var ln = 10
         super.finish(player)
-        displayQuestItem(player, Items.STEEL_CLAWS_3097)
+        drawReward(player, Items.STEEL_CLAWS_3097)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "3,000 Attack XP", ln++)
         drawReward(player, "Some Steel Claws", ln++)

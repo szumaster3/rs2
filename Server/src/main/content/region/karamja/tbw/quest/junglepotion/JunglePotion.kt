@@ -68,7 +68,7 @@ class JunglePotion : Quest(Quests.JUNGLE_POTION, 81, 80, 1, Vars.VARP_QUEST_JUNG
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, HerbItem.VOLENCIA_MOSS.product.id)
+        drawReward(player, HerbItem.VOLENCIA_MOSS.product.id)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "775 Herblore XP", ln)
         rewardXP(player, Skills.HERBLORE, 775.0)

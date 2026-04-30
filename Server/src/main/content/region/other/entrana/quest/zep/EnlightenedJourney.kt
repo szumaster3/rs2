@@ -175,7 +175,7 @@ class EnlightenedJourney : Quest(Quests.ENLIGHTENED_JOURNEY, 55, 54, 1, Vars.VAR
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.BOMBER_CAP_9945)
+        drawReward(player, Items.BOMBER_CAP_9945)
         drawReward(player, "1 Quest Point, 2K Crafting, 3k", ln++)
         drawReward(player, "Farming, 1,5k Woodcutting, 4k", ln++)
         drawReward(player, "Firemaking,", ln++)

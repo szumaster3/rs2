@@ -2,7 +2,7 @@ package content.region.asgarnia.falador.quest.fortress
 
 import content.data.GameAttributes
 import content.region.asgarnia.falador.quest.fortress.dialogue.SirAmikVarzeDialogue
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.getAttribute
 import core.api.removeAttribute
 import core.game.node.entity.player.Player
@@ -79,7 +79,7 @@ class BlackKnightsFortress : Quest(Quests.BLACK_KNIGHTS_FORTRESS, 14, 13, 3, Var
     override fun finish(player: Player) {
         super.finish(player)
         var line = 10
-        displayQuestItem(player, Items.BROKEN_CAULDRON_9591)
+        drawReward(player, Items.BROKEN_CAULDRON_9591)
         drawReward(player, "3 Quests Points", line++)
         drawReward(player, "2500 Coins", line)
         removeAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER)

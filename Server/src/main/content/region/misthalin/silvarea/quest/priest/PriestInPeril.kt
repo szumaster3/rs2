@@ -1,7 +1,7 @@
 package content.region.misthalin.silvarea.quest.priest
 
 import core.api.addItemOrDrop
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.removeAttribute
 import core.api.rewardXP
 import core.game.node.entity.player.Player
@@ -172,7 +172,7 @@ class PriestInPeril : Quest(Quests.PRIEST_IN_PERIL, 99, 98, 1, Vars.VARP_QUEST_P
         super.finish(player)
         var line = 10
 
-        displayQuestItem(player, Items.WOLFBANE_2952)
+        drawReward(player, Items.WOLFBANE_2952)
         drawReward(player, "1 Quest Point", line++)
         drawReward(player, "1406 Prayer XP", line++)
         drawReward(player, "Wolfbane dagger", line++)

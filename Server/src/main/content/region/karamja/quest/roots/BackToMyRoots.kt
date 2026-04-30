@@ -89,7 +89,7 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
         super.finish(player)
         var ln = 10
         // 16.01.2009
-        displayQuestItem(player, Items.NULL_11779)
+        drawReward(player, Items.NULL_11779)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "24K Farming XP", ln++)
         drawReward(player, "40K Woodcutting XP", ln++)

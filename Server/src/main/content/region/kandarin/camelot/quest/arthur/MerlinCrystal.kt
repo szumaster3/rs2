@@ -5,7 +5,6 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable
-import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Quests
 import shared.consts.Vars
@@ -165,9 +164,9 @@ class MerlinCrystal : Quest(Quests.MERLINS_CRYSTAL, 87, 86, 6, Vars.VARP_QUEST_M
     override fun finish(player: Player) {
         super.finish(player)
         var line = 10
-        sendString(player, "6 Quest Points", Components.QUEST_COMPLETE_SCROLL_277, line++)
-        sendString(player, "Excalibur", Components.QUEST_COMPLETE_SCROLL_277, line)
-        sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.EXCALIBUR_35, 235)
+        drawReward(player,"6 Quest Points", line++)
+        drawReward(player,"Excalibur", line)
+        drawReward(player, Items.EXCALIBUR_35)
         setVarbit(player, Vars.VARBIT_SCENERY_MUSEUM_DISPLAY_9_3655, 1, true)
         updateQuestTab(player)
     }

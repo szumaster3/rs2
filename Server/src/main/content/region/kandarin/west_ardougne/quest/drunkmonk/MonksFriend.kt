@@ -1,7 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.drunkmonk
 
 import core.api.addItemOrDrop
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.rewardXP
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -52,7 +52,7 @@ class MonksFriend : Quest(Quests.MONKS_FRIEND, 89, 88, 1, Vars.VARP_QUEST_MONKS_
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.LAW_RUNE_6434)
+        drawReward(player, Items.LAW_RUNE_6434)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "8 Law Runes", ln++)
         drawReward(player, "2000 Woodcutting XP", ln)

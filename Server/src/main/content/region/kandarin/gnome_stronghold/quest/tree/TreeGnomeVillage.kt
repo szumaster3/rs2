@@ -83,7 +83,7 @@ class TreeGnomeVillage : Quest(Quests.TREE_GNOME_VILLAGE, 125, 124, 2, Vars.VARP
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.GNOME_AMULET_589)
+        drawReward(player, Items.GNOME_AMULET_589)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "11,450 Attack XP", ln++)
         drawReward(player, "Gnome Amulet of Protection", ln)

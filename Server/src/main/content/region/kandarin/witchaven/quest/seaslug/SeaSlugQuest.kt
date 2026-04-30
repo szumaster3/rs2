@@ -1,7 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug
 
 import core.api.addItemOrDrop
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.rewardXP
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -176,7 +176,7 @@ class SeaSlugQuest : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLU
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.SEA_SLUG_1466)
+        drawReward(player, Items.SEA_SLUG_1466)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "7175 Fishing XP", ln++)
         drawReward(player, "Oyster pearls", ln)

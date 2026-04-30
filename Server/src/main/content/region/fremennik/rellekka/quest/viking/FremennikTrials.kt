@@ -6,7 +6,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
-import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Quests
 import shared.consts.Vars
@@ -74,7 +73,7 @@ class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.FREMENNIK_HELM_3748, 240)
+        drawReward(player, Items.FREMENNIK_HELM_3748, 240)
         drawReward(player, "3 Quest points, 2.8k XP in:", ln++)
         drawReward(player, "Strength, Defence, Attack,", ln++)
         drawReward(player, "Hitpoints, Fishing, Thieving,", ln++)

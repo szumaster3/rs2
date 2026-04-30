@@ -79,7 +79,7 @@ class ZogreFleshEaters : Quest(Quests.ZOGRE_FLESH_EATERS, 40, 39, 1, Vars.VARBIT
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.OGRE_ARTEFACT_4818)
+        drawReward(player, Items.OGRE_ARTEFACT_4818)
         drawReward(player, "1 Quest Point.", ln++)
         drawReward(player, "Can now make Brutal Arrows", ln++)
         drawReward(player, "and cure disease potions.", ln++)

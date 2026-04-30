@@ -268,7 +268,7 @@ class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, PROGRESS, 0, 1, 30) {
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.PHOENIX_QUILL_14616)
+        drawReward(player, Items.PHOENIX_QUILL_14616)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "14,400 Firemaking xp", ln++)
         drawReward(player, "12,500 Fletching xp", ln++)

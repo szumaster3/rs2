@@ -99,7 +99,7 @@ class GoblinDiplomacy : Quest(Quests.GOBLIN_DIPLOMACY, 20, 19, 5, Vars.VARP_QUES
     override fun finish(player: Player) {
         super.finish(player)
         var line = 10
-        displayQuestItem(player, Items.GOBLIN_MAIL_288)
+        drawReward(player, Items.GOBLIN_MAIL_288)
         drawReward(player, "5 Quests Points", line++)
         drawReward(player, "200 Crafting XP", line++)
         drawReward(player, "A gold bar", line++)

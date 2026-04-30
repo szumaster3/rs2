@@ -84,7 +84,7 @@ class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 103, 102, 1, 496, 0, 1,
     override fun finish(player: Player) {
         var ln = 10
         super.finish(player)
-        displayQuestItem(player, Items.INITIATE_SALLET_5574)
+        drawReward(player, Items.INITIATE_SALLET_5574)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "1000 Prayer, Herblore and", ln++)
         drawReward(player, "Agility XP", ln++)

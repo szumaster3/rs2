@@ -118,7 +118,7 @@ class PiratesTreasure : Quest(
     override fun finish(player: Player) {
         super.finish(player)
         var line = 10
-        displayQuestItem(player, Items.CASKET_7956)
+        drawReward(player, Items.CASKET_7956)
         drawReward(player, "2 Quest Points", line++)
         drawReward(player, "One-Eyed Hector's Treasure", line++)
         drawReward(player, "Chest", line++)

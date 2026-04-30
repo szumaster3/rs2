@@ -72,7 +72,7 @@ class PerilsOfIceMountain :
         super.finish(player)
         var ln = 10
         sendString(player, "Perils of Ice Mountain", Components.QUEST_COMPLETE_SCROLL_277, 4)
-        displayQuestItem(player, Items.PLANS_13233)
+        drawReward(player, Items.PLANS_13233)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "500 Construction, Farming,", ln++)
         drawReward(player, "Hunter and Thieving XP", ln++)

@@ -3,7 +3,7 @@ package content.region.kandarin.yanille.quest.handsand
 import com.google.gson.JsonObject
 import content.data.GameAttributes
 import core.ServerStore
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.hasLevelStat
 import core.api.rewardXP
 import core.api.setVarbit
@@ -160,7 +160,7 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.SANDY_HAND_6945)
+        drawReward(player, Items.SANDY_HAND_6945)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "1000 Thieving XP", ln++)
         drawReward(player, "9000 Crafting XP", ln++)

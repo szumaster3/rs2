@@ -91,7 +91,7 @@ class ZooknockDialogueFile(val it: Int) : DialogueFile() {
             14 -> {
                 val componentId = Components.QUEST_COMPLETE_SCROLL_277
                 player!!.interfaceManager.open(Component(componentId))
-                displayQuestItem(player!!, Items.MSPEAK_AMULET_4022)
+                drawReward(player!!, Items.MSPEAK_AMULET_4022)
                 for (i in 0..17) {
                     when (i) {
                         3 -> sendString(player!!, "Monkey Madness: Chapter 3", componentId, i)

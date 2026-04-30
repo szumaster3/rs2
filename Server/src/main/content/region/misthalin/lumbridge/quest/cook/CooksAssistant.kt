@@ -93,7 +93,7 @@ class CooksAssistant : Quest(
         super.finish(player)
 
         var line = 10
-        displayQuestItem(player, Items.CAKE_1891)
+        drawReward(player, Items.CAKE_1891)
         sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.CAKE_1891, 240)
 
         drawReward(player, "1 Quest Point", line++)

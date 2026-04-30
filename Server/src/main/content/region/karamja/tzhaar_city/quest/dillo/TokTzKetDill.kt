@@ -1,6 +1,6 @@
 package content.region.karamja.tzhaar_city.quest.dillo
 
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.rewardXP
 import core.api.setVarbit
 import core.game.node.entity.player.Player
@@ -47,7 +47,7 @@ class TokTzKetDill : Quest(Quests.TOKTZ_KET_DILL, 152, 151, 1, Vars.VARBIT_QUEST
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.PILLAR_13246)
+        drawReward(player, Items.PILLAR_13246)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "5,000 Attack XP", ln++)
         drawReward(player, "5,000 Strength XP", ln++)

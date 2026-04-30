@@ -1,6 +1,7 @@
 package content.region.kandarin.camelot.quest.grail
 
 import content.data.GameAttributes
+import core.api.drawReward
 import core.api.getAttribute
 import core.api.rewardXP
 import core.game.node.entity.player.Player
@@ -141,11 +142,10 @@ class HolyGrail : Quest(Quests.HOLY_GRAIL, 76, 75, 1, 5, 0, 1, 10) {
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        player.packetDispatch.sendItemZoomOnInterface(Items.HOLY_GRAIL_19, 230, 277, 5)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "11,000 Prayer XP", ln++)
         drawReward(player, "15,300 Defence XP", ln)
-
+        drawReward(player, Items.HOLY_GRAIL_19)
         rewardXP(player, Skills.PRAYER, 11000.0)
         rewardXP(player, Skills.DEFENCE, 15300.0)
     }

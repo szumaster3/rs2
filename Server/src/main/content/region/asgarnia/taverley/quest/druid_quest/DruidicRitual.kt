@@ -70,7 +70,7 @@ class DruidicRitual : Quest(Quests.DRUIDIC_RITUAL, 48, 47, 4, 80, 0, 3, 4) {
     override fun finish(player: Player) {
         var ln = 10
         super.finish(player)
-        displayQuestItem(player, Items.CLEAN_GUAM_249)
+        drawReward(player, Items.CLEAN_GUAM_249)
         drawReward(player, "4 Quest Points", ln++)
         drawReward(player, "250 Herblore XP", ln++)
         drawReward(player, "Access to Herblore skill", ln)

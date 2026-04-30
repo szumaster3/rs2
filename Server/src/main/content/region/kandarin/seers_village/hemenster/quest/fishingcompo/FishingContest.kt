@@ -68,7 +68,7 @@ class FishingContest : Quest(Quests.FISHING_CONTEST, 62, 61, 1, 11, 0, 1, 5) {
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.FISHING_TROPHY_26)
+        drawReward(player, Items.FISHING_TROPHY_26)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "2437 Fishing XP.", ln++)
         drawReward(player, "Access to the White Wolf Mountain shortcut.", ln)

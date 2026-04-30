@@ -4931,7 +4931,7 @@ fun sendIfaceSettings(
  * @param itemId The item id to display.
  * @param zoom The zoom level for the item model (default = 240).
  */
-fun displayQuestItem(
+fun drawReward(
     player: Player,
     itemId: Int,
     zoom: Int = 240

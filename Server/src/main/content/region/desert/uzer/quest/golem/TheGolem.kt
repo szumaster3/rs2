@@ -1,6 +1,6 @@
 package content.region.desert.uzer.quest.golem
 
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.getAttribute
 import core.api.getStatLevel
 import core.api.rewardXP
@@ -71,7 +71,7 @@ class TheGolem : Quest(Quests.THE_GOLEM, 70, 69, 1, Vars.VARBIT_QUEST_THE_GOLEM_
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.STATUETTE_4618)
+        drawReward(player, Items.STATUETTE_4618)
         drawReward(player, "1 quest point", ln++)
         drawReward(player, "1,000 Crafting XP", ln++)
         drawReward(player, "1,000 Theiving XP", ln)

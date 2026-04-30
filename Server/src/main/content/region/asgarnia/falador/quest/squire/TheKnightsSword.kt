@@ -110,7 +110,7 @@ class TheKnightsSword : Quest(Quests.THE_KNIGHTS_SWORD, 22, 21, 1, Vars.VARP_QUE
         super.finish(player)
         var line = 10
 
-        displayQuestItem(player, Items.BLURITE_SWORD_667)
+        drawReward(player, Items.BLURITE_SWORD_667)
         drawReward(player, "1 Quest Point", line++)
         drawReward(player, "12,725 Smithing XP", line)
         rewardXP(player, Skills.SMITHING, 12725.0)

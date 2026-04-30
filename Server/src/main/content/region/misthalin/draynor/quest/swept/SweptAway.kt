@@ -2,7 +2,7 @@ package content.region.misthalin.draynor.quest.swept
 
 import content.data.GameAttributes
 import core.api.addItemOrDrop
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.getAttribute
 import core.api.setVarbit
 import core.game.node.entity.player.Player
@@ -66,7 +66,7 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.BROOMSTICK_14057)
+        drawReward(player, Items.BROOMSTICK_14057)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "A broom", ln++)
         drawReward(player, "Access to 10 portions of", ln++)

@@ -199,7 +199,7 @@ class HeroesQuest : Quest(Quests.HEROES_QUEST, 75, 74, 1, Vars.VARP_QUEST_HEROES
     override fun finish(player: Player) {
         var ln = 10
         super.finish(player)
-        displayQuestItem(player, Items.DRAGON_BATTLEAXE_1377)
+        drawReward(player, Items.DRAGON_BATTLEAXE_1377)
 
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "Access to the Heroes' Guild", ln++)

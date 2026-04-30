@@ -1,6 +1,6 @@
 package content.region.asgarnia.taverley.quest.ball
 
-import core.api.displayQuestItem
+import core.api.drawReward
 import core.api.rewardXP
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -41,7 +41,7 @@ class WitchHouse : Quest(Quests.WITCHS_HOUSE, 124, 123, 4, Vars.VARP_QUEST_WTICH
     override fun finish(player: Player) {
         super.finish(player)
         var line = 10
-        displayQuestItem(player, Items.BALL_2407)
+        drawReward(player, Items.BALL_2407)
         drawReward(player, "4 Quest Points", line++)
         drawReward(player, "6325 Hitpoints XP", line)
         rewardXP(player, Skills.HITPOINTS, 6325.0)

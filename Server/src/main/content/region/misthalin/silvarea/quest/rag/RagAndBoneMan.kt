@@ -131,7 +131,7 @@ class RagAndBoneMan : Quest(Quests.RAG_AND_BONE_MAN, 100, 99, 2, 714, 0, 1, 4) {
         var ln = 10
         super.finish(player)
         player.packetDispatch.sendString("You have completed ${Quests.RAG_AND_BONE_MAN}!", 277, 4)
-        displayQuestItem(player, Items.BONE_IN_VINEGAR_7813, 240)
+        drawReward(player, Items.BONE_IN_VINEGAR_7813, 240)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "500 Cooking XP and 500", ln++)
         drawReward(player, "Prayer XP", ln)

@@ -81,7 +81,7 @@ class RumDeal : Quest(Quests.RUM_DEAL, 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PRO
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.HOLY_WRENCH_6714)
+        drawReward(player, Items.HOLY_WRENCH_6714)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "Holy Wrench", ln++)
         drawReward(player, "7000 prayer XP, 7000 Fishing", ln++)

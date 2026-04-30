@@ -5,9 +5,7 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import core.plugin.Initializable
-import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Quests
 
@@ -193,7 +191,7 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, WhatLiesBelowListener.BEACON_RING)
+        drawReward(player, WhatLiesBelowListener.BEACON_RING)
         drawReward(player, "8,000 Runecrafting XP", ln++)
         drawReward(player, "2,000 Defence XP", ln++)
         drawReward(player, "Beacon ring", ln++)

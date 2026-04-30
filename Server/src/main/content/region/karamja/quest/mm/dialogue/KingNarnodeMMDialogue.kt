@@ -45,7 +45,7 @@ class KingNarnodeMMDialogue : DialogueFile() {
                     setAttribute(player!!, "/save:MonkeyMadnessPuzzleSolved", false)
                     val interfaceId = Components.QUEST_COMPLETE_SCROLL_277
                     player!!.interfaceManager.open(Component(interfaceId))
-                    displayQuestItem(player!!, Items.MSPEAK_AMULET_4022)
+                    drawReward(player!!, Items.MSPEAK_AMULET_4022)
                     for (i in 0..17) {
                         when (i) {
                             3 -> sendString(player!!, "Monkey Madness: Chapter 1", interfaceId, i)

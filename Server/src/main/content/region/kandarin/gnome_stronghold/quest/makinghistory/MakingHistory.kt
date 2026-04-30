@@ -60,7 +60,7 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.ENCHANTED_KEY_6754)
+        drawReward(player, Items.ENCHANTED_KEY_6754)
         drawReward(player, "3 Quest points, 1000 Prayer", ln++)
         drawReward(player, "1000 Crafting XP, 750", ln++)
         drawReward(player, "gold coins. Use the enchanted", ln++)

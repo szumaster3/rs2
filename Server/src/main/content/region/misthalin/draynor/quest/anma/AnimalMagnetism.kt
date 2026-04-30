@@ -233,7 +233,7 @@ class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM, 33, 32, 1) {
         var ln = 10
         val item = if (getStatLevel(player, Skills.RANGE) >= 50) AVAS_ACCUMULATOR else AVAS_ATTRACTOR
 
-        displayQuestItem(player,  item)
+        drawReward(player,  item)
         drawReward(player, "1000 XP in each of Crafting,", ln++)
         drawReward(player, "Fletching and Slayer", ln++)
         drawReward(player, "2500 Woodcutting XP", ln++)

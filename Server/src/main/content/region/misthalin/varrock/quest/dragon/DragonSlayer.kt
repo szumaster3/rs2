@@ -219,7 +219,7 @@ class DragonSlayer : Quest(Quests.DRAGON_SLAYER, 18, 17, 2, Vars.VARP_QUEST_DRAG
         drawReward(player, "18,650 Strength XP", ln++)
         drawReward(player, "18,650 Defence XP", ln++)
         drawReward(player, "You have completed the Dragon Slayer Quest!", 4)
-        displayQuestItem(player, Items.ELVARGS_HEAD_11279)
+        drawReward(player, Items.ELVARGS_HEAD_11279)
         rewardXP(player, Skills.STRENGTH, 18650.0)
         rewardXP(player, Skills.DEFENCE, 18650.0)
         player.unhook(spellCastHook)
