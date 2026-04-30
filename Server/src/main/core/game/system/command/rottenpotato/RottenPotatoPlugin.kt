@@ -20,6 +20,13 @@ class RottenPotatoPlugin : InteractionListener {
             handle(player, used, with)
         }
 
+        onUseWithWildcard(SCENERY, { usedId, _ ->
+            usedId == ROTTEN_POTATO
+        }) { player, _, with ->
+            player.dialogueInterpreter.open(RPUseWithSceneryDialogue().ID, with as Scenery)
+            true
+        }
+
         onUseWithPlayer(ROTTEN_POTATO) { player, used, with ->
             handle(player, used, with)
         }
@@ -38,7 +45,7 @@ class RottenPotatoPlugin : InteractionListener {
         when (node) {
             is Scenery -> {
                 val go = node.asScenery()
-                // TODO
+                player.dialogueInterpreter.open(RPUseWithSceneryDialogue().ID, go)
             }
 
             is NPC -> {
