@@ -34,7 +34,7 @@ class FruitCuttingPlugin : InteractionListener {
                 val productAmount = if (button == 2 && with.id in intArrayOf(Items.PINEAPPLE_2114, Items.TENTI_PINEAPPLE_1851)) 4 else 1
                 val productName = if (button == 2) "slices" else "chunks"
                 val product = Item(productID, productAmount)
-
+                closeDialogue(player)
                 sendSkillDialogue(player) {
                     withItems(productID)
                     create { _, amount ->
