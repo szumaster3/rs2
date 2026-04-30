@@ -46,8 +46,8 @@ class SeersVillagePlugin : InteractionListener {
          * Handles player interaction with the Forester NPC.
          */
 
-        on(NPCs.FORESTER_231, IntType.NPC, "talk-to") { player, node ->
-            sendNPCDialogue(player, node.id, "He doesn't seem interested in talking to you.")
+        on(NPCs.FORESTER_231, IntType.NPC, "talk-to") { player, _ ->
+            sendMessage(player,"He doesn't seem interested in talking to you.")
             return@on true
         }
     }

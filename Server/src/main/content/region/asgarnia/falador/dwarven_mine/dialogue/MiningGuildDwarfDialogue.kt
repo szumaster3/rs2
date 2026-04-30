@@ -31,7 +31,7 @@ class MiningGuildDwarfDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> playerl(FaceAnim.ASKING, "What do you dwarves do with the ore you mine?").also { stage = 5 }
                 3 -> playerl(FaceAnim.FRIENDLY, "No thanks, I'm fine.").also { stage = END_DIALOGUE }
             }
-            2 -> npc(FaceAnim.OLD_HAPPY, "Ooh, it's WONDEFRFUL! There are lots of coal rocks,", "and even a few mithril rocks in the guild,", "all exclusively for people with at least level 60 mining", "There's no better mining site anywhere near here.").also { stage++ }
+            2 -> npc(FaceAnim.OLD_HAPPY, "Ooh, it's WONDERFUL! There are lots of coal rocks,", "and even a few mithril rocks in the guild,", "all exclusively for people with at least level 60 mining", "There's no better mining site anywhere near here.").also { stage++ }
             3 -> playerl(FaceAnim.HALF_ASKING, "So you won't let me go in there?").also { stage++ }
             4 -> if (getStatLevel(player, Skills.MINING) >= 60) {
                 npc(FaceAnim.OLD_NORMAL, "Yes, you can enter if you wish.").also { stage = END_DIALOGUE }

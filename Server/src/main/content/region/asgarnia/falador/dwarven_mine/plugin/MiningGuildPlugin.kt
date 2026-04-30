@@ -64,12 +64,12 @@ class MiningGuildPlugin : InteractionListener {
 
 
         on(NPCs.GUARD_206, IntType.NPC, "talk-to") { player, node ->
-            openDialogue(player, DwarvenMineGuardDialogue(), node.id)
+            openDialogue(player, DwarvenMineGuardDialogue(), node.asNpc())
             return@on true
         }
 
         on(NPCs.DWARF_582, IntType.NPC, "talk-to") { player, node ->
-            openDialogue(player, DwarvenMineShopkeeperDialogue(), node.id)
+            openDialogue(player, DwarvenMineShopkeeperDialogue(), node.asNpc())
             return@on true
         }
     }

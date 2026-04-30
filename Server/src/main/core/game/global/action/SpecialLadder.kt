@@ -98,6 +98,8 @@ enum class SpecialLadder(private val location: Location, private val destination
     JATIZSO_SHOUT_TOWER_UP(Location.create(2373, 3800, 0), Location.create(2374, 3800, 2)),
     KHARIDIAN_DESERT_SUMMONING_UP(Location.create(3299, 9318, 0), Location.create(3303, 2897, 0)),
     KHARIDIAN_DESERT_SUMMONING_DOWN(Location.create(3304, 2897, 0), Location.create(3299, 9317, 0)),
+    KEEP_LE_FAYE_BASEMENT_DOWN(Location.create(2770, 3407, 0),Location.create(1888, 4269, 0)),
+    KEEP_LE_FAYE_BASEMENT_UP(Location.create(1887, 4269, 0),Location.create(2770, 3408, 0)),
     KELDAGRIM_LIBRARY_UP(Location.create(2865, 10222, 0), Location.create(2865, 10224, 1)),
     LAVA_MAZE_EAST_UP(Location.create(3017, 10249, 0), Location.create(3069, 3855, 0)),
     LAVA_MAZE_KBD_UP(Location.create(3069, 10256, 0), Location.create(3017, 3848, 0)),
