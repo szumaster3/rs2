@@ -19,12 +19,12 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
         var line = 11
 
         if (stage == 0) {
-            line(player, "I can start this quest by talking to !!Jorral?? in the !!Outpost??", line++, false)
-            line(player, "!!North West of West Ardougne??.", line++, false)
+            line(player, "I can start this quest by talking to !!Jorral?? in the !!Outpost??", line++)
+            line(player, "!!North West of West Ardougne??.", line++)
             line += 1
-            line(player, "Minimum requirements:", line++, false)
+            line(player, "Minimum requirements:", line++)
             line(player, "!!I must have completed the ${Quests.PRIEST_IN_PERIL} Quest??", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL))
-            line(player, "It will be easier with", line++, false)
+            line(player, "It will be easier with", line++)
             line(player, "!!Crafting lvl 24??", line++, getStatLevel(player, Skills.CRAFTING) >= 24)
             line(player, "!!Smithing lvl 40??", line++, getStatLevel(player, Skills.SMITHING) >= 40)
             line(player, "!!Mining lvl 40??", line++, getStatLevel(player, Skills.MINING) >= 40)
@@ -32,17 +32,17 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
         }
 
         if (stage >= 1) {
-            line(player, "Jorral wants to save the outpost from King Lathas plans.", line++)
+            line(player, "Jorral wants to save the outpost from King Lathas plans.", line++, true)
             line++
         }
 
         if (getVarbit(player, MHUtils.PROGRESS) >= 3) {
-            line(player, "I have gathered the parts of history. I have been given a letter.", line++)
+            line(player, "I have gathered the parts of history. I have been given a letter.", line++, true)
             line++
         }
 
         if (stage >= 99) {
-            line(player, "The king was pleased to see the history. He gave me a letter for Jorral", line++)
+            line(player, "The king was pleased to see the history. He gave me a letter for Jorral", line++, true)
             line++
         }
 

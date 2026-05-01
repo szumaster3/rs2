@@ -12,6 +12,9 @@ import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents the Melina dialogue.
+ */
 @Initializable
 class MelinaDialogue(player: Player? = null) : Dialogue(player) {
 

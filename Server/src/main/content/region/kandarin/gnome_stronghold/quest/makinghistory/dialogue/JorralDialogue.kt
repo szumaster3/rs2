@@ -14,6 +14,10 @@ import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents the Jorral dialogue.
+ * Source: https://www.youtube.com/watch?v=aki67Pfh42A
+ */
 @Initializable
 class JorralDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -76,19 +80,19 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
             1 -> npcl(FaceAnim.HALF_GUILTY, "All is lost!").also { stage++ }
             2 -> playerl(FaceAnim.HALF_GUILTY, "Sorry?").also { stage++ }
             3 -> npc(FaceAnim.SAD, "Just look around you! This great building will soon be", "in ruin.").also { stage++ }
-            4 -> playerl(FaceAnim.HALF_GUILTY, "Great building?").also { stage++ }
+            4 -> playerl(FaceAnim.HALF_ASKING, "Great building?").also { stage++ }
             5 -> npc(FaceAnim.ANNOYED, "Of course! This building has a history spanning", "generations!").also { stage++ }
             6 -> player(FaceAnim.HALF_GUILTY, "Ah, I see, a great history. But why will it be in ruin?").also { stage++ }
             7 -> npc(FaceAnim.SAD, "It's to be ripped apart to make way for King Lathas'", "new alchemists' lab.").also { stage++ }
             8 -> player(FaceAnim.HALF_GUILTY, "Does the king not respect the outpost's GREAT", "history?").also { stage++ }
             9 -> npc(FaceAnim.HALF_GUILTY, "Well, actually nobody knows what the history is. But", "there must be something.").also { stage++ }
-            10 -> npc("Wait a minute. You could help me!").also { stage++ }
-            11 -> playerl(FaceAnim.HALF_GUILTY, "Me?").also { stage++ }
-            12 -> npc(FaceAnim.HALF_GUILTY, "Yes! Uncover the history of this building to convince", "King Lathas to leave it alone. Do you want to know", "more?").also { stage++ }
-            13 -> options("Tell me more.", "I don't care about some dusty building.").also { stage++ }
+            10 -> npc(FaceAnim.NOD_YES,"Wait a minute. You could help me!").also { stage++ }
+            11 -> playerl(FaceAnim.ASKING, "Me?").also { stage++ }
+            12 -> npc(FaceAnim.HAPPY, "Yes! Uncover the history of this building to convince", "King Lathas to leave it alone. Do you want to know", "more?").also { stage++ }
+            13 -> options("Tell me more.", "I don't care about some dusty building").also { stage++ }
             14 -> when (buttonID) {
                 1 -> player(FaceAnim.HALF_GUILTY, "Tell me more.").also { stage = 16 }
-                2 -> playerl(FaceAnim.HALF_GUILTY, "I don't care about some dusty building.").also { stage++ }
+                2 -> playerl(FaceAnim.HALF_GUILTY, "I don't care about some dusty building").also { stage++ }
             }
             15 -> npc("It's doomed. DOOMED!").also { stage = END_DIALOGUE }
             16 -> npcl(FaceAnim.HALF_GUILTY, "That's what I like to hear.").also { stage++ }
@@ -122,9 +126,9 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
             40 -> npc("How's it going?").also { stage++ }
             41 -> options("What's the story so far?", "What do I need to do now?", "Got to go, bye!").also { stage++ }
             42 -> when (buttonID) {
-                1 -> player("What's the story so far?").also { stage++ }
-                2 -> player("What do I need to do now?").also { stage = 24 }
-                3 -> player("Got to go, bye!").also { stage = END_DIALOGUE }
+                1 -> player(FaceAnim.HALF_ASKING,"What's the story so far?").also { stage++ }
+                2 -> player(FaceAnim.HALF_ASKING,"What do I need to do now?").also { stage = 24 }
+                3 -> player(FaceAnim.HAPPY,"Got to go, bye!").also { stage = END_DIALOGUE }
             }
             43 -> if (getAttribute(player, MHUtils.ATTRIBUTE_ERIN_PROGRESS, false) || getVarbit(player, MHUtils.ERIN_PROGRESS) == 4) {
                 npcl(FaceAnim.FRIENDLY, "From the two pieces of evidence, we know that the outpost was lived in by followers of Zamorak,").also { stage = 100 }

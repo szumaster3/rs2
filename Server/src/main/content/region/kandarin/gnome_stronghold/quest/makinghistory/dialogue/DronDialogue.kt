@@ -10,6 +10,9 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents the Dron dialogue.
+ */
 @Initializable
 class DronDialogue(player: Player? = null) : Dialogue(player) {
 

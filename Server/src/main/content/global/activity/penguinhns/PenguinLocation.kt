@@ -125,6 +125,9 @@ enum class PenguinLocation(
     BARREL_ARDOUGNE(NPCs.BARREL_8104, "located south of Ardougne.",
         Location.create(2662, 3152)),
 
+    BUSH_OUTPOST(NPCs.BUSH_8105, "located near the outpost.",
+        Location.create(2434, 3349)),
+
     BARREL_PORT_PHASMATYS(NPCs.BARREL_8104, "located near the city of ghosts.",
         Location.create(3654, 3491)),
 

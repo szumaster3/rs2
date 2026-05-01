@@ -13,6 +13,9 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents the Blanin dialogue.
+ */
 @Initializable
 class BlaninDialogue(player: Player? = null) : Dialogue(player) {
 

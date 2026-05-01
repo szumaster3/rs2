@@ -13,6 +13,9 @@ import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents the King Lathas dialogue.
+ */
 @Initializable
 class KingLathasDialogue(player: Player? = null) : Dialogue(player) {
 

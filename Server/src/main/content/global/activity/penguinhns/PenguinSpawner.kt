@@ -23,8 +23,8 @@ class PenguinSpawner {
             spawnedOrdinals.add(penguin.ordinal)
 
             NPC(penguin.npcId, location).also {
-                it.isNeverWalks = true
-                it.isWalks = false
+                it.isWalks = true
+                it.walkRadius = 4
                 PenguinManager.npcs.add(it)
             }.init()
         }

@@ -12,6 +12,9 @@ import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents the Droalak dialogue.
+ */
 @Initializable
 class DroalakDialogue(player: Player? = null) : Dialogue(player) {
 

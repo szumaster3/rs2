@@ -42,7 +42,7 @@ class MakingHistoryPlugin : InteractionListener, LogoutListener {
             return@on true
         }
 
-        onDig(Location(2440, 3145, 0)) { player ->
+        onDig(Location.create(2435, 3138, 0)) { player ->
             if (getVarbit(player, MHUtils.ERIN_PROGRESS) >= 1) {
                 sendDialogue(player, "You use the spade and find a chest. Wonder what's inside?")
                 setVarbit(player, MHUtils.ERIN_PROGRESS, 2, true)
@@ -51,8 +51,8 @@ class MakingHistoryPlugin : InteractionListener, LogoutListener {
             return@onDig
         }
 
-        onUseWith(IntType.ITEM, Items.ENCHANTED_KEY_6754, Items.CHEST_6759) { player, used, _ ->
-            if (removeItem(player, used.asItem())) {
+        onUseWith(IntType.ITEM, Items.ENCHANTED_KEY_6754, Items.CHEST_6759) { player, used, with ->
+            if (removeItem(player, with.asItem())) {
                 sendDialogueLines(player, "You look in the chest and find a journal, and then you throw away", "the chest.")
                 addItemOrDrop(player, Items.JOURNAL_6755)
                 setVarbit(player, MHUtils.ERIN_PROGRESS, 4, true)
@@ -62,6 +62,11 @@ class MakingHistoryPlugin : InteractionListener, LogoutListener {
         }
 
         on(Items.ENCHANTED_KEY_6754, IntType.ITEM, "feel") { player, _ ->
+            if(inInventory(player, Items.JOURNAL_6755)) {
+                sendMessage(player, "You already have the journal.")
+                return@on true
+            }
+
             if (inBorders(player, 2438, 3143, 2442, 3147)) {
                 sendMessage(player, "The key is steaming. It must be right below your feet.")
                 playAudio(player, Sounds.HISTORY_KEY_STEAMING_1201)

@@ -10,118 +10,132 @@ import core.game.node.entity.player.Player
 import shared.consts.Items
 
 class DrozalJournal : InteractionListener {
+
+    // Sources: https://youtu.be/aki67Pfh42A?si=hGgvfJy76POA4mTs&t=98
+
     companion object {
         private val TITLE = "Drozal's Journal"
-        private val CONTENTS =
-            arrayOf(
-                PageSet(
-                    Page(
-                        BookLine("----------------------", 55),
-                        BookLine("---1st Bennath  ", 56),
-                        BookLine("----------------------", 57),
-                        BookLine("My life is full of changes", 58),
-                        BookLine("at the moment. I've met", 59),
-                        BookLine("a great and powerful follower", 60),
-                        BookLine("of Zamorak, whom has offered", 61),
-                        BookLine("me the chance to join", 62),
-                        BookLine("him and others in the", 63),
-                        BookLine("quest for ultimate power", 64),
-                        BookLine("and desolation of others.", 65),
-                    ),
-                    Page(
-                        BookLine("This is just the opportunity", 66),
-                        BookLine("I've been looking for!", 67),
-                        BookLine("I move into the old outpost", 68),
-                        BookLine("(North of Ardougne) at", 69),
-                        BookLine("the end of this week. I", 70),
-                        BookLine("can hardly wait!", 71),
-                        BookLine("----------------------", 72),
-                        BookLine("---15th Bennath", 73),
-                        BookLine("----------------------", 74),
-                        BookLine("Been here a few days now.", 75),
-                        BookLine("I'm overwhelmed on just", 76),
-                    ),
+        private val CONTENTS = arrayOf(
+            PageSet(
+                Page(
+                    BookLine("----------------------", 55),
+                    BookLine("---1st Bennath", 56),
+                    BookLine("----------------------", 57),
+                    BookLine("My life is full of changes", 58),
+                    BookLine("at the moment. I've met", 59),
+                    BookLine("a great and powerful", 60),
+                    BookLine("follower of Zamorak,", 61),
+                    BookLine("whom has offered me the", 62),
+                    BookLine("chance to join him and", 63),
+                    BookLine("others in the quest for", 64),
+                    BookLine("ultimate power and", 65),
                 ),
-                PageSet(
-                    Page(
-                        BookLine("how evil the other 8 are.", 55),
-                        BookLine("I suppose this is amplified", 56),
-                        BookLine("by living in such a small", 57),
-                        BookLine("building.", 58),
-                        BookLine("----------------------", 59),
-                        BookLine("---20th Bennath", 60),
-                        BookLine("----------------------", 61),
-                        BookLine("Started causing havoc", 62),
-                        BookLine("to the people of Ardougne", 63),
-                        BookLine("today. We poisoned the", 64),
-                        BookLine("water supply with a strange", 65),
-                    ),
-                    Page(
-                        BookLine("concoction which caused", 66),
-                        BookLine("everyone to break out", 67),
-                        BookLine("in boils! Very funny.", 68),
-                        BookLine("The others have been stealthily", 69),
-                        BookLine("setting fire to some people", 70),
-                        BookLine("and laughing at their", 71),
-                        BookLine("conclusion of spontaneous", 72),
-                        BookLine("combustion. I think I", 73),
-                        BookLine("shall have to come up", 74),
-                        BookLine("with something more evil", 75),
-                        BookLine("for tomorrow.", 76),
-                    ),
+                Page(
+                    BookLine("desolation of others. This", 66),
+                    BookLine("is just the opportunity", 67),
+                    BookLine("I've been looking for! I", 68),
+                    BookLine("move into the old outpost", 69),
+                    BookLine("(North of Ardougne) at", 70),
+                    BookLine("the end of this week.", 71),
+                    BookLine("I can hardly wait!", 73),
                 ),
-                PageSet(
-                    Page(
-                        BookLine("----------------------", 55),
-                        BookLine("---32nd Bennath", 56),
-                        BookLine("----------------------", 57),
-                        BookLine("Following my genius plan", 58),
-                        BookLine("to make all the children", 59),
-                        BookLine("invisible, the city is", 60),
-                        BookLine("now in total chaos as", 61),
-                        BookLine("the kids test their freedom", 62),
-                        BookLine("by putting adults into", 63),
-                        BookLine("a panic. Honestly, some", 64),
-                        BookLine("of the tricks the kids", 65),
-                    ),
-                    Page(
-                        BookLine("play are better than anything", 66),
-                        BookLine("I could invent.", 67),
-                        BookLine("----------------------", 68),
-                        BookLine("---20th Raktuber", 69),
-                        BookLine("----------------------", 70),
-                        BookLine("adly things have calmed", 71),
-                        BookLine("down in the city, and", 72),
-                        BookLine("they've started to realise", 73),
-                        BookLine("that we're the cause of", 74),
-                        BookLine("all the tragedy. Luckily,", 75),
-                        BookLine("the people don't have", 76),
-                    ),
+            ),
+            PageSet(
+                Page(
+                    BookLine("----------------------", 55),
+                    BookLine("---15th Bennath", 56),
+                    BookLine("----------------------", 57),
+                    BookLine("Been here a few days", 58),
+                    BookLine("now. I'm overwhelmed on", 59),
+                    BookLine("just how evil the other 8", 60),
+                    BookLine("are. I suppose this is", 61),
+                    BookLine("amplified by living in such", 62),
+                    BookLine("a small building.", 63),
                 ),
-                PageSet(
-                    Page(
-                        BookLine("enough power to get past", 55),
-                        BookLine("our defences, and even", 56),
-                        BookLine("if they did, they would", 57),
-                        BookLine("wish they hadn't thought", 58),
-                        BookLine("of such an attack.", 59),
-                        BookLine("----------------------", 60),
-                        BookLine("---28th Raktuber", 61),
-                        BookLine("----------------------", 62),
-                        BookLine("We have been told to 'beware", 63),
-                        BookLine("for your days are numbered'", 64),
-                        BookLine("by the people of Ardougne.", 65),
-                    ),
-                    Page(
-                        BookLine("It seems the city has", 66),
-                        BookLine("asked for some external", 67),
-                        BookLine("help, which will be upon", 68),
-                        BookLine("us some time soon. I'm", 69),
-                        BookLine("sure we will eliminate", 70),
-                        BookLine("such a threat though.", 71),
-                    ),
+                Page(
+                    BookLine("----------------------", 66),
+                    BookLine("---20th Bennath", 67),
+                    BookLine("----------------------", 68),
+                    BookLine("Started causing havoc to", 69),
+                    BookLine("the people of Ardougne", 70),
+                    BookLine("today. We poisoned the", 71),
+                    BookLine("water supply with a", 72),
+                    BookLine("strange concoction which", 73),
+                    BookLine("caused everyone to break", 74),
+                    BookLine("out in boils! Very funny.", 75),
+                    BookLine("The others have been", 76),
+                ),
+            ),
+            PageSet(
+                Page(
+                    BookLine("stealthily setting fire to", 55),
+                    BookLine("some people and laughing", 56),
+                    BookLine("at their conclusion of", 57),
+                    BookLine("spontaneous combustion.", 58),
+                    BookLine("I think I shall have to", 60),
+                    BookLine("come up with something", 60),
+                    BookLine("more evil for tomorrow.", 61),
+                ),
+                Page(
+                    BookLine("----------------------", 66),
+                    BookLine("---32nd Bennath", 67),
+                    BookLine("----------------------", 68),
+                    BookLine("Following my genius plan", 69),
+                    BookLine("to make all the children", 70),
+                    BookLine("invisible, the city is now", 71),
+                    BookLine("in total chaos as the kids", 72),
+                    BookLine("test their freedom by", 73),
+                    BookLine("putting adults into", 74),
+                    BookLine("a panic.", 75),
+                ),
+            ),
+            PageSet(
+                Page(
+                    BookLine("Honestly, some of the", 55),
+                    BookLine("tricks the kids play are", 56),
+                    BookLine("better than anything I", 57),
+                    BookLine("could invent.", 58),
+                ),
+                Page(
+                    BookLine("----------------------", 66),
+                    BookLine("---20th Raktuber", 67),
+                    BookLine("----------------------", 68),
+                    BookLine("Sadly things have calmed", 69),
+                    BookLine("down in the city, and", 70),
+                    BookLine("they've started to realise", 71),
+                    BookLine("that we're the cause of all", 72),
+                    BookLine("the tragedy. Luckily, the", 73),
+                    BookLine("people don't have enough", 74),
+                    BookLine("power to get past our", 75),
+                    BookLine("defences, and even if", 76),
+                ),
+            ),
+            PageSet(
+                Page(
+                    BookLine("they did, they would wish", 55),
+                    BookLine("they hadn't thought of", 56),
+                    BookLine("such an attack.", 57),
+                ), Page(
+                    BookLine("----------------------", 66),
+                    BookLine("---28th Raktuber", 67),
+                    BookLine("----------------------", 68),
+                    BookLine("We have been told to", 69),
+                    BookLine("'beware for your days", 70),
+                    BookLine("are numbered' by the", 71),
+                    BookLine("people of Ardougne. It", 72),
+                    BookLine("seems the city has asked", 73),
+                    BookLine("for some external help,", 74),
+                    BookLine("which will be upon us", 75),
+                    BookLine("some time soon. I'm sure", 76),
+                )
+            ),
+            PageSet(
+                Page(
+                    BookLine("we will eliminate such a", 55),
+                    BookLine("threat though.", 56),
                 ),
             )
+        )
     }
 
     @Suppress("UNUSED_PARAMETER")
