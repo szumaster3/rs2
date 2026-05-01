@@ -5,10 +5,10 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
@@ -131,33 +131,37 @@ class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
         playAudio(player, Sounds.STUNNED_2727, 1)
         sendChat(player, "Ow!")
 
-        submitIndividualPulse(
-            player,
-            object : Pulse(1) {
-                var counter = 0
-                override fun pulse(): Boolean {
-                    when(counter++) {
-                        0 -> {
-                            sendGraphics(Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player.location)
-                            playAudio(player, Sounds.STUNNED_2727, 1)
-                        }
-
-                        1 -> openOverlay(player, Components.FADE_TO_BLACK_115)
-                        3 -> {
-                            val destination = if(npc.id == NPCs.PIRATE_PETE_2826) Location(3680, 3536, 0) else Location(2162, 5114, 1)
-                            player.teleporter.send(destination, TeleportManager.TeleportType.INSTANT)
-                        }
-                        6 -> openOverlay(player, Components.FADE_FROM_BLACK_170)
-                        7 -> player.unlock()
-                        8 -> {
-                            openDialogue(player, PiratePeteTravelDialogue())
-                            return true
-                        }
-                    }
-                    return false
+        queueScript(player,1,QueueStrength.SOFT) { stage ->
+            when (stage) {
+                0 -> {
+                    sendGraphics(Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player.location)
+                    playAudio(player, Sounds.STUNNED_2727, 1)
+                    return@queueScript delayScript(player, 1)
                 }
-            },
-        )
+                1 -> {
+                    openOverlay(player, Components.FADE_TO_BLACK_115)
+                    return@queueScript delayScript(player, 2)
+                }
+                2 -> {
+                    val destination =
+                        if (npc.id == NPCs.PIRATE_PETE_2826)
+                            Location(3680, 3536, 0)
+                        else
+                            Location(2162, 5114, 1)
+                    player.teleporter.send(destination, TeleportManager.TeleportType.INSTANT)
+                    return@queueScript delayScript(player, 3)
+                }
+                3 -> {
+                    openOverlay(player, Components.FADE_FROM_BLACK_170)
+                    return@queueScript delayScript(player, 2)
+                }
+                4 -> {
+                    openDialogue(player, PiratePeteTravelDialogue())
+                    return@queueScript stopExecuting(player)
+                }
+                else -> return@queueScript stopExecuting(player)
+            }
+        }
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.PIRATE_PETE_2825,NPCs.PIRATE_PETE_2826)

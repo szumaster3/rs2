@@ -2,9 +2,9 @@ package content.region.morytania.mort_myre.quest.druidspirit.plugin
 
 import content.region.morytania.mort_myre.npc.GhastNPC
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.scenery.SceneryBuilder
-import core.game.system.task.Pulse
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
@@ -47,33 +47,23 @@ object NSUtils {
                 addItem(player, Items.DRUID_POUCH_2957)
             }
             spawnProjectile(player, attacker, 268)
-            submitWorldPulse(
-                object : Pulse() {
-                    var ticks = 0
-
-                    override fun pulse(): Boolean {
-                        when (ticks++) {
-                            2 -> {
-                                playAudio(player, 1495)
-                                visualize(
-                                    attacker,
-                                    -1,
-                                    Graphics(shared.consts.Graphics.FIRST_CONTACT_GOES_WITH_ABOVE_269, 125),
-                                )
-                            }
-                            3 -> {
-                                attacker.transform(attacker.id + 1).also {
-                                    playAudio(player, 1490)
-                                    attacker.attack(player)
-                                    attacker.setAttribute("woke", getWorldTicks())
-                                    return true
-                                }
-                            }
-                        }
-                        return false
+            queueScript(player, 3, QueueStrength.NORMAL) { stage ->
+                when (stage) {
+                    0 -> {
+                        playAudio(player, 1495)
+                        visualize(attacker, -1, Graphics(shared.consts.Graphics.FIRST_CONTACT_GOES_WITH_ABOVE_269, 125))
+                        return@queueScript delayScript(player, 1)
                     }
-                },
-            )
+                    1 -> {
+                        attacker.transform(attacker.id + 1)
+                        playAudio(player, 1490)
+                        attacker.attack(player)
+                        attacker.setAttribute("woke", getWorldTicks())
+                        return@queueScript stopExecuting(player)
+                    }
+                    else -> return@queueScript stopExecuting(player)
+                }
+            }
             return true
         }
         return false

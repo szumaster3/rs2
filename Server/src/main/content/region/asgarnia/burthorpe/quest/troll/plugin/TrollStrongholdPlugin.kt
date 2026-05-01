@@ -6,6 +6,7 @@ import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -68,40 +69,35 @@ class TrollStrongholdPlugin : InteractionListener {
 
             on(npcId, IntType.NPC, "pickpocket") { player, node ->
                 val npc = node.asNpc()
-                player.lock()
-                submitWorldPulse(object : Pulse() {
-                    var counter = 0
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            0 -> {
-                                if (hasLevelDyn(player, Skills.THIEVING, 30)) {
-                                    animate(player, Animation(881))
-                                } else {
-                                    sendMessage(player, "You need to be a level 30 thief to pickpocket ${npc.name}.")
-                                    return true
-                                }
+                queueScript(player,1,QueueStrength.NORMAL) { stage ->
+                    when (stage) {
+                        0 -> {
+                            if (!hasLevelDyn(player, Skills.THIEVING, 30)) {
+                                sendMessage(player, "You need to be a level 30 thief to pickpocket ${npc.name}.")
+                                return@queueScript stopExecuting(player)
                             }
-                            3 -> {
-                                val success = SkillUtils.success(player, Skills.THIEVING)
-                                if (success) {
-                                    if (isQuestInProgress(player, Quests.TROLL_STRONGHOLD, 8, 10)) {
-                                        addItem(player, keyItem)
-                                        sendMessage(player, "You find a small key on ${npc.name}.")
-                                    } else {
-                                        sendMessage(player, "You find nothing on ${npc.name}.")
-                                    }
-                                } else {
-                                    sendChat(npc, "What you think you doing?")
-                                    transformNpc(npc, failTransform, 50)
-                                    npc.attack(player)
-                                }
-                                player.unlock()
-                                return true
-                            }
+                            animate(player, Animation(881))
+                            return@queueScript delayScript(player, 3)
                         }
-                        return false
+                        1 -> {
+                            val success = SkillUtils.success(player, Skills.THIEVING)
+                            if (success) {
+                                if (isQuestInProgress(player, Quests.TROLL_STRONGHOLD, 8, 10)) {
+                                    addItem(player, keyItem)
+                                    sendMessage(player, "You find a small key on ${npc.name}.")
+                                } else {
+                                    sendMessage(player, "You find nothing on ${npc.name}.")
+                                }
+                            } else {
+                                sendChat(npc, "What you think you doing?")
+                                transformNpc(npc, failTransform, 50)
+                                npc.attack(player)
+                            }
+                            return@queueScript stopExecuting(player)
+                        }
+                        else -> return@queueScript stopExecuting(player)
                     }
-                })
+                }
                 return@on true
             }
         }

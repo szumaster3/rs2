@@ -2,11 +2,13 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
-import core.api.submitIndividualPulse
+import core.api.finishDiaryTask
+import core.api.queueScript
+import core.api.stopExecuting
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.scenery.Scenery
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
@@ -20,16 +22,11 @@ class VarrockFenceJumpShortcut : AgilityShortcut(intArrayOf(9300), 13, 0.0, "jum
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         player.faceLocation(scenery.location)
-        submitIndividualPulse(
-            player,
-            object : Pulse(1, player) {
-                override fun pulse(): Boolean {
-                    player.animate(jumpAnim)
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 5)
-                    return true
-                }
-            },
-        )
+        queueScript(player, delay = 1, strength = QueueStrength.WEAK) { _ ->
+            player.animate(jumpAnim)
+            finishDiaryTask(player, DiaryType.VARROCK, 0, 5)
+            return@queueScript stopExecuting(player)
+        }
 
         AgilityHandler.forceWalk(
             player,

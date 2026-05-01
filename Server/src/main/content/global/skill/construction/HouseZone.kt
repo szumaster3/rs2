@@ -2,9 +2,9 @@ package content.global.skill.construction
 
 import content.data.GameAttributes
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.RegionManager.forId
 import core.game.world.map.RegionManager.removeRegion
 import core.game.world.map.zone.MapZone
@@ -69,23 +69,21 @@ class HouseZone(private val house: HouseManager) : MapZone("poh-zone", true, Zon
                 val toRemove = previousRegion
                 val dungRemove = previousDungeon
                 clearLogoutListener(player, "house-logout")
-                submitWorldPulse(
-                    object : Pulse(2) {
-                        override fun pulse(): Boolean {
-                            val r = forId(toRemove)
-                            val dr = if (dungRemove != -1) forId(dungRemove) else null
-                            removeRegion(toRemove)
-                            unregisterRegion(toRemove)
-                            r.isActive = false
-                            if (dungRemove != -1) {
-                                removeRegion(dungRemove)
-                                unregisterRegion(dungRemove)
-                                dr!!.isActive = false
-                            }
-                            return true
-                        }
-                    },
-                )
+                queueScript(e,2,QueueStrength.SOFT) { _ ->
+                    val r = forId(toRemove)
+                    val dr = if (dungRemove != -1) forId(dungRemove) else null
+
+                    removeRegion(toRemove)
+                    unregisterRegion(toRemove)
+                    r.isActive = false
+
+                    if (dungRemove != -1) {
+                        removeRegion(dungRemove)
+                        unregisterRegion(dungRemove)
+                        dr!!.isActive = false
+                    }
+                    return@queueScript stopExecuting(e)
+                }
             }
             return true
         }

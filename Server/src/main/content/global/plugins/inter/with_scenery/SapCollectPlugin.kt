@@ -3,13 +3,12 @@ package content.global.plugins.inter.with_scenery
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Scenery
-import shared.consts.Sounds
 
 class SapCollectPlugin : InteractionListener {
 
@@ -30,21 +29,17 @@ class SapCollectPlugin : InteractionListener {
                 sendMessage(player, "You need a bucket to do that.")
                 return@onUseWith true
             }
-            submitIndividualPulse(
-                player,
-                object : Pulse(2) {
-                    override fun pulse(): Boolean {
-                        if (removeItem(player, Items.BUCKET_1925)) {
-                            animate(player, ANIMATION)
-                            if (addItem(player, Items.BUCKET_OF_SAP_4687)) {
-                                sendMessage(player, "You cut the tree and allow its sap to drip down into your bucket.")
-                            }
-                            return true
-                        }
-                        return false
-                    }
+            queueScript(player,2,QueueStrength.NORMAL) { _ ->
+                if (!removeItem(player, Items.BUCKET_1925)) {
+                    return@queueScript stopExecuting(player)
                 }
-            )
+
+                animate(player, ANIMATION)
+                if (addItem(player, Items.BUCKET_OF_SAP_4687)) {
+                    sendMessage(player, "You cut the tree and allow its sap to drip down into your bucket.")
+                }
+                return@queueScript stopExecuting(player)
+            }
             return@onUseWith true
         }
 

@@ -3,9 +3,9 @@ package content.region.kandarin.feldip.gutanoth.dialogue
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
@@ -38,37 +38,29 @@ class OgreGuardDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npc(FaceAnim.OLD_DEFAULT, "Ok, I opens da stoppa's for yous creature.").also { stage++ }
             4 -> {
                 end()
-                lock(player, 6)
-                submitWorldPulse(
-                    object : Pulse() {
-                        var counter = 0
-
-                        override fun pulse(): Boolean {
-                            when (counter++) {
-                                0 -> {
-                                    npc.asNpc().faceLocation(Location.create(2457, 3048, 0))
-                                }
-
-                                2 -> {
-                                    animate(npc.asNpc(), 2102)
-                                    playAudio(player, Sounds.OGRE_DESTROY_BARRICADE_1954, 1)
-                                }
-
-                                4 -> {
-                                    setVarbit(player, Vars.VARBIT_QUEST_ZOGRE_GATE_PASSAGE_496, 1, true)
-                                }
-
-                                5 -> {
-                                    end()
-                                    face(npc.asNpc(), player, 2)
-                                    sendNPCDialogue(player, NPCs.OGRE_GUARD_2042, "Ok der' yous goes!", FaceAnim.OLD_DEFAULT).also { stage = END_DIALOGUE }
-                                    return true
-                                }
-                            }
-                            return false
+                queueScript(player,1,QueueStrength.SOFT) { tick ->
+                    when (tick) {
+                        0 -> {
+                            npc.asNpc().faceLocation(Location.create(2457, 3048, 0))
+                            return@queueScript delayScript(player, 2)
                         }
-                    },
-                )
+                        1 -> {
+                            animate(npc.asNpc(), 2102)
+                            playAudio(player, Sounds.OGRE_DESTROY_BARRICADE_1954, 1)
+                            return@queueScript delayScript(player, 2)
+                        }
+                        2 -> {
+                            setVarbit(player, Vars.VARBIT_QUEST_ZOGRE_GATE_PASSAGE_496, 1, true)
+                            return@queueScript delayScript(player, 1)
+                        }
+                        3 -> {
+                            face(npc.asNpc(), player, 2)
+                            sendNPCDialogue(player, NPCs.OGRE_GUARD_2042, "Ok der' yous goes!", FaceAnim.OLD_DEFAULT)
+                            return@queueScript stopExecuting(player)
+                        }
+                        else -> return@queueScript stopExecuting(player)
+                    }
+                }
             }
 
             5 -> player("Don't worry, I know how to take care of myself.").also { stage = END_DIALOGUE }

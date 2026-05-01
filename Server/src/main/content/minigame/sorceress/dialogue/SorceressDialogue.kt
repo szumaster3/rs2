@@ -3,9 +3,9 @@ package content.minigame.sorceress.dialogue
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
@@ -62,14 +62,9 @@ class SorceressDialogue(player: Player? = null) : Dialogue(player) {
     private fun teleport() {
         sendChat(npc, "Be gone intruder!")
         lock(player, 2)
-        submitWorldPulse(
-            object : Pulse(2, player) {
-                override fun pulse(): Boolean {
-                    unlock(player)
-                    teleport(player!!, Location(3321, 3143, 0))
-                    return true
-                }
-            },
-        )
+        queueScript(player,2,QueueStrength.NORMAL) {
+            teleport(player!!, Location(3321, 3143, 0))
+            return@queueScript stopExecuting(player)
+        }
     }
 }

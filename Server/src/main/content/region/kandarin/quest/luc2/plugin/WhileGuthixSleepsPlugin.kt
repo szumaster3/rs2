@@ -5,7 +5,7 @@ import core.api.*
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.system.task.Pulse
+import core.game.interaction.QueueStrength
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.*
@@ -51,27 +51,28 @@ class WhileGuthixSleepsPlugin : InteractionListener {
 
                 else -> {
                     lock(player, 6)
-                    submitIndividualPulse(
-                        player,
-                        object : Pulse(1) {
-                            var counter = 0
-
-                            override fun pulse(): Boolean {
-                                when (counter++) {
-                                    0 -> openInterface(player, Components.FADE_TO_BLACK_115)
-                                    3 -> teleport(player, Location(2035, 4379, 0))
-                                    4 -> openInterface(player, Components.FADE_FROM_BLACK_170)
-                                    6 -> {
-                                        closeOverlay(player)
-                                        player.musicPlayer.unlock(Music.DANGEROUS_LOGIC_579)
-                                        unlock(player)
-                                        return true
-                                    }
-                                }
-                                return false
+                    queueScript(player,1,QueueStrength.SOFT) { stage ->
+                        when (stage) {
+                            0 -> {
+                                openInterface(player, Components.FADE_TO_BLACK_115)
+                                return@queueScript delayScript(player, 3)
                             }
-                        },
-                    )
+                            1 -> {
+                                teleport(player, Location(2035, 4379, 0))
+                                return@queueScript delayScript(player, 1)
+                            }
+                            2 -> {
+                                openInterface(player, Components.FADE_FROM_BLACK_170)
+                                return@queueScript delayScript(player, 2)
+                            }
+                            3 -> {
+                                closeOverlay(player)
+                                player.musicPlayer.unlock(Music.DANGEROUS_LOGIC_579)
+                                return@queueScript stopExecuting(player)
+                            }
+                            else -> return@queueScript stopExecuting(player)
+                        }
+                    }
                 }
             }
             return@on true

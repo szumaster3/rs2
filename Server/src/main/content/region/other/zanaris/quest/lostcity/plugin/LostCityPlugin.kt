@@ -8,6 +8,7 @@ import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
@@ -94,26 +95,25 @@ class LostCityPlugin : InteractionListener {
                     (getQuestStage(player, quest) > 20) &&
                     isOutsideShed
             if (hasRequirements) {
-                var count = 0
-                submitWorldPulse(
-                    object : Pulse(2) {
-                        override fun pulse(): Boolean {
-                            when (count++) {
-                                0 -> {
-                                    sendMessage(player, "The world starts to shimmer...", 1)
-                                    teleport(player, Location(2452, 4473, 0), TeleportType.FAIRY_RING)
-                                }
-
-                                1 -> return isQuestComplete(player, quest)
-                                2 -> {
-                                    finishQuest(player, quest)
-                                    return true
-                                }
-                            }
-                            return false
+                queueScript(player,2,QueueStrength.NORMAL) { stage ->
+                    when (stage) {
+                        0 -> {
+                            sendMessage(player, "The world starts to shimmer...", 1)
+                            teleport(player, Location(2452, 4473, 0), TeleportType.FAIRY_RING)
+                            return@queueScript delayScript(player, 2)
                         }
-                    },
-                )
+                        1 -> {
+                            if (isQuestComplete(player, quest)) return@queueScript stopExecuting(player)
+                            return@queueScript delayScript(player, 2)
+                        }
+
+                        2 -> {
+                            finishQuest(player, quest)
+                            return@queueScript stopExecuting(player)
+                        }
+                        else -> return@queueScript stopExecuting(player)
+                    }
+                }
             }
             return@on true
         }

@@ -3,6 +3,7 @@ package content.region.other.zanaris.npc
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
@@ -11,7 +12,6 @@ import core.game.node.entity.npc.NPCBehavior
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
@@ -29,17 +29,13 @@ class ZygomiteNPC : NPCBehavior(NPCs.FUNGI_3344, NPCs.FUNGI_3345, NPCs.ZYGOMITE_
             }
             lock(player, 3)
             animate(player, FIRST_ANIMATION)
-            submitWorldPulse(
-                object : Pulse() {
-                    override fun pulse(): Boolean {
-                        animate(entity = fungi, anim = SECOND_ANIMATION)
-                        transformNpc(fungi, fungi.id + 2, 500)
-                        fungi.impactHandler.disabledTicks = 1
-                        fungi.attack(player)
-                        return true
-                    }
-                },
-            )
+            queueScript(player,1,QueueStrength.SOFT) { _ ->
+                animate(entity = fungi, anim = SECOND_ANIMATION)
+                transformNpc(fungi, fungi.id + 2, 500)
+                fungi.impactHandler.disabledTicks = 1
+                fungi.attack(player)
+                return@queueScript stopExecuting(player)
+            }
             return@on true
         }
 

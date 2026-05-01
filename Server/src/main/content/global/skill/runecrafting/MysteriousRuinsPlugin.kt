@@ -7,12 +7,12 @@ import core.api.*
 import core.game.container.impl.EquipmentContainer.SLOT_HAT
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.QuestReq
 import core.game.node.entity.player.link.quest.QuestRequirements
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import shared.consts.Animations
 
 /**
@@ -86,7 +86,7 @@ class MysteriousRuinsPlugin : InteractionListener {
             return true
         }
 
-        submitTeleportPulse(player, ruin, 0)
+        submitTeleport(player, ruin, 0)
         return true
     }
 
@@ -106,7 +106,7 @@ class MysteriousRuinsPlugin : InteractionListener {
             return false
         }
 
-        submitTeleportPulse(player, ruin, 0)
+        submitTeleport(player, ruin, 0)
         return true
     }
 
@@ -126,21 +126,17 @@ class MysteriousRuinsPlugin : InteractionListener {
         lock(player, 4)
         animate(player, Animations.HUMAN_BURYING_BONES_827)
         sendMessage(player, "You hold the ${talisman.name} towards the mysterious ruins.")
-        submitTeleportPulse(player, ruin, 3)
+        submitTeleport(player, ruin, 3)
     }
 
     /**
      * Submits a pulse to teleport the player to the ruin after a short delay.
      */
-    private fun submitTeleportPulse(player: Player, ruin: MysteriousRuins, delay: Int) {
+    private fun submitTeleport(player: Player, ruin: MysteriousRuins, delay: Int) {
         sendMessage(player, "You feel a powerful force take hold of you.")
-        submitWorldPulse(
-            object : Pulse(delay, player) {
-                override fun pulse(): Boolean {
-                    teleport(player, ruin.end)
-                    return true
-                }
-            },
-        )
+        queueScript(player,delay,QueueStrength.NORMAL) {
+            teleport(player, ruin.end)
+            return@queueScript stopExecuting(player)
+        }
     }
 }

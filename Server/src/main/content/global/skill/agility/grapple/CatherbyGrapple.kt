@@ -4,6 +4,7 @@ import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
@@ -71,37 +72,30 @@ class CatherbyGrapple : InteractionListener {
             player.logoutListeners["yanille-grapple"] = { p: Player ->
                 p.location = start
             }
-            submitWorldPulse(
-                object : Pulse(2) {
-                    var counter = 0
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            1 -> {
-                                face(player, END_LOCATION)
-                                animate(player, Animation(Animations.FIRE_CROSSBOW_TO_CLIMB_WALL_4455))
-                            }
-
-                            3 -> {
-                                replaceScenery(rocks!!, rocks!!.id + 1, 10)
-                            }
-
-                            8 -> {
-                                teleport(player, END_LOCATION)
-                            }
-
-                            9 -> {
-                                unlock(player)
-                                sendMessage(player, "You successfully grapple the rock and climb the cliffside.")
-                                AgilityHandler.checkGrappleBreak(player)
-                                player.logoutListeners.remove("catherby-grapple")
-                                return true
-                            }
-                        }
-                        return false
+            queueScript(player,2,QueueStrength.SOFT) { stage ->
+                when (stage) {
+                    0 -> {
+                        face(player, END_LOCATION)
+                        animate(player, Animation(Animations.FIRE_CROSSBOW_TO_CLIMB_WALL_4455))
+                        return@queueScript delayScript(player, 4)
                     }
-                },
-            )
-
+                    1 -> {
+                        replaceScenery(rocks!!, rocks!!.id + 1, 10)
+                        return@queueScript delayScript(player, 10)
+                    }
+                    2 -> {
+                        teleport(player, END_LOCATION)
+                        return@queueScript delayScript(player, 2)
+                    }
+                    3 -> {
+                        sendMessage(player, "You successfully grapple the rock and climb the cliffside.")
+                        AgilityHandler.checkGrappleBreak(player)
+                        player.logoutListeners.remove("catherby-grapple")
+                        return@queueScript stopExecuting(player)
+                    }
+                    else -> return@queueScript stopExecuting(player)
+                }
+            }
             return@on true
         }
     }

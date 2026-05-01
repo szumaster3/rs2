@@ -4,10 +4,10 @@ import content.data.GameAttributes
 import content.data.RandomEvent
 import core.api.*
 import core.game.dialogue.FaceAnim
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import shared.consts.*
 
@@ -47,44 +47,46 @@ object FrogUtils {
     fun kissTheFrog(player: Player, node: Node) {
         val npc = node as NPC
         val royalCouple = if (player.isMale) FROG_PRINCESS_NPC else FROG_PRINCE_NPC
-        fun visualize() = visualize(npc, HUMAN_KISS_ANIM, HUMAN_KISS_GFX)
-
         player.lock(18)
-        submitIndividualPulse(player, object : Pulse(1, player) {
-            var counter = 0
-            override fun pulse(): Boolean {
-                when (counter++) {
-                    1 -> {
-                        face(player, npc, 3)
-                        face(npc, player, 3)
-                        npc.animate(Animation(FROG_KISS_ANIM))
-                        player.animate(Animation(Animations.HUMAN_KISS_THE_FROG_2376))
-                    }
-                    4 -> visualize(npc,TRANSFORM_INTO_HUMAN,Graphics.SPELL_SPLASH_85)
-                    6 -> transformNpc(npc, royalCouple, 100)
-                    8 -> sendNPCDialogueLines(player,
-                        royalCouple,
-                        FaceAnim.HAPPY,false,
-                        "Thank you so much, ${player.username}.",
-                        "I must return to my fairy tale kingdom now, but I will",
-                        "leave you a reward for your kindness."
-                    )
-                    9,12 -> {
-                        visualize()
-                        if (counter == 15) openInterface(player, Components.FADE_TO_BLACK_120)
-                    }
-
-                    16 -> {
-                        npc.reTransform()
-                        cleanup(player)
-                        openInterface(player, Components.FADE_FROM_BLACK_170)
-                        addItemOrDrop(player, Items.FROG_TOKEN_6183)
-                        sendMessage(player, "You've received a frog token!")
-                        return true
-                    }
+        queueScript(player,1,QueueStrength.SOFT) { stage ->
+            when (stage) {
+                0 -> {
+                    face(player, npc, 3)
+                    face(npc, player, 3)
+                    npc.animate(Animation(FROG_KISS_ANIM))
+                    player.animate(Animation(Animations.HUMAN_KISS_THE_FROG_2376))
+                    return@queueScript delayScript(player, 3)
                 }
-                return false
+                1 -> {
+                    visualize(npc, TRANSFORM_INTO_HUMAN, Graphics.SPELL_SPLASH_85)
+                    return@queueScript delayScript(player, 2)
+                }
+                2 -> {
+                    transformNpc(npc, royalCouple, 100)
+                    return@queueScript delayScript(player, 2)
+                }
+                3 -> {
+                    sendNPCDialogueLines(player, royalCouple, FaceAnim.HAPPY, false, "Thank you so much, ${player.username}.", "I must return to my fairy tale kingdom now, but I will", "leave you a reward for your kindness.")
+                    return@queueScript delayScript(player, 1)
+                }
+                4 -> {
+                    visualize(npc, HUMAN_KISS_ANIM, HUMAN_KISS_GFX)
+                    return@queueScript delayScript(player, 3)
+                }
+                5 -> {
+                    visualize(npc, HUMAN_KISS_ANIM, HUMAN_KISS_GFX)
+                    return@queueScript delayScript(player, 3)
+                }
+                6 -> {
+                    npc.reTransform()
+                    cleanup(player)
+                    openInterface(player, Components.FADE_FROM_BLACK_170)
+                    addItemOrDrop(player, Items.FROG_TOKEN_6183)
+                    sendMessage(player, "You've received a frog token!")
+                    return@queueScript stopExecuting(player)
+                }
+                else -> return@queueScript stopExecuting(player)
             }
-        })
+        }
     }
 }

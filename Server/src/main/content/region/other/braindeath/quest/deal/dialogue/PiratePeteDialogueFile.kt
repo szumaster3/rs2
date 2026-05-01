@@ -4,8 +4,8 @@ import content.region.other.braindeath.quest.deal.cutscene.TeleportCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
 import core.tools.END_DIALOGUE
@@ -74,17 +74,12 @@ class PiratePeteDialogueFile : DialogueFile() {
                 lock(player!!, 3)
                 findNPC(NPCs.PIRATE_PETE_2825)?.let { animate(it, Animations.HUMAN_THROW_DART_806) }
                 sendChat(player!!, "Ow!")
-                submitIndividualPulse(
-                    player!!,
-                    object : Pulse(3) {
-                        override fun pulse(): Boolean {
-                            sendGraphics(Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player!!.location)
-                            playAudio(player!!, Sounds.STUNNED_2727, 1)
-                            TeleportCutscene(player!!).start()
-                            return true
-                        }
-                    },
-                )
+                queueScript(player!!,3,QueueStrength.SOFT){
+                    sendGraphics(Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player!!.location)
+                    playAudio(player!!, Sounds.STUNNED_2727)
+                    TeleportCutscene(player!!).start()
+                    return@queueScript stopExecuting(player!!)
+                }
             }
         }
     }

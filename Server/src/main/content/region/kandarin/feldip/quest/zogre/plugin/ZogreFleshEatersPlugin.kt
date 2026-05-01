@@ -8,7 +8,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItem
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.tools.BLUE
@@ -27,37 +26,9 @@ class ZogreFleshEatersPlugin : InteractionListener {
         on(intArrayOf(Scenery.CRUSHED_BARRICADE_6881, Scenery.CRUSHED_BARRICADE_6882), IntType.SCENERY, "climb-over") { player, _ ->
             if(getVarbit(player, Vars.VARBIT_QUEST_ZOGRE_GATE_PASSAGE_496) != 1) return@on false
             lock(player, 3)
-            submitIndividualPulse(
-                player,
-                object : Pulse() {
-                    var counter = 0
-
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            0 -> {
-                                forceMove(
-                                    player,
-                                    player.location,
-                                    player.location.transform(
-                                        if (player.location.x < 2457) Direction.EAST else Direction.WEST,
-                                        2
-                                    ),
-                                    20,
-                                    60,
-                                    null,
-                                    10980,
-                                )
-                            }
-
-                            1 -> {
-                                resetAnimator(player)
-                                return true
-                            }
-                        }
-                        return false
-                    }
-                },
-            )
+            forceMove(player, player.location, player.location.transform(if (player.location.x < 2457) Direction.EAST else Direction.WEST, 2), 20, 60, null, 10980) {
+                resetAnimator(player)
+            }
             return@on true
         }
 

@@ -1,6 +1,5 @@
 package content.region.kandarin.feldip.gutanoth.plugin
 
-import content.global.skill.thieving.ThievingDefinition
 import content.global.skill.thieving.pickpocket.PickpocketListener
 import content.region.kandarin.feldip.quest.zogre.npc.BrentleVahnNPC
 import content.region.kandarin.feldip.quest.zogre.npc.SlashBashNPC
@@ -11,6 +10,7 @@ import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
@@ -187,69 +187,43 @@ class GutanothPlugin : InteractionListener {
             lock(player, 3)
             animate(player, Animations.HUMAN_MULTI_USE_832)
             sendMessage(player, "You attempt to pick the lock on the coffin.")
-            submitIndividualPulse(
-                player,
-                object : Pulse(2) {
-                    var table = PickpocketListener.pickpocketRoll(player, 84.0, 240.0, OgreCoffin.OGRE_COFFIN.table)
-                    override fun pulse(): Boolean {
-                        if (table != null) {
-                            sendMessage(player, "You unlock the coffin...")
-                            if (inInventory(player, Items.LOCKPICK_1523)) sendMessage(player, "Your lockpick snaps.")
-                            replaceScenery(
-                                sceneryId,
-                                if (sceneryId.id ==
-                                    Scenery.OGRE_COFFIN_6848
-                                ) {
-                                    Scenery.OGRE_COFFIN_6890
-                                } else {
-                                    Scenery.OGRE_COFFIN_6851
-                                },
-                                2,
-                            )
-                            addItem(player, loot.id, loot.amount)
-                            rewardXP(player, Skills.THIEVING, 1.0)
-                            if (loot.id in
-                                intArrayOf(
-                                    Items.FAYRG_BONES_4830,
-                                    Items.RAURG_BONES_4832,
-                                    Items.OURG_BONES_4834,
-                                    Items.ZOGRE_BONES_4812
-                                )
-                            ) {
-                                sendItemDialogue(
-                                    player,
-                                    loot.id,
-                                    "You find some ancestral ${getItemName(loot.id)}."
-                                )
-                                sendMessage(player, "You find some ancestral ${getItemName(loot.id)}.")
-                            } else {
-                                sendItemDialogue(
-                                    player,
-                                    if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id,
-                                    "You find something..."
-                                )
-                            }
-                        } else {
-                            sendMessage(
-                                player,
-                                "You fail to pick the lock - your fingers get numb from fumbling with the lock."
-                            )
-                            val disease = RandomFunction.random(100) <= 4
-                            if (disease) {
-                                sendMessage(player, "Your clumsiness releases a disease ridden spore cloud.")
-                                registerTimer(player, spawnTimer("disease", minutesToTicks(15)))
-                            }
-                            val rollDamage = (1..4).random()
-                            val fingernumb = RandomFunction.roll(1)
-                            if (fingernumb) {
-                                impact(player, rollDamage, ImpactHandler.HitsplatType.NORMAL)
-                            }
-                            rewardXP(player, Skills.THIEVING, 1.0)
-                        }
-                        return true
+            queueScript(player,2,QueueStrength.NORMAL) { _ ->
+                val table = PickpocketListener.pickpocketRoll(player, 84.0, 240.0, OgreCoffin.OGRE_COFFIN.table)
+                if (table != null) {
+                    sendMessage(player, "You unlock the coffin...")
+
+                    if (inInventory(player, Items.LOCKPICK_1523)) {
+                        sendMessage(player, "Your lockpick snaps.")
                     }
-                },
-            )
+                    val newId =
+                        if (sceneryId.id == Scenery.OGRE_COFFIN_6848)
+                            Scenery.OGRE_COFFIN_6890
+                        else
+                            Scenery.OGRE_COFFIN_6851
+
+                    replaceScenery(sceneryId, newId, 2)
+                    addItem(player, loot.id, loot.amount)
+                    rewardXP(player, Skills.THIEVING, 1.0)
+                    if (loot.id in intArrayOf(Items.FAYRG_BONES_4830, Items.RAURG_BONES_4832, Items.OURG_BONES_4834, Items.ZOGRE_BONES_4812)) {
+                        sendItemDialogue(player, loot.id, "You find some ancestral ${getItemName(loot.id)}.")
+                        sendMessage(player, "You find some ancestral ${getItemName(loot.id)}.")
+                    } else {
+                        sendItemDialogue(player, if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id, "You find something...")
+                    }
+                } else {
+                    sendMessage(player, "You fail to pick the lock - your fingers get numb from fumbling with the lock.")
+                    if (RandomFunction.random(100) <= 4) {
+                        sendMessage(player, "Your clumsiness releases a disease ridden spore cloud.")
+                        registerTimer(player, spawnTimer("disease", minutesToTicks(15)))
+                    }
+                    val rollDamage = (1..4).random()
+                    if (RandomFunction.roll(1)) {
+                        impact(player, rollDamage, ImpactHandler.HitsplatType.NORMAL)
+                    }
+                    rewardXP(player, Skills.THIEVING, 1.0)
+                }
+                return@queueScript stopExecuting(player)
+            }
             return@on true
         }
 
@@ -286,45 +260,39 @@ class GutanothPlugin : InteractionListener {
                 lock(player, 3)
                 animate(player, Animations.HUMAN_MULTI_USE_832)
                 sendMessage(player, "You unlock the coffin with your zogre coffin key...")
-                submitIndividualPulse(
-                    player,
-                    object : Pulse(2) {
-                        override fun pulse(): Boolean {
-                            sendMessage(player, "The key crumbles in the lock!")
-                            replaceScenery(
-                                sceneryId,
-                                if (sceneryId.id == Scenery.OGRE_COFFIN_6848) {
-                                    Scenery.OGRE_COFFIN_6890
-                                } else {
-                                    Scenery.OGRE_COFFIN_6851
-                                }, 2
-                            )
-                            addItem(player, loot.id, loot.amount)
-                            if (loot.id in
-                                intArrayOf(
-                                    Items.FAYRG_BONES_4830,
-                                    Items.RAURG_BONES_4832,
-                                    Items.OURG_BONES_4834,
-                                    Items.ZOGRE_BONES_4812
-                                )
-                            ) {
-                                sendItemDialogue(
-                                    player,
-                                    loot.id,
-                                    "You find some ancestral ${getItemName(loot.id)}."
-                                )
-                                sendMessage(player, "You find some ancestral ${getItemName(loot.id)}.")
-                            } else {
-                                sendItemDialogue(
-                                    player,
-                                    if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id,
-                                    "You find something..."
-                                )
-                            }
-                            return true
-                        }
-                    },
-                )
+                queueScript(player, 2, QueueStrength.NORMAL) { _ ->
+
+                    sendMessage(player, "The key crumbles in the lock!")
+
+                    val newId =
+                        if (sceneryId.id == Scenery.OGRE_COFFIN_6848)
+                            Scenery.OGRE_COFFIN_6890
+                        else
+                            Scenery.OGRE_COFFIN_6851
+
+                    replaceScenery(sceneryId, newId, 2)
+
+                    addItem(player, loot.id, loot.amount)
+
+                    if (loot.id in intArrayOf(
+                            Items.FAYRG_BONES_4830,
+                            Items.RAURG_BONES_4832,
+                            Items.OURG_BONES_4834,
+                            Items.ZOGRE_BONES_4812
+                        )
+                    ) {
+                        sendItemDialogue(player, loot.id, "You find some ancestral ${getItemName(loot.id)}.")
+                        sendMessage(player, "You find some ancestral ${getItemName(loot.id)}.")
+                    } else {
+                        sendItemDialogue(
+                            player,
+                            if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id,
+                            "You find something..."
+                        )
+                    }
+
+                    return@queueScript stopExecuting(player)
+                }
             }
             return@on true
         }

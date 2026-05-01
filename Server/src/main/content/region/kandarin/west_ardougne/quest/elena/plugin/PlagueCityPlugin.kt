@@ -377,37 +377,30 @@ class PlagueCityPlugin : InteractionListener {
 
             lock(player, 5)
             lockInteractions(player, 5)
-
-            submitIndividualPulse(player, object : Pulse(1) {
-                var counter = 0
-
-                override fun pulse(): Boolean {
-                    when (counter++) {
-                        0 -> {
-                            forceWalk(player, Location(2514, 9740, 0), "SMART")
-                        }
-                        1 -> {
-                            faceLocation(player, Location(2514, 9739, 0))
-                        }
-                        2 -> {
-                            animate(player, Animations.PC_SEWERS_TIE_ROPE_3191)
-                            playAudio(player, Sounds.PLAGUE_ATTACH_1731)
-                            setVarbit(player, TIED_ROPE_VARBIT, 5, true)
-                        }
-                        3 -> {
-                            setQuestStage(player, Quests.PLAGUE_CITY, 6)
-                            sendItemDialogue(
-                                player,
-                                Items.ROPE_954,
-                                "You tie the end of the rope to the sewer pipe's grill."
-                            )
-                            return true
-                        }
+            queueScript(player, 1, QueueStrength.SOFT) { stage ->
+                when (stage) {
+                    0 -> {
+                        forceWalk(player, Location(2514, 9740, 0), "SMART")
+                        return@queueScript delayScript(player, 1)
                     }
-                    return false
+                    1 -> {
+                        faceLocation(player, Location(2514, 9739, 0))
+                        return@queueScript delayScript(player, 1)
+                    }
+                    2 -> {
+                        animate(player, Animations.PC_SEWERS_TIE_ROPE_3191)
+                        playAudio(player, Sounds.PLAGUE_ATTACH_1731)
+                        setVarbit(player, TIED_ROPE_VARBIT, 5, true)
+                        return@queueScript delayScript(player, 1)
+                    }
+                    3 -> {
+                        setQuestStage(player, Quests.PLAGUE_CITY, 6)
+                        sendItemDialogue(player, Items.ROPE_954, "You tie the end of the rope to the sewer pipe's grill.")
+                        return@queueScript stopExecuting(player)
+                    }
+                    else -> return@queueScript stopExecuting(player)
                 }
-            })
-
+            }
             return@onUseWith true
         }
 
@@ -634,26 +627,31 @@ class PlagueCityPlugin : InteractionListener {
                         npc?.faceLocation(location(2536, 3273, 0))
                     }
                     end()
-                    submitIndividualPulse(
-                        player!!,
-                        object : Pulse(3, player) {
-                            override fun pulse(): Boolean {
-                                val secondMourner = RegionManager.getLocalNpcs(Location.create(2534, 3273, 0), 6)
-                                    .firstOrNull { it.id == NPCs.MOURNER_3216 }
-                                if (secondMourner != null) {
-                                    secondMourner.faceLocation(location(2537, 3273, 0))
-                                    secondMourner.sendChat("Well, you can't let them in...")
-                                    setQuestStage(player!!, Quests.PLAGUE_CITY, 17)
-                                    sendDialogueLines(player!!, "You wait until the mourner's back is turned and sneak into the building.")
-                                    getObject(location(2540, 3273, 0))?.asScenery()?.let {
-                                        DoorActionHandler.handleAutowalkDoor(player!!, it)
-                                    }
-                                    return true
-                                }
-                                return false
-                            }
+                    queueScript(player!!, delay = 3, strength = QueueStrength.WEAK) { _ ->
+
+                        val secondMourner = RegionManager.getLocalNpcs(Location.create(2534, 3273, 0), 6)
+                            .firstOrNull { it.id == NPCs.MOURNER_3216 }
+
+                        if (secondMourner == null) {
+                            return@queueScript stopExecuting(player!!)
                         }
-                    )
+
+                        secondMourner.faceLocation(location(2537, 3273, 0))
+                        secondMourner.sendChat("Well, you can't let them in...")
+
+                        setQuestStage(player!!, Quests.PLAGUE_CITY, 17)
+
+                        sendDialogueLines(
+                            player!!,
+                            "You wait until the mourner's back is turned and sneak into the building."
+                        )
+
+                        getObject(location(2540, 3273, 0))?.asScenery()?.let {
+                            DoorActionHandler.handleAutowalkDoor(player!!, it)
+                        }
+
+                        return@queueScript stopExecuting(player!!)
+                    }
                 }
             }
         }

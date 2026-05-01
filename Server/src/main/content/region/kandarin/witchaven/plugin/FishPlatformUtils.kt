@@ -1,8 +1,8 @@
 package content.region.kandarin.witchaven.plugin
 
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import shared.consts.Components
 import shared.consts.Music
@@ -35,26 +35,19 @@ object FishingPlatformBoat {
             player.musicPlayer.unlock(Music.THE_MOLLUSC_MENACE_200)
         }
 
-        player.lock()
-
-        submitWorldPulse(object : Pulse() {
-            private var counter = 0
-            private val fadeDelay = 3
-            private val teleportDelay = 4
-
-            override fun pulse(): Boolean {
-                counter++
-                if (counter == fadeDelay) {
+        queueScript(player,1,QueueStrength.SOFT) { stage ->
+            when (stage) {
+                0 -> {
                     setMinimapState(player, 2)
                     openInterface(player, Components.SEASLUG_BOAT_TRAVEL_461)
                     setComponentVisibility(player, Components.SEASLUG_BOAT_TRAVEL_461, travel.component, false)
-                    return false
+                    return@queueScript delayScript(player, 1)
                 }
-                if (counter == teleportDelay) {
+                1 -> {
                     teleport(player, travel.destinationLoc)
-                    return false
+                    return@queueScript delayScript(player, travel.ticks - 4)
                 }
-                if (counter >= travel.ticks) {
+                2 -> {
                     openInterface(player, Components.FADE_FROM_BLACK_170)
                     val message = if (getQuestStage(player, Quests.SEA_SLUG) > 50) {
                         "The boat arrives ${travel.destName}."
@@ -65,11 +58,10 @@ object FishingPlatformBoat {
                     setMinimapState(player, 0)
                     closeInterface(player)
                     closeOverlay(player)
-                    player.unlock()
-                    return true
+                    return@queueScript stopExecuting(player)
                 }
-                return false
+                else -> return@queueScript stopExecuting(player)
             }
-        })
+        }
     }
 }

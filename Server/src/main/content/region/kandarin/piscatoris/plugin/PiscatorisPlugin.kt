@@ -5,8 +5,8 @@ import core.api.*
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.*
@@ -64,23 +64,21 @@ class PiscatorisPlugin : InteractionListener {
                 sendMessage(player, "You do not have space in your inventory.")
                 return@on true
             }
-
-            submitIndividualPulse(player, object : Pulse() {
-                var tick = 0
-                override fun pulse(): Boolean {
-                    when (tick++) {
-                        0 -> animate(player, Animations.HUMAN_BURYING_BONES_827)
-                        1 -> {
-                            if (addItem(player, Items.SEAWEED_401)) {
-                                replaceScenery(node.asScenery(), EMPTY_NET_SCENERY, 5)
-                            }
-                            return true
-                        }
+            queueScript(player,1,QueueStrength.NORMAL) { stage ->
+                when (stage) {
+                    0 -> {
+                        animate(player, Animations.HUMAN_BURYING_BONES_827)
+                        return@queueScript delayScript(player, 1)
                     }
-                    return false
+                    1 -> {
+                        if (addItem(player, Items.SEAWEED_401)) {
+                            replaceScenery(node.asScenery(), EMPTY_NET_SCENERY, 5)
+                        }
+                        return@queueScript stopExecuting(player)
+                    }
+                    else -> return@queueScript stopExecuting(player)
                 }
-            })
-
+            }
             return@on true
         }
 

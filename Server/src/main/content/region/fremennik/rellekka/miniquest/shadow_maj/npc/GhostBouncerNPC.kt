@@ -2,6 +2,7 @@ package content.region.fremennik.rellekka.miniquest.shadow_maj.npc
 
 import content.region.fremennik.rellekka.miniquest.shadow_maj.GeneralShadow
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.AbstractNPC
@@ -30,34 +31,32 @@ class GhostBouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
         val start = Projectile.getLocation(player)
         val target = Location.getRandomLocation(start, 5, true)
 
-        submitIndividualPulse(player, object : Pulse(1) {
-            var counter = 0
-
-            override fun pulse(): Boolean {
-                when (counter) {
-                    0 -> {
-                        sendMessage(player, "You grab the severed leg and throw it to distract the hound.")
-                        playAudio(player, Sounds.SEVERED_LEG_ATTACK_3415)
-                        spawnProjectile(start, target, Graphics.FLYING_HUMAN_LEG_SPINNING_SOULS_BANE_1024, 40, 30, 1, 250, 0)
-                    }
-                    1 -> sendChat(player, "Away, darn spot!")
-                    2 -> animate(player, Animation(Animations.SEVERED_LEG_ATTACK_5812))
-                    8 -> {
-                        rewardXP(player, Skills.SLAYER, 2000.0)
-                        sendItemDialogue(
-                            player,
-                            Items.SHADOW_SWORD_10858,
-                            "You receive a shadow sword and 2000 Slayer xp."
-                        )
-                        addItemOrDrop(player, Items.SHADOW_SWORD_10858)
-                        GeneralShadow.setShadowProgress(player, 5)
-                        return true
-                    }
+        queueScript(player,1,QueueStrength.SOFT) { stage ->
+            when (stage) {
+                0 -> {
+                    sendMessage(player, "You grab the severed leg and throw it to distract the hound.")
+                    playAudio(player, Sounds.SEVERED_LEG_ATTACK_3415)
+                    spawnProjectile(start, target, Graphics.FLYING_HUMAN_LEG_SPINNING_SOULS_BANE_1024, 40, 30, 1, 250, 0)
+                    return@queueScript delayScript(player, 1)
                 }
-                counter++
-                return false
+                1 -> {
+                    sendChat(player, "Away, darn spot!")
+                    return@queueScript delayScript(player, 1)
+                }
+                2 -> {
+                    animate(player, Animation(Animations.SEVERED_LEG_ATTACK_5812))
+                    return@queueScript delayScript(player, 6)
+                }
+                3 -> {
+                    rewardXP(player, Skills.SLAYER, 2000.0)
+                    sendItemDialogue(player, Items.SHADOW_SWORD_10858, "You receive a shadow sword and 2000 Slayer xp.")
+                    addItemOrDrop(player, Items.SHADOW_SWORD_10858)
+                    GeneralShadow.setShadowProgress(player, 5)
+                    return@queueScript stopExecuting(player)
+                }
+                else -> return@queueScript stopExecuting(player)
             }
-        })
+        }
 
         clear()
         super.finalizeDeath(killer)

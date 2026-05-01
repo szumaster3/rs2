@@ -3,9 +3,9 @@ package content.global.skill.construction.decoration.kitchen
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Scenery
@@ -114,25 +114,23 @@ class TeaMakerPlugin : InteractionListener {
             val scenery = with.asScenery()
             lock(player, 7)
             animate(player, Animations.GRAB_AND_HOLDING_ONTO_SOMETHING_BIG_3622)
-            submitIndividualPulse(player, object : Pulse() {
-                var counter = 0
-                override fun pulse(): Boolean {
-                    when (counter++) {
-                        1 -> {
-                            animate(player, Animations.KETTLE_3625)
-                            replaceScenery(scenery, with.id + 1, 4)
-                            animateScenery(scenery, 3720)
-                        }
-                        6 -> {
-                            sendMessage(player, "You fill the kettle from the sink.")
-                            replaceSlot(player, used.asItem().slot, Item(Items.FULL_KETTLE_7690))
-                            animate(player, Animations.LET_GO_OF_SOMETHING_BIG_3623)
-                            return true
-                        }
+            queueScript(player,1,QueueStrength.SOFT) { stage ->
+                when (stage) {
+                    0 -> {
+                        animate(player, Animations.KETTLE_3625)
+                        replaceScenery(scenery, with.id + 1, 4)
+                        animateScenery(scenery, 3720)
+                        return@queueScript delayScript(player, 5)
                     }
-                    return false
+                    1 -> {
+                        sendMessage(player, "You fill the kettle from the sink.")
+                        replaceSlot(player, used.asItem().slot, Item(Items.FULL_KETTLE_7690))
+                        animate(player, Animations.LET_GO_OF_SOMETHING_BIG_3623)
+                        return@queueScript stopExecuting(player)
+                    }
+                    else -> return@queueScript stopExecuting(player)
                 }
-            })
+            }
             return@onUseWith true
         }
     }

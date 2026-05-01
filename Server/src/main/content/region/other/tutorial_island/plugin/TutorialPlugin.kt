@@ -8,8 +8,8 @@ import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.link.TeleportManager
-import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.repository.Repository
@@ -162,16 +162,11 @@ class TutorialPlugin : InteractionListener {
 
         on(QUEST_LADDER_UP, IntType.SCENERY, "climb-up") { player, node ->
             ClimbActionHandler.climbLadder(player, node.asScenery(), "climb-up")
-            submitWorldPulse(
-                object : Pulse(2) {
-                    override fun pulse(): Boolean {
-                        val questTutor = Repository.findNPC(NPCs.QUEST_GUIDE_949) ?: return true
-                        sendChat(questTutor, "What are you doing, ${player.username}? Get back down the ladder.")
-                        return true
-                    }
-                },
-            )
-
+            queueScript(player, delay = 2, strength = QueueStrength.WEAK) { _ ->
+                val questTutor = Repository.findNPC(NPCs.QUEST_GUIDE_949) ?: return@queueScript stopExecuting(player)
+                sendChat(questTutor, "What are you doing, ${player.username}? Get back down the ladder.")
+                return@queueScript stopExecuting(player)
+            }
             return@on true
         }
 

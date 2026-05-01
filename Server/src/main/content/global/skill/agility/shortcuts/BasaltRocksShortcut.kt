@@ -2,13 +2,11 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
-import core.api.faceLocation
-import core.api.sendMessage
-import core.api.submitWorldPulse
+import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
@@ -56,26 +54,23 @@ class BasaltRocksShortcut : AgilityShortcut {
 
     override fun run(player: Player, obj: Scenery, option: String, failed: Boolean) {
         val path = pathMap[obj.id] ?: return
-
-        submitWorldPulse(object : Pulse(1, player) {
-            override fun pulse(): Boolean {
-                val id = path.id
-                val pointA = path.from
-                val pointB = path.to
-
-                val (start, end) = when (player.location) {
-                    pointA -> Pair(pointA, pointB)
-                    pointB -> Pair(pointB, pointA)
-                    else -> return false.also { sendMessage(player, "I can't reach.") }
+        queueScript(player, 1, QueueStrength.SOFT) { _ ->
+            val id = path.id
+            val pointA = path.from
+            val pointB = path.to
+            val (start, end) = when (player.location) {
+                pointA -> pointA to pointB
+                pointB -> pointB to pointA
+                else -> {
+                    sendMessage(player, "I can't reach.")
+                    return@queueScript stopExecuting(player)
                 }
-
-                faceLocation(player, end)
-
-                val delay = if (id in listOf(4550, 4551, 4554, 4555, 4559)) 1 else 0
-                AgilityHandler.forceWalk(player, -1, start, end, Animation.create(769), 20, 0.0, null, delay)
-                return true
             }
-        })
+            faceLocation(player, end)
+            val delay = if (id in listOf(4550, 4551, 4554, 4555, 4559)) 1 else 0
+            AgilityHandler.forceWalk(player, -1, start, end, Animation.create(769), 20, 0.0, null, delay)
+            return@queueScript stopExecuting(player)
+        }
     }
 
     override fun getDestination(n: Node?, node: Node): Location? {

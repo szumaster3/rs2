@@ -5,6 +5,7 @@ import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -65,28 +66,20 @@ class RoguesCastlePlugin : InteractionListener {
             }
             playAudio(player, Sounds.PICK_LOCK_2407, 2)
             sendMessage(player, "You attempt to pick the lock on the chest...")
-            submitIndividualPulse(
-                player,
-                object : Pulse(2) {
-                    override fun pulse(): Boolean {
-                        val success = RandomFunction.roll(10)
-                        if (success) {
-                            replaceScenery(scenery, scenery.id + 1, 20)
-                            rewardXP(player, Skills.THIEVING, 300.0)
-                        } else {
-                            val dealsDamage = RandomFunction.roll(10)
-                            if (dealsDamage) {
-                                impact(player, RandomFunction.random(1, 3), ImpactHandler.HitsplatType.NORMAL)
-                                sendMessage(player, "You activated a trap on the chest!")
-                            }
-                        }
-
-                        sendMessage(player, "You ${if (success) "manage" else "fail"} to pick the lock on the chest.")
-                        return true
+            queueScript(player,2,QueueStrength.NORMAL) { _ ->
+                val success = RandomFunction.roll(10)
+                if (success) {
+                    replaceScenery(scenery, scenery.id + 1, 20)
+                    rewardXP(player, Skills.THIEVING, 300.0)
+                } else {
+                    if (RandomFunction.roll(10)) {
+                        impact(player, RandomFunction.random(1, 3), ImpactHandler.HitsplatType.NORMAL)
+                        sendMessage(player, "You activated a trap on the chest!")
                     }
-                },
-            )
-
+                }
+                sendMessage(player, "You ${if (success) "manage" else "fail"} to pick the lock on the chest.")
+                return@queueScript stopExecuting(player)
+            }
             return@on true
         }
 

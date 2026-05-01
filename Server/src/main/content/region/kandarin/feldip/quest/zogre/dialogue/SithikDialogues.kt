@@ -4,9 +4,9 @@ import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
@@ -204,30 +204,25 @@ class SithikIntsPortraitDialogueFile : DialogueFile() {
             0 -> npcl("Oh lovely! You're making my portrait! Let me see it afterwards!").also { stage++ }
             1 -> sendDialogue(player!!, "You begin sketching the irritable Sithik.").also { stage++ }
             2 -> {
+                end()
                 if (!removeItem(player!!, papyrus)) {
                     sendMessage(player!!, "Nothing interesting happens.")
                     player!!.interfaceManager.closeChatbox()
                     return
                 }
-
-                submitIndividualPulse(player!!, object : Pulse() {
-                    override fun pulse(): Boolean {
-                        val p = player ?: return true
-
-                        animate(p, 909)
-
-                        val (portraitId, portraitItem) = if (Random.nextBoolean()) {
+                queueScript(player!!,1,QueueStrength.SOFT) { _ ->
+                    animate(player!!, 909)
+                    val (portraitId, portraitItem) =
+                        if (Random.nextBoolean()) {
                             ZogreUtils.REALIST_PORTRAIT to correctPortrait
                         } else {
                             ZogreUtils.UNREALIST_PORTRAIT to incorrectPortrait
                         }
-
-                        addItem(p, portraitItem)
-                        sendItemDialogue(p, portraitId, "You get a portrait of Sithik.")
-                        p.interfaceManager.closeChatbox()
-                        return true
-                    }
-                })
+                    addItem(player!!, portraitItem)
+                    sendItemDialogue(player!!, portraitId, "You get a portrait of Sithik.")
+                    player!!.interfaceManager.closeChatbox()
+                    return@queueScript stopExecuting(player!!)
+                }
             }
         }
     }

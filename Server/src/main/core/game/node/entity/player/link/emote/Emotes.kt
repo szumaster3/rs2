@@ -2,6 +2,7 @@ package core.game.node.entity.player.link.emote
 
 import core.api.*
 import core.game.container.impl.EquipmentContainer
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.diary.DiaryType
@@ -356,38 +357,31 @@ enum class Emotes(
         lockedMessage = "This emote can be unlocked by playing a Thanksgiving holiday event.",
     ) {
         override fun play(player: Player) {
-            lock(player, 17)
-            submitWorldPulse(
-                object : Pulse(1, player) {
-                    var counter: Int = 0
-
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            1 -> forceEmote(
-                                player,
-                                Animation(Animations.GIVE_THANKS_BEGIN_10994),
-                                Graphics(shared.consts.Graphics.RE_PUFF_86),
-                            )
-
-                            3 -> player.appearance.transformNPC(NPCs.THANKSGIVING_TURKEY_8499).also {
-                                forceEmote(player, Animation(Animations.HUMAN_TURKEY_DANCE_10996), Graphics(-1))
-                            }
-
-                            13 -> player.appearance.transformNPC(NPCs.TURKEY_8501)
-                            16 -> player.appearance.transformNPC(-1).also {
-                                forceEmote(
-                                    player,
-                                    Animation(Animations.GIVE_THANKS_END_10995),
-                                    Graphics(shared.consts.Graphics.RE_PUFF_86),
-                                )
-                            }
-                        }
-                        return false
+            queueScript(player, 1, QueueStrength.NORMAL) { stage ->
+                when (stage) {
+                    0 -> {
+                        forceEmote(player, Animation(Animations.GIVE_THANKS_BEGIN_10994), Graphics(shared.consts.Graphics.RE_PUFF_86))
+                        return@queueScript delayScript(player, 2)
                     }
-                },
-            )
+                    1 -> {
+                        player.appearance.transformNPC(NPCs.THANKSGIVING_TURKEY_8499)
+                        forceEmote(player, Animation(Animations.HUMAN_TURKEY_DANCE_10996), Graphics(-1))
+                        return@queueScript delayScript(player, 10)
+                    }
+                    2 -> {
+                        player.appearance.transformNPC(NPCs.TURKEY_8501)
+                        return@queueScript delayScript(player, 3)
+                    }
+                    3 -> {
+                        player.appearance.transformNPC(-1)
+                        forceEmote(player, Animation(Animations.GIVE_THANKS_END_10995), Graphics(shared.consts.Graphics.RE_PUFF_86))
+                        return@queueScript stopExecuting(player)
+                    }
+                    else -> return@queueScript stopExecuting(player)
+                }
+            }
         }
-    }, ;
+    };
 
     /**
      * Plays the emote.

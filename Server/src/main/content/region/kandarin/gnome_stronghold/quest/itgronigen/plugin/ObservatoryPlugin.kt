@@ -10,9 +10,9 @@ import core.api.utils.PlayerCamera
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.link.warning.WarningManager
 import core.game.node.entity.player.link.warning.WarningType
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.*
@@ -219,35 +219,29 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(ORRERY, IntType.SCENERY, "view") { player, _ ->
-            lock(player, 10000)
-            lockInteractions(player, 10000)
+            lock(player, 1)
+            lockInteractions(player, 1)
             player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-            submitWorldPulse(
-                object : Pulse(1) {
-                    var counter = 0
-
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            0 -> {
-                                PlayerCamera(player).setPosition(2443, 3186, 300)
-                                PlayerCamera(player).rotateTo(2444, 3185, 300, 1000)
-                            }
-
-                            3 -> {
-                                sendChat(player, "Oooooh, bizarre!")
-                            }
-
-                            6 -> {
-                                PlayerCamera(player).reset()
-                                player.interfaceManager.restoreTabs()
-                                unlock(player)
-                                return true
-                            }
-                        }
-                        return false
+            queueScript(player,1,QueueStrength.SOFT) { stage ->
+                when (stage) {
+                    0 -> {
+                        PlayerCamera(player).setPosition(2443, 3186, 300)
+                        PlayerCamera(player).rotateTo(2444, 3185, 300, 1000)
+                        return@queueScript delayScript(player, 3)
                     }
-                },
-            )
+                    1 -> {
+                        sendChat(player, "Oooooh, bizarre!")
+                        return@queueScript delayScript(player, 3)
+                    }
+                    2 -> {
+                        PlayerCamera(player).reset()
+                        player.interfaceManager.restoreTabs()
+                        unlock(player)
+                        return@queueScript stopExecuting(player)
+                    }
+                    else -> return@queueScript stopExecuting(player)
+                }
+            }
             return@on true
         }
 
