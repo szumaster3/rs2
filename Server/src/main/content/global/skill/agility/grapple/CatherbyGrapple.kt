@@ -16,7 +16,6 @@ import shared.consts.Scenery
 
 class CatherbyGrapple : InteractionListener {
     companion object {
-        private val START_LOCATION: Location = Location.create(2866, 3429, 0)
         private val END_LOCATION: Location = Location.create(2869, 3430, 0)
 
         private val REQUIREMENTS =
@@ -41,15 +40,8 @@ class CatherbyGrapple : InteractionListener {
     private var rocks = getScenery(Location.create(2869, 3429, 0))
 
     override fun defineListeners() {
-        flagInstant()
-        on(Scenery.ROCKS_17042, IntType.SCENERY, "grapple") { player, _ ->
-            if (checkArea(player)) {
-                forceWalk(player, START_LOCATION, "smart")
-            } else {
-                sendMessage(player, "Nothing interesting happens.")
-                return@on true
-            }
 
+        on(Scenery.ROCKS_17042, IntType.SCENERY, "grapple") { player, _ ->
             if (!inEquipment(player, MITHRIL_GRAPPLE) || !anyInEquipment(player, *crossbowIds)) {
                 sendMessage(player, "You need a mithril grapple tipped bolt with a rope to do that.")
                 return@on true
@@ -109,6 +101,9 @@ class CatherbyGrapple : InteractionListener {
         return true
     }
 
-    private fun checkArea(player: Player): Boolean =
-        inBorders(player, START_LOCATION.x - 2, START_LOCATION.y - 2, START_LOCATION.x, START_LOCATION.y)
+    override fun defineDestinationOverrides() {
+        setDest(IntType.SCENERY, Scenery.ROCKS_17042) { _, _ ->
+            return@setDest Location(2866, 3429, 0)
+        }
+    }
 }
