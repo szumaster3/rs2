@@ -84,7 +84,30 @@ class PickpocketListener : InteractionListener {
                 stun(player, pocketData.stunTime)
                 impact(player, RandomFunction.random(pocketData.stunDamageMin, pocketData.stunDamageMax))
                 sendMessage(player, "You feel slightly concussed from the blow.")
-                if(isWearingGloves) GlovesOfSilence.reduceDurability(player, Item(Items.GLOVES_OF_SILENCE_10075))
+                if (isWearingGloves)
+                {
+                    val gloves =
+                        player.equipment.get(
+                            Items.GLOVES_OF_SILENCE_10075
+                        )
+
+                    if (gloves != null)
+                    {
+                        val broken =
+                            GlovesOfSilence.onFailedPickpocket(
+                                player,
+                                gloves
+                            )
+
+                        if (broken)
+                        {
+                            sendMessage(
+                                player,
+                                "Your gloves of silence fall apart."
+                            )
+                        }
+                    }
+                }
                 npc.face(null)
             } else {
                 lock(player, delay)

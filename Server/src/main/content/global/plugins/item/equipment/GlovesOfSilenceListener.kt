@@ -6,65 +6,113 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
 
-class GlovesOfSilenceListener : InteractionListener {
+class GlovesOfSilenceListener : InteractionListener
+{
 
-    override fun defineListeners() {
+    override fun defineListeners()
+    {
 
         /*
-         * Handles repair the pair of gloves.
+         * Handles repairing gloves of silence.
          */
+        onUseWith(
+            IntType.ITEM,
+            Items.DARK_KEBBIT_FUR_10115,
+            GlovesOfSilence.ITEM_ID
+        )
+        { player, _, _ ->
 
-        onUseWith(IntType.ITEM, Items.DARK_KEBBIT_FUR_10115, Items.GLOVES_OF_SILENCE_10075) { player, used, with ->
-            val gloves = with.asItem() ?: return@onUseWith true
-            val fur = used.asItem() ?: return@onUseWith true
-
+            /*
+             * Crafting requirement.
+             */
             if (getStatLevel(player, Skills.CRAFTING) < 64)
             {
-                sendMessage(player, "You need a Crafting level of 64 to repair these gloves.")
+                sendMessage(
+                    player,
+                    "You need a Crafting level of 64 to repair these gloves."
+                )
+
                 return@onUseWith true
             }
 
-            if(getCharge(gloves ) == 1000)
+            /*
+             * Gloves already new.
+             */
+            if (!GlovesOfSilence.isDamaged(player))
             {
-                sendMessage(player, "These gloves are new.")
+                sendMessage(
+                    player,
+                    "These gloves are new."
+                )
+
                 return@onUseWith true
             }
 
-            if (!allInInventory(player, Items.NEEDLE_1733, Items.THREAD_1734, Items.KNIFE_946, used.id, with.id)
-            ) {
-                sendMessage(player, "You need a needle, thread, knife and dark kebbit fur.")
+            /*
+             * Required items.
+             */
+            if (
+                !allInInventory(
+                    player,
+                    Items.NEEDLE_1733,
+                    Items.THREAD_1734,
+                    Items.KNIFE_946,
+                    Items.DARK_KEBBIT_FUR_10115,
+                    GlovesOfSilence.ITEM_ID
+                )
+            )
+            {
+                sendMessage(
+                    player,
+                    "You need a needle, thread, knife and dark kebbit fur."
+                )
+
                 return@onUseWith true
             }
 
-            val slot = gloves.slot
-            setCharge(gloves, 1000)
-            GlovesOfSilence.repair(gloves)
+            /*
+             * Repair gloves.
+             */
+            GlovesOfSilence.repair(player)
 
-            removeItem(player, fur)
-            removeItem(player, Items.THREAD_1734)
-            removeItem(player, Items.NEEDLE_1733)
+            /*
+             * Consume materials.
+             */
+            removeItem(
+                player,
+                Items.DARK_KEBBIT_FUR_10115
+            )
 
-            sendMessages(player, "You carefully stitch the gloves back together.")
+            removeItem(
+                player,
+                Items.THREAD_1734
+            )
+
+            sendMessage(
+                player,
+                "You carefully stitch the gloves back together."
+            )
+
             return@onUseWith true
         }
 
         /*
-         * Handles checking charges of them.
+         * Handles checking gloves condition.
          */
+        on(
+            GlovesOfSilence.ITEM_ID,
+            IntType.ITEM,
+            "operate",
+            "check"
+        )
+        { player, _ ->
 
-        on(Items.GLOVES_OF_SILENCE_10075, IntType.ITEM, "operate", "check") { p, node ->
-            val durability = getCharge(node.asItem())
-            val m = when(durability){
-                 990 -> "These gloves are in good condition."
-                 980 -> "These gloves are starting to look quite shabby."
-                 970 -> "These gloves are starting to need repair."
-                 960 -> "These gloves are in need of repair."
-                 950 -> "These gloves are about to fall apart."
-                else -> "These gloves are new."
-            }
-            sendMessage(p,m)
+            sendMessage(
+                player,
+                GlovesOfSilence.getConditionMessage(player)
+            )
+
             return@on true
-
         }
     }
 }
