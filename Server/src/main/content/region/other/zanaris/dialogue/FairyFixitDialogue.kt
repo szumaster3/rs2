@@ -38,7 +38,7 @@ class FairyFixitDialogue(player: Player? = null) : Dialogue(player) {
             11 -> playerl(FaceAnim.ASKING, "Uh, right. So is it safe to use the fairy rings then?").also { stage++ }
             12 -> npcl(FaceAnim.OLD_CALM_TALK1, "Sure, as long as you have been given permission to use them.").also { stage++ }
             13 -> npcl(FaceAnim.OLD_CALM_TALK2, "You should just be aware that using the fairy rings sometimes has strange results - the locations that you have been to may affect the locations you are trying to reach.").also { stage++ }
-            14 -> npc(FaceAnim.OLD_CALM_TALK1, "I could fix it by replacing the fizgog and the whosprangit; I've put in a request for some new parts, but they're pretty hard to get hold of it seems.").also { stage = END_DIALOGUE }
+            14 -> npcl(FaceAnim.OLD_CALM_TALK1, "I could fix it by replacing the fizgog and the whosprangit; I've put in a request for some new parts, but they're pretty hard to get hold of it seems.").also { stage = END_DIALOGUE }
             20 -> options("What have you got for me?", "Why are you carrying that toolbox?", "Not interested, thanks.").also { stage++ }
             21 -> when (buttonId) {
                 1 -> player(FaceAnim.ASKING, "What have you got for me?").also { stage = 30 }

@@ -12,7 +12,7 @@ class SedduDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> npc("I buy and sell adventurer's equipment, do you want to trade?").also { stage++ }
+            0 -> npcl("I buy and sell adventurer's equipment, do you want to trade?").also { stage++ }
             1 -> options("Yes, please", "No, thanks").also { stage++ }
             2 -> when (buttonID) {
                 1 -> {

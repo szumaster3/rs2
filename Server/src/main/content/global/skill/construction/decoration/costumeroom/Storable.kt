@@ -117,7 +117,7 @@ enum class Storable(
     SantaCostume(Items.SANTA_COSTUME_TOP_14601, intArrayOf(Items.SANTA_COSTUME_BOOTS_14605, Items.SANTA_COSTUME_LEGS_14603, Items.SANTA_COSTUME_LEGS_14604, Items.SANTA_COSTUME_GLOVES_14602, Items.SANTA_COSTUME_TOP_14595, Items.SANTA_COSTUME_TOP_14600), type = StorableType.TOY),
     IceAmulet(Items.ICE_AMULET_14599, type = StorableType.TOY),
     Cornucopia(Items.CORNUCOPIA_14537, type = StorableType.TOY),
-    Cornucopia1(Items.CORNUCOPIA_14538, type = StorableType.TOY),
+    //Cornucopia1(Items.CORNUCOPIA_14538, type = StorableType.TOY),
     Marionette(Items.BLUE_MARIONETTE_6865, intArrayOf(Items.BLUE_MARIONETTE_6865, Items.GREEN_MARIONETTE_6866, Items.RED_MARIONETTE_6867), type = StorableType.TOY),
     // Treasure - low.
     TrimmedBlackArmour(Items.BLACK_PLATEBODY_T_2583, intArrayOf(Items.BLACK_FULL_HELMT_2587, Items.BLACK_PLATEBODY_T_2583, Items.BLACK_PLATELEGS_T_2585, Items.BLACK_KITESHIELD_T_2589), type = StorableType.TRAILS,0),

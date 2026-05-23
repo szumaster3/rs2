@@ -60,6 +60,7 @@ class RobinDialogueFile : DialogueFile() {
                     }
                 }
             }
+            else -> end()
         }
     }
 }

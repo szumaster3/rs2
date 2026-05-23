@@ -134246,7 +134246,7 @@
   },
   {
     "destroy_message": "You will lose all food stored in the Cornucopia. You can get another empty one from Diango in Draynor Village.",
-    "examine": "An empty horn of plenty.",
+    "examine": "A Horn of plenty.",
     "durability": null,
     "name": "Cornucopia",
     "tradeable": "false",

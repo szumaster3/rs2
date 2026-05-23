@@ -110,22 +110,22 @@ class BartenderDialogues : DialogueFile() {
             105 -> npcl("He was talking to some shifty looking wizard the other day. I don't know his name, but I'd recognise him if I saw him.").also { stage++ }
             106 -> player("I'm sorry to tell you this, but Brentle Vahn is dead - I believe he was murdered.").also { stage++ }
             107 -> npc(FaceAnim.SCARED, "Noooo! I'm shocked...").also { stage++ }
-            108 -> npcl("...but not surprised. He was a good customer... but I knew he would sell his sword arm and do many a dark deed if paid enough.").also { stage++ }
-            109 -> npcl("If you need help bringing the culprit to justice, you let me know.").also { stage = END_DIALOGUE }
+            108 -> npcl(FaceAnim.FRIENDLY, "...but not surprised. He was a good customer... but I knew he would sell his sword arm and do many a dark deed if paid enough.").also { stage++ }
+            109 -> npcl(FaceAnim.NEUTRAL, "If you need help bringing the culprit to justice, you let me know.").also { stage = END_DIALOGUE }
 
-            110 -> npcl("Oh yes, Brentle's tankard. Yeah, you've shown me this already. It belonged to Brentle Vahn, he was quite a common customer, though I've not seen him in a while.").also { stage++ }
-            111 -> npcl("He was talking to some shifty looking wizard the other day. I don't know his name, but I'd recognise him if I saw him.").also {
+            110 -> npcl(FaceAnim.NEUTRAL,"Oh yes, Brentle's tankard. Yeah, you've shown me this already. It belonged to Brentle Vahn, he was quite a common customer, though I've not seen him in a while.").also { stage++ }
+            111 -> npcl(FaceAnim.NEUTRAL,"He was talking to some shifty looking wizard the other day. I don't know his name, but I'd recognise him if I saw him.").also {
                 setVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487, 4, true)
                 stage = END_DIALOGUE
             }
 
             TORN_PAGE -> sendItemDialogue(p, Items.TORN_PAGE_4809, "You show the bar tender the torn page.").also { stage++ }
-            201 -> player("Do you have any clue what this might be?").also { stage++ }
-            202 -> npcl("Oooh, don't show me that sort of stuff, it's probably all magical and wizardy, probably turn me into a frog as soon as I look at it...").also { stage = END_DIALOGUE }
+            201 -> player(FaceAnim.HALF_ASKING,"Do you have any clue what this might be?").also { stage++ }
+            202 -> npcl(FaceAnim.NEUTRAL,"Oooh, don't show me that sort of stuff, it's probably all magical and wizardy, probably turn me into a frog as soon as I look at it...").also { stage = END_DIALOGUE }
 
             BLACK_PRISM -> sendItemDialogue(p, Items.BLACK_PRISM_4808, "You show the bar tender the black prism.").also { stage++ }
-            301 -> player("Hello there, I found this black prism, I wondered if you knew anything about it.").also { stage++ }
-            302 -> npcl("Hmmm, it's not really familiar to me, sorry. Looks magical to me... maybe someone else in Yanille can help you?").also { stage = END_DIALOGUE }
+            301 -> player(FaceAnim.FRIENDLY,"Hello there, I found this black prism, I wondered if you knew anything about it.").also { stage++ }
+            302 -> npcl(FaceAnim.NEUTRAL,"Hmmm, it's not really familiar to me, sorry. Looks magical to me... maybe someone else in Yanille can help you?").also { stage = END_DIALOGUE }
 
             WRONG_PORTRAIT -> sendItemDialogue(p, ZogreUtils.UNREALIST_PORTRAIT, "You show the sketch to the Inn keeper.").also { stage++ }
             401 -> npcl(FaceAnim.HALF_ASKING, "Who's that? I mean, I guess it's a picture of a person isn't it? Sorry... you've got me? And before you ask, you're not putting it up on my wall!").also { stage++ }
@@ -134,17 +134,17 @@ class BartenderDialogues : DialogueFile() {
             404 -> playerl(FaceAnim.NEUTRAL, "I'll try...").also { stage = END_DIALOGUE }
 
             CORRECT_PORTRAIT -> sendItemDialogue(p, ZogreUtils.REALIST_PORTRAIT, "You show the portrait to the Inn keeper.").also { stage++ }
-            501 -> npcl("Yeah, that's the guy who was talking to Brentle Vahn the other day! Look at those eyes, never a more shifty looking pair will you ever see!").also { stage++ }
-            502 -> player("You've just identified the man who I think sent Brentle Vahn to his death.").also { stage++ }
-            503 -> player("I'm bringing him to justice with the wizards' guild grand secretary. Can you sign this portrait to confirm he was talking to Brentle Vahn?").also { stage++ }
+            501 -> npcl(FaceAnim.NEUTRAL,"Yeah, that's the guy who was talking to Brentle Vahn the other day! Look at those eyes, never a more shifty looking pair will you ever see!").also { stage++ }
+            502 -> player(FaceAnim.NEUTRAL,"You've just identified the man who I think sent Brentle Vahn to his death.").also { stage++ }
+            503 -> player(FaceAnim.HALF_ASKING,"I'm bringing him to justice with the wizards' guild grand secretary. Can you sign this portrait to confirm he was talking to Brentle Vahn?").also { stage++ }
             504 -> npcl(FaceAnim.HAPPY, "I can and I will!").also {
                 removeItem(p, ZogreUtils.REALIST_PORTRAIT)
                 addItem(p, ZogreUtils.SIGNED_PORTRAIT)
                 stage++
             }
             505 -> sendItemDialogue(p, ZogreUtils.SIGNED_PORTRAIT, "The Dragon Inn bartender signs the portrait.").also { stage++ }
-            506 -> player("Thanks for your help, it's really very good of you.").also { stage++ }
-            507 -> npcl("Not at all, just doing my part.").also {
+            506 -> player(FaceAnim.FRIENDLY,"Thanks for your help, it's really very good of you.").also { stage++ }
+            507 -> npcl(FaceAnim.NEUTRAL,"Not at all, just doing my part.").also {
                 setAttribute(p, ZogreUtils.TALK_ABOUT_SIGN_PORTRAIT, true)
                 stage = END_DIALOGUE
             }

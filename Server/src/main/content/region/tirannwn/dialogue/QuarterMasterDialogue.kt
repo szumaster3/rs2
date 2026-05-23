@@ -2,6 +2,7 @@ package content.region.tirannwn.dialogue
 
 import core.api.hasRequirement
 import core.api.openNpcShop
+import core.api.sendMessage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -34,16 +35,15 @@ class QuarterMasterDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npc("Would you like a look at what we have now?").also { stage++ }
             1 -> options("Yes please.", "No thanks.").also { stage++ }
             2 -> when (buttonId) {
-                1 -> playerl(FaceAnim.FRIENDLY, "Yes please.").also { stage++ }
-                2 -> playerl(FaceAnim.FRIENDLY, "No thanks.").also { stage = END_DIALOGUE }
-            }
-            3 -> {
-                if (!hasRequirement(player, Quests.REGICIDE)) {
+                1 -> {
                     end()
-                } else {
-                    end()
-                    openNpcShop(player, NPCs.QUARTERMASTER_1208)
+                    if (hasRequirement(player, Quests.REGICIDE, false)) {
+                        openNpcShop(player, NPCs.QUARTERMASTER_1208)
+                    } else {
+                        sendMessage(player, "You need to have completed Regicide Quest to access this shop.")
+                    }
                 }
+                2 -> playerl(FaceAnim.FRIENDLY, "No thanks.").also { stage = END_DIALOGUE }
             }
         }
         return true

@@ -28,9 +28,9 @@ class TaxidermistDialogue(player: Player? = null) : Dialogue(player) {
                 Topic("Not right now", 1, false),
                 Topic("What?", 2, false)
             )
-            1 -> npc(FaceAnim.HALF_GUILTY, "Well, you go kill things so I can stuff them, eh?").also { stage = END_DIALOGUE }
+            1 -> npcl(FaceAnim.HALF_GUILTY, "Well, you go kill things so I can stuff them, eh?").also { stage = END_DIALOGUE }
             2 -> npcl(FaceAnim.HALF_GUILTY, "If you bring me a monster head or a very big fish, I can preserve it for you so you can mount it in your house.").also { stage = 4 }
-            3 -> npc(FaceAnim.HALF_GUILTY, "I hear there are all sorts of exotic creatures in the Slayer Tower - I'd like a chance to stuff one of them!").also { stage = END_DIALOGUE }
+            3 -> npcl(FaceAnim.HALF_GUILTY, "I hear there are all sorts of exotic creatures in the Slayer Tower - I'd like a chance to stuff one of them!").also { stage = END_DIALOGUE }
             4 -> npc(FaceAnim.HAPPY, "Give it to me to look at then.").also { stage = END_DIALOGUE }
         }
         return true

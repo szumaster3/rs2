@@ -38,16 +38,16 @@ class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("I'd like to see what you sell.").also { stage = 20 }
                 3 -> player("I've seen enough, thanks.").also { stage = 30 }
             }
-            10 -> npc("I am a supplier of leather armours and accessories. Ask and I will tell you what I know.").also { stage++ }
+            10 -> npcl(FaceAnim.NEUTRAL,"I am a supplier of leather armours and accessories. Ask and I will tell you what I know.").also { stage++ }
             11 -> options("Tell me about your armours.", "Tell me about your accessories.", "I've seen enough, thanks.").also { stage++ }
             12 -> when (buttonId) {
                 1 -> player("Tell me about your armours.").also { stage++ }
                 2 -> player("Tell me about your accessories.").also { stage += 2 }
                 3 -> player("I've seen enough, thanks.").also { stage = 30 }
             }
-            13 -> npc("I have normal, studded and hard types.").also { stage = 200 }
-            14 -> npc("Ah yes we have a new range accessories in stock. Essential items for an archer like you. We have vambraces, chaps, cowls, and coifs.").also { stage = 300 }
-            20 -> npc("Indeed, cast your eyes on my wares, adventurer.").also { stage++ }
+            13 -> npcl(FaceAnim.NEUTRAL,"I have normal, studded and hard types.").also { stage = 200 }
+            14 -> npcl(FaceAnim.NEUTRAL,"Ah yes we have a new range accessories in stock. Essential items for an archer like you. We have vambraces, chaps, cowls, and coifs.").also { stage = 300 }
+            20 -> npcl(FaceAnim.NEUTRAL,"Indeed, cast your eyes on my wares, adventurer.").also { stage++ }
             21 -> end().also { openNpcShop(player, npc.id) }
             30 -> npc("Very good, adventurer.").also { stage = END_DIALOGUE }
             100 -> when (buttonId) {
@@ -56,7 +56,7 @@ class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> player("Can I buy a Skillcape of Range?").also { stage++ }
                 4 -> player("I've seen enough, thanks.").also { stage = 30 }
             }
-            101 -> npc("Certainly! Right when you give me 99000 coins.").also { stage++ }
+            101 -> npcl(FaceAnim.HAPPY,"Certainly! Right when you give me 99000 coins.").also { stage++ }
             102 -> options("Okay, here you go.", "No, thanks.").also { stage++ }
             103 -> when (buttonId) {
                 1 -> player("Okay, here you go.").also { stage++ }

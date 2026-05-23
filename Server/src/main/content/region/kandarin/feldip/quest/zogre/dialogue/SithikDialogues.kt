@@ -24,13 +24,13 @@ class SithikDialogue : DialogueFile() {
             2 -> npc("What do you expect when you just go snooping around a", "person's place against their express permission.").also { stage++ }
             3 -> options("What do you do?", "Why do you spend most of your time in bed?", "Ok, thanks.").also { stage++ }
             4 -> when (buttonID) {
-                1 -> playerl("What do you do?").also { stage++ }
-                2 -> playerl("Why do you spend most of your time in bed?").also { stage = 11 }
-                3 -> playerl("Ok, thanks.").also { stage = END_DIALOGUE }
+                1 -> playerl(FaceAnim.HALF_ASKING,"What do you do?").also { stage++ }
+                2 -> playerl(FaceAnim.HALF_ASKING,"Why do you spend most of your time in bed?").also { stage = 11 }
+                3 -> playerl(FaceAnim.NEUTRAL,"Ok, thanks.").also { stage = END_DIALOGUE }
             }
             5 -> npc(FaceAnim.HALF_GUILTY, "I'm a scholarly student of the magical arts. When I was", "younger I used to be an adventurer, probably just like", "yourself. But I lost interest in the constant fighting,", "looting and gaining abilities.").also { stage++ }
             6 -> npc(FaceAnim.CALM, "Instead I decided to focus my attention and time to", "study the purer form of the lost arts.").also { stage++ }
-            7 -> player("The lost arts? What are they?").also { stage++ }
+            7 -> player(FaceAnim.HALF_ASKING,"The lost arts? What are they?").also { stage++ }
             8 -> npc(FaceAnim.HALF_GUILTY, "Ignorant people call them the 'dark arts'. I'm talking", "about Necromancy, the power to bring the dead back to", "life - the power of the gods! Surely the most awesome", "power known to man.").also { stage++ }
             9 -> player(FaceAnim.HALF_GUILTY, "Hmm, well I guess I must be an ignorant person then,", "because bringing the dead back to life sounds very", "unnatural.").also { stage = 3 }
             10 -> npc(FaceAnim.HALF_GUILTY, "I'm actually quite old and not so very well and I'd like", "to get over this illness I have, then I'll return to my", "very serious and important studies.").also { stage = 3 }
@@ -90,21 +90,21 @@ class SithikQuestDialogueFile : DialogueFile() {
             8 -> npc(FaceAnim.HAPPY, "Anyways, dead ogres you say? How strange? That must", "be a strange sight?").also { stage++ }
             9 -> player(FaceAnim.HALF_GUILTY, "Very well, if you don't know anything about it, you", "won't mind if I look around then?").also { stage++ }
             10 -> npc(FaceAnim.ANNOYED, "Well, err....well, actually yes I do mind...it's my place", "and I don't want strangers going through my things.").also { stage++ }
-            11 -> player("Well, I'm going to have a look around anyway, if", "you're not involved in this whole thing, you won't have", "anything to hide.").also { stage++ }
+            11 -> player(FaceAnim.NEUTRAL,"Well, I'm going to have a look around anyway, if", "you're not involved in this whole thing, you won't have", "anything to hide.").also { stage++ }
             12 -> npc(FaceAnim.ANNOYED, "Why, if I was a few years younger I'd give you a", "good hiding!").also { stage++ }
-            13 -> player("I'm sure!").also {
+            13 -> player(FaceAnim.FRIENDLY,"I'm sure!").also {
                 setAttribute(player!!, "/save:${ZogreUtils.ASK_SITHIK_ABOUT_OGRES}", true)
                 stage = 3
             }
             14 -> npc(FaceAnim.HALF_GUILTY, "I'm a scholarly student of the magical arts. When I was", "younger I used to be an adventurer, probably just like", "yourself. But I lost interest in the constant fighting,", "looting and gaining abilities.").also { stage++ }
             15 -> npc(FaceAnim.CALM, "Instead I decided to focus my attention and time to", "study the purer form of the lost arts.").also { stage++ }
-            16 -> player("The lost arts? What are they?").also { stage++ }
+            16 -> player(FaceAnim.HALF_ASKING,"The lost arts? What are they?").also { stage++ }
             17 -> npc(FaceAnim.HALF_GUILTY, "Ignorant people call them the 'dark arts'. I'm talking", "about Necromancy, the power to bring the dead back to", "life - the power of the gods! Surely the most awesome", "power known to man.").also { stage++ }
             18 -> player(FaceAnim.HALF_GUILTY, "Hmm, well I guess I must be an ignorant person then,", "because bringing the dead back to life sounds very", "unnatural.").also { stage = 3 }
             19 -> npc(FaceAnim.CALM, "Well, err....well, actually yes I do mind...it's my place", "and I don't want strangers going through my things.").also { stage++ }
             20 -> player("Well, I'm going to have a look around anyway, if", "you're not involved in this whole thing, you won't have", "anything to hide.").also { stage++ }
             21 -> npc(FaceAnim.ANNOYED, "Why, if I was a few years younger I'd give you a", "good hiding!").also { stage++ }
-            22 -> playerl("I'm sure!").also {
+            22 -> playerl(FaceAnim.FRIENDLY,"I'm sure!").also {
                 setAttribute(player!!, "/save:${ZogreUtils.ASK_SITHIK_AGAIN}", true)
                 stage = 3
             }

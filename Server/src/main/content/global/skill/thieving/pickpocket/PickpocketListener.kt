@@ -87,25 +87,22 @@ class PickpocketListener : InteractionListener {
                 if (isWearingGloves)
                 {
                     val gloves =
-                        player.equipment.get(
-                            Items.GLOVES_OF_SILENCE_10075
+                        player.equipment.toArray().first {
+                            it?.id == Items.GLOVES_OF_SILENCE_10075
+                        }
+
+                    val broken =
+                        GlovesOfSilence.onFailedPickpocket(
+                            player,
+                            gloves!!
                         )
 
-                    if (gloves != null)
+                    if (broken)
                     {
-                        val broken =
-                            GlovesOfSilence.onFailedPickpocket(
-                                player,
-                                gloves
-                            )
-
-                        if (broken)
-                        {
-                            sendMessage(
-                                player,
-                                "Your gloves of silence fall apart."
-                            )
-                        }
+                        sendMessage(
+                            player,
+                            "Your gloves of silence fall apart."
+                        )
                     }
                 }
                 npc.face(null)

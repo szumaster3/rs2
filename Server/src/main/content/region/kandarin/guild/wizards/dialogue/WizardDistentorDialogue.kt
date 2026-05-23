@@ -39,16 +39,14 @@ class WizardDistentorDialogue(player: Player? = null) : Dialogue(player) {
                     options("Nothing thanks, I'm just looking around.", "Can you teleport me to Rune Essence?").also { stage++ }
                 }
             }
-
             3 -> when (buttonId) {
                 1 -> player("Nothing thanks, I'm just looking around.").also { stage++ }
-                2 -> player("Can you teleport me to the Rune Essence?").also { stage = 5 }
+                2 -> {
+                    end()
+                    EssenceTeleport.teleport(npc, player)
+                }
             }
             4 -> npc("That's fine with me.").also { stage = END_DIALOGUE }
-            5 -> {
-                end()
-                EssenceTeleport.teleport(npc, player)
-            }
         }
         return true
     }

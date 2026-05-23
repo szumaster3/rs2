@@ -46,6 +46,12 @@ class DiangoReclaimableInterface : ComponentPlugin() {
 
         when (opcode) {
             155 -> {
+
+                if (player.inventory.freeSlots() <= 0) {
+                    sendMessage(player, "You don't have enough space in your inventory.")
+                    return true
+                }
+
                 player.inventory.add(reclaimItem)
                 refresh(player)
             }

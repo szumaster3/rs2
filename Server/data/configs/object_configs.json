@@ -15538,5 +15538,13 @@
   {
     "examine": "Why can't it just have an ON switch?",
     "ids": "26791"
-  }
+  },
+  {
+    "examine": "Looks like a way to cross.",
+    "ids": "17062"
+  },
+  {
+    "examine": "The wine merchant's stall.",
+    "ids": "14011"
+  },
 ]

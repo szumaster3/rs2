@@ -33,7 +33,7 @@ class TyrasGuardDialogue(player: Player? = null) : Dialogue(player) {
                 Topic("Do you know what's south of here?", 20, false),
                 Topic("Okay, thanks.", END_DIALOGUE, false)
             )
-            20 -> npc(FaceAnim.NEUTRAL, "No. We sent a scouting party in that direction, when we first established our camp. Some of the men got lost in the swamps. Eventually we listed them as dead.").also { stage++ }
+            20 -> npcl(FaceAnim.NEUTRAL, "No. We sent a scouting party in that direction, when we first established our camp. Some of the men got lost in the swamps. Eventually we listed them as dead.").also { stage++ }
             21 -> npcl(FaceAnim.NEUTRAL, "Then suddenly they returned, with a wild gleam in their eyes, raving about gods and snakes and all kinds of madness.").also { stage++ }
             22 -> npcl(FaceAnim.NEUTRAL, "We had to drive them out, in case their condition infected the rest of the troops. Their wives will be given a full widow pension when we return home.").also { stage++ }
             23 -> npcl(FaceAnim.NEUTRAL, "General Hining concluded that, whatever is down there, it's not affiliated with any of the elf factions, and it should be left alone.").also { stage++ }

@@ -54,7 +54,7 @@ class ElfTrackerDialogue(player: Player? = null) : Dialogue(player) {
             30 -> npcl(FaceAnim.THINKING, "These forests aren't always as dense as you'd think. If you look closer, you might see ways that you can get through. With that in mind, why don't you give it another go?").also { stage++ }
             31 -> player(FaceAnim.ANNOYED, "Thanks... I'll see what I can find.").also { stage = END_DIALOGUE }
             40 -> player(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
-            41 -> npc(FaceAnim.FRIENDLY, "How goes the hunt for that bandit camp?").also { stage++ }
+            41 -> npc(FaceAnim.HALF_ASKING, "How goes the hunt for that bandit camp?").also { stage++ }
             42 -> {
                 var campFound = false
                 if (!campFound) {

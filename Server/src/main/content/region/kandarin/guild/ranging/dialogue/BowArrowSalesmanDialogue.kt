@@ -2,6 +2,7 @@ package content.region.kandarin.guild.ranging.dialogue
 
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -21,7 +22,7 @@ class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npc("A fair day, traveller. Would you like to see my wares?").also { stage++ }
+            0 -> npcl(FaceAnim.HALF_ASKING,"A fair day, traveller. Would you like to see my wares?").also { stage++ }
             1 -> options("Yes please.", "No thanks.").also { stage++ }
             2 -> when (buttonId) {
                 1 -> end().also { openNpcShop(player, npc.id) }

@@ -2,6 +2,7 @@ package content.region.kandarin.guild.wizards.dialogue
 
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.global.Skillcape
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -36,31 +37,27 @@ class RobeStoreDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("Yes please.", "No thank you.").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player("Yes please.").also { stage++ }
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.ROBE_STORE_OWNER_1658)
+                }
                 2 -> player("No thank you.").also { stage = END_DIALOGUE }
             }
-
-            2 -> {
-                end()
-                openNpcShop(player, NPCs.ROBE_STORE_OWNER_1658)
-            }
-
             3 -> when (buttonId) {
                 1 -> player("Can I buy a Skillcape of Magic?").also { stage++ }
-                2 -> npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?").also {
-                    stage = 0
-                }
+                2 -> npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?").also { stage = 0 }
             }
 
-            4 -> npc("Certainly! Right when you give me 99000 coins.").also { stage++ }
+            4 -> npc(FaceAnim.HAPPY,"Certainly! Right when you give me 99000 coins.").also { stage++ }
             5 -> options("Okay, here you go.", "No, thanks.").also { stage++ }
             6 -> when (buttonId) {
-                1 -> player("Okay, here you go.").also { stage++ }
+                1 -> {
+                    end()
+                    if (Skillcape.purchase(player, Skills.MAGIC)) {
+                        npc("There you go! Enjoy.").also { stage = END_DIALOGUE }
+                    }
+                }
                 2 -> player("No, thanks.").also { stage = END_DIALOGUE }
-            }
-
-            7 -> if (Skillcape.purchase(player, Skills.MAGIC)) {
-                npc("There you go! Enjoy.").also { stage = END_DIALOGUE }
             }
         }
         return true

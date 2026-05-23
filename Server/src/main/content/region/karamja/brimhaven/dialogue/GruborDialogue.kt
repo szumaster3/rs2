@@ -29,13 +29,13 @@ class GruborDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("Would you like your hedges trimming?", "I want to come in.", "Do you want to trade?").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Would you like your hedges trimming?").also { stage = 10 }
-                2 -> player(FaceAnim.HALF_GUILTY, "I want to come in.").also { stage = 20 }
-                3 -> player(FaceAnim.HALF_GUILTY, "Do you want to trade?").also { stage = 30 }
+                1 -> player(FaceAnim.HALF_ASKING, "Would you like your hedges trimming?").also { stage = 10 }
+                2 -> player(FaceAnim.HAPPY, "I want to come in.").also { stage = 20 }
+                3 -> player(FaceAnim.HALF_ASKING, "Do you want to trade?").also { stage = 30 }
             }
             10 -> npc(FaceAnim.HALF_GUILTY, "Eh? Don't be daft! We don't even HAVE any hehdges!").also { stage = END_DIALOGUE }
-            20 -> npc(FaceAnim.HALF_GUILTY, "No, go away.").also { stage = END_DIALOGUE }
-            30 -> npc(FaceAnim.HALF_GUILTY, "No, I'm busy.").also { stage = END_DIALOGUE }
+            20 -> npc(FaceAnim.ANNOYED, "No, go away.").also { stage = END_DIALOGUE }
+            30 -> npc(FaceAnim.NEUTRAL, "No, I'm busy.").also { stage = END_DIALOGUE }
         }
         return true
     }
