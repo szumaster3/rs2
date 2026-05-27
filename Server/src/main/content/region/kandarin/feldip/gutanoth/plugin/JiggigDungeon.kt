@@ -51,7 +51,7 @@ class JiggigDungeon : MapArea {
                 }
                 3 -> {
                     PlayerCamera(player).reset()
-                    setAttribute(player, "/save${ZogreUtils.CHARRED_AREA}", true)
+                    setAttribute(player, ZogreUtils.CHARRED_AREA, true)
                     unlock(player)
                     return@queueScript stopExecuting(player)
                 }

@@ -96,7 +96,7 @@ class GrishFinishDialogue : DialogueFile() {
             8 -> npcl(FaceAnim.OLD_DEFAULT, "Urghhh...not good fing creature, yous gotta get da ogrish old fings for da making new jiggig special. You's creature needs da key for getting in da low bury place.").also { stage++ }
             9 -> sendItemDialogue(player!!, Items.OGRE_GATE_KEY_4839, "Grish gives you a crudely crafted key.").also {
                 sendMessage(player!!, "Grish gives you a crudely crafted key.")
-                setAttribute(player!!, "/save:${ZogreUtils.RECEIVED_KEY_FROM_GRISH}", true)
+                setAttribute(player!!, ZogreUtils.RECEIVED_KEY_FROM_GRISH, true)
                 setVarbit(player!!, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487, 8)
                 addItem(player!!, Items.OGRE_GATE_KEY_4839)
                 stage++

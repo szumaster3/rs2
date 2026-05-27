@@ -322,7 +322,7 @@ class GutanothPlugin : InteractionListener {
 
                             2 -> {
                                 end()
-                                setAttribute(player, "/save:${ZogreUtils.ZOMBIE_NPC_ACTIVE}", true)
+                                setAttribute(player, ZogreUtils.ZOMBIE_NPC_ACTIVE, true)
                             }
                         }
                     }
@@ -373,7 +373,7 @@ class GutanothPlugin : InteractionListener {
                             5 -> {
                                 end()
                                 sendDialogue(player, "You eventually manage to lift the lid.")
-                                setAttribute(player, "/save:${ZogreUtils.BLACK_PRISM_ACQUIRED}", 0)
+                                setAttribute(player, ZogreUtils.BLACK_PRISM_ACQUIRED, 0)
                                 setVarbit(player, Vars.VARBIT_QUEST_ZOGRE_COFFIN_TRANSFORM_488, 3, true)
                             }
                         }

@@ -93,7 +93,7 @@ class SithikQuestDialogueFile : DialogueFile() {
             11 -> player(FaceAnim.NEUTRAL,"Well, I'm going to have a look around anyway, if", "you're not involved in this whole thing, you won't have", "anything to hide.").also { stage++ }
             12 -> npc(FaceAnim.ANNOYED, "Why, if I was a few years younger I'd give you a", "good hiding!").also { stage++ }
             13 -> player(FaceAnim.FRIENDLY,"I'm sure!").also {
-                setAttribute(player!!, "/save:${ZogreUtils.ASK_SITHIK_ABOUT_OGRES}", true)
+                setAttribute(player!!, ZogreUtils.ASK_SITHIK_ABOUT_OGRES, true)
                 stage = 3
             }
             14 -> npc(FaceAnim.HALF_GUILTY, "I'm a scholarly student of the magical arts. When I was", "younger I used to be an adventurer, probably just like", "yourself. But I lost interest in the constant fighting,", "looting and gaining abilities.").also { stage++ }
@@ -105,7 +105,7 @@ class SithikQuestDialogueFile : DialogueFile() {
             20 -> player("Well, I'm going to have a look around anyway, if", "you're not involved in this whole thing, you won't have", "anything to hide.").also { stage++ }
             21 -> npc(FaceAnim.ANNOYED, "Why, if I was a few years younger I'd give you a", "good hiding!").also { stage++ }
             22 -> playerl(FaceAnim.FRIENDLY,"I'm sure!").also {
-                setAttribute(player!!, "/save:${ZogreUtils.ASK_SITHIK_AGAIN}", true)
+                setAttribute(player!!, ZogreUtils.ASK_SITHIK_AGAIN, true)
                 stage = 3
             }
             23 -> npc(FaceAnim.HALF_GUILTY, "I'm actually quite old and not so very well and I'd like", "to get over this illness I have, then I'll return to my", "very serious and important studies.").also { stage = 3 }
@@ -294,7 +294,7 @@ class SithikIntsAfterTransformDialogueFile : DialogueFile() {
         when (stage) {
             0 -> npcl(FaceAnim.OLD_ANGRY1, "Arghhhh..what's happened to me...you beast!").also { stage++ }
             1 -> player("It's your own fault, you shouldn't have lied about your", "involvement with the undead Ogres at Jiggig. The", "potion will wear off once you've told the truth!").also {
-                setAttribute(player!!, "/save:${ZogreUtils.TALK_WITH_SITHIK_OGRE_DONE}", true)
+                setAttribute(player!!, ZogreUtils.TALK_WITH_SITHIK_OGRE_DONE, true)
                 stage++
             }
             2 -> npc(FaceAnim.OLD_DEFAULT, "Ok, ok, I admit it, I got Brentle Vahn to cast the spell", "to put an end to those awful Ogres...they're just", "disgusting creatures...").also { stage++ }
