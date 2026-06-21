@@ -25,7 +25,7 @@ private val WIELD_BOLT_SLOTS = intArrayOf(3, 7, 11, 15)
 private val REMOVE_BOLT_SLOTS = intArrayOf(4, 8, 12, 16)
 private const val UNWIELD_BOLT_SLOT = 19
 
-private val boltAmountTextIds = intArrayOf(20, 21, 22, 23)
+private val boltQtyVarbits = intArrayOf(2469,2470,2471,2472)
 private val boltNameTextIds = intArrayOf(25, 26, 27, 28)
 private val modelComponentIds = intArrayOf(2, 6, 10, 14)
 
@@ -190,36 +190,42 @@ class BoltPouchPlugin : InterfaceListener, InteractionListener
         val current = player.equipment.get(ARROWS_SLOT)
         val iface = Components.XBOWS_POUCH_433
 
-        if (current != null && current.amount > 0)
+        /*
+         * Equipped bolts.
+         */
+
+        sendItemOnInterface(player,iface,18,current?.id?:-1,90)
+        sendString(player,current?.name?:"Nothing",iface,29)
+
+        val ammoAmount =current?.amount?:0
+
+        if (ammoAmount == 0)
         {
-            player.packetDispatch.sendItemZoomOnInterface(current.id, current.amount, 190, iface, 18)
-            sendString(player, current.name, iface, 29)
-            sendString(player, colorize("%G${current.amount}"), iface, 24)
+            sendString(player, "0", iface, 24)
         }
         else
         {
-            sendModelOnInterface(player, iface, 18, -1)
-            sendString(player, "Nothing", iface, 29)
-            sendString(player, "0", iface, 24)
+            sendString(player,colorize("%G${current.amount}"),iface,24)
         }
+
+        /*
+         * Pouch slots.
+         */
 
         for (i in 0 until MAX_SLOTS)
         {
             val boltId = manager.getBolt(i)
             val amount = manager.getAmount(i)
-
-            val name = if (boltId != -1) getItemName(boltId) else "Nothing"
-            val amountText = if (amount > 0) colorize("%G$amount") else "0"
-
-            sendString(player, name, iface, boltNameTextIds[i])
-            sendString(player, amountText, iface, boltAmountTextIds[i])
-            if (boltId != -1)
+            setVarbit(player,boltQtyVarbits[i],amount,true)
+            if (boltId<=0)
             {
-                player.packetDispatch.sendItemZoomOnInterface(boltId, amount, 190, iface, modelComponentIds[i])
+                sendString(player,"Nothing",iface,boltNameTextIds[i])
+                sendItemOnInterface(player, iface, modelComponentIds[i], -1)
             }
             else
             {
-                sendModelOnInterface(player, iface, modelComponentIds[i], -1)
+                sendString(player,getItemName(boltId),iface,boltNameTextIds[i])
+                sendItemOnInterface(player, iface, modelComponentIds[i],boltId,90)
             }
         }
     }
