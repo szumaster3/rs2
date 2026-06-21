@@ -449,6 +449,11 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 12)
+
+                if (player.settings.isRunToggled) {
+                    player.settings.toggleRun()
+                }
+
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Running",
@@ -463,6 +468,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
+                registerHintIcon(player, Location(3086, 3125, 0), 100) // QUEST DOOR
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                     "Run to the next guide",
@@ -478,7 +484,6 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(NPCs.QUEST_GUIDE_949)!!)
-                player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlainMessage(
                     true,
@@ -508,7 +513,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Location(3088, 3120, 0), 75) // LADDER (QUEST END)
+                registerHintIcon(player, Location(3088, 3120, 0), 100) // LADDER (QUEST END)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
@@ -559,10 +564,11 @@ object TutorialStage {
                         "should only take a few seconds.",
                         "",
                     ))
-                runTask(player, 3) {
+                queueScript(player, 3, QueueStrength.SOFT) {
                     sendDialogue(player, "This rock contains tin.")
                     setAttribute(player, GameAttributes.TUTORIAL_STAGE, 33)
                     load(player, 33)
+                    return@queueScript stopExecuting(player)
                 }
             }
 
@@ -578,8 +584,9 @@ object TutorialStage {
                         "should only take a few seconds.",
                         "",
                     ))
-                runTask(player, 3) {
+                queueScript(player, 3, QueueStrength.SOFT) {
                     sendDialogue(player, "This rock contains copper.")
+                    return@queueScript stopExecuting(player)
                 }
             }
 
@@ -724,6 +731,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 5)
+                player.interfaceManager.openTab(Component(Components.WORNITEMS_387))
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Wielding weapons",
@@ -732,7 +740,7 @@ object TutorialStage {
                         "icon of a man, the one to the right of your backpack icon.",
                         "",
                     ))
-                queueScript(player, 5, QueueStrength.SOFT) {
+                queueScript(player, 3, QueueStrength.SOFT) {
                     Component.setUnclosable(
                         player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                             "Worn interface",
@@ -895,7 +903,7 @@ object TutorialStage {
                     "he can.",
                 ))
                 if(!inBank(player, Items.COINS_995))
-                    player.getBank().add(TutorialStage.STARTER_BANK);
+                    player.bank.add(STARTER_BANK)
             }
 
             56 -> {

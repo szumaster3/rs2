@@ -18,7 +18,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
-            30 -> npc(FaceAnim.FRIENDLY, "Hi there. You must be new around here.", "What do I call you? 'Newcomer' seems so impersonal, and if we're", "going to be working together. I'd rather call you oy", "name." )
+            30 -> npc(FaceAnim.FRIENDLY, "Hi there. You must be new around here. What do I", "call you? 'Newcomer' seems so impersonal, and if we're", "going to be working together. I'd rather call you oy", "name." )
             34 -> player(FaceAnim.HAPPY, "I prospected both types of rock! One set contains tin,","and the other has copper ore inside.")
             40 -> playerl(FaceAnim.ASKING, "How do I make a weapon out of this?")
             in 43..50 -> npc(FaceAnim.HALF_ASKING, "Would you like me to recap anything?")
