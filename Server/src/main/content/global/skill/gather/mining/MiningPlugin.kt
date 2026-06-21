@@ -138,9 +138,9 @@ class MiningPlugin : InteractionListener {
      */
 
     private fun handleMining(player: Player, node: Node, state: Int): Boolean {
-        val resource = MiningNode.forId(node.id)
-        val tool = SkillingTool.getPickaxe(player)
-        val isEssence = resource!!.id in intArrayOf(
+        val resource = MiningNode.forId(node.id) ?: run { return true }
+        val tool = SkillingTool.getPickaxe(player) ?: run { return true }
+        val isEssence = resource.id in intArrayOf(
             shared.consts.Scenery.RUNE_ESSENCE_2491,/*
              * Lunar essence rock.
              */

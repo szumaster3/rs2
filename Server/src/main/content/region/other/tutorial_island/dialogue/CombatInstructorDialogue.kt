@@ -20,7 +20,7 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             44 -> playerl(FaceAnim.FRIENDLY, "Hi! My name's ${player.username}.")
-            47 -> npc(FaceAnim.FRIENDLY, "Very good, but that little butter knife isn't going to protect you much.", "Here, take these.")
+            47 -> npc(FaceAnim.FRIENDLY, "Very good, but that little butter knife isn't going to","protect you much. Here, take these.")
             53 -> playerl(FaceAnim.FRIENDLY, "I did it! I killed a giant rat!")
             54 -> npc(FaceAnim.FRIENDLY, "Good work. Now let's try something different.")
             in 55..60 -> npc(FaceAnim.FRIENDLY, "Do you need something?")

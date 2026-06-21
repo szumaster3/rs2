@@ -19,7 +19,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             30 -> npc(FaceAnim.FRIENDLY, "Hi there. You must be new around here.", "What do I call you? 'Newcomer' seems so impersonal, and if we're", "going to be working together. I'd rather call you oy", "name." )
-            34 -> playerl(FaceAnim.FRIENDLY, "I prospected both types of rock! One has tin and the other copper.")
+            34 -> player(FaceAnim.HAPPY, "I prospected both types of rock! One set contains tin,","and the other has copper ore inside.")
             40 -> playerl(FaceAnim.ASKING, "How do I make a weapon out of this?")
             in 43..50 -> npc(FaceAnim.HALF_ASKING, "Would you like me to recap anything?")
         }
@@ -39,14 +39,13 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             34 -> when (stage++) {
-                0 -> player(FaceAnim.HAPPY, "I prospected both types of rock! One set contains tin,","and the other has copper ore inside.")
-                2 -> npc(FaceAnim.FRIENDLY, "Absolutely right, ${player.username}. These two ore types can", "be smelted together to make bronze.")
-                3 -> npc(FaceAnim.FRIENDLY, "So now you know wht ore is in the rocks over there,", "why don't you have a go at mining some tin and", "copper? Here you'll need this to start with.")
-                4 -> {
+                0 -> npc(FaceAnim.FRIENDLY, "Absolutely right, ${player.username}. These two ore types can", "be smelted together to make bronze.")
+                1 -> npc(FaceAnim.FRIENDLY, "So now you know wht ore is in the rocks over there,", "why don't you have a go at mining some tin and", "copper? Here you'll need this to start with.")
+                2 -> {
                     addItemOrDrop(player, Items.BRONZE_PICKAXE_1265)
                     sendItemDialogue(player, Items.BRONZE_PICKAXE_1265, "Dezzick gives you a <col=0000FF>bronze pickaxe!</col>")
                 }
-                5 -> {
+                3 -> {
                     end()
                     setAttribute(player, GameAttributes.TUTORIAL_STAGE, 35)
                     TutorialStage.load(player, 35)

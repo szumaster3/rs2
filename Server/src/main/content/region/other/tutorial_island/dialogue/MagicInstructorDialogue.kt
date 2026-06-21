@@ -57,7 +57,7 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
         when (tutStage) {
             67 -> when (stage) {
                 0 -> {
-                    npc(FaceAnim.FRIENDLY, "Good day, newcomer. My name is Terrova. I'm here", "to tell you about $DARK_BLUE Magic</col>. Let's start by opening your", "spell list.")
+                    npc(FaceAnim.FRIENDLY, "Good day, newcomer. My name is Terrova. I'm here", "to tell you about$DARK_BLUE Magic</col>. Let's start by opening your", "spell list.")
                     stage++
                 }
                 1 -> {
