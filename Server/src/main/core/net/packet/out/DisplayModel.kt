@@ -27,8 +27,9 @@ class DisplayModel : OutgoingPacket<DisplayModelContext> {
             }
 
             DisplayModelContext.ModelType.ITEM -> {
+                val value = if (context.amount > 0) context.amount else context.zoom
                 buffer = IoBuffer(Network.DISPLAY_MODEL_ITEM)
-                buffer.putInt(context.zoom)
+                buffer.putInt(value)
                 buffer.putIntB((context.interfaceId shl 16) or context.childId)
                 buffer.putLEShortA(context.nodeId)
                 buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
