@@ -11,8 +11,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.HintIconManager
 import core.game.node.item.Item
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
 import core.game.world.GameWorld.settings
 import core.game.world.map.Location
 import core.game.world.repository.Repository
@@ -564,7 +562,7 @@ object TutorialStage {
                 runTask(player, 3) {
                     sendDialogue(player, "This rock contains tin.")
                     setAttribute(player, GameAttributes.TUTORIAL_STAGE, 33)
-                    TutorialStage.load(player, 33)
+                    load(player, 33)
                 }
             }
 
@@ -725,6 +723,7 @@ object TutorialStage {
             45 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
+                setVarbit(player, FLASHING_ICON, 5)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Wielding weapons",
@@ -733,18 +732,16 @@ object TutorialStage {
                         "icon of a man, the one to the right of your backpack icon.",
                         "",
                     ))
-                runTask(player, 10) {
-                    hideTabs(player, login)
-                    player.interfaceManager.openTab(Component(Components.WORNITEMS_387))
-                    setVarbit(player, FLASHING_ICON, 5)
+                queueScript(player, 5, QueueStrength.SOFT) {
                     Component.setUnclosable(
                         player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Worn interface",
-                        "",
-                        "You can see what items you are wearing in the worn equipment",
-                        "to the left of the screen, with their combined statistics on the",
-                        "right. Let's add something. Left click your dagger to 'wield' it.",
-                    ))
+                            "Worn interface",
+                            "",
+                            "You can see what items you are wearing in the worn equipment",
+                            "to the left of the screen, with their combined statistics on the",
+                            "right. Let's add something. Left click your dagger to 'wield' it.",
+                        ))
+                    return@queueScript stopExecuting(player)
                 }
             }
 
@@ -1208,7 +1205,7 @@ object TutorialStage {
         sendString(player, "$percent% Done", Components.TUTORIAL_PROGRESS_371, 1)
     }
 
-    fun removeHintIcon(player: Player) {
+    private fun removeHintIcon(player: Player) {
         val slot = player.getAttribute("tutorial:hinticon", -1)
         if (slot < 0 || slot >= HintIconManager.MAXIMUM_SIZE) return
 

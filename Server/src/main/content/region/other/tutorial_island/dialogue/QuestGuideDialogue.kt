@@ -30,8 +30,8 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             27 -> {
-                setVarbit(player, Vars.VARBIT_FLASHING_TAB_ICON_3756, 3)
                 sendPlainDialogue(player, true, "Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
+                setVarbit(player, Vars.VARBIT_FLASHING_TAB_ICON_3756, 3)
             }
             28 -> when (stage) {
                 0 -> npc("When you start a quest it will change colour to yellow,", "and to green when you've finished. This is so you can", "easily see what's complete, what's started and what's left", "to begin.").also { stage++ }
