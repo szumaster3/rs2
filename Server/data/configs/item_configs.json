@@ -2892,7 +2892,7 @@
     "id": "299"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another off any rat with a tail.",
     "examine": "A bit of rat.",
     "durability": null,
     "name": "Rat's tail",
@@ -5702,7 +5702,7 @@
     "id": "602"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get another mould and piece of molten glass.",
     "examine": "A perfectly circular disc of glass.",
     "durability": null,
     "name": "Observatory lens",
@@ -6416,6 +6416,7 @@
     "id": "670"
   },
   {
+    "destroy_message": "Pickpocket Dig Site workmen to obtain another.",
     "examine": "A carefully-kept-safe skull sample.",
     "durability": null,
     "name": "Animal skull",
@@ -6425,7 +6426,7 @@
     "id": "671"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Pan in the river near Varrock Dig Site to obtain another.",
     "examine": "A special cup.",
     "durability": null,
     "name": "Special cup",
@@ -6435,6 +6436,7 @@
     "id": "672"
   },
   {
+    "destroy_message": "Pickpocket the female student at Varrock Dig Site to obtain another.",
     "examine": "A lucky mascot.",
     "durability": null,
     "name": "Teddy",
@@ -7169,7 +7171,7 @@
     "id": "761"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You will need to enter the Phoenix Gang hideout to reclaim this half of the shield.",
     "examine": "Half of the Shield of Arrav.",
     "durability": null,
     "name": "Broken shield",
@@ -7179,7 +7181,7 @@
     "id": "763"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You will need to enter the Black Arm Gang hideout to reclaim this half of the shield.",
     "examine": "Half of the Shield of Arrav.",
     "durability": null,
     "name": "Broken shield",
@@ -7221,10 +7223,12 @@
     "id": "768"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Entrance certificate to the Imperial Guard.",
+    "destroy_message": "Instead of destroying this I should take it to King Roald to claim my reward.",
+    "examine": "I can use this to claim a reward from King Roald.",
     "durability": null,
     "name": "Certificate",
+    "tradeable": "false",
+    "destroy": "true",
     "archery_ticket_price": "0",
     "weight": "0.005",
     "id": "769"
@@ -7319,11 +7323,12 @@
     "equipment_slot": "9"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can obtain another set of Family Gauntlets from Dimintheis.",
     "examine": "My reward for assisting the Fitzharmon family.",
     "durability": null,
     "name": "Family gauntlets",
     "tradeable": "false",
+    "destroy": "true",
     "weight": "1",
     "archery_ticket_price": "0",
     "id": "778",
@@ -7352,7 +7357,7 @@
     "id": "781"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "King Narnode will give you another sample.",
     "examine": "A sample of the bark from the Grand Tree.",
     "durability": null,
     "name": "Bark sample",
@@ -7361,7 +7366,7 @@
     "id": "783"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "King Narnode will replace this book if you need one.",
     "examine": "A book to translate the ancient gnome language into English.",
     "durability": null,
     "name": "Translation book",
@@ -7370,7 +7375,7 @@
     "id": "784"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Search Glough's cupboard to find another copy of his journal.",
     "examine": "Perhaps I should read it and see what Glough is up to!",
     "durability": null,
     "name": "Glough's journal",
@@ -7379,7 +7384,7 @@
     "id": "785"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Hazelmere will give you another copy of his message.",
     "examine": "Hazelmere wrote something down on this scroll.",
     "durability": null,
     "name": "Hazelmere's scroll",
@@ -7388,7 +7393,7 @@
     "id": "786"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another invoice from the foreman at the shipyard.",
     "examine": "An order from the Karamja shipyard.",
     "durability": null,
     "name": "Lumber order",
@@ -7397,7 +7402,7 @@
     "id": "787"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another key from Anita, in the Gnome Stronghold.",
     "examine": "The key to Glough's chest.",
     "durability": null,
     "name": "Glough's key",
@@ -7407,8 +7412,8 @@
     "id": "788"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Twigs bound together in the shape of a (Z/U/T/O).",
+    "destroy_message": "You can get another twig from King Narnode.",
+    "examine": "Twigs bound together in the shape of a T.",
     "durability": null,
     "name": "Twigs",
     "tradeable": "false",
@@ -7417,8 +7422,8 @@
     "id": "789"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Twigs bound together in the shape of a (Z/U/T/O).",
+    "destroy_message": "You can get another twig from King Narnode.",
+    "examine": "Twigs bound together in the shape of a U.",
     "durability": null,
     "name": "Twigs",
     "tradeable": "false",
@@ -7427,8 +7432,8 @@
     "id": "790"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Twigs bound together in the shape of a (Z/U/T/O).",
+    "destroy_message": "You can get another twig from King Narnode.",
+    "examine": "Twigs bound together in the shape of a Z.",
     "durability": null,
     "name": "Twigs",
     "tradeable": "false",
@@ -7437,8 +7442,8 @@
     "id": "791"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Twigs bound together in the shape of a (Z/U/T/O).",
+    "destroy_message": "You can get another twig from King Narnode.",
+    "examine": "Twigs bound together in the shape of a O.",
     "durability": null,
     "name": "Twigs",
     "tradeable": "false",
@@ -7458,7 +7463,7 @@
     "id": "793"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Search the chest in Glough's house to find another copy of his plans.",
     "examine": "These are plans for an invasion!",
     "durability": null,
     "name": "Invasion plans",
@@ -7468,12 +7473,13 @@
     "id": "794"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "If you destroy this, you will not be able to get a replacement.",
     "examine": "A model of a Karamja warship.",
     "durability": null,
     "name": "War ship",
     "tradeable": "false",
-    "weight": "0.01",
+    "destroy": "true",
+    "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "795"
   },
@@ -24914,11 +24920,12 @@
     "id": "2394"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "This item will likely break if you put it down here, and you will have to go looking for another.",
     "examine": "A dangerous magical liquid.",
     "durability": null,
     "name": "Magic ogre potion",
     "tradeable": "false",
+    "destroy": "true",
     "archery_ticket_price": "0",
     "id": "2395",
     "equipment_slot": "3"
@@ -28782,7 +28789,7 @@
     "id": "2794"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -28808,7 +28815,7 @@
     "id": "2797"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -28826,7 +28833,7 @@
     "id": "2799"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -35451,7 +35458,7 @@
     "id": "3564"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -35469,7 +35476,7 @@
     "id": "3566"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -35487,7 +35494,7 @@
     "id": "3568"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -35505,7 +35512,7 @@
     "id": "3570"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -35547,7 +35554,7 @@
     "id": "3575"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -35565,7 +35572,7 @@
     "id": "3577"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to @npc if you need another one.",
     "shop_price": "5",
     "examine": "I need to solve this.",
     "durability": null,
@@ -36094,7 +36101,7 @@
     "id": "3697"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You will have to start the trading sequence again to get another!",
     "examine": "Some flowers from a distant land.",
     "durability": null,
     "name": "Exotic flower",
@@ -36293,7 +36300,7 @@
     "id": "3721"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "It's a bucket of salty water.",
     "durability": null,
     "name": "Full bucket",
@@ -36303,7 +36310,7 @@
     "id": "3722"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This bucket is eighty percent full. It has a 5 painted on its side.",
     "durability": null,
     "name": "4/5ths full bucket",
@@ -36312,7 +36319,7 @@
     "id": "3723"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This bucket is sixty percent full. It has a 5 painted on its side.",
     "durability": null,
     "name": "3/5ths full bucket",
@@ -36321,7 +36328,7 @@
     "id": "3724"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This bucket is forty percent full. It has a 5 painted on its side.",
     "durability": null,
     "name": "2/5ths full bucket",
@@ -36330,7 +36337,7 @@
     "id": "3725"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This bucket is twenty percent full. It has a 5 painted on its side.",
     "durability": null,
     "name": "1/5ths full bucket",
@@ -36339,9 +36346,9 @@
     "id": "3726"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "shop_price": "2",
-    "examine": "It's an empty bucket.",
+    "examine": "This bucket is completely empty. It has a 5 painted on its side.",
     "grand_exchange_price": "50",
     "durability": null,
     "name": "Empty bucket",
@@ -36351,7 +36358,7 @@
     "id": "3727"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This bucket of water is frozen solid.",
     "durability": null,
     "name": "Frozen bucket",
@@ -36360,7 +36367,7 @@
     "id": "3728"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This jug is completely full. It has a 3 painted on its side.",
     "durability": null,
     "name": "Full jug",
@@ -36369,7 +36376,7 @@
     "id": "3729"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This jug is two thirds full. It has a 3 painted on its side.",
     "durability": null,
     "name": "2/3rds full jug",
@@ -36378,7 +36385,7 @@
     "id": "3730"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This jug is one third full. It has a 3 painted on its side.",
     "durability": null,
     "name": "1/3rds full jug",
@@ -36387,9 +36394,9 @@
     "id": "3731"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "shop_price": "1",
-    "examine": "This jug is empty.",
+    "examine": "This jug is completely empty. It has a 3 painted on its side.",
     "grand_exchange_price": "164",
     "durability": null,
     "name": "Empty jug",
@@ -36399,7 +36406,7 @@
     "id": "3732"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to find another from within the building.",
     "examine": "This jug of water is frozen solid.",
     "durability": null,
     "name": "Frozen jug",
@@ -57187,16 +57194,18 @@
     "id": "6113"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Return to the Laughing Miner barmaid to get your stout back.",
     "examine": "A pint of bluish beer.",
     "durability": null,
     "name": "Kelda stout",
-    "weight": "0.5",
+    "tradeable": "false",
+    "destroy": "true",
+    "weight": "0.55",
     "archery_ticket_price": "0",
     "id": "6118"
   },
   {
-    "examine": "There is a strange [green/yellow] marking on this stone.",
+    "examine": "There is a strange yellow marking on this stone.",
     "durability": null,
     "name": "Square stone",
     "weight": "1",
@@ -57204,7 +57213,7 @@
     "id": "6119"
   },
   {
-    "examine": "There is a strange [green/yellow] marking on this stone.",
+    "examine": "There is a strange green marking on this stone.",
     "durability": null,
     "name": "Square stone",
     "weight": "1",
@@ -60433,7 +60442,7 @@
     "id": "6448"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another white rosebush seed from the Monastery.",
     "examine": "A white rosebush seed.",
     "durability": null,
     "name": "White rose seed",
@@ -60444,7 +60453,7 @@
     "id": "6453"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another red rosebush seed from the Monastery.",
     "examine": "A red rosebush seed.",
     "durability": null,
     "name": "Red rose seed",
@@ -60454,7 +60463,7 @@
     "id": "6454"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another pink rosebush seed from the Monastery.",
     "examine": "A pink rosebush seed.",
     "durability": null,
     "name": "Pink rose seed",
@@ -60474,7 +60483,7 @@
     "id": "6456"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get more from Queen Ellamaria in New Varrock palace garden.",
     "examine": "A delphinium seed.",
     "durability": null,
     "name": "Delphinium seed",
@@ -60484,7 +60493,7 @@
     "id": "6457"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get more snowdrop seeds from Kragen in Ardougne.",
     "examine": "A snowdrop seed.",
     "durability": null,
     "name": "Snowdrop seed",
@@ -60494,16 +60503,17 @@
     "id": "6460"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another shoot from the dying White Tree.",
     "examine": "A shoot that has been cut from a dying White Tree.",
     "durability": null,
     "name": "White tree shoot",
     "tradeable": "false",
+    "destroy": "true",
     "archery_ticket_price": "0",
     "id": "6461"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another shoot from the dying White Tree.",
     "examine": "A young White Tree sapling.",
     "durability": null,
     "name": "White tree shoot",
@@ -60512,7 +60522,7 @@
     "id": "6462"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another shoot from the dying White Tree.",
     "examine": "This shoot from a White Tree has been watered and will soon grow.",
     "durability": null,
     "name": "White tree shoot",
@@ -62067,7 +62077,7 @@
     "id": "6634"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "As a security precaution, your CommOrb will automatically self-destruct when dropped.",
     "examine": "A Temple Knight Communication Orb. Top Secret!",
     "durability": null,
     "name": "Commorb",
@@ -63223,7 +63233,7 @@
     "defence_anim": "2079",
     "equipment_slot": "3",
     "attack_anims": "2080,2081,2082,2080",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Maybe there are more buried around the world?",
     "grand_exchange_price": "2875",
     "stand_anim": "813",
     "tradeable": "true",
@@ -63260,7 +63270,7 @@
     "defence_anim": "2079",
     "equipment_slot": "3",
     "attack_anims": "2080,2081,2082,2080",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Maybe there are more buried around the world?",
     "grand_exchange_price": "17200",
     "stand_anim": "813",
     "tradeable": "true",
@@ -63297,7 +63307,7 @@
     "defence_anim": "2079",
     "equipment_slot": "3",
     "attack_anims": "2080,2081,2082,2080",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Maybe there are more buried around the world?",
     "grand_exchange_price": "4115",
     "stand_anim": "813",
     "tradeable": "true",
@@ -63819,7 +63829,7 @@
     "turn180_anim": "7045",
     "render_anim": "124",
     "equipment_slot": "3",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can make a replacement.",
     "stand_anim": "7047",
     "name": "Slender blade",
     "tradeable": "false",
@@ -63849,7 +63859,7 @@
     "stand_turn_anim": "1209"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable. (See Wizard Korvak for replacement for 25,000 gold.)",
     "shop_price": "25000",
     "examine": "A large pouch used for storing essence.",
     "durability": null,
@@ -63870,7 +63880,6 @@
     "id": "6820"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
     "examine": "This looks valuable.",
     "durability": null,
     "name": "Orb",
@@ -64135,7 +64144,7 @@
     "id": "6853"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can obtain an empty box from Rosie the Pixie in Diango's workshop.",
     "examine": "A box for storing completed puppets.",
     "durability": null,
     "name": "Puppet box",
@@ -64145,7 +64154,6 @@
     "id": "6854"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
     "examine": "A box for storing painted baubles.",
     "durability": null,
     "name": "Bauble box",
@@ -64165,10 +64173,12 @@
     "equipment_slot": "0"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can obtain another scarf from Diango in the Draynor market.",
     "examine": "A woolly scarf.",
     "durability": null,
     "name": "Bobble scarf",
+    "tradeable": "false",
+    "destroy": "true",
     "weight": "0.25",
     "archery_ticket_price": "0",
     "id": "6857",
@@ -64236,7 +64246,7 @@
     "equipment_slot": "0"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can obtain another hat from Diango in the Draynor Market.",
     "examine": "A woolly tobogganing scarf.",
     "durability": null,
     "name": "Woolly scarf",
@@ -65351,7 +65361,7 @@
     "id": "6988"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another Z sigil from the pedestal with a silver Z on.",
     "examine": "A metal sigil in the shape of a Z.",
     "durability": null,
     "name": "Z sigil",
@@ -65359,7 +65369,7 @@
     "id": "6993"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another M sigil from the pedestal with a silver M on.",
     "examine": "A metal sigil in the shape of an M.",
     "durability": null,
     "name": "M sigil",
@@ -65367,7 +65377,7 @@
     "id": "6994"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another R sigil from the pedestal with a silver R on.",
     "examine": "A metal sigil in the shape of an R.",
     "durability": null,
     "name": "R sigil",
@@ -65375,7 +65385,7 @@
     "id": "6995"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another K sigil from the pedestal with a silver K on.",
     "examine": "A metal sigil in the shape of a K.",
     "durability": null,
     "name": "K sigil",
@@ -68888,7 +68898,7 @@
     "equipment_slot": "3"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Hopefully Fairy Nuff made a copy of this list.",
     "examine": "A list of the Fairy Queen's symptoms.",
     "durability": null,
     "name": "Symptoms list",
@@ -69671,7 +69681,7 @@
     "id": "7472"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "I'll have to get all the ingredients again.",
     "examine": "A pot of brulee supreme.",
     "durability": null,
     "name": "Brulee supreme",
@@ -69680,7 +69690,7 @@
     "id": "7476"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "I got this by killing the Evil Chicken. It might be hard to get another one.",
     "examine": "What came first, the chicken or...",
     "durability": null,
     "name": "Evil chicken's egg",
@@ -69699,7 +69709,7 @@
     "id": "7478"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can make another one by adding evil spices to ordinary stew.",
     "examine": "It's a meat and potato stew with fancy seasoning.",
     "durability": null,
     "name": "Spicy stew",
@@ -70190,7 +70200,7 @@
     "id": "7542"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Maybe Traiborn will have another.",
     "examine": "Now all I need to do is cook it.",
     "durability": null,
     "name": "Raw guide cake",
@@ -70199,7 +70209,7 @@
     "id": "7543"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Maybe Traiborn will have another.",
     "examine": "Egg containing knowledge.",
     "durability": null,
     "name": "Enchanted egg",
@@ -70208,7 +70218,7 @@
     "id": "7544"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Maybe Traiborn will have another.",
     "examine": "Guiding milk.",
     "durability": null,
     "name": "Enchanted milk",
@@ -70218,7 +70228,7 @@
     "id": "7545"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Maybe Traiborn will have another.",
     "examine": "A pot of special flour.",
     "durability": null,
     "name": "Enchanted flour",
@@ -73878,7 +73888,7 @@
     "id": "7957"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another mining prop from Donal in the inn under Miscellania.",
     "examine": "A prop for holding up a tunnel roof.",
     "durability": null,
     "name": "Mining prop",
@@ -80406,7 +80416,7 @@
     "id": "9075"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to mine more from the Lunar Isle Mine.",
     "examine": "This needs refining",
     "durability": null,
     "name": "Lunar ore",
@@ -80517,19 +80527,20 @@
     "id": "9085"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get an empty one from Baba Yaga.",
     "shop_price": "10",
-    "examine": "A glass vial containing water.",
+    "examine": "A vessel containing water.",
     "grand_exchange_price": "21",
     "durability": null,
     "name": "Vial of water",
     "tradeable": "true",
+    "destroy": "true",
     "weight": "0.02",
     "archery_ticket_price": "0",
     "id": "9086"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get an empty one from Baba Yaga.",
     "examine": "A vessel for dreaming while awake!",
     "durability": null,
     "name": "Waking sleep vial",
@@ -80538,7 +80549,7 @@
     "id": "9087"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get an empty one from Baba Yaga.",
     "examine": "A vessel with water and Guam inside.",
     "durability": null,
     "name": "Guam vial",
@@ -80547,7 +80558,7 @@
     "id": "9088"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get an empty one from Baba Yaga.",
     "examine": "A vessel with water and Marrentill inside.",
     "durability": null,
     "name": "Marr vial",
@@ -80556,7 +80567,7 @@
     "id": "9089"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get an empty one from Baba Yaga.",
     "examine": "A vessel with water, guam and marrentill inside.",
     "durability": null,
     "name": "Guam-marr vial",
@@ -80578,7 +80589,7 @@
     "equip_audio": "2247",
     "render_anim": "28",
     "equipment_slot": "3",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get another Dramen staff.",
     "stand_anim": "813",
     "attack_audios": "2555,0,0,0",
     "name": "Lunar staff - pt1",
@@ -80603,7 +80614,7 @@
     "equip_audio": "2247",
     "render_anim": "28",
     "equipment_slot": "3",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get another Dramen staff.",
     "stand_anim": "813",
     "attack_audios": "2555,0,0,0",
     "name": "Lunar staff - pt2",
@@ -80628,7 +80639,7 @@
     "equip_audio": "2247",
     "render_anim": "28",
     "equipment_slot": "3",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You'll have to get another Dramen staff.",
     "stand_anim": "813",
     "attack_audios": "2555,0,0,0",
     "name": "Lunar staff - pt3",
@@ -83650,7 +83661,7 @@
     "id": "9648"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You found this key in a painting in Meiyerditch, north of the Myreque hideout.",
     "examine": "A key to some large, strange door.",
     "durability": null,
     "name": "Large ornate key",
@@ -83680,7 +83691,7 @@
     "id": "9653"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "This can be found again beneath a pot outside the witch's house in Taverley.",
     "examine": "A key to the Witch's house's front door. (Witch's House)",
     "durability": null,
     "name": "Door key",
@@ -83951,7 +83962,7 @@
     "id": "9681"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You get another one from your CommOrb.",
     "examine": "A copy of the mysterious glyphs.",
     "durability": null,
     "name": "Door transcription",
@@ -84000,7 +84011,7 @@
     "id": "9686"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get the fragments from Col O'Niall.",
     "examine": "A piece of torn page.",
     "durability": null,
     "name": "Fragment 1",
@@ -84008,7 +84019,7 @@
     "id": "9687"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get the fragments from Col O'Niall.",
     "examine": "A piece of torn page.",
     "durability": null,
     "name": "Fragment 2",
@@ -84016,7 +84027,7 @@
     "id": "9688"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get the fragments from Col O'Niall.",
     "examine": "A piece of torn page.",
     "durability": null,
     "name": "Fragment 3",
