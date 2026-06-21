@@ -1,6 +1,6 @@
 [
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "These are the remains of the dwarf who was stationed in the Guard Tower.",
     "examine": "The body of a Dwarf savaged by Goblins.",
     "durability": null,
     "name": "Dwarf remains",
@@ -797,7 +797,7 @@
     "id": "83"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You found this staff in the Temple of Ikov.",
     "examine": "The power in this staff causes it to vibrate gently.",
     "durability": null,
     "name": "Staff of armadyl",
@@ -2626,8 +2626,8 @@
     "id": "270"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "It looks like part of a machine",
+    "destroy_message": "Hopefully, there's another in the fountain at Draynor Manor.",
+    "examine": "It looks like part of a machine.",
     "durability": null,
     "name": "Pressure gauge",
     "tradeable": "false",
@@ -2635,7 +2635,7 @@
     "id": "271"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Hopefully, there is some more in Draynor Manor.",
     "examine": "A box of fish food.",
     "durability": null,
     "name": "Fish food",
@@ -2660,14 +2660,15 @@
     "id": "274"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Hopefully, there's another in that compost heap at Draynor Manor.",
+    "examine": "A slightly smelly key. (Ernest the Chicken)",
     "durability": null,
     "name": "Key",
     "archery_ticket_price": "0",
     "id": "275"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Hopefully, I can find another in Draynor Manor.",
     "examine": "It's slightly charred.",
     "durability": null,
     "name": "Rubber tube",
@@ -2676,7 +2677,7 @@
     "id": "276"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "I'll have to find another in the basement of Draynor Manor.",
     "examine": "It's pretty full.",
     "durability": null,
     "name": "Oil can",
@@ -2808,7 +2809,7 @@
     "id": "289"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can obtain another from Sedridor at the Wizards' Tower.",
     "examine": "This contains some vital research results.",
     "durability": null,
     "name": "Research package",
@@ -2818,7 +2819,8 @@
     "id": "290"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can obtain more from Aubury in Varrock.",
+    "examine": "It's written in code.",
     "durability": null,
     "name": "Notes",
     "archery_ticket_price": "0",

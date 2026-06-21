@@ -5,9 +5,11 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Items
+import shared.consts.Quests
 import shared.consts.Scenery
 
 class KingsRansomPlugin : InteractionListener, MapArea {
@@ -54,6 +56,39 @@ class KingsRansomPlugin : InteractionListener, MapArea {
             val exit = LADDER_EXITS.values.find { it.key == key } ?: LADDER_EXITS[0]!!
             player.properties.teleportLocation = exit.destination
             removeAttribute(player, "ladder-exit")
+            return@on true
+        }
+
+        /*
+         * Handles the destroy dialogue for the Holy Grail.
+         */
+
+        on(Items.HOLY_GRAIL_19, IntType.ITEM, "destroy") { player, node ->
+            val item = node as Item
+
+            val destroyMessage = when {
+                // After Holy Grail, during King's Ransom.
+                isQuestComplete(player, Quests.HOLY_GRAIL) && !isQuestComplete(player, Quests.KINGS_RANSOM) ->
+                    "If you destroy the Holy Grail, you will need to return to the Fisher King's realm to obtain another."
+
+                // Complete King's Ransom.
+                isQuestComplete(player, Quests.KINGS_RANSOM) ->
+                    "If you destroy the Holy Grail, you can obtain another from Keep Le Faye or reclaim one from the quest storage chest."
+
+                // During Holy Grail.
+                else ->
+                    "If you destroy the Holy Grail, you will need to return to the Fisher King's realm to obtain another."
+            }
+
+            sendDestroyItemDialogue(player, Items.HOLY_GRAIL_19, destroyMessage)
+
+            addDialogueAction(player) { p, button ->
+                if (button == 3) {
+                    closeDialogue(p)
+                    removeItem(p, item)
+                }
+            }
+
             return@on true
         }
 

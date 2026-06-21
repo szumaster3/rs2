@@ -19,7 +19,8 @@ import shared.consts.Vars;
  */
 @Initializable
 public class WaterFall extends Quest {
-
+    //https://youtu.be/-4tWcoRGRjY?si=r-X1mcOzIY5aZvWO&t=60
+    //Legion
     /**
      * Instantiates a new Water fall.
      */

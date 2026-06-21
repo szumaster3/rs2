@@ -182,9 +182,9 @@ class RasoloDialogueFile : DialogueBuilderFile() {
                     .npcl("Well, his lair is very close to here. I suggest you look around for it.")
                     .end()
 
-                branch.onValue(0)
+                branch.onValue(0)//https://www.youtube.com/watch?v=ICy9ZiflLW8
                     .playerl("I lost that ring you gave me...")
-                    .npcl("Then by all means, take another. Only a foolish merchant would give away his only stock!")
+                    .npc("Then by all means, take another.","Only a foolish merchant would give away his only stock!")
                     .endWith { _, player ->
                         addItem(player, Items.RING_OF_VISIBILITY_4657)
                     }
