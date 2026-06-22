@@ -34,6 +34,7 @@ class TeleportCrystalPlugin : InteractionListener {
                 addDialogueAction(player) { player, button ->
                     when(button) {
                         2 -> {
+                            closeDialogue(player)
                             player.teleporter.send(Location(2329, 3172), TeleportType.NORMAL)
                             degrade(player, Item(node.id))
                         }

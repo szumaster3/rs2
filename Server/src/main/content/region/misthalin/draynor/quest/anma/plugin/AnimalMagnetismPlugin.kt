@@ -125,9 +125,9 @@ class AnimalMagnetismPlugin : OptionHandler() {
             event ?: return false
             val player = event.player
             animate(player, ANIMATION, false)
-            lock(player, ANIMATION.definition.getDurationTicks())
+            lock(player, ANIMATION.definition.durationTicks)
             Pulser.submit(
-                object : Pulse(ANIMATION.definition.getDurationTicks(), player) {
+                object : Pulse(ANIMATION.definition.durationTicks, player) {
                     override fun pulse(): Boolean {
                         if (!player.zoneMonitor.isInZone("rimmington mine")) {
                             sendMessage(
@@ -211,7 +211,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
                             return true
                         }
                         val animation = getAnimation(Items.MITHRIL_AXE_1355)
-                        lock(player, animation!!.definition.getDurationTicks())
+                        lock(player, animation!!.definition.durationTicks)
                         if (RandomFunction.random(10) < 3) {
                             sendMessage(player, "You almost remove a suitable twig, but you don't quite manage it.")
                         } else {

@@ -72,7 +72,7 @@ class TrapDismantlePulse(player: Player?, node: Scenery?, wrapper: TrapWrapper) 
     override fun reward(): Boolean {
         if (++ticks % (
                     trap.settings.dismantleAnimation.definition
-                        .getDurationTicks() + 1
+                        .durationTicks + 1
                     ) != 0
         ) {
             return false
@@ -90,7 +90,7 @@ class TrapDismantlePulse(player: Player?, node: Scenery?, wrapper: TrapWrapper) 
     override fun message(type: Int) {
         when (type) {
             0 -> {
-                val ticks = wrapper.ticks + (wrapper.type.settings.dismantleAnimation.definition.getDurationTicks()) + 1
+                val ticks = wrapper.ticks + (wrapper.type.settings.dismantleAnimation.definition.durationTicks) + 1
                 wrapper.ticks = ticks
                 wrapper.busyTicks = ticks
             }
