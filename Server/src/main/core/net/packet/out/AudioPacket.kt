@@ -4,13 +4,13 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.world.map.Location
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.DefaultContext
+import core.net.packet.context.Context
 
 /**
  * Sends an audio packet.
  * @author Vexia
  */
-class AudioPacket : OutgoingPacket<DefaultContext> {
+class AudioPacket : OutgoingPacket<Context.Default> {
 
     companion object {
         fun write(buffer: IoBuffer, audio: Audio, loc: Location?): IoBuffer {
@@ -35,7 +35,7 @@ class AudioPacket : OutgoingPacket<DefaultContext> {
      * ║ 4 music                                    ║
      * ║ 172 sound effect                           ║
      * ╚════════════════════════════════════════════╝ */
-    override fun send(context: DefaultContext) {
+    override fun send(context: Context.Default) {
         val audio = context.objects[0] as Audio
         val loc = context.objects[1] as Location?
         val buffer = if (loc == null) {

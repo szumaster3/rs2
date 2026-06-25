@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.system.config.ItemConfigParser;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
+import core.net.packet.context.Context;
 import core.net.packet.out.ContainerPacket;
 import core.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
@@ -287,7 +287,7 @@ public final class EquipmentContainer extends Container {
         @Override
         public void update(Container c, ContainerEvent event) {
             int[] slots = event.getSlots();
-            PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 387, 28, 94, event.getItems(), false, slots));
+            PacketRepository.send(ContainerPacket.class, new Context.ContainerContext(player, 387, 28, 94, event.getItems(), false, slots));
             update(c);
             boolean updateDefenceAnimation = false;
             for (int slot : slots) {
@@ -315,7 +315,7 @@ public final class EquipmentContainer extends Container {
             if (inter != null) {
                 inter.updateInterface();
             }
-            PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 387, 28, 94, c.toArray(), 14, false));
+            PacketRepository.send(ContainerPacket.class, new Context.ContainerContext(player, 387, 28, 94, c.toArray(), 14, false));
             update(c);
             player.getProperties().updateDefenceAnimation();
         }

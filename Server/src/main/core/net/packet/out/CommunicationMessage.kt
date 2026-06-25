@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
+import core.net.packet.context.Context
 import core.net.packet.context.MessageContext
 import core.tools.StringUtils.encryptPlayerChat
 import core.tools.StringUtils.stringToLong
@@ -13,14 +14,14 @@ import java.util.*
  * Handles communication message packet sending.
  * @author Emperor
  */
-class CommunicationMessage : OutgoingPacket<MessageContext> {
-    override fun send(context: MessageContext) {
+class CommunicationMessage : OutgoingPacket<Context.Message> {
+    override fun send(context: Context.Message) {
         val buffer = IoBuffer(context.opcode, PacketHeader.BYTE)
         val message = context.message
         val player = context.player
         val other = context.other
         when (context.opcode) {
-            MessageContext.SEND_MESSAGE -> {
+            Context.Message.SEND_MESSAGE -> {
                 val bytes = ByteArray(256)
                 val length = encryptPlayerChat(bytes, 0, 0, message.length, message.toByteArray())
                 buffer.putLong(stringToLong(other))
@@ -28,7 +29,7 @@ class CommunicationMessage : OutgoingPacket<MessageContext> {
                 buffer.putBytes(bytes, 0, length)
             }
 
-            MessageContext.RECEIVE_MESSAGE -> {
+            Context.Message.RECEIVE_MESSAGE -> {
                 val bytes = ByteArray(256)
                 bytes[0] = message.length.toByte()
                 val length = 1 + encryptPlayerChat(bytes, 0, 1, message.length, message.toByteArray())
@@ -37,7 +38,7 @@ class CommunicationMessage : OutgoingPacket<MessageContext> {
                     .put(context.chatIcon.toByte().toInt()).putBytes(bytes, 0, length)
             }
 
-            MessageContext.CLAN_MESSAGE -> {
+            Context.Message.CLAN_MESSAGE -> {
                 val clan = player.communication.clan ?: return
                 val bytes = ByteArray(256)
                 bytes[0] = context.message.length.toByte()

@@ -69,7 +69,10 @@ object PacketRepository {
      * Sends a packet to the player defined in the context.
      */
     @JvmStatic
-    fun send(clazz: Class<out OutgoingPacket<*>>, context: Context) {
+    fun <T : Context> send(
+        clazz: Class<out OutgoingPacket<T>>,
+        context: T
+    ) {
         val player = context.player
 
         if (player.session == null || player.isArtificial) {
@@ -84,7 +87,7 @@ object PacketRepository {
 
         try {
             @Suppress("UNCHECKED_CAST")
-            PacketWriteQueue.handle(packet as OutgoingPacket<Context>, context)
+            PacketWriteQueue.handle(packet as OutgoingPacket<T>, context)
         } catch (e: Exception) {
             val stackTrace = StringWriter().also { e.printStackTrace(PrintWriter(it)) }
             log(PacketRepository::class.java, Log.ERR, "Error writing packet: $stackTrace")

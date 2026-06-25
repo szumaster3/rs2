@@ -2,7 +2,6 @@ package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
 import core.game.system.communication.ClanRepository;
-import core.net.packet.Context;
 
 /**
  * The packet context for clan-related outgoing packets.

@@ -5,14 +5,14 @@ import core.game.world.map.Location;
 import core.net.packet.IoBuffer;
 import core.net.packet.OutgoingPacket;
 import core.net.packet.PacketHeader;
-import core.net.packet.context.AreaPositionContext;
+import core.net.packet.context.Context;
 
 /**
  * Handles the update area position packet.
  *
  * @author Emperor
  */
-public final class UpdateAreaPosition implements OutgoingPacket<AreaPositionContext> {
+public final class UpdateAreaPosition implements OutgoingPacket<Context.AreaPosition> {
 
     /**
      * Gets the region chunk update buffer.
@@ -41,7 +41,7 @@ public final class UpdateAreaPosition implements OutgoingPacket<AreaPositionCont
     }
 
     @Override
-    public void send(AreaPositionContext context) {
+    public void send(Context.AreaPosition context) {
         IoBuffer buffer = getBuffer(context.getPlayer(), context.getLocation());
         buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
         context.getPlayer().getSession().write(buffer);

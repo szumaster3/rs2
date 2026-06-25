@@ -1,7 +1,6 @@
 package core.net.packet.context
 
 import core.game.node.entity.player.Player
-import core.net.packet.Context
 
 data class SceneryUpdateContext(
     private val player: Player,
@@ -17,6 +16,6 @@ data class SceneryUpdateContext(
     val int4: Int,
     val int5: Int,
     val int6: Int
-) : Context {
+) {
     override fun getPlayer(): Player = player
 }

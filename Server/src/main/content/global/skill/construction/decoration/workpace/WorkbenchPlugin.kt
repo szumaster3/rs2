@@ -14,7 +14,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
+import core.net.packet.context.Context
 import core.net.packet.out.ContainerPacket
 import shared.consts.Components
 import shared.consts.Items
@@ -197,7 +197,7 @@ class WorkbenchPlugin : InterfaceListener, InteractionListener {
 
         PacketRepository.send(
             ContainerPacket::class.java,
-            ContainerContext(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false),
+            Context.ContainerContext(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false),
         )
     }
 }

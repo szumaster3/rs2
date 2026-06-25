@@ -4,7 +4,7 @@ import core.game.container.ContainerEvent
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
-import core.net.packet.context.ContainerContext
+import core.net.packet.context.Context
 import shared.consts.Network
 
 /**
@@ -12,10 +12,10 @@ import shared.consts.Network
  *
  * @author Emperor
  */
-class ContainerPacket : OutgoingPacket<ContainerContext> {
-    override fun send(context: ContainerContext) {
+class ContainerPacket : OutgoingPacket<Context.ContainerContext> {
+    override fun send(context: Context.ContainerContext) {
         var buffer: IoBuffer? = null
-        if (context.isClear) {
+        if (context.isClear()) {
             buffer = IoBuffer(Network.UPDATE_CONTAINER)
             buffer.putIntB(context.interfaceId shl 16 or context.childId)
         } else {

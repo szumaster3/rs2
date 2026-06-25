@@ -11,7 +11,7 @@ import core.game.system.communication.CommunicationInfo
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContactContext
+import core.net.packet.context.Context
 import core.net.packet.context.MessageContext
 import core.net.packet.out.CommunicationMessage
 import core.net.packet.out.ContactPackets
@@ -102,7 +102,7 @@ object ManagementEvents {
                     val p = Repository.getPlayerByName(playerName) ?: continue
                     p.communication.contacts[event.username]?.worldId = event.world
                     PacketRepository.send(
-                        ContactPackets::class.java, ContactContext(p, event.username, event.world)
+                        ContactPackets::class.java, Context.Contact(p, event.username, event.world)
                     )
                 }
             }
@@ -139,7 +139,7 @@ object ManagementEvents {
 
                 PacketRepository.send(
                     ContactPackets::class.java,
-                    ContactContext(p, ContactContext.UPDATE_STATE_TYPE),
+                    Context.Contact(p, Context.Contact.UPDATE_STATE_TYPE),
                 )
 
                 p.communication.contacts.clear()
@@ -152,7 +152,7 @@ object ManagementEvents {
                     c.rank = ClanRank.values()[contact.rank]
                     PacketRepository.send(
                         ContactPackets::class.java,
-                        ContactContext(p, contact.username, contact.world),
+                        Context.Contact(p, contact.username, contact.world),
                     )
                 }
 
@@ -162,7 +162,7 @@ object ManagementEvents {
 
                 PacketRepository.send(
                     ContactPackets::class.java,
-                    ContactContext(p, ContactContext.IGNORE_LIST_TYPE)
+                    Context.Contact(p, Context.Contact.IGNORE_LIST_TYPE)
                 )
             }
 
@@ -183,11 +183,11 @@ object ManagementEvents {
                 if (sender != null) {
                     PacketRepository.send(
                         CommunicationMessage::class.java,
-                        MessageContext(
+                        Context.Message(
                             sender,
                             event.receiver,
                             event.rank,
-                            MessageContext.SEND_MESSAGE,
+                            Context.Message.SEND_MESSAGE,
                             event.message
                         ),
                     )
@@ -196,11 +196,11 @@ object ManagementEvents {
                 if (receiver != null) {
                     PacketRepository.send(
                         CommunicationMessage::class.java,
-                        MessageContext(
+                        Context.Message(
                             receiver,
                             event.sender,
                             event.rank,
-                            MessageContext.RECEIVE_MESSAGE,
+                            Context.Message.RECEIVE_MESSAGE,
                             event.message,
                         ),
                     )
@@ -357,11 +357,11 @@ object ManagementEvents {
                 for (member in clan.players.filter { it.player != null }) {
                     PacketRepository.send(
                         CommunicationMessage::class.java,
-                        MessageContext(
+                        Context.Message(
                             member.player,
                             event.sender,
                             event.rank,
-                            MessageContext.CLAN_MESSAGE,
+                            Context.Message.CLAN_MESSAGE,
                             event.message,
                         ),
                     )

@@ -12,7 +12,7 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
+import core.net.packet.context.Context.Camera.
 import core.net.packet.out.CameraViewPacket
 import core.tools.RandomFunction
 
@@ -43,8 +43,8 @@ class DartTrap : MovementHook {
                             Projectile.create(startProj, l, 270, 0, 10, 46, 85, 5, 11).send()
                             delay = 3
                         } else {
-                            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.POSITION, startProj.x + (dir.stepX * 4), startProj.y + (dir.stepY * 4), 350, 1, 100),)
-                            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.ROTATION, l.x, l.y, 350, 1, 100))
+                            PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.POSITION, startProj.x + (dir.stepX * 4), startProj.y + (dir.stepY * 4), 350, 1, 100),)
+                            PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.ROTATION, l.x, l.y, 350, 1, 100))
                             Projectile.create(startProj, l.transform(-dir.stepX * 4, -dir.stepY * 4, 0), 270, 0, 0, 46, 200, 5, 11).send()
                         }
                     } else if (count == 2) {
@@ -60,21 +60,21 @@ class DartTrap : MovementHook {
                                 val mod = if (dir == Direction.WEST) -1 else 1
                                 PacketRepository.send(
                                     CameraViewPacket::class.java,
-                                    CameraContext(player, CameraContext.CameraType.POSITION, l.x - (5 * mod), l.y - (5 * mod), 400, 8, 6),
+                                    Context.Camera.(player, Context.CameraCameraType.POSITION, l.x - (5 * mod), l.y - (5 * mod), 400, 8, 6),
                                 )
                                 PacketRepository.send(
                                     CameraViewPacket::class.java,
-                                    CameraContext(player, CameraContext.CameraType.ROTATION, l.x + (2 * mod), l.y, 350, 8, 1),
+                                    Context.Camera.(player, Context.CameraCameraType.ROTATION, l.x + (2 * mod), l.y, 350, 8, 1),
                                 )
                             } else {
                                 val mod = if (dir == Direction.SOUTH) -1 else 1
                                 PacketRepository.send(
                                     CameraViewPacket::class.java,
-                                    CameraContext(player, CameraContext.CameraType.POSITION, l.x + (5 * mod), l.y - (5 * mod), 400, 8, 6),
+                                    Context.Camera.(player, Context.CameraCameraType.POSITION, l.x + (5 * mod), l.y - (5 * mod), 400, 8, 6),
                                 )
                                 PacketRepository.send(
                                     CameraViewPacket::class.java,
-                                    CameraContext(player, CameraContext.CameraType.ROTATION, l.x, l.y + (2 * mod), 350, 8, 1),
+                                    Context.Camera.(player, Context.CameraCameraType.ROTATION, l.x, l.y + (2 * mod), 350, 8, 1),
                                 )
                             }
                             player.lock(7)
@@ -91,7 +91,7 @@ class DartTrap : MovementHook {
                         delay = 2
                         AgilityHandler.walk(player, -1, l, l.transform(dir.stepX shl 1, dir.stepY shl 1, 0), null, 30.0, null)
                     } else if (count == 4) {
-                        PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 0, 0, 0))
+                        PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.RESET, 0, 0, 0, 0, 0))
                         player.logoutListeners.remove("dart-trap")
                         return true
                     }

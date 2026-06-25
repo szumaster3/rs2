@@ -1,7 +1,6 @@
 package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
-import core.net.packet.Context;
 
 /**
  * The context implementation used for the InteractionOption outgoing packet.

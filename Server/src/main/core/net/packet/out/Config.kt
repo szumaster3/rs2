@@ -3,14 +3,15 @@ package core.net.packet.out
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingPacket
 import core.net.packet.context.ConfigContext
+import core.net.packet.context.Context
 
 /**
  * The config outgoing packet.
  * @author Emperor
  */
-class Config : OutgoingPacket<ConfigContext> {
+class Config : OutgoingPacket<Context.Config> {
 
-    override fun send(context: ConfigContext) {
+    override fun send(context: Context.Config) {
         val buffer: IoBuffer
         if (context.value < Byte.MIN_VALUE || context.value > Byte.MAX_VALUE) {
             buffer = IoBuffer(226)

@@ -19,6 +19,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.repository.Repository;
+import core.net.packet.context.Context;
 import core.net.packet.context.MessageContext;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
@@ -325,7 +326,7 @@ public class AIPlayer extends Player {
      *
      * @param ctx the ctx
      */
-    public void handleIncomingChat(MessageContext ctx) {
+    public void handleIncomingChat(Context.Message ctx) {
     }
 
     private ArrayList<Node> getNodeInRange(int range, int entry) {

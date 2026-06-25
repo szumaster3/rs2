@@ -1,9 +1,7 @@
 package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
-import core.game.world.map.Location;
 import core.game.world.update.flag.context.Graphics;
-import core.net.packet.Context;
 
 /**
  * The packet context for the positioned graphic packet.

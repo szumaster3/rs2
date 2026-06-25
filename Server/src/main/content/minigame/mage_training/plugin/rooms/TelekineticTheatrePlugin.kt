@@ -22,7 +22,7 @@ import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.map.path.Pathfinder
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
+import core.net.packet.context.Context.Camera.
 import core.net.packet.out.CameraViewPacket
 import core.tools.RandomFunction
 import shared.consts.Components
@@ -118,7 +118,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
                 if (player.getAttribute("camera", false)) {
                     PacketRepository.send(
                         CameraViewPacket::class.java,
-                        CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
+                        Context.Camera.(player, Context.CameraCameraType.RESET, 0, 0, 400, 1, 20),
                     )
                     player.setAttribute("camera", false)
                     return true
@@ -212,7 +212,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
         player.setAttribute("camera", false)
         PacketRepository.send(
             CameraViewPacket::class.java,
-            CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
+            Context.Camera.(player, Context.CameraCameraType.RESET, 0, 0, 400, 1, 20),
         )
         val mazeGuard = NPC.create(NPCs.MAZE_GUARDIAN_3102, base!!.transform(maze!!.endLocation))
         mazeGuard.init()
@@ -266,7 +266,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
      */
     fun observe(player: Player) {
         if (player.getAttribute("camera", false)) {
-            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20))
+            PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.RESET, 0, 0, 400, 1, 20))
             player.setAttribute("camera", false)
             return
         }
@@ -283,12 +283,12 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
             x += 11
             y += 15
             height = 799
-            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
-            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.ROTATION, x - 55, y - 25, height, 1, speed))
+            PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
+            PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.ROTATION, x - 55, y - 25, height, 1, speed))
             return
         }
-        PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
-        PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.ROTATION, x + xInc, y + yInc, height, 1, speed))
+        PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
+        PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.ROTATION, x + xInc, y + yInc, height, 1, speed))
     }
 
     /**

@@ -9,7 +9,7 @@ import core.game.world.repository.Repository;
 import core.net.amsc.MSPacketRepository;
 import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContactContext;
+import core.net.packet.context.Context;
 import core.net.packet.out.ContactPackets;
 import core.tools.Log;
 import core.tools.StringUtils;
@@ -257,10 +257,10 @@ public final class CommunicationInfo {
         Player target = Repository.getPlayerByName(contact);
         if (target != null) {
             if (showActive(player, target)) {
-                PacketRepository.send(ContactPackets.class, new ContactContext(player, contact, GameWorld.getSettings().getWorldId()));
+                PacketRepository.send(ContactPackets.class, new Context.Contact(player, contact, GameWorld.getSettings().getWorldId()));
             }
             if (player.getSettings().getPrivateChatSetting() == 1 && showActive(target, player)) {
-                PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), GameWorld.getSettings().getWorldId()));
+                PacketRepository.send(ContactPackets.class, new Context.Contact(target, player.getName(), GameWorld.getSettings().getWorldId()));
             }
         }
     }
@@ -288,7 +288,7 @@ public final class CommunicationInfo {
                 if (showActive(target, player)) {
                     worldId = GameWorld.getSettings().getWorldId();
                 }
-                PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), worldId));
+                PacketRepository.send(ContactPackets.class, new Context.Contact(target, player.getName(), worldId));
             }
         } else {
             info.contacts.remove(contact);
@@ -299,7 +299,7 @@ public final class CommunicationInfo {
             if (player.getSettings().getPrivateChatSetting() == 1) {
                 Player target = Repository.getPlayerByName(contact);
                 if (target != null) {
-                    PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), 0));
+                    PacketRepository.send(ContactPackets.class, new Context.Contact(target, player.getName(), 0));
                 }
             }
         }
@@ -330,7 +330,7 @@ public final class CommunicationInfo {
         info.blocked.add(contact);
         Player target = Repository.getPlayerByName(contact);
         if (target != null && hasContact(target, player.getName())) {
-            PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), 0));
+            PacketRepository.send(ContactPackets.class, new Context.Contact(target, player.getName(), 0));
         }
     }
 
@@ -359,7 +359,7 @@ public final class CommunicationInfo {
         if (CommunicationInfo.showActive(player, contact)) {
             worldId = c.worldId;
         }
-        PacketRepository.send(ContactPackets.class, new ContactContext(player, contact, worldId));
+        PacketRepository.send(ContactPackets.class, new Context.Contact(player, contact, worldId));
     }
 
     /**

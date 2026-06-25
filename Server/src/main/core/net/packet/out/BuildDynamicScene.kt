@@ -7,21 +7,22 @@ import core.game.world.map.build.DynamicRegion
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
+import core.net.packet.context.Context
 import core.net.packet.context.DynamicSceneContext
 
 /**
  * Represents the build dynamic scene.
  * @author Emperor
  */
-class BuildDynamicScene : OutgoingPacket<DynamicSceneContext> {
-    override fun send(context: DynamicSceneContext) {
+class BuildDynamicScene : OutgoingPacket<Context.DynamicScene> {
+    override fun send(context: Context.DynamicScene) {
         val buffer = IoBuffer(214, PacketHeader.SHORT)
         val regionIds: MutableList<Int> = ArrayList(20)
         val player = context.player
-        buffer.putLEShortA(player.location.getSceneX())
+        buffer.putLEShortA(player.location.sceneX)
         buffer.putLEShortA(player.location.regionX)
         buffer.putS(player.location.z)
-        buffer.putLEShortA(player.location.getSceneY())
+        buffer.putLEShortA(player.location.sceneY)
         buffer.setBitAccess()
         var r = player.viewport.region
         val chunks = Array(4) { Array(13) { arrayOfNulls<RegionChunk>(13) } }

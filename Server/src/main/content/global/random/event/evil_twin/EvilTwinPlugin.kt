@@ -11,7 +11,7 @@ import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
+import core.net.packet.context.Context.Camera.
 import core.net.packet.out.CameraViewPacket
 import shared.consts.Components
 import shared.consts.NPCs
@@ -63,7 +63,7 @@ class EvilTwinPlugin : InteractionListener, MapArea {
                         EvilTwinUtils.currentCrane = EvilTwinUtils.currentCrane!!.transform(EvilTwinUtils.currentCrane!!.id, EvilTwinUtils.currentCrane!!.rotation, EvilTwinUtils.region.baseLocation.transform(14, 12, 0))
                         SceneryBuilder.add(Scenery(14977, EvilTwinUtils.currentCrane?.location, 22, 0))
                         SceneryBuilder.add(EvilTwinUtils.currentCrane)
-                        PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 0, 0, 0))
+                        PacketRepository.send(CameraViewPacket::class.java, Context.Camera.(player, Context.CameraCameraType.RESET, 0, 0, 0, 0, 0))
                         true
                     }
                 )
