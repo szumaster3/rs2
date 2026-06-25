@@ -75,11 +75,11 @@ class TakeBoatDialogue() : DialogueFile() {
                         "in breach of mighty Saradomin's edict."
                     ).also { stage++ }
                 } else {
-                    npc(FaceAnim.FRIENDLY, "All is satisfactory. You may board the boat now.").also { stage = 24 }
+                    npc(FaceAnim.FRIENDLY, "All is satisfactory. You may board the boat now.").also { stage += 2 }
                 }
             }
-            23 -> npc(FaceAnim.ANGRY, "Do not try and deceive us again. Come back when you", "have liad down your Zamorakian instruments of death.").also { stage = END_DIALOGUE }
-            24 -> {
+            1 -> npc(FaceAnim.ANGRY, "Do not try and deceive us again. Come back when you", "have liad down your Zamorakian instruments of death.").also { stage = END_DIALOGUE }
+            2 -> {
                 end()
                 CharterShip.PORT_SARIM_TO_ENTRANA.sail(player!!)
             }

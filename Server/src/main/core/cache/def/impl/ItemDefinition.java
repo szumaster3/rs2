@@ -782,7 +782,7 @@ public class ItemDefinition extends Definition<Item> {
             if (name.contains(substring)) return true;
         }
         if (name.startsWith("ring") || name.startsWith("amulet")) return true;
-        int[] bonuses = getConfiguration("bonus");
+        int[] bonuses = getConfiguration(ItemConfigParser.BONUS);
         if (bonuses != null) {
             for (int bonus : bonuses) {
                 if (bonus != 0) return false;
