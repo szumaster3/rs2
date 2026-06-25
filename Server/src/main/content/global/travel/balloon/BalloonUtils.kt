@@ -341,7 +341,7 @@ object BalloonUtils {
     /**
      * Unlocks destination for player and grants reward XP if applicable.
      */
-    fun unlockDestination(player: Player, destination: BalloonTravelDefinition) {
+    private fun unlockDestination(player: Player, destination: BalloonTravelDefinition) {
         if (getVarbit(player, destination.varbitId) != 1) {
             setVarbit(player, destination.varbitId, 1, true)
 
@@ -435,8 +435,9 @@ object BalloonUtils {
         }
 
         closeInterface(player)
-        setAttribute(player, "zep_current_route", destination.ordinal)
-        setAttribute(player, "zep_current_step_${destination.ordinal}", 1)
+        val routeId = destination.ordinal + 1
+        setAttribute(player, "zep_current_route", routeId)
+        setAttribute(player, "zep_current_step_$routeId", 1)
         openInterface(player, Components.ZEP_INTERFACE_470)
 
         return true
@@ -445,7 +446,7 @@ object BalloonUtils {
     /**
      * Consumes required logs from player inventory for destination travel.
      */
-    fun consumeLogs(
+    private fun consumeLogs(
         player: Player,
         destination: BalloonTravelDefinition
     ): Boolean {
@@ -458,7 +459,7 @@ object BalloonUtils {
     /**
      * Consumes balloon charges stored in varbit.
      */
-    fun consumeCharges(
+    private fun consumeCharges(
         player: Player,
         destination: BalloonTravelDefinition
     ): Boolean {
@@ -480,7 +481,7 @@ object BalloonUtils {
     /**
      * Adds charges to player storage.
      */
-    fun addCharges(player: Player, amount: Int) {
+    private fun addCharges(player: Player, amount: Int) {
         if (amount <= 0) return
         setVarbit(player, LOGS_VARBIT, getCharges(player) + amount, true)
     }

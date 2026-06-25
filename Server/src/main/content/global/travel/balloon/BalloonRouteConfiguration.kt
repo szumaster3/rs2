@@ -110,17 +110,17 @@ object BalloonRouteConfiguration {
                 RouteStage(
                     sequence = listOf(4,4,9,5,5,5,5,5,10,9,5,5,10,5,5,9,9,5,5,5),
                     overlay = BalloonRouteDefinition::castle_wars_0,
-                    BalloonPosition(0, 0)
+                    BalloonPosition(118, 99)
                 ),
                 RouteStage(
                     sequence = listOf(9,5,5,10,6,5,5,5,5,5,5,5,4,5,6,5,5,6,5),
                     overlay = BalloonRouteDefinition::castle_wars_1,
-                    BalloonPosition(0, 0)
+                    BalloonPosition(199, 179)
                 ),
                 RouteStage(
                     sequence = listOf(9,5,5,6,5,5,5,9,10,5,5,5,5,4,10,5,5,6),
                     overlay = BalloonRouteDefinition::castle_wars_2,
-                    BalloonPosition(0, 0)
+                    BalloonPosition(159, 139)
                 )
             )
         )

@@ -294,6 +294,7 @@ object BalloonRouteDefinition {
 
     /*
      * Grand tree route stages.
+     * Author: Edie @psyopcutie
      */
 
     fun grand_tree_0(p: Player, c: Int) = balloonScreen(p, c) {
@@ -345,34 +346,324 @@ object BalloonRouteDefinition {
     }
 
     fun grand_tree_2(p: Player, c: Int) = balloonScreen(p, c) {
-        models(40 to 19713, 45 to 19714, 50 to 19715, 55 to 19716)
+        // Ground
+        models(
+            40 to 19713,
+            45 to 19714,
+            50 to 19715,
+            55 to 19716
+        )
 
-        models(78 to 19654)
-        models(99 to 19650)
-        models(98 to 19651)
-        models(79 to 19665)
-        eagles(178)
-        models(198 to 19525, 199 to 19524, 200 to 19526)
-        models(80 to 19676)
-        models(100 to 19652)
-        models(120 to 19666)
+        // Landing base
         model(97, 19567)
+
+        // Waterfall
+        models(
+            87 to 19644,
+            88 to 19645,
+            89 to 19646,
+            90 to 19647,
+            91 to 19648,
+            92 to 19649,
+            99 to 19650,
+            98 to 19651,
+            100 to 19652,
+            101 to 19653,
+            78 to 19654,
+            102 to 19655,
+            103 to 19656,
+            104 to 19657,
+            105 to 19658,
+            106 to 19659,
+            107 to 19660,
+            108 to 19660,
+            109 to 19661,
+            110 to 19662,
+            111 to 19663,
+            112 to 19664,
+            79 to 19665,
+            120 to 19666,
+            121 to 19667,
+            122 to 19668,
+            123 to 19669,
+            124 to 19670,
+            125 to 19671,
+            126 to 19672,
+            127 to 19673,
+            128 to 19674,
+            129 to 19675,
+            80 to 19676,
+            130 to 19677,
+            131 to 19678,
+            132 to 19679,
+            140 to 19680,
+            141 to 19681,
+            142 to 19682,
+            143 to 19683,
+            144 to 19684,
+            145 to 19685,
+            146 to 19686,
+            81 to 19687,
+            147 to 19688,
+            148 to 19689,
+            149 to 19690,
+            150 to 19691,
+            151 to 19692,
+            161 to 19693,
+            162 to 19694,
+            163 to 19695,
+            164 to 19696,
+            165 to 19697,
+            82 to 19698,
+            166 to 19699,
+            167 to 19700,
+            168 to 19701,
+            169 to 19702,
+            170 to 19703,
+            182 to 19704,
+            183 to 19705,
+            187 to 19706,
+            188 to 19707,
+            189 to 19708,
+            83 to 19709,
+            84 to 19710,
+            85 to 19711,
+            86 to 19712
+        )
+
+        // Clouds
+        models(
+            174 to 19525,
+            198 to 19525,
+            212 to 19525,
+
+            199 to 19524,
+            213 to 19524,
+
+            175 to 19526,
+            200 to 19526,
+            214 to 19526
+        )
+        eagles(178, 225)
     }
 
     /*
      * Castle wars route stages.
+     * Author: Edie @psyopcutie
      */
 
     fun castle_wars_0(p: Player, c: Int) = balloonScreen(p, c) {
-        models(40 to 19583, 45 to 19588, 50 to 19588, 55 to 19589)
+        // Ground
+        models(
+            40 to 19583,
+            45 to 19588,
+            50 to 19588,
+            55 to 19589
+        )
+
+        // Launch base
+        model(78, 19572)
+
+        // Trees
+        models(
+            80 to 19568,
+            100 to 19569,
+            120 to 19570
+        )
+
+        // Rocks
+        models(
+            83 to 19616,
+            84 to 19616,
+            93 to 19616,
+            85 to 19615,
+            92 to 19615,
+            105 to 19617,
+            112 to 19617
+        )
+
+        // Shark
+        model(97, 19717)
+
+        // Clouds
+        models(
+            227 to 19525, 181 to 19525, 164 to 19525, 169 to 19525, 212 to 19525, 175 to 19525,
+            228 to 19524, 182 to 19524, 165 to 19524, 213 to 19524, 176 to 19524,
+            229 to 19526, 183 to 19526, 166 to 19526, 170 to 19526, 214 to 19526, 177 to 19526
+        )
+
+        eagles(140, 147, 207, 130, 193, 136)
     }
 
     fun castle_wars_1(p: Player, c: Int) = balloonScreen(p, c) {
-        models(40 to 19590, 45 to 19591, 50 to 19592, 55 to 19593)
+        // Ground
+        models(
+            40 to 19590,
+            45 to 19591,
+            50 to 19592,
+            55 to 19593
+        )
+
+        // Trees
+        models(
+            95 to 19568,
+            115 to 19569,
+            135 to 19570,
+
+            87 to 19519,
+            88 to 19519,
+
+            107 to 19521,
+            108 to 19521,
+
+            89 to 19575,
+            90 to 19574,
+            91 to 19577,
+
+            109 to 19579,
+            110 to 19576,
+            111 to 19581,
+
+            129 to 19580,
+            130 to 19578,
+            131 to 19582,
+
+            92 to 19599,
+            96 to 19599,
+
+            112 to 19600,
+            116 to 19600,
+
+            132 to 19601,
+            136 to 19601,
+
+            93 to 19639,
+            113 to 19640,
+            133 to 19641,
+            153 to 19642,
+            173 to 19643
+        )
+
+        // Rocks
+        models(
+            85 to 19616,
+            86 to 19616
+        )
+
+        // Shark
+        model(79, 19717)
+
+        // Clouds
+        models(
+            140 to 19525,
+            180 to 19525,
+            189 to 19525,
+            203 to 19525,
+            215 to 19525,
+            228 to 19525,
+
+            141 to 19524,
+            158 to 19524,
+            190 to 19524,
+            204 to 19524,
+            216 to 19524,
+            229 to 19524,
+            230 to 19524,
+
+            142 to 19526,
+            159 to 19526,
+            181 to 19526,
+            191 to 19526,
+            205 to 19526,
+            217 to 19526,
+            231 to 19526
+        )
+        animated(152, 19781, 373)
+        animated(156, 19781, 373)
+
+        // Birds
+        eagles(118, 197)
     }
 
     fun castle_wars_2(p: Player, c: Int) = balloonScreen(p, c) {
-        models(40 to 19594, 45 to 19584, 50 to 19585, 55 to 19586)
+        // Ground
+        models(
+            40 to 19594,
+            45 to 19584,
+            50 to 19585,
+            55 to 19586
+        )
+
+        // Landing base
         model(97, 19567)
-    }
+
+        // Trees
+        models(
+            78 to 19599,
+            86 to 19599,
+            87 to 19599,
+
+            99 to 19600,
+            106 to 19600,
+            107 to 19600,
+
+            118 to 19601,
+            126 to 19601,
+            127 to 19601,
+
+            80 to 19568,
+            93 to 19568,
+
+            100 to 19569,
+            113 to 19569,
+
+            120 to 19570,
+            133 to 19570,
+
+            83 to 19575,
+            84 to 19574,
+            85 to 19577,
+
+            103 to 19579,
+            104 to 19576,
+            105 to 19581,
+
+            123 to 19580,
+            124 to 19578,
+            125 to 19582,
+
+            92 to 19519,
+            112 to 19521
+        )
+
+        // Clouds
+        models(
+            170 to 19525,
+            183 to 19525,
+            208 to 19525,
+            215 to 19525,
+            222 to 19525,
+
+            171 to 19524,
+            184 to 19524,
+            185 to 19524,
+            198 to 19524,
+            209 to 19524,
+            210 to 19524,
+            216 to 19524,
+
+            172 to 19526,
+            186 to 19526,
+            199 to 19526,
+            211 to 19526,
+            217 to 19526,
+            223 to 19526
+        )
+
+        // Birds
+        eagles(140, 153, 179)
+
+        animated(138, 19781, 373)
+        animated(147, 19781, 373)
+     }
 }

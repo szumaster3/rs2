@@ -1,5 +1,6 @@
 package content.global.travel.balloon
 
+import core.Util.random
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
@@ -63,12 +64,33 @@ class BalloonFlightInterface : InterfaceListener, Commands {
                 else -> null
             }
 
-            if (buttonID == 8 || buttonID != sequence.getOrNull(index) || move == null) {
+            /*
+             * Bail out.
+             */
+
+            if (buttonID == 8) {
                 BalloonUtils.clearBalloonState(player, routeId, step)
                 closeInterface(player)
                 closeSingleTab(player)
+                sendMessage(player, "You bail, but land safely on Entrana.")
                 return@on true
             }
+
+            /*
+             * Wrong sequence.
+             */
+
+            if (buttonID != sequence.getOrNull(index) || move == null) {
+                BalloonUtils.clearBalloonState(player, routeId, step)
+
+                when (random(1)) {
+                    0 -> BalloonCrashHandler.crashAtOceanSite(player)
+                    else -> BalloonCrashHandler.crashAtWoodlandSite(player, BalloonCrashHandler.WoodlandExit.values().random())
+                }
+
+                return@on true
+            }
+
             BalloonUtils.getSoundForButton(player, buttonID)
             BalloonUtils.drawBalloon(player, move, routeId, step)
 
@@ -134,7 +156,7 @@ class BalloonFlightInterface : InterfaceListener, Commands {
         define(
             name = "finbal",
             privilege = Privilege.ADMIN,
-            usage = "::bfinbal",
+            usage = "::finbal",
             description = "Enable balloon traveling."
         ) { player, _ ->
             finishQuest(player, Quests.ENLIGHTENED_JOURNEY)

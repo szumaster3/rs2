@@ -88,7 +88,7 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
          * Handles fly option for service NPCs.
          */
 
-        on(ASSISTANT_NPC_IDS, IntType.NPC, "Fly") { player, node ->
+        on(ASSISTANT_NPC_IDS + 5049, IntType.NPC, "Fly") { player, node ->
             if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY)) {
                 sendMessage(player, "You must complete ${Quests.ENLIGHTENED_JOURNEY} before you can use it.")
                 return@on true

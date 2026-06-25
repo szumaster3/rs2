@@ -190,6 +190,7 @@ class ServerConstants {
                 arrayOf(Location.create(3069, 10257, 0), "king black dragon", "kbd"),
                 arrayOf(Location.create(3359, 3416, 0), "digsite"),
                 arrayOf(Location.create(3488, 3489, 0), "canifis"),
+                arrayOf(Location.create(2809, 3350, 0), "entrana"),
                 arrayOf(Location.create(3428, 3526, 0), "slayer tower", "slayer"),
                 arrayOf(Location.create(3502, 9483, 2), "kalphite queen", "kq", "kalphite hive", "kalphite"),
                 arrayOf(Location.create(3233, 2913, 0), "pyramid"),

@@ -79360,7 +79360,7 @@
     "id": "5066"
   },
   {
-    "examine": "I'd better be careful eating this.",
+    "examine": "Arghhh!!! Run away!",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -79378,7 +79378,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "I'd better be careful eating this.",
+    "examine": "Arghhh!!! Run away!",
     "name": "Shark",
     "defence_level": "1",
     "safespot": null,
@@ -79390,7 +79390,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "I'd better be careful eating this.",
+    "examine": "Arghhh!!! Run away!",
     "name": "Shark",
     "defence_level": "1",
     "safespot": null,

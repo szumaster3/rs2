@@ -15546,5 +15546,33 @@
   {
     "examine": "The wine merchant's stall.",
     "ids": "14011"
+  },
+  {
+    "examine": "What remains of the balloon...",
+    "ids": "19156"
+  },
+  {
+    "examine": "What remains of the basket.",
+    "ids": "19161"
+  },
+  {
+    "examine": "What remains of the balloon...",
+    "ids": "19162"
+  },
+  {
+    "examine": "What remains of the balloon...",
+    "ids": "19164"
+  },
+  {
+    "examine": "A commonly found tree.",
+    "ids": "19165"
+  },
+  {
+    "examine": "A commonly found tree.",
+    "ids": "19166"
+  },
+  {
+    "examine": "A commonly found tree.",
+    "ids": "19167"
   }
 ]
