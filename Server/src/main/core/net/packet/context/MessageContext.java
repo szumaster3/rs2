@@ -2,7 +2,6 @@ package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import core.net.packet.Context;
 
 /**
  * Packet context for communication message packets.

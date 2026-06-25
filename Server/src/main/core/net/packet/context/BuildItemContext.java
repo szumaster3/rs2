@@ -2,7 +2,6 @@ package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.net.packet.Context;
 
 /**
  * Represents the build item packet context, <br> which is used for

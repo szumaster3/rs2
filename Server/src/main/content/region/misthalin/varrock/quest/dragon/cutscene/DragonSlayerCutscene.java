@@ -17,7 +17,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
+import core.net.packet.context.Context;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
@@ -82,9 +82,9 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
     public void open() {
         player.lock();
         player.getDialogueInterpreter().open(918, npcs.get(0), this);
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 11, player.getLocation().getY() + 1, 190, 1, 100));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 3, player.getLocation().getY(), 190, 1, 100));
-        bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 7, player.getLocation().getY() - 3, 250, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 4, player.getLocation().getY(), 210, 1, 1));
+        PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 11, player.getLocation().getY() + 1, 190, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() + 3, player.getLocation().getY(), 190, 1, 100));
+        bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 7, player.getLocation().getY() - 3, 250, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() + 4, player.getLocation().getY(), 210, 1, 1));
     }
 
     @Override
@@ -102,7 +102,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
         setVarp(player, 176, 8);
         player.getSavedData().questData.setDragonSlayerPlanks(0);
         PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, player.getLocation().getX() + 13, player.getLocation().getY() - 3, 250, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.RESET, player.getLocation().getX() + 13, player.getLocation().getY() - 3, 250, 1, 100));
         player.lock(3);
     }
 
@@ -117,7 +117,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
      * @param position the position
      * @param rotation the rotation
      */
-    public void bob(final CameraContext position, final CameraContext rotation) {
+    public void bob(final Context.Camera position, final Context.Camera rotation) {
         PacketRepository.send(CameraViewPacket.class, position);
         PacketRepository.send(CameraViewPacket.class, rotation);
         if (bobinPulse.position == null || bobinPulse.rotation == null) {
@@ -137,9 +137,9 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
          */
         boolean alternate = false;
 
-        private CameraContext position = null;
+        private Context.Camera position = null;
 
-        private CameraContext rotation = null;
+        private Context.Camera rotation = null;
 
         private int counter = 0;
 
@@ -291,12 +291,12 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                 case 30:
                     switch (stage) {
                         case 500:
-                            ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 6, player.getLocation().getY() - 3, 350, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 2, player.getLocation().getY(), 190, 1, 1));
+                            ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 6, player.getLocation().getY() - 3, 350, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() + 2, player.getLocation().getY(), 190, 1, 1));
                             npc("And this is a mighty fine ship. She don't look much, but", "she handles like a dream.");
                             stage = 501;
                             break;
                         case 501:
-                            ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 5, player.getLocation().getY() - 3, 350, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 350, 1, 1));
+                            ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 5, player.getLocation().getY() - 3, 350, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 350, 1, 1));
                             player.face(npc);
                             npc.face(player);
                             player("How much longer until we reach Crandor?");
@@ -315,15 +315,15 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                                     player.getInterfaceManager().close();
                                     interpreter.sendDialogues(6085, null, "Looks like theres a storm coming up, cap'n. Soon we", "won't be able to see anything!");
                                     stage = 504;
-                                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 8, player.getLocation().getY() + 15, 1200, 1, 100));
-                                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX(), player.getLocation().getY(), 1200, 1, 100));
-                                    ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 5, player.getLocation().getY() + 18, 1200, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 2, player.getLocation().getY(), 1200, 1, 1));
+                                    PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 8, player.getLocation().getY() + 15, 1200, 1, 100));
+                                    PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX(), player.getLocation().getY(), 1200, 1, 100));
+                                    ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 5, player.getLocation().getY() + 18, 1200, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 2, player.getLocation().getY(), 1200, 1, 1));
                                     return true;
                                 }
                             });
                             break;
                         case 504:
-                            ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() - 2, player.getLocation().getY() + 14, 1000, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 2, player.getLocation().getY() - 50, 1000, 1, 1));
+                            ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() - 2, player.getLocation().getY() + 14, 1000, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 2, player.getLocation().getY() - 50, 1000, 1, 1));
                             npc("Oh, well. The weather has been so good up until now.");
                             stage = 505;
                             break;
@@ -348,9 +348,9 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                             stage = 508;
                             break;
                         case 508:
-                            PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 7, player.getLocation().getY() + 2, 400, 1, 100));
-                            PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 100));
-                            ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 8, player.getLocation().getY() + 5, 400, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 1));
+                            PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 7, player.getLocation().getY() + 2, 400, 1, 100));
+                            PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 100));
+                            ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 8, player.getLocation().getY() + 5, 400, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 1));
                             close();
                             player.getPacketDispatch().sendPositionedGraphic(446, 70, 1, cutscene.getBase().transform(37, 5, 1));
                             player.getPacketDispatch().sendPositionedGraphic(446, 70, 2, cutscene.getBase().transform(36, 5, 1));
@@ -385,9 +385,9 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                                 public boolean pulse() {
                                     switch (counter++) {
                                         case 2:
-                                            PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 5, player.getLocation().getY() + 2, 400, 1, 100));
-                                            PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 100));
-                                            ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 7, player.getLocation().getY() + 2, 400, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 1));
+                                            PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 5, player.getLocation().getY() + 2, 400, 1, 100));
+                                            PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 100));
+                                            ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 7, player.getLocation().getY() + 2, 400, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 1));
 
                                             player.getPacketDispatch().sendPositionedGraphic(446, 20, 2, cutscene.getBase().transform(38, 7, 1));
                                             player.getPacketDispatch().sendPositionedGraphic(446, 20, 1, cutscene.getBase().transform(37, 7, 1));
@@ -414,9 +414,9 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                                             cutscene.getNPCS().get(1).getImpactHandler().manualHit(player, 10, HitsplatType.NORMAL);
                                             break;
                                         case 10:
-                                            PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 13, player.getLocation().getY() + 2, 400, 1, 40));
-                                            PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 40));
-                                            ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 2, 400, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 4, player.getLocation().getY(), 400, 1, 1));
+                                            PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 13, player.getLocation().getY() + 2, 400, 1, 40));
+                                            PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 3, player.getLocation().getY(), 400, 1, 40));
+                                            ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 2, 400, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() - 4, player.getLocation().getY(), 400, 1, 1));
                                             npc("We're going to sink!");
                                             stage = 510;
                                             return true;
@@ -427,7 +427,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                             break;
                         case 510:
                             player("Look! Land ahead!");
-                            ((DragonSlayerCutscene) cutscene).bob(new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 3, 350, 1, 1), new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 70, player.getLocation().getY() - 30, 350, 1, 1));
+                            ((DragonSlayerCutscene) cutscene).bob(new Context.Camera(player, Context.Camera.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 3, 350, 1, 1), new Context.Camera(player, Context.Camera.CameraType.ROTATION, player.getLocation().getX() + 70, player.getLocation().getY() - 30, 350, 1, 1));
                             player.face(npc);
                             stage = 511;
                             break;
@@ -440,7 +440,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                         case 512:
                             setAttribute(player, "real-end", CharterShip.PORT_SARIM_TO_CRANDOR.getLocation());
                             setAttribute(player, "cutscene:original-loc", CharterShip.PORT_SARIM_TO_CRANDOR.getLocation());
-                            PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1200, 4, 4));
+                            PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.SHAKE, 4, 4, 1200, 4, 4));
                             player.getDialogueInterpreter().sendPlainMessage(true, "<col=8A0808>CRASH!");
                             cutscene.stop(true);
                             finished = true;

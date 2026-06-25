@@ -5,7 +5,7 @@ import core.game.container.Container;
 import core.game.container.ContainerEvent;
 import core.game.node.entity.player.Player;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
+import core.net.packet.context.Context;
 import core.net.packet.out.ContainerPacket;
 
 /**
@@ -21,12 +21,12 @@ public final class BurdenContainerListener implements ContainerListener {
 
 	@Override
 	public void update(Container c, ContainerEvent event) {
-		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 30, event.getItems(), false, event.getSlots()));
+		PacketRepository.send(ContainerPacket.class, new Context.ContainerContext(player, -1, -2, 30, event.getItems(), false, event.getSlots()));
 	}
 
 	@Override
 	public void refresh(Container c) {
-		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 30, c.toArray(), c.capacity(), false));
+		PacketRepository.send(ContainerPacket.class, new Context.ContainerContext(player, -1, -2, 30, c.toArray(), c.capacity(), false));
 	}
 
 }

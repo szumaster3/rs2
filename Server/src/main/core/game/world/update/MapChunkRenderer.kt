@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.RegionChunk
 import core.net.packet.PacketRepository
 import core.net.packet.context.ClearChunkContext
+import core.net.packet.context.Context
 import core.net.packet.out.ClearRegionChunk
 
 /**
@@ -28,7 +29,7 @@ object MapChunkRenderer {
             for (y in 0 until sizeY) {
                 val previous = last[x][y] ?: continue
                 if (!containsChunk(current, previous)) {
-                    PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
+                    PacketRepository.send(ClearRegionChunk::class.java, Context.ClearChunk(player, previous))
                 } else {
                     updated.add(previous)
                 }

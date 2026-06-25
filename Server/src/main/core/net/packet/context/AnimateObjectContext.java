@@ -2,7 +2,6 @@ package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
 import core.game.world.update.flag.context.Animation;
-import core.net.packet.Context;
 
 /**
  * Represents the context of animating an object.

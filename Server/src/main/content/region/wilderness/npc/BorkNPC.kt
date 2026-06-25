@@ -27,7 +27,7 @@ import core.game.world.map.build.DynamicRegion
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
+import core.net.packet.context.Context.Camera.
 import core.net.packet.out.CameraViewPacket
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
@@ -109,7 +109,7 @@ class BorkNPC : AbstractNPC {
 
                     PacketRepository.send(
                         CameraViewPacket::class.java,
-                        CameraContext(player!!, CameraContext.CameraType.SHAKE, 3, 2, 2, 2, 2),
+                        Context.Camera.(player!!, Context.CameraCameraType.SHAKE, 3, 2, 2, 2, 2),
                     )
                     player!!.interfaceManager.restoreTabs()
                     setMinimapState(player!!, 0)
@@ -354,7 +354,7 @@ class BorkNPC : AbstractNPC {
             if (entity is Player) {
                 PacketRepository.send(
                     CameraViewPacket::class.java,
-                    CameraContext(entity.asPlayer(), CameraContext.CameraType.RESET, 3, 2, 2, 2, 2),
+                    Context.Camera.(entity.asPlayer(), Context.CameraCameraType.RESET, 3, 2, 2, 2, 2),
                 )
             }
             return super.leave(entity, logout)

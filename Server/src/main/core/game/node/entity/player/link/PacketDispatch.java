@@ -11,7 +11,7 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.*;
+import core.net.packet.context.Context;
 import core.net.packet.context.DisplayModelContext.ModelType;
 import core.net.packet.out.*;
 import core.tools.Log;
@@ -35,7 +35,7 @@ public final class PacketDispatch {
     /**
      * The player context.
      */
-    private final PlayerContext context;
+    private final Context.PlayerContext context;
 
     /**
      * Constructs a new {@code PacketDispatch} {@code Object}.
@@ -44,11 +44,11 @@ public final class PacketDispatch {
      */
     public PacketDispatch(Player player) {
         this.player = player;
-        this.context = new PlayerContext(player);
+        this.context = new Context.PlayerContext(player);
     }
 
     public void sendVarp(int index, int value) {
-        PacketRepository.send(Config.class, new ConfigContext(player, index, value));
+        PacketRepository.send(Config.class, new Context.Config(player, index, value));
     }
 
     public void sendVarcUpdate(short index, int value) {
@@ -129,7 +129,17 @@ public final class PacketDispatch {
      * @param length       The access mask length.
      */
     public void sendIfaceSettings(int settingsHash, int childId, int interfaceId, int offset, int length) {
-        PacketRepository.send(AccessMask.class, new AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length));
+        PacketRepository.send(
+                AccessMask.class,
+                new Context.AccessMask(
+                        player,
+                        interfaceId,
+                        childId,
+                        length,
+                        offset,
+                        settingsHash
+                )
+        );
     }
 
     /**

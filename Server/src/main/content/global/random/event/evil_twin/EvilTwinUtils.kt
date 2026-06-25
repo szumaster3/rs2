@@ -14,7 +14,7 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
+import core.net.packet.context.Context.Camera.
 import core.net.packet.out.CameraViewPacket
 import core.tools.RandomFunction
 import shared.consts.*
@@ -147,11 +147,11 @@ object EvilTwinUtils {
                     val l = entity.location
                     PacketRepository.send(
                         CameraViewPacket::class.java,
-                        CameraContext(player, CameraContext.CameraType.POSITION, l.x + 2, l.y + 3, 520, 1, 5)
+                        Context.Camera.(player, Context.CameraCameraType.POSITION, l.x + 2, l.y + 3, 520, 1, 5)
                     )
                     PacketRepository.send(
                         CameraViewPacket::class.java,
-                        CameraContext(player, CameraContext.CameraType.ROTATION, l.x - 3, l.y - 3, 420, 1, 5)
+                        Context.Camera.(player, Context.CameraCameraType.ROTATION, l.x - 3, l.y - 3, 420, 1, 5)
                     )
                 }
             }
@@ -179,13 +179,13 @@ object EvilTwinUtils {
             var loc = region.baseLocation.transform(14, 20, 0)
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(player, CameraContext.CameraType.POSITION, loc.x, loc.y, 520, 1, 100)
+                Context.Camera.(player, Context.CameraCameraType.POSITION, loc.x, loc.y, 520, 1, 100)
             )
             loc =
                 region.baseLocation.transform(x, 4 + y - (if (x < 14 || x > 14) (y / 4) else 0), 0)
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(player, CameraContext.CameraType.ROTATION, loc.x, loc.y, 420, 1, 100)
+                Context.Camera.(player, Context.CameraCameraType.ROTATION, loc.x, loc.y, 420, 1, 100)
             )
         }
         setAttribute(player, CRANE_X_LOC, x)

@@ -14,7 +14,7 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.path.Pathfinder
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
+import core.net.packet.context.Context.Camera.
 import core.net.packet.out.CameraViewPacket
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
@@ -762,13 +762,13 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 val ll = cutscene!!.base.transform(21, 36, 0)
                 val x = ll.x
                 val y = ll.y
-                var rot: CameraContext? = null
-                var pos: CameraContext? = null
+                var rot: Context.Camera.? = null
+                var pos: Context.Camera.? = null
                 val height = 450
                 val speed = 55
                 val other = 1
-                pos = CameraContext(player, CameraContext.CameraType.POSITION, x + 3, y + 4, height, other, speed)
-                rot = CameraContext(player, CameraContext.CameraType.ROTATION, x - 1, y - 2, height, other, speed)
+                pos = Context.Camera.(player, Context.CameraCameraType.POSITION, x + 3, y + 4, height, other, speed)
+                rot = Context.Camera.(player, Context.CameraCameraType.ROTATION, x - 1, y - 2, height, other, speed)
                 PacketRepository.send(CameraViewPacket::class.java, pos)
                 PacketRepository.send(CameraViewPacket::class.java, rot)
                 Pulser.submit(
@@ -776,13 +776,13 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                         override fun pulse(): Boolean {
                             val x = player.location.x
                             val y = player.location.y
-                            var rot: CameraContext? = null
-                            var pos: CameraContext? = null
+                            var rot: Context.Camera.? = null
+                            var pos: Context.Camera.? = null
                             val height = 450
                             val speed = 100
                             val other = 1
-                            pos = CameraContext(player, CameraContext.CameraType.POSITION, x - 5, y - 4, height, other, speed)
-                            rot = CameraContext(player, CameraContext.CameraType.ROTATION, x + 2, y, height, other, speed)
+                            pos = Context.Camera.(player, Context.CameraCameraType.POSITION, x - 5, y - 4, height, other, speed)
+                            rot = Context.Camera.(player, Context.CameraCameraType.ROTATION, x + 2, y, height, other, speed)
                             PacketRepository.send(CameraViewPacket::class.java, pos!!)
                             PacketRepository.send(CameraViewPacket::class.java, rot!!)
                             interpreter.sendDialogues(
@@ -809,8 +809,8 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 val height = 330
                 val speed = 100
                 val other = 1
-                val pos = CameraContext(player, CameraContext.CameraType.POSITION, x, y - 1, height, other, speed)
-                val rot = CameraContext(player, CameraContext.CameraType.ROTATION, x + 20, y + 50, height, other, speed)
+                val pos = Context.Camera.(player, Context.CameraCameraType.POSITION, x, y - 1, height, other, speed)
+                val rot = Context.Camera.(player, Context.CameraCameraType.ROTATION, x + 20, y + 50, height, other, speed)
                 PacketRepository.send(CameraViewPacket::class.java, pos)
                 PacketRepository.send(CameraViewPacket::class.java, rot)
                 close()

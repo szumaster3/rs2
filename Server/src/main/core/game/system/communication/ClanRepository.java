@@ -11,6 +11,7 @@ import core.game.world.repository.Repository;
 import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ClanContext;
+import core.net.packet.context.Context;
 import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.UpdateClanChat;
@@ -210,7 +211,7 @@ public final class ClanRepository {
             if (p != null) {
                 PacketRepository.send(
                         CommunicationMessage.class,
-                        new MessageContext(
+                        new Context.Message(
                                 p,
                                 player.getName(),
                                 Rights.getChatIcon(player),
@@ -249,7 +250,7 @@ public final class ClanRepository {
         for (ClanEntry e : players) {
             PacketRepository.send(
                     CommunicationMessage.class,
-                    new MessageContext(
+                    new Context.Message(
                             e.getPlayer(),
                             player.getName(),
                             Rights.getChatIcon(player),

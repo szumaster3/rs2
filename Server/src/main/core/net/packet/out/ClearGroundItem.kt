@@ -3,14 +3,14 @@ package core.net.packet.out
 import core.game.node.item.Item
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.BuildItemContext
+import core.net.packet.context.Context
 
 /**
  * Represents the outgoing packet of clearing ground items.
  * @author Emperor
  */
-class ClearGroundItem : OutgoingPacket<BuildItemContext> {
-    override fun send(context: BuildItemContext) {
+class ClearGroundItem : OutgoingPacket<Context.BuildItem> {
+    override fun send(context: Context.BuildItem) {
         val player = context.player
         val item = context.item
         val buffer = write(UpdateAreaPosition.getBuffer(player, item.location.chunkBase), item)

@@ -17,7 +17,7 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
+import core.net.packet.context.Context.Camera.
 import core.net.packet.out.CameraViewPacket
 import shared.consts.*
 
@@ -213,7 +213,7 @@ class MonkeyMadnessPlugin : InteractionListener {
 
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 0, 4, 4),
+                Context.Camera.(player, Context.CameraCameraType.SHAKE, 4, 4, 0, 4, 4),
             )
 
             teleport(player, Location.create(2705, 9175, 1))

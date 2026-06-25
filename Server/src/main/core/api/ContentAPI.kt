@@ -1244,7 +1244,7 @@ fun sendAnimation(
  */
 @JvmOverloads
 fun playAudio(player: Player, id: Int, delay: Int = 0, loops: Int = 1, location: Location? = null, radius: Int = Audio.defaultAudioRadius) {
-    PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(id, delay, loops, radius), location))
+    PacketRepository.send(AudioPacket::class.java, Context.Default(player, Audio(id, delay, loops, radius), location ?: player.location))
 }
 
 /**
@@ -1260,7 +1260,7 @@ fun playAudio(player: Player, id: Int, delay: Int = 0, loops: Int = 1, location:
 fun playGlobalAudio(location: Location, id: Int, delay: Int = 0, loops: Int = 1, radius: Int = Audio.defaultAudioRadius) {
     val nearbyPlayers = RegionManager.getLocalPlayers(location, radius)
     for (player in nearbyPlayers) {
-        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(id, delay, loops, radius), location))
+        PacketRepository.send(AudioPacket::class.java, Context.Default(player, Audio(id, delay, loops, radius), location))
     }
 }
 
@@ -4921,7 +4921,14 @@ fun sendIfaceSettings(
     offset: Int,
     length: Int
 ) {
-    PacketRepository.send(AccessMask::class.java, AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length))
+    PacketRepository.send(AccessMask::class.java, Context.AccessMask(
+        player,
+        interfaceId,
+        childId,
+        length,
+        offset,
+        settingsHash
+    ))
 }
 
 /**

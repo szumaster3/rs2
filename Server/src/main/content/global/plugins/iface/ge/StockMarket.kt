@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ConfigContext
-import core.net.packet.context.ContainerContext
+import core.net.packet.context.Context
 import core.net.packet.out.Config
 import core.net.packet.out.ContainerPacket
 import core.tools.Log
@@ -368,7 +368,7 @@ class StockMarket : InterfaceListener {
             if (offer != null) {
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, -1, -1757, 523 + offer.index, offer.withdraw, false)
+                    Context.ContainerContext(player, -1, -1757, 523 + offer.index, offer.withdraw, false)
                 )
             }
         }

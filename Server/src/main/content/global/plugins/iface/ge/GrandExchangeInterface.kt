@@ -14,7 +14,7 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
+import core.net.packet.context.Context
 import core.net.packet.out.ContainerPacket
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -158,7 +158,7 @@ class GrandExchangeInterface : ComponentPlugin() {
                     sendMessage(player, "You successfully traded your item components for a set!")
                 }
                 playAudio(player, Sounds.GE_TRADE_OK_4044)
-                PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -2, player.getAttribute("container-key", 93), player.inventory, false))
+                PacketRepository.send(ContainerPacket::class.java, Context.ContainerContext(player, -1, -2, player.getAttribute("container-key", 93), player.inventory, false))
             }
 
             155 -> {

@@ -14,7 +14,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
+import core.net.packet.context.Context;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -24,7 +24,7 @@ import shared.consts.NPCs;
 import static core.api.ContentAPIKt.setAttribute;
 
 /**
- * The type Grand exchange cutscene.
+ * The Grand exchange cutscene.
  */
 @Initializable
 public final class GrandExchangeCutscene extends CutscenePlugin {
@@ -86,8 +86,8 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
     }
 
     private static void camera(final Player player, int x, int y, int xRot, int yRot, int height, int speed) {
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, speed));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, x + xRot, y + yRot, height, 1, speed));
+        PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.POSITION, x, y, height, 1, speed));
+        PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.ROTATION, x + xRot, y + yRot, height, 1, speed));
     }
 
     private void camera(int x, int y, int xRot, int yRot, int height, int speed) {
@@ -203,7 +203,7 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
                     stage = 102;
                     break;
                 case 102:
-                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 580, 1, 100));
+                    PacketRepository.send(CameraViewPacket.class, new Context.Camera(player, Context.Camera.CameraType.RESET, 0, 0, 580, 1, 100));
                     final CutscenePlugin cutscene = player.getAttribute("ge-cutscene", null);
                     cutscene.stop(false);
                     player.getSavedData().globalData.setGeTutorial(true);

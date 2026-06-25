@@ -1,7 +1,6 @@
 package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
-import core.net.packet.Context;
 
 /**
  * Represents a camera context.
@@ -58,7 +57,7 @@ public final class CameraContext implements Context {
      * @param zoomSpeed The zoom speed.
      * @param speed     The speed.
      */
-    public CameraContext(Player player, CameraType type, int x, int y, int height, int speed, int zoomSpeed) {
+    public Context.Camera(Player player, CameraType type, int x, int y, int height, int speed, int zoomSpeed) {
         this.player = player;
         this.type = type;
         this.x = x;
@@ -76,7 +75,7 @@ public final class CameraContext implements Context {
      * @return the new context.
      */
     public CameraContext transform(final Player player, final int x, final int y) {
-        return new CameraContext(player, type, this.x + x, this.y + y, height, speed, zoomSpeed);
+        return new Context.Camera(player, type, this.x + x, this.y + y, height, speed, zoomSpeed);
     }
 
     /**
@@ -86,7 +85,7 @@ public final class CameraContext implements Context {
      * @return the new context.
      */
     public CameraContext transform(final int heightOffset) {
-        return new CameraContext(player, type, x, y, height + heightOffset, speed, zoomSpeed);
+        return new Context.Camera(player, type, x, y, height + heightOffset, speed, zoomSpeed);
     }
 
     @Override
