@@ -82,6 +82,7 @@ abstract class SkillingTask<T : Node>(
      */
     open fun stopTask() {
         stopExecuting(player)
-        resetAnimator(player)
+        //resetAnimator(player)
     }
+
 }
