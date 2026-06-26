@@ -29,7 +29,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
         val hasSandbags = inInventory(player!!, Items.SANDBAG_9943, 8)
         val hasSilk = inInventory(player!!, Items.SILK_950, 10)
         val hasBowl = inInventory(player!!, Items.UNFIRED_BOWL_1791, 1)
-        val hasSapling = inInventory(player, Items.AUGUSTES_SAPLING_9932) && inBank(player, Items.AUGUSTES_SAPLING_9932)
+        val hasSapling = inInventory(player, Items.AUGUSTES_SAPLING_9932) || inBank(player, Items.AUGUSTES_SAPLING_9932)
         val hasGogglesAndCap = inInventory(player, Items.BOMBER_CAP_9945, Items.GNOME_GOGGLES_9472)
 
         when (getQuestStage(player, Quests.ENLIGHTENED_JOURNEY)) {
@@ -276,12 +276,12 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         removeItem(player, Item(Items.YELLOW_DYE_1765, 1))
                         setGiven(player, "ej-dye-yellow")
                         npcl(FaceAnim.FRIENDLY, "Ah, wonderful, yellow dye. Thank you.")
-                        stage = if (hasGiven(player, "ej-red-dye")) 3 else 7
+                        stage = if (hasGiven(player, "ej-dye-red")) 3 else 7
                     } else if (hasRed && !gaveRed) {
                         removeItem(player, Item(Items.RED_DYE_1763, 1))
                         setGiven(player, "ej-dye-red")
                         npcl(FaceAnim.FRIENDLY, "Red dye! Thank you.")
-                        stage = if (hasGiven(player, "ej-yellow-dye")) 3 else 8
+                        stage = if (hasGiven(player, "ej-dye-yellow")) 3 else 8
                     } else if (!hasYellow && !hasRed) {
                         when {
                             !gaveYellow && !gaveRed -> npcl(FaceAnim.FRIENDLY, "You don't have any dye with you.").also { stage = 9 }
