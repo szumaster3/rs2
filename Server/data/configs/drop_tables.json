@@ -19835,7 +19835,14 @@
     ]
   },
   {
-    "default": [],
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
     "charm": [],
     "ids": "1307",
     "description": "Borrokar (level: 48)",
@@ -59794,5 +59801,33 @@
         "maxAmount": "1"
       }
     ]
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1329",
+    "description": "Black unicorn Foal (level: 22)",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1328",
+    "description": "Unicorn Foal (level: 12)",
+    "main": []
   }
 ]
