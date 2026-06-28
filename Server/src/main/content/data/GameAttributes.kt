@@ -23,38 +23,19 @@ internal object GameAttributes {
     const val PRAYER_LOCK = "prayer:lock"
 
     // Construction skill.
-    const val CON = "con"
-    const val PORTAL = "portal"
     const val CON_HOTSPOT = "con:hotspot"
     const val POH_PORTAL = "poh_entry"
-    const val CON_OBJ = "construction:objs"
-    const val CON_CLOCKMAKER_DIAL = "construction:clockbench"
     const val CON_PORTAL_DIR = "con:directportal"
     const val CON_GAZE_INTO = "con:gaze-into"
-    const val CON_REMOVE_DECO = "construction:remove_decoration"
-    const val CON_TOOLS = "construction:tools"
-    const val CON_ROOM = "construction:room"
-    const val CON_REMOVE = "construction:remove_dialogue"
     const val CON_SERVANT_CALL = "con:call"
-    const val CON_LAST_TASK = "construction:servant_last_task"
-    const val CON_TASK = "construction:servant_task"
     const val CON_FLATPACK_TIER = "construction:flatpack:tier"
     const val CON_LECTERN_OBJECT = "ttb:objectid"
 
     const val FAMILY_CREST = "/save:construction:family_crest"
 
     // Basic random event attributes.
-    const val RE = "random"
     const val RE_PAUSE = "random:pause"
     const val RE_LOCK = "random:locked"
-    const val RE_REWARD = "random:reward"
-
-
-    // Prison pete random event.
-    const val RE_PRISON_1 = "/save:random:prison_pete_start"
-    const val RE_PRISON_2 = "/save:random:prison_pete_index"
-    const val RE_PRISON_3 = "/save:random:prison_pete_interactions"
-    const val RE_PRISON_4 = "/save:random:prison_pete_wrong"
 
     // Pinball random event.
     const val RE_PINBALL_START = "/save:random:pinball_start"
@@ -79,10 +60,7 @@ internal object GameAttributes {
     const val RE_PILLORY_SCORE = "/save:random:pillory_score"
 
     // Evil twin random event.
-    const val RE_TWIN_START = "/save:random:5:start"
     const val RE_TWIN_DIAL = "/save:random:evil_twin_dialogue"
-    const val RE_TWIN_OBJ_LOC_X = "/save:random:evil_twin_loc:x"
-    const val RE_TWIN_OBJ_LOC_Y = "/save:random:evil_twin_loc:y"
 
     // Evil bob random event.
     const val RE_BOB_START = "/save:random:evil_bob_start"
@@ -99,10 +77,6 @@ internal object GameAttributes {
     const val RE_MIME_INDEX = "random:mime_index"
     const val RE_MIME_CORRECT = "random:mime_correct"
     const val RE_MIME_WRONG = "random:mime_wrong"
-
-    // Quiz master random event.
-    const val RE_QUIZ_REWARD = "/save:quiz:random_reward"
-    const val RE_QUIZ_SCORE = "/save:quiz:score"
 
     // Maze random event.
     const val MAZE_ATTRIBUTE_TICKS_LEFT = "maze:percent-ticks-left"
@@ -122,7 +96,6 @@ internal object GameAttributes {
     const val CERTER_INDEX = "random:certer_index"
 
     // Gravedigger random event.
-
     const val GRAVEDIGGER_SCORE = "random:gravedigger:score"
 
     // Drill demon random event.
@@ -185,15 +158,15 @@ internal object GameAttributes {
     const val QUEST_HFTD_STRANGE_WALL_DISCOVER = "/save:hftd:strange-wall"
     const val QUEST_HFTD_UNLOCK_DOOR = "/save:hftd:item-placed"
 
-    // God books.
-    const val GOD_BOOKS = "/save:god_books:access"
-
     const val QUEST_HFTD_USE_AIR_RUNE = "/save:hftd:air"
     const val QUEST_HFTD_USE_FIRE_RUNE = "/save:hftd:fire"
     const val QUEST_HFTD_USE_EARTH_RUNE = "/save:hftd:earth"
     const val QUEST_HFTD_USE_WATER_RUNE = "/save:hftd:water"
     const val QUEST_HFTD_USE_ARROW = "/save:hftd:arrow"
     const val QUEST_HFTD_USE_SWORD = "/save:hftd:sword"
+
+    // God books.
+    const val GOD_BOOKS = "/save:god_books:access"
 
     // Black knights fortress quest.
     const val QUEST_BKF_DOSSIER_INTER = "/save:quest:fortress:read_dossier"
@@ -322,10 +295,6 @@ internal object GameAttributes {
     // Ancient pages (lore).
     const val LORE_ANCIENT_PAGES_TRANSCRIPT = "/save:ancient_page"
 
-    // Clue Scrolls.
-    const val PUZZLE_BOX = "/save:clue:puzzle-box"
-    const val PUZZLE_BOX_COMPLETE = "/save:clue:puzzle-box-completed"
-
     // Keldagrim travel.
     const val MINECART_TRAVEL_UNLOCK = "/save:keldagrim-visited"
 
@@ -448,15 +417,14 @@ internal object GameAttributes {
     const val MUSEUM_INTERFACE_534_MODEL = "iface:534:model"
     const val MUSEUM_ARTIFACT_MODEL = "small$MUSEUM_INTERFACE_534_MODEL"
 
-    // Recruitment drive
-    const val RECRUITMENT_DRIVE_TEST_OF_PATIENCE = "rd:test_of_patience"
-    const val RECRUITMENT_DRIVE_NPC_SPAWN = "rd:generatedsirleye"
-
-    // Tog
+    // Tog.
     const val TOG_TIMER = "minigame:tearsofguthix-ticksremaining"
     const val TOG_TEARS_TTL = "minigame:tearsofguthix-tearscollected"
-    const val TOG_ACTVITY = "minigame:tearsofguthix-iscollecting"
+    const val TOG_ACTIVITY = "minigame:tearsofguthix-iscollecting"
 
 
     const val COUNCIL_PERMISSION = "/save:dorgesh-kaan:council_permission"
+
+    // Ring of forging charges.
+    const val ROF_CHARGES = "ringOfForgingCharges"
 }

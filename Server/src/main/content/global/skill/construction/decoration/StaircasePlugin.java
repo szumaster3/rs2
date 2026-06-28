@@ -1,6 +1,5 @@
 package content.global.skill.construction.decoration;
 
-import content.data.GameAttributes;
 import content.global.skill.construction.*;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.Dialogue;
@@ -19,24 +18,29 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * The type Staircase plugin.
+ * Handles construction staircases.
+ * @author Emperor
  */
 @Initializable
 public final class StaircasePlugin extends OptionHandler {
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         ClassScanner.definePlugin(new BuildDialogue());
         ClassScanner.definePlugin(new ClimbPohLadder());
-        for (int i = 13497; i < 13507; i++) {
+        // 13497 - 13502 are normal stairs
+        // 13503 - 13506 are spiral stairs
+        for (int i = 13497; i <= 13506; i++) {
             SceneryDefinition.forId(i).getHandlers().put("option:climb", this);
             SceneryDefinition.forId(i).getHandlers().put("option:climb-up", this);
             SceneryDefinition.forId(i).getHandlers().put("option:climb-down", this);
             SceneryDefinition.forId(i).getHandlers().put("option:remove-room", this);
         }
+        // 13409 is dungeon entrance
         SceneryDefinition.forId(13409).getHandlers().put("option:enter", this);
         SceneryDefinition.forId(13409).getHandlers().put("option:remove-room", this);
-        for (int id = 13328; id < 13331; id++) {
+        // 13328 - 13330 are dungeon ladders
+        for (int id = 13328; id <= 13330; id++) {
             SceneryDefinition.forId(id).getHandlers().put("option:climb", this);
             SceneryDefinition.forId(id).getHandlers().put("option:remove-room", this);
         }
@@ -54,64 +58,106 @@ public final class StaircasePlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        HouseManager house = player.getAttribute(GameAttributes.POH_PORTAL, null);
+        HouseManager house = player.getAttribute("poh_entry", null);
         if (house == null) {
             player.getPacketDispatch().sendMessage("You're not in your house right now (REPORT).");
             return true;
         }
-        Scenery scenery = (Scenery) node;
+        Scenery object = (Scenery) node;
         switch (option) {
             case "open":
-                SceneryBuilder.replace(scenery, scenery.transform(scenery.getId() + 3), 200);
+                SceneryBuilder.replace(object, object.transform(object.getId() + 3), 200);
                 return true;
             case "close":
-                SceneryBuilder.replace(scenery, scenery.transform(scenery.getId() - 3));
+                SceneryBuilder.replace(object, object.transform(object.getId() - 3));
                 return true;
             case "remove-room":
-                if (player.getLocation().getZ() != 0) {
-                    player.getPacketDispatch().sendMessage("The room below is supporting this room!");
+
+                int currentZ = player.getLocation().getZ();
+                int chunkX = player.getLocation().getChunkX();
+                int chunkY = player.getLocation().getChunkY();
+
+                // must be in building mode
+                if (!player.getHouseManager().isBuildingMode()) {
+                    player.getPacketDispatch().sendMessage("You can only do this in building mode.");
                     return true;
                 }
-                return false;
+
+                // if you're in the dungeon, try and remove the room at Z = 0 from the house region.
+                if (HouseManager.isInDungeon(player)) {
+                    player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 0);
+
+                    // From ground floor (z=0), stairs could lead to 1st floor (z=1) or the dungeon (z=3)
+                } else {
+                    // garden dungeon entrance and oubliette ladders don't need a height selection
+                    if (node.getId() == 13409 || node.getId() == 13675 || node.getId() == 13676 || node.getId() == 13677 || node.getId() == 13678 || node.getId() == 13679 || node.getId() == 13680) {
+                        player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 3);
+                    } else {
+                        player.getDialogueInterpreter().sendOptions("Remove which room?", "Room Above", "Room Below", "Cancel");
+                        player.getDialogueInterpreter().addAction((interId, btn) -> {
+                            if (btn == 2) { // Above
+                                player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, currentZ + 1);
+                            } else if (btn == 3) { // Below
+                                if (currentZ - 1 == -1) {
+                                    player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 3);
+                                } else {
+                                    player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, currentZ - 1);
+                                }
+
+                            }
+                        });
+                    }
+
+                }
+                return true;
+
             case "climb":
-                if (house.getDungeonRegion() == player.getViewport().getRegion()) {
-                    climb(player, 1, house, scenery);
+                if (HouseManager.isInDungeon(player)) {
+                    climb(player, 1, house, object);
                     return true;
                 }
-                if (scenery.getLocation().getZ() > 0) {
-                    climb(player, -1, house, scenery);
+                if (object.getLocation().getZ() > 0) {
+                    climb(player, -1, house, object);
                     return true;
                 }
-                player.getDialogueInterpreter().open("con:climbdial", house, scenery);
+                player.getDialogueInterpreter().open("con:climbdial", house, object);
                 return true;
             case "climb-up":
-                climb(player, 1, house, scenery);
+                climb(player, 1, house, object);
                 return true;
             case "enter":
             case "climb-down":
             case "go-down":
-                climb(player, -1, house, scenery);
+                climb(player, -1, house, object);
                 return true;
         }
         return false;
     }
 
-    private static void climb(Player player, int z, HouseManager house, Scenery scenery) {
+    /**
+     * Climbs the staircase.
+     *
+     * @param player The player.
+     * @param z      The plane difference.
+     * @param house  The house the player is currently in.
+     * @param object The object.
+     */
+    private static void climb(Player player, int z, HouseManager house, Scenery object) {
         Location l = player.getLocation();
         int plane = l.getZ() + z;
         int roomX = l.getChunkX();
         int roomY = l.getChunkY();
         Room current = house.getRooms()[l.getZ()][roomX][roomY];
-        if (plane < 0) {
+        if (plane < 0) { //Dungeon
             plane = 3;
-        } else if (player.getViewport().getRegion() == house.getDungeonRegion() && plane == 1) {
+        } else if (player.getViewport().getRegion() == house.getDungeonRegion() && plane == 1) {//going up
             plane = 0;
         }
         Room room = house.getRooms()[plane][roomX][roomY];
-
+//		boolean stairs = room != null && room.getStairs() != null || room.get;
         if (room == null || room.getProperties().isRoof()) {
             if (player.getHouseManager().isInHouse(player) && player.getHouseManager().isBuildingMode()) {
-                player.getDialogueInterpreter().open("con:nfroom", plane, roomX, roomY, current, scenery);
+                player.getDialogueInterpreter().open("con:nfroom", plane, roomX, roomY, current, object);
             } else {
                 player.getPacketDispatch().sendMessage("This doesn't seem to lead anywhere.");
             }
@@ -133,25 +179,33 @@ public final class StaircasePlugin extends OptionHandler {
     }
 
     /**
-     * The type Climb poh ladder.
+     * Handles the climbing dialogue.
+     *
+     * @author Emperor
      */
     static final class ClimbPohLadder extends Dialogue {
 
+        /**
+         * Represents the object to use.
+         */
         private HouseManager house;
 
+        /**
+         * The ladder.
+         */
         private Scenery ladder;
 
         /**
-         * Instantiates a new Climb poh ladder.
+         * Constructs a new {@code ClimbPohLadder} {@code Object}.
          */
         public ClimbPohLadder() {
             super();
         }
 
         /**
-         * Instantiates a new Climb poh ladder.
+         * Constructs a new {@code ClimbPohLadder} {@code Object}.
          *
-         * @param player the player
+         * @param player the player.
          */
         public ClimbPohLadder(final Player player) {
             super(player);
@@ -163,7 +217,7 @@ public final class StaircasePlugin extends OptionHandler {
         }
 
         @Override
-        public boolean open(java.lang.Object... args) {
+        public boolean open(Object... args) {
             house = (HouseManager) args[0];
             ladder = (Scenery) args[1];
             interpreter.sendOptions("What would you like to do?", "Climb Up.", "Climb Down.");
@@ -213,31 +267,50 @@ public final class StaircasePlugin extends OptionHandler {
     }
 
     /**
-     * The type Build dialogue.
+     * Handles the creating a room on different floor dialogue.
+     *
+     * @author Emperor
      */
     static final class BuildDialogue extends Dialogue {
 
+        /**
+         * The plane of the room to build.
+         */
         private int plane;
 
+        /**
+         * The room x-coordinate.
+         */
         private int roomX;
 
+        /**
+         * The room y-coordinate.
+         */
         private int roomY;
 
+        /**
+         * The room we're building on.
+         */
         private Room room;
 
+        /**
+         * The stairs object.
+         */
         private Scenery stairs;
 
         /**
-         * Instantiates a new Build dialogue.
+         * Constructs a new {@code BuildDialogue} {@code Object}.
          */
         public BuildDialogue() {
-
+            /**
+             * empty.
+             */
         }
 
         /**
-         * Instantiates a new Build dialogue.
+         * Constructs a new {@code BuildDialogue} {@code Object}.
          *
-         * @param player the player
+         * @param player the player.
          */
         public BuildDialogue(final Player player) {
             super(player);
@@ -249,7 +322,7 @@ public final class StaircasePlugin extends OptionHandler {
         }
 
         @Override
-        public boolean open(java.lang.Object... args) {
+        public boolean open(Object... args) {
             plane = (Integer) args[0];
             roomX = (Integer) args[1];
             roomY = (Integer) args[2];
@@ -278,12 +351,12 @@ public final class StaircasePlugin extends OptionHandler {
             boolean dungeon = plane == 3;
             switch (stage) {
                 case 0:
-                    interpreter.sendOptions("Select an Option", "Yes", "No");
+                    interpreter.sendOptions("Select an option", "Yes", "No");
                     stage = 1;
                     break;
                 case 1:
                     switch (buttonId) {
-                        case 1:
+                        case 1: //yes
                             if (room.getProperties() == RoomProperties.THRONE_ROOM) {
                                 Room r = Room.create(player, RoomProperties.OUBILETTE);
                                 Direction[] dirs = BuildingUtils.getAvailableRotations(player, r.getExits(), plane, roomX, roomY);
@@ -303,9 +376,9 @@ public final class StaircasePlugin extends OptionHandler {
                                 return true;
                             }
                             if (dungeon) {
-                                interpreter.sendOptions("Select an Option", "Skill Hall", "Quest Hall", "Dungeon Stairs");
+                                interpreter.sendOptions("Select an option", "Skill Hall", "Quest Hall", "Dungeon Stairs");
                             } else {
-                                interpreter.sendOptions("Select an Option", "Skill Hall", "Quest Hall");
+                                interpreter.sendOptions("Select an option", "Skill Hall", "Quest Hall");
                             }
                             stage = 2;
                             return true;
@@ -339,16 +412,17 @@ public final class StaircasePlugin extends OptionHandler {
                     return true;
                 case 3:
                     switch (buttonId) {
-                        case 1:
+                        case 1: //yes
                             r = Room.create(player, RoomProperties.DUNGEON_STAIRS);
                             dirs = BuildingUtils.getAvailableRotations(player, r.getExits(), plane, roomX, roomY);
                             for (Direction d : dirs) {
                                 if (d == room.getRotation()) {
                                     r.setRotation(d);
-                                    Hotspot stairs = room.getStairs();
-                                    int index = stairs != null ? stairs.getDecorationIndex() : -1;
+                                    // todo this just puts a default set of stairs in the dungeon. The below code works for skill/quest hall, but not a dungeon entrance.
+                                    //Hotspot stairs = room.getStairs();
+                                    //int index = stairs != null ? stairs.getDecorationIndex() : -1;
                                     BuildingUtils.buildRoom(player, r, plane, roomX, roomY, r.getExits(), true);
-                                    r.getStairs().setDecorationIndex(index);
+                                    r.getStairs().setDecorationIndex(/*index*/1);
                                     end();
                                     return true;
                                 }
@@ -365,12 +439,12 @@ public final class StaircasePlugin extends OptionHandler {
                     end();
                     return true;
                 case 5:
-                    interpreter.sendOptions("Select an Option", "Yes", "No");
+                    interpreter.sendOptions("Select an option", "Yes", "No");
                     stage = 6;
                     return true;
                 case 6:
                     switch (buttonId) {
-                        case 1:
+                        case 1: //yes
                             r = Room.create(player, RoomProperties.THRONE_ROOM);
                             dirs = BuildingUtils.getAvailableRotations(player, r.getExits(), plane, roomX, roomY);
                             for (Direction d : dirs) {

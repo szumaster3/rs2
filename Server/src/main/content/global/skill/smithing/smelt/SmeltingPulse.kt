@@ -1,5 +1,6 @@
 package content.global.skill.smithing.smelt
 
+import content.data.GameAttributes
 import content.global.skill.smithing.bar.BarItem
 import core.api.*
 import core.game.container.impl.EquipmentContainer
@@ -11,6 +12,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
+import core.tools.Log
 import core.tools.RandomFunction
 import core.tools.StringUtils
 import shared.consts.Animations
@@ -143,8 +145,35 @@ class SmeltingPulse : SkillPulse<Item?> {
         return amount < 1
     }
 
-    private fun hasForgingRing(player: Player): Boolean = inEquipment(player, RING_OF_FORGING)
+    private fun hasForgingRing(player: Player): Boolean = inEquipment(player, RING_OF_FORGING,1)
 
+    fun success(player: Player): Boolean {
+        if (barItem === BarItem.IRON && !superHeat) {
+            if (hasForgingRing(player)) {
+                var charges = player.getAttribute(GameAttributes.ROF_CHARGES,140) - 1
+                if (charges <= 0) {
+                    if (removeItem(player, Items.RING_OF_FORGING_2568, Container.EQUIPMENT)) {
+                        charges = 140
+                        sendMessage(
+                            player,
+                            "Your Ring of forging uses up its last charge and disintegrates."
+                        )
+                        stop()
+                    } else {
+                        log(this.javaClass, Log.ERR, "Failed to delete empty ring of forging for player " + player.name)
+                        return false
+                    }
+                }
+                setAttribute(player,"/save:${GameAttributes.ROF_CHARGES}",charges)
+                return true
+            } else {
+                return RandomFunction.nextBool()
+            }
+        }
+        return true
+    }
+
+    /*
     fun success(player: Player): Boolean {
         if (barItem == BarItem.IRON && !superHeat) {
             return if (hasForgingRing(player)) {
@@ -155,6 +184,7 @@ class SmeltingPulse : SkillPulse<Item?> {
                     if (getCharge(ring) == 0) {
                         removeItem(player, ring)
                         sendMessage(player, "Your ring of forging uses up its last charge and disintegrates.")
+                        stop()
                     }
                 }
                 true
@@ -164,6 +194,7 @@ class SmeltingPulse : SkillPulse<Item?> {
         }
         return true
     }
+    */
 
     companion object {
         private const val RING_OF_FORGING = Items.RING_OF_FORGING_2568

@@ -199,7 +199,7 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
             playAudio(player, Sounds.COLLECT_TEAR_1795)
             animate(player, Animations.FILL_TOG_BOWL_2043)
             val index = TearsOfGuthixListener.allWalls.indexOf(node.location)
-            setAttribute(player, GameAttributes.TOG_ACTVITY, index)
+            setAttribute(player, GameAttributes.TOG_ACTIVITY, index)
             return@on true
         }
     }
@@ -217,7 +217,7 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
             setVarbit(entity, VARBIT_TOG_TIME_BAR, (newTimer * 10 / questPoints), false)
 
             // Activity.
-            val activityIndex = getAttribute(entity, GameAttributes.TOG_ACTVITY, 0)
+            val activityIndex = getAttribute(entity, GameAttributes.TOG_ACTIVITY, 0)
             if (activityIndex != 0) {
                 val tearState = TearsOfGuthixListener.globalWallState[activityIndex]
                 var tears = getAttribute(entity, GameAttributes.TOG_TEARS_TTL, 0)
@@ -275,7 +275,7 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
     override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
         if (entity is Player) {
             entity.hook(Event.Tick, this)
-            setAttribute(entity, GameAttributes.TOG_ACTVITY, 0)
+            setAttribute(entity, GameAttributes.TOG_ACTIVITY, 0)
         }
     }
 }
