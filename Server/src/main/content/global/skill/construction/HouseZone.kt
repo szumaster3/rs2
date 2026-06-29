@@ -2,25 +2,28 @@ package content.global.skill.construction
 
 import content.data.GameAttributes
 import core.api.*
-import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.system.task.Pulse
 import core.game.world.map.RegionManager.forId
 import core.game.world.map.RegionManager.removeRegion
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneRestriction
+import core.game.world.map.zone.ZoneType
 import shared.consts.Items
 
-class HouseZone(private val house: HouseManager) : MapZone("poh-zone", true, ZoneRestriction.RANDOM_EVENTS) {
+class HouseZone(private val house: HouseManager) :
+    MapZone("poh-zone$house", true, ZoneRestriction.RANDOM_EVENTS) {
     private var previousRegion = -1
     private var previousDungeon = -1
-    private val restrictedItems = (Items.GADDERHAMMER_7668..Items.CUP_OF_TEA_7737)
 
     override fun configure() {
         unregisterOldRegions()
+        setZoneType(ZoneType.P_O_H.id)
         registerRegion(house.houseRegion.id)
-        if (house.dungeonRegion != null) {
-            registerRegion(house.dungeonRegion.id)
+
+        house.dungeonRegion?.let {
+            registerRegion(it.id)
         }
     }
 
@@ -35,12 +38,12 @@ class HouseZone(private val house: HouseManager) : MapZone("poh-zone", true, Zon
 
     override fun enter(e: Entity): Boolean {
         if (e is Player) {
-            val player = e.asPlayer()
-            if (house == player.houseManager) {
+
+            if (house == e.houseManager) {
                 previousRegion = house.houseRegion.id
-                if (house.dungeonRegion != null) previousDungeon = house.dungeonRegion.id
+                previousDungeon = house.dungeonRegion?.id ?: -1
             }
-            registerLogoutListener(e, "house-logout") { p: Player ->
+            registerLogoutListener(e, "houselogout") { p ->
                 p.location = house.location.exitLocation
             }
         }
@@ -49,44 +52,83 @@ class HouseZone(private val house: HouseManager) : MapZone("poh-zone", true, Zon
 
     override fun death(e: Entity, killer: Entity): Boolean {
         if (e is Player) {
-            val player = e.asPlayer()
-            HouseManager.leave(player)
+            HouseManager.leave(e)
+            return true
         }
-        return true
+
+        return super.death(e, killer)
     }
 
     override fun leave(e: Entity, logout: Boolean): Boolean {
-        if (e is Player) {
-            val player = e.asPlayer()
-            if(getAttribute(player, GameAttributes.CON_GAZE_INTO, false)) return false
-            if (house == player.houseManager) {
-                val items = restrictedItems.toIntArray()
-                if (anyInInventory(player, *items)) {
-                    player.inventory.removeAll(items)
-                }
-
-                house.expelGuests(player)
-                val toRemove = previousRegion
-                val dungRemove = previousDungeon
-                clearLogoutListener(player, "house-logout")
-                queueScript(e,2,QueueStrength.SOFT) { _ ->
-                    val r = forId(toRemove)
-                    val dr = if (dungRemove != -1) forId(dungRemove) else null
-
-                    removeRegion(toRemove)
-                    unregisterRegion(toRemove)
-                    r.isActive = false
-
-                    if (dungRemove != -1) {
-                        removeRegion(dungRemove)
-                        unregisterRegion(dungRemove)
-                        dr!!.isActive = false
-                    }
-                    return@queueScript stopExecuting(e)
-                }
-            }
+        if (e !is Player) {
             return true
         }
+
+        val player = e
+
+        if(getAttribute(player, GameAttributes.CON_GAZE_INTO, false)) return false
+
+        if (!logout) {
+            val dest = player.properties.teleportLocation
+
+            val currentRegion = player.location.regionId
+            val houseRegion = house.houseRegion.id
+            val dungeonRegion = house.dungeonRegion?.id ?: -1
+
+            val currentlyInHouse =
+                currentRegion == houseRegion || currentRegion == dungeonRegion
+
+            val destinationRegion =
+                dest?.regionId ?: -1
+
+            val movingToHouse =
+                destinationRegion == houseRegion || destinationRegion == dungeonRegion
+
+            if (currentlyInHouse || movingToHouse) {
+                return true
+            }
+        }
+
+        removeItems(player)
+
+        if (house == player.houseManager) {
+
+            house.expelGuests(player)
+
+            val removeHouse = previousRegion
+            val removeDungeon = previousDungeon
+
+            submitWorldPulse(object : Pulse(2) {
+                override fun pulse(): Boolean {
+
+                    val region = forId(removeHouse)
+                    val dungeon = if (removeDungeon != -1)
+                        forId(removeDungeon)
+                    else null
+
+                    removeRegion(removeHouse)
+                    unregisterRegion(removeHouse)
+                    region.flagInactive()
+
+                    if (removeDungeon != -1) {
+                        removeRegion(removeDungeon)
+                        unregisterRegion(removeDungeon)
+                        dungeon?.flagInactive()
+                    }
+
+                    return true
+                }
+            })
+        }
+
+        clearLogoutListener(player, "houselogout")
         return true
+    }
+
+    private fun removeItems(player: Player) {
+        for (item in Items.KETTLE_7688..Items.CHEFS_DELIGHT_7755) {
+            removeAll(player, item, Container.INVENTORY)
+            removeAll(player, item, Container.BoB)
+        }
     }
 }
