@@ -264,6 +264,7 @@ class WomDeliveryDialogue : DialogueFile() {
             }
 
         val itemName = task.itemId?.let(::getItemName) ?: "Old Man's Message"
+        val targetNpc = getNPCName(task.npcId)
 
         when (stage) {
             0 ->
@@ -275,21 +276,26 @@ class WomDeliveryDialogue : DialogueFile() {
             1 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    if (task.itemId != null) "I need you to bring me ${amount}x $itemName."
-                    else "Please deliver the Old Man's message for me."
+                    if (task.itemId != null) {
+                        "I need you to bring me ${amount}x $itemName and deliver it to $targetNpc."
+                    } else {
+                        "Please deliver the Old Man's message to $targetNpc."
+                    }
                 )
                 setAttribute(player, "/save:${WomDeliveryListener.TASK_START}", true)
                 setAttribute(player, "/save:${WomDeliveryListener.CURRENT_TASK}", task.name)
                 stage++
             }
-            2 -> options("Where can I get that?", "Right, I'll see you later.").also { stage++ }
+            2 -> options("Where can I get that?", "Who do I deliver it to?", "Right, I'll see you later.").also { stage++ }
             3 ->
                 when (buttonID) {
                     1 -> playerl(FaceAnim.HALF_GUILTY, "Where can I get that?").also { stage++ }
-                    2 -> playerl(FaceAnim.HALF_GUILTY, "Right, I'll see you later.").also { stage = END_DIALOGUE }
+                    2 -> playerl(FaceAnim.HALF_GUILTY, "Who do I deliver it to?").also { stage = 5 }
+                    3 -> playerl(FaceAnim.HALF_GUILTY, "Right, I'll see you later.").also { stage = END_DIALOGUE }
                 }
-            4 -> npc(FaceAnim.HALF_GUILTY, task.description).also { stage++ }
-            5 -> playerl(FaceAnim.HALF_GUILTY, "Right, I'll see you later.").also { stage = END_DIALOGUE }
+            4 -> npc(FaceAnim.HALF_GUILTY, "[NOT IMPLEMENTED]").also { stage = END_DIALOGUE }
+            5 -> npc(FaceAnim.HALF_GUILTY, "You need to deliver it to $targetNpc. ${task.description}").also { stage++ }
+            6 -> playerl(FaceAnim.HALF_GUILTY, "Right, I'll see you later.").also { stage = END_DIALOGUE }
         }
     }
 
