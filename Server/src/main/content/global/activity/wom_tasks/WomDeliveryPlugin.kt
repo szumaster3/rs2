@@ -294,7 +294,7 @@ class WomDeliveryDialogue : DialogueFile() {
                     3 -> playerl(FaceAnim.HALF_GUILTY, "Right, I'll see you later.").also { stage = END_DIALOGUE }
                 }
             4 -> npc(FaceAnim.HALF_GUILTY, "[NOT IMPLEMENTED]").also { stage = END_DIALOGUE }
-            5 -> npc(FaceAnim.HALF_GUILTY, "You need to deliver it to $targetNpc. ${task.description}").also { stage++ }
+            5 -> npcl(FaceAnim.HALF_GUILTY, "You need to deliver it to $targetNpc. ${task.description}").also { stage++ }
             6 -> playerl(FaceAnim.HALF_GUILTY, "Right, I'll see you later.").also { stage = END_DIALOGUE }
         }
     }
