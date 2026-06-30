@@ -44,10 +44,17 @@ enum class WomDeliveryTasks(val npcId: Int, val itemId: Int?, val minAmount: Int
     FATHER_LAWRENCE_MESSAGE(npcId = NPCs.FATHER_LAWRENCE_640, itemId = Items.OLD_MANS_MESSAGE_5506, description = "Deliver Old man's message to Father Lawrence."),
     ABBOT_LANGLEY_MESSAGE(npcId = NPCs.ABBOT_LANGLEY_801, itemId = Items.OLD_MANS_MESSAGE_5506, description = "Deliver Old man's message to Abbot Langley."),
     THURGO_MESSAGE(npcId = NPCs.THURGO_604, itemId = Items.OLD_MANS_MESSAGE_5506, description = "Deliver Old man's message to Thurgo.");
-    val amount: Int = RandomFunction.random(minAmount, maxAmount)
 
     companion object {
-        fun forItem(itemId: Int): WomDeliveryTasks? = values().firstOrNull { it.itemId == itemId }
+        private val ALL = values()
+
+        fun random(): WomDeliveryTasks = ALL.random()
+
+        fun forItem(itemId: Int): WomDeliveryTasks? =
+            ALL.firstOrNull { it.itemId == itemId }
+
+        fun forName(name: String): WomDeliveryTasks? =
+            ALL.firstOrNull { it.name == name }
     }
 }
 
@@ -234,20 +241,29 @@ enum class WomTaskReward(val npc: IntArray, val table: WeightBasedTable) {
 class WomDeliveryDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(WISE_OLD_MAN)
-        val currentTask = getAttribute(player!!, WomDeliveryListener.CURRENT_TASK, "")
-        val hasTask = getAttribute(player!!, WomDeliveryListener.TASK_START, false)
+
+        val player = requireNotNull(player)
+
+        val currentTask = getAttribute(player, WomDeliveryListener.CURRENT_TASK, "")
+        val hasTask = getAttribute(player, WomDeliveryListener.TASK_START, false)
 
         val task =
             if (hasTask && currentTask.isNotEmpty()) {
-                runCatching { WomDeliveryTasks.valueOf(currentTask) }.getOrNull() ?: WomDeliveryTasks.values().random()
+                WomDeliveryTasks.forName(currentTask)
             } else {
-                WomDeliveryTasks.values().random()
+                null
+            } ?: WomDeliveryTasks.random()
+
+        val amount =
+            if (hasTask) {
+                getAttribute(player, "/save:${WomDeliveryListener.CURRENT_AMOUNT}", 1)
+            } else {
+                RandomFunction.random(task.minAmount, task.maxAmount).also {
+                    setAttribute(player, "/save:${WomDeliveryListener.CURRENT_AMOUNT}", it)
+                }
             }
 
-        val amount = RandomFunction.random(task.minAmount, task.maxAmount)
-        setAttribute(player!!, "/save:${WomDeliveryListener.CURRENT_AMOUNT}", amount)
-
-        val itemName = if (task.itemId != null) getItemName(task.itemId) else "Old Man's Message"
+        val itemName = task.itemId?.let(::getItemName) ?: "Old Man's Message"
 
         when (stage) {
             0 ->
@@ -262,8 +278,8 @@ class WomDeliveryDialogue : DialogueFile() {
                     if (task.itemId != null) "I need you to bring me ${amount}x $itemName."
                     else "Please deliver the Old Man's message for me."
                 )
-                setAttribute(player!!, "/save:${WomDeliveryListener.TASK_START}", true)
-                setAttribute(player!!, "/save:${WomDeliveryListener.CURRENT_TASK}", task.name)
+                setAttribute(player, "/save:${WomDeliveryListener.TASK_START}", true)
+                setAttribute(player, "/save:${WomDeliveryListener.CURRENT_TASK}", task.name)
                 stage++
             }
             2 -> options("Where can I get that?", "Right, I'll see you later.").also { stage++ }
@@ -313,15 +329,16 @@ class WomDeliveryListener : InteractionListener {
         const val WISE_OLD_MAN = NPCs.WISE_OLD_MAN_2253
         const val OLD_MAN_MESSAGE = Items.OLD_MANS_MESSAGE_5506
 
-        const val CURRENT_TASK = "womt-task"
-        const val CURRENT_AMOUNT = "womt-amount"
-        const val TASK_START = "womt-start"
+        const val CURRENT_TASK = "wom-task"
+        const val CURRENT_AMOUNT = "wom-amount"
+        const val TASK_START = "wom-start"
         const val LETTER_DELIVERY = "letter-delivery"
 
         private fun finishTask(player: Player) {
             setAttribute(player, "/save:${TASK_START}", false)
             setAttribute(player, "/save:${CURRENT_TASK}", "")
             setAttribute(player, "/save:${CURRENT_AMOUNT}", 0)
+            setAttribute(player, "/save:${LETTER_DELIVERY}", -1)
         }
 
         private fun rollNpcReward(player: Player, npc: NPC) {
@@ -357,30 +374,30 @@ class WomDeliveryListener : InteractionListener {
                 return
             }
 
-            val task = runCatching { WomDeliveryTasks.valueOf(taskName) }.getOrNull()
+            val task = WomDeliveryTasks.forName(taskName)
             if (task == null || task.npcId != npc.id) {
                 sendNPCDialogue(player, npc.id, "I'm not expecting anything from you.", FaceAnim.HALF_GUILTY)
                 return
             }
 
             if (task.itemId != null && task.itemId != OLD_MAN_MESSAGE) {
-                if (inInventory(player, task.itemId, amount)) {
-                    removeItem(player, Item(task.itemId, amount))
-                    sendNPCDialogue(player, npc.id, "Ah, thank you for bringing me $amount ${getItemName(task.itemId)}!", FaceAnim.HAPPY)
-                    rollNpcReward(player, npc)
-                    finishTask(player)
-                } else {
+                if (!inInventory(player, task.itemId, amount)) {
                     sendNPCDialogue(player, npc.id, "You haven't brought everything I asked for yet.", FaceAnim.HALF_GUILTY)
-                }
-            } else {
-                if (!removeItem(player, OLD_MAN_MESSAGE)) {
-                    sendNPCDialogue(player, npc.id, "You don't have the Old Man's message with you.", FaceAnim.HALF_GUILTY)
                     return
                 }
-                sendNPCDialogue(player, npc.id, "A message from the Wise Old Man? Thank you kindly!", FaceAnim.HAPPY)
+                removeItem(player, Item(task.itemId, amount))
+                sendNPCDialogue(player, npc.id, "Ah, thank you for bringing me $amount ${getItemName(task.itemId)}!", FaceAnim.HAPPY)
                 rollNpcReward(player, npc)
                 finishTask(player)
+                return
             }
+            if (!removeItem(player, OLD_MAN_MESSAGE)) {
+                sendNPCDialogue(player, npc.id, "You don't have the Old Man's message with you.", FaceAnim.HALF_GUILTY)
+                return
+            }
+            sendNPCDialogue(player, npc.id, "A message from the Wise Old Man? Thank you kindly!", FaceAnim.HAPPY)
+            rollNpcReward(player, npc)
+            finishTask(player)
         }
     }
 }
