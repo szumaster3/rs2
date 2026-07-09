@@ -15574,5 +15574,13 @@
   {
     "examine": "A commonly found tree.",
     "ids": "19167"
+  },
+  {
+    "examine": "For smelting metal.",
+    "ids": "21303"
+  },
+  {
+    "examine": "A furnace; small but effective.",
+    "ids": "14921"
   }
 ]

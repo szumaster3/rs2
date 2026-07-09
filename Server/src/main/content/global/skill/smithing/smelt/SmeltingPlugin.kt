@@ -1,5 +1,6 @@
 package content.global.skill.smithing.smelt
 
+import content.global.skill.crafting.CraftingDefinition
 import content.global.skill.smithing.bar.BarItem
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -23,7 +24,7 @@ class SmeltingPlugin : InteractionListener {
          * Handles perfect gold smelting (Family crest quest special interaction).
          */
 
-        onUseWith(IntType.SCENERY, Items.PERFECT_GOLD_ORE_446, *FURNACE_IDS) { player, used, _ ->
+        onUseWith(IntType.SCENERY, Items.PERFECT_GOLD_ORE_446, *CraftingDefinition.FURNACES) { player, used, _ ->
             queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
                 when (stage) {
                     0 -> {
@@ -53,7 +54,7 @@ class SmeltingPlugin : InteractionListener {
          * Handles creating cannonballs.
          */
 
-        onUseWith(IntType.SCENERY, Items.STEEL_BAR_2353, *FURNACE_IDS) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.STEEL_BAR_2353, *CraftingDefinition.FURNACES) { player, _, _ ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
             if (!isQuestComplete(player, Quests.DWARF_CANNON)) {
@@ -165,40 +166,42 @@ class SmeltingPlugin : InteractionListener {
          * Handles use option for tutorial furnace.
          */
 
-        on(specialFurnace, IntType.SCENERY, "use") { player, _ ->
-            if (inBorders(player, getRegionBorders(TUTORIAL_REGION))) {
-                if (!anyInInventory(player, *tutorialOres)) {
-                    sendPlainDialogue(player,
-                        false,
-                        "This is a furnace for smelting metal. To use it simply click on the",
-                        "ore you wish to smelt then click on the furnace you would like to",
-                        "use.",
-                    )
-                    return@on true
+        on(Scenery.FURNACE_3044, IntType.SCENERY, "use") { player, _ ->
+            fun tutorialMessage() = sendPlainDialogue(
+                player,
+                false,
+                "This is a furnace for smelting metal. To use it simply click on the",
+                "ore you wish to smelt then click on the furnace you would like to",
+                "use."
+            )
+
+            when {
+                inBorders(player, getRegionBorders(TUTORIAL_REGION)) -> {
+                    if (!anyInInventory(player, *tutorialOres)) {
+                        tutorialMessage()
+                    } else if (!inInventory(player, Items.TIN_ORE_438) || !inInventory(player, Items.COPPER_ORE_436)) {
+                        sendPlainDialogue(
+                            player,
+                            false,
+                            "",
+                            "You do not have the required ores to make this bar.",
+                            ""
+                        )
+                    } else {
+                        tutorialMessage()
+                    }
                 }
-                if (!inInventory(player, Items.TIN_ORE_438) || !inInventory(player, Items.COPPER_ORE_436)) {
-                    sendPlainDialogue(player,
-                        false,
-                        "",
-                        "You do not have the required ores to make this bar.",
-                        "",
-                    )
-                } else {
-                    sendPlainDialogue(player,
-                        false,
-                        "This is a furnace for smelting metal. To use it simply click on the",
-                        "ore you wish to smelt then click on the furnace you would like to",
-                        "use.",
+
+                !isDiaryComplete(player, DiaryType.VARROCK, 0) -> {
+                    sendMessage(
+                        player,
+                        "You need to have completed the easy tasks in the Varrock Diary in order to use this."
                     )
                 }
-            } else if (!isDiaryComplete(player, DiaryType.VARROCK, 0)) {
-                sendMessage(
-                    player,
-                    "You need to have completed the easy tasks in the Varrock Diary in order to use this."
-                )
-            } else {
-                openChatbox(player, Components.SMELTING_311)
+
+                else -> openChatbox(player, Components.SMELTING_311)
             }
+
             return@on true
         }
 
@@ -206,7 +209,7 @@ class SmeltingPlugin : InteractionListener {
          * Handles use the ores on furnaces.
          */
 
-        onUseWith(IntType.SCENERY, getOreIds(), *FURNACE_IDS) { player, _, with ->
+        onUseWith(IntType.SCENERY, getOreIds(), *CraftingDefinition.FURNACES) { player, _, with ->
             if (with.asScenery().id == Scenery.FURNACE_26814 && !isDiaryComplete(player, DiaryType.VARROCK, 0)) {
                 if (!GameWorld.settings!!.isMembers) {
                     sendNPCDialogue(player, NPCs.JEFFERY_6298, "Keep away from that! It's dangerous!")
@@ -231,7 +234,7 @@ class SmeltingPlugin : InteractionListener {
          * Handles tutorial island interaction.
          */
 
-        onUseWith(IntType.SCENERY, tutorialOres, *specialFurnace) { player, used, _ ->
+        onUseWith(IntType.SCENERY, tutorialOres, Scenery.FURNACE_3044) { player, used, _ ->
             if (!inInventory(player, Items.TIN_ORE_438) || !inInventory(player, Items.COPPER_ORE_436)) {
                 player.dialogueInterpreter.sendPlainMessage(
                     false,
@@ -245,8 +248,8 @@ class SmeltingPlugin : InteractionListener {
                 animate(player, smeltAnimation)
                 playAudio(player, Sounds.FURNACE_2725, 1)
                 player.packetDispatch.sendRunScript(102, "s", "You smelt the copper and tin together in the furnace.")
-                addItem(player, Items.BRONZE_BAR_2349)
                 queueScript(player, 4, QueueStrength.SOFT) {
+                    addItem(player, Items.BRONZE_BAR_2349)
                     rewardXP(player, Skills.SMITHING, BarItem.BRONZE.experience)
                     player.dispatch(
                         ResourceProducedEvent(
@@ -267,25 +270,8 @@ class SmeltingPlugin : InteractionListener {
     companion object {
         private val smeltAnimation = Animation(Animations.HUMAN_FURNACE_SMELT_3243)
         private val tutorialOres = intArrayOf(Items.TIN_ORE_438, Items.COPPER_ORE_436)
-        private val specialFurnace = intArrayOf(Scenery.CLAY_FORGE_21303, Scenery.FURNACE_3044)
 
         private const val TUTORIAL_REGION = 12436
-
-        private val FURNACE_IDS = intArrayOf(
-            Scenery.FURNACE_4304,
-            Scenery.FURNACE_6189,
-            Scenery.FURNACE_11010,
-            Scenery.FURNACE_11666,
-            Scenery.FURNACE_12100,
-            Scenery.FURNACE_12809,
-            Scenery.SMALL_FURNACE_14921,
-            Scenery.FURNACE_18497,
-            Scenery.FURNACE_26814,
-            Scenery.FURNACE_30021,
-            Scenery.FURNACE_30510,
-            Scenery.FURNACE_36956,
-            Scenery.FURNACE_37651
-        )
 
         private fun getOreIds(): IntArray {
             val ids = mutableListOf<Int>()
