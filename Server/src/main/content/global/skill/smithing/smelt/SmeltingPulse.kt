@@ -173,29 +173,6 @@ class SmeltingPulse : SkillPulse<Item?> {
         return true
     }
 
-    /*
-    fun success(player: Player): Boolean {
-        if (barItem == BarItem.IRON && !superHeat) {
-            return if (hasForgingRing(player)) {
-                val ring = getItemFromEquipment(player, EquipmentSlot.RING)
-                if (ring != null) {
-                    if (getCharge(ring) == 1000) setCharge(ring, 140)
-                    adjustCharge(ring, -1)
-                    if (getCharge(ring) == 0) {
-                        removeItem(player, ring)
-                        sendMessage(player, "Your ring of forging uses up its last charge and disintegrates.")
-                        stop()
-                    }
-                }
-                true
-            } else {
-                RandomFunction.getRandom(100) <= (if (getStatLevel(player, Skills.SMITHING) >= 45) 80 else 50)
-            }
-        }
-        return true
-    }
-    */
-
     companion object {
         private const val RING_OF_FORGING = Items.RING_OF_FORGING_2568
     }

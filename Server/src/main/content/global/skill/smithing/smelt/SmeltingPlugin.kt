@@ -191,17 +191,8 @@ class SmeltingPlugin : InteractionListener {
                         tutorialMessage()
                     }
                 }
-
-                !isDiaryComplete(player, DiaryType.VARROCK, 0) -> {
-                    sendMessage(
-                        player,
-                        "You need to have completed the easy tasks in the Varrock Diary in order to use this."
-                    )
-                }
-
                 else -> openChatbox(player, Components.SMELTING_311)
             }
-
             return@on true
         }
 
