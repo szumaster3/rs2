@@ -1,6 +1,6 @@
 package content.minigame.pest_control;
 
-import content.minigame.pest_control.monsters.*;
+import content.minigame.pest_control.npc.*;
 import core.ServerConstants;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;

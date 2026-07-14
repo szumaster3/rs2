@@ -1,4 +1,4 @@
-package content.minigame.pest_control.monsters;
+package content.minigame.pest_control.npc;
 
 import content.minigame.pest_control.PestControlSession;
 import core.game.interaction.MovementPulse;

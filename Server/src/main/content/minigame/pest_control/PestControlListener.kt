@@ -1,7 +1,7 @@
 package content.minigame.pest_control
 
 import content.global.travel.charter.CharterShip
-import content.minigame.pest_control.monsters.*
+import content.minigame.pest_control.npc.*
 import content.minigame.pest_control.reward.PCRewardInterface
 import core.api.*
 import core.cache.def.impl.NPCDefinition

@@ -1,4 +1,4 @@
-package content.minigame.pest_control.dialogue
+package content.minigame.pest_control
 
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue

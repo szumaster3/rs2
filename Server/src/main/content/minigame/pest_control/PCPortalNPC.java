@@ -1,7 +1,7 @@
 package content.minigame.pest_control;
 
-import content.minigame.pest_control.monsters.PCRavagerNPC;
-import content.minigame.pest_control.monsters.PCSpinnerNPC;
+import content.minigame.pest_control.npc.PCRavagerNPC;
+import content.minigame.pest_control.npc.PCSpinnerNPC;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.npc.AbstractNPC;
