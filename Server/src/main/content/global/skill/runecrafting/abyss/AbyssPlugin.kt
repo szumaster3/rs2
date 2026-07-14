@@ -1,6 +1,7 @@
 package content.global.skill.runecrafting.abyss
 
 import content.data.skill.SkillingTool
+import content.global.plugins.item.ForinthryBraceletPlugin
 import content.global.skill.runecrafting.Altar
 import core.api.*
 import core.game.interaction.IntType
@@ -61,6 +62,7 @@ class AbyssPlugin : InteractionListener {
          */
 
         on(IntType.SCENERY, "exit-through") { player, node ->
+            ForinthryBraceletPlugin.clearAbyssProtection(player)
             val altar = Altar.forScenery(node as core.game.node.scenery.Scenery)
             altar?.enterRift(player)
             return@on true
@@ -242,8 +244,10 @@ class AbyssPlugin : InteractionListener {
             )
             npc.sendChat("Veniens! Sallakar! Rinnesset!")
             player.skills.decrementPrayerPoints(100.0)
-            removeTimer<Skulled>(player)
-            registerTimer(player, spawnTimer<Skulled>(2000))
+            if (!ForinthryBraceletPlugin.handleAbyssEntry(player)){
+                removeTimer<Skulled>(player)
+                registerTimer(player, spawnTimer<Skulled>(2000))
+            }
             GameWorld.Pulser.submit(
                 object : Pulse(2, player) {
                     override fun pulse(): Boolean {

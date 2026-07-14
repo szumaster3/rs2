@@ -97779,12 +97779,11 @@
   },
   {
     "ge_buy_limit": "5000",
-    "examine": "It repels revenants and helps you enter the Abyss.",
+    "examine": "Makes using the Abyss and Wilderness just slightly safer.",
     "grand_exchange_price": "15200",
     "durability": null,
     "name": "Forinthry brace(5)",
     "tradeable": "true",
-    "weight": "0.2",
     "archery_ticket_price": "0",
     "id": "11095",
     "equipment_slot": "9"
@@ -97799,12 +97798,11 @@
     "id": "11096"
   },
   {
-    "examine": "It repels revenants and helps you enter the Abyss.",
+    "examine": "Makes using the Abyss and Wilderness just slightly safer.",
     "grand_exchange_price": "5",
     "durability": null,
     "name": "Forinthry brace(4)",
     "tradeable": "true",
-    "weight": "0.2",
     "archery_ticket_price": "0",
     "id": "11097",
     "equipment_slot": "9"
@@ -97817,12 +97815,11 @@
     "id": "11098"
   },
   {
-    "examine": "It repels revenants and helps you enter the Abyss.",
+    "examine": "Makes using the Abyss and Wilderness just slightly safer.",
     "grand_exchange_price": "5",
     "durability": null,
     "name": "Forinthry brace(3)",
     "tradeable": "true",
-    "weight": "0.2",
     "archery_ticket_price": "0",
     "id": "11099",
     "equipment_slot": "9"
@@ -97835,12 +97832,11 @@
     "id": "11100"
   },
   {
-    "examine": "It repels revenants and helps you enter the Abyss.",
+    "examine": "Makes using the Abyss and Wilderness just slightly safer.",
     "grand_exchange_price": "5",
     "durability": null,
     "name": "Forinthry brace(2)",
     "tradeable": "true",
-    "weight": "0.2",
     "archery_ticket_price": "0",
     "id": "11101",
     "equipment_slot": "9"
@@ -97854,12 +97850,11 @@
   },
   {
     "ge_buy_limit": "5000",
-    "examine": "It repels revenants and helps you enter the Abyss.",
+    "examine": "Makes using the Abyss and Wilderness just slightly safer.",
     "grand_exchange_price": "2537",
     "durability": null,
     "name": "Forinthry brace(1)",
     "tradeable": "true",
-    "weight": "0.2",
     "archery_ticket_price": "0",
     "id": "11103",
     "equipment_slot": "9"

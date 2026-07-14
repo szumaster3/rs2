@@ -7,6 +7,7 @@ package content.data
 internal object GameAttributes {
     // Timers.
     const val TELEBLOCK_TIMER = "teleblock"
+    const val REVENANT_TELEBLOCK = "revenant-teleblock"
 
     // Location save.
     const val ORIGINAL_LOCATION = "/save:original-loc"

@@ -48,14 +48,15 @@ class RevenantCombatHandler(meleeAnimation: Animation?, magicAnimation: Animatio
                 if (hasTimerActive(victim, GameAttributes.TELEBLOCK_TIMER)) {
                     playGlobalAudio(victim.getLocation(), 4064, 0, 1, 10)
                 } else {
+                    setAttribute(victim,GameAttributes.REVENANT_TELEBLOCK,true)
                     registerTimer(victim, spawnTimer(GameAttributes.TELEBLOCK_TIMER, ticks))
                 }
             }
         }
         if (entity?.id == 6998) {
-            applyPoison(victim!!, entity, 40);
+            applyPoison(victim!!, entity, 40)
         } else if (WildernessZone.getWilderness(entity!!) >= 50) {
-            applyPoison(victim!!, entity, 30);
+            applyPoison(victim!!, entity, 30)
         }
 
         super.impact(entity, victim, state)

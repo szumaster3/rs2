@@ -1,6 +1,7 @@
 package core.game.node.entity.player.link;
 
 import content.data.GameAttributes;
+import content.global.plugins.item.ForinthryBraceletPlugin;
 import content.region.other.tutorial_island.plugin.*;
 import core.ServerConstants;
 import core.game.interaction.QueueStrength;
@@ -102,13 +103,32 @@ public class TeleportManager {
      * @return {@code True} if the player successfully started teleporting.
      */
     public boolean send(Location location, TeleportType type, int teleportType) {
+        boolean canIgnoreTeleblock = false;
+
+        /*
+         * The Forinthry bracelet only bypasses revenant teleblock.
+         * Do not consume a charge unless teleport is actually blocked.
+         */
+
+        if (hasTimerActive(entity, GameAttributes.TELEBLOCK_TIMER)
+                && entity.isPlayer()
+                && entity.getAttribute(GameAttributes.REVENANT_TELEBLOCK, false)) {
+            canIgnoreTeleblock = ForinthryBraceletPlugin.canIgnoreTeleblock(entity.asPlayer());
+        }
+
         if (teleportType == WILDERNESS_TELEPORT || type == TeleportType.OBELISK) {
-            if (hasTimerActive(entity, GameAttributes.TELEBLOCK_TIMER)) return false;
+            if (hasTimerActive(entity, GameAttributes.TELEBLOCK_TIMER) && !canIgnoreTeleblock) {
+                if (entity.isPlayer()) {
+                    entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
+                }
+                return false;
+            }
+
         } else {
             if (!entity.getZoneMonitor().teleport(teleportType, null)) {
                 return false;
             }
-            if (teleportType != -1 && entity.isTeleBlocked()) {
+            if (teleportType != -1 && entity.isTeleBlocked() && !canIgnoreTeleblock) {
                 if (entity.isPlayer()) {
                     entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
                 }

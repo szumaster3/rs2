@@ -1,6 +1,7 @@
 package core.game.system.timer.impl
 
 import content.data.GameAttributes
+import core.api.removeAttribute
 import core.api.sendMessage
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
@@ -20,7 +21,10 @@ class Teleblock :
         if (entity !is Player) return
         sendMessage(entity, "You have been teleblocked.")
     }
-
+    override fun onRemoval(entity: Entity) {
+        if (entity !is Player) return
+        removeAttribute(entity,GameAttributes.REVENANT_TELEBLOCK)
+    }
     override fun getTimer(vararg args: Any): RSTimer {
         val t = Teleblock()
         t.runInterval = args.getOrNull(0) as? Int ?: 100

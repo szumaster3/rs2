@@ -269,7 +269,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
             }
         }
 
-        if (event.target.id == Items.SKULL_SCEPTRE_9013 && event.option == "invoke" || event.option == "operate") {
+        if (event.target.id == Items.SKULL_SCEPTRE_9013 && (event.option == "invoke" || event.option == "operate")) {
             finishTask(
                 player,
                 DiaryLevel.HARD,
