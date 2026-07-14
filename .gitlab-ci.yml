@@ -22,6 +22,7 @@ cache:
 verify:jdk11:
   stage: build
   script:
+    - 'cd Server'
     - 'mvn $MAVEN_CLI_OPTS verify'
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
