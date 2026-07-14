@@ -26,12 +26,12 @@ object EvilTwinUtils {
     const val RANDOM_EVENT = "/save:evil_twin:random"
     const val CRANE_X_LOC = "/save:evil_twin:ccx"
     const val CRANE_Y_LOC = "/save:evil_twin:ccy"
-    var tries = 3
-    var success = false
-    var mollyNPC: NPC? = null
-    var craneNPC: NPC? = null
-    var currentCrane: Scenery? = null
-    val region: DynamicRegion = DynamicRegion.create(Regions.RE_EVIL_TWIN_7504)
+    const val TRIES = "/save:evil_twin:tries"
+    const val SUCCESS = "/save:evil_twin:success"
+    val mollyNPCs = mutableMapOf<Player, NPC>()
+    val craneNPCs = mutableMapOf<Player, NPC>()
+    val cranes = mutableMapOf<Player, Scenery>()
+
     val rewards =
         arrayOf(
             Item(Items.UNCUT_DIAMOND_1618, 2),
@@ -40,6 +40,18 @@ object EvilTwinUtils {
             Item(Items.UNCUT_SAPPHIRE_1624, 4)
         )
 
+    val regions = mutableMapOf<Player, DynamicRegion>()
+
+    fun getRegion(player: Player): DynamicRegion {
+        return regions.getOrPut(player) {
+            DynamicRegion.create(Regions.RE_EVIL_TWIN_7504)
+        }
+    }
+
+    private fun removeRegion(player: Player) {
+        regions.remove(player)?.clear()
+    }
+
     /**
      * Starts the event.
      *
@@ -47,31 +59,37 @@ object EvilTwinUtils {
      * @return `true` if the event was started, `false` otherwise.
      */
     fun start(player: Player): Boolean {
+        val region = getRegion(player)
         region.add(player)
         region.setMusicId(Music.HEAD_TO_HEAD_612)
-        currentCrane = Scenery(shared.consts.Scenery.EVIL_CLAW_14976, region.baseLocation.transform(14, 12, 0), 10, 0)
+        cranes[player] = Scenery(shared.consts.Scenery.EVIL_CLAW_14976, region.baseLocation.transform(14, 12, 0), 10, 0)
         val color: EvilTwinColors = RandomFunction.getRandomElement(EvilTwinColors.values())
         val model = RandomFunction.random(5)
         val hash = color.ordinal or (model shl 16)
         val npcId = getMollyId(hash)
         setAttribute(player, RANDOM_EVENT, hash)
+        val molly = NPC.create(
+            npcId,
+            Location.getRandomLocation(player.location, 1, true)
+        )
 
-        mollyNPC = NPC.create(npcId, Location.getRandomLocation(player.location, 1, true))
-        mollyNPC?.apply {
+        mollyNPCs[player] = molly
+        molly?.apply {
             isWalks = false
             isNeverWalks = true
             isRespawn = false
             init()
         }
 
-        mollyNPC?.let { npc ->
+        mollyNPCs[player]?.let { npc ->
             sendChat(npc, "I need your help, ${player.username}.")
             npc.faceTemporary(player, 3)
         }
-
+        setAttribute(player,SUCCESS,false)
+        setAttribute(player,TRIES,3)
         setAttribute(player, RandomEvent.save(), player.location)
         queueScript(player, 4, QueueStrength.SOFT) {
-            mollyNPC?.let { npc ->
+            mollyNPCs[player]?.let { npc ->
                 teleport(player, npc, hash)
                 npc.locks.lockMovement(300000)
                 openDialogue(player, MollyDialogue(3))
@@ -90,6 +108,7 @@ object EvilTwinUtils {
      * @param hash The hash of this event.
      */
     fun teleport(player: Player, npc: NPC, hash: Int) {
+        val region = getRegion(player)
         setMinimapState(player, 2)
         npc.properties.teleportLocation = region.baseLocation.transform(4, 15, 0)
         npc.direction = Direction.NORTH
@@ -97,8 +116,8 @@ object EvilTwinUtils {
         registerLogoutListener(player, RandomEvent.logout()) { p ->
             p.location = getAttribute(p, RandomEvent.save(), player.location)
         }
-        spawnSuspects(hash)
-        showNPCs(true)
+        spawnSuspects(player,hash)
+        showNPCs(player,true)
     }
 
     /**
@@ -107,15 +126,13 @@ object EvilTwinUtils {
      * @param player The player.
      */
     fun cleanup(player: Player) {
-        craneNPC = null
-        success = false
-        mollyNPC?.clear()
         PlayerCamera(player).reset()
         restoreTabs(player)
         player.properties.teleportLocation = getAttribute(player, RandomEvent.save(), null)
         setMinimapState(player, 0)
-        removeAttributes(player, RANDOM_EVENT, RandomEvent.save(), CRANE_X_LOC, CRANE_Y_LOC)
+        removeAttributes(player, RANDOM_EVENT, RandomEvent.save(), CRANE_X_LOC, CRANE_Y_LOC, TRIES, SUCCESS)
         clearLogoutListener(player, RandomEvent.logout())
+        removeRegion(player)
     }
 
     /**
@@ -124,9 +141,18 @@ object EvilTwinUtils {
      * @param player The player.
      */
     fun decreaseTries(player: Player) {
-        tries--
-        sendString(player, "Tries: $tries", Components.CRANE_CONTROL_240, 27)
-        if (tries < 1) {
+        val remainingTries = getAttribute(player, TRIES, 3) - 1
+
+        setAttribute(player, TRIES, remainingTries)
+
+        sendString(
+            player,
+            "Tries: $remainingTries",
+            Components.CRANE_CONTROL_240,
+            27
+        )
+
+        if (remainingTries < 1) {
             lock(player, 20)
             closeTabInterface(player)
             openDialogue(player, MollyDialogue(1))
@@ -142,7 +168,7 @@ object EvilTwinUtils {
      */
     fun locationUpdate(player: Player, entity: Entity, last: Location?) {
         when (entity) {
-            craneNPC -> {
+            craneNPCs[player] -> {
                 if (entity.walkingQueue.queue.size > 1 && player.interfaceManager.singleTab != null) {
                     val l = entity.location
                     PacketRepository.send(
@@ -156,11 +182,11 @@ object EvilTwinUtils {
                 }
             }
             player -> {
-                mollyNPC?.let { npc ->
+                mollyNPCs[player]?.let { npc ->
                     if (npc.isHidden(player) && entity.location.localX < 9) {
-                        showNPCs(true)
+                        showNPCs(player,true)
                     } else if (!npc.isHidden(player) && entity.location.localX > 8) {
-                        showNPCs(false)
+                        showNPCs(player,false)
                     }
                 }
             }
@@ -175,6 +201,7 @@ object EvilTwinUtils {
      * @param y The y-coords of the crane.
      */
     fun updateCraneCam(player: Player, x: Int, y: Int) {
+        val region = getRegion(player)
         if (player.interfaceManager.singleTab != null) {
             var loc = region.baseLocation.transform(14, 20, 0)
             PacketRepository.send(
@@ -199,25 +226,30 @@ object EvilTwinUtils {
      * @param direction The direction.
      */
     fun moveCrane(player: Player, direction: Direction) {
+        val region = getRegion(player)
         submitWorldPulse(
             object : Pulse(1, player) {
                 override fun pulse(): Boolean {
-                    if (!direction.canMove(currentCrane!!.location.transform(direction))) {
+                    val crane = cranes[player] ?: return true
+
+                    if (!direction.canMove(crane.location.transform(direction))) {
                         return true
                     }
                     val craneX: Int = player.getAttribute(CRANE_X_LOC, 14) + direction.stepX
                     val craneY: Int = player.getAttribute(CRANE_Y_LOC, 12) + direction.stepY
                     updateCraneCam(player, craneX, craneY)
-                    removeScenery(currentCrane!!)
-                    addScenery(Scenery(66, currentCrane!!.location, 22, 0))
-                    currentCrane =
-                        currentCrane!!.transform(
-                            currentCrane!!.id,
-                            currentCrane!!.rotation,
-                            region.baseLocation.transform(craneX, craneY, 0)
-                        )
-                    addScenery(Scenery(14977, currentCrane!!.location, 22, 0))
-                    addScenery(currentCrane!!)
+                    removeScenery(crane)
+                    addScenery(Scenery(66, crane.location, 22, 0))
+                    val newCrane = crane.transform(
+                        crane.id,
+                        crane.rotation,
+                        region.baseLocation.transform(craneX, craneY, 0)
+                    )
+
+                    cranes[player] = newCrane
+
+                    addScenery(Scenery(14977, newCrane.location, 22, 0))
+                    addScenery(newCrane)
                     return true
                 }
             }
@@ -229,8 +261,9 @@ object EvilTwinUtils {
      *
      * @param showMolly True to show, false to hide.
      */
-    private fun showNPCs(showMolly: Boolean) {
-        mollyNPC?.isInvisible = !showMolly
+    private fun showNPCs(p: Player, showMolly: Boolean) {
+        val region = getRegion(p)
+        mollyNPCs[p]?.isInvisible = !showMolly
         for (npc in region.planes[0].npcs) {
             if (npc.id in NPCs.SUSPECT_3852..NPCs.SUSPECT_3891) {
                 npc.isInvisible = false
@@ -258,6 +291,7 @@ object EvilTwinUtils {
      * @param player The player.
      */
     fun removeSuspects(player: Player) {
+        val region = getRegion(player)
         val hash: Int = player.getAttribute(RANDOM_EVENT, 0)
         for (npc in region.planes[0].npcs) {
             if (npc.id in NPCs.SUSPECT_3852..NPCs.SUSPECT_3891 && !isEvilTwin(npc, hash)) {
@@ -272,7 +306,8 @@ object EvilTwinUtils {
      *
      * @param hash The hash value of the npc.
      */
-    private fun spawnSuspects(hash: Int) {
+    private fun spawnSuspects(p:Player,hash: Int) {
+        val region = getRegion(p)
         if (region.planes[0].npcs.size > 3) return
 
         val npcId = 3852 + (hash and 0xFF)

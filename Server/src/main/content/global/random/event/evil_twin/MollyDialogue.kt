@@ -17,7 +17,7 @@ import core.tools.RandomFunction
 class MollyDialogue(var type: Int) : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(EvilTwinUtils.mollyNPC!!.id)
+        npc = NPC(EvilTwinUtils.mollyNPCs[player]!!.id)
         when (type) {
             0 -> when (stage) {
                 0 -> npc(FaceAnim.HAPPY, "Well done! You managed to catch my sister!").also { stage++ }

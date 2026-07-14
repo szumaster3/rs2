@@ -2,13 +2,13 @@ package content.global.random.event.gravedigger
 
 import content.data.RandomEvent
 import content.global.random.RandomEventNPC
+import content.global.random.event.gravedigger.GravediggerPlugin.Companion.removeCoffins
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.timer.impl.AntiMacro
-import core.game.world.map.Location
 import core.tools.RandomFunction
 import shared.consts.NPCs
 
@@ -22,15 +22,25 @@ class LeoNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.
         super.init()
         sendChat("Can I borrow you for a minute, ${player.username}?")
         lock(player, 5)
-        teleport(player, Location.create(1928, 5002, 0), TeleportManager.TeleportType.NORMAL)
+        val region = GravediggerPlugin.createRegion(player)
+        region.add(player)
+        val leo = create(NPCs.LEO_3508, region.baseLocation.transform(8, 10, 0))
+        leo.apply {
+            isWalks = false
+            isNeverWalks = true
+            isRespawn = false
+            init()
+        }
+        teleport(player, region.baseLocation.transform(8, 9, 0), TeleportManager.TeleportType.NORMAL)
+        leo.properties.teleportLocation = region.baseLocation.transform(8, 10, 0)
         setAttribute(player, RandomEvent.save(), player.location)
         registerLogoutListener(player, RandomEvent.logout()) { p ->
             p.location = getAttribute(p, RandomEvent.save(), player.location)
+            removeCoffins(player)
         }
-        queueScript(player, 5, QueueStrength.SOFT)
-        {
+        queueScript(player, 5, QueueStrength.SOFT) {
             setMinimapState(player, 2)
-            faceLocation(player, Location(1928, 5003, 0))
+            faceLocation(player, leo.location)
             player.dialogueInterpreter.open(LeoDialogue(), NPCs.LEO_3508)
             AntiMacro.terminateEventNpc(player)
             return@queueScript stopExecuting(player)
