@@ -205,7 +205,7 @@ class EvilTwinInterface : InterfaceListener {
                 30 -> EvilTwinUtils.moveCrane(player, Direction.NORTH)
                 31 -> EvilTwinUtils.moveCrane(player, Direction.EAST)
                 32 -> EvilTwinUtils.moveCrane(player, Direction.WEST)
-                33 -> closeInterface(player)
+                33 -> closeTabInterface(player)
             }
 
             playAudio(player, Sounds.TWIN_MOVE_CRANE_2273)
