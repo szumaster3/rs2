@@ -39,7 +39,6 @@ class LeoDialogue : DialogueFile() {
             8 -> {
                 end()
                 setAttribute(player!!, "random:talk-to", true)
-                GravediggerPlugin.init(player!!)
                 openInterface(player!!, Components.MESSAGESCROLL_220).also {
                     sendString(player!!, arrayOf("You need to:", "Pick up the coffins.", "Check the body inside.", "Find out where they need to be buried.", "Put all give coffins in the correct graves.", "Then talk to Leo to get a reward.", "You can store items in the mausoleum if you need more", "inventory space.").joinToString("<br>"), Components.MESSAGESCROLL_220, 6)
                 }
