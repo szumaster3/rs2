@@ -326,9 +326,27 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
             }
             return super.isUsing(e)
         }
-    }, ;
+    },
 
-    private val sets = Array(4) { arrayOfNulls<Item>(5) }
+    /**
+     * Berserker necklace set.
+     */
+    BERSERKER_NECKLACE(
+        endGraphics = null,
+        set = arrayOf(
+            intArrayOf(
+                Items.BERSERKER_NECKLACE_11128
+            ),
+            intArrayOf(
+                Items.TOKTZ_XIL_AK_6523,
+                Items.TOKTZ_XIL_EK_6525,
+                Items.TZHAAR_KET_EM_6527,
+                Items.TZHAAR_KET_OM_6528
+            ),
+        ),
+    );
+
+    private val sets = Array(set.size) { arrayOfNulls<Item>(5) }
 
     init {
         for (i in set.indices) {
@@ -366,6 +384,6 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
                 }
             }
         }
-        return hits == 4
+        return hits == sets.size
     }
 }

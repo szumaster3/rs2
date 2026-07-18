@@ -291,6 +291,9 @@ open class MeleeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         if (e is Player && e.isWearingVoid(CombatStyle.MELEE) && (skillId == Skills.ATTACK || skillId == Skills.STRENGTH)) {
             return 1.1
         }
+        if (e is Player && e.properties.armourSet === ArmourSet.BERSERKER_NECKLACE && skillId == Skills.STRENGTH) {
+            return 1.2
+        }
         return 1.0
     }
 
@@ -304,8 +307,12 @@ open class MeleeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         if (ArmourSet.VERAC.isUsing(e)) {
             return ArmourSet.VERAC
         }
+        if (ArmourSet.BERSERKER_NECKLACE.isUsing(e)) {
+            return ArmourSet.BERSERKER_NECKLACE
+        }
         return if (ArmourSet.TORAG.isUsing(e)) {
             ArmourSet.TORAG
+
         } else super.getArmourSet(e)
     }
 
