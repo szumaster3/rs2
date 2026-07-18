@@ -346,11 +346,11 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
         ),
     );
 
-    private val sets = Array(set.size) { arrayOfNulls<Item>(5) }
+    private val sets = Array(set.size) { i -> arrayOfNulls<Item>(set[i].size) }
 
     init {
         for (i in set.indices) {
-            for (k in sets[i].indices) {
+            for (k in set[i].indices) {
                 sets[i][k] = Item(set[i][k])
             }
         }
