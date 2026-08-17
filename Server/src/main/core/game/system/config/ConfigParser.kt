@@ -18,6 +18,7 @@ class ConfigParser : Commands {
     }
 
     fun postPlugin() {
+        DiaryConfigLoader().load()
         ShopParser().load()
         DropTableParser().load()
         NPCSpawner().load()

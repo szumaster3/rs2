@@ -1,0 +1,156 @@
+{
+  "easy": [
+    {
+      "varbit": 5691,
+      "task": "Buy a Farming amulet from Sarah on the farm north of Port Sarim."
+    },
+    {
+      "varbit": 5692,
+      "task": "Buy a stat-boosting beer from a waitress in the Rising Sun Tavern."
+    },
+    {
+      "varbit": 5693,
+      "task": "Buy a black chainbody from Wayne's Chains, and try it on in the shop."
+    },
+    {
+      "varbit": 5694,
+      "task": "Climb to the top of the White Knights' Castle."
+    },
+    {
+      "varbit": 5695,
+      "task": "Discover your family crest from Sir Renitee."
+    },
+    {
+      "varbit": 5696,
+      "task": "Enter the mole's lair under Falador Park."
+    },
+    {
+      "varbit": 5697,
+      "task": "Feed Ridgeley, the hairdresser's pet."
+    },
+    {
+      "varbit": 5698,
+      "task": "Fill a bucket from the pump north of the west Falador bank."
+    },
+    {
+      "varbit": 5699,
+      "task": "Heal an elemental wizard by casting an appropriate elemental spell on him (Air, Water, Earth, Fire)."
+    },
+    {
+      "varbit": 5700,
+      "task": "Kill a duck in Falador Park."
+    },
+    {
+      "varbit": 5701,
+      "task": "Kill a highwayman on the road south of Falador."
+    },
+    {
+      "varbit": 5702,
+      "task": "Make an air tiara."
+    },
+    {
+      "varbit": 5703,
+      "task": "Pop a party balloon."
+    },
+    {
+      "varbit": 5704,
+      "task": "Recharge your Prayer points at the altar south-west of Port Sarim."
+    },
+    {
+      "varbit": 5705,
+      "task": "Take the boat to Entrana."
+    }
+  ],
+  "medium": [
+    {
+      "varbit": 5706,
+      "task": "Craft a Fruit basket using the loom at the farm north of Port Sarim."
+    },
+    {
+      "varbit": 5707,
+      "task": "Crawl under Falador's south wall."
+    },
+    {
+      "varbit": 5723,
+      "task": "Grapple up, and then jump off the north Falador wall."
+    },
+    {
+      "varbit": 5709,
+      "task": "Increase your reputation with the White Knights by killing a black knight."
+    },
+    {
+      "varbit": 5710,
+      "task": "Kill an ice giant in the Asgarnian Ice Dungeon."
+    },
+    {
+      "varbit": 5711,
+      "task": "Light a bullseye lantern in the chemist's."
+    },
+    {
+      "varbit": 5712,
+      "task": "Pickpocket a Falador guard."
+    },
+    {
+      "varbit": 5713,
+      "task": "Place a scarecrow to protect your sweetcorn as it grows in the patch north of Port Sarim."
+    },
+    {
+      "varbit": 5714,
+      "task": "Salute Sir Tiffy Cashien while wearing full initiate armour."
+    },
+    {
+      "varbit": 5715,
+      "task": "Smith blurite crossbow limbs on Thurgo's anvil."
+    },
+    {
+      "varbit": 5716,
+      "task": "Travel from Port Sarim to Musa Point for free (with a little help from Charos)."
+    },
+    {
+      "varbit": 5717,
+      "task": "Visit the Port Sarim rat pits."
+    }
+  ],
+  "hard": [
+    {
+      "varbit": 5718,
+      "task": "Ascend the Dark Wizards' Tower while wearing full proselyte armour."
+    },
+    {
+      "varbit": 5719,
+      "task": "Change your family crest to the Saradomin symbol."
+    },
+    {
+      "varbit": 5720,
+      "task": "Craft 196 or more air runes simultaneously."
+    },
+    {
+      "varbit": 5721,
+      "task": "Cut down a Yew tree or Magic tree that you grew in Falador Park."
+    },
+    {
+      "varbit": 5708,
+      "task": "Dial to the fairy ring on Mudskipper Point."
+    },
+    {
+      "varbit": 5722,
+      "task": "Dye a cape pink with Pink dye from Betty in Port Sarim."
+    },
+    {
+      "varbit": 5724,
+      "task": "Enter the Mining Guild."
+    },
+    {
+      "varbit": 5725,
+      "task": "Kill a mogre at Mudskipper Point."
+    },
+    {
+      "varbit": 5726,
+      "task": "Kill a skeletal wyvern in the Asgarnian Ice Dungeon."
+    },
+    {
+      "varbit": 5727,
+      "task": "Summon an Ibis in the Port Sarim fish store."
+    }
+  ]
+}

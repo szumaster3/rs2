@@ -1,0 +1,164 @@
+{
+  "easy": [
+    {
+      "varbit": 3566,
+      "task": "Pick 5 bananas from the plantation located east of the volcano."
+    },
+    {
+      "varbit": 3567,
+      "task": "Use the rope swing to travel to the small island north-west of Karamja, where the moss giants are."
+    },
+    {
+      "varbit": 3568,
+      "task": "Mine some gold from the rocks on the north-west peninsula of Karamja."
+    },
+    {
+      "varbit": 3569,
+      "task": "Travel to Port Sarim via the dock, east of Musa Point."
+    },
+    {
+      "varbit": 3570,
+      "task": "Travel to Ardougne via the port near Brimhaven."
+    },
+    {
+      "varbit": 3571,
+      "task": "Explore Cairn Island to the west of Karamja."
+    },
+    {
+      "varbit": 3572,
+      "task": "Use the Fishing spots north of the banana plantation."
+    },
+    {
+      "varbit": 3573,
+      "task": "Collect 5 seaweed from anywhere on Karamja."
+    },
+    {
+      "varbit": 3574,
+      "task": "Attempt the TzHaar Fight Pits or Fight Cave."
+    },
+    {
+      "varbit": 3575,
+      "task": "Kill a Jogre in the Pothole dungeon."
+    }
+  ],
+  "medium": [
+    {
+      "varbit": 3579,
+      "task": "Claim a ticket from the Agility arena in Brimhaven."
+    },
+    {
+      "varbit": 3580,
+      "task": "Discover hidden wall in the dungeon below the volcano."
+    },
+    {
+      "varbit": 3581,
+      "task": "Visit the Isle of Crandor via the dungeon below the volcano."
+    },
+    {
+      "varbit": 3582,
+      "task": "Use Vigroy and Hajedy's cart service."
+    },
+    {
+      "varbit": 3583,
+      "task": "Earn 100% favour in the village of Tai Bwo Wannai Cleanup."
+    },
+    {
+      "varbit": 3584,
+      "task": "Cook a spider on stick."
+    },
+    {
+      "varbit": 3585,
+      "task": "Charter the Lady of the Waves from Cairn Isle to Port Khazard."
+    },
+    {
+      "varbit": 3586,
+      "task": "Cut a log from a teak tree."
+    },
+    {
+      "varbit": 3587,
+      "task": "Cut a log from a mahogany tree."
+    },
+    {
+      "varbit": 3588,
+      "task": "Catch a karambwan."
+    },
+    {
+      "varbit": 3589,
+      "task": "Exchange gems, a gout tuber, trading sticks for a machete."
+    },
+    {
+      "varbit": 3590,
+      "task": "Use the gnome glider to travel to Karamja."
+    },
+    {
+      "varbit": 3591,
+      "task": "Grow a healthy fruit tree in the patch near Brimhaven."
+    },
+    {
+      "varbit": 3592,
+      "task": "Trap a Horned Graahk."
+    },
+    {
+      "varbit": 3593,
+      "task": "Chop the vines to gain deeper access to Brimhaven Dungeon."
+    },
+    {
+      "varbit": 3594,
+      "task": "Cross the lava using the stepping stones within Brimhaven Dungeon."
+    },
+    {
+      "varbit": 3595,
+      "task": "Climb the stairs within Brimhaven Dungeon."
+    },
+    {
+      "varbit": 3597,
+      "task": "Charter a ship from the shipyard in the far east of Karamja."
+    },
+    {
+      "varbit": 3596,
+      "task": "Mine a red topaz from a gem rock."
+    }
+  ],
+  "hard": [
+    {
+      "varbit": 3566,
+      "task": "Become the Champion of the Fight Pits."
+    },
+    {
+      "varbit": 3567,
+      "task": "Successfully kill a Ket-Zek in the Fight Caves."
+    },
+    {
+      "varbit": 3568,
+      "task": "Eat an oomlie wrap."
+    },
+    {
+      "varbit": 3569,
+      "task": "Craft some nature runes."
+    },
+    {
+      "varbit": 3570,
+      "task": "Cook a karambwan thoroughly."
+    },
+    {
+      "varbit": 3571,
+      "task": "Kill a deathwing in the dungeon under the Kharazi Jungle."
+    },
+    {
+      "varbit": 3572,
+      "task": "Use the crossbow shortcut south of the volcano."
+    },
+    {
+      "varbit": 3573,
+      "task": "Collect five palm leaves."
+    },
+    {
+      "varbit": 3574,
+      "task": "Be assigned a Slayer task by Duradel or Lapalok in Shilo Village."
+    },
+    {
+      "varbit": 3575,
+      "task": "Kill a metal dragon in Brimhaven Dungeon."
+    }
+  ]
+}
