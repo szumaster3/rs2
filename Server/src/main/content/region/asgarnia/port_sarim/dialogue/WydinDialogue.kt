@@ -70,7 +70,7 @@ class WydinDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     4 -> {
-                        player(FaceAnim.HALF_GUILTY, "Can I buy something please?")
+                        player(FaceAnim.HALF_ASKING, "Can I buy something please?")
                         stage = 40
                     }
                 }
@@ -96,7 +96,7 @@ class WydinDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 40 -> {
-                    npc(FaceAnim.HAPPY, "Yes, ofcourse.")
+                    npc(FaceAnim.HAPPY, "Yes, of course.")
                     stage = 41
                 }
 

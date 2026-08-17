@@ -26,21 +26,21 @@ class SigurdDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("Who are you?", "Can you teach me about canoeing?").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Who are you?").also { stage++ }
+                1 -> player(FaceAnim.HALF_ASKING, "Who are you?").also { stage++ }
                 2 -> npc(FaceAnim.HALF_GUILTY, "It's really quite simple. Just walk down to that", "tree on the water bank and chop it down.").also { stage = 16 }
             }
             2 -> npc(FaceAnim.HALF_GUILTY, "I'm Sigurd the Great and Brainy.").also { stage++ }
-            3 -> player(FaceAnim.HALF_GUILTY, "Why do they call you the Great and Brainy?").also { stage++ }
+            3 -> player(FaceAnim.HALF_ASKING, "Why do they call you the Great and Brainy?").also { stage++ }
             4 -> npc(FaceAnim.HALF_GUILTY, "Because I invented the Log Canoe!").also { stage++ }
-            5 -> player(FaceAnim.HALF_GUILTY, "Log Canoe?").also { stage++ }
+            5 -> player(FaceAnim.HALF_ASKING, "Log Canoe?").also { stage++ }
             6 -> npc(FaceAnim.HALF_GUILTY, "Yeash! Me and my cousins were having a great", "party by the river when we decided to have a", " game of 'Smack The Tree'").also { stage++ }
-            7 -> player(FaceAnim.HALF_GUILTY, "Smack the Tree?").also { stage++ }
+            7 -> player(FaceAnim.HALF_ASKING, "Smack the Tree?").also { stage++ }
             8 -> npc(FaceAnim.HALF_GUILTY, "It's a game where you take it in turnsh shmacking", " a tree. First one to uproot the tree winsh!").also { stage++ }
             9 -> npc(FaceAnim.HALF_GUILTY, "Anyway, I won the game with a flying tackle.", " The tree came loose and down the river bank I went", " still holding the tree.").also { stage++ }
             10 -> npc(FaceAnim.HALF_GUILTY, "I woke up a few hours later and found myself", "several miles down river. And thatsh how I", "invented the log canoe!").also { stage++ }
             11 -> player(FaceAnim.HALF_GUILTY, "So you invented the 'Log Canoe' by falling into a river", "hugging a tree?").also { stage++ }
             12 -> npc(FaceAnim.HALF_GUILTY, "Well I refined the design from the original", "you know!").also { stage++ }
-            13 -> npc(FaceAnim.HALF_GUILTY, "I cut all the branches off to make it more", "comfortable. I could tell you how to if you like?").also { stage++ }
+            13 -> npc(FaceAnim.HALF_ASKING, "I cut all the branches off to make it more", "comfortable. I could tell you how to if you like?").also { stage++ }
             14 -> options("Yes", "No").also { stage++ }
             15 -> when (buttonId) {
                 1 -> npc(FaceAnim.HALF_GUILTY, "It's really quite simple. Just walk down to that tree", "on the water bank and chop it down.").also { stage++ }
@@ -57,7 +57,7 @@ class SigurdDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 npc(FaceAnim.HALF_GUILTY, "Then take your axe to it and shape it how you", "like!").also { stage++ }
             }
-            17 -> npc(FaceAnim.HALF_GUILTY, "What's a Waka?").also { stage++ }
+            17 -> npc(FaceAnim.HALF_ASKING, "What's a Waka?").also { stage++ }
             18 -> npcl(FaceAnim.HALF_GUILTY, "I've only ever seen Hari using them. People say he's found a way to canoe the river underground and into the Wilderness.").also { stage++ }
             19 -> npcl(FaceAnim.HALF_GUILTY, "Hari hangs around up near Edgeville.").also { stage++ }
             20 -> npcl(FaceAnim.HALF_GUILTY, "He's a nice bloke.").also { stage = END_DIALOGUE }

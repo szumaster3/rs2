@@ -29,17 +29,17 @@ class CapnIzzyDialogue(private val it: Int) : DialogueFile() {
                     }
                 }
                 6 -> when (buttonID) {
-                    1 -> playerl(FaceAnim.NEUTRAL, "What is this place?").also { stage = 10 }
-                    2 -> playerl(FaceAnim.NEUTRAL, "What do I do in the arena?").also { stage = 20 }
+                    1 -> playerl(FaceAnim.HALF_ASKING, "What is this place?").also { stage = 10 }
+                    2 -> playerl(FaceAnim.HALF_ASKING, "What do I do in the arena?").also { stage = 20 }
                     3 -> playerl(FaceAnim.NEUTRAL, "I'd like to use the Agility Arena, please.").also { stage = 30 }
                     4 -> playerl(FaceAnim.HALF_ASKING, "May I buy a Skillcape of Agility, please?").also { stage = 40 }
                     5 -> playerl(FaceAnim.NEUTRAL, "See you later.").also { stage = END_DIALOGUE }
                 }
                 7 -> when (buttonID) {
-                    1 -> playerl(FaceAnim.NEUTRAL, "What is this place?").also { stage = 10 }
-                    2 -> playerl(FaceAnim.NEUTRAL, "What do I do in the arena?").also { stage = 20 }
+                    1 -> playerl(FaceAnim.HALF_ASKING, "What is this place?").also { stage = 10 }
+                    2 -> playerl(FaceAnim.HALF_ASKING, "What do I do in the arena?").also { stage = 20 }
                     3 -> playerl(FaceAnim.NEUTRAL, "I'd like to use the Agility Arena, please.").also { stage = 30 }
-                    4 -> playerl(FaceAnim.NEUTRAL, "Can you tell me a bit about the Skillcape of Agility, please?").also { stage = 50 }
+                    4 -> playerl(FaceAnim.HALF_ASKING, "Can you tell me a bit about the Skillcape of Agility, please?").also { stage = 50 }
                     5 -> playerl(FaceAnim.NEUTRAL, "See you later.").also { stage = END_DIALOGUE }
                 }
                 10 -> npcl(FaceAnim.NEUTRAL, "This, me hearty, is the entrance to the Brimhaven, Agility Arena!").also { stage++ }
@@ -98,7 +98,7 @@ class CapnIzzyDialogue(private val it: Int) : DialogueFile() {
                 }
                 45 -> npcl(FaceAnim.NEUTRAL, "Well, come back and see me when you do.").also { stage = END_DIALOGUE }
                 50 -> sendNormalDialogue(NPC(NPCs.CAPN_IZZY_NO_BEARD_437), FaceAnim.NEUTRAL, "Aye, to be sure! The Skillcape of Agility be the symbol", "of the master of dexterity! One who wears it can climb", "like a cat, run like the wind and jump like...err, well", "jump like a jumping thing!").also { stage++ }
-                51 -> npcl(FaceAnim.NEUTRAL, "Now, be there anything else ye'd like to know?").also { stage = 5 }
+                51 -> npcl(FaceAnim.HALF_ASKING, "Now, be there anything else ye'd like to know?").also { stage = 5 }
             }
             1 -> when (stage) {
                 0 -> npcl(NPCs.PARROT_4535, FaceAnim.OLD_CALM_TALK2, "Clap him in irons!").also { stage++ }

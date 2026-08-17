@@ -19,7 +19,7 @@ class HicktonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FaceAnim.HAPPY, "Welcome to Hickton's Archery Emporium. Do you", "want to see my wares?")
+        npc(FaceAnim.HALF_ASKING, "Welcome to Hickton's Archery Emporium. Do you", "want to see my wares?")
         return true
     }
 
@@ -38,7 +38,7 @@ class HicktonDialogue(player: Player? = null) : Dialogue(player) {
 
             }
             2 -> when (buttonId) {
-                1 -> player("Can I buy a Skillcape of Fletching?").also { stage++ }
+                1 -> player(FaceAnim.HALF_ASKING,"Can I buy a Skillcape of Fletching?").also { stage++ }
                 2 -> end().also { npc.openShop(player) }
                 3 -> player(FaceAnim.EVIL_LAUGH, "No, I prefer to bash things close up.").also { stage = END_DIALOGUE }
 

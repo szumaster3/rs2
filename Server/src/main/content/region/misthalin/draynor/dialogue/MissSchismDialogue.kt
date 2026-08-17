@@ -19,7 +19,7 @@ class MissSchismDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FaceAnim.HALF_GUILTY, "Oooh, my dear, have you heard the news?")
+        npc(FaceAnim.HALF_ASKING, "Oooh, my dear, have you heard the news?")
         return true
     }
 
@@ -27,15 +27,15 @@ class MissSchismDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> sendOptions(player, "What would you like to say?", "Ok, tell me about the news.", "Who are you?", "I'm not talking to you, you horrible woman.").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Ok, tell me about the news.").also { stage++ }
-                2 -> player(FaceAnim.HALF_GUILTY, "Who are you?").also { stage = 15 }
+                1 -> player(FaceAnim.HALF_ASKING, "Ok, tell me about the news.").also { stage++ }
+                2 -> player(FaceAnim.HALF_ASKING, "Who are you?").also { stage = 15 }
                 3 -> player(FaceAnim.HALF_GUILTY, "I'm not talking to you, you horrible woman.").also { stage = 20 }
             }
             2 -> npc(FaceAnim.HALF_GUILTY, "Well, there's just to much to tell at once! What would", "you like to hear first: the vampire or the bank?").also { stage++ }
             3 -> options("Tell me about the vampire.", "Tell me about the bank.").also { stage++ }
             4 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "Tell me about the vampire.").also { stage++ }
-                2 -> player(FaceAnim.HALF_GUILTY, "What about the bank?").also { stage = 10 }
+                2 -> player(FaceAnim.HALF_ASKING, "What about the bank?").also { stage = 10 }
             }
             5 -> if (isQuestComplete(player, Quests.VAMPIRE_SLAYER)) {
                 npc(FaceAnim.HALF_GUILTY, "Well, there's nothing to tell NOW. You killed it.").also { stage++ }

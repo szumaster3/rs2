@@ -18,7 +18,7 @@ class FinanceAdvisorDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
-            58 -> playerl(FaceAnim.FRIENDLY, "Hello, who are you?")
+            58 -> playerl(FaceAnim.HALF_ASKING, "Hello, who are you?")
             59 -> npcl(FaceAnim.FRIENDLY, "You're nearly finished. The Prayer instructor would like to have a chat with you in the nearby church.").also { return false }
         }
         return true
@@ -28,7 +28,7 @@ class FinanceAdvisorDialogue(player: Player? = null) : Dialogue(player) {
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             58 -> when (stage++) {
                 0 -> npcl(FaceAnim.FRIENDLY, "I'm the Financial Advisor. I'm here to tell people how to make money.")
-                1 -> playerl(FaceAnim.FRIENDLY, "Okay. How can I make money then?")
+                1 -> playerl(FaceAnim.HALF_ASKING, "Okay. How can I make money then?")
                 2 -> npcl(FaceAnim.HALF_THINKING, "How you can make money? Quite.")
                 3 -> npcl(FaceAnim.FRIENDLY, "Well there are three basic ways of making money here: combat, quests, and trading. I will talk you through each of them very quickly.")
                 4 -> npcl(FaceAnim.FRIENDLY, "Let's start with combat as it is probably still fresh in your mind. Many enemies, both human and monster will drop items when they die.")

@@ -30,18 +30,18 @@ class PartyPeteDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Hi! I'm, Party Pete. Welcome to the Party Room!").also { stage++ }
             1 -> options("So, what's this room for?", "What's the big lever over there for?", "What's the gold chest for?", "I wanna party!", "More.").also { stage = 3 }
             3 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "So, what's this room for?").also { stage = 50 }
-                2 -> player(FaceAnim.HALF_GUILTY, "What's the big lever over there for?").also { stage = 55 }
-                3 -> player(FaceAnim.HALF_GUILTY, "What's the gold chest for?").also { stage = 61 }
-                4 -> player(FaceAnim.HALF_GUILTY, "I wanna party!").also { stage = 65 }
+                1 -> player(FaceAnim.HALF_ASKING, "So, what's this room for?").also { stage = 50 }
+                2 -> player(FaceAnim.HALF_ASKING, "What's the big lever over there for?").also { stage = 55 }
+                3 -> player(FaceAnim.HALF_ASKING, "What's the gold chest for?").also { stage = 61 }
+                4 -> player(FaceAnim.FRIENDLY, "I wanna party!").also { stage = 65 }
                 5 -> options("I love your hair!", "Why's there a chameleon in here?", "Back.").also { stage = 5 }
             }
             5 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "I love your hair!").also { stage++ }
-                2 -> player(FaceAnim.HALF_GUILTY, "Why's there a chameleon in here?").also { stage = 9 }
+                1 -> player(FaceAnim.FRIENDLY, "I love your hair!").also { stage++ }
+                2 -> player(FaceAnim.HALF_ASKING, "Why's there a chameleon in here?").also { stage = 9 }
                 3 -> options("So, what's this room for?", "What's the big lever over there for?", "What's the gold chest for?", "I wanna party!", "More...").also { stage = 3 }
             }
-            6 -> npcl(FaceAnim.HAPPY, "Isn't it groovy?").also { stage = END_DIALOGUE }
+            6 -> npcl(FaceAnim.HALF_ASKING, "Isn't it groovy?").also { stage = END_DIALOGUE }
             9 -> npcl(FaceAnim.HAPPY, "Karma's my pet. I got him for Christmas one year. He keeps the Party Room free of flies, and he loves watching me dance. Karma karma karma cha...").also { stage++ }
             10 -> options("Can you talk to him?", "Christmas is over.", "Aww, that's nice.", "Got any cake?").also { stage++ }
             11 -> when (buttonId) {

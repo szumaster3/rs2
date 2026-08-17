@@ -21,27 +21,27 @@ class FactoryWorkerDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             NPCs.FACTORY_WORKER_2173 -> when (stage) {
-                0 -> playerl(FaceAnim.FRIENDLY, "Are you okay?").also { stage++ }
+                0 -> playerl(FaceAnim.HALF_ASKING, "Are you okay?").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_ANGRY1, "Don't I look okay?").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "If you were any shorter you wouldn't exist.").also { stage++ }
                 3 -> npcl(FaceAnim.OLD_ANGRY1, "Very funny, human.").also { stage = END_DIALOGUE }
             }
 
             NPCs.FACTORY_WORKER_2174 -> when (stage) {
-                0 -> playerl(FaceAnim.FRIENDLY, "What are you dwarves doing in this factory?").also { stage++ }
+                0 -> playerl(FaceAnim.HALF_ASKING, "What are you dwarves doing in this factory?").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_ANGRY1, "Working of course, can't you see that?").also { stage++ }
-                2 -> playerl(FaceAnim.FRIENDLY, "But working on what?").also { stage++ }
+                2 -> playerl(FaceAnim.HALF_ASKING, "But working on what?").also { stage++ }
                 3 -> npcl(FaceAnim.OLD_DEFAULT, "Refining the ore that is being brought into the factory, of course.").also { stage++ }
-                4 -> playerl(FaceAnim.FRIENDLY, "And what does that mean?").also { stage++ }
+                4 -> playerl(FaceAnim.HALF_ASKING, "And what does that mean?").also { stage++ }
                 5 -> npcl(FaceAnim.OLD_ANGRY1, "It means you should stop asking so many questions and get back to work!").also { stage = END_DIALOGUE }
             }
 
             NPCs.FACTORY_WORKER_2175 -> when (stage) {
-                0 -> playerl(FaceAnim.FRIENDLY, "Who owns this factory?").also { stage++ }
+                0 -> playerl(FaceAnim.HALF_ASKING, "Who owns this factory?").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_DEFAULT, "The Consortium does and that's all you need to know.").also { stage++ }
-                2 -> playerl(FaceAnim.FRIENDLY, "But what company? I thought there were all these different companies?").also { stage++ }
+                2 -> playerl(FaceAnim.HALF_ASKING, "But what company? I thought there were all these different companies?").also { stage++ }
                 3 -> npcl(FaceAnim.OLD_DEFAULT, "Oh yes, all the major companies own this plant. It's too vital to be in the hands of one company alone.").also { stage++ }
-                4 -> playerl(FaceAnim.FRIENDLY, "And what exactly are you doing here?").also { stage++ }
+                4 -> playerl(FaceAnim.HALF_ASKING, "And what exactly are you doing here?").also { stage++ }
                 5 -> npcl(FaceAnim.OLD_ANGRY1, "I tire of these questions. Let me get back to work!").also { stage = END_DIALOGUE }
             }
         }

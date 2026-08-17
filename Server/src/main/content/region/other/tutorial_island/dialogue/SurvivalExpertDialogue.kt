@@ -136,7 +136,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> npcl(FaceAnim.FRIENDLY, "As you move your mouse over the various skills the small yellow popup box will show you the exact amount of experience you have and how much is needed to get to the next level.").also { stage++ }
                 4 -> npcl(FaceAnim.FRIENDLY, "You can also click on a skill to open up the relevant skillguide. In the skillguide, you can see all of the unlocks available in that skill.").also { stage++ }
 
-                5 -> npcl(FaceAnim.FRIENDLY, "Is there anything else you'd like to hear more about?").also { stage = 0 }
+                5 -> npcl(FaceAnim.HALF_ASKING, "Is there anything else you'd like to hear more about?").also { stage = 0 }
 
                 6 -> npcl(FaceAnim.FRIENDLY, "Woodcutting, eh? Don't worry, newcomer, it's really very easy. Simply equip your axe and click on a nearby tree to chop away.").also { stage++ }
                 7 -> npcl(FaceAnim.FRIENDLY, "As you explore the mainland you will discover many different kinds of trees that will require different Woodcutting levels to chop down.").also { stage++ }

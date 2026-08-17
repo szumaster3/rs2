@@ -12,7 +12,7 @@ class ZandarHorfyreDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> player(FaceAnim.HALF_THINKING, "Who are you?").also { stage++ }
+            0 -> player(FaceAnim.HALF_ASKING, "Who are you?").also { stage++ }
             1 -> npcl(FaceAnim.NEUTRAL, "My name is Zandar Horfyre, and you ${player?.name} are trespassing in my tower, not to mention attacking my students! I thank you to leave immediately!").also { stage++ }
             2 -> showTopics(
                 Topic("Ok, I was going anyway.", 3),

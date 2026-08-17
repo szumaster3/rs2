@@ -21,9 +21,9 @@ class TzHaarMejKahDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("What is this place?", "Who's the current champion?", "What did you call me?", "No I'm fine thanks.").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "What is this place?").also { stage = 10 }
-                2 -> player(FaceAnim.HALF_GUILTY, "Who's the current champion?").also { stage = 21 }
-                3 -> player(FaceAnim.HALF_GUILTY, "What did you call me?").also { stage = 30 }
+                1 -> player(FaceAnim.HALF_ASKING, "What is this place?").also { stage = 10 }
+                2 -> player(FaceAnim.HALF_ASKING, "Who's the current champion?").also { stage = 21 }
+                3 -> player(FaceAnim.HALF_ASKING, "What did you call me?").also { stage = 30 }
                 4 -> player(FaceAnim.HALF_GUILTY, "No I'm fine thanks.").also { stage = END_DIALOGUE }
             }
             30 -> npc(FaceAnim.CHILD_GUILTY, "Are you not JalYt-Ket?").also { stage++ }
@@ -38,7 +38,7 @@ class TzHaarMejKahDialogue(player: Player? = null) : Dialogue(player) {
             14 -> npc(FaceAnim.CHILD_GUILTY, "No rules, you use whatever you want. Last person", "standing wins and is declared champion, they stay in", "the pit for the next fight.").also { stage++ }
             15 -> options("Do I win anything?", "Sounds good.").also { stage++ }
             16 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Do I win anything?").also { stage++ }
+                1 -> player(FaceAnim.HALF_ASKING, "Do I win anything?").also { stage++ }
                 2 -> player(FaceAnim.HALF_GUILTY, "Sounds good.").also { stage = END_DIALOGUE }
             }
             17 -> npc(FaceAnim.CHILD_GUILTY, "You ask a lot of questions.", "Champion gets TokKul as reward, but more fights the more", "TokKul they get.").also { stage++ }

@@ -22,7 +22,7 @@ class KnightNotesDialogue : DialogueFile() {
             5 -> npcl(FaceAnim.FRIENDLY, "The dwarf spoke of a great treasure, apparently mentioned in dwarven legend, and of creatures of great evil, fighting those of great good.").also { stage = 6 }
             6 -> npcl(FaceAnim.FRIENDLY, "I sent Sir Gerry and a small command of knights to investigate the dwarf's stories several months ago and it appears that he has found the resting place of that incredible weapon:").also { stage = 7 }
             7 -> npcl(FaceAnim.FRIENDLY, "the Godsword.").also { stage = 8 }
-            8 -> playerl(FaceAnim.FRIENDLY, "The Godsword? What's that?").also { stage = 9 }
+            8 -> playerl(FaceAnim.HALF_ASKING, "The Godsword? What's that?").also { stage = 9 }
             9 -> npcl(FaceAnim.FRIENDLY, "During the great God Wars, the evil usurper Zamorak gathered many ancient relics and armies to his cause.").also { stage = 10 }
             10 -> npcl(FaceAnim.FRIENDLY, "There were none powerful enough to stand alone before his might, so our glorious Lord Saradomin").also { stage = 11 }
             11 -> npcl(FaceAnim.FRIENDLY, "gathered a triumverate *sic* of gods to stem the tide of evil. They came together and, using great magics, they created the Godsword; a weapon so mighty that it could slay even a god.").also { stage = 12 }
@@ -38,7 +38,7 @@ class KnightNotesDialogue : DialogueFile() {
             21 -> npcl(FaceAnim.FRIENDLY, "Apparently not. It appears that a millennia-old battle is still being fought beneath the ruins of the temple, and the prize for winning the battle is the Godsword!").also { stage = 22 }
             22 -> npcl(FaceAnim.FRIENDLY, "Hmm... Well, thank you very much, young " + (if (player!!.isMale) "boy" else "gal") + ".").also { stage = 23 }
             23 -> npcl(FaceAnim.FRIENDLY, "You've been a great help. I shall pass it on to my superiors.").also { stage = 24 }
-            24 -> playerl(FaceAnim.FRIENDLY, "Is that it, then? Aren't we going to do something?").also { stage = 25 }
+            24 -> playerl(FaceAnim.HALF_ASKING, "Is that it, then? Aren't we going to do something?").also { stage = 25 }
             25 -> npcl(FaceAnim.FRIENDLY, "Yes, yes. All in good time. I'll have to consult my commanding officer first. Thank you " + (if (player!!.isMale) "boy" else "gal") + ", you're dismissed.").also { stage = END_DIALOGUE }
         }
     }

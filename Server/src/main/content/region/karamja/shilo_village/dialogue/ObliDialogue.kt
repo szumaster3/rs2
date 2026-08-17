@@ -17,7 +17,7 @@ class ObliDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FaceAnim.FRIENDLY, "Welcome to Obli's General Store Bwana!", "Would you like to see my items?")
+        npc(FaceAnim.HALF_ASKING, "Welcome to Obli's General Store Bwana!", "Would you like to see my items?")
         return true
     }
 

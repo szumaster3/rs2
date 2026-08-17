@@ -22,14 +22,14 @@ class CharleyDialogue(player: Player? = null) : Dialogue(player) {
         if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
             player(FaceAnim.FRIENDLY, "Hello!")
         } else {
-            npc(FaceAnim.FRIENDLY, "I got fish, you got gold?").also { stage = 10 }
+            npc(FaceAnim.HALF_ASKING, "I got fish, you got gold?").also { stage = 10 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npcl(FaceAnim.FRIENDLY, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage++ }
+            0 -> npcl(FaceAnim.HALF_ASKING, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage++ }
             1 -> npcl(FaceAnim.FRIENDLY, "The powder monkey be takin' a caulk after gettin' rowdy on bumboo, so there be plenty of room for ye.").also { stage++ }
             2 -> player(FaceAnim.FRIENDLY, "Riiiiight...").also { stage++ }
             3 -> player(FaceAnim.FRIENDLY, "I'll just be over here if you need me.").also { stage = END_DIALOGUE }
@@ -40,11 +40,11 @@ class CharleyDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> player(FaceAnim.HALF_ASKING, "What happened to your legs?").also { stage = 30 }
             }
             20 -> npcl(FaceAnim.FRIENDLY, "Then what are ye doin' in a fish shop? Looking fer work?").also { stage++ }
-            21 -> player(FaceAnim.FRIENDLY, "Possibly, do you have any quests?").also { stage++ }
+            21 -> player(FaceAnim.HALF_ASKING, "Possibly, do you have any quests?").also { stage++ }
             22 -> npcl(FaceAnim.HALF_ASKING, "I dunno, I haven't gone through the last catch yet. What sort of a fish is it?").also { stage++ }
             23 -> player(FaceAnim.FRIENDLY, "A quest isn't a type of fish!").also { stage++ }
             24 -> npcl(FaceAnim.FRIENDLY, "Then I don't have any, and yer wastin' my time!").also { stage = END_DIALOGUE }
-            30 -> npcl(FaceAnim.FRIENDLY, "Ye wanna know what happened to my legs?").also { stage++ }
+            30 -> npcl(FaceAnim.HALF_ASKING, "Ye wanna know what happened to my legs?").also { stage++ }
             31 -> npcl(FaceAnim.FRIENDLY, "Yer too much of a lilly-livered, hat wearin' landlubber to know what happened to my legs!").also { stage++ }
             32 -> playerl(FaceAnim.FRIENDLY, "No I'm not! I've seen some freaky stuff! I can take it!").also { stage++ }
             33 -> npcl(FaceAnim.FRIENDLY, "All right, lad, since yer so insistent, I'll tell ye.").also { stage++ }

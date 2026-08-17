@@ -18,7 +18,7 @@ class FrincosDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(FaceAnim.HALF_GUILTY, "Hello, how can I help you?").also { stage++ }
+        npcl(FaceAnim.HALF_ASKING, "Hello, how can I help you?").also { stage++ }
         return true
     }
 

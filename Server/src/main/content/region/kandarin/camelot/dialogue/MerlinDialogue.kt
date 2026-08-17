@@ -77,13 +77,13 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> npcl(FaceAnim.NEUTRAL, "That is a powerful artefact indeed. Returning it here would help Camelot a lot.").also { stage++ }
                 3 -> npcl(FaceAnim.NEUTRAL, "Due to its nature the Holy Grail is likely to reside in a holy place.").also { stage++ }
-                4 -> playerl(FaceAnim.NEUTRAL, "Any suggestions?").also { stage++ }
+                4 -> playerl(FaceAnim.HALF_ASKING, "Any suggestions?").also { stage++ }
                 5 -> npcl(FaceAnim.NEUTRAL, "I believe there is a holy island somewhere not far away... I'm not entirely sure... I spent too long inside that crystal! Anyway, go and talk to someone over there.").also { stage++ }
                 6 -> npcl(FaceAnim.NEUTRAL, "I suppose you could also try speaking to Sir Galahad?").also { stage++ }
                 7 -> npcl(FaceAnim.NEUTRAL, "He returned from the quest many years after everyone else. He seems to know something about it, but he can only speak about those experiences cryptically.").also { stage++ }
                 8 -> showTopics(
                     Topic(FaceAnim.NEUTRAL, "Thank you for the advice.", END_DIALOGUE),
-                    Topic(FaceAnim.NEUTRAL, "Where can I find Sir Galahad?", 15),
+                    Topic(FaceAnim.HALF_ASKING, "Where can I find Sir Galahad?", 15),
                 )
                 15 -> npcl(FaceAnim.NEUTRAL, "Galahad now lives a life of religious contemplation. He lives somewhere west of McGrubor's Wood I think.").also { stage = END_DIALOGUE }
                 20 -> playerl(FaceAnim.NEUTRAL, "Thanks!").also { stage = END_DIALOGUE }

@@ -34,10 +34,10 @@ class FlorinDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player("You're more than welcome.").also { stage++ }
             1 -> options("What do you do here?", "How do you like your town?", "What's happening around here?", "Is there anything I can do to help out?", "Ok, thanks.").also { stage++ }
             2 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "What do you do here?").also { stage = 3 }
-                2 -> player(FaceAnim.HALF_GUILTY, "How do you like your town?").also { stage = 4 }
-                3 -> player(FaceAnim.HALF_GUILTY, "What's happening around here?").also { stage = 5 }
-                4 -> player(FaceAnim.HALF_GUILTY, "Is there anything I can do to help out?").also { stage = 6 }
+                1 -> player(FaceAnim.HALF_ASKING, "What do you do here?").also { stage = 3 }
+                2 -> player(FaceAnim.HALF_ASKING, "How do you like your town?").also { stage = 4 }
+                3 -> player(FaceAnim.HALF_ASKING, "What's happening around here?").also { stage = 5 }
+                4 -> player(FaceAnim.HALF_ASKING, "Is there anything I can do to help out?").also { stage = 6 }
                 5 -> player(FaceAnim.HALF_GUILTY, "Ok, thanks.").also { stage = END_DIALOGUE }
             }
             3 -> npcl(FaceAnim.HALF_GUILTY, "Well met! My name's Florin, I do a bit of this, a bit of that. Just try to survive really, there's nothing much else we can do.").also { stage = 1 }

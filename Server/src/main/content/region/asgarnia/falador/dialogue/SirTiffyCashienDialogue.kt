@@ -36,7 +36,7 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("What ho, " + (if (player.isMale) "sirrah" else "milady") + ". Spiffing day for a walk in the park,", "what?").also { stage++ }
-            1 -> player("Spiffing?").also { stage++ }
+            1 -> player(FaceAnim.HALF_ASKING,"Spiffing?").also { stage++ }
             2 -> npc("Absolutely, top-hole! Well, can't stay and chat all day,", "dontchaknow! Ta-ta for now!").also { stage++ }
             3 -> if (!isQuestComplete(player, Quests.RECRUITMENT_DRIVE)) {
                 playerl(FaceAnim.HALF_GUILTY, "Erm...goodbye.").also { stage = END_DIALOGUE }
@@ -46,9 +46,9 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
             10 -> when (buttonId) {
-                1 -> playerl(FaceAnim.FRIENDLY, "Do you have any jobs for me yet?").also { stage = 11 }
-                2 -> playerl(FaceAnim.FRIENDLY, "I don't really understand this 'Gaze of Saradomin' thing... Do you think you could explain what it does for me?").also { stage = 13 }
-                3 -> playerl(FaceAnim.FRIENDLY, "Can I buy some armours?").also { stage = 19 }
+                1 -> playerl(FaceAnim.HALF_ASKING, "Do you have any jobs for me yet?").also { stage = 11 }
+                2 -> playerl(FaceAnim.HALF_THINKING, "I don't really understand this 'Gaze of Saradomin' thing... Do you think you could explain what it does for me?").also { stage = 13 }
+                3 -> playerl(FaceAnim.HALF_ASKING, "Can I buy some armours?").also { stage = 19 }
                 4 -> if (player.properties.spawnLocation == ServerConstants.HOME_LOCATION) {
                     playerl(FaceAnim.FRIENDLY, "Hi Tiffy, I was wondering, can I change my respawn point to Falador?").also { stage = 22 }
                 } else {
@@ -71,7 +71,7 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 openNpcShop(player, NPCs.SIR_TIFFY_CASHIEN_2290)
             }
-            21 -> npcl(FaceAnim.HALF_GUILTY, "What? You're saying you want to respawn in Lumbridge? Are you sure?").also { stage = 26 }
+            21 -> npcl(FaceAnim.ASKING, "What? You're saying you want to respawn in Lumbridge? Are you sure?").also { stage = 26 }
             22 -> npcl(FaceAnim.FRIENDLY, "Ah, so you'd like to respawn in Falador, the good old homestead! Are you sure?").also { stage++ }
             23 -> options("Yes, I want to respawn in Falador.", "Actually, no thanks. I like my respawn point.").also { stage++ }
             24 -> when (buttonId) {

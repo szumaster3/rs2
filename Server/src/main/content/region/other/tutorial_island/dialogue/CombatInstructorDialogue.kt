@@ -119,21 +119,21 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 7 -> npcl(FaceAnim.FRIENDLY, "Before going into combat with an opponent it is wise to put the mouse over them and see what combat level they are.").also { stage++ }
                 8 -> npcl(FaceAnim.FRIENDLY, "Green coloured writing usually means it will be an easy fight for you, red means you will probably lose, yellow means they are around your level and orange means they are slightly stronger.").also { stage++ }
                 9 -> npcl(FaceAnim.FRIENDLY, "Sometimes things will go your way, sometimes they won't. There is no such thing as a guaranteed win, but if the odds are on your side, you stand the best chance of walking away victorious.").also { stage++ }
-                10 -> npcl(FaceAnim.FRIENDLY, "Now, was there something else you wanted to hear about again?").also { stage = 0 }
+                10 -> npcl(FaceAnim.HALF_ASKING, "Now, was there something else you wanted to hear about again?").also { stage = 0 }
 
                 11 -> npcl(FaceAnim.FRIENDLY, "Ah, my speciality. Close combat fighting, which is also known as melee fighting, covers all combat done at close range to your opponent.").also { stage++ }
                 12 -> npcl(FaceAnim.FRIENDLY, "Melee fighting depends entirely upon your three basic combat stats: Attack, Defence, and Strength.").also { stage++ }
                 13 -> npcl(FaceAnim.FRIENDLY, "Also, of course, it depends on the quality of your armour and weaponry. A high-levelled fighter with good armour and weapons will be deadly up close.").also { stage++ }
                 14 -> npcl(FaceAnim.FRIENDLY, "If this is the path you wish to take, remember your success depends on getting as close to your enemy as quickly as possible.").also { stage++ }
                 15 -> npcl(FaceAnim.FRIENDLY, "Personally, I consider the fine art of melee combat to be the ONLY combat method worth using.").also { stage++ }
-                16 -> npcl(FaceAnim.FRIENDLY, "Now, did you want to hear anything else?").also { stage = 0 }
+                16 -> npcl(FaceAnim.HALF_ASKING, "Now, did you want to hear anything else?").also { stage = 0 }
 
                 17 -> npcl(FaceAnim.FRIENDLY, "Thinking of being a ranger, eh? Well, okay. I don't enjoy it myself, but I can see the appeal.").also { stage++ }
                 18 -> npcl(FaceAnim.FRIENDLY, "Ranging employs a lot of different weapons as a skill, not just the shortbow you have there. Spears, throwing knives, and crossbows are all used best at a distance from your enemy.").also { stage++ }
                 19 -> npcl(FaceAnim.FRIENDLY, "Now, those rats were easy pickings, but on the mainland you will be very lucky if you can find a spot where you can shoot at your enemies without them being able to retaliate.").also { stage++ }
                 20 -> npcl(FaceAnim.FRIENDLY, "At close range, rangers often do badly in combat. Your best tactic as a ranger is to hit and run, keeping your foe at a distance.").also { stage++ }
                 21 -> npcl(FaceAnim.FRIENDLY, "Your effectiveness as a ranger is almost entirely dependent on your Ranged stat. As with all skills, the more you train it, the more powerful it will become.").also { stage++ }
-                22 -> npcl(FaceAnim.FRIENDLY, "Anything else you wanted to know?").also { stage = 0 }
+                22 -> npcl(FaceAnim.HALF_ASKING, "Anything else you wanted to know?").also { stage = 0 }
 
                 23 -> npcl(FaceAnim.FRIENDLY, "Ah yes, the Wilderness. It is a place of evil, mark my words. Many is the colleague I have lost in that foul place.").also { stage++ }
                 24 -> npcl(FaceAnim.FRIENDLY, "It is also a place of both adventure and wealth, so if you are brave enough and strong enough to survive it, you will make a killing. Literally!").also { stage++ }
@@ -149,7 +149,7 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 34 -> npcl(FaceAnim.FRIENDLY, "When skulled, you should try to avoid dying for the twenty minutes or so it will take for the skull to wear off.").also { stage++ }
                 35 -> npcl(FaceAnim.FRIENDLY, "If you wish to find the Wilderness, head north from where you start on the mainland. It is rather large and hard to miss.").also { stage++ }
                 36 -> npcl(FaceAnim.FRIENDLY, "If you don't wish to end up there, take notice of the warning you will receive when getting near to it.").also { stage++ }
-                37 -> npcl(FaceAnim.FRIENDLY, "Now, was there anything more?").also { stage = 0 }
+                37 -> npcl(FaceAnim.HALF_ASKING, "Now, was there anything more?").also { stage = 0 }
 
                 38 -> npcl(FaceAnim.FRIENDLY, "Okay then.").also { stage++ }
                 39 -> end()

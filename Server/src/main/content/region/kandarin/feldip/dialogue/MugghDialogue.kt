@@ -24,7 +24,7 @@ class MugghDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> playerl(FaceAnim.FRIENDLY, "Just having a nosey, really.").also { stage++ }
             1 -> npcl(FaceAnim.CHILD_NORMAL, "You bring dat nose back here when we open for business. I fix you up good.").also { stage++ }
-            2 -> playerl(FaceAnim.FRIENDLY, "Fix me up?").also { stage++ }
+            2 -> playerl(FaceAnim.HALF_ASKING, "Fix me up?").also { stage++ }
             3 -> npcl(FaceAnim.CHILD_NORMAL, "Yeah, me give you facial. Try to make your ugly face look bit nicer.").also { stage++ }
 
             4 -> playerl(FaceAnim.FRIENDLY, "Charming.").also { stage = END_DIALOGUE }

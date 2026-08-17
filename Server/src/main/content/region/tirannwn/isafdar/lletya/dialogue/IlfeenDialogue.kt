@@ -22,9 +22,9 @@ class IlfeenDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         when (questStage) {
-            0 -> npcl(FaceAnim.FRIENDLY, "Good day, what are you doing all the way out here?").also { stage = 0 }
+            0 -> npcl(FaceAnim.HALF_ASKING, "Good day, what are you doing all the way out here?").also { stage = 0 }
             1 -> playerl(FaceAnim.ASKING, "There is something I meant to ask you about. Do you remember Oaknock? He was a gnome inventor.").also { stage = 10 }
-            2 -> player(FaceAnim.FRIENDLY, "Hello again. Are you still offering to chant seeds?").also { stage = 20 }
+            2 -> player(FaceAnim.HALF_ASKING, "Hello again. Are you still offering to chant seeds?").also { stage = 20 }
         }
         return true
     }

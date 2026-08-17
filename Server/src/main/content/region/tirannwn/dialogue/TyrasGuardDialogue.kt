@@ -24,13 +24,13 @@ class TyrasGuardDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> showTopics(
-                Topic("What's going on around here?", 10, false),
-                Topic("Do you know what's south of here?", 20, false),
+                Topic(FaceAnim.HALF_ASKING,"What's going on around here?", 10, false),
+                Topic(FaceAnim.HALF_ASKING,"Do you know what's south of here?", 20, false),
                 Topic("I'll leave you alone.", END_DIALOGUE, false)
             )
             10 -> npcl(FaceAnim.NEUTRAL, "Sorry, I shouldn't give out sensitive information to civilians. You should go to General Hining, in the camp along the road.").also { stage = 11 }
             11 -> showTopics(
-                Topic("Do you know what's south of here?", 20, false),
+                Topic(FaceAnim.HALF_ASKING,"Do you know what's south of here?", 20, false),
                 Topic("Okay, thanks.", END_DIALOGUE, false)
             )
             20 -> npcl(FaceAnim.NEUTRAL, "No. We sent a scouting party in that direction, when we first established our camp. Some of the men got lost in the swamps. Eventually we listed them as dead.").also { stage++ }

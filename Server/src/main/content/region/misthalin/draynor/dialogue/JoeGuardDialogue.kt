@@ -63,8 +63,8 @@ class JoeGuardDialogue(player: Player? = null) : Dialogue(player) {
                 } else {
                     npc("That was perfect, I can't thank you enough.").also { stage++ }
                 }
-                14 -> player("How are you? Still ok? Not too drunk?").also { stage++ }
-                15 -> player("Would you care for another, my friend?").also { stage++ }
+                14 -> player(FaceAnim.HALF_ASKING,"How are you? Still ok? Not too drunk?").also { stage++ }
+                15 -> player(FaceAnim.HALF_ASKING,"Would you care for another, my friend?").also { stage++ }
                 16 -> npc("I better not, I don't want to be drunk on duty.").also { stage++ }
                 17 -> player("Here, just keep these for later,", "I hate to see a thirsty guard.").also { stage++ }
                 18 -> if (player.inventory.remove(BEER) && player.inventory.remove(BEER)) {
@@ -74,13 +74,13 @@ class JoeGuardDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 19 -> npc("Franksh, that wash just what I need to shtay on guard.", "No more beersh, I don't want to get drunk.").also { stage++ }
                 20 -> sendDialogue(player, "The guard is drunk, and no longer a problem.").also { stage = END_DIALOGUE }
-                23 -> player("Hello friend, I am just rescuing the prince, is that ok?").also { stage++ }
+                23 -> player(FaceAnim.HALF_ASKING,"Hello friend, I am just rescuing the prince, is that ok?").also { stage++ }
                 24 -> npc("Thatsh a funny joke. You are lucky I am shober. Go", "in peace, friend.").also { stage = END_DIALOGUE }
             }
             return true
         }
         when (stage) {
-            0 -> player(FaceAnim.HALF_GUILTY, "Hi, who are you guarding here?").also { stage++ }
+            0 -> player(FaceAnim.HALF_ASKING, "Hi, who are you guarding here?").also { stage++ }
             1 -> npc(FaceAnim.HALF_GUILTY, "Can't say, all very secret. You should get out of here.", "I am not suposed to talk while I guard.").also { stage++ }
             2 -> end()
         }

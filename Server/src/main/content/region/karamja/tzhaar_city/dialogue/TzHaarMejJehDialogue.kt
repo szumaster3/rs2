@@ -33,16 +33,16 @@ class TzHaarMejJehDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> showTopics(
                 IfTopic(FaceAnim.HALF_GUILTY, "I have a fire cape here.", 1, jadPracticeSettings && jadPractice && hasAnFireCape, skipPlayer = false),
-                IfTopic(FaceAnim.HALF_GUILTY, "What is this place?", 2, !hasAnFireCape, skipPlayer = false),
-                Topic(FaceAnim.HALF_GUILTY, "What did you call me?", 11, skipPlayer = false),
+                IfTopic(FaceAnim.HALF_ASKING, "What is this place?", 2, !hasAnFireCape, skipPlayer = false),
+                Topic(FaceAnim.HALF_ASKING, "What did you call me?", 11, skipPlayer = false),
                 Topic(FaceAnim.HALF_GUILTY, if(jadPracticeSettings && jadPractice) "About my challenge..." else "The challenge is too long. I want to challenge Jad directly.", if(jadPracticeSettings && jadPractice) 27 else 15, skipPlayer = false),
                 Topic(FaceAnim.HALF_GUILTY, "No I'm fine thanks.", END_DIALOGUE)
             )
             1 -> end().also {interpreter.open(DialogueInterpreter.getDialogueKey("firecape-exchange"), npc) }
-            2 -> player(FaceAnim.HALF_GUILTY, "What is this place?").also { stage++ }
+            2 -> player(FaceAnim.HALF_ASKING, "What is this place?").also { stage++ }
             3 -> npc(FaceAnim.CHILD_FRIENDLY, "This is the fight caves, TzHaar-Xil made it for practice,", "but many JalYt come here to fight too.", "Just enter the cave and make sure you're prepared.").also { stage++ }
             4 -> showTopics(
-                Topic(FaceAnim.HALF_GUILTY, "Are there any rules?", 5,false),
+                Topic(FaceAnim.HALF_ASKING, "Are there any rules?", 5,false),
                 Topic(FaceAnim.HALF_GUILTY, "Ok thanks.", END_DIALOGUE, false)
             )
             5 -> npc(FaceAnim.CHILD_GUILTY, "Rules? Survival is the only rule in there.").also { stage++ }
@@ -56,7 +56,7 @@ class TzHaarMejJehDialogue(player: Player? = null) : Dialogue(player) {
             10 -> npc(FaceAnim.CHILD_GUILTY, "Gold is like you JalYt, soft and easily broken, we use", "hard rock forged in fire like TzHaar!").also { stage = END_DIALOGUE }
             11 -> npc(FaceAnim.CHILD_GUILTY, "Are you not JalYt-Ket?").also { stage++ }
             12 -> showTopics(
-                Topic(FaceAnim.HALF_GUILTY, "What's a 'JalYt-Ket'?", 13, false),
+                Topic(FaceAnim.HALF_ASKING, "What's a 'JalYt-Ket'?", 13, false),
                 Topic(FaceAnim.HALF_GUILTY, "I guess so...", END_DIALOGUE, false),
                 Topic(FaceAnim.HALF_GUILTY, "No I'm not!", END_DIALOGUE, false)
             )

@@ -26,7 +26,7 @@ class GarvDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("Can I go in there?", "I want for nothing!").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Can I go in there?").also { stage++ }
+                1 -> player(FaceAnim.HALF_ASKING, "Can I go in there?").also { stage++ }
                 2 -> player(FaceAnim.HALF_GUILTY, "I want for nothing!").also { stage = 3 }
             }
 

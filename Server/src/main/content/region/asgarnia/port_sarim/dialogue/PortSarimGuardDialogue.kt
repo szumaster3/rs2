@@ -39,11 +39,11 @@ class PortSarimGuardDialogue(player: Player? = null) : Dialogue(player) {
             5 -> player("Well it sounds better than sitting on this rooftop all day", "looking at trees!").also { stage++ }
             6 -> npc("I'll have you know it's a very important job guarding this", "jail!").also { stage++ }
             7 -> npc("If anyone comes sneaking in here to mess around with", "the prisoners, the lads downstairs will make mincemeat of them, and I'll be", "here to pick them off if they try to escape.").also { stage++ }
-            8 -> player("You mean people aren't meant to be able to shoot the", "prisoners in the cells?").also { stage++ }
+            8 -> player(FaceAnim.HALF_ASKING,"You mean people aren't meant to be able to shoot the", "prisoners in the cells?").also { stage++ }
             9 -> npc(FaceAnim.NOD_YES, "Yes, that's right.").also { stage++ }
             10 -> player("Okay, it's been nice talking to you.").also { stage = END_DIALOGUE }
             11 -> npc(FaceAnim.THINKING, "What? I can see you!").also { stage++ }
-            12 -> player("No, you're just imagining it. Perhaps you've been up here in the sun for too long?").also { stage++ }
+            12 -> player(FaceAnim.HALF_ASKING,"No, you're just imagining it. Perhaps you've been up here in the sun for too long?").also { stage++ }
             13 -> npc(FaceAnim.HALF_ASKING, "So who am I talking to?").also { stage++ }
             14 -> player("Oh dear, you've started talking to yourself. That's a common sign that you're going mad!").also { stage++ }
             15 -> npc(FaceAnim.SAD, "But... but... you're standing right there...").also { stage++ }

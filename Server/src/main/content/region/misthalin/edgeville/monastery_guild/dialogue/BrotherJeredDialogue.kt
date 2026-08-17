@@ -20,7 +20,7 @@ class BrotherJeredDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isMaster(player, Skills.PRAYER)) {
-            player("Can I buy a Skillcape of Prayer?")
+            player(FaceAnim.HALF_ASKING,"Can I buy a Skillcape of Prayer?")
             stage = 200
         } else if (inInventory(player, Items.HOLY_ELIXIR_13754, 1) &&
             inInventory(
@@ -29,7 +29,7 @@ class BrotherJeredDialogue(player: Player? = null) : Dialogue(player) {
                 1,
             )
         ) {
-            player("Can you bless this spirit shield for me?")
+            player(FaceAnim.HALF_ASKING,"Can you bless this spirit shield for me?")
             stage = 100
         } else {
             options("What can you do to help a bold adventurer like myself?", "Praise be to Saradomin!")

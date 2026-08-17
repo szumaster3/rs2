@@ -18,7 +18,7 @@ class JayeneKliynDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player("Hello there. What are you doing here?")
+        player(FaceAnim.HALF_ASKING,"Hello there. What are you doing here?")
         return true
     }
 
@@ -27,9 +27,9 @@ class JayeneKliynDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npcl(FaceAnim.HALF_GUILTY, "I'm waiting here hoping that someone can guide me to the Paterdomus, the temple on the Salve.").also { stage++ }
             1 -> options("Where is Paterdomus?", "Why do you want to go to Paterdomus?", "Could you defend yourself if we met enemies...?", "I can take you to Paterdomus.", "Ok, thanks.").also { stage++ }
             2 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Where is Paterdomus?").also { stage++ }
-                2 -> player(FaceAnim.HALF_GUILTY, "Why do you want to go to Paterdomus?").also { stage = 4 }
-                3 -> player(FaceAnim.HALF_GUILTY, "Could you defend yourself if we met enemies...?").also { stage = 5 }
+                1 -> player(FaceAnim.HALF_ASKING, "Where is Paterdomus?").also { stage++ }
+                2 -> player(FaceAnim.HALF_ASKING, "Why do you want to go to Paterdomus?").also { stage = 4 }
+                3 -> player(FaceAnim.HALF_ASKING, "Could you defend yourself if we met enemies...?").also { stage = 5 }
                 4 -> player(FaceAnim.HALF_GUILTY, "I can take you to Paterdomus.").also { stage = 6 }
                 5 -> player(FaceAnim.HALF_GUILTY, "Ok, thanks.").also { stage = END_DIALOGUE }
             }

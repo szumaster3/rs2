@@ -33,7 +33,7 @@ class OliviaDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npc(FaceAnim.HALF_GUILTY, "Something like that, yes. I was just minding my own", "business, trying to keep these pesky thieves off my stalls,", "when I heard a strange noise and a scream.").also { stage++ }
             4 -> npc(FaceAnim.HALF_GUILTY, "I went across to see what was going on, but there was", "a bright purple flash and everything went black. Before I knew", "what had happened, I was standing in Falador!").also { stage++ }
             5 -> npc(FaceAnim.HALF_GUILTY, "It took me ages to get back, and when I arrived I saw", "there was a huge hole in the bank wall and some of the bankers", "had been killed!").also { stage++ }
-            6 -> playerl(FaceAnim.FRIENDLY, "Did you see who teleported you to Falador?").also { stage++ }
+            6 -> playerl(FaceAnim.HALF_ASKING, "Did you see who teleported you to Falador?").also { stage++ }
             7 -> npcl(FaceAnim.HALF_GUILTY, "No, they were standing behind that old man's door.").also { stage++ }
             8 -> npc(FaceAnim.HALF_GUILTY, "He really shouldn't leave his door open all day,", "especially in this neighbourhood - there are thousands of thieves around,", "and anyone could wander in!").also { stage++ }
             9 -> playerl(FaceAnim.FRIENDLY, "Okay, thanks for your time.").also { stage++ }

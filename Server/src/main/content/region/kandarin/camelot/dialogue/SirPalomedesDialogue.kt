@@ -20,7 +20,7 @@ class SirPalomedesDialogue(player: Player? = null) : Dialogue(player) {
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
                 0 -> {
-                    npcl(FaceAnim.NEUTRAL, "Hello there adventurer, what do you want of me?")
+                    npcl(FaceAnim.HALF_ASKING, "Hello there adventurer, what do you want of me?")
                     val questStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL)
                     stage = when (questStage) {
                         0 -> 1
@@ -40,7 +40,7 @@ class SirPalomedesDialogue(player: Player? = null) : Dialogue(player) {
             }
         } else {
             when (stage) {
-                0 -> npcl(FaceAnim.HALF_GUILTY, "Hello there adventurer, what do you want of me?").also {
+                0 -> npcl(FaceAnim.HALF_ASKING, "Hello there adventurer, what do you want of me?").also {
                     if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 0 || isQuestComplete(player!!, Quests.HOLY_GRAIL)) {
                         stage = 1
                     } else if (getQuestStage(player!!, Quests.HOLY_GRAIL) >= 10) {

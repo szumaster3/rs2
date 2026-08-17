@@ -18,7 +18,7 @@ class GnomeTravelerDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if(npc.id == NPCs.GNOME_TRAVELLER_2139) {
-            player("Hello there! What are you doing in the city?")
+            player(FaceAnim.HALF_ASKING,"Hello there! What are you doing in the city?")
         } else {
             player("Hello there mister gnome!")
             stage = 7

@@ -16,9 +16,9 @@ class DrogoDwarfDialogue : DialogueFile() {
         when (stage) {
             0 -> npc(FaceAnim.OLD_DEFAULT, "'Ello. Welcome to my Mining shop, friend.").also { stage++ }
             1 -> showTopics(
-                Topic("Do you want to trade?", 4),
-                Topic("Hello, shorty.", 3),
-                Topic("Why don't you ever restock ores and bars?", 2)
+                Topic(FaceAnim.HALF_ASKING,"Do you want to trade?", 4),
+                Topic(FaceAnim.FRIENDLY,"Hello, shorty.", 3),
+                Topic(FaceAnim.HALF_ASKING,"Why don't you ever restock ores and bars?", 2)
             )
             2 -> npc(FaceAnim.OLD_DEFAULT, "The only ores and bars I sell are those sold to me.").also { stage = END_DIALOGUE }
             3 -> npc(FaceAnim.OLD_ANGRY1, "I may be short, but at least I've got manners.").also { stage = END_DIALOGUE }

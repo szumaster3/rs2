@@ -30,7 +30,7 @@ class MosolReiDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Greetings Bwana! We've removed the threat of Rashiliyia", "and though there are still some random outbreaks of undead", "activity we are more than able to deal with it.").also { stage++ }
-            1 -> npc("You're welcome to enter the village now Bwana,", "shall I show you the way?").also { stage++ }
+            1 -> npc(FaceAnim.HALF_ASKING,"You're welcome to enter the village now Bwana,", "shall I show you the way?").also { stage++ }
             2 -> options("Yes, Ok, I'll go into the village!", "I think I'll see it some other time.").also { stage++ }
             3 -> when (buttonId) {
                 1 -> {

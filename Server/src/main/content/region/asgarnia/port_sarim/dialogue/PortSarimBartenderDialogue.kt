@@ -28,7 +28,7 @@ class PortSarimBartenderDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npc(FaceAnim.HAPPY, "Hello there!").also { stage++ }
             1 -> sendOptions(player, "Choose an option:", "Could I buy a beer, please.", "Bye, then.").also { stage++ }
             2 -> when (buttonId) {
-                1 -> player(FaceAnim.HAPPY, "Could I buy a beer, please?").also { stage++ }
+                1 -> player(FaceAnim.HALF_ASKING, "Could I buy a beer, please?").also { stage++ }
                 2 -> {
                     player(FaceAnim.FRIENDLY, "Bye, then.").also { stage = 6 }
                     stage = 20

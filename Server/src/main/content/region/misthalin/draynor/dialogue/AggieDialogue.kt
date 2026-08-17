@@ -42,13 +42,13 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             } else if(getQuestStage(player, Quests.SWEPT_AWAY) == 2 && player.getAttribute("total_sweeps", 0) >= 0) {
                 npcl(FaceAnim.SAD, "Hmm, that doesn't look quite right. To enchant the broom, you need to sweep away 4 lines to make a pattern of 4 small triangles - and no extra lines or shapes.").also { stage = 921 }
             } else {
-                player("Woah! Where are we and what are we doing here?")
+                player(FaceAnim.HALF_ASKING,"Woah! Where are we and what are we doing here?")
                 stage = 900
             }
             return true
         }
         quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
-        npc("What can I help you with?")
+        npc(FaceAnim.HALF_ASKING,"What can I help you with?")
         stage = 0
         return true
     }
@@ -97,17 +97,17 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             720 ->
                 when (buttonId) {
                     1 -> {
-                        player("Could you think of a way to make skin paste?")
+                        player(FaceAnim.HALF_ASKING,"Could you think of a way to make skin paste?")
                         stage = 721
                     }
 
                     2 -> {
-                        player("What could you make for me?")
+                        player(FaceAnim.HALF_ASKING,"What could you make for me?")
                         stage = 10
                     }
 
                     3 -> {
-                        player("Cool, do you turn people into frogs?")
+                        player(FaceAnim.HALF_ASKING,"Cool, do you turn people into frogs?")
                         stage = 20
                     }
 
@@ -117,7 +117,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     5 -> {
-                        player(FaceAnim.FURIOUS, "Can you make dyes for me please?")
+                        player(FaceAnim.HALF_ASKING,"Can you make dyes for me please?")
                         stage = 40
                     }
                 }
@@ -145,7 +145,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             723 -> {
-                player("What do you need to make it?")
+                player(FaceAnim.HALF_ASKING,"What do you need to make it?")
                 stage = 724
             }
 
@@ -222,12 +222,12 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                 if (!isQuestComplete(player, Quests.SWEPT_AWAY)) {
                     when (buttonId) {
                         1 -> {
-                            player("What could you make for me?")
+                            player(FaceAnim.HALF_ASKING,"What could you make for me?")
                             stage = 10
                         }
 
                         2 -> {
-                            player("Cool, do you turn people into frogs?")
+                            player(FaceAnim.HALF_ASKING,"Cool, do you turn people into frogs?")
                             stage = 20
                         }
 
@@ -242,19 +242,19 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                         }
 
                         5 -> {
-                            player(FaceAnim.FURIOUS, "Can you make dyes for me please?")
+                            player(FaceAnim.HALF_ASKING, "Can you make dyes for me please?")
                             stage = 40
                         }
                     }
                 } else {
                     when (buttonId) {
                         1 -> {
-                            player("What could you make for me?")
+                            player(FaceAnim.HALF_ASKING,"What could you make for me?")
                             stage = 10
                         }
 
                         2 -> {
-                            player("Cool, do you turn people into frogs?")
+                            player(FaceAnim.HALF_ASKING,"Cool, do you turn people into frogs?")
                             stage = 20
                         }
 
@@ -264,7 +264,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                         }
 
                         4 -> {
-                            player(FaceAnim.FURIOUS, "Can you make dyes for me please?")
+                            player(FaceAnim.HALF_ASKING, "Can you make dyes for me please?")
                             stage = 40
                         }
                     }
@@ -290,17 +290,17 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             42 ->
                 when (buttonId) {
                     1 -> {
-                        player(FaceAnim.FURIOUS, "What do you need to make red dye?")
+                        player(FaceAnim.HALF_ASKING, "What do you need to make red dye?")
                         stage = 410
                     }
 
                     2 -> {
-                        player(FaceAnim.FURIOUS, "What do you need to make yellow dye?")
+                        player(FaceAnim.HALF_ASKING, "What do you need to make yellow dye?")
                         stage = 420
                     }
 
                     3 -> {
-                        player(FaceAnim.FURIOUS, "What do you need to make blue dye?")
+                        player(FaceAnim.HALF_ASKING, "What do you need to make blue dye?")
                         stage = 430
                     }
                 }
@@ -311,7 +311,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             431 -> {
-                player(FaceAnim.FURIOUS, "Okay, make me some blue dye please.")
+                player(FaceAnim.FRIENDLY, "Okay, make me some blue dye please.")
                 stage = 432
             }
 
@@ -342,7 +342,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             421 -> {
-                player(FaceAnim.FURIOUS, "Okay, make me some yellow dye please.")
+                player(FaceAnim.FRIENDLY, "Okay, make me some yellow dye please.")
                 stage = 422
             }
 
@@ -370,7 +370,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             411 -> {
-                player(FaceAnim.FURIOUS, "Okay, make me some red dye please.")
+                player(FaceAnim.FRIENDLY, "Okay, make me some red dye please.")
                 stage = 412
             }
 
@@ -393,7 +393,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
 
             413 -> end()
             30 -> {
-                npc("Oh, you like to call a witch names do you?")
+                npc(FaceAnim.HALF_ASKING,"Oh, you like to call a witch names do you?")
                 stage = 31
             }
 
@@ -530,11 +530,11 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             900 -> npc("Oh, this is just a little place that some of us witches use", "on occasion. It's rather convenient for the occasional", "ritual or spell.").also { stage++ }
             901 -> npc("Not only is it infused with a bit of magical peace, but", "it's out of the way enough that we don't get a lot of", "unnecessary interruptions.").also { stage++ }
             902 -> player("Ah, right. Which leaves the question of what we're doing", "here.").also { stage++ }
-            903 -> npc("You want that broom of yours enchanted, right?").also { stage++ }
+            903 -> npc(FaceAnim.HALF_ASKING,"You want that broom of yours enchanted, right?").also { stage++ }
             904 -> player("Right.").also { stage++ }
             905 -> npc("Well the best way to enchant that hunk of dead wood", "is to harness the power latent in this magical symbol", "here.").also { stage++ }
-            906 -> npc("Do you see that pattern of 16 lines thrown out of sand", "on the ground?").also { stage++ }
-            907 -> player("How could I miss it?").also { stage++ }
+            906 -> npc(FaceAnim.HALF_ASKING,"Do you see that pattern of 16 lines thrown out of sand", "on the ground?").also { stage++ }
+            907 -> player(FaceAnim.HALF_ASKING,"How could I miss it?").also { stage++ }
             908 -> npc("In order to enchant the broom, you need to sweep", "away 4 lines of those 16 lines, such that you leave only 4", "small triangles on the ground - and nothing else.").also { stage++ }
             909 -> npc("If you run into any trouble, let me know and I'll", "reconfigure the original pattern for you. I can also", "teleport you back to Draynor when you're ready to", "leave.").also { stage++ }
             910 -> {
@@ -548,8 +548,8 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             913 -> npc("Yes, there is a lot of power in these types of magical", "symbols.").also { stage++ }
             914 -> options("Is there anything else that needs to be done here?", "Where are we?", "I'd like to go back to Draynor, please.").also { stage++ }
             915 -> when (buttonId) {
-                1 -> player("Is there anything else that needs to be done here?").also { stage = 918 }
-                2 -> player("Where are we?").also { stage = 919 }
+                1 -> player(FaceAnim.HALF_ASKING,"Is there anything else that needs to be done here?").also { stage = 918 }
+                2 -> player(FaceAnim.HALF_ASKING,"Where are we?").also { stage = 919 }
                 3 -> player("I'd like to go back to Draynor, please.").also { stage++ }
 
             }

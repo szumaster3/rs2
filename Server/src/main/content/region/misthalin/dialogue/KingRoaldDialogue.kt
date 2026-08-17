@@ -48,7 +48,7 @@ class KingRoaldDialogue(player: Player? = null) : Dialogue(player) {
                 player("Greetings, your Majesty.")
                 loadFile(optionFiles[buttonId - 1])
             }
-            START_DIALOGUE -> npc(FaceAnim.HALF_GUILTY, "Do you have anything of importance to say?").also { stage++ }
+            START_DIALOGUE -> npc(FaceAnim.HALF_ASKING, "Do you have anything of importance to say?").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "...Not really.").also { stage++ }
             2 -> npc(FaceAnim.HALF_GUILTY, "You will have to excuse me, then. I am very busy as I", "have a kingdom to run!").also { stage = END_DIALOGUE }
             END_DIALOGUE -> end()

@@ -20,7 +20,7 @@ class ArvelDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        npcl(FaceAnim.FRIENDLY, "Good day traveller. You are far from home, what brings you here?")
+        npcl(FaceAnim.HALF_ASKING, "Good day traveller. You are far from home, what brings you here?")
         return true
     }
 
@@ -30,7 +30,7 @@ class ArvelDialogue(player: Player? = null) : Dialogue(player) {
             1 -> npc(FaceAnim.FRIENDLY, "Sounds ghastly, I just want to live in peace.").also { stage++ }
             2 -> playerl(FaceAnim.FRIENDLY, "Unfortunately without people like me, peace doesn't last for long.").also { stage++ }
             3 -> npcl(FaceAnim.FRIENDLY, "True, but then again most adventurers cause as much trouble as they put right.").also { stage++ }
-            4 -> player(FaceAnim.FRIENDLY, "You've got a point there... Hmm...").also { stage++ }
+            4 -> player(FaceAnim.HALF_THINKING, "You've got a point there... Hmm...").also { stage++ }
             5 -> npc(FaceAnim.FRIENDLY, "Well, good day traveller. And always do the right thing.").also { stage = END_DIALOGUE }
         }
         return true

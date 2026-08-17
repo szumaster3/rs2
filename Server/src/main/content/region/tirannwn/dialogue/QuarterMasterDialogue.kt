@@ -32,7 +32,7 @@ class QuarterMasterDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npc("Would you like a look at what we have now?").also { stage++ }
+            0 -> npc(FaceAnim.HALF_ASKING,"Would you like a look at what we have now?").also { stage++ }
             1 -> options("Yes please.", "No thanks.").also { stage++ }
             2 -> when (buttonId) {
                 1 -> {

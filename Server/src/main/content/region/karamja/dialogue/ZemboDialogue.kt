@@ -17,7 +17,7 @@ class ZemboDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FaceAnim.HALF_GUILTY, "Hey, are you wanting to try some of my fine wines", "and spririts? All brewed locally on Karamja island.")
+        npc(FaceAnim.HALF_ASKING, "Hey, are you wanting to try some of my fine wines", "and spririts? All brewed locally on Karamja island.")
         return true
     }
 

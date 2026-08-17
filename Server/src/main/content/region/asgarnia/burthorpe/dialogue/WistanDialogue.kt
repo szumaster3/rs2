@@ -15,7 +15,7 @@ class WistanDialogue: DialogueFile() {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage++ }
             1 -> npcl(FaceAnim.FRIENDLY, "Welcome to Burthorpe Supplies. Your last shop before heading north into the mountains!").also { stage++ }
-            2 -> npcl(FaceAnim.FRIENDLY, "Would you like to buy something?").also { stage++ }
+            2 -> npcl(FaceAnim.HALF_ASKING, "Would you like to buy something?").also { stage++ }
             3 -> options("Yes, please.", "No, thanks.").also { stage++ }
             4 -> when (buttonID) {
                 1 -> playerl(FaceAnim.FRIENDLY, "Yes, please.").also { stage = 5 }

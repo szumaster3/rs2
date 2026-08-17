@@ -22,7 +22,7 @@ class KringkDialogue(player: Player? = null) : Dialogue(player) {
         npc = NPC(NPCs.KRINGK_7058)
         when (stage) {
             START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
-                playerl(FaceAnim.FRIENDLY, "What's going on here?").also { stage++ }
+                playerl(FaceAnim.ASKING, "What's going on here?").also { stage++ }
             } else {
                 npcl(FaceAnim.CHILD_NORMAL, "I would offer haircut, but it hard to do style for puny human with puny head. Me know. You want wig intead? Me give you big-big discount!").also { stage = 5 }
             }

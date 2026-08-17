@@ -58,7 +58,7 @@ class ALazyGuardDialogue : DialogueFile() {
 
                 1 -> npcl(FaceAnim.HALF_GUILTY, "Please, leave me alone. I'm sure the walls never used to sway that much.").also { stage = END_DIALOGUE }
 
-                2 -> player("Do you still fancy a drink?").also { stage++ }
+                2 -> player(FaceAnim.HALF_ASKING,"Do you still fancy a drink?").also { stage++ }
                 3 -> npcl(FaceAnim.HALF_GUILTY, "I really shouldn't... oh... ok then just the one.").also { stage++ }
                 4 -> {
                     sendItemDialogue(player!!, Item(Items.KHALI_BREW_77), "You hand a bottle of Khali brew to the guard. He takes a mouthful of the drink.").also {

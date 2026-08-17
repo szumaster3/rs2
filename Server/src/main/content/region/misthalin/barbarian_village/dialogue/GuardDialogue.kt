@@ -26,7 +26,7 @@ class GuardDialogue(player: Player? = null) : Dialogue(player) {
         if (!hasRead) {
             npcl(FaceAnim.ANNOYED, "Ahem! Can I help you?")
         } else {
-            npcl(FaceAnim.NEUTRAL, "Can I help you?").also { stage = 10 }
+            npcl(FaceAnim.HALF_ASKING, "Can I help you?").also { stage = 10 }
         }
         return true
     }
@@ -65,7 +65,7 @@ class GuardDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             16 -> npc("Simply enter the player's name in the box and click the", "rule that the offender was breaking.").also { stage++ }
-            17 -> player(FaceAnim.FRIENDLY, "Okay. Then what?").also { stage++ }
+            17 -> player(FaceAnim.HALF_ASKING, "Okay. Then what?").also { stage++ }
             18 -> npc(FaceAnim.HALF_GUILTY, "That's it! It really is that simple and it only takes a", "moment to do. Now you may enter the training", "centre. Good luck, citizen.").also { stage++ }
             19 -> {
                 end()

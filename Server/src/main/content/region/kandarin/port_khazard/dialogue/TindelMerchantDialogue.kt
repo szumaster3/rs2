@@ -17,9 +17,9 @@ class TindelMerchantDialogue : DialogueFile() {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Hello there! Welcome to my special antiques boutique.").also { stage++ }
             1 -> showTopics(
-                Topic("What do you do here?", 2),
-                Topic("What's involved?", 5),
-                Topic("What do I get from this?", 8),
+                Topic(FaceAnim.HALF_ASKING,"What do you do here?", 2),
+                Topic(FaceAnim.HALF_ASKING,"What's involved?", 5),
+                Topic(FaceAnim.HALF_ASKING,"What do I get from this?", 8),
                 Topic(FaceAnim.HAPPY, "Ok, I'll give it a go!", 11),
                 Topic(FaceAnim.FRIENDLY, "Ok, thanks.", 10)
             )

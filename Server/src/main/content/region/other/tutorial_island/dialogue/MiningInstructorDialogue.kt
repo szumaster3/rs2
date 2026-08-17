@@ -102,7 +102,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 6 -> npc(FaceAnim.FRIENDLY, "You will be able to buy better pickaxes from the Dwarven Mine when you reach the mainland, but they can be expensive.").also { stage++ }
                 7 -> npc(FaceAnim.FRIENDLY, "Also, the better the pickaxe the higher the Mining level required to use it will be.").also { stage++ }
 
-                8 -> npc(FaceAnim.FRIENDLY, "Was there anything else you wanted to hear?").also { stage = 0 }
+                8 -> npc(FaceAnim.HALF_ASKING, "Was there anything else you wanted to hear?").also { stage = 0 }
 
                 9  -> npc(FaceAnim.FRIENDLY, "Smelting is very easy. Simply take the ores required to make a metal to a furnace, then use the ores on the furnace to smelt them into a bar of metal.").also { stage++ }
                 10 -> npc(FaceAnim.FRIENDLY, "Furnaces are expensive to build and maintain, so there are not that many scattered around the world. I suggest when you find one you remember its location for future use.").also { stage++ }

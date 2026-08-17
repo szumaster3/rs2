@@ -1,12 +1,14 @@
 package content.region.misthalin.draynor.dialogue
 
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
+import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
@@ -216,7 +218,7 @@ class LeelaDialogue(player: Player? = null) : Dialogue(player) {
                     2 ->
                         when (buttonId) {
                             1 -> {
-                                player("I must a make a disguise. What do you suggest?")
+                                player(FaceAnim.HALF_ASKING,"I must a make a disguise. What do you suggest?")
                                 stage = 10
                             }
 
@@ -226,7 +228,7 @@ class LeelaDialogue(player: Player? = null) : Dialogue(player) {
                             }
 
                             3 -> {
-                                player("What can I do with the guards?")
+                                player(FaceAnim.HALF_ASKING,"What can I do with the guards?")
                                 stage = 30
                             }
 
@@ -362,10 +364,10 @@ class LeelaDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.LEELA_915)
 
     companion object {
-        private val ROPE = Item(954)
-        private val SKIRT = Item(1013)
-        private val YELLOW_WIG = Item(2419)
-        private val PASTE = Item(2424)
-        private val BRONZE_KEY = Item(2418)
+        private val ROPE = Item(Items.ROPE_954)
+        private val SKIRT = Item(Items.PINK_SKIRT_1013)
+        private val YELLOW_WIG = Item(Items.WIG_2419)
+        private val PASTE = Item(Items.PASTE_2424)
+        private val BRONZE_KEY = Item(Items.BRONZE_KEY_2418)
     }
 }

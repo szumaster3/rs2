@@ -93,7 +93,7 @@ class CartConductorDialogue(player: Player? = null) : Dialogue(player) {
 
             6 -> npcl(FaceAnim.OLD_DEFAULT, "Keldagrim is the hub of all the traffic of the dwarven realm. Almost every dwarven outpost has railtracks leading to Keldagrim, connecting them for easy travel and transportation of goods.").also { stage++ }
 
-            7 -> player(FaceAnim.HAPPY, "Amazing! And what powers the carts? Magic?").also { stage++ }
+            7 -> player(FaceAnim.THINKING, "Amazing! And what powers the carts? Magic?").also { stage++ }
             8 -> npcl(FaceAnim.OLD_DEFAULT, "Oh, no no, we dwarves don't use magic. All of this is powered by steam engines, developed over the past few centuries after the Consortium came to power.").also { stage++ }
             9 -> player("Thanks for the info.").also { stage = 0 }
             10 -> {

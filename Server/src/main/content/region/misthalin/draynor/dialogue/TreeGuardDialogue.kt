@@ -23,20 +23,20 @@ class TreeGuardDialogue : DialogueFile() {
             } else if (!inInventory(player!!, Items.STEW_2003)) {
                 npcl(FaceAnim.AFRAID, "Ssshhh! What do you want?").also { stage++ }
             } else {
-                npcl("Yes, what do you do... I say, is that stew for me?").also { stage = 17 }
+                npcl(FaceAnim.HALF_ASKING,"Yes, what do you do... I say, is that stew for me?").also { stage = 17 }
             }
 
             1 -> playerl("Well, it's not every day you see a man up a tree.").also { stage++ }
             2 -> npcl("I'm trying to observe a suspect. Leave me alone!").also { stage++ }
             3 -> options("This is about the bank robbery, right?", "You're not being very subtle up there.", "Can I do anything to help?").also { stage++ }
             4 -> when (buttonID) {
-                1 -> playerl("This is about the bank robbery, right?").also { stage++ }
+                1 -> playerl(FaceAnim.HALF_ASKING,"This is about the bank robbery, right?").also { stage++ }
                 2 -> playerl("You're not being very subtle up there.").also { stage = 9 }
-                3 -> playerl("Can I do anything to help?").also { stage = 13 }
+                3 -> playerl(FaceAnim.HALF_ASKING,"Can I do anything to help?").also { stage = 13 }
             }
 
             5 -> npcl("Yes, that's right. We're keeping the suspect under tight observation for the moment.").also { stage++ }
-            6 -> playerl("Can't you just... I dunno.... arrest him?").also { stage++ }
+            6 -> playerl(FaceAnim.HALF_ASKING,"Can't you just... I dunno.... arrest him?").also { stage++ }
             7 -> npcl("I'm not meant to discuss the case. You know what confidentiality rules are like.").also { stage++ }
 
             8 -> playerl("Fair enough.").also { stage = END_DIALOGUE }

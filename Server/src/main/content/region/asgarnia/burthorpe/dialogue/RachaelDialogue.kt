@@ -16,9 +16,9 @@ class RachaelDialogue : DialogueFile() {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.FRIENDLY, "Welcome to the Burthorpe Games Rooms!").also { stage++ }
             1 -> showTopics(
-                Topic(FaceAnim.FRIENDLY, "How do I play board games?", 10),
-                Topic(FaceAnim.FRIENDLY, "What games can I play?", 30),
-                Topic(FaceAnim.FRIENDLY, "Can I buy a drink please?", 20),
+                Topic(FaceAnim.HALF_ASKING, "How do I play board games?", 10),
+                Topic(FaceAnim.HALF_ASKING, "What games can I play?", 30),
+                Topic(FaceAnim.HALF_ASKING, "Can I buy a drink please?", 20),
                 Topic(FaceAnim.FRIENDLY, "Thanks!", END_DIALOGUE),
             )
             10 -> npcl(FaceAnim.FRIENDLY, "You can challenge someone to a game anywhere in the games rooms by using the right click option. Choose the type of game and then choose the options you want such as time per move. If you want to play a particular").also { stage++ }
@@ -32,10 +32,10 @@ class RachaelDialogue : DialogueFile() {
             }
             30 -> npcl(FaceAnim.FRIENDLY, "Currently we offer Draughts, Runelink, Runesquares, and Runeversi.").also { stage++ }
             31 -> showTopics(
-                Topic(FaceAnim.FRIENDLY, "Draughts?", 35),
-                Topic(FaceAnim.FRIENDLY, "Runelink?", 36),
-                Topic(FaceAnim.FRIENDLY, "Runesquares?", 37),
-                Topic(FaceAnim.FRIENDLY, "Runeversi?", 38),
+                Topic(FaceAnim.ASKING, "Draughts?", 35),
+                Topic(FaceAnim.ASKING, "Runelink?", 36),
+                Topic(FaceAnim.ASKING, "Runesquares?", 37),
+                Topic(FaceAnim.ASKING, "Runeversi?", 38),
             )
             35 -> npcl(FaceAnim.FRIENDLY, "Draughts uses standard rules, apart from: a draw is declared if no piece has been taken or promoted for forty moves. To play Draughts go to the challenge room in the SW corner.").also { stage = 1 }
             36 -> npcl(FaceAnim.FRIENDLY, "Yup, you have to get four runes in row. The challenge room for Runelink is in the SE corner.").also { stage = 1 }

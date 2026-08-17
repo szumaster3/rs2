@@ -39,15 +39,15 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("I don't know, what can you do for me?", "Nothing, thanks").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "I don't know, what can you do for me?").also { stage = 3 }
+                1 -> player(FaceAnim.HALF_ASKING, "I don't know, what can you do for me?").also { stage = 3 }
                 2 -> player(FaceAnim.HALF_GUILTY, "Nothing, thanks.").also { stage++ }
             }
             2 -> npc(FaceAnim.HALF_GUILTY, "Mmm, well, see you some other time maybe.").also { stage = END_DIALOGUE }
-            3 -> npc(FaceAnim.HALF_GUILTY, "Hmm, well, mmm, do you have a family crest? I keep", "track of every " + ServerConstants.SERVER_NAME + " family, you know, so I might", "be able to find yours.").also { stage++ }
+            3 -> npc(FaceAnim.HALF_ASKING, "Hmm, well, mmm, do you have a family crest? I keep", "track of every " + ServerConstants.SERVER_NAME + " family, you know, so I might", "be able to find yours.").also { stage++ }
             4 -> npc(FaceAnim.HALF_GUILTY, "I'm also something of an, mmm, a painter. If you've", "met any important persons or visited any nice places I", "could paint them for you.").also { stage++ }
             5 -> showTopics(
-                Topic("Can you see if I have a family crest?", 6),
-                Topic("Can I buy a painting?", 35)
+                Topic(FaceAnim.HALF_ASKING,"Can you see if I have a family crest?", 6),
+                Topic(FaceAnim.HALF_ASKING,"Can I buy a painting?", 35)
             )
             6 -> npc(FaceAnim.HALF_GUILTY, "What is your name?").also { stage++ }
             7 -> player(FaceAnim.HALF_GUILTY, player.username + ".").also { stage++ }

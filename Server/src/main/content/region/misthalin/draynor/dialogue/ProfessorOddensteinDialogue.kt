@@ -35,7 +35,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             20 -> {
-                npc(FaceAnim.HALF_GUILTY, "Have you found everything yet?")
+                npc(FaceAnim.HALF_ASKING, "Have you found everything yet?")
                 stage = 0
             }
 
@@ -58,12 +58,12 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
 
                 1 -> when (buttonId) {
                     1 -> {
-                        player(FaceAnim.HALF_GUILTY, "What does this machine do?")
+                        player(FaceAnim.HALF_ASKING, "What does this machine do?")
                         stage = 11
                     }
 
                     2 -> {
-                        player(FaceAnim.HALF_GUILTY, "Is this your house?")
+                        player(FaceAnim.HALF_ASKING, "Is this your house?")
                         stage = 20
                     }
                 }
@@ -112,12 +112,12 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
 
                 1 -> when (buttonId) {
                     1 -> {
-                        player(FaceAnim.HALF_GUILTY, "I'm looking for a guy called Ernest.")
+                        player(FaceAnim.HALF_ASKING, "I'm looking for a guy called Ernest.")
                         stage = 2
                     }
 
                     2 -> {
-                        player(FaceAnim.HALF_GUILTY, "What does this machine do?")
+                        player(FaceAnim.HALF_ASKING, "What does this machine do?")
                         stage = 11
                     }
 
@@ -133,7 +133,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 3 -> {
-                    player(FaceAnim.HALF_GUILTY, "So you know where he is then?")
+                    player(FaceAnim.HALF_ASKING, "So you know where he is then?")
                     stage = 4
                 }
 
@@ -175,7 +175,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 9 -> {
-                    npc(FaceAnim.HALF_GUILTY, "Who's Veronica?")
+                    npc(FaceAnim.HALF_ASKING, "Who's Veronica?")
                     stage = 10
                 }
 

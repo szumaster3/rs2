@@ -12,6 +12,7 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
@@ -69,7 +70,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 2 -> {
-                    player("Do you have anything for trade?")
+                    player(FaceAnim.HALF_ASKING,"Do you have anything for trade?")
                     stage = 13
                 }
 
@@ -91,7 +92,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 3 -> {
-                    player("Do you have anything for trade?")
+                    player(FaceAnim.HALF_ASKING,"Do you have anything for trade?")
                     stage = 13
                 }
 
@@ -125,7 +126,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             22 -> {
-                player("What do you mean?")
+                player(FaceAnim.HALF_ASKING,"What do you mean?")
                 stage = 23
             }
 
@@ -207,7 +208,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             41 -> {
-                player("What sort of price?")
+                player(FaceAnim.HALF_ASKING,"What sort of price?")
                 stage = 42
             }
 
@@ -250,7 +251,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             48 -> {
-                player("What do you mean?")
+                player(FaceAnim.HALF_ASKING,"What do you mean?")
                 stage = 49
             }
 
@@ -296,7 +297,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 setAttribute(player, "/save:falador-diary-talk-first-time", true)
                 stage = 100
             } else {
-                npc("How are you getting on with the Achievement Diary?")
+                npc(FaceAnim.HALF_ASKING,"How are you getting on with the Achievement Diary?")
                 stage = 90
             }
 
@@ -317,7 +318,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 3 -> {
-                    player("I have a question.")
+                    player(FaceAnim.HALF_ASKING,"I have a question.")
                     stage = 105
                 }
             }
@@ -347,7 +348,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             104 -> {
-                npc("Have you got any questions?")
+                npc(FaceAnim.HALF_ASKING,"Have you got any questions?")
                 stage = 105
             }
 
@@ -372,17 +373,17 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
 
             106 -> when (buttonId) {
                 1 -> {
-                    player("What is the Achievement Diary?")
+                    player(FaceAnim.HALF_ASKING,"What is the Achievement Diary?")
                     stage = 110
                 }
 
                 2 -> {
-                    player("What are the rewards?")
+                    player(FaceAnim.HALF_ASKING,"What are the rewards?")
                     stage = 120
                 }
 
                 3 -> {
-                    player("How do I claim the rewards?")
+                    player(FaceAnim.HALF_ASKING,"How do I claim the rewards?")
                     stage = 130
                 }
 
@@ -399,17 +400,17 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 2 -> {
-                    player("What is the Achievement Diary?")
+                    player(FaceAnim.HALF_ASKING,"What is the Achievement Diary?")
                     stage = 110
                 }
 
                 3 -> {
-                    player("What are the rewards?")
+                    player(FaceAnim.HALF_ASKING,"What are the rewards?")
                     stage = 120
                 }
 
                 4 -> {
-                    player("How do I claim the rewards?")
+                    player(FaceAnim.HALF_ASKING,"How do I claim the rewards?")
                     stage = 130
                 }
 
@@ -622,7 +623,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.REDBEARD_FRANK_375)
 
     companion object {
-        private val KARAMJAN_RUM = Item(431)
-        private val KEY = Item(432)
+        private val KARAMJAN_RUM = Item(Items.KARAMJAN_RUM_431)
+        private val KEY = Item(Items.CHEST_KEY_432)
     }
 }

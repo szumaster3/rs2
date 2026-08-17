@@ -25,7 +25,7 @@ class VermundiDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("Yes, what clothes do you have in stock?", "No, I'm just browsing.").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player("Yes, what clothes do you have in stock?").also { stage++ }
+                1 -> player(FaceAnim.HALF_ASKING,"Yes, what clothes do you have in stock?").also { stage++ }
                 2 -> player("No, I'm just browsing.").also { stage = END_DIALOGUE }
             }
 

@@ -32,9 +32,9 @@ class SirLucanDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 1 -> playerl(FaceAnim.NEUTRAL, "I'm looking for a quest...").also { stage++ }
                 2 -> npcl(FaceAnim.NEUTRAL, "Talk to the King then adventurer. He is always looking for men of bravery to aid him in his actions.").also { stage = END_DIALOGUE }
-                10 -> playerl(FaceAnim.NEUTRAL, "Any suggestions on freeing Merlin?").also { stage++ }
+                10 -> playerl(FaceAnim.HALF_ASKING, "Any suggestions on freeing Merlin?").also { stage++ }
                 11 -> npcl(FaceAnim.NEUTRAL, "I've tried all the weapons I can find, yet none are powerful enough to break his crystal prison...").also { stage++ }
-                12 -> playerl(FaceAnim.NEUTRAL, "Excalibur eh? Where would I find that?").also { stage++ }
+                12 -> playerl(FaceAnim.HALF_ASKING, "Excalibur eh? Where would I find that?").also { stage++ }
                 13 -> npcl(FaceAnim.NEUTRAL, "The Lady of the Lake is looking after it I believe... but I know not where she resides currently.").also { stage++ }
                 14 -> playerl(FaceAnim.NEUTRAL, "Thanks. I'll try and find someone who does.").also { stage = END_DIALOGUE }
                 20 -> playerl(FaceAnim.NEUTRAL, "I need to get into Mordred's Fortress.").also { stage++ }

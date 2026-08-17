@@ -113,17 +113,17 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
             }
             45 -> when (buttonId) {
                 1 -> player("You should give it back, you know.").also { stage++ }
-                2 -> player("How can I get a hat like that?").also { stage = 187 }
+                2 -> player(FaceAnim.HALF_ASKING,"How can I get a hat like that?").also { stage = 187 }
             }
             46 -> npc("No, I think I'll keep it.").also { stage++ }
             47 -> player("But...").also { stage++ }
-            48 -> npc("Now you've got that off your chest, would you like to", "ask me about anything else?").also { stage++ }
+            48 -> npc(FaceAnim.HALF_ASKING,"Now you've got that off your chest, would you like to", "ask me about anything else?").also { stage++ }
             49 -> {
                 setTitle(player, 3)
                 sendOptions(player, "What would you like to say?", "How can I get a hat like that?", "Yes please.", "Thanks, maybe some other time.").also { stage++ }
             }
             50 -> when (buttonId) {
-                1 -> player("How can I get a hat like that?").also { stage = 187 }
+                1 -> player(FaceAnim.HALF_ASKING,"How can I get a hat like that?").also { stage = 187 }
                 2 -> player("Yes please.").also { stage = 44 }
                 3 -> player("Thanks, maybe some other time.").also { stage++ }
             }
@@ -159,7 +159,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
             68 -> playerl(FaceAnim.HALF_GUILTY, "I've dealt with them, although there are a few still knocking about.").also { stage++ }
             69 -> npcl(FaceAnim.HALF_GUILTY, "The jungle's filled with nasty creatures. There are vicious spiders that you can hardly see before they try to bite your legs off, and great big jungle ogres.").also { stage++ }
             70 -> npcl(FaceAnim.HALF_ASKING, "Is there anything else you'd like to ask?").also { stage = 60 }
-            71 -> npcl(FaceAnim.HALF_GUILTY, "Oh, the dwarven realms?").also { stage++ }
+            71 -> npcl(FaceAnim.HALF_ASKING, "Oh, the dwarven realms?").also { stage++ }
             72 -> npcl(FaceAnim.HALF_GUILTY, "Yes, there was a time, back in the Fourth Age, when we humans wouldn't have been able to venture underground. That was before we had magic; the dwarves were quite a threat.").also { stage++ }
             73 -> npcl(FaceAnim.HALF_GUILTY, "Still, it's much more friendly now. You can visit the vast dwarven mine if you like; the entrance is on the mountain north of Falador.").also { stage++ }
             74 -> npcl(FaceAnim.HALF_GUILTY, "If you go further west you may be able to visit the dwarven city of Keldagrim. But they were a bit cautious about letting humans in, last time I asked.").also { stage++ }
@@ -202,7 +202,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player(FaceAnim.HALF_ASKING, "Tell me about valiant heroes!").also { stage++ }
                 2 -> player(FaceAnim.HALF_ASKING, "Where did humans learn to use magic?").also { stage = 118 }
                 3 -> player(FaceAnim.HALF_ASKING, "I suppose you'd know about the history of today's cities?").also { stage = 125 }
-                4 -> player(FaceAnim.HALF_ASKING, "Tell me about yourself, old man.")
+                4 -> player(FaceAnim.HALF_ASKING, "Tell me about yourself, old man.").also { stage = 136 }
             }
             109 -> npcl(FaceAnim.HALF_GUILTY, "Ha ha ha... There are plenty of heroes. Always have been, always will be, until the fall of the world.").also { stage++ }
             110 -> npcl(FaceAnim.HALF_GUILTY, "You're quite a noted adventurer yourself!").also { stage++ }

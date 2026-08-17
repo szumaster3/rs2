@@ -34,7 +34,7 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 1 -> showTopics(
                     Topic(FaceAnim.NEUTRAL, "I want to become a Knight of the Round Table!", 2),
-                    Topic(FaceAnim.NEUTRAL, "So what are you doing in Gielinor?", 10),
+                    Topic(FaceAnim.HALF_ASKING, "So what are you doing in Gielinor?", 10),
                     Topic(FaceAnim.NEUTRAL, "Thank you very much.", END_DIALOGUE),
                 )
 
@@ -75,11 +75,11 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
                         stage++
                     }
                     questStage == 40 -> {
-                        playerl(FaceAnim.NEUTRAL, "Hello, do you have a knight named Sir Percival?")
+                        playerl(FaceAnim.HALF_ASKING, "Hello, do you have a knight named Sir Percival?")
                         stage = 40
                     }
                     else -> {
-                        npcl(FaceAnim.NEUTRAL, "How goes thy quest?")
+                        npcl(FaceAnim.HALF_ASKING, "How goes thy quest?")
                         stage =
                             if (questStage == 50 && player.hasItem(Item(Items.HOLY_GRAIL_19, 1))) 60
                             else 30

@@ -25,7 +25,7 @@ class MawrthDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player(FaceAnim.FRIENDLY, "They look old enough to look after themselves.").also { stage++ }
             1 -> npcl(FaceAnim.FRIENDLY, "They are only 34 and 38, far too young to be left unsupervised.").also { stage++ }
             2 -> player(FaceAnim.FRIENDLY, "Only!?! How old does that make you?").also { stage++ }
-            3 -> npcl(FaceAnim.FRIENDLY, "Has no one told you it is rude to ask a lady her age?").also { stage++ }
+            3 -> npcl(FaceAnim.HALF_ASKING, "Has no one told you it is rude to ask a lady her age?").also { stage++ }
             4 -> playerl(FaceAnim.FRIENDLY, "Sorry, I wasn't thinking. Anyway... I'd better stop distracting you.").also { stage++ }
             5 -> npc(FaceAnim.FRIENDLY, "Okay, See you some other time.").also { stage = END_DIALOGUE }
         }

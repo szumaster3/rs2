@@ -49,8 +49,8 @@ class MatthiasDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Greetings. Can I help you at all?").also { stage++ }
             1 -> showTopics(
-                Topic("Do you have any quests I could do?", 13, false),
-                Topic("What is this place?", 10, false),
+                Topic(FaceAnim.HALF_ASKING,"Do you have any quests I could do?", 13, false),
+                Topic(FaceAnim.HALF_ASKING,"What is this place?", 10, false),
                 Topic(FaceAnim.HALF_ASKING, "Could I have a go with your bird?", 2, false),
             )
             2 -> npc(FaceAnim.HAPPY, "Training falcons is a lot of work and I doubt you're up", "to the task. However, I suppose I could let you try", "hunting with one.").also { stage++ }

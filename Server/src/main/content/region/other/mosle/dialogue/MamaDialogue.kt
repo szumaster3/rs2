@@ -26,9 +26,9 @@ class MamaDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
-                npcl(FaceAnim.FRIENDLY, "Ar, darlin'! How might ya' Mama help ye?").also { stage++ }
+                npcl(FaceAnim.HALF_ASKING, "Ar, darlin'! How might ya' Mama help ye?").also { stage++ }
             } else {
-                npcl(FaceAnim.FRIENDLY, "Hello stranger, you come for a drink?").also { stage = 4 }
+                npcl(FaceAnim.HALF_ASKING, "Hello stranger, you come for a drink?").also { stage = 4 }
             }
             1 -> npcl(FaceAnim.FRIENDLY, "The powder monkey be takin' a caulk after gettin' rowdy on bumboo, so there be plenty of room for ye.").also { stage++ }
             2 -> player(FaceAnim.STRUGGLE, "Riiiiight...").also { stage++ }
@@ -37,7 +37,7 @@ class MamaDialogue(player: Player? = null) : Dialogue(player) {
             5 -> npcl(FaceAnim.FRIENDLY, "We got some cold beers, some warm stews and some 'rum'.").also { stage++ }
             6 -> playerl(FaceAnim.HALF_ASKING, "Not, Captain Braindeath's 'rum'?").also { stage++ }
             7 -> npcl(FaceAnim.FRIENDLY, "Yes! There was some sorta problem at the brewery, but they got it all sorted out now.").also { stage++ }
-            8 -> npcl(FaceAnim.FRIENDLY, "You wanna buy something?").also { stage++ }
+            8 -> npcl(FaceAnim.HALF_ASKING, "You wanna buy something?").also { stage++ }
             9 -> options("Yes", "No").also { stage++ }
             10 -> when (buttonId) {
                 1 -> end().also { openNpcShop(player, NPCs.MAMA_3164) }

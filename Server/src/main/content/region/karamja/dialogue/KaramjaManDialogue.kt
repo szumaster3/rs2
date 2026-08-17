@@ -13,7 +13,7 @@ class KaramjaManDialogue(player: Player? = null) : Dialogue(player) {
     
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(FaceAnim.HAPPY, "Hello, how's it going?")
+        player(FaceAnim.HALF_ASKING, "Hello, how's it going?")
         return true
     }
 

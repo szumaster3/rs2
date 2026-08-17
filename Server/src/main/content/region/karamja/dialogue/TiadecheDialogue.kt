@@ -31,7 +31,7 @@ class TiadecheDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npc(FaceAnim.FRIENDLY, "Hello, Bwana! Would you like to buy some Karambwan?").also { stage++ }
+            0 -> npc(FaceAnim.HALF_ASKING, "Hello, Bwana! Would you like to buy some Karambwan?").also { stage++ }
             1 -> options("Yes", "No.").also { stage++ }
             2 -> when (buttonId) {
                 1 -> end().also { openNpcShop(player, npc.id) }

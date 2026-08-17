@@ -26,7 +26,7 @@ class FritzTheGlassblowerDialogue(player: Player? = null) : Dialogue(player) {
         if (!player.getSavedData().globalData.isFritzGlass()) {
             npc(FaceAnim.HALF_GUILTY, "Hello adventurer, welcome to the Entrana furnace.")
         } else {
-            npc(FaceAnim.HALF_GUILTY, "Ah " + player.username + ", have you come to sell me some molten", "glass?").also { stage = 100 }
+            npc(FaceAnim.HALF_ASKING, "Ah " + player.username + ", have you come to sell me some molten", "glass?").also { stage = 100 }
         }
         return true
     }
@@ -55,7 +55,7 @@ class FritzTheGlassblowerDialogue(player: Player? = null) : Dialogue(player) {
             16 -> npc(FaceAnim.HALF_GUILTY, "There are many things you can use the molten glass", "for once you have made it. Depending on how talented", "you are, you could try turning it into something, like a", "fishbowl, for example. If you'd like to try your hand at").also { stage++ }
             17 -> npc(FaceAnim.HALF_GUILTY, "the fine art of glass you can use my spare", "glass pipe. I think I left it on the chest of", "drawers in my house this morning.").also { stage++ }
             18 -> npc(FaceAnim.HALF_GUILTY, "Alternatively I am always happy to buy the molten glass", "from you, saves me running about making it for", "myself.").also { stage++ }
-            19 -> player(FaceAnim.HALF_GUILTY, "That sounds good. How much will you pay me?").also { stage++ }
+            19 -> player(FaceAnim.HALF_ASKING, "That sounds good. How much will you pay me?").also { stage++ }
             20 -> npc(FaceAnim.HALF_GUILTY, "Tell you what, because you've been interested in my", "art, I'll pay you the premium price of 20 gold pieces", "for each piece of molten glass you bring me.").also { stage = END_DIALOGUE }
 
             100 -> {
@@ -69,7 +69,7 @@ class FritzTheGlassblowerDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             110 -> if (!player.inventory.containsItem(MOLTEN_GLASS)) {
-                npc(FaceAnim.HALF_GUILTY, "Umm, not much point me trying to pay you for glass", "you don't have, is there?")
+                npc(FaceAnim.HALF_ASKING, "Umm, not much point me trying to pay you for glass", "you don't have, is there?")
                 stage = 111
             } else {
                 val amt = player.inventory.getAmount(MOLTEN_GLASS)

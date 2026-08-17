@@ -21,7 +21,7 @@ class EniolaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npcl(FaceAnim.NEUTRAL, "Good day, how may I help you?").also {
+            0 -> npcl(FaceAnim.HALF_ASKING, "Good day, how may I help you?").also {
                 if (hasAwaitingGrandExchangeCollections(player)) {
                     stage++
                 } else {

@@ -35,7 +35,7 @@ class BlasidarTheSculptorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> player(FaceAnim.FRIENDLY, "Ho there! Who are you?").also { stage++ }
+            0 -> player(FaceAnim.HALF_ASKING, "Ho there! Who are you?").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "Only the most famous sculptor in all of Keldagrim.").also { stage++ }
             2 -> player(FaceAnim.HALF_ASKING, "Does Keldagrim have a lot of sculptors then?").also { stage++ }
             3 -> npc(FaceAnim.OLD_NORMAL, "Well... I'm the best outside of Keldagrim too, I tell you! Especially here in the north.").also { stage++ }

@@ -6,6 +6,7 @@ import core.api.openDialogue
 import core.api.removeItem
 import core.api.sendMessage
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -28,11 +29,11 @@ class KalebParamayaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npc("Hello, Bwana, what can I do for you today?").also { stage++ }
+            0 -> npc(FaceAnim.HALF_ASKING,"Hello, Bwana, what can I do for you today?").also { stage++ }
             1 -> options("Can you tell me a bit about this place?", "Have you anything for sale?", "I have a question about my Achievement Diary.", "I'm fine, thanks.").also { stage++ }
             2 -> when (buttonId) {
-                1 -> player("Can you tell me a bit about this place?").also { stage++ }
-                2 -> player("Have you anything for sale?").also { stage = 8 }
+                1 -> player(FaceAnim.HALF_ASKING,"Can you tell me a bit about this place?").also { stage++ }
+                2 -> player(FaceAnim.HALF_ASKING,"Have you anything for sale?").also { stage = 8 }
                 3 -> player("I have a question about my Achievement Diary.").also { stage = 7 }
                 4 -> player("I'm fine, thanks.").also { stage = END_DIALOGUE }
             }

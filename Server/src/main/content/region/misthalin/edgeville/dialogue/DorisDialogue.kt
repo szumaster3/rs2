@@ -26,9 +26,9 @@ class DorisDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!hasRequirement(player, Quests.RECIPE_FOR_DISASTER, false)) {
-            npc("What are you doing in my house?")
+            npc(FaceAnim.ANNOYED,"What are you doing in my house?")
         } else {
-            npc("Hello again dearie. How are you doing?").also { stage = 5 }
+            npc(FaceAnim.HALF_ASKING,"Hello again dearie. How are you doing?").also { stage = 5 }
         }
         return true
     }
@@ -47,15 +47,15 @@ class DorisDialogue(player: Player? = null) : Dialogue(player) {
                     2 -> player("I want to use your kitchen.").also { stage += 2 }
                     3 -> player("Give me all your money!").also { stage += 3 }
                 }
-            2 -> npc("Would you mind wandering out of my house?").also { stage = END_DIALOGUE }
+            2 -> npc(FaceAnim.HALF_ASKING,"Would you mind wandering out of my house?").also { stage = END_DIALOGUE }
             3 -> npc("I suppose you can, but try not to make a mess.").also { stage = END_DIALOGUE }
             4 -> npc("I haven't got any money!").also { stage = END_DIALOGUE }
             5 -> showTopics(
                 Topic("Pretty good!", 7),
                 Topic("Not too good actually!", 8),
                 Topic("What's it like living so close to the Wilderness?", 9),
-                Topic("How did Dave come to be evil?", 14),
-                IfTopic("What's happened to my cat?", 19, hasHellCat)
+                Topic(FaceAnim.HALF_ASKING,"How did Dave come to be evil?", 14),
+                IfTopic(FaceAnim.HALF_ASKING,"What's happened to my cat?", 19, hasHellCat)
             )
             7 -> npc("That's good to hear.").also { stage = END_DIALOGUE }
             8 -> npc("Oh well.").also { stage = END_DIALOGUE }

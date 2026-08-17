@@ -26,7 +26,7 @@ class JoeDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
-                npcl(FaceAnim.FRIENDLY, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage++ }
+                npcl(FaceAnim.HALF_ASKING, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage++ }
             } else {
                 npc("Whadda ya want?").also { stage = 4 }
             }
@@ -39,7 +39,7 @@ class JoeDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("Nothing! Honest!").also { stage = 17 }
                 3 -> playerl(FaceAnim.HAPPY, "I wanted to know where you got that harpoon hand.").also { stage = 6 }
             }
-            6 -> npcl(FaceAnim.FRIENDLY, "Yer new in town aintcha?").also { stage++ }
+            6 -> npcl(FaceAnim.HALF_ASKING, "Yer new in town aintcha?").also { stage++ }
             7 -> playerl(FaceAnim.STRUGGLE, "Newish certainly.").also { stage++ }
             8 -> npcl(FaceAnim.FRIENDLY, "Well, if ye wants te hear the story, here goes.").also { stage++ }
             9 -> npcl(FaceAnim.FRIENDLY, "See, I was walkin' along the docks one day, and this fierce storm blew up.").also { stage++ }

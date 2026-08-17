@@ -38,16 +38,16 @@ class SquireDiaryDialogue : DialogueFile() {
                 options("Can you remind me what my Falador shield does, please?", "What is the Achievement Diary?", "What are the rewards?", "How do I claim the rewards?", "See you later.").also { stage = 107 }
             }
             106 -> when (buttonID) {
-                1 -> player("What is the Achievement Diary?").also { stage = 110 }
-                2 -> player("What are the rewards?").also { stage = 120 }
-                3 -> player("How do I claim the rewards?").also { stage = 130 }
+                1 -> player(FaceAnim.HALF_ASKING,"What is the Achievement Diary?").also { stage = 110 }
+                2 -> player(FaceAnim.HALF_ASKING,"What are the rewards?").also { stage = 120 }
+                3 -> player(FaceAnim.HALF_ASKING,"How do I claim the rewards?").also { stage = 130 }
                 4 -> player("See you later.").also { stage = END_DIALOGUE }
             }
             107 -> when (buttonID) {
-                1 -> player("Can you remind me what my Falador shield does, please?").also { stage = 150 }
-                2 -> player("What is the Achievement Diary?").also { stage = 110 }
-                3 -> player("What are the rewards?").also { stage = 120 }
-                4 -> player("How do I claim the rewards?").also { stage = 130 }
+                1 -> player(FaceAnim.HALF_ASKING,"Can you remind me what my Falador shield does, please?").also { stage = 150 }
+                2 -> player(FaceAnim.HALF_ASKING,"What is the Achievement Diary?").also { stage = 110 }
+                3 -> player(FaceAnim.HALF_ASKING,"What are the rewards?").also { stage = 120 }
+                4 -> player(FaceAnim.HALF_ASKING,"How do I claim the rewards?").also { stage = 130 }
                 5 -> player("See you later.").also { stage = END_DIALOGUE }
             }
             110 -> npc("Ah, well it's a diary that helps you keep track of", "particular achievements you've made here on", "Gielinor.").also { stage++ }

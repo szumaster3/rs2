@@ -17,15 +17,15 @@ class FatTonyDialogue : DialogueFile() {
             0 -> npc(FaceAnim.HALF_GUILTY, "Go away, I'm very busy.").also { stage++ }
             1 -> showTopics(
                 Topic("Sorry to disturb you.", END_DIALOGUE, false),
-                Topic("What are you busy doing?", 2, false),
-                Topic("Have you anything to sell?", 11, false)
+                Topic(FaceAnim.HALF_ASKING,"What are you busy doing?", 2, false),
+                Topic(FaceAnim.HALF_ASKING,"Have you anything to sell?", 11, false)
             )
             2 -> npc(FaceAnim.HALF_GUILTY, "I'm cooking pizzas for the people in this camp.").also { stage++ }
             3 -> npc(FaceAnim.HALF_GUILTY, "Not that these louts appreciate my gourmet cooking!").also { stage++ }
             4 -> showTopics(
-                Topic("So what is a gourmet chef doing cooking for bandits?", 5, false),
-                Topic("Can I have some pizza too?", 8, false),
-                Topic("Okay, I'll leave you to it.", END_DIALOGUE, false)
+                Topic(FaceAnim.HALF_ASKING,"So what is a gourmet chef doing cooking for bandits?", 5, false),
+                Topic(FaceAnim.HALF_ASKING,"Can I have some pizza too?", 8, false),
+                Topic(FaceAnim.NEUTRAL,"Okay, I'll leave you to it.", END_DIALOGUE, false)
             )
             5 -> npc(FaceAnim.HALF_GUILTY, "Well, I'm an outlaw. I was accused of giving the king food", "poisoning!").also { stage++ }
             6 -> npc(FaceAnim.HALF_GUILTY, "The thought of it! I think he just drank too much wine", "that night.").also { stage++ }

@@ -26,7 +26,7 @@ class MartinTheMasterGardenerDialogue(player: Player? = null) : Dialogue(player)
         when (stage) {
             0 -> when (buttonId) {
                 1 -> {
-                    player(FaceAnim.HALF_GUILTY, "What is that cape that you're wearing?")
+                    player(FaceAnim.HALF_ASKING, "What is that cape that you're wearing?")
                     stage = 10
                 }
 

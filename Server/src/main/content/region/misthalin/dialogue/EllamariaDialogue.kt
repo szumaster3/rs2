@@ -20,7 +20,7 @@ class EllamariaDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "No, one has just had them installed. One has had the", "most marvellous idea to bring renewed happiness to", "one's own deatest husband.").also { stage++ }
-            1 -> player(FaceAnim.HALF_GUILTY, "One? I'm not sure I understand you-").also { stage++ }
+            1 -> player(FaceAnim.HALF_ASKING, "One? I'm not sure I understand you-").also { stage++ }
             2 -> npc(FaceAnim.HALF_GUILTY, "Oh dear - the common classes, oh how they fill one with", "intolerable levels of exasperation, I swear to the most", "true.").also { stage++ }
             3 -> player(FaceAnim.HALF_GUILTY, "Ri-ight ... if you say so, my lady. I'll be off then, if you", "don't mind.").also { stage++ }
             4 -> npc(FaceAnim.HALF_GUILTY, "Yes, be off with you, before I call the guards.").also { stage++ }

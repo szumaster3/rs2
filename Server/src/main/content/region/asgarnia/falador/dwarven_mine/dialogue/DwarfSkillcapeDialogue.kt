@@ -29,9 +29,9 @@ class DwarfSkillcapeDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> sendOptions(player, "What would you like to say?", "What have you got in the Guild?", "What do you dwarves do with the ore you mine?", "Can you tell me about your skillcape?", "No thanks, I'm fine.").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "What have you got in the guild?").also { stage = 10 }
-                2 -> player(FaceAnim.HALF_GUILTY, "What do you dwarves do with the ore you mine?").also { stage = 20 }
-                3 -> player(FaceAnim.HALF_GUILTY, "Can you tell me about your skillcape?").also { stage = 40 }
+                1 -> player(FaceAnim.HALF_ASKING, "What have you got in the guild?").also { stage = 10 }
+                2 -> player(FaceAnim.HALF_ASKING, "What do you dwarves do with the ore you mine?").also { stage = 20 }
+                3 -> player(FaceAnim.HALF_ASKING, "Can you tell me about your skillcape?").also { stage = 40 }
                 4 -> player(FaceAnim.HALF_GUILTY, "No thanks, I'm fine.").also { stage = END_DIALOGUE }
             }
             10 -> npc(FaceAnim.OLD_NORMAL, "Ooh, it's WONDERFUL! There are lots of coal rocks,", "and even a few mithril rocks in the guild,", "all exclusively for people with at least level 60 mining.", "There's no better mining site anywhere near here.").also { stage = 0 }

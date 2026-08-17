@@ -22,7 +22,7 @@ class DavonDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("What are you selling?", "What do you mean pssst?", "Why don't you ever restock some types of amulets?").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HAPPY, "What are you selling?").also { stage = 10 }
+                1 -> player(FaceAnim.HALF_ASKING, "What are you selling?").also { stage = 10 }
                 2 -> player(FaceAnim.SUSPICIOUS, "What do you mean pssst?").also { stage = 20 }
                 3 -> player(FaceAnim.HALF_ASKING, "Why don't you ever restock some types of amulets?").also { stage = 30 }
             }

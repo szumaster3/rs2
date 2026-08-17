@@ -29,8 +29,8 @@ class PirateJackieDialogue : DialogueFile() {
                 stage++
             }
             3 -> when (buttonID) {
-                1 -> playerl(FaceAnim.NEUTRAL, "What is this place?").also { stage++ }
-                2 -> playerl(FaceAnim.NEUTRAL, "What do you do?").also { stage = 6 }
+                1 -> playerl(FaceAnim.HALF_ASKING, "What is this place?").also { stage++ }
+                2 -> playerl(FaceAnim.HALF_ASKING, "What do you do?").also { stage = 6 }
                 3 -> playerl(FaceAnim.NEUTRAL, "I'd like to trade in my tickets, please.").also { stage = 8 }
                 4 -> playerl(FaceAnim.NEUTRAL, "I have a question about my Achievement Diary.").also { stage = 9 }
                 5 -> playerl(FaceAnim.NEUTRAL, "See you later.").also { stage = END_DIALOGUE }

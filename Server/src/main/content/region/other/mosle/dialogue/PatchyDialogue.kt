@@ -21,9 +21,9 @@ class PatchyDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
-            npcl(FaceAnim.FRIENDLY, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage = 1 }
+            npcl(FaceAnim.HALF_ASKING, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage = 1 }
         } else {
-            npcl(FaceAnim.FRIENDLY, "Hello there! Can I sew ye somethin' tegether?").also { stage = 4 }
+            npcl(FaceAnim.HALF_ASKING, "Hello there! Can I sew ye somethin' tegether?").also { stage = 4 }
         }
         return true
     }
@@ -46,7 +46,7 @@ class PatchyDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player("Yes, please!").also { stage++ }
                 2 -> player("No").also { stage = 100 }
             }
-            14 -> npc("Now, do you want to be sewing items together or", "separating them?").also { stage++ }
+            14 -> npc(FaceAnim.HALF_ASKING,"Now, do you want to be sewing items together or", "separating them?").also { stage++ }
             15 -> options("Sew together", "Separate").also { stage++ }
             16 -> when (buttonId) {
                 1 -> playerl(FaceAnim.HAPPY, "I'd like something sewn together.").also { stage++ }

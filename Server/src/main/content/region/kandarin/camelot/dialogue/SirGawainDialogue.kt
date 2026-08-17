@@ -39,7 +39,7 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> {
                     showTopics(
                         Topic(FaceAnim.NEUTRAL, "Good day.", END_DIALOGUE),
-                        Topic(FaceAnim.NEUTRAL, "Know you of any quests sir knight?", 2),
+                        Topic(FaceAnim.HALF_ASKING, "Know you of any quests sir knight?", 2),
                     )
                 }
 
@@ -51,8 +51,8 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
                 10 -> {
                     showTopics(
                         Topic(FaceAnim.NEUTRAL, "Good day.", END_DIALOGUE),
-                        Topic(FaceAnim.NEUTRAL, "Any ideas on how to get Merlin out of that crystal?", 11),
-                        Topic(FaceAnim.NEUTRAL, "Do you know how Merlin got trapped?", STAGE_PROGRESS),
+                        Topic(FaceAnim.HALF_ASKING, "Any ideas on how to get Merlin out of that crystal?", 11),
+                        Topic(FaceAnim.HALF_ASKING, "Do you know how Merlin got trapped?", STAGE_PROGRESS),
                     )
                 }
 
@@ -67,7 +67,7 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 16 -> {
-                    playerl(FaceAnim.NEUTRAL, "And where could I find her?")
+                    playerl(FaceAnim.HALF_ASKING, "And where could I find her?")
                     stage++
                 }
 
@@ -103,7 +103,7 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 40 -> {
-                    playerl(FaceAnim.NEUTRAL, "Any ideas on finding Excalibur?")
+                    playerl(FaceAnim.HALF_ASKING, "Any ideas on finding Excalibur?")
                     stage++
                 }
 
@@ -124,14 +124,14 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
 
                 1 -> showTopics(
                     Topic(FaceAnim.NEUTRAL, "Good day.", END_DIALOGUE),
-                    Topic(FaceAnim.NEUTRAL, "Know you of any quests sir knight?", 5),
+                    Topic(FaceAnim.HALF_ASKING, "Know you of any quests sir knight?", 5),
                 )
                 5 -> npcl(FaceAnim.NEUTRAL, "I think you've done the main quest we were on right now...").also { stage = END_DIALOGUE }
                 10 -> playerl(FaceAnim.NEUTRAL, "I seek the Grail in the name of Camelot!").also { stage++ }
-                11 -> npcl(FaceAnim.NEUTRAL, "The Grail? That is truly a noble quest indeed. None but Galahad have come close.").also { stage++ }
-                12 -> playerl(FaceAnim.NEUTRAL, "Galahad? Who is he?").also { stage++ }
+                11 -> npcl(FaceAnim.HALF_ASKING, "The Grail? That is truly a noble quest indeed. None but Galahad have come close.").also { stage++ }
+                12 -> playerl(FaceAnim.HALF_ASKING, "Galahad? Who is he?").also { stage++ }
                 13 -> npcl(FaceAnim.NEUTRAL, "He used to be one of the Knights of the Round Table, but he mysteriously disappeared many years ago.").also { stage++ }
-                14 -> playerl(FaceAnim.NEUTRAL, "Why would he quit being a Knight?").also { stage++ }
+                14 -> playerl(FaceAnim.HALF_ASKING, "Why would he quit being a Knight?").also { stage++ }
                 15 -> npcl(FaceAnim.NEUTRAL, "That is a good question.").also { stage++ }
                 16 -> npcl(FaceAnim.NEUTRAL, "I'm afraid I don't have the answer.").also { stage = END_DIALOGUE }
             }

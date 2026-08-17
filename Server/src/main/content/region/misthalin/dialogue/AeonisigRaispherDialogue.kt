@@ -1,6 +1,7 @@
 package content.region.misthalin.dialogue
 
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -20,11 +21,11 @@ class AeonisigRaispherDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("Who are you?", "What do you do here?", "Where did you come from?", "How did you come to be an advisor to King Roald?", "What is happening in the kingdom?").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player("Who are you?").also { stage = 2 }
-                2 -> player("What do you do here?").also { stage = 4 }
-                3 -> player("Where did you come from?").also { stage = 7 }
-                4 -> player("How did you come to be an advisor to King Roald?").also { stage = 9 }
-                5 -> player("What is happening in the kingdom?").also { stage = 13 }
+                1 -> player(FaceAnim.HALF_ASKING,"Who are you?").also { stage = 2 }
+                2 -> player(FaceAnim.HALF_ASKING,"What do you do here?").also { stage = 4 }
+                3 -> player(FaceAnim.HALF_ASKING,"Where did you come from?").also { stage = 7 }
+                4 -> player(FaceAnim.HALF_ASKING,"How did you come to be an advisor to King Roald?").also { stage = 9 }
+                5 -> player(FaceAnim.HALF_ASKING,"What is happening in the kingdom?").also { stage = 13 }
             }
             2 -> npc("Apologies! Allow me to introduce myself. My", "name is Aeonisig Raispher, special advisor", "to King Roald on spiritual matters.").also { stage++ }
             3 -> npc("It means that some decisions the King has to make might", "have unforeseen repercussions on the nation's spiritual", "sensibilities. My duty is to ensure that Saradomin", "ideals are not stomped underfoot.").also { stage = END_DIALOGUE }

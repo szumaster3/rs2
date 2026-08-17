@@ -2,6 +2,7 @@ package content.region.asgarnia.falador.dialogue
 
 import core.api.openNpcShop
 import core.game.dialogue.DialogueFile
+import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
@@ -13,7 +14,7 @@ class GardenSupplierDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> npc("Hello, I sell many plants. Would you like", "to see what I have?").also { stage++ }
+            0 -> npc(FaceAnim.HALF_ASKING,"Hello, I sell many plants. Would you like", "to see what I have?").also { stage++ }
             1 -> showTopics(
                 Topic("Yes, please!", 2),
                 Topic("No, thanks.", END_DIALOGUE),

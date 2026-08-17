@@ -20,8 +20,8 @@ class LucyPartyRoomDialogue : DialogueFile() {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Hi! I'm Lucy. Welcome to the Party Room!").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Hi.").also { stage++ }
-            2 -> npc(FaceAnim.HALF_GUILTY, "Would you like to buy a beer?").also { stage++ }
-            3 -> player(FaceAnim.HALF_GUILTY, "How much do they cost?").also { stage++ }
+            2 -> npc(FaceAnim.HALF_ASKING, "Would you like to buy a beer?").also { stage++ }
+            3 -> player(FaceAnim.HALF_ASKING, "How much do they cost?").also { stage++ }
             4 -> npc(FaceAnim.HALF_GUILTY, "Just 2 gold pieces.").also { stage++ }
             5 -> showTopics(
                 Topic("Yes please!", 6),

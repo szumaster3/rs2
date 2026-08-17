@@ -3,6 +3,7 @@ package content.region.asgarnia.falador.dialogue
 import content.region.asgarnia.falador.diary.dialogue.SquireDiaryDialogue
 import core.api.*
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.Diary
@@ -37,7 +38,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                    -1 -> npc("Hello friend! Many thanks for all of your help! Vyvin", "never even realised it was a different sword, and I still", "have my job!").also { stage = END_DIALOGUE }
                 }
                 60 -> when (stage) {
-                   -1 -> npc("So how are you doing getting a sword?").also { stage = 0 }
+                   -1 -> npc(FaceAnim.HALF_ASKING,"So how are you doing getting a sword?").also { stage = 0 }
                     0 -> if (!inInventory(player, Items.BLURITE_SWORD_667)) {
                         player("I've found a dwarf who will make the sword, I've just", "got to find the materials for it now!").also { stage = END_DIALOGUE }
                     } else {
@@ -54,7 +55,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 50 -> when (stage) {
-                   -1 -> npc("So how are you doing getting a sword?").also { stage = 0 }
+                   -1 -> npc(FaceAnim.HALF_ASKING,"So how are you doing getting a sword?").also { stage = 0 }
                     0 -> if (!inInventory(player, Items.PORTRAIT_666, 1)) {
                         player("I didn't get the picture yet...").also { stage = 1 }
                     } else {
@@ -65,7 +66,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 40 -> when (stage) {
-                   -1 -> npc("So how are you doing getting a sword?").also { stage = 0 }
+                   -1 -> npc(FaceAnim.HALF_ASKING,"So how are you doing getting a sword?").also { stage = 0 }
                     0 -> player("I have found an Imcando dwarf but he needs a picture", "of the sword before he can make it.").also { stage++ }
                     1 -> npc("A picture eh? Hmmm.... The only one I can think of is", "in a small portrait of Sir Vyvin's father... Sir Vyvin", "keeps it in a cupboard in his room I think.").also { stage++ }
                     2 -> player("Ok, I'll try to get that then.").also { stage++ }
@@ -77,12 +78,12 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 30 -> when (stage) {
-                   -1 -> npc("So how are you doing getting a sword?").also { stage = 0 }
+                   -1 -> npc(FaceAnim.HALF_ASKING,"So how are you doing getting a sword?").also { stage = 0 }
                     0 -> player("I have found an Imcando Dwarf named Thurgo!", "I have given him Redberry pie, I hope he will", "help me now.").also { stage = END_DIALOGUE }
                 }
 
                 20, 10 -> when (stage) {
-                   -1 -> npc("So how are you doing getting a sword?").also { stage = 0 }
+                   -1 -> npc(FaceAnim.HALF_ASKING,"So how are you doing getting a sword?").also { stage = 0 }
                     0 -> player("I'm still looking for Imcando dwarves to help me...").also { stage++ }
                     1 -> npc("Please try and find them quickly... I am scared Sir", "Vyvin will find out!").also { stage = END_DIALOGUE }
                 }
@@ -90,15 +91,15 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                    -1 -> npc("Hello. I am the squire to Sir Vyvin.").also { stage = 0 }
                     0 -> options("And how is life as a squire?", "Wouldn't you prefer to be a squire for me?").also { stage++ }
                     1 -> when (buttonId) {
-                        1 -> player("And how is life as a squire?").also { stage = 10 }
-                        2 -> player("Wouldn't you prefer to be a squire for me?").also { stage = 20 }
+                        1 -> player(FaceAnim.HALF_ASKING,"And how is life as a squire?").also { stage = 10 }
+                        2 -> player(FaceAnim.HALF_ASKING,"Wouldn't you prefer to be a squire for me?").also { stage = 20 }
                     }
                     10 -> npc("Well, Sir Vyvin is a good guy to work for, however,", "I'm in a spot of trouble today. I've gone and lost Sir", "Vyvin's sword!").also { stage++ }
                     11 -> options("Do you know where you lost it?", "I can make a new sword if you like...", "Is he angry?").also { stage++ }
                     12 -> when (buttonId) {
-                        1 -> player("Do you know where you lost it?").also { stage = 100 }
+                        1 -> player(FaceAnim.HALF_ASKING,"Do you know where you lost it?").also { stage = 100 }
                         2 -> player("I can make a new sword if you like...").also { stage = 120 }
-                        3 -> player("Is he angry?").also { stage = 130 }
+                        3 -> player(FaceAnim.HALF_ASKING,"Is he angry?").also { stage = 130 }
                     }
                     20 -> npc("No, sorry, I'm loyal to Sir Vyvin.").also { stage = END_DIALOGUE }
                     100 -> npc("Well now, if I knew THAT it wouldn't be lost, now", "would it?").also { stage = END_DIALOGUE }
@@ -107,7 +108,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                     122 -> npc("a particularly skilled tribe of dwarven smiths. I doubt", "anyone could make it in the style they do.").also { stage++ }
                     123 -> options("So would these dwarves make another one?", "Well I hope you find it soon.").also { stage = 134 }
                     134 -> when (buttonId) {
-                        1 -> player("So would these dwarves make another one?").also { stage = 160 }
+                        1 -> player(FaceAnim.HALF_ASKING,"So would these dwarves make another one?").also { stage = 160 }
                         2 -> player("Well I hope you find it soon.").also { stage = 170 }
                     }
                     160 -> npc("I'm not a hundred percent sure the Imcando tribe", "exists anymore. I should think Reldo, the palace", "librarian in Varrock, will know; he has done a lot of", "research on the races of " + settings!!.name + ".").also { stage++ }

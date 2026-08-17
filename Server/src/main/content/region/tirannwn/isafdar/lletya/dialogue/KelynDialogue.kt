@@ -22,7 +22,7 @@ class KelynDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Huh... Oh sorry, you made me jump. I was miles away, day dreaming.").also { stage++ }
-            1 -> player(FaceAnim.FRIENDLY, "About what may I ask?").also { stage++ }
+            1 -> player(FaceAnim.HALF_ASKING, "About what may I ask?").also { stage++ }
             2 -> npcl(FaceAnim.FRIENDLY, "I was thinking about the crystal spires of Prifddinas.").also { stage++ }
             3 -> player(FaceAnim.FRIENDLY, "It must be beautiful, I've only seen the city walls.").also { stage++ }
             4 -> npcl(FaceAnim.FRIENDLY, "I have never seen it, all I know are the stories. I hope that changes one day.").also { stage = END_DIALOGUE }

@@ -36,7 +36,7 @@ class TheFaceDialogue(player: Player? = null) : Dialogue(player) {
                 npcl(FaceAnim.FRIENDLY, "Oh it's you again.").also { stage++ }
             }
             1 -> sendDialogue(player!!, "*She glances at you with barely disguised disdain.*").also { stage++ }
-            2 -> player(FaceAnim.FRIENDLY, "*Aside* I wonder what her problem is?").also { stage++ }
+            2 -> player(FaceAnim.HALF_ASKING, "*Aside* I wonder what her problem is?").also { stage++ }
             3 -> npcl(FaceAnim.FRIENDLY, "I must congratulate you on your performance, I have only ever seen one other display of musicality to match, as you should know.").also { stage++ }
             4 -> playerl(FaceAnim.FRIENDLY, "Thank you, and don't worry, I won't tell Felkrash that you helped me.",).also { stage = END_DIALOGUE }
         }

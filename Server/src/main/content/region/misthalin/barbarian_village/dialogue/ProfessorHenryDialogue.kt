@@ -56,15 +56,15 @@ class ProfessorHenryDialogue(player: Player? = null) : Dialogue(player) {
             100 -> npcl(FaceAnim.ANNOYED, "Hello what?").also { stage++ }
             101 -> playerl(FaceAnim.HALF_GUILTY, "Uh...hello there?").also { stage++ }
             102 -> npcl(FaceAnim.HALF_GUILTY, "Hello, 'Professor'. Manners cost nothing, you know. " + "When you're in my classroom, I ask that you use the proper address for my station.").also { stage++ }
-            103 -> playerl(FaceAnim.HALF_GUILTY, "Your station?").also { stage++ }
+            103 -> playerl(FaceAnim.HALF_ASKING, "Your station?").also { stage++ }
             104 -> npcl(FaceAnim.HALF_GUILTY, "Yes. It means 'position', so to speak.").also { stage++ }
             105 -> playerl(FaceAnim.HALF_GUILTY, "Oh, okay.").also { stage++ }
             106 -> npcl(FaceAnim.HALF_GUILTY, "Now, what can I do for you, exactly?").also { stage++ }
-            107 -> playerl(FaceAnim.HALF_GUILTY, "What is this place?").also { stage++ }
+            107 -> playerl(FaceAnim.HALF_ASKING, "What is this place?").also { stage++ }
             108 -> npcl(FaceAnim.HALF_GUILTY, "This is the Misthalin Training Centre of Excellence. " + "It is where bold adventurers, such as yourself, can come to learn of the dangers of " + "the wide world and gain some valuable experience at the same time.").also { stage++ }
-            109 -> playerl(FaceAnim.HALF_GUILTY, "What can I do here?").also { stage++ }
+            109 -> playerl(FaceAnim.HALF_ASKING, "What can I do here?").also { stage++ }
             110 -> npcl(FaceAnim.HALF_GUILTY, "Here you can take part in the Player Safety test: " + "a set of valuable lessons to learn about staying safe " + "in ${ServerConstants.SERVER_NAME}.").also { stage++ }
-            111 -> npcl(FaceAnim.HALF_GUILTY, "I can give you a test paper to take and, once completed, " + "you can bring it back to me for marking. Would you like to take the test? " + "It will not cost you anything.").also { stage++ }
+            111 -> npcl(FaceAnim.HALF_ASKING, "I can give you a test paper to take and, once completed, " + "you can bring it back to me for marking. Would you like to take the test? " + "It will not cost you anything.").also { stage++ }
             112 -> showTopics(Topic("Yes, please.", 200), Topic("Not right now, thanks.", END_DIALOGUE))
             200 -> {
                 if (freeSlots(player) == 0) {

@@ -45,15 +45,15 @@ class SirKayDialogue(player: Player? = null) : Dialogue(player) {
                 // Achievement topics.
                 2 -> showTopics(
                     IfTopic("I seem to have lost my seers' headband...", 10, Diary.canReplaceReward(player!!, DiaryType.SEERS_VILLAGE, diaryLevel)),
-                    IfTopic("Can you remind me what my headband does?", 11, Diary.hasClaimedLevelRewards(player!!, DiaryType.SEERS_VILLAGE, diaryLevel)),
+                    IfTopic(FaceAnim.HALF_ASKING,"Can you remind me what my headband does?", 11, Diary.hasClaimedLevelRewards(player!!, DiaryType.SEERS_VILLAGE, diaryLevel)),
                     IfTopic("I have question about my Achievement Diary.", 16, Diary.canClaimLevelRewards(player, DiaryType.SEERS_VILLAGE, diaryLevel), true),
                     IfTopic("I'd like to change my teleport point.", 24, hardDiaryComplete),
-                    Topic("Hi! Can you help me out with the Achievement Diary tasks?", 23)
+                    Topic(FaceAnim.HALF_ASKING,"Hi! Can you help me out with the Achievement Diary tasks?", 23)
                 )
             }
             2 -> {
                 if (holyGrailQuestStage == 10) {
-                    npcl(FaceAnim.HAPPY, "I hear you are questing for the Holy Grail?!").also { stage = 4 }
+                    npcl(FaceAnim.HALF_ASKING, "I hear you are questing for the Holy Grail?!").also { stage = 4 }
                 } else when (merlinQuestStage) {
                     100 -> npcl(FaceAnim.HAPPY, "${if (player!!.isMale) "sirrah" else "madam"}! Many thanks for your assistance in restoring Merlin to his former freedom!").also { stage = 3 }
                     10 -> playerl(FaceAnim.HALF_ASKING, "Any ideas on getting Merlin out of that crystal?").also { stage = 5 }
@@ -65,8 +65,8 @@ class SirKayDialogue(player: Player? = null) : Dialogue(player) {
             3 -> playerl(FaceAnim.NEUTRAL, "Hey, no problem.").also { stage = END_DIALOGUE }
             4 -> playerl(FaceAnim.HALF_ASKING, "That's right. Any hints?").also { stage++ }
             5 -> npcl(FaceAnim.NEUTRAL, "Unfortunately not, " + (if (player!!.isMale) "sirrah" else "madam") + ".").also { stage = END_DIALOGUE }
-            6 -> npcl(FaceAnim.NEUTRAL, "Mordred... So you think he may be involved with the curse upon Merlin?").also { stage++ }
-            7 -> playerl(FaceAnim.NEUTRAL, "Good a guess as any right?").also { stage++ }
+            6 -> npcl(FaceAnim.HALF_ASKING, "Mordred... So you think he may be involved with the curse upon Merlin?").also { stage++ }
+            7 -> playerl(FaceAnim.HALF_ASKING, "Good a guess as any right?").also { stage++ }
             8 -> npcl(FaceAnim.NEUTRAL, "I think you may be on to something there. Unfortunately his fortress is impregnable!").also { stage++ }
             9 -> playerl(FaceAnim.NEUTRAL, "...I'll figure something out.").also { stage = END_DIALOGUE }
             10 -> {

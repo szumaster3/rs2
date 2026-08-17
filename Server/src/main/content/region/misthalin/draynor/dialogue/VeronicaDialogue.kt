@@ -170,7 +170,7 @@ class VeronicaDialogue(player: Player? = null) : Dialogue(player) {
 
             100 -> when (stage) {
                 0 -> {
-                    player(FaceAnim.HALF_GUILTY, "Where is he now?")
+                    player(FaceAnim.HALF_ASKING, "Where is he now?")
                     stage = 1
                 }
 

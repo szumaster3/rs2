@@ -33,7 +33,7 @@ class HaroldDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Hi.").also { stage++ }
-            1 -> player(FaceAnim.FRIENDLY, "Can I buy you a drink?").also { stage++ }
+            1 -> player(FaceAnim.HALF_ASKING, "Can I buy you a drink?").also { stage++ }
             2 -> npc(FaceAnim.HAPPY, "Now you're talking! An Asgarnian Ale, please!").also { stage++ }
             3 -> if (!removeItem(player!!, Items.ASGARNIAN_ALE_1905)) {
                 player(FaceAnim.FRIENDLY, "I'll go and get you one.").also { stage = END_DIALOGUE }

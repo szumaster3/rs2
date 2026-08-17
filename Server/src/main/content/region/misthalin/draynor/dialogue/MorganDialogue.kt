@@ -40,7 +40,7 @@ class MorganDialogue(player: Player? = null) : Dialogue(player) {
             3 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "No, vampires are scary!").also { stage = END_DIALOGUE }
                 2 -> player(FaceAnim.HALF_GUILTY, "Ok, I'm up for an adventure.").also { stage = 4 }
-                3 -> player(FaceAnim.HALF_GUILTY, "Have you got any tips on killing the vampire?").also { stage = 4 }
+                3 -> player(FaceAnim.HALF_ASKING, "Have you got any tips on killing the vampire?").also { stage = 4 }
             }
             4 -> npc(FaceAnim.HALF_GUILTY, "I think first you should seek help. I have a friend who", "is a retired vampire hunter, his name is Dr. Harlow. He", "may be able to give you some tips. He can normally be", "found in the Blue Moon Inn in Varrock, he's a bit of").also { stage++ }
             5 -> npc(FaceAnim.HALF_GUILTY, "an old soak these days. Mention his old friend Morgan,", "I'm sure he wouldn't want me killed by a vampire.").also { stage++ }

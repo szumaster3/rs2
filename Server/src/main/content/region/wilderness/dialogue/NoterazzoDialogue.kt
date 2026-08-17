@@ -18,7 +18,7 @@ class NoterazzoDialogue : DialogueFile() {
             1 -> showTopics(
                 Topic("Yes please.", 2),
                 Topic("No thanks.", END_DIALOGUE),
-                Topic("How can you afford to give such good deals?", 3)
+                Topic(FaceAnim.HALF_ASKING,"How can you afford to give such good deals?", 3)
             )
             2 -> end().also { openNpcShop(player!!, NPCs.NOTERAZZO_597) }
             3 -> npc(FaceAnim.NEUTRAL, "The general stores in Asgarnia and Misthalin are heavily", "taxed.").also { stage++ }

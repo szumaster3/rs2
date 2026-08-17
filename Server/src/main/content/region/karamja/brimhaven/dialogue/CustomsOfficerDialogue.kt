@@ -23,14 +23,14 @@ class CustomsOfficerDialogue(player: Player? = null) : Dialogue(player) {
         if (args.size > 1) {
             if (player.getQuestRepository().isComplete(Quests.PIRATES_TREASURE)) {
                 if (inInventory(player, Items.KARAMJAN_RUM_431)) {
-                    npc("Aha, trying to smuggle rum are we?").also { stage = 900 }
+                    npc(FaceAnim.HALF_THINKING,"Aha, trying to smuggle rum are we?").also { stage = 900 }
                     return true
                 }
                 npc(FaceAnim.HALF_GUILTY, "Well you've got some odd stuff, but it's all legal. Now", "you need to pay a boarding charge of 30 coins.").also { stage = 121 }
                 return true
             }
         }
-        npc(FaceAnim.HALF_GUILTY, "Can I help you?")
+        npc(FaceAnim.HALF_ASKING, "Can I help you?")
         return true
     }
 
@@ -39,13 +39,13 @@ class CustomsOfficerDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> options("Can I journey on this ship?", "Does Karamja have unusual customs then?").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Can I journey on this ship?").also { stage = 10 }
-                2 -> player(FaceAnim.HALF_GUILTY, "Does Karamja have unusual customs then?").also { stage = 20 }
+                1 -> player(FaceAnim.HALF_ASKING, "Can I journey on this ship?").also { stage = 10 }
+                2 -> player(FaceAnim.HALF_ASKING, "Does Karamja have unusual customs then?").also { stage = 20 }
             }
-            10 -> npc(FaceAnim.HALF_GUILTY, "You need to be searched before you can board?").also { stage++ }
+            10 -> npc(FaceAnim.HALF_ASKING, "You need to be searched before you can board?").also { stage++ }
             11 -> options("Why?", "Search away, I have nothing to hide.", "You're not putting your hands on my things!").also { stage++ }
             12 -> when (buttonId) {
-                1 -> player(FaceAnim.HALF_GUILTY, "Why?").also { stage = 110 }
+                1 -> player(FaceAnim.HALF_ASKING, "Why?").also { stage = 110 }
                 2 -> player(FaceAnim.HALF_GUILTY, "Search away, I have nothing to hide.").also { stage = 120 }
                 3 -> player(FaceAnim.HALF_GUILTY, "You're not putting your hands on my things!").also { stage = 130 }
             }
@@ -93,7 +93,7 @@ class CustomsOfficerDialogue(player: Player? = null) : Dialogue(player) {
                     charter!!.sail(player)
                 }
             }
-            900 -> player(FaceAnim.HALF_GUILTY, "Umm... it's for personal use?").also { stage = 901 }
+            900 -> player(FaceAnim.HALF_ASKING, "Umm... it's for personal use?").also { stage = 901 }
             901 -> {
                 var i = 0
                 while (i < amountInInventory(player, Items.KARAMJAN_RUM_431)) {

@@ -18,7 +18,7 @@ class FyionaFrayDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player("Hello there. What are you doing here?")
+        player(FaceAnim.HALF_ASKING,"Hello there. What are you doing here?")
         return true
     }
 

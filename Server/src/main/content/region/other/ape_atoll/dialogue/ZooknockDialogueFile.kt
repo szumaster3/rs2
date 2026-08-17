@@ -34,21 +34,21 @@ class ZooknockDialogueFile(val it: Int) : DialogueFile() {
             0 -> when {
                 itemUsed == Items.GOLD_BAR_2357 && !getAttribute(player!!, "/save:mm:gold-given", false) -> {
                     setAttribute(player!!, "/save:mm:gold-given", true)
-                    playerl("What do you think of this?")
+                    playerl(FaceAnim.HALF_ASKING,"What do you think of this?")
                     player!!.inventory.remove(Item(Items.GOLD_BAR_2357))
                     stage = 15
                 }
 
                 itemUsed == Items.MAMULET_MOULD_4020 && !getAttribute(player!!, "/save:mm:mould-given", false) -> {
                     setAttribute(player!!, "/save:mm:mould-given", true)
-                    playerl("What do you think of this?")
+                    playerl(FaceAnim.HALF_ASKING,"What do you think of this?")
                     player!!.inventory.remove(Item(Items.MAMULET_MOULD_4020))
                     stage = 20
                 }
 
                 itemUsed == Items.MONKEY_DENTURES_4006 && !getAttribute(player!!, "/save:mm:dentures-given", false) -> {
                     setAttribute(player!!, "/save:mm:dentures-given", true)
-                    playerl("What do you think of this?")
+                    playerl(FaceAnim.HALF_ASKING,"What do you think of this?")
                     player!!.inventory.remove(Item(Items.MONKEY_DENTURES_4006))
                     stage = 30
                 }

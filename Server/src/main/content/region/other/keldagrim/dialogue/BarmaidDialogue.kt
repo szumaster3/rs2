@@ -24,7 +24,7 @@ class BarmaidDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.OLD_DEFAULT, "Welcome to the Laughing Miner pub, human traveller.").also { stage++ }
             1 -> showTopics(
-                Topic(FaceAnim.FRIENDLY, "Who is that man walking around outside?", 2),
+                Topic(FaceAnim.HALF_ASKING, "Who is that man walking around outside?", 2),
                 Topic(FaceAnim.FRIENDLY, "I'd like a beer please.", 12),
                 Topic(FaceAnim.FRIENDLY, "I'd like some food please.", 16),
             )
@@ -34,9 +34,9 @@ class BarmaidDialogue(player: Player? = null) : Dialogue(player) {
             5 -> playerl(FaceAnim.FRIENDLY, "But what's wrong with him?").also { stage++ }
             6 -> npcl(FaceAnim.OLD_DEFAULT, "Well, he's drunk isn't he?").also { stage++ }
             7 -> npcl(FaceAnim.OLD_DEFAULT, "I told you, he's cheap. He couldn't get any other work since the Red Axe fired him. Been drinking ever since.").also { stage++ }
-            8 -> playerl(FaceAnim.FRIENDLY, "How did that happen?").also { stage++ }
+            8 -> playerl(FaceAnim.HALF_ASKING, "How did that happen?").also { stage++ }
             9 -> npcl(FaceAnim.OLD_DEFAULT, "I'm not quite sure, I think he kept wearing the wrong coloured cap all the time. They don't much like it if you don't wear your red uniform into work.").also { stage++ }
-            10 -> playerl(FaceAnim.FRIENDLY, "They fired him for that??").also { stage++ }
+            10 -> playerl(FaceAnim.ASKING, "They fired him for that??").also { stage++ }
             11 -> npcl(FaceAnim.OLD_DEFAULT, "The Red Axe will fire you for just about anything if they want to.").also { stage = END_DIALOGUE }
             12 -> npcl(FaceAnim.OLD_DEFAULT, "That'll be 2 gold coins.").also { stage++ }
             13 -> showTopics(

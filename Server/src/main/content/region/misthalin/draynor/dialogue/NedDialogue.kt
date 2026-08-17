@@ -5,6 +5,7 @@ import content.region.misthalin.lumbridge.diary.dialogue.NedDiaryDialogue
 import content.region.misthalin.varrock.quest.dragon.dialogue.NedDialogue
 import core.api.*
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.dialogue.IfTopic
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
@@ -50,7 +51,7 @@ class NedDialogue(player: Player? = null) : Dialogue(player) {
             11 -> player("You make rope from wool?").also { stage++ }
             12 -> npc("Of course you can!").also { stage++ }
             13 -> player("I thought you needed hemp or jute.").also { stage++ }
-            14 -> npc("Do you want some rope or not?").also { stage++ }
+            14 -> npc(FaceAnim.HALF_ASKING,"Do you want some rope or not?").also { stage++ }
             15 -> if (!inInventory(player, Items.BALL_OF_WOOL_1759, 4)) {
                 options("Okay, please sell me some rope.", "That's a little more than I want to pay.", "I will go and get some wool.").also { stage = 16 }
             } else {
@@ -58,7 +59,7 @@ class NedDialogue(player: Player? = null) : Dialogue(player) {
             }
             17 -> when (buttonId) {
                 1 -> player("Okay, please sell me some rope.").also { stage = 100 }
-                2 -> player("I have some balls of wool.", "Could you make me some rope?").also { stage = 120 }
+                2 -> player(FaceAnim.HALF_ASKING,"I have some balls of wool.", "Could you make me some rope?").also { stage = 120 }
                 3 -> player("That's a little more than I want to pay.").also { stage = 200 }
             }
             16 -> when (buttonId) {
@@ -67,7 +68,7 @@ class NedDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> player("I will go and get some wool.").also { stage = 300 }
             }
             40 -> when (buttonId) {
-                1 -> player("Ned could you make other things from wool?").also { stage = 41 }
+                1 -> player(FaceAnim.HALF_ASKING,"Ned could you make other things from wool?").also { stage = 41 }
                 2 -> player("Yes, I would like some rope.").also { stage = 10 }
                 3 -> player("No thanks Ned, I don't need any.").also { stage = 20 }
             }

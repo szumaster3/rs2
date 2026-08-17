@@ -26,7 +26,7 @@ class GrimgnashDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> player(FaceAnim.HALF_GUILTY, "Like me? Why?", "Who are you?").also { stage++ }
+            0 -> player(FaceAnim.HALF_ASKING, "Like me? Why?", "Who are you?").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "I Grimngnash and I hungry! Perhaps I eat you!").also { stage++ }
             2 -> player(FaceAnim.HALF_GUILTY, "I'm really not that tasty. I think I should be going now.", "Goodbye.").also { stage++ }
             3 -> npc(FaceAnim.OLD_ANGRY1, "Human lucky Grimgnash too tired to hunt for food. Stupid", "wolves keep Grimgnsh awake with howling. Grimgnash", "can't sleep.").also { stage = END_DIALOGUE }

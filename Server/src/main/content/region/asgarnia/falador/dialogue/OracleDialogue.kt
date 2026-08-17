@@ -1,6 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -22,7 +23,7 @@ class OracleDialogue(player: Player? = null) : Dialogue(player) {
 
         when (quest?.getStage(player)) {
             20 -> player("I seek a piece of the map to the island of Crandor.")
-            else -> player("Can you impart your wise knowledge on me, O Oracle?")
+            else -> player(FaceAnim.HALF_ASKING,"Can you impart your wise knowledge on me, O Oracle?")
         }
 
         return true

@@ -2,6 +2,7 @@ package content.region.misthalin.draynor.dialogue
 
 import core.api.removeAttribute
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -44,7 +45,7 @@ class PrinceAliDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             100 -> end()
             0 -> {
-                npc("That is very kind of you, how do I get out?")
+                npc(FaceAnim.HALF_ASKING,"That is very kind of you, how do I get out?")
                 stage = 1
             }
 

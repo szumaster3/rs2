@@ -26,7 +26,7 @@ class TzHaarDialogue(player: Player? = null) : Dialogue(player) {
             0 -> options("What do you have to trade?", "What did you call me?", "No I'm fine thanks.").also { stage++ }
             1 -> when (buttonId) {
                 1 -> end().also { openNpcShop(player, npc.id) }
-                2 -> player("What did you call me?").also { stage++ }
+                2 -> player(FaceAnim.ASKING,"What did you call me?").also { stage++ }
                 3 -> player("No I'm fine thanks.").also { stage = END_DIALOGUE }
             }
             2 -> npc(FaceAnim.CHILD_FRIENDLY, "Are you not JalYt-Ket?").also { stage++ }
