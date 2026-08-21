@@ -1,7 +1,9 @@
 package content.global.skill.construction.decoration.costumeroom
 
+import core.api.isQuestComplete
 import core.game.node.entity.player.Player
 import shared.consts.Items
+import shared.consts.Quests
 
 /**
  * Represents a storable item in the Costume Room across all box types.
@@ -10,39 +12,80 @@ enum class Storable(
     val displayId: Int,
     val takeIds: IntArray = intArrayOf(displayId),
     val type: StorableType,
-    val tier: Int = 0
+    val tier: Int = 0,
+    val quest: String? = null
 ){
     // Books
-    ArenaBook(Items.ARENA_BOOK_6891, type = StorableType.BOOK),
-    MyNotes(Items.MY_NOTES_11339, type = StorableType.BOOK),
-    CrumblingTome(Items.CRUMBLING_TOME_4707, type = StorableType.BOOK),
-    PieRecipeBook(Items.PIE_RECIPE_BOOK_7162, type = StorableType.BOOK),
-    GiannesCookBook(Items.GIANNES_COOK_BOOK_2167, type = StorableType.BOOK),
-    GameBook(Items.GAME_BOOK_7681, type = StorableType.BOOK),
-    StrongholdNotes(Items.STRONGHOLD_NOTES_9004, type = StorableType.BOOK),
+    InstructionManual(Items.INSTRUCTION_MANUAL_5, type = StorableType.BOOK, quest = Quests.DWARF_CANNON),
+    BaxtorianBook(Items.BOOK_ON_BAXTORIAN_292, type = StorableType.BOOK, quest = Quests.WATERFALL_QUEST),
+    TheTaleOfScorpius(Items.ASTRONOMY_BOOK_600, type = StorableType.BOOK, quest = Quests.OBSERVATORY_QUEST),
+    BookOnChemicals(Items.BOOK_ON_CHEMICALS_711, type = StorableType.BOOK, quest = Quests.THE_DIG_SITE),
+    ShamansTome(Items.SHAMANS_TOME_729, type = StorableType.BOOK, quest = Quests.LEGENDS_QUEST),
+    BindingBook(Items.BINDING_BOOK_730, type = StorableType.BOOK, quest = Quests.LEGENDS_QUEST),
+    ShieldOfArrav(Items.BOOK_757, type = StorableType.BOOK, quest = Quests.SHIELD_OF_ARRAV),
+    GnomeBook(Items.TRANSLATION_BOOK_784, type = StorableType.BOOK, quest = Quests.THE_GRAND_TREE),
+    RandasJournal(Items.OLD_JOURNAL_1493, type = StorableType.BOOK, quest = Quests.UNDERGROUND_PASS),
+    IbanHistory(Items.HISTORY_OF_IBAN_1494, type = StorableType.BOOK, quest = Quests.UNDERGROUND_PASS),
+    ArdougneTouristGuide(Items.GUIDE_BOOK_1856, type = StorableType.BOOK, quest = Quests.TRIBAL_TOTEM),
     CocktailGuide(Items.COCKTAIL_GUIDE_2023, type = StorableType.BOOK),
-    TarnsDiary(Items.TARNS_DIARY_10587,type = StorableType.BOOK),
-    ConstructionGuide(Items.CONSTRUCTION_GUIDE_8463, type = StorableType.BOOK),
-    GlassblowingBook(Items.GLASSBLOWING_BOOK_11656, type = StorableType.BOOK),
-    BrewinGuide(Items.BREWIN_GUIDE_8989,type = StorableType.BOOK),
-    SecurityBook(Items.SECURITY_BOOK_9003, type = StorableType.BOOK),
-    QueenHelpBook(Items.QUEEN_HELP_BOOK_10562, type = StorableType.BOOK),
+    GiannesCookBook(Items.GIANNES_COOK_BOOK_2167, type = StorableType.BOOK),
+    WitchDiary(Items.DIARY_2408, type = StorableType.BOOK, quest = Quests.WITCHS_HOUSE),
+    BatteredBook(Items.BATTERED_BOOK_2886, type = StorableType.BOOK, quest = Quests.ELEMENTAL_WORKSHOP_I),
+    BigBookOfBangs(Items.BIG_BOOK_OF_BANGS_3230, type = StorableType.BOOK, quest = Quests.REGICIDE),
+    DroznalJournal(Items.JOURNAL_3845, type = StorableType.BOOK, quest = Quests.HORROR_FROM_THE_DEEP),
+    AncientJournal(Items.DIARY_3846, type = StorableType.BOOK, quest = Quests.HORROR_FROM_THE_DEEP),
+    LighthouseManual(Items.MANUAL_3847, type = StorableType.BOOK, quest = Quests.HORROR_FROM_THE_DEEP),
+    GrimBook(Items.GHRIMS_BOOK_3901, type = StorableType.BOOK, quest = Quests.THRONE_OF_MISCELLANIA),
+    CadarnLineage(Items.CADARN_LINEAGE_4209, type = StorableType.BOOK, quest = Quests.ROVING_ELVES),
+    CrystalOfSyren(Items.CRYSTAL_OF_SEREN_4313, type = StorableType.BOOK, quest = Quests.ROVING_ELVES),
+    DwarvenLore(Items.DWARVEN_LORE_4568, type = StorableType.BOOK, quest = Quests.BETWEEN_A_ROCK),
+    VarmensNotes(Items.VARMENS_NOTES_4616, type = StorableType.BOOK, quest = Quests.THE_GOLEM),
+    Translation(Items.TRANSLATION_4655, type = StorableType.BOOK, quest = Quests.DESERT_TREASURE),
+    EmbalmingManual(Items.EMBALMING_MANUAL_4686, type = StorableType.BOOK, quest = Quests.ICTHLARINS_LITTLE_HELPER),
+    CrumblingTome(Items.CRUMBLING_TOME_4707, type = StorableType.BOOK),
+    BookOfPortraiture(Items.BOOK_OF_PORTRAITURE_4817, type = StorableType.BOOK, quest = Quests.ZOGRE_FLESH_EATERS),
+    HamBook(Items.BOOK_OF_HAM_4829, type = StorableType.BOOK, quest = Quests.ZOGRE_FLESH_EATERS),
+    GoblinSymbolBook(Items.GOBLIN_SYMBOL_BOOK_5009, type = StorableType.BOOK, quest = Quests.THE_LOST_TRIBE),
     AbyssalBook(Items.ABYSSAL_BOOK_5520, type = StorableType.BOOK),
+    PrifddinasHistory(Items.PRIFDDINAS_HISTORY_6073, type = StorableType.BOOK, quest = Quests.MOURNINGS_END_PART_I),
+    EasternDiscovery(Items.EASTERN_DISCOVERY_6075, type = StorableType.BOOK, quest = Quests.MOURNINGS_END_PART_I),
+    EasternSettlement(Items.EASTERN_SETTLEMENT_6077, type = StorableType.BOOK, quest = Quests.MOURNINGS_END_PART_I),
+    GreatDivide(Items.THE_GREAT_DIVIDE_6079, type = StorableType.BOOK, quest = Quests.MOURNINGS_END_PART_I),
+    EdernsJournal(Items.EDERNS_JOURNAL_6649, type = StorableType.BOOK, quest = Quests.MOURNINGS_END_PART_II),
+    DemonicTome(Items.DEMONIC_TOME_6749, type = StorableType.BOOK, quest = Quests.SHADOW_OF_THE_STORM),
+    RatPitManual(Items.BOOK_6767, type = StorableType.BOOK, quest = Quests.RATCATCHERS),
+    Ballad(Items.BALLAD_6793, type = StorableType.BOOK, quest = Quests.SPIRITS_OF_THE_ELID),
+    ArenaBook(Items.ARENA_BOOK_6891, type = StorableType.BOOK),
+    BookOPiracy(Items.BOOK_O_PIRACY_7144, type = StorableType.BOOK, quest = Quests.CABIN_FEVER),
+    PieRecipeBook(Items.PIE_RECIPE_BOOK_7162, type = StorableType.BOOK),
+    SleepingSeven(Items.ANCIENT_BOOK_7633, type = StorableType.BOOK, quest = Quests.IN_AID_OF_THE_MYREQUE),
+    Hallowland(Items.BATTERED_TOME_7634, type = StorableType.BOOK, quest = Quests.IN_AID_OF_THE_MYREQUE),
+    ModernDay(Items.LEATHER_BOOK_7635, type = StorableType.BOOK, quest = Quests.IN_AID_OF_THE_MYREQUE),
+    GameBook(Items.GAME_BOOK_7681, type = StorableType.BOOK),
+    HermanBook(Items.HERMANS_BOOK_7951, type = StorableType.BOOK, quest = Quests.SWAN_SONG),
+    BurntDiary(Items.BURNT_DIARY_7965, type = StorableType.BOOK, quest = Quests.ROYAL_TROUBLE),
+    LiftManual(Items.LIFT_MANUAL_7972, type = StorableType.BOOK, quest = Quests.ROYAL_TROUBLE),
+    ConstructionGuide(Items.CONSTRUCTION_GUIDE_8463, type = StorableType.BOOK),
+    BrewinGuide(Items.BREWIN_GUIDE_8989, type = StorableType.BOOK),
+    SecurityBook(Items.SECURITY_BOOK_9003, type = StorableType.BOOK),
+    StrongholdNotes(Items.STRONGHOLD_NOTES_9004, type = StorableType.BOOK),
+    MoonclanManual(Items.MOONCLAN_MANUAL_9078, type = StorableType.BOOK, quest = Quests.LUNAR_DIPLOMACY),
+    BeatenBook(Items.BEATEN_BOOK_9717, type = StorableType.BOOK, quest = Quests.ELEMENTAL_WORKSHOP_II),
+    FarmingManual(Items.FARMING_MANUAL_9903, type = StorableType.BOOK, quest = Quests.MY_ARMS_BIG_ADVENTURE),
+    BirdBook(Items.BIRD_BOOK_10173, type = StorableType.BOOK, quest = Quests.EAGLES_PEAK),
+    FeatheredJournal(Items.FEATHERED_JOURNAL_10179, type = StorableType.BOOK, quest = Quests.EAGLES_PEAK),
+    QueenHelpBook(Items.QUEEN_HELP_BOOK_10562, type = StorableType.BOOK),
+    TarnsDiary(Items.TARNS_DIARY_10587, type = StorableType.BOOK),
+    ClockworkBook(Items.CLOCKWORK_BOOK_10594, type = StorableType.BOOK, quest = Quests.COLD_WAR),
+    PrayerBook(Items.PRAYER_BOOK_10890, type = StorableType.BOOK, quest = Quests.THE_GREAT_BRAIN_ROBBERY),
+    GoblinBook(Items.GOBLIN_BOOK_10999, type = StorableType.BOOK, quest = Quests.ANOTHER_SLICE_OF_HAM),
+    DagonBook(Items.DAGONHAI_HISTORY_11001, type = StorableType.BOOK, quest = Quests.WHAT_LIES_BELOW),
+    MyNotes(Items.MY_NOTES_11339, type = StorableType.BOOK),
+    GlassblowingBook(Items.GLASSBLOWING_BOOK_11656, type = StorableType.BOOK),
     ExplorersNotes(Items.EXPLORERS_NOTES_11677, type = StorableType.BOOK),
-    GoblinBook(Items.GOBLIN_BOOK_10999, type = StorableType.BOOK),
-    DwarvenLore(Items.DWARVEN_LORE_4568, type = StorableType.BOOK),
-    BookOPiracy(Items.BOOK_O_PIRACY_7144, type = StorableType.BOOK),
-    ClockworkBook(Items.CLOCKWORK_BOOK_10594, type = StorableType.BOOK),
-    ScabariteNotes(Items.SCABARITE_NOTES_11975, type = StorableType.BOOK),
-    Translation(Items.TRANSLATION_4655, type = StorableType.BOOK),
-    BookOnChemicals(Items.BOOK_ON_CHEMICALS_711, type = StorableType.BOOK),
-    InstructionManual(Items.INSTRUCTION_MANUAL_5, type = StorableType.BOOK),
-    BirdBook(Items.BIRD_BOOK_10173,type = StorableType.BOOK),
-    FeatheredJournal(Items.FEATHERED_JOURNAL_10179, type = StorableType.BOOK),
-    BatteredBook(Items.BATTERED_BOOK_2886, type = StorableType.BOOK),
-    BeatenBook(Items.BEATEN_BOOK_9717, type = StorableType.BOOK),
-    AHandwrittenBook(Items.A_HANDWRITTEN_BOOK_9627, type = StorableType.BOOK),
-    VarmensNotes(Items.VARMENS_NOTES_4616, type = StorableType.BOOK),
+    YewnockNotes(Items.YEWNOCKS_NOTES_11750, type = StorableType.BOOK, quest = Quests.THE_PATH_OF_GLOUPHRIE),
+    TouristGuide(Items.TZHAAR_TOURIST_GUIDE_13244, type = StorableType.BOOK, quest = Quests.TOKTZ_KET_DILL),
+    ArmadylCommunique(Items.ARMADYL_COMMUNIQU_14085, type = StorableType.BOOK, quest = Quests.WHILE_GUTHIX_SLEEPS),
     // Capes.
     LegendsCape(Items.CAPE_OF_LEGENDS_1052, type = StorableType.CAPE),
     ObsidianCape(Items.OBSIDIAN_CAPE_6568, type = StorableType.CAPE),
@@ -280,18 +323,48 @@ enum class Storable(
     companion object {
         private val idToStorable: Map<Int, Storable> by lazy {
             values().flatMap { storable ->
-                storable.takeIds.map { id -> id to storable }
-            }.toMap()
+                    storable.takeIds.map { id -> id to storable } }.toMap()
         }
-
-        private val allItemIds: Set<Int> by lazy { idToStorable.keys }
 
         private val storableIdSets: Map<Storable, Set<Int>> by lazy {
             values().associateWith { it.takeIds.toSet() }
         }
 
-        fun getItems(type: StorableType, tier: Int? = null): List<Storable> =
-            values().filter { it.type == type && (tier == null || it.tier == tier) }
+        fun getItems(type: StorableType): List<Storable> =
+            values().filter { it.type == type }
+
+        fun getItems(type: StorableType, tier: Int): List<Storable> =
+            values().filter { it.type == type && it.tier <= tier }
+
+        /**
+         * Returns true when this book is automatically available
+         * in the bookcase because its required quest is completed.
+         */
+        fun isQuestUnlocked(
+            player: Player,
+            storable: Storable
+        ): Boolean {
+            if (storable.type != StorableType.BOOK) {
+                return false
+            }
+
+            val quest = storable.quest ?: return false
+
+            return isQuestComplete(player, quest)
+        }
+
+        /**
+         * Returns true when the item should be available
+         * in the storage interface.
+         *
+         * An item can be available either because:
+         * - it was stored by the player, or
+         * - it is automatically unlocked by a completed quest (apply only to bookcase).
+         */
+        fun isAvailable(player: Player, storable: Storable, storedItems: Set<Int>): Boolean {
+            val stored = storable.takeIds.any { it in storedItems }
+            return stored || isQuestUnlocked(player, storable)
+        }
 
         fun hasStorableEquipped(player: Player, storable: Storable): Boolean {
             val equippedIds = player.equipment.toArray().mapNotNull { it?.id }.toSet()
