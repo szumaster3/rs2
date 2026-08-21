@@ -138,8 +138,7 @@ class MiningPlugin : InteractionListener {
      */
 
     private fun handleMining(player: Player, node: Node, state: Int): Boolean {
-        val resource = MiningNode.forId(node.id) ?: run { return true }
-        val tool = SkillingTool.getPickaxe(player) ?: run { return true }
+        val resource = MiningNode.forId(node.id) ?: return true
         val isEssence = resource.id in intArrayOf(
             shared.consts.Scenery.RUNE_ESSENCE_2491,/*
              * Lunar essence rock.
@@ -157,14 +156,18 @@ class MiningPlugin : InteractionListener {
             return true
         }
 
+        /*
+         * Check all requirements before trying to get a pickaxe.
+         */
         if (state == 0) {
             if (!checkRequirements(player, resource, node)) {
                 player.scripts.reset()
                 return true
             }
 
+            val tool = getUsablePickaxe(player) ?: return true
             if (!isEssence) {
-                val message = if (resource.identifier == MiningNode.OBSIDIAN_0.identifier) {
+                val message = if (isObsidian) {
                     "You swing your pick at the wall."
                 } else {
                     "You swing your pickaxe at the rock."
@@ -172,11 +175,16 @@ class MiningPlugin : InteractionListener {
                 sendMessage(player, message)
             }
 
-            anim(player, resource, tool!!)
+            anim(player, resource, tool)
             return delayScript(player, getDelay(resource, tool))
         }
 
-        anim(player, resource, tool!!)
+        /*
+         * The player could have removed the pickaxe while the mining
+         * delay was running, so check again here.
+         */
+        val tool = getUsablePickaxe(player) ?: return true
+        anim(player, resource, tool)
         if (!checkReward(player, resource, tool)) {
             return delayScript(player, getDelay(resource, tool))
         }
@@ -238,17 +246,15 @@ class MiningPlugin : InteractionListener {
             addItemOrDrop(player, reward, rewardAmount)
             if (!isEssence) {
                 var chance = 282
-                var altered = false
                 val ring = getItemFromEquipment(player, EquipmentSlot.RING)
                 if (ring != null && ring.name.lowercase().contains("ring of wealth")) {
                     chance = (chance / 1.5).toInt()
-                    altered = true
                 }
                 val necklace = getItemFromEquipment(player, EquipmentSlot.NECK)
                 if (necklace != null && necklace.id in Items.AMULET_OF_GLORY_1705..Items.AMULET_OF_GLORY4_1713) {
                     chance = (chance / 1.5).toInt()
-                    altered = true
                 }
+
                 if (RandomFunction.roll(chance)) {
                     val gem = gemRewards.random()
                     sendMessage(player, "You find a ${gem.name}!")
@@ -422,11 +428,10 @@ class MiningPlugin : InteractionListener {
      * Checks all requirements for mining a [resource] by [player].
      */
     fun checkRequirements(player: Player, resource: MiningNode, node: Node): Boolean {
-        val allPickaxes = SkillingTool.values().filter {
-            inEquipmentOrInventory(player, it.id)
-        }
+        val hasPickaxe = SkillingTool.values()
+            .any { inEquipmentOrInventory(player, it.id) }
 
-        if (allPickaxes.isEmpty()) {
+        if (!hasPickaxe) {
             sendMessage(player, "You do not have a pickaxe to use.")
             return false
         }
@@ -436,12 +441,10 @@ class MiningPlugin : InteractionListener {
             return false
         }
 
-        val usablePickaxe = allPickaxes
-            .filter { player.getSkills().getLevel(Skills.MINING) >= it.level }
-            .maxByOrNull { it.level }
+        val usablePickaxe = getUsablePickaxe(player)
 
         if (usablePickaxe == null) {
-            sendMessage(player, "You need a pickaxe to mine this rock. You do not have a pickaxe which you have the Mining level to use.")
+            sendMessage(player, "You need a pickaxe to mine this rock. " + "You do not have a pickaxe which you have the Mining level to use.")
             return false
         }
 
@@ -470,6 +473,13 @@ class MiningPlugin : InteractionListener {
             return false
         }
         return node.isActive
+    }
+
+    private fun getUsablePickaxe(player: Player): SkillingTool? {
+        return SkillingTool.values()
+            .filter { inEquipmentOrInventory(player, it.id) }
+            .filter { player.getSkills().getLevel(Skills.MINING) >= it.level }
+            .maxByOrNull { it.level }
     }
 }
 
