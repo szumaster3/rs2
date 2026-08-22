@@ -2,104 +2,104 @@ package content.global.plugins.iface
 
 import core.api.sendInputDialogue
 import core.api.sendMessage
-import core.game.component.Component
-import core.game.component.ComponentDefinition
-import core.game.component.ComponentPlugin
-import core.game.node.entity.player.Player
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.link.request.trade.TradeModule.Companion.getExtension
-import core.plugin.Initializable
-import core.plugin.Plugin
 import shared.consts.Components
 
 /**
- * Represents the interface plugin used to handle all trade related functions.
+ * Represents the interface listener used to handle all trade related functions.
  * @author Vexia
  */
-@Initializable
-class TradeInterface : ComponentPlugin() {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(Components.TRADECONFIRM_334, this)
-        ComponentDefinition.put(Components.TRADEMAIN_335, this)
-        ComponentDefinition.put(Components.TRADESIDE_336, this)
-        return this
-    }
+class TradeInterface : InterfaceListener {
 
-    override fun handle(
-        player: Player,
-        component: Component,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int,
-    ): Boolean {
-        val module = getExtension(player) ?: return true
-        when (component.id) {
-            Components.TRADECONFIRM_334 ->
-                when (button) {
-                    20 -> module.setAccepted(true, true)
-                    21 -> module.decline()
-                }
+    override fun defineInterfaceListeners() {
 
-            Components.TRADEMAIN_335 ->
-                when (opcode) {
-                    155 ->
-                        when (button) {
-                            16 -> module.setAccepted(true, true)
-                            18 -> module.decline()
-                            30 -> module.container!!.withdraw(slot, 1)
-                        }
+        on(Components.TRADECONFIRM_334) { player, _, _, buttonID, _, _ ->
+            val module = getExtension(player) ?: return@on true
 
-                    196 -> module.container!!.withdraw(slot, 5)
-                    124 -> module.container!!.withdraw(slot, 10)
-                    199 -> module.container!!.withdraw(slot, module.container!!.getAmount(module.container!![slot]))
-                    234 ->
-                        sendInputDialogue(player, false, "Enter the amount:") { value: Any ->
-                            var s = value.toString()
-                            s = s.replace("k", "000")
-                            s = s.replace("K", "000")
-                            s = s.replace("m", "000000")
-                            s = s.replace("M", "000000")
-                            val `val` = s.toInt()
-                            module.container!!.withdraw(slot, `val`)
-                        }
+            when (buttonID) {
+                20 -> module.setAccepted(true, true)
+                21 -> module.decline()
+            }
 
-                    9 -> {
-                        if (getExtension(if (button == 32) module.target else player) == null) {
-                            return true
-                        }
-                        sendMessage(
-                            player,
-                            getExtension(
-                                if (button ==
-                                    32
-                                ) {
-                                    module.target
-                                } else {
-                                    player
-                                },
-                            )!!.container!![slot].definition.examine,
-                        )
+            return@on true
+        }
+
+        on(Components.TRADEMAIN_335) { player, _, opcode, buttonID, slot, _ ->
+            val module = getExtension(player) ?: return@on true
+
+            when (opcode) {
+                155 -> {
+                    when (buttonID) {
+                        16 -> module.setAccepted(true, true)
+                        18 -> module.decline()
+                        30 -> module.container!!.withdraw(slot, 1)
                     }
                 }
 
-            Components.TRADESIDE_336 ->
-                when (opcode) {
-                    155 -> module.container!!.offer(slot, 1)
-                    196 -> module.container!!.offer(slot, 5)
-                    124 -> module.container!!.offer(slot, 10)
-                    199 -> module.container!!.offer(slot, player.inventory.getAmount(player.inventory[slot]))
-                    234 ->
-                        sendInputDialogue(player, false, "Enter the amount:") { value: Any ->
-                            var s = value.toString()
-                            s = s.replace("k", "000")
-                            s = s.replace("K", "000")
-                            val `val` = s.toInt()
-                            module.container!!.offer(slot, `val`)
-                        }
-
-                    9 -> sendMessage(player, player.inventory[slot].definition.examine)
+                196 -> module.container!!.withdraw(slot, 5)
+                124 -> module.container!!.withdraw(slot, 10)
+                199 -> {
+                    module.container!!.withdraw(slot, module.container!!.getAmount(module.container!![slot]))
                 }
+
+                234 -> {
+                    sendInputDialogue(player, false, "Enter the amount:") { value ->
+                        var amount = value.toString()
+                        amount = amount.replace("k", "000")
+                        amount = amount.replace("K", "000")
+                        amount = amount.replace("m", "000000")
+                        amount = amount.replace("M", "000000")
+
+                        module.container!!.withdraw(slot, amount.toInt())
+                    }
+                }
+
+                9 -> {
+                    val target = if (buttonID == 32) {
+                        module.target
+                    } else {
+                        player
+                    }
+                    val targetModule = getExtension(target) ?: return@on true
+                    sendMessage(player, targetModule.container!![slot].definition.examine)
+                }
+            }
+            return@on true
         }
-        return true
+
+        on(Components.TRADESIDE_336) { player, _, opcode, _, slot, _ ->
+            val module = getExtension(player) ?: return@on true
+
+            when (opcode) {
+                155 -> module.container!!.offer(slot, 1)
+                196 -> module.container!!.offer(slot, 5)
+                124 -> module.container!!.offer(slot, 10)
+                199 -> {
+                    module.container!!.offer(
+                        slot,
+                        player.inventory.getAmount(player.inventory[slot])
+                    )
+                }
+
+                234 -> {
+                    sendInputDialogue(player, false, "Enter the amount:") { value ->
+                        var amount = value.toString()
+                        amount = amount.replace("k", "000")
+                        amount = amount.replace("K", "000")
+                        amount = amount.replace("m", "000000")
+                        amount = amount.replace("M", "000000")
+
+                        module.container!!.offer(slot, amount.toInt())
+                    }
+                }
+
+                9 -> {
+                    sendMessage(player, player.inventory[slot].definition.examine)
+                }
+            }
+
+            return@on true
+        }
     }
 }

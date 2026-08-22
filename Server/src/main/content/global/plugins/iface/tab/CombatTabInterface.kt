@@ -1,8 +1,6 @@
 package content.global.plugins.iface.tab
 
-import core.game.component.Component
-import core.game.component.ComponentDefinition
-import core.game.component.ComponentPlugin
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.combat.equipment.WeaponInterface
@@ -10,7 +8,6 @@ import core.game.node.entity.combat.equipment.WeaponInterface.WeaponInterfaces
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
-import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Components
 
@@ -19,21 +16,23 @@ import shared.consts.Components
  *
  * @author Emperor, Vexia
  */
-@Initializable
-class CombatTabInterface : ComponentPlugin() {
+class CombatTabInterface : InterfaceListener {
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
+    override fun defineInterfaceListeners() {
+
         WeaponInterfaces.values().forEach { inter ->
-            ComponentDefinition.put(inter.interfaceId, this)
+            on(inter.interfaceId) { player, _, _, buttonID, _, _ ->
+                handleButton(player, buttonID)
+            }
         }
-        ComponentDefinition.put(Components.WEAPON_FISTS_SEL_92, this)
-        return this
+
+        on(Components.WEAPON_FISTS_SEL_92) { player, _, _, buttonID, _, _ ->
+            handleButton(player, buttonID)
+        }
     }
 
-    override fun handle(
-        player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int
-    ): Boolean {
-        when (button) {
+    private fun handleButton(player: Player, buttonID: Int): Boolean {
+        when (buttonID) {
             7, 9, 24, 26, 27 -> {
                 GameWorld.Pulser.submit(object : Pulse(1, player) {
                     override fun pulse(): Boolean {
@@ -50,11 +49,10 @@ class CombatTabInterface : ComponentPlugin() {
                         if (inter != null && inter.isSpecialBar) {
                             player.settings.toggleSpecialBar()
                             if (player.settings.isSpecialToggled) {
-                                val handler = CombatStyle.MELEE.swingHandler.getSpecial(
-                                    player.equipment.getNew(3)?.id ?: -1
-                                )
+                                val handler = CombatStyle.MELEE.swingHandler.getSpecial(player.equipment.getNew(3)?.id ?: -1)
                                 if (handler != null) {
-                                    @Suppress("UNCHECKED_CAST") val plugin = handler as? Plugin<Any>
+                                    @Suppress("UNCHECKED_CAST")
+                                    val plugin = handler as? Plugin<Any>
                                     if (plugin?.fireEvent("instant_spec", player) == true) {
                                         handleInstantSpec(player, handler, plugin)
                                     }
@@ -69,8 +67,8 @@ class CombatTabInterface : ComponentPlugin() {
             0 -> return false
             else -> {
                 val inter = player.getExtension(WeaponInterface::class.java) as? WeaponInterface ?: return false
-                if (inter.setAttackStyle(button)) {
-                    when (button) {
+                if (inter.setAttackStyle(buttonID)) {
+                    when (buttonID) {
                         4, 5 -> inter.openAutocastSelect()
                         else -> {
                             if (player.properties.autocastSpell != null) {

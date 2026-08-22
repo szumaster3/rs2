@@ -5,60 +5,53 @@ import content.global.skill.construction.decoration.costumeroom.StorableType
 import core.api.openInterface
 import core.api.sendMessage
 import core.api.setAttribute
-import core.game.component.Component
-import core.game.component.ComponentDefinition
-import core.game.component.ComponentPlugin
 import core.game.container.access.InterfaceContainer.generateItems
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.plugin.Initializable
-import core.plugin.Plugin
 import shared.consts.Components
 
 /**
- * Represents interface plugin for the Diango Reclaimable.
+ * Represents interface listener for the Diango Reclaimable.
  * @author Ceikry
  */
-@Initializable
-class DiangoReclaimableInterface : ComponentPlugin() {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(COMPONENT_ID, this)
+class DiangoReclaimableInterface : InterfaceListener {
+
+    override fun defineInterfaceListeners() {
+
         ITEMS.addAll(getEligibleItemsList(StorableType.TOY))
-        return this
-    }
 
-    override fun handle(
-        player: Player,
-        component: Component,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int,
-    ): Boolean {
-        var reclaimable = player.getAttribute<Array<Item?>>("diango-reclaimables", null)
-        if (reclaimable == null) reclaimable = getEligibleItems(player)
+        on(COMPONENT_ID) { player, _, opcode, _, slot, _ ->
 
-        val reclaimItem = reclaimable?.getOrNull(slot)
-        if (reclaimItem == null) {
-            sendMessage(player, "Something went wrong there. Please try again.")
-            return true
-        }
+            val reclaimable =
+                player.getAttribute<Array<Item?>>("diango-reclaimables", null)
+                    ?: getEligibleItems(player)
 
-        when (opcode) {
-            155 -> {
+            val reclaimItem = reclaimable?.getOrNull(slot)
 
-                if (player.inventory.freeSlots() <= 0) {
-                    sendMessage(player, "You don't have enough space in your inventory.")
-                    return true
-                }
-
-                player.inventory.add(reclaimItem)
-                refresh(player)
+            if (reclaimItem == null) {
+                sendMessage(player, "Something went wrong there. Please try again.")
+                return@on true
             }
 
-            9 -> sendMessage(player, reclaimItem.definition.examine)
+            when (opcode) {
+                155 -> {
+                    if (player.inventory.freeSlots() <= 0) {
+                        sendMessage(player, "You don't have enough space in your inventory.")
+                        return@on true
+                    }
+
+                    player.inventory.add(reclaimItem)
+                    refresh(player)
+                }
+
+                9 -> {
+                    sendMessage(player, reclaimItem.definition.examine)
+                }
+            }
+
+            return@on false
         }
-        return false
     }
 
     companion object {
@@ -72,13 +65,12 @@ class DiangoReclaimableInterface : ComponentPlugin() {
          */
         private fun getEligibleItemsList(type: StorableType): List<Item> {
             return Storable.values()
-                .filter { it.type == StorableType.TOY && it.takeIds.isNotEmpty() }
+                .filter { it.type == type && it.takeIds.isNotEmpty() }
                 .map { Item(it.takeIds.first()) }
         }
 
         /**
          * Opens the reclaim interface for the specified player.
-         * Sets up the reclaimable items and displays the interface.
          *
          * @param player The player opening the interface.
          */
@@ -104,7 +96,7 @@ class DiangoReclaimableInterface : ComponentPlugin() {
         /**
          * Refreshes the reclaim interface.
          *
-         * @param player The player.
+         * @param player The player refreshing the interface.
          */
         private fun refresh(player: Player) {
             player.interfaceManager.close()
