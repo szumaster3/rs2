@@ -256,7 +256,7 @@ enum class Storable(
     ZamorakRuneArmour(Items.ZAMORAK_PLATEBODY_2653, intArrayOf(Items.ZAMORAK_FULL_HELM_2657, Items.ZAMORAK_PLATEBODY_2653, Items.ZAMORAK_PLATELEGS_2655, Items.ZAMORAK_KITESHIELD_2659), type = StorableType.TRAILS, 2),
     SaradominRuneArmour(Items.SARADOMIN_PLATEBODY_2661, intArrayOf(Items.SARADOMIN_FULL_HELM_2665, Items.SARADOMIN_PLATEBODY_2661, Items.SARADOMIN_PLATELEGS_2663, Items.SARADOMIN_KITESHIELD_2667), type = StorableType.TRAILS, 2),
     GuthixRuneArmour(Items.GUTHIX_PLATEBODY_2669, intArrayOf(Items.GUTHIX_FULL_HELM_2673, Items.GUTHIX_PLATEBODY_2669, Items.GUTHIX_PLATELEGS_2671, Items.GUTHIX_KITESHIELD_2675), type = StorableType.TRAILS, 2),
-    TrimmedBlueDhide(Items.DHIDE_BODY_T_7373, intArrayOf(Items.DHIDE_BODY_T_7373, Items.DHIDE_CHAPS_T_7384), type = StorableType.TRAILS, 2),
+    TrimmedBlueDhide(Items.DHIDE_BODY_T_7376, intArrayOf(Items.DHIDE_BODY_T_7376, Items.DHIDE_CHAPS_T_7384), type = StorableType.TRAILS, 2),
     GoldTrimmedBlueDhide(Items.DHIDE_BODY_G_7374, intArrayOf(Items.DHIDE_BODY_G_7374, Items.DHIDE_CHAPS_G_7382), type = StorableType.TRAILS, 2),
     SaradominBlessedDhide(Items.SARADOMIN_DHIDE_10386, intArrayOf(Items.SARADOMIN_DHIDE_10386, Items.SARADOMIN_CHAPS_10388, Items.SARADOMIN_BRACERS_10384), type = StorableType.TRAILS, 2),
     GuthixBlessedDhide(Items.GUTHIX_DRAGONHIDE_10378, intArrayOf(Items.GUTHIX_DRAGONHIDE_10378, Items.GUTHIX_CHAPS_10380, Items.GUTHIX_BRACERS_10376), type = StorableType.TRAILS, 2),
