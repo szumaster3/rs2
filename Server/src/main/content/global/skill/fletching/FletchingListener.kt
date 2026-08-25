@@ -162,13 +162,7 @@ class FletchingListener : InteractionListener {
                             rewardXP(player, Skills.FLETCHING, entry.xp)
 
                             remaining--
-
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
-                            delayClock(player, Clocks.SKILLING, 3)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 3)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 3, true)
                         }
                     }
 
@@ -237,10 +231,7 @@ class FletchingListener : InteractionListener {
                         }
 
                         player.animate(Animation.create(enum.animation))
-
                         playAudio(player, Sounds.STRING_BOW_2606)
-
-                        delayClock(player, Clocks.SKILLING, 2)
 
                         if (!removeItem(player, enum.unfinished)) {
                             return@queueScript stopExecuting(player)
@@ -270,13 +261,7 @@ class FletchingListener : InteractionListener {
                         }
 
                         remaining--
-                        if (remaining <= 0) {
-                            return@queueScript stopExecuting(player)
-                        }
-
-                        delayClock(player, Clocks.SKILLING, 2)
-                        setCurrentScriptState(player, 0)
-                        delayScript(player, 2)
+                        return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                     }
                 }
 
@@ -284,80 +269,6 @@ class FletchingListener : InteractionListener {
                     amountInInventory(player, used.id)
                 }
             }
-
-            return@onUseWith true
-        }
-
-        /*
-         * Handles attaching feathers to arrow shafts to create headless arrows.
-         */
-
-        onUseWith(IntType.ITEM, FletchingDefinition.ARROW_SHAFT, *FletchingDefinition.FEATHER_IDS) { player, used, with
-            ->
-            if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
-
-            val handler =
-                object :
-                    SkillDialogueHandler(
-                        player,
-                        SkillDialogue.MAKE_SET_ONE_OPTION,
-                        Item(FletchingDefinition.HEADLESS_ARROW)
-                    ) {
-
-                    override fun create(amount: Int, index: Int) {
-                        var remaining = amount * 15
-
-                        queueScript(player, 0, QueueStrength.WEAK) {
-                            if (remaining <= 0) return@queueScript stopExecuting(player)
-                            if (!inInventory(player, FletchingDefinition.ARROW_SHAFT)) {
-                                sendMessage(player, "You don't have any arrow shafts.")
-                                return@queueScript stopExecuting(player)
-                            }
-                            if (!anyInInventory(player, *FletchingDefinition.FEATHER_IDS)) {
-                                sendMessage(player, "You don't have any feathers.")
-                                return@queueScript stopExecuting(player)
-                            }
-
-                            val shaftAmount = amountInInventory(player, used.id)
-                            val featherAmount = amountInInventory(player, with.id)
-                            if (shaftAmount <= 0 || featherAmount <= 0) return@queueScript stopExecuting(player)
-
-                            val batch = min(15, min(shaftAmount, featherAmount))
-                            val realBatch = min(batch, remaining)
-
-                            if (
-                                removeItem(player, Item(used.id, realBatch)) &&
-                                removeItem(player, Item(with.id, realBatch))
-                            ) {
-                                addItem(player, FletchingDefinition.HEADLESS_ARROW, realBatch)
-                                rewardXP(player, Skills.FLETCHING, realBatch.toDouble())
-
-                                val message =
-                                    if (realBatch == 1) "You attach a feather to a shaft."
-                                    else "You attach feathers to $realBatch arrow shafts."
-                                sendMessage(player, message)
-                            }
-
-                            remaining -= realBatch
-
-                            if (remaining > 0) {
-                                delayClock(player, Clocks.SKILLING, 2)
-                                setCurrentScriptState(player, 0)
-                                delayScript(player, 2)
-                            } else {
-                                stopExecuting(player)
-                            }
-                        }
-                    }
-
-                    override fun getAll(index: Int): Int {
-                        val possible = min(amountInInventory(player, used.id), amountInInventory(player, with.id))
-                        return possible / 15
-                    }
-                }
-
-            val maxAmount = handler.getAll(0)
-            if (maxAmount < 1) handler.create(1, 0) else handler.open()
 
             return@onUseWith true
         }
@@ -419,7 +330,6 @@ class FletchingListener : InteractionListener {
                             }
 
                             addItem(player, FletchingDefinition.HEADLESS_ARROW, realBatch)
-
                             rewardXP(player, Skills.FLETCHING, realBatch.toDouble())
 
                             val message =
@@ -431,13 +341,8 @@ class FletchingListener : InteractionListener {
 
                             sendMessage(player, message)
                             remaining -= realBatch
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
 
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         }
                     }
 
@@ -450,7 +355,7 @@ class FletchingListener : InteractionListener {
             val maxAmount = handler.getAll(0)
 
             if (maxAmount < 1) {
-                handler.create(1, 0)
+                handler.create(0, 0)
             } else {
                 handler.open()
             }
@@ -546,7 +451,6 @@ class FletchingListener : InteractionListener {
 
                         playAudio(player, Sounds.STRING_CROSSBOW_2924)
                         player.animate(Animation.create(limbEnum.animation))
-                        delayClock(player, Clocks.SKILLING, 2)
 
                         if (!removeItem(player, limbEnum.limb)) {
                             return@queueScript stopExecuting(player)
@@ -561,13 +465,8 @@ class FletchingListener : InteractionListener {
                         sendMessage(player, "You attach the metal limbs to the stock.")
 
                         remaining--
-                        if (remaining <= 0) {
-                            return@queueScript stopExecuting(player)
-                        }
 
-                        delayClock(player, Clocks.SKILLING, 2)
-                        setCurrentScriptState(player, 0)
-                        delayScript(player, 2)
+                        return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                     }
                 }
 
@@ -605,7 +504,6 @@ class FletchingListener : InteractionListener {
 
                         playAudio(player, Sounds.CHISEL_2586)
                         animate(player, gem.animation)
-                        delayClock(player, Clocks.SKILLING, 2)
 
                         val rewardAmount = when (gem.gem) {
                             Items.OYSTER_PEARLS_413, Items.ONYX_6573 -> 24
@@ -620,13 +518,7 @@ class FletchingListener : InteractionListener {
                             remaining--
                         }
 
-                        if (remaining > 0) {
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
-                        } else {
-                            return@queueScript false
-                        }
+                        return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                     }
                 }
             }
@@ -691,7 +583,6 @@ class FletchingListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
 
-                            delayClock(player, Clocks.SKILLING, 2)
 
                             val removedBase = removeItem(player, Item(bolt.base, batch))
 
@@ -715,17 +606,11 @@ class FletchingListener : InteractionListener {
 
                             remaining -= batch
 
-                            if (
-                                remaining > 0 &&
-                                amountInInventory(player, bolt.base) > 0 &&
-                                amountInInventory(player, bolt.tip) > 0
-                            ) {
-                                delayClock(player, Clocks.SKILLING, 2)
-                                setCurrentScriptState(player, 0)
-                                delayScript(player, 2)
-                            } else {
-                                stopExecuting(player)
+                            if(amountInInventory(player, bolt.base) <= 0 ||
+                                amountInInventory(player, bolt.tip) <= 0){
+                                return@queueScript stopExecuting(player)
                             }
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         }
                     }
 
@@ -771,18 +656,12 @@ class FletchingListener : InteractionListener {
                         }
 
                         if (getStatLevel(player, Skills.FLETCHING) < kebbit.level) {
-                            sendDialogue(
-                                player,
-                                "You need a Fletching level of ${kebbit.level} to do this."
-                            )
+                            sendDialogue(player, "You need a Fletching level of ${kebbit.level} to do this.")
                             return@queueScript stopExecuting(player)
                         }
 
                         if (amountInInventory(player, kebbit.base) <= 0) {
-                            sendMessage(
-                                player,
-                                "You do not have enough materials to make kebbit bolts."
-                            )
+                            sendMessage(player, "You do not have enough materials to make kebbit bolts.")
                             return@queueScript stopExecuting(player)
                         }
 
@@ -794,7 +673,6 @@ class FletchingListener : InteractionListener {
                         val batch = 1
 
                         player.animate(Animation(Animations.FLETCH_LOGS_4433))
-                        delayClock(player, Clocks.SKILLING, 2)
 
                         if (!removeItem(player, Item(kebbit.base, batch))) {
                             return@queueScript stopExecuting(player)
@@ -810,13 +688,7 @@ class FletchingListener : InteractionListener {
 
                         remaining--
 
-                        if (remaining <= 0) {
-                            return@queueScript stopExecuting(player)
-                        }
-
-                        delayClock(player, Clocks.SKILLING, 2)
-                        setCurrentScriptState(player, 0)
-                        delayScript(player, 2)
+                        return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                     }
                 }
             }
@@ -892,8 +764,6 @@ class FletchingListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
 
-                            delayClock(player, Clocks.SKILLING, 2)
-
                             val removedTips = removeItem(player, Item(used.id, batch))
                             val removedBolts = removeItem(player, Item(with.id, batch))
 
@@ -907,13 +777,7 @@ class FletchingListener : InteractionListener {
 
                             remaining -= batch
 
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
-
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         }
                     }
 
@@ -1012,8 +876,6 @@ class FletchingListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
 
-                            delayClock(player, Clocks.SKILLING, 2)
-
                             val removedShafts =
                                 removeItem(player, Item(used.id, actualBatch))
 
@@ -1030,13 +892,7 @@ class FletchingListener : InteractionListener {
 
                             remaining -= actualBatch
 
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
-
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         }
                     }
 
@@ -1113,8 +969,6 @@ class FletchingListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
 
-                            delayClock(player, Clocks.SKILLING, 2)
-
                             val removedTips =
                                 removeItem(player, Item(used.id, batch))
 
@@ -1131,13 +985,7 @@ class FletchingListener : InteractionListener {
 
                             remaining -= batch
 
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
-
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         }
                     }
 
@@ -1251,13 +1099,7 @@ class FletchingListener : InteractionListener {
 
                             remaining -= batchAmount
 
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
-
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         }
                     }
 
@@ -1376,13 +1218,8 @@ class FletchingListener : InteractionListener {
                             rewardXP(player, Skills.FLETCHING, dart.xp * realBatch)
 
                             remaining -= realBatch
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
 
-                            delayClock(player, Clocks.SKILLING, 1)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 1)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 1, true)
                         }
                     }
 
@@ -1505,13 +1342,7 @@ class FletchingListener : InteractionListener {
 
                             remaining -= realBatch
 
-                            if (remaining <= 0) {
-                                return@queueScript stopExecuting(player)
-                            }
-
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         }
                     }
 

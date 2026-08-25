@@ -122,7 +122,6 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
             playAudio(player, Sounds.SPINNING_2590)
             animate(player, 894)
             animateScenery(wheel, 466)
-            delayClock(player, Clocks.SKILLING, delay)
 
             if (!removeItem(player, Item(spin.need, 1))) {
                 return@queueScript stopExecuting(player)
@@ -146,13 +145,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
                 }
             }
 
-            if (remaining <= 0) {
-                return@queueScript stopExecuting(player)
-            }
-
-            delayClock(player, Clocks.SKILLING, delay)
-            setCurrentScriptState(player, 0)
-            delayScript(player, delay)
+            return@queueScript delayClock(player, Clocks.SKILLING, delay, true)
         }
     }
 }

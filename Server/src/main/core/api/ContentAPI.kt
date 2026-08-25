@@ -4133,8 +4133,12 @@ fun delayClock(
     entity: Entity,
     clock: Int,
     ticks: Int,
+    delayScript: Boolean = false
 ): Boolean {
     entity.clocks[clock] = getWorldTicks() + ticks
+    if (delayScript) {
+        return delayScript(entity, ticks)
+    }
     return false
 }
 

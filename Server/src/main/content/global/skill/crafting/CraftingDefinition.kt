@@ -116,10 +116,10 @@ object CraftingDefinition {
     }
 
     private val mouldComponentMap = mapOf(
-        CraftingDefinition.RING_MOULD     to intArrayOf(20, 22, 24, 26, 28, 30, 32, 35),
-        CraftingDefinition.NECKLACE_MOULD to intArrayOf(42, 44, 46, 48, 50, 52, 54),
-        CraftingDefinition.AMULET_MOULD   to intArrayOf(61, 63, 65, 67, 69, 71, 73),
-        CraftingDefinition.BRACELET_MOULD to intArrayOf(80, 82, 84, 86, 88, 90, 92)
+        RING_MOULD     to intArrayOf(20, 22, 24, 26, 28, 30, 32, 35),
+        NECKLACE_MOULD to intArrayOf(42, 44, 46, 48, 50, 52, 54),
+        AMULET_MOULD   to intArrayOf(61, 63, 65, 67, 69, 71, 73),
+        BRACELET_MOULD to intArrayOf(80, 82, 84, 86, 88, 90, 92)
     )
 
     /**
@@ -136,10 +136,10 @@ object CraftingDefinition {
         }
 
         val mouldButtons = listOf(
-            CraftingDefinition.RING_MOULD     to 14,
-            CraftingDefinition.NECKLACE_MOULD to 36,
-            CraftingDefinition.AMULET_MOULD   to 55,
-            CraftingDefinition.BRACELET_MOULD to 74
+            RING_MOULD     to 14,
+            NECKLACE_MOULD to 36,
+            AMULET_MOULD   to 55,
+            BRACELET_MOULD to 74
         )
 
 
@@ -266,7 +266,6 @@ object CraftingDefinition {
 
             playAudio(player, Sounds.FURNACE_2725)
             animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
-            delayClock(player, Clocks.SKILLING, 5)
 
             val removed = mutableListOf<Int>()
             val success = type.items.all { item ->
@@ -286,12 +285,7 @@ object CraftingDefinition {
 
             remaining--
 
-            if (remaining > 0) {
-                setCurrentScriptState(player, 0)
-                delayScript(player, 5)
-            } else {
-                stopExecuting(player)
-            }
+            return@queueScript delayClock(player, Clocks.SKILLING, 5, true)
         }
     }
 

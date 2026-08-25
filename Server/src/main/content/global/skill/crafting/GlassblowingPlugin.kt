@@ -87,7 +87,6 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
 
                 playAudio(player, Sounds.GLASSBLOWING_2724)
                 animate(player, Animations.GLASS_BLOW_884)
-                delayClock(player, Clocks.SKILLING, 3)
 
                 if (!removeItem(player, MOLTEN_GLASS)) return@queueScript stopExecuting(player)
                 addItem(player, product.productId, product.amount)
@@ -100,11 +99,7 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
 
                 remaining--
 
-                if (remaining <= 0) return@queueScript stopExecuting(player)
-
-                delayClock(player, Clocks.SKILLING, 3)
-                setCurrentScriptState(player, 0)
-                delayScript(player, 3)
+                return@queueScript delayClock(player, Clocks.SKILLING, 3, true)
             }
         }
     }

@@ -61,7 +61,6 @@ class MoltenGlassMakePlugin : InteractionListener {
                         playAudio(player, Sounds.FURNACE_2725)
                         animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
                         sendMessage(player, "You heat the sand and soda ash in the furnace to make glass.")
-                        delayClock(player, Clocks.SKILLING, 2)
 
                         val removedSoda = removeItem(player, SODA_ASH)
 
@@ -99,9 +98,7 @@ class MoltenGlassMakePlugin : InteractionListener {
                             return@queueScript stopExecuting(player)
                         }
 
-                        delayClock(player, Clocks.SKILLING, 2)
-                        setCurrentScriptState(player, 0)
-                        delayScript(player, 2)
+                        return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                     }
                 }
 

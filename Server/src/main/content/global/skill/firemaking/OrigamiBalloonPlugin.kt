@@ -86,11 +86,9 @@ class OrigamiBalloonPlugin : InteractionListener {
                             amountInInventory(player, dye.dyeId) > 0 &&
                             amountInInventory(player, Items.ORIGAMI_BALLOON_9934) > 0
                         ) {
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
                         } else {
-                            stopExecuting(player)
+                            return@queueScript stopExecuting(player)
                         }
                     }
                 }
@@ -137,7 +135,7 @@ class OrigamiBalloonPlugin : InteractionListener {
                     )
                     .send()
 
-                stopExecuting(player)
+                return@queueScript stopExecuting(player)
             }
 
             return@onUseWith true

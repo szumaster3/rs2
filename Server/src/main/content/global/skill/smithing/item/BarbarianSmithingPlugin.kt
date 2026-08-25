@@ -2,6 +2,7 @@ package content.global.skill.smithing.item
 
 import content.region.kandarin.baxtorian.BarbarianTraining
 import core.api.*
+import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -82,7 +83,6 @@ class BarbarianSmithingPlugin : InteractionListener {
             }
 
             animate(player, Animations.HAMMER_6712)
-            delayScript(player, 4)
 
             if (removeItem(player, barsItem) && removeItem(player, woodItem)) {
                 addItem(player, productId, 1)
@@ -101,8 +101,7 @@ class BarbarianSmithingPlugin : InteractionListener {
             } else {
                 return@queueScript stopExecuting(player)
             }
-
-            delayScript(player, 1)
+            return@queueScript delayClock(player, Clocks.SKILLING, 1, true)
         }
     }
 }

@@ -158,7 +158,6 @@ class GemCutPlugin : InteractionListener {
 
             animate(player, animation)
             sound?.let { playAudio(player, it) }
-            delayClock(player, Clocks.SKILLING, 1)
 
             if (removeItem(player, requiredItem)) {
                 onRemoved()
@@ -168,8 +167,6 @@ class GemCutPlugin : InteractionListener {
             if (remaining <= 0) return@queueScript stopExecuting(player)
 
             delayClock(player, Clocks.SKILLING, 1)
-            setCurrentScriptState(player, 0)
-            delayScript(player, 1)
         }
     }
 

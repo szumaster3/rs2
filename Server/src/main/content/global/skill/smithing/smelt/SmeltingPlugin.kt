@@ -25,13 +25,11 @@ class SmeltingPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.PERFECT_GOLD_ORE_446, *CraftingDefinition.FURNACES) { player, used, _ ->
-            queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
+            queueScript(player, 1, QueueStrength.NORMAL) { stage: Int ->
                 when (stage) {
                     0 -> {
                         if (removeItem(player, used.asItem())) {
                             sendMessage(player, "You place a lump of gold in the furnace.")
-                            lock(player, 4)
-                            lockInteractions(player, 4)
                             animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
                         }
                         return@queueScript delayScript(player, 2)
@@ -84,7 +82,7 @@ class SmeltingPlugin : InteractionListener {
                     var remaining = amount
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         if (remaining <= 0) return@queueScript stopExecuting(player)
-                        if (amountInInventory(player, Items.STEEL_BAR_2353) <= 0) {
+                        if (!inInventory(player, Items.STEEL_BAR_2353)) {
                             sendMessage(player, "You have run out of steel bars.")
                             return@queueScript stopExecuting(player)
                         }
@@ -114,13 +112,7 @@ class SmeltingPlugin : InteractionListener {
 
                                 remaining--
 
-                                if (remaining > 0 && amountInInventory(player, Items.STEEL_BAR_2353) > 0) {
-                                    delayClock(player, Clocks.SKILLING, 3)
-                                    setCurrentScriptState(player, 0)
-                                    return@queueScript delayScript(player, 3)
-                                }
-
-                                return@queueScript stopExecuting(player)
+                                return@queueScript delayClock(player, Clocks.SKILLING, 3, true)
                             }
                             else -> return@queueScript stopExecuting(player)
                         }

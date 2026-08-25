@@ -180,7 +180,7 @@ class ChargeOrbSpell : SpellListener("modern") {
                     if (crafted == amount) {
                         return@queueScript stopExecuting(player)
                     }
-                    setCurrentScriptState(player, 0)
+
                     return@queueScript delayScript(player, 6)
                 }
             }

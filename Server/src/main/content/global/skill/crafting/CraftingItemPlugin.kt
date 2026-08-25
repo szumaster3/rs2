@@ -87,16 +87,8 @@ class CraftingItemPlugin : InteractionListener {
                             remaining--
                         }
 
-                        if (
-                            remaining > 0 &&
-                            inInventory(player, used.id)
-                        ) {
-                            delayClock(player, Clocks.SKILLING, 1)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 1)
-                        } else {
-                            stopExecuting(player)
-                        }
+
+                        return@queueScript delayClock(player, Clocks.SKILLING, 1, true)
                     }
                 }
 
@@ -137,7 +129,6 @@ class CraftingItemPlugin : InteractionListener {
                 if (removeItem(player, Item(item.base, 20))) {
                     addItem(player, item.product)
                     rewardXP(player, Skills.CRAFTING, 50.0)
-
                     sendMessage(player, "You add the feathers to the coif to make a feathered headdress.")
                     delayClock(player, Clocks.SKILLING, 1)
                 }
@@ -172,16 +163,7 @@ class CraftingItemPlugin : InteractionListener {
                             remaining--
                         }
 
-                        if (
-                            remaining > 0 &&
-                            amountInInventory(player, item.base) >= 20
-                        ) {
-                            delayClock(player, Clocks.SKILLING, 1)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 1)
-                        } else {
-                            stopExecuting(player)
-                        }
+                        return@queueScript delayClock(player, Clocks.SKILLING, 1, true)
                     }
                 }
 
@@ -218,9 +200,7 @@ class CraftingItemPlugin : InteractionListener {
                 if (removeItem(player, snelm.shell)) {
                     addItem(player, snelm.product)
                     rewardXP(player, Skills.CRAFTING, 32.5)
-
                     sendMessage(player, "You craft the shell into a helmet.")
-
                     delayClock(player, Clocks.SKILLING, 1)
                 }
 
@@ -256,16 +236,7 @@ class CraftingItemPlugin : InteractionListener {
                             remaining--
                         }
 
-                        if (
-                            remaining > 0 &&
-                            inInventory(player, snelm.shell)
-                        ) {
-                            delayClock(player, Clocks.SKILLING, 1)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 1)
-                        } else {
-                            stopExecuting(player)
-                        }
+                        return@queueScript delayClock(player, Clocks.SKILLING, 1, true)
                     }
                 }
 
@@ -363,13 +334,7 @@ class CraftingItemPlugin : InteractionListener {
                             remaining--
                         }
 
-                        if (remaining > 0) {
-                            delayClock(player, Clocks.SKILLING, 1)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 1)
-                        } else {
-                            stopExecuting(player)
-                        }
+                        return@queueScript delayClock(player, Clocks.SKILLING, 1, true)
                     }
                 }
 

@@ -144,7 +144,6 @@ class LeatherCraftingPlugin : InteractionListener, InterfaceListener {
             }
 
             animate(player, Animations.CRAFT_LEATHER_1249)
-            delayClock(player, Clocks.SKILLING, 2)
 
             var removed = removeItem(player, Item(craft.input, craft.amount))
 
@@ -184,13 +183,7 @@ class LeatherCraftingPlugin : InteractionListener, InterfaceListener {
 
             remaining--
 
-            if (remaining <= 0) {
-                return@queueScript stopExecuting(player)
-            }
-
-            delayClock(player, Clocks.SKILLING, 2)
-            setCurrentScriptState(player, 0)
-            delayScript(player, 2)
+            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
         }
     }
 

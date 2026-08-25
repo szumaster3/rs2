@@ -36,8 +36,6 @@ enum class JunglePotionObject(val objectId: Int, private val herbId: Int, val pr
             }
 
             player.animate(anim)
-            delayClock(player, Clocks.SKILLING, 2)
-            delayScript(player, 2)
 
             sendMessage(player, "You search the area...")
 
@@ -47,12 +45,10 @@ enum class JunglePotionObject(val objectId: Int, private val herbId: Int, val pr
                 }
                 addItem(player, herbId)
                 sendItemDialogue(player, herbId, "You find a grimy herb.")
-                return@queueScript false
+                return@queueScript stopExecuting(player)
             }
 
-            delayClock(player, Clocks.SKILLING, 2)
-            setCurrentScriptState(player, 0)
-            delayScript(player, 2)
+            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
         }
     }
 

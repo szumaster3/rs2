@@ -210,7 +210,6 @@ class PotteryPlugin : InteractionListener {
 
             audio?.let { playAudio(player, it) }
             animate(player, animation)
-            delayClock(player, Clocks.SKILLING, 5)
 
             if (!removeItem(player, inputId)) {
                 return@queueScript stopExecuting(player)
@@ -222,13 +221,7 @@ class PotteryPlugin : InteractionListener {
 
             remaining--
 
-            if (remaining <= 0) {
-                return@queueScript stopExecuting(player)
-            }
-
-            delayClock(player, Clocks.SKILLING, 5)
-            setCurrentScriptState(player, 0)
-            delayScript(player, 5)
+            return@queueScript delayClock(player, Clocks.SKILLING, 5, true)
         }
     }
 

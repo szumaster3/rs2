@@ -75,7 +75,6 @@ class WeavingPlugin : InteractionListener {
 
                         animate(player, Animations.PULLING_ROPE_2270)
                         playAudio(player, Sounds.LOOM_WEAVE_2587)
-                        delayClock(player, Clocks.SKILLING, 5)
 
                         if (!removeItem(player, required)) {
                             return@queueScript stopExecuting(player)
@@ -116,13 +115,7 @@ class WeavingPlugin : InteractionListener {
 
                         remaining--
 
-                        if (remaining <= 0) {
-                            return@queueScript stopExecuting(player)
-                        }
-
-                        delayClock(player, Clocks.SKILLING, 5)
-                        setCurrentScriptState(player, 0)
-                        delayScript(player, 5)
+                        return@queueScript delayClock(player, Clocks.SKILLING, 5, true)
                     }
                 }
             }.open()

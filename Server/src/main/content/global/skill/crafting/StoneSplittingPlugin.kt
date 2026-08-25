@@ -150,20 +150,13 @@ class StoneSplittingPlugin : InteractionListener {
 
             animate(player, animation)
             playAudio(player, sound)
-            delayClock(player, Clocks.SKILLING, 2)
 
             if (removeItem(player, Item(requiredItem, 1))) {
                 onSuccess()
                 remaining--
             }
 
-            if (remaining <= 0) {
-                return@queueScript stopExecuting(player)
-            }
-
-            delayClock(player, Clocks.SKILLING, 2)
-            setCurrentScriptState(player, 0)
-            delayScript(player, 2)
+            return@queueScript delayClock(player, Clocks.SKILLING, 2, true)
         }
     }
 

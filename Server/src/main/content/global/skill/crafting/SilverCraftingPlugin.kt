@@ -297,13 +297,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
 
             remaining--
 
-            if (remaining <= 0) {
-                return@queueScript stopExecuting(player)
-            }
-
-            delayClock(player, Clocks.SKILLING, 5)
-            setCurrentScriptState(player, 0)
-            delayScript(player, 5)
+            return@queueScript delayClock(player, Clocks.SKILLING, 5, true)
         }
     }
 }
