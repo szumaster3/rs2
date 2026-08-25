@@ -19,6 +19,7 @@ class MoltenGlassMakePlugin : InteractionListener {
         const val BUCKET_OF_SAND = Items.BUCKET_OF_SAND_1783
         const val SANDBAG = Items.SANDBAG_9943
         const val MOLTEN_GLASS = Items.MOLTEN_GLASS_1775
+
         val INPUTS = intArrayOf(SODA_ASH, BUCKET_OF_SAND, SANDBAG)
         val SAND_SOURCES = intArrayOf(BUCKET_OF_SAND, SANDBAG)
     }
@@ -43,24 +44,49 @@ class MoltenGlassMakePlugin : InteractionListener {
                     var remaining = amount
 
                     queueScript(player, 0, QueueStrength.WEAK) {
-                        if (remaining <= 0) return@queueScript stopExecuting(player)
-                        if (!inInventory(player, SODA_ASH) || !anyInInventory(player, *SAND_SOURCES)) return@queueScript stopExecuting(player)
+                        if (remaining <= 0) {
+                            return@queueScript stopExecuting(player)
+                        }
+
+                        if (!inInventory(player, SODA_ASH)) {
+                            sendMessage(player, "You have run out of soda ash.")
+                            return@queueScript stopExecuting(player)
+                        }
+
+                        if (!anyInInventory(player, *SAND_SOURCES)) {
+                            sendMessage(player, "You have run out of sand.")
+                            return@queueScript stopExecuting(player)
+                        }
 
                         playAudio(player, Sounds.FURNACE_2725)
                         animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
                         sendMessage(player, "You heat the sand and soda ash in the furnace to make glass.")
                         delayClock(player, Clocks.SKILLING, 2)
 
-                        removeItem(player, SODA_ASH)
-                        when {
+                        val removedSoda = removeItem(player, SODA_ASH)
+
+                        val removedSand = when {
                             inInventory(player, BUCKET_OF_SAND) -> {
-                                removeItem(player, BUCKET_OF_SAND)
-                                addItem(player, Items.BUCKET_1925)
+                                removeItem(player, BUCKET_OF_SAND).also {
+                                    if (it) {
+                                        addItem(player, Items.BUCKET_1925)
+                                    }
+                                }
                             }
+
                             inInventory(player, SANDBAG) -> {
-                                removeItem(player, SANDBAG)
-                                addItem(player, Items.EMPTY_SACK_5418)
+                                removeItem(player, SANDBAG).also {
+                                    if (it) {
+                                        addItem(player, Items.EMPTY_SACK_5418)
+                                    }
+                                }
                             }
+
+                            else -> false
+                        }
+
+                        if (!removedSoda || !removedSand) {
+                            return@queueScript stopExecuting(player)
                         }
 
                         addItem(player, productId)
@@ -68,11 +94,14 @@ class MoltenGlassMakePlugin : InteractionListener {
                         player.dispatch(ResourceProducedEvent(productId, 1, player))
 
                         remaining--
-                        if (remaining > 0) {
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
-                        } else stopExecuting(player)
+
+                        if (remaining <= 0) {
+                            return@queueScript stopExecuting(player)
+                        }
+
+                        delayClock(player, Clocks.SKILLING, 2)
+                        setCurrentScriptState(player, 0)
+                        delayScript(player, 2)
                     }
                 }
 

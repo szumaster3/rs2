@@ -19,6 +19,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
         /*
          * Handles interaction with spinning wheel.
          */
+
         on(CraftingDefinition.SPINNING_WHEEL, IntType.SCENERY, "spin") { player, obj ->
             setAttribute(player, "current_spinning_wheel", obj)
             openInterface(player, Components.CRAFTING_SPINNING_459)
@@ -28,6 +29,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
         /*
          * Handles creating golden wool.
          */
+
         onUseWith(IntType.SCENERY, Items.GOLDEN_FLEECE_3693, *CraftingDefinition.SPINNING_WHEEL) { player, _, with ->
             if (removeItem(player, Items.GOLDEN_FLEECE_3693)) {
                 lock(player, 3)
@@ -42,29 +44,41 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
     }
 
     override fun defineInterfaceListeners() {
+
         on(Components.CRAFTING_SPINNING_459) { player, _, opcode, buttonID, _, _ ->
             val spin = CraftingDefinition.Spinning.forId(buttonID) ?: return@on true
+
             if (!inInventory(player, spin.need, 1)) {
                 sendMessage(player, "You need ${getItemName(spin.need).lowercase()} to make this.")
                 return@on true
             }
 
-            val wheel = getAttribute<Scenery>(player, "current_spinning_wheel", Scenery(0,Location(0,0,0))) ?: run {
-                return@on true
-            }
+            val wheel = getAttribute(player, "current_spinning_wheel", Scenery(0, Location(0, 0, 0)))
 
             val amount = when (opcode) {
                 155 -> 1
                 196 -> 5
                 124 -> amountInInventory(player, spin.need)
                 199 -> {
-                    sendInputDialogue(player, true, "Enter the amount:") { value: Any ->
-                        val valAmount = if (value is String) value.toInt() else value as Int
+                    sendInputDialogue(player, true, "Enter the amount:") { value ->
+                        val valueAmount =
+                            if (value is String) {
+                                value.toIntOrNull() ?: return@sendInputDialogue
+                            } else {
+                                value as Int
+                            }
+
+                        if (valueAmount <= 0) {
+                            return@sendInputDialogue
+                        }
+
                         closeInterface(player)
-                        handleSpinning(player, spin, wheel, valAmount)
+                        handleSpinning(player, spin, wheel, valueAmount)
                     }
+
                     return@on true
                 }
+
                 else -> 1
             }
 
@@ -74,26 +88,35 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
         }
     }
 
-    private fun handleSpinning(player: Player, spin: CraftingDefinition.Spinning, wheel: core.game.node.scenery.Scenery, amount: Int) {
+    private fun handleSpinning(player: Player, spin: CraftingDefinition.Spinning, wheel: Scenery, amount: Int) {
+        if (amount <= 0) return
         if (!clockReady(player, Clocks.SKILLING)) return
 
         var remaining = amount
 
         queueScript(player, 0, QueueStrength.WEAK) {
-            if (remaining <= 0) return@queueScript false
+            if (remaining <= 0) {
+                return@queueScript stopExecuting(player)
+            }
+
+            if (!clockReady(player, Clocks.SKILLING)) {
+                return@queueScript stopExecuting(player)
+            }
 
             var delay = 5
-            if (player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)?.isComplete(2) == true
-                && withinDistance(player, Location(2711, 3471, 1))
-                && player.equipment[EquipmentContainer.SLOT_HAT] != null
-                && DiaryManager(player).headband == 2
+
+            if (
+                player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)?.isComplete(2) == true &&
+                withinDistance(player, Location(2711, 3471, 1)) &&
+                player.equipment[EquipmentContainer.SLOT_HAT] != null &&
+                DiaryManager(player).headband == 2
             ) {
                 delay = 2
             }
 
             if (!inInventory(player, spin.need, 1)) {
-                sendMessage(player, "You have run out of ${getItemName(spin.need)}.")
-                return@queueScript false
+                sendMessage(player, "You have run out of ${getItemName(spin.need).lowercase()}.")
+                return@queueScript stopExecuting(player)
             }
 
             playAudio(player, Sounds.SPINNING_2590)
@@ -101,15 +124,19 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
             animateScenery(wheel, 466)
             delayClock(player, Clocks.SKILLING, delay)
 
-            if (removeItem(player, Item(spin.need, 1))) {
-                addItem(player, spin.product, 1)
-                rewardXP(player, Skills.CRAFTING, spin.exp)
-                remaining--
+            if (!removeItem(player, Item(spin.need, 1))) {
+                return@queueScript stopExecuting(player)
             }
 
-            // Seers diary.
-            val spun = getAttribute<Int>(player, "diary:seers:bowstrings-spun", 0)
-            if (player.viewport.region!!.id == 10806 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 0, 4)) {
+            addItem(player, spin.product, 1)
+            rewardXP(player, Skills.CRAFTING, spin.exp)
+            remaining--
+
+            /*
+             * Seers' Village diary.
+             */
+            val spun = getAttribute(player, "diary:seers:bowstrings-spun", 0)
+            if (player.viewport.region?.id == 10806 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 0, 4)) {
                 if (spun >= 4) {
                     setAttribute(player, "/save:diary:seers:bowstrings-spun", 5)
                     finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 0, 4)
@@ -119,11 +146,13 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
                 }
             }
 
-            if (remaining > 0) {
-                delayClock(player, Clocks.SKILLING, delay)
-                setCurrentScriptState(player, 0)
-                delayScript(player, delay)
-            } else false
+            if (remaining <= 0) {
+                return@queueScript stopExecuting(player)
+            }
+
+            delayClock(player, Clocks.SKILLING, delay)
+            setCurrentScriptState(player, 0)
+            delayScript(player, delay)
         }
     }
 }

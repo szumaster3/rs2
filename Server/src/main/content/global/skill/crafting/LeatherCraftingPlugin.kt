@@ -94,9 +94,15 @@ class LeatherCraftingPlugin : InteractionListener, InterfaceListener {
         closeInterface(player)
     }
 
-    private fun handleLeatherCrafting(player: Player, craft: CraftingDefinition.Leather, amountToMake: Int) {
+    private fun handleLeatherCrafting(
+        player: Player,
+        craft: CraftingDefinition.Leather,
+        amount: Int
+    ) {
         if (!clockReady(player, Clocks.SKILLING)) return
-        var remaining = amountToMake
+
+        var remaining = amount
+
         queueScript(player, 0, QueueStrength.WEAK) {
             if (remaining <= 0 || !clockReady(player, Clocks.SKILLING)) {
                 return@queueScript stopExecuting(player)
@@ -104,7 +110,10 @@ class LeatherCraftingPlugin : InteractionListener, InterfaceListener {
 
             if (getStatLevel(player, Skills.CRAFTING) < craft.level) {
                 val name = getItemName(craft.product).lowercase()
-                sendDialogue(player, "You need a Crafting level of ${craft.level} to make ${if(core.tools.StringUtils.isPlusN(name)) "an" else "a"} $name.")
+                sendDialogue(
+                    player,
+                    "You need a Crafting level of ${craft.level} to make ${if (core.tools.StringUtils.isPlusN(name)) "an" else "a"} $name."
+                )
                 return@queueScript stopExecuting(player)
             }
 
@@ -118,6 +127,7 @@ class LeatherCraftingPlugin : InteractionListener, InterfaceListener {
                     sendDialogue(player, "You need a needle to make this.")
                     return@queueScript stopExecuting(player)
                 }
+
                 if (!inInventory(player, Items.THREAD_1734)) {
                     sendDialogue(player, "You need thread to make this.")
                     return@queueScript stopExecuting(player)
@@ -126,44 +136,61 @@ class LeatherCraftingPlugin : InteractionListener, InterfaceListener {
 
             if (!inInventory(player, craft.input, craft.amount)) {
                 val name = getItemName(craft.input).lowercase()
-                sendDialogue(player, "You need ${craft.amount} ${if (craft.amount == 1) name else "${name}s"} to make this.")
+                sendMessage(
+                    player,
+                    "You have run out of ${if (craft.amount == 1) name else "${name}s"}."
+                )
                 return@queueScript stopExecuting(player)
             }
+
             animate(player, Animations.CRAFT_LEATHER_1249)
             delayClock(player, Clocks.SKILLING, 2)
 
             var removed = removeItem(player, Item(craft.input, craft.amount))
-            if (craft.studded) removed = removed && removeItem(player, Item(Items.STEEL_STUDS_2370))
 
-            if (removed) {
-                addItem(player, craft.product)
-                rewardXP(player, Skills.CRAFTING, craft.xp)
+            if (craft.studded) {
+                removed = removed && removeItem(player, Item(Items.STEEL_STUDS_2370))
+            }
 
-                if (!craft.studded) {
-                    CraftingDefinition.decayThread(player)
-                    if (CraftingDefinition.isLastThread(player))
-                        CraftingDefinition.removeThread(player)
+            if (!removed) {
+                return@queueScript stopExecuting(player)
+            }
+
+            addItem(player, craft.product)
+            rewardXP(player, Skills.CRAFTING, craft.xp)
+
+            if (!craft.studded) {
+                CraftingDefinition.decayThread(player)
+
+                if (CraftingDefinition.isLastThread(player)) {
+                    CraftingDefinition.removeThread(player)
                 }
+            }
 
-                val made = getItemName(craft.product).lowercase()
-                sendMessage(player, if (craft.pair) "You make a pair of $made." else "You make ${if(core.tools.StringUtils.isPlusN(made)) "an" else "a"} $made.")
+            val made = getItemName(craft.product).lowercase()
 
-                craft.diary?.let {
-                    finishDiaryTask(player, it.type, it.stage, it.step)
+            sendMessage(
+                player,
+                if (craft.pair) {
+                    "You make a pair of $made."
+                } else {
+                    "You make ${if (core.tools.StringUtils.isPlusN(made)) "an" else "a"} $made."
                 }
+            )
+
+            craft.diary?.let {
+                finishDiaryTask(player, it.type, it.stage, it.step)
             }
 
             remaining--
 
-            val hasMaterials =
-                inInventory(player, craft.input, craft.amount) &&
-                        (!craft.studded || inInventory(player, Items.STEEL_STUDS_2370))
+            if (remaining <= 0) {
+                return@queueScript stopExecuting(player)
+            }
 
-            if (remaining > 0 && hasMaterials) {
-                delayClock(player, Clocks.SKILLING, 2)
-                setCurrentScriptState(player, 0)
-                delayScript(player, 2)
-            } else stopExecuting(player)
+            delayClock(player, Clocks.SKILLING, 2)
+            setCurrentScriptState(player, 0)
+            delayScript(player, 2)
         }
     }
 

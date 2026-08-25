@@ -71,10 +71,7 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
         private const val MOLTEN_GLASS = Items.MOLTEN_GLASS_1775
         private const val GLASS_BLOWING_INTERFACE = Components.CRAFTING_GLASS_542
 
-        fun make(player: Player, product: CraftingDefinition.Glass, amount: Int) {
-            closeInterface(player)
-            handleGlassblowing(player, product, amount)
-        }
+        private val ARTICLE_AN_ITEMS = intArrayOf(Items.UNPOWERED_ORB_567, Items.OIL_LAMP_4525)
 
         fun handleGlassblowing(player: Player, product: CraftingDefinition.Glass, amount: Int) {
             if (!clockReady(player, Clocks.SKILLING)) return
@@ -82,7 +79,9 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
 
             queueScript(player, 0, QueueStrength.WEAK) {
                 if (remaining <= 0) return@queueScript stopExecuting(player)
-                if (!inInventory(player, Items.GLASSBLOWING_PIPE_1785) || !inInventory(player, Items.MOLTEN_GLASS_1775)) {
+
+                if (!inInventory(player, MOLTEN_GLASS)) {
+                    sendMessage(player, "You have run out of molten glass.")
                     return@queueScript stopExecuting(player)
                 }
 
@@ -90,24 +89,22 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
                 animate(player, Animations.GLASS_BLOW_884)
                 delayClock(player, Clocks.SKILLING, 3)
 
-                if (!removeItem(player, Items.MOLTEN_GLASS_1775)) return@queueScript stopExecuting(player)
+                if (!removeItem(player, MOLTEN_GLASS)) return@queueScript stopExecuting(player)
                 addItem(player, product.productId, product.amount)
                 rewardXP(player, Skills.CRAFTING, product.experience)
                 player.dispatch(ResourceProducedEvent(product.productId, product.amount, player))
 
                 val name = getItemName(product.productId)
-                val article = if (product.productId in intArrayOf(Items.UNPOWERED_ORB_567, Items.OIL_LAMP_4525)) "an" else "a"
+                val article = if (product.productId in ARTICLE_AN_ITEMS) "an" else "a"
                 sendMessage(player, "You make $article $name.")
 
                 remaining--
 
-                if (remaining > 0 && inInventory(player, Items.MOLTEN_GLASS_1775)) {
-                    delayClock(player, Clocks.SKILLING, 3)
-                    setCurrentScriptState(player, 0)
-                    delayScript(player, 3)
-                } else {
-                    stopExecuting(player)
-                }
+                if (remaining <= 0) return@queueScript stopExecuting(player)
+
+                delayClock(player, Clocks.SKILLING, 3)
+                setCurrentScriptState(player, 0)
+                delayScript(player, 3)
             }
         }
     }

@@ -268,20 +268,30 @@ object CraftingDefinition {
             animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
             delayClock(player, Clocks.SKILLING, 5)
 
-            val success = type.items.all { removeItem(player, it) }
+            val removed = mutableListOf<Int>()
+            val success = type.items.all { item ->
+                val ok = removeItem(player, item)
+                if (ok) removed += item
+                ok
+            }
+
             if (!success) {
+                removed.forEach { addItem(player, it) }
                 return@queueScript stopExecuting(player)
             }
 
             addItem(player, type.productId)
             rewardXP(player, Skills.CRAFTING, type.experience)
+            sendMessage(player, "You make ${getItemName(type.productId)}.")
 
             remaining--
 
             if (remaining > 0) {
                 setCurrentScriptState(player, 0)
                 delayScript(player, 5)
-            } else stopExecuting(player)
+            } else {
+                stopExecuting(player)
+            }
         }
     }
 

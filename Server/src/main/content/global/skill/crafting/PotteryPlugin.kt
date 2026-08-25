@@ -10,10 +10,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import core.tools.StringUtils
-import shared.consts.Animations
-import shared.consts.Items
-import shared.consts.Quests
-import shared.consts.Scenery
+import shared.consts.*
 import java.util.*
 
 class PotteryPlugin : InteractionListener {
@@ -34,7 +31,9 @@ class PotteryPlugin : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, CraftingDefinition.UNFIRED_POTTERY_ITEM_IDS, *CraftingDefinition.POTTERY_OVENS) { player, used, oven ->
-            val pottery = CraftingDefinition.Pottery.forId(used.id) ?: return@onUseWith false
+            val pottery = CraftingDefinition.Pottery.forId(used.id)
+                ?: return@onUseWith false
+
             firePottery(player, pottery, oven)
             return@onUseWith true
         }
@@ -62,24 +61,44 @@ class PotteryPlugin : InteractionListener {
     }
 
     private fun handlePotteryWheel(player: Player) {
-        val items = CraftingDefinition.Pottery.values().map { it.unfinished }.toTypedArray()
+        val items = CraftingDefinition.Pottery.values()
+            .map { it.unfinished }
+            .toTypedArray()
+
         sendSkillDialogue(player) {
             withItems(*items)
 
             create { itemId, amount ->
-                val pottery = CraftingDefinition.Pottery.forId(itemId) ?: return@create
-                if (!checkRequirements(player, pottery.level, Items.SOFT_CLAY_1761)) return@create
+                val pottery = CraftingDefinition.Pottery.forId(itemId)
+                    ?: return@create
 
-                process(player, amount, Items.SOFT_CLAY_1761, pottery.unfinished.id, pottery.exp,
+                if (!checkRequirements(player, pottery.level, Items.SOFT_CLAY_1761)) {
+                    return@create
+                }
+
+                process(
+                    player = player,
+                    amount = amount,
+                    inputId = Items.SOFT_CLAY_1761,
+                    output = pottery.unfinished.id,
+                    exp = pottery.exp,
                     animation = 883
                 ) {
                     handleDiaryWheel(player, pottery)
-                    val article = if (StringUtils.isPlusN(pottery.unfinished.name)) "an" else "a"
-                    sendMessage(player, "You make the clay into $article ${pottery.unfinished.name.lowercase(Locale.getDefault())}.")
+
+                    val article =
+                        if (StringUtils.isPlusN(pottery.unfinished.name)) "an" else "a"
+
+                    sendMessage(
+                        player,
+                        "You make the clay into $article ${pottery.unfinished.name.lowercase(Locale.getDefault())}."
+                    )
                 }
             }
 
-            calculateMaxAmount { amountInInventory(player, Items.SOFT_CLAY_1761) }
+            calculateMaxAmount {
+                amountInInventory(player, Items.SOFT_CLAY_1761)
+            }
         }
     }
 
@@ -89,14 +108,22 @@ class PotteryPlugin : InteractionListener {
             return false
         }
 
-        if (!checkRequirements(player, pottery.level, pottery.unfinished.id)) return false
+        if (!checkRequirements(player, pottery.level, pottery.unfinished.id)) {
+            return false
+        }
 
         sendSkillDialogue(player) {
             withItems(pottery.unfinished)
+
             create { _, amount ->
-                process(player, amount, pottery.unfinished.id, pottery.product.id, pottery.fireExp,
+                process(
+                    player = player,
+                    amount = amount,
+                    inputId = pottery.unfinished.id,
+                    output = pottery.product.id,
+                    exp = pottery.fireExp,
                     animation = Animations.HUMAN_FURNACE_SMELT_3243,
-                    audio = 2588
+                    audio = Sounds.POTTERY_2588
                 ) {
                     sendMessage(player, "You put ${pottery.unfinished.name.lowercase(Locale.getDefault())} in the oven.")
                     sendMessage(player, "You remove ${pottery.product.name.lowercase(Locale.getDefault())} from the oven.")
@@ -104,7 +131,9 @@ class PotteryPlugin : InteractionListener {
                 }
             }
 
-            calculateMaxAmount { player.inventory.getAmount(pottery.unfinished) }
+            calculateMaxAmount {
+                player.inventory.getAmount(pottery.unfinished)
+            }
         }
 
         return true
@@ -112,89 +141,159 @@ class PotteryPlugin : InteractionListener {
 
     private fun handleOvenInteraction(player: Player, node: Node) {
         val potteryMap = mapOf(
-            Items.UNFIRED_POT_1787       to CraftingDefinition.Pottery.POT,
-            Items.UNFIRED_PIE_DISH_1789  to CraftingDefinition.Pottery.DISH,
-            Items.UNFIRED_BOWL_1791      to CraftingDefinition.Pottery.BOWL,
+            Items.UNFIRED_POT_1787 to CraftingDefinition.Pottery.POT,
+            Items.UNFIRED_PIE_DISH_1789 to CraftingDefinition.Pottery.DISH,
+            Items.UNFIRED_BOWL_1791 to CraftingDefinition.Pottery.BOWL,
             Items.UNFIRED_PLANT_POT_5352 to CraftingDefinition.Pottery.PLANT,
-            Items.UNFIRED_POT_LID_4438   to CraftingDefinition.Pottery.LID
+            Items.UNFIRED_POT_LID_4438 to CraftingDefinition.Pottery.LID
         )
 
         sendSkillDialogue(player) {
             withItems(*potteryMap.keys.toIntArray())
 
             create { selectedItemId, _ ->
-                potteryMap[selectedItemId]?.let { firePottery(player, it, node) }
+                potteryMap[selectedItemId]?.let {
+                    firePottery(player, it, node)
+                }
             }
 
-            calculateMaxAmount { selectedItemId -> amountInInventory(player, selectedItemId) }
+            calculateMaxAmount { selectedItemId ->
+                amountInInventory(player, selectedItemId)
+            }
         }
     }
 
-    private fun checkRequirements(player: Player, level: Int, itemId: Int): Boolean {
+    private fun checkRequirements(
+        player: Player,
+        level: Int,
+        itemId: Int
+    ): Boolean {
         if (getStatLevel(player, Skills.CRAFTING) < level) {
             sendMessage(player, "You need a Crafting level of $level to do this.")
             return false
         }
+
         if (!inInventory(player, itemId)) {
             sendMessage(player, "You don't have the required item.")
             return false
         }
+
         return true
     }
 
-    private fun process(player: Player, amount: Int, inputId: Int, output: Int, exp: Double, animation: Int, audio: Int? = null, diaryAction: (() -> Unit)? = null) {
+    private fun process(
+        player: Player,
+        amount: Int,
+        inputId: Int,
+        output: Int,
+        exp: Double,
+        animation: Int,
+        audio: Int? = null,
+        diaryAction: (() -> Unit)? = null
+    ) {
         var remaining = amount
+
         queueScript(player, 0, QueueStrength.WEAK) {
-            if (remaining <= 0 || !clockReady(player, Clocks.SKILLING) || !inInventory(player, inputId)) return@queueScript stopExecuting(player)
+
+            if (remaining <= 0) {
+                return@queueScript stopExecuting(player)
+            }
+
+            if (!clockReady(player, Clocks.SKILLING)) {
+                return@queueScript stopExecuting(player)
+            }
+
+            if (!inInventory(player, inputId)) {
+                sendMessage(player, "You have run out of materials.")
+                return@queueScript stopExecuting(player)
+            }
 
             audio?.let { playAudio(player, it) }
             animate(player, animation)
             delayClock(player, Clocks.SKILLING, 5)
 
-            if (removeItem(player, inputId)) {
-                addItem(player, output)
-                rewardXP(player, Skills.CRAFTING, exp)
-                diaryAction?.invoke()
-                remaining--
+            if (!removeItem(player, inputId)) {
+                return@queueScript stopExecuting(player)
             }
 
-            if (remaining > 0 && inInventory(player, inputId)) {
-                delayClock(player, Clocks.SKILLING, 5)
-                setCurrentScriptState(player, 0)
-                delayScript(player, 5)
-            } else stopExecuting(player)
+            addItem(player, output)
+            rewardXP(player, Skills.CRAFTING, exp)
+            diaryAction?.invoke()
+
+            remaining--
+
+            if (remaining <= 0) {
+                return@queueScript stopExecuting(player)
+            }
+
+            delayClock(player, Clocks.SKILLING, 5)
+            setCurrentScriptState(player, 0)
+            delayScript(player, 5)
         }
     }
 
-    private fun handleDiaryWheel(player: Player, pottery: CraftingDefinition.Pottery) {
+    private fun handleDiaryWheel(
+        player: Player,
+        pottery: CraftingDefinition.Pottery
+    ) {
         when (pottery) {
             CraftingDefinition.Pottery.BOWL ->
                 if (withinDistance(player, Location(3086, 3410, 0))) {
-                    setAttribute(player, "/save:diary:varrock:spun-bowl", true)
+                    setAttribute(
+                        player,
+                        "/save:diary:varrock:spun-bowl",
+                        true
+                    )
                 }
+
             CraftingDefinition.Pottery.POT ->
                 if (withinDistance(player, Location(3086, 3410, 0))) {
-                    finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, LumbridgeAchievementDiary.Companion.BeginnerTasks.BARBARIAN_VILLAGE_MAKE_A_POT)
+                    finishDiaryTask(
+                        player,
+                        DiaryType.LUMBRIDGE,
+                        0,
+                        LumbridgeAchievementDiary.Companion.BeginnerTasks.BARBARIAN_VILLAGE_MAKE_A_POT
+                    )
+
                     setVarbit(player, 4956, 1, true)
                 }
+
             else -> {}
         }
     }
 
-    private fun handleDiaryOven(player: Player, pottery: CraftingDefinition.Pottery) {
+    private fun handleDiaryOven(
+        player: Player,
+        pottery: CraftingDefinition.Pottery
+    ) {
         when (pottery) {
             CraftingDefinition.Pottery.BOWL ->
-                if (withinDistance(player, Location(3085, 3408, 0)) && getAttribute(player, "diary:varrock:spun-bowl", false)) {
-                    finishDiaryTask(player, DiaryType.VARROCK, 0, VarrockAchievementDiary.Companion.EasyTasks.BARBARIAN_VILLAGE_SPIN_A_BOWL)
-                    setVarbit(player,3995,1,true)
+                if (
+                    withinDistance(player, Location(3085, 3408, 0)) &&
+                    getAttribute(player, "diary:varrock:spun-bowl", false)
+                ) {
+                    finishDiaryTask(
+                        player,
+                        DiaryType.VARROCK,
+                        0,
+                        VarrockAchievementDiary.Companion.EasyTasks.BARBARIAN_VILLAGE_SPIN_A_BOWL
+                    )
 
-
+                    setVarbit(player, 3995, 1, true)
                 }
+
             CraftingDefinition.Pottery.POT ->
                 if (withinDistance(player, Location(3085, 3408, 0))) {
-                    finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, LumbridgeAchievementDiary.Companion.BeginnerTasks.BARBARIAN_VILLAGE_FIRE_A_POT)
-                    setVarbit(player,4957,1,true)
+                    finishDiaryTask(
+                        player,
+                        DiaryType.LUMBRIDGE,
+                        0,
+                        LumbridgeAchievementDiary.Companion.BeginnerTasks.BARBARIAN_VILLAGE_FIRE_A_POT
+                    )
+
+                    setVarbit(player, 4957, 1, true)
                 }
+
             else -> {}
         }
     }
