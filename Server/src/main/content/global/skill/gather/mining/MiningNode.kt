@@ -122,7 +122,6 @@ enum class MiningNode(var id: Int, var emptyId: Int, var identifier: Byte) {
     LIMESTONE_0(Scenery.PILE_OF_ROCK_4027, Scenery.PILE_OF_ROCK_4028, 4.toByte()),
     LIMESTONE_1(Scenery.PILE_OF_ROCK_4028, Scenery.PILE_OF_ROCK_4029, 4.toByte()),
     LIMESTONE_2(Scenery.PILE_OF_ROCK_4029, Scenery.PILE_OF_ROCK_4030, 4.toByte()),
-    LIMESTONE_3(Scenery.PILE_OF_ROCK_4030, Scenery.PILE_OF_ROCK_4027, 4.toByte()),
 
     BLURITE_ORE_0(Scenery.ROCKS_33220, Scenery.ROCKS_33222, 5.toByte()),
     BLURITE_ORE_1(Scenery.ROCKS_33221, Scenery.ROCKS_33223, 5.toByte()),
@@ -456,7 +455,7 @@ enum class MiningNode(var id: Int, var emptyId: Int, var identifier: Byte) {
             }
             // Limestone.
             4 -> {
-                respawnRate = 10 or (20 shl 16)
+                respawnRate = 9 or (10 shl 16)
                 experience = 26.5
                 rate = 0.2
                 reward = 3211

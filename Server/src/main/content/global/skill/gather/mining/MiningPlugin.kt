@@ -270,24 +270,6 @@ class MiningPlugin : InteractionListener {
         }
 
         /*
-         * Handles limestone respawn.
-         */
-
-        if (resource.id == shared.consts.Scenery.PILE_OF_ROCK_4030 && !isEssence && resource.respawnRate != 0) {
-            removeScenery(node as Scenery)
-            GameWorld.Pulser.submit(
-                object : Pulse(resource.respawnDuration, player) {
-                    override fun pulse(): Boolean {
-                        SceneryBuilder.add(Scenery(shared.consts.Scenery.PILE_OF_ROCK_4027, node.location))
-                        return true
-                    }
-                },
-            )
-            node.setActive(false)
-            return false
-        }
-
-        /*
          * Handles obsidian respawn.
          */
 
@@ -302,6 +284,10 @@ class MiningPlugin : InteractionListener {
             return true
         }
 
+        /*
+         * Handles gem rocks.
+         */
+
         if (resource.id in shared.consts.Scenery.GEM_ROCK_9030..shared.consts.Scenery.GEM_ROCK_9032) {
             SceneryBuilder.replaceWithTempBeforeNew(
                 node.asScenery(),
@@ -311,17 +297,28 @@ class MiningPlugin : InteractionListener {
                 true,
             )
         } else if (!isEssence && resource.respawnRate != 0) {
-            SceneryBuilder.replace(
-                node as Scenery,
-                Scenery(
-                    resource.emptyId,
-                    node.getLocation(),
-                    node.type,
-                    node.rotation,
-                ),
-                resource.respawnDuration,
-            )
-            node.setActive(false)
+            /*
+             * Limestone respawn.
+             */
+            if (resource == MiningNode.LIMESTONE_2) {
+                SceneryBuilder.replaceWithTempBeforeNew(
+                    node.asScenery(),
+                    Scenery(resource.emptyId, node.asScenery().location, node.asScenery().type, node.asScenery().rotation),
+                    Scenery(MiningNode.LIMESTONE_0.id, node.asScenery().location, node.asScenery().type, node.asScenery().rotation),
+                    resource.respawnDuration,
+                    true,
+                )
+            } else {
+                /*
+                 * Normal mining node respawn.
+                 */
+                SceneryBuilder.replace(
+                    node.asScenery(),
+                    Scenery(resource.emptyId, node.asScenery().location, node.asScenery().type, node.asScenery().rotation),
+                    resource.respawnDuration,
+                )
+            }
+            node.isActive = false
             return true
         }
         return true

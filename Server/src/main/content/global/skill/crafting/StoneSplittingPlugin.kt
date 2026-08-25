@@ -12,7 +12,6 @@ import core.tools.RandomUtils
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Sounds
-import kotlin.math.min
 
 class StoneSplittingPlugin : InteractionListener {
 
@@ -24,8 +23,8 @@ class StoneSplittingPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.STONE_SLAB_13245, Items.CHISEL_1755) { player, used, _ ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
-            if (!hasLevel(player, Skills.CRAFTING, 20)) return@onUseWith true
-            if (!hasTool(player, Items.HAMMER_2347)) return@onUseWith true
+            if (getDynLevel(player, Skills.CRAFTING) < 20) return@onUseWith true
+            if (!inInventory(player, Items.HAMMER_2347)) return@onUseWith true
             if (!inInventory(player, used.id)) return@onUseWith true
 
             runTask(player, 2) {
@@ -47,54 +46,48 @@ class StoneSplittingPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.CHISEL_1755, *GRANITE_IDS) { player, _, with ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
-            if (!hasTool(player, Items.CHISEL_1755)) return@onUseWith true
+            if (!inInventory(player, Items.CHISEL_1755)) return@onUseWith true
 
             setTitle(player, 2)
             sendOptions(player, "What would you like to do?", "Split the block into smaller pieces.", "Nothing.")
 
             addDialogueAction(player) { _, button ->
-                if (button == 2) {
-                    var remaining = min(amountInInventory(player, with.id), amountInInventory(player, with.id))
+                if (button != 2) {
+                    closeDialogue(player)
+                    return@addDialogueAction
+                }
 
-                    queueScript(player, 0, QueueStrength.WEAK) {
-                        if (!clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
-                        if (remaining <= 0) return@queueScript stopExecuting(player)
-                        if (!inInventory(player, Items.CHISEL_1755) || !inInventory(player, with.id)) {
-                            sendMessage(player, "You have ran out of granite.")
-                            return@queueScript stopExecuting(player)
-                        }
+                val graniteId = with.id
+                val resultId = if (graniteId == Items.GRANITE_5KG_6983)
+                    Items.GRANITE_2KG_6981 else Items.GRANITE_500G_6979
 
-                        val requiredSlots = 4
-                        if (freeSlots(player) < requiredSlots) {
-                            sendDialogue(player, "You'll need $requiredSlots empty inventory spaces to hold the granite.")
-                            return@queueScript stopExecuting(player)
-                        }
-
-                        animate(player, Animations.HUMAN_CHISEL_GRANITE_11146)
-                        playAudio(player, Sounds.CHISEL_2586)
-                        delayClock(player, Clocks.SKILLING, 2)
-                        delayScript(player, 2)
-
-                        if (removeItem(player, Item(with.id, 1))) {
-                            when (with.id) {
+                sendSkillDialogue(player) {
+                    withItems(resultId)
+                    create { _, amount ->
+                        runTask(
+                            player = player,
+                            amount = amount,
+                            requiredItem = graniteId,
+                            requiredSlots = 4,
+                            animation = Animations.HUMAN_CHISEL_GRANITE_11146,
+                            sound = Sounds.CHISEL_2586,
+                            missingMessage = "You have run out of granite."
+                        ) {
+                            when (graniteId) {
                                 Items.GRANITE_5KG_6983 -> {
                                     addItem(player, Items.GRANITE_2KG_6981, 2)
                                     addItem(player, Items.GRANITE_500G_6979, 2)
                                 }
-                                else -> addItem(player, Items.GRANITE_500G_6979, 4)
+
+                                Items.GRANITE_2KG_6981 -> {
+                                    addItem(player, Items.GRANITE_500G_6979, 4)
+                                }
                             }
                         }
-
-                        remaining--
-
-                        if (remaining > 0 && inInventory(player, with.id)) {
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
-                        } else stopExecuting(player)
                     }
-                } else closeDialogue(player)
+                    calculateMaxAmount { amountInInventory(player, graniteId) }
+                }
             }
-
             return@onUseWith true
         }
 
@@ -102,88 +95,88 @@ class StoneSplittingPlugin : InteractionListener {
          * Handles limestone cutting into bricks.
          */
 
-        onUseWith(IntType.ITEM, Items.CHISEL_1755, Items.LIMESTONE_3211) { player, used, with ->
+        onUseWith(IntType.ITEM, Items.CHISEL_1755, Items.LIMESTONE_3211) { player, _, with ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
-            if (!hasLevel(player, Skills.CRAFTING, 12) || !hasTool(player, Items.CHISEL_1755)) return@onUseWith true
+            if (getDynLevel(player, Skills.CRAFTING) < 12)  return@onUseWith true
+            if (!inInventory(player, Items.CHISEL_1755)) return@onUseWith true
 
             sendSkillDialogue(player) {
                 withItems(Items.LIMESTONE_BRICK_3420)
-
                 create { _, amount ->
-                    var remaining = amount
+                    runTask(
+                        player = player,
+                        amount = amount,
+                        requiredItem = with.id,
+                        requiredSlots = 1,
+                        animation = Animations.CHISEL_OYSTER_PEARL_4470,
+                        sound = Sounds.SPLIT_ROCK_1708,
+                        missingMessage = "You have run out of limestone."
+                    ) {
+                        val successProbability = BASE_SUCCESS_PROBABILITY +
+                                getStatLevel(player, Skills.CRAFTING) * SUCCESS_PER_LEVEL
 
-                    queueScript(player, 0, QueueStrength.WEAK) {
-                        if (!clockReady(player, Clocks.SKILLING)) return@queueScript false
-                        if (remaining <= 0 || !inInventory(player, with.id)) {
-                            sendMessage(player, "You have ran out of limestone.")
-                            return@queueScript false
-                        }
-
-                        playAudio(player, Sounds.SPLIT_ROCK_1708)
-                        animate(player, Animations.CHISEL_OYSTER_PEARL_4470)
-                        delayClock(player, Clocks.SKILLING, 2)
-
-                        if (removeItem(player, with.id)) {
-                            val successProbability = BASE_SUCCESS_PROBABILITY + getStatLevel(player, Skills.CRAFTING) * SUCCESS_PER_LEVEL
-
-                            if (RandomUtils.randomDouble() <= successProbability) {
-                                rewardXP(player, Skills.CRAFTING, 6.0)
-                                addItem(player, Items.LIMESTONE_BRICK_3420)
-                                sendMessage(player, "You successfully craft ${getItemName(Items.LIMESTONE_BRICK_3420)}.")
-                            } else {
-                                rewardXP(player, Skills.CRAFTING, 1.5)
-                                addItem(player, Items.ROCK_968)
-                                sendMessage(player, "You fail to craft ${getItemName(Items.LIMESTONE_BRICK_3420)}.")
-                            }
-
-                            remaining--
-                        }
-
-                        return@queueScript if (remaining > 0 && inInventory(player, with.id)) {
-                            delayClock(player, Clocks.SKILLING, 2)
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 2)
+                        if (RandomUtils.randomDouble() <= successProbability) {
+                            rewardXP(player, Skills.CRAFTING, 6.0)
+                            addItem(player, Items.LIMESTONE_BRICK_3420)
+                            sendMessage(player, "You successfully craft ${getItemName(Items.LIMESTONE_BRICK_3420)}.")
                         } else {
-                            false
+                            rewardXP(player, Skills.CRAFTING, 1.5)
+                            addItem(player, Items.ROCK_968)
+                            sendMessage(player, "You fail to craft ${getItemName(Items.LIMESTONE_BRICK_3420)}.")
                         }
                     }
                 }
-
                 calculateMaxAmount { amountInInventory(player, with.id) }
             }
-
             return@onUseWith true
         }
     }
 
-    /**
-     * Checks if the player has the required crafting level.
-     */
-    private fun hasLevel(player: Player, skill: Int, level: Int): Boolean {
-        if (getStatLevel(player, skill) < level) {
-            sendMessage(player, "You need a Crafting level of at least $level.")
-            return false
-        }
-        return true
-    }
+    private fun runTask(player: Player, amount: Int, requiredItem: Int, requiredSlots: Int, animation: Int, sound: Int, missingMessage: String, onSuccess: () -> Unit) {
+        var remaining = amount
 
-    /**
-     * Checks if the player has the required tool.
-     */
-    private fun hasTool(player: Player, toolId: Int): Boolean {
-        if (!inInventory(player, toolId)) {
-            sendMessage(player, "You need ${getItemName(toolId)} to do that.")
-            return false
+        queueScript(player, 0, QueueStrength.WEAK) {
+            if (!clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
+            if (!inInventory(player, requiredItem)) {
+                sendMessage(player, missingMessage)
+                return@queueScript stopExecuting(player)
+            }
+            if (remaining <= 0) return@queueScript stopExecuting(player)
+
+            if (freeSlots(player) < requiredSlots) {
+                sendDialogue(player, "You'll need $requiredSlots empty inventory space${if (requiredSlots > 1) "s" else ""} to continue.")
+                return@queueScript stopExecuting(player)
+            }
+
+            animate(player, animation)
+            playAudio(player, sound)
+            delayClock(player, Clocks.SKILLING, 2)
+
+            if (removeItem(player, Item(requiredItem, 1))) {
+                onSuccess()
+                remaining--
+            }
+
+            if (remaining <= 0) {
+                return@queueScript stopExecuting(player)
+            }
+
+            delayClock(player, Clocks.SKILLING, 2)
+            setCurrentScriptState(player, 0)
+            delayScript(player, 2)
         }
-        return true
     }
 
     companion object {
         private const val MAXIMUM_SUCCESS_LEVEL = 40
         private const val BASE_SUCCESS_PROBABILITY = 0.75
         private const val MAXIMUM_SUCCESS_PROBABILITY = 1.0
-        private val SPREAD_SUCCESS = MAXIMUM_SUCCESS_PROBABILITY - BASE_SUCCESS_PROBABILITY
-        private val SUCCESS_PER_LEVEL = SPREAD_SUCCESS / MAXIMUM_SUCCESS_LEVEL
-        private val GRANITE_IDS = intArrayOf(Items.GRANITE_2KG_6981, Items.GRANITE_5KG_6983)
+        private const val SPREAD_SUCCESS = MAXIMUM_SUCCESS_PROBABILITY - BASE_SUCCESS_PROBABILITY
+        private const val SUCCESS_PER_LEVEL = SPREAD_SUCCESS / MAXIMUM_SUCCESS_LEVEL
+
+        private val GRANITE_IDS = intArrayOf(
+            Items.GRANITE_2KG_6981,
+            Items.GRANITE_5KG_6983
+        )
     }
 }
