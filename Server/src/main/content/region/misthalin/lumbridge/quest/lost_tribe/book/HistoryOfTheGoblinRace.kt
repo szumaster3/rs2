@@ -1,58 +1,37 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.book
 
 import core.api.*
-import core.game.component.Component
-import core.game.component.ComponentDefinition
-import core.game.component.ComponentPlugin
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
-import core.plugin.Initializable
-import core.plugin.Plugin
 import shared.consts.Components
 import shared.consts.Quests
 
-@Initializable
-class HistoryOfTheGoblinRace : ComponentPlugin() {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(Components.GOBLIN_SYMBOL_BOOK_183, this)
-        return this
-    }
+class HistoryOfTheGoblinRace : InterfaceListener {
 
-    override fun open(
-        player: Player?,
-        component: Component?,
-    ) {
-        player ?: return
-        super.open(player, component)
-        sendInterfaceConfig(player, Components.GOBLIN_SYMBOL_BOOK_183, 17, true)
-        val qstage = player.questRepository.getQuest(Quests.THE_LOST_TRIBE).getStage(player)
-        component?.setUncloseEvent { player, _ ->
-            if (qstage == 42 || qstage == 41) {
-                sendPlayerDialogue(
-                    player,
-                    "Hey... The symbol of the 'Dorgeshuun' tribe looks just, like the symbol on the brooch I found.",
-                )
-                setQuestStage(player!!, Quests.THE_LOST_TRIBE, 43)
+    override fun defineInterfaceListeners() {
+
+        onOpen(Components.GOBLIN_SYMBOL_BOOK_183) { player, component ->
+            sendInterfaceConfig(player, Components.GOBLIN_SYMBOL_BOOK_183, 17, true)
+            val qstage = getQuestStage(player, Quests.THE_LOST_TRIBE)
+            component.setUncloseEvent { p, _ ->
+                if (qstage == 42 || qstage == 41) {
+                    sendPlayerDialogue(p, "Hey... The symbol of the 'Dorgeshuun' tribe looks just, like the symbol on the brooch I found.")
+                    setQuestStage(p!!, Quests.THE_LOST_TRIBE, 43)
+                }
+                removeAttribute(p, "hgr-index")
+                return@setUncloseEvent true
             }
-            removeAttribute(player, "hgr-index")
-            true
+            return@onOpen true
         }
-    }
 
-    override fun handle(
-        player: Player?,
-        component: Component?,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int,
-    ): Boolean {
-        player ?: return false
-        when (button) {
-            16 -> setIndex(player, getIndex(player) + 1)
-            17 -> setIndex(player, getIndex(player) - 1)
+        on(Components.GOBLIN_SYMBOL_BOOK_183) { player, _, _, button, _, _ ->
+            when (button) {
+                16 -> setIndex(player, getIndex(player) + 1)
+                17 -> setIndex(player, getIndex(player) - 1)
+            }
+            update(player)
+            return@on true
         }
-        update(player)
-        return true
     }
 
     fun update(player: Player) {
@@ -64,10 +43,7 @@ class HistoryOfTheGoblinRace : ComponentPlugin() {
         sendInterfaceConfig(player, Components.GOBLIN_SYMBOL_BOOK_183, 17, index == 0)
     }
 
-    fun setIndex(
-        player: Player,
-        index: Int,
-    ) {
+    private fun setIndex(player: Player, index: Int) {
         setAttribute(player, "hgr-index", index)
     }
 
