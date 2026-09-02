@@ -389,11 +389,12 @@ class FiremakingListener : InteractionListener {
             mode: FiremakingType,
         ): Boolean {
             if (mode == FiremakingType.BARBARIAN &&
-                getAttribute(player, BarbarianTraining.FM_START, false)
+                !player.savedData.activityData.barbarianFiremaking &&
+                !getAttribute(player, BarbarianTraining.FM_BASE, false)
             ) {
                 sendDialogue(
                     player,
-                    "You must begin the relevant section of Otto Godblessed's barbarian training.",
+                    "You must speak to Otto Godblessed before you can use this method of firemaking.",
                 )
                 return false
             }
