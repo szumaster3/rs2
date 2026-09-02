@@ -3,6 +3,7 @@ package content.global.plugins.inter.with_scenery
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -23,6 +24,13 @@ class SandSourcePlugin : InteractionListener {
         private val SAND_PILES = intArrayOf(Scenery.SAND_2977, Scenery.SAND_2978, Scenery.SAND_2979)
         private val CONTAINER_IDS = intArrayOf(Items.BUCKET_1925, Items.EMPTY_SACK_5418)
         private const val SOUND_EFFECT = Sounds.SAND_BUCKET_2584
+
+        /*
+         * Sand pile depletion.
+         */
+
+        private const val PILE_DEPLETE_CHANCE = 8 // 1-in-8 chance per fill
+        private const val PILE_RESPAWN_TICKS = 75
     }
 
     override fun defineListeners() {
@@ -30,9 +38,10 @@ class SandSourcePlugin : InteractionListener {
         /*
          * Handles using containers on sandpits & sand piles.
          */
+
         onUseWith(IntType.SCENERY, CONTAINER_IDS, *SANDPITS, *SAND_PILES) { player, used, with ->
             val isSandPile = with.id in SAND_PILES
-            fillSand(player, used.id, with, isSandPile)
+            fillSand(player, used.id, with, depletable = isSandPile)
             return@onUseWith true
         }
 
@@ -53,11 +62,11 @@ class SandSourcePlugin : InteractionListener {
      * @param player The player.
      * @param containerId The item id.
      * @param source The scenery id.
-     * @param infinity True if the source is a sand pile else sandpit.
+     * @param depletable True if is not infinite src.
      */
-    private fun fillSand(player: Player, containerId: Int, source: Node, infinity: Boolean) {
-        val emptySlots = amountInInventory(player, containerId)
-        if (emptySlots <= 0) return
+    private fun fillSand(player: Player, containerId: Int, source: Node, depletable: Boolean) {
+        var remaining = amountInInventory(player, containerId)
+        if (remaining <= 0) return
 
         val (animation, filledItem, itemName) = when (containerId) {
             Items.BUCKET_1925 -> Triple(Animations.FILL_BUCKET_SAND_895, Items.BUCKET_OF_SAND_1783, "bucket")
@@ -65,37 +74,56 @@ class SandSourcePlugin : InteractionListener {
             else -> return
         }
 
-        var animationReplay = 0
+        var ticks = 0
 
-        runTask(player, 2, emptySlots) {
-            if (infinity && RegionManager.getObject(source.location) == null) return@runTask
-            if (!removeItem(player, Item(containerId, 1), Container.INVENTORY)) return@runTask
-            if (animationReplay % 2 == 0)
+        queueScript(player, 2, QueueStrength.WEAK) {
+            if (remaining <= 0) return@queueScript stopExecuting(player)
+
+            if (!inInventory(player, containerId)) {
+                return@queueScript stopExecuting(player)
+            }
+
+            if (depletable && RegionManager.getObject(source.location) == null) {
+                return@queueScript stopExecuting(player)
+            }
+
+            if (!removeItem(player, Item(containerId, 1), Container.INVENTORY)) {
+                return@queueScript stopExecuting(player)
+            }
+
+            if (ticks % 2 == 0) {
                 animate(player, animation)
                 playAudio(player, SOUND_EFFECT)
-            animationReplay++
+            }
+            ticks++
 
             if (addItem(player, filledItem)) {
                 sendMessage(player, "You fill the $itemName with sand.")
             } else {
                 sendMessage(player, "You do not have enough inventory space.")
+                return@queueScript stopExecuting(player)
             }
 
-            // 1/8 chance to reduce/remove sand pile.
-            if (infinity && (1..8).random() == 1) {
-                handleSandPile(player, source)
+            if (depletable && (1..PILE_DEPLETE_CHANCE).random() == 1) {
+                handleSandPile(source)
             }
+
+            remaining--
+
+            if (remaining <= 0) return@queueScript stopExecuting(player)
+
+            setCurrentScriptState(player, 0)
+            delayScript(player, 2)
         }
     }
 
     /**
      * Handles sand pile state change after collecting sand.
      */
-    private fun handleSandPile(player: Player, with: Node) {
+    private fun handleSandPile(with: Node) {
         val nextId = when (with.id) {
             Scenery.SAND_2977 -> Scenery.SAND_2978
             Scenery.SAND_2978 -> Scenery.SAND_2979
-            Scenery.SAND_2979 -> null
             else -> null
         }
 
@@ -103,7 +131,7 @@ class SandSourcePlugin : InteractionListener {
             replaceScenery(with.asScenery(), nextId, -1)
         } else {
             removeScenery(with.asScenery())
-            submitWorldPulse(object : Pulse(75) {
+            submitWorldPulse(object : Pulse(PILE_RESPAWN_TICKS) {
                 override fun pulse(): Boolean {
                     addScenery(Scenery.SAND_2977, with.location, with.direction.ordinal)
                     return true
