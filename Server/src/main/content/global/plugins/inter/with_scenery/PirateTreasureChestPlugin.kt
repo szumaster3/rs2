@@ -22,8 +22,8 @@ class PirateTreasureChestPlugin : InteractionListener {
             addItem(player, Items.PIRATE_MESSAGE_433)
             playAudio(player, Sounds.PIRATECHEST_UNLOCK_2308)
             sendMessage(player, "You unlock the chest.")
-            sendMessage(player, "All that's in the chest is a message...")
-            sendMessage(player, "You take the message from the chest.")
+            sendMessage(player, "All that's in the chest is a message...",1)
+            sendMessage(player, "You take the message from the chest.",2)
             return@onUseWith true
         }
     }
