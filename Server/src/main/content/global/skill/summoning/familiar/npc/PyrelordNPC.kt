@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.crafting.CraftingDefinition
-import content.global.skill.firemaking.FireMakingPlugin
+import content.global.skill.firemaking.FiremakingListener
 import content.global.skill.firemaking.LogItem
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
@@ -105,7 +105,7 @@ class PyrelordNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPC
                         GroundItemManager.destroy(ground)
                         player.getSkills().addExperience(Skills.FIREMAKING, logItem.xp + 10)
                         familiar.faceLocation(`object`.getFaceLocation(familiar.location))
-                        SceneryBuilder.add(`object`, logItem.life, FireMakingPlugin.getAsh(player, logItem, `object`))
+                        SceneryBuilder.add(`object`, logItem.life, FiremakingListener.getAsh(player, logItem, `object`))
                         if (player.viewport.region!!.id == 10806) {
                             finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 1, 9)
                             setVarbit(player, 5803,1,true)

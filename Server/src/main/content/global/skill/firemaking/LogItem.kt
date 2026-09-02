@@ -29,7 +29,6 @@ enum class LogItem(val logId: Int, val defaultLevel: Int, val barbarianLevel: In
 
     companion object {
         private var logItemMap: HashMap<Int, LogItem> = HashMap()
-        val ALL_LOGS: IntArray = values().map { it.logId }.toIntArray()
 
         init {
             for (log in values()) {
