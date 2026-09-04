@@ -4678,6 +4678,28 @@ fun openDoor(player: Player, node: Scenery) {
 }
 
 /**
+ * Opens a door and instantly moves the player through it.
+ *
+ * @param player The player interacting with the door.
+ * @param node The scenery object representing the door to be opened.
+ * @param openId The scenery id to use for the opened door.
+ */
+fun openDoor(player: Player, node: Scenery, openId: Int) {
+    val destination = DoorActionHandler.getEndLocation(player, node, true)
+
+    DoorActionHandler.open(
+        node,
+        node,
+        openId,
+        openId,
+        true,
+        3,
+        false
+    )
+    forceWalk(player, destination, "")
+}
+
+/**
  * Gets the name of a scenery.
  *
  * @param id The id for the scenery object.
