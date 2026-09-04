@@ -17,8 +17,37 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
+        val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+        val hasSword = inInventory(player, Items.BRONZE_SWORD_1277) || inEquipment(player, Items.BRONZE_SWORD_1277)
+        val hasShield = inInventory(player, Items.WOODEN_SHIELD_1171) || inEquipment(player, Items.WOODEN_SHIELD_1171)
+        val hasBow = inInventory(player, Items.SHORTBOW_841) || inEquipment(player, Items.SHORTBOW_841)
+        val arrowCount = amountInInventory(player, Items.BRONZE_ARROW_882) + amountInEquipment(player, Items.BRONZE_ARROW_882)
 
-        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
+        if (tutStage in 48..60 && !hasSword) {
+            addItem(player, Items.BRONZE_SWORD_1277)
+            sendItemDialogue(player, Items.BRONZE_SWORD_1277, "The Combat Guide gives you a spare <col=08088A>bronze sword</col>.")
+            return true
+        }
+
+        if (tutStage in 48..60 && !hasShield) {
+            addItem(player, Items.WOODEN_SHIELD_1171)
+            sendItemDialogue(player, Items.WOODEN_SHIELD_1171, "The Combat Guide gives you a spare <col=08088A>wooden shield</col>.")
+            return true
+        }
+
+        if (tutStage in 54..60 && !hasBow) {
+            addItem(player, Items.SHORTBOW_841)
+            sendItemDialogue(player, Items.SHORTBOW_841, "The Combat Guide gives you a spare <col=08088A>shortbow</col>.")
+            return true
+        }
+
+        if (tutStage in 54..60 && arrowCount < 50) {
+            addItem(player, Items.BRONZE_ARROW_882, 50 - arrowCount)
+            sendItemDialogue(player, Items.BRONZE_ARROW_882, "The Combat Guide gives you some <col=08088A>bronze arrows</col>.")
+            return true
+        }
+
+        when (tutStage) {
             44 -> playerl(FaceAnim.FRIENDLY, "Hi! My name's ${player.username}.")
             47 -> npc(FaceAnim.FRIENDLY, "Very good, but that little butter knife isn't going to","protect you much. Here, take these.")
             53 -> playerl(FaceAnim.FRIENDLY, "I did it! I killed a giant rat!")
@@ -31,7 +60,8 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
+        val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+        when (tutStage) {
             44 -> when (stage++) {
                 0 -> npc(FaceAnim.ANGRY,
                     "Do I look like I care? To me you're just another", "newcomer who thinks they're ready to fight."

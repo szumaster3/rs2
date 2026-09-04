@@ -91,6 +91,7 @@ enum class MiningNode(var id: Int, var emptyId: Int, var identifier: Byte) {
     TIN_ORE_32(Scenery.ROCKS_37643, Scenery.ROCKS_31060, 2.toByte()),
     TIN_ORE_33(Scenery.ROCKS_37644, Scenery.ROCKS_31061, 2.toByte()),
     TIN_ORE_34(Scenery.ROCKS_37685, Scenery.ROCKS_37702, 2.toByte()),
+    TIN_ORE_35(Scenery.ROCKS_3043, Scenery.ROCKS_11552, 2.toByte()),
 
     CLAY_0(Scenery.ROCKS_2109, Scenery.ROCKS_451, 3.toByte()),
     CLAY_1(Scenery.ROCKS_2108, Scenery.ROCKS_450, 3.toByte()),

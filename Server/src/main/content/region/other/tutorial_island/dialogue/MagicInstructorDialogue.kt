@@ -21,29 +21,37 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
+        val player = player ?: return true
         val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+        if (tutStage == 70) {
+            val airRunes = amountInInventory(player, Items.AIR_RUNE_556)
+            val mindRunes = amountInInventory(player, Items.MIND_RUNE_558)
+            val missingAir = airRunes < 5
+            val missingMind = mindRunes < 5
+
+            if (missingAir || missingMind) {
+                val airAmount = if (missingAir) 5 - airRunes else 0
+                val mindAmount = if (missingMind) 5 - mindRunes else 0
+                if (missingAir && missingMind) {
+                    addItem(player, Items.AIR_RUNE_556, airAmount)
+                    addItem(player, Items.MIND_RUNE_558, mindAmount)
+                    sendDoubleItemDialogue(player, Items.AIR_RUNE_556, Items.MIND_RUNE_558, "You receive some spare runes.")
+                } else if (missingAir) {
+                    addItem(player, Items.AIR_RUNE_556, airAmount)
+                    sendItemDialogue(player, Items.AIR_RUNE_556, "You receive some spare <col=08088A>air runes</col>.")
+                } else {
+                    addItem(player, Items.MIND_RUNE_558, mindAmount)
+                    sendItemDialogue(player, Items.MIND_RUNE_558, "You receive some spare <col=08088A>mind runes</col>.")
+                }
+
+                stage = END_DIALOGUE
+                return true
+            }
+        }
+
         when (tutStage) {
             67 -> playerl(FaceAnim.FRIENDLY, "Hello.")
-            69 -> npc(
-                FaceAnim.FRIENDLY,
-                "Good. This is a list of your spells. Currently you can",
-                "only cast one offensive spell called Wind Strike. Let's",
-                "try it out on one of those chickens."
-            )
-            70 -> {
-                val hasAir = inInventory(player, Items.AIR_RUNE_556)
-                val hasMind = inInventory(player, Items.MIND_RUNE_558)
-
-                if (!hasAir || !hasMind) {
-                    if (freeSlots(player) < 2) {
-                        GroundItemManager.create(arrayOf(Item(Items.AIR_RUNE_556, 15), Item(Items.MIND_RUNE_558, 15)), player.location, player)
-                    } else {
-                        addItem(player, Items.AIR_RUNE_556, 15)
-                        addItem(player, Items.MIND_RUNE_558, 15)
-                    }
-                    sendDoubleItemDialogue(player, Items.AIR_RUNE_556, Items.MIND_RUNE_558, "You receive some spare runes.")
-                }
-            }
+            69 -> npc(FaceAnim.FRIENDLY, "Good. This is a list of your spells. Currently you can", "only cast one offensive spell called Wind Strike. Let's", "try it out on one of those chickens.")
             71 -> npc(FaceAnim.FRIENDLY, "Well you're all finished here now. I'll give you a", "reasonable number of runes when you leave.")
             else -> return false
         }
@@ -69,9 +77,9 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
             69 -> when (stage) {
                 0 -> {
+                    addItem(player, Items.AIR_RUNE_556, 5)
+                    addItem(player, Items.MIND_RUNE_558, 5)
                     sendDoubleItemDialogue(player, Items.AIR_RUNE_556, Items.MIND_RUNE_558, "Terrova gives you five <col=08088A>air runes</col> and five <col=08088A>mind runes</col>!")
-                    addItemOrDrop(player, Items.AIR_RUNE_556, 5)
-                    addItemOrDrop(player, Items.MIND_RUNE_558, 5)
                     stage++
                 }
                 1 -> {

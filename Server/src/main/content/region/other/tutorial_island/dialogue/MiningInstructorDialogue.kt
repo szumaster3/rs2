@@ -17,9 +17,34 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
-            30 -> npc(FaceAnim.FRIENDLY, "Hi there. You must be new around here. What do I", "call you? 'Newcomer' seems so impersonal, and if we're", "going to be working together. I'd rather call you oy", "name." )
-            34 -> player(FaceAnim.HAPPY, "I prospected both types of rock! One set contains tin,","and the other has copper ore inside.")
+        val player = player ?: return true
+        val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+
+        if (tutorialStage in 35..50) {
+            val hasPickaxe = inInventory(player, Items.BRONZE_PICKAXE_1265)
+
+            if (!hasPickaxe) {
+                addItem(player, Items.BRONZE_PICKAXE_1265)
+                sendItemDialogue(player, Items.BRONZE_PICKAXE_1265, "Dezzick gives you a spare <col=0000FF>bronze pickaxe</col>!")
+                stage = END_DIALOGUE
+                return true
+            }
+        }
+
+        if (tutorialStage in 41..50) {
+            val hasHammer = inInventory(player, Items.HAMMER_2347)
+
+            if (!hasHammer) {
+                addItem(player, Items.HAMMER_2347)
+                sendItemDialogue(player, Items.HAMMER_2347, "Dezzick gives you a spare <col=0000FF>hammer</col>!")
+                stage = END_DIALOGUE
+                return true
+            }
+        }
+
+        when (tutorialStage) {
+            30 -> npc(FaceAnim.FRIENDLY, "Hi there. You must be new around here. What do I", "call you? 'Newcomer' seems so impersonal, and if we're", "going to be working together. I'd rather call you oy", "name.")
+            34 -> player(FaceAnim.HAPPY, "I prospected both types of rock! One set contains tin,", "and the other has copper ore inside.")
             40 -> playerl(FaceAnim.ASKING, "How do I make a weapon out of this?")
             in 43..50 -> npc(FaceAnim.HALF_ASKING, "Would you like me to recap anything?")
         }
@@ -28,21 +53,6 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
-        val hasHammer = inInventory(player,Items.HAMMER_2347, 1)
-        val hasPickaxe = inInventory(player,Items.BRONZE_PICKAXE_1265, 1)
-
-        if (tutorialStage in 34..50 && !hasPickaxe) {
-            addItem(player, Items.BRONZE_PICKAXE_1265)
-            sendItemDialogue(player, Items.BRONZE_PICKAXE_1265, "Dezzick gives you a <col=0000FF>bronze pickaxe!</col>")
-            return true
-        }
-
-        if (tutorialStage in 40..50 && !hasHammer) {
-            addItem(player, Items.HAMMER_2347)
-            sendItemDialogue(player, Items.HAMMER_2347, "Dezzick gives you a <col=0000FF>hammer</col>!")
-            return true
-        }
-
         when (tutorialStage) {
             30 -> when (stage++) {
                 0 -> playerl(FaceAnim.FRIENDLY, "You can call me ${player.username}.")

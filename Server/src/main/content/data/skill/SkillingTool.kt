@@ -1,5 +1,6 @@
 package content.data.skill
 
+import core.api.inEquipmentOrInventory
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import shared.consts.Animations
@@ -125,7 +126,17 @@ enum class SkillingTool(val id: Int, val level: Int, val ratio: Double, val anim
         }
 
         /**
-         * Returns the axe the player can use.
+         * Checks whether the player has a pickaxe.
+         */
+        @JvmStatic
+        fun hasPickaxe(player: Player): Boolean {
+            return arrayOf(PICKAXE_CLASS5, PICKAXE_CLASS4, RUNE_PICKAXE, PICKAXE_CLASS3, ADAMANT_PICKAXE, PICKAXE_CLASS2, MITHRIL_PICKAXE, STEEL_PICKAXE, PICKAXE_CLASS1, IRON_PICKAXE, BRONZE_PICKAXE, INFERNO_ADZE2).any {
+                inEquipmentOrInventory(player, it.id)
+            }
+        }
+
+        /**
+         * Returns the pickaxe the player can use.
          */
         @JvmStatic
         fun getPickaxe(player: Player): SkillingTool? {

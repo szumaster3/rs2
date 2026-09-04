@@ -3,6 +3,7 @@ package content.global.skill.gather.mining
 import content.data.GameAttributes
 import content.data.skill.SkillingTool
 import content.global.activity.star.ShootingStarBonus
+import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.IntType
@@ -14,11 +15,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.ChanceItem
-import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
-import core.game.system.task.Pulse
-import core.game.world.GameWorld
 import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 import core.tools.prependArticle
@@ -34,6 +32,11 @@ class MiningPlugin : InteractionListener {
     )
 
     override fun defineListeners() {
+
+        /*
+         * Handles mining the resources.
+         */
+
         defineInteraction(
             IntType.SCENERY,
             MiningNode.values().map { it.id }.toIntArray(),
@@ -57,35 +60,23 @@ class MiningPlugin : InteractionListener {
 
             sendMessage(player, "You examine the rock for ores...")
 
-            val messages = mapOf(
-                13.toByte() to "This rock contains gems.",
-                15.toByte() to "This rock is sandstone.",
-                16.toByte() to "This rock is granite.",
-                18.toByte() to "This rock contains a magical kind of stone.",
-                19.toByte() to "This rock contains obsidian."
-            )
+            val message = when (rock.identifier) {
+                13.toByte() -> "This rock contains gems."
+                15.toByte() -> "This rock is sandstone."
+                16.toByte() -> "This rock is granite."
+                18.toByte() -> "This rock contains a magical kind of stone."
+                19.toByte() -> "This rock contains obsidian."
+                else -> "This rock contains ${getItemName(rock.reward).lowercase()}."
+            }
 
-            val identifier = rock.identifier
-            val message = messages[identifier]
-
-            if (message != null) {
-                queueScript(player, 3, QueueStrength.SOFT) {
-                    sendMessage(player, message)
-                    return@queueScript stopExecuting(player)
-                }
+            if (rock.identifier == 1.toByte() || rock.identifier == 2.toByte()) {
+                sendMessage(player, message,3)
                 return@on true
             }
 
-            val resourceName = Item(rock.reward).name.lowercase()
-
-            when (identifier) {
-                2.toByte() -> sendMessage(player, "This rock contains $resourceName.")
-                1.toByte() -> sendMessage(player, "This rock contains $resourceName.")
-
-                else -> queueScript(player, 3, QueueStrength.SOFT) {
-                    sendMessage(player, "This rock contains $resourceName.")
-                    return@queueScript stopExecuting(player)
-                }
+            queueScript(player, 3, QueueStrength.SOFT) {
+                sendMessage(player, message)
+                return@queueScript stopExecuting(player)
             }
 
             return@on true
@@ -165,7 +156,7 @@ class MiningPlugin : InteractionListener {
                 return true
             }
 
-            val tool = getUsablePickaxe(player) ?: return true
+            val tool = SkillingTool.getPickaxe(player) ?: return true
             if (!isEssence) {
                 val message = if (isObsidian) {
                     "You swing your pick at the wall."
@@ -183,7 +174,7 @@ class MiningPlugin : InteractionListener {
          * The player could have removed the pickaxe while the mining
          * delay was running, so check again here.
          */
-        val tool = getUsablePickaxe(player) ?: return true
+        val tool = SkillingTool.getPickaxe(player) ?: return true
         anim(player, resource, tool)
         if (!checkReward(player, resource, tool)) {
             return delayScript(player, getDelay(resource, tool))
@@ -228,7 +219,9 @@ class MiningPlugin : InteractionListener {
             }
 
             if (!isTutorialIsland) {
+                val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
                 sendDialogue(player, "You manage to mine some ${rewardName.lowercase()}.")
+                TutorialStage.load(player, tutStage)
             } else if (isGems) {
                 sendMessage(player, "You get ${prependArticle(rewardName)}.")
             } else if (isGranite) {
@@ -405,19 +398,15 @@ class MiningPlugin : InteractionListener {
 
 
     fun anim(player: Player, resource: MiningNode?, tool: SkillingTool) {
-        val isEssence = resource?.identifier == 14.toByte()
-        val isObsidian = resource?.identifier == 19.toByte()
-
-        val baseAnim = tool.animation
-
-        val anim = when {
-            isEssence -> baseAnim + 6128
-            isObsidian -> baseAnim + 9718
-            else -> baseAnim
-        }
-
         if (animationFinished(player)) {
-            animate(player, anim)
+            animate(
+                player,
+                tool.animation + when (resource?.identifier) {
+                    14.toByte() -> 6128// Essences
+                    19.toByte() -> 9718// Obsidian
+                    else -> 0
+                },
+            )
         }
     }
 
@@ -425,8 +414,7 @@ class MiningPlugin : InteractionListener {
      * Checks all requirements for mining a [resource] by [player].
      */
     fun checkRequirements(player: Player, resource: MiningNode, node: Node): Boolean {
-        val hasPickaxe = SkillingTool.values()
-            .any { inEquipmentOrInventory(player, it.id) }
+        val hasPickaxe = SkillingTool.hasPickaxe(player)
 
         if (!hasPickaxe) {
             sendMessage(player, "You do not have a pickaxe to use.")
@@ -438,7 +426,7 @@ class MiningPlugin : InteractionListener {
             return false
         }
 
-        val usablePickaxe = getUsablePickaxe(player)
+        val usablePickaxe = SkillingTool.getPickaxe(player)
 
         if (usablePickaxe == null) {
             sendMessage(player, "You need a pickaxe to mine this rock. " + "You do not have a pickaxe which you have the Mining level to use.")
@@ -472,12 +460,6 @@ class MiningPlugin : InteractionListener {
         return node.isActive
     }
 
-    private fun getUsablePickaxe(player: Player): SkillingTool? {
-        return SkillingTool.values()
-            .filter { inEquipmentOrInventory(player, it.id) }
-            .filter { player.getSkills().getLevel(Skills.MINING) >= it.level }
-            .maxByOrNull { it.level }
-    }
 }
 
 /*

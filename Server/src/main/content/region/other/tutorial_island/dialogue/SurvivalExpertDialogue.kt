@@ -5,7 +5,6 @@ import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
@@ -21,57 +20,50 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         val player = player ?: return true
         val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+        if (tutStage in 5..15) {
+            val hasAxe = inInventory(player, Items.BRONZE_AXE_1351)
+            val hasTinderbox = inInventory(player, Items.TINDERBOX_590)
+
+            when {
+                !hasAxe && !hasTinderbox -> {
+                    addItem(player, Items.BRONZE_AXE_1351)
+                    addItem(player, Items.TINDERBOX_590)
+                    sendDoubleItemDialogue(player, Items.TINDERBOX_590, Items.BRONZE_AXE_1351, "The Survival Expert gives you a spare <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!")
+                    stage = END_DIALOGUE
+                    return true
+                }
+
+                !hasAxe -> {
+                    addItem(player, Items.BRONZE_AXE_1351)
+                    sendItemDialogue(player, Items.BRONZE_AXE_1351, "The Survival Expert gives you a spare <col=08088A>bronze axe</col>.")
+                    stage = END_DIALOGUE
+                    return true
+                }
+
+                !hasTinderbox -> {
+                    addItem(player, Items.TINDERBOX_590)
+                    sendItemDialogue(player, Items.TINDERBOX_590, "The Survival Expert gives you a spare <col=08088A>tinderbox</col>.")
+                    stage = END_DIALOGUE
+                    return true
+                }
+            }
+        }
+
+        if (tutStage in 12..15 && !inInventory(player, Items.SMALL_FISHING_NET_303)) {
+            addItem(player, Items.SMALL_FISHING_NET_303)
+            sendItemDialogue(player, Items.SMALL_FISHING_NET_303, "The Survival Guide gives you a spare <col=08088A>net</col>!")
+            stage = END_DIALOGUE
+            return true
+        }
 
         when (tutStage) {
-            4 -> npc(FaceAnim.FRIENDLY,
-                "Hello there, newcomer. My name is Brynna. My job is",
-                "to teach you a few survival tips and tricks. First off",
-                "we're going to start with the most basic survival skill of",
-                "all: making a fire."
-            )
-            5, 14, 15 -> {
-                val hasAxe = inInventory(player, Items.BRONZE_AXE_1351)
-                val hasTinderbox = inInventory(player, Items.TINDERBOX_590)
-
-                if (!hasAxe) {
-                    sendItemDialogue(player, Items.BRONZE_AXE_1351, "The Survival Expert gives you a spare bronze axe.")
-                    addItem(player, Items.BRONZE_AXE_1351)
-                }
-
-                if (!hasTinderbox) {
-                    sendItemDialogue(player, Items.TINDERBOX_590, "The Survival Expert gives you a spare tinderbox.")
-                    addItem(player, Items.TINDERBOX_590)
-                }
-
-                npc(FaceAnim.NEUTRAL, "Light the logs in your backpack to make a fire.")
-                stage = END_DIALOGUE
-            }
-
+            4 -> npc(FaceAnim.FRIENDLY, "Hello there, newcomer. My name is Brynna. My job is", "to teach you a few survival tips and tricks. First off", "we're going to start with the most basic survival skill of", "all: making a fire.")
+            5, 6, 14, 15 -> npc(FaceAnim.NEUTRAL, "Light the logs in your backpack to make a fire.").also { stage = END_DIALOGUE }
             8 -> npcl(FaceAnim.FRIENDLY, "Light the logs in your backpack to make a fire.").also { stage = END_DIALOGUE }
-            11 -> npc(FaceAnim.HAPPY,
-                "Well done! Next we need to get some food in our",
-                "bellies. We'll need something to cook. There are shrimp",
-                "in the pond there, so let's catch and cook some."
-            )
-            12 -> {
-                if (!inInventory(player, Items.SMALL_FISHING_NET_303)) {
-                    sendItemDialogue(player, Items.SMALL_FISHING_NET_303, "The Survival Guide gives you a <col=08088A>net</col>!")
-                    addItem(player, Items.SMALL_FISHING_NET_303)
-                } else {
-                    npc(
-                        FaceAnim.HAPPY,
-                        "Well done! Next we need to get some food in our",
-                        "bellies. We'll need something to cook. There are shrimp",
-                        "in the pond there, so let's catch and cook some."
-                    )
-                }
-                stage = END_DIALOGUE
-            }
-
+            11 -> npc(FaceAnim.HAPPY, "Well done! Next we need to get some food in our", "bellies. We'll need something to cook. There are shrimp", "in the pond there, so let's catch and cook some.")
+            12 -> npc(FaceAnim.HAPPY, "Well done! Next we need to get some food in our", "bellies. We'll need something to cook. There are shrimp", "in the pond there, so let's catch and cook some.").also { stage = END_DIALOGUE }
             16 -> npc(FaceAnim.HALF_ASKING, "Hello again. Is there something you'd like to hear more about?")
-
-            else -> sendDialogue(player, "You should complete your objective before talking to Brynna.")
-                .also { stage = END_DIALOGUE }
+            else -> sendDialogue(player, "You should complete your objective before talking to Brynna.").also { stage = END_DIALOGUE }
         }
         return true
     }

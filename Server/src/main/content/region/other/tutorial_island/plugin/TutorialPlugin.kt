@@ -320,12 +320,39 @@ class TutorialPlugin : InteractionListener {
          */
 
         onEquip(intArrayOf(BRONZE_AXE, BRONZE_PICKAXE, BRONZE_DAGGER)) { player, _ ->
-            val restriction = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
-            if (restriction < 47) {
+            val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+            if (stage < 47) {
                 sendDialogue(player, "You'll be told how to equip items later.")
+                TutorialStage.load(player, stage)
                 return@onEquip false
             }
             return@onEquip true
+        }
+
+        /*
+         * Handles prospecting the tin ore.
+         */
+
+        on(Scenery.ROCKS_3043, IntType.SCENERY, "prospect") { player, _ ->
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 31) {
+                return@on true
+            }
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 32)
+            TutorialStage.load(player, 32)
+            return@on true
+        }
+
+        /*
+         * Handles prospecting the copper ore.
+         */
+
+        on(Scenery.ROCKS_3042, IntType.SCENERY, "prospect") { player, _ ->
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 33) {
+                return@on true
+            }
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 34)
+            TutorialStage.load(player, 34)
+            return@on true
         }
     }
 

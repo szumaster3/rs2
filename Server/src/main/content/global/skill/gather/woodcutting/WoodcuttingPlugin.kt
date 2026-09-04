@@ -5,6 +5,7 @@ import content.data.skill.SkillingTool
 import content.data.tables.BirdNestDropTable
 import content.global.skill.farming.FarmingPatch
 import content.global.skill.firemaking.LogItem
+import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
@@ -112,8 +113,10 @@ class WoodcuttingPlugin : InteractionListener {
                 val experience: Double = calculateExperience(player, resource, rewardAmount)
                 player.getSkills().addExperience(Skills.WOODCUTTING, experience, true)
 
+                val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
                 if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
                     sendItemDialogue(player, Items.LOGS_1511, "You get some logs.")
+                    TutorialStage.load(player, tutStage)
                 }
                 val itemName = ItemDefinition.forId(reward).name.lowercase()
                 if (resource == WoodcuttingNode.DRAMEN_TREE) {
@@ -194,7 +197,7 @@ class WoodcuttingPlugin : InteractionListener {
         return hostRatio < clientRatio
     }
 
-    fun animateWoodcutting(player: Player) {
+    private fun animateWoodcutting(player: Player) {
         if (!player.animator.isAnimating) {
             player.animate(SkillingTool.getAxe(player)?.let { Animation(it.animation) })
             val playersAroundMe = RegionManager

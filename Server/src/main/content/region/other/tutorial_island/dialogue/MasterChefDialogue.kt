@@ -7,7 +7,6 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
@@ -19,7 +18,52 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
+        val player = player ?: return true
+        val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+
+        if (tutStage == 19) {
+            val hasWater = inInventory(player, Items.BUCKET_OF_WATER_1929)
+            val hasFlour = inInventory(player, Items.POT_OF_FLOUR_1933)
+            val hasEmptyBucket = inInventory(player, Items.BUCKET_1925)
+            val hasEmptyPot = inInventory(player, Items.EMPTY_POT_1931)
+
+            when {
+                !hasWater && !hasFlour -> {
+                    if (hasEmptyBucket) {
+                        removeItem(player, Items.BUCKET_1925)
+                    }
+                    if (hasEmptyPot) {
+                        removeItem(player, Items.EMPTY_POT_1931)
+                    }
+                    addItem(player, Items.BUCKET_OF_WATER_1929)
+                    addItem(player, Items.POT_OF_FLOUR_1933)
+                    sendDoubleItemDialogue(player, Items.POT_OF_FLOUR_1933, Items.BUCKET_OF_WATER_1929, "The master chef gives you some <col=08088A>flour</col> and some <col=08088A>water</col>.")
+                    stage = END_DIALOGUE
+                    return true
+                }
+
+                !hasWater -> {
+                    if (hasEmptyBucket) {
+                        removeItem(player, Items.BUCKET_1925)
+                    }
+                    addItem(player, Items.BUCKET_OF_WATER_1929)
+                    sendItemDialogue(player, Items.BUCKET_OF_WATER_1929, "The master chef gives you some <col=08088A>water</col>.")
+                    stage = END_DIALOGUE
+                    return true
+                }
+
+                !hasFlour -> {
+                    if (hasEmptyPot) {
+                        removeItem(player, Items.EMPTY_POT_1931)
+                    }
+                    addItem(player, Items.POT_OF_FLOUR_1933)
+                    sendItemDialogue(player, Items.POT_OF_FLOUR_1933, "The master chef gives you some <col=08088A>flour</col>.")
+                    stage = END_DIALOGUE
+                    return true
+                }
+            }
+        }
+        when (tutStage) {
             18 -> npc(FaceAnim.FRIENDLY, "Ah! Welcome, newcomer. I am the Master Chef, Lev. It", "is here I will teach you how to cook food truly fit for a", "king.")
             19 -> npc(FaceAnim.HAPPY, "Hello again.")
             in 20..100 -> npc(FaceAnim.HALF_ASKING, "Do you need something?")
@@ -29,8 +73,8 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val player = player ?: return true
-        val hasWater = player.inventory.containsItems(Item(Items.BUCKET_OF_WATER_1929, 1))
-        val hasFlour = player.inventory.containsItems(Item(Items.POT_OF_FLOUR_1933, 1))
+        val hasWater = inInventory(player,Items.BUCKET_OF_WATER_1929, 1)
+        val hasFlour = inInventory(player,Items.POT_OF_FLOUR_1933, 1)
 
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             18 -> when (stage) {
@@ -61,11 +105,7 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
 
             19 -> {
                 if (!hasWater || !hasFlour) {
-                    sendDoubleItemDialogue(player,
-                        Items.POT_OF_FLOUR_1933,
-                        Items.BUCKET_OF_WATER_1929,
-                        "The master chef gives you some <col=08088A>flour</col> and some <col=08088A>water</col>."
-                    )
+                    sendDoubleItemDialogue(player, Items.POT_OF_FLOUR_1933, Items.BUCKET_OF_WATER_1929, "The master chef gives you some <col=08088A>flour</col> and some <col=08088A>water</col>.")
                     removeItem(player, Items.BUCKET_1925)
                     removeItem(player, Items.EMPTY_POT_1931)
                     addItem(player, Items.BUCKET_OF_WATER_1929)

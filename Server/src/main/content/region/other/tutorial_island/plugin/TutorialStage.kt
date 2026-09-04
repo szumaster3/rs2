@@ -565,7 +565,6 @@ object TutorialStage {
                         "",
                     ))
                 queueScript(player, 3, QueueStrength.SOFT) {
-                    sendDialogue(player, "This rock contains tin.")
                     setAttribute(player, GameAttributes.TUTORIAL_STAGE, 33)
                     load(player, 33)
                     return@queueScript stopExecuting(player)
@@ -578,16 +577,12 @@ object TutorialStage {
                 registerHintIcon(player, Location(3086, 9501, 0), 50)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Please wait.",
+                        "It's tin.",
                         "",
-                        "Your character is now attempting to prospect the rock. This",
-                        "should only take a few seconds.",
-                        "",
+                        "So now you know there's tin in the grey rocks, try prospecting the",
+                        "brown ones next.",
+                        ""
                     ))
-                queueScript(player, 3, QueueStrength.SOFT) {
-                    sendDialogue(player, "This rock contains copper.")
-                    return@queueScript stopExecuting(player)
-                }
             }
 
             34 -> {
