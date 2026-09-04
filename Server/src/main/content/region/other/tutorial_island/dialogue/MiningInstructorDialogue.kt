@@ -27,7 +27,23 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
+        val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
+        val hasHammer = inInventory(player,Items.HAMMER_2347, 1)
+        val hasPickaxe = inInventory(player,Items.BRONZE_PICKAXE_1265, 1)
+
+        if (tutorialStage in 34..50 && !hasPickaxe) {
+            addItem(player, Items.BRONZE_PICKAXE_1265)
+            sendItemDialogue(player, Items.BRONZE_PICKAXE_1265, "Dezzick gives you a <col=0000FF>bronze pickaxe!</col>")
+            return true
+        }
+
+        if (tutorialStage in 40..50 && !hasHammer) {
+            addItem(player, Items.HAMMER_2347)
+            sendItemDialogue(player, Items.HAMMER_2347, "Dezzick gives you a <col=0000FF>hammer</col>!")
+            return true
+        }
+
+        when (tutorialStage) {
             30 -> when (stage++) {
                 0 -> playerl(FaceAnim.FRIENDLY, "You can call me ${player.username}.")
                 1 -> npc(FaceAnim.FRIENDLY, "Ok then, ${player.username}.", "My name is Dezzick and I'm a", "miner by trade. Let's prospect some rocks.")
@@ -42,7 +58,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 0 -> npc(FaceAnim.FRIENDLY, "Absolutely right, ${player.username}. These two ore types can", "be smelted together to make bronze.")
                 1 -> npc(FaceAnim.FRIENDLY, "So now you know wht ore is in the rocks over there,", "why don't you have a go at mining some tin and", "copper? Here you'll need this to start with.")
                 2 -> {
-                    addItemOrDrop(player, Items.BRONZE_PICKAXE_1265)
+                    addItem(player, Items.BRONZE_PICKAXE_1265)
                     sendItemDialogue(player, Items.BRONZE_PICKAXE_1265, "Dezzick gives you a <col=0000FF>bronze pickaxe!</col>")
                 }
                 3 -> {
@@ -65,7 +81,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
             40 -> when (stage++) {
                 0 -> npcl(FaceAnim.FRIENDLY, "Now that you've got a bar, you can smith it into a weapon. To smith something, you need a hammer and an anvil. There's some anvils just here that you can use. See if you can make a bronze dagger.")
                 1 -> {
-                    addItemOrDrop(player, Items.HAMMER_2347)
+                    addItem(player, Items.HAMMER_2347)
                     sendItemDialogue(player, Items.HAMMER_2347, "Dezzick gives you a <col=0000FF>hammer</col>!")
                 }
                 2 -> {
@@ -79,7 +95,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 0 -> {
                     setTitle(player, 4)
                     sendOptions(
-                        player!!,
+                        player,
                         title = "What would you like to hear more about?",
                         "Tell me about mining again.",
                         "Tell me about smelting again.",
