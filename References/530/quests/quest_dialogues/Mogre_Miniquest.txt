@@ -1,0 +1,82 @@
+Mogre (Mini-Quest) (January 2, 2009) https://www.youtube.com/watch?v=LVb5-__H89Q
+
+Sober-up Skippy south-east of Rimmington
+
+Player: "Well, I could dump this bucket of water over him. That would sober him up a little."
+
+Select an Option
+	"Throw the water!"
+		Player: "Hey, Skippy!"
+		Skippy: "What?"
+		*throws water*
+		Skippy: "Ahhhhhhhhhhgh! That's cold! Are you trying to kill me?"
+		Player: "Nope. Just sober you up. Memory coming back yet?"
+		Skippy: "No. But I could do with a bowl of tea to warm myself up a bit. Go grab me one and we'll talk."
+		Player: "Any particular type of tea?"
+		Skippy: "Nettle for preference. Just make sure it's hot."
+		Skippy: "And don't throw it at me!"
+		Player: "What's your problem? You're all clean now."
+		<end of dialogue, quest progresses>
+	"I think I'll leave it for now"
+	
+Place nettles in a bowl of water and heat it up, then put it in a teacup.
+	
+Talk to Skippy.
+
+Player: "Hey, Skippy!" 
+Skippy: "Gaah! Don't drench me again!"
+Player: "Hey! I only did that once! Try not to be such a big baby!"
+Skippy: "So what are you here for then?"
+Player: "I've come to give you your tea."
+Skippy: "Excellent! I was thinking I was going to freeze out here!"
+"Skippy drinks the tea and clutches his forehead in pain."
+Skippy: "Ohhhhh..."
+Player: "What? What's wrong?"
+Skippy: "Not so loud...I think I have a hangover..."
+Player: "Great...Well, I doubt you can remember anything through a hangover. What a waste of nettle tea..."
+Skippy: "Hey! A little sympathy here?"
+Skippy: "Owwowwoww... must remember not to shout..."
+Skippy: "Look, I do know a hangover cure. If you can get me a bucket of the stuff I think I'll be okay."
+Player: "Wait... is this cure a bucket of chocolate milk and snape grass?"
+Skippy: "Yes! That's the stuff!"
+Player: "Ahhh. Yes, I've made some of that stuff before. I should be able to get you some, no problem."
+<end dialogue, quest progresses>
+
+Combine chocolate into a bucket of milk, then use the snape grass on it.
+
+Talk to Skippy
+
+Player: "Hey, Skippy!"
+Skippy: "Egad! Don't you know not to shout around a guy with a hangover?"
+Skippy: "Ahhhhhg...No more shouting for me..."
+Skippy: "What is it anyway?"
+Player: "Well, Skippy, you will no doubt be glad to hear that I got you your hangover cure!"
+Skippy: "Gimme!"
+"Skippy chugs the hangover cure... very impressive."
+Skippy: "Ahhhhhhhhhhhhhhh..."
+Skippy: "Much better..."
+Player: "Feeling better?"
+Skippy: "Considerably."
+Player: "Then tell me where the mudskippers are!"
+Skippy: "I wish yuo wouldn't go looking for them. Those vicious killers will tear you apart."
+Skippy: "It's becoming clear to me now..."
+Skippy: "I was fishing using a Fishing Explosive."
+Player: "A Fishing Explosive?"
+Skippy: "Well, Slayer Masters sell these highly volatine potions for killing underwater creatures."
+Skippy: "If you don't feel like lobbing a net about all day you can use them to fish with..."
+Skippy: "But this time I was startled by what I thought was a giant mudskipper."
+Skippy: "What it was, infact, was a..."
+Skippy: "Dramatic Pause..."
+Skippy: "A Mogre!"
+Player: "What exactly is a Mogre?"
+Skippy: "A Mogre is a type of Ogre that spends most of its time underwater."
+Skippy: "They hunt giant mudskippers by wearing their skins and swimming close until they can attack them."
+Skippy: "When I used the Fishing Explosives I scared off all the fish, and so the Mogre got out of the water to express its extreme displeasure."
+Skippy: "With an iron mace."
+Player: "I take it the head injury is responsible for the staggering and yelling?"
+Skippy: "No, no."
+Skippy: "My addiction to almost-lethal alcohol did that."
+Skippy: "But if you are set on finding these Mogres just head south from here until you find Mudskipper Point."
+Player: "The mudskipper-eating monsters are to be found at Mudskipper point?"
+Player: "Shock!"
+Player: "Thanks. I'll be careful."

@@ -1,0 +1,55 @@
+"I have enough people helping me at the moment, thank you"
+"Excellent! You are now part of my team.
+
+That portal is serving a different game. You should wait for your portal.
+You enter the portal.
+If you were wearing your explorer's ring you may have earned more runes.
+The green orbs have stopped responding to yellow wands.
+You cannot create a barrier this close to the altar.
+You wand needs time to charge before creating another barrier. The barrier will be added shortly.
+You remove the barrier.
+
+Wizard Vief gives you 750 tokens. [perfect]
+for loosers lolipop
+
+If team made annihilation:
+Perfect! We captured every single altar! At this rate,
+I'm well on track to be the new head of the guild.
+
+Your purchase has been added to your inventory.
+You do not have enough tokens to buy that item.
+You must select something to buy before you can confirm your purchase
+
+attract -> npc follow
+repel -> follow oposite
+inborder -> transform + add point
+barrier -> stun
+
+join game -> without
+
+Waiting for players to join.
+Waiting for portal to open.
+Waiting for orbs to appear.
+The portal is open
+
+tp spots -> https://www.youtube.com/watch?v=4j47RYJbFWI&ab_channel=avahol1c
+
+roll ess on next round (saw 14) if inv full drop
+
+if afk on round -> "you are pulled through the portal."
+"Swapping wands."
+
+The Lumbridge ring sparkles to life, creating more runes for you.
+
+
+vief
+
+are you ready? The portal will open in any moment.
+
+im ready! -> excellent. i knew i could count on you.
+no what am i supposed to do? -> no what am i supposed to do? -> its quite ocmplicated but a runecrafter of your calibre","should have no trouble understanding. after all, most of","the people they let in here are highly intelligent. -> the runecrafting altars are sources of energy. Every","time we craft runes, that energy comes out of the"," altars and into the eccences. -> Sometimes, too much energy comes out, and it forms","into yellow energy orbs that hang in the air. These","attract another form of energy from the surrounding","space, which manifests as green orbs.
+The yellow orbs need to be put back into the altar. The","green orbs should be kept away. You can move the"," orbs around by attracting and repelling them using","special wands. I'll give you a thrid wand to create"
+barriers. barriers will stop green orbs from getting to"," the altar.
+
+
+I want to quit the team.
