@@ -70,6 +70,7 @@ class BalloonFlightInterface : InterfaceListener, Commands {
 
             if (buttonID == 8) {
                 BalloonUtils.clearBalloonState(player, routeId, step)
+                BalloonUtils.reset(player, Components.ZEP_INTERFACE_470)
                 closeInterface(player)
                 closeSingleTab(player)
                 sendMessage(player, "You bail, but land safely on Entrana.")
@@ -82,7 +83,7 @@ class BalloonFlightInterface : InterfaceListener, Commands {
 
             if (buttonID != sequence.getOrNull(index) || move == null) {
                 BalloonUtils.clearBalloonState(player, routeId, step)
-
+                BalloonUtils.reset(player, Components.ZEP_INTERFACE_470)
                 when (random(1)) {
                     0 -> BalloonCrashHandler.crashAtOceanSite(player)
                     else -> BalloonCrashHandler.crashAtWoodlandSite(player, BalloonCrashHandler.WoodlandExit.values().random())

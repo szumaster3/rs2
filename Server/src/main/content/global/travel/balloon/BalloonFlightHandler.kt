@@ -20,7 +20,7 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
         /**
          * Represents the assistant npc transform ids.
          */
-        private val ASSISTANT_NPC_IDS = intArrayOf(5062,5063,5064,5065,5066)
+        private val ASSISTANT_NPC_IDS = intArrayOf(5053,5054,5055,5056,5062,5063,5064,5065,5066,5057)
 
         /**
          * Represents the basket scenery ids.
@@ -80,7 +80,7 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
          */
 
         on(ASSISTANT_NPC_IDS, IntType.NPC, "talk-to") { player, node ->
-            openDialogue(player, AssistantDialogue(), node)
+            openDialogue(player, AssistantDialogue(), node.asNpc())
             return@on true
         }
 

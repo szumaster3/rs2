@@ -1,6 +1,7 @@
 package content.region.other.entrana.quest.zep
 
 import core.api.*
+import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
@@ -194,11 +195,19 @@ class EnlightenedJourney : Quest(Quests.ENLIGHTENED_JOURNEY, 55, 54, 1, Vars.VAR
         // Source: https://rune-server.org/threads/balloon-traveling-varbits.704722/#post-5791539
         setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_PROGRESS_2866, 200, true)
         setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_ENTRANA_BALLOON_2867, 2, true)
-        setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 1, true)
+        // setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 1, true)
         // setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CASTLE_WARS_BALLOON_2869, 1, true)
         // setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_GRAND_TREE_BALLOON_2870, 1, true)
         // setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CRAFTING_GUILD_BALLOON_2871, 1, true)
         // setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_VARROCK_BALLOON_2872, 1, true)
+    }
+
+    override fun questCloseEvent(player: Player?, component: Component?)
+    {
+        queueScript(player!!,1){
+            setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 2, true)
+            return@queueScript stopExecuting(player)
+        }
     }
 
     override fun newInstance(`object`: Any?): Quest {

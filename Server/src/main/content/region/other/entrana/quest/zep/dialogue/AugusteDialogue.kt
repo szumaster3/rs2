@@ -9,26 +9,25 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.GameWorld
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.*
 
-@Initializable
-class AugusteDialogue(player: Player? = null) : Dialogue(player) {
-
-    override fun handle(componentID: Int, buttonID: Int): Boolean {
-        val hasPapyrus = inInventory(player!!, Items.PAPYRUS_970, 3)
-        val hasCandle = inInventory(player!!, Items.CANDLE_36, 1)
-        val hasWool = inInventory(player!!, Items.BALL_OF_WOOL_1759, 1)
-        val hasPotatoes = inInventory(player!!, Items.POTATOES10_5438, 1)
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        val player = player ?: return
+        npc = NPC(NPCs.AUGUSTE_5049)
+        val hasPapyrus = inInventory(player, Items.PAPYRUS_970, 3)
+        val hasCandle = inInventory(player, Items.CANDLE_36, 1)
+        val hasWool = inInventory(player, Items.BALL_OF_WOOL_1759, 1)
+        val hasPotatoes = inInventory(player, Items.POTATOES10_5438, 1)
 
         val hasDyedBalloon = DyeItem.values().map { it.origamiBalloonId }.toIntArray()
         val hasPlain = inInventory(player, Items.ORIGAMI_BALLOON_9934)
         val hasDyed = anyInInventory(player, *hasDyedBalloon)
 
-        val hasSandbags = inInventory(player!!, Items.SANDBAG_9943, 8)
-        val hasSilk = inInventory(player!!, Items.SILK_950, 10)
-        val hasBowl = inInventory(player!!, Items.UNFIRED_BOWL_1791, 1)
+        val hasSandbags = inInventory(player, Items.SANDBAG_9943, 8)
+        val hasSilk = inInventory(player, Items.SILK_950, 10)
+        val hasBowl = inInventory(player, Items.UNFIRED_BOWL_1791, 1)
         val hasSapling = inInventory(player, Items.AUGUSTES_SAPLING_9932) || inBank(player, Items.AUGUSTES_SAPLING_9932)
         val hasGogglesAndCap = inInventory(player, Items.BOMBER_CAP_9945, Items.GNOME_GOGGLES_9472)
 
@@ -52,7 +51,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         player(FaceAnim.FRIENDLY, "Yes! Sign me up.").also { stage++ }
                     } else {
                         end()
-                        sendMessage(player, RED + "You do not meet the requirements to start: 'Enlightened Journey'.")
+                        sendMessage(player, core.tools.RED + "You do not meet the requirements to start: 'Enlightened Journey'.")
                         stage = END_DIALOGUE
                     }
 
@@ -168,7 +167,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     1 -> playerl(FaceAnim.HAPPY, "Yes, I have them here.").also {
                         val missing = buildList {
                             if (!hasPotatoes) add("a full sack of potatoes")
-                            if (!inInventory(player!!, Items.PAPYRUS_970, 2)) add("more papyrus")
+                            if (!inInventory(player, Items.PAPYRUS_970, 2)) add("more papyrus")
                         }
                         if (missing.isEmpty()) {
                             stage = 3
@@ -217,7 +216,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     end()
                     if(freeSlots(player) < 2) {
                         npcl(FaceAnim.FRIENDLY, "Looks like you don't have enough room in your inventory for the basket and the sapling. Come back when you do.")
-                        return true
+                        return
                     }
                     setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 6)
                     addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932, 1)
@@ -364,11 +363,11 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 26 -> {
                     if (freeSlots(player) < 2) {
                         npcl(FaceAnim.FRIENDLY, "Looks like you don't have enough room in your inventory for the basket and the sapling. Come back when you do.")
-                        return true
+                        return
                     }
                     if (!inInventory(player, Items.COINS_995, 30000)) {
                         npcl(FaceAnim.FRIENDLY, "Looks like you don't have enough money. Come back when you do.")
-                        return true
+                        return
                     }
                     if (removeItem(player, Item(Items.COINS_995, 30000))) {
                         npcl(FaceAnim.FRIENDLY, "Here you go. Now be very careful not to lose it again!")
@@ -449,19 +448,19 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     end()
                     if(player.familiarManager.hasFamiliar() || player.familiarManager.hasPet()) {
                         npcl(FaceAnim.HALF_GUILTY, "You need to put your pet into your inventory before the flight.")
-                        return true
+                        return
                     }
                     if(player.settings.weight > 40) {
                         npcl(FaceAnim.HALF_GUILTY, "You have too much weight in your bag. You may only bring 40kg of weight.")
-                        return true
+                        return
                     }
                     if(!inInventory(player, Items.LOGS_1511, 10)) {
                         npcl(FaceAnim.HALF_GUILTY, "You don't have enough logs. You need ten normal logs.")
-                        return true
+                        return
                     }
                     if(!inInventory(player, Items.TINDERBOX_590, 1)) {
                         npcl(FaceAnim.HALF_GUILTY, "You need a tinderbox.")
-                        return true
+                        return
                     }
                     if(removeItem(player, Item(Items.LOGS_1511, 10))) {
                         lock(player, 3)
@@ -535,13 +534,10 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
         }
-        return true
     }
 
     private fun hasGiven(player: Player, key: String) = getAttribute(player, key, false)
     private fun setGiven(player: Player, key: String) = setAttribute(player, "/save:$key", true)
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.AUGUSTE_5049)
 }
 
 class AugusteFirstTalkAfterQuestDialogue : DialogueFile() {

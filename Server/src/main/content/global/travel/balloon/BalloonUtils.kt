@@ -1,7 +1,6 @@
 package content.global.travel.balloon
 
 import content.data.GameAttributes
-import content.region.other.entrana.quest.zep.dialogue.AugusteFirstTalkAfterQuestDialogue
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.QueueStrength
@@ -12,10 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.tools.colorize
-import shared.consts.Components
-import shared.consts.Quests
-import shared.consts.Regions
-import shared.consts.Sounds
+import shared.consts.*
 
 /**
  * Utility responsible for rendering and updating balloon flight interface state.
@@ -145,7 +141,7 @@ object BalloonUtils {
         closeInterface(player)
 
         if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY))
-            openDialogue(player, AugusteFirstTalkAfterQuestDialogue())
+            setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 1, true)
     }
 
     /**
@@ -345,9 +341,9 @@ object BalloonUtils {
         if (getVarbit(player, destination.varbitId) != 1) {
             setVarbit(player, destination.varbitId, 1, true)
 
-            val xp = 2000
-            if (destination != BalloonTravelDefinition.ENTRANA) {
-                rewardXP(player, Skills.FIREMAKING, xp.toDouble())
+            val xp = 2000.0
+            if (isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY)) {
+                rewardXP(player, Skills.FIREMAKING, xp)
             }
 
             sendMessage(

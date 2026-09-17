@@ -1,14 +1,13 @@
 package content.region.other.entrana.quest.zep.plugin
 
 import content.region.other.entrana.quest.zep.cutscene.AirBalloonCutscene
+import content.region.other.entrana.quest.zep.dialogue.AugusteDialogue
+import content.region.other.entrana.quest.zep.dialogue.AugusteFirstTalkAfterQuestDialogue
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
-import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Quests
-import shared.consts.Scenery
+import shared.consts.*
 
 class EnlightenedJourneyPlugin : InteractionListener {
 
@@ -26,6 +25,18 @@ class EnlightenedJourneyPlugin : InteractionListener {
                 }
             }
             return@onUseWith true
+        }
+
+        on(NPCs.AUGUSTE_5049, IntType.NPC, "talk-to"){p,_ ->
+            if(getVarbit(p,Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868)==1 &&!isQuestComplete(p,Quests.ENLIGHTENED_JOURNEY))
+            {
+                openDialogue(p,AugusteFirstTalkAfterQuestDialogue())
+            }
+            else
+            {
+                openDialogue(p,AugusteDialogue())
+            }
+            return@on true
         }
     }
 }

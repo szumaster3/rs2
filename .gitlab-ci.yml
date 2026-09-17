@@ -3,38 +3,43 @@ variables:
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-fast --show-version"
   GIT_SUBMODULE_STRATEGY: none
 
-image: maven:3-openjdk-11-slim
+image: maven:3-eclipse-temurin-11
 
 workflow:
   rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
-before_script:
-  - 'free -mh'
-  - 'apt-get update -q'
+# # Shared rules for jobs that run only in mr (not on the default branch)
+.mr_only_rules: &mr_only_rules
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: never
+    - when: always
 
-# Cache downloaded dependencies and plugins between builds.
-# To keep cache across branches add 'key: "$CI_JOB_NAME"'
 cache:
+  key: "$CI_JOB_NAME"
   paths:
     - .m2/repository
 
+stages:
+  - build
+  - test
+
 verify:jdk11:
   stage: build
+  before_script:
+    - free -mh
   script:
-    - 'cd Server'
-    - 'mvn $MAVEN_CLI_OPTS verify'
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-      when: never
-    - when: always
+    - cd Server
+    - mvn $MAVEN_CLI_OPTS verify
+  <<: *mr_only_rules
 
 test:json:
   stage: test
+  before_script:
+    - free -mh
+    - apt-get update -q
+    - apt-get install -q -y --no-install-recommends jq
   script:
-    - 'apt-get install -q -y --no-install-recommends jq'
-    - 'find . -name \*.json -type f -print0 | xargs -0 -n1 -P8 jq empty'
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-      when: never
-    - when: always
+    - find . -name "*.json" -type f -print0 | xargs -0 -n1 -P8 jq empty
+  <<: *mr_only_rules
