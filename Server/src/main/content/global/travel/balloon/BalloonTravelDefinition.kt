@@ -36,9 +36,9 @@ enum class BalloonTravelDefinition(
     ENTRANA("in Entrana", NPCs.AUGUSTE_5049, Location(2809, 3356), Items.LOGS_1511, 1, 1, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_ENTRANA_BALLOON_2867, 25, 17, 19133);
 
     companion object {
-        private val npcMap by lazy { values().associateBy { it.npcId } }
-        private val buttonToBalloon by lazy { values().associateBy { it.button } }
-        private val sceneryToBalloon by lazy { values().associateBy { it.sceneryId } }
+        private val npcMap = values().associateBy { it.npcId }
+        private val buttonToBalloon = values().associateBy { it.button }
+        private val sceneryToBalloon = values().associateBy { it.sceneryId }
 
         fun fromButtonId(buttonId: Int): BalloonTravelDefinition? = buttonToBalloon[buttonId]
         fun fromSceneryId(id: Int): BalloonTravelDefinition? = sceneryToBalloon[id]

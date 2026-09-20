@@ -1,7 +1,7 @@
 package content.global.activity.trails
 
+import content.region.wilderness.plugin.WildernessCape
 import core.api.log
-import core.api.toIntArray
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -132,7 +132,7 @@ abstract class ClueScroll(
         /**
          * The wilderness cape ids.
          */
-        val WILDERNESS_CAPES = (4315..4414).toIntArray()
+        val WILDERNESS_CAPES = WildernessCape.allItemIds
 
         /**
          * The mapping of clue scrolls.

@@ -1,6 +1,7 @@
 package content.global.skill.construction.decoration.costumeroom
 
 import core.api.isQuestComplete
+import content.region.wilderness.plugin.WildernessCape
 import core.game.node.entity.player.Player
 import shared.consts.Items
 import shared.consts.Quests
@@ -87,10 +88,11 @@ enum class Storable(
     TouristGuide(Items.TZHAAR_TOURIST_GUIDE_13244, type = StorableType.BOOK, quest = Quests.TOKTZ_KET_DILL),
     ArmadylCommunique(Items.ARMADYL_COMMUNIQU_14085, type = StorableType.BOOK, quest = Quests.WHILE_GUTHIX_SLEEPS),
     // Capes.
-    LegendsCape(Items.CAPE_OF_LEGENDS_1052, type = StorableType.CAPE),
-    ObsidianCape(Items.OBSIDIAN_CAPE_6568, type = StorableType.CAPE),
-    FireCape(Items.FIRE_CAPE_6570, type = StorableType.CAPE),
-    TeamCape(Items.TEAM_1_CAPE_4315, type = StorableType.CAPE),
+    LegendsCape(Items.CAPE_OF_LEGENDS_10635, intArrayOf(Items.CAPE_OF_LEGENDS_1052), type = StorableType.CAPE),
+    ObsidianCape(Items.OBSIDIAN_CAPE_10636, intArrayOf(Items.OBSIDIAN_CAPE_6568), type = StorableType.CAPE),
+    FireCape(Items.FIRE_CAPE_10637, intArrayOf(Items.FIRE_CAPE_6570), type = StorableType.CAPE),
+    TeamCape(Items.TEAM_1_CAPE_10638, WildernessCape.allItemIds, type = StorableType.CAPE),
+    GodCape(Items.GUTHIX_CAPE_10720, intArrayOf(Items.GUTHIX_CAPE_2413,Items.SARADOMIN_CAPE_2412,Items.ZAMORAK_CAPE_2414), type = StorableType.CAPE),
     AttackCape(Items.ATTACK_CAPE_10639, intArrayOf(Items.ATTACK_CAPE_9747,Items.ATTACK_HOOD_9749), type = StorableType.CAPE),
     StrengthCape(Items.STRENGTH_CAPE_10640, intArrayOf(Items.STRENGTH_CAPE_9750,Items.STRENGTH_HOOD_9752), type = StorableType.CAPE),
     DefenceCape(Items.DEFENCE_CAPE_10641, intArrayOf(Items.DEFENCE_CAPE_9753,Items.DEFENCE_HOOD_9755), type = StorableType.CAPE),
@@ -160,7 +162,6 @@ enum class Storable(
     SantaCostume(Items.SANTA_COSTUME_TOP_14601, intArrayOf(Items.SANTA_COSTUME_BOOTS_14605, Items.SANTA_COSTUME_LEGS_14603, Items.SANTA_COSTUME_LEGS_14604, Items.SANTA_COSTUME_GLOVES_14602, Items.SANTA_COSTUME_TOP_14595, Items.SANTA_COSTUME_TOP_14600), type = StorableType.TOY),
     IceAmulet(Items.ICE_AMULET_14599, type = StorableType.TOY),
     Cornucopia(Items.CORNUCOPIA_14537, type = StorableType.TOY),
-    //Cornucopia1(Items.CORNUCOPIA_14538, type = StorableType.TOY),
     Marionette(Items.BLUE_MARIONETTE_6865, intArrayOf(Items.BLUE_MARIONETTE_6865, Items.GREEN_MARIONETTE_6866, Items.RED_MARIONETTE_6867), type = StorableType.TOY),
     // Treasure - low.
     TrimmedBlackArmour(Items.BLACK_PLATEBODY_T_2583, intArrayOf(Items.BLACK_FULL_HELMT_2587, Items.BLACK_PLATEBODY_T_2583, Items.BLACK_PLATELEGS_T_2585, Items.BLACK_KITESHIELD_T_2589), type = StorableType.TRAILS,0),
@@ -321,14 +322,8 @@ enum class Storable(
     EliteBlackArmour(Items.ELITE_BLACK_PLATEBODY_14492, intArrayOf(Items.ELITE_BLACK_FULL_HELM_14494, Items.ELITE_BLACK_PLATEBODY_14492, Items.ELITE_BLACK_PLATELEGS_14490), type = StorableType.ARMOUR_CASE);
 
     companion object {
-        private val idToStorable: Map<Int, Storable> by lazy {
-            values().flatMap { storable ->
-                    storable.takeIds.map { id -> id to storable } }.toMap()
-        }
-
-        private val storableIdSets: Map<Storable, Set<Int>> by lazy {
+        private val storableIdSets: Map<Storable, Set<Int>> =
             values().associateWith { it.takeIds.toSet() }
-        }
 
         fun getItems(type: StorableType): List<Storable> =
             values().filter { it.type == type }
