@@ -111,17 +111,15 @@ class StorageBoxInterface : InterfaceListener {
 
     private fun processItem(player: Player, item: Storable, type: StorableType) {
         val container = getContainer(player, type)
-        val storedItems = container.getItems(type).toSet()
-        val actualId = item.takeIds.firstOrNull() ?: item.displayId
-        val questUnlocked = Storable.isQuestUnlocked(player, item)
-        val stored = item.takeIds.any { it in storedItems }
+        val storedItems = container.getItems(type)
 
         /*
-         * Quest books.
+         * Quest books unlocked by quest.
          */
-        if (questUnlocked)
+        if (Storable.isQuestUnlocked(player, item))
         {
-            if (inInventory(player,actualId,1))
+            val bookId = item.takeIds.first()
+            if (inInventory(player, bookId, 1))
             {
                 sendMessage(player, "You already have this book in your inventory.")
                 return
@@ -134,42 +132,52 @@ class StorageBoxInterface : InterfaceListener {
             }
 
             sendMessage(player, "You take the book from the ${boxName(type)}.")
-            addItem(player, actualId, 1)
+            addItem(player, bookId, 1)
             updateInterface(player, type)
             return
         }
 
         /*
-         * Normal stored item.
+         * Withdraw.
          */
-        if (stored)
+        val storedIds = item.takeIds.filter { it in storedItems }
+        if (storedIds.isNotEmpty())
         {
-
-            if (freeSlots(player) <= 0)
+            val toGive = if (item.oneOf) listOf(storedIds.first()) else storedIds
+            if (freeSlots(player) < toGive.size)
             {
                 sendMessage(player, "You don't have enough inventory space.")
                 return
             }
             sendMessage(player, "You take the item from the ${boxName(type)}.")
-            addItem(player, actualId, 1)
-            container.withdraw(type, item)
+            toGive.forEach{
+                addItem(player, it, 1)
+                container.withdrawId(type, it)
+            }
             updateInterface(player, type)
             return
         }
 
         /*
-         * Nothing stored and no quest unlock.
-         *
-         * Try to deposit the item from inventory.
+         * Deposit.
          */
-        if (!player.inventory.contains(actualId, 1))
+        val toStore = if (item.oneOf) {
+            listOfNotNull(item.takeIds.firstOrNull { inInventory(player, it, 1) })
+        } else {
+            item.takeIds.toList()
+        }
+        if (toStore.isEmpty() || toStore.any { !inInventory(player, it, 1) })
         {
-            sendMessage(player, "You don't have that item in your inventory.")
+            val msg = if (!item.oneOf && item.takeIds.size > 1) "You need all the pieces in your inventory to store this."
+            else "You don't have that item in your inventory."
+            sendMessage(player, msg)
             return
         }
-        sendMessage(player, "You put the item into the box.")
-        removeItem(player, Item(actualId))
-        container.addItem(type, actualId)
+        sendMessage(player, "You put the item into the ${boxName(type)}.")
+        toStore.forEach {
+            removeItem(player, Item(it))
+            container.addItem(type, it)
+        }
         updateInterface(player, type)
     }
 
@@ -307,6 +315,7 @@ class StorageContainer {
         val id = item.takeIds.firstOrNull() ?: item.displayId
         stored[type]?.remove(id)
     }
+    fun withdrawId(type: StorableType, id: Int) { stored[type]?.remove(id) }
     fun contains(type: StorableType, id: Int) = id in (stored[type] ?: emptyList())
     fun getItems(type: StorableType) = stored[type]?.toList() ?: emptyList()
     fun getTier(type: StorableType) = tiers.getOrDefault(type, 0)

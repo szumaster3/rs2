@@ -14,7 +14,8 @@ enum class Storable(
     val takeIds: IntArray = intArrayOf(displayId),
     val type: StorableType,
     val tier: Int = 0,
-    val quest: String? = null
+    val quest: String? = null,
+    val oneOf: Boolean = false
 ){
     // Books
     InstructionManual(Items.INSTRUCTION_MANUAL_5, type = StorableType.BOOK, quest = Quests.DWARF_CANNON),
@@ -91,8 +92,8 @@ enum class Storable(
     LegendsCape(Items.CAPE_OF_LEGENDS_10635, intArrayOf(Items.CAPE_OF_LEGENDS_1052), type = StorableType.CAPE),
     ObsidianCape(Items.OBSIDIAN_CAPE_10636, intArrayOf(Items.OBSIDIAN_CAPE_6568), type = StorableType.CAPE),
     FireCape(Items.FIRE_CAPE_10637, intArrayOf(Items.FIRE_CAPE_6570), type = StorableType.CAPE),
-    TeamCape(Items.TEAM_1_CAPE_10638, WildernessCape.allItemIds, type = StorableType.CAPE),
-    GodCape(Items.GUTHIX_CAPE_10720, intArrayOf(Items.GUTHIX_CAPE_2413,Items.SARADOMIN_CAPE_2412,Items.ZAMORAK_CAPE_2414), type = StorableType.CAPE),
+    TeamCape(Items.TEAM_1_CAPE_10638, WildernessCape.allItemIds, type = StorableType.CAPE, oneOf = true),
+    GodCape(Items.GUTHIX_CAPE_10720, intArrayOf(Items.GUTHIX_CAPE_2413, Items.SARADOMIN_CAPE_2412, Items.ZAMORAK_CAPE_2414), type = StorableType.CAPE, oneOf = true),
     AttackCape(Items.ATTACK_CAPE_10639, intArrayOf(Items.ATTACK_CAPE_9747,Items.ATTACK_HOOD_9749), type = StorableType.CAPE),
     StrengthCape(Items.STRENGTH_CAPE_10640, intArrayOf(Items.STRENGTH_CAPE_9750,Items.STRENGTH_HOOD_9752), type = StorableType.CAPE),
     DefenceCape(Items.DEFENCE_CAPE_10641, intArrayOf(Items.DEFENCE_CAPE_9753,Items.DEFENCE_HOOD_9755), type = StorableType.CAPE),
