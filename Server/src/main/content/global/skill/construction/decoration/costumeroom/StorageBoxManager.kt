@@ -11,11 +11,12 @@ import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
+import shared.consts.Components
 import shared.consts.Items
 
 class StorageBoxInterface : InterfaceListener {
     companion object {
-        private const val INTERFACE = 467
+        private const val INTERFACE = Components.COMPONENT_467
         private const val COMPONENT = 164
         private const val SIZE = 30
         private const val BUTTON_MORE = Items.MORE_10165

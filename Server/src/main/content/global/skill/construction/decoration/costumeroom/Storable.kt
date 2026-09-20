@@ -118,6 +118,7 @@ enum class Storable(
     WoodcuttingCape(Items.WOODCUTTING_CAPE_10660, intArrayOf(Items.WOODCUTTING_CAPE_9807,Items.WOODCUTTING_HOOD_9809), type = StorableType.CAPE),
     FarmingCape(Items.FARMING_CAPE_10661, intArrayOf(Items.FARMING_CAPE_9810,Items.FARMING_HOOD_9812), type = StorableType.CAPE),
     QuestCape(Items.QUEST_POINT_CAPE_10662, intArrayOf(Items.QUEST_POINT_CAPE_9813,Items.QUEST_POINT_HOOD_9814), type = StorableType.CAPE),
+    SummoningCape(Items.SUMMONING_CAPE_12524, intArrayOf(Items.SUMMONING_CAPE_12169,Items.SUMMONING_HOOD_12171), type = StorableType.CAPE),
     SpottedCape(Items.SPOTTED_CAPE_10663, intArrayOf(Items.SPOTTED_CAPE_10069), type = StorableType.CAPE),
     SpottierCape(Items.SPOTTIER_CAPE_10664, intArrayOf(Items.SPOTTIER_CAPE_10071), type = StorableType.CAPE),
     // Fancy.
