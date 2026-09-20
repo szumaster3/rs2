@@ -17,21 +17,6 @@ class BankDepositBoxInterface : InterfaceListener {
         private const val OP_AMOUNT_ALL = 199
         private const val OP_AMOUNT_X = 234
         private const val OP_EXAMINE = 9
-
-        private fun transferX(player: Player, slot: Int, withdraw: Boolean, after: (() -> Unit)? = null) {
-            sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
-                val number = Integer.parseInt(value.toString())
-
-                if (withdraw) {
-                    player.bank.takeItem(slot, number)
-                } else {
-                    player.bank.addItem(slot, number)
-                }
-
-                player.bank.updateLastAmountX(number)
-                after?.let { it() }
-            }
-        }
     }
 
     private fun handleDepositBoxMenu(player: Player, component: Component, opcode: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
@@ -47,7 +32,7 @@ class BankDepositBoxInterface : InterfaceListener {
                 OP_AMOUNT_ONE -> player.bank.addItem(slot, 1)
                 OP_AMOUNT_FIVE -> player.bank.addItem(slot, 5)
                 OP_AMOUNT_TEN -> player.bank.addItem(slot, 10)
-                OP_AMOUNT_X -> transferX(player, slot, false, player.bank::refreshDepositBoxInterface)
+                OP_AMOUNT_X -> BankUtils.transferX(player, slot, false, player.bank::refreshDepositBoxInterface)
                 OP_AMOUNT_ALL -> player.bank.addItem(slot, player.inventory.getAmount(item))
                 else -> player.debug("Unknown deposit box menu opcode $opcode")
             }
