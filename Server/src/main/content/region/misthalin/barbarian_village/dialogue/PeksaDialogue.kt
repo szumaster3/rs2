@@ -15,7 +15,7 @@ import shared.consts.Quests
  * Represents the Peksa dialogue.
  *
  * # Relations
- * - [Scorpion Catcher quest][content.region.kandarin.seers_village.quest.scorpcatcher.ScorpionCatcherPlugin]
+ * - [Scorpion Catcher quest][content.region.kandarin.seers_village.quest.scorpcatcher.plugin.ScorpionCatcherPlugin]
  */
 @Initializable
 class PeksaDialogue(player: Player? = null) : Dialogue(player) {
