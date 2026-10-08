@@ -19,6 +19,21 @@ class ItemCommandSet : CommandSet(Privilege.ADMIN) {
         .map { it.id }
         .toIntArray()
 
+    private val talismanKit = intArrayOf(
+        Items.AIR_TALISMAN_1438,
+        Items.MIND_TALISMAN_1448,
+        Items.WATER_TALISMAN_1444,
+        Items.EARTH_TALISMAN_1440,
+        Items.FIRE_TALISMAN_1442,
+        Items.BODY_TALISMAN_1446,
+        Items.COSMIC_TALISMAN_1454,
+        Items.CHAOS_TALISMAN_1452,
+        Items.NATURE_TALISMAN_1462,
+        Items.LAW_TALISMAN_1458,
+        Items.DEATH_TALISMAN_1456,
+        Items.BLOOD_TALISMAN_1450,
+    )
+
     override fun defineCommands() {
 
         /*
@@ -103,6 +118,21 @@ class ItemCommandSet : CommandSet(Privilege.ADMIN) {
                 addItem(player, item, 1000)
             }
             return@define
+        }
+
+        /*
+         * Command for giving talismans.
+         */
+
+        define(
+            name = "talismankit",
+            privilege = Privilege.ADMIN,
+            usage = "::talismankit",
+            description = "Provides a kit of all talismans."
+        ) { player, _ ->
+            for (item in talismanKit) {
+                addItemOrDrop(player, item)
+            }
         }
 
         /*
