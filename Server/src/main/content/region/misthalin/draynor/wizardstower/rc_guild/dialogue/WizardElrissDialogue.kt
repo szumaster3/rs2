@@ -62,14 +62,8 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            // Main menu, page 1.
-            0 -> showTopics(
-                IfTopic("I have some tokens I'd like to cash in.", 1, inInventory(player, Items.RUNECRAFTING_GUILD_TOKEN_13650)),
-                IfTopic("I have a talisman to show you.", 2, xpPerTalisman.keys.any { inInventory(player, it) }),
-                IfTopic("I've lost my omni-talisman.", 4, !hasOmniTalisman() && completedTask()),
-                Topic("What is this place?", 5),
-                Topic("I have another question.", 100, true),
-            )
+            // Main menu.
+            0 -> showMainMenu(secondPage = false)
 
             1 -> {
                 end()
@@ -147,7 +141,7 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
             16 -> showTopics(
                 Topic("Never mind, then.", 0),
                 Topic("Go on, tell me.", 18),
-                IfTopic("[Charm] You can tell me.", 80, wearsCharosRing()),
+                IfTopic("[Charm] You can tell me.", 80, inEquipment(player!!, Items.RING_OF_CHAROSA_6465)),
             )
 
             18 -> npc(FaceAnim.FRIENDLY, "Leave me be!").also { stage = END_DIALOGUE }
@@ -266,12 +260,7 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
 
             72 -> npc(FaceAnim.FRIENDLY, "Was there something else you wanted?").also { stage = 0 }
 
-            // Main menu, page 2.
-            100 -> showTopics(
-                Topic("What can I do here?", 19),
-                Topic("Can I buy some tokens?", 200),
-                Topic("Never mind.", END_DIALOGUE),
-            )
+            100 -> showMainMenu(secondPage = true)
 
             // [Charm] Ring of charos (a) branch.
             80 -> npcl(FaceAnim.FRIENDLY, "You do seem trustworthy. I suppose it can't hurt to tell you a little.").also { stage++ }
@@ -337,16 +326,48 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
+    /**
+     * Main menu. Shows at most 5 options at once: when more than 5 are visible,
+     * the first page has 4 of them plus "More options...", the second page the rest
+     * (always at least 2, since more than 5 are visible).
+     */
+    private fun showMainMenu(secondPage: Boolean) {
+        val visible = booleanArrayOf(
+            inInventory(player, Items.RUNECRAFTING_GUILD_TOKEN_13650),
+            xpPerTalisman.keys.any { inInventory(player, it) },
+            !hasOmniTalisman() && completedTask(),
+            true,
+            true,
+            true,
+            true,
+        )
+        val needsMore = visible.count { it } > 5
+        fun show(i: Int): Boolean {
+            if (!visible[i]) return false
+            val rank = visible.take(i).count { it }
+            return when {
+                !needsMore -> true
+                secondPage -> rank >= 4
+                else -> rank < 4
+            }
+        }
+        showTopics(
+            IfTopic("I have some tokens I'd like to cash in.", 1, show(0)),
+            IfTopic("I have a talisman to show you.", 2, show(1)),
+            IfTopic("I've lost my omni-talisman.", 4, show(2)),
+            IfTopic("What is this place?", 5, show(3)),
+            IfTopic("What can I do here?", 19, show(4)),
+            IfTopic("Can I buy some tokens?", 200, show(5)),
+            IfTopic("Never mind.", END_DIALOGUE, show(6), true),
+            IfTopic("More options...", 100, needsMore && !secondPage, true),
+        )
+    }
+
     private fun hasOmniTalisman() = hasAnItem(player, Items.OMNI_TALISMAN_13649).container != null
 
     private fun completedTask() = getAttribute(player, GameAttributes.RC_GUILD_TALISMAN_TASK_COMPLETE, false)
 
     private fun talismanShown(talisman: Int) = getAttribute(player, GameAttributes.RC_GUILD_TALISMAN + "_$talisman", false)
-
-    /**
-     * Ring of charos (a).
-     */
-    private fun wearsCharosRing() = inEquipment(player!!, 6465)
 
     /**
      * Any colour of the Runecrafter robes (checked by item name).
