@@ -26,34 +26,33 @@ import shared.consts.*
 class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea {
 
     companion object {
-        private val RC_HAT = intArrayOf(
-            Items.RUNECRAFTER_HAT_13626,
-            Items.RUNECRAFTER_HAT_13625,
-            Items.RUNECRAFTER_HAT_13621,
-            Items.RUNECRAFTER_HAT_13620,
-            Items.RUNECRAFTER_HAT_13616,
-            Items.RUNECRAFTER_HAT_13615,
+        private const val GUILD_REGION = 6741
+        private const val TOWER_REGION = 12337
+        private const val MIN_RC_LEVEL = 50
+        private const val ALTARS_TEXT_COMPONENT = 33
+
+        private val GUILD_DESTINATION = Location.create(1696, 5461, 2)
+        private val TOWER_DESTINATION = Location.create(3106, 3160, 1)
+
+        private val SCENERY_ANIMATIONS = mapOf(
+            Scenery.CONTAINMENT_UNIT_38327 to 10193,
+            Scenery.GLASS_SPHERES_38331 to 10128,
+            Scenery.GYROSCOPE_38330 to 10127,
+            Scenery.RUNESTONE_ACCELERATOR_38329 to 10196,
         )
+
+        private val MAP_SCENERY = intArrayOf(Scenery.MAP_TABLE_38315, Scenery.MAP_38422, Scenery.MAP_38421)
 
         private val WIZARD_NPCs = intArrayOf(
-            NPCs.WIZARD_8033,
-            NPCs.WIZARD_8034,
-            NPCs.WIZARD_8035,
-            NPCs.WIZARD_8036,
-            NPCs.WIZARD_8037,
-            NPCs.WIZARD_8038,
-            NPCs.WIZARD_8039,
-            NPCs.WIZARD_8040,
+            NPCs.WIZARD_8033, NPCs.WIZARD_8034, NPCs.WIZARD_8035, NPCs.WIZARD_8036,
+            NPCs.WIZARD_8037, NPCs.WIZARD_8038, NPCs.WIZARD_8039, NPCs.WIZARD_8040,
         )
 
-        // Components for each altar icon that shows on the map table interface.
-        private val altarComponents = intArrayOf(35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48)
-
-        // Item IDs of all talismans. In-game command [::talismankit] add all talisman items to inventory :).
+        // Item IDs of all talismans. In-game command [::talismankit] adds all talisman items to inventory.
         val talismanIDs = Talisman.values().map { it.item }.toIntArray()
 
-        // Map to link talisman item IDs with interface component IDs.
-        // (The component 45 and 46 IDs was for: Elemental talisman [ID: 5516] and Soul talisman [ID: 1460]).
+        // Talisman item ID -> altar icon component on the map table interface.
+        // (Components 45 and 46 are for: Elemental talisman [5516] and Soul talisman [1460]).
         private val talismanToComponentMap = mapOf(
             Items.AIR_TALISMAN_1438    to 35,
             Items.BODY_TALISMAN_1446   to 36,
@@ -69,113 +68,87 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
             Items.COSMIC_TALISMAN_1454 to 48,
         )
 
+        private val altarComponents = talismanToComponentMap.values.toIntArray()
+
+        /*
+         * Two-way toggle: hat with goggles <-> hat without goggles.
+         */
+
         val hatToggleMap = mapOf(
             Items.RUNECRAFTER_HAT_13626 to Items.RUNECRAFTER_HAT_13625,
-            Items.RUNECRAFTER_HAT_13625 to Items.RUNECRAFTER_HAT_13626,
             Items.RUNECRAFTER_HAT_13621 to Items.RUNECRAFTER_HAT_13620,
-            Items.RUNECRAFTER_HAT_13620 to Items.RUNECRAFTER_HAT_13621,
             Items.RUNECRAFTER_HAT_13616 to Items.RUNECRAFTER_HAT_13615,
-            Items.RUNECRAFTER_HAT_13615 to Items.RUNECRAFTER_HAT_13616,
-        )
+        ).let { it + it.entries.associate { (k, v) -> v to k } }
+
+        private val RC_HAT = hatToggleMap.keys.toIntArray()
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(6741))
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(GUILD_REGION))
+
     override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(
         ZoneRestriction.CANNON,
         ZoneRestriction.RANDOM_EVENTS,
         ZoneRestriction.GRAVES,
-        ZoneRestriction.FIRES
+        ZoneRestriction.FIRES,
     )
+
+    private fun isInTower(player: core.game.node.entity.player.Player) =
+        player.viewport.region!!.regionId == TOWER_REGION
+
+    /**
+     * Reveals the given altar icons on the map interface.
+     */
+    private fun revealAltars(player: core.game.node.entity.player.Player, components: IntArray) {
+        components.forEach { setComponentVisibility(player, Components.RCGUILD_MAP_780, it, false) }
+    }
 
     override fun defineListeners() {
 
         /*
-         * Handles interactions with various objects inside the guild.
+         * Handles animated guild scenery.
          */
 
-        on(Scenery.CONTAINMENT_UNIT_38327, IntType.SCENERY, "activate") { _, node ->
-            animateScenery(node.asScenery(), 10193)
-            return@on true
-        }
-        on(Scenery.GLASS_SPHERES_38331, IntType.SCENERY, "activate") { _, node ->
-            animateScenery(node.asScenery(), 10129)
-            return@on true
-        }
-        on(Scenery.GYROSCOPE_38330, IntType.SCENERY, "activate") { _, node ->
-            animateScenery(node.asScenery(), 10127)
-            return@on true
-        }
-        on(Scenery.RUNESTONE_ACCELERATOR_38329, IntType.SCENERY, "activate") { _, node ->
-            animateScenery(node.asScenery(), 10196)
+        on(SCENERY_ANIMATIONS.keys.toIntArray(), IntType.SCENERY, "activate") { _, node ->
+            animateScenery(node.asScenery(), SCENERY_ANIMATIONS.getValue(node.id))
             return@on true
         }
 
         /*
-         * Handles the interaction with the map table scenery to open the study interface.
+         * Handles map table and wall maps open the study interface.
          */
 
-        on(Scenery.MAP_TABLE_38315, IntType.SCENERY, "Study") { player, _ ->
+        on(MAP_SCENERY, IntType.SCENERY, "Study") { player, _ ->
             openInterface(player, Components.RCGUILD_MAP_780)
             return@on true
         }
 
         /*
-         * Handles the interaction with the map scenery to open the study interface.
-         */
-
-        on(Scenery.MAP_38422, IntType.SCENERY, "Study") { player, _ ->
-            openInterface(player, Components.RCGUILD_MAP_780)
-            return@on true
-        }
-
-        /*
-         * Handles the interaction with the map scenery to open the study interface.
-         */
-
-        on(Scenery.MAP_38421, IntType.SCENERY, "Study") { player, _ ->
-            openInterface(player, Components.RCGUILD_MAP_780)
-            return@on true
-        }
-
-        /*
-         * Handles use talisman item to reveal altar on the map.
+         * Handles using a talisman on the map table to reveals its altar.
          */
 
         onUseWith(IntType.SCENERY, talismanIDs, Scenery.MAP_TABLE_38315) { player, used, _ ->
             openInterface(player, Components.RCGUILD_MAP_780)
-            val componentID = talismanToComponentMap[used.id] ?: 0
-            if (componentID != 0) {
-                setComponentVisibility(player, Components.RCGUILD_MAP_780, componentID, false)
-            }
+            talismanToComponentMap[used.id]?.let { revealAltars(player, intArrayOf(it)) }
             return@onUseWith true
         }
 
         /*
-         * Handles the interaction with the Omni items on the map table.
-         * If the Omni Talisman or Omni Tiara equipped, gain access to all
-         * altar locations on the map.
+         * Handles using the omni talisman on the map table to reveals all altars.
          */
 
         onUseWith(IntType.SCENERY, Items.OMNI_TALISMAN_13649, Scenery.MAP_TABLE_38315) { player, _, _ ->
-            if (!inEquipment(player, Items.OMNI_TALISMAN_13649) || !inEquipment(player, Items.OMNI_TIARA_13655)) {
-                openInterface(player, Components.RCGUILD_MAP_780)
-                for (componentID in altarComponents) {
-                    setComponentVisibility(player, Components.RCGUILD_MAP_780, componentID, false).also {
-                        sendString(player, "All the altars of " + GameWorld.settings!!.name + ".", Components.RCGUILD_MAP_780, 33)
-                    }
-                }
-            }
+            openInterface(player, Components.RCGUILD_MAP_780)
+            revealAllAltars(player)
             return@onUseWith true
         }
 
         /*
-         * Handles the interaction with the RC Portal scenery.
-         * Checks if the player has the required RC level and has completed the Rune Mysteries quest.
+         * Handles teleport to guild.
          */
 
         on(Scenery.PORTAL_38279, IntType.SCENERY, "Enter") { player, _ ->
-            if (getStatLevel(player, Skills.RUNECRAFTING) < 50) {
-                sendDialogue(player, "You require 50 Runecrafting to enter the Runecrafters' Guild.")
+            if (getStatLevel(player, Skills.RUNECRAFTING) < MIN_RC_LEVEL) {
+                sendDialogue(player, "You require $MIN_RC_LEVEL Runecrafting to enter the Runecrafters' Guild.")
                 return@on true
             }
             if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
@@ -183,11 +156,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
                 return@on true
             }
 
-            val destination = if (player.viewport.region!!.regionId == 12337) {
-                Location.create(1696, 5461, 2)
-            } else {
-                Location.create(3106, 3160, 1)
-            }
+            val destination = if (isInTower(player)) GUILD_DESTINATION else TOWER_DESTINATION
 
             player.lock(4)
             visualize(player, Animations.RC_TP_A_10180, Graphics.RC_GUILD_TP)
@@ -201,8 +170,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
         }
 
         /*
-         * Handles the interaction with the RC Hat item by toggling between two variations.
-         * You can switch between wearing the goggles on the hat or without them.
+         * Handles toggle goggles on the RC hat.
          */
 
         on(RC_HAT, IntType.ITEM, "Goggles") { player, node ->
@@ -212,7 +180,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
         }
 
         /*
-         * Handles interaction with Wizard Elriss NPC to open the rewards interface.
+         * Handles the rewards interface.
          */
 
         on(NPCs.WIZARD_ELRISS_8032, IntType.NPC, "Exchange") { player, _ ->
@@ -226,18 +194,13 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
 
         on(WIZARD_NPCs, IntType.NPC, "talk-to") { player, _ ->
             sendOptions(player, "Select an option", "I want to join the orb project!", "Never mind.")
-            addDialogueAction(player) { _, _ ->
-                closeDialogue(player)
-            }
+            addDialogueAction(player) { _, _ -> closeDialogue(player) }
             return@on true
         }
 
         on(NPCs.WIZARD_GRAYZAG_707, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogueLines(
-                player,
-                node.id,
-                FaceAnim.SILENT,
-                false,
+                player, node.id, FaceAnim.SILENT, false,
                 "Not now, I'm trying to concentrate on a",
                 "very difficult spell!"
             )
@@ -255,30 +218,23 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.SCENERY, intArrayOf(Scenery.PORTAL_38279), "enter") { player, node ->
-            if (player.viewport.region!!.regionId == 12337) {
-                return@setDest node.asScenery().location
-            } else {
-                return@setDest Location(1696, 5461, 2)
-            }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.PORTAL_38279), "enter") { p, node ->
+            if (isInTower(p.asPlayer())) node.asScenery().location else GUILD_DESTINATION
         }
     }
 
     override fun defineInterfaceListeners() {
-
-        /*
-         * Handles the opening of the study interface.
-         */
-
+        // Omni talisman staff / omni tiara equipped -> all altars are shown.
         onOpen(Components.RCGUILD_MAP_780) { player, _ ->
             if (inEquipment(player, Items.OMNI_TALISMAN_STAFF_13642) || inEquipment(player, Items.OMNI_TIARA_13655)) {
-                for (rune in altarComponents) {
-                    setComponentVisibility(player, Components.RCGUILD_MAP_780, rune, false).also {
-                        sendString(player, "All the altars of " + GameWorld.settings!!.name + ".", Components.RCGUILD_MAP_780, 33)
-                    }
-                }
+                revealAllAltars(player)
             }
             return@onOpen true
         }
+    }
+
+    private fun revealAllAltars(player: core.game.node.entity.player.Player) {
+        revealAltars(player, altarComponents)
+        sendString(player, "All the altars of ${GameWorld.settings!!.name}.", Components.RCGUILD_MAP_780, ALTARS_TEXT_COMPONENT)
     }
 }
