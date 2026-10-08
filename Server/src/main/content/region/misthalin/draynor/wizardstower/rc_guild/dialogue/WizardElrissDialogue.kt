@@ -68,7 +68,7 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
                 IfTopic("I have a talisman to show you.", 2, xpPerTalisman.keys.any { inInventory(player, it) }),
                 IfTopic("I've lost my omni-talisman.", 4, !hasOmniTalisman() && completedTask()),
                 Topic("What is this place?", 5),
-                Topic("I have another question.", 100),
+                Topic("I have another question.", 100, true),
             )
 
             1 -> {
