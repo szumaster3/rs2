@@ -109,6 +109,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
          */
 
         on(SCENERY_ANIMATIONS.keys.toIntArray(), IntType.SCENERY, "activate") { _, node ->
+            if(node.location != Location(1701, 5474, 2))
             animateScenery(node.asScenery(), SCENERY_ANIMATIONS.getValue(node.id))
             return@on true
         }
