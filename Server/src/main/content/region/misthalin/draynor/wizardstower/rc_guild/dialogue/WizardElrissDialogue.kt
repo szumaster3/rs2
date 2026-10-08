@@ -23,6 +23,7 @@ import shared.consts.NPCs
  * [x] - Restored npc descriptions.
  * [ ] - Check if task is possible to complete.
  * [ ] - Added onUseWith interaction [Talisman on NPC].
+ * [ ] - Replace the name based Runecrafter robes check with item ids.
  */
 
 /**
@@ -38,18 +39,18 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
      * Experience reward for each shown talisman.
      */
     val xpPerTalisman = mapOf(
-        Items.AIR_TALISMAN_1438     to 9.0,
-        Items.MIND_TALISMAN_1448    to 9.0,
-        Items.WATER_TALISMAN_1444   to 9.0,
-        Items.EARTH_TALISMAN_1440   to 12.0,
-        Items.FIRE_TALISMAN_1442    to 27.0,
-        Items.BODY_TALISMAN_1446    to 50.0,
-        Items.COSMIC_TALISMAN_1454  to 109.0,
-        Items.CHAOS_TALISMAN_1452   to 171.0,
-        Items.NATURE_TALISMAN_1462  to 531.0,
-        Items.LAW_TALISMAN_1458     to 1428.0,
-        Items.DEATH_TALISMAN_1456   to 4242.0,
-        Items.BLOOD_TALISMAN_1450   to 6958.0,
+        Items.AIR_TALISMAN_1438 to 9.0,
+        Items.MIND_TALISMAN_1448 to 9.0,
+        Items.WATER_TALISMAN_1444 to 9.0,
+        Items.EARTH_TALISMAN_1440 to 12.0,
+        Items.FIRE_TALISMAN_1442 to 27.0,
+        Items.BODY_TALISMAN_1446 to 50.0,
+        Items.COSMIC_TALISMAN_1454 to 109.0,
+        Items.CHAOS_TALISMAN_1452 to 171.0,
+        Items.NATURE_TALISMAN_1462 to 531.0,
+        Items.LAW_TALISMAN_1458 to 1428.0,
+        Items.DEATH_TALISMAN_1456 to 4242.0,
+        Items.BLOOD_TALISMAN_1450 to 6958.0,
     )
 
     override fun open(vararg args: Any?): Boolean {
@@ -63,13 +64,11 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             // Main menu, page 1.
             0 -> showTopics(
-                IfTopic("I've lost my omni-talisman.", 4, !hasOmniTalisman() && completedTask()),
-                IfTopic("I have some tokens I'd like to cash in.", 1, inInventory(player,Items.RUNECRAFTING_GUILD_TOKEN_13650)),
+                IfTopic("I have some tokens I'd like to cash in.", 1, inInventory(player, Items.RUNECRAFTING_GUILD_TOKEN_13650)),
                 IfTopic("I have a talisman to show you.", 2, xpPerTalisman.keys.any { inInventory(player, it) }),
+                IfTopic("I've lost my omni-talisman.", 4, !hasOmniTalisman() && completedTask()),
                 Topic("What is this place?", 5),
-                Topic("What can I do here?", 19),
-                Topic("Can I buy some tokens?", 200),
-                Topic("Never mind.", END_DIALOGUE),
+                Topic("I have another question.", 100),
             )
 
             1 -> {
@@ -148,7 +147,7 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
             16 -> showTopics(
                 Topic("Never mind, then.", 0),
                 Topic("Go on, tell me.", 18),
-                IfTopic("[Charm] You can tell me.", 80,  inEquipment(player!!, Items.RING_OF_CHAROSA_6465)),
+                IfTopic("[Charm] You can tell me.", 80, wearsCharosRing()),
             )
 
             18 -> npc(FaceAnim.FRIENDLY, "Leave me be!").also { stage = END_DIALOGUE }
@@ -267,6 +266,13 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
 
             72 -> npc(FaceAnim.FRIENDLY, "Was there something else you wanted?").also { stage = 0 }
 
+            // Main menu, page 2.
+            100 -> showTopics(
+                Topic("What can I do here?", 19),
+                Topic("Can I buy some tokens?", 200),
+                Topic("Never mind.", END_DIALOGUE),
+            )
+
             // [Charm] Ring of charos (a) branch.
             80 -> npcl(FaceAnim.FRIENDLY, "You do seem trustworthy. I suppose it can't hurt to tell you a little.").also { stage++ }
             81 -> npcl(FaceAnim.FRIENDLY, "I am searching for an artefact that gives off a very specific type of energy. After many years of research, I think I'm finally drawing near.").also { stage++ }
@@ -338,7 +344,12 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
     private fun talismanShown(talisman: Int) = getAttribute(player, GameAttributes.RC_GUILD_TALISMAN + "_$talisman", false)
 
     /**
-     * Any colour of the Runecrafter robes.
+     * Ring of charos (a).
+     */
+    private fun wearsCharosRing() = inEquipment(player!!, 6465)
+
+    /**
+     * Any colour of the Runecrafter robes (checked by item name).
      */
     private fun wearsRunecrafterRobes() = player!!.equipment.toArray().count { it != null && it.name.startsWith("Runecrafter") } >= 3
 
