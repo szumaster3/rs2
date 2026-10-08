@@ -6,6 +6,7 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.IfTopic
 import core.game.dialogue.Topic
+import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -81,23 +82,16 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 60
                     return true
                 }
-                val newlyShown = xpPerTalisman.keys.filter { inInventory(player, it) && !talismanShown(it) }
-                if (newlyShown.isEmpty()) {
+                if (nextTalisman() == null && !allTalismansShown()) {
                     npc("You don't have any new talismans for me. Come back when you find them.")
                     stage = END_DIALOGUE
                     return true
                 }
-                newlyShown.forEach {
-                    setAttribute(player, GameAttributes.RC_GUILD_TALISMAN + "_$it", true)
-                    rewardXP(player, Skills.RUNECRAFTING, xpPerTalisman.getValue(it))
-                }
-                sendItemDialogue(
-                    player,
-                    newlyShown.last(),
-                    if (newlyShown.size == 1) "You show Elriss the ${getItemName(newlyShown.first())}." else "You show Elriss your talismans.",
-                )
-                stage = if (xpPerTalisman.keys.all { talismanShown(it) }) 65 else END_DIALOGUE
+                showNextTalisman()
             }
+
+            // Next talisman (one dialogue per talisman).
+            75 -> showNextTalisman()
 
             3 -> {
                 sendItemDialogue(player!!, Items.OMNI_TALISMAN_13649, "Wizard Elriss gives you an omni-talisman.")
@@ -141,7 +135,7 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
             16 -> showTopics(
                 Topic("Never mind, then.", 0),
                 Topic("Go on, tell me.", 18),
-                IfTopic("[Charm] You can tell me.", 80, inEquipment(player!!, Items.RING_OF_CHAROSA_6465)),
+                IfTopic("[Charm] You can tell me.", 80, wearsCharosRing()),
             )
 
             18 -> npc(FaceAnim.FRIENDLY, "Leave me be!").also { stage = END_DIALOGUE }
@@ -232,20 +226,17 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
             62 -> showTopics(
                 Topic("Of course it matters.", 63),
                 Topic("No, I suppose not.", 64),
-                Topic("Never mind.", END_DIALOGUE),
+                Topic("Never mind.", END_DIALOGUE, true),
             )
             63 -> npcl(FaceAnim.FRIENDLY, "Of course it does, of course it does. Be careful which team you join, then. I'll accept your reward tokens, either way.").also { stage = 0 }
             64 -> npcl(FaceAnim.FRIENDLY, "No. The important thing is that the orbs get pushed back into the altars, whatever colour they are.").also { stage = 0 }
-
-            // Omni-talisman reward.
-            65 -> npc("Excellent! You've shown me enough talismans. I can", "give you an omni talisman now.").also { stage = 3 }
 
             // Lost omni-talisman.
             66 -> player("Yes.").also { stage++ }
             67 -> npcl(FaceAnim.FRIENDLY, "I suppose I can make you a new one, but the materials need to be paid for. I suppose I could part with another one for 50,000 coins.").also { stage++ }
             68 -> showTopics(
-                Topic("Pay the 50,000 coins.", 69),
-                Topic("Not right now.", 70),
+                Topic("Pay the 50,000 coins.", 69, true),
+                Topic("Not right now.", 70, true),
             )
             69 -> {
                 if (removeItem(player!!, Item(Items.COINS_995, 50000))) {
@@ -363,11 +354,38 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
         )
     }
 
+    private fun nextTalisman() = xpPerTalisman.keys.firstOrNull { inInventory(player, it) && !talismanShown(it) }
+
+    private fun allTalismansShown() = xpPerTalisman.keys.all { talismanShown(it) }
+
+    /**
+     * Shows the next unshown talisman from the inventory, one dialogue per talisman.
+     * When none are left, gives the omni-talisman if all of them were shown.
+     */
+    private fun showNextTalisman() {
+        val talisman = nextTalisman()
+        when {
+            talisman != null -> {
+                setAttribute(player, GameAttributes.RC_GUILD_TALISMAN + "_$talisman", true)
+                rewardXP(player, Skills.RUNECRAFTING, xpPerTalisman.getValue(talisman))
+                sendItemDialogue(player!!, talisman, "You show Elriss the ${getItemName(talisman)}.")
+                stage = 75
+            }
+            allTalismansShown() -> npc("Excellent! You've shown me enough talismans. I can", "give you an omni talisman now.").also { stage = 3 }
+            else -> end()
+        }
+    }
+
     private fun hasOmniTalisman() = hasAnItem(player, Items.OMNI_TALISMAN_13649).container != null
 
     private fun completedTask() = getAttribute(player, GameAttributes.RC_GUILD_TALISMAN_TASK_COMPLETE, false)
 
     private fun talismanShown(talisman: Int) = getAttribute(player, GameAttributes.RC_GUILD_TALISMAN + "_$talisman", false)
+
+    /**
+     * Ring of charos (a).
+     */
+    private fun wearsCharosRing() = inEquipment(player!!, Items.RING_OF_CHAROSA_6465)
 
     /**
      * Any colour of the Runecrafter robes (checked by item name).

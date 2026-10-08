@@ -70,7 +70,7 @@ class WizardKorvakDialogue(player: Player? = null) : Dialogue(player) {
             } else {
                 showTopics(
                     Topic("Can you help me with my essence pouches?", 18),
-                    IfTopic("I've got an omni-talisman that I would like to attach to a tiara or staff.", 3, hasOmniItem),
+                    IfTopic("I've got an omni-talisman that I would like to attach to a tiara or staff.", 3, hasOmniItem, true),
                     Topic("Why are you so jumpy?", 7),
                     Topic("Never mind.", END_DIALOGUE),
                 )
@@ -178,43 +178,39 @@ class WizardKorvakDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             27 -> when (buttonId) {
-                1 -> player("Repair large pouch for 9,000 gp.").also { stage++ }
-                2 -> player("Repair giant pouch for 12,000 gp.").also { stage = 29 }
+                1 -> {
+                    if (amountInInventory(player, Items.COINS_995) < 9000) {
+                    player("Oi, I'm broke!")
+                    stage = 36
+                    return true
+                    }
+                    if (!inInventory(player, Items.LARGE_POUCH_5513)) {
+                        npc("The voices are angry at you! You have nothing to", "repair. Leave us be.")
+                        stage = END_DIALOGUE
+                        return true
+                    }
+                    end()
+                    repair()
+                    removeItem(player, Item(Items.COINS_995, 9000))
+                    npc("Magic makes me happy, magic makes me glad, magic", "makes the voices quiet, and nothing rhymes with", "purple.")
+                }
+                2 -> {
+                    if (amountInInventory(player, Items.COINS_995) < 12000) {
+                        player("Oi, I'm broke!")
+                        stage = 36
+                        return true
+                    }
+                    if (!inInventory(player, Items.GIANT_POUCH_5515)) {
+                        npc("The voices are angry at you! You have nothing to", "repair. Leave us be.")
+                        stage = END_DIALOGUE
+                        return true
+                    }
+                    end()
+                    repair()
+                    removeItem(player, Item(Items.COINS_995, 12000))
+                    npc("Ahhh, the simple act of a transformation spell.", "So, soothing. It makes the voices quiet.", "Your pouch is repaired.")
+                }
                 3 -> player("Never mind.").also { stage = END_DIALOGUE }
-            }
-
-            28 -> {
-                if (amountInInventory(player, Items.COINS_995) < 9000) {
-                    player("Oi, I'm broke!")
-                    stage = 36
-                    return true
-                }
-                if (!inInventory(player, Items.LARGE_POUCH_5513)) {
-                    npc("The voices are angry at you! You have nothing to", "repair. Leave us be.")
-                    stage = END_DIALOGUE
-                    return true
-                }
-                end()
-                repair()
-                removeItem(player, Item(Items.COINS_995, 9000))
-                npc("Magic makes me happy, magic makes me glad, magic", "makes the voices quiet, and nothing rhymes with", "purple.")
-            }
-
-            29 -> {
-                if (amountInInventory(player, Items.COINS_995) < 12000) {
-                    player("Oi, I'm broke!")
-                    stage = 36
-                    return true
-                }
-                if (!inInventory(player, Items.GIANT_POUCH_5515)) {
-                    npc("The voices are angry at you! You have nothing to", "repair. Leave us be.")
-                    stage = END_DIALOGUE
-                    return true
-                }
-                end()
-                repair()
-                removeItem(player, Item(Items.COINS_995, 12000))
-                npc("Ahhh, the simple act of a transformation spell.", "So, soothing. It makes the voices quiet.", "Your pouch is repaired.")
             }
 
             30 -> npc("Ah, coins to fund my rock collection.").also { stage++ }
