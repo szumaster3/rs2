@@ -107,6 +107,10 @@ internal object GameAttributes {
     // Kiss the frog random event.
     const val KTF_KISS_FAIL = "/save:random:kiss_the_frog:fail"
 
+    // Candlelight random event.
+    const val RE_CANDLELIGHT_CANDLES = "candlelight:candle-array"
+    const val RE_CANDLELIGHT_CAMERA = "candlelight:camera-pos"
+
     // Swept away continuation (mini-quest).
     const val MINI_PURPLE_CAT = "/save:mini-quest:purple-cat"
     const val MINI_PURPLE_CAT_COMPLETE = "/save:mini-quest:purple-cat:complete"

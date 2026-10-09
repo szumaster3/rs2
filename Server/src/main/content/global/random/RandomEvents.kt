@@ -1,5 +1,6 @@
 package content.global.random
 
+import content.global.random.event.candlelight.PiousPeteNPC
 import content.global.random.event.certers.CertersBrothersNPC
 import content.global.random.event.drill_demon.SergeantDamienNPC
 import content.global.random.event.drunkdwarf.DrunkenDwarfNPC
@@ -69,6 +70,7 @@ enum class RandomEvents(
     ROCK_GOLEM(RockGolemNPC(), skillIds = intArrayOf(Skills.MINING)),
     SHADE(ShadeNPC(), skillIds = intArrayOf(Skills.PRAYER)),
     ZOMBIE(ZombieNPC(), skillIds = intArrayOf(Skills.PRAYER)),
+    CANDLELIGHT(npc = PiousPeteNPC(), skillIds = intArrayOf(Skills.PRAYER)),
     ;
 
     companion object {
