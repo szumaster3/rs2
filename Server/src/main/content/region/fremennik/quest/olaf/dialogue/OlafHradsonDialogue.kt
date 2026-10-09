@@ -1,5 +1,6 @@
 package content.region.fremennik.quest.olaf.dialogue
 
+import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -162,8 +163,6 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     private fun handleCarvings(s: Int) {
-        val p = player!!
-
         when (stage) {
             0 -> player("Olaf. I cut some logs from the tree. Here's the wood.").also { stage++ }
             1 -> npc(FaceAnim.NEUTRAL, "Wonderful! I'll carve them up now.").also { stage++ }
@@ -186,7 +185,7 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             8 -> npc(FaceAnim.FRIENDLY, "And this one is for my son, Volf. Kids love planks in", "my experience. Tell him I said hello.").also { stage++ }
             9 -> player("Alright. They live in Rellekka, right?").also { stage++ }
             10 -> npc(FaceAnim.NEUTRAL, "Yes. Hurry back! And don't forget the story: I'm not", "here, I'm someplace far away.").also {
-                setQuestStage(p, Quests.OLAFS_QUEST, 2)
+                setQuestStage(player, Quests.OLAFS_QUEST, 2)
                 stage = END_DIALOGUE
             }
         }
@@ -195,28 +194,35 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
     private fun handleFreezing(s: Int) {
         when (stage) {
             // Talking to Olaf Hradson before delivering the carvings.
-            0 -> if(getVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534) < 2) {
-                // Crude
-                npc("So, how did my wife like her carving?").also { stage = 9 }
-            } else if(getVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534) == 2) {
-                // Cruder
-                npc("Did my son like his present? I'll bet he was thrilled.").also { stage = 12 }
-            // Talking to Olaf Hradson again before lighting the fire.
-            } else if(getVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534) == 4) {
-                // If the player has the damp planks.
-                if(inInventory(player, Items.DAMP_PLANKS_11031)) {
-                    npcl(FaceAnim.SAD, "So...very...cold. Almost cold enough to tear up an old map with my fevered shivering. Cough, cough.")
-                    stage = END_DIALOGUE
-                // If the player lost the damp planks and not have at least one free backpack space.
-                } else if(freeSlots(player) == 0 && !inInventory(player, Items.DAMP_PLANKS_11031)){
-                    playerl(FaceAnim.NEUTRAL, "Hey, Olaf. I dropped those slimy planks you gave me. They were not going to burn at all.")
-                    stage = 16
+            0 -> {
+                val progress = getVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534)
+
+                if (progress < 3) {
+                    val needWife = progress < 2
+                    val needSon = !getAttribute(player, GameAttributes.OLAF_VOLF_DELIVERED, false)
+                    val lostCrude = needWife && !inInventory(player, Items.CRUDE_CARVING_11032)
+                    val lostCruder = needSon && !inInventory(player, Items.CRUDER_CARVING_11033)
+
+                    if (lostCrude || (needWife && !lostCruder)) {
+                        npc("So, how did my wife like her carving?").also { stage = 9 }
+                    } else {
+                        npc("Did my son like his present? I'll bet he was thrilled.").also { stage = 12 }
+                    }
+                } else if (progress == 4) {
+                    // Talking to Olaf Hradson again before lighting the fire.
+                    if (inInventory(player, Items.DAMP_PLANKS_11031)) {
+                        npcl(FaceAnim.SAD, "So...very...cold. Almost cold enough to tear up an old map with my fevered shivering. Cough, cough.")
+                        stage = END_DIALOGUE
+                    } else if (freeSlots(player) == 0) {
+                        playerl(FaceAnim.NEUTRAL, "Hey, Olaf. I dropped those slimy planks you gave me. They were not going to burn at all.")
+                        stage = 15
+                    } else {
+                        playerl(FaceAnim.NEUTRAL, "Hey, Olaf. I dropped those slimy planks you gave me. Sorry, they were just too slippery to hold on to.")
+                        stage = 16
+                    }
                 } else {
-                    playerl(FaceAnim.NEUTRAL, "Hey, Olaf. I dropped those slimy planks you gave me. Sorry, they were just too slippery to hold on to.")
-                    stage = 17
+                    player("Olaf, are you all right?").also { stage++ }
                 }
-            } else {
-                player("Olaf, are you all right?").also { stage++ }
             }
             1 -> npc(FaceAnim.NEUTRAL, "So... cold... need... fire.").also {
                 if(getVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534) != 3){
@@ -255,10 +261,10 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
             11 -> npcl(FaceAnim.FRIENDLY, "Well, hurry up and give it to her then!").also { stage = END_DIALOGUE }
-            12 -> if(!inInventory(player, Items.CRUDER_CARVING_11033)){
+            12 -> if (!inInventory(player, Items.CRUDER_CARVING_11033)) {
                 player("I don't know... I may have accidentially lost it.").also { stage++ }
             } else {
-                player("I don't know... I still have to give it to her.").also { stage = 11 }
+                player("I'll bet he will be... As soon as I go and give it to him.").also { stage = 14 }
             }
             13 -> if(freeSlots(player) == 0) {
                 npcl(FaceAnim.ANGRY, "So, you can lose my son's carving and still have time to fill your backpack with rubbish. I'll make a replacement - you can come and get it when you can carry it.")
@@ -266,12 +272,11 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             } else {
                 npcl(FaceAnim.FRIENDLY, "Gah! Are you doing this deliberately now? Here, have another - and try not to lose this one!")
                 addItemOrDrop(player, Items.CRUDER_CARVING_11033)
-                stage++
+                stage = END_DIALOGUE
             }
-            14 -> player("I'll bet he will be... As soon as I go and give it to him.").also { stage++ }
-            15 -> npcl(FaceAnim.NEUTRAL, "Well, take your time over it, why don't you.").also { stage = END_DIALOGUE}
-            16 -> npcl(FaceAnim.NEUTRAL, "Well...when you feel...like helping me...I'll give you some more. But you will need...to be able...to carry them.").also { stage = END_DIALOGUE}
-            17 -> npcl(FaceAnim.NEUTRAL, "Well, here, have another load. And get it right this time. I can feel...my life slipping away...cough, cough. Splutter.").also {
+            14 -> npcl(FaceAnim.NEUTRAL, "Well, take your time over it, why don't you.").also { stage = END_DIALOGUE}
+            15 -> npcl(FaceAnim.NEUTRAL, "Well...when you feel...like helping me...I'll give you some more. But you will need...to be able...to carry them.").also { stage = END_DIALOGUE}
+            16 -> npcl(FaceAnim.NEUTRAL, "Well, here, have another load. And get it right this time. I can feel...my life slipping away...cough, cough. Splutter.").also {
                 addItemOrDrop(player, Items.DAMP_PLANKS_11031, 1)
                 stage = END_DIALOGUE
             }

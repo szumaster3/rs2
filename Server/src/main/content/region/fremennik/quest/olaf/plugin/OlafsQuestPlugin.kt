@@ -15,11 +15,15 @@ class OlafsQuestPlugin : InteractionListener {
     companion object {
         val parchmentContent = arrayOf(
             "",
-            "Alas, we are lost. Our ship has been smashed against the rocks and we are floundering. Sven",
-            "has ordered us to make for the hidden caves, but I do not think we will make it alive. The other",
-            "ships have already gone down, along with the greater share of that cursed treasure. I commend",
-            "my soul to the gods.",
-            "-Ulfric Longbeard",
+            "Alas, we are lost. Our ship has been",
+            "smashed against the rocks and we",
+            "are floundering. Sven has ordered us",
+            "to make for the hidden caves, but I",
+            "do not think we will make it alive.",
+            "The other ships have already gone",
+            "down, along with the greater share of",
+            "that cursed treasure. I commend my",
+            "soul to the gods. -Ulfric Longbeard",
         )
     }
 
@@ -90,15 +94,19 @@ class OlafsQuestPlugin : InteractionListener {
          * Handles opening the chest and spawn Ulfric NPC.
          */
 
-        on(Scenery.CHEST_14197, IntType.SCENERY, "open") { player, _ ->
-            if(isQuestComplete(player, Quests.OLAFS_QUEST)) {
+        on(Scenery.CHEST_14197, IntType.SCENERY, "open") { player, node ->
+            if (isQuestComplete(player, Quests.OLAFS_QUEST)) {
                 sendMessage(player, "The chest is empty.")
                 return@on true
             }
-            if(getQuestStage(player, Quests.OLAFS_QUEST) != 99) {
-                sendMessage(player, "You open the chest and the vengeful spirit of fremennik captain appears!", 2)
-                player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(137), 98)
-                UlfricNPC.spawnUlfric(player)
+            if (getQuestStage(player, Quests.OLAFS_QUEST) != 99) {
+                if (UlfricNPC.spawnUlfric(player)) {
+                    replaceScenery(node.asScenery(), node.id -1, 3)
+                    sendMessage(player, "You open the chest and the vengeful spirit of fremennik captain appears!", 2)
+                    player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(137), 98)
+                } else {
+                    sendMessage(player, "You can't do that right now.")
+                }
             } else {
                 sendMessage(player, "You find a note in the chest...")
                 sendMessage(player, "...and a huge heap of treasure!")
@@ -112,9 +120,10 @@ class OlafsQuestPlugin : InteractionListener {
          */
 
         on(Items.PARCHMENT_11036, IntType.ITEM, "read") { player, _ ->
-            if(!getAttribute(player, GameAttributes.READ_PARCHMENT, false)){
+            if(!getAttribute(player, GameAttributes.OLAF_READ_PARCHMENT, false)){
                 sendMessage(player, "The scroll tells you that there were more ships washed up, further out to sea.")
                 sendMessage(player, "Better yet, they were apparently carrying the better part of the treasure!")
+                setAttribute(player, GameAttributes.OLAF_READ_PARCHMENT, true)
             } else {
                 openInterface(player, Components.SCROLL_255).also {
                     sendString(player, parchmentContent.joinToString("<br>"), Components.SCROLL_255, 3)

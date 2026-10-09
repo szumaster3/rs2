@@ -1,5 +1,6 @@
 package content.region.fremennik.quest.olaf.dialogue
 
+import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -52,9 +53,12 @@ class IngridHradsonDialogue(player: Player? = null) : Dialogue(player) {
             8 -> {
                 npc(FaceAnim.FRIENDLY, "Well, since you have come such a long way, you can","have this. I baked it this morning, so it's still nice and","fresh.")
                 addItem(player, Items.BREAD_2309)
-                setVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534, 2, true)
+                val progress = getVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534)
+                if (progress < 2) {
+                    val volfDone = getAttribute(player, GameAttributes.OLAF_VOLF_DELIVERED, false)
+                    setVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534, if (volfDone) 3 else 2, true)
+                }
                 stage++
-
             }
             9 -> player("Oh, thank you! Enjoy your Obscurian Tribal", "Artifact(tm). It has a million-and-one uses!").also { stage = END_DIALOGUE }
 

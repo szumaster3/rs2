@@ -1,7 +1,7 @@
 package content.region.fremennik.quest.olaf.npc
 
+import content.data.GameAttributes
 import core.api.*
-import core.api.utils.PlayerCamera
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
@@ -13,25 +13,30 @@ import core.game.world.map.Location
 import shared.consts.NPCs
 import shared.consts.Quests
 
-class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location){
+class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = UlfricNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ULFRIC_3706,NPCs.ULFRIC_3710)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ULFRIC_3706, NPCs.ULFRIC_3710)
 
     companion object {
+        /**
+         * Spawns Ulfric NPC for the player.
+         * @return true if Ulfric was spawned, false if one is already active for this player.
+         */
         @JvmStatic
-        fun spawnUlfric(player: Player) {
+        fun spawnUlfric(player: Player): Boolean {
+            val existing = getAttribute<UlfricNPC?>(player, GameAttributes.OLAF_ULFRIC_SPAWN, null)
+            if (existing != null && existing.isActive) {
+                return false
+            }
+
             val ulfric = UlfricNPC(NPCs.ULFRIC_3710)
             ulfric.location = Location.create(2744, 10161, 0)
             ulfric.isWalks = true
             ulfric.isAggressive = true
-            ulfric.isActive = false
-
-            if (ulfric.asNpc() != null && ulfric.isActive) {
-                ulfric.properties.teleportLocation = ulfric.properties.spawnLocation
-            }
             ulfric.isActive = true
+            setAttribute(player, GameAttributes.OLAF_ULFRIC_SPAWN, ulfric)
             GameWorld.Pulser.submit(
                 object : Pulse(1, ulfric) {
                     var counter = 0
@@ -61,12 +66,19 @@ class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
                     }
                 },
             )
+            return true
+        }
+
+        @JvmStatic
+        fun clearUlfric(player: Player) {
+            removeAttribute(player, GameAttributes.OLAF_ULFRIC_SPAWN)
         }
     }
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
             clearHintIcon(killer)
+            clearUlfric(killer)
             setQuestStage(killer, Quests.OLAFS_QUEST, 99)
         }
         clear()

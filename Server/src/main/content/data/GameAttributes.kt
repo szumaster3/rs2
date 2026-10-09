@@ -430,5 +430,8 @@ internal object GameAttributes {
     const val ROF_CHARGES = "ringOfForgingCharges"
 
     // Olaf's quest
-    const val READ_PARCHMENT = "/save:olafs-quest:read-parchment"
+    const val OLAF_READ_PARCHMENT = "/save:olafs-quest:read-parchment"
+    const val OLAF_VOLF_DELIVERED = "olafs-quest:volf-delivered"
+    const val OLAF_VOLF_DELIVERED_SAVE = "/save:$OLAF_VOLF_DELIVERED"
+    const val OLAF_ULFRIC_SPAWN = "olafs-quest:ulfric"
 }
