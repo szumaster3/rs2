@@ -24,7 +24,7 @@ class SlayerOptionPlugin : InteractionListener {
         private const val STAIRS_2 = Scenery.STAIRS_35121
         private const val CAVE_ENTRANCE = Scenery.CAVE_ENTRANCE_15767
         private val CAVE_EXIT = intArrayOf(Scenery.CAVE_15811, Scenery.CAVE_15812, Scenery.CAVE_23157, Scenery.CAVE_23158)
-        private val SWENS_DIG_LOCATIONS = arrayOf(Location(2749, 3733, 0), Location(2748, 3733, 0), Location(2747, 3733, 0), Location(2747, 3734, 0), Location(2747, 3735, 0), Location(2747, 3736, 0), Location(2748, 3736, 0), Location(2749, 3736, 0))
+        private val SWENS_DIG_LOCATIONS = arrayOf(Location(2750, 3735, 0),Location(2749, 3733, 0), Location(2748, 3733, 0), Location(2747, 3733, 0), Location(2747, 3734, 0), Location(2747, 3735, 0), Location(2747, 3736, 0), Location(2748, 3736, 0), Location(2749, 3736, 0))
     }
 
     override fun defineDestinationOverrides() {
@@ -36,24 +36,32 @@ class SlayerOptionPlugin : InteractionListener {
         }
     }
 
+    /**
+     * Handles enter to the brine rat cave.
+     */
     private fun enterCavern(player: Player) {
-        lock(player, 6)
-        sendMessage(player, "You dig a hole...")
-        openOverlay(player, FADE_START)
-        queueScript(player, 5, QueueStrength.SOFT) { stage ->
-            when (stage) {
-                0 -> {
-                    teleport(player, Location(2697, 10119, 0), TeleportManager.TeleportType.INSTANT)
-                    openInterface(player, FADE_END)
-                    keepRunning(player)
+        if(getQuestStage(player, Quests.OLAFS_QUEST) == 4) {
+            lock(player, 6)
+            sendMessage(player, "You dig a hole...", 1)
+            closeOverlay(player)
+            openOverlay(player, FADE_START)
+            queueScript(player, 3, QueueStrength.SOFT) { stage ->
+                when (stage) {
+                    0 -> {
+                        teleport(player, Location(2697, 10119, 0), TeleportManager.TeleportType.INSTANT)
+                        openInterface(player, FADE_END)
+                        keepRunning(player)
+                    }
+
+                    1 -> {
+                        playAudio(player, Sounds.STUNNED_2727)
+                        sendGraphics(Graphics(80, 96), player.location)
+                        sendMessage(player, "...And fall into a dark and slimy pit!")
+                        stopExecuting(player)
+                    }
+
+                    else -> stopExecuting(player)
                 }
-                1 -> {
-                    playAudio(player, Sounds.STUNNED_2727)
-                    sendGraphics(Graphics(80, 96), player.location)
-                    sendMessage(player, "...And fall into a dark and slimy pit!")
-                    stopExecuting(player)
-                }
-                else -> stopExecuting(player)
             }
         }
     }
@@ -104,15 +112,46 @@ class SlayerOptionPlugin : InteractionListener {
         }
 
         /*
-         * Handles exit from the mos le harmless cave.
+         * Handles exits from the mos le harmless cave and the brine rat cave.
          */
 
         on(CAVE_EXIT, IntType.SCENERY, "exit") { player, node ->
-            val destination = when (node.id) {
-                Scenery.CAVE_23157, Scenery.CAVE_23158 -> Location(2729, 3733, 0)
-                else -> Location(3749, 2973, 0)
+            when (node.id) {
+                Scenery.CAVE_23157, Scenery.CAVE_23158 -> {
+                    lock(player, 6)
+                    sendMessage(player, "You push the boulder.", 1)
+                    closeOverlay(player)
+                    openOverlay(player, FADE_START)
+
+                    queueScript(player, 3, QueueStrength.SOFT) { stage ->
+                        when (stage) {
+                            0 -> {
+                                sendMessage(player, "You squeeze through the narrow crack in the cliff face.")
+                                teleport(player, Location(2729, 3733, 0), TeleportManager.TeleportType.INSTANT)
+                                openInterface(player, FADE_END)
+                                keepRunning(player)
+                            }
+
+                            1 -> {
+                                sendMessage(player, "You exit the cave. From this side you can't even make out how to get into the cave!")
+                                sendMessage(player, "You'll likely need to dig to get back inside.")
+                                stopExecuting(player)
+                            }
+
+                            else -> stopExecuting(player)
+                        }
+                    }
+                }
+
+                else -> {
+                    teleport(
+                        player,
+                        Location(3749, 2973, 0),
+                        TeleportManager.TeleportType.INSTANT
+                    )
+                }
             }
-            teleport(player, destination, TeleportManager.TeleportType.INSTANT)
+
             return@on true
         }
     }

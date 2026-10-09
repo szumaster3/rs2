@@ -428,4 +428,7 @@ internal object GameAttributes {
 
     // Ring of forging charges.
     const val ROF_CHARGES = "ringOfForgingCharges"
+
+    // Olaf's quest
+    const val READ_PARCHMENT = "/save:olafs-quest:read-parchment"
 }

@@ -134,9 +134,9 @@ public abstract class Quest implements Plugin<Object> {
             this.questCloseEvent(p, c);
             return true;
         }));
-        player.getPacketDispatch().sendString("" + player.getQuestRepository().getPoints() + "", 277, 7);
-        player.getPacketDispatch().sendString("You have completed the " + getName() + " Quest!", 277, 4);
-        player.getPacketDispatch().sendMessage("Congratulations! You have completed the " + getName() + " Quest!");
+        player.getPacketDispatch().sendString("" + player.getQuestRepository().getPoints(), 277, 7);
+        player.getPacketDispatch().sendString("You have completed the " + getName() + "!", 277, 4);
+        player.getPacketDispatch().sendMessage("Congratulations! You have completed the " + getName() + "!");
         int questJingles[] = {152, 153, 154};
         playJingle(player, questJingles[new Random().nextInt(3)]);
     }

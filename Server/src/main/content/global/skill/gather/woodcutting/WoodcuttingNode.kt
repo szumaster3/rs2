@@ -2,6 +2,7 @@ package content.global.skill.gather.woodcutting
 
 import core.ServerConstants
 import core.game.world.repository.Repository.players
+import shared.consts.Items
 import shared.consts.Scenery
 
 /**
@@ -96,7 +97,7 @@ enum class WoodcuttingNode {
     MAGIC_TREE_3(Scenery.MAGIC_TREE_8409, Scenery.TREE_STUMP_37824, 23.toByte(), true),
     CURSED_MAGIC_TREE(Scenery.CURSED_MAGIC_TREE_37821, Scenery.TREE_STUMP_37822, 17.toByte()),
     DRAMEN_TREE(Scenery.DRAMEN_TREE_1292, 771, 18.toByte()),
-    WINDSWEPT_TREE(Scenery.WINDSWEPT_TREE_18137, Scenery.TREE_STUMP_1353, 19.toByte()),
+    WINDSWEPT_TREE(Scenery.WINDSWEPT_TREE_18137, Scenery.TREE_STUMP_1353, 24.toByte()),
     LIGHT_JUNGLE_1(Scenery.LIGHT_JUNGLE_9010, Scenery.LIGHT_JUNGLE_9010, 31.toByte()),
     LIGHT_JUNGLE_2(Scenery.LIGHT_JUNGLE_9011, Scenery.LIGHT_JUNGLE_9010, 31.toByte()),
     LIGHT_JUNGLE_3(Scenery.LIGHT_JUNGLE_9012, Scenery.LIGHT_JUNGLE_9010, 31.toByte()),
@@ -370,6 +371,15 @@ enum class WoodcuttingNode {
                 baseHigh = 255.0
                 tierModLow = 0.0
                 tierModHigh = 0.0
+            }
+
+            24 -> {
+                reward = Items.WINDSWEPT_LOGS_11035
+                respawnRate = 50 or (100 shl 16)
+                rate = 0.05
+                experience = 1.0
+                level = 50
+                rewardAmount = Int.MAX_VALUE
             }
 
             30 -> {

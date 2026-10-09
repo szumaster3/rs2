@@ -340,7 +340,7 @@ object LoginConfiguration {
 
     private fun setConfigs(player: Player) {
         setVarbit(player, 4322, 1)
-
+        setVarbit(player, 3537, if(getQuestStage(player, Quests.OLAFS_QUEST) != 3) 1 else 0)
 
         if (getAttribute(player, GameAttributes.KW_COMPLETE, false)) {
             setVarbit(player, 3909, 8)
