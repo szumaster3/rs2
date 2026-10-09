@@ -72,12 +72,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- jetbrains://idea/navigate/reference?project=openscape&path=Config -->
-        <dependency>
-            <groupId>org.rsps</groupId>
-            <artifactId>Constants</artifactId>
-            <version>1.0.0</version>
-        </dependency>
         <!-- Source: https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -163,7 +157,7 @@
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>org.rsps</groupId>
                             <artifactId>Constants</artifactId>
-                            <version>1.0</version>
+                            <version>1.0.0</version>
                             <packaging>jar</packaging>
                             <generatePom>true</generatePom>
                         </configuration>
