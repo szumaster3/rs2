@@ -416,7 +416,7 @@ public final class PacketDispatch {
      * @param yaw         the yaw rotation value.
      */
     public void sendInterfaceAnimateRotation(int id, int componentId, int pitch, int yaw) {
-        PacketRepository.send(InterfaceModelAnimateRotation.class, new InterfaceAnimateRotateContext(player, id, componentId, pitch, yaw));
+        PacketRepository.send(InterfaceSetModelRotation.class, new InterfaceSetModelRotationContext(player, id, componentId, pitch, yaw));
     }
 
     /**

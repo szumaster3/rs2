@@ -61,7 +61,7 @@ object PacketRepository {
         put(ResetInterface::class.java, ResetInterface())
         put(VarcUpdate::class.java, VarcUpdate())
         put(InterfaceSetAngle::class.java, InterfaceSetAngle())
-        put(InterfaceModelAnimateRotation::class.java, InterfaceModelAnimateRotation())
+        put(InterfaceSetModelRotation::class.java, InterfaceSetModelRotation())
         put(LastLoginInfo::class.java, LastLoginInfo())
     }
 

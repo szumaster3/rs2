@@ -2,11 +2,11 @@ package core.net.packet.out
 
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.InterfaceAnimateRotateContext
+import core.net.packet.context.InterfaceSetModelRotationContext
 
-class InterfaceModelAnimateRotation : OutgoingPacket<InterfaceAnimateRotateContext> {
+class InterfaceSetModelRotation : OutgoingPacket<InterfaceSetModelRotationContext> {
 
-    override fun send(ctx: InterfaceAnimateRotateContext) {
+    override fun send(ctx: InterfaceSetModelRotationContext) {
         val player = ctx.player
         val buffer = IoBuffer(207)
         val componentHash = (ctx.id shl 16) or ctx.componentId
