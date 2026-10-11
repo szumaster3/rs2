@@ -9,6 +9,14 @@ Singleplayer-only fork of the [2009scape server](https://gitlab.com/2009scape/20
 - **In:** local single-player server, content development (Kotlin), local save data.
 - **Out:** hosting, login/auth against a database, public world, client distribution.
 
+## Precompiled build
+
+Don't want to compile? A ready-to-play build of this fork is published on GitHub and updated continuously:
+
+[github.com/szumaster3/runescape](https://github.com/szumaster3/runescape)
+
+See the README in that repository for instructions. This repository contains the source code only.
+
 ## Requirements
 
 | Component | Version / note                                        |
