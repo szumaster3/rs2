@@ -1,21 +1,21 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import core.api.getQuestStage
+import core.api.sendMessage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
+import shared.consts.NPCs
 import shared.consts.Quests
 
 class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             else -> {
-                player.packetDispatch.sendMessage("The captain looks up from his work as you address him.")
+                sendMessage(player,"The captain looks up from his work as you address him.")
                 npc("What are you doing in here?")
             }
         }
@@ -23,7 +23,7 @@ class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             52 -> when (stage) {
                 0 -> {
                     player("I wanted to have a chat?")
@@ -85,7 +85,7 @@ class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
 
                 11 -> {
                     end()
-                    quest!!.setStage(player, 53)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 53)
                 }
             }
 
@@ -106,5 +106,5 @@ class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(831)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_SIAD_831)
 }

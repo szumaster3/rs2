@@ -1,8 +1,6 @@
 package content.region.kandarin.feldip.quest.chompybird.npc
 
-import core.api.findLocalNPC
-import core.api.getAttribute
-import core.api.sendMessage
+import core.api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -30,9 +28,7 @@ class RantzNPC : AbstractNPC {
         val chompy = findLocalNPC(this, NPCs.CHOMPY_BIRD_1550) as? ChompyBirdNPC ?: return
 
         val owner = getAttribute<Player?>(chompy, "owner", null) ?: return
-        val quest = owner.questRepository.getQuest(Quests.BIG_CHOMPY_BIRD_HUNTING)
-
-        if (quest.getStage(owner) !in 40..50 || chompy.getAttribute("attacked", false)) return
+        if (getQuestStage(owner, Quests.BIG_CHOMPY_BIRD_HUNTING) !in 40..50 || chompy.getAttribute("attacked", false)) return
 
         sendChat("Hey, dere's da chompy, I's gonna shoot it.")
         sendMessage(owner, "Rantz: Hey, dere's da chompy, I's gonna shoot it.")
@@ -41,6 +37,6 @@ class RantzNPC : AbstractNPC {
 
         attack(chompy)
         chompy.setAttribute("attacked", true)
-        quest.setStage(owner, 50)
+        setQuestStage(owner, Quests.BIG_CHOMPY_BIRD_HUNTING, 50)
     }
 }

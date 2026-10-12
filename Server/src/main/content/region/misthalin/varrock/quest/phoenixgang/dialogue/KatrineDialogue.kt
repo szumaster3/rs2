@@ -2,11 +2,12 @@ package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
 import content.region.asgarnia.burthorpe.quest.hero.dialogue.KatrineDialogueFile
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
+import core.api.getQuestStage
 import core.api.openDialogue
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
@@ -20,16 +21,12 @@ import shared.consts.Quests
  */
 class KatrineDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV)
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.SHIELD_OF_ARRAV)) {
             100 -> {
                 if (ShieldofArrav.isBlackArm(player)) {
-                    val heroesQuest: Quest = player.getQuestRepository().getQuest(Quests.HEROES_QUEST)
-                    if (0 < heroesQuest.getStage(player) && heroesQuest.getStage(player) < 100) {
+                    if (getQuestStage(player, Quests.HEROES_QUEST) in 1 until 100) {
                         openDialogue(player, KatrineDialogueFile(), npc)
                         return true
                     }
@@ -68,7 +65,7 @@ class KatrineDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (quest!!.getStage(player) == 60 && stage >= 200) {
+        if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 60 && stage >= 200) {
             when (stage) {
                 200 -> if (!player.inventory.containsItem(CROSSBOWS)) {
                     player("No, I haven't found them yet.")
@@ -106,7 +103,7 @@ class KatrineDialogue(player: Player? = null) : Dialogue(player) {
                     if (player.inventory.remove(CROSSBOWS)) {
                         npc("Ok. You can join our gang now. Feel free to enter", "any of the rooms of the ganghouse.")
                         stage = 206
-                        quest!!.setStage(player, 70)
+                        setQuestStage(player, Quests.SHIELD_OF_ARRAV, 70)
                         ShieldofArrav.setBlackArm(player)
                     }
                 }
@@ -115,7 +112,7 @@ class KatrineDialogue(player: Player? = null) : Dialogue(player) {
             }
             return true
         }
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.SHIELD_OF_ARRAV)) {
             80, 90, 100, 70 -> when (stage) {
                 0 -> {
                     npc("Hey.")
@@ -392,12 +389,9 @@ class KatrineDialogue(player: Player? = null) : Dialogue(player) {
 
                 183 -> end()
                 184 -> {
-                    quest!!.setStage(player, 60)
+                    setQuestStage(player, Quests.SHIELD_OF_ARRAV, 60)
                     ShieldofArrav.setBlackArmMission(player)
-                    npc(
-                        "Great! You'll find the Phoenix gang's weapon stash just",
-                        "next to a temple, due east of here.",
-                    )
+                    npc("Great! You'll find the Phoenix gang's weapon stash just", "next to a temple, due east of here.")
                     stage = 185
                 }
 

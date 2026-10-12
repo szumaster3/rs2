@@ -182,7 +182,7 @@ class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
                     "Thank you. The problem is, there is a ghost in the",
                     "church graveyard. I would like you to get rid of it.",
                 ).also {
-                    player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).start(player)
+                    setQuestStage(player, Quests.THE_RESTLESS_GHOST, 10)
                     updateQuestTab(player)
                     stage++
                 }

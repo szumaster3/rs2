@@ -50,14 +50,14 @@ class HeroesQuest : Quest(Quests.HEROES_QUEST, 75, 74, 1, Vars.VARP_QUEST_HEROES
     }
 
     override fun drawJournal(
-        player: Player?,
+        player: Player,
         stage: Int,
     ) {
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player!!, Quests.HEROES_QUEST) > 0
+        var started = getQuestStage(player, Quests.HEROES_QUEST) > 0
 
         if (!started) {
             if (checkQuestsAreComplete(player)) {

@@ -51,7 +51,7 @@ class NatureSpiritDialogue(player: Player? = null) : Dialogue(player) {
             0 -> playerl(FaceAnim.NEUTRAL, "A silver sickle? What's that?").also { stage++ }
             1 -> npcl(FaceAnim.NEUTRAL, "The sickle is the symbol and weapon of the Druid, you need to construct one of silver so that I can bless it, with its powers you will be able to defeat the Ghasts of Mort Myre.").also {
                 stage++
-                setQuest(65)
+                setQuestStage(player, Quests.NATURE_SPIRIT, 65)
             }
             2 -> options("Where would I get a silver sickle?", "What will you do to the silver sickle?", "How can a blessed sickle help me to defeat the Ghasts?", "Ok, thanks.").also { stage++ }
             3 -> when (buttonID) {
@@ -90,7 +90,7 @@ class NatureSpiritDialogue(player: Player? = null) : Dialogue(player) {
             }
             201 -> sendItemDialogue(player, Items.DRUID_POUCH_2957, "The nature spirit gives you an empty pouch.").also {
                 stage++
-                setQuest(75)
+                setQuestStage(player, Quests.NATURE_SPIRIT, 75)
             }
             202 -> npcl(FaceAnim.NEUTRAL, "You'll need this in order to collect together nature's bounty. It will bind the Ghast to you until you flee or it is defeated.").also { stage = END_DIALOGUE }
             300 -> {
@@ -149,12 +149,8 @@ class NatureSpiritDialogue(player: Player? = null) : Dialogue(player) {
                     if (removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)) {
                         addItem(player, Items.SILVER_SICKLEB_2963)
                         unlock(player)
-                        player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 70)
-                        openDialogue(
-                            player,
-                            NPCs.NATURE_SPIRIT_1051,
-                            findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC,
-                        )
+                        setQuestStage(player, Quests.NATURE_SPIRIT, 70)
+                        openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
                     }
                 }
 
@@ -172,9 +168,5 @@ class NatureSpiritDialogue(player: Player? = null) : Dialogue(player) {
             }
             return false
         }
-    }
-
-    fun setQuest(stage: Int) {
-        player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player!!, stage)
     }
 }

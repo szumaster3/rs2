@@ -44,7 +44,7 @@ class BrotherOmadDialogueFile : DialogueFile() {
                     10 -> npcl(FaceAnim.HALF_WORRIED, "Please do. We won't be able to help you as we are peaceful men but we would be grateful for your help!").also { stage++ }
                     11 -> playerl(FaceAnim.HALF_ASKING, "Where are they?").also { stage++ }
                     12 -> npcl(FaceAnim.SAD, "They hide in a secret cave in the forest. It's hidden under a ring of stones. Please, bring back the blanket!").also {
-                        player!!.questRepository.getQuest(Quests.MONKS_FRIEND).start(player)
+                        setQuestStage(player!!, Quests.MONKS_FRIEND, 10)
                         updateQuestTab(player!!)
                         stage = END_DIALOGUE
                     }

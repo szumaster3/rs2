@@ -18,8 +18,7 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT)
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.GERTRUDES_CAT)) {
             0 -> player(FaceAnim.HALF_GUILTY, "Hello, are you ok?")
             10 -> player(FaceAnim.HALF_GUILTY, "Hello Gertrude.").also { stage = 210 }
             20 -> player(FaceAnim.HALF_GUILTY, "Hello Gertrude.").also { stage = 230 }
@@ -33,7 +32,6 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT)
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Do I look ok? Those kids drive me crazy.").also { stage++ }
             1 -> npc(FaceAnim.HALF_GUILTY, "I'm sorry. It's just that I've lost her.").also { stage++ }
@@ -52,7 +50,7 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
             101 -> npc(FaceAnim.HALF_GUILTY, "I think my sons, Shilop and Wilough, saw the cat last.", "They'll be out in the market place.").also { stage++ }
             102 -> player(FaceAnim.HALF_GUILTY, "Alright then, I'll see what I can do.").also { stage++ }
             103 -> {
-                quest.start(player)
+                setQuestStage(player, Quests.GERTRUDES_CAT, 10)
                 updateQuestTab(player)
                 end()
             }

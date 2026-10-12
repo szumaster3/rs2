@@ -2,6 +2,8 @@ package content.region.other.tutorial_island.npc
 
 import content.data.GameAttributes
 import core.api.getAttribute
+import core.api.hasStarted
+import core.api.produceGroundItem
 import core.api.sendNPCDialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.Entity
@@ -18,6 +20,7 @@ import shared.consts.Quests
 
 @Initializable
 class GiantRatNPC : AbstractNPC {
+
     constructor() : super(0, null) {
         this.isAggressive = false
     }
@@ -32,35 +35,26 @@ class GiantRatNPC : AbstractNPC {
         getSkills().lifepoints = 3
     }
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = GiantRatNPC(id, location)
-
-    override fun tick() {
-        super.tick()
-    }
+    override fun construct(id: Int, location: Location, vararg objects: Any, ): AbstractNPC = GiantRatNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
+
         if (killer !is Player) {
             return
         }
-        val player = killer
-        val tutorialStage = GameAttributes.TUTORIAL_STAGE
-        if (killer is Player) {
-            if (player.getQuestRepository().getQuest(Quests.WITCHS_POTION).isStarted(player)) {
-                GroundItemManager.create(Item(Items.RATS_TAIL_300), getLocation(), player)
-            }
-            if (getAttribute(player, tutorialStage, -1) < 50) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.COMBAT_INSTRUCTOR_944,
-                    "I admire your thirst for violence! Let's have a chat before you kill another one, though, eh?",
-                    FaceAnim.ANNOYED,
-                )
-            }
+
+        if (hasStarted(killer, Quests.WITCHS_POTION)) {
+            produceGroundItem(killer, Items.RATS_TAIL_300, 1, getLocation())
+        }
+
+        if (getAttribute(killer, GameAttributes.TUTORIAL_STAGE, -1) < 50) {
+            sendNPCDialogue(
+                killer,
+                NPCs.COMBAT_INSTRUCTOR_944,
+                "I admire your thirst for violence! Let's have a chat before you kill another one, though, eh?",
+                FaceAnim.ANNOYED,
+            )
         }
     }
 

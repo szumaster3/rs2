@@ -121,11 +121,7 @@ class LostTribe : Quest(Quests.THE_LOST_TRIBE, 84, 83, 1) {
         setVarp(player, Vars.VARP_QUEST_LOST_TRIBE_PROGRESS_465, 11)
     }
 
-    override fun getConfig(
-        player: Player?,
-        stage: Int,
-    ): IntArray {
-        player ?: return intArrayOf(Vars.VARP_QUEST_LOST_TRIBE_PROGRESS_465, 0)
+    override fun getConfig(player: Player, stage: Int): IntArray {
         if (stage in 50..99) {
             return intArrayOf(Vars.VARP_QUEST_LOST_TRIBE_PROGRESS_465, 9)
         }

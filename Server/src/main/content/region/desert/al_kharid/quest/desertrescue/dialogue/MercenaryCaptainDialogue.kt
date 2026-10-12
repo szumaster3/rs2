@@ -1,23 +1,17 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
-import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
+import core.api.getQuestStage
 import core.game.dialogue.Dialogue
-import core.game.node.entity.Entity
-import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
-import core.game.world.map.Location
+import shared.consts.NPCs
 import shared.consts.Quests
 
 class MercenaryCaptainDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             11 -> interpreter.sendDialogue("You approach the Mercenary Captain.")
             else -> npc("What are you doing here?")
         }
@@ -25,7 +19,7 @@ class MercenaryCaptainDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             11 -> when (stage) {
                 0 -> {
                     player("Wow! A real captain!")
@@ -127,44 +121,5 @@ class MercenaryCaptainDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(830)
-
-    class MercenaryCaptain : AbstractNPC {
-        constructor() : super(0, null)
-
-        constructor(id: Int, location: Location?) : super(id, location)
-
-        override fun construct(
-            id: Int,
-            location: Location,
-            vararg objects: Any,
-        ): AbstractNPC = MercenaryCaptain(id, location)
-
-        override fun finalizeDeath(killer: Entity) {
-            super.finalizeDeath(killer)
-            if (killer is Player) {
-                val player = killer
-                val quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-                when (quest.getStage(player)) {
-                    0, 10 -> {}
-                    else -> {
-                        if (!player.inventory.containsItem(TouristTrap.METAL_KEY) && !player.bank.containsItem(
-                                TouristTrap.METAL_KEY,
-                            )
-                        ) {
-                            player.inventory.add(TouristTrap.METAL_KEY, player)
-                            player.dialogueInterpreter.sendItemMessage(
-                                TouristTrap.METAL_KEY,
-                                "The mercenary captain drops a metal key on the floor.",
-                                "You quickly grab the key and add it to your inventory.",
-                            )
-                        }
-                        quest.setStage(player, 20)
-                    }
-                }
-            }
-        }
-
-        override fun getIds(): IntArray = intArrayOf(830)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MERCENARY_CAPTAIN_830)
 }

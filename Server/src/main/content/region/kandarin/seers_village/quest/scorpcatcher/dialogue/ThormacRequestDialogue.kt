@@ -110,7 +110,7 @@ class ThormacRequestDialogue : DialogueFile() {
                     2 -> npcl(FaceAnim.NEUTRAL, "Ok, here's another cage. You're almost as bad at losing things as me.").also { stage++ }
                     3 -> {
                         end()
-                        player!!.questRepository.setStageNonmonotonic(player!!.questRepository.forIndex(108), 10)
+                        setQuestStageNonmonotonic(player!!, 108, 10)
                         removeAttributes(player!!, GameAttributes.LABEL_SCORPION_TAVERLEY, GameAttributes.LABEL_SCORPION_OUTPOST,GameAttributes.LABEL_SCORPION_MONASTERY)
                         addItemOrDrop(player!!, Items.SCORPION_CAGE_456)
                         stage = END_DIALOGUE

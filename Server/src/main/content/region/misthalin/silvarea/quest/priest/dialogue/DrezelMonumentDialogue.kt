@@ -22,13 +22,12 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        var quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
-        if (quest.getStage(player) == 17) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 17) {
             npc(FaceAnim.HALF_GUILTY, "Ah, " + player.username + ". I see you finally made it down here.", "Things are worse than I feared. I'm not sure if I will", "be able to repair the damage.")
             stage = 900
             return true
         }
-        if (quest.getStage(player) == 18) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 18) {
             stage =
                 if (anyInInventory(player, Items.RUNE_ESSENCE_1436, Items.PURE_ESSENCE_7936)) {
                     player(FaceAnim.HALF_GUILTY, "I brought you some Rune Essence.")
@@ -39,18 +38,17 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
                 }
             return true
         }
-        if (quest.getStage(player) == 100 && !player.getSavedData().questData.isTalkedDrezel) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 100 && !player.getSavedData().questData.isTalkedDrezel) {
             player(FaceAnim.HALF_GUILTY, "So can I pass through that barrier now?")
             stage = 400
             return true
         }
-        quest = player.getQuestRepository().getQuest(Quests.NATURE_SPIRIT)
-        if (quest.getStage(player) <= 5) {
+        if (getQuestStage(player, Quests.NATURE_SPIRIT) <= 5) {
             npc(FaceAnim.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?")
             stage = 420
-        } else if (quest.getStage(player) < 100 ||
+        } else if (getQuestStage(player, Quests.NATURE_SPIRIT) < 100 ||
             hasAnItem(player, Items.WOLFBANE_2952).container == null &&
-            quest.getStage(player) == 100
+            getQuestStage(player, Quests.NATURE_SPIRIT) == 100
         ) {
             openDialogue(player, DrezelDialogueFile(), npc)
         } else {
@@ -61,7 +59,6 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
         when (stage) {
             400 -> {
                 npc(FaceAnim.HALF_GUILTY, "Ah, " + player.username + ". For all the assistance you have given", "both myself and Misthalin in your actions, I cannot let", "you pass without warning you.")
@@ -287,7 +284,7 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             916 -> {
-                quest.setStage(player, 18)
+                setQuestStage(player, Quests.PRIEST_IN_PERIL, 18)
                 end()
             }
         }

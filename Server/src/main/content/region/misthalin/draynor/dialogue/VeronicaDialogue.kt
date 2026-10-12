@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.api.updateQuestTab
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -17,8 +19,7 @@ class VeronicaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN)
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
             0 -> {
                 npc(FaceAnim.HALF_ASKING, "Can you please help me? I'm in a terrible spot of", "trouble.")
                 stage = 0
@@ -43,8 +44,7 @@ class VeronicaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN)
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
             0 -> when (stage) {
                 0 -> {
                     options("Aha, sounds like a quest. I'll help.", "No, I'm looking for something to kill.")
@@ -103,7 +103,7 @@ class VeronicaDialogue(player: Player? = null) : Dialogue(player) {
 
                 8 -> {
                     npc(FaceAnim.HALF_GUILTY, "Thank you, thank you. I'm very grateful.")
-                    quest.start(player)
+                    setQuestStage(player, Quests.ERNEST_THE_CHICKEN, 10)
                     updateQuestTab(player)
                     stage = 9
                 }

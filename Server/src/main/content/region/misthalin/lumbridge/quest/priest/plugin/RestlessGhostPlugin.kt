@@ -54,7 +54,7 @@ class RestlessGhostPlugin : InteractionListener {
                                 sendMessage(player, "You find another skull.")
                                 addItem(player, Items.GHOSTS_SKULL_553)
                             }
-                            player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(25), 40)
+                            setQuestStageNonmonotonic(player, 25, 40)
                         }
                     }
             }

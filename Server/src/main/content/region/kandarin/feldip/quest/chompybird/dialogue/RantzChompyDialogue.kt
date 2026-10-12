@@ -27,20 +27,24 @@ class RantzChompyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val chompyBird = player.questRepository.getQuest(Quests.BIG_CHOMPY_BIRD_HUNTING)
-        val chompyStage = chompyBird.getStage(player)
-        val hasOgreBow = inInventory(player, Items.OGRE_BOW_2883) || inEquipment(player, Items.OGRE_BOW_2883) || inBank(
-            player,
-            Items.OGRE_BOW_2883,
-        )
+
+        val chompyStage = getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING)
+
+        val hasOgreBow =
+            inInventory(player, Items.OGRE_BOW_2883) ||
+                    inEquipment(player, Items.OGRE_BOW_2883) ||
+                    inBank(player, Items.OGRE_BOW_2883)
+
         if (stage in 60 until 100 && !hasOgreBow) {
             stage = 201
             player.dialogueInterpreter.handle(0, 0)
             return true
         }
+
         when (chompyStage) {
-            in 0 until 100 -> loadFile(ChompyDialogue(chompyBird))
+            in 0 until 100 -> loadFile(ChompyDialogue())
         }
+
         player.dialogueInterpreter.handle(0, 0)
         return true
     }

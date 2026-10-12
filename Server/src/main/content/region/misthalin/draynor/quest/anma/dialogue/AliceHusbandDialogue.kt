@@ -2,12 +2,13 @@ package content.region.misthalin.draynor.quest.anma.dialogue
 
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
 import content.region.misthalin.draynor.quest.anma.cutscene.AnimalMagnetismCutscene
+import core.api.getQuestStage
 import core.api.inInventory
 import core.api.removeItem
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
@@ -15,16 +16,15 @@ import shared.consts.Quests
 
 class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
 
-    private lateinit var quest: Quest
-
     override fun open(vararg args: Any?): Boolean {
-        quest = player.questRepository.getQuest(Quests.ANIMAL_MAGNETISM)
+
         npc = args[0] as NPC
         if (!player.equipment.containsAtLeastOneItem(Items.GHOSTSPEAK_AMULET_552)) {
             npc("Wooo wooo wooooo!")
             return true
         }
-        when (quest.getStage(player)) {
+
+        when (getQuestStage(player, Quests.ANIMAL_MAGNETISM)) {
             0 -> {
                 npc("Hi, I don't feel like talking.")
             }
@@ -94,7 +94,7 @@ class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
             end()
             return true
         }
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.ANIMAL_MAGNETISM)) {
             0 -> {
                 when (stage) {
                     else -> {
@@ -158,8 +158,8 @@ class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     8 -> {
-                        if (quest.getStage(player) == 10) {
-                            quest.setStage(player, 11)
+                        if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 10) {
+                            setQuestStage(player, Quests.ANIMAL_MAGNETISM, 11)
                         }
                         end()
                     }
@@ -216,7 +216,7 @@ class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     7 -> {
-                        quest.setStage(player, 13)
+                        setQuestStage(player, Quests.ANIMAL_MAGNETISM, 13)
                         end()
                     }
                 }
@@ -257,7 +257,7 @@ class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     3 -> {
-                        quest.setStage(player, 15)
+                        setQuestStage(player, Quests.ANIMAL_MAGNETISM, 15)
                         end()
                     }
                 }
@@ -328,7 +328,7 @@ class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
 
                     7 -> {
                         if (removeItem(player, AnimalMagnetism.CRONE_AMULET)) {
-                            quest.setStage(player, 19)
+                            setQuestStage(player, Quests.ANIMAL_MAGNETISM, 19)
                             end()
                         }
                     }

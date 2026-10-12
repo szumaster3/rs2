@@ -1,25 +1,24 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.tools.RandomFunction
+import shared.consts.NPCs
 import shared.consts.Quests
 
 class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
         when (npc.getShownNPC(player).id) {
-            4985, 825 -> when (quest!!.getStage(player)) {
+            4985, 825 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 40 -> npc("Do you want to trade clothes now?")
                 30 -> npc("Hello again, do you want to try and unlock my chains?", "I'd really appreciate it!")
                 20 -> npc("You look like a new 'recruit'. How long have you been", "here?")
@@ -32,7 +31,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                 else -> npc("Please, just leave me alone my life is", "terrible as it is.")
             }
 
-            826 -> stage = when (quest!!.getStage(player)) {
+            826 -> stage = when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 else -> {
                     npc("Yay! I'm finally free.")
                     0
@@ -44,7 +43,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.getShownNPC(player).id) {
-            4985, 825 -> when (quest!!.getStage(player)) {
+            4985, 825 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 30 -> when (stage) {
                     0 -> {
                         player("Yeah, okay, let's give it a go.")
@@ -52,7 +51,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     1 -> {
-                        quest!!.setStage(player, 40)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 40)
                         npc("Great! You did it! Do you want to trade clothes now?")
                         stage = 0
                     }
@@ -261,7 +260,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                             interpreter.sendDialogue("A nearby guard spots you!")
                             stage = 24
                         } else {
-                            quest!!.setStage(player, 40)
+                            setQuestStage(player, Quests.THE_TOURIST_TRAP, 40)
                             npc("Great! You did it! Do you want to trade clothes now?")
                             stage = 0
                         }
@@ -303,7 +302,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
 
                                         4 -> {
                                             player.unlock()
-                                            quest!!.setStage(player, 30)
+                                            setQuestStage(player, Quests.THE_TOURIST_TRAP, 30)
                                             player.properties.teleportLocation = Location.create(3285, 3034, 0)
                                             return true
                                         }
@@ -379,12 +378,12 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
 
-            826 -> when (quest!!.getStage(player)) {
+            826 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 else -> end()
             }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(825, 826, 4985)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MALE_SLAVE_825, NPCs.ESCAPING_SLAVE_826, NPCs.MERCENARY_4985)
 }

@@ -1,6 +1,8 @@
 package content.region.misthalin.draynor.dialogue
 
+import core.api.getQuestStage
 import core.api.setAttribute
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.impl.Projectile
@@ -27,8 +29,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN)
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
             0, 10 -> {
                 npc(FaceAnim.HALF_GUILTY, "Be careful in here, there's lots of dangerous equipment.")
                 stage = 0
@@ -48,8 +49,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN)
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
             0, 100 -> when (stage) {
                 0 -> {
                     options("What does this machine do?", "Is this your house?")
@@ -238,7 +238,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 18 -> {
-                    quest.setStage(player, 20)
+                    setQuestStage(player, Quests.ERNEST_THE_CHICKEN, 20)
                     end()
                 }
             }

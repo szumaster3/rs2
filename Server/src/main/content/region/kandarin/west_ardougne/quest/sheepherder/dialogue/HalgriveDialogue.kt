@@ -1,10 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.sheepherder.dialogue
 
 import content.region.kandarin.west_ardougne.quest.sheepherder.SheepHerder
-import core.api.addItemOrDrop
-import core.api.finishQuest
-import core.api.getQuestStage
-import core.api.hasAnItem
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -127,7 +124,7 @@ class HalgriveDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             105 -> {
-                player.getQuestRepository().getQuest(Quests.SHEEP_HERDER).start(player)
+                setQuestStage(player!!, Quests.SHEEP_HERDER, 10)
                 player.dialogueInterpreter.sendDialogue("The councillor gives you some poisoned sheep feed.")
                 player.inventory.add(SheepHerder.POISON)
                 stage++

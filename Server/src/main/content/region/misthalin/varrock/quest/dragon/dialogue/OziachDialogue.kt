@@ -1,6 +1,8 @@
 package content.region.misthalin.varrock.quest.dragon.dialogue
 
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
+import core.api.finishQuest
+import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -268,14 +270,8 @@ class OziachDialogue(player: Player? = null) : Dialogue(player) {
                 6 -> {
                     end()
                     val heads = player.inventory.getAmount(DragonSlayer.ELVARG_HEAD)
-                    if (player.inventory.remove(
-                            Item(
-                                DragonSlayer.ELVARG_HEAD.id,
-                                heads,
-                            ),
-                        ) && !player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).isCompleted(player)
-                    ) {
-                        quest!!.finish(player)
+                    if (player.inventory.remove(Item(DragonSlayer.ELVARG_HEAD.id, heads)) && !isQuestComplete(player, Quests.DRAGON_SLAYER)) {
+                        finishQuest(player, Quests.DRAGON_SLAYER)
                     }
                 }
             }

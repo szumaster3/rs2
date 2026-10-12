@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -16,12 +18,11 @@ class FatherLawrenceDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
-        if (quest.getStage(player) < 30) {
+        if (getQuestStage(player!!, Quests.ROMEO_JULIET) < 30) {
             npc(FaceAnim.HALF_GUILTY, "Oh to be a father in the times of whiskey.")
             stage = 0
         }
-        when (quest.getStage(player)) {
+        when (getQuestStage(player!!, Quests.ROMEO_JULIET)) {
             30 -> {
                 npc("...and let Saradomin light the way for you...", "Urgh!")
                 stage = 41
@@ -143,7 +144,7 @@ class FatherLawrenceDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             55 -> {
-                quest.setStage(player, 40)
+                setQuestStage(player!!, Quests.ROMEO_JULIET, 40)
                 end()
             }
 

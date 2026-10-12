@@ -6,6 +6,7 @@ import content.region.misthalin.varrock.quest.firedup.dialogue.KingRoaldDialogue
 import content.region.misthalin.varrock.quest.phoenixgang.dialogue.KingRoaldDialogue
 import core.api.getAttribute
 import core.api.getQuestStage
+import core.api.hasStarted
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -27,13 +28,14 @@ class KingRoaldDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
         if (isQuestComplete(player, Quests.PRIEST_IN_PERIL)) {
-            if (!player.questRepository.hasStarted(Quests.ALL_FIRED_UP) || getQuestStage(player, Quests.ALL_FIRED_UP) == 90) {
+            if (!hasStarted(player, Quests.ALL_FIRED_UP) || getQuestStage(player, Quests.ALL_FIRED_UP) == 90) {
                 addOption(Quests.ALL_FIRED_UP, KingRoaldDialogueFile(getQuestStage(player, Quests.ALL_FIRED_UP)))
             }
         } else {
             addOption(Quests.PRIEST_IN_PERIL, KingRoaldPriestInPerilDialogue(getQuestStage(player, Quests.PRIEST_IN_PERIL)))
         }
-        if (player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).isStarted(player) && !isQuestComplete(player, Quests.SHIELD_OF_ARRAV)) {
+        if (
+            getQuestStage(player, Quests.SHIELD_OF_ARRAV) > 0 && !isQuestComplete(player, Quests.SHIELD_OF_ARRAV)) {
             addOption(Quests.SHIELD_OF_ARRAV, KingRoaldDialogue())
         }
         if (!sendChoices()) {

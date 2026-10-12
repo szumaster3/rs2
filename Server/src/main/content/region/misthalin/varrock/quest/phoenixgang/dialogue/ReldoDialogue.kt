@@ -2,6 +2,7 @@ package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -269,7 +270,7 @@ class ReldoDialogue(player: Player? = null) : Dialogue(player) {
                         "It's somewhere on the west end of the library, I think.",
                         "Maybe that will be of some use.",
                     )
-                    player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).setStage(player, 42)
+                    setQuestStage(player, Quests.THE_LOST_TRIBE, 42)
                     stage++
                 }
 

@@ -1,8 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue;
 
 import content.region.desert.al_kharid.quest.desertrescue.dialogue.*;
-import content.region.desert.al_kharid.quest.desertrescue.npc.MineSlaveNPC;
-import content.region.desert.al_kharid.quest.desertrescue.npc.RowdySlaveNPC;
+import content.region.desert.al_kharid.quest.desertrescue.npc.*;
 import content.region.desert.al_kharid.quest.desertrescue.plugin.TouristTrapPlugin;
 import core.game.component.Component;
 import core.game.container.impl.EquipmentContainer;
@@ -100,7 +99,7 @@ public final class TouristTrap extends Quest {
 
     @Override
     public Quest newInstance(Object object) {
-        ClassScanner.definePlugins(new TouristTrapPlugin(), new AnaDialogue(), new CaptainSiadDialogue(), new DesertGuardDialogue(), new IrenaDialogue(), new MaleSlaveDialogue(), new MercenaryCaptainDialogue(), new MercenaryDialogue(), new MinecartDriverDialogue(), new MineSlaveNPC(), new MiningCampZone(), new RowdySlaveNPC(), new AlShabimDialogue(), new BedabinNomadDialogue());
+        ClassScanner.definePlugins(new TouristTrapPlugin(), new AnaDialogue(), new AnaNPC(), new CaptainSiadDialogue(), new DesertGuardDialogue(), new IrenaDialogue(), new MaleSlaveDialogue(), new MercenaryCaptainDialogue(), new MercenaryDialogue(), new MinecartDriverDialogue(), new MineSlaveNPC(), new MiningCampZone(), new RowdySlaveNPC(), new AlShabimDialogue(), new BedabinNomadDialogue(), new DesertGuardNPC(), new MercenaryCaptainNPC());
         return this;
     }
 

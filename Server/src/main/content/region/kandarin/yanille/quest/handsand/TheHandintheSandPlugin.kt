@@ -157,7 +157,7 @@ class TheHandintheSandPlugin : InteractionListener {
                 if (removeItem(player, used.asItem())) {
                     playGlobalAudio(player.location,Sounds.HANDSAND_SERUM_1592)
                     sendItemDialogue(player, Items.TRUTH_SERUM_6952, "As you focus the light on the vial and Betty pours the potion in, the lens heats up and shatters. After a few seconds Betty hands you the vial of Truth Serum.")
-                    player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(72), 8)
+                    setQuestStageNonmonotonic(player, 72, 8)
                     setVarbit(player, Vars.VARBIT_BETTY_DESK_1537, 0)
                     addItem(player, Items.TRUTH_SERUM_6952, 1)
                 }

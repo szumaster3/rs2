@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.dialogue
 
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -24,15 +26,7 @@ class SigmundDialogue : Dialogue {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         interpreter.sendDialogues(npc, FaceAnim.HALF_GUILTY, "Can I help you?")
-        if (player
-                .getQuestRepository()
-                .getQuest(Quests.THE_LOST_TRIBE)
-                .getStage(player) > 0 &&
-            player
-                .getQuestRepository()
-                .getQuest(Quests.THE_LOST_TRIBE)
-                .getStage(player) < 100
-        ) {
+        if (getQuestStage(player, Quests.THE_LOST_TRIBE) in 1..99) {
             npc("Have you found out what it was?")
             stage = 34
             return true
@@ -125,7 +119,7 @@ class SigmundDialogue : Dialogue {
             31 -> {
                 npc("You should ask other people around the town if they", "saw anything.")
                 stage = END_DIALOGUE
-                player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).start(player)
+                player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE)?.start(player)
                 player.setAttribute("/save:tlt-witness", TLTNPCS[0])
             }
 

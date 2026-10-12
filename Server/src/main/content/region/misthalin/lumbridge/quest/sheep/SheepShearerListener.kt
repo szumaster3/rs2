@@ -18,7 +18,7 @@ class SheepShearerListener: InteractionListener {
         on(IntType.NPC, "shear") { player, node ->
             val sheep = node as NPC
             if (sheep.id == NPCs.SHEEP_3579) {
-                if (player.questRepository.getQuest(Quests.SHEEP_SHEARER).isStarted(player)) {
+                if (getQuestStage(player, Quests.SHEEP_SHEARER) > 0) {
                     setAttribute(player, SheepShearer.ATTR_IS_PENGUIN_SHEEP_SHEARED, true)
                 }
                 animate(player, Animation(Animations.SHEAR_SHEEP_893))

@@ -76,8 +76,8 @@ class FishingContest : Quest(Quests.FISHING_CONTEST, 62, 61, 1, 11, 0, 1, 5) {
         removeAttributes(player, GameAttributes.QUEST_FISHINGCOMPO_STASH_GARLIC)
     }
 
-    override fun questCloseEvent(player: Player?, component: Component?) {
-        queueScript(player!!, 1, QueueStrength.SOFT) {
+    override fun questCloseEvent(player: Player, component: Component) {
+        queueScript(player, 1, QueueStrength.SOFT) {
             val npc = getAttribute(player, "temp-npc", -1)
             openDialogue(player, FishingQuestCompleteDialogue(npc))
             return@queueScript stopExecuting(player)

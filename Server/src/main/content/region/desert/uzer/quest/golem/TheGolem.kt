@@ -65,8 +65,8 @@ class TheGolem : Quest(Quests.THE_GOLEM, 70, 69, 1, Vars.VARBIT_QUEST_THE_GOLEM_
         }
     }
 
-    override fun hasRequirements(player: Player?): Boolean =
-        getStatLevel(player!!, Skills.CRAFTING) >= 20 && getStatLevel(player, Skills.THIEVING) >= 25
+    override fun hasRequirements(player: Player): Boolean =
+        getStatLevel(player, Skills.CRAFTING) >= 20 && getStatLevel(player, Skills.THIEVING) >= 25
 
     override fun finish(player: Player) {
         super.finish(player)
@@ -81,7 +81,7 @@ class TheGolem : Quest(Quests.THE_GOLEM, 70, 69, 1, Vars.VARBIT_QUEST_THE_GOLEM_
 
     override fun newInstance(`object`: Any?): Quest = this
 
-    override fun updateVarps(player: Player?) {
-        TheGolemListener.updateVarps(player!!)
+    override fun updateVarps(player: Player) {
+        TheGolemListener.updateVarps(player)
     }
 }

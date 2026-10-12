@@ -1,5 +1,6 @@
 package content.region.misthalin.draynor.quest.haunted.npc
 
+import core.api.getQuestStage
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -28,7 +29,7 @@ class ErnestChickenNPC(
     }
 
     override fun isHidden(player: Player): Boolean {
-        return player.questRepository.getQuest(Quests.ERNEST_THE_CHICKEN).getStage(player) == 100 ||
+        return getQuestStage(player, Quests.ERNEST_THE_CHICKEN) == 100 ||
                 player.getAttribute("ernest-hide", false)
     }
 

@@ -90,7 +90,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         }
 
         on(NPCs.KRUK_1441, IntType.NPC, "talk-to") { player, npc ->
-            if (player.questRepository.getQuest(Quests.MONKEY_MADNESS).getStage(player) >= 35) {
+            if (getQuestStage(player, Quests.MONKEY_MADNESS) >= 35) {
                 openDialogue(player, KrukDialogue(), npc)
             }
             return@on true

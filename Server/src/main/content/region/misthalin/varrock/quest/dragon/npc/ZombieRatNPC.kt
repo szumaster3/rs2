@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.dragon.npc
 
+import core.api.getQuestStage
 import core.api.produceGroundItem
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -22,15 +23,12 @@ class ZombieRatNPC : AbstractNPC {
 
         if (killer !is Player) return
 
-        val questRepo = killer.questRepository
-        val ds = questRepo.getQuest(Quests.DRAGON_SLAYER)
-        if (ds.getStage(killer) in 1..99) {
+        if (getQuestStage(killer, Quests.DRAGON_SLAYER) in 1..99) {
             if (RandomFunction.random(5) == 2) {
                 produceGroundItem(killer, Items.KEY_1543, 1, getLocation())
             }
         }
-        val wp = questRepo.getQuest(Quests.WITCHS_POTION)
-        if (wp.getStage(killer) in 1..99) {
+        if (getQuestStage(killer, Quests.WITCHS_POTION) in 1..99) {
             produceGroundItem(killer, Items.RATS_TAIL_300, 1, getLocation())
         }
         produceGroundItem(killer, Items.BONES_526, 1, getLocation())

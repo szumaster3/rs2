@@ -122,7 +122,7 @@ class ElementalWorkshop :
     }
 
     override fun getConfig(
-        player: Player?,
+        player: Player,
         stage: Int,
     ): IntArray {
         if (stage >= 100) return intArrayOf(Vars.VARP_QUEST_ELEMENTAL_WORKSHOP_PROGRESS_299, 1048576)
@@ -138,7 +138,7 @@ class ElementalWorkshop :
             setAttribute(player, "/save:ew1:got_needle", false)
             setAttribute(player, "/save:ew1:got_leather", false)
             setAttribute(player, "/save:ew1:bellows_fixed", false)
-            player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(52), 0)
+            setQuestStageNonmonotonic(player, 52, 0)
             setVarp(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP_PROGRESS_299, 0)
             player.teleport(Location.create(2715, 3481, 0))
             player.inventory.clear()
@@ -155,7 +155,7 @@ class ElementalWorkshop :
             setAttribute(player, "/save:ew1:got_needle", true)
             setAttribute(player, "/save:ew1:got_leather", true)
             setAttribute(player, "/save:ew1:bellows_fixed", true)
-            player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(52), 95)
+            setQuestStageNonmonotonic(player, 52, 95)
             setVarbit(player, EWUtils.BELLOWS_STATE, enabled, true)
             setVarbit(player, EWUtils.FURNACE_STATE, enabled, true)
             setVarbit(player, EWUtils.WATER_WHEEL_STATE, enabled, true)

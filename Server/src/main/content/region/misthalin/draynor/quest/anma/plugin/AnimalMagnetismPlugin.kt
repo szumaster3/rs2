@@ -184,8 +184,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
                         node ?: return false
                         option ?: return false
 
-                        val quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
-                        if (quest.getStage(player) <= 28) {
+                        if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) <= 28) {
                             val tool = getAxe(player)
                             if (tool == null || tool.ordinal < 4) {
                                 sendMessage(player, "You don't have the required axe in order to do that.")
@@ -193,10 +192,10 @@ class AnimalMagnetismPlugin : OptionHandler() {
                             }
                             val animation = getAnimation(tool.animation)
                             player.animate(animation, 2)
-                            if (quest.getStage(player) == 28) {
-                                quest.setStage(player, 29)
+                            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28) {
+                               setQuestStage(player, Quests.ANIMAL_MAGNETISM, 29)
                             }
-                            sendMessage(player, "The axe bounces off the undead wood." + (if (quest.getStage(player) == 28 || quest.getStage(player) == 29) " I should report this to Ava." else ""))
+                            sendMessage(player, "The axe bounces off the undead wood." + (if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28 || getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 29) " I should report this to Ava." else ""))
                             return true
                         }
                         if (freeSlots(player) < 1) {
@@ -233,12 +232,11 @@ class AnimalMagnetismPlugin : OptionHandler() {
 
             val player = event.player
             val animation = getAnimation(event.usedItem.id)
-            val quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
             player.animate(animation, 2)
-            if (quest.getStage(player) == 28) {
-                quest.setStage(player, 29)
+            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28) {
+                setQuestStage(player, Quests.ANIMAL_MAGNETISM, 29)
             }
-            sendMessage(player, "The axe bounces off the undead wood." + (if (quest.getStage(player) == 28 || quest.getStage(player) == 29) " I should report this to Ava." else ""))
+            sendMessage(player, "The axe bounces off the undead wood." + (if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28 || getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 29) " I should report this to Ava." else ""))
             return true
         }
 
@@ -278,10 +276,9 @@ class AnimalMagnetismPlugin : OptionHandler() {
             val data = getIndex(button)
             val toggled = data[1] as Boolean
             val configs = getConfigs(data[0] as Int)
-            val quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
             player.packetDispatch.sendInterfaceConfig(Components.ANMA_RGB_480, configs[0], !toggled)
             player.packetDispatch.sendInterfaceConfig(Components.ANMA_RGB_480, data[2] as Int, toggled)
-            if (quest.getStage(player) == 33) {
+            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 33) {
                 setNoteCache(player, data[0] as Int, !toggled)
                 if (isTranslated(player)) {
                     if (removeItem(player, AnimalMagnetism.RESEARCH_NOTES)) {

@@ -1,11 +1,11 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
+import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.Location
 import core.game.world.map.RegionManager.getObject
@@ -14,13 +14,10 @@ import shared.consts.Quests
 
 class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
         when (npc.id) {
-            NPCs.BEDABIN_NOMAD_GUARD_834 -> when (quest!!.getStage(player)) {
+            NPCs.BEDABIN_NOMAD_GUARD_834 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 54 -> if (player.inventory.containsItem(TouristTrap.TECHNICAL_PLANS)) {
                     player("Al Shabim said I could enter, here are the plans!")
                     stage++
@@ -51,7 +48,7 @@ class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
-            NPCs.BEDABIN_NOMAD_GUARD_834 -> when (quest!!.getStage(player)) {
+            NPCs.BEDABIN_NOMAD_GUARD_834 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 54 -> when (stage) {
                     0 -> end()
                     1 -> {

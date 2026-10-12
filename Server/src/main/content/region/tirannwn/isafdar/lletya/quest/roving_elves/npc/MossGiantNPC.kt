@@ -1,6 +1,9 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves.npc
 
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
+import core.api.getQuestStage
+import core.api.produceGroundItem
+import core.api.sendMessage
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -30,12 +33,13 @@ class MossGiantNPC : AbstractNPC {
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
+
         if (killer is Player) {
-            val player = killer
-            val quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES)
-            if (quest.getStage(player) == 15 && !player.inventory.contains(RovingElves.CONSECRATION_SEED, 1)) {
-                player.packetDispatch.sendMessage("A small grey seed drops on the ground.")
-                GroundItemManager.create(Item(RovingElves.CONSECRATION_SEED), getLocation(), player)
+            if (getQuestStage(killer, Quests.ROVING_ELVES) == 15 &&
+                !killer.inventory.contains(RovingElves.CONSECRATION_SEED, 1)
+            ) {
+                sendMessage(killer,"A small grey seed drops on the ground.")
+                produceGroundItem(killer, RovingElves.CONSECRATION_SEED, 1, getLocation())
             }
         }
     }

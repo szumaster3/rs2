@@ -1,5 +1,6 @@
 package content.region.misthalin.silvarea.npc
 
+import core.api.getQuestStage
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
@@ -27,11 +28,8 @@ class MonkOfZamorakNPC : NPCBehavior(*MONK_NPCS) {
     ) {
         super.onDropTableRolled(self, killer, drops)
         if (killer is Player) {
-            val player = killer
-            val quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
-
-            if (quest.isStarted(player)) {
-                GroundItemManager.create(Item(Items.GOLDEN_KEY_2944, 1), self.location, player)
+            if (getQuestStage(killer, Quests.PRIEST_IN_PERIL) > 0) {
+                GroundItemManager.create(Item(Items.GOLDEN_KEY_2944, 1), self.location, killer)
             }
         }
     }

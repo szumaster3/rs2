@@ -1,6 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
+import core.api.finishQuest
 import core.game.dialogue.DialogueFile
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -53,7 +54,7 @@ class KingRoaldDialogue : DialogueFile() {
                         if (!player!!.inventory.add(Item(Items.COINS_995, 600))) {
                             GroundItemManager.create(Item(Items.COINS_995, 600), player!!)
                         }
-                        player!!.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).finish(player)
+                        finishQuest(player!!, Quests.SHIELD_OF_ARRAV)
                         stage = END_DIALOGUE
                     }
                 }

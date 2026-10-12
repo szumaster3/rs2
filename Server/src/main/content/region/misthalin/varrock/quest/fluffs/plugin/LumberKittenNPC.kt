@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.fluffs.plugin
 
+import core.api.getQuestStage
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld.ticks
@@ -10,19 +11,13 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class LumberKittenNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
+class LumberKittenNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+
     private var hidden = true
     private var nextSpeak = 0
     private var hideDelay = 0
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = LumberKittenNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any, ): AbstractNPC = LumberKittenNPC(id, location)
 
     override fun init() {
         isWalks = false
@@ -44,10 +39,8 @@ class LumberKittenNPC(
         super.tick()
     }
 
-    override fun isHidden(player: Player): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT)
-        return hidden || quest.getStage(player) < 20 || quest.getStage(player) > 50
-    }
+    override fun isHidden(player: Player): Boolean =
+        hidden || getQuestStage(player, Quests.GERTRUDES_CAT) !in 20..50
 
     override fun getIds(): IntArray = intArrayOf(NPCs.CRATE_767)
 }

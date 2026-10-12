@@ -14,11 +14,10 @@ class DemonSlayerCutscene : MapArea {
     override fun areaEnter(entity: Entity) {
         if (entity !is Player) return
 
-        val quest = entity.questRepository.getQuest(Quests.DEMON_SLAYER)
         val alreadyInCutscene = getAttribute(entity, "demon-slayer:cutscene", false)
         val hasSilverlight = inInventory(entity, Items.SILVERLIGHT_2402) || inEquipment(entity, Items.SILVERLIGHT_2402)
 
-        if (quest.getStage(entity) == 30 && !alreadyInCutscene && hasSilverlight) {
+        if (getQuestStage(entity, Quests.DEMON_SLAYER) == 30 && !alreadyInCutscene && hasSilverlight) {
             ActivityManager.start(entity, "Demon Slayer Cutscene", false)
             setAttribute(entity, "demon-slayer:cutscene", true)
         }

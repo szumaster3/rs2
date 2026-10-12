@@ -78,8 +78,8 @@ class DruidicRitual : Quest(Quests.DRUIDIC_RITUAL, 48, 47, 4, 80, 0, 3, 4) {
         closeChatBox(player)
     }
 
-    override fun questCloseEvent(player: Player?, component: Component?) {
-        queueScript(player!!, 1, QueueStrength.SOFT) {
+    override fun questCloseEvent(player: Player, component: Component) {
+        queueScript(player, 1, QueueStrength.SOFT) {
             openDialogue(player, NPCs.KAQEMEEX_455, NPC.create(NPCs.KAQEMEEX_455, player.location), true)
             return@queueScript stopExecuting(player)
         }

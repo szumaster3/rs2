@@ -4,6 +4,7 @@ import content.region.other.braindeath.quest.deal.dialogue.CaptainBraindeathDial
 import core.api.openDialogue
 import core.api.openOverlay
 import core.api.setMinimapState
+import core.api.setQuestStageNonmonotonic
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
@@ -60,7 +61,7 @@ class ZombieProtestCutscene(
                 move(getNPC(ZOMBIE_3)!!, 0, 3)
                 move(getNPC(ZOMBIE_4)!!, 6, 5)
                 move(getNPC(ZOMBIE_0)!!, 3, 4)
-                player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(107)!!, 2)
+                setQuestStageNonmonotonic(player, 107, 2)
                 timedUpdate(6)
             }
 

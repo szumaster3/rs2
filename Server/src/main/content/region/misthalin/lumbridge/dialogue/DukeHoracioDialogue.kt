@@ -4,6 +4,7 @@ import content.region.misthalin.lumbridge.quest.ariane1.dialogue.DukeHoracioRMDi
 import content.region.misthalin.lumbridge.quest.lost_tribe.dialogue.DukeHoracioLostTribeDialogue
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
 import content.region.misthalin.varrock.quest.dragon.dialogue.DukeDragonSlayerDialogue
+import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -23,19 +24,19 @@ class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if ((
-                player.questRepository.getQuest(Quests.DRAGON_SLAYER).getStage(player) == 100 &&
+                    getQuestStage(player, Quests.DRAGON_SLAYER) == 100 &&
                     !player.inventory.containsItem(DragonSlayer.SHIELD) &&
                     !player.bank.containsItem(DragonSlayer.SHIELD)
             ) ||
             (
-                player.questRepository.getQuest(Quests.DRAGON_SLAYER).isStarted(player) &&
-                    !player.questRepository.getQuest(Quests.DRAGON_SLAYER).isCompleted(player)
+                    getQuestStage(player, Quests.DRAGON_SLAYER) > 0 &&
+                            !isQuestComplete(player, Quests.DRAGON_SLAYER)
             )
         ) {
             addOption(Quests.DRAGON_SLAYER, DukeDragonSlayerDialogue(player.questRepository.getStage(Quests.DRAGON_SLAYER)))
         }
-        if (!player.questRepository.isComplete(Quests.THE_LOST_TRIBE) &&
-            player.questRepository.getQuest(Quests.THE_LOST_TRIBE).isStarted(player)
+        if (!isQuestComplete(player, Quests.THE_LOST_TRIBE) &&
+            getQuestStage(player, Quests.THE_LOST_TRIBE) > 0
         ) {
             addOption(
                 Quests.THE_LOST_TRIBE,

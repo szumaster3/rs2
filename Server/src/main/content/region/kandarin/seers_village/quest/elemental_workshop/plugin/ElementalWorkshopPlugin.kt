@@ -272,8 +272,8 @@ class ElementalWorkshopPlugin : InteractionListener {
                 sendMessage(player, "Following the instructions in the book you make an elemental shield.")
             }
 
-            if (!player.questRepository.getQuest(Quests.ELEMENTAL_WORKSHOP_I).isCompleted(player)) {
-                player.questRepository.getQuest(Quests.ELEMENTAL_WORKSHOP_I).finish(player)
+            if (!isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_I)) {
+                finishQuest(player, Quests.ELEMENTAL_WORKSHOP_I)
             }
             return@onUseWith true
         }

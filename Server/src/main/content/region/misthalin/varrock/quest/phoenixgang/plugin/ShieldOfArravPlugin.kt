@@ -58,7 +58,6 @@ class ShieldOfArravPlugin : OptionHandler() {
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        val quest = player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV)
         val id =
             when (node) {
                 is Scenery -> node.id
@@ -83,7 +82,7 @@ class ShieldOfArravPlugin : OptionHandler() {
             2401 ->
                 when (option) {
                     "search" -> {
-                        if (quest.getStage(player) == 70 && ShieldofArrav.isBlackArm(player)) {
+                        if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 70 && ShieldofArrav.isBlackArm(player)) {
                             if (!player.inventory.containsItem(ShieldofArrav.BLACKARM_SHIELD) &&
                                 !player.bank.containsItem(ShieldofArrav.BLACKARM_SHIELD)
                             ) {
@@ -130,7 +129,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                     "close" -> SceneryBuilder.replace(node as Scenery, node.transform(2403))
 
                     "search" -> {
-                        if (quest.getStage(player) == 70 && ShieldofArrav.isPhoenix(player)) {
+                        if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 70 && ShieldofArrav.isPhoenix(player)) {
                             if (!inBank(player, ShieldofArrav.PHOENIX_SHIELD.id) &&
                                 !inInventory(player, ShieldofArrav.PHOENIX_SHIELD.id)
                             ) {
@@ -148,7 +147,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                 }
 
             2398 -> {
-                if (quest.getStage(player) == 60 &&
+                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 60 &&
                     ShieldofArrav.isBlackArmMission(player) &&
                     !inInventory(
                         player,
@@ -156,7 +155,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                     )
                 ) {
                     sendDialogue(player, "This is the door to the weapon stash you were looking for...")
-                } else if (quest.getStage(player) == 60 && inInventory(player, ShieldofArrav.KEY.id)) {
+                } else if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 60 && inInventory(player, ShieldofArrav.KEY.id)) {
                     DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
                 } else {
                     sendMessage(player, "The door is securely locked.")
@@ -181,7 +180,7 @@ class ShieldOfArravPlugin : OptionHandler() {
             }
 
             2402 -> {
-                if (quest.getStage(player) == 10 &&
+                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 10 &&
                     !inInventory(player, ShieldofArrav.BOOK.id) &&
                     !inBank(
                         player,

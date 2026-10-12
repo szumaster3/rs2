@@ -3072,7 +3072,7 @@ fun hasRequirement(
         }
     }
 
-    var neededQp = min(max(totalSoftQp, totalHardQp), player.questRepository.availablePoints)
+    var neededQp = min(max(totalSoftQp, totalHardQp), player.questRepository.getAvailablePoints())
 
     isMet = isMet && neededQp <= player.questRepository.points
 
@@ -4191,6 +4191,23 @@ fun setQuestStage(
 }
 
 /**
+ * Sets the stage of a specific quest for a player without enforcing monotonic progression.
+ *
+ * @param player The player whose quest stage is being set.
+ * @param questIndex The index of the quest.
+ * @param stage The new stage to set for the quest.
+ */
+fun setQuestStageNonmonotonic(
+    player: Player,
+    questIndex: Int,
+    stage: Int,
+) {
+    player.questRepository.forIndex(questIndex)?.let {
+        player.questRepository.setStageNonmonotonic(it, stage)
+    }
+}
+
+/**
  * Updates the quest tab to reflect the latest quest information for a player.
  *
  * @param player The player whose quest tab is being updated.
@@ -4237,7 +4254,7 @@ fun isQuestComplete(
 fun getQuest(
     player: Player,
     quest: String,
-): Quest = player.questRepository.getQuest(quest)
+): Quest = player.questRepository.getQuest(quest)!!
 
 /**
  * Starts a quest for a player if they meet the necessary requirements.
@@ -4250,7 +4267,7 @@ fun startQuest(
     player: Player,
     quest: String,
 ): Boolean {
-    val quest = player.questRepository.getQuest(quest)
+    val quest = player.questRepository.getQuest(quest)!!
     val canStart = quest.hasRequirements(player)
     if (!canStart) return false
     quest.start(player)
@@ -4267,7 +4284,7 @@ fun finishQuest(
     player: Player,
     quest: String,
 ) {
-    player.questRepository.getQuest(quest).finish(player)
+    player.questRepository.getQuest(quest)?.finish(player)
 }
 
 /**

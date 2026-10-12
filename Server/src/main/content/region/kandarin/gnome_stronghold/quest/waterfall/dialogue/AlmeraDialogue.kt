@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.waterfall.dialogue
 
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
@@ -11,8 +13,7 @@ import shared.consts.Quests
 class AlmeraDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
-        stage = if (quest.getStage(player) == 100) {
+        stage = if (getQuestStage(player, Quests.WATERFALL_QUEST) == 100) {
             player(FaceAnim.HALF_GUILTY, "Hello Almera.")
             7
         } else {
@@ -23,19 +24,18 @@ class AlmeraDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
         when (stage) {
-            0 -> if (quest.getStage(player) == 0) {
+            0 -> if (getQuestStage(player, Quests.WATERFALL_QUEST) == 0) {
                 npc(
                     FaceAnim.ASKING,
                     "Ah, hello there. Nice to see an outsider for a change,",
                     "are you busy? I have a problem.",
                 )
                 stage = 1
-            } else if (quest.getStage(player) == 10) {
+            } else if (getQuestStage(player, Quests.WATERFALL_QUEST) == 10) {
                 npc(FaceAnim.JOLLY, "Hello brave adventurer, have you seen my boy yet?")
                 stage = 200
-            } else if (quest.getStage(player) >= 20) {
+            } else if (getQuestStage(player, Quests.WATERFALL_QUEST) >= 20) {
                 npc(FaceAnim.JOLLY, "Well hello, you're still around then.")
                 stage = 202
             } else {
@@ -81,7 +81,7 @@ class AlmeraDialogue(player: Player? = null) : Dialogue(player) {
                     "out back if you wish, do be careful, the current down",
                     "stream is very strong.",
                 )
-                quest.start(player)
+                setQuestStage(player, Quests.WATERFALL_QUEST, 10)
                 stage = 100
             }
 

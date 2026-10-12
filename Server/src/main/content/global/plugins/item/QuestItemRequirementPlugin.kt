@@ -69,9 +69,7 @@ class QuestItemRequirementPlugin : InteractionListener {
         onEquip(questCapes) { player, _ ->
             val maxQP = QuestRepository.getQuests().values.sumOf { it.questPoints }
             if (player.questRepository.points < maxQP) {
-                player.packetDispatch.sendMessage(
-                    "You cannot equip the Quest cape without completing all available quests.",
-                )
+                sendMessage(player,"You cannot equip the Quest cape without completing all available quests.",)
                 return@onEquip false
             }
             return@onEquip true

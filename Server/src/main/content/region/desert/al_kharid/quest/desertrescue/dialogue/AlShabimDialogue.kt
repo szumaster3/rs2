@@ -1,29 +1,29 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
+import shared.consts.Items
+import shared.consts.NPCs
 import shared.consts.Quests
 
 class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             else -> npcl(FaceAnim.FRIENDLY, "Hello Effendi! I am Al Shabim, greetings on behalf of the Bedabin nomads.")
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             54 -> when (stage) {
                 0 -> if (player.inventory.containsItem(TouristTrap.PROTOTYPE_DART)) {
                     npc("Wonderful, I see you have made the new weapon!")
@@ -118,7 +118,7 @@ class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 29 -> {
-                    quest!!.setStage(player, 60)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 60)
                     player.inventory.remove(TouristTrap.PROTOTYPE_DART)
                     player.inventory.add(TouristTrap.TENTI_PINEAPPLE)
                     interpreter.sendItemMessage(
@@ -189,7 +189,7 @@ class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 9 -> {
-                    quest!!.setStage(player, 51)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 51)
                     player.inventory.add(TouristTrap.BEDABIN_KEY, player)
                     interpreter.sendItemMessage(TouristTrap.BEDABIN_KEY, "Al Shabim gives you a key.")
                     stage++
@@ -236,10 +236,7 @@ class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 10 -> {
-                    npc(
-                        "Bring us back the plans inside the chest, they should be",
-                        "sealed. All haste to you Effendi!",
-                    )
+                    npc("Bring us back the plans inside the chest, they should be", "sealed. All haste to you Effendi!")
                     stage = 11
                 }
 
@@ -269,19 +266,16 @@ class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 23 -> {
-                    quest!!.setStage(player, 54)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 54)
                     end()
                 }
             }
 
             100, 60, 70, 80, 90 -> when (stage) {
                 0 -> {
-                    if (quest!!.getStage(player) == 60 && !player.hasItem(TouristTrap.TENTI_PINEAPPLE)) {
+                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 60 && !player.hasItem(TouristTrap.TENTI_PINEAPPLE)) {
                         player.inventory.add(TouristTrap.TENTI_PINEAPPLE, player)
-                        interpreter.sendItemMessage(
-                            TouristTrap.TENTI_PINEAPPLE,
-                            "You receive a tasty looking pineapple from Al Shabim.",
-                        )
+                        interpreter.sendItemMessage(TouristTrap.TENTI_PINEAPPLE, "You receive a tasty looking pineapple from Al Shabim.")
                         stage++
                         stage = 32
                     }
@@ -295,10 +289,7 @@ class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 31 -> {
-                    interpreter.sendItemMessage(
-                        TouristTrap.TENTI_PINEAPPLE,
-                        "You receive a tasty looking pineapple from Al Shabim.",
-                    )
+                    interpreter.sendItemMessage(TouristTrap.TENTI_PINEAPPLE, "You receive a tasty looking pineapple from Al Shabim.")
                     stage++
                 }
 
@@ -318,9 +309,9 @@ class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(832)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AL_SHABIM_832)
 
     companion object {
-        private val BRONZE_DARTS = Item(806, 6)
+        private val BRONZE_DARTS = Item(Items.BRONZE_DART_806, 6)
     }
 }

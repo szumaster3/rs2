@@ -1,35 +1,21 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
-import core.api.sendMessage
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
-import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
-import core.game.world.GameWorld.ticks
-import core.game.world.map.Location
-import core.game.world.map.RegionManager.getLocalPlayers
 import core.tools.END_DIALOGUE
-import core.tools.RandomFunction
 import shared.consts.NPCs
 import shared.consts.Quests
 
 class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
-    override fun init() {
-        super.init()
-    }
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
         when (npc.id) {
-            5001 -> when (quest!!.getStage(player)) {
+            5001 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 40 -> npc("Yeah, what do you want?")
                 50, 51, 52, 53, 54 -> stage = if (player.inventory.containsItem(TouristTrap.TENTI_PINEAPPLE)) {
                     player("Hey... I have something for you!")
@@ -54,7 +40,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                 else -> npc("What are you looking at?")
             }
 
-            else -> when (quest!!.getStage(player)) {
+            else -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 else -> npc("What are you looking at?")
             }
         }
@@ -63,7 +49,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
-            5001 -> when (quest!!.getStage(player)) {
+            5001 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 51, 52, 53, 54 -> when (stage) {
                     0 -> {
                         interpreter.sendItemMessage(
@@ -74,7 +60,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     1 -> if (player.inventory.remove(TouristTrap.TENTI_PINEAPPLE)) {
-                        quest!!.setStage(player, 60)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 60)
                         npc(
                             "Great! Just what I've been looking for! Mmmmmmm...",
                             "Delicious! This is so nice! Mmmmm, *SLURP*",
@@ -112,7 +98,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     1 -> if (player.inventory.remove(TouristTrap.TENTI_PINEAPPLE)) {
-                        quest!!.setStage(player, 60)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 60)
                         npc(
                             "Great! Just what I've been looking for! Mmmmmmm...",
                             "Delicious!! This is so nice! Mmmmm, *SLURP*",
@@ -197,7 +183,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     10 -> {
-                        quest!!.setStage(player, 50)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 50)
                         end()
                     }
                 }
@@ -229,111 +215,22 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                 else -> end()
             }
 
-            else -> when (quest!!.getStage(player)) {
+            else -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
                 else -> end()
             }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(4993, 4994, 4995, 4996, 4997, 4998, 4999, 5000, 5001)
-
-    class DesertGuardNPC : AbstractNPC {
-        private var lastCheck = 0
-
-        constructor() : super(0, null)
-
-        constructor(id: Int, location: Location?) : super(id, location)
-
-        override fun construct(
-            id: Int,
-            location: Location,
-            vararg objects: Any,
-        ): AbstractNPC = DesertGuardNPC(id, location)
-
-        override fun tick() {
-            if (lastCheck < ticks) {
-                lastCheck = ticks + RandomFunction.random(50, 150)
-                if (!inCombat()) {
-                    warn()
-                }
-            }
-            super.tick()
-        }
-
-        private fun warn() {
-            val players = getLocalPlayers(this)
-            for (player in players) {
-                if (player.getAttribute(
-                        "guard-warning",
-                        0,
-                    ) > ticks || !player.zoneMonitor.isInZone("mining camp") || player.inCombat() || !player.location.withinDistance(
-                        getLocation(),
-                        8,
-                    )
-                ) {
-                    continue
-                }
-                if (TouristTrap.inJail(player)) {
-                    continue
-                }
-                if (!TouristTrap.hasSlaveClothes(player)) {
-                    player.setAttribute("guard-warning", ticks + 300)
-                    player.lock()
-                    Pulser.submit(
-                        object : Pulse(1, this, player) {
-                            var count = 0
-
-                            override fun pulse(): Boolean {
-                                when (++count) {
-                                    1 -> {
-                                        face(player)
-                                        if (!TouristTrap.hasSlaveClothes(player)) {
-                                            sendChat("Hey, they're interesting clothes!")
-                                            sendMessage(player, "Guard: You're no slave.")
-                                        } else {
-                                            sendChat("Hey - you with the armour!")
-                                            sendMessage(player, "Guard: Hey - You with the armour!")
-                                        }
-                                    }
-
-                                    5 -> if (!TouristTrap.hasSlaveClothes(player)) {
-                                        sendChat("You're no slave.")
-                                        sendMessage(player, "Guard: What are you doing in here?")
-                                    } else {
-                                        sendChat("You're not allowed in here!")
-                                        sendMessage(player, "Guard: You're not allowed in here!")
-                                    }
-
-                                    8 -> {
-                                        sendChat("Intel the cell you go! I hope this teaches you a lesson.")
-                                        properties.combatPulse.attack(player)
-                                    }
-
-                                    10 -> if (!TouristTrap.inJail(player)) {
-                                        TouristTrap.jail(player)
-                                    }
-                                }
-                                return false
-                            }
-                        },
-                    )
-                    break
-                }
-            }
-        }
-
-        override fun getIds(): IntArray = intArrayOf(
-            NPCs.GUARD_4993,
-            NPCs.GUARD_4994,
-            NPCs.GUARD_4995,
-            NPCs.GUARD_4996,
-            NPCs.GUARD_4997,
-            NPCs.GUARD_4998,
-            NPCs.GUARD_4999,
-            NPCs.GUARD_5000,
-            NPCs.GUARD_5001,
-            NPCs.GUARD_5002,
-        )
-    }
+    override fun getIds(): IntArray = intArrayOf(
+        NPCs.GUARD_4993,
+        NPCs.GUARD_4994,
+        NPCs.GUARD_4995,
+        NPCs.GUARD_4996,
+        NPCs.GUARD_4997,
+        NPCs.GUARD_4998,
+        NPCs.GUARD_4999,
+        NPCs.GUARD_5000,
+        NPCs.GUARD_5001
+    )
 }

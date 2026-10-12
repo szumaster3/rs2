@@ -27,11 +27,9 @@ import shared.consts.Quests
  */
 class JulietDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
     private var cutscene: JulietCutscene? = null
 
     override fun open(vararg args: Any?): Boolean {
-        quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
         npc = args[0] as NPC
         if (args.size > 1) {
             cutscene = args[1] as JulietCutscene
@@ -39,7 +37,7 @@ class JulietDialogue(player: Player? = null) : Dialogue(player) {
             stage = 2000
             return true
         }
-        stage = when (quest!!.getStage(player)) {
+        stage = when (getQuestStage(player, Quests.ROMEO_JULIET)) {
             0 -> {
                 npc(FaceAnim.HALF_GUILTY, "Romeo, Romeo, wherefore art thou Romeo? Bold", "adventurer, have you seen Romeo on your travels?", "Skinny guy, a bit wishy washy, head full of poetry.")
                 0
@@ -92,9 +90,8 @@ class JulietDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
-        val phil = if (cutscene != null) cutscene!!.phillipia else findNPC(3325)!!
-        val dad = if (cutscene != null) cutscene!!.npcs[2] else findNPC(3324)!!
+        val phil = if (cutscene != null) cutscene!!.phillipia else findNPC(NPCs.PHILLIPA_3325)!!
+        val dad = if (cutscene != null) cutscene!!.npcs[2] else findNPC(NPCs.DRAUL_LEPTOC_3324)!!
         when (stage) {
             2000 -> npc("She's going to make it seem even more convincing!").also { stage++ }
             2001 -> interpreter.sendDialogues(phil, FaceAnim.HALF_GUILTY, "Yes, I'm quite the actress! Good luck dear cousin!").also { stage++ }
@@ -153,7 +150,7 @@ class JulietDialogue(player: Player? = null) : Dialogue(player) {
 
             2013 -> interpreter.sendDialogues(phil, FaceAnim.FURIOUS, "Poor Juliet...make preparations for her body to be", "placed in the Crypt...").also { stage++ }
             2014 -> if (player.inventory.remove(POTION)) {
-                quest.setStage(player, 70)
+                setQuestStage(player, Quests.ROMEO_JULIET, 70)
                 cutscene!!.stop(true)
                 end()
             }
@@ -172,8 +169,8 @@ class JulietDialogue(player: Player? = null) : Dialogue(player) {
 
             33 -> {
                 end()
-                if (!player.inventory.add(Item(755))) {
-                    GroundItemManager.create(GroundItem(Item(755), npc.location, player))
+                if (!player.inventory.add(Item(Items.MESSAGE_755))) {
+                    GroundItemManager.create(GroundItem(Item(Items.MESSAGE_755), npc.location, player))
                 }
                 setQuestStage(player, Quests.ROMEO_JULIET, 20)
                 updateQuestTab(player)
@@ -190,8 +187,8 @@ class JulietDialogue(player: Player? = null) : Dialogue(player) {
             106 -> npc(FaceAnim.HALF_GUILTY, "Please, take this new message to him,", "and please don't loose it.").also { stage++ }
             107 -> {
                 end()
-                if (!player.inventory.add(Item(755))) {
-                    GroundItemManager.create(GroundItem(Item(755), npc.location, player))
+                if (!player.inventory.add(Item(Items.MESSAGE_755))) {
+                    GroundItemManager.create(GroundItem(Item(Items.MESSAGE_755), npc.location, player))
                 }
                 setQuestStage(player, Quests.ROMEO_JULIET, 20)
                 updateQuestTab(player)
@@ -212,8 +209,8 @@ class JulietDialogue(player: Player? = null) : Dialogue(player) {
             705 -> npc(FaceAnim.HALF_GUILTY, "Many thanks! Oh, I'm so very grateful. You may be", "our only hope.").also { stage++ }
             706 -> {
                 end()
-                if (!player.inventory.add(Item(755))) {
-                    GroundItemManager.create(GroundItem(Item(755), npc.location, player))
+                if (!player.inventory.add(Item(Items.MESSAGE_755))) {
+                    GroundItemManager.create(GroundItem(Item(Items.MESSAGE_755), npc.location, player))
                 }
                 setQuestStage(player, Quests.ROMEO_JULIET, 20)
                 updateQuestTab(player)

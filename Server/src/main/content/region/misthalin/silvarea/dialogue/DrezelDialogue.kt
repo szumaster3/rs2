@@ -19,17 +19,16 @@ class DrezelDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
-        if (quest.getStage(player) == 13) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 13) {
             playerl(FaceAnim.HALF_GUILTY, "Hello.")
             stage = 0
-        } else if (quest.getStage(player) == 14) {
+        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 14) {
             npc(FaceAnim.HALF_GUILTY, "How does it adventurer? Any luck in finding the key to", "the cell or a way of stopping the vampire yet?")
             stage = 600
-        } else if (quest.getStage(player) == 15) {
+        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 15) {
             player(FaceAnim.HALF_GUILTY, "The key fitted the lock! You're free to leave now!")
             stage = 701
-        } else if (quest.getStage(player) == 16) {
+        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 16) {
             player(FaceAnim.HALF_GUILTY, "I poured the blessed water over the vampires coffin. I", "think that should trap him in there long enough for you", "to escape.")
             stage = 800
         }
@@ -37,7 +36,6 @@ class DrezelDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = getQuestStage(player, Quests.PRIEST_IN_PERIL)
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Oh! You do not appear to be on of those Zamorakians", "who imprisoned me here! Who are you and why are", "you here?").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "My name's " + player.username + ". King Roald sent me to find", "out what was going on at the temple. I take it you are", "Drezel?").also { stage++ }

@@ -2,6 +2,8 @@ package content.region.misthalin.varrock.quest.surok.plugin
 
 import core.api.amountInBank
 import core.api.amountInInventory
+import core.api.getQuestStage
+import core.api.produceGroundItem
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
@@ -25,14 +27,10 @@ class OutlawNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
         super.finalizeDeath(killer)
         if (killer is Player) {
             val player = killer.asPlayer()
-            val quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW)
-            if (quest.getStage(player) == 10) {
-                val amount = amountInInventory(player, WhatLiesBelowListener.RATS_PAPER) + amountInBank(
-                    player,
-                    WhatLiesBelowListener.RATS_PAPER,
-                )
+            if (getQuestStage(player, Quests.WHAT_LIES_BELOW) == 10) {
+                val amount = amountInInventory(player, WhatLiesBelowListener.RATS_PAPER) + amountInBank(player, WhatLiesBelowListener.RATS_PAPER)
                 if (amount < 5) {
-                    GroundItemManager.create(Item(WhatLiesBelowListener.RATS_PAPER), getLocation())
+                    produceGroundItem(player, WhatLiesBelowListener.RATS_PAPER, 1, getLocation())
                 }
             }
         }

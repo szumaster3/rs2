@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.romeo.plugin
 
+import core.api.getQuestStage
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -15,12 +16,7 @@ class JulietNPC : AbstractNPC {
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = JulietNPC(id, location)
 
-    override fun isHidden(player: Player): Boolean =
-        player
-            .getQuestRepository()
-            .getQuest(Quests.ROMEO_JULIET)
-            .getStage(player) > 60 &&
-            player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) < 100
+    override fun isHidden(player: Player): Boolean = getQuestStage(player, Quests.ROMEO_JULIET) in 61..99
 
     override fun getIds(): IntArray = ID
 

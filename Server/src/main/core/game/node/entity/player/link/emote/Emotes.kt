@@ -201,9 +201,7 @@ enum class Emotes(
         lockedMessage = "This emote can be unlocked during the Lost Tribe quest.",
     ) {
         override fun play(player: Player) {
-            if (isEligibleForGoblinBow(player) &&
-                player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 45
-            ) {
+            if (isEligibleForGoblinBow(player) && getQuestStage(player, Quests.THE_LOST_TRIBE) == 45) {
                 val mistag = getLocalNpcs(player).firstOrNull { npc ->
                     npc.id == NPCs.MISTAG_2084 && withinDistance(npc, player.location, 3)
                 }

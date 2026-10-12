@@ -16,20 +16,16 @@ import core.tools.END_DIALOGUE
 class IslwynDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES)
-        val waterfall = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
-        val questStage = quest.getStage(player)
-
         when {
-            quest.isCompleted(player) || questStage >= 100 -> {
+            isQuestComplete(player, Quests.ROVING_ELVES) -> {
                 player(FaceAnim.HALF_GUILTY, "Hello Islwyn, I'm back.")
                 stage = 31
             }
-            quest.isStarted(player) && questStage >= 10 -> {
+            hasStarted(player, Quests.ROVING_ELVES) && getQuestStage(player, Quests.ROVING_ELVES) >= 10 -> {
                 player(FaceAnim.HALF_GUILTY, "Hello Islwyn.")
                 stage = 0
             }
-            questStage == 0 && waterfall.isCompleted(player) -> {
+            getQuestStage(player, Quests.ROVING_ELVES) == 0 && isQuestComplete(player, Quests.WATERFALL_QUEST) -> {
                 player(FaceAnim.HALF_GUILTY, "Hello there.")
                 stage = 0
             }

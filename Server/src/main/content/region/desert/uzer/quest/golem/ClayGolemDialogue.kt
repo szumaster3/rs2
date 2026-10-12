@@ -79,7 +79,7 @@ class ClayGolemDialogue(player: Player? = null) : Dialogue(player) {
             1 -> options("Select an option", "Shall I try to repair you?", "I'm not going to find a conversation here!")
             2 -> when (buttonId) {
                 1 -> {
-                    if (p.questRepository.getQuest(Quests.THE_GOLEM).hasRequirements(p)) {
+                    if (p.questRepository.getQuest(Quests.THE_GOLEM)?.hasRequirements(p) == true) {
                         player("Shall I try to repair you?")
                         stage++
                     } else {

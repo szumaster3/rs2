@@ -154,7 +154,7 @@ class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1) {
         updateQuestTab(player)
     }
 
-    override fun getConfig(player: Player?, stage: Int): IntArray {
+    override fun getConfig(player: Player, stage: Int): IntArray {
         if(stage == 100) return intArrayOf(1282, 90)
         if(stage > 0) return intArrayOf(1282, 1)
         else return intArrayOf(1282, 0)

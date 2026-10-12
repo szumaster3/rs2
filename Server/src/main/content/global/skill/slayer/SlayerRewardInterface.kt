@@ -62,7 +62,7 @@ class SlayerRewardInterface : InterfaceListener {
                         return@on true
                     }
                     // Quest requirement logic.
-                    val qp = player.questRepository.availablePoints
+                    val qp = player.questRepository.getAvailablePoints()
                     val size = mgr.removed.size
                     val requiredQP = arrayOf(50, 100, 150, 200)[size]
 

@@ -126,7 +126,6 @@ class BloatedToadListeners :
 
     override fun defineListeners() {
         on(Items.BLOATED_TOAD_2875, IntType.ITEM, "drop") { player, used ->
-            val quest = player.questRepository.getQuest(Quests.BIG_CHOMPY_BIRD_HUNTING)
             val inExtraBorder = extraBorders.filter { it.insideBorder(player) }.count() > 0
 
             if (!borders.insideBorder(player) && !inExtraBorder) {
@@ -134,12 +133,12 @@ class BloatedToadListeners :
                 return@on true
             }
 
-            if (quest.getStage(player) < 30) {
+            if (getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING) < 30) {
                 sendPlayerDialogue(player, "I don't know what you want from me.")
                 return@on true
             }
 
-            if (quest.getStage(player) in 30..40) {
+            if (getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING) in 30..40) {
                 if (player.location == Location.create(2635, 2966, 0) ||
                     player.location ==
                     Location.create(
@@ -148,7 +147,7 @@ class BloatedToadListeners :
                         0,
                     )
                 ) {
-                    quest.setStage(player, 40)
+                    setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING, 40)
                 } else {
                     sendPlayerDialogue(player, "I should probably put this where Rantz told me.")
                     return@on true

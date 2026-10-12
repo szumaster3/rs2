@@ -1,5 +1,6 @@
 package content.region.misthalin.silvarea.quest.priest.dialogue
 
+import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
@@ -28,7 +29,7 @@ class KingRoaldPriestInPerilDialogue(val questStage: Int) : DialogueFile() {
                 8 -> when (buttonID) {
                     1 -> {
                         player(FaceAnim.HAPPY, "Sure. I don't have anything better to do right now.")
-                        player!!.questRepository.getQuest(Quests.PRIEST_IN_PERIL).start(player)
+                        setQuestStage(player!!, Quests.PRIEST_IN_PERIL, 10)
                         stage++
                     }
                     2 -> npc("Yes, I dare say it does. I wouldn't even have", "mentioned it had you not seemed to be looking for", "something to do anyway.").also { stage = END_DIALOGUE }
@@ -55,7 +56,7 @@ class KingRoaldPriestInPerilDialogue(val questStage: Int) : DialogueFile() {
                 9 -> npc("You get back there and do whatever is necessary to", "safeguard my kingdom from attack, or I will see you", "beheaded for high treason!").also { stage++ }
                 10 -> {
                     player(FaceAnim.SCARED, "Y-yes your Highness.")
-                    player!!.questRepository.getQuest(Quests.PRIEST_IN_PERIL).setStage(player, 13)
+                    setQuestStage(player!!, Quests.PRIEST_IN_PERIL, 13)
                     stage = END_DIALOGUE
                 }
             }

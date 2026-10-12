@@ -118,8 +118,8 @@ class OlafsQuest : Quest(Quests.OLAFS_QUEST, 137, 136, 1, Vars.VARBIT_QUEST_OLAF
             line(player, "I intend to claim it!", line++, true)
             line++
             line(player, "I have gained access to Sven and Helmsman's cave.", line++, false)
-            line(player, "I should be careful of the creatures down here, and", line++, false)
-            line(player, "keep an eye out for both the treasure and any traps that guard it.", line++, false)
+            line(player, "I should be careful of the creatures down here, and keep an", line++, false)
+            line(player, "eye out for both the treasure and any traps that guard it.", line++, false)
         }
 
         if(stage == 99){
@@ -144,13 +144,34 @@ class OlafsQuest : Quest(Quests.OLAFS_QUEST, 137, 136, 1, Vars.VARBIT_QUEST_OLAF
             line(player, "I intend to claim it!", line++, true)
             line++
             line(player, "I have gained access to Sven and Helmsman's cave.", line++, true)
-            line(player, "I should be careful of the creatures down here, and", line++, true)
-            line(player, "keep an eye out for both the treasure and any traps that guard it.", line++, true)
             line++
             line(player, "I have found the treasure and defeated Ulfric.", line++, true)
         }
 
         if (stage == 100) {
+            line(player, "Having spoken to Olad Hradson, I have agreed to help", line++, true)
+            line(player, "him convince his family that he is a good navigator.", line++, true)
+            line++
+            line(player, "I have taken the logs from the windswept tree", line++, true)
+            line(player, "to Olaf Hradson.", line++, true)
+            line++
+            line(player, "I have taken the carvings to Olaf Hradson's", line++, true)
+            line(player, "wife, Ingrid, and his son, Volf.", line++, true)
+            line++
+            line(player, "Olaf Hradson is freezing to death, but is too stubborn to go to town.", line++, true)
+            line(player, "He has given me some damp firewood to use on his fire.", line++, true)
+            line++
+            line(player, "I have started the fire.", line++, true)
+            line++
+            line(player, "Olaf Hradson has given me a treasure map, which he believes", line++, true)
+            line(player, "to be cursed.", line++, true)
+            line(player, "I doubt it is - he simply had it upside down.", line++, true)
+            line(player, "There is a treasure buried somewhere, as indicated by the X, and", line++, true)
+            line(player, "I intend to claim it!", line++, true)
+            line++
+            line(player, "I have gained access to Sven and Helmsman's cave.", line++, true)
+            line++
+            line(player, "I have found the treasure and defeated Ulfric.", line++, true)
             line++
             line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
         }

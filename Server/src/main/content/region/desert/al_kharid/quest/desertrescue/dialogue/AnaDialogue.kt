@@ -1,51 +1,28 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
-import core.api.sendDialogueLines
-import core.api.sendNPCDialogue
-import core.api.sendNPCDialogueLines
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.interaction.NodeUsageEvent
-import core.game.interaction.UseWithHandler
-import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
-import core.game.world.map.Location
 import core.game.world.map.RegionManager.getNpc
-import core.plugin.Plugin
+import shared.consts.NPCs
 import shared.consts.Quests
 
 class AnaDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
-    override fun init() {
-        super.init()
-    }
-
     override fun open(vararg args: Any?): Boolean {
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-        if ((quest!!.getStage(player) == 71 || quest!!.getStage(player) == 72) && args.size > 1) {
-            sendDialogueLines(
-                player,
-                "You see a barrel coming to the surface. Before too long you haul it",
-                "onto the side. The barrel seems quite heavy and you hear a muffled",
-                "sound coming from inside."
-            )
+        if ((getQuestStage(player, Quests.THE_TOURIST_TRAP) == 71 ||getQuestStage(player, Quests.THE_TOURIST_TRAP) == 72) && args.size > 1) {
+            sendDialogueLines(player, "You see a barrel coming to the surface. Before too long you haul it", "onto the side. The barrel seems quite heavy and you hear a muffled", "sound coming from inside.")
             stage = 400
             return true
         }
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             98 -> when (stage) {
                 0 -> {
-                    npc(
-                        "Great! Thanks for getting me out of that mine! And",
-                        "that barrel wasn't too bad anyway! Pop by again",
-                        "sometime, I'm sure we'll have a barrel of laughs!"
-                    )
+                    npc("Great! Thanks for getting me out of that mine! And", "that barrel wasn't too bad anyway! Pop by again", "sometime, I'm sure we'll have a barrel of laughs!")
                     stage++
                 }
             }
@@ -61,7 +38,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             else -> {
-                player.packetDispatch.sendMessage("This slave does not appear interested in talking to you.")
+                sendMessage(player,"This slave does not appear interested in talking to you.")
                 end()
             }
         }
@@ -69,7 +46,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             98 -> when (stage) {
                 1 -> {
                     npc(
@@ -87,12 +64,12 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
 
                 3 -> {
                     player.inventory.add(TouristTrap.WROUGHT_IRON_KEY, player)
-                    player.packetDispatch.sendMessage("Ana spots Irena and waves...")
-                    val irena = getNpc(player, 4986)
+                    sendMessage(player,"Ana spots Irena and waves...")
+                    val irena = getNpc(player, NPCs.MERCENARY_4986)
                     irena!!.sendChat("Hi Ana!")
-                    quest!!.setStage(player, 98)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 98)
                     end()
-                    player.dialogueInterpreter.open(4986, irena)
+                    player.dialogueInterpreter.open(NPCs.MERCENARY_4986, irena)
                 }
             }
 
@@ -103,7 +80,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 401 -> {
-                    quest!!.setStage(player, 72)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 72)
                     end()
                 }
             }
@@ -268,7 +245,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 7 -> {
-                    quest!!.setStage(player, 61)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 61)
                     end()
                 }
             }
@@ -276,47 +253,5 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(822)
-
-    class AnaBarrelHandler : UseWithHandler(TouristTrap.BARREL.id) {
-        override fun newInstance(arg: Any?): Plugin<Any> {
-            addHandler(822, NPC_TYPE, this)
-            return this
-        }
-
-        override fun handle(event: NodeUsageEvent): Boolean {
-            val player = event.player
-            val quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-            when (quest.getStage(player)) {
-                61 -> player.dialogueInterpreter.open(822, event.usedWith, true)
-                else -> return false
-            }
-            return true
-        }
-    }
-
-    class AnaNPC : AbstractNPC {
-        constructor() : super(0, null)
-
-        constructor(id: Int, location: Location?) : super(id, location)
-
-        override fun construct(
-            id: Int,
-            location: Location,
-            vararg objects: Any,
-        ): AbstractNPC = AnaNPC(id, location)
-
-        override fun isHidden(player: Player): Boolean {
-            val quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-            return if (quest.getStage(player) > 61) {
-                true
-            } else {
-                player.inventory.containsItem(TouristTrap.ANNA_BARREL) || player.bank.containsItem(
-                    TouristTrap.ANNA_BARREL,
-                )
-            }
-        }
-
-        override fun getIds(): IntArray = intArrayOf(822)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANA_822)
 }

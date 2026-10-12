@@ -18,12 +18,11 @@ import shared.consts.Quests
 class HettyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.WITCHS_POTION)
-        if (quest.isCompleted(player)) {
+        if (isQuestComplete(player, Quests.WITCHS_POTION)) {
             npc(FaceAnim.ASKING, "How's your magic coming along?")
             stage = 0
         }
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.WITCHS_POTION)) {
             0 -> npc(FaceAnim.NEUTRAL, "What could you want with an old woman like me?").also { stage = 11}
             20 -> npc(FaceAnim.HAPPY, "So have you found the things for the potion?").also { stage = 100}
             40 -> if (args.size == 2) {
@@ -46,7 +45,6 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.WITCHS_POTION)
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "I'm practicing and slowly getting better.").also { stage++ }
             1 -> npc(FaceAnim.HALF_GUILTY, "Good, good.").also { stage = END_DIALOGUE }
@@ -72,9 +70,7 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
             32 -> player(FaceAnim.NEUTRAL, "What do I need?").also { stage++ }
             33 -> npc(FaceAnim.NEUTRAL, "You need an eye of newt, a rat's tail, and onion... Oh", "and a piece of burnt meat.").also { stage++ }
             34 -> player(FaceAnim.HAPPY, "Great, I'll go get them.").also {
-                quest.start(player)
-                quest.setStage(player, 20)
-                end()
+                setQuestStage(player, Quests.WITCHS_POTION, 20)
                 stage = END_DIALOGUE
             }
             35 -> {
@@ -94,7 +90,7 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
             105 -> {
                 end()
                 if (player.inventory.remove(Item(Items.ONION_1957), Item(Items.RATS_TAIL_300), Item(Items.BURNT_MEAT_2146), Item(Items.EYE_OF_NEWT_221))) {
-                    quest.setStage(player, 40)
+                    setQuestStage(player, Quests.WITCHS_POTION, 40)
                     npc(FaceAnim.HAPPY, "Ok, now drink from the cauldron.")
                 }
             }

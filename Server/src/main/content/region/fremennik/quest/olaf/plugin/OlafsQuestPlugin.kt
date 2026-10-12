@@ -103,7 +103,7 @@ class OlafsQuestPlugin : InteractionListener {
                 if (UlfricNPC.spawnUlfric(player)) {
                     replaceScenery(node.asScenery(), node.id -1, 3)
                     sendMessage(player, "You open the chest and the vengeful spirit of fremennik captain appears!", 2)
-                    player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(137), 98)
+                    setQuestStageNonmonotonic(player, 137, 98)
                 } else {
                     sendMessage(player, "You can't do that right now.")
                 }

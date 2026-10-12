@@ -129,8 +129,8 @@ class HorrorFromTheDeep : Quest(Quests.HORROR_FROM_THE_DEEP, 77, 76, 2, Vars.VAR
         rewardXP(player, Skills.STRENGTH, 4662.0)
     }
 
-    override fun questCloseEvent(player: Player?, component: Component?) {
-        queueScript(player!!, 1, QueueStrength.SOFT) {
+    override fun questCloseEvent(player: Player, component: Component) {
+        queueScript(player, 1, QueueStrength.SOFT) {
             openDialogue(player, JossikLighthouseDialogue())
             return@queueScript stopExecuting(player)
         }

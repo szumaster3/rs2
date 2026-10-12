@@ -2,6 +2,7 @@ package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.inInventory
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -79,10 +80,9 @@ class CharlieTheTrampDialogue(player: Player? = null) : Dialogue(player) {
 
             284 -> {
                 if (!player.questRepository.hasStarted(Quests.SHIELD_OF_ARRAV)) {
-                    player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).start(player)
-                    player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).setStage(player, 50)
+                    setQuestStage(player, Quests.SHIELD_OF_ARRAV, 50)
                 } else if (!ShieldofArrav.isBlackArm(player) && !ShieldofArrav.isPhoenix(player)) {
-                    player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).setStage(player, 50)
+                    setQuestStage(player, Quests.SHIELD_OF_ARRAV, 50)
                 }
                 end()
             }

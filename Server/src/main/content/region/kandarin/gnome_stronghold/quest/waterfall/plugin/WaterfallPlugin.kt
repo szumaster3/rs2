@@ -390,7 +390,6 @@ class WaterfallPlugin : OptionHandler() {
         override fun handle(event: NodeUsageEvent): Boolean {
             val player = event.player
             val useditem = event.usedItem
-            val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
             val scenery = event.usedWith as Scenery
 
             if (useditem.id == ROPE.id && scenery.id == 1996 || scenery.id == 1997) {
@@ -507,7 +506,7 @@ class WaterfallPlugin : OptionHandler() {
 
             if (useditem.id == AMULET.id &&
                 scenery.id == 2006 &&
-                quest.getStage(player) != 100 &&
+                getQuestStage(player, Quests.WATERFALL_QUEST) != 100 &&
                 player.location !=
                 Location(
                     2603,
@@ -546,7 +545,7 @@ class WaterfallPlugin : OptionHandler() {
                 }
             }
 
-            if (useditem.id == URN.id && scenery.id == 2014 && quest.getStage(player) != 100) {
+            if (useditem.id == URN.id && scenery.id == 2014 && getQuestStage(player, Quests.WATERFALL_QUEST) != 100) {
                 if (player.inventory.freeSlots() < 5) {
                     player.packetDispatch.sendMessage("You'll need 5 free inventory slots to take Glarial's treasure.")
                     return false
@@ -563,7 +562,7 @@ class WaterfallPlugin : OptionHandler() {
                     player.pulseManager.run(
                         object : Pulse(8, player) {
                             override fun pulse(): Boolean {
-                                quest.finish(player)
+                                finishQuest(player, Quests.WATERFALL_QUEST)
                                 return true
                             }
                         },

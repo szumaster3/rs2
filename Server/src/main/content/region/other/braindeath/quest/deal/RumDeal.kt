@@ -56,26 +56,12 @@ class RumDeal : Quest(Quests.RUM_DEAL, 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PRO
         }
     }
 
-    override fun hasRequirements(player: Player?): Boolean {
-        if (player != null) {
-            if (getStatLevel(player, Skills.FARMING) < 40) {
-                return false
-            }
-            if (getStatLevel(player, Skills.FISHING) < 50) {
-                return false
-            }
-            if (getStatLevel(player, Skills.PRAYER) < 47) {
-                return false
-            }
-            if (getStatLevel(player, Skills.CRAFTING) < 42) {
-                return false
-            }
-            if (getStatLevel(player, Skills.SLAYER) < 42) {
-                return false
-            }
-            return true
-        }
-        return false
+    override fun hasRequirements(player: Player): Boolean {
+        return getStatLevel(player, Skills.FARMING) >= 40 &&
+                getStatLevel(player, Skills.FISHING) >= 50 &&
+                getStatLevel(player, Skills.PRAYER) >= 47 &&
+                getStatLevel(player, Skills.CRAFTING) >= 42 &&
+                getStatLevel(player, Skills.SLAYER) >= 42
     }
 
     override fun finish(player: Player) {

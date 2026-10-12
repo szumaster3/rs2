@@ -98,14 +98,14 @@ class DrezelDialogueFile : DialogueFile() {
                     if (questStage == 0) {
                         repeat(3) { addItemOrDrop(player!!, Items.MEAT_PIE_2327, 1) }
                         repeat(3) { addItemOrDrop(player!!, Items.APPLE_PIE_2323, 1) }
-                        player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player!!, 5)
+                        setQuestStage(player!!, Quests.NATURE_SPIRIT, 5)
                     }
                     stage++
                 }
                 23 -> npcl(FaceAnim.NEUTRAL, "Please take this food to Filliman, he'll probably appreciate a bit of cooked food. Now, he's never revealed where he lives in the swamps but I guess he'd be to the south, search for him won't you?").also { stage++ }
                 24 -> playerl(FaceAnim.FRIENDLY, "I'll do my very best, don't worry, if he's in there and he's still alive I'll definitely find him.").also {
                     stage = END_DIALOGUE
-                    player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).start(player!!)
+                    setQuestStage(player!!, Quests.NATURE_SPIRIT, 10)
                 }
             }
         } else if (questStage == 15) {
@@ -131,7 +131,7 @@ class DrezelDialogueFile : DialogueFile() {
         } else if (questStage == 40) {
             npcl(FaceAnim.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also {
                 stage = END_DIALOGUE
-                player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player!!, 45)
+                setQuestStage(player!!, Quests.NATURE_SPIRIT, 45)
             }
         } else if (questStage == 100) {
             when (stage) {

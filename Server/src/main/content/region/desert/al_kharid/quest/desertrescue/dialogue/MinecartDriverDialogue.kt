@@ -1,18 +1,18 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
+import shared.consts.Items
+import shared.consts.NPCs
 import shared.consts.Quests
 
 class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var quest: Quest? = null
-
     override fun open(vararg args: Any?): Boolean {
-        quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             90 -> npc("Quickly, get in the back of the cart.")
             80 -> interpreter.sendDialogue("The cart driver seems to be fastidiously cleaning his cart.", "It doesn't look as if he wants to be disturbed.")
             else -> player("Hello!")
@@ -21,7 +21,7 @@ class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (quest!!.getStage(player)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
             90 -> when (stage) {
                 0 -> {
                     player("Okay, sorry.")
@@ -162,7 +162,7 @@ class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
                         return true
                     }
                     if (player.inventory.remove(COINS)) {
-                        quest!!.setStage(player, 90)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 90)
                         npc("Okay, get in the back of the cart then!")
                         stage++
                     }
@@ -188,9 +188,9 @@ class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(841)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MINE_CART_DRIVER_841)
 
     companion object {
-        private val COINS = Item(995, 100)
+        private val COINS = Item(Items.COINS_995, 100)
     }
 }

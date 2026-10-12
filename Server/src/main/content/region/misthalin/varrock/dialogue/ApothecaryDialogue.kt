@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import core.api.getQuestStage
+import core.api.setQuestStage
 import core.api.setVarbit
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
@@ -21,12 +23,12 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) == 40) {
+        if (getQuestStage(player, Quests.ROMEO_JULIET) == 40) {
             player("Apothecary. Father Lawrence sent me.")
             stage = 500
             return true
         }
-        if (player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) == 50) {
+        if (getQuestStage(player, Quests.ROMEO_JULIET) == 50) {
             return if (!player.inventory.contains(Items.CADAVA_BERRIES_753, 1)) {
                 npc("Keep searching for those Cadava berries. They're needed", "for the potion.")
                 stage = 507
@@ -37,7 +39,7 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
                 true
             }
         }
-        if (player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) == 60) {
+        if (getQuestStage(player, Quests.ROMEO_JULIET) == 60) {
             if (!player.inventory.contains(Items.CADAVA_POTION_756, 1) && !player.bank.contains(Items.CADAVA_POTION_756, 1)) {
                 return if (player.inventory.contains(Items.CADAVA_BERRIES_753, 1)) {
                     npc("Well done. You have the berries.")
@@ -216,7 +218,7 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             506 -> {
-                player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).setStage(player, 50)
+                setQuestStage(player, Quests.ROMEO_JULIET, 50)
                 player("Ok, thanks.")
                 stage = 507
             }
@@ -243,7 +245,7 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             640 -> {
-                player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).setStage(player, 60)
+                setQuestStage(player, Quests.ROMEO_JULIET, 60)
                 end()
             }
         }

@@ -1,9 +1,7 @@
 package content.region.kandarin.camelot.quest.arthur.dialogue
 
 import content.data.GameAttributes
-import core.api.getQuest
-import core.api.removeAttribute
-import core.api.sendDialogue
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
@@ -59,10 +57,8 @@ class MorganLeFayeDialogue : DialogueFile() {
             )
 
             STAGE_EXCALIBUR -> npcl(FaceAnim.NEUTRAL, "The lady of the lake has it. I don't know if she'll give it to you though, she can be rather temperamental.").also {
-                var quest = getQuest(player!!, Quests.MERLINS_CRYSTAL)
-
-                if (quest.getStage(player) == 30) {
-                    player!!.questRepository.setStage(quest, 40)
+                if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 30) {
+                    setQuestStage(player!!, Quests.MERLINS_CRYSTAL, 40)
                 }
                 stage = 31
             }

@@ -28,7 +28,6 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val afterTribalTotemQuest = isQuestComplete(player, Quests.TRIBAL_TOTEM)
-        val quest = player.getQuestRepository().getQuest(Quests.BACK_TO_MY_ROOTS)
         when (stage) {
             0 -> showTopics(
                 Topic("Yes it's very nice.", 1, false),
@@ -52,7 +51,7 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             7 -> npcl(FaceAnim.HAPPY, "It's rather easy, it's his middle name.").also { stage++ }
             8 -> playerl(FaceAnim.ASKING, "Whose middle name?").also { stage++ }
             9 -> npcl(FaceAnim.ANNOYED, "Hum. I probably shouldn't have said that. Forget I mentioned it.").also { stage = END_DIALOGUE }
-            10 -> if(!quest.hasRequirements(player)) {
+            10 -> if(!hasRequirement(player, Quests.BACK_TO_MY_ROOTS, false)) {
                 npc(FaceAnim.HAPPY, "Actually, now you mention it, yes... but you're not", "experienced enough to help me just yet.").also { stage = END_DIALOGUE }
                 sendMessage(player, "Check your quest journal for the requirements to start the Back to my Roots quest.")
             } else if (isQuestComplete(player, Quests.BACK_TO_MY_ROOTS)) {
@@ -85,7 +84,7 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
 
-            27 -> when(quest.getStage(player)){
+            27 -> when(getQuestStage(player, Quests.BACK_TO_MY_ROOTS)){
                 8 -> npcl(FaceAnim.FRIENDLY, "You call yourself a farmer? How could you let the vine go wild like that?").also { stage = 44 }
                 7 -> player("Guess what? I got you a cutting... and it should still be alive, too!").also { stage++ }
                 6 -> npcl(FaceAnim.HALF_ASKING, "Umm. Have you had time to plant that vine yet?").also { stage = 39 }

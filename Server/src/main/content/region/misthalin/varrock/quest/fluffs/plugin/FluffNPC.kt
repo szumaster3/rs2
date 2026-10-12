@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.fluffs.plugin
 
+import core.api.getQuestStage
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -8,24 +9,15 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class FluffNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = FluffNPC(id, location)
+class FluffNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id, location) {
+
+    override fun construct(id: Int, location: Location, vararg objects: Any, ): AbstractNPC = FluffNPC(id, location)
 
     override fun isHidden(player: Player): Boolean {
-        if (player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT).getStage(player) < 20) {
+        if (getQuestStage(player, Quests.GERTRUDES_CAT) < 20) {
             return true
         }
-        return player.getAttribute(
-            "hidefluff",
-            0L,
-        ) > System.currentTimeMillis()
+        return player.getAttribute("hidefluff", 0L) > System.currentTimeMillis()
     }
 
     override fun getIds(): IntArray = ID

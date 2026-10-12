@@ -202,9 +202,9 @@ class EnlightenedJourney : Quest(Quests.ENLIGHTENED_JOURNEY, 55, 54, 1, Vars.VAR
         // setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_VARROCK_BALLOON_2872, 1, true)
     }
 
-    override fun questCloseEvent(player: Player?, component: Component?)
+    override fun questCloseEvent(player: Player, component: Component)
     {
-        queueScript(player!!,1){
+        queueScript(player,1){
             setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 2, true)
             return@queueScript stopExecuting(player)
         }

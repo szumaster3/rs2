@@ -1,9 +1,7 @@
 package content.region.misthalin.varrock.quest.romeo.dialogue
 
 import content.region.misthalin.varrock.quest.romeo.cutscene.RomeoAndJulietCutscene
-import core.api.sendItemDialogue
-import core.api.setQuestStage
-import core.api.updateQuestTab
+import core.api.*
 import core.game.activity.ActivityManager
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -32,7 +30,6 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
     private var phill: NPC? = null
 
     override fun open(vararg args: Any?): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
         npc = args[0] as NPC
         if (args.size > 1) {
             cutscene = args[1] as RomeoAndJulietCutscene
@@ -40,7 +37,7 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
             stage = 740
             return true
         }
-        when (quest.getStage(player)) {
+        when (getQuestStage(player, Quests.ROMEO_JULIET)) {
             0 -> {
                 npc(FaceAnim.HALF_GUILTY, "Juliet. Juliet, where art thou Juliet?", "Have you seen my Juliet?")
                 stage = 0
@@ -96,7 +93,6 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
         when (stage) {
             0 -> {
                 options("No sorry. I haven't seen her.", "Perhaps I could help to find her for you?")
@@ -429,8 +425,8 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             422 -> {
-                quest.setStage(player, 30)
-                player.getQuestRepository().syncronizeTab(player)
+                setQuestStage(player, Quests.ROMEO_JULIET, 30)
+                updateQuestTab(player)
                 player.inventory.remove(Item(755))
                 player("FATHER LAWRENCE!")
                 stage = 423
@@ -866,7 +862,7 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
             751 -> {
                 end()
                 cutscene!!.stop(true)
-                quest.finish(player)
+                finishQuest(player, Quests.ROMEO_JULIET)
             }
         }
         return true

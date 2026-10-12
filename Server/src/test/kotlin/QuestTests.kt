@@ -1,3 +1,4 @@
+import core.api.finishQuest
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.link.quest.QuestRepository
 import org.junit.jupiter.api.Assertions
@@ -55,9 +56,8 @@ class QuestTests {
             IllegalStateException::class.java,
             {
                 QuestRepository.register(testQuest)
-                val repo = QuestRepository(testPlayer)
-                repo.getQuest("Test Quest").finish(testPlayer)
-                repo.getQuest("Test Quest").finish(testPlayer)
+                finishQuest(testPlayer, "Test Quest")
+                finishQuest(testPlayer, "Test Quest")
             },
             "Quest completed twice without throwing an exception or threw wrong exception!",
         )

@@ -1,7 +1,9 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
+import content.region.asgarnia.burthorpe.quest.hero.dialogue.KatrineDialogueFile
 import content.region.asgarnia.burthorpe.quest.hero.dialogue.StravenDialogueFile
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
+import core.api.getQuestStage
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
@@ -27,8 +29,7 @@ class StravenDialogue(player: Player? = null) : Dialogue(player) {
         when (quest!!.getStage(player)) {
             100 -> {
                 if (ShieldofArrav.isPhoenix(player)) {
-                    val heroesQuest: Quest = player.getQuestRepository().getQuest(Quests.HEROES_QUEST)
-                    if (0 < heroesQuest.getStage(player) && heroesQuest.getStage(player) < 100) {
+                    if (getQuestStage(player, Quests.HEROES_QUEST) in 1 until 100) {
                         openDialogue(player, StravenDialogueFile(), npc)
                         return true
                     }

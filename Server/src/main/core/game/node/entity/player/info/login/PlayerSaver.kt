@@ -527,7 +527,7 @@ class PlayerSaver(val player: Player) {
         quests.addProperty("points", player.questRepository.points.toString())
 
         val questStages = JsonArray()
-        player.questRepository.questList.forEach {
+        player.questRepository.getQuestStages().forEach {
             val quest = JsonObject()
             quest.addProperty("questId", it.key.toString())
             quest.addProperty("questStage", it.value.toString())

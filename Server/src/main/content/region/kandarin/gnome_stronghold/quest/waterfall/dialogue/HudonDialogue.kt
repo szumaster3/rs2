@@ -1,5 +1,8 @@
 package content.region.kandarin.gnome_stronghold.quest.waterfall.dialogue
 
+import core.api.getQuestStage
+import core.api.sendMessage
+import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
 import core.game.dialogue.FaceAnim
@@ -8,18 +11,26 @@ import shared.consts.Quests
 
 class HudonDialogue(player: Player? = null) : Dialogue(player) {
 
-    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("hudon_dialogue"), 305)
+    override fun open(vararg args: Any?): Boolean {
+        stage = if (getQuestStage(player, Quests.WATERFALL_QUEST) >= 20) {
+            player(FaceAnim.HALF_GUILTY, "So you're still here.")
+            20
+        } else {
+            player(FaceAnim.HALF_GUILTY, "Hello son, are you okay? You need help?")
+            0
+        }
+        return true
+    }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
         when (stage) {
             100 -> end()
             101 -> {
-                player.packetDispatch.sendMessage("Hudon is refusing to leave the waterfall.")
+                sendMessage(player,"Hudon is refusing to leave the waterfall.")
                 end()
             }
 
-            0 -> if (quest.getStage(player) == 10) {
+            0 -> if (getQuestStage(player, Quests.WATERFALL_QUEST) == 10) {
                 interpreter.sendDialogues(305, FaceAnim.CHILD_NORMAL, "It looks like you need the help.")
                 stage = 1
             }
@@ -61,7 +72,7 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
 
             6 -> {
                 interpreter.sendDialogues(305, FaceAnim.CHILD_NORMAL, "I'm fine alone.")
-                quest.setStage(player, 20)
+                setQuestStage(player, Quests.WATERFALL_QUEST, 20)
                 stage = 101
             }
 
@@ -71,7 +82,7 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.CHILD_NORMAL,
                     "I'll find that treasure soon, just you wait and see.",
                 )
-                stage = if (quest.getStage(player) == 100) {
+                stage = if (getQuestStage(player, Quests.WATERFALL_QUEST) == 100) {
                     21
                 } else {
                     100
@@ -115,15 +126,6 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun open(vararg args: Any?): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
-        stage = if (quest.getStage(player) >= 20) {
-            player(FaceAnim.HALF_GUILTY, "So you're still here.")
-            20
-        } else {
-            player(FaceAnim.HALF_GUILTY, "Hello son, are you okay? You need help?")
-            0
-        }
-        return true
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("hudon_dialogue"), 305)
+
 }
