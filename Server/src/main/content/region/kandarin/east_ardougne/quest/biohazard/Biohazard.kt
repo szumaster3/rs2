@@ -1,6 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.biohazard
 
 import content.data.GameAttributes
+import core.api.getAttribute
 import core.api.isQuestComplete
 import core.api.removeAttributes
 import core.api.rewardXP
@@ -39,153 +40,121 @@ class Biohazard : Quest(Quests.BIOHAZARD, 36, 35, 3, Vars.VARP_QUEST_BIOHAZARD_P
         }
 
         if (stage == 1) {
-            line(player, "I need to get into !!West Ardougne?? to find !!Elena's Distillator??.", line++, true)
-            line(player, "However, the !!Mourners?? have blocked the tunnel I used", line++, true)
-            line(player, "before. !!Elena?? sugested I talk to !!Jerico??, an old friend of", line++, true)
-            line(player, "her fathers, and ask for his help in crossing the wall. His", line++, true)
-            line(player, "home is north of the chapel in !!East Ardougne??.", line++, true)
+            line(player, "I need to get into !!West Ardougne?? to find !!Elena's Distillator??.", line++)
+            line(player, "However, the !!Mourners?? have blocked the tunnel I used", line++)
+            line(player, "before. !!Elena?? suggested I talk to !!Jerico??, an old friend of", line++)
+            line(player, "her father's, and ask for his help in crossing the wall. His", line++)
+            line(player, "home is north of the chapel in !!East Ardougne??.", line++)
             line++
-        }
-
-        if (stage >= 1) {
-            line(player, "The Mourners blocked the tunnel I used to enter West", line++, true)
-            line(player, "Ardougne before. However, I spoke to Jerico, an old friend", line++, true)
-            line(player, "of Elena's father, about finding another way into the city.", line++, true)
-            line++
-        }
-
-        if (stage >= 2) {
-            line(player, "!!Jerico?? told me that !!Omart??, a friend of his, should be able", line++, true)
-            line(player, "to help me get into !!West Ardougne??. He is waiting for me at", line++, true)
-            line(player, "the southern end of the wall.", line++, true)
+        } else if (stage > 1) {
+            line(player, "I spoke to Jerico, an old friend of Elena's father, about", line++, true)
+            line(player, "finding another way into West Ardougne.", line++, true)
             line++
         }
 
         if (stage == 2) {
-            line(player, "!!Omart??, a friend of !!Jerico??, has agreed to help me cross the", line++, true)
-            line(player, "wall into !!West Ardougne??. However, I need to distract the", line++, true)
-            line(player, "guards in the !!Watchtower?? first. Following the suggestion", line++, true)
-            line(player, "of !!Omart??, I threw some !!Bird Feed?? near the tower. Now I just", line++, true)
-            line(player, "need to release some !!Pigeons?? nearby and they should", line++, true)
-            line(player, "distract the guards. !!Jerico?? should be able to supply the", line++, true)
-            line(player, "!!Pigeons??.", line++, true)
+            line(player, "!!Jerico?? told me that !!Omart??, a friend of his, should be able", line++)
+            line(player, "to help me get into !!West Ardougne??. He is waiting for me at", line++)
+            line(player, "the southern end of the wall. However, I need to distract", line++)
+            line(player, "the guards in the !!Watchtower?? first. !!Jerico?? may have an idea.", line++)
+            line++
+        } else if (stage > 2) {
+            line(player, "Omart, a friend of Jerico, agreed to help me cross the wall", line++, true)
+            line(player, "into West Ardougne, but I had to distract the guards in the", line++, true)
+            line(player, "Watchtower first.", line++, true)
             line++
         }
 
         if (stage == 3) {
-            line(player, "!!Omart??, a friend of !!Jerico??, has agreed to help me cross the", line++, true)
-            line(player, "wall into !!West Ardougne??. He is waiting for me at the", line++, true)
-            line(player, "southern end of the wall.", line++, true)
+            line(player, "I found some !!Bird Feed?? in !!Jerico's?? cupboard. I should throw", line++)
+            line(player, "it near the tower, then release some !!Pigeons?? from the", line++)
+            line(player, "corner of the fence and the guards should be distracted.", line++)
+            line++
+        } else if (stage > 3) {
+            line(player, "I threw some Bird Feed near the tower and released some", line++, true)
+            line(player, "Pigeons to distract the guards.", line++, true)
             line++
         }
 
-        if (stage >= 3) {
+        if (stage in 4..5) {
+            line(player, "The guards are distracted! I should speak to !!Omart?? and cross", line++)
+            line(player, "the wall into !!West Ardougne??. !!Elena's Distillator?? should be", line++)
+            line(player, "somewhere in the !!Mourner Headquarters?? in the north east", line++)
+            line(player, "of the city. I need to get in and recover it.", line++)
+            line++
+        } else if (stage > 5) {
             line(player, "Omart and Kilron, friends of Jerico, helped me cross the", line++, true)
             line(player, "wall into West Ardougne.", line++, true)
             line++
         }
 
-        if (stage == 4) {
-            line(player, "!!Elena's Distillator?? should be somewhere in the !!Mourner??", line++, true)
-            line(player, "!!Headquarters?? in the north east of !!West Ardougne??. I need", line++, true)
-            line(player, "to get in and recover it.", line++, true)
+        if (stage == 6) {
+            line(player, "I used a !!Rotten Apple?? to poison the !!Mourners' Stew??. The", line++)
+            line(player, "mourners are waiting for a doctor, so I need a !!Doctor's Gown??", line++)
+            line(player, "to get into the !!Mourner Headquarters??.", line++)
+            line++
+        } else if (stage > 6) {
+            line(player, "I poisoned the Mourners' Stew with a Rotten Apple and, wearing", line++, true)
+            line(player, "a Doctor's Gown, got into the Mourner Headquarters.", line++, true)
             line++
         }
 
-        if (stage == 7) {
-            line(player, "!!Elena's Distillator?? should be somewhere in the !!Mourner??", line++, true)
-            line(player, "!!Headquarters?? in the north east of !!West Ardougne??. I need", line++, true)
-            line(player, "to get in and recover it. I used a !!Rotten Apple?? to poison", line++, true)
-            line(player, "the !!Mourner's Stew?? which might help me.", line++, true)
-            line++
-        }
-
-        if (stage == 8) {
-            line(player, "I managed to get into the !!Mourner Headquarters?? in !!West??", line++, true)
-            line(player, "!!Ardougne??. I should see if I can find !!Elena's Distillator??", line++, true)
-            line(player, "inside.", line++, true)
+        if (stage in 7..9) {
+            line(player, "I managed to get into the !!Mourner Headquarters?? in !!West??", line++)
+            line(player, "!!Ardougne??. I should see if I can find !!Elena's Distillator??", line++)
+            line(player, "inside.", line++)
             line++
         }
 
         if (stage == 10) {
-            line(player, "I managed to get into the !!Mourner Headquarters?? in !!West??", line++, true)
-            line(player, "!!Ardougne??. I found !!Elena's Distillator?? inside. I should return", line++, true)
-            line(player, "it to her.", line++, true)
+            line(player, "I found !!Elena's Distillator?? in the !!Mourner Headquarters??. I", line++)
+            line(player, "should return it to her.", line++)
+            line++
+        } else if (stage > 10) {
+            line(player, "I found Elena's Distillator and returned it to her.", line++, true)
             line++
         }
 
-        if (stage >= 10) {
-            line(player, "I managed to get into the Mourner Headquarters in West", line++, true)
-            line(player, "Ardougne. I found Elena's Distillator and returned it", line++, true)
-            line(player, "to her.", line++, true)
+        if (stage == 10 && getAttribute(player, GameAttributes.ELENA_REPLACE, false)) {
+            line(player, "!!Elena?? ran some tests on a !!Plague Sample?? using her", line++)
+            line(player, "!!Distillator??. However, she wasn't able to discover anything.", line++)
+            line(player, "She asked me to go to the !!Chemist?? in !!Rimmington?? to pick up", line++)
+            line(player, "some !!Touch Paper?? before continuing on to take some", line++)
+            line(player, "items to !!Guidor?? in !!Varrock??.", line++)
             line++
-        }
-
-        if (stage == 11) {
-            line(player, "!!Elena?? ran some tests on a !!Plague Sample?? using her", line++, true)
-            line(player, "!!Distillator??. However, she wasn't able to discover anything.", line++, true)
-            line(player, "She asked me to go to the !!Chemist?? in !!Rimmington?? to pick up", line++, true)
-            line(player, "some !!Touch Paper?? before continuing on to take some", line++, true)
-            line(player, "items to !!Guidor?? in !!Varrock??. She warned me that carrying", line++, true)
-            line(player, "some of the items into !!Varrock?? might be problematic and", line++, true)
-            line(player, "suggested I ask the !!Chemist?? for help with this.", line++, true)
-            line++
-        }
-
-        if (stage > 11) {
+        } else if (stage in 11..15) {
             line(player, "Elena ran some tests on a Plague Sample using her", line++, true)
             line(player, "Distillator. However, she wasn't able to discover anything.", line++, true)
             line++
-        }
-
-        if (stage >= 11) {
-            line(player, "!!Elena?? asked me to take some items to !!Guidor?? in !!Varrock??.", line++, true)
-            line(player, "I've been warned that carrying some of these items into", line++, true)
-            line(player, "!!Varrock?? might be problematic. The !!Chemist?? in !!Rimmington??", line++, true)
-            line(player, "recommended I ask his !!Errand Boys?? for help with this.", line++, true)
-            line(player, "However, he warned me they like to steal things so", line++, true)
-            line(player, "suggested I only give them something they won't have", line++, true)
-            line(player, "need of themselves.", line++, true)
+            line(player, "I have !!Touch Paper?? from the !!Chemist?? in !!Rimmington??. I need to", line++)
+            line(player, "take the vials, the sample and the paper to !!Guidor??, who", line++)
+            line(player, "lives in the south east of !!Varrock??. The !!Chemist?? warned me", line++)
+            line(player, "that carrying the vials into !!Varrock?? is risky and suggested", line++)
+            line(player, "I give one to each of his !!Errand Boys??. They like to steal,", line++)
+            line(player, "so I should not give them something I need. They will", line++)
+            line(player, "wait at the !!Dancing Donkey Inn?? in south east !!Varrock??.", line++)
+            line++
+        } else if (stage > 15) {
+            line(player, "Elena ran some tests on a Plague Sample using her", line++, true)
+            line(player, "Distillator, but couldn't discover anything. She sent me to", line++, true)
+            line(player, "Guidor in Varrock, with the help of the Chemist's Errand Boys.", line++, true)
             line++
         }
 
-        if (stage > 15) {
-            line(player, "!!Elena?? asked me to take some items to !!Guidor?? in !!Varrock??. I", line++, true)
-            line(player, "was warned that carrying some of these items into !!Varrock??", line++, true)
-            line(player, "might be problematic so I gave them to the !!Chemist's??", line++, true)
-            line(player, "!!Errand Boys?? to smuggle in. I should meet them at the", line++, true)
-            line(player, "!!Dancing Donkey Inn?? in south east !!Varrock??.", line++, true)
+        if (stage in 16..98) {
+            line(player, "!!Guidor?? ran his own tests on the !!Plague Sample?? and", line++)
+            line(player, "discovered a disturbing truth, that the !!Plague?? of !!West??", line++)
+            line(player, "!!Ardougne?? is a lie. I should return to !!Elena?? and tell her.", line++)
             line++
-        }
-
-        if (stage == 14) {
-            line(player, "!!Elena?? asked me to take some items to !!Guidor??. I can find his", line++, true)
-            line(player, "home in the south east corner of !!Varrock??.", line++, true)
-            line++
-        }
-
-        if (stage > 14) {
-            line(player, "Elena asked me to take some items to Guidor in Varrock so", line++, true)
-            line(player, "that he could run his own tests on the Plague Sample.", line++, true)
-            line++
-        }
-
-        if (stage == 15) {
-            line(player, "!!Guidor?? ran his own tests on the !!Plague Sample?? and", line++, true)
-            line(player, "discovered a disturbing truth, that the !!Plague?? of !!West??", line++, true)
-            line(player, "!!Ardougne?? is a lie. I should return to !!Elena?? and tell her.", line++, true)
-            line++
-        }
-
-        if (stage > 15) {
+        } else if (stage >= 99) {
             line(player, "Guidor ran his tests and discovered a disturbing truth,", line++, true)
             line(player, "that the Plague of West Ardougne is a lie.", line++, true)
             line++
         }
 
         if (stage == 99) {
-            line(player, "I returned to !!Elena?? and told her the truth about the !!Plague??.", line++, true)
-            line(player, "She asked me to confront !!King Lathas?? immediately. I can", line++, true)
+            line(player, "I returned to !!Elena?? and told her the truth about the !!Plague??.", line++)
+            line(player, "She asked me to confront !!King Lathas?? immediately. I can", line++)
             line(player, "find him in !!Ardougne Castle??.", line++)
             line++
         }
@@ -208,7 +177,17 @@ class Biohazard : Quest(Quests.BIOHAZARD, 36, 35, 3, Vars.VARP_QUEST_BIOHAZARD_P
         drawReward(player, "3 Quest Points", line++)
         drawReward(player, "1250 Thieving XP", line)
         rewardXP(player, Skills.THIEVING, 1250.0)
-        removeAttributes(player, GameAttributes.FEED_ON_FENCE, GameAttributes.ELENA_REPLACE)
+        removeAttributes(
+            player,
+            GameAttributes.FEED_ON_FENCE,
+            GameAttributes.ELENA_REPLACE,
+            GameAttributes.FIRST_VIAL_CORRECT,
+            GameAttributes.FIRST_VIAL_WRONG,
+            GameAttributes.SECOND_VIAL_CORRECT,
+            GameAttributes.SECOND_VIAL_WRONG,
+            GameAttributes.THIRD_VIAL_CORRECT,
+            GameAttributes.THIRD_VIAL_WRONG,
+        )
     }
 
     override fun newInstance(`object`: Any?): Quest = this

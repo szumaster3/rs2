@@ -19,7 +19,8 @@ class MournerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
     override fun finalizeDeath(killer: Entity?) {
         val player = killer?.asPlayer() ?: return super.finalizeDeath(killer)
 
-        if (getQuestStage(player, Quests.BIOHAZARD) < 6) {
+        val questStage = getQuestStage(player, Quests.BIOHAZARD)
+        if (questStage < 6) {
             return super.finalizeDeath(killer)
         }
 
@@ -30,7 +31,9 @@ class MournerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
         } else {
             addItemOrDrop(player, Items.KEY_2832)
             sendMessage(player, "and find a key.", 1)
-            setQuestStage(player, Quests.BIOHAZARD, 8)
+            if (questStage < 8) {
+                setQuestStage(player, Quests.BIOHAZARD, 8)
+            }
         }
 
         super.finalizeDeath(killer)

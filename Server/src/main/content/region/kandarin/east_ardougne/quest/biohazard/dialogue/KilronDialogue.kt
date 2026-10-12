@@ -13,7 +13,7 @@ import shared.consts.Quests
  * Represents the Kilron dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class KilronDialogue : DialogueFile() {
 
@@ -21,7 +21,7 @@ class KilronDialogue : DialogueFile() {
         val questStage = getQuestStage(player!!, Quests.BIOHAZARD)
         npc = NPC(NPCs.KILRON_349)
         when {
-            (questStage in 1..10) -> {
+            (questStage >= 1) -> {
                 when (stage) {
                     0 -> player("Hello Kilron.").also { stage++ }
                     1 -> npc("Hello traveller. Do you need to go back over?").also { stage++ }

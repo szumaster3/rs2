@@ -29,23 +29,16 @@ class BiohazardPlugin : InteractionListener {
         }
 
         on(Scenery.WATCHTOWER_FENCE_2067, IntType.SCENERY, "investigate") { player, _ ->
-            if (removeItem(player, Items.BIRD_FEED_422)) {
-                sendMessage(player, "You throw a handful of seeds onto the watchtower.")
-                sendMessage(player, "The mourners do not seem to notice.", 1)
-                setAttribute(player, GameAttributes.FEED_ON_FENCE, true)
+            if (inInventory(player, Items.BIRD_FEED_422)) {
+                throwFeed(player)
+            } else {
+                sendMessage(player, "You investigate the fence but find nothing of interest.")
             }
             return@on true
         }
 
-        onUseWith(IntType.SCENERY, Items.BIRD_FEED_422, Scenery.WATCHTOWER_FENCE_2067) { player, used, _ ->
-            if (getAttribute(player, GameAttributes.FEED_ON_FENCE, true)) {
-                return@onUseWith true
-            }
-            if (removeItem(player, used.asItem())) {
-                sendMessage(player, "You throw a handful of seeds onto the watchtower.")
-                sendMessage(player, "The mourners do not seem to notice.", 1)
-                setAttribute(player, GameAttributes.FEED_ON_FENCE, true)
-            }
+        onUseWith(IntType.SCENERY, Items.BIRD_FEED_422, Scenery.WATCHTOWER_FENCE_2067) { player, _, _ ->
+            throwFeed(player)
             return@onUseWith true
         }
 
@@ -61,6 +54,7 @@ class BiohazardPlugin : InteractionListener {
             }
 
             if (player.location != FENCE_CORNER_LOCATION) {
+                sendMessage(player, "The pigeons would be wasted here. You should release them closer to the watchtower.", 1)
                 return@on true
             }
 
@@ -81,7 +75,9 @@ class BiohazardPlugin : InteractionListener {
             sendMessage(player, "The pigeons fly towards the watch tower.", 1)
             sendMessage(player, "The mourners are frantically trying to scare the pigeons away.", 2)
 
-            setQuestStage(player, Quests.BIOHAZARD, 4)
+            if (getQuestStage(player, Quests.BIOHAZARD) < 4) {
+                setQuestStage(player, Quests.BIOHAZARD, 4)
+            }
             return@on true
         }
 
@@ -107,29 +103,16 @@ class BiohazardPlugin : InteractionListener {
         }
 
         on(Scenery.CUPBOARD_2057, IntType.SCENERY, "search") { player, node ->
+            if (getQuestStage(player, Quests.BIOHAZARD) < 2) {
+                sendMessage(player, "You search the cupboard but find nothing interesting.")
+                return@on true
+            }
             if (inInventory(player, Items.BIRD_FEED_422)) {
                 sendMessage(player, "You search the cupboard but find nothing interesting.")
                 return@on true
-            } else {
-                openDialogue(
-                    player,
-                    object : DialogueFile() {
-                        override fun handle(componentID: Int, buttonID: Int) {
-                            when (stage) {
-                                0 -> sendItemDialogue(player, Items.BIRD_FEED_422, "The cupboard is full of birdfeed.").also { stage++ }
-                                1 -> player("Mmm, birdfeed! Now what could I do with that?").also { stage++ }
-                                2 -> {
-                                    end()
-                                    addItemOrDrop(player, Items.BIRD_FEED_422)
-                                    setQuestStage(player, Quests.BIOHAZARD, 3)
-                                }
-                            }
-                        }
-                    },
-                    node,
-                )
-                return@on true
             }
+            openDialogue(player, BirdFeedDialogue(), node)
+            return@on true
         }
 
         on(Scenery.FENCE_2068, IntType.SCENERY, "squeeze-through") { player, _ ->
@@ -156,6 +139,11 @@ class BiohazardPlugin : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, Items.ROTTEN_APPLE_1984, Scenery.CAULDRON_2043) { player, used, _ ->
+            val questStage = getQuestStage(player, Quests.BIOHAZARD)
+            if (questStage !in 4..5) {
+                sendMessage(player, "Nothing interesting happens.")
+                return@onUseWith true
+            }
             if (removeItem(player, used.asItem())) {
                 sendMessage(player, "You place the rotten apple in the pot...")
                 setQuestStage(player, Quests.BIOHAZARD, 6)
@@ -165,27 +153,29 @@ class BiohazardPlugin : InteractionListener {
 
         on(Scenery.DOOR_2036, IntType.SCENERY, "open") { player, node ->
             if (inBorders(player, getRegionBorders(10035)) || inBorders(player, getRegionBorders(10036))) {
+                val questStage = getQuestStage(player, Quests.BIOHAZARD)
                 if (isQuestComplete(player, Quests.BIOHAZARD) ||
-                    getQuestStage(player, Quests.BIOHAZARD) >= 7 ||
+                    questStage >= 7 ||
                     player.location.y in 3321..3327
                 ) {
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     return@on true
                 }
 
-                if (getQuestStage(player, Quests.BIOHAZARD) in 1..6) {
+                if (questStage in 1..5) {
                     sendMessage(player, "The door is locked. You can hear the mourners eating...")
                     sendMessage(player, "You need to distract them from their stew.", 1)
                     return@on true
                 }
 
-                if (!inEquipment(player, Items.DOCTORS_GOWN_430) || getQuestStage(player, Quests.BIOHAZARD) == 0) {
-                    openDialogue(player, MournerDialogue(), NPCs.MOURNER_347)
+                if (questStage == 6 && inEquipment(player, Items.DOCTORS_GOWN_430)) {
+                    sendNPCDialogue(player, NPCs.MOURNER_347, "In you go doc.")
+                    setQuestStage(player, Quests.BIOHAZARD, 7)
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     return@on true
                 }
-                sendNPCDialogue(player, NPCs.MOURNER_347, "In you go dot.")
-                setQuestStage(player, Quests.BIOHAZARD, 7)
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+
+                openDialogue(player, MournerDialogue(), NPCs.MOURNER_347)
             } else {
                 DoorActionHandler.handleDoor(player, node.asScenery())
             }
@@ -214,7 +204,7 @@ class BiohazardPlugin : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, Items.KEY_2832, *PLAGUE_1F_GATES) { player, _, with ->
-            if (getQuestStage(player, Quests.BIOHAZARD) > 8) {
+            if (inInventory(player, Items.KEY_2832)) {
                 sendMessage(player, "The key fits the gate.")
                 DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
             } else {
@@ -236,8 +226,14 @@ class BiohazardPlugin : InteractionListener {
 
         on(Scenery.CRATE_34586, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the crate...")
-            if (!inInventory(player, Items.DISTILLATOR_420) && getQuestStage(player, Quests.BIOHAZARD) in 8..15) {
-                setQuestStage(player, Quests.BIOHAZARD, 10)
+            val questStage = getQuestStage(player, Quests.BIOHAZARD)
+            if (!inInventory(player, Items.DISTILLATOR_420) &&
+                questStage in 8..10 &&
+                !getAttribute(player, GameAttributes.ELENA_REPLACE, false)
+            ) {
+                if (questStage < 10) {
+                    setQuestStage(player, Quests.BIOHAZARD, 10)
+                }
                 addItemOrDrop(player, Items.DISTILLATOR_420)
                 sendMessage(player, "and find Elena's distillator.")
             } else {
@@ -253,7 +249,7 @@ class BiohazardPlugin : InteractionListener {
                 else -> null
             }
             if (isQuestComplete(player, Quests.BIOHAZARD)) {
-                sendNPCDialogueLines(player, NPCs.GUARD_344, FaceAnim.NEUTRAL, false, "The king has granted you access to ths training area.", "Make good use of it, soon all your strength will be", "needed.")
+                sendNPCDialogueLines(player, NPCs.GUARD_344, FaceAnim.NEUTRAL, false, "The king has granted you access to this training area.", "Make good use of it, soon all your strength will be", "needed.")
                 addDialogueAction(player) { _, _ ->
                     if (gatePair != null) {
                         DoorActionHandler.autowalkFence(player, node.asScenery(), gatePair.first, gatePair.second)
@@ -272,6 +268,34 @@ class BiohazardPlugin : InteractionListener {
                 return@setDest Location(2542, 3331, 0)
             } else {
                 return@setDest Location.create(2541, 3331, 0)
+            }
+        }
+    }
+
+    private fun throwFeed(player: core.game.node.entity.player.Player) {
+        if (getAttribute(player, GameAttributes.FEED_ON_FENCE, false)) {
+            sendMessage(player, "You have already thrown seeds onto the watchtower.")
+            return
+        }
+        if (removeItem(player, Items.BIRD_FEED_422)) {
+            sendMessage(player, "You throw a handful of seeds onto the watchtower.")
+            sendMessage(player, "The mourners do not seem to notice.", 1)
+            setAttribute(player, GameAttributes.FEED_ON_FENCE, true)
+        }
+    }
+
+    inner class BirdFeedDialogue : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                0 -> sendItemDialogue(player!!, Items.BIRD_FEED_422, "The cupboard is full of birdfeed.").also { stage++ }
+                1 -> player("Mmm, birdfeed! Now what could I do with that?").also { stage++ }
+                2 -> {
+                    end()
+                    addItemOrDrop(player!!, Items.BIRD_FEED_422)
+                    if (getQuestStage(player!!, Quests.BIOHAZARD) == 2) {
+                        setQuestStage(player!!, Quests.BIOHAZARD, 3)
+                    }
+                }
             }
         }
     }

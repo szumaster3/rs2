@@ -11,7 +11,7 @@ import shared.consts.Quests
  * Represents the Jerico dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class JericoBiohazardQuestDialogue : DialogueFile() {
 
@@ -68,6 +68,14 @@ class JericoBiohazardQuestDialogue : DialogueFile() {
                     2 -> player("Not yet.").also { stage++ }
                     3 -> npc("Omart will be waiting by the wall, in", "case you need to cross again.").also { stage++ }
                     4 -> end()
+                }
+            }
+
+            (questStage >= 9) -> {
+                when (stage) {
+                    0 -> player("Hello again Jerico.").also { stage++ }
+                    1 -> npc("Hello traveller. Omart will be waiting by the wall, in", "case you need to cross again.").also { stage++ }
+                    2 -> end()
                 }
             }
         }

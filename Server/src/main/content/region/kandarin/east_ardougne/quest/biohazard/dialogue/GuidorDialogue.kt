@@ -13,7 +13,7 @@ import shared.consts.Quests
  * Represents the Guidor dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class GuidorDialogue : DialogueFile() {
 
@@ -44,8 +44,7 @@ class GuidorDialogue : DialogueFile() {
             11 -> npc("Right then, sounds like we'd better get to work!").also { stage++ }
             12 -> {
                 if (!inInventory(player!!, Items.PLAGUE_SAMPLE_418)) {
-                    end()
-                    npc("Seems like you don't actually HAVE the plague sample.", "It's a long way to come empty-handed... and", "quite a long way back to.")
+                    npc("Seems like you don't actually HAVE the plague sample.", "It's a long way to come empty-handed... and", "quite a long way back to.").also { stage = END_DIALOGUE }
                 } else {
                     player("I have the plague sample.").also { stage++ }
                 }
@@ -55,14 +54,11 @@ class GuidorDialogue : DialogueFile() {
             14 -> player("... some ethenea?").also { stage++ }
             15 -> npc("Indeed!").also { stage++ }
             16 -> {
-                if (!anyInInventory(player!!, Items.SULPHURIC_BROLINE_417) && !inInventory(player!!, Items.ETHENEA_415) && !inInventory(player!!, Items.LIQUID_HONEY_416) && !inInventory(player!!, Items.TOUCH_PAPER_419)) {
-                    end()
-                    npc("Look, I need all three reagents to test the plague", "sample. Come back when you've got them.")
+                val required = listOf(Items.SULPHURIC_BROLINE_417, Items.ETHENEA_415, Items.LIQUID_HONEY_416, Items.TOUCH_PAPER_419)
+                if (required.any { !inInventory(player!!, it) }) {
+                    npc("Look, I need all three reagents and some touch paper", "to test the plague sample. Come back when you've", "got them.").also { stage = END_DIALOGUE }
                 } else {
-                    removeItem(player!!, Items.SULPHURIC_BROLINE_417)
-                    removeItem(player!!, Items.ETHENEA_415)
-                    removeItem(player!!, Items.LIQUID_HONEY_416)
-                    removeItem(player!!, Items.TOUCH_PAPER_419)
+                    required.forEach { removeItem(player!!, it) }
                     sendMessage(player!!, "You give him the vials and the touch paper.")
                     npc("Now I'll just apply these to the sample and... I don't", "get it... the touch paper has remained the same.")
                     stage = 17
@@ -72,7 +68,7 @@ class GuidorDialogue : DialogueFile() {
             17 -> options("That's why Elena wanted you to do it.", "So what does that mean exactly?").also { stage++ }
             18 -> when (buttonID) {
                 1 -> player("That's why Elena wanted you to do it, because she", "wasn't sure what was happening.").also { stage++ }
-                2 -> player("Oh, nothing, I was just going to bless your room", "and I've done that now. Goodbye.").also { stage = END_DIALOGUE }
+                2 -> player("So what does that mean exactly?").also { stage++ }
             }
             19 -> npc("Well that's just it, nothing has happened.").also { stage++ }
             20 -> npc("I don't know what this sample is, but it certainly isn't", "toxic.").also { stage++ }

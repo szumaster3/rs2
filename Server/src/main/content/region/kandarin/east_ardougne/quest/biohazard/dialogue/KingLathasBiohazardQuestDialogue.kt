@@ -12,7 +12,7 @@ import shared.consts.Quests
  * Represents the Lathas dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class KingLathasBiohazardQuestDialogue : DialogueFile() {
 
@@ -56,7 +56,9 @@ class KingLathasBiohazardQuestDialogue : DialogueFile() {
                     27 -> npc("How could I not do? He was my brother.").also { stage++ }
                     28 -> {
                         end()
-                        finishQuest(player!!, Quests.BIOHAZARD)
+                        if (getQuestStage(player!!, Quests.BIOHAZARD) < 100) {
+                            finishQuest(player!!, Quests.BIOHAZARD)
+                        }
                     }
                 }
             }

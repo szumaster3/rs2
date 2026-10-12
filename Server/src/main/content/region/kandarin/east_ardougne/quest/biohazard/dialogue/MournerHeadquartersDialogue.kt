@@ -13,18 +13,24 @@ import shared.consts.NPCs
  * Represents the Mourner Headquarters dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class MournerHeadquartersDialogue : DialogueFile() {
 
+    private var source: NPC? = null
+
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.MOURNER_348)
+        if (source == null) {
+            source = npc
+        }
+        val sourceId = source?.id ?: NPCs.MOURNER_348
+        npc = NPC(if (sourceId == NPCs.MOURNER_370) NPCs.MOURNER_370 else NPCs.MOURNER_348)
         when (stage) {
             0 -> {
                 if (inBorders(player!!, 2547, 3321, 2555, 3327)) {
                     player("Hello there.").also { stage = 100 }
                 } else {
-                    playerl(FaceAnim.FRIENDLY, "Hi.").also { stage = 0 }
+                    playerl(FaceAnim.FRIENDLY, "Hi.").also { stage = 1 }
                 }
             }
 
@@ -35,7 +41,7 @@ class MournerHeadquartersDialogue : DialogueFile() {
             5 -> npcl(FaceAnim.FRIENDLY, "Then I suggest you leave as soon as you can.").also { stage++ }
             6 -> playerl(FaceAnim.FRIENDLY, "Thanks for the advice.").also { stage = END_DIALOGUE }
 
-            100 -> if (npc!!.id == NPCs.MOURNER_370) {
+            100 -> if (sourceId == NPCs.MOURNER_370) {
                 npc("You're here at last! I don't know what I've", "eaten but I feel like I'm on death's door.").also { stage = 104 }
             } else {
                 npc("Oh dear oh dear. I feel terrible, I", "think it was the stew.").also { stage++ }
@@ -63,7 +69,7 @@ class MournerHeadquartersDialogue : DialogueFile() {
             110 -> npc("You're no doctor!").also { stage++ }
             111 -> {
                 end()
-                npc!!.attack(player)
+                source?.attack(player)
             }
 
             112 -> npc("Pray for me? You're no doctor...", "You're an imposter!").also { stage = 111 }

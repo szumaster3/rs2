@@ -12,7 +12,7 @@ import shared.consts.Quests
  * Represents the Chemist dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class ChemistBiohazardQuestDialogue : DialogueFile() {
 
@@ -29,9 +29,9 @@ class ChemistBiohazardQuestDialogue : DialogueFile() {
                     }
                     3 -> npc("You idiot! A plague sample should be confined to a lab!").also { stage++ }
                     4 -> if (!removeItem(player!!, Items.PLAGUE_SAMPLE_418)) {
-                        end()
+                        npc("Hmm, you don't seem to have one on you. Well, what", "can I do for you then?").also { stage = 1 }
                     } else {
-                        npc("I'm taking it off you. I'm afraid it's the only responsible thing to do.")
+                        npc("I'm taking it off you. I'm afraid it's the only responsible thing to do.").also { stage = 1 }
                     }
                     6 -> npc("Oh, well that's different then. Must be pretty important", "to come all this way.").also { stage++ }
                     7 -> npc("How's everyone doing there anyway? Wasn't there", "some plague scare?").also { stage++ }
@@ -52,9 +52,13 @@ class ChemistBiohazardQuestDialogue : DialogueFile() {
                     19 -> npc("Yes well don't stand around here gassing. You'd better", "hurry if you want to see Guidor... He won't be around", "for much longer.").also { stage++ }
                     20 -> {
                         end()
-                        sendMessage(player!!, "He gives you the touch paper.")
-                        addItemOrDrop(player!!, Items.TOUCH_PAPER_419)
-                        setQuestStage(player!!, Quests.BIOHAZARD, 11)
+                        if (!inInventory(player!!, Items.TOUCH_PAPER_419)) {
+                            sendMessage(player!!, "He gives you the touch paper.")
+                            addItemOrDrop(player!!, Items.TOUCH_PAPER_419)
+                        }
+                        if (getQuestStage(player!!, Quests.BIOHAZARD) < 11) {
+                            setQuestStage(player!!, Quests.BIOHAZARD, 11)
+                        }
                     }
                 }
             }

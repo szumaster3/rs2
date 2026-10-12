@@ -12,7 +12,7 @@ import shared.consts.Quests
  * Represents the Kilron dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class OmartBiohazardQuestDialogue : DialogueFile() {
 
@@ -61,14 +61,14 @@ class OmartBiohazardQuestDialogue : DialogueFile() {
                         end()
                         sendMessage(player!!, "You climb up the rope ladder...")
                         runTask(player!!, 2) {
-                            teleport(player!!, location(2556, 3267, 0))
+                            teleport(player!!, location(2556, 3267, 0), TeleportManager.TeleportType.INSTANT)
                             sendMessage(player!!, "and drop down on the other side.")
                         }
                     }
                 }
             }
 
-            (questStage in 4..99) -> {
+            (questStage >= 4) -> {
                 when (stage) {
                     0 -> player("Hello Omart.").also { stage++ }
                     1 -> npc("Hello traveller. The guards are still distracted", "if you wish to cross the wall.").also { stage++ }

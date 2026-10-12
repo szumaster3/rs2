@@ -10,7 +10,7 @@ import shared.consts.NPCs
  * Represents the Guidors Wife dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class GuidorsWifeQuestDialogue : DialogueFile() {
 

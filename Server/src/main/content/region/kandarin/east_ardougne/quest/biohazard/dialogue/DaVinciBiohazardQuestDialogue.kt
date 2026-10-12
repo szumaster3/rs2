@@ -8,6 +8,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
@@ -16,7 +17,7 @@ import shared.consts.Quests
  * Represents the Da Vinci dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 @Initializable
 class DaVinciBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
@@ -24,31 +25,33 @@ class DaVinciBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        val SECOND_VIAL = getAttribute(player, GameAttributes.SECOND_VIAL_CORRECT, false)
-        val WRONG_VIAL = getAttribute(player, GameAttributes.SECOND_VIAL_WRONG, false)
-        val QUEST_STAGE = getQuestStage(player, Quests.BIOHAZARD)
+        val delivered = getAttribute(player, GameAttributes.SECOND_VIAL_CORRECT, false) ||
+            getAttribute(player, GameAttributes.SECOND_VIAL_WRONG, false)
+        val questStage = getQuestStage(player, Quests.BIOHAZARD)
+        val inRimmington = npc.id == NPCs.DA_VINCI_336
 
         when {
-            npc.id == NPCs.DA_VINCI_336 && SECOND_VIAL || WRONG_VIAL -> {
-                npcl(FaceAnim.NEUTRAL, "Oh, it's you again. Please don't distract me now, I'm contemplating the sublime.").also { stage = 7 }
+            inRimmington && delivered -> {
+                npcl(FaceAnim.NEUTRAL, "Oh, it's you again. Please don't distract me now, I'm contemplating the sublime.").also { stage = END_DIALOGUE }
             }
 
             !GameWorld.settings!!.isMembers -> {
-                npcl(FaceAnim.ANNOYED, "Bah! A great artist such as myself should not have to suffer the HUMILIATION of spending time on these dreadful worlds where non-members wander everywhere!").also { stage = 7 }
+                npcl(FaceAnim.ANNOYED, "Bah! A great artist such as myself should not have to suffer the HUMILIATION of spending time on these dreadful worlds where non-members wander everywhere!").also { stage = END_DIALOGUE }
             }
 
-            npc.id == NPCs.DA_VINCI_337 && SECOND_VIAL || WRONG_VIAL -> {
+            !inRimmington && delivered -> {
                 npc("Hello again. I hope your journey was as pleasant as", "mine.")
                 stage = 8
             }
 
-            QUEST_STAGE == 0 || QUEST_STAGE == 100 -> sendMessage(player, "Da Vinci does not feel sufficiently moved to talk.").also { stage = 7 }
-
-            QUEST_STAGE >= 10 -> player("Hello, I hear you're an errand boy for the chemist.")
+            inRimmington && questStage in 10..15 -> {
+                player("Hello, I hear you're an errand boy for the chemist.")
+                stage = 0
+            }
 
             else -> {
                 sendMessage(player, "Da Vinci does not feel sufficiently moved to talk.")
-                stage = 7
+                stage = END_DIALOGUE
             }
         }
 
@@ -61,50 +64,28 @@ class DaVinciBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
             1 -> player("Good for you. Now can you take a vial to Varrock for", "me?").also { stage++ }
             2 -> npc("Go on then.").also { stage++ }
             3 -> options("You give him the vial of ethenea...", "You give him the vial of liquid honey...", "You give him the vial of sulphuric broline...").also { stage++ }
-            4 -> when (buttonId) {
-                1 -> {
-                    if (!removeItem(player!!, Items.ETHENEA_415)) {
-                        end()
-                        sendMessage(player!!, "You can't give him what you don't have.")
-                    } else {
-                        sendMessage(player!!, "You give him the vial of ethenea.")
-                        player("Right. I'll see you later in the Dancing Donkey Inn.")
-                        stage++
-                    }
+            4 -> {
+                val (vial, name) = when (buttonId) {
+                    1 -> Items.ETHENEA_415 to "ethenea"
+                    2 -> Items.LIQUID_HONEY_416 to "liquid honey"
+                    else -> Items.SULPHURIC_BROLINE_417 to "sulphuric broline"
                 }
-
-                2 -> {
-                    if (!removeItem(player!!, Items.LIQUID_HONEY_416)) {
-                        end()
-                        sendMessage(player!!, "You can't give him what you don't have.")
-                    } else {
-                        sendMessage(player!!, "You give him the vial of liquid honey.")
-                        stage = 7
-                    }
-                }
-
-                3 -> {
-                    if (!removeItem(player!!, Items.SULPHURIC_BROLINE_417)) {
-                        end()
-                        sendMessage(player!!, "You can't give him what you don't have.")
-                    } else {
-                        sendMessage(player!!, "You give him the vial of sulphuric broline.")
-                        stage = 7
-                    }
+                if (!removeItem(player!!, vial)) {
+                    sendMessage(player!!, "You can't give him what you don't have.")
+                    end()
+                } else {
+                    sendMessage(player!!, "You give him the vial of $name.")
+                    val key = if (vial == Items.ETHENEA_415) GameAttributes.SECOND_VIAL_CORRECT else GameAttributes.SECOND_VIAL_WRONG
+                    setAttribute(player!!, key, true)
+                    player("Right. I'll see you later in the Dancing Donkey Inn.")
+                    stage = 5
                 }
             }
+            5 -> npc("That's right.").also { stage = 6 }
+            6 -> end()
 
-            5 -> npc("That's right.").also { stage++ }
-            6 -> {
-                end()
-                setAttribute(player!!, GameAttributes.SECOND_VIAL_CORRECT, true)
-            }
-            7 -> {
-                end()
-                setAttribute(player!!, GameAttributes.SECOND_VIAL_WRONG, true)
-            }
             8 -> {
-                if(getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false)) {
+                if (getAttribute(player, GameAttributes.SECOND_VIAL_CORRECT, false)) {
                     playerl(FaceAnim.FRIENDLY, "Well, as they say, it's always sunny in Gielinor.")
                     stage = 9
                 } else {
@@ -114,15 +95,15 @@ class DaVinciBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
             }
             9 -> npc("Ok, here it is.").also { stage++ }
             10 -> {
-                end()
                 sendMessage(player!!, "He gives you the vial of ethenea.")
-                player("Thanks, you've been a big help.")
                 addItemOrDrop(player!!, Items.ETHENEA_415, 1)
                 removeAttribute(player!!, GameAttributes.SECOND_VIAL_CORRECT)
+                player("Thanks, you've been a big help.")
+                stage = 21
             }
             11 -> npcl(FaceAnim.HALF_THINKING, "Package? That's a funny way to describe a liquid of such exquisite beauty!").also { stage++ }
             12 -> options("I'm getting a bad feeling about this.", "Just give me the stuff now please.").also { stage++ }
-            13 -> when(buttonId) {
+            13 -> when (buttonId) {
                 1 -> player("I'm getting a bad feeling about this.").also { stage++ }
                 2 -> player("Just give me the stuff now please.").also { stage++ }
             }
@@ -136,6 +117,7 @@ class DaVinciBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 removeAttribute(player!!, GameAttributes.SECOND_VIAL_WRONG)
             }
+            21 -> end()
         }
         return true
     }

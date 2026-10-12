@@ -15,7 +15,7 @@ import shared.consts.Quests
  * Represents the Elena dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 class ElenaBiohazardQuestDialogue : DialogueFile() {
 
@@ -59,13 +59,17 @@ class ElenaBiohazardQuestDialogue : DialogueFile() {
                 }
             }
 
-            (questStage == 1) -> {
+            (questStage in 1..3) -> {
                 when (stage) {
                     0 -> player(FaceAnim.HAPPY, "Hello Elena.").also { stage++ }
                     1 -> npc(FaceAnim.HAPPY, "Hello brave adventurer. Any luck finding my distillator?").also { stage++ }
 
                     2 -> player(FaceAnim.WORRIED, "No, I'm afraid not.").also { stage++ }
-                    3 -> npc(FaceAnim.HAPPY, "Speak to Jerico, he will help you to cross the", "wall. He lives next to the chapel.").also { stage++ }
+                    3 -> if (questStage == 1) {
+                        npc(FaceAnim.HAPPY, "Speak to Jerico, he will help you to cross the", "wall. He lives next to the chapel.").also { stage++ }
+                    } else {
+                        npc(FaceAnim.HAPPY, "Jerico's friends are waiting by the wall. Ask Jerico", "if you need help distracting the guards.").also { stage++ }
+                    }
 
                     4 -> end()
                 }
@@ -80,7 +84,7 @@ class ElenaBiohazardQuestDialogue : DialogueFile() {
                 }
             }
 
-            (questStage in 5..7) -> {
+            (questStage in 5..9) -> {
                 when (stage) {
                     0 -> player(FaceAnim.HAPPY, "Hello again.").also { stage++ }
                     1 -> npc(FaceAnim.HAPPY, "You're back, did you find the distillator?").also { stage++ }
@@ -147,7 +151,7 @@ class ElenaBiohazardQuestDialogue : DialogueFile() {
                     100 -> npc(FaceAnim.HALF_GUILTY, "Yes... I have feelings for you too...", "Now get to work!").also { stage = END_DIALOGUE }
                     200 -> {
                         if (REQUIRED_ITEMS.any { !inInventory(player!!, it) }) {
-                            if(freeSlots(player!!) < REQUIRED_ITEMS.size){
+                            if (freeSlots(player!!) < REQUIRED_ITEMS.count { !inInventory(player!!, it) }) {
                                 sendDialogue(player!!, "Elena tries to give you some items but you don't have enough room for them.").also { stage = END_DIALOGUE }
                             } else {
                                 sendDialogue(player!!, "Elena replaces your items.")

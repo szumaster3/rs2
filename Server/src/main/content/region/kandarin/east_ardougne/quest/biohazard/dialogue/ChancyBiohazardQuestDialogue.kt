@@ -17,7 +17,7 @@ import shared.consts.Quests
  * Represents the Chancy dialogue.
  *
  * # Relations
- * - [Biohazard][content.region.kandarin.west_ardougne.east.quest.biohazard.Biohazard]
+ * - [Biohazard][content.region.kandarin.east_ardougne.quest.biohazard]
  */
 @Initializable
 class ChancyBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
@@ -25,40 +25,38 @@ class ChancyBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        val FIRST_VIAL = getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false)
-        val WRONG_VIAL = getAttribute(player, GameAttributes.FIRST_VIAL_WRONG, false)
-        val QUEST_STAGE = getQuestStage(player, Quests.BIOHAZARD)
+        val delivered = getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false) ||
+            getAttribute(player, GameAttributes.FIRST_VIAL_WRONG, false)
+        val questStage = getQuestStage(player, Quests.BIOHAZARD)
+        val inRimmington = npc.id == NPCs.CHANCY_338
 
         when {
-            npc.id == NPCs.CHANCY_338 && FIRST_VIAL || WRONG_VIAL -> {
+            inRimmington && delivered -> {
                 npcl(FaceAnim.NEUTRAL, "Look, I've got your vial but I'm not taking two. I always like to play the percentages.").also { stage = END_DIALOGUE }
             }
 
-            !GameWorld.settings!!.isMembers &&  npc.id == NPCs.CHANCY_338 -> {
+            !GameWorld.settings!!.isMembers && inRimmington -> {
                 player(FaceAnim.HALF_ASKING, "Hello! Playing Solitaire?!")
             }
 
-            !GameWorld.settings!!.isMembers &&  npc.id == NPCs.CHANCY_339 -> {
+            !GameWorld.settings!!.isMembers && !inRimmington -> {
                 player(FaceAnim.HALF_ASKING, "Good morning.")
                 stage = 2
             }
 
-            npc.id == NPCs.CHANCY_339 && FIRST_VIAL || WRONG_VIAL -> {
+            !inRimmington && delivered -> {
                 player("Hi, thanks for doing that.")
                 stage = 12
             }
 
-            QUEST_STAGE == 0 || QUEST_STAGE == 100 -> {
-                sendMessage(player, "Chancy doesn't feel like talking.").also { stage = END_DIALOGUE }
-            }
-
-            QUEST_STAGE >= 10 -> {
+            inRimmington && questStage in 10..15 -> {
                 player("Hello, I've got a vial for you to take to Varrock.")
                 stage = 4
             }
 
             else -> {
                 sendMessage(player, "Chancy doesn't feel like talking.")
+                stage = END_DIALOGUE
             }
         }
 
@@ -77,63 +75,42 @@ class ChancyBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
             5 -> player("Maybe you should ask him for more money.").also { stage++ }
             6 -> npc("Nah... I just use my initiative here and there.").also { stage++ }
             7 -> options("You give him the vial of ethenea...", "You give him the vial of liquid honey...", "You give him the vial of sulphuric broline...").also { stage++ }
-            8 -> when (buttonId) {
-                1 -> {
-                    if (!removeItem(player!!, Items.ETHENEA_415)) {
-                        end()
-                        sendMessage(player!!, "You can't give him what you don't have.")
-                    } else {
-                        sendMessage(player!!, "You give him the vial of ethenea.")
-                        stage = 11
-                    }
+            8 -> {
+                val (vial, name) = when (buttonId) {
+                    1 -> Items.ETHENEA_415 to "ethenea"
+                    2 -> Items.LIQUID_HONEY_416 to "liquid honey"
+                    else -> Items.SULPHURIC_BROLINE_417 to "sulphuric broline"
                 }
+                if (!removeItem(player!!, vial)) {
+                    sendMessage(player!!, "You can't give him what you don't have.")
+                    end()
+                } else {
+                    sendMessage(player!!, "You give him the vial of $name.")
+                    val key = if (vial == Items.LIQUID_HONEY_416) GameAttributes.FIRST_VIAL_CORRECT else GameAttributes.FIRST_VIAL_WRONG
+                    setAttribute(player!!, key, true)
+                    player("Right. I'll see you later in the Dancing Donkey Inn.")
+                    stage = 9
+                }
+            }
+            9 -> npc("Be Lucky!").also { stage = 10 }
+            10 -> end()
 
-                2 -> {
-                    if (!removeItem(player!!, Items.LIQUID_HONEY_416)) {
-                        end()
-                        sendMessage(player!!, "You can't give him what you don't have.")
-                    } else {
-                        sendMessage(player!!, "You give him the vial of liquid honey.")
-                        player("Right. I'll see you later in the Dancing Donkey Inn.")
-                        stage++
-                    }
-                }
-
-                3 -> {
-                    if (!removeItem(player!!, Items.SULPHURIC_BROLINE_417)) {
-                        end()
-                        sendMessage(player!!, "You can't give him what you don't have.")
-                    } else {
-                        sendMessage(player!!, "You give him the vial of sulphuric broline.")
-                        stage = 11
-                    }
-                }
-            }
-            9 -> npc("Be Lucky!").also { stage++ }
-            10 -> {
-                end()
-                setAttribute(player!!, GameAttributes.FIRST_VIAL_CORRECT, true)
-            }
-            11 -> {
-                end()
-                setAttribute(player!!, GameAttributes.FIRST_VIAL_WRONG, true)
-            }
             12 -> {
-                if(getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false)) {
+                if (getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false)) {
                     npc("No problem.")
-                    stage++
+                    stage = 13
                 } else {
                     npcl(FaceAnim.FRIENDLY, "No problem. I've got some money for you actually.")
                     stage = 15
                 }
             }
-            13 -> npc("Next time give me something more valuable...", "I couldn't get anything for this on the blackmarket.")
+            13 -> npc("Next time give me something more valuable...", "I couldn't get anything for this on the blackmarket.").also { stage = 14 }
             14 -> {
-                end()
-                player("That was the idea.")
                 sendMessage(player!!, "He gives you the vial of liquid honey.")
                 addItemOrDrop(player!!, Items.LIQUID_HONEY_416, 1)
                 removeAttribute(player!!, GameAttributes.FIRST_VIAL_CORRECT)
+                player("That was the idea.")
+                stage = 26
             }
             15 -> playerl(FaceAnim.FRIENDLY, "What do you mean?").also { stage++ }
             16 -> npcl(FaceAnim.FRIENDLY, "Well, it turns out that potion you gave me, was quite valuable...").also { stage++ }
@@ -142,7 +119,7 @@ class ChancyBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
             19 -> playerl(FaceAnim.FRIENDLY, "You sold my vial and gambled with the money?!").also { stage++ }
             20 -> npcl(FaceAnim.FRIENDLY, "Actually yes... but praise be to Saradoming because I won! So all's well that ends well right?").also { stage++ }
             21 -> options("No! Nothing could be further from the truth!", "You have no idea what you have just done!").also { stage++ }
-            22 -> when(buttonId) {
+            22 -> when (buttonId) {
                 1 -> playerl(FaceAnim.FRIENDLY, "No! Nothing could be further from the truth!").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "You have no idea what you have just done!").also { stage = 24 }
             }
@@ -152,6 +129,7 @@ class ChancyBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 removeAttribute(player, GameAttributes.FIRST_VIAL_WRONG)
             }
+            26 -> end()
         }
         return true
     }
