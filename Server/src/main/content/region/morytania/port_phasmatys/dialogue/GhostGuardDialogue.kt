@@ -1,6 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.plugin.EnergyBarrier
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -21,7 +22,7 @@ class GhostGuardDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val isGhostsAhoyComplete = isQuestComplete(player, Quests.GHOSTS_AHOY)
-        val hasGhostspeakAmulet = inEquipment(player, Items.GHOSTSPEAK_AMULET_552)
+        val hasGhostspeakAmulet = hasGhostspeak(player)
         val hasBedsheet = inEquipment(player, Items.BEDSHEET_4285)
 
         when {

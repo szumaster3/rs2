@@ -10,13 +10,16 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 
+/**
+ * Represents the Villagers (Ghosts Ahoy quest) dialogue.
+ */
 class PaidVillagerDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val tokens = amountInInventory(player!!, Items.ECTO_TOKEN_4278)
         npc = NPC(NPCs.GHOST_VILLAGER_1697)
         when (stage) {
-            0 -> player("how much?").also { stage++ }
-            1 -> npc("Oh, it'll cost you 1 ecto-tokens.").also { stage++ }
+            0 -> player("How much?").also { stage++ }
+            1 -> npc("Oh, it'll cost you 1 ecto-token.").also { stage++ }
             2 -> if (tokens < 1) {
                 player("I don't have that many on me.").also { stage++ }
             } else {
@@ -34,6 +37,8 @@ class PaidVillagerDialogue : DialogueFile() {
             7 -> if (removeItem(player!!, Item(Items.ECTO_TOKEN_4278, 1))) {
                 end()
                 collectSignature(player!!)
+            } else {
+                npc("No tokens, no signature.").also { stage = END_DIALOGUE }
             }
         }
     }

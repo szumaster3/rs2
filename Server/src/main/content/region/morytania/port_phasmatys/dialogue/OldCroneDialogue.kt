@@ -40,7 +40,7 @@ class OldCroneDialogue(player: Player? = null) : Dialogue(player) {
         val labelsComplete = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)
         val enchantReceived = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_OLD_CRONE_ENCH_RECEIVED, false)
 
-        val ghostsAhoyReady = ghostsAhoy >= QUEST_STAGE_GHOSTS_AHOY_REQUIRED
+        val ghostsAhoyReady = ghostsAhoy in QUEST_STAGE_GHOSTS_AHOY_REQUIRED..QUEST_STAGE_GHOSTS_AHOY_LAST
         val animalMagnetismActive = animalMagnetism in ANIMAL_MAGNETISM_ACTIVE_RANGE
         val animalMagnetismDoneOrStarted = animalMagnetism < QUEST_COMPLETE || isQuestComplete(player, Quests.ANIMAL_MAGNETISM)
 
@@ -144,6 +144,7 @@ class OldCroneDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
         private const val QUEST_STAGE_GHOSTS_AHOY_REQUIRED = 3
+        private const val QUEST_STAGE_GHOSTS_AHOY_LAST = 99
         private const val QUEST_COMPLETE = 16
         private val ANIMAL_MAGNETISM_ACTIVE_RANGE = 16..18
         private const val MIN_MAGIC_LEVEL_FOR_BROOM = 53

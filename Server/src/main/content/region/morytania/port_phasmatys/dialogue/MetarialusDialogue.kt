@@ -11,10 +11,12 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 
+/**
+ * Represents the Metarialus dialogue.
+ */
 @Initializable
 class MetarialusDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var npc: NPC? = null
     private var hasGhostSpeak = false
 
     override fun open(vararg args: Any?): Boolean {

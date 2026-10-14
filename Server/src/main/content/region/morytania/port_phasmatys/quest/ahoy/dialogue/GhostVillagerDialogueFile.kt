@@ -1,7 +1,10 @@
 package content.region.morytania.port_phasmatys.quest.ahoy.dialogue
 
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.collectSignature
+import core.api.getAttribute
 import core.api.inEquipment
+import core.api.inInventory
 import core.api.openDialogue
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.npc.NPC
@@ -9,18 +12,25 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 
+/**
+ * Represents the Ghost Villager (Ghosts Ahoy quest) dialogue.
+ */
 class GhostVillagerDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.GHOST_VILLAGER_1697)
         when (stage) {
             0 -> player("Would you sign this petition form, please?").also { stage++ }
             1 -> {
-                if (!inEquipment(player!!, Items.BEDSHEET_4285)) {
-                    npc("I'm sorry, but it's hard to believe that a mortal", "could be interested in helping us.").also {
-                        stage = END_DIALOGUE
-                    }
+                if (!inInventory(player!!, Items.PETITION_FORM_4283)) {
+                    npc("Sign what? You haven't got a petition form.").also { stage = END_DIALOGUE }
+                } else if (getAttribute(player!!, GhostsAhoyUtils.petitioncomplete, false)) {
+                    npc("I think you already have all the signatures you need.").also { stage = END_DIALOGUE }
                 } else if (inEquipment(player!!, Items.BEDSHEET_4284)) {
                     npc("Why are you wearing that bedsheet? If you're", "trying to pretend to be one of us, you're not fooling", "anybody - you're not even green!").also {
+                        stage = END_DIALOGUE
+                    }
+                } else if (!inEquipment(player!!, Items.BEDSHEET_4285)) {
+                    npc("I'm sorry, but it's hard to believe that a mortal", "could be interested in helping us.").also {
                         stage = END_DIALOGUE
                     }
                 } else {

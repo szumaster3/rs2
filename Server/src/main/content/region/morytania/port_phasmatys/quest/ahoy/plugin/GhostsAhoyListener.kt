@@ -10,6 +10,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Components
 import shared.consts.Items
@@ -64,13 +65,16 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         on(Objects.COFFIN_5279, IntType.SCENERY, "search") { player, _ ->
-            if (!inInventory(player, Items.MYSTICAL_ROBES_4247)) {
+            val questStage = getQuestStage(player, Quests.GHOSTS_AHOY)
+            val hasRobes = hasAnItem(player, Items.MYSTICAL_ROBES_4247).container != null
+            if (questStage in 4..79 && !hasRobes) {
                 sendItemDialogue(
                     player,
                     Items.MYSTICAL_ROBES_4247,
                     "You take the Robes of Necrovarus from the remains of his mortal body.",
                 )
                 addItemOrDrop(player, Items.MYSTICAL_ROBES_4247)
+                setAttribute(player, GhostsAhoyUtils.robesFound, true)
             } else {
                 sendMessage(player, "You search the coffin and find nothing.")
             }
@@ -95,6 +99,7 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
                     } else {
                         sendMessage(player, "You drop the petition form; it blows away in the wind.")
                         setAttribute(player, GhostsAhoyUtils.petitionsigns, 0)
+                        removeAttribute(player, GhostsAhoyUtils.petitioncomplete)
                     }
                 }
             }
@@ -103,13 +108,17 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         on(Objects.ROCK_5269, IntType.SCENERY, "jump-to") { player, node ->
-            jumpRockPath(player)
             if (!player.location.withinDistance(node.location, 1)) return@on false
 
+            val target = GhostsAhoyUtils.rockJumpMap[player.location]
+            if (target == null) {
+                sendMessage(player, "That's too far to jump!")
+                return@on true
+            }
+
+            jumpRockPath(player)
             runTask(player, 2) {
-                val target = GhostsAhoyUtils.rockJumpMap[player.location]
-                if (target != null) teleport(player, target)
-                else sendMessage(player.asPlayer(), "That's too far to jump!")
+                teleport(player, target)
             }
 
             return@on true
@@ -137,10 +146,12 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         onDig(Location(3803, 3530, 0)) { player ->
+            val questStage = getQuestStage(player, Quests.GHOSTS_AHOY)
             val hasBook = hasAnItem(player, Items.BOOK_OF_HARICANTO_4248).container != null
-            if (!hasBook) {
+            if (questStage in 4..79 && !hasBook) {
                 sendItemDialogue(player, Items.BOOK_OF_HARICANTO_4248, "You unearth the Book of Haricanto.")
                 addItemOrDrop(player, Items.BOOK_OF_HARICANTO_4248)
+                setAttribute(player, GhostsAhoyUtils.bookFound, true)
             } else {
                 sendMessage(player, "You dig but find nothing.")
             }
@@ -156,9 +167,9 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         on(GhostsAhoyUtils.silkShipModel, IntType.ITEM, "inspect") { player, _ ->
-            val shipFlagColor = getAttribute(player, GhostsAhoyUtils.shipFlag, "")
-            val shipBottomColor = getAttribute(player, GhostsAhoyUtils.shipBottom, "")
-            val shipSkullColor = getAttribute(player, GhostsAhoyUtils.shipSkull, "")
+            val shipFlagColor = getAttribute(player, GhostsAhoyUtils.shipFlag, "white")
+            val shipBottomColor = getAttribute(player, GhostsAhoyUtils.shipBottom, "white")
+            val shipSkullColor = getAttribute(player, GhostsAhoyUtils.shipSkull, "white")
             sendItemDialogue(
                 player,
                 Items.MODEL_SHIP_4254,
@@ -177,25 +188,9 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
             return@onUseWith true
         }
 
-        onUseWith(IntType.ITEM, intArrayOf(Items.RED_DYE_1763, Items.YELLOW_DYE_1765, Items.BLUE_DYE_1767), Items.MODEL_SHIP_4254) { player, node, _ ->
-            setAttribute(player, GhostsAhoyUtils.colorMatching, 0)
-            if (getAttribute(player, GhostsAhoyUtils.colorMatching, 0) == 3) {
-                setAttribute(player, GhostsAhoyUtils.rightShip, 1)
-            }
-            openDialogue(player, object : DialogueFile() {
-                    override fun handle(componentID: Int, buttonID: Int) {
-                        when (stage) {
-                            0 -> {
-                                setTitle(player, 3)
-                                sendOptions(player, "Which part of the flag do you want to dye?", "Top half", "Bottom half", "Skull emblem")
-                                stage++
-                            }
-
-                            1 -> GhostsAhoyUtils.handleDyeSelection(player, buttonID)
-                        }
-                    }
-                }, node.asItem()
-            )
+        onUseWith(IntType.ITEM, dyes, Items.MODEL_SHIP_4254) { player, used, with ->
+            val dye = if (used.id in dyes) used else with
+            openDialogue(player, DyeDialogue(dye.id), dye.asItem())
             return@onUseWith true
         }
 
@@ -212,8 +207,6 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         onUseWith(IntType.SCENERY, Items.CHEST_KEY_2404, Objects.CLOSED_CHEST_5270) { player, _, with ->
-            animate(player, Animations.HUMAN_OPEN_CHEST_536)
-            removeItem(player, Items.CHEST_KEY_2404)
             if (removeItem(player, Items.CHEST_KEY_2404)) {
                 animate(player, Animations.HUMAN_OPEN_CHEST_536)
                 sendItemDialogue(player, Items.CHEST_KEY_2404, "You unlock the chest.")
@@ -223,7 +216,8 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         on(Objects.OPEN_CHEST_5273, IntType.SCENERY, "close") { _, node ->
-            replaceScenery(node.asScenery(), node.id - 3, -1)
+            // Always restore the unlocked chest: a closed chest must never end up needing a key again.
+            replaceScenery(node.asScenery(), Objects.CLOSED_CHEST_5272, -1)
             return@on true
         }
 
@@ -234,7 +228,7 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
                     return
                 }
 
-                if (freeSlots(player) > 1) {
+                if (freeSlots(player) > 0) {
                     addItem(player, scrapId, 1)
                     sendItemDialogue(player, scrapId, "You find a piece of a map inside the chest.")
                 } else {
@@ -246,8 +240,6 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
             val hasB = hasAnItem(player, Items.MAP_SCRAP_4276).container != null
             val hasC = hasAnItem(player, Items.MAP_SCRAP_4275).container != null
 
-            val crabSpawned = getAttribute(player, "ghostsAhoyCrabSpawned", false)
-
             when {
                 inBorders(player, 3618, 3544, 3620, 3546) ->
                     giveScrap(player, hasA, Items.MAP_SCRAP_4274)
@@ -255,18 +247,14 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
                 inBorders(player, 3604, 3563, 3607, 3565) ->
                     giveScrap(player, hasB, Items.MAP_SCRAP_4276)
 
-                inBorders(player, 3619, 3543, 3617, 3541) -> {
-                    if (crabSpawned) {
+                inBorders(player, 3617, 3541, 3619, 3543) -> when {
+                    getAttribute(player, GhostsAhoyUtils.lastMapScrap, false) ->
                         giveScrap(player, hasC, Items.MAP_SCRAP_4275)
-                        return@on true
-                    }
 
-                    if (!getAttribute(player, GhostsAhoyUtils.lastMapScrap, false)) {
-                        spawnGiantLobster(player)
-                        return@on true
-                    }
+                    getAttribute(player, GhostsAhoyUtils.crabSpawned, false) ->
+                        sendMessage(player, "A giant lobster is guarding the chest!")
 
-                    giveScrap(player, hasC, Items.MAP_SCRAP_4275)
+                    else -> spawnGiantLobster(player)
                 }
             }
             return@on true
@@ -290,15 +278,34 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         onClose(Components.AHOY_RUNEDRAW_9) { player, _ ->
-            sendMessage(player, "You've won the game of Runedraw!")
-            setAttribute(player, GhostsAhoyUtils.getSignedBow, true)
-            setQuestStage(player, Quests.GHOSTS_AHOY, 11)
-            openDialogue(player, RobinDialogueFile())
+            if (!getAttribute(player, GhostsAhoyUtils.getSignedBow, false)) {
+                sendMessage(player, "You've won the game of Runedraw!")
+                setAttribute(player, GhostsAhoyUtils.getSignedBow, true)
+                openDialogue(player, RobinDialogueFile())
+            }
             return@onClose true
         }
     }
 
     companion object {
         val mapPieces = intArrayOf(Items.MAP_SCRAP_4274, Items.MAP_SCRAP_4275, Items.MAP_SCRAP_4276)
+        val dyes = intArrayOf(Items.RED_DYE_1763, Items.YELLOW_DYE_1765, Items.BLUE_DYE_1767)
+    }
+}
+
+private class DyeDialogue(private val dyeId: Int) : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when (stage) {
+            0 -> {
+                setTitle(player!!, 3)
+                sendOptions(player!!, "Which part of the flag do you want to dye?", "Top half", "Bottom half", "Skull emblem")
+                stage++
+            }
+
+            1 -> {
+                GhostsAhoyUtils.handleDyeSelection(player!!, buttonID, dyeId)
+                stage = END_DIALOGUE
+            }
+        }
     }
 }

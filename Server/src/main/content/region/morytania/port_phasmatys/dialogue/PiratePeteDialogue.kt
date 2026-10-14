@@ -49,7 +49,7 @@ class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
             )
 
             1 -> {
-                val random = Random.nextInt(0, 6)
+                val random = Random.nextInt(7)
                 when (random) {
                     0 -> npcl(FaceAnim.FRIENDLY, "All right. I'll need to use my Magical Teleporting Bottle.").also { stage = 2 }
                     1 -> npcl(FaceAnim.FRIENDLY, "All right. You know that it's going to cost extra to take your friend as well, right?").also { stage = 7 }

@@ -1,6 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.VelorinaAhoyDialogue
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
@@ -21,7 +22,7 @@ class VelorinaDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
 
         // If the player is not wearing the Ghostspeak Amulet.
-        if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+        if (!hasGhostspeak(player)) {
             npc("Woooo wooo wooooo woooo")
             stage = 4
             return true

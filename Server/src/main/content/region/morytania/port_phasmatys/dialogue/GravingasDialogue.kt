@@ -1,6 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.GravingasAhoyDialogue
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.getQuestStage
 import core.api.inEquipment
 import core.api.openDialogue
@@ -23,14 +24,14 @@ class GravingasDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         when {
             // If the player has the bedsheet and has completed the quest.
-            inEquipment(player, Items.BEDSHEET_4285) && getQuestStage(player, Quests.GHOSTS_AHOY) >= 1 -> {
+            getQuestStage(player, Quests.GHOSTS_AHOY) in 1..99 && (hasGhostspeak(player) || inEquipment(player, Items.BEDSHEET_4285)) -> {
                 end()
                 openDialogue(player, GravingasAhoyDialogue())
                 return true
             }
 
             // If the player does not have the Ghostspeak Amulet.
-            !inEquipment(player, Items.GHOSTSPEAK_AMULET_552) -> {
+            !hasGhostspeak(player) -> {
                 npcl(FaceAnim.FRIENDLY, "Woooo wooo wooooo woooo")
                 return true
             }

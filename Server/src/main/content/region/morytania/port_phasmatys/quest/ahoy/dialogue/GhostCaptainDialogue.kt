@@ -12,13 +12,16 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 
+/**
+ * Represents the Ghost Captain (Ghosts Ahoy quest) dialogue.
+ */
 @Initializable
 class GhostCaptainDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
-            !inEquipment(player, Items.GHOSTSPEAK_AMULET_552) -> npc(FaceAnim.FRIENDLY, "Woooo wooo wooooo woooo")
+            !GhostsAhoyUtils.hasGhostspeak(player) -> npc(FaceAnim.FRIENDLY, "Woooo wooo wooooo woooo")
             inBorders(player, 3788, 3556, 3797, 3562) -> options("Can you take me back to Phasmatys, now?", "There isn't much on this island, is there?").also { stage = 7 }
             else -> player("Where do you sail to, in such a small boat?").also { stage = 1 }
         }
@@ -39,7 +42,7 @@ class GhostCaptainDialogue(player: Player? = null) : Dialogue(player) {
             4 -> if (amountInInventory(player, Items.ECTO_TOKEN_4278) >= 25) {
                 options("I have the ectotokens here - please take me to Dragontooth Island.", "No thanks, not at the moment.").also { stage++ }
             } else {
-                player("No thanks, not at the moment.").also { stage = END_DIALOGUE }
+                player("I don't have enough ectotokens at the moment.").also { stage = END_DIALOGUE }
             }
 
             5 -> when (buttonId) {

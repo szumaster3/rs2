@@ -50,98 +50,148 @@ class GhostsAhoy : Quest(Quests.GHOSTS_AHOY, 68, 67, 2, Vars.VARBIT_QUEST_GHOST_
             line++
         }
 
-        if (stage == 1) {
-            line(player, "I have spoken with !!Velorina??,", line++, true)
-            line(player, "who has told me the sad history of the ghosts of !!Port Phasmatys??.", line++, true)
-            line++
-            line(player, "She has asked me to plead with Necrovarus in the Phasmatyan Temple", line++, false)
-            line(player, "to let any ghost who so wishes pass over into the next world.", line++, false)
-            line++
-        }
+        if (stage in 1..99) {
+            fun write(crossed: Boolean, vararg texts: String) {
+                texts.forEach { line(player, it, line++, crossed) }
+                line++
+            }
 
-        if (stage == 2) {
-            line(player, "I have spoken with !!Velorina??,", line++, true)
-            line(player, "who has told me the sad history of the ghosts of !!Port Phasmatys??.", line++, true)
-            line++
-            line(player, "She has asked me to plead with Necrovarus in the Phasmatyan Temple", line++, true)
-            line(player, "to let any ghost who so wishes pass over into the next world.", line++, true)
-            line++
-            line(player, "I pleaded with Necrovarus, to no avail.", line++, false)
-            line++
-        }
+            write(
+                true,
+                "I have spoken with !!Velorina??,",
+                "who has told me the sad history of the ghosts of !!Port Phasmatys??.",
+            )
 
-        if (stage == 3) {
-            line(player, "I have spoken with !!Velorina??,", line++, true)
-            line(player, "who has told me the sad history of the ghosts of !!Port Phasmatys??.", line++, true)
-            line++
-            line(player, "She has asked me to plead with Necrovarus in the Phasmatyan Temple", line++, true)
-            line(player, "to let any ghost who so wishes pass over into the next world.", line++, true)
-            line++
-            line(player, "I pleaded with Necrovarus, to no avail.", line++, true)
-            line++
-            line(player, "Velorina was crestfallen at !!Necrovarus'?? refusal to lift his ban,", line++, false)
-            line(player, "and she told me of a woman who fled Port Phasmatys", line++, false)
-            line(player, "before the townsfolk died, and to seek her out, as she", line++, false)
-            line(player, "may know of a way around Necrovarus' stubbornness.", line++, false)
-            line++
-        }
+            if (stage == 1) {
+                write(
+                    false,
+                    "She has asked me to plead with Necrovarus in the Phasmatyan Temple",
+                    "to let any ghost who so wishes pass over into the next world.",
+                )
+            } else {
+                write(
+                    true,
+                    "She asked me to plead with Necrovarus in the Phasmatyan Temple",
+                    "to let any ghost who so wishes pass over into the next world.",
+                    "I pleaded with Necrovarus, to no avail.",
+                )
+            }
 
-        if (stage == 4) {
-            line(player, "I have spoken with !!Velorina??,", line++, true)
-            line(player, "who has told me the sad history of the ghosts of !!Port Phasmatys??.", line++, true)
-            line++
-            line(player, "She has asked me to plead with Necrovarus in the Phasmatyan Temple", line++, true)
-            line(player, "to let any ghost who so wishes pass over into the next world.", line++, true)
-            line++
-            line(player, "I pleaded with Necrovarus, to no avail.", line++, true)
-            line++
-            line(player, "Velorina was crestfallen at !!Necrovarus'?? refusal to lift his ban,", line++, true)
-            line(player, "and she told me of a woman who fled Port Phasmatys", line++, true)
-            line(player, "before the townsfolk died, and to seek her out, as she", line++, true)
-            line(player, "may know of a way around Necrovarus' stubbornness.", line++, true)
-            line++
-            line(player, "I found the old woman, who told me of an enchantment", line++, false)
-            line(player, "she can perform on the !!Amulet of Ghostspeak??,", line++, false)
-            line(player, "which will then let me command Necrovarus to do my bidding.", line++, false)
-            line++
-        }
+            if (stage == 2) {
+                write(false, "I should tell !!Velorina?? that !!Necrovarus?? would not listen.")
+            } else if (stage >= 3) {
+                write(
+                    true,
+                    "Velorina was crestfallen at !!Necrovarus'?? refusal to lift his ban,",
+                    "and she told me of a woman who fled Port Phasmatys",
+                    "before the townsfolk died, and to seek her out, as she",
+                    "may know of a way around Necrovarus' stubbornness.",
+                )
+            }
 
-        if (stage == 99) {
-            line(player, "I have spoken with !!Velorina??,", line++, true)
-            line(player, "who has told me the sad history of the ghosts of !!Port Phasmatys??.", line++, true)
-            line++
-            line(player, "She has asked me to plead with Necrovarus in the Phasmatyan Temple", line++, true)
-            line(player, "to let any ghost who so wishes pass over into the next world.", line++, true)
-            line++
-            line(player, "I pleaded with Necrovarus, to no avail.", line++, true)
-            line++
-            line(player, "Velorina was crestfallen at !!Necrovarus'?? refusal to lift his ban,", line++, true)
-            line(player, "and she told me of a woman who fled Port Phasmatys", line++, true)
-            line(player, "before the townsfolk died, and to seek her out, as she", line++, true)
-            line(player, "may know of a way around Necrovarus' stubbornness.", line++, true)
-            line++
-            line(player, "I found the old woman, who told me of an enchantment", line++, true)
-            line(player, "she can perform on the !!Amulet of Ghostspeak??,", line++, true)
-            line(player, "which will then let me command Necrovarus to do my bidding.", line++, true)
-            line++
-            line(player, "I brought the old woman the !!Book of Haricanto??,", line++, false)
-            line(player, "the !!Robes of Necrovarus??, and a translation manual.", line++, false)
-            line++
-            line(player, "The old woman used the items I brought her to", line++, false)
-            line(player, "perform the enchantment on the Amulet of Ghostspeak.", line++, false)
-            line(player, "I have commanded !!Necrovarus?? to remove his ban.", line++, false)
-            line(player, "I have told !!Velorina?? that !!Necrovarus?? has been commanded", line++, false)
-            line(player, "to remove his ban, and to allow any ghost who so desires", line++, false)
-            line(player, "to pass over into the next plane of existence.", line++, false)
-            line++
+            val enlightened = getAttribute(player, GhostsAhoyUtils.croneEnlightened, false)
+            if (stage == 3 && !enlightened) {
+                write(
+                    false,
+                    "She told me of a small wooden shack by the sea in",
+                    "Morytania, with castles to the west and east. The old",
+                    "woman there might like a nice hot cup of !!nettle tea??.",
+                )
+            }
+
+            if (stage in 4..79 && !enlightened) {
+                write(
+                    false,
+                    "I found the old woman. She wants !!nettle tea?? with milk,",
+                    "in her own special !!porcelain cup??.",
+                )
+            }
+
+            if (enlightened) {
+                write(
+                    true,
+                    "I found the old woman, who told me of an enchantment",
+                    "she can perform on the !!Amulet of Ghostspeak??,",
+                    "which will then let me command Necrovarus to do my bidding.",
+                )
+            }
+
+            if (stage in 4..79 && enlightened) {
+                val robes = getAttribute(player, GhostsAhoyUtils.robesFound, false)
+                val book = getAttribute(player, GhostsAhoyUtils.bookFound, false)
+                val manual = getAttribute(player, GhostsAhoyUtils.manualGiven, false)
+                val signed = getAttribute(player, GhostsAhoyUtils.getSignedBow, false)
+
+                line(player, "To perform the enchantment she needs:", line++, false)
+                line(player, "The !!Robes of Necrovarus?? from the coffin in the temple,", line++, robes)
+                line(player, "the !!Book of Haricanto??, buried on Dragontooth Island,", line++, book)
+                line(player, "and a !!translation manual??, which !!Ak-Haranu?? will trade", line++, manual)
+                line(player, "for an oak longbow signed by !!Robin??.", line++, manual)
+                line++
+
+                if (getAttribute(player, GhostsAhoyUtils.petitionstart, false) && !getAttribute(player, GhostsAhoyUtils.petitionPresented, false)) {
+                    line(player, "!!Gravingas?? gave me a petition to collect 10 signatures", line++, false)
+                    line(player, "from the ghosts, which I could present to !!Necrovarus??.", line++, false)
+                    line++
+                }
+                if (signed) {
+                    line(player, "I beat !!Robin?? at Runedraw and he agreed to sign a longbow.", line++, true)
+                    line++
+                }
+                if (stage >= 6) {
+                    line(player, "I found the old woman's son and told her he is alive.", line++, true)
+                    line++
+                } else if (stage == 5) {
+                    line(player, "I should tell the old woman I found her son.", line++, false)
+                    line++
+                }
+
+                write(
+                    false,
+                    "Once I have everything, I should bring the items and my",
+                    "!!Amulet of Ghostspeak?? to the old woman.",
+                )
+            }
+
+            if (stage >= 80) {
+                write(
+                    true,
+                    "I brought the old woman the !!Book of Haricanto??,",
+                    "the !!Robes of Necrovarus??, and a translation manual.",
+                )
+            }
+
+            if (stage in 80..98) {
+                write(
+                    false,
+                    "The old woman used the items I brought her to",
+                    "perform the enchantment on the Amulet of Ghostspeak.",
+                    "I should wear it and command !!Necrovarus?? to remove his ban.",
+                )
+            }
+
+            if (stage == 99) {
+                write(
+                    true,
+                    "The old woman used the items I brought her to",
+                    "perform the enchantment on the Amulet of Ghostspeak.",
+                )
+                write(
+                    false,
+                    "I have commanded !!Necrovarus?? to remove his ban.",
+                    "I should tell !!Velorina?? that !!Necrovarus?? has been commanded",
+                    "to remove his ban, and to allow any ghost who so desires",
+                    "to pass over into the next plane of existence.",
+                )
+            }
         }
 
         if (stage == 100) {
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line++, false)
             line++
             line(player, "Velorina gave me the Ectophial in return,", line++, false)
             line(player, "which I can use to teleport to the !!Temple of Phasmatys??.", line++, false)
             line++
-            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
         }
     }
 
@@ -166,6 +216,13 @@ class GhostsAhoy : Quest(Quests.GHOSTS_AHOY, 68, 67, 2, Vars.VARBIT_QUEST_GHOST_
             GhostsAhoyUtils.petitionsigns,
             GhostsAhoyUtils.petitionstart,
             GhostsAhoyUtils.petitioncomplete,
+            GhostsAhoyUtils.petitionPresented,
+            GhostsAhoyUtils.getSignedBow,
+            GhostsAhoyUtils.croneEnlightened,
+            GhostsAhoyUtils.akharanuAsked,
+            GhostsAhoyUtils.robesFound,
+            GhostsAhoyUtils.bookFound,
+            GhostsAhoyUtils.manualGiven,
         )
     }
 

@@ -1,7 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.addItemOrDrop
-import core.api.inEquipment
 import core.api.inInventory
 import core.api.sendDialogue
 import core.game.dialogue.Dialogue
@@ -21,7 +21,7 @@ class GhostInkeeperDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+        if (!hasGhostspeak(player)) {
             npc("Woooo wooo wooooo woooo")
             stage = 10
             return true

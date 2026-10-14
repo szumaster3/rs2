@@ -1,5 +1,6 @@
 package content.region.morytania.port_phasmatys.quest.ahoy.dialogue
 
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.npc.NPC
@@ -10,6 +11,9 @@ import shared.consts.NPCs
 import shared.consts.Quests
 import shared.consts.Vars
 
+/**
+ * Represents the Velorina (Ghosts Ahoy quest) dialogue.
+ */
 class VelorinaAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY)
@@ -44,7 +48,7 @@ class VelorinaAhoyDialogue : DialogueFile() {
                 16 -> player("A ghost is a soul left in limbo, unable to pass over to the", "next world; they might have something left to do in this", "world that torments them, or they might just have died", "in a state of confusion.").also { stage++ }
                 17 -> npc("Yes, that is normally the case. But here in Port", "Phasmatys, we of this town once chose freely to become", "ghosts!").also { stage++ }
                 18 -> player("Why on earth would you do such a thing?").also { stage++ }
-                19 -> npc("It is a long story. Many years ago, this was a thriving", "port, a trading centre to the eastern lands of", "" + GameWorld.settings!!.name + "We became rich on the profits made from", "the traders that came across the eastern seas.").also { stage++ }
+                19 -> npc("It is a long story. Many years ago, this was a thriving", "port, a trading centre to the eastern lands of", "" + GameWorld.settings!!.name + ". We became rich on the profits made from", "the traders that came across the eastern seas.").also { stage++ }
                 20 -> npc("We were very happy...", "until Lord Drakan noticed us.").also { stage++ }
                 21 -> npc("He sent unholy creatures to demand that a blood-tithe", "be paid to the Lord Vampyre, as is required from all in", "the domain of Morytania. We had no choice but to", "agree to his demands.").also { stage++ }
                 22 -> npc("As the years went by, our numbers dwindled and many", "spoke of abandoning the town for safer lands.", "Then, Necrovarus came to us.").also { stage++ }
@@ -59,7 +63,7 @@ class VelorinaAhoyDialogue : DialogueFile() {
                 31 -> player("That's a very sad story.").also { stage = 8 }
                 32 -> {
                     end()
-                    setQuestStage(player!!, Quests.GHOSTS_AHOY, 1)
+                    GhostsAhoyUtils.advanceQuest(player!!, 1)
                     setVarbit(player!!, Vars.VARBIT_GHOSTS_AHOY_PROGRESS_217, 1, true)
                 }
             }
@@ -78,17 +82,25 @@ class VelorinaAhoyDialogue : DialogueFile() {
                 4 -> npc("She fled before the Ectofuntus took control over us, but", "being a disciple of Necrovarus she would have been", "privy to many of his darkest secrets. She may know of", "a way to aid us without Necrovarus.").also { stage++ }
                 5 -> options("Do you know where this woman can be found?", "If it was such a long time ago, won't she be dead already?").also { stage++ }
                 6 -> when (buttonID) {
-                    1 -> player("Do you know where this woman can be found?").also { stage++ }
-                    2 -> player("If it was such a long time ago, won't she be", "dead already?").also {
-                        stage = 8
-                    }
+                    1 -> player("Do you know where this woman can be found?").also { stage = 7 }
+                    2 -> player("If it was such a long time ago, won't she be", "dead already?").also { stage = 8 }
                 }
-                7 -> npc("I have a vision of a small wooden shack, the land it was", "built on the unholy soil of Morytania. I sense the sea is", "very close, and that there looms castles to the west and", "the east.").also { stage = END_DIALOGUE }
-                8 -> npc("She was a friend of mine. Had she died, I would have", "felt her spirit pass over to the next world, though", "I may not follow.").also { stage++ }
+                7 -> npc("I have a vision of a small wooden shack, the land it was", "built on the unholy soil of Morytania. I sense the sea is", "very close, and that there looms castles to the west and", "the east.").also { stage = 9 }
+                8 -> npc("She was a friend of mine. Had she died, I would have", "felt her spirit pass over to the next world, though", "I may not follow.").also { stage = 7 }
                 9 -> {
                     end()
-                    setQuestStage(player!!, Quests.GHOSTS_AHOY, 3)
+                    GhostsAhoyUtils.advanceQuest(player!!, 3)
                 }
+            }
+
+            in 3..79 -> when (stage) {
+                0 -> npc("Have you had any luck finding the woman who fled?").also { stage++ }
+                1 -> player("Not yet.").also { stage++ }
+                2 -> npc("I have a vision of a small wooden shack, the land it was", "built on the unholy soil of Morytania. I sense the sea is", "very close, and that there looms castles to the west and", "the east.").also { stage = END_DIALOGUE }
+            }
+
+            in 80..98 -> when (stage) {
+                0 -> npc("I sense great power in the amulet you carry. Use it on", "Necrovarus - it is our only hope.").also { stage = END_DIALOGUE }
             }
 
             99 -> when (stage) {
@@ -96,7 +108,9 @@ class VelorinaAhoyDialogue : DialogueFile() {
                 1 -> player("Only happy to help out.").also { stage++ }
                 2 -> npc("Here, take this as a thank you for the service", "that you have given us.").also { stage++ }
                 3 -> sendItemDialogue(player!!, Items.ECTOPHIAL_4251, "Velorina gives you a vial of bright green ectoplasm.").also {
-                    addItemOrDrop(player!!, Items.ECTOPHIAL_4251)
+                    if (hasAnItem(player!!, Items.ECTOPHIAL_4251).container == null) {
+                        addItemOrDrop(player!!, Items.ECTOPHIAL_4251)
+                    }
                     stage++
                 }
                 4 -> npc("This is an Ectophial. If you ever want to come back to", "Port Phasmatys, empty this on the floor beneath your feet,", "and you will be instantly teleported to the", " temple - the source of its power.").also { stage++ }
@@ -104,6 +118,19 @@ class VelorinaAhoyDialogue : DialogueFile() {
                 6 -> {
                     end()
                     finishQuest(player!!, Quests.GHOSTS_AHOY)
+                }
+            }
+
+            100 -> when (stage) {
+                0 -> if (hasAnItem(player!!, Items.ECTOPHIAL_4251).container != null) {
+                    npc("Hello again. I hope the Ectophial is serving you well.").also { stage = END_DIALOGUE }
+                } else {
+                    player("I seem to have lost my Ectophial.").also { stage++ }
+                }
+                1 -> npc("Then take another. It is the least I can do.").also { stage++ }
+                2 -> sendItemDialogue(player!!, Items.ECTOPHIAL_4251, "Velorina gives you a vial of bright green ectoplasm.").also {
+                    addItemOrDrop(player!!, Items.ECTOPHIAL_4251)
+                    stage = END_DIALOGUE
                 }
             }
         }

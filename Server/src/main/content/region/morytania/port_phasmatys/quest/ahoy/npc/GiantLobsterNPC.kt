@@ -12,6 +12,8 @@ import shared.consts.NPCs
 
 class GiantLobsterNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
 
+    private var owner: Player? = null
+
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = GiantLobsterNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.GIANT_LOBSTER_1693)
@@ -20,6 +22,8 @@ class GiantLobsterNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
         @JvmStatic
         fun spawnGiantLobster(player: Player) {
             val giantLobster = GiantLobsterNPC(NPCs.GIANT_LOBSTER_1693)
+            giantLobster.owner = player
+            setAttribute(player, GhostsAhoyUtils.crabSpawned, true)
             giantLobster.location = location(3617, 3543, 0)
             giantLobster.isWalks = true
             giantLobster.isAggressive = true
@@ -34,7 +38,6 @@ class GiantLobsterNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
                     override fun pulse(): Boolean {
                         giantLobster.init()
                         sendMessage(player, "You are attacked by a giant lobster!!")
-                        setAttribute(player, "ghostsAhoyCrabSpawned", true)
                         registerHintIcon(player, giantLobster)
                         giantLobster.attack(player)
                         return true
@@ -44,12 +47,29 @@ class GiantLobsterNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
         }
     }
 
+    override fun handleTickActions() {
+        super.handleTickActions()
+        val player = owner ?: return
+        // The owner died, logged out or walked away: remove the lobster so the chest can't stay blocked.
+        if (!player.isActive || player.location.getDistance(location) > 25.0) {
+            release(player)
+            clear()
+        }
+    }
+
+    private fun release(player: Player) {
+        removeAttribute(player, GhostsAhoyUtils.crabSpawned)
+        clearHintIcon(player)
+        owner = null
+    }
+
     override fun finalizeDeath(killer: Entity?) {
-        if (killer is Player) {
-            clearHintIcon(killer)
-            setAttribute(killer,
-                GhostsAhoyUtils.lastMapScrap, true)
-            removeAttribute(killer, "ghostsAhoyCrabSpawned")
+        val player = owner
+        if (player != null) {
+            if (killer == player) {
+                setAttribute(player, GhostsAhoyUtils.lastMapScrap, true)
+            }
+            release(player)
         }
         clear()
         super.finalizeDeath(killer)

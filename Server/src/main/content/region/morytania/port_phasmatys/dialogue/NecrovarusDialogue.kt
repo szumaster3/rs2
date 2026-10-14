@@ -1,13 +1,16 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.NecrovarusAhoyDialogue
-import core.api.*
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
+import core.api.isQuestComplete
+import core.api.isQuestInProgress
+import core.api.openDialogue
+import core.api.sendDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
@@ -18,7 +21,7 @@ import shared.consts.Quests
 class NecrovarusDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+        if (!hasGhostspeak(player)) {
             sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
             return true
         }

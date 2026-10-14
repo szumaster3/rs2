@@ -1,10 +1,8 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.AkharanuAhoyDialogue
-import core.api.getQuestStage
-import core.api.inInventory
-import core.api.openDialogue
-import core.api.openNpcShop
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -23,7 +21,11 @@ class AkharanuDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (inInventory(player!!, Items.SIGNED_OAK_BOW_4236) || getQuestStage(player, Quests.GHOSTS_AHOY) >= 5) {
+        val questStage = getQuestStage(player, Quests.GHOSTS_AHOY)
+        val asked = getAttribute(player!!, GhostsAhoyUtils.akharanuAsked, false)
+        // Quest talk: first meeting after the old woman's tea, or when handing over the signed bow.
+        // Otherwise fall back to the normal chat/shop dialogue.
+        if (questStage in 4..79 && (inInventory(player!!, Items.SIGNED_OAK_BOW_4236) || !asked)) {
             end()
             openDialogue(player, AkharanuAhoyDialogue())
         } else {

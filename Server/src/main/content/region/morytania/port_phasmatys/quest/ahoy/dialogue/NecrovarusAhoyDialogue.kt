@@ -10,6 +10,9 @@ import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents the Necrovarus (Ghosts Ahoy quest) dialogue.
+ */
 class NecrovarusAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY)
@@ -25,25 +28,28 @@ class NecrovarusAhoyDialogue : DialogueFile() {
                 6 -> npc(FaceAnim.ANGRY, "Get out of my sight!! Or I promise you that you will", "regret your insolence for the rest of eternity!!!").also { stage++ }
                 7 -> {
                     end()
-                    setQuestStage(player!!, Quests.GHOSTS_AHOY, 2)
+                    GhostsAhoyUtils.advanceQuest(player!!, 2)
                 }
             }
 
-            2 -> when (stage) {
+            in 2..3 -> when (stage) {
                 0 -> player("Please, listen to me-").also { stage++ }
                 1 -> npc("No - listen to me. Go from this place and do not return,", "or I will remove your head.").also { stage = END_DIALOGUE }
             }
 
-            4 -> when (stage) {
-                0 -> player("Wheels have been set in motion, Necrovarus,", "wheels that will set the citizens of Port Phasmatys", "free.").also { stage++ }
-                1 -> npc("Oh goody goody. I just can't wait.").also { stage = END_DIALOGUE }
-            }
+            in 4..79 -> when (stage) {
+                0 -> when {
+                    getAttribute(player!!, GhostsAhoyUtils.petitioncomplete, false) && inInventory(player!!, Items.PETITION_FORM_4283) ->
+                        player("Necrovarus, I am presenting you with a petition form", "that has been signed by 10 citizens of Port Phasmatys.").also { stage = 1 }
 
-            in 5..10 -> when (stage) {
-                0 -> if (getAttribute(player!!, GhostsAhoyUtils.petitioncomplete, false)) {
-                    player("Necrovarus, I am presenting you with a petition form", "that has been signed by 10 citizens of Port Phasmatys.").also { stage++ }
-                } else {
-                    npc(FaceAnim.ANGRY, "Get out of my sight!! Or I promise you that you will", "regret your insolence for the rest of eternity!!!").also { stage = END_DIALOGUE }
+                    getAttribute(player!!, GhostsAhoyUtils.petitionPresented, false) && hasAnItem(player!!, Items.BONE_KEY_4272).container == null ->
+                        npc(FaceAnim.ANGRY, "You again?! Get out of my sight!!").also { stage = 20 }
+
+                    questStage == 4 ->
+                        player("Wheels have been set in motion, Necrovarus,", "wheels that will set the citizens of Port Phasmatys", "free.").also { stage = 30 }
+
+                    else ->
+                        npc(FaceAnim.ANGRY, "Get out of my sight!! Or I promise you that you will", "regret your insolence for the rest of eternity!!!").also { stage = END_DIALOGUE }
                 }
                 1 -> npc("A Petition you say?", "Continue, mortal.").also { stage++ }
                 2 -> player("It says that the citizens of Port Phasmatys should have", "the right to choose whether they pass over into the next", "world or not, and not have this decided by the powers", "that be on their behalf.").also { stage++ }
@@ -55,11 +61,22 @@ class NecrovarusAhoyDialogue : DialogueFile() {
                 8 -> sendDialogue(player!!, "The petition form turns to ashes in your hand.").also { stage++ }
                 9 -> {
                     end()
-                    removeItem(player!!, Items.PETITION_FORM_4283)
-                    addItemOrDrop(player!!, Items.ASHES_592)
+                    if (removeItem(player!!, Items.PETITION_FORM_4283)) {
+                        addItemOrDrop(player!!, Items.ASHES_592)
+                        setAttribute(player!!, GhostsAhoyUtils.petitionPresented, true)
+                        sendDialogue(player!!, "In his rage Necrovarus drops a key on the floor.")
+                        produceGroundItem(player!!, Items.BONE_KEY_4272, 1, player!!.location)
+                    }
+                }
+
+                // lost the bone key: Necrovarus drops it again
+                20 -> {
+                    end()
                     sendDialogue(player!!, "In his rage Necrovarus drops a key on the floor.")
                     produceGroundItem(player!!, Items.BONE_KEY_4272, 1, player!!.location)
                 }
+
+                30 -> npc("Oh goody goody. I just can't wait.").also { stage = END_DIALOGUE }
             }
 
             80 -> when (stage) {
@@ -98,8 +115,12 @@ class NecrovarusAhoyDialogue : DialogueFile() {
                 21 -> npc("... pass into the next world.").also { stage++ }
                 22 -> {
                     end()
-                    setQuestStage(player!!, Quests.GHOSTS_AHOY, 99)
+                    GhostsAhoyUtils.advanceQuest(player!!, 99)
                 }
+            }
+
+            in 99..100 -> when (stage) {
+                0 -> npc(FaceAnim.ANNOYED, "Begone, mortal. The barrier is broken... for now.").also { stage = END_DIALOGUE }
             }
         }
     }

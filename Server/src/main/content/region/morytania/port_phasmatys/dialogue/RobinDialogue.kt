@@ -1,10 +1,8 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.RobinDialogueFile
-import core.api.getQuestStage
-import core.api.inInventory
-import core.api.openDialogue
-import core.api.removeItem
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -23,8 +21,11 @@ class RobinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
+        val questStage = getQuestStage(player, Quests.GHOSTS_AHOY)
+        val hasLongbow = inInventory(player!!, Items.OAK_LONGBOW_845)
+        val wonRunedraw = getAttribute(player!!, GhostsAhoyUtils.getSignedBow, false)
         when {
-            getQuestStage(player, Quests.GHOSTS_AHOY) >= 10 -> openDialogue(player, RobinDialogueFile())
+            questStage in 4..79 && (hasLongbow || wonRunedraw) -> openDialogue(player, RobinDialogueFile())
             else -> playerl(FaceAnim.FRIENDLY, "It's nice to see another human face around here.").also { stage = 1 }
         }
         return true

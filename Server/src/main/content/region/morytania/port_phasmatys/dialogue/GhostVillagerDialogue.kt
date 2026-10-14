@@ -2,6 +2,7 @@ package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.GhostVillagerDialogueFile
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.getAttribute
 import core.api.inEquipment
 import core.api.openDialogue
@@ -23,7 +24,7 @@ class GhostVillagerDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> {
-                if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+                if (!hasGhostspeak(player)) {
                     npc("Woooo wooo wooooo woooo").also { stage = 1 }
                     return true
                 }

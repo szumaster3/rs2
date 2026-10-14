@@ -1,6 +1,6 @@
 package content.region.morytania.port_phasmatys.dialogue
 
-import core.api.inEquipment
+import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.openNpcShop
 import core.api.sendDialogue
 import core.game.dialogue.Dialogue
@@ -9,7 +9,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.Items
 import shared.consts.NPCs
 
 /**
@@ -20,7 +19,7 @@ class GhostShopkeeperDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+        if (!hasGhostspeak(player)) {
             npcl(FaceAnim.FRIENDLY, "Woooo wooo wooooo woooo").also { stage = 2 }
         } else {
             npcl(FaceAnim.FRIENDLY, "Can I help you at all?")
