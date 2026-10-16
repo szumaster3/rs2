@@ -157,34 +157,40 @@ class Skills(
             return
         }
         val already200m = this.experience[slot] == 200000000.0
-        var experienceAdd = (experience * mod)
+        var experienceAdd = experience * mod
         // Check if a player has brawling gloves and, if equipped, modify xp.
-        val bgManager = BrawlingGlovesManager.getInstance(player)
-        if (!bgManager.GloveCharges.isEmpty()) {
-            var gloves = if (forSkill(slot) == null) null else Item(forSkill(slot)!!.id)
-            if (gloves == null && (slot == STRENGTH || slot == DEFENCE)) {
-                gloves = Item(forSkill(ATTACK)!!.id)
-            }
-            if (gloves != null && player!!.equipment.containsItem(gloves)) {
-                experienceAdd += experienceAdd * bgManager.experienceBonus
-                bgManager.updateCharges(gloves.id, 1)
+        if (player != null) {
+            val bgManager = BrawlingGlovesManager.getInstance(player)
+            if (bgManager.gloveCharges.isNotEmpty()) {
+                var gloves = forSkill(slot)?.let { Item(it.id) }
+                if (gloves == null && (slot == STRENGTH || slot == DEFENCE)) {
+                    gloves = Item(forSkill(ATTACK)!!.id)
+                }
+                if (gloves != null && player.equipment.containsItem(gloves)) {
+                    experienceAdd += experienceAdd * bgManager.experienceBonus
+                    bgManager.updateCharges(gloves.id, 1)
+                }
             }
         }
         // Check for Flame gloves and ring of Fire.
         if (
-            player!!.equipment.containsItem(Item(Items.FLAME_GLOVES_13660)) ||
-            player.equipment.containsItem(Item(Items.RING_OF_FIRE_13659))
+            player != null && (player.equipment.containsItem(Item(Items.FLAME_GLOVES_13660)) ||
+                    player.equipment.containsItem(Item(Items.RING_OF_FIRE_13659)))
         ) {
             if (slot == FIREMAKING) {
                 var count = 0
-                if (player.equipment.containsItem(Item(Items.FLAME_GLOVES_13660))) count += 1
-                if (player.equipment.containsItem(Item(Items.RING_OF_FIRE_13659))) count += 1
-                experienceAdd += if (count == 2) 0.05 * experienceAdd else 0.02 * experienceAdd
+                if (player.equipment.containsItem(Item(Items.FLAME_GLOVES_13660))) count++
+                if (player.equipment.containsItem(Item(Items.RING_OF_FIRE_13659))) count++
+                experienceAdd += if (count == 2) {
+                    0.05 * experienceAdd
+                } else {
+                    0.02 * experienceAdd
+                }
             }
         }
         this.experience[slot] += experienceAdd
         if (this.experience[slot] >= 200000000) {
-            if (!already200m && !player.isArtificial) {
+            if (!already200m && player != null && !player.isArtificial) {
                 sendNews(
                     entity.asPlayer().username +
                             " has just reached 200m experience in " +
@@ -196,13 +202,12 @@ class Skills(
         }
         if (entity is Player && this.experience[slot] > 175) {
             if (
-                !player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false) && slot != HITPOINTS
-            ) {
+                !player!!.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false) && slot != HITPOINTS) {
                 this.experience[slot] = 175.0
             }
         }
         experienceGained += experienceAdd
-        run(player, slot, experienceAdd)
+        player?.let { run(it, slot, experienceAdd) }
         val newLevel = getStaticLevelByExperience(slot)
         if (newLevel > staticLevels[slot]) {
             val amount = newLevel - staticLevels[slot]
@@ -215,7 +220,7 @@ class Skills(
             staticLevels[slot] = newLevel
 
             if (entity is Player) {
-                player.updateAppearance()
+                player!!.updateAppearance()
                 levelup(player, slot, amount)
                 updateCombatLevel()
             }
@@ -232,7 +237,7 @@ class Skills(
                     diffs.add(Pair(i, diff))
                 }
             }
-            logXpGains(player, diffs)
+            player?.let { logXpGains(it, diffs) }
             lastUpdateXp = this.experience.clone()
             lastUpdate = ticks
         }
