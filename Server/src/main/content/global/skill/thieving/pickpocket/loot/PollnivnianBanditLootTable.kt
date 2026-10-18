@@ -8,8 +8,13 @@ import shared.consts.NPCs
 object PollnivnianBanditLootTable {
 
     val NPC_ID = intArrayOf(
+        1879,
+        1887,
+        1891,
+        1895,
+        1896,
         NPCs.BANDIT_1880,
-        NPCs.BANDIT_1881
+        NPCs.BANDIT_1881,
     )
 
     val LOOT = WeightBasedTable.create(

@@ -1,20 +1,22 @@
 package content.global.skill.thieving.blackjack.timer
 
-import content.global.skill.thieving.blackjack.BlackjackUtils
-import content.global.skill.thieving.blackjack.BlackjackType
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.system.timer.RSTimer
 import core.game.world.update.flag.context.Animation
 
+/**
+ * Keeps an NPC "unconscious" for [remainingTicks] ticks or until it was pickpocketed [pickpocketsLeft] times.
+ * Create it with `spawnTimer<BlackjackUnconsciousTimer>(ticks, pickpockets)`.
+ */
 class BlackjackUnconsciousTimer : RSTimer(
     runInterval = 1,
     identifier = BLACKJACK_UNCONSCIOUS,
     isSoft = false
 ) {
 
-    var remainingTicks: Int = 0
-    var pickpocketsLeft: Int = 2
+    var remainingTicks: Int = DEFAULT_TICKS
+    var pickpocketsLeft: Int = DEFAULT_PICKPOCKETS
 
     override fun getInitialRunDelay(): Int = 1
 
@@ -37,15 +39,14 @@ class BlackjackUnconsciousTimer : RSTimer(
         entity.sendChat("Arghh my head.")
     }
 
-    override fun getTimer(vararg args: Any): RSTimer {
-        val blackjackType = args.getOrNull(0) as? BlackjackType ?: BlackjackType.ORDINARY
-        val timer = BlackjackUnconsciousTimer()
-        timer.remainingTicks = BlackjackUtils.getStunTicks(blackjackType)
-        timer.pickpocketsLeft = args.getOrNull(1) as? Int ?: 2
-        return timer
+    override fun getTimer(vararg args: Any): RSTimer = BlackjackUnconsciousTimer().also {
+        it.remainingTicks = args.getOrNull(0) as? Int ?: DEFAULT_TICKS
+        it.pickpocketsLeft = args.getOrNull(1) as? Int ?: DEFAULT_PICKPOCKETS
     }
 
     companion object {
-        val BLACKJACK_UNCONSCIOUS = "blackjack_unconscious"
+        const val BLACKJACK_UNCONSCIOUS = "blackjack_unconscious"
+        const val DEFAULT_TICKS = 8
+        const val DEFAULT_PICKPOCKETS = 2
     }
 }

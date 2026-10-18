@@ -8,6 +8,12 @@ enum class BlackjackNPC(val npcIds: IntArray, val thievingLevel: Int, val xp: Do
     MENAPHITE_THUG(intArrayOf(NPCs.MENAPHITE_THUG_1905), 65, 137.5, 5);
 
     companion object {
+        /**
+         * Wrapper (multi-state) NPC ids. The real NPC is picked by a varbit per player,
+         * so the listener has to be registered on them too.
+         */
+        val WRAPPER_IDS = intArrayOf(1879, 1887, 1891, 1895, 1896)
+
         fun forId(id: Int) =
             values().firstOrNull { id in it.npcIds }
     }

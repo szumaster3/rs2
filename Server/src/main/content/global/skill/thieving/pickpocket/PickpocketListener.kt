@@ -5,10 +5,12 @@ import content.global.skill.thieving.blackjack.BlackjackUtils
 import content.global.skill.thieving.pickpocket.loot.FremennikCitizenLootTable
 import core.api.*
 import core.api.utils.WeightBasedTable
+import core.game.container.impl.EquipmentContainer
 import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.DeathTask
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
@@ -19,119 +21,107 @@ import core.tools.RandomFunction
 import shared.consts.*
 
 class PickpocketListener : InteractionListener {
+
     override fun defineListeners() {
         on(IntType.NPC, "pickpocket", "pick-pocket") { player, node ->
-            val pocketData = Pickpocket.forID(node.id) ?: return@on false
             val npc = node.asNpc()
-            val npcName = npc.name.lowercase()
-            val cabinetKey = hasAnItem(player, Items.DISPLAY_CABINET_KEY_4617).container != null
+            val shown = npc.definition.getChildNPC(player)
+            val data = Pickpocket.forID(shown.id) ?: return@on false
+            val npcName = shown.name.lowercase()
 
-            if (isStunned(player)) {
-                sendMessage(player, "You're stunned!")
+            getBlockReason(player, npc, npcName, data)?.let {
+                sendMessage(player, it)
                 return@on true
             }
-
-            if (player.inCombat()) {
-                sendMessage(player, "You can't do this while in combat.")
-                return@on true
-            }
-
-            if (getStatLevel(player, Skills.THIEVING) < pocketData.requiredLevel) {
-                sendMessage(player, "You need a Thieving level of ${pocketData.requiredLevel} to do that.")
-                return@on true
-            }
-
-            if (DeathTask.isDead(npc)) {
-                sendMessage(player, "Too late, $npcName is already dead.")
-                return@on true
-            }
-
-            if (npc.id == NPCs.CURATOR_HAIG_HALEN_646 && cabinetKey) {
-                sendMessage(player, "You have no reason to do that.")
-                return@on true
-            }
-
-            if (!pocketData.loot.canRoll(player)) {
-                sendMessage(player, "You don't have enough inventory space to do that.")
-                return@on true
-            }
-
-            val (delay, animation) = if (BlackjackUtils.canPickpocket(npc)) {
-                BlackjackUtils.onPickpocket(npc)
-                1 to Animation(Animations.HUMAN_BURYING_BONES_827)
-            } else {
-                2 to Animation(Animations.HUMAN_PICKPOCKETING_881)
-            }
-
-            delayClock(player, Clocks.SKILLING, delay)
-            animate(player, animation)
-            sendMessage(player, "You attempt to pick the $npcName's pocket.")
 
             if (npc.id in FremennikCitizenLootTable.NPC_ID && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-                npc.sendChat("You stay away from me outerlander!")
+                data.message?.let { npc.sendChat(it) }
                 sendMessage(player, "They are too suspicious of you for you to get close enough to steal from them.")
                 return@on true
             }
 
-            val lootTable = pickpocketRoll(player, pocketData.low, pocketData.high, pocketData.loot)
-            val isWearingGloves = inEquipment(player, Items.GLOVES_OF_SILENCE_10075)
-            if (lootTable == null) {
-                npc.faceLocation(player.location)
-                npc.animator.animate(Animation(Animations.PUNCH_422))
-                npc.sendChat(pocketData.message)
-                sendMessage(player, "You fail to pick the $npcName's pocket.")
-                playHurtAudio(player, 20)
-                stun(player, pocketData.stunTime)
-                impact(player, RandomFunction.random(pocketData.stunDamageMin, pocketData.stunDamageMax))
-                sendMessage(player, "You feel slightly concussed from the blow.")
-                if (isWearingGloves)
-                {
-                    val gloves =
-                        player.equipment.toArray().first {
-                            it?.id == Items.GLOVES_OF_SILENCE_10075
-                        }
+            val knockedOut = BlackjackUtils.canPickpocket(npc)
+            val delay = if (knockedOut) 1 else 2
 
-                    val broken =
-                        GlovesOfSilence.onFailedPickpocket(
-                            player,
-                            gloves!!
-                        )
+            delayClock(player, Clocks.SKILLING, delay)
+            animate(player, Animation(if (knockedOut) Animations.HUMAN_BURYING_BONES_827 else Animations.HUMAN_PICKPOCKETING_881))
+            sendMessage(player, "You attempt to pick the $npcName's pocket.")
 
-                    if (broken)
-                    {
-                        sendMessage(
-                            player,
-                            "Your gloves of silence fall apart."
-                        )
-                    }
-                }
-                npc.face(null)
+            val loot = if (knockedOut) data.loot.roll() else pickpocketRoll(player, data.low, data.high, data.loot)
+
+            if (loot == null) {
+                onFail(player, npc, npcName, data)
             } else {
-                lock(player, delay)
-                playAudio(player, Sounds.PICK_2581)
-                lootTable.forEach { player.inventory.add(it) }
-
-                sendMessage(player, if (npc.id == NPCs.CURATOR_HAIG_HALEN_646) "You steal a tiny key." else "You pick the $npcName's pocket.")
-                rewardXP(player, Skills.THIEVING, pocketData.xp)
-
-                when {
-                    inBorders(player, ZoneBorders(3201, 3456, 3227, 3468)) && npc.id == NPCs.GUARD_5920 -> {
-                        finishDiaryTask(player, DiaryType.VARROCK, 1, 12)
-                        setVarbit(player, 4018,1, true)
-
-                    }
-                    inBorders(player, ZoneBorders(2934, 3399, 3399, 3307)) && npc.id in intArrayOf(NPCs.GUARD_9, NPCs.GUARD_3230, NPCs.GUARD_3228, NPCs.GUARD_3229) -> {
-                        finishDiaryTask(player, DiaryType.FALADOR, 1, 6)
-                        setVarbit(player, 5712, 1, true)
-                    }
-                }
+                onSuccess(player, npc, npcName, data, loot, delay)
+                if (knockedOut) BlackjackUtils.onPickpocket(npc)
             }
 
             return@on true
         }
     }
 
+    /**
+     * Returns the message explaining why the player can't pickpocket the npc right now, or `null` if they can.
+     */
+    private fun getBlockReason(player: Player, npc: NPC, npcName: String, data: Pickpocket): String? = when {
+        isStunned(player) -> "You're stunned!"
+        player.inCombat() -> "You can't do this while in combat."
+        getStatLevel(player, Skills.THIEVING) < data.requiredLevel -> "You need a Thieving level of ${data.requiredLevel} to do that."
+        DeathTask.isDead(npc) -> "Too late, $npcName is already dead."
+        npc.id == NPCs.CURATOR_HAIG_HALEN_646 && hasAnItem(player, Items.DISPLAY_CABINET_KEY_4617).container != null -> "You have no reason to do that."
+        !data.loot.canRoll(player) -> "You don't have enough inventory space to do that."
+        else -> null
+    }
+
+    private fun onFail(player: Player, npc: NPC, npcName: String, data: Pickpocket) {
+        npc.faceLocation(player.location)
+        npc.animator.animate(Animation(Animations.PUNCH_422))
+        data.message?.let { npc.sendChat(it) }
+        sendMessage(player, "You fail to pick the $npcName's pocket.")
+        playHurtAudio(player, 20)
+        stun(player, data.stunTime)
+        impact(player, RandomFunction.random(data.stunDamageMin, data.stunDamageMax))
+        sendMessage(player, "You feel slightly concussed from the blow.")
+        damageGloves(player)
+        npc.face(null)
+    }
+
+    private fun onSuccess(player: Player, npc: NPC, npcName: String, data: Pickpocket, loot: List<Item>, delay: Int) {
+        lock(player, delay)
+        playAudio(player, Sounds.PICK_2581)
+        loot.forEach { player.inventory.add(it) }
+
+        sendMessage(player, if (npc.id == NPCs.CURATOR_HAIG_HALEN_646) "You steal a tiny key." else "You pick the $npcName's pocket.")
+        rewardXP(player, Skills.THIEVING, data.xp)
+
+        when {
+            inBorders(player, VARROCK_PALACE) && npc.id == NPCs.GUARD_5920 -> {
+                finishDiaryTask(player, DiaryType.VARROCK, 1, 12)
+                setVarbit(player, 4018, 1, true)
+            }
+            inBorders(player, FALADOR) && npc.id in FALADOR_GUARDS -> {
+                finishDiaryTask(player, DiaryType.FALADOR, 1, 6)
+                setVarbit(player, 5712, 1, true)
+            }
+        }
+    }
+
+    /**
+     * Gloves of silence may break when the wearer gets caught.
+     */
+    private fun damageGloves(player: Player) {
+        val gloves = player.equipment[EquipmentContainer.SLOT_HANDS]
+            ?.takeIf { it.id == Items.GLOVES_OF_SILENCE_10075 } ?: return
+        if (GlovesOfSilence.onFailedPickpocket(player, gloves)) {
+            sendMessage(player, "Your gloves of silence fall apart.")
+        }
+    }
+
     companion object {
+        private val VARROCK_PALACE = ZoneBorders(3201, 3456, 3227, 3468)
+        private val FALADOR = ZoneBorders(2934, 3307, 3399, 3399)
+        private val FALADOR_GUARDS = intArrayOf(NPCs.GUARD_9, NPCs.GUARD_3230, NPCs.GUARD_3228, NPCs.GUARD_3229)
+
         /**
          * Rolls for a pickpocket attempt.
          *

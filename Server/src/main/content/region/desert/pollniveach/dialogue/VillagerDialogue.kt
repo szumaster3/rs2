@@ -2,6 +2,7 @@ package content.region.desert.pollniveach.dialogue
 
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
@@ -35,8 +36,9 @@ class VillagerDialogue(player: Player? = null) : Dialogue(player) {
     )
 
     override fun open(vararg args: Any?): Boolean {
+        npc = args.getOrNull(0) as? NPC ?: return false
         player("Hello, how's it going?")
-        stage = randomStage ?: intArrayOf(0, 2, 4, 6, 10, 12, 15).random().also { randomStage = it }
+        stage = intArrayOf(0, 2, 4, 6, 10, 12, 15).random()
         return true
     }
 
@@ -58,7 +60,7 @@ class VillagerDialogue(player: Player? = null) : Dialogue(player) {
             9 -> player("Ohhh kaaay, I'll leave you to it then.").also { stage = 16 }
 
             10 -> npc("I'm fine, how are you?").also { stage = 11 }
-            11 -> player("Very well, thank you.").also { stage = 20 }
+            11 -> player("Very well, thank you.").also { stage = 16 }
 
             12 -> npc("Who are you?").also { stage = 13 }
             13 -> player("I'm a bold adventurer.").also { stage = 14 }
