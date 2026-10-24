@@ -34,7 +34,7 @@ class WendyDialogue(player: Player? = null) : Dialogue(player) {
                         "Who are you?",
                         "What are you doing?",
                         "You look a little lost.",
-                        "Let's talk about purple cats.",
+                        "Can you make my cat purple?",
                         "Can you remove the purple from a cat?"
                     )
                 stage = 1

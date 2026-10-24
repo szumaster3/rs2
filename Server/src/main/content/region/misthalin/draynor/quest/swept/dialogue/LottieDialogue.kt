@@ -1,8 +1,10 @@
 package content.region.misthalin.draynor.quest.swept.dialogue
 
-import content.data.GameAttributes
-import core.api.addItem
-import core.api.getAttribute
+import core.api.addItemOrDrop
+import core.api.hasAnItem
+import core.api.inInventory
+import core.api.removeAll
+import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
@@ -31,14 +33,12 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LOTTIE, false)) {
-                    // ?
-                }
                 showTopics(
                     Topic<Any?>("Who are you and what are you doing in Betty's basement?", 20, false),
                     Topic<Any?>("I need to retrieve Betty's wand.", 1, false),
                     Topic<Any?>("What is this place?", 25, false),
-                    Topic<Any?>("No need to be rude!", 29, false)
+                    Topic<Any?>("No need to be rude!", 29, false),
+                    Topic<Any?>("Could you put the creatures back how they were?", 31, false)
                 )
             }
 
@@ -61,7 +61,7 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             4 -> {
-                npc("That sounds simple enough; what's so complicated about", "opening a little chest?")
+                player("That sounds simple enough; what's so complicated about", "opening a little chest?")
                 stage++
             }
 
@@ -69,7 +69,7 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
                 npc(
                     "Well, the chest in which Betty stores her wand is",
                     "magically sealed. I won't confuse you with the details",
-                    "right now, but  here's the deal:"
+                    "right now, but here's the deal:"
                 )
                 stage++
             }
@@ -103,7 +103,7 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             10 -> {
-                npc(
+                player(
                     "So, what you're saying is that we need to put each",
                     "creature in its proper enclosure in order to open the",
                     "chest?"
@@ -170,7 +170,9 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
                     "exactly who is where. You can use it for reference, if",
                     "you like. It's not necessary, but I find it helpful."
                 )
-                addItem(player, Items.MAGIC_SLATE_14069, 1)
+                if (hasAnItem(player, Items.MAGIC_SLATE_14069).container == null) {
+                    addItemOrDrop(player, Items.MAGIC_SLATE_14069, 1)
+                }
                 stage++
             }
 
@@ -195,8 +197,8 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
             22 -> {
                 when (buttonId) {
                     1 -> {
-                        npcl(FaceAnim.NEUTRAL, "I most certain am not! I'm learning the ways of witchcraft from Betty.")
-                        stage++
+                        npcl(FaceAnim.NEUTRAL, "I most certainly am not! I'm learning the ways of witchcraft from Betty.")
+                        stage = 23
                     }
 
                     2 -> {
@@ -204,11 +206,6 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
                         stage = 24
                     }
                 }
-                npcl(
-                    FaceAnim.NEUTRAL,
-                    "If you knew anything at all, you'd be able to tell from my witchly deportment, and aura of mysticism and enchantment that radiates from my every pore."
-                )
-                stage = 0
             }
 
             23 -> {
@@ -253,7 +250,7 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
 
             28 -> {
                 npcl(FaceAnim.NEUTRAL, "Not to mention the company.")
-                stage++
+                stage = 0
             }
 
             29 -> {
@@ -266,7 +263,20 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.NEUTRAL,
                     "I've lots of studying to do and all of these creatures to look after. It's not easy to keep track of everything and make casual conversation as well."
                 )
+                stage = END_DIALOGUE
+            }
+
+            31 -> {
+                npc(FaceAnim.NEUTRAL, "Of course. Give me a moment.")
                 stage++
+            }
+
+            32 -> {
+                SweptUtils.resetBettyBasementNPCs()
+                SweptUtils.Pen.values().filter { it.itemId != -1 }
+                    .forEach { if (inInventory(player, it.itemId)) removeAll(player, it.itemId) }
+                npc(FaceAnim.HAPPY, "There. Everything is back the way it was when you", "arrived.")
+                stage = END_DIALOGUE
             }
         }
         return true

@@ -97,8 +97,16 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
         on(Scenery.MAGGIE_S_CAULDRON_39230, IntType.SCENERY, "stir") { player, _ ->
             lock(player, 1)
-            if (getQuestStage(player, Quests.SWEPT_AWAY) >= 4) {
+            val questStage = getQuestStage(player, Quests.SWEPT_AWAY)
+            if (questStage >= 4) {
+                if (questStage == 4 && !inInventory(player, Items.BROOMSTICK_14057)) {
+                    sendMessage(player, "You need the enchanted broomstick to stir the cauldron properly.")
+                    return@on true
+                }
                 animate(player, SweptUtils.STIR_WITH_BROOMSTICK_ANIMATION)
+                if (questStage == 4) {
+                    setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CAULDRON_STIRRED, true)
+                }
                 sendPlayerDialogue(player, "There, that should do it.", FaceAnim.NEUTRAL)
             } else {
                 animate(player, SweptUtils.STIR_ANIMATION)
@@ -120,7 +128,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
         }
 
         /*
-         * Handles extracting a creature from Gus's crates.
+         * Handles extracting a creature from Gus's (wrongly labelled) crates.
          */
 
         on(SweptUtils.GUS_CRATES, IntType.SCENERY, "extract-creature") { player, node ->
@@ -153,9 +161,10 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
         /*
          * Handles extracting a creature from Gus's labelled crates.
+         * Only the crate that really contains newts gives one to the player.
          */
 
-        on(SweptUtils.GUS_CRATES_LABELLED, IntType.SCENERY, "extract-creature") { player, _ ->
+        on(SweptUtils.GUS_CRATES_LABELLED, IntType.SCENERY, "extract-creature") { player, node ->
             if (!getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)) {
                 player.dialogueInterpreter.sendDialogues(
                     player, NPCs.GUS_8205,
@@ -163,55 +172,48 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
                     "One look should be enough. We wouldn't want to get",
                     "Ms. Hetty Annoyed."
                 )
-            } else {
-                animate(player, SweptUtils.TAKE_NEWT_FROM_CRATE_ANIMATION)
-                sendMessage(player, "You fish around in the crate and extract a newt.")
-                addItem(player, Items.NEWT_14064)
+                return@on true
+            }
+            when (node.id) {
+                SweptUtils.GUS_CRATES_LABELLED[1] -> {
+                    if (freeSlots(player) < 1) {
+                        sendMessage(player, "You don't have enough inventory space.")
+                    } else {
+                        animate(player, SweptUtils.TAKE_NEWT_FROM_CRATE_ANIMATION)
+                        sendMessage(player, "You fish around in the crate and extract a newt.")
+                        addItem(player, Items.NEWT_14064)
+                    }
+                }
+                SweptUtils.GUS_CRATES_LABELLED[0] -> {
+                    animate(player, SweptUtils.TAKE_FROG_FROM_CRATE_ANIMATION)
+                    sendMessage(player, "You pull out a toad. It wriggles out of your hand and back into the crate.")
+                }
+                else -> {
+                    animate(player, SweptUtils.TAKE_FROG_FROM_CRATE_ANIMATION)
+                    sendMessage(player, "You pull out a creature, but it wriggles out of your hand and back into the crate.")
+                }
             }
             return@on true
         }
 
         /*
-         * Handles removing the label from Gus's crates based on the crate type.
+         * Handles removing the label from Gus's crates (the label goes back to the player).
          */
 
         on(SweptUtils.GUS_CRATES_LABELLED, IntType.SCENERY, "remove-label") { player, node ->
-            when (node.id) {
-                SweptUtils.GUS_CRATES[0] -> setVarbit(player, SweptUtils.VARBIT_TOAD_CRATE_LABEL, 0, true)
-                SweptUtils.GUS_CRATES[1] -> setVarbit(player, SweptUtils.VARBIT_NEWT_CRATE_LABEL, 0, true)
-                SweptUtils.GUS_CRATES[2] -> setVarbit(player, SweptUtils.VARBIT_NEWT_AND_TOAD_CRATE_LABEL, 0, true)
-            }
+            SweptUtils.removeCrateLabel(player, node.id)
             return@on true
         }
 
         /*
-         * Handles labelling the crate with Newts and Toads when used with a label.
+         * Handles sticking any of the three labels on any of the three crates.
          */
 
-        onUseWith(IntType.SCENERY, Items.NEWTS_AND_TOADS_LABEL_14067, SweptUtils.NT_CRATE) { player, used, _ ->
-            SweptUtils.handleCrateLabelling(player, used.id, SweptUtils.VARBIT_NEWT_AND_TOAD_CRATE_LABEL, 3)
-            SweptUtils.checkGusTask(player)
-            return@onUseWith true
-        }
-
-        /*
-         * Handles labelling the crate with a Toad when used with a Toad label.
-         */
-
-        onUseWith(IntType.SCENERY, Items.TOAD_LABEL_14066, SweptUtils.T_CRATE) { player, used, _ ->
-            SweptUtils.handleCrateLabelling(player, used.id, SweptUtils.VARBIT_TOAD_CRATE_LABEL, 2)
-            SweptUtils.checkGusTask(player)
-            return@onUseWith true
-        }
-
-        /*
-         * Handles labelling the crate with a Newt when used with a Newt label.
-         */
-
-        onUseWith(IntType.SCENERY, Items.NEWT_LABEL_14065, SweptUtils.N_CRATE) { player, used, _ ->
-            SweptUtils.handleCrateLabelling(player, used.id, SweptUtils.VARBIT_NEWT_CRATE_LABEL, 1)
-            SweptUtils.checkGusTask(player)
-            return@onUseWith true
+        for (label in SweptUtils.LABEL_ITEMS) {
+            onUseWith(IntType.SCENERY, label, *SweptUtils.GUS_CRATES) { player, used, with ->
+                SweptUtils.labelCrate(player, used.id, with.id)
+                return@onUseWith true
+            }
         }
 
         /*
@@ -224,11 +226,15 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
         }
 
         /*
-         * Handles opening the lottie chest.
+         * Handles opening the lottie chest (only once the menagerie is in order).
          */
 
         on(Scenery.CHEST_39278, IntType.SCENERY, "open") { player, _ ->
-            setVarbit(player, SweptUtils.VARBIT_LOTTIE_CHEST, 1)
+            if (!SweptUtils.isMenagerieSolved()) {
+                sendMessage(player, "The chest is magically sealed. Order must be restored to the menagerie first.")
+            } else {
+                setVarbit(player, SweptUtils.VARBIT_LOTTIE_CHEST, 1)
+            }
             return@on true
         }
 
@@ -237,7 +243,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
          */
 
         on(Scenery.CHEST_39279, IntType.SCENERY, "search") { player, _ ->
-            if (!getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BETTY_WAND, false)) {
+            if (hasAnItem(player, Items.BETTYS_WAND_14068).container == null) {
                 sendMessage(player, "You search the chest and find Betty's wand.")
                 addItemOrDrop(player, Items.BETTYS_WAND_14068)
                 setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BETTY_WAND, true)
@@ -258,48 +264,14 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
         val penIds = SweptUtils.Pen.values().map { it.penId }.toIntArray()
 
         /*
-         * Handles using a creatures with the pen.
+         * Handles using a creature with a pen.
          */
 
         penItems.forEach { itemId ->
             onUseWith(IntType.SCENERY, itemId, *penIds) { player, used, with ->
                 val pen = SweptUtils.Pen.fromId(with.id) ?: return@onUseWith true
-
-                if (SweptUtils.CREATURES.containsKey(pen)) {
-                    sendMessage(player, "You can't put a creature into a pen that already has one inside.")
-                    return@onUseWith true
-                }
-
-                if (!inInventory(player, used.id)) {
-                    sendMessage(player, "You don't have the creature to put in the pen.")
-                    return@onUseWith true
-                }
-
-                removeItem(player, used.id)
-
-                val entry = SweptUtils.Pen.values().firstOrNull { it.itemId == used.id } ?: return@onUseWith true
-                val npc = core.game.node.entity.npc.NPC.create(entry.npcId, pen.location)
-                SweptUtils.CREATURES[pen] = Pair(npc, entry.itemId)
-                npc.init()
-
-                val npcName = getNPCName(npc.id)
-                val pronoun = if (npcName in listOf("Rat", "Bat")) "He" else "She"
-                sendMessage(player, "You put the $npcName into the pen. $pronoun looks extremely happy here.")
-
-                player.incrementAttribute(GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER)
-
-                val interactions = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, -1)
-                if (interactions > 16) {
-                    for (creaturePen in SweptUtils.Pen.values()) {
-                        if (creaturePen.itemId != -1 && inInventory(player, creaturePen.itemId)) {
-                            removeItem(player, creaturePen.itemId)
-                        }
-                    }
-                    sendMessages(player, "The creature laps out of your grasp and scampers away.", "You can't take a creature into a chamber that has another creature inside.")
-                    sendPlayerDialogue(player, "I don't think I should take this little guy into a room that has another creature in it.")
-                    removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER)
-                    openDialogue(player, LottieSupportDialogue())
-                }
+                val creature = SweptUtils.Pen.values().firstOrNull { it.itemId == used.id } ?: return@onUseWith true
+                SweptUtils.placeCreature(player, pen, creature)
                 return@onUseWith true
             }
         }
@@ -308,25 +280,9 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
          * Handles moving the creature in the pen.
          */
 
-        on(SweptUtils.Pen.values().map { it.penId }.toIntArray(), IntType.SCENERY, "Move-creature") { player, node ->
+        on(penIds, IntType.SCENERY, "move-creature") { player, node ->
             val pen = SweptUtils.Pen.fromId(node.id) ?: return@on true
             SweptUtils.handlePenInteraction(player, pen)
-
-            val interactions = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, -1)
-            player.incrementAttribute(GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER)
-            if (interactions > 16) {
-                SweptUtils.Pen.values().map { it.itemId }.filter { it != -1 }.forEach { id ->
-                    if (inInventory(player, id)) removeItem(player, id)
-                }
-                sendMessages(
-                    player,
-                    "The creature laps out of your grasp and scampers away.",
-                    "You can't take a creature into a chamber that has another creature inside."
-                )
-                sendPlayerDialogue(player, "I don't think I should take this little guy into a room that has another creature in it.")
-                removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER)
-                openDialogue(player, LottieSupportDialogue())
-            }
             return@on true
         }
 
@@ -335,7 +291,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
          */
 
         onUseWith(IntType.NPC, Items.BROOMSTICK_14057, NPCs.KARDIA_992) { player, used, with ->
-            if(inInventory(player, used.id) && getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_KARDIA_ENCH_RECEIVED, false)) {
+            if (inInventory(player, used.id) && getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_KARDIA_ENCH_RECEIVED, false)) {
                 sendPlayerDialogue(player, "Oh, right - I already had this enchanted here. Sorry to bother you.")
             } else {
                 openDialogue(player, with.id, with.id)
@@ -353,7 +309,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
     /*
      * Handles interactions with the Maggie scenery during the quest.
-     * Unlocks Halloween emotes for the player as they progress through stages.
+     * Unlocks the next missing Halloween emote each time the cauldron is stirred early.
      */
 
     class MaggieSceneryInteraction : DialogueFile() {
@@ -363,12 +319,12 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
                 Pair(Emotes.SCARED, "Terrified"),
                 Pair(Emotes.ZOMBIE_HAND, "Zombie hand")
             )
-            if (stage < emotes.size) {
-                val (emote, emoteName) = emotes[stage]
-                if (!hasEmote(player!!, emote)) SweptUtils.unlockHalloweenEmotes(player!!, emote, emoteName)
-                stage++
+            val next = emotes.firstOrNull { !hasEmote(player!!, it.first) }
+            if (next == null) {
+                end()
+                return
             }
-            if (stage >= emotes.size) closeInterface(player!!)
+            SweptUtils.unlockHalloweenEmotes(player!!, next.first, next.second)
         }
     }
 
@@ -388,7 +344,9 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
                     SweptUtils.resetBettyBasementNPCs()
                     SweptUtils.Pen.values().mapNotNull { if (it.itemId != -1) it.itemId else null }
                         .forEach { id -> if (inInventory(player!!, id)) removeAll(player!!, id) }
+                    setAttribute(player!!, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, 0)
                     stage++
+                    handle(componentID, buttonID)
                 }
                 3 -> npc(FaceAnim.HAPPY, "Not to worry - I found everyone! All the critters are", "accounted for, you're fine to start over.").also { stage = END_DIALOGUE }
             }
@@ -412,7 +370,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
                     "Please can you give it another go? Do you want me to",
                     "put everything back to how it was for you?"
                 ).also { stage++ }
-                2 -> options("Yes, please.", "No, I think I can solve this.", "What's wrong with the way I did it?", "But, Gus...")
+                2 -> options("Yes, please.", "No, I think I can solve this.", "What's wrong with the way I did it?", "But, Gus...").also { stage++ }
                 3 -> when (buttonID) {
                     1 -> player("Yes, please.").also { stage++ }
                     2 -> player("No, I think I can solve this.").also { stage = END_DIALOGUE }

@@ -1,11 +1,11 @@
 package content.region.misthalin.draynor.quest.swept.dialogue
 
+import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
@@ -24,10 +24,14 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
 
     private var hasBroomstick = false
 
+    /** 0 = not started, 1 = broom being enchanted, 2 = broom enchanted, 3 = asked to stir, 4 = quest complete. */
+    private var mode = 0
+
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         hasBroomstick = hasAnItem(player, Items.BROOMSTICK_14057).container != null
-        if (!hasBroomstick && isQuestComplete(player, Quests.SWEPT_AWAY)) {
+        // Also replaces a lost broom while the quest is in progress, otherwise the player would be stuck.
+        if (!hasBroomstick && getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
             npcl(FaceAnim.FRIENDLY, "First things first. Where's that broomstick that I gave you?")
             stage = 1
         } else {
@@ -53,7 +57,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             3 -> {
-                player.inventory.add(Item(Items.BROOMSTICK_14057))
+                addItemOrDrop(player, Items.BROOMSTICK_14057, 1)
                 npcl(
                     FaceAnim.FRIENDLY,
                     "Here you go, but please look after it from now on. This is a pretty special little jobbie."
@@ -70,34 +74,61 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             5 -> {
-                if (getQuestStage(player, Quests.SWEPT_AWAY) < 3) {
-                    options(
-                        "Oo, something smells rather...interesting!",
-                        "Your house appears to be on wheels.",
-                        "So, about those oxen."
-                    )
-                } else if (getQuestStage(player, Quests.SWEPT_AWAY) >= 4) {
-                    options(
-                        "I've stirred the cauldron for you.",
-                        "Your house appears to be on wheels.",
-                        "So, about those oxen."
-                    )
-                } else {
-                    options("I have good news for you.", "Your house appears to be on wheels.", "So, about those oxen.")
+                val questStage = getQuestStage(player, Quests.SWEPT_AWAY)
+                mode = when {
+                    isQuestComplete(player, Quests.SWEPT_AWAY) -> 4
+                    questStage >= 4 -> 3
+                    questStage == 3 -> 2
+                    questStage >= 1 -> 1
+                    else -> 0
+                }
+                when (mode) {
+                    0 -> options("Oo, something smells rather...interesting!", "Your house appears to be on wheels.", "So, about those oxen.")
+                    1 -> options("I'm still working on the broomstick.", "Your house appears to be on wheels.", "So, about those oxen.")
+                    2 -> options("I have good news for you.", "Your house appears to be on wheels.", "So, about those oxen.")
+                    3 -> {
+                        if (getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CAULDRON_STIRRED, false)) {
+                            options("I've stirred the cauldron for you.", "Your house appears to be on wheels.", "So, about those oxen.")
+                        } else {
+                            options("About stirring the cauldron...", "Your house appears to be on wheels.", "So, about those oxen.")
+                        }
+                    }
+                    else -> options("How's Babe doing?", "Your house appears to be on wheels.", "So, about those oxen.")
                 }
                 stage = 10
             }
 
             10 -> when (buttonId) {
-                1 -> if (getQuestStage(player, Quests.SWEPT_AWAY) < 3) {
-                    playerl(FaceAnim.HALF_GUILTY, "Oo, something smells rather...interesting around here.")
-                    stage = 20
-                } else if (getQuestStage(player, Quests.SWEPT_AWAY) >= 4) {
-                    player("I've stirred the caudron for you - that stuff has a kick", "to it.")
-                    stage = 80
-                } else {
-                    player(FaceAnim.HAPPY, "I have good news for you.")
-                    stage = 62
+                1 -> when (mode) {
+                    0 -> {
+                        playerl(FaceAnim.HALF_GUILTY, "Oo, something smells rather...interesting around here.")
+                        stage = 20
+                    }
+
+                    1 -> {
+                        playerl(FaceAnim.HALF_GUILTY, "I'm still working on getting the broomstick enchanted.")
+                        stage = 15
+                    }
+
+                    2 -> {
+                        player(FaceAnim.HAPPY, "I have good news for you.")
+                        stage = 62
+                    }
+
+                    3 -> {
+                        if (getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CAULDRON_STIRRED, false)) {
+                            player("I've stirred the cauldron for you - that stuff has a kick", "to it.")
+                            stage = 80
+                        } else {
+                            playerl(FaceAnim.HALF_GUILTY, "About stirring the cauldron...")
+                            stage = 16
+                        }
+                    }
+
+                    else -> {
+                        playerl(FaceAnim.HALF_GUILTY, "How's Babe doing?")
+                        stage = 17
+                    }
                 }
 
                 2 -> {
@@ -109,6 +140,30 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
                     playerl(FaceAnim.HALF_GUILTY, "So, about those oxen.")
                     stage = 60
                 }
+            }
+
+            15 -> {
+                npcl(
+                    FaceAnim.FRIENDLY,
+                    "Cha, take your time! Remember: Hetty in Rimmington, Betty in Port Sarim and Aggie in Draynor. Each of them needs to work their magic on the broom."
+                )
+                stage = END_DIALOGUE
+            }
+
+            16 -> {
+                npcl(
+                    FaceAnim.FRIENDLY,
+                    "Just give the cauldron a good stir with the enchanted broomstick, cha. Pretty please with sweeties on top!"
+                )
+                stage = END_DIALOGUE
+            }
+
+            17 -> {
+                npcl(
+                    FaceAnim.HAPPY,
+                    "Much better, thanks to a bowl of the good stuff, cha! She's still a bit sniffly, so keep your distance."
+                )
+                stage = END_DIALOGUE
             }
 
             20 -> {
@@ -315,7 +370,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.HALF_ASKING,
                     "Can I count on you to get my broom enchanted so that we can finish this thing off?"
                 )
-                stage++
+                stage = 39
             }
 
             46 -> {
@@ -324,11 +379,13 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             47 -> {
-                end()
+                if (getQuestStage(player, Quests.SWEPT_AWAY) < 1) {
+                    addItemOrDrop(player, Items.BROOMSTICK_14057, 1)
+                    setQuestStage(player, Quests.SWEPT_AWAY, 1)
+                    setVarbit(player, Vars.VARBIT_QUEST_SWEPT_AWAY_PROGRESS_5448, 1)
+                }
                 player("Of course.")
-                addItemOrDrop(player, Items.BROOMSTICK_14057, 1)
-                setQuestStage(player, Quests.SWEPT_AWAY, 1)
-                setVarbit(player, Vars.VARBIT_QUEST_SWEPT_AWAY_PROGRESS_5448, 1)
+                stage = END_DIALOGUE
             }
 
             50 -> {
@@ -388,7 +445,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
                 npc(
                     FaceAnim.FRIENDLY,
                     "Aye, you say? Brilliant! Oh, I can't tell you how",
-                    "greatful I am. You're in for a treat, you are - it you'd",
+                    "grateful I am. You're in for a treat, you are - if you'd",
                     "just do one more little thing for me."
                 )
                 stage = 65
@@ -438,7 +495,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             71 -> {
-                npc("Drill! Just a quick stir at two with the broom should be", "all it needs.")
+                npc("Drill! Just a quick stir or two with the broom should be", "all it needs.")
                 stage = 72
             }
 

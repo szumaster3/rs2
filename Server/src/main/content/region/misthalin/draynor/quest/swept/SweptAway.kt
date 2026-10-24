@@ -1,7 +1,7 @@
 package content.region.misthalin.draynor.quest.swept
 
 import content.data.GameAttributes
-import core.api.addItemOrDrop
+import core.api.removeAttribute
 import core.api.drawReward
 import core.api.getAttribute
 import core.api.setVarbit
@@ -32,20 +32,25 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_
         if (stage >= 1) {
             line(player, "I have agreed to help Maggie prepare a batch of the 'good stuff'", line++, true)
             line(player, "that she is concocting in her pauldron.", line++, true)
-            line(player, "Maggie gave me a broom which I've had enchanted by", line++, stage > 4)
-            line(player, "!!Hetty?? in !!Rimmington??,", line++, getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BROOM_POTION, false) || getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false) || stage > 4)
-            line(player, "!!Betty?? in !!Port Sarim?? and", line++, stage > 4)
-            line(player, "!!Aggie?? in !!Draynor??.", line++, stage > 4)
+            line(player, "Maggie gave me a broom which I need to have enchanted by", line++, stage >= 3)
+            line(player, "!!Hetty?? in !!Rimmington??,", line++, getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BROOM_POTION, false) || getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false) || stage >= 3)
+            line(player, "!!Betty?? in !!Port Sarim?? and", line++, stage >= 3)
+            line(player, "!!Aggie?? in !!Draynor??.", line++, stage >= 3)
             line++
         }
 
         if (stage >= 3) {
-            line(player, "I've stirred Maggie's cauldron with the enchanted broom.", line++, stage > 5)
+            line(player, "The broom has been enchanted by all three witches.", line++, stage >= 4)
+            line(player, "I should take it back to !!Maggie??.", line++, stage >= 4)
             line++
         }
         if (stage >= 4) {
-            line(player, "I spoke to Maggie, who thanked me for helping her prepare the goulash.", line++, stage > 99)
-            line(player, "She has offered me 10 bowls of goulash in return for my help.", line++, stage > 99)
+            line(player, "Maggie asked me to stir the cauldron with the enchanted broom.", line++, stage == 100 || getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CAULDRON_STIRRED, false))
+            line++
+        }
+        if (stage == 100) {
+            line(player, "I stirred the cauldron and Maggie thanked me for helping her", line++, true)
+            line(player, "prepare the goulash. She offered me 10 bowls in return.", line++, true)
             line++
         }
 
@@ -71,7 +76,7 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_
         drawReward(player, "A broom", ln++)
         drawReward(player, "Access to 10 portions of", ln++)
         drawReward(player, "experience-giving goulash", ln)
-        addItemOrDrop(player, Items.GOULASH_14058, 1)
+        removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CAULDRON_STIRRED)
         setVarbit(player, Vars.VARBIT_QUEST_SWEPT_AWAY_PROGRESS_5448, 50, true)
     }
 

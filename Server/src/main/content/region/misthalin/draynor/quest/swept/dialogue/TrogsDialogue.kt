@@ -27,6 +27,7 @@ class TrogsDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         if (!inEquipment(player, Items.CATSPEAK_AMULET_4677, 1)) {
             npc(FaceAnim.CHILD_NEUTRAL, "Meow?")
+            stage = END_DIALOGUE
             return true
         }
 

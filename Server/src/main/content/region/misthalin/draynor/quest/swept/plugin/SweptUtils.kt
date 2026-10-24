@@ -41,6 +41,8 @@ internal object SweptUtils {
     val GUS_CRATES = intArrayOf(39334, 39335, 39336)
     val GUS_CRATES_LABELLED = intArrayOf(39337, 39339, 39341)
 
+    val LABEL_ITEMS = intArrayOf(Items.NEWT_LABEL_14065, Items.TOAD_LABEL_14066, Items.NEWTS_AND_TOADS_LABEL_14067)
+
     val CREATURES = mutableMapOf<Pen, Pair<NPC, Int>>()
 
     enum class Pen(val penId: Int, val npcId: Int, val itemId: Int, val location: Location, val modelId: Int) {
@@ -69,17 +71,33 @@ internal object SweptUtils {
     )
 
     /**
-     * Spawns all NPCs in the Betty basement pens.
+     * Starting layout of the menagerie: pen -> creature that starts inside it.
+     * The bat and the snail are already at home, the other four are scrambled.
+     */
+    private val INITIAL_LAYOUT: Map<Pen, Pen> = linkedMapOf(
+        Pen.BAT to Pen.BAT,
+        Pen.SNAIL to Pen.SNAIL,
+        Pen.RAT to Pen.SPIDER,
+        Pen.SPIDER to Pen.REPTILE,
+        Pen.REPTILE to Pen.BLACKBIRD,
+        Pen.BLACKBIRD to Pen.RAT
+    )
+
+    private const val MAX_CREATURE_MOVES = 16
+
+    private fun spawnCreature(pen: Pen, creature: Pen) {
+        val npc = NPC.create(creature.npcId, pen.location)
+        CREATURES[pen] = Pair(npc, creature.itemId)
+        npc.init()
+    }
+
+    /**
+     * Spawns all NPCs in the Betty basement pens in their (scrambled) starting layout.
      */
     @JvmStatic
     fun spawnBettyBasementNPCs() {
-        Pen.values()
-            .filter { it.npcId != -1 }
-            .forEach { pen ->
-                val npc = NPC.create(pen.npcId, pen.location)
-                CREATURES[pen] = Pair(npc, pen.itemId)
-                npc.init()
-            }
+        removeBettyNPCs()
+        INITIAL_LAYOUT.forEach { (pen, creature) -> spawnCreature(pen, creature) }
     }
 
     /**
@@ -87,8 +105,6 @@ internal object SweptUtils {
      */
     @JvmStatic
     fun resetBettyBasementNPCs() {
-        CREATURES.values.forEach { it.first.reset() }
-        CREATURES.clear()
         spawnBettyBasementNPCs()
     }
 
@@ -97,64 +113,105 @@ internal object SweptUtils {
      */
     @JvmStatic
     fun removeBettyNPCs() {
-        CREATURES.values.forEach { it.first.reset() }
+        CREATURES.values.forEach { it.first.clear() }
         CREATURES.clear()
     }
 
     /**
-     * Handles adding or removing a creature to/from a pen.
+     * Returns the creature the player is currently carrying, if any.
+     */
+    private fun heldCreature(player: Player): Pen? =
+        Pen.values().firstOrNull { it.itemId != -1 && inInventory(player, it.itemId) }
+
+    /**
+     * Checks if every creature is in its own pen and the holding pen is empty.
+     */
+    @JvmStatic
+    fun isMenagerieSolved(): Boolean {
+        if (CREATURES.containsKey(Pen.HOLDING)) return false
+        return Pen.values()
+            .filter { it != Pen.HOLDING }
+            .all { pen -> CREATURES[pen]?.second == pen.itemId }
+    }
+
+    /**
+     * Handles taking a creature out of a pen, or putting the carried creature into an empty pen.
      */
     @JvmStatic
     fun handlePenInteraction(player: Player, pen: Pen) {
         val existing = CREATURES[pen]
+        val held = heldCreature(player)
 
         if (existing != null) {
+            if (held != null) {
+                sendMessage(player, "You can't carry more than one creature at a time.")
+                return
+            }
+            if (freeSlots(player) < 1) {
+                sendMessage(player, "You don't have enough inventory space.")
+                return
+            }
             val (npc, storedItem) = existing
+            val npcName = getNPCName(npc.id)
             CREATURES.remove(pen)
             npc.clear()
             if (storedItem != -1) addItem(player, storedItem)
-
-            val npcName = getNPCName(npc.id)
-            val message = if (pen == Pen.HOLDING) {
-                "You remove the $npcName from the pen."
-            } else {
-                "You remove the $npcName from the pen."
-            }
-
-            sendMessage(player, message)
-            player.incrementAttribute(GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER)
+            sendMessage(player, "You remove the $npcName from the pen.")
             return
         }
 
-        if (CREATURES.values.any { it.first.id == pen.npcId && pen.npcId != -1 }) {
+        if (held == null) {
+            sendMessage(player, "You have no creatures to put into the pen.")
+            return
+        }
+        placeCreature(player, pen, held)
+    }
+
+    /**
+     * Puts the given (carried) creature into the given pen.
+     */
+    @JvmStatic
+    fun placeCreature(player: Player, pen: Pen, creature: Pen) {
+        if (CREATURES.containsKey(pen)) {
             sendMessage(player, "You can't put a creature into a pen that already has one inside.")
             return
         }
-
-        val entry: Pen = if (pen == Pen.HOLDING) {
-            Pen.values().firstOrNull { it.itemId != -1 && player.inventory.contains(it.itemId, 1) }
-                ?: run {
-                    sendMessage(player, "You have no creatures to put into the pen.")
-                    return
-                }
-        } else pen
-
-        if (entry.itemId != -1) removeItem(player, entry.itemId)
-
-        val npc = NPC.create(entry.npcId, pen.location)
-        val itemToStore = if (entry.itemId != -1) entry.itemId else -1
-        CREATURES[pen] = Pair(npc, itemToStore)
-        npc.init()
-
-        val npcName = getNPCName(npc.id)
-        val pronoun = if (npcName in listOf("Rat", "Bat")) "He" else "She"
-        val correctPen = Pen.values().firstOrNull { it.npcId == npc.id }
-        val message = if (pen != Pen.HOLDING && pen == correctPen) {
-            "You put the $npcName into the pen. $pronoun looks extremely happy here."
-        } else {
-            "You put the $npcName into the pen. $pronoun doesn't seem very happy here."
+        if (creature.itemId == -1 || !removeItem(player, creature.itemId)) {
+            sendMessage(player, "You don't have the creature to put in the pen.")
+            return
         }
-        sendMessage(player, message)
+
+        spawnCreature(pen, creature)
+
+        val npcName = getNPCName(creature.npcId)
+        val pronoun = if (npcName in listOf("Rat", "Bat")) "He" else "She"
+        val happy = pen != Pen.HOLDING && pen == creature
+        sendMessage(
+            player,
+            if (happy) "You put the $npcName into the pen. $pronoun looks extremely happy here."
+            else "You put the $npcName into the pen. $pronoun doesn't seem very happy here."
+        )
+
+        countMove(player)
+    }
+
+    /**
+     * Counts a creature move. Too many moves resets the puzzle through Lottie.
+     */
+    private fun countMove(player: Player) {
+        val moves = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, 0) + 1
+        setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, moves)
+        if (moves <= MAX_CREATURE_MOVES) return
+
+        Pen.values().filter { it.itemId != -1 }.forEach { if (inInventory(player, it.itemId)) removeAll(player, it.itemId) }
+        setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, 0)
+        sendMessages(
+            player,
+            "The creature leaps out of your grasp and scampers away.",
+            "You can't take a creature into a chamber that has another creature inside."
+        )
+        sendPlayerDialogue(player, "I don't think I should take this little guy into a room that has another creature in it.")
+        addDialogueAction(player) { p, _ -> openDialogue(p, SweptAwayPlugin.LottieSupportDialogue()) }
     }
 
     /**
@@ -165,8 +222,9 @@ internal object SweptUtils {
         openInterface(player, PEN_TABLE_INTERFACE)
         COMPONENT_TO_PEN.forEach { (component, penId) ->
             val pen = Pen.fromId(penId) ?: return@forEach
-            val npcPair = CREATURES[pen]
-            val modelId = npcPair?.first?.let { pen.modelId } ?: -1
+            val storedItem = CREATURES[pen]?.second
+            val creature = if (storedItem == null || storedItem == -1) null else Pen.values().firstOrNull { it.itemId == storedItem }
+            val modelId = creature?.modelId ?: -1
             sendModelOnInterface(player, PEN_TABLE_INTERFACE, component, modelId, -1)
         }
     }
@@ -322,7 +380,11 @@ internal object SweptUtils {
                 runTask(player, 2) {
                     visualize(player, -1, BROOM_ENCHANTMENT_GFX)
                     sendPlayerDialogue(player, "Woah, I felt that down to my toes!", FaceAnim.SCARED)
-                    setQuestStage(player, Quests.SWEPT_AWAY, 3)
+                    // Never move the quest backwards (or start it) from here.
+                    val questStage = getQuestStage(player, Quests.SWEPT_AWAY)
+                    if (questStage in 1..2) {
+                        setQuestStage(player, Quests.SWEPT_AWAY, 3)
+                    }
                 }
                 player.removeAttribute("swept_lines")
             }
@@ -343,15 +405,72 @@ internal object SweptUtils {
     }
 
     /**
-     * Checks for correct crate labelling.
+     * Gets the varbit which stores the label stuck on the given crate.
+     */
+    @JvmStatic
+    fun crateVarbit(crateId: Int): Int = when (crateId) {
+        T_CRATE, GUS_CRATES_LABELLED[0] -> VARBIT_TOAD_CRATE_LABEL
+        N_CRATE, GUS_CRATES_LABELLED[1] -> VARBIT_NEWT_CRATE_LABEL
+        NT_CRATE, GUS_CRATES_LABELLED[2] -> VARBIT_NEWT_AND_TOAD_CRATE_LABEL
+        else -> -1
+    }
+
+    private fun labelValue(itemId: Int): Int = when (itemId) {
+        Items.NEWT_LABEL_14065 -> 1
+        Items.TOAD_LABEL_14066 -> 2
+        Items.NEWTS_AND_TOADS_LABEL_14067 -> 3
+        else -> 0
+    }
+
+    private fun labelItem(value: Int): Int = when (value) {
+        1 -> Items.NEWT_LABEL_14065
+        2 -> Items.TOAD_LABEL_14066
+        3 -> Items.NEWTS_AND_TOADS_LABEL_14067
+        else -> -1
+    }
+
+    /**
+     * Sticks a label on a crate and checks the result once all three crates have one.
+     */
+    @JvmStatic
+    fun labelCrate(player: Player, labelItem: Int, crateId: Int) {
+        val varbit = crateVarbit(crateId)
+        val value = labelValue(labelItem)
+        if (varbit == -1 || value == 0) return
+        handleCrateLabelling(player, labelItem, varbit, value)
+        checkGusTask(player)
+    }
+
+    /**
+     * Removes the label from a crate and gives it back to the player.
+     */
+    @JvmStatic
+    fun removeCrateLabel(player: Player, crateId: Int) {
+        val varbit = crateVarbit(crateId)
+        if (varbit == -1) return
+        val item = labelItem(getVarbit(player, varbit))
+        if (item == -1) return
+        if (freeSlots(player) < 1) {
+            sendMessage(player, "You don't have enough inventory space.")
+            return
+        }
+        setVarbit(player, varbit, 0, true)
+        addItem(player, item)
+        sendMessage(player, "You peel the label off the crate.")
+    }
+
+    /**
+     * Checks for correct crate labelling (only once every crate has a label).
      */
     @JvmStatic
     fun checkGusTask(player: Player) {
-        if (
-            getVarbit(player, VARBIT_NEWT_AND_TOAD_CRATE_LABEL) == 3 &&
-            getVarbit(player, VARBIT_TOAD_CRATE_LABEL) == 2 &&
-            getVarbit(player, VARBIT_NEWT_CRATE_LABEL) == 1
-        ) {
+        val newt = getVarbit(player, VARBIT_NEWT_CRATE_LABEL)
+        val toad = getVarbit(player, VARBIT_TOAD_CRATE_LABEL)
+        val both = getVarbit(player, VARBIT_NEWT_AND_TOAD_CRATE_LABEL)
+
+        if (newt == 0 || toad == 0 || both == 0) return
+
+        if (both == 3 && toad == 2 && newt == 1) {
             sendNPCDialogue(player, NPCs.GUS_8205, "Hurray! I do believe that you've labelled the crates correctly! Ms Hetty will be so pleased.")
             removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS)
             setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, true)
@@ -388,9 +507,9 @@ internal object SweptUtils {
                             setVarbit(player, VARBIT_NEWT_CRATE_LABEL, 0, true)
                             setVarbit(player, VARBIT_TOAD_CRATE_LABEL, 0, true)
                             setVarbit(player, VARBIT_NEWT_AND_TOAD_CRATE_LABEL, 0, true)
-                            addItemOrDrop(player, Items.NEWT_LABEL_14065, 1)
-                            addItemOrDrop(player, Items.TOAD_LABEL_14066, 1)
-                            addItemOrDrop(player, Items.NEWTS_AND_TOADS_LABEL_14067, 1)
+                            LABEL_ITEMS.forEach { label ->
+                                if (!inInventory(player, label)) addItemOrDrop(player, label, 1)
+                            }
                         }
                         6 -> {
                             unlock(player)

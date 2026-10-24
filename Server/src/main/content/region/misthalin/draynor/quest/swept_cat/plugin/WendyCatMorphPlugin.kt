@@ -13,6 +13,11 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import shared.consts.*
 
+/**
+ * Only the ordinary cat families (kitten, cat, overgrown...) can be made purple.
+ */
+private fun isRegularCat(petData: Pets): Boolean = petData != Pets.PURPLE_CAT && petData.name.startsWith("CAT")
+
 private val purpleCats = intArrayOf(
     Items.PET_KITTEN_14089,
     Items.PET_CAT_14090,
@@ -59,8 +64,10 @@ class WendyCatMorphPlugin : InteractionListener {
 
             if (isPurpleCat) {
                 openDialogue(player, WendyPurpleCatDialogueExtension())
+            } else if (isRegularCat(petData)) {
+                openDialogue(player, WendyRegularCatDialogueExtension(item.id))
             } else {
-                openDialogue(player, WendyRegularCatDialogueExtension())
+                sendMessage(player, "Wendy only seems interested in cats.")
             }
 
             return@onUseAnyWith true
@@ -68,7 +75,7 @@ class WendyCatMorphPlugin : InteractionListener {
     }
 }
 
-private class WendyRegularCatDialogueExtension : DialogueFile() {
+private class WendyRegularCatDialogueExtension(private val usedItemId: Int) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.WENDY_8201)
 
@@ -81,35 +88,32 @@ private class WendyRegularCatDialogueExtension : DialogueFile() {
                 2 -> player(FaceAnim.NEUTRAL, "No, I think I'll hold off for the time being.").also { stage = 6 }
             }
             4 -> {
-                val familiar = player?.familiarManager?.familiar
-                val inv = player?.inventory?.toArray() ?: arrayOfNulls<Item>(0)
-                val petID = inv.firstOrNull { it != null && Pets.forId(it.id) != null }
-
-                if (familiar == null && petID == null) {
+                val petData = Pets.forId(usedItemId)
+                if (petData == null || !inInventory(player!!, usedItemId)) {
                     end()
                     return
                 }
 
-                val petItemID = familiar?.id ?: petID?.id
-                val petData = Pets.forId(petItemID!!) ?: run {
-                    end()
-                    return
-                }
-
-                val purpleCatID = when (petItemID) {
+                val purpleCatID = when (usedItemId) {
                     petData.babyItemId -> Pets.PURPLE_CAT.babyItemId
                     petData.grownItemId -> Pets.PURPLE_CAT.grownItemId
                     petData.overgrownItemId -> Pets.PURPLE_CAT.overgrownItemId
                     // petData.lazyItemId -> Pets.CAT_6.lazyItemId
                     // petData.wilyItemId -> Pets.CAT_6.wilyItemId
-                    else -> run {
-                        end()
-                        return
-                    }
+                    else -> -1
                 }
 
-                if(!removeItem(player!!, petItemID)) return
-                val spawnTile = familiar?.getClosestOccupiedTile(player?.location ?: return) ?: player?.location
+                if (purpleCatID == -1) {
+                    npcl(FaceAnim.STRUGGLE, "Hmm, I'm afraid I can't do anything with this one.")
+                    stage = 7
+                    return
+                }
+
+                if (!removeItem(player!!, usedItemId)) {
+                    end()
+                    return
+                }
+                val spawnTile = player?.location
                 player?.familiarManager?.morphPet(Item(purpleCatID), false, spawnTile)
 
                 val newFamiliar = player?.familiarManager?.familiar

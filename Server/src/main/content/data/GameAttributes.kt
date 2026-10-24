@@ -130,6 +130,7 @@ internal object GameAttributes {
     const val QUEST_SWEPT_AWAY_CREATURE_INTER = "/save:quest:sweep-away:creature_interactions"
     const val QUEST_SWEPT_AWAY_LABELS = "/save:quest:swept-away:labels"
     const val QUEST_SWEPT_AWAY_LOTTIE = "/save:quest:sweep-away:lottie-puzzle"
+    const val QUEST_SWEPT_AWAY_CAULDRON_STIRRED = "/save:swept-away:cauldron-stirred"
 
     const val QUEST_SWEPT_AWAY_LABELS_COMPLETE = "/save:quest:swept-away:labels:complete"
 
