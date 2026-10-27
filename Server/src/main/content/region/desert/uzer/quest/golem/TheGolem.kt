@@ -74,7 +74,7 @@ class TheGolem : Quest(Quests.THE_GOLEM, 70, 69, 1, Vars.VARBIT_QUEST_THE_GOLEM_
         drawReward(player, Items.STATUETTE_4618)
         drawReward(player, "1 quest point", ln++)
         drawReward(player, "1,000 Crafting XP", ln++)
-        drawReward(player, "1,000 Theiving XP", ln)
+        drawReward(player, "1,000 Thieving XP", ln)
         rewardXP(player, Skills.CRAFTING, 1000.0)
         rewardXP(player, Skills.THIEVING, 1000.0)
     }
