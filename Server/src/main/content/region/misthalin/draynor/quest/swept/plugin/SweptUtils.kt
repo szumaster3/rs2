@@ -3,12 +3,11 @@ package content.region.misthalin.draynor.quest.swept.plugin
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.FaceAnim
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.scenery.Scenery
-import core.game.system.task.Pulse
-import core.game.world.GameWorld
 import core.game.world.map.Location
 import shared.consts.*
 import shared.consts.Scenery as Objects
@@ -38,7 +37,7 @@ internal object SweptUtils {
     const val N_CRATE = shared.consts.Scenery.WRONGLY_LABELLED_CRATE_NEWTS_39335
     const val T_CRATE = shared.consts.Scenery.WRONGLY_LABELLED_CRATE_TOADS_39334
 
-    val GUS_CRATES = intArrayOf(39334, 39335, 39336)
+    val GUS_CRATES = intArrayOf(T_CRATE, N_CRATE, NT_CRATE)
     val GUS_CRATES_LABELLED = intArrayOf(39337, 39339, 39341)
 
     val LABEL_ITEMS = intArrayOf(Items.NEWT_LABEL_14065, Items.TOAD_LABEL_14066, Items.NEWTS_AND_TOADS_LABEL_14067)
@@ -470,8 +469,14 @@ internal object SweptUtils {
 
         if (newt == 0 || toad == 0 || both == 0) return
 
-        if (both == 3 && toad == 2 && newt == 1) {
-            sendNPCDialogue(player, NPCs.GUS_8205, "Hurray! I do believe that you've labelled the crates correctly! Ms Hetty will be so pleased.")
+        val correct = newt == 1 && toad == 2 && both == 3
+
+        if (correct) {
+            sendNPCDialogue(
+                player,
+                NPCs.GUS_8205,
+                "Hurray! I do believe that you've labelled the crates correctly! Ms Hetty will be so pleased."
+            )
             removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS)
             setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, true)
         } else {
@@ -496,31 +501,26 @@ internal object SweptUtils {
     @JvmStatic
     fun resetGusTask(player: Player) {
         lock(player, 6)
-        GameWorld.Pulser.submit(
-            object : Pulse() {
-                var counter = 0
-
-                override fun pulse(): Boolean {
-                    when (counter++) {
-                        0 -> openInterface(player, Components.FADE_TO_BLACK_120)
-                        3 -> {
-                            setVarbit(player, VARBIT_NEWT_CRATE_LABEL, 0, true)
-                            setVarbit(player, VARBIT_TOAD_CRATE_LABEL, 0, true)
-                            setVarbit(player, VARBIT_NEWT_AND_TOAD_CRATE_LABEL, 0, true)
-                            LABEL_ITEMS.forEach { label ->
-                                if (!inInventory(player, label)) addItemOrDrop(player, label, 1)
-                            }
-                        }
-                        6 -> {
-                            unlock(player)
-                            openInterface(player, Components.FADE_FROM_BLACK_170)
-                            return true
-                        }
+        openInterface(player, Components.FADE_TO_BLACK_120)
+        queueScript(player, 3, QueueStrength.SOFT) { stage ->
+            when (stage) {
+                0 -> {
+                    setVarbit(player, VARBIT_NEWT_CRATE_LABEL, 0, true)
+                    setVarbit(player, VARBIT_TOAD_CRATE_LABEL, 0, true)
+                    setVarbit(player, VARBIT_NEWT_AND_TOAD_CRATE_LABEL, 0, true)
+                    LABEL_ITEMS.forEach { label ->
+                        if (!inInventory(player, label)) addItemOrDrop(player, label, 1)
                     }
-                    return false
+                    return@queueScript delayScript(player, 3)
+                }
+                1 -> {
+                    unlock(player)
+                    openInterface(player, Components.FADE_FROM_BLACK_170)
+                    return@queueScript stopExecuting(player)
                 }
             }
-        )
+            return@queueScript stopExecuting(player)
+        }
     }
 
     /**

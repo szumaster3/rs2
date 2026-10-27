@@ -166,9 +166,9 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
         on(SweptUtils.GUS_CRATES_LABELLED, IntType.SCENERY, "extract-creature") { player, node ->
             if (!getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)) {
-                player.dialogueInterpreter.sendDialogues(
+                sendNPCDialogueLines(
                     player, NPCs.GUS_8205,
-                    "No! remember what I said: we can't waste the stock.",
+                    FaceAnim.HALF_THINKING,false, "No! remember what I said: we can't waste the stock.",
                     "One look should be enough. We wouldn't want to get",
                     "Ms. Hetty Annoyed."
                 )
