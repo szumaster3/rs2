@@ -11,65 +11,100 @@ import shared.consts.Items
 import kotlin.math.min
 
 class PoisonWeaponPlugin : InteractionListener {
+
     private val poisonsId = intArrayOf(
         Items.WEAPON_POISON_187,
         Items.WEAPON_POISON_PLUS_5937,
-        Items.WEAPON_POISON_PLUS_PLUS_5940
+        Items.WEAPON_POISON_PLUS_PLUS_5940,
     )
 
     private val regularWeapons = PoisonSets.itemMap.keys.toIntArray()
+    private val poisonedWeapons = PoisonSets.poisonedToBase.keys.toIntArray()
 
-    private val poisonedWeapons = PoisonSets.itemMap.values
-        .flatMap { it.toList() }
-        .toIntArray()
-
-    private val regularKarambwanWeapons = KarambwanPoisonSets.values().map { it.base }.toIntArray()
-
-    private val karambwanPoisonedWeapons = KarambwanPoisonSets.values().map { it.kp }.toIntArray()
+    private val regularKarambwanWeapons = KarambwanPoisonSets.itemMap.keys.toIntArray()
+    private val karambwanPoisonedWeapons = KarambwanPoisonSets.poisonedToBase.keys.toIntArray()
 
     override fun defineListeners() {
+        /*
+         * Handles apply weapon poison to up to five pieces of ammunition or weapons.
+         */
 
         onUseWith(IntType.ITEM, poisonsId, *regularWeapons) { player, used, with ->
-            val index = poisonsId.indexOf(used.id)
-            val item = with.asItem()
-            val product = PoisonSets.itemMap[item.id]?.get(index) ?: return@onUseWith true
-            val amt = min(5, item.amount)
+            val poisonIndex = poisonsId.indexOf(used.id)
+            if (poisonIndex == -1) return@onUseWith false
 
-            if (!removeItem(player, Item(item.id, amt))) return@onUseWith false
+            val weapon = with.asItem()
+            val product = PoisonSets.itemMap[weapon.id]?.getOrNull(poisonIndex) ?: return@onUseWith false
+            val amount = min(5, weapon.amount)
 
-            addItemOrDrop(player, product, amt)
-            replaceSlot(player, used.asItem().slot, Item(Items.VIAL_229, 1))
-            sendMessage(player, "You poison the ${item.name.lowercase()}.")
+            if (amount == weapon.amount) {
+                replaceSlot(player, weapon.slot, Item(product, amount))
+            } else {
+                if (!removeItem(player, Item(weapon.id, amount))) {
+                    return@onUseWith false
+                }
+                addItemOrDrop(player, product, amount)
+            }
+            replaceSlot(player, used.asItem().slot, Item(Items.VIAL_229))
+            sendMessage(player, "You poison the ${weapon.name.lowercase()}.")
             return@onUseWith true
         }
 
-        onUseWith(IntType.ITEM, Items.KARAMBWAN_PASTE_3153, *regularKarambwanWeapons) { player, used, with ->
-            val item = with.asItem()
-            val product = KarambwanPoisonSets.itemMap[item.id] ?: return@onUseWith true
-            if (!removeItem(player, used.asItem())) return@onUseWith false
+        /*
+         * Handles apply poisonous Karambwan paste to a spear or hasta.
+         */
 
-            replaceSlot(player, item.slot, Item(product.kp, 1))
-            val weaponType = if (product.name.contains("spear", ignoreCase = true)) "spear" else "hasta"
+        onUseWith(IntType.ITEM, Items.KARAMBWAN_PASTE_3153, *regularKarambwanWeapons) { player, used, with ->
+            val weapon = with.asItem()
+            val product = KarambwanPoisonSets.itemMap[weapon.id] ?: return@onUseWith false
+
+            if (!removeItem(player, used.asItem())) {
+                return@onUseWith false
+            }
+
+            replaceSlot(player, weapon.slot, Item(product.kp))
+            val weaponType = if (product.name.endsWith("SPEAR")) "spear" else "hasta"
             sendMessage(player, "You smear the poisonous Karambwan paste over the $weaponType.")
             return@onUseWith true
         }
 
+        /*
+         * Handles remove the regular weapon poison with a cleaning cloth.
+         */
+
         onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *poisonedWeapons) { player, _, with ->
-            val item = with.asItem()
-            val base = PoisonSets.getBase(item.id) ?: return@onUseWith false
-            val amt = min(5, item.amount)
-            if (!removeItem(player, Item(item.id, amt))) return@onUseWith false
-            replaceSlot(player, item.slot, Item(base, amt))
+            val weapon = with.asItem()
+            val base = PoisonSets.getBase(weapon.id) ?: return@onUseWith false
+            val amount = min(5, weapon.amount)
+
+            if (amount == weapon.amount) {
+                replaceSlot(player, weapon.slot, Item(base, amount))
+            } else {
+                if (!removeItem(player, Item(weapon.id, amount))) {
+                    return@onUseWith false
+                }
+                addItemOrDrop(player, base, amount)
+            }
             return@onUseWith true
         }
 
-        onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *karambwanPoisonedWeapons) { player, _, with ->
-            val item = with.asItem()
-            val base = KarambwanPoisonSets.getBase(item.id) ?: return@onUseWith false
-            val amt = min(5, item.amount)
-            if (!removeItem(player, Item(item.id, amt))) return@onUseWith false
+        /*
+         * Handles remove Karambwan poison with a cleaning cloth.
+         */
 
-            replaceSlot(player, item.slot, Item(base, amt))
+        onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *karambwanPoisonedWeapons) { player, _, with ->
+            val weapon = with.asItem()
+            val base = KarambwanPoisonSets.getBase(weapon.id) ?: return@onUseWith false
+            val amount = min(5, weapon.amount)
+
+            if (amount == weapon.amount) {
+                replaceSlot(player, weapon.slot, Item(base, amount))
+            } else {
+                if (!removeItem(player, Item(weapon.id, amount))) {
+                    return@onUseWith false
+                }
+                addItemOrDrop(player, base, amount)
+            }
             return@onUseWith true
         }
     }
@@ -92,7 +127,8 @@ class PoisonWeaponPlugin : InteractionListener {
 
         companion object {
             val itemMap = values().associateBy { it.base }
-            private val poisonedToBase = values().associate { it.kp to it.base }
+            val poisonedToBase: Map<Int, Int> = values().associate { it.kp to it.base }
+
             fun getBase(poisoned: Int): Int? = poisonedToBase[poisoned]
         }
     }
@@ -102,7 +138,7 @@ class PoisonWeaponPlugin : InteractionListener {
             base = Items.BRONZE_ARROW_882,
             p = Items.BRONZE_ARROWP_883,
             pp = Items.BRONZE_ARROWP_PLUS_5616,
-            ppp = Items.BRONZE_ARROWP_PLUS_PLUS_5622,
+            ppp = Items.BRONZE_ARROWP_PLUS_PLUS_5622
         ),
         IRON_ARROW(
             base = Items.IRON_ARROW_884,
@@ -133,6 +169,12 @@ class PoisonWeaponPlugin : InteractionListener {
             p = Items.RUNE_ARROWP_893,
             pp = Items.RUNE_ARROWP_PLUS_5621,
             ppp = Items.RUNE_ARROWP_PLUS_PLUS_5627,
+        ),
+        DRAGON_ARROW(
+            base = Items.DRAGON_ARROW_11212,
+            p = Items.DRAGON_ARROWP_11227,
+            pp = Items.DRAGON_ARROWP_PLUS_11228,
+            ppp = Items.DRAGON_ARROWP_PLUS_PLUS_11229,
         ),
         BRONZE_KNIFE(
             base = Items.BRONZE_KNIFE_864,
@@ -217,6 +259,12 @@ class PoisonWeaponPlugin : InteractionListener {
             p = Items.RUNE_DARTP_817,
             pp = Items.RUNE_DARTP_PLUS_5634,
             ppp = Items.RUNE_DARTP_PLUS_PLUS_5641,
+        ),
+        DRAGON_DART(
+            base = Items.DRAGON_DART_11230,
+            p = Items.DRAGON_DARTP_11231,
+            pp = Items.DRAGON_DARTP_PLUS_11233,
+            ppp = Items.DRAGON_DARTP_PLUS_PLUS_11234
         ),
         BLURITE_BOLT(
             base = Items.BLURITE_BOLTS_9139,
@@ -461,14 +509,19 @@ class PoisonWeaponPlugin : InteractionListener {
         ;
 
         companion object {
-            val itemMap = values().associate { it.base to intArrayOf(it.p, it.pp, it.ppp) }
-
-            fun getBase(poisoned: Int): Int? {
-                for ((base, set) in itemMap.entries) {
-                    if (set.contains(poisoned)) return base
-                }
-                return null
+            val itemMap: Map<Int, IntArray> = values().associate {
+                it.base to intArrayOf(it.p, it.pp, it.ppp)
             }
+
+            val poisonedToBase: Map<Int, Int> = buildMap {
+                for (set in values()) {
+                    put(set.p, set.base)
+                    put(set.pp, set.base)
+                    put(set.ppp, set.base)
+                }
+            }
+
+            fun getBase(poisoned: Int): Int? = poisonedToBase[poisoned]
         }
     }
 }

@@ -160,15 +160,10 @@ class PrinceAliRescue : Quest(Quests.PRINCE_ALI_RESCUE, 24, 23, 3, Vars.VARP_QUE
         sendMessage(player,"The chancellor pays you 700 coins.")
         drawReward(player, Items.COINS_8894)
         drawReward(player, "3 Quests Points", ln++)
-        drawReward(player, "700 Coins", ln++)
-        drawReward(player, "1,000 Thieving XP", ln)
-        rewardXP(player, Skills.CRAFTING, 1000.0)
-        rewardXP(player, Skills.THIEVING, 1000.0)
-
+        drawReward(player, "700 Coins", ln)
         if (!player.inventory.add(COINS)) {
             GroundItemManager.create(COINS, player)
         }
-
         removeAttribute(player, "guard-drunk")
     }
 }

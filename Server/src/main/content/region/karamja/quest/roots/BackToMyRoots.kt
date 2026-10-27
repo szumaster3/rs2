@@ -16,72 +16,78 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
-        var line = 12
+
+        var ln = 12
+
         if (stage == 0) {
-            line(player, "I can start this quest by speaking to !!Horacio?? in !!East??", line++)
-            line(player, "!!Ardougne?? in the !!Handelmort Mansion?? garden.", line++)
-            line(player, "Before I begin I will need to:", line++)
-            line(player, if (hasLevelStat(player, Skills.WOODCUTTING, 72)) "---Have at least level 72 Woodcutting./--" else "!!Have at least level 72 Woodcutting.??", line++)
-            line(player, if (hasLevelStat(player, Skills.FIREMAKING, 53)) "---Have at least level 53 Firemaking./--" else "!!Have at least level 53 Firemaking.??", line++)
-            line(player, if (hasLevelStat(player, Skills.SLAYER, 59)) "---Have at least level 59 Slayer./--" else "!!Have at least level 59 Slayer.??", line++)
-            line(player, if (hasLevelStat(player, Skills.AGILITY, 55)) "---Have at least level 55 Agility./--" else "!!Have at least 55 Agility.??", line++)
-            line++
-            line(player, "I also need to have completed:", line++)
-            line(player, "!!${Quests.ONE_SMALL_FAVOUR}??.", line++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false))
-            line(player, "!!${Quests.TRIBAL_TOTEM}??.", line++, isQuestComplete(player, Quests.TRIBAL_TOTEM))
-            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", line++, isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND))
-            line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS}??.", line++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false))
-            line++
+            line(player, "I can start this quest by speaking to !!Horacio?? in !!East??", ln++)
+            line(player, "!!Ardougne?? in the !!Handelmort Mansion?? garden.", ln++)
+            line(player, "Before I begin I will need to:", ln++)
+            line(player, if (hasLevelStat(player, Skills.WOODCUTTING, 72)) "---Have at least level 72 Woodcutting./--" else "!!Have at least level 72 Woodcutting.??", ln++)
+            line(player, if (hasLevelStat(player, Skills.FIREMAKING, 53)) "---Have at least level 53 Firemaking./--" else "!!Have at least level 53 Firemaking.??", ln++)
+            line(player, if (hasLevelStat(player, Skills.SLAYER, 59)) "---Have at least level 59 Slayer./--" else "!!Have at least level 59 Slayer.??", ln++)
+            line(player, if (hasLevelStat(player, Skills.AGILITY, 55)) "---Have at least 55 Agility./--" else "!!Have at least 55 Agility.??", ln++)
+            ln++
+
+            line(player, "I also need to have completed:", ln++)
+            line(player, "!!${Quests.ONE_SMALL_FAVOUR}??.", ln++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false))
+            line(player, "!!${Quests.TRIBAL_TOTEM}??.", ln++, isQuestComplete(player, Quests.TRIBAL_TOTEM))
+            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", ln++, isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND))
+            line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS}??.", ln++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false))
+            ln++
         }
 
-        if (stage == 2) {
-            line(player, "I have spoken to Wizard Cromperty and found out about", line++, true)
-            line(player, "his missing parcel.", line++, true)
-            line++
-        }
-        if (stage == 3) {
-            line(player, "I have spoken to an R.P.D.T. worker.", line++, true)
-            line++
+        if (stage >= 2) {
+            line(player, "I have spoken to Wizard Cromperty and found out about", ln++, true)
+            line(player, "his missing parcel.", ln++, true)
+            ln++
         }
 
-        if (stage == 4) {
-            line(player, "I have returned the R.P.D.T. to normal - parcels will now be delivered", line++, true)
-            line(player, "I also acquired a severed wizards hand.", line++, true)
-            line++
-            line(player, "I found out about Wizard Cromperty's special", line++, true)
-            line(player, "preservation magic - !!a sealed pot??.", line++, true)
-            line++
+        if (stage >= 3) {
+            line(player, "I have spoken to an R.P.D.T. worker.", ln++, true)
+            ln++
         }
 
-        if(stage == 6) {
-            line(player, "I have spoken to Garth the farmer about root", line++, true)
-            line(player, "cuttings and getting to the roots of the !!Jade Vine??", line++, true)
-            line(player, "which is located east of !!Shilo Village??.", line++, true)
-            line++
+        if (stage >= 4) {
+            line(player, "I have returned the R.P.D.T. to normal - parcels will now be delivered", ln++, true)
+            line(player, "I also acquired a severed wizards hand.", ln++, true)
+            ln++
+
+            line(player, "I found out about Wizard Cromperty's special", ln++, true)
+            line(player, "preservation magic - !!a sealed pot??.", ln++, true)
+            ln++
         }
 
-        if(stage == 7) {
-            line(player, "My potted cutting took successfully and I", line++, true)
-            line(player, "sealed it in the airtight pot.", line++, true)
-            line++
+        if (stage >= 6) {
+            line(player, "I have spoken to Garth the farmer about root", ln++, true)
+            line(player, "cuttings and getting to the roots of the !!Jade Vine??", ln++, true)
+            line(player, "which is located east of !!Shilo Village??.", ln++, true)
+            ln++
         }
 
-        if(stage == 8) {
-            line(player, "I returned the cutting to Horacio.", line++, true)
-            line(player, "I agreed to grow the cutting for Horacio in the prepared patch", line++, true)
-            line(player, "at Handelmort Mansion.", line++, true)
-            line++
-            line(player, "Horacio asked me to kill the wild vine.", line++, true)
-            line(player, "I have found out how to care for my own Jade Vine.", line++, true)
+        if (stage >= 7) {
+            line(player, "My potted cutting took successfully and I", ln++, true)
+            line(player, "sealed it in the airtight pot.", ln++, true)
+            ln++
         }
 
-        if (stage == 100) {
-            line++
-            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
-            line++
-            line(player, "I can now grow my own !!Jade Vine?? in the patch", line++, false)
-            line(player, "outside !!Handelmort Mansion?? in !!East Ardougne??.", line++, false)
-            line(player, "If I ever lose the seed or need help with it, !!Horacio?? will help.", line, false)
+        if (stage >= 8) {
+            line(player, "I returned the cutting to Horacio.", ln++, true)
+            line(player, "I agreed to grow the cutting for Horacio in the prepared patch", ln++, true)
+            line(player, "at Handelmort Mansion.", ln++, true)
+            ln++
+
+            line(player, "Horacio asked me to kill the wild vine.", ln++, true)
+            line(player, "I have found out how to care for my own Jade Vine.", ln++, true)
+        }
+
+        if (stage >= 100) {
+            ln++
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", ln++, false)
+            ln++
+            line(player, "I can now grow my own !!Jade Vine?? in the patch", ln++, false)
+            line(player, "outside !!Handelmort Mansion?? in !!East Ardougne??.", ln++, false)
+            line(player, "If I ever lose the seed or need help with it, !!Horacio?? will help.", ln, false)
         }
     }
 
@@ -99,7 +105,7 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
         drawReward(player, "Jade vine seed", ln)
         rewardXP(player, Skills.FIREMAKING, 24000.0)
         rewardXP(player, Skills.WOODCUTTING, 40000.0)
-        rewardXP(player, Skills.SLAYER, 15000.0)
+        rewardXP(player, Skills.SLAYER, 23000.0)
         rewardXP(player, Skills.AGILITY, 15000.0)
         setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 65, true)
         addItemOrBank(player, Items.JADE_VINE_SEED_11778, 1)
