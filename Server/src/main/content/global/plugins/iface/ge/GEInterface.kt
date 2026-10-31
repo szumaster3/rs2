@@ -127,7 +127,7 @@ class GEInterface : InterfaceListener {
         }
 
         val inventory = component.id == Components.EXCHANGE_SETS_SIDE_644
-        if (slot < 0 || slot >= if (inventory) 28 else ItemSet.values().size) {
+        if (slot < 0 || slot >= if (inventory) 28 else ItemSet.getItemList().size) {
             return
         }
 
@@ -135,16 +135,15 @@ class GEInterface : InterfaceListener {
         val set: ItemSet
 
         if (inventory) {
-            val inventoryItem = player.inventory[slot] ?: return
+            item = player.inventory[slot] ?: return
 
-            item = inventoryItem
             set = ItemSet.forId(item.id) ?: run {
                 if (opcode == 127) return
                 sendMessage(player, "This isn't a set item.")
                 return
             }
         } else {
-            set = ItemSet.values()[slot]
+            set = ItemSet.forIndex(slot) ?: return
             item = Item(set.itemId)
         }
 
