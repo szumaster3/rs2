@@ -32,7 +32,7 @@ class TarMakingTask(
             return false
         }
 
-        if (!inInventory(player, Items.SWAMP_TAR_1939, 15)) {
+        if (!inInventory(player, Items.SWAMP_TAR_1939, SWAMP_TAR_BATCH)) {
             sendMessage(player, "You need at least 15 swamp tar in order to do this.")
             return false
         }
@@ -41,6 +41,7 @@ class TarMakingTask(
             sendMessage(player, "You don't have enough space in your inventory.")
             return false
         }
+
         return true
     }
 
@@ -51,21 +52,21 @@ class TarMakingTask(
 
     override fun canContinue(): Boolean {
         return amount > 0 &&
-                inInventory(player, Items.SWAMP_TAR_1939, 15) &&
-                inInventory(player, tar.ingredient)
+            inInventory(player, Items.SWAMP_TAR_1939, SWAMP_TAR_BATCH) &&
+            inInventory(player, tar.ingredient)
     }
 
     override fun process(): Boolean {
-        if (!inInventory(player, Items.SWAMP_TAR_1939, 15) ||
+        if (!inInventory(player, Items.SWAMP_TAR_1939, SWAMP_TAR_BATCH) ||
             !inInventory(player, tar.ingredient)
         ) {
             return true
         }
 
-        removeItem(player, Item(Items.SWAMP_TAR_1939, 15))
-        removeItem(player, tar.ingredient)
+        removeItem(player, Item(Items.SWAMP_TAR_1939, SWAMP_TAR_BATCH))
+        removeItem(player, Item(tar.ingredient))
 
-        addItem(player, tar.product, 15)
+        addItem(player, tar.product, SWAMP_TAR_BATCH)
         rewardXP(player, Skills.HERBLORE, tar.experience)
 
         val ingredientName = getItemName(tar.ingredient)
@@ -79,4 +80,7 @@ class TarMakingTask(
         return amount <= 0
     }
 
+    companion object {
+        private const val SWAMP_TAR_BATCH = 15
+    }
 }

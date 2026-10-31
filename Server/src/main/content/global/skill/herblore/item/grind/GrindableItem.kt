@@ -29,7 +29,14 @@ enum class GrindableItem(val items: Set<Int>, val product: Int, val message: Str
     GUAM_LEAF(setOf(Items.CLEAN_GUAM_249), Items.GROUND_GUAM_6681, "You grind down the guam.");
 
     companion object {
-        private val map = GrindableItem.values().flatMap { g -> g.items.map { it to g } }.toMap()
-        fun forID(id: Int): GrindableItem? = map[id]
+        private val all = values()
+
+        private val byItemId = all
+            .flatMap { grind -> grind.items.map { itemId -> itemId to grind } }
+            .toMap()
+
+        val itemIds: IntArray = all.flatMap { it.items }.toIntArray()
+
+        fun forID(id: Int): GrindableItem? = byItemId[id]
     }
 }

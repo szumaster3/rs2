@@ -1,3 +1,4 @@
+
 package content.global.skill.herblore.item
 
 import core.api.*
@@ -24,18 +25,36 @@ class GuthixRestMakePlugin : InteractionListener {
     }
 
     private fun handleMix(player: Player, from: Item, to: Item): Boolean {
-        if (!hasRequirement(player, Quests.DRUIDIC_RITUAL) || !hasRequirement(player, Quests.ONE_SMALL_FAVOUR)) return false
+        if (!hasRequirement(player, Quests.DRUIDIC_RITUAL) || !hasRequirement(player, Quests.ONE_SMALL_FAVOUR)) {
+            return false
+        }
+
         if (getDynLevel(player, Skills.HERBLORE) < 18) {
             sendMessage(player, "You need a Herblore level of at least 18 to mix a Guthix Rest Tea.")
             return false
         }
 
-        val (herb, mix) = if (from.id in herbIds) from to to else to to from
-        val existingIngredients = GuthixRest.byTeaId[mix.id]?.ingredients ?: emptySet()
-        val newIngredients = existingIngredients + herb.id
+        val herb: Item
+        val mix: Item
+
+        if (from.id in herbIds) {
+            herb = from
+            mix = to
+        } else {
+            herb = to
+            mix = from
+        }
+
+        val existingIngredients = GuthixRest.byTeaId[mix.id]?.ingredients
+            ?: emptyList()
+
+        val newIngredients = (existingIngredients + herb.id).sorted()
 
         val upgradedTea = GuthixRest.byIngredients[newIngredients]
-            ?: return player.sendMessage("Nothing interesting happens.").let { false }
+        if (upgradedTea == null) {
+            sendMessage(player, "Nothing interesting happens.")
+            return false
+        }
 
         val mixSlot = mix.slot
         player.inventory.replace(Item(upgradedTea.product), mixSlot, true)
@@ -43,16 +62,31 @@ class GuthixRestMakePlugin : InteractionListener {
         val herbSlot = herb.slot
         player.inventory.remove(herb, herbSlot, true)
 
-        sendMessage(player, "You place the ${herb.name.lowercase().replace(" leaf", "")} into the steamy mixture" +
-                if (upgradedTea == GuthixRest.COMPLETE_MIX) " and make Guthix Rest Tea." else ".")
+        sendMessage(
+            player,
+            "You place the ${herb.name.lowercase().replace(" leaf", "")} into the steamy mixture" +
+                    if (upgradedTea == GuthixRest.COMPLETE_MIX) {
+                        " and make Guthix Rest Tea."
+                    } else {
+                        "."
+                    }
+        )
 
         rewardXP(player, Skills.HERBLORE, 13.5 + newIngredients.size * 0.5)
         return true
     }
 
     companion object {
-        private val herbIds = setOf(Items.CLEAN_GUAM_249, Items.CLEAN_MARRENTILL_251, Items.CLEAN_HARRALANDER_255)
+        private val herbIds = setOf(
+            Items.CLEAN_GUAM_249,
+            Items.CLEAN_MARRENTILL_251,
+            Items.CLEAN_HARRALANDER_255
+        )
+
         val herbsArray = herbIds.toIntArray()
-        val teaMixes = GuthixRest.values().map { it.product }.toIntArray() + Items.CUP_OF_HOT_WATER_4460
+
+        val teaMixes = GuthixRest.values()
+            .map { it.product }
+            .toIntArray() + Items.CUP_OF_HOT_WATER_4460
     }
 }

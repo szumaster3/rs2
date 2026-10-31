@@ -11,16 +11,14 @@ import shared.consts.Sounds
 class GrindItemTask(
     player: Player,
     private val grind: GrindableItem,
+    private val sourceId: Int,
     private var amount: Int
 ) : SkillingTask<Player>(player, cycleTicks = 2) {
 
-    override fun canStart(): Boolean {
-        return true
-    }
+    override fun canStart(): Boolean = amount > 0
 
     override fun canContinue(): Boolean {
-        return amount > 0 &&
-                inInventory(player, grind.items.first())
+        return amount > 0 && inInventory(player, sourceId)
     }
 
     override fun playAnimation() {
@@ -29,26 +27,24 @@ class GrindItemTask(
     }
 
     override fun process(): Boolean {
-        val sourceId = grind.items.first()
-
-        if (!inInventory(player, sourceId))
-            return true
-
-
-        val specialCase = if (sourceId == FISHING_BAIT)
-            10.coerceAtMost(amountInInventory(player, sourceId))
-         else
-             1
-
-        if (!removeItem(player, Item(sourceId, specialCase))) {
+        if (!inInventory(player, sourceId)) {
             return true
         }
 
-        addItem(player, grind.product, specialCase)
+        val quantity = if (sourceId == FISHING_BAIT) {
+            minOf(10, amount, amountInInventory(player, sourceId))
+        } else {
+            1
+        }
+
+        if (quantity <= 0 || !removeItem(player, Item(sourceId, quantity))) {
+            return true
+        }
+
+        addItem(player, grind.product, quantity)
         sendMessage(player, grind.message)
 
-        amount -= specialCase
-
+        amount -= quantity
         return amount <= 0
     }
 

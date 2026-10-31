@@ -14,7 +14,10 @@ enum class TarItem(val ingredient: Int, val product: Int, val level: Int, val ex
     HARRALANDER_TAR(HerbItem.HARRALANDER.product.id, Items.HARRALANDER_TAR_10145, 44, 72.5);
 
     companion object {
-        private val mapByIngredient = values().associateBy { it.ingredient }
+        private val all = values()
+        private val mapByIngredient = all.associateBy { it.ingredient }
+
+        val ingredientIds: IntArray = all.map { it.ingredient }.toIntArray()
 
         /**
          * Finds a [TarItem] by its ingredient id.

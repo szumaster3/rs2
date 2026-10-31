@@ -10,12 +10,13 @@ import shared.consts.Items
 class GrindItemPlugin : InteractionListener {
 
     override fun defineListeners() {
-        onUseWith(IntType.ITEM, GRIND_ITEM_IDS, Items.PESTLE_AND_MORTAR_233) { player, used, _ ->
-            val grind = GrindableItem.forID(used.id) ?: return@onUseWith true
-            val max = amountInInventory(player, used.id)
+        onUseWith(IntType.ITEM, GrindableItem.itemIds, Items.PESTLE_AND_MORTAR_233) { player, used, _ ->
+            val sourceId = used.id
+            val grind = GrindableItem.forID(sourceId) ?: return@onUseWith true
+            val max = amountInInventory(player, sourceId)
 
             if (max <= 1) {
-                GrindItemTask(player, grind, 1).start()
+                GrindItemTask(player, grind, sourceId, 1).start()
                 return@onUseWith true
             }
 
@@ -26,19 +27,16 @@ class GrindItemPlugin : InteractionListener {
             ) {
 
                 override fun create(amount: Int, index: Int) {
-                    GrindItemTask(player, grind, amount).start()
+                    val available = amountInInventory(player, sourceId)
+                    if (available > 0) {
+                        GrindItemTask(player, grind, sourceId, amount.coerceAtMost(available)).start()
+                    }
                 }
 
-                override fun getAll(index: Int): Int {
-                    return max
-                }
+                override fun getAll(index: Int): Int = max
             }.open()
 
             return@onUseWith true
         }
-    }
-
-    companion object {
-        val GRIND_ITEM_IDS = GrindableItem.values().flatMap { it.items }.toIntArray()
     }
 }
