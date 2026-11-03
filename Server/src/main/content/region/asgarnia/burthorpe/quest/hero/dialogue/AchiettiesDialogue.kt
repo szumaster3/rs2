@@ -67,7 +67,7 @@ class AchiettiesDialogue(player: Player? = null) : Dialogue(player) {
                 if (HeroesQuest.allItemsInInventory(player)) {
                     playerl(FaceAnim.NEUTRAL, "I have all the required items.").also { stage = 30 }
                 } else {
-                    playerl(FaceAnim.NEUTRAL, "It's tough. I've not done it yet.").also { stage = 11 }
+                    playerl(FaceAnim.NEUTRAL, "It's tough. I've not done it yet.").also { stage = 12 }
                 }
             }
             30 -> npcl(FaceAnim.FRIENDLY, "I see that you have. Well done. Now, to complete the quest, and gain entry to the Heroes' Guild in your final task all that you have to do is...").also { stage++ }
