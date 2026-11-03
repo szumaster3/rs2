@@ -5,14 +5,12 @@ import content.region.asgarnia.falador.quest.rd.cutscene.EnterTestingRoomCutscen
 import content.region.asgarnia.falador.quest.rd.RDUtils
 import core.ServerConstants
 import core.api.*
-import core.game.dialogue.Dialogue
-import core.game.dialogue.DialogueBuilder
-import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.FaceAnim
+import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import core.tools.START_DIALOGUE
 import shared.consts.NPCs
 import shared.consts.Quests
 
@@ -100,297 +98,550 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(NPCs.SIR_TIFFY_CASHIEN_2290)
 
+    /**
+     * Represents the Sir Tiffy Cashien dialogue file.
+     *
+     * # Relations
+     * - [Recruitment Drive]
+     */
+    class SirTiffyCashienDialogueFile : DialogueFile() {
 
-    class SirTiffyCashienDialogueFile : DialogueBuilderFile() {
-        override fun create(b: DialogueBuilder) {
-            b.onQuestStages(Quests.RECRUITMENT_DRIVE, 1)
-                .playerl(
-                    FaceAnim.FRIENDLY,
-                    "Sir Amik Varze sent me to meet you here for some sort of testing..."
-                )
-                .npcl(
-                    FaceAnim.FRIENDLY,
-                    "Ah, @name! Amik told me all about you, dontchaknow! Spliffing job you you did with the old Black Knights there, absolutely first class."
-                )
-                .playerl(FaceAnim.GUILTY, "...Thanks I think.")
-                .npcl(FaceAnim.FRIENDLY, "Well, not in those exact words, but you get my point, what?")
-                .npcl(
-                    FaceAnim.FRIENDLY,
-                    "A top-notch filly like yourself is just the right sort we've been looking for for our organisation."
-                )
-                .npcl(FaceAnim.FRIENDLY, "So, are you ready to begin testing?")
-                .let { path ->
-                    val originalPath = b.placeholder()
-                    path.goto(originalPath)
-                    return@let originalPath.builder().options().let { optionBuilder ->
-                        val continuePath = b.placeholder()
-                        optionBuilder
-                            .option("Testing..?")
-                            .playerl(FaceAnim.THINKING, "Testing? What exactly do you mean by testing?")
-                            .npcl(
+        private fun showMainOptions() {
+            options(
+                "Testing..?",
+                "Organisation?",
+                "Yes, let's go!",
+                "No, I've changed my mind."
+            )
+            stage = 7
+        }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                START_DIALOGUE -> {
+                    when (getQuestStage(player!!, Quests.RECRUITMENT_DRIVE)) {
+                        1 -> {
+                            playerl(
                                 FaceAnim.FRIENDLY,
-                                "Jolly bad show! Varze was supposed to have informed you about all this before sending you here!"
+                                "Sir Amik Varze sent me to meet you here for some sort of testing..."
                             )
-                            .npcl(
+                            stage = 1
+                        }
+
+                        2 -> {
+                            npc(
                                 FaceAnim.FRIENDLY,
-                                "Well, not your fault I suppose, what? Anywho, our organisation is looking for a certain specific type of person to join."
+                                "Ah, what ho!",
+                                "Back for another go at the old testing, what?"
                             )
-                            .playerl(
-                                FaceAnim.FRIENDLY,
-                                "So... You want me to go kill some monster or something for you?"
+                            stage = 50
+                        }
+
+                        3 -> {
+                            npc(
+                                FaceAnim.HAPPY,
+                                "Oh, jolly well done!",
+                                "Your performance will need to be evaluated by Sir Vey",
+                                "personally, but I don't think it's going too far ahead of",
+                                "myself to welcome you to the team!"
                             )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Not at all, old bean. There's plenty of warriors around should we require dumb muscle."
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "That's really not the kind of thing our organisation is after, what?"
-                            )
-                            .playerl(
-                                FaceAnim.FRIENDLY,
-                                "So you want me to go and fetch you some kind of common item, and then take it for delivery somewhere on the other side of the country?"
-                            )
-                            .playerl(FaceAnim.SAD, "Because I really hate doing that!")
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Haw, haw, haw! What a dull thing to ask of someone, what?"
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "I know what you mean, though. I did my fair share of running errands when I was a young adventurer, myself!"
-                            )
-                            .playerl(FaceAnim.FRIENDLY, "So what exactly will this test consist of?")
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Can't let just any old riff-raff in, what? The mindless thugs and bully boys are best left in the White Knights or the city guard. We look for the top-shelf brains to join us."
-                            )
-                            .playerl(
-                                FaceAnim.HALF_ASKING,
-                                "So you want to test my brains? Will it hurt?"
-                            )
-                            .npcl(FaceAnim.FRIENDLY, "Haw, haw, haw! That's a good one!")
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Not in the slightest.. Well, maybe a bit, but we all have to make sacrifices occasionally, what?"
-                            )
-                            .playerl(FaceAnim.FRIENDLY, "What do you want me to do then?")
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "It's a test of wits, what? I'll take you to our secret training grounds, and you will have to pass through a series of five separate intelligence test to prove you're our sort of adventurer."
-                            )
-                            .npcl(FaceAnim.FRIENDLY, "Standard puzzle room rules will apply.")
-                            .playerl(
+                            stage = 90
+                        }
+                    }
+                }
+
+                // Initial conversation.
+                1 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Ah, @name! Amik told me all about you, dontchaknow! Spliffing job you you did with the old Black Knights there, absolutely first class."
+                    )
+                    stage = 2
+                }
+
+                2 -> {
+                    playerl(FaceAnim.GUILTY, "...Thanks I think.")
+                    stage = 3
+                }
+
+                3 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Well, not in those exact words, but you get my point, what?"
+                    )
+                    stage = 4
+                }
+
+                4 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "A top-notch filly like yourself is just the right sort we've been looking for for our organisation."
+                    )
+                    stage = 5
+                }
+
+                5 -> {
+                    npcl(FaceAnim.FRIENDLY, "So, are you ready to begin testing?")
+                    stage = 6
+                }
+
+                6 -> showMainOptions()
+
+                // Main menu.
+                7 -> {
+                    when (buttonID) {
+                        1 -> {
+                            playerl(
                                 FaceAnim.THINKING,
-                                "Erm... What are standard puzzle room rules exactly?"
+                                "Testing? What exactly do you mean by testing?"
                             )
-                            .npcl(FaceAnim.HAPPY, "Never done this sort of thing before, what?")
-                            .npc(
-                                "The simple rules are:",
-                                "No items or equipment to be brought with you.",
-                                "Each room is a self-contained puzzle.",
-                                "You may quit at any time."
-                            )
-                            .npcl(
-                                FaceAnim.HAPPY,
-                                "Of course, if you quit a room, then all your progress up to that point will be cleared, and you'll have to start again from scratch."
-                            )
-                            .npc(
-                                FaceAnim.HAPPY,
-                                "Our organisation manages to filter all the top-notch",
-                                "adventurers this way.",
-                                "So, are you ready to go?"
-                            )
-                            .goto(originalPath)
-                        optionBuilder
-                            .option("Organisation?")
-                            .playerl(
+                            stage = 10
+                        }
+
+                        2 -> {
+                            playerl(
                                 FaceAnim.FRIENDLY,
                                 "This organisation you keep mentioning.. Perhaps you could tell me a little about it?"
                             )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Oh, that Amik! Jolly bad form. Did he not tell you anything that he was supposed to?"
-                            )
-                            .playerl(
-                                FaceAnim.FRIENDLY,
-                                "No. He didn't really tell me anything except to come here and meet you."
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Well, now, old sport, let me give you the heads up and the low down, what?"
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "I represent the Temple Knights. We are the premier order of Knights in Asgarnia, if not the world. Saradomin himself personally founded our order centuries ago, and we answer only to him."
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Only the very best of the best are permitted to join, and the powers we command are formidable indeed."
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "You might say that we are the front line of defence for the entire kingdom!"
-                            )
-                            .playerl(
-                                FaceAnim.THINKING,
-                                "So what's the difference between you and the White Knights?"
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Well, in simple terms, we're better! Any fool with a sword can manage to get into the White Knights, which is mostly the reason they are so very, very incompetent, what?"
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "The Temple Knights, on the other hand, have to be smarter, stronger and better than all others. We are the elite. No man controls us, for our orders come directly from Saradomin himself!"
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "According to Sir Vey Lance, our head of operations, that is. He claims that everything he tells us to do is done with Saradomin's implicit permission."
-                            )
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "It's not every job where you have more authority than the king, though, is it?"
-                            )
-                            .playerl(FaceAnim.THINKING, "Wait... You can order the King around?")
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Well, not me personally. I'm only in the recruitment side of things, dontchaknow, but the higher ranking members of the organisation have almost absolute power over the kingdom."
-                            )
-                            .npcl(FaceAnim.NEUTRAL, "Plus a few others, so I hear...")
-                            .npcl(
-                                FaceAnim.FRIENDLY,
-                                "Anyway, this is why we keep our organisation shrouded in secrecy, and why we demand such rigorous testing for all potential recruits. Speaking of which, are you ready to begin your testing?"
-                            )
-                            .goto(originalPath)
-                        optionBuilder
-                            .option("Yes, let's go!")
-                            .player(
+                            stage = 40
+                        }
+
+                        3 -> {
+                            player(
                                 FaceAnim.FRIENDLY,
                                 "Yeah. this sounds right up my street.",
                                 "Let's go!"
                             )
-                            .branch { player ->
-                                if (
-                                    player.inventory.isEmpty &&
-                                    player.equipment.isEmpty &&
-                                    !(player.familiarManager.hasFamiliar() ||
-                                            player.familiarManager.hasPet())
-                                ) {
-                                    1
-                                } else {
-                                    0
-                                }
-                            }
-                            .let { branch ->
-                                branch
-                                    .onValue(0)
-                                    .npcl(
-                                        FaceAnim.FRIENDLY,
-                                        "To start the test you can't have anything in the inventory and equipment."
-                                    )
-                                    .end()
-                                return@let branch
-                            }
-                            .onValue(1)
-                            .npcl(
+                            stage = 60
+                        }
+
+                        4 -> {
+                            playerl("No, I've changed my mind.")
+                            stage = 70
+                        }
+                    }
+                }
+
+                // "Testing..?" branch.
+                10 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Jolly bad show! Varze was supposed to have informed you about all this before sending you here!"
+                    )
+                    stage = 11
+                }
+
+                11 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Well, not your fault I suppose, what? Anywho, our organisation is looking for a certain specific type of person to join."
+                    )
+                    stage = 12
+                }
+
+                12 -> {
+                    playerl(
+                        FaceAnim.FRIENDLY,
+                        "So... You want me to go kill some monster or something for you?"
+                    )
+                    stage = 13
+                }
+
+                13 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Not at all, old bean. There's plenty of warriors around should we require dumb muscle."
+                    )
+                    stage = 14
+                }
+
+                14 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "That's really not the kind of thing our organisation is after, what?"
+                    )
+                    stage = 15
+                }
+
+                15 -> {
+                    playerl(
+                        FaceAnim.FRIENDLY,
+                        "So you want me to go and fetch you some kind of common item, and then take it for delivery somewhere on the other side of the country?"
+                    )
+                    stage = 16
+                }
+
+                16 -> {
+                    playerl(FaceAnim.SAD, "Because I really hate doing that!")
+                    stage = 17
+                }
+
+                17 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Haw, haw, haw! What a dull thing to ask of someone, what?"
+                    )
+                    stage = 18
+                }
+
+                18 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "I know what you mean, though. I did my fair share of running errands when I was a young adventurer, myself!"
+                    )
+                    stage = 19
+                }
+
+                19 -> {
+                    playerl(FaceAnim.FRIENDLY, "So what exactly will this test consist of?")
+                    stage = 20
+                }
+
+                20 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Can't let just any old riff-raff in, what? The mindless thugs and bully boys are best left in the White Knights or the city guard. We look for the top-shelf brains to join us."
+                    )
+                    stage = 21
+                }
+
+                21 -> {
+                    playerl(
+                        FaceAnim.HALF_ASKING,
+                        "So you want to test my brains? Will it hurt?"
+                    )
+                    stage = 22
+                }
+
+                22 -> {
+                    npcl(FaceAnim.FRIENDLY, "Haw, haw, haw! That's a good one!")
+                    stage = 23
+                }
+
+                23 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Not in the slightest.. Well, maybe a bit, but we all have to make sacrifices occasionally, what?"
+                    )
+                    stage = 24
+                }
+
+                24 -> {
+                    playerl(FaceAnim.FRIENDLY, "What do you want me to do then?")
+                    stage = 25
+                }
+
+                25 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "It's a test of wits, what? I'll take you to our secret training grounds, and you will have to pass through a series of five separate intelligence test to prove you're our sort of adventurer."
+                    )
+                    stage = 26
+                }
+
+                26 -> {
+                    npcl(FaceAnim.FRIENDLY, "Standard puzzle room rules will apply.")
+                    stage = 27
+                }
+
+                27 -> {
+                    playerl(
+                        FaceAnim.THINKING,
+                        "Erm... What are standard puzzle room rules exactly?"
+                    )
+                    stage = 28
+                }
+
+                28 -> {
+                    npcl(FaceAnim.HAPPY, "Never done this sort of thing before, what?")
+                    stage = 29
+                }
+
+                29 -> {
+                    npc(
+                        "The simple rules are:",
+                        "No items or equipment to be brought with you.",
+                        "Each room is a self-contained puzzle.",
+                        "You may quit at any time."
+                    )
+                    stage = 30
+                }
+
+                30 -> {
+                    npcl(
+                        FaceAnim.HAPPY,
+                        "Of course, if you quit a room, then all your progress up to that point will be cleared, and you'll have to start again from scratch."
+                    )
+                    stage = 31
+                }
+
+                31 -> {
+                    npc(
+                        FaceAnim.HAPPY,
+                        "Our organisation manages to filter all the top-notch",
+                        "adventurers this way.",
+                        "So, are you ready to go?"
+                    )
+                    stage = 32
+                }
+
+                32 -> showMainOptions()
+
+                // "Organisation?" branch.
+                40 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Oh, that Amik! Jolly bad form. Did he not tell you anything that he was supposed to?"
+                    )
+                    stage = 41
+                }
+
+                41 -> {
+                    playerl(
+                        FaceAnim.FRIENDLY,
+                        "No. He didn't really tell me anything except to come here and meet you."
+                    )
+                    stage = 42
+                }
+
+                42 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Well, now, old sport, let me give you the heads up and the low down, what?"
+                    )
+                    stage = 43
+                }
+
+                43 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "I represent the Temple Knights. We are the premier order of Knights in Asgarnia, if not the world. Saradomin himself personally founded our order centuries ago, and we answer only to him."
+                    )
+                    stage = 44
+                }
+
+                44 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Only the very best of the best are permitted to join, and the powers we command are formidable indeed."
+                    )
+                    stage = 45
+                }
+
+                45 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "You might say that we are the front line of defence for the entire kingdom!"
+                    )
+                    stage = 46
+                }
+
+                46 -> {
+                    playerl(
+                        FaceAnim.THINKING,
+                        "So what's the difference between you and the White Knights?"
+                    )
+                    stage = 47
+                }
+
+                47 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Well, in simple terms, we're better! Any fool with a sword can manage to get into the White Knights, which is mostly the reason they are so very, very incompetent, what?"
+                    )
+                    stage = 48
+                }
+
+                48 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "The Temple Knights, on the other hand, have to be smarter, stronger and better than all others. We are the elite. No man controls us, for our orders come directly from Saradomin himself!"
+                    )
+                    stage = 49
+                }
+
+                49 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "According to Sir Vey Lance, our head of operations, that is. He claims that everything he tells us to do is done with Saradomin's implicit permission."
+                    )
+                    stage = 51
+                }
+
+                51 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "It's not every job where you have more authority than the king, though, is it?"
+                    )
+                    stage = 52
+                }
+
+                52 -> {
+                    playerl(FaceAnim.THINKING, "Wait... You can order the King around?")
+                    stage = 53
+                }
+
+                53 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Well, not me personally. I'm only in the recruitment side of things, dontchaknow, but the higher ranking members of the organisation have almost absolute power over the kingdom."
+                    )
+                    stage = 54
+                }
+
+                54 -> {
+                    npcl(FaceAnim.NEUTRAL, "Plus a few others, so I hear...")
+                    stage = 55
+                }
+
+                55 -> {
+                    npcl(
+                        FaceAnim.FRIENDLY,
+                        "Anyway, this is why we keep our organisation shrouded in secrecy, and why we demand such rigorous testing for all potential recruits. Speaking of which, are you ready to begin your testing?"
+                    )
+                    stage = 56
+                }
+
+                56 -> showMainOptions()
+
+                // "Yes, let's go!" branch.
+                60 -> {
+                    val canStart =
+                        player!!.inventory.isEmpty() &&
+                                player!!.equipment.isEmpty() &&
+                                !(player!!.familiarManager.hasFamiliar() ||
+                                        player!!.familiarManager.hasPet())
+
+                    if (!canStart) {
+                        npcl(
+                            FaceAnim.FRIENDLY,
+                            "To start the test you can't have anything in the inventory and equipment."
+                        )
+                        stage = 61
+                    } else {
+                        npcl(
+                            FaceAnim.FRIENDLY,
+                            "Jolly good show! Now, the training grounds location is a secret, so..."
+                        )
+                        stage = 62
+                    }
+                }
+
+                61 -> endFile()
+
+                62 -> {
+                    if (getQuestStage(player!!, Quests.RECRUITMENT_DRIVE) == 1) {
+                        setQuestStage(player!!, Quests.RECRUITMENT_DRIVE, 2)
+                    }
+                    RDUtils.shuffleTask(player!!)
+                    EnterTestingRoomCutscene(player!!).start()
+                    endFile()
+                }
+
+                // "No, I've changed my mind." branch.
+                70 -> endFile()
+
+                // Returning player, quest stage 2.
+                50 -> {
+                    options(
+                        "Yes, let's go!",
+                        "No, I've changed my mind."
+                    )
+                    stage = 80
+                }
+
+                80 -> {
+                    when (buttonID) {
+                        1 -> {
+                            player(
                                 FaceAnim.FRIENDLY,
-                                "Jolly good show! Now, the training grounds location is a secret, so..."
+                                "Yeah. this sounds right up my street.",
+                                "Let's go!"
                             )
-                            .goto(continuePath)
-                        optionBuilder
-                            .option("No, I've changed my mind.")
-                            .player("No, I've changed my mind.")
-                            .end()
+                            stage = 81
+                        }
 
-                        return@let continuePath.builder()
+                        2 -> {
+                            playerl("No, I've changed my mind.")
+                            stage = 70
+                        }
                     }
                 }
-                .endWith { _, player ->
-                    if (getQuestStage(player, Quests.RECRUITMENT_DRIVE) == 1) {
-                        setQuestStage(player, Quests.RECRUITMENT_DRIVE, 2)
-                    }
-                    RDUtils.shuffleTask(player)
-                    EnterTestingRoomCutscene(player).start()
-                }
 
-            b.onQuestStages(Quests.RECRUITMENT_DRIVE, 2)
-                .npc(FaceAnim.FRIENDLY, "Ah, what ho!", "Back for another go at the old testing, what?")
-                .options()
-                .let { optionBuilder ->
-                    val continuePath = b.placeholder()
-                    optionBuilder
-                        .option("Yes, let's go!")
-                        .player(FaceAnim.FRIENDLY, "Yeah. this sounds right up my street.", "Let's go!")
-                        .branch { player ->
-                            if (
-                                player.inventory.isEmpty &&
-                                player.equipment.isEmpty &&
-                                !(player.familiarManager.hasFamiliar() ||
-                                        player.familiarManager.hasPet())
-                            ) {
-                                1
-                            } else {
-                                0
-                            }
-                        }
-                        .let { branch ->
-                            branch
-                                .onValue(0)
-                                .npcl(
-                                    FaceAnim.NEUTRAL,
-                                    "Well, bad luck, old @g[guy,gal]. You'll need to have a completely empty inventory and you can't be wearing any equipment before we can accurately test you."
-                                )
-                                .npcl(
-                                    FaceAnim.HAPPY,
-                                    "Don't want people cheating by smuggling stuff in, what? That includes things carried by familiars, too! Come and see me again after you've been to the old bank to drop your stuff off, what?"
-                                )
-                                .end()
-                            return@let branch
-                        }
-                        .onValue(1)
-                        .npc(
+                81 -> {
+                    val canStart =
+                        player!!.inventory.isEmpty() &&
+                                player!!.equipment.isEmpty() &&
+                                !(player!!.familiarManager.hasFamiliar() ||
+                                        player!!.familiarManager.hasPet())
+
+                    if (!canStart) {
+                        npcl(FaceAnim.NEUTRAL, "Well, bad luck, old @g[guy,gal]. You'll need to have a completely empty inventory and you can't be wearing any equipment before we can accurately test you.")
+                        stage = 82
+                    } else {
+                        npc(
                             FaceAnim.FRIENDLY,
                             "Jolly good show!",
                             "Now the training grounds location is a secret, so..."
                         )
-                        .endWith { _, player ->
-                            RDUtils.shuffleTask(player)
-                            EnterTestingRoomCutscene(player).start()
-                        }
-                    optionBuilder
-                        .option("No, I've changed my mind.")
-                        .player("No, I've changed my mind.")
-                        .end()
-                    return@let continuePath.builder()
+                        stage = 84
+                    }
                 }
-            b.onQuestStages(Quests.RECRUITMENT_DRIVE, 3)
-                .npc(
-                    FaceAnim.HAPPY,
-                    "Oh, jolly well done!",
-                    "Your performance will need to be evaluated by Sir Vey",
-                    "personally, but I don't think it's going too far ahead of",
-                    "myself to welcome you to the team!"
-                )
-                .endWith { _, player -> finishQuest(player, Quests.RECRUITMENT_DRIVE) }
+
+                82 -> {
+                    npcl(
+                        FaceAnim.HAPPY,
+                        "Don't want people cheating by smuggling stuff in, what? That includes things carried by familiars, too! Come and see me again after you've been to the old bank to drop your stuff off, what?"
+                    )
+                    stage = 83
+                }
+
+                83 -> endFile()
+
+                84 -> {
+                    RDUtils.shuffleTask(player!!)
+                    EnterTestingRoomCutscene(player!!).start()
+                    endFile()
+                }
+
+                // Quest completion.
+                90 -> {
+                    finishQuest(player!!, Quests.RECRUITMENT_DRIVE)
+                    endFile()
+                }
+            }
         }
     }
 
-    class SirTiffyCashienFailedDialogueFile : DialogueBuilderFile() {
-        override fun create(b: DialogueBuilder) {
-            b.onPredicate { _ -> true }
-                .npc(
-                    FaceAnim.SAD,
-                    "Oh, jolly bad luck, what?",
-                    "Not quite the brainbox you thought you were, eh?"
-                )
-                .npc(
-                    FaceAnim.HAPPY,
-                    "Well, never mind!",
-                    "You have an open invitation to join our organization, so",
-                    "when you're feeling a little smarter, come back and talk",
-                    "to me again."
-                )
+    /**
+     * Represents Sir Tiffy Cashien's failed test dialogue.
+     */
+    class SirTiffyCashienFailedDialogueFile : DialogueFile() {
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                START_DIALOGUE -> {
+                    npc(
+                        FaceAnim.SAD,
+                        "Oh, jolly bad luck, what?",
+                        "Not quite the brainbox you thought you were, eh?"
+                    )
+                    stage = 1
+                }
+
+                1 -> {
+                    npc(
+                        FaceAnim.HAPPY,
+                        "Well, never mind!",
+                        "You have an open invitation to join our organization, so",
+                        "when you're feeling a little smarter, come back and talk",
+                        "to me again."
+                    )
+                    stage = 2
+                }
+
+                2 -> endFile()
+            }
         }
     }
 }

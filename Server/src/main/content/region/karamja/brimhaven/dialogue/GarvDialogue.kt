@@ -1,18 +1,19 @@
 package content.region.karamja.brimhaven.dialogue
 
 import core.api.*
-import core.game.dialogue.Dialogue
-import core.game.dialogue.DialogueBuilder
-import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.FaceAnim
+import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents Garv dialogue.
+ */
 @Initializable
 class GarvDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -41,42 +42,105 @@ class GarvDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.GARV_788)
 }
 
-class GarvDialogueFile : DialogueBuilderFile() {
-    override fun create(b: DialogueBuilder) {
-        b.onQuestStages(Quests.HEROES_QUEST, 0, 1, 2).npcl("Hello. What do you want?").options().let { optionBuilder ->
-            optionBuilder.option_playerl("Can I go in there?").npcl("No. In there is private.").end()
-            optionBuilder.option_playerl("I want for nothing!").npcl("You're one of a very lucky few then.").end()
-        }
-
-        b.onQuestStages(Quests.HEROES_QUEST, 3, 4, 5, 6, 100).npcl("Hello. What do you want?")
-            .playerl("Hi. I'm Hartigen. I've come to work here.").branch { player ->
-                return@branch if (inEquipment(player, Items.BLACK_FULL_HELM_1165) && inEquipment(
-                        player,
-                        Items.BLACK_PLATEBODY_1125,
-                    ) && inEquipment(player, Items.BLACK_PLATELEGS_1077)
-                ) {
-                    1
-                } else {
-                    0
+class GarvDialogueFile : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when (stage) {
+            START_DIALOGUE -> {
+                stage = when (getQuestStage(player!!, Quests.HEROES_QUEST)) {
+                    in 0..2 -> 1
+                    in 3..6, 100 -> 10
+                    else -> 100
                 }
-            }.let { branch ->
-                branch.onValue(1).npcl("I assume you have your I.D. papers then?").branch { player ->
-                    return@branch if (inInventory(player, Items.ID_PAPERS_1584)) {
-                        1
-                    } else {
-                        0
-                    }
-                }.let { branch2 ->
-                    branch2.onValue(1).npcl("You'd better come in then, Grip will want to talk to you.")
-                        .endWith { _, player ->
-                            if (getQuestStage(player, Quests.HEROES_QUEST) == 3) {
-                                setQuestStage(player, Quests.HEROES_QUEST, 4)
-                            }
-                        }
-                    branch2.onValue(0)
-                        .playerl("Uh... Yeah. About that...I must have left them in my other suit of armour.").end()
-                }
-                branch.onValue(0).npcl("Hartigen the Black Knight? I don't think so. He doesn't dress like that.").end()
             }
+
+            // Before joining the Black Knights.
+            1 -> {
+                npcl("Hello. What do you want?")
+                stage = 2
+            }
+
+            2 -> {
+                options("Can I go in there?", "I want for nothing!")
+                stage = 3
+            }
+
+            3 -> when (buttonID) {
+                1 -> stage = 4
+                2 -> stage = 5
+            }
+
+            4 -> {
+                playerl("Can I go in there?")
+                stage = 6
+            }
+
+            6 -> {
+                npcl("No. In there is private.")
+                endFile()
+            }
+
+            5 -> {
+                playerl("I want for nothing!")
+                stage = 7
+            }
+
+            7 -> {
+                npcl("You're one of a very lucky few then.")
+                endFile()
+            }
+
+            // Heroes' Quest stages 3, 4, 5, 6 and 100.
+            10 -> {
+                npcl("Hello. What do you want?")
+                stage = 11
+            }
+
+            11 -> {
+                playerl("Hi. I'm Hartigen. I've come to work here.")
+                stage = 12
+            }
+
+            12 -> {
+                stage = if (
+                    inEquipment(player!!, Items.BLACK_FULL_HELM_1165) &&
+                    inEquipment(player!!, Items.BLACK_PLATEBODY_1125) &&
+                    inEquipment(player!!, Items.BLACK_PLATELEGS_1077)
+                ) {
+                    20
+                } else {
+                    30
+                }
+            }
+
+            20 -> {
+                npcl("I assume you have your I.D. papers then?")
+                stage = 21
+            }
+
+            21 -> {
+                if (inInventory(player!!, Items.ID_PAPERS_1584)) {
+                    npcl("You'd better come in then, Grip will want to talk to you.")
+                    if (getQuestStage(player!!, Quests.HEROES_QUEST) == 3) {
+                        setQuestStage(player!!, Quests.HEROES_QUEST, 4)
+                    }
+                    endFile()
+                } else {
+                    playerl("Uh... Yeah. About that...I must have left them in my other suit of armour.")
+                    endFile()
+                }
+            }
+
+            23 -> {
+                playerl("Uh... Yeah. About that...I must have left them in my other suit of armour.")
+                endFile()
+            }
+
+            30 -> {
+                npcl("Hartigen the Black Knight? I don't think so. He doesn't dress like that.")
+                endFile()
+            }
+
+            100 -> endFile()
+        }
     }
 }

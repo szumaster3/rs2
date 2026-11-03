@@ -1,4 +1,4 @@
-package content.region.asgarnia.falador.quest.rd.plugin.tests
+package content.region.asgarnia.falador.quest.rd.dialogue
 
 import content.region.asgarnia.falador.quest.rd.RDUtils
 import content.region.asgarnia.falador.quest.rd.RecruitmentDrive
@@ -11,7 +11,7 @@ import core.game.world.GameWorld
 import shared.consts.Components
 import shared.consts.NPCs
 
-class TestOfObservation(private val state: Int = 0) : DialogueFile() {
+class LadyTableDialogue(private val state: Int = 0) : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.LADY_TABLE_2283)
@@ -28,7 +28,7 @@ class TestOfObservation(private val state: Int = 0) : DialogueFile() {
                 player!!.faceLocation(location(2458, 4980, 0))
                 setAttribute(player!!, "rd:statues", (1..12).random())
                 setVarbit(player!!, 658, getAttribute(player!!, "rd:statues", 0))
-                npcl(FaceAnim.FRIENDLY, "Welcome, @name. This room will test your observation skills.").also { stage++ }
+                npcl(FaceAnim.FRIENDLY, "Welcome, ${player!!.name}. This room will test your observation skills.").also { stage++ }
             }
             1 -> npcl(FaceAnim.FRIENDLY, "Study the statues closely. There is one missing statue in this room.").also { stage++ }
             2 -> npcl(FaceAnim.FRIENDLY, "We will also mix the order up a little, to make things interesting for you!").also { stage++ }
@@ -85,7 +85,7 @@ class TestOfObservation(private val state: Int = 0) : DialogueFile() {
             1 -> {
                 end()
                 lock(player!!, 10)
-                removeAttribute(player!!, SirReenItchoodPlugin.ATTRIBUTE_CLUE)
+                removeAttribute(player!!, SirReenItchoodDialogue.ATTRIBUTE_CLUE)
                 setAttribute(player!!, RecruitmentDrive.stagePass, false)
                 setAttribute(player!!, RecruitmentDrive.stageFail, false)
                 RDUtils.failSequence(player!!)

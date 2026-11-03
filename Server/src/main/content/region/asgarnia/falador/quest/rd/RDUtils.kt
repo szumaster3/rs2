@@ -1,9 +1,9 @@
 package content.region.asgarnia.falador.quest.rd
 
 import content.region.asgarnia.falador.dialogue.SirTiffyCashienDialogue
-import content.region.asgarnia.falador.quest.rd.plugin.tests.MissCheeversPlugin
-import content.region.asgarnia.falador.quest.rd.plugin.tests.MissCheeversPlugin.Companion.DoorVials.Companion.doorVialsRequiredMap
-import content.region.asgarnia.falador.quest.rd.plugin.tests.TestOfTactics
+import content.region.asgarnia.falador.quest.rd.dialogue.SirKuamFerentseDialogue
+import content.region.asgarnia.falador.quest.rd.plugin.MissCheeversPlugin
+import content.region.asgarnia.falador.quest.rd.plugin.MissCheeversPlugin.Companion.DoorVials.Companion.doorVialsRequiredMap
 import core.api.*
 import core.game.component.Component
 import core.game.interaction.QueueStrength
@@ -21,40 +21,53 @@ import shared.consts.*
  */
 object RDUtils {
 
-    /** The varbit id for tracking the state of the fox on the east side. */
+    /**
+     * The varbit id for tracking the state of the fox on the east side.
+     */
     const val VARBIT_FOX_EAST = 680
-    /** The varbit id for tracking the state of the fox on the west side. */
+
+    /**
+     * The varbit id for tracking the state of the fox on the west side.
+     */
     const val VARBIT_FOX_WEST = 681
-    /** The varbit id for tracking the state of the chicken on the east side. */
+
+    /**
+     * The varbit id for tracking the state of the chicken on the east side.
+     */
     const val VARBIT_CHICKEN_EAST = 682
-    /** The varbit id for tracking the state of the chicken on the west side. */
+
+    /**
+     * The varbit id for tracking the state of the chicken on the west side.
+     */
     const val VARBIT_CHICKEN_WEST = 683
-    /** The varbit id for tracking the state of the grain on the east side. */
+
+    /**
+     * The varbit id for tracking the state of the grain on the east side.
+     */
     const val VARBIT_GRAIN_EAST = 684
-    /** The varbit id for tracking the state of the grain on the west side. */
+
+    /**
+     * The varbit id for tracking the state of the grain on the west side.
+     */
     const val VARBIT_GRAIN_WEST = 685
 
-    /** Attribute to track if the NPC has been spawned. */
+    /**
+     * Attribute to track if the NPC has been spawned.
+     */
     const val ATTRIBUTE_NPC_SPAWN = "rd:generatedsirleye"
 
     /**
      * Returns a fixed location corresponding to a specific scenery object.
-     *
-     * @param node The scenery node being interacted with.
-     * @return The [Location] of the scenery, or (0,0) if unknown.
      */
-    fun getLocationForScenery(node: Node): Location =
-        when (node.asScenery().id) {
-            Scenery.CRATE_7347 -> Location(2476, 4943)
-            Scenery.CRATE_7348 -> Location(2476, 4937)
-            Scenery.CRATE_7349 -> Location(2475, 4943)
-            else -> Location(0, 0)
-        }
+    fun getLocationForScenery(node: Node): Location = when (node.asScenery().id) {
+        Scenery.CRATE_7347 -> Location(2476, 4943)
+        Scenery.CRATE_7348 -> Location(2476, 4937)
+        Scenery.CRATE_7349 -> Location(2475, 4943)
+        else -> Location(0, 0)
+    }
 
     /**
      * Resets the player's state.
-     *
-     * @param player The player whose state is being reset.
      */
     fun resetPlayerState(player: Player) {
         setMinimapState(player, 0)
@@ -68,8 +81,13 @@ object RDUtils {
             VARBIT_GRAIN_WEST,
         ).forEach { setVarbit(player, it, 0) }
 
-        listOf(Items.GRAIN_5607, Items.FOX_5608, Items.CHICKEN_5609)
-            .forEach { removeItem(player, it, Container.EQUIPMENT) }
+        listOf(Items.GRAIN_5607, Items.FOX_5608, Items.CHICKEN_5609).forEach {
+                removeItem(
+                    player,
+                    it,
+                    Container.EQUIPMENT
+                )
+            }
 
         player.inventory.clear()
         player.equipment.clear()
@@ -93,11 +111,6 @@ object RDUtils {
 
     /**
      * Processes the usage of one item on another, replacing them with the resulting item.
-     *
-     * @param player The player using the items.
-     * @param used The item being used.
-     * @param with The item used on.
-     * @param newItem The resulting item.
      */
     fun processItemUsage(player: Player, used: Item, with: Item, newItem: Item) {
         replaceSlot(player, slot = used.index, Item(newItem.id))
@@ -109,9 +122,6 @@ object RDUtils {
 
     /**
      * Handles the player using a vial on a spade during the Miss Cheevers puzzle.
-     *
-     * @param player The player using the vial.
-     * @param used The vial item being used.
      */
     fun handleVialUsage(player: Player, used: Item) {
         lock(player, 5)
@@ -144,8 +154,6 @@ object RDUtils {
 
     /**
      * Handles the player pulling the spade during the Miss Cheevers puzzle.
-     *
-     * @param player The player pulling the spade.
      */
     fun handleSpadePull(player: Player) {
         lock(player, 3)
@@ -165,28 +173,33 @@ object RDUtils {
 
     /**
      * Handles the player walking through the door area, moving them to the correct side.
-     *
-     * @param player The player walking through the door.
      */
     fun handleDoorWalkThrough(player: Player) {
         when {
-            inBorders(player, 2476, 4941, 2477, 4939) ->
-                forceMove(player, player.location, Location(2478, 4940, 0), 20, 80)
-            inBorders(player, 2477, 4941, 2478, 4939) ->
-                forceMove(player, player.location, Location(2476, 4940, 0), 20, 80)
+            inBorders(player, 2476, 4941, 2477, 4939) -> forceMove(
+                player,
+                player.location,
+                Location(2478, 4940, 0),
+                20,
+                80
+            )
+
+            inBorders(player, 2477, 4941, 2478, 4939) -> forceMove(
+                player,
+                player.location,
+                Location(2476, 4940, 0),
+                20,
+                80
+            )
         }
     }
 
     /**
      * Helper method for handling a player searching an object.
-     *
-     * @param player The player searching.
-     * @param attributeCheck Attribute to check if the item was already found.
-     * @param item The item to give the player if successful.
-     * @param searchingDescription Message shown when searching.
-     * @param objectDescription Message shown when finding the item.
      */
-    fun searchingHelper(player: Player, attributeCheck: String, item: Int, searchingDescription: String, objectDescription: String) {
+    fun searchingHelper(
+        player: Player, attributeCheck: String, item: Int, searchingDescription: String, objectDescription: String
+    ) {
         sendMessage(player, searchingDescription)
         queueScript(player, 1, QueueStrength.WEAK) {
             if (attributeCheck.isNotEmpty() && !getAttribute(player, attributeCheck, false)) {
@@ -202,11 +215,6 @@ object RDUtils {
 
     /**
      * Processes item usage and returns the resulting item.
-     *
-     * @param player The player using the items.
-     * @param used The item being used.
-     * @param with The item used on.
-     * @param resultItem The resulting item.
      */
     fun processItemUsageAndReturn(player: Player, used: Item, with: Item, resultItem: Item) {
         processItemUsage(player, used, with, resultItem)
@@ -214,8 +222,6 @@ object RDUtils {
 
     /**
      * Shuffles the puzzle stages and resets the player's quest attributes.
-     *
-     * @param player The player to reset and shuffle stages for.
      */
     @JvmStatic
     fun shuffleTask(player: Player) {
@@ -235,11 +241,11 @@ object RDUtils {
      * Handles fail sequence.
      */
     @JvmStatic
-    fun failSequence(player : Player) {
+    fun failSequence(player: Player) {
         player.lock()
         player.interfaceManager.closeOverlay()
         player.interfaceManager.openOverlay(Component(Components.FADE_TO_BLACK_120))
-        var clearBoss = getAttribute(player, TestOfTactics.spawnSirLeye, NPC(0))
+        var clearBoss = getAttribute(player, SirKuamFerentseDialogue.spawnSirLeye, NPC(0))
         if (clearBoss.id != 0) {
             clearBoss.clear()
         }
@@ -277,7 +283,7 @@ object RDUtils {
      * Handles finish quest sequence.
      */
     @JvmStatic
-    fun finishSequence(player : Player) {
+    fun finishSequence(player: Player) {
         queueScript(player, 1, QueueStrength.SOFT) { stage ->
             when (stage) {
                 0 -> {
@@ -291,6 +297,7 @@ object RDUtils {
                     hideMinimap(player)
                     return@queueScript delayScript(player, 6)
                 }
+
                 1 -> {
                     clearInventory(player)
                     teleport(player, Location(2996, 3375), TeleportManager.TeleportType.INSTANT)
@@ -299,13 +306,17 @@ object RDUtils {
                     return@queueScript delayScript(player, 2)
 
                 }
+
                 2 -> {
                     face(player, findLocalNPC(player, NPCs.SIR_TIFFY_CASHIEN_2290)!!)
                     player.interfaceManager.restoreTabs()
                     player.unlock()
-                    openDialogue(player, SirTiffyCashienDialogue.SirTiffyCashienDialogueFile(), NPC(NPCs.SIR_TIFFY_CASHIEN_2290))
+                    openDialogue(
+                        player, SirTiffyCashienDialogue.SirTiffyCashienDialogueFile(), NPC(NPCs.SIR_TIFFY_CASHIEN_2290)
+                    )
                     return@queueScript stopExecuting(player)
                 }
+
                 else -> return@queueScript stopExecuting(player)
             }
         }

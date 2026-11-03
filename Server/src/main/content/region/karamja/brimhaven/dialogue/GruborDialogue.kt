@@ -5,17 +5,18 @@ import core.api.getAttribute
 import core.api.getQuestStage
 import core.api.openDialogue
 import core.api.setAttribute
-import core.game.dialogue.Dialogue
-import core.game.dialogue.DialogueBuilder
-import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.FaceAnim
+import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import core.tools.START_DIALOGUE
 import shared.consts.NPCs
 import shared.consts.Quests
 
+/**
+ * Represents Grubor dialogue.
+ */
 @Initializable
 class GruborDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -45,33 +46,143 @@ class GruborDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.GRUBOR_789)
 }
 
-class GruborDialogueFile : DialogueBuilderFile() {
-    override fun create(b: DialogueBuilder) {
-        b.onPredicate { player ->
-            getQuestStage(player, Quests.HEROES_QUEST) >= 2 && getAttribute(
-                player, HeroesQuest.attributeGruborLetsYouIn, false
-            ) && HeroesQuest.isBlackArm(player)
-        }.playerl("Hi.").npcl("Hi, I'm a little busy right now.").end()
-        b.onPredicate { player ->
-            getQuestStage(player, Quests.HEROES_QUEST) >= 2 && !getAttribute(
-                player, HeroesQuest.attributeGruborLetsYouIn, false
-            ) && HeroesQuest.isBlackArm(player)
-        }.npcl(FaceAnim.THINKING, "Yes? What do you want?").options().let { optionBuilder ->
-            optionBuilder.option_playerl("Rabbit's foot.").npcl("Eh? What are you on about? Go away!").end()
-            optionBuilder.option_playerl("Four leaved clover.")
-                .npcl("Oh you're one of the gang are you? Ok, hold up a second, I'll just let you in through here.")
-                .linel("You hear the door being unbarred from inside.").endWith { _, player ->
-                    setAttribute(player, HeroesQuest.attributeGruborLetsYouIn, true)
+class GruborDialogueFile : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when (stage) {
+            START_DIALOGUE -> {
+                stage = when {
+                    getQuestStage(player!!, Quests.HEROES_QUEST) >= 2 &&
+                            getAttribute(player!!, HeroesQuest.attributeGruborLetsYouIn, false) &&
+                            HeroesQuest.isBlackArm(player!!) -> 1
+
+                    getQuestStage(player!!, Quests.HEROES_QUEST) >= 2 &&
+                            !getAttribute(player!!, HeroesQuest.attributeGruborLetsYouIn, false) &&
+                            HeroesQuest.isBlackArm(player!!) -> 10
+
+                    else -> 30
                 }
+            }
 
-            optionBuilder.option_playerl("Lucky horseshoe.").npcl("Eh? What are you on about? Go away!").end()
-            optionBuilder.option_playerl("Black cat.").npcl("Eh? What are you on about? Go away!").end()
-        }
+            // Already allowed inside.
+            1 -> {
+                playerl("Hi.")
+                stage = 2
+            }
 
-        b.onPredicate { _ -> true }.npcl(FaceAnim.THINKING, "Yes? What do you want?").options().let { optionBuilder ->
-            optionBuilder.option_playerl("Would you like your hedges trimming?").npcl("Eh? Don't be daft! We don't even HAVE any hedges!").end()
-            optionBuilder.option_playerl("I want to come in.").npcl("No, go away.").end()
-            optionBuilder.option_playerl("Do you want to trade?").npcl("No, I'm busy.").end()
+            2 -> {
+                npcl("Hi, I'm a little busy right now.")
+                endFile()
+            }
+
+            // Black Arm member who has not been let inside.
+            10 -> {
+                npcl(FaceAnim.THINKING, "Yes? What do you want?")
+                stage = 11
+            }
+
+            11 -> {
+                options(
+                    "Rabbit's foot.",
+                    "Four leaved clover.",
+                    "Lucky horseshoe.",
+                    "Black cat."
+                )
+                stage = 12
+            }
+
+            12 -> when (buttonID) {
+                1 -> {
+                    playerl("Rabbit's foot.")
+                    stage = 14
+                }
+                2 -> {
+                    playerl("Four leaved clover.")
+                    stage = 16
+                }
+                3 -> {
+                    playerl("Lucky horseshoe.")
+                    stage = 18
+                }
+                4 -> {
+                    playerl("Black cat.")
+                    stage = 20
+                }
+            }
+
+            14 -> {
+                npcl("Eh? What are you on about? Go away!")
+                endFile()
+            }
+
+            16 -> {
+                npcl("Oh you're one of the gang are you? Ok, hold up a second, I'll just let you in through here.")
+                stage = 21
+            }
+
+            18 -> {
+                npcl("Eh? What are you on about? Go away!")
+                endFile()
+            }
+
+            20 -> {
+                npcl("Eh? What are you on about? Go away!")
+                endFile()
+            }
+
+            21 -> {
+                dialogue("You hear the door being unbarred from inside.")
+                stage = 22
+            }
+
+            22 -> {
+                setAttribute(player!!, HeroesQuest.attributeGruborLetsYouIn, true)
+                endFile()
+            }
+
+            // Everyone else.
+            30 -> {
+                npcl(FaceAnim.THINKING, "Yes? What do you want?")
+                stage = 31
+            }
+
+            31 -> {
+                options(
+                    "Would you like your hedges trimming?",
+                    "I want to come in.",
+                    "Do you want to trade?"
+                )
+                stage = 32
+            }
+
+            32 -> when (buttonID) {
+                1 -> {
+                    playerl("Would you like your hedges trimming?")
+                    stage = 34
+                }
+                2 -> {
+                    playerl("I want to come in.")
+                    stage = 36
+                }
+                3 -> {
+                    playerl("Do you want to trade?")
+                    stage = 38
+                }
+            }
+
+            34 -> {
+                npcl("Eh? Don't be daft! We don't even HAVE any hedges!")
+                endFile()
+            }
+
+            36 -> {
+                npcl("No, go away.")
+                endFile()
+            }
+
+            38 -> {
+                npcl("No, I'm busy.")
+                endFile()
+            }
         }
     }
 }

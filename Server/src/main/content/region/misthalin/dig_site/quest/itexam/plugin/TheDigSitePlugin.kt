@@ -9,8 +9,6 @@ import core.api.*
 import core.api.utils.PlayerCamera
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
-import core.game.dialogue.DialogueBuilder
-import core.game.dialogue.DialogueBuilderFile
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
@@ -23,6 +21,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
+import core.tools.START_DIALOGUE
 import shared.consts.*
 
 class TheDigSitePlugin : InteractionListener {
@@ -506,23 +505,32 @@ class TheDigSitePlugin : InteractionListener {
         onUseWith(SCENERY, Items.VIAL_229, Scenery.BARREL_17297) { player, used, _ ->
             if (removeItem(player, used)) {
                 addItemOrDrop(player, Items.UNIDENTIFIED_LIQUID_702)
+
                 openDialogue(
                     player,
-                    object : DialogueBuilderFile() {
-                        override fun create(b: DialogueBuilder) {
-                            b
-                                .onPredicate { _ -> true }
-                                .item(Items.UNIDENTIFIED_LIQUID_702, "You fill the vial with the liquid.")
-                                .player(
-                                    "I'm not sure what this stuff is. I had better be VERY",
-                                    "careful with it; I had better not drop it either...",
-                                )
+                    object : DialogueFile() {
+                        override fun handle(componentID: Int, buttonID: Int) {
+                            when (stage) {
+                                START_DIALOGUE -> {
+                                    sendItemDialogue(player, Items.UNIDENTIFIED_LIQUID_702, "You fill the vial with the liquid.")
+                                    stage = 1
+                                }
+
+                                1 -> {
+                                    player("I'm not sure what this stuff is. I had better be VERY", "careful with it; I had better not drop it either...")
+                                    stage = 2
+                                }
+
+                                2 -> endFile()
+                            }
                         }
-                    },
+                    }
                 )
+
                 sendMessage(player, "You put the lid back on the barrel just in case it's dangerous.")
                 setVarbit(player, TheDigSite.barrelVarbit, 0)
             }
+
             return@onUseWith true
         }
 

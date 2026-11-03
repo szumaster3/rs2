@@ -1,6 +1,5 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
-import content.region.asgarnia.burthorpe.quest.hero.dialogue.KatrineDialogueFile
 import content.region.asgarnia.burthorpe.quest.hero.dialogue.StravenDialogueFile
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.getQuestStage

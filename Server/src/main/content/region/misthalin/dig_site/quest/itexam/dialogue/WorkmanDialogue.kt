@@ -42,18 +42,32 @@ class WorkmanDialogue(player: Player? = null) : Dialogue(player) {
         intArrayOf(NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565)
 }
 
-class DigsiteWorkmanDialogueFile : DialogueBuilderFile() {
-    override fun create(b: DialogueBuilder) {
-        b.onPredicate { _ -> true }.playerl(FaceAnim.FRIENDLY, "Here, have a look at this...").npc(
-                FaceAnim.FRIENDLY,
-                "I give permission... blah de blah... err. Okay, that's all in",
-                "order, you may use the mineshaft now. I'll hang onto",
-                "this scroll, shall I?",
-            ).endWith { _, player ->
-                removeItem(player, Items.INVITATION_LETTER_696)
-                if (getQuestStage(player, Quests.THE_DIG_SITE) == 7) {
-                    setQuestStage(player, Quests.THE_DIG_SITE, 8)
-                }
+class DigsiteWorkmanDialogueFile : DialogueFile() {
+
+    override fun handle(componentID: Int, buttonID: Int) {
+        when (stage) {
+            START_DIALOGUE -> {
+                playerl(FaceAnim.FRIENDLY, "Here, have a look at this...")
+                stage = 1
             }
+
+            1 -> {
+                npc(
+                    FaceAnim.FRIENDLY,
+                    "I give permission... blah de blah... err. Okay, that's all in",
+                    "order, you may use the mineshaft now. I'll hang onto",
+                    "this scroll, shall I?"
+                )
+                stage = 2
+            }
+
+            2 -> {
+                removeItem(player!!, Items.INVITATION_LETTER_696)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 7) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE, 8)
+                }
+                endFile()
+            }
+        }
     }
 }

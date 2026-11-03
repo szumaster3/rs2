@@ -1,11 +1,8 @@
-package content.region.asgarnia.falador.quest.rd.plugin.tests
+package content.region.asgarnia.falador.quest.rd.plugin
 
-import content.region.asgarnia.falador.quest.rd.RDUtils
 import content.region.asgarnia.falador.quest.rd.RecruitmentDrive
+import content.region.asgarnia.falador.quest.rd.dialogue.SirTinleyDialogueFile
 import core.api.*
-import core.game.dialogue.DialogueBuilder
-import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.FaceAnim
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -15,7 +12,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Scenery
 
-class SirSpishyusRoomListeners : InteractionListener {
+class SirTinleyPlugin : InteractionListener {
 
     companion object {
         /**
@@ -107,7 +104,7 @@ class SirSpishyusRoomListeners : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Scenery.PRECARIOUS_BRIDGE_7286, SCENERY, "cross") { player, node ->
+        on(Scenery.PRECARIOUS_BRIDGE_7286, SCENERY, "cross") { player, _ ->
             if (countEquipmentItems(player) > 1) {
                 sendDialogue(player, "I really don't think I should be carrying more than 5Kg across that rickety bridge...")
             } else if (checkFail(player)) {
@@ -121,7 +118,7 @@ class SirSpishyusRoomListeners : InteractionListener {
             return@on true
         }
 
-        on(Scenery.PRECARIOUS_BRIDGE_7287, SCENERY, "cross") { player, node ->
+        on(Scenery.PRECARIOUS_BRIDGE_7287, SCENERY, "cross") { player, _ ->
             if (countEquipmentItems(player) > 1) {
                 sendDialogue(player, "I really don't think I should be carrying more than 5Kg across that rickety bridge...")
             } else if (checkFail(player)) {
@@ -251,35 +248,5 @@ class SirSpishyusRoomListeners : InteractionListener {
             }
             return@onUnequip true
         }
-    }
-}
-
-class SirSpishyusDialogueFile(private val dialogueNum: Int = 0) : DialogueBuilderFile() {
-
-    override fun create(b: DialogueBuilder) {
-        b.onPredicate { player -> getAttribute(player, RecruitmentDrive.stagePass, false) }
-            .npc(FaceAnim.HAPPY, "Excellent work, @name.", "Please step through the portal to your next challenge.")
-            .end()
-
-        b.onPredicate { player ->
-            dialogueNum == 2 || getAttribute(player, RecruitmentDrive.stageFail, false)
-        }
-            .betweenStage { _, player, _, _ ->
-                setAttribute(player, RecruitmentDrive.stageFail, true)
-            }
-            .npc(FaceAnim.SAD, "No... I am very sorry.", "You are not up to the challenge.", "Better luck in the future.")
-            .endWith { _, player ->
-                removeAttribute(player, "quest:recruitmentdrive-donotmove")
-                setAttribute(player, RecruitmentDrive.stagePass, false)
-                setAttribute(player, RecruitmentDrive.stageFail, false)
-                RDUtils.failSequence(player)
-            }
-
-        b.onPredicate { true }
-            .npcl(FaceAnim.FRIENDLY, "Ah, welcome @name.")
-            .playerl(FaceAnim.FRIENDLY, "Hello. What am I supposed to do here?")
-            .npcl(FaceAnim.FRIENDLY, "Take the fox, chicken, and grain across the bridge, but be careful!")
-            .npcl(FaceAnim.FRIENDLY, "You can only carry one at a time, and leaving the wrong pair alone will result in failure.")
-            .playerl(FaceAnim.FRIENDLY, "Got it. I'll see what I can do.")
     }
 }

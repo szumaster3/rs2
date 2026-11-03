@@ -3,7 +3,7 @@ package content.region.asgarnia.falador.quest.rd.plugin
 import content.region.asgarnia.falador.dialogue.KnightNotesDialogue
 import content.region.asgarnia.falador.quest.rd.RDUtils
 import content.region.asgarnia.falador.quest.rd.RecruitmentDrive
-import content.region.asgarnia.falador.quest.rd.plugin.tests.*
+import content.region.asgarnia.falador.quest.rd.dialogue.*
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
@@ -44,7 +44,7 @@ class RecruitmentDrivePlugin : InteractionListener, MapArea {
                 sendNPCDialogueLines(player, NPCs.LADY_TABLE_2283, FaceAnim.NEUTRAL, false, "Excellent work, ${player.name}.", "Please step through the portal to meet your next challenge.")
             } else {
                 setAttribute(player, RecruitmentDrive.stageFail, true)
-                openDialogue(player, TestOfObservation(2), NPC(NPCs.LADY_TABLE_2283))
+                openDialogue(player, LadyTableDialogue(2), NPC(NPCs.LADY_TABLE_2283))
             }
             return@on true
         }
@@ -227,13 +227,13 @@ class RecruitmentDrivePlugin : InteractionListener, MapArea {
 
         fun initRoomStage(player: Player, npc: Int) {
             when (npc) {
-                NPCs.SIR_SPISHYUS_2282 -> openDialogue(player, SirSpishyusDialogueFile(1), NPC(npc))
-                NPCs.LADY_TABLE_2283 -> openDialogue(player, TestOfObservation(1), NPC(npc))
-                NPCs.SIR_KUAM_FERENTSE_2284 -> openDialogue(player, TestOfTactics(1), NPC(npc))
+                NPCs.SIR_SPISHYUS_2282 -> openDialogue(player, SirSpishyusDialogue(1), NPC(npc))
+                NPCs.LADY_TABLE_2283 -> openDialogue(player, LadyTableDialogue(1), NPC(npc))
+                NPCs.SIR_KUAM_FERENTSE_2284 -> openDialogue(player, SirKuamFerentseDialogue(1), NPC(npc))
                 NPCs.SIR_TINLEY_2286 -> openDialogue(player, SirTinleyDialogueFile(1), NPC(npc))
-                NPCs.SIR_REN_ITCHOOD_2287 -> openDialogue(player, SirReenItchoodPlugin(1), NPC(npc))
+                NPCs.SIR_REN_ITCHOOD_2287 -> openDialogue(player, SirReenItchoodDialogue(1), NPC(npc))
                 NPCs.MISS_CHEEVERS_2288 -> openDialogue(player, MissCheeversDialogueFile(1), NPC(npc))
-                NPCs.MS_HYNN_TERPRETT_2289 -> openDialogue(player, TestOfWits(1), NPC(npc))
+                NPCs.MS_HYNN_TERPRETT_2289 -> openDialogue(player, MsHynnTerprettDialogue(1), NPC(npc))
             }
         }
     }
