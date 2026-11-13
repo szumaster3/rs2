@@ -596,23 +596,24 @@ public enum Decoration {
     }
 
     public static Decoration getDecoration(Player player, Scenery object) {
+        HouseManager house = player.getHouseManager();
         Location l = object.getLocation();
-        int z = l.getZ();
-        if (HouseManager.isInDungeon(player)) {
-            z = 3;
-        }
-        Room room = player.getHouseManager().getRooms()[z][l.getChunkX()][l.getChunkY()];
+        Room room = house.getRoom(l);
+        if (room == null) return null;
         for (Hotspot h : room.getHotspots()) {
             if (h.getCurrentX() == l.getChunkOffsetX() && h.getCurrentY() == l.getChunkOffsetY()) {
-                if (h.getDecorationIndex() != -1) {
-                    Decoration deco = h.getHotspot().getDecorations()[h.getDecorationIndex()];
-                    if (deco.getObjectId(player.getHouseManager().getStyle()) == object.getId()) {
-                        return deco;
-                    }
+                Decoration deco = h.getDecoration();
+                if (deco != null && deco.getObjectId(house, h.getHotspot()) == object.getId()) {
+                    return deco;
                 }
             }
         }
         return null;
+    }
+
+    public int getObjectId(HouseManager house, BuildHotspot hotspot) {
+        int id = getObjectId(house.getStyle());
+        return hotspot.getType() == BuildHotspotType.CREST ? id + house.getCrest().ordinal() : id;
     }
 
     public static Decoration forObjectId(int objectId) {

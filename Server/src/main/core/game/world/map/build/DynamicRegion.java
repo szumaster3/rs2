@@ -312,7 +312,7 @@ public final class DynamicRegion extends Region {
         chunks[z][x][y] = chunk;
         getPlanes()[z].getChunks()[x][y] = chunk;
         if (chunk != null) {
-            chunk.setCurrentBase(getBaseLocation().transform(x << 3, y << 3, 0));
+            chunk.setCurrentBase(getBaseLocation().transform(x << 3, y << 3, z));
         }
     }
 
@@ -328,26 +328,33 @@ public final class DynamicRegion extends Region {
     public void replaceChunk(int z, int x, int y, RegionChunk chunk, Region fromRegion) {
         Region.load(DynamicRegion.this);
         RegionPlane p = getPlanes()[z];
-        chunks[z][x][y] = chunk;
-        p.getChunks()[x][y] = chunk;
+        RegionChunk previous = p.getChunks()[x][y];
+        for (int dx = 0; dx < RegionChunk.SIZE; dx++) {
+            for (int dy = 0; dy < RegionChunk.SIZE; dy++) {
+                if (previous != null) {
+                    for (Scenery object : previous.getObjects(dx, dy)) {
+                        if (object != null && object.isRenderable()) {
+                            Location loc = object.getLocation();
+                            LandscapeParser.removeClippingFlagsFor(p, loc.getLocalX(), loc.getLocalY(), object);
+                        }
+                    }
+                }
+                p.getObjects()[(x << 3) + dx][(y << 3) + dy] = null;
+            }
+        }
+        setChunk(z, x, y, chunk);
         if (chunk == null) {
             for (int i = x << 3; i < (x + 1) << 3; i++) {
                 for (int j = y << 3; j < (y + 1) << 3; j++) {
                     p.getFlags().invalidateFlag(i, j);
                     p.getProjectileFlags().invalidateFlag(i, j);
-                    Scenery object = p.getObjects()[i][j];
-                    if (object != null) {
-                        LandscapeParser.removeScenery(object);
-                    } else {
-                        p.add(null, i, j, true);
-                    }
+                    p.getFlags().getLandscape()[i][j] = false;
                 }
             }
         } else {
             Region.load(fromRegion);
             Location l = chunk.getBase();
             RegionPlane rp = fromRegion.getPlanes()[l.getZ()];
-            chunk.setCurrentBase(getBaseLocation().transform(x << 3, y << 3, z));
             chunk.rebuildFlags(rp);
         }
     }

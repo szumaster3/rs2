@@ -152,20 +152,7 @@ class RegionPlane(
 
         val oldObject: Scenery?
         if (chunk is BuildRegionChunk) {
-            val index = chunk.getIndex(offsetX, offsetY, objectId)
-            oldObject = chunk.getObjects(index)[offsetX][offsetY]
-            val remove = Scenery(
-                0, region.baseLocation.transform(
-                    x, y,
-                    plane
-                ), 22, 0
-            )
-            remove.isRenderable = false
-
-            if (oldObject != null) {
-            }
-
-            chunk.getObjects(index)[offsetX][offsetY] = remove
+            chunk.find(offsetX, offsetY, objectId)?.let(chunk::remove)
             return
         }
 
@@ -198,7 +185,7 @@ class RegionPlane(
         val offsetY = y - chunkY * CHUNK_SIZE
         val r = getRegionChunk(chunkX, chunkY)
         if (r is BuildRegionChunk) {
-            r.store(`object`)
+            if (`object` != null) r.store(`object`)
             return
         }
         r.getObjects()[offsetX][offsetY] = `object`
@@ -214,6 +201,11 @@ class RegionPlane(
             }
             return list
         }
+
+    fun resetMap() {
+        chunks = Array(CHUNK_SIZE) { arrayOfNulls(CHUNK_SIZE) }
+        objects = Array(REGION_SIZE) { arrayOfNulls(REGION_SIZE) }
+    }
 
     /**
      * Clears this region plane.
@@ -368,8 +360,7 @@ class RegionPlane(
         val chunk = getRegionChunk(chunkX, chunkY) ?: return null
 
         if (chunk is BuildRegionChunk) {
-            val brc = chunk
-            return brc[offsetX, offsetY, brc.getIndex(offsetX, offsetY, objectId)]
+            return chunk.find(offsetX, offsetY, objectId)
         }
 
         val objects = chunk.getObjects() ?: return null

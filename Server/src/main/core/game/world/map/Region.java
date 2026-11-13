@@ -318,23 +318,23 @@ public class Region {
             if (r.isLoaded() && r.isBuild() == build) {
                 return;
             }
+            if (r.isBuild() != build) {
+                for (RegionPlane plane : r.planes) {
+                    plane.resetMap();
+                }
+                RegionManager.resetFlags(r.getId());
+                r.objectCount = 0;
+            }
             r.build = build;
             boolean dynamic = r instanceof DynamicRegion;
             int regionId = dynamic ? ((DynamicRegion) r).getRegionId() : r.getId();
             int regionX = regionId >> 8 & 0xFF;
             int regionY = regionId & 0xFF;
-            int mapscapeId = Cache.getIndexes()[5].getArchiveId("m" + regionX + "_"+ regionY);
-
-            if (mapscapeId < 0 && !dynamic) {
-                r.setLoaded(true);
-                return;
-            }
+            int mapscapeId = regionId < 0 ? -1 : Cache.getIndexes()[5].getArchiveId("m" + regionX + "_" + regionY);
 
             byte[][][] mapscapeData = new byte[4][SIZE][SIZE];
             for (RegionPlane plane : r.planes) {
                 plane.getFlags().setLandscape(new boolean[SIZE][SIZE]);
-                //plane.getFlags().setClippingFlags(new int[SIZE][SIZE]);
-                //plane.getProjectileFlags().setClippingFlags(new int[SIZE][SIZE]);
             }
             if (mapscapeId > -1) {
                 ByteBuffer mapscape = ByteBuffer.wrap(Cache.getIndexes()[5].getCacheFile().getContainerUnpackedData(mapscapeId));
@@ -342,7 +342,11 @@ public class Region {
             }
             r.hasFlags = dynamic;
             r.setLoaded(true);
-            int landscapeId = Cache.getIndexes()[5].getArchiveId("l" + regionX + "_" + regionY);
+            if (mapscapeId < 0 && !dynamic) {
+                return;
+            }
+            MapscapeParser.clipMapscape(r, mapscapeData);
+            int landscapeId = regionId < 0 ? -1 : Cache.getIndexes()[5].getArchiveId("l" + regionX + "_" + regionY);
             if (landscapeId > -1) {
                 byte[] landscape = Cache.getIndexes()[5].getFileData(landscapeId, 0, XteaParser.Companion.getRegionXTEA(regionId));
                 if (landscape == null || landscape.length < 4) {
@@ -355,7 +359,6 @@ public class Region {
                     new Throwable("Failed parsing region " + regionId + "!", t).printStackTrace();
                 }
             }
-            MapscapeParser.clipMapscape(r, mapscapeData);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -391,7 +394,11 @@ public class Region {
                 }
             }
         }
-        if (r.isBuild()) r.setLoaded(false);
+        if (r.isBuild()) {
+            r.setLoaded(false);
+            r.objectCount = 0;
+            RegionManager.resetFlags(r.getId());
+        }
         r.activityPulse.stop();
         return true;
     }

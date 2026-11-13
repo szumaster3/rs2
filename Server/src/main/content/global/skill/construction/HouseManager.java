@@ -308,11 +308,8 @@ public final class HouseManager {
                 Room room = rooms[0][x][y];
                 if (room != null && (room.getProperties() == RoomProperties.GARDEN || room.getProperties() == RoomProperties.FORMAL_GARDEN)) {
                     for (Hotspot h : room.getHotspots()) {
-                        if (h.getDecorationIndex() > -1) {
-                            Decoration d = h.getHotspot().getDecorations()[h.getDecorationIndex()];
-                            if (d == Decoration.PORTAL) {
-                                return houseRegion.getBaseLocation().transform(x * 8 + h.getChunkX(), y * 8 + h.getChunkY() + 2, 0);
-                            }
+                        if (h.getDecoration() == Decoration.PORTAL && h.getCurrentX() >= 0) {
+                            return houseRegion.getBaseLocation().transform(x * 8 + h.getCurrentX(), y * 8 + h.getCurrentY() + 2, 0);
                         }
                     }
                 }
@@ -374,8 +371,9 @@ public final class HouseManager {
      */
     public DynamicRegion construct() {
         houseRegion = getPreparedRegion();
+        dungeonRegion = null;
         configureRoofs();
-        prepareHouseChunks(style, houseRegion, buildingMode, rooms);
+        prepareHouseChunks(style, houseRegion, rooms);
         houseRegion.flagActive();
 
         if (hasDungeon()) {
@@ -411,26 +409,23 @@ public final class HouseManager {
         HouseManager manager;
 
         /**
-         * The Building mode.
-         */
-        boolean buildingMode;
-
-        /**
          * Instantiates a new Room load contract.
          *
          * @param manager      the manager
-         * @param buildingMode the building mode
          * @param rooms        the rooms
          */
-        public RoomLoadContract(HouseManager manager, boolean buildingMode, Room[][][] rooms) {
+        public RoomLoadContract(HouseManager manager, Room[][][] rooms) {
             this.rooms = rooms;
             this.manager = manager;
-            this.buildingMode = buildingMode;
         }
 
         @Override
         public BuildRegionChunk getChunk(int x, int y, int plane, @NotNull DynamicRegion dyn) {
-            return rooms[plane][x][y].getChunk().copy(dyn.getPlanes()[plane]);
+            Room room = rooms[plane][x][y];
+            room.decorate(style);
+            BuildRegionChunk chunk = room.getChunk().copy(dyn.getPlanes()[plane]);
+            chunk.rotate(room.getRotation());
+            return chunk;
         }
 
         @Override
@@ -439,13 +434,13 @@ public final class HouseManager {
         }
     }
 
-    private void prepareHouseChunks(HousingStyle style, DynamicRegion target, boolean buildingMode, Room[][][] rooms) {
+    private void prepareHouseChunks(HousingStyle style, DynamicRegion target, Room[][][] rooms) {
         Region from = RegionManager.forId(style.getRegionId());
         Region.load(from, true);
         RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
         RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0, 0);
 
-        RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, rooms);
+        RoomLoadContract loadRooms = new RoomLoadContract(this, rooms);
         RegionSpecification spec = new RegionSpecification(
                 using(target),
                 fillWith(defaultChunk)
@@ -468,7 +463,7 @@ public final class HouseManager {
         Region.load(from, true);
         RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
 
-        RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, new Room[][][]{rooms});
+        RoomLoadContract loadRooms = new RoomLoadContract(this, new Room[][][]{rooms});
         RegionSpecification spec = new RegionSpecification(
                 using(target),
                 fillWith((x, y, plane, region) -> buildingMode ? null : defaultChunk)
@@ -532,31 +527,8 @@ public final class HouseManager {
         }
         int chunkX = object.getLocation().getChunkOffsetX();
         int chunkY = object.getLocation().getChunkOffsetY();
-        switch (room.getRotation()) {
-            case WEST: {
-                int tempChunk = chunkY;
-                chunkY = 7 - chunkX;
-                chunkX = tempChunk;
-                break;
-            }
-            case EAST: {
-                //x = y, y = x, x = 7 - y
-                int tempChunk = chunkX;
-                chunkX = 7 - chunkY;
-                chunkY = tempChunk;
-                break;
-            }
-            case SOUTH: {
-                chunkX = 7 - chunkX;
-                chunkY = 7 - chunkY;
-                break;
-            }
-            default: {
-
-            }
-        }
         for (Hotspot h : room.getHotspots()) {
-            if ((h.getChunkX() == chunkX || h.getChunkX2() == chunkX) && (h.getChunkY() == chunkY || h.getChunkY2() == chunkY) && h.getHotspot().getObjectId(style) == object.getId()) {
+            if (h.getCurrentX() == chunkX && h.getCurrentY() == chunkY && h.getCurrentObjectId() == object.getId()) {
                 return h;
             }
         }
@@ -572,6 +544,9 @@ public final class HouseManager {
      * @return {@code True} if so.
      */
     public boolean hasRoomAt(int z, int roomX, int roomY) {
+        if (roomX < 0 || roomX >= rooms[z].length || roomY < 0 || roomY >= rooms[z][roomX].length) {
+            return false;
+        }
         Room room = rooms[z][roomX][roomY];
         return room != null && !room.getProperties().isRoof();
     }

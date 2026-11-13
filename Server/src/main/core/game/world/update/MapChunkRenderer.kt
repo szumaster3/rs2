@@ -22,20 +22,18 @@ object MapChunkRenderer {
         val last = player.playerFlags.lastViewport
         val updated: MutableList<RegionChunk> = ArrayList()
         val current = v.chunks
-        var sizeX = last.size
-        for (x in 0 until sizeX) {
-            val sizeY: Int = last[x].size
-            for (y in 0 until sizeY) {
-                val previous = last[x][y] ?: continue
-                if (!containsChunk(current, previous)) {
-                    PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
-                } else {
-                    updated.add(previous)
+        if (!player.playerFlags.isUpdateSceneGraph) {
+            for (column in last) {
+                for (previous in column.filterNotNull()) {
+                    if (!containsChunk(current, previous)) {
+                        PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
+                    } else {
+                        updated.add(previous)
+                    }
                 }
             }
         }
-        sizeX = current.size
-        for (x in 0 until sizeX) {
+        for (x in current.indices) {
             val sizeY: Int = current[x].size
             for (y in 0 until sizeY) {
                 val chunk = current[x][y]

@@ -6,7 +6,10 @@ class Hotspot(val hotspot: BuildHotspot, val chunkX: Int, val chunkY: Int, var c
 
     var currentX: Int
     var currentY: Int
+    var currentObjectId = hotspot.objectId
     var decorationIndex = -1
+
+    fun getDecoration(): Decoration? = hotspot.decorations.getOrNull(decorationIndex)
 
     fun copy(): Hotspot {
         return Hotspot(hotspot, chunkX, chunkY, chunkX2, chunkY2)

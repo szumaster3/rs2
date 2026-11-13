@@ -4,17 +4,13 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
-import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.build.LandscapeParser;
 import core.net.packet.IoBuffer;
 import core.net.packet.out.ClearScenery;
 import core.net.packet.out.ConstructGroundItem;
 import core.net.packet.out.ConstructScenery;
-import core.tools.Log;
 
 import java.util.ArrayList;
-
-import static core.api.ContentAPIKt.log;
 
 /**
  * A region chunk, used for easily modifying objects.
@@ -49,8 +45,9 @@ public class BuildRegionChunk extends RegionChunk {
         this(base, rotation, plane);
         for (int x = 0; x < SIZE; x++) {
             for (int y = 0; y < SIZE; y++) {
-                if (objects[x][y] != null) {
-                    this.objects[0][x][y] = new Scenery(objects[x][y]);
+                Scenery object = objects[x][y];
+                if (object != null && object.getId() != 0) {
+                    this.objects[0][x][y] = copyObject(object, object.getRotation(), object.getLocation());
                 }
             }
         }
@@ -58,16 +55,22 @@ public class BuildRegionChunk extends RegionChunk {
 
     @Override
     protected boolean appendUpdate(Player player, IoBuffer buffer) {
-        boolean updated = false;//super.appendUpdate(player, buffer);
-        for (int i = 0; i < objects.length; i++) {
-            for (int x = 0; x < SIZE; x++) {
-                for (int y = 0; y < SIZE; y++) {
-                    Scenery o = objects[i][x][y];
-                    if (o instanceof Constructed) {
-                        ConstructScenery.write(buffer, o);
+        boolean updated = false;
+        for (Scenery[][] layer : objects) {
+            for (Scenery[] column : layer) {
+                for (Scenery object : column) {
+                    if (object != null && !object.isRenderable()) {
+                        ClearScenery.write(buffer, object);
                         updated = true;
-                    } else if (o != null && !o.isRenderable()) {
-                        ClearScenery.write(buffer, o);
+                    }
+                }
+            }
+        }
+        for (Scenery[][] layer : objects) {
+            for (Scenery[] column : layer) {
+                for (Scenery object : column) {
+                    if (object instanceof Constructed && object.isRenderable()) {
+                        ConstructScenery.write(buffer, object);
                         updated = true;
                     }
                 }
@@ -87,61 +90,33 @@ public class BuildRegionChunk extends RegionChunk {
 
     @Override
     public void rotate(Direction direction) {
-        if (rotation != 0) {
-            log(this.getClass(), Log.ERR, "Region chunk was already rotated!");
+        int angle = direction.toInteger();
+        if (angle > 3) {
+            throw new IllegalArgumentException("Chunk rotation must be cardinal");
+        }
+        int turns = (angle - rotation) & 3;
+        if (turns == 0) {
             return;
         }
-        Scenery[][][] copy = new Scenery[ARRAY_SIZE][SIZE][SIZE];
-        int baseX = currentBase.getLocalX();
-        int baseY = currentBase.getLocalY();
-        for (int x = 0; x < SIZE; x++) {
-            for (int y = 0; y < SIZE; y++) {
-                for (int i = 0; i < objects.length; i++) {
-                    Scenery object = copy[i][x][y] = objects[i][x][y];
-                    if (object != null) {
-                        SceneryBuilder.remove(object);
-                        this.remove(object);
-                    }
-                }
-            }
-        }
-        clear();
-        switch (direction) {
-            case NORTH:
-                rotation = 0;
-                break;
-            case EAST:
-                rotation = 1;
-                break;
-            case SOUTH:
-                rotation = 2;
-                break;
-            case WEST:
-                rotation = 3;
-                break;
-            default:
-                rotation = (direction.toInteger() + (direction.toInteger() % 2 == 0 ? 2 : 0)) % 4;
-                log(this.getClass(), Log.ERR, "Attempted to rotate a chunk in a non-cardinal direction - using fallback rotation code. This should be investigated!");
-                break;
-        }
-        ;
-        for (int i = 0; i < objects.length; i++) {
+        // Rotate a detached copy before installing it in the destination region.
+        Scenery[][][] rotated = new Scenery[ARRAY_SIZE][SIZE][SIZE];
+        for (Scenery[][] layer : objects) {
             for (int x = 0; x < SIZE; x++) {
                 for (int y = 0; y < SIZE; y++) {
-                    Scenery object = copy[i][x][y];
-                    if (object != null) {
-                        int[] pos = getRotatedPosition(x, y, object.getDefinition().sizeX, object.getDefinition().sizeY, object.getRotation(), rotation);
-                        Scenery obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, object.getLocation().transform(pos[0] - x, pos[1] - y, 0));
-                        if (object instanceof Constructed) {
-                            obj = obj.asConstructed();
-                        }
-                        obj.setActive(object.isActive());
-                        obj.setRenderable(object.isRenderable());
-                        LandscapeParser.flagScenery(plane, baseX + pos[0], baseY + pos[1], obj, true, true);
+                    Scenery object = layer[x][y];
+                    if (object == null) {
+                        continue;
                     }
+                    int[] pos = getRotatedPosition(x, y, object.getDefinition().sizeX,
+                            object.getDefinition().sizeY, object.getRotation(), turns);
+                    Scenery copy = copyObject(object, (object.getRotation() + turns) & 3,
+                            currentBase.transform(pos[0], pos[1], 0));
+                    store(rotated, pos[0], pos[1], copy);
                 }
             }
         }
+        System.arraycopy(rotated, 0, objects, 0, objects.length);
+        rotation = angle;
     }
 
     @Override
@@ -151,12 +126,8 @@ public class BuildRegionChunk extends RegionChunk {
             for (int x = 0; x < SIZE; x++) {
                 for (int y = 0; y < SIZE; y++) {
                     Scenery o = objects[i][x][y];
-                    if (o instanceof Constructed) {
-                        chunk.objects[i][x][y] = o.transform(o.getId(), o.getRotation()).asConstructed();
-                    } else if (o != null) {
-                        chunk.objects[i][x][y] = o.transform(o.getId());
-                        chunk.objects[i][x][y].setActive(o.isActive());
-                        chunk.objects[i][x][y].setRenderable(o.isRenderable());
+                    if (o != null) {
+                        chunk.objects[i][x][y] = copyObject(o, o.getRotation(), o.getLocation());
                     }
                 }
             }
@@ -164,18 +135,26 @@ public class BuildRegionChunk extends RegionChunk {
         return chunk;
     }
 
+    private static Scenery copyObject(Scenery object, int rotation, Location location) {
+        Scenery copy = object.transform(object.getId(), rotation, location);
+        if (object instanceof Constructed) {
+            copy = copy.asConstructed();
+        }
+        copy.setActive(object.isActive());
+        copy.setRenderable(object.isRenderable());
+        return copy;
+    }
+
     @Override
     public void rebuildFlags(RegionPlane from) {
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                Location loc = currentBase.transform(x, y, 0);
-                Location fromLoc = base.transform(x, y, 0);
-                plane.getFlags().getLandscape()[loc.getLocalX()][loc.getLocalY()] = from.getFlags().getLandscape()[fromLoc.getLocalX()][fromLoc.getLocalY()];
-                plane.getFlags().clearFlag(x, y);
-                for (int i = 0; i < ARRAY_SIZE; i++) {
-                    Scenery obj = objects[i][x][y];
-                    if (obj != null)
-                        LandscapeParser.applyClippingFlagsFor(plane, loc.getLocalX(), loc.getLocalY(), obj);
+        super.copyTerrain(from);
+        for (Scenery[][] layer : objects) {
+            for (Scenery[] column : layer) {
+                for (Scenery object : column) {
+                    if (object != null && object.isRenderable()) {
+                        Location loc = object.getLocation();
+                        LandscapeParser.applyClippingFlagsFor(plane, loc.getLocalX(), loc.getLocalY(), object);
+                    }
                 }
             }
         }
@@ -201,52 +180,17 @@ public class BuildRegionChunk extends RegionChunk {
     public void remove(Scenery object) {
         int chunkX = object.getLocation().getChunkOffsetX();
         int chunkY = object.getLocation().getChunkOffsetY();
-        Scenery current = null;
-        int index = -1;
-        int i = 0;
-        while ((current == null || current.getId() != object.getId()) && i < objects.length) {
-            current = objects[i++][chunkX][chunkY];
-            if ((current == null || current.getId() < 1) && index == -1) {
-                index = i - 1;
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i][chunkX][chunkY] == object) {
+                if (object instanceof Constructed) {
+                    objects[i][chunkX][chunkY] = null;
+                } else {
+                    object.setRenderable(false);
+                }
+                object.setActive(false);
+                return;
             }
         }
-        if (current != null && current.equals(object)) {
-            current.setActive(false);
-            object.setRenderable(false);
-        } else {
-            objects[index][chunkX][chunkY] = object;
-        }
-        object.setActive(false);
-        object.setRenderable(false);
-    }
-
-    /**
-     * Adds the scenery.
-     *
-     * @param object The object to add.
-     */
-    public void add(Scenery object) {
-        int chunkX = object.getLocation().getChunkOffsetX();
-        int chunkY = object.getLocation().getChunkOffsetY();
-        Scenery current = null;
-        int index = -1;
-        int i = 0;
-        while ((current == null || current.getId() != object.getId()) && i < objects.length) {
-            current = objects[i++][chunkX][chunkY];
-            if ((current == null || current.getId() < 1) && index == -1) {
-                index = i - 1;
-            }
-        }
-        if (current != null && current.equals(object)) {
-            current.setActive(true);
-            current.setRenderable(true);
-        } else if (index == -1) {
-            throw new IllegalStateException("Insufficient array length for storing object!");
-        } else {
-            objects[index][chunkX][chunkY] = object = object.asConstructed();
-        }
-        object.setActive(true);
-        object.setRenderable(true);
     }
 
     /**
@@ -255,29 +199,26 @@ public class BuildRegionChunk extends RegionChunk {
      * @param object The object.
      */
     public void store(Scenery object) {
-        if (object == null) {
-            return;
-        }
         int chunkX = object.getLocation().getChunkOffsetX();
         int chunkY = object.getLocation().getChunkOffsetY();
-        for (int i = 0; i < objects.length; i++) {
-            Scenery stat = objects[i][chunkX][chunkY];
-            if (stat == null || stat.getId() < 1) {
-                objects[i][chunkX][chunkY] = object;
-                object.setActive(true);
-                object.setRenderable(true);
+        store(objects, chunkX, chunkY, object);
+        object.setActive(true);
+        object.setRenderable(true);
+    }
+
+    private static void store(Scenery[][][] layers, int x, int y, Scenery object) {
+        for (Scenery[][] layer : layers) {
+            if (layer[x][y] == object) {
                 return;
             }
         }
-        System.err.print("Objects - [");
-        for (int i = 0; i < objects.length; i++) {
-            System.err.print(objects[i][chunkX][chunkY]);
-            if (i < objects.length - 1) {
-                System.err.print(", ");
+        for (Scenery[][] layer : layers) {
+            if (layer[x][y] == null) {
+                layer[x][y] = object;
+                return;
             }
         }
-        log(this.getClass(), Log.ERR, "]!");
-        throw new IllegalStateException("Insufficient array length for storing all objects! ");
+        throw new IllegalStateException("Too many scenery objects at " + object.getLocation());
     }
 
     /**
@@ -288,13 +229,25 @@ public class BuildRegionChunk extends RegionChunk {
      * @param objectId The object id.
      */
     public int getIndex(int x, int y, int objectId) {
+        int first = -1;
         for (int i = 0; i < objects.length; i++) {
             Scenery o = get(x, y, i);
-            if (o != null && ((objectId > -1 && o.getId() == objectId) || (objectId == -1 && o.getDefinition().hasOptions(false)))) {
+            if (o == null || !o.isRenderable()) {
+                continue;
+            }
+            if (objectId == o.getId() || (objectId == -1 && o.getDefinition().hasOptions(false))) {
                 return i;
             }
+            if (first == -1) {
+                first = i;
+            }
         }
-        return 0;
+        return objectId == -1 ? first : -1;
+    }
+
+    public Scenery find(int x, int y, int objectId) {
+        int index = getIndex(x, y, objectId);
+        return index == -1 ? null : get(x, y, index);
     }
 
     /**

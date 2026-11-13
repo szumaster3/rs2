@@ -6,6 +6,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
+import core.game.world.map.build.RegionFlags;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
 import core.net.packet.out.ClearScenery;
@@ -296,6 +297,7 @@ public class RegionChunk {
      * @return The new x-coordinate.
      */
     public static int[] getRotatedPosition(int x, int y, int sizeX, int sizeY, int rotation, int chunkRotation) {
+        chunkRotation &= 3;
         if ((rotation & 0x1) == 1) {
             int s = sizeX;
             sizeX = sizeY;
@@ -443,15 +445,33 @@ public class RegionChunk {
     }
 
     public void rebuildFlags(RegionPlane from) {
+        copyTerrain(from);
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 Location loc = currentBase.transform(x, y, 0);
-                Location fromLoc = base.transform(x, y, 0);
-                plane.getFlags().getLandscape()[loc.getLocalX()][loc.getLocalY()] = from.getFlags().getLandscape()[fromLoc.getLocalX()][fromLoc.getLocalY()];
-                plane.getFlags().clearFlag(x, y);
                 Scenery obj = objects[x][y];
                 if (obj != null)
-                    LandscapeParser.flagScenery(plane, loc.getLocalX(), loc.getLocalY(), obj, false, true);
+                    LandscapeParser.applyClippingFlagsFor(plane, loc.getLocalX(), loc.getLocalY(), obj);
+            }
+        }
+    }
+
+    protected void copyTerrain(RegionPlane from) {
+        boolean[][] source = from.getFlags().getLandscape();
+        boolean[][] destination = plane.getFlags().getLandscape();
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                int[] rotated = getRotatedPosition(x, y, 1, 1, 0, rotation);
+                int destX = currentBase.getLocalX() + rotated[0];
+                int destY = currentBase.getLocalY() + rotated[1];
+                int sourceX = base.getLocalX() + x;
+                int sourceY = base.getLocalY() + y;
+                destination[destX][destY] = source != null && source[sourceX][sourceY];
+                plane.getFlags().flagEmptyTile(destX, destY);
+                plane.getFlags().unflag(destX, destY, RegionFlags.SOLID_TILE);
+                if (source != null && (from.getFlags().getFlag(sourceX, sourceY) & RegionFlags.SOLID_TILE) != 0) {
+                    plane.getFlags().flagSolidTile(destX, destY);
+                }
             }
         }
     }

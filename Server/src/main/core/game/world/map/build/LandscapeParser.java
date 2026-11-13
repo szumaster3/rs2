@@ -3,8 +3,10 @@ package core.game.world.map.build;
 import core.cache.def.impl.SceneryDefinition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.scenery.Scenery;
+import core.game.world.map.BuildRegionChunk;
 import core.game.world.map.Location;
 import core.game.world.map.Region;
+import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
 import core.game.world.map.RegionPlane;
 
@@ -46,15 +48,18 @@ public final class LandscapeParser {
                 int type = configuration >> 2;
                 int z = location >> 12;
                 r.setObjectCount(r.getObjectCount() + 1);
-                if (x < 0 || y < 0 || x >= 64 || y >= 64) {
-
-                } else {
-                    if ((mapscape[1][x][y] & 0x2) == 2) {
-                        z--;
-                    }
-                    if (z >= 0 && z <= 3) {
-                        Scenery object = new Scenery(objectId, Location.create((r.getX() << 6) + x, (r.getY() << 6) + y, z), type, rotation);
-                        flagScenery(r.getPlanes()[z], x, y, object, true, storeObjects);
+                int clippingPlane = z - ((mapscape[1][x][y] & 2) != 0 ? 1 : 0);
+                int objectPlane = storeObjects ? z : clippingPlane;
+                if (z <= 3 && objectPlane >= 0) {
+                    Scenery object = new Scenery(objectId, r.getBaseLocation().transform(x, y, objectPlane), type, rotation);
+                    if (storeObjects) {
+                        // Instance templates select the source plane from the landscape file.
+                        r.getPlanes()[z].add(object, x, y, false);
+                        if (clippingPlane >= 0) {
+                            applyClippingFlagsFor(r.getPlanes()[clippingPlane], x, y, object);
+                        }
+                    } else {
+                        flagScenery(r.getPlanes()[objectPlane], x, y, object, true, false);
                     }
                 }
             }
@@ -180,13 +185,31 @@ public final class LandscapeParser {
         Region.load(plane.getRegion());
         int localX = object.getLocation().getLocalX();
         int localY = object.getLocation().getLocalY();
-        Scenery current = plane.getChunkObject(localX, localY, object.getId());
-        if (current == null || current.getId() != object.getId()) {
-            return null;
+        Scenery current;
+        RegionChunk regionChunk = plane.getRegionChunk(localX >> 3, localY >> 3);
+        if (regionChunk instanceof BuildRegionChunk) {
+            BuildRegionChunk chunk = (BuildRegionChunk) regionChunk;
+            current = null;
+            for (Scenery candidate : chunk.getObjects(localX & 7, localY & 7)) {
+                if (candidate != null && candidate.isRenderable() && candidate.equals(object)) {
+                    current = candidate;
+                    if (candidate == object) break;
+                }
+            }
+            if (current == null) return null;
+            chunk.remove(current);
+        } else {
+            current = plane.getChunkObject(localX, localY, object.getId());
+            if (current == null || current.getId() != object.getId()) return null;
+            plane.remove(localX, localY, object.getId());
         }
         current.setActive(false);
         object.setActive(false);
-        plane.remove(localX, localY, object.getId());
+        removeClippingFlagsFor(plane, localX, localY, current);
+        return current;
+    }
+
+    public static void removeClippingFlagsFor(RegionPlane plane, int localX, int localY, Scenery object) {
         SceneryDefinition def = object.getDefinition();
         int sizeX;
         int sizeY;
@@ -222,6 +245,5 @@ public final class LandscapeParser {
                 }
             }
         }
-        return current;
     }
 }

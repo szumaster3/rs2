@@ -164,6 +164,9 @@ public final class BuildRoomDialogue extends Dialogue {
      * @return The boundaries.
      */
     private boolean inBounds() {
+        if (roomX < 0 || roomX >= 8 || roomY < 0 || roomY >= 8) {
+            return false;
+        }
         Rectangle bounds = player.getHouseManager().getBoundaries();
         int max = player.getHouseManager().getMaximumDimension(player);
         if ((roomX < bounds.x || roomX >= bounds.x + bounds.width) && bounds.width >= max) {
@@ -197,11 +200,7 @@ public final class BuildRoomDialogue extends Dialogue {
                     case 3:
                         if (player.getInventory().remove(new Item(Items.COINS_995, room.getProperties().getCost()))) {
                             room.setRotation(directions[index]);
-                            boolean[] exit = new boolean[exits.length];
-                            for (int i = 0; i < exit.length; i++) {
-                                exit[(i + index) % exit.length] = exits[i];
-                            }
-                            BuildingUtils.buildRoom(player, room, roomZ, roomX, roomY, exit, true);
+                            BuildingUtils.buildRoom(player, room, roomZ, roomX, roomY, room.getExits(), true);
                             end();
                             return true;
                         }

@@ -2,9 +2,7 @@ package content.global.skill.construction;
 
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Direction;
-import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
-import core.game.world.map.RegionManager;
 
 /**
  * Represents the room properties.
@@ -926,11 +924,13 @@ public enum RoomProperties {
      *
      * @return The exits.
      */
-    public boolean[] getExits() {
-        Region region = RegionManager.forId(7503);
-        Region.load(region, true);
-        RegionChunk chunk = region.getPlanes()[0].getRegionChunk(chunkX, chunkY);
-        return new boolean[]{isExit(chunk, 7, 3), isExit(chunk, 3, 0), isExit(chunk, 0, 3), isExit(chunk, 3, 7)};
+    public boolean[] getExits(RegionChunk chunk) {
+        return new boolean[]{
+                isExit(chunk, 7, 3, 2) || isExit(chunk, 7, 4, 2),
+                isExit(chunk, 3, 0, 3) || isExit(chunk, 4, 0, 3),
+                isExit(chunk, 0, 3, 0) || isExit(chunk, 0, 4, 0),
+                isExit(chunk, 3, 7, 1) || isExit(chunk, 4, 7, 1)
+        };
 
     }
 
@@ -939,9 +939,9 @@ public enum RoomProperties {
      *
      * @return {@code True} if so.
      */
-    private boolean isExit(RegionChunk chunk, int x, int y) {
+    private boolean isExit(RegionChunk chunk, int x, int y, int rotation) {
         for (Scenery object : chunk.getObjects(x, y)) {
-            if (object != null && (object.getId() == 15313 || object.getId() == 15314 || object.getId() == 15317)) {
+            if (object != null && object.isRenderable() && object.getRotation() == rotation && BuildingUtils.isDoorHotspot(object)) {
                 return true;
             }
         }

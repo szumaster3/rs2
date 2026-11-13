@@ -323,28 +323,26 @@ public final class BuildingUtils {
                     Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
                     if (r != null && r.getRotation() == room.getRotation() && !r.getProperties().isLand()) {
                         Hotspot h = r.getStairs();
-                        if (h != null) {
+                        if (h != null && decIndex >= 0 && decIndex < h.getHotspot().getDecorations().length) {
                             h.setDecorationIndex(decIndex);
                             Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
                             if (reg == null) {
                                 continue;
                             }
                             BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
-                            Scenery[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
-                            for (Scenery o : objects) {
-                                if (o != null && o.getType() == object.getType()) {
-                                    SceneryBuilder.replace(o, o.transform(h.getHotspot().getDecorations()[decIndex].getObjectId(style)));
-                                    if (plane == 1) {
-                                        if (r.getProperties() == RoomProperties.SKILL_HALL) {
-                                            r.updateProperties(player, RoomProperties.SKILL_HALL_2);
-                                        } else if (r.getProperties() == RoomProperties.QUEST_HALL) {
-                                            r.updateProperties(player, RoomProperties.QUEST_HALL_2);
-                                        } else {
-                                            break;
-                                        }
-                                        player.getHouseManager().reload(player, true);
+                            if (h.getCurrentX() < 0) continue;
+                            Scenery o = chunk.find(h.getCurrentX(), h.getCurrentY(), h.getCurrentObjectId());
+                            if (o != null) {
+                                SceneryBuilder.replace(o, o.transform(h.getDecoration().getObjectId(style)));
+                                if (plane == 1) {
+                                    if (r.getProperties() == RoomProperties.SKILL_HALL) {
+                                        r.updateProperties(player, RoomProperties.SKILL_HALL_2);
+                                    } else if (r.getProperties() == RoomProperties.QUEST_HALL) {
+                                        r.updateProperties(player, RoomProperties.QUEST_HALL_2);
+                                    } else {
+                                        continue;
                                     }
-                                    break;
+                                    player.getHouseManager().reload(player, true);
                                 }
                             }
                         } else {
@@ -354,12 +352,10 @@ public final class BuildingUtils {
                 }
                 break;
             case CREST:
-                SceneryBuilder.replace(object, object.transform(deco.getObjectId(style) + player.getHouseManager().getCrest().ordinal()));
-                hotspot.setDecorationIndex(decIndex);
-                break;
             case INDIVIDUAL:
-                SceneryBuilder.replace(object, object.transform(deco.getObjectId(style)));
-                hotspot.setDecorationIndex(decIndex);
+                if (SceneryBuilder.replace(object, object.transform(deco.getObjectId(player.getHouseManager(), hotspot.getHotspot())))) {
+                    hotspot.setDecorationIndex(decIndex);
+                }
                 break;
             case RECURSIVE:
                 BuildRegionChunk chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];
@@ -368,8 +364,8 @@ public final class BuildingUtils {
                         Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
                         if (h != null) {
                             h.setDecorationIndex(decIndex);
-                            int objectId = hotspot.getHotspot().getObjectId(style);
-                            Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
+                            int objectId = h.getCurrentObjectId();
+                            Scenery o = chunk.find(x, y, objectId);
                             if (o != null && objectId == o.getId()) {
                                 SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
                             }
@@ -386,8 +382,8 @@ public final class BuildingUtils {
                             Hotspot h = room.getHotspot(bh, x, y);
                             if (h != null) {
                                 h.setDecorationIndex(decIndex);
-                                int objectId = bh.getObjectId(style);
-                                Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
+                                int objectId = h.getCurrentObjectId();
+                                Scenery o = chunk.find(x, y, objectId);
                                 if (o != null && objectId == o.getId()) {
                                     SceneryBuilder.replace(o, o.transform(bh.getDecorations()[decIndex].getObjectId(style)));
                                 }
@@ -420,14 +416,11 @@ public final class BuildingUtils {
         HousingStyle style = player.getHouseManager().getStyle();
         for (int i = 0; i < room.getHotspots().length; i++) {
             Hotspot hotspot = room.getHotspots()[i];
-            int objectId = hotspot.getDecorationIndex() < 0 ? -1 : hotspot.getHotspot().getDecorations()[hotspot.getDecorationIndex()].getObjectId(style);
-            if (hotspot.getHotspot().getType() == BuildHotspotType.CREST) {
-                objectId += player.getHouseManager().getCrest().ordinal();
-            }
-            if (objectId == object.getId() && hotspot.getCurrentX() == l.getChunkOffsetX() && hotspot.getCurrentY() == l.getChunkOffsetY()) {
+            Decoration decoration = hotspot.getDecoration();
+            if (decoration != null && decoration.getObjectId(player.getHouseManager(), hotspot.getHotspot()) == object.getId()
+                    && hotspot.getCurrentX() == l.getChunkOffsetX() && hotspot.getCurrentY() == l.getChunkOffsetY()) {
                 player.animate(REMOVE_ANIMATION);
                 removeDecoration(player, region, room, hotspot, object, style);
-                Decoration decoration = Decoration.forObjectId(object.getId());
                 for (Item item : decoration.getRefundItems()) {
                     addItemOrDrop(player, item.getId(), item.getAmount());
                 }
@@ -459,19 +452,18 @@ public final class BuildingUtils {
                     Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
                     if (r != null && r.getRotation() == room.getRotation()) {
                         Hotspot h = r.getStairs();
-                        if (h != null) {
+                        if (h != null && h.getDecoration() != null) {
+                            int objectId = h.getDecoration().getObjectId(style);
                             h.setDecorationIndex(-1);
                             Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
                             if (reg == null) {
                                 continue;
                             }
                             BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
-                            Scenery[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
-                            for (Scenery o : objects) {
-                                if (o != null && o.getType() == object.getType()) {
-                                    SceneryBuilder.replace(o, o.transform(h.getHotspot().getObjectId(style)));
-                                    break;
-                                }
+                            if (h.getCurrentX() < 0) continue;
+                            Scenery o = chunk.find(h.getCurrentX(), h.getCurrentY(), objectId);
+                            if (o != null) {
+                                SceneryBuilder.replace(o, o.transform(h.getCurrentObjectId()));
                             }
                         } else {
                             log(BuildingUtils.class, Log.ERR, "Couldn't find stairs! " + plane);
@@ -491,7 +483,7 @@ public final class BuildingUtils {
                 break;
             case INDIVIDUAL:
             case CREST:
-                SceneryBuilder.replace(object, object.transform(hotspot.getHotspot().getObjectId(style)));
+                SceneryBuilder.replace(object, object.transform(hotspot.getCurrentObjectId()));
                 hotspot.setDecorationIndex(-1);
                 break;
             case RECURSIVE:
@@ -499,12 +491,12 @@ public final class BuildingUtils {
                 for (int x = 0; x < 8; x++) {
                     for (int y = 0; y < 8; y++) {
                         Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
-                        if (h != null) {
-                            int objectId = hotspot.getHotspot().getDecorations()[h.getDecorationIndex()].getObjectId(style);
-                            Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
+                        if (h != null && h.getDecoration() != null) {
+                            int objectId = h.getDecoration().getObjectId(style);
+                            Scenery o = chunk.find(x, y, objectId);
                             h.setDecorationIndex(-1);
-                            if (o != null && objectId == o.getId()) {
-                                SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getObjectId(style)));
+                            if (o != null) {
+                                SceneryBuilder.replace(o, o.transform(h.getCurrentObjectId()));
                             }
                         }
                     }
@@ -517,12 +509,12 @@ public final class BuildingUtils {
                     for (int y = 0; y < 8; y++) {
                         for (BuildHotspot bh : linkedHotspots) {
                             Hotspot h = room.getHotspot(bh, x, y);
-                            if (h != null) {
-                                int objectId = bh.getDecorations()[h.getDecorationIndex()].getObjectId(style);
-                                Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
+                            if (h != null && h.getDecoration() != null) {
+                                int objectId = h.getDecoration().getObjectId(style);
+                                Scenery o = chunk.find(x, y, objectId);
                                 h.setDecorationIndex(-1);
-                                if (o != null && objectId == o.getId()) {
-                                    SceneryBuilder.replace(o, o.transform(bh.getObjectId(style)));
+                                if (o != null) {
+                                    SceneryBuilder.replace(o, o.transform(h.getCurrentObjectId()));
                                 }
                             }
                         }
@@ -606,28 +598,28 @@ public final class BuildingUtils {
         if (z == 3) {
             player.getHouseManager().setHasDungeon(true);
         }
-        if (room.getProperties().isChamber() && z < 2) {
+        Room above = z < 2 ? player.getHouseManager().getRooms()[z + 1][x][y] : null;
+        if (room.getProperties().isChamber() && z < 2 && (above == null || above.getProperties().isRoof())) {
             int count = 0;
-            int index = 0;
             for (int i = 0; i < exits.length; i++) {
                 if (exits[i]) {
                     count++;
-                } else {
-                    index = i;
                 }
             }
             //(0=east, 1=south, 2=west, 3=north).
 
+            Room roof;
             if (count == 4) {
-                room = Room.create(player, RoomProperties.ROOF_4_EXIT);
+                roof = Room.create(player, RoomProperties.ROOF_4_EXIT);
             } else if (count == 3) {
-                room = Room.create(player, RoomProperties.ROOF_3_EXIT);
+                roof = Room.create(player, RoomProperties.ROOF_3_EXIT);
             } else if ((exits[0] != exits[2]) || (exits[1] != exits[3])) {
-                room = Room.create(player, RoomProperties.ROOF_3_EXIT);
+                roof = Room.create(player, RoomProperties.ROOF_3_EXIT);
             } else {
-                room = Room.create(player, RoomProperties.ROOF_2_EXIT);
+                roof = Room.create(player, RoomProperties.ROOF_2_EXIT);
             }
-            player.getHouseManager().getRooms()[z + 1][x][y] = room;
+            roof.setRotation(room.getRotation());
+            player.getHouseManager().getRooms()[z + 1][x][y] = roof;
         }
         if (reload) {
             player.getHouseManager().reload(player, true);
