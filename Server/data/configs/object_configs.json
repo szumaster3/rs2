@@ -15582,5 +15582,9 @@
   {
     "examine": "A furnace; small but effective.",
     "ids": "14921"
+  },
+  {
+    "examine": "Definitely blue.",
+    "ids": "33220,33221"
   }
 ]

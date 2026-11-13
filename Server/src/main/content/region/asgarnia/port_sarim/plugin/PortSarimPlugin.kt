@@ -229,9 +229,13 @@ class PortSarimPlugin : InteractionListener {
                 1 -> options("Yes, I'm not afraid of death!", "No thanks, I don't want to die!").also { stage++ }
                 2 -> when(buttonID) {
                     1 -> {
+                        end()
                         val location = Location.create(3056, 9555, 0)
                         player!!.properties.teleportLocation = location
                         sendMessage(player!!, "You venture into the icy cavern.")
+                    }
+                    2 -> {
+                        end()
                     }
                 }
             }
