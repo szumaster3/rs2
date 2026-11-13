@@ -1,5 +1,6 @@
 package content.global.skill.thieving
 
+import content.global.skill.construction.decoration.DoorPlugin
 import core.api.getUsedOption
 import core.api.lockInteractions
 import core.api.sendDialogue
@@ -9,6 +10,7 @@ import core.game.interaction.InteractionListener
 import core.game.node.scenery.Scenery
 
 class ThievingOptionPlugin : InteractionListener {
+    private val houseDoors = DoorPlugin()
 
     override fun defineListeners() {
 
@@ -57,6 +59,8 @@ class ThievingOptionPlugin : InteractionListener {
 
         on(ThievingDefinition.Doors.DOOR_IDS, IntType.SCENERY, "open", "pick-lock") { player, node ->
             val option = getUsedOption(player)
+            val scenery = node as Scenery
+            if (houseDoors.handleDungeonDoor(player, scenery, option)) return@on true
             val door = ThievingDefinition.Doors.forLocation(node.location)
 
             when (option) {
@@ -64,7 +68,7 @@ class ThievingOptionPlugin : InteractionListener {
                     if (door == null) {
                         sendMessage(player, "The door is locked.")
                     } else {
-                        door.open(player, node as Scenery)
+                        door.open(player, scenery)
                     }
                     return@on true
                 }
@@ -72,12 +76,16 @@ class ThievingOptionPlugin : InteractionListener {
                     if (door == null) {
                         sendMessage(player, "This door cannot be unlocked.")
                     } else {
-                        door.pickLock(player, node as Scenery)
+                        door.pickLock(player, scenery)
                     }
                     return@on true
                 }
                 else -> return@on false
             }
+        }
+
+        on(DoorPlugin.dungeonDoorIds, IntType.SCENERY, "force") { player, node ->
+            houseDoors.handleDungeonDoor(player, node as Scenery, "force")
         }
     }
 }

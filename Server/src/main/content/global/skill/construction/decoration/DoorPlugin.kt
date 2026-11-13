@@ -1,12 +1,17 @@
 package content.global.skill.construction.decoration
 
 import content.global.skill.construction.BuildHotspot
+import content.global.skill.construction.HouseManager
 import content.global.skill.construction.HousingStyle
+import core.api.getDynLevel
+import core.api.rewardXP
+import core.api.sendMessage
 import core.cache.def.impl.SceneryDefinition
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Constructed
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
@@ -14,6 +19,7 @@ import core.game.world.map.Direction
 import core.game.world.map.RegionManager
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.RandomFunction
 
 @Initializable
 class DoorPlugin : OptionHandler() {
@@ -45,6 +51,44 @@ class DoorPlugin : OptionHandler() {
             }
             else -> false
         }
+    }
+
+    fun handleDungeonDoor(player: Player, door: Scenery, option: String): Boolean {
+        val lock = DungeonLock.values().firstOrNull { door.id == it.leftId || door.id == it.rightId } ?: return false
+        val house = player.getAttribute<HouseManager>("poh_entry", player.houseManager)
+        val dungeon = house.dungeonRegion ?: return false
+        if (player.location.regionId != dungeon.id || door.location.regionId != dungeon.id ||
+            RegionManager.forId(dungeon.id) !== dungeon) return false
+
+        if (option == "open") {
+            sendMessage(player, "The door is locked.")
+            return true
+        }
+
+        val skill = when (option) {
+            "pick-lock" -> Skills.THIEVING
+            "force" -> Skills.STRENGTH
+            else -> return false
+        }
+        if (!door.isActive) return true
+
+        val level = getDynLevel(player, skill).coerceIn(1, 99)
+        val chance = lock.startChance + (100 - lock.startChance) * (level - 1) / 98
+        if (RandomFunction.random(100) >= chance) {
+            sendMessage(player, if (option == "pick-lock") "You fail to pick the lock." else "You fail to force the door open.")
+            return true
+        }
+        if (openDoor(door, getOtherLeaf(door, door), OPEN_DOORS.getValue(door.id))) {
+            rewardXP(player, skill, lock.experience)
+            sendMessage(player, if (option == "pick-lock") "You pick the lock." else "You force the door open.")
+        }
+        return true
+    }
+
+    private enum class DungeonLock(val leftId: Int, val rightId: Int, val experience: Double, val startChance: Int) {
+        OAK(13344, 13345, 10.0, 50),
+        STEEL(13346, 13347, 15.0, 35),
+        MARBLE(13348, 13349, 20.0, 20)
     }
 
     private fun openDoor(door: Scenery, second: Scenery?, replaceId: Int): Boolean {
@@ -91,7 +135,7 @@ class DoorPlugin : OptionHandler() {
                 val rot = if (door.location.chunkOffsetY == 3) 3 else 1
                 Triple(offsetX, 0, rot)
             }
-            else -> Triple(0, 0, door.rotation)
+            else -> Triple(0, 0, (door.rotation + 1) and 3)
         }
     }
 
@@ -115,6 +159,9 @@ class DoorPlugin : OptionHandler() {
     }
 
     companion object {
+        val dungeonDoorIds: IntArray
+            get() = DungeonLock.values().flatMap { listOf(it.leftId, it.rightId) }.toIntArray()
+
         private val OPEN_DOORS = mapOf(
             13100 to 13102,
             13101 to 13103,
