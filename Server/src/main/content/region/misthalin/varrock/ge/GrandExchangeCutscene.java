@@ -14,8 +14,8 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.out.CameraViewPacket;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.CameraContext;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import shared.consts.Components;
@@ -86,8 +86,8 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
     }
 
     private static void camera(final Player player, int x, int y, int xRot, int yRot, int height, int speed) {
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, speed));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, x + xRot, y + yRot, height, 1, speed));
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, speed));
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, x + xRot, y + yRot, height, 1, speed));
     }
 
     private void camera(int x, int y, int xRot, int yRot, int height, int speed) {
@@ -203,7 +203,7 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
                     stage = 102;
                     break;
                 case 102:
-                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 580, 1, 100));
+                    PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 580, 1, 100));
                     final CutscenePlugin cutscene = player.getAttribute("ge-cutscene", null);
                     cutscene.stop(false);
                     player.getSavedData().globalData.setGeTutorial(true);

@@ -2,8 +2,8 @@ package core.api.utils
 
 import core.game.node.entity.player.Player
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
-import core.net.packet.out.CameraViewPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.CameraContext
 
 class PlayerCamera(val player: Player) {
 
@@ -19,7 +19,7 @@ class PlayerCamera(val player: Player) {
     fun setPosition(x: Int, y: Int, height: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.SET, x, y, height, 0, 0)
-        PacketRepository.send(CameraViewPacket::class.java, ctx!!)
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -33,7 +33,7 @@ class PlayerCamera(val player: Player) {
     fun rotateTo(x: Int, y: Int, height: Int, speed: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.ROTATION, x, y, height, speed, 1)
-        PacketRepository.send(CameraViewPacket::class.java, ctx!!)
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -48,7 +48,7 @@ class PlayerCamera(val player: Player) {
         player ?: return
         ctx ?: return
         ctx = CameraContext(player, CameraContext.CameraType.ROTATION, ctx!!.x + diffX, ctx!!.y + diffY, ctx!!.height + diffHeight, speed, 1)
-        PacketRepository.send(CameraViewPacket::class.java, ctx!!)
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -62,7 +62,7 @@ class PlayerCamera(val player: Player) {
     fun panTo(x: Int, y: Int, height: Int, speed: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, speed, 1)
-        PacketRepository.send(CameraViewPacket::class.java, ctx!!)
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -77,7 +77,7 @@ class PlayerCamera(val player: Player) {
     fun shake(cameraType: Int, jitter: Int, amplitude: Int, frequency: Int, speed: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.SHAKE, cameraType, jitter, amplitude, frequency, speed)
-        PacketRepository.send(CameraViewPacket::class.java, ctx!!)
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -91,7 +91,7 @@ class PlayerCamera(val player: Player) {
      */
     fun shake(cameraType: CameraShakeType, jitter: Int, amplitude: Int, frequency: Int, speed: Int) {
         val ctx = CameraContext(player, CameraContext.CameraType.SHAKE, cameraType.ordinal, jitter, amplitude, frequency, speed)
-        PacketRepository.send(CameraViewPacket::class.java, ctx)
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx)
     }
 
     /**
@@ -100,6 +100,6 @@ class PlayerCamera(val player: Player) {
     fun reset() {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.RESET, -1, -1, -1, -1, -1)
-        PacketRepository.send(CameraViewPacket::class.java, ctx!!)
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
     }
 }

@@ -6,8 +6,8 @@ import core.api.sendString
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
-import core.net.packet.context.ChildPositionContext
-import core.net.packet.out.RepositionChild
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.ChildPositionContext
 import core.tools.StringUtils
 import shared.consts.Components
 
@@ -152,7 +152,7 @@ open class SkillDialogueHandler(val player: Player, val type: SkillDialogue?, va
                     player.packetDispatch.sendItemZoomOnInterface(item.id, 160, interfaceId, 2 + i)
                     val (x, y) = POSITIONS[i]
                     PacketRepository.send(
-                        RepositionChild::class.java,
+                        Encoders530.REPOSITION_CHILD,
                         ChildPositionContext(player, interfaceId, 2 + i, x, y)
                     )
                 }

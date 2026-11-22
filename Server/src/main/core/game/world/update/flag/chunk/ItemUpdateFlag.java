@@ -5,9 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
-import core.net.packet.out.ClearGroundItem;
-import core.net.packet.out.ConstructGroundItem;
-import core.net.packet.out.UpdateGroundItemAmount;
+import core.net.packet.out.Encoders530;
 
 /**
  * Handles an item update flag.
@@ -80,11 +78,11 @@ public final class ItemUpdateFlag extends UpdateFlag<Object> {
     @Override
     public void write(IoBuffer buffer) {
         if (isRemove()) {
-            ClearGroundItem.write(buffer, item);
+            Encoders530.writeGroundItemRemoval(buffer, item);
         } else if (isConstruct()) {
-            ConstructGroundItem.write(buffer, item);
+            Encoders530.writeGroundItemAddition(buffer, item);
         } else {
-            UpdateGroundItemAmount.write(buffer, item, oldAmount);
+            Encoders530.writeGroundItemAmount(buffer, item, oldAmount);
         }
     }
 

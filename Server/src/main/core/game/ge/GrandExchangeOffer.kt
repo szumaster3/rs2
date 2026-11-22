@@ -7,10 +7,9 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.repository.Repository
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
-import core.net.packet.context.GrandExchangeContext
-import core.net.packet.out.ContainerPacket
-import core.net.packet.out.GrandExchangePacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.ContainerContext
+import core.net.packet.out.PacketContext.GrandExchangeContext
 import java.sql.ResultSet
 import kotlin.math.min
 
@@ -147,7 +146,7 @@ class GrandExchangeOffer {
     fun visualize(player: Player?) {
         player ?: return
         PacketRepository.send(
-            GrandExchangePacket::class.java,
+            Encoders530.GRAND_EXCHANGE_PACKET,
               GrandExchangeContext(
                 player,
                 index.toByte(),
@@ -162,7 +161,7 @@ class GrandExchangeOffer {
         )
         val withdrawItems: Array<Item> = withdraw.filterNotNull().toTypedArray()
         PacketRepository.send(
-            ContainerPacket::class.java, ContainerContext(player, -1, -1757, 523 + index, withdrawItems, false)
+            Encoders530.CONTAINER_PACKET, ContainerContext(player, -1, -1757, 523 + index, withdrawItems, false)
         )
     }
 

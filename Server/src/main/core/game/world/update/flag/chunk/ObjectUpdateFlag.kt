@@ -3,8 +3,7 @@ package core.game.world.update.flag.chunk
 import core.game.node.scenery.Scenery
 import core.game.world.update.flag.UpdateFlag
 import core.net.packet.IoBuffer
-import core.net.packet.out.ClearScenery
-import core.net.packet.out.ConstructScenery
+import core.net.packet.out.Encoders530
 
 /**
  * The object update flag.
@@ -14,9 +13,9 @@ class ObjectUpdateFlag(private val scenery: Scenery?, private val remove: Boolea
 
     override fun write(buffer: IoBuffer) {
         if (remove) {
-            ClearScenery.write(buffer, scenery!!)
+            Encoders530.writeSceneryRemoval(buffer, scenery!!)
         } else {
-            ConstructScenery.write(buffer, scenery!!)
+            Encoders530.writeSceneryAddition(buffer, scenery!!)
         }
     }
 

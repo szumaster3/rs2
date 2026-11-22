@@ -14,8 +14,8 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
-import core.net.packet.out.ContainerPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.ContainerContext
 import shared.consts.Components
 import shared.consts.Items
 import kotlin.math.min
@@ -196,7 +196,7 @@ class WorkbenchPlugin : InterfaceListener, InteractionListener {
         val items: Array<Item> = tempItems.map { it ?: Item(-1) }.toTypedArray()
 
         PacketRepository.send(
-            ContainerPacket::class.java,
+            Encoders530.CONTAINER_PACKET,
             ContainerContext(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false),
         )
     }

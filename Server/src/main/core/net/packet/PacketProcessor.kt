@@ -45,10 +45,10 @@ import core.game.world.repository.Repository
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.ChatMessage
 import core.net.amsc.MSPacketRepository
-import core.net.packet.context.PlayerContext
 import core.net.packet.`in`.Packet
 import core.net.packet.`in`.RunScript
-import core.net.packet.out.ClearMinimapFlag
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.PlayerContext
 import core.tools.Log
 import core.worker.ManagementEvents
 import proto.management.ClanMessage
@@ -818,7 +818,7 @@ object PacketProcessor {
     }
 
     private fun sendClearMinimap(player: Player) {
-        PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(player))
+        PacketRepository.send(Encoders530.CLEAR_MINIMAP_FLAG, PlayerContext(player))
     }
 
     fun switchItem(slot: Int, secondSlot: Int, container: Container?, insert: Boolean, player: Player) {

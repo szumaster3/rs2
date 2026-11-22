@@ -9,8 +9,8 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
-import core.net.packet.out.CameraViewPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.CameraContext
 import core.tools.StringUtils
 import shared.consts.Items
 import shared.consts.NPCs
@@ -157,13 +157,13 @@ enum class BarcrawlType {
                 sendMessage(player, "The barmaid giggles. The barmaid signs your card.")
             } else {
                 PacketRepository.send(
-                    CameraViewPacket::class.java,
+                    Encoders530.CAMERA_VIEW_PACKET,
                     CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1, 4, 4),
                 )
                 Pulser.submit(
                     object : Pulse(3, player) {
                         override fun pulse(): Boolean {
-                            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.RESET, 4, 4, 1, 4, 4))
+                            PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.RESET, 4, 4, 1, 4, 4))
                             return true
                         }
                     },

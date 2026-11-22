@@ -6,8 +6,8 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.ItemUpdateFlag;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.BuildItemContext;
-import core.net.packet.out.UpdateGroundItemAmount;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.BuildItemContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +138,7 @@ public final class GroundItemManager {
         }
         int oldAmount = g.getAmount();
         g.setAmount(oldAmount + item.getAmount());
-        PacketRepository.send(UpdateGroundItemAmount.class, new BuildItemContext(p, g, oldAmount));
+        PacketRepository.send(Encoders530.UPDATE_GROUND_ITEM_AMOUNT, new BuildItemContext(p, g, oldAmount));
         return g;
     }
 

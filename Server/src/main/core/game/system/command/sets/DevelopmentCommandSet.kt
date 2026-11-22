@@ -25,9 +25,6 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.repository.Repository
-import core.net.packet.PacketWriteQueue
-import core.net.packet.context.PlayerContext
-import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
 import core.tools.GREEN
 import core.tools.RED
@@ -556,11 +553,12 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Command for testing a packet by writing a ResetInterface packet to the queue.
+         * Tests the reset interface packet for the supplied interface ID.
          */
 
-        define(name = "testpacket", Privilege.ADMIN) { player, _ ->
-            PacketWriteQueue.write(ResetInterface(), PlayerContext(player))
+        define(name = "testpacket", Privilege.ADMIN, usage = "::testpacket <interfaceId>") { player, args ->
+            val interfaceId = args.getOrNull(1)?.toIntOrNull() ?: return@define reject(player, "Please provide a valid interface ID.")
+            player.packetDispatch.resetInterface(interfaceId)
         }
 
         /*

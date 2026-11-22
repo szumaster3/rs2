@@ -11,10 +11,9 @@ import core.game.system.communication.CommunicationInfo
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContactContext
-import core.net.packet.context.MessageContext
-import core.net.packet.out.CommunicationMessage
-import core.net.packet.out.ContactPackets
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.ContactContext
+import core.net.packet.out.PacketContext.MessageContext
 import core.tools.SystemLogger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -102,7 +101,7 @@ object ManagementEvents {
                     val p = Repository.getPlayerByName(playerName) ?: continue
                     p.communication.contacts[event.username]?.worldId = event.world
                     PacketRepository.send(
-                        ContactPackets::class.java, ContactContext(p, event.username, event.world)
+                        Encoders530.CONTACT_PACKETS, ContactContext(p, event.username, event.world)
                     )
                 }
             }
@@ -138,7 +137,7 @@ object ManagementEvents {
                 val p = Repository.getPlayerByName(event.username) ?: return
 
                 PacketRepository.send(
-                    ContactPackets::class.java,
+                    Encoders530.CONTACT_PACKETS,
                     ContactContext(p, ContactContext.UPDATE_STATE_TYPE),
                 )
 
@@ -151,7 +150,7 @@ object ManagementEvents {
                     c.worldId = contact.world
                     c.rank = ClanRank.values()[contact.rank]
                     PacketRepository.send(
-                        ContactPackets::class.java,
+                        Encoders530.CONTACT_PACKETS,
                         ContactContext(p, contact.username, contact.world),
                     )
                 }
@@ -161,7 +160,7 @@ object ManagementEvents {
                 }
 
                 PacketRepository.send(
-                    ContactPackets::class.java,
+                    Encoders530.CONTACT_PACKETS,
                     ContactContext(p, ContactContext.IGNORE_LIST_TYPE)
                 )
             }
@@ -182,7 +181,7 @@ object ManagementEvents {
 
                 if (sender != null) {
                     PacketRepository.send(
-                        CommunicationMessage::class.java,
+                        Encoders530.COMMUNICATION_MESSAGE,
                         MessageContext(
                             sender,
                             event.receiver,
@@ -195,7 +194,7 @@ object ManagementEvents {
 
                 if (receiver != null) {
                     PacketRepository.send(
-                        CommunicationMessage::class.java,
+                        Encoders530.COMMUNICATION_MESSAGE,
                         MessageContext(
                             receiver,
                             event.sender,
@@ -356,7 +355,7 @@ object ManagementEvents {
 
                 for (member in clan.players.filter { it.player != null }) {
                     PacketRepository.send(
-                        CommunicationMessage::class.java,
+                        Encoders530.COMMUNICATION_MESSAGE,
                         MessageContext(
                             member.player,
                             event.sender,

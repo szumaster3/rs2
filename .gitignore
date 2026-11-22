@@ -70,6 +70,9 @@ lib64
 logs
 out/
 out/**
+!/Server/src/main/core/net/packet/out/
+!/Server/src/main/core/net/packet/out/Encoders530.kt
+!/Server/src/main/core/net/packet/out/PacketContext.kt
 pyvenv.cfg
 share/
 logs.txt

@@ -3,7 +3,7 @@ package core.game.world.update.flag.chunk
 import core.game.world.update.flag.UpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.net.packet.IoBuffer
-import core.net.packet.out.AnimateObjectPacket
+import core.net.packet.out.Encoders530
 
 /**
  * The animate object update flag.
@@ -12,7 +12,7 @@ import core.net.packet.out.AnimateObjectPacket
 class AnimateObjectUpdateFlag(context: Animation?) : UpdateFlag<Animation?>(context) {
 
     override fun write(buffer: IoBuffer) {
-        AnimateObjectPacket.write(buffer, context!!)
+        Encoders530.writeObjectAnimation(buffer, context!!)
     }
 
     override fun data(): Int {
