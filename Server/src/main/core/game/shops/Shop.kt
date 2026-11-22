@@ -14,8 +14,8 @@ import core.game.shops.Shops.Companion.logShop
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
-import core.net.packet.out.ContainerPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.ContainerContext
 import shared.consts.Components
 import shared.consts.Items
 import java.lang.Integer.max
@@ -38,14 +38,14 @@ class ShopListener(val player: Player) : ContainerListener {
      * Called when the container changes.
      */
     override fun update(c: Container?, event: ContainerEvent?) {
-        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, event!!.items, false, *event.slots))
+        PacketRepository.send(Encoders530.CONTAINER_PACKET, ContainerContext(player, -1, -1, 92, event!!.items, false, *event.slots))
     }
 
     /**
      * Refreshes the entire container.
      */
     override fun refresh(c: Container?) {
-        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, c!!.toArray(), c.capacity(), false))
+        PacketRepository.send(Encoders530.CONTAINER_PACKET, ContainerContext(player, -1, -1, 92, c!!.toArray(), c.capacity(), false))
     }
 }
 

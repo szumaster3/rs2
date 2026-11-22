@@ -3,8 +3,8 @@ package core.game.world.update
 import core.game.node.entity.player.Player
 import core.game.world.map.RegionChunk
 import core.net.packet.PacketRepository
-import core.net.packet.context.ClearChunkContext
-import core.net.packet.out.ClearRegionChunk
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.ClearChunkContext
 
 /**
  * Handles the rendering of the player's surrounding map chunks.
@@ -26,7 +26,7 @@ object MapChunkRenderer {
             for (column in last) {
                 for (previous in column.filterNotNull()) {
                     if (!containsChunk(current, previous)) {
-                        PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
+                        PacketRepository.send(Encoders530.CLEAR_REGION_CHUNK, ClearChunkContext(player, previous))
                     } else {
                         updated.add(previous)
                     }

@@ -17,8 +17,8 @@ import core.game.world.GameWorld.Pulser
 import core.game.world.map.Direction
 import core.game.world.update.flag.context.Animation
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
-import core.net.packet.out.CameraViewPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.CameraContext
 import shared.consts.NPCs
 import shared.consts.Quests
 
@@ -222,7 +222,7 @@ class GypsyArisDialogue(player: Player? = null) : Dialogue(player) {
                     cutscene!!.npcs.add(wally)
                     wally.init()
                     PacketRepository.send(
-                        CameraViewPacket::class.java,
+                        Encoders530.CAMERA_VIEW_PACKET,
                         CameraContext(
                             player,
                             CameraContext.CameraType.POSITION,
@@ -234,7 +234,7 @@ class GypsyArisDialogue(player: Player? = null) : Dialogue(player) {
                         ),
                     )
                     PacketRepository.send(
-                        CameraViewPacket::class.java,
+                        Encoders530.CAMERA_VIEW_PACKET,
                         CameraContext(
                             player,
                             CameraContext.CameraType.ROTATION,
@@ -273,7 +273,7 @@ class GypsyArisDialogue(player: Player? = null) : Dialogue(player) {
                                         wally!!.direction = Direction.SOUTH_WEST
                                         wally!!.properties.teleportLocation = cutscene!!.base.transform(28, 40, 0)
                                         PacketRepository.send(
-                                            CameraViewPacket::class.java,
+                                            Encoders530.CAMERA_VIEW_PACKET,
                                             CameraContext(
                                                 player,
                                                 CameraContext.CameraType.POSITION,
@@ -285,7 +285,7 @@ class GypsyArisDialogue(player: Player? = null) : Dialogue(player) {
                                             ),
                                         )
                                         PacketRepository.send(
-                                            CameraViewPacket::class.java,
+                                            Encoders530.CAMERA_VIEW_PACKET,
                                             CameraContext(
                                                 player,
                                                 CameraContext.CameraType.ROTATION,

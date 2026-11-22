@@ -11,8 +11,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
-import core.net.packet.out.ContainerPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.ContainerContext
 import shared.consts.Components
 
 class StakeContainer(
@@ -30,7 +30,7 @@ class StakeContainer(
         player.interfaceManager.openSingleTab(OVERLAY)
         player.packetDispatch.sendRunScript(150, "IviiiIssssssss", INVY_PARAMS)
         player.packetDispatch.sendIfaceSettings(1278, 0, Components.TRADESIDE_336, 0, 27)
-        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, 2, 93, player.inventory, false))
+        PacketRepository.send(Encoders530.CONTAINER_PACKET, ContainerContext(player, -1, 2, 93, player.inventory, false))
     }
 
     fun offer(
@@ -111,7 +111,7 @@ class StakeContainer(
 
         override fun refresh(c: Container?) {
             PacketRepository.send(
-                ContainerPacket::class.java,
+                Encoders530.CONTAINER_PACKET,
                 ContainerContext(player, -1, 2, 93, player.inventory, false)
             )
         }

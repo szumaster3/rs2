@@ -8,8 +8,8 @@ import core.game.world.repository.InitializingNodeList
 import core.game.world.repository.Repository
 import core.integration.grafana.Grafana
 import core.net.packet.PacketRepository
-import core.net.packet.context.PlayerContext
-import core.net.packet.out.ClearMinimapFlag
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.PlayerContext
 
 /**
  * The entity update sequence.
@@ -28,7 +28,7 @@ class UpdateSequence {
         lobbyList = Repository.lobbyPlayers
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
-        lobbyList!!.map { PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
+        lobbyList!!.map { PacketRepository.send(Encoders530.CLEAR_MINIMAP_FLAG, PlayerContext(it)) }
 
         var npcTickStart = System.currentTimeMillis()
         npcList!!.forEach(NPC::tick)

@@ -14,8 +14,8 @@ import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
 import core.net.packet.PacketRepository
-import core.net.packet.context.InterfaceContext
-import core.net.packet.out.Interface
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.InterfaceContext
 import core.plugin.Plugin
 import core.tools.Log
 import core.tools.colorize
@@ -110,8 +110,8 @@ object LoginConfiguration {
             sendString(player, "Never expires", lobbyInterface.id, 94)
         }
 
-        PacketRepository.send(Interface::class.java, InterfaceContext(player, lobbyPane.id, 2, Components.WELCOME_SCREEN_378, true))
-        PacketRepository.send(Interface::class.java, InterfaceContext(player, lobbyPane.id, 3, selectedMessageModel, true))
+        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, lobbyPane.id, 2, Components.WELCOME_SCREEN_378, true))
+        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, lobbyPane.id, 3, selectedMessageModel, true))
         sendString(player, GameWorld.settings?.message_string ?: "", selectedMessageModel, getMessageChild(selectedMessageModel))
     }
 

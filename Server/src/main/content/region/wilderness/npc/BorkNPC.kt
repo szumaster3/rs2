@@ -27,8 +27,8 @@ import core.game.world.map.build.DynamicRegion
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
-import core.net.packet.out.CameraViewPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.CameraContext
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -108,7 +108,7 @@ class BorkNPC : AbstractNPC {
                      */
 
                     PacketRepository.send(
-                        CameraViewPacket::class.java,
+                        Encoders530.CAMERA_VIEW_PACKET,
                         CameraContext(player!!, CameraContext.CameraType.SHAKE, 3, 2, 2, 2, 2),
                     )
                     player!!.interfaceManager.restoreTabs()
@@ -353,7 +353,7 @@ class BorkNPC : AbstractNPC {
         override fun leave(entity: Entity, logout: Boolean): Boolean {
             if (entity is Player) {
                 PacketRepository.send(
-                    CameraViewPacket::class.java,
+                    Encoders530.CAMERA_VIEW_PACKET,
                     CameraContext(entity.asPlayer(), CameraContext.CameraType.RESET, 3, 2, 2, 2, 2),
                 )
             }

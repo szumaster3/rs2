@@ -9,10 +9,7 @@ import core.game.world.map.build.LandscapeParser;
 import core.game.world.map.build.RegionFlags;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
-import core.net.packet.out.ClearScenery;
-import core.net.packet.out.ConstructGroundItem;
-import core.net.packet.out.ConstructScenery;
-import core.net.packet.out.UpdateAreaPosition;
+import core.net.packet.out.Encoders530;
 import core.tools.Log;
 
 import java.util.ArrayList;
@@ -117,7 +114,7 @@ public class RegionChunk {
      * @param player The player.
      */
     public void synchronize(Player player) {
-        IoBuffer buffer = UpdateAreaPosition.getChunkUpdateBuffer(player, currentBase);
+        IoBuffer buffer = Encoders530.chunkUpdateBuffer(player, currentBase);
         if (appendUpdate(player, buffer)) {
             player.getSession().write(buffer);
         }
@@ -142,13 +139,13 @@ public class RegionChunk {
                 }
                 Scenery stat = plane.getObjects()[baseX + x][baseY + y];
                 if (!dyn.isRenderable() && stat != null) {
-                    ClearScenery.write(buffer, stat);
+                    Encoders530.writeSceneryRemoval(buffer, stat);
                     updated = true;
                 } else if (dyn != stat) {
                     if (stat != null) {
-                        ClearScenery.write(buffer, stat);
+                        Encoders530.writeSceneryRemoval(buffer, stat);
                     }
-                    ConstructScenery.write(buffer, dyn);
+                    Encoders530.writeSceneryAddition(buffer, dyn);
                     updated = true;
                 }
             }
@@ -157,7 +154,7 @@ public class RegionChunk {
         for (GroundItem item : totalItems) {
             if (item != null && item.isActive() && item.getLocation() != null) {
                 if (!item.isPrivate() || item.droppedBy(player)) {
-                    ConstructGroundItem.write(buffer, item);
+                    Encoders530.writeGroundItemAddition(buffer, item);
                     updated = true;
                 }
             }
@@ -228,7 +225,7 @@ public class RegionChunk {
      */
     public void update(Player player) {
         if (isUpdated()) {
-            IoBuffer buffer = UpdateAreaPosition.getChunkUpdateBuffer(player, currentBase);
+            IoBuffer buffer = Encoders530.chunkUpdateBuffer(player, currentBase);
             Object[] flagsArray = flags.toArray();
             int size = flagsArray.length;
             for (int i = 0; i < size; i++) {

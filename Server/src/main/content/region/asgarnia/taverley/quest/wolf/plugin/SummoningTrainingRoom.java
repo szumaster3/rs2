@@ -24,10 +24,9 @@ import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.MinimapStateContext;
-import core.net.packet.out.CameraViewPacket;
-import core.net.packet.out.MinimapState;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.CameraContext;
+import core.net.packet.out.PacketContext.MinimapStateContext;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -243,8 +242,8 @@ public final class SummoningTrainingRoom extends OptionHandler {
                 fluffy.init();
                 fluffy.faceTemporary(player, 1);
                 Location b = cutscene.getBase().transform(42, 50, 0);
-                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, b.getX(), b.getY(), 244, 1, 100));
-                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, b.getX() + 1, b.getY(), 244, 1, 100));
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, b.getX(), b.getY(), 244, 1, 100));
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, b.getX() + 1, b.getY(), 244, 1, 100));
                 switch (quest.getStage(player)) {
                     case 10:
                         player("Come on then little, fluffy...");
@@ -299,8 +298,8 @@ public final class SummoningTrainingRoom extends OptionHandler {
                                 int x = player.getLocation().getX() + 1;
                                 int y = player.getLocation().getY() - 1;
                                 int height = 300;
-                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 100));
-                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1000, y + 13, height, 1, 100));
+                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 100));
+                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1000, y + 13, height, 1, 100));
                                 player.faceLocation(cutscene.getBase().transform(44, 50, 1));
                                 GameWorld.getPulser().submit(new Pulse(1, player, fluffy) {
                                     int counter = 0;
@@ -347,8 +346,8 @@ public final class SummoningTrainingRoom extends OptionHandler {
                                                 int x = player.getLocation().getX() - 4;
                                                 int y = player.getLocation().getY();
                                                 int height = 270;
-                                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 100));
-                                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1, y, height, 1, 100));
+                                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 100));
+                                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1, y, height, 1, 100));
                                                 interpreter.sendDialogue("A chilling, unnatural fear envelops you!");
                                                 stage = 7;
                                                 return true;
@@ -394,8 +393,8 @@ public final class SummoningTrainingRoom extends OptionHandler {
                                 int x = player.getLocation().getX() + 1;
                                 int y = player.getLocation().getY() - 1;
                                 int height = 300;
-                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 100));
-                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1000, y + 13, height, 1, 100));
+                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 100));
+                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1000, y + 13, height, 1, 100));
                                 player.faceLocation(cutscene.getBase().transform(44, 50, 1));
                                 close();
                                 player("Oh, good. It's too busy gnawing to notice me.");
@@ -412,8 +411,8 @@ public final class SummoningTrainingRoom extends OptionHandler {
                                 stage = 5;
                                 break;
                             case 5:
-                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, 1000, 13, 0, 1, 100));
-                                PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
+                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.RESET, 1000, 13, 0, 1, 100));
+                                PacketRepository.send(Encoders530.MINIMAP_STATE, new MinimapStateContext(player, 0));
                                 player.unlock();
                                 player.getLocks().lockMovement(10000000);
                                 player.getInterfaceManager().openTab(new Component(149));
@@ -431,8 +430,8 @@ public final class SummoningTrainingRoom extends OptionHandler {
                                 height = 440;
                                 player.lock();
                                 player.getLocks().lockMovement(100000);
-                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 95));
-                                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1000, y + 17, height, 1, 95));
+                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 1, 95));
+                                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, x + 1000, y + 17, height, 1, 95));
                                 wolf = player.getFamiliarManager().getFamiliar();
                                 GameWorld.getPulser().submit(new Pulse(1, player, fluffy) {
                                     int counter;

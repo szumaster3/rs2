@@ -13,8 +13,8 @@ import core.game.node.item.Item;
 import core.game.system.config.ItemConfigParser;
 import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
-import core.net.packet.out.ContainerPacket;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.ContainerContext;
 import shared.consts.Components;
 import shared.consts.Vars;
 
@@ -523,22 +523,22 @@ public final class BankContainer extends Container {
 		@Override
 		public void update(Container c, ContainerEvent event) {
 			if (c instanceof BankContainer) {
-				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 762, 64000, 95, event.getItems(), false, event.getSlots()));
+				PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, 762, 64000, 95, event.getItems(), false, event.getSlots()));
 				player.getBank().setTabConfigurations();
 				player.getBank().sendBankSpace();
 			} else {
-				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 763, 64000, 93, event.getItems(), false, event.getSlots()));
+				PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, 763, 64000, 93, event.getItems(), false, event.getSlots()));
 			}
 		}
 
 		@Override
 		public void refresh(Container c) {
 			if (c instanceof BankContainer) {
-				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 762, 64000, 95, c.toArray(), c.capacity(), false));
+				PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, 762, 64000, 95, c.toArray(), c.capacity(), false));
 				player.getBank().setTabConfigurations();
 				player.getBank().sendBankSpace();
 			} else {
-				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 763, 64000, 93, c.toArray(), 28, false));
+				PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, 763, 64000, 93, c.toArray(), 28, false));
 			}
 		}
 	}

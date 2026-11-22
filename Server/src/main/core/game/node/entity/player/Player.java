@@ -70,12 +70,10 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.IoSession;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.DynamicSceneContext;
-import core.net.packet.context.SceneGraphContext;
-import core.net.packet.context.SkillContext;
-import core.net.packet.out.BuildDynamicScene;
-import core.net.packet.out.SkillLevel;
-import core.net.packet.out.UpdateSceneGraph;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.DynamicSceneContext;
+import core.net.packet.out.PacketContext.SceneGraphContext;
+import core.net.packet.out.PacketContext.SkillContext;
 import core.plugin.Plugin;
 import core.tools.Log;
 import core.tools.RandomFunction;
@@ -605,7 +603,7 @@ public class Player extends Entity {
         playerFlag.setUpdateSceneGraph(false);
         renderInfo.updateInformation();
         if (getSkills().isLifepointsUpdate()) {
-            PacketRepository.send(SkillLevel.class, new SkillContext(this, Skills.HITPOINTS));
+            PacketRepository.send(Encoders530.SKILL_LEVEL, new SkillContext(this, Skills.HITPOINTS));
             getSkills().setLifepointsUpdate(false);
         }
         if (getAttribute("flagged-for-save", false)) {
@@ -907,9 +905,9 @@ public class Player extends Entity {
     public void updateSceneGraph(boolean login) {
         Region region = getViewport().getRegion();
         if (region instanceof DynamicRegion || region == null && (region = RegionManager.forId(location.getRegionId())) instanceof DynamicRegion) {
-            PacketRepository.send(BuildDynamicScene.class, new DynamicSceneContext(this, login));
+            PacketRepository.send(Encoders530.BUILD_DYNAMIC_SCENE, new DynamicSceneContext(this, login));
         } else {
-            PacketRepository.send(UpdateSceneGraph.class, new SceneGraphContext(this, login));
+            PacketRepository.send(Encoders530.UPDATE_SCENE_GRAPH, new SceneGraphContext(this, login));
         }
     }
 

@@ -26,8 +26,8 @@ import core.game.world.map.zone.impl.DarkZone;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.InterfaceContext;
-import core.net.packet.out.Interface;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.InterfaceContext;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
@@ -116,7 +116,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 
     private void splatterMud(Location hole) {
         for (Player p : RegionManager.getLocalPlayers(getCenterLocation(), (size() >> 1) + 2)) {
-            PacketRepository.send(Interface.class, new InterfaceContext(p, Components.TOPLEVEL_548, 77, 226, true));
+            PacketRepository.send(Encoders530.INTERFACE, new InterfaceContext(p, Components.TOPLEVEL_548, 77, 226, true));
             LightSources s = LightSources.getActiveLightSource(p);
             if (s == null || s.getOpen()) {
                 if (s != null) {

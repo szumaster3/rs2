@@ -4,8 +4,8 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.net.packet.PacketRepository.send
-import core.net.packet.context.HintIconContext
-import core.net.packet.out.HintIcon
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.HintIconContext
 
 /**
  * Handles hint icon operations for a player.
@@ -113,7 +113,7 @@ class HintIconManager {
             }
 
             val icon = HintIconContext(player, slot, arrowId, resolvedTargetType, target, modelId, height)
-            send(HintIcon::class.java, icon)
+            send(Encoders530.HINT_ICON, icon)
             manager.hintIcons[slot] = icon
             return slot
         }
@@ -131,7 +131,7 @@ class HintIconManager {
             val icon = manager.hintIcons.getOrNull(slot) ?: return
 
             icon.targetType = 0
-            send(HintIcon::class.java, icon)
+            send(Encoders530.HINT_ICON, icon)
             manager.hintIcons[slot] = null
         }
     }

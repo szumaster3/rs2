@@ -5,8 +5,8 @@ import core.game.container.Container;
 import core.game.container.ContainerEvent;
 import core.game.node.entity.player.Player;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
-import core.net.packet.out.ContainerPacket;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.ContainerContext;
 
 /**
  * The Beast of Burden container listener.
@@ -21,12 +21,12 @@ public final class BurdenContainerListener implements ContainerListener {
 
 	@Override
 	public void update(Container c, ContainerEvent event) {
-		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 30, event.getItems(), false, event.getSlots()));
+		PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, -1, -2, 30, event.getItems(), false, event.getSlots()));
 	}
 
 	@Override
 	public void refresh(Container c) {
-		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 30, c.toArray(), c.capacity(), false));
+		PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, -1, -2, 30, c.toArray(), c.capacity(), false));
 	}
 
 }

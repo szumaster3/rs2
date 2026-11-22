@@ -9,9 +9,8 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.net.packet.PacketRepository
-import core.net.packet.context.InterfaceContext
-import core.net.packet.out.CloseInterface
-import core.net.packet.out.Interface
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.InterfaceContext
 
 /**
  * Handles the multiway combat zones.
@@ -91,7 +90,7 @@ private constructor() : MapZone("Multicombat", true) {
         if (e is Player) {
             val p = e
             val resizable = p.interfaceManager.isResizable
-            PacketRepository.send(Interface::class.java, InterfaceContext(p, p.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
+            PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(p, p.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
             p.packetDispatch.sendInterfaceConfig(745, 1, false)
         }
         e.properties.isMultiZone = true
@@ -101,7 +100,7 @@ private constructor() : MapZone("Multicombat", true) {
     override fun leave(e: Entity, logout: Boolean): Boolean {
         if (!logout && e is Player) {
             val resizable = e.interfaceManager.isResizable
-            PacketRepository.send(CloseInterface::class.java, InterfaceContext(e, e.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
+            PacketRepository.send(Encoders530.CLOSE_INTERFACE, InterfaceContext(e, e.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
         }
         e.properties.isMultiZone = false
         return super.leave(e, logout)

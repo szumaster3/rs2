@@ -7,8 +7,8 @@ import core.game.interaction.InterfaceListeners.runOpen
 import core.game.interaction.InterfaceListeners.runSlotSwitch
 import core.game.node.entity.player.Player
 import core.net.packet.PacketRepository
-import core.net.packet.context.InterfaceContext
-import core.net.packet.out.Interface
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.InterfaceContext
 
 /**
  * Represents a UI component that can be opened, closed, and interacted with by a player.
@@ -82,7 +82,7 @@ open class Component {
 
         if (definition == null) {
             PacketRepository.send(
-                Interface::class.java,
+                Encoders530.INTERFACE,
                 InterfaceContext(player, manager.windowPaneId, manager.defaultChildId, id, false),
             )
             plugin?.open(player, this)
@@ -94,7 +94,7 @@ open class Component {
         }
 
         if (definition.type == InterfaceType.TAB) {
-            PacketRepository.send(Interface::class.java, InterfaceContext(
+            PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(
                 player,
                 definition.getWindowPaneId(manager.isResizable),
                 definition.getChildId(manager.isResizable) + definition.tabIndex,
@@ -105,7 +105,7 @@ open class Component {
             return
         }
 
-        PacketRepository.send(Interface::class.java, InterfaceContext(
+        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(
             player,
             definition.getWindowPaneId(manager.isResizable),
             definition.getChildId(manager.isResizable),

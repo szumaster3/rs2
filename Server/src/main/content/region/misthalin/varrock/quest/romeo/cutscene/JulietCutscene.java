@@ -11,8 +11,8 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.out.CameraViewPacket;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.CameraContext;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 
@@ -68,8 +68,8 @@ public final class JulietCutscene extends CutscenePlugin {
         int other = 1;
         pos = new CameraContext(player, CameraContext.CameraType.POSITION, x, y - 4, height, other, speed);
         rot = new CameraContext(player, CameraContext.CameraType.ROTATION, x, y - 4, height, other, speed);
-        PacketRepository.send(CameraViewPacket.class, pos);
-        PacketRepository.send(CameraViewPacket.class, rot);
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, pos);
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, rot);
         for (NPC npc : npcs) {
             npc.face(player);
         }

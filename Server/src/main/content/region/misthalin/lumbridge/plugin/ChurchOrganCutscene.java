@@ -12,10 +12,9 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.MusicContext;
-import core.net.packet.out.CameraViewPacket;
-import core.net.packet.out.MusicPacket;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.CameraContext;
+import core.net.packet.out.PacketContext.MusicContext;
 import core.plugin.Initializable;
 
 /**
@@ -47,16 +46,16 @@ public final class ChurchOrganCutscene extends CutscenePlugin {
         final Scenery newOrgin = new Scenery(36979, base.transform(42, 14, 0));
         SceneryBuilder.remove(orgin);
         SceneryBuilder.add(newOrgin);
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() - 7, 405, 1, 100));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 405, 1, 100));
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() - 7, 405, 1, 100));
+        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 405, 1, 100));
         player.lock();
         GameWorld.getPulser().submit(new Pulse(3) {
             @Override
             public boolean pulse() {
                 player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(base.transform(42, 14, 0)), new Animation(9982));
-                PacketRepository.send(MusicPacket.class, new MusicContext(player, 147, true));
-                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() - 3, 400, 1, 1));
-                PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 400, 1, 1));
+                PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, 147, true));
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() - 3, 400, 1, 1));
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 400, 1, 1));
                 return true;
             }
         });

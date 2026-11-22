@@ -11,9 +11,28 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.*;
-import core.net.packet.context.DisplayModelContext.ModelType;
-import core.net.packet.out.*;
+import core.net.packet.out.Encoders530;
+import core.net.packet.out.PacketContext.AccessMaskContext;
+import core.net.packet.out.PacketContext.AnimateInterfaceContext;
+import core.net.packet.out.PacketContext.AnimateObjectContext;
+import core.net.packet.out.PacketContext.CSConfigContext;
+import core.net.packet.out.PacketContext.ChildPositionContext;
+import core.net.packet.out.PacketContext.ConfigContext;
+import core.net.packet.out.PacketContext.DisplayModelContext;
+import core.net.packet.out.PacketContext.DisplayModelContext.ModelType;
+import core.net.packet.out.PacketContext.GameMessageContext;
+import core.net.packet.out.PacketContext.InterfaceConfigContext;
+import core.net.packet.out.PacketContext.InterfaceSetAngleContext;
+import core.net.packet.out.PacketContext.InterfaceSetModelRotationContext;
+import core.net.packet.out.PacketContext.MusicContext;
+import core.net.packet.out.PacketContext.PlayerContext;
+import core.net.packet.out.PacketContext.PositionedGraphicContext;
+import core.net.packet.out.PacketContext.ResetInterfaceContext;
+import core.net.packet.out.PacketContext.RunScriptContext;
+import core.net.packet.out.PacketContext.StringContext;
+import core.net.packet.out.PacketContext.SystemUpdateContext;
+import core.net.packet.out.PacketContext.VarcUpdateContext;
+import core.net.packet.out.PacketContext.WindowsPaneContext;
 import core.tools.Log;
 
 import static core.api.ContentAPIKt.log;
@@ -48,11 +67,11 @@ public final class PacketDispatch {
     }
 
     public void sendVarp(int index, int value) {
-        PacketRepository.send(Config.class, new ConfigContext(player, index, value));
+        PacketRepository.send(Encoders530.CONFIG, new ConfigContext(player, index, value));
     }
 
     public void sendVarcUpdate(short index, int value) {
-        PacketRepository.send(VarcUpdate.class, new VarcUpdateContext(player, index, value));
+        PacketRepository.send(Encoders530.VARC_UPDATE, new VarcUpdateContext(player, index, value));
     }
 
     /**
@@ -71,7 +90,7 @@ public final class PacketDispatch {
             log(this.getClass(), Log.ERR, "Message length out of bounds (" + message + ")!");
             message = message.substring(0, 255);
         }
-        PacketRepository.send(GameMessage.class, new GameMessageContext(player, message));
+        PacketRepository.send(Encoders530.GAME_MESSAGE, new GameMessageContext(player, message));
     }
 
     /**
@@ -129,7 +148,7 @@ public final class PacketDispatch {
      * @param length       The access mask length.
      */
     public void sendIfaceSettings(int settingsHash, int childId, int interfaceId, int offset, int length) {
-        PacketRepository.send(AccessMask.class, new AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length));
+        PacketRepository.send(Encoders530.ACCESS_MASK, new AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length));
     }
 
     /**
@@ -139,7 +158,7 @@ public final class PacketDispatch {
      * @param type     The windowns pane type.
      */
     public void sendWindowsPane(int windowId, int type) {
-        PacketRepository.send(WindowsPane.class, new WindowsPaneContext(player, windowId, type));
+        PacketRepository.send(Encoders530.WINDOWS_PANE, new WindowsPaneContext(player, windowId, type));
     }
 
     /**
@@ -148,7 +167,7 @@ public final class PacketDispatch {
      * @param time the amount of time.
      */
     public void sendSystemUpdate(int time) {
-        PacketRepository.send(SystemUpdatePacket.class, new SystemUpdateContext(player, time));
+        PacketRepository.send(Encoders530.SYSTEM_UPDATE_PACKET, new SystemUpdateContext(player, time));
     }
 
     /**
@@ -157,7 +176,7 @@ public final class PacketDispatch {
      * @param musicId The music id.
      */
     public void sendMusic(int musicId) {
-        PacketRepository.send(MusicPacket.class, new MusicContext(player, musicId));
+        PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, musicId));
     }
 
     /**
@@ -166,7 +185,7 @@ public final class PacketDispatch {
      * @param musicId The music id.
      */
     public void sendTempMusic(int musicId) {
-        PacketRepository.send(MusicPacket.class, new MusicContext(player, musicId, true));
+        PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, musicId, true));
     }
 
     /**
@@ -176,7 +195,7 @@ public final class PacketDispatch {
      * @param value The value of the config.
      */
     public void sendScriptConfig(int id, int value, String types, Object... parameters) {
-        PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, types, parameters));
+        PacketRepository.send(Encoders530.CS_CONFIG_PACKET, new CSConfigContext(player, id, value, types, parameters));
     }
 
     /**
@@ -187,7 +206,7 @@ public final class PacketDispatch {
      * @param objects The run scripts objects.
      */
     public void sendRunScript(int id, String string, Object... objects) {
-        PacketRepository.send(RunScriptPacket.class, new RunScriptContext(player, id, string, objects));
+        PacketRepository.send(Encoders530.RUN_SCRIPT_PACKET, new RunScriptContext(player, id, string, objects));
     }
 
     /**
@@ -198,21 +217,21 @@ public final class PacketDispatch {
      * @param lineId      The line id.
      */
     public void sendString(String string, int interfaceId, int lineId) {
-        PacketRepository.send(StringPacket.class, new StringContext(player, string, interfaceId, lineId));
+        PacketRepository.send(Encoders530.STRING_PACKET, new StringContext(player, string, interfaceId, lineId));
     }
 
     /**
      * Send a update packet for the amount of run energy.
      */
     public void sendRunEnergy() {
-        PacketRepository.send(RunEnergy.class, getContext());
+        PacketRepository.send(Encoders530.RUN_ENERGY, getContext());
     }
 
     /**
      * Send the logout packet.
      */
     public void sendLogout() {
-        PacketRepository.send(Logout.class, getContext());
+        PacketRepository.send(Encoders530.LOGOUT, getContext());
     }
 
     /**
@@ -223,7 +242,7 @@ public final class PacketDispatch {
      * @param childId     The child id.
      */
     public void sendAnimationInterface(int animationId, int interfaceId, int childId) {
-        PacketRepository.send(AnimateInterface.class, new AnimateInterfaceContext(player, animationId, interfaceId, childId));
+        PacketRepository.send(Encoders530.ANIMATE_INTERFACE, new AnimateInterfaceContext(player, animationId, interfaceId, childId));
     }
 
     /**
@@ -235,10 +254,8 @@ public final class PacketDispatch {
     public void sendPlayerOnInterface(int interfaceId, int childId) {
         // fixme right now for iface 68-71 the player is massive
         // The zoom for the other windows is 2150
-        // for these 4 individuals it should be 796 but dmc.setZoom doesn't work
-        DisplayModelContext dmc = new DisplayModelContext(player, interfaceId, childId);
-        dmc.setZoom(796); // this appears to do nothing
-        PacketRepository.send(DisplayModel.class, dmc);
+        // These four interfaces need a zoom of 796. The player model packet has no zoom field.
+        PacketRepository.send(Encoders530.DISPLAY_MODEL, new DisplayModelContext(player, interfaceId, childId));
     }
 
     /**
@@ -249,19 +266,19 @@ public final class PacketDispatch {
      * @param childId     The child id.
      */
     public void sendNpcOnInterface(int npcId, int interfaceId, int childId) {
-        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, npcId, interfaceId, childId));
+        PacketRepository.send(Encoders530.DISPLAY_MODEL, new DisplayModelContext(player, npcId, interfaceId, childId));
     }
 
     public void sendModelOnInterface(int modelID, int interfaceId, int childId, int zoom) {
-        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.MODEL, modelID, zoom, interfaceId, childId, new Object()));
+        PacketRepository.send(Encoders530.DISPLAY_MODEL, new DisplayModelContext(player, ModelType.MODEL, modelID, 0, interfaceId, childId, zoom));
     }
 
     public void sendRepositionOnInterface(int interfaceId, int childId, int positionX, int positionY) {
-        PacketRepository.send(RepositionChild.class, new ChildPositionContext(player, interfaceId, childId, positionX, positionY));
+        PacketRepository.send(Encoders530.REPOSITION_CHILD, new ChildPositionContext(player, interfaceId, childId, positionX, positionY));
     }
 
     public void sendAngleOnInterface(int interfaceId, int childId, int zoom, int pitch, int yaw) {
-        PacketRepository.send(InterfaceSetAngle.class, new DefaultContext(player, pitch, zoom, yaw, interfaceId, childId));
+        PacketRepository.send(Encoders530.INTERFACE_SET_ANGLE, new InterfaceSetAngleContext(player, pitch, zoom, yaw, interfaceId, childId));
     }
 
     /**
@@ -273,7 +290,7 @@ public final class PacketDispatch {
      * @param childId     The child id.
      */
     public void sendItemOnInterface(int itemId, int amount, int interfaceId, int childId) {
-        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.ITEM, itemId, amount, interfaceId, childId));
+        PacketRepository.send(Encoders530.DISPLAY_MODEL, new DisplayModelContext(player, ModelType.ITEM, itemId, amount, interfaceId, childId));
     }
 
     /**
@@ -285,7 +302,7 @@ public final class PacketDispatch {
      * @param childId     The child id.
      */
     public void sendItemZoomOnInterface(int itemId, int zoom, int interfaceId, int childId) {
-        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.ITEM, itemId, zoom, interfaceId, childId, zoom));
+        PacketRepository.send(Encoders530.DISPLAY_MODEL, new DisplayModelContext(player, ModelType.ITEM, itemId, 0, interfaceId, childId, zoom));
     }
 
     public void sendInterSetItemsOptionsScript(int interfaceId, int componentId, int key, int width, int height, String... options) {
@@ -331,7 +348,7 @@ public final class PacketDispatch {
      * @param childId     The child id.
      */
     public void sendItemZoomOnInterface(int itemId, int amount, int zoom, int interfaceId, int childId) {
-        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.ITEM, itemId, amount, interfaceId, childId, zoom));
+        PacketRepository.send(Encoders530.DISPLAY_MODEL, new DisplayModelContext(player, ModelType.ITEM, itemId, 0, interfaceId, childId, amount));
     }
 
     /**
@@ -342,7 +359,7 @@ public final class PacketDispatch {
      * @param hide        If the component should be hidden.
      */
     public void sendInterfaceConfig(int interfaceId, int childId, boolean hide) {
-        PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, interfaceId, childId, hide));
+        PacketRepository.send(Encoders530.INTERFACE_CONFIG, new InterfaceConfigContext(player, interfaceId, childId, hide));
     }
 
     /**
@@ -382,7 +399,7 @@ public final class PacketDispatch {
      * @param location the location.
      */
     public void sendPositionedGraphic(int id, int height, int delay, Location location) {
-        PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, new Graphics(id, height, delay), location, 0, 0));
+        PacketRepository.send(Encoders530.POSITIONED_GRAPHIC, new PositionedGraphicContext(player, new Graphics(id, height, delay), location, 0, 0));
     }
 
     /**
@@ -404,7 +421,7 @@ public final class PacketDispatch {
      * @param location the location.
      */
     public void sendPositionedGraphics(Graphics graphics, Location location) {
-        PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, graphics, location, 0, 0));
+        PacketRepository.send(Encoders530.POSITIONED_GRAPHIC, new PositionedGraphicContext(player, graphics, location, 0, 0));
     }
 
     /**
@@ -416,7 +433,7 @@ public final class PacketDispatch {
      * @param yaw         the yaw rotation value.
      */
     public void sendInterfaceAnimateRotation(int id, int componentId, int pitch, int yaw) {
-        PacketRepository.send(InterfaceSetModelRotation.class, new InterfaceSetModelRotationContext(player, id, componentId, pitch, yaw));
+        PacketRepository.send(Encoders530.INTERFACE_SET_MODEL_ROTATION, new InterfaceSetModelRotationContext(player, id, componentId, pitch, yaw));
     }
 
     /**
@@ -444,7 +461,7 @@ public final class PacketDispatch {
             return;
         }
         animation.setObject(object);
-        PacketRepository.send(AnimateObjectPacket.class, new AnimateObjectContext(player, animation));
+        PacketRepository.send(Encoders530.ANIMATE_OBJECT_PACKET, new AnimateObjectContext(player, animation));
     }
 
     /**
@@ -458,7 +475,7 @@ public final class PacketDispatch {
     }
 
     public void sendVarClient(int id, int value, boolean cs2) {
-        PacketRepository.send(Config.class, new ConfigContext(player, id, value, cs2));
+        PacketRepository.send(Encoders530.CONFIG, new ConfigContext(player, id, value, cs2));
     }
 
     public void sendLeftShiftedVarbit(int varpIndex, int offset, int value) {
@@ -489,15 +506,15 @@ public final class PacketDispatch {
     }
 
     public void sendScriptConfigs(int id, int value, String type, Object... params) {
-        PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, type, params));
+        PacketRepository.send(Encoders530.CS_CONFIG_PACKET, new CSConfigContext(player, id, value, type, params));
     }
 
     public void resetInterface(int id) {
-        PacketRepository.send(ResetInterface.class, new InterfaceContext(player, 0, 0, id, false));
+        PacketRepository.send(Encoders530.RESET_INTERFACE, new ResetInterfaceContext(player, id));
     }
 
     public void sendLastLoginInfo() {
-        PacketRepository.send(LastLoginInfo.class, new PlayerContext(player));
+        PacketRepository.send(Encoders530.LAST_LOGIN_INFO, new PlayerContext(player));
     }
 
 }

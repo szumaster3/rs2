@@ -12,8 +12,8 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.path.Pathfinder
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
-import core.net.packet.out.CameraViewPacket
+import core.net.packet.out.Encoders530
+import core.net.packet.out.PacketContext.CameraContext
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
@@ -765,8 +765,8 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 val other = 1
                 pos = CameraContext(player, CameraContext.CameraType.POSITION, x + 3, y + 4, height, other, speed)
                 rot = CameraContext(player, CameraContext.CameraType.ROTATION, x - 1, y - 2, height, other, speed)
-                PacketRepository.send(CameraViewPacket::class.java, pos)
-                PacketRepository.send(CameraViewPacket::class.java, rot)
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, pos)
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, rot)
                 Pulser.submit(
                     object : Pulse(5) {
                         override fun pulse(): Boolean {
@@ -779,8 +779,8 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                             val other = 1
                             pos = CameraContext(player, CameraContext.CameraType.POSITION, x - 5, y - 4, height, other, speed)
                             rot = CameraContext(player, CameraContext.CameraType.ROTATION, x + 2, y, height, other, speed)
-                            PacketRepository.send(CameraViewPacket::class.java, pos!!)
-                            PacketRepository.send(CameraViewPacket::class.java, rot!!)
+                            PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, pos!!)
+                            PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, rot!!)
                             interpreter.sendDialogues(
                                 player,
                                 FaceAnim.HALF_GUILTY,
@@ -807,8 +807,8 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 val other = 1
                 val pos = CameraContext(player, CameraContext.CameraType.POSITION, x, y - 1, height, other, speed)
                 val rot = CameraContext(player, CameraContext.CameraType.ROTATION, x + 20, y + 50, height, other, speed)
-                PacketRepository.send(CameraViewPacket::class.java, pos)
-                PacketRepository.send(CameraViewPacket::class.java, rot)
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, pos)
+                PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, rot)
                 close()
                 npc.walkingQueue.reset()
                 npc.walkingQueue.addPath(cutscene!!.base.transform(19, 35, 0).x, cutscene!!.base.transform(19, 35, 0).y)
