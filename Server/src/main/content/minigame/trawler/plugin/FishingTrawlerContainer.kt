@@ -60,7 +60,7 @@ class FishingTrawlerContainer(val player: Player) :
         var take = amount.coerceAtMost(item.amount)
         if (take < 1) return
 
-        if (item.definition.isStackable()) {
+        if (item.definition.isStackable) {
             val freeSlots = player.inventory.freeSlots()
             val add = if (player.inventory.contains(item.id, item.amount)) take else take.coerceAtMost(freeSlots)
             if (add > 0) {
@@ -114,7 +114,7 @@ class FishingTrawlerContainer(val player: Player) :
         for (slot in 0 until CONTAINER_SIZE) {
             val item = get(slot) ?: continue
 
-            if (item.definition.isStackable()) {
+            if (item.definition.isStackable) {
                 GroundItemManager.create(item, player.location, player)
             } else {
                 repeat(item.amount) {

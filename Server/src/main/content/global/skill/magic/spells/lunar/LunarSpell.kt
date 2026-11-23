@@ -690,7 +690,7 @@ class LunarSpell : SpellListener("lunar") {
             val potion = consumable.consumable as? Potion
                 ?: return@onCast sendMessage(player, "You can only cast this spell on a valid potion.")
 
-            if (!item.definition.isTradeable() || potion !in accepted.map { it.consumable }) {
+            if (!item.definition.isTradeable || potion !in accepted.map { it.consumable }) {
                 sendMessage(player, "You can't cast this spell on that item.")
                 return@onCast
             }

@@ -1,6 +1,5 @@
 package core.cache.def.impl
 
-import core.ServerConstants
 import core.cache.Cache
 import java.nio.ByteBuffer
 
@@ -33,14 +32,10 @@ class ClothDefinition {
 
     val models: IntArray = intArrayOf(-1, -1, -1, -1, -1)
 
-    /**
-     * Loads the definitions.
-     *
-     * @param buffer The buffer.
-     */
     fun load(buffer: ByteBuffer) {
-        var opcode: Int
-        while (((buffer.get().toInt() and 0xFF).also { opcode = it }) != 0) {
+        while (true) {
+            val opcode = buffer.get().toInt() and 0xFF
+            if (opcode == 0) return
             parse(opcode, buffer)
         }
     }
@@ -57,10 +52,8 @@ class ClothDefinition {
             2 -> {
                 val length = buffer.get().toInt() and 0xFF
                 modelIds = IntArray(length)
-                var i = 0
-                while (i < length) {
+                for (i in 0 until length) {
                     modelIds[i] = buffer.getShort().toInt() and 0xFFFF
-                    i++
                 }
             }
 
@@ -69,11 +62,9 @@ class ClothDefinition {
                 val length = buffer.get().toInt() and 0xFF
                 originalColors = IntArray(length)
                 modifiedColors = IntArray(length)
-                var i = 0
-                while (i < length) {
+                for (i in 0 until length) {
                     originalColors[i] = buffer.getShort().toInt()
                     modifiedColors[i] = buffer.getShort().toInt()
-                    i++
                 }
             }
 
@@ -81,11 +72,9 @@ class ClothDefinition {
                 val length = buffer.get().toInt() and 0xFF
                 originalTextureColors = IntArray(length)
                 modifiedTextureColors = IntArray(length)
-                var i = 0
-                while (i < length) {
+                for (i in 0 until length) {
                     originalTextureColors[i] = buffer.getShort().toInt()
                     modifiedTextureColors[i] = buffer.getShort().toInt()
-                    i++
                 }
             }
 
@@ -104,30 +93,12 @@ class ClothDefinition {
          */
         fun forId(clothId: Int): ClothDefinition {
             val def = ClothDefinition()
-            val bs = Cache.getIndexes()[2].getFileData(3, clothId, null)
+            val bs = Cache.getIndexes()[2]!!.getFileData(3, clothId, null)
             if (bs != null) {
                 def.load(ByteBuffer.wrap(bs))
             }
             return def
         }
 
-        /**
-         * The main method.
-         *
-         * @param args The arguments cast on runtime.
-         */
-        @JvmStatic
-        fun main(args: Array<String>) {
-            try {
-                Cache.init(ServerConstants.CACHE_PATH)
-            } catch (e: Throwable) {
-                e.printStackTrace()
-            }
-            val length = Cache.getIndexes()[2].getFilesSize(3)
-
-            for (i in 0 until length) {
-                val def = forId(i)
-            }
-        }
     }
 }

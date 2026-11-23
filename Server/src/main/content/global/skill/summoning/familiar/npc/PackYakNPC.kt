@@ -41,13 +41,13 @@ class PackYakNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs
             return false
         }
 
-        val remove = if (!item.definition.isUnnoted()) {
+        val remove = if (!item.definition.isUnnoted) {
             Item(item.id, 1)
         } else {
             item
         }
 
-        if (!item.definition.isUnnoted()) {
+        if (!item.definition.isUnnoted) {
             item = Item(item.noteChange, 1)
         }
 

@@ -207,7 +207,7 @@ object ClimbActionHandler {
 
     @JvmStatic
     private fun isClimbable(scenery: Scenery): Boolean {
-        scenery.definition.options.forEach { if (it.contains("Climb", ignoreCase = true)) return true }
+        scenery.definition.options.forEach { if (it?.contains("Climb", ignoreCase = true) == true) return true }
         return scenery.name.equals("Trapdoor", ignoreCase = true) || scenery.name.equals("Rope", ignoreCase = true)
     }
 

@@ -258,9 +258,8 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         when (entity) {
             is Player -> {
                 if (entity.equipment[EquipmentContainer.SLOT_WEAPON] != null && RangeWeapon.get(entity.equipment[EquipmentContainer.SLOT_WEAPON].id)!!.ammunitionSlot != EquipmentContainer.SLOT_ARROWS && entity.equipment[EquipmentContainer.SLOT_ARROWS] != null)
-                    styleStrengthBonus -= entity.equipment[EquipmentContainer.SLOT_ARROWS].definition.getConfiguration<IntArray>(
-                        ItemConfigParser.BONUS
-                    )[14]
+                    styleStrengthBonus -= entity.equipment[EquipmentContainer.SLOT_ARROWS].definition
+                        .getConfiguration<IntArray>(ItemConfigParser.BONUS)?.get(14) ?: 0
                 var effectiveStrengthLevel = entity.skills.getLevel(Skills.RANGE).toDouble()
                 if (flags.contains(SwingHandlerFlag.IGNORE_STAT_REDUCTION)) {
                     val staticLevel = entity.skills.getStaticLevel(Skills.RANGE).toDouble()

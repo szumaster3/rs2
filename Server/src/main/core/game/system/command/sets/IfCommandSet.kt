@@ -33,12 +33,12 @@ class IfCommandSet : Commands {
                 if (child.scripts!!.onVarpTransmit != null) {
                     notify(player, logToConsole = true, message = "$child [VARP]:")
                     notify(player, logToConsole = true, message = "  Transmit ${child.triggers!!.varpTriggers!!.joinToString(",")} triggers script ${child.scripts!!.onVarpTransmit!!.id}",)
-                    notify(player, logToConsole = true, message = "  Default script args: ${child.scripts!!.onVarpTransmit!!.args.joinToString(",")}")
+                    notify(player, logToConsole = true, message = "  Default script args: ${child.scripts!!.onVarpTransmit!!.args?.joinToString(",")}")
                 }
                 if (child.scripts!!.onVarcTransmit != null) {
                     notify(player, logToConsole = true, message = "$child [VARC]:")
                     notify(player, logToConsole = true, message = "  Transmit ${child.triggers!!.varcTriggers!!.joinToString(",",)} triggers script ${child.scripts!!.onVarcTransmit!!.id}",)
-                    notify(player, logToConsole = true, message = "  Default script args: ${child.scripts!!.onVarcTransmit!!.args.joinToString(",")}",)
+                    notify(player, logToConsole = true, message = "  Default script args: ${child.scripts!!.onVarcTransmit!!.args?.joinToString(",")}",)
                 }
             }
         }

@@ -23,7 +23,7 @@ import java.util.*
  * @author Ceikry
  */
 object QCRepository {
-    private val quickChatIndex = Cache.getIndexes()[24]
+    private val quickChatIndex = Cache.getIndexes()[24]!!
 
     /**
      * The entry method that connects to the other more specific methods
@@ -296,7 +296,7 @@ object QCRepository {
     }
 
     private fun getFromMap(map: Int, index: Int): String {
-        return DataMap.get(map).getString(index)
+        return DataMap.get(map).getString(index) ?: ""
     }
 
     /**

@@ -25,7 +25,7 @@ class ItemDefTests {
             Assertions.assertEquals(
                 expectedValue,
                 def.value,
-                "Value of ${def.name} (${def.isUnnoted()}) does not match known good values!",
+                "Value of ${def.name} (${def.isUnnoted}) does not match known good values!",
             )
         }
     }
