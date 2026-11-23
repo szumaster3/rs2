@@ -116,7 +116,7 @@ class BankBoothPlugin : InteractionListener {
         val item = used as Item
 
         if (item.noteChange != item.id) {
-            if (item.definition.isUnnoted()) {
+            if (item.definition.isUnnoted) {
                 val amount = amountInInventory(player, item.id)
                 if (removeItem(player, Item(item.id, amount))) {
                     addItem(player, item.noteChange, amount)

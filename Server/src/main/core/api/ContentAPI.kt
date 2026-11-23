@@ -501,7 +501,7 @@ fun addItemOrDrop(
     amount: Int = 1,
 ) {
     val item = Item(id, amount)
-    if (amount == 1 || item.definition.isStackable()) {
+    if (amount == 1 || item.definition.isStackable) {
         if (!player.inventory.add(item)) GroundItemManager.create(item, player)
     } else {
         val singleItem = Item(id, 1)
@@ -3227,7 +3227,7 @@ fun getFamiliarBoost(
  * @return The noted version of the item.
  */
 fun note(item: Item): Item {
-    if (!item.definition.isUnnoted()) return item
+    if (!item.definition.isUnnoted) return item
 
     if (item.definition.noteId < 0) return item
 
@@ -3241,7 +3241,7 @@ fun note(item: Item): Item {
  * @return The unnoted version of the item.
  */
 fun unnote(item: Item): Item {
-    if (item.definition.isUnnoted()) return item
+    if (item.definition.isUnnoted) return item
 
     return Item(item.noteChange, item.amount, item.charge)
 }

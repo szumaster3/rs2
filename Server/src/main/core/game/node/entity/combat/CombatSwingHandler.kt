@@ -349,7 +349,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             val styleIndex = entity.settings.attackStyleIndex
             if (state.weapon != null && state.weapon.item != null) {
                 val weapon = state.weapon.item
-                val audios = weapon?.definition?.getConfiguration<Array<Audio>>(ItemConfigParser.ATTACK_AUDIO, null)
+                val audios = weapon?.definition?.getConfiguration<Array<Audio>>(ItemConfigParser.ATTACK_AUDIO)
                 if (audios != null) {
                     var audio: Audio? = null
                     if (styleIndex < audios.size) {

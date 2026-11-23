@@ -63,7 +63,7 @@ class EquipHandler : InteractionListener {
             }
 
             // Fire plugin event if defined
-            val plugin = item.definition.getConfiguration<Plugin<Any>>("equipment", null)
+            val plugin = item.definition.getConfiguration<Plugin<Any>>("equipment")
             if (plugin != null) {
                 if (!(plugin.fireEvent("unequip", player, item) as Boolean)) {
                     return
@@ -106,7 +106,7 @@ class EquipHandler : InteractionListener {
             }
 
             // Fire the equipment plugin event if defined
-            val equipStateListener = item.definition.getConfiguration<Plugin<Any>>("equipment", null)
+            val equipStateListener = item.definition.getConfiguration<Plugin<Any>>("equipment")
             if (equipStateListener != null) {
                 val bool = equipStateListener.fireEvent("equip", player, item)
                 if (bool != true) {

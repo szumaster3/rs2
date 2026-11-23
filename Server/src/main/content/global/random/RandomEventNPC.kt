@@ -122,7 +122,7 @@ abstract class RandomEventNPC(
         player.pulseManager.clear()
         for (item in player.inventory.toArray()) {
             if (item == null) continue
-            if (item.definition.isUnnoted()) {
+            if (item.definition.isUnnoted) {
                 removeItem(player, item)
                 addItem(player, item.noteChange, item.amount)
             }

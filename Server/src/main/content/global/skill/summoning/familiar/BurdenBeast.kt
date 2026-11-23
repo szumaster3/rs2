@@ -126,7 +126,7 @@ abstract class BurdenBeast : Familiar {
         }
         if (item == null || owner == null) return
 
-        if (!withdraw && !isAllowed(owner, Item(item.id, if (item.definition.isStackable()) amount else 1))) {
+        if (!withdraw && !isAllowed(owner, Item(item.id, if (item.definition.isStackable) amount else 1))) {
             return
         }
 
@@ -143,7 +143,7 @@ abstract class BurdenBeast : Familiar {
             return
         }
 
-        if (!item.definition.isStackable() && item.slot > -1) {
+        if (!item.definition.isStackable && item.slot > -1) {
             from.replace(null, item.slot)
             to.add(Item(item.id, 1))
             actualAmount--

@@ -264,7 +264,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             return Pair(null, Item(-1, -1))
         }
 
-        val shopItemId = if (item.definition.isUnnoted()) {
+        val shopItemId = if (item.definition.isUnnoted) {
             item.id
         } else {
             item.noteChange
@@ -458,7 +458,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             item.amount = player.inventory.getAmount(item.id)
         }
 
-        val id = if (!item.definition.isUnnoted()) item.noteChange else item.id
+        val id = if (!item.definition.isUnnoted) item.noteChange else item.id
         val (isPlayerStock, shopSlot) = getStockSlot(id)
 
         if (isPlayerStock && shopSlot == -1 && generalPlayerStock.freeSlots() == 0) {
@@ -490,7 +490,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 showTab(player, true)
             }
             addItem(player, profit.id, profit.amount)
-            if (!item.definition.isUnnoted()) {
+            if (!item.definition.isUnnoted) {
                 item.id = item.noteChange
             }
             container?.add(item)

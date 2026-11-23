@@ -59,7 +59,7 @@ class StockMarket : InterfaceListener {
                         return@on true
                     }
                     var id = item.id
-                    if (!item.definition.isUnnoted()) {
+                    if (!item.definition.isUnnoted) {
                         id = item.noteChange
                     }
                     if (!PriceIndex.canTrade(id)) {

@@ -46,20 +46,20 @@ class HunterPlugin : OptionHandler() {
             }
             if (trap.settings.failId != -1) {
                 definition = SceneryDefinition.forId(trap.settings.failId)
-                definition.getHandlers()["option:dismantle"] = this
-                definition.getHandlers()["option:deactivate"] = this
+                definition.handlers["option:dismantle"] = this
+                definition.handlers["option:deactivate"] = this
             }
             for (objectId in trap.settings.objectIds) {
                 definition = SceneryDefinition.forId(objectId)
-                definition.getHandlers()["option:deactivate"] = this
-                definition.getHandlers()["option:dismantle"] = this
-                definition.getHandlers()["option:investigate"] = this
+                definition.handlers["option:deactivate"] = this
+                definition.handlers["option:dismantle"] = this
+                definition.handlers["option:investigate"] = this
             }
             for (node in trap.nodes) {
                 for (objectId in node.objectIds) {
                     definition = SceneryDefinition.forId(objectId)
-                    definition.getHandlers()["option:check"] = this
-                    definition.getHandlers()["option:retrieve"] = this
+                    definition.handlers["option:check"] = this
+                    definition.handlers["option:retrieve"] = this
                 }
             }
         }

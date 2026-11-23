@@ -312,8 +312,7 @@ object PacketProcessor {
                 val def = SceneryDefinition.forId(pkt.id) ?: return
                 pkt.player.debug("[SCENERY]---------------------")
                 pkt.player.debug("ID: ${pkt.id}")
-                if (def.configFile != null)
-                    pkt.player.debug("Varbit: ${def.configFile.id}")
+                def.configFile?.let { pkt.player.debug("Varbit: ${it.id}") }
                 pkt.player.debug("------------------------------")
                 if (!pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false))
                     pkt.player.packetDispatch.sendRunScript(102, "s", def.examine)
