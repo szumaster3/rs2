@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.quest.dorics.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Doric dialogue file.
@@ -42,7 +43,7 @@ class DoricDialogue(private val questStage: Int) : DialogueFile() {
             40 -> npc(FaceAnim.OLD_NORMAL, "Clay is what I use more than anything, to make casts.", "Could you get me 6 clay, 4 copper ore, and 2 iron ore,", "please? I could pay a little, and let you use my anvils.", "Take this pickaxe with you just in case you need it.").also { stage++ }
             41 -> {
                 playerl(FaceAnim.FRIENDLY, "Certainly, I'll be right back!")
-                startQuest(player, Quests.DORICS_QUEST)
+                startQuest(player, Quests.DORICS_QUEST.questName)
                 if (!inInventory(player, Items.BRONZE_PICKAXE_1265)) addItemOrDrop(player, Items.BRONZE_PICKAXE_1265)
                 stage = END_DIALOGUE
             }
@@ -64,7 +65,7 @@ class DoricDialogue(private val questStage: Int) : DialogueFile() {
             2 -> npcl(FaceAnim.OLD_NORMAL, "Many thanks. Pass them here, please. I can spare you some coins for your trouble, and please use my anvils any time you want.").also { stage++ }
             3 -> if (removeItem(player, Item(Items.CLAY_434, 6)) && removeItem(player, Item(Items.COPPER_ORE_436, 4)) && removeItem(player, Item(Items.IRON_ORE_440, 2))) {
                 sendItemDialogue(player, Items.COPPER_ORE_436, "You hand the clay, copper, and iron to Doric.")
-                finishQuest(player, Quests.DORICS_QUEST)
+                finishQuest(player, Quests.DORICS_QUEST.questName)
                 stage = END_DIALOGUE
             }
             50 -> npcl(FaceAnim.OLD_NORMAL, "Not to worry, stick at it. Remember, I need 6 clay, 4 copper ore, and 2 iron ore.").also { stage++ }

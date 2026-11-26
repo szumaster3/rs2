@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Bailey dialogue.
@@ -24,11 +25,11 @@ class BaileyDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         when {
             // Bailey's Cookhouse - First talk.
-            getQuestStage(player, Quests.SEA_SLUG) >= 15 -> player("Hello.").also { stage = 100 }
+            getQuestStage(player, Quests.SEA_SLUG.questName) >= 15 -> player("Hello.").also { stage = 100 }
             // Things Are Heating Up - second talk.
-            getQuestStage(player, Quests.SEA_SLUG) >= 20 -> player("I've managed to light the torch.").also { stage = 200 }
+            getQuestStage(player, Quests.SEA_SLUG.questName) >= 20 -> player("I've managed to light the torch.").also { stage = 200 }
             // Post-quest dialogue
-            isQuestComplete(player, Quests.SEA_SLUG) -> player("Hello Bailey.").also { stage = 205 }
+            isQuestComplete(player, Quests.SEA_SLUG.questName) -> player("Hello Bailey.").also { stage = 205 }
             // Start.
             else -> player("Hello there.")
         }
@@ -54,7 +55,7 @@ class BaileyDialogue(player: Player? = null) : Dialogue(player) {
 
             14 -> {
                 end()
-                setQuestStage(player, Quests.SEA_SLUG, 6)
+                setQuestStage(player, Quests.SEA_SLUG.questName, 6)
             }
 
             100 -> npc(FaceAnim.SCARED, "Oh, thank the gods it's you. They've all gone mad I tell", "you, one of the fishermen tried to throw me into the", "sea!").also { stage++ }

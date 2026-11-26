@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue;
 
+import content.data.Quests;
+
 import content.region.desert.al_kharid.quest.desertrescue.dialogue.*;
 import content.region.desert.al_kharid.quest.desertrescue.npc.*;
 import content.region.desert.al_kharid.quest.desertrescue.plugin.TouristTrapPlugin;
@@ -94,7 +96,7 @@ public final class TouristTrap extends Quest {
      * Instantiates a new Tourist trap.
      */
     public TouristTrap() {
-        super(Quests.THE_TOURIST_TRAP, 123, 122, 2, Vars.VARP_QUEST_TOURIST_TRAP_PROGRESS_197, 0, 1, 30);
+        super(Quests.THE_TOURIST_TRAP, Vars.VARP_QUEST_TOURIST_TRAP_PROGRESS_197, 0, 1, 30);
     }
 
     @Override

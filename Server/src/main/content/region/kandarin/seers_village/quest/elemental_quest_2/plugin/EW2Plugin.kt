@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.elemental_quest_2.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.elemental_quest_2.dialogue.SchematicCrateDialogue
 import core.api.*
 import core.game.interaction.IntType
@@ -27,19 +29,19 @@ class EW2Plugin : InteractionListener {
 
         on(Items.SCROLL_9721, IntType.ITEM, "read") { player, _ ->
             openInterface(player, EW2Utils.BlankScroll).also { eW2scroll(player) }
-            setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II, 3)
+            setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II.questName, 3)
             return@on true
         }
 
         on(Scenery.BOOKCASE_17382, IntType.SCENERY, "search") { player, _ ->
-            if (isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_I) &&
+            if (isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_I.questName) &&
                 !inInventory(player, Items.BEATEN_BOOK_9717) &&
                 hasLevelStat(player, Skills.MAGIC, 20) &&
                 hasLevelStat(player, Skills.SMITHING, 30)
             ) {
                 sendItemDialogue(player, Items.BEATEN_BOOK_9717, "You find an old-looking book.")
                 addItemOrDrop(player, Items.BEATEN_BOOK_9717)
-                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II, 1)
+                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II.questName, 1)
                 setAttribute(player, EW2Utils.foundBook, 1)
                 setVarbit(player, EW2Utils.EW2_QUEST_VARBIT, 1, true)
             } else {
@@ -61,7 +63,7 @@ class EW2Plugin : InteractionListener {
 
         on(Scenery.MACHINERY_18594, IntType.SCENERY, "search") { player, _ ->
             sendItemDialogue(player, Items.KEY_9722, "You find a key hidden in the third pipe.")
-            setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II, 4)
+            setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II.questName, 4)
             addItemOrDrop(player, Items.KEY_9722)
             return@on true
         }
@@ -69,7 +71,7 @@ class EW2Plugin : InteractionListener {
         onUseWith(IntType.SCENERY, Items.KEY_9722, Scenery.HATCH_18595) { player, _, _ ->
             sendItemDialogue(player, Items.KEY_9722, "The key fits the lock in the hatch perfectly.")
             setVarbit(player, EW2Utils.EW2_HATCH_VARBIT, 3)
-            setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II, 5)
+            setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II.questName, 5)
             return@onUseWith true
         }
 

@@ -1,5 +1,7 @@
 package content.region.other.zanaris.quest.lostcity.npc
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendDialogue
 import core.api.setQuestStage
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class TreeSpiritNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -42,8 +43,8 @@ class TreeSpiritNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         if (killer is Player) {
-            if (getQuestStage(killer, Quests.LOST_CITY) == 20) {
-                setQuestStage(killer, Quests.LOST_CITY, 21)
+            if (getQuestStage(killer, Quests.LOST_CITY.questName) == 20) {
+                setQuestStage(killer, Quests.LOST_CITY.questName, 21)
                 sendDialogue(killer, "With the Tree Spirit defeated you can now chop the tree.")
             }
         }

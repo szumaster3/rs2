@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.haunted
 
+import content.data.Quests
+
 import content.region.misthalin.draynor.quest.haunted.npc.ErnestChickenNPC
 import content.region.misthalin.draynor.quest.haunted.npc.ErnestNPC
 import core.api.removeAttributes
@@ -13,14 +15,13 @@ import core.plugin.ClassScanner.definePlugins
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the Ernest the Chicken quest.
  */
 @Initializable
-class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_QUEST_ERNEST_THE_CHICKEN_PROGRESS_32, 0, 1, 3) {
+class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN) {
     override fun drawJournal(
         player: Player,
         stage: Int,

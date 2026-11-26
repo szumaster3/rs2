@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov.npc
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class FireWarriorOfLesarkusNPC(id: Int = 0, val player: Player?, location: Location? = null) : AbstractNPC(id, location) {
     var clearTime = 0
@@ -58,8 +59,8 @@ class FireWarriorOfLesarkusNPC(id: Int = 0, val player: Player?, location: Locat
         if (entity is Player) {
             val player = entity.asPlayer()
             removeAttribute(player, GameAttributes.QUEST_IKOV_WARRIOR_INST)
-            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 3) {
-                setQuestStage(player, Quests.TEMPLE_OF_IKOV, 4)
+            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) == 3) {
+                setQuestStage(player, Quests.TEMPLE_OF_IKOV.questName, 4)
             }
             super.finalizeDeath(player)
         }

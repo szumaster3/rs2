@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.plugin
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.removeItem
 import core.game.node.Node
@@ -8,7 +10,6 @@ import core.game.node.item.Item
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Handles movement through energy barriers.
@@ -89,7 +90,7 @@ object EnergyBarrier {
      * Passes the barrier for players who completed Ghosts Ahoy or meet force conditions.
      */
     fun passGateAfterQuest(player: Player, node: Node) {
-        val canPass = shouldForcePass(player, node) || isQuestComplete(player, Quests.GHOSTS_AHOY)
+        val canPass = shouldForcePass(player, node) || isQuestComplete(player, Quests.GHOSTS_AHOY.questName)
         walkThrough(player, node, canPass, byTalk = false)
     }
 }

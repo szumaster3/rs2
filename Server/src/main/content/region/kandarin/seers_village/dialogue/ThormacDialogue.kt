@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.scorpcatcher.dialogue.ThormacRequestDialogue
 import core.api.isQuestComplete
 import core.api.openDialogue
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Thormac dialogue.
@@ -36,7 +37,7 @@ class ThormacDialogue(player: Player? = null) : Dialogue(player) {
             /*
              * Scorpion Catcher dialogue.
              */
-            0 -> if (!isQuestComplete(player, Quests.SCORPION_CATCHER)) {
+            0 -> if (!isQuestComplete(player, Quests.SCORPION_CATCHER.questName)) {
                 openDialogue(player, ThormacRequestDialogue())
             } else {
                 npcl(FaceAnim.NEUTRAL, "Thank you for rescuing my scorpions.").also { stage++ }

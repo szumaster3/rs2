@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.quest.priest
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.drawReward
 import core.api.removeAttribute
@@ -9,7 +11,6 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -17,7 +18,7 @@ import shared.consts.Vars
  * @author Vexia
  */
 @Initializable
-class PriestInPeril : Quest(Quests.PRIEST_IN_PERIL, 99, 98, 1, Vars.VARP_QUEST_PRIEST_IN_PERIL_PROGRESS_302, 0, 1, 100) {
+class PriestInPeril : Quest(Quests.PRIEST_IN_PERIL, Vars.VARP_QUEST_PRIEST_IN_PERIL_PROGRESS_302, 0, 1, 100) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

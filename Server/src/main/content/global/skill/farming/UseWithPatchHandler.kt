@@ -1,5 +1,7 @@
 package content.global.skill.farming
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -12,7 +14,6 @@ import core.tools.StringUtils
 import core.tools.prependArticle
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class UseWithPatchHandler : InteractionListener {
@@ -45,7 +46,7 @@ class UseWithPatchHandler : InteractionListener {
             val usedItem = used.asItem()
             val trimmablePatches = arrayOf(PatchType.TREE_PATCH, PatchType.BUSH_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH, PatchType.CALQUAT_TREE_PATCH)
             if (patch == FarmingPatch.TROLL_STRONGHOLD_HERB) {
-                if (!hasRequirement(player, Quests.MY_ARMS_BIG_ADVENTURE)) {
+                if (!hasRequirement(player, Quests.MY_ARMS_BIG_ADVENTURE.questName)) {
                     return@onUseWith true
                 }
             }

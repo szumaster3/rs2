@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.death.dialogue.HaroldDialogueFile
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -12,7 +14,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Harold dialogue.
@@ -22,7 +23,7 @@ class HaroldDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 10, 29)) {
+        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU.questName, 10, 29)) {
             openDialogue(player!!, HaroldDialogueFile(), npc)
         } else {
             player(FaceAnim.FRIENDLY, "Hello there.")

@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.handsand
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -12,7 +14,6 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -24,7 +25,7 @@ class SandyDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val handProgress = getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
-        val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)
+        val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName)
 
         when {
             questStage == 4 -> {
@@ -64,7 +65,7 @@ class SandyDialogue(player: Player? = null) : Dialogue(player) {
             1 -> player(FaceAnim.HALF_ASKING, "I'm [player name]. I'm here investigating the possible murder of a wizard.").also { stage++ }
             2 -> npcl(FaceAnim.HALF_ASKING, "I don't care about that, I have far too much work to do. Let the authorities take care of things like murder and stop snooping around my office!").also { stage++ }
             3 -> sendDialogue(player, "Sand seems very keen to get you out of the office, perhaps you should take a look around.").also {
-                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 5)
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName, 5)
                 setVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 2, true)
                 stage = END_DIALOGUE
             }
@@ -112,7 +113,7 @@ class SandyDialogue(player: Player? = null) : Dialogue(player) {
             }
             17 -> {
                 end()
-                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 10)
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName, 10)
                 removeAttribute(player, GameAttributes.HAND_SAND_SANDY_ANSWERS)
                 sendItemDialogue(player, Items.MAGICAL_ORB_A_6951, "Sandy has told you all he knows. The magical orb is full and needs to be returned to the Wizard in Yanille.")
             }

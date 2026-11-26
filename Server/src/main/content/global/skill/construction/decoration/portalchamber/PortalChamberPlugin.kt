@@ -1,5 +1,7 @@
 package content.global.skill.construction.decoration.portalchamber
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.construction.Decoration
 import content.global.skill.runecrafting.item.Rune
@@ -22,7 +24,6 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.DARK_RED
 import shared.consts.Components
-import shared.consts.Quests
 import shared.consts.Sounds
 import shared.consts.Scenery as Objects
 
@@ -91,12 +92,12 @@ class PortalChamberPlugin : OptionHandler() {
 
                 val location = Locations.values().firstOrNull { it.name.contains(identifier, true) } ?: return
 
-                if (location == Locations.ARDOUGNE && !isQuestComplete(player, Quests.PLAGUE_CITY)) {
+                if (location == Locations.ARDOUGNE && !isQuestComplete(player, Quests.PLAGUE_CITY.questName)) {
                     sendMessage(player, "You must complete the Plague City quest to direct the portal there.")
                     return
                 }
 
-                if(location == Locations.ARDOUGNE && isQuestComplete(player, Quests.PLAGUE_CITY)) {
+                if(location == Locations.ARDOUGNE && isQuestComplete(player, Quests.PLAGUE_CITY.questName)) {
                     sendMessage(player, "You have not yet learned how to cast this spell.")
                 }
 

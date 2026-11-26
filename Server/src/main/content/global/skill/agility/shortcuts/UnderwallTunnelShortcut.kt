@@ -1,5 +1,7 @@
 package content.global.skill.agility.shortcuts
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.diary.VarrockAchievementDiary
 import core.api.*
 import core.game.interaction.IntType
@@ -11,7 +13,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
-import shared.consts.Quests
 import shared.consts.Scenery
 
 /**
@@ -65,7 +66,7 @@ class UnderwallTunnelShortcut : InteractionListener {
         }
 
         on(SWAN_OBJECT, IntType.SCENERY, "enter") { player, node ->
-            if (!hasRequirement(player, Quests.SWAN_SONG)) {
+            if (!hasRequirement(player, Quests.SWAN_SONG.questName)) {
                 sendMessage(player, "You need to start the Swan Song quest to enter this tunnel.")
                 return@on true
             }

@@ -1,5 +1,7 @@
 package content.region.karamja.quest.roots.npc
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.data.skill.SkillingTool
 import content.region.karamja.quest.roots.BackToMyRootsPlugin
@@ -11,7 +13,6 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class WildJadeVineNPC(
     id: Int = 0,
@@ -76,8 +77,8 @@ class WildJadeVineNPC(
         super.finalizeDeath(killer)
         val player = killer as? Player ?: return
 
-        if (getQuestStage(player, Quests.BACK_TO_MY_ROOTS) == 7) {
-            setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 8)
+        if (getQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName) == 7) {
+            setQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName, 8)
 
             val back = getAttribute(player, GameAttributes.VINE_FIGHT, player.location)
             clearLogoutListener(player, GameAttributes.VINE_FIGHT)

@@ -1,5 +1,7 @@
 package content.global.skill.crafting
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.InputType
 import core.game.event.ResourceProducedEvent
@@ -98,7 +100,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
         onOpen(Components.CRAFTING_SILVER_CASTING_438) { player, component ->
             val hasSilverBar = inInventory(player, Items.SILVER_BAR_2355)
             val hasMithrilBar = inInventory(player, Items.MITHRIL_BAR_2359)
-            val hasQuestReq = hasRequirement(player, Quests.LEGACY_OF_SEERGAZE, false)
+            val hasQuestReq = hasRequirement(player, Quests.LEGACY_OF_SEERGAZE.questName, false)
             val craftingLevel = getStatLevel(player, Skills.CRAFTING)
 
             val slots = listOf(
@@ -174,7 +176,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
                 return@on true
             }
 
-            if (product.product == Items.CONDUCTOR_4201 && getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) < 4) {
+            if (product.product == Items.CONDUCTOR_4201 && getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) < 4) {
                 sendMessage(player, "You need partial completion of Creature of Fenkenstrain to do that.")
                 return@on true
             }

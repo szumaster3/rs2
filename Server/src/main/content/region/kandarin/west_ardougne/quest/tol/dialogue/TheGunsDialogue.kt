@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents The Guns dialogue.
@@ -19,7 +20,7 @@ import shared.consts.Quests
 class TheGunsDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE)) {
+        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE.questName)) {
             in 0..1 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Wow, that looks pretty heavy.").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Umpf! Yeah, mate...argghh...this is...umpf...hard work...").also { stage++ }

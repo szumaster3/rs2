@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.dialogue.zoo
 
+import content.data.Quests
+
 import core.api.getStatLevel
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -10,14 +12,13 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CharlieDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestComplete(player, Quests.EAGLES_PEAK)) {
+        if (isQuestComplete(player, Quests.EAGLES_PEAK.questName)) {
             playerl(FaceAnim.HALF_ASKING, "Hi, how are you getting on with that ferret?").also { stage = 25 }
         } else {
             playerl(FaceAnim.NEUTRAL, "Hi!")

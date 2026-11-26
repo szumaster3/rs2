@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.quest.ahoy.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -8,7 +10,6 @@ import core.game.world.GameWorld
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -16,7 +17,7 @@ import shared.consts.Vars
  */
 class VelorinaAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY)
+        val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY.questName)
         npc = NPC(NPCs.VELORINA_1683)
         when (questStage) {
             0 -> when (stage) {
@@ -117,7 +118,7 @@ class VelorinaAhoyDialogue : DialogueFile() {
                 5 -> npc("Remember that once the Ectophial has been used you need", "to refill it from the Ectofuntus.").also { stage++ }
                 6 -> {
                     end()
-                    finishQuest(player!!, Quests.GHOSTS_AHOY)
+                    finishQuest(player!!, Quests.GHOSTS_AHOY.questName)
                 }
             }
 

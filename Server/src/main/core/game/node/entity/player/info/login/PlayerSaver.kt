@@ -168,6 +168,9 @@ class PlayerSaver(val player: Player) {
                 completedLevels.add(level)
             }
             diary.add("completedLevels", completedLevels)
+            if (diaryEntry.type.name == "ARDOUGNE") {
+                diary.addProperty("ardougneCrossbowMask", diaryEntry.ardougneCrossbowMask)
+            }
 
             val rewardedLevels = JsonArray()
             diaryEntry.levelRewarded.forEach { rewardedLevels.add(it) }

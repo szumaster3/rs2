@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -7,7 +9,6 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.tools.Log
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /* TODO:
@@ -17,7 +18,7 @@ import shared.consts.Vars
  *    it is reasonable to assume he could make a convincing forgery that would still allow the quest to be completed.
  */
 @Initializable
-class FamilyCrest : Quest(Quests.FAMILY_CREST, 59, 58, 1, Vars.VARP_QUEST_FAMILY_CREST_PROGRESS_148, 0, 1, 11) {
+class FamilyCrest : Quest(Quests.FAMILY_CREST) {
     override fun newInstance(`object`: Any?): Quest = this
 
     override fun drawJournal(

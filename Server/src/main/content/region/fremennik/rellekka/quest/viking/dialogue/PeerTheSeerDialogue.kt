@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import kotlin.random.Random
 
 /**
@@ -74,7 +75,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             playerl(FaceAnim.HALF_ASKING, "So you will vote for me at the council?")
             stage = 120
             return true
-        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
             if(!hasSkeletalPiece) {
                 player(FaceAnim.HAPPY, "Hello Peer.")
                 stage = 150
@@ -83,12 +84,12 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 159
             }
             return true
-        } else if (player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)) {
+        } else if (player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS.questName)) {
             npcl(FaceAnim.SAD, "Hello outerlander. What do you want?")
             stage = 50
             return true
         }
-        if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) == 0) {
+        if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName) == 0) {
             if (!hasSkeletalPiece) {
                 npc(FaceAnim.SAD, "I have no interest in talking to you just now outerlander.")
                 stage = 1000

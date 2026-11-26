@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.murder.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import core.api.getAttribute
 import core.api.getQuestStage
@@ -28,7 +30,7 @@ class StanfordDialogue(player: Player? = null) : Dialogue(player) {
 
 class StanfordDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.MURDER_MYSTERY)) {
+        when (getQuestStage(player!!, Quests.MURDER_MYSTERY.questName)) {
             0 -> npcl("Have you no shame? We are all grieving at the moment.").also { stage = END_DIALOGUE }
             1 -> when (stage) {
                 0 -> playerl(FaceAnim.NEUTRAL, "I'm here to help the guards with their investigation.").also { stage++ }

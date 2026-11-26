@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.cook
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,16 +10,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class CooksAssistant : Quest(
-    Quests.COOKS_ASSISTANT,
-    15, 14, 1,
-    Vars.VARP_QUEST_COOKS_ASSISTANT_PROGRESS_29,
-    0, 1, 2
-) {
+class CooksAssistant : Quest(Quests.COOKS_ASSISTANT) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

@@ -1,5 +1,7 @@
 package content.region.other.zanaris.quest.lostcity.plugin
 
+import content.data.Quests
+
 import content.data.skill.SkillingTool
 import content.global.skill.gather.woodcutting.WoodcuttingPulse
 import content.region.other.zanaris.quest.lostcity.npc.TreeSpiritNPC
@@ -20,7 +22,6 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class LostCityPlugin : InteractionListener {
     init {
@@ -82,7 +83,7 @@ class LostCityPlugin : InteractionListener {
 
         on(shared.consts.Scenery.DOOR_2406, IntType.SCENERY, "open") { player, node ->
             DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
-            val quest = Quests.LOST_CITY
+            val quest = Quests.LOST_CITY.questName
             val isOutsideShed = player.location.x < node.location.x
             val hasRequirements =
                 (
@@ -119,7 +120,7 @@ class LostCityPlugin : InteractionListener {
         }
 
         on(shared.consts.Scenery.DRAMEN_TREE_1292, IntType.SCENERY, "chop down") { player, node ->
-            val questStage = getQuestStage(player, Quests.LOST_CITY)
+            val questStage = getQuestStage(player, Quests.LOST_CITY.questName)
             if (SkillingTool.getAxe(player) == null) {
                 sendMessage(player, "You do not have an axe which you have the level to use.")
                 return@on true

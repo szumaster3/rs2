@@ -1,5 +1,7 @@
 package content.global.skill.summoning
 
+import content.data.Quests
+
 import content.global.skill.summoning.familiar.npc.IbisNPC
 import core.api.*
 import core.game.event.SummoningPointsRechargeEvent
@@ -19,12 +21,12 @@ class SummoningPlugin : InteractionListener {
          */
 
         on(summoningPouchID, IntType.ITEM, "summon") { player, node ->
-            if (!isQuestComplete(player, Quests.WOLF_WHISTLE) && player.getAttribute<Any?>("in-cutscene", null) == null) {
+            if (!isQuestComplete(player, Quests.WOLF_WHISTLE.questName) && player.getAttribute<Any?>("in-cutscene", null) == null) {
                 sendMessage(player, "You have to complete Wolf Whistle before you can summon a familiar.")
                 return@on true
             }
 
-            if(isQuestComplete(player, Quests.IN_PYRE_NEED) && node.id == Items.PHOENIX_POUCH_14624) {
+            if(isQuestComplete(player, Quests.IN_PYRE_NEED.questName) && node.id == Items.PHOENIX_POUCH_14624) {
                 sendMessage(player, "You must complete In Pyre Need before you can summon a familiar.")
                 return@on true
             }
@@ -61,8 +63,8 @@ class SummoningPlugin : InteractionListener {
                 }
 
                 "renew-points" -> {
-                    val wolfComplete = isQuestComplete(player, Quests.WOLF_WHISTLE)
-                    val wolfStage = getQuestStage(player, Quests.WOLF_WHISTLE)
+                    val wolfComplete = isQuestComplete(player, Quests.WOLF_WHISTLE.questName)
+                    val wolfStage = getQuestStage(player, Quests.WOLF_WHISTLE.questName)
                     if (!wolfComplete && wolfStage != 60) {
                         sendMessage(player, "You need to complete Wolf Whistle quest to do this.")
                         return@on true

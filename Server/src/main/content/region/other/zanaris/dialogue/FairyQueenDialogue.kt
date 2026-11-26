@@ -1,5 +1,7 @@
 package content.region.other.zanaris.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Fairy Queen dialogue.
@@ -18,7 +19,7 @@ class FairyQueenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.FAIRYTALE_II_CURE_A_QUEEN)) {
+        if (!hasRequirement(player, Quests.FAIRYTALE_II_CURE_A_QUEEN.questName)) {
             options("How do crops and such survive down here?", "What's so good about this place?")
         } else {
             playerl(FaceAnim.ASKING, "Have you managed to work out a plan yet?").also { stage = 3 }

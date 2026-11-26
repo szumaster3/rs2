@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.sendOptions
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Miss Schism dialogue.
@@ -37,7 +38,7 @@ class MissSchismDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player(FaceAnim.HALF_GUILTY, "Tell me about the vampire.").also { stage++ }
                 2 -> player(FaceAnim.HALF_ASKING, "What about the bank?").also { stage = 10 }
             }
-            5 -> if (isQuestComplete(player, Quests.VAMPIRE_SLAYER)) {
+            5 -> if (isQuestComplete(player, Quests.VAMPIRE_SLAYER.questName)) {
                 npc(FaceAnim.HALF_GUILTY, "Well, there's nothing to tell NOW. You killed it.").also { stage++ }
             } else {
                 npc("There is an evil Vampire terrorizing the city!").also { stage = 9 }
@@ -54,7 +55,7 @@ class MissSchismDialogue(player: Player? = null) : Dialogue(player) {
             15 -> npc(FaceAnim.HALF_GUILTY, "I, my dear, am a concerned citizen of Draynor Village.", "Ever since the Council allowed those farmers to set up", "their stalls here, we've had a constant flow of thieves and", "murderers through our fair village, and I decided that").also { stage++ }
             16 -> npc(FaceAnim.HALF_GUILTY, "someone HAD to stand up and", "keep an eye on the situation.").also { stage++ }
             17 -> npc(FaceAnim.HALF_GUILTY, "I also do voluntary work for the Draynor Manor", "Restoration Fund. We're campaigning to have", "Draynor manor turned into a museum before the wet-rot", "destroys it completely.").also { stage++ }
-            18 -> if (isQuestComplete(player, Quests.VAMPIRE_SLAYER)) {
+            18 -> if (isQuestComplete(player, Quests.VAMPIRE_SLAYER.questName)) {
                 player(FaceAnim.HALF_GUILTY, "Well, now that I've cleared the vampire out of the manor,", "I guess you won't have too much trouble turning it into a", "museum.").also { stage++ }
             } else {
                 end()

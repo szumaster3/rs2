@@ -1,5 +1,7 @@
 package content.global.skill.runecrafting
 
+import content.data.Quests
+
 import content.global.skill.runecrafting.item.Rune
 import content.global.skill.runecrafting.item.Talisman
 import content.global.skill.runecrafting.item.Tiara
@@ -9,7 +11,6 @@ import core.api.sendMessage
 import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
-import shared.consts.Quests
 import shared.consts.Scenery as Objects
 
 /**
@@ -57,14 +58,14 @@ enum class Altar(
      */
     fun enterRift(player: Player) {
         when (this) {
-            ASTRAL -> if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return
-            DEATH -> if (!hasRequirement(player, Quests.MOURNINGS_END_PART_II)) return
-            BLOOD -> if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE)) return
+            ASTRAL -> if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY.questName)) return
+            DEATH -> if (!hasRequirement(player, Quests.MOURNINGS_END_PART_II.questName)) return
+            BLOOD -> if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE.questName)) return
             LAW -> if (!ItemDefinition.canEnterEntrana(player)) {
                 sendMessage(player, "You can't take weapons and armour into the law rift.", null)
                 return
             }
-            COSMIC -> if (!isQuestComplete(player, Quests.LOST_CITY)) {
+            COSMIC -> if (!isQuestComplete(player, Quests.LOST_CITY.questName)) {
                 sendMessage(player, "You need to have completed the Lost City quest in order to do that.", null)
                 return
             }

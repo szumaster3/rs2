@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.itgronigen.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -8,7 +10,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Observatory assistant dialogue file.
@@ -20,7 +21,7 @@ class ObservatoryAssistantDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.OBSERVATORY_ASSISTANT_6118)
-        val questStage = getQuestStage(player!!, Quests.OBSERVATORY_QUEST)
+        val questStage = getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName)
         val amountOfPlanks = amountInInventory(player!!, Items.PLANK_960)
         when (questStage) {
             0 -> when (stage) {
@@ -46,7 +47,7 @@ class ObservatoryAssistantDialogue : DialogueFile() {
                 12 -> npc("Just talk to the professor. He'll fill you in.").also { stage++ }
                 13 -> {
                     end()
-                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 1)
+                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 1)
                 }
             }
             2 -> when (amountOfPlanks) {
@@ -75,7 +76,7 @@ class ObservatoryAssistantDialogue : DialogueFile() {
                     3 -> npcl(FaceAnim.FRIENDLY, "Good work! The professor has been eagerly waiting them.").also { stage++ }
                     4 -> {
                         end()
-                        setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 3)
+                        setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 3)
                     }
                 }
             }
@@ -92,7 +93,7 @@ class ObservatoryAssistantDialogue : DialogueFile() {
                 5 -> npc(FaceAnim.FRIENDLY, "He'll surely be pleased. Go ahead and give", "it to him.").also { stage++ }
                 6 -> {
                     end()
-                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 5)
+                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 5)
                 }
             }
             6 -> when (stage) {
@@ -110,7 +111,7 @@ class ObservatoryAssistantDialogue : DialogueFile() {
                 7 -> npcl(FaceAnim.FRIENDLY, "I suggest you have a word with the professor, in that case.").also { stage++ }
                 8 -> {
                     end()
-                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 7)
+                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 7)
                 }
             }
             8 -> when (stage) {
@@ -132,7 +133,7 @@ class ObservatoryAssistantDialogue : DialogueFile() {
                 11 -> npcl(FaceAnim.FRIENDLY, "Will do.").also { stage++ }
                 12 -> {
                     end()
-                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 9)
+                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 9)
                 }
             }
             11 -> when (stage) {

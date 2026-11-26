@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.plugin
 
+import content.data.Quests
+
 import content.global.skill.smithing.bar.BarItem
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
 import content.region.desert.al_kharid.quest.desertrescue.plugin.TouristTrapPlugin.AnnaCartHandler.AnnaCartCutscene
@@ -41,7 +43,6 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 class TouristTrapPlugin : OptionHandler() {
@@ -161,7 +162,7 @@ class TouristTrapPlugin : OptionHandler() {
 
             "walk through" -> when (id) {
                 2698, 2699 -> {
-                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP) < 60) {
+                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) < 60) {
                         sendNPCDialogue(player, 5001, "Hey you! You're not allowed in there.")
                     }
                     if (!TouristTrap.hasSlaveClothes(player)) {
@@ -196,7 +197,7 @@ class TouristTrapPlugin : OptionHandler() {
                     if (!player.inventory.containsItem(TouristTrap.BEDABIN_KEY)) {
                         sendMessage(player,"This chest needs a key to unlock it.")
                     }
-                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP) <= 54 && getQuestStage(player, Quests.THE_TOURIST_TRAP) != 53) {
+                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) <= 54 && getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) != 53) {
                         sendMessage(player,
                             "The captain spots you before you manage to open the chest...",
                         )
@@ -209,7 +210,7 @@ class TouristTrapPlugin : OptionHandler() {
                                 }
                             },
                         )
-                    } else if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 53) {
+                    } else if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 53) {
                         if (!player.hasItem(TouristTrap.TECHNICAL_PLANS)) {
                             player.dialogueInterpreter.sendItemMessage(
                                 TouristTrap.TECHNICAL_PLANS,
@@ -242,7 +243,7 @@ class TouristTrapPlugin : OptionHandler() {
                 }
 
                 2674, 2673 -> {
-                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP) > 60 && getQuestStage(player, Quests.THE_TOURIST_TRAP) < 98 && player.inventory.containsItem(
+                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) > 60 && getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) < 98 && player.inventory.containsItem(
                             TouristTrap.ANNA_BARREL
                         )
                     ) {
@@ -264,7 +265,7 @@ class TouristTrapPlugin : OptionHandler() {
                                             player.unlock()
                                             player.inventory.remove(TouristTrap.ANNA_BARREL)
                                             TouristTrap.addConfig(player, (1 shl 4))
-                                            setQuestStage(player, Quests.THE_TOURIST_TRAP, 61)
+                                            setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 61)
                                             player.properties.teleportLocation = Location.create(3285, 3034, 0)
                                             return true
                                         }
@@ -334,8 +335,8 @@ class TouristTrapPlugin : OptionHandler() {
 
                 2684 -> player.dialogueInterpreter.open("cart dialogue", node)
                 2678 -> {
-                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 51) {
-                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 52)
+                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 51) {
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 52)
                     }
                     player.dialogueInterpreter.sendItemMessage(
                         9904,
@@ -350,7 +351,7 @@ class TouristTrapPlugin : OptionHandler() {
                 )
 
                 18958, 18959 -> {
-                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 90) {
+                    if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 90) {
                         player.dialogueInterpreter.open("ana cart dialogue")
                     }
                     sendMessage(player, "This looks like a mine cart which takes barrels out of the encampment to Al Kharid.")
@@ -371,7 +372,7 @@ class TouristTrapPlugin : OptionHandler() {
                             "You find a cell door key.",
                         )
                     } else if (hasItem(player, TouristTrap.WROUGHT_IRON_KEY) && player.getQuestRepository()
-                            .isComplete(Quests.THE_TOURIST_TRAP)
+                            .isComplete(Quests.THE_TOURIST_TRAP.questName)
                     ) {
                         player.inventory.add(TouristTrap.WROUGHT_IRON_KEY, player)
                         player.dialogueInterpreter.sendItemMessage(
@@ -385,7 +386,7 @@ class TouristTrapPlugin : OptionHandler() {
             }
 
             "operate" -> {
-                if (getQuestStage(player, Quests.THE_TOURIST_TRAP) != 71) {
+                if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) != 71) {
                     player.dialogueInterpreter.sendDialogue("There doesn't seem anything to lift.")
                 }
                 ActivityManager.start(player, "winch cutscene", false)
@@ -682,7 +683,7 @@ class TouristTrapPlugin : OptionHandler() {
                 516 -> {
                     player.inventory.remove(TouristTrap.ANNA_BARREL)
                     player.bank.remove(TouristTrap.ANNA_BARREL)
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 71)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 71)
                     end()
                 }
 
@@ -741,7 +742,7 @@ class TouristTrapPlugin : OptionHandler() {
         override fun handle(event: NodeUsageEvent): Boolean {
             val player = event.player
             if (event.usedWith.id == 18958) {
-                if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 72) {
+                if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 72) {
                     player.lock(4)
                     player.animate(Animation.create(5050))
                     Pulser.submit(
@@ -749,7 +750,7 @@ class TouristTrapPlugin : OptionHandler() {
                             override fun pulse(): Boolean {
                                 player.inventory.remove(event.usedItem)
                                 TouristTrap.addConfig(player, 4096 + (2048 + (1 shl 4)))
-                                setQuestStage(player, Quests.THE_TOURIST_TRAP, 80)
+                                setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 80)
                                 player.dialogueInterpreter.sendDialogue(
                                     "You place Ana (In the barrel) carefully on the cart. This  was the last",
                                     "barrel to go on the cart, but the cart driver doesn't seem to be",
@@ -765,7 +766,7 @@ class TouristTrapPlugin : OptionHandler() {
             if (event.usedWith.location != Location.create(3318, 9430, 0)) {
                 return false
             }
-            if (getQuestStage(player, Quests.THE_TOURIST_TRAP) != 61) {
+            if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) != 61) {
                 return false
             }
             player.dialogueInterpreter.sendDialogue(
@@ -823,7 +824,7 @@ class TouristTrapPlugin : OptionHandler() {
                                 }
 
                                 33 -> {
-                                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 70)
+                                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 70)
                                     player.inventory.remove(TouristTrap.ANNA_BARREL)
                                     removeAttribute(player, "ana-delay")
                                     this@AnnaCartCutscene.stop(true)
@@ -915,7 +916,7 @@ class TouristTrapPlugin : OptionHandler() {
                                     6 -> {
                                         player.unlock()
                                         player.interfaceManager.closeOverlay()
-                                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 95)
+                                        setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 95)
                                         player.interfaceManager.close()
                                         player.properties.teleportLocation = Location.create(3258, 3029, 0)
                                         player.inventory.add(TouristTrap.ANNA_BARREL)
@@ -1189,7 +1190,7 @@ class TouristTrapPlugin : OptionHandler() {
 
         override fun open(vararg args: Any?): Boolean {
             barrel = args[0] as Scenery
-            quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
+            quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP.questName)
             if ((quest!!.getStage(player) == 70 || quest!!.getStage(player) == 72) && !player.hasItem(TouristTrap.ANNA_BARREL)) {
                 interpreter.sendDialogue("You search the barrels and find Ana.")
                 stage = 400
@@ -1274,7 +1275,7 @@ class TouristTrapPlugin : OptionHandler() {
 
         override fun handle(event: NodeUsageEvent): Boolean {
             val player = event.player
-            if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 54 && player.inventory.containsItem(TouristTrap.TECHNICAL_PLANS)) {
+            if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 54 && player.inventory.containsItem(TouristTrap.TECHNICAL_PLANS)) {
                 player.dialogueInterpreter.open("bedabin-anvil")
                 return true
             } else {
@@ -1294,7 +1295,7 @@ class TouristTrapPlugin : OptionHandler() {
                 if (event.usedWith.location != Location.create(3292, 9423, 0)) {
                     return false
                 }
-                if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 70) {
+                if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 70) {
                     player.dialogueInterpreter.open("winch dialogue", true)
                     return true
                 }

@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.grandtree.plugin.TheGrandTreeUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -9,7 +11,6 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Femi dialogue.
@@ -67,7 +68,7 @@ class FemiCartDialogueFile : DialogueFile() {
         npc = NPC(NPCs.FEMI_676)
         when (stage) {
             0 -> {
-                if (getQuestStage(player!!, Quests.THE_GRAND_TREE) == 55) {
+                if (getQuestStage(player!!, Quests.THE_GRAND_TREE.questName) == 55) {
                     npc(FaceAnim.OLD_DEFAULT, "OK traveller, you'd better get going.").also { stage++ }
                 } else {
                     npc(FaceAnim.OLD_DEFAULT, "Thanks again, traveller!").also { stage = END_DIALOGUE }

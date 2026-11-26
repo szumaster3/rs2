@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.tree.TreeGnomeVillage.Companion.mazeEntrance
 import content.region.kandarin.gnome_stronghold.quest.tree.TreeGnomeVillage.Companion.mazeVillage
 import core.api.*
@@ -12,7 +14,6 @@ import core.game.world.map.Location
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 
 class ElkoyDialogue : DialogueFile() {
     fun travelCutscene(
@@ -46,7 +47,7 @@ class ElkoyDialogue : DialogueFile() {
     }
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName)
         val locY = player!!.location.y
         val followLocation = if (locY > 3161) "village" else "exit"
         when {

@@ -1,5 +1,7 @@
 package content.minigame.sorceress.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.minigame.sorceress.plugin.SorceressGardenPlugin.SeasonDefinitions
 import core.api.*
@@ -12,7 +14,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Osman dialogue.
@@ -25,7 +26,7 @@ class OsmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.questRepository.getQuest(Quests.PRINCE_ALI_RESCUE)
+        quest = player.questRepository.getQuest(Quests.PRINCE_ALI_RESCUE.questName)
         when (quest!!.getStage(player)) {
             100 -> {
                 player("I'd like to talk about sq'irks.")

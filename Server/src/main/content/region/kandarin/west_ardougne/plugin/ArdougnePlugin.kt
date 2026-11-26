@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.plugin
 
+import content.data.Quests
+
 import content.global.travel.charter.CharterShip
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import content.region.kandarin.east_ardougne.dialogue.CaptainBarnabyDialogue
@@ -11,7 +13,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class ArdougnePlugin : InteractionListener {
 
@@ -66,7 +67,7 @@ class ArdougnePlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, Items.FERRET_10092, NPCs.CHARLIE_5138) { player, _, npc ->
-            if (!hasRequirement(player, Quests.EAGLES_PEAK)) return@onUseWith false
+            if (!hasRequirement(player, Quests.EAGLES_PEAK.questName)) return@onUseWith false
             sendPlayerDialogue(player, "Hey, I've got another ferret if you're interested?")
             addDialogueAction(player) { _, _ ->
                 sendNPCDialogue(player, npc.id, "Er, oh! Well that's very kind of you, but we don't really need another ferret at the moment, I'm afraid. We're having enough trouble taming the one we've got.", FaceAnim.NEUTRAL)

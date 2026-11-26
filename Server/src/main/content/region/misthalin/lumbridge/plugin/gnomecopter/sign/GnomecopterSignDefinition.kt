@@ -1,8 +1,9 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.sign
 
+import content.data.Quests
+
 import core.game.world.map.Location
 import core.tools.RED
-import shared.consts.Quests
 
 enum class GnomecopterSignDefinition(override val location: Location, override val info: Array<String>, override val scrollable: Boolean): InformationSign
 {
@@ -11,7 +12,7 @@ enum class GnomecopterSignDefinition(override val location: Location, override v
 
     //Burgh de Rott
     GENERAL_STORE(Location(2153, 5431, 0), arrayOf("This player is stocking the", "general store with useful", "items.", "", "Down in swampy Morytania,", "the locals' idea of a tasty", "meal is a giant snail, so the", "shop needs plenty of those.", "There's also plenty of demand", "for basic tools such as axes", "and tinderboxes."), false),
-    GLOBAL_SIGN(Location(2160, 5427, 0), arrayOf("Vampyres can only be hunt", "with silver weapons, such as", "blessed silver sickles and", "silver crossbow bolts.", "", "Once they are sufficiently", "weakened, they can be", "finished off with the use of a", "special silver rod and a dose", "of a certain kind of potion.", "You'll learn all about fighting", "vampyres if you complete the", "${RED}${Quests.IN_AID_OF_THE_MYREQUE}</col> quest."),false),
+    GLOBAL_SIGN(Location(2160, 5427, 0), arrayOf("Vampyres can only be hunt", "with silver weapons, such as", "blessed silver sickles and", "silver crossbow bolts.", "", "Once they are sufficiently", "weakened, they can be", "finished off with the use of a", "special silver rod and a dose", "of a certain kind of potion.", "You'll learn all about fighting", "vampyres if you complete the", "${RED}${Quests.IN_AID_OF_THE_MYREQUE.questName}</col> quest."),false),
     FURNACE_SIGN(Location(2162, 5409, 0), arrayOf("The furnace in burgh de Rott", "needs to be repaired and", "stocked with coal before it", "can be used.", "", "This player is using it to", "make a special rod out of a", "silver and mithril alloy, to help", "when fighting vampyres."),false),
     BANK_SIGN(Location(2140, 5408, 0), arrayOf("Every town needs a bank.", "The bank in Burgh de Rott is", "badly in need of repair, so", "this player is fixing it. The", "hole in the bank's wall also", "needs patching."), false),
 
@@ -35,5 +36,5 @@ enum class GnomecopterSignDefinition(override val location: Location, override v
 
     //Trollweiss & Rellekka
     RELLEKKA_EAGLES_SIGN(Location(2543, 5430, 1), arrayOf("In the icy mountain, a small", "cavern contains the lair of", "some giant eagles.", "", "After completing the ${RED}Eagles</col>", "${RED}Peak</col> quest, players may catch", "them with a rope and ride", "them to other eagle nests,", "around the world."), false),
-    EAST_OF_TROLLWEISS_SIGN(Location(2543, 5422, 1), arrayOf("East of the Trollweiss and", "Rellekka Hunter area lies a", "range of snowy mountains", "populated by fearsome ice", "trolls and wolves. Players", "come here for the ${RED}Desert</col>", "${RED}Treasure</col> quest and to", "enter the insanely", "dangerous ${RED}God Wars</col>", "${RED}Dungeon</col>.", "", "Not all quests are just", "about fighting, however. In", "the ${RED}${Quests.TROLL_ROMANCE}</col> quest,", "players are challenged to", "help a particularly soppy", "troll gain the affections of", "their beloved. This involves", "building a sled and taking it", "for a ride down this", "mountain!"), true);
+    EAST_OF_TROLLWEISS_SIGN(Location(2543, 5422, 1), arrayOf("East of the Trollweiss and", "Rellekka Hunter area lies a", "range of snowy mountains", "populated by fearsome ice", "trolls and wolves. Players", "come here for the ${RED}Desert</col>", "${RED}Treasure</col> quest and to", "enter the insanely", "dangerous ${RED}God Wars</col>", "${RED}Dungeon</col>.", "", "Not all quests are just", "about fighting, however. In", "the ${RED}${Quests.TROLL_ROMANCE.questName}</col> quest,", "players are challenged to", "help a particularly soppy", "troll gain the affections of", "their beloved. This involves", "building a sled and taking it", "for a ride down this", "mountain!"), true);
 }

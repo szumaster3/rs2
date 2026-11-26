@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Guardian Of Armadyl dialogue.
@@ -493,8 +494,8 @@ class GuardianOfArmadylDialogueFile : DialogueFile() {
             544 -> {
                 setAttribute(player!!, GameAttributes.QUEST_IKOV_SELECTED_END, 1)
 
-                if (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV) == 5) {
-                    setQuestStage(player!!, Quests.TEMPLE_OF_IKOV, 6)
+                if (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName) == 5) {
+                    setQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName, 6)
                 }
 
                 addItemOrDrop(player!!, Items.ARMADYL_PENDANT_87)

@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.elena.cutscene.UndergroundCutscene
 import content.region.kandarin.west_ardougne.quest.elena.plugin.PlagueCityPlugin
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Edmond dialogue.
@@ -26,9 +27,9 @@ class EdmondDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (inEquipmentOrInventory(player, Items.GAS_MASK_1506) && (getQuestStage(player, Quests.PLAGUE_CITY) == 2)) {
+        if (inEquipmentOrInventory(player, Items.GAS_MASK_1506) && (getQuestStage(player, Quests.PLAGUE_CITY.questName) == 2)) {
             playerl(FaceAnim.FRIENDLY, "Hi Edmond, I've got the gas mask now.")
-        } else if (getQuestStage(player, Quests.PLAGUE_CITY) > 2) {
+        } else if (getQuestStage(player, Quests.PLAGUE_CITY.questName) > 2) {
             playerl(FaceAnim.FRIENDLY, "Hello Edmond.")
         } else {
             playerl(FaceAnim.FRIENDLY, "Hello old man.")
@@ -39,7 +40,7 @@ class EdmondDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(componentID: Int, buttonID: Int): Boolean {
         val bucketUses = getAttribute(player, PlagueCityPlugin.BUCKET_USES_ATTRIBUTE, value)
         var hasAnScroll = hasAnItem(player, Items.A_MAGIC_SCROLL_1505).container != null
-        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             0 -> when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Sorry, I can't stop to talk...").also { stage++ }
                 1 -> playerl(FaceAnim.HALF_ASKING, "Why, what's wrong?").also { stage++ }
@@ -68,7 +69,7 @@ class EdmondDialogue(player: Player? = null) : Dialogue(player) {
                 17 -> npcl(FaceAnim.NEUTRAL, "The foresters keep a close eye on it, but there is a back way in.").also { stage++ }
                 18 -> {
                     end()
-                    setQuestStage(player!!, Quests.PLAGUE_CITY, 1)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 1)
                 }
             }
             1 -> when (stage) {
@@ -90,7 +91,7 @@ class EdmondDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> npcl(FaceAnim.NEUTRAL, "The problem is the soil is rock hard. You'll need to pour on several buckets of water to soften it up. I'll keep an eye out for the mourners.").also { stage++ }
                 2 -> {
                     end()
-                    setQuestStage(player!!, Quests.PLAGUE_CITY, 3)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 3)
                 }
             }
             3 -> when (stage) {
@@ -140,7 +141,7 @@ class EdmondDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> npcl(FaceAnim.NEUTRAL, "Here take this magic scroll, I have little use for it but it may help you.").also { stage++ }
                 3 -> {
                     end()
-                    finishQuest(player, Quests.PLAGUE_CITY)
+                    finishQuest(player, Quests.PLAGUE_CITY.questName)
                 }
             }
 

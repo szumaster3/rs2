@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Hazelmere dialogue.
@@ -21,7 +22,7 @@ import shared.consts.Quests
 class HazelmereDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE.questName)) {
             10 -> {
                 if (player!!.hasItem(Item(Items.BARK_SAMPLE_783))) {
                     when (stage) {
@@ -49,7 +50,7 @@ class HazelmereDialogue(player: Player? = null) : Dialogue(player) {
                                 if (removeItem(player!!, Items.BARK_SAMPLE_783)) {
                                     addItemOrDrop(player!!, Items.HAZELMERES_SCROLL_786)
                                 }
-                                setQuestStage(player!!, Quests.THE_GRAND_TREE, 20)
+                                setQuestStage(player!!, Quests.THE_GRAND_TREE.questName, 20)
                                 stage = END_DIALOGUE
                             }
                     }

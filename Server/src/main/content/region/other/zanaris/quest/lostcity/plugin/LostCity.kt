@@ -1,5 +1,7 @@
 package content.region.other.zanaris.quest.lostcity.plugin
 
+import content.data.Quests
+
 import core.api.drawReward
 import core.api.hasLevelStat
 import core.game.node.entity.player.Player
@@ -8,11 +10,10 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class LostCity: Quest(Quests.LOST_CITY, 83, 82, 3, Vars.VARP_QUEST_LOST_CITY_PROGRESS_147, 0, 1, 6) {
+class LostCity: Quest(Quests.LOST_CITY) {
     class SkillRequirement(
         val skill: Int?,
         val level: Int?,

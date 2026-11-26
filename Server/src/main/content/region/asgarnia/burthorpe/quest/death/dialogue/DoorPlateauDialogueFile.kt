@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.death.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.getScenery
 import core.api.sendDialogue
@@ -9,7 +11,6 @@ import core.game.global.action.DoorActionHandler
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Door Plateau dialogue.
@@ -40,7 +41,7 @@ class DoorPlateauDialogueFile(val door: Int) : DialogueFile() {
         if (door == 2) {
             npc = NPC(NPCs.TENZING_1071)
 
-            when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
+            when (getQuestStage(player!!, Quests.DEATH_PLATEAU.questName)) {
                 in 0..19 -> {
                     when (stage) {
                         0 -> {
@@ -86,7 +87,7 @@ class DoorPlateauDialogueFile(val door: Int) : DialogueFile() {
         }
         if (door == 3) {
             npc = NPC(NPCs.TENZING_1071)
-            when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
+            when (getQuestStage(player!!, Quests.DEATH_PLATEAU.questName)) {
                 in 0..24 -> {
                     when (stage) {
                         0 -> npcl(

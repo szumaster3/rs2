@@ -1,10 +1,11 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Rolad dialogue.
@@ -13,7 +14,7 @@ class RoladDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> if(!hasRequirement(player!!, Quests.BETWEEN_A_ROCK, false)) {
+            0 -> if(!hasRequirement(player!!, Quests.BETWEEN_A_ROCK.questName, false)) {
                 npc(FaceAnim.OLD_NORMAL, "Oh, hello... do I know you?").also { stage++ }
             } else {
                 npc(FaceAnim.OLD_NORMAL, "Can you leave me alone please? I'm trying to study.").also { stage = END_DIALOGUE }

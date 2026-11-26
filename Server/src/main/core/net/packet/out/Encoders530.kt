@@ -164,7 +164,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     WEIGHT_UPDATE(encode<PlayerContext> { context ->
         val buffer = IoBuffer(7)
         buffer.putShort(context.player.settings.weight.toInt())
-        // TODO context.getPlayer().getSession().write(buffer);
+        context.player.details.session.write(buffer)
     }),
     SKILL_LEVEL(encode<SkillContext> { context ->
         val buffer = IoBuffer(20)
@@ -179,18 +179,6 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             buffer.putS(skills.getLevel(context.skillId, true))
         }
         context.player.details.session.write(buffer)
-    }),
-    UPDATE_RANDOM_FILE(encode<PlayerContext> {
-        val buffer = IoBuffer(211)
-        buffer.putInt(1) // Let's assume this is UID.
-        buffer.put(0)
-        buffer.put(0)
-        buffer.put(0)
-        buffer.put(0)
-        for (i in 0..3) {
-            buffer.putInt(i + 100)
-        }
-        // TODO context.getPlayer().getSession().write(buffer);
     }),
 
     // Interfaces

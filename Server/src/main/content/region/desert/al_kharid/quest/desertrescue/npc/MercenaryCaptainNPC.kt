@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.npc
 
+import content.data.Quests
+
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -8,7 +10,6 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MercenaryCaptainNPC : AbstractNPC {
     constructor() : super(0, null)
@@ -25,14 +26,14 @@ class MercenaryCaptainNPC : AbstractNPC {
         super.finalizeDeath(killer)
         if (killer is Player) {
             val player = killer
-            when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 0, 10 -> {}
                 else -> {
                     if (!player.inventory.containsItem(TouristTrap.METAL_KEY) && !player.bank.containsItem(TouristTrap.METAL_KEY)) {
                         player.inventory.add(TouristTrap.METAL_KEY, player)
                         player.dialogueInterpreter.sendItemMessage(TouristTrap.METAL_KEY, "The mercenary captain drops a metal key on the floor.", "You quickly grab the key and add it to your inventory.")
                     }
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 20)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 20)
                 }
             }
         }

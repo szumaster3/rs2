@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.tog
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,7 +10,6 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -17,7 +18,7 @@ import shared.consts.Vars
  * Author: [Ovenbreado](https://gitlab.com/ovenbreado)
  */
 @Initializable
-class TearsOfGuthix : Quest(Quests.TEARS_OF_GUTHIX, 120, 119, 1, 449, Vars.VARBIT_QUEST_TEARS_OF_GUTHIX_PROGRESS_451, 0, 1, 2) {
+class TearsOfGuthix : Quest(Quests.TEARS_OF_GUTHIX, 449, Vars.VARBIT_QUEST_TEARS_OF_GUTHIX_PROGRESS_451, 0, 1, 2) {
 
     companion object {
         /**
@@ -64,7 +65,7 @@ class TearsOfGuthix : Quest(Quests.TEARS_OF_GUTHIX, 120, 119, 1, 449, Vars.VARBI
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
-        var started = getQuestStage(player, Quests.TEARS_OF_GUTHIX) > 0
+        var started = getQuestStage(player, Quests.TEARS_OF_GUTHIX.questName) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Juna the serpent?? who", line++, false)

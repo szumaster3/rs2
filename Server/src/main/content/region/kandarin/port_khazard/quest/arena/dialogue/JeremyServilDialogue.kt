@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Jeremy Servil dialogue.
@@ -20,7 +21,7 @@ import shared.consts.Quests
 class JeremyServilDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA.questName)) {
             20 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
                 1 -> npcl(FaceAnim.CHILD_SAD, "Please " + (if (player!!.isMale) "Sir" else "Madam") + ", don't hurt me.").also { stage++ }
@@ -29,7 +30,7 @@ class JeremyServilDialogue(player: Player? = null) : Dialogue(player) {
                 4 -> playerl(FaceAnim.FRIENDLY, "Don't lose heart, I'll be back.").also { stage++ }
                 5 -> {
                     end()
-                    setQuestStage(player!!, Quests.FIGHT_ARENA, 40)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA.questName, 40)
                 }
             }
 

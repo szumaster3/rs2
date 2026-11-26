@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendMessage
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Gorad dialogue.
@@ -23,7 +24,7 @@ class GoradDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.WATCHTOWER)
+        val questStage = getQuestStage(player, Quests.WATCHTOWER.questName)
 
         if (questStage == 100) {
             sendMessage(player, "Gorad is busy; try again later.")

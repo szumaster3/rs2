@@ -1,5 +1,7 @@
 package content.region.karamja.brimhaven.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.hero.HeroesQuest
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Charlie The Cook dialogue.
@@ -65,7 +66,7 @@ class CharlieTheCookDialogueFile : DialogueFile() {
             }
 
             2 -> {
-                if (getQuestStage(player!!, Quests.HEROES_QUEST) >= 3 && HeroesQuest.isPhoenix(player!!)) {
+                if (getQuestStage(player!!, Quests.HEROES_QUEST.questName) >= 3 && HeroesQuest.isPhoenix(player!!)) {
                     options("I'm looking for a gherkin...", "I'm a fellow member of the Phoenix Gang.", "Just exploring.")
                 } else {
                     player("Just exploring.")
@@ -74,7 +75,7 @@ class CharlieTheCookDialogueFile : DialogueFile() {
             }
 
             3 -> {
-                val isPhoenix = getQuestStage(player!!, Quests.HEROES_QUEST) >= 3 &&
+                val isPhoenix = getQuestStage(player!!, Quests.HEROES_QUEST.questName) >= 3 &&
                         HeroesQuest.isPhoenix(player!!)
 
                 when {
@@ -190,8 +191,8 @@ class CharlieTheCookDialogueFile : DialogueFile() {
             }
 
             76 -> {
-                if (getQuestStage(player!!, Quests.HEROES_QUEST) == 3) {
-                    setQuestStage(player!!, Quests.HEROES_QUEST, 4)
+                if (getQuestStage(player!!, Quests.HEROES_QUEST.questName) == 3) {
+                    setQuestStage(player!!, Quests.HEROES_QUEST.questName, 4)
                 }
                 endFile()
             }

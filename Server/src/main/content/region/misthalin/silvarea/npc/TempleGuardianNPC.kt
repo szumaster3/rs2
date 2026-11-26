@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.npc
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendMessage
 import core.api.setQuestStage
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class TempleGuardianNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -45,8 +46,8 @@ class TempleGuardianNPC(id: Int = 0, location: Location? = null) : AbstractNPC(i
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         val player = (killer as Player)
-        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 11) {
-            setQuestStage(player, Quests.PRIEST_IN_PERIL, 12)
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 11) {
+            setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 12)
         }
     }
 }

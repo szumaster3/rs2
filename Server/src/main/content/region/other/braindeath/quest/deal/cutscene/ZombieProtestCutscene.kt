@@ -61,7 +61,7 @@ class ZombieProtestCutscene(
                 move(getNPC(ZOMBIE_3)!!, 0, 3)
                 move(getNPC(ZOMBIE_4)!!, 6, 5)
                 move(getNPC(ZOMBIE_0)!!, 3, 4)
-                setQuestStageNonmonotonic(player, 107, 2)
+                setQuestStageNonmonotonic(player, 101, 2)
                 timedUpdate(6)
             }
 

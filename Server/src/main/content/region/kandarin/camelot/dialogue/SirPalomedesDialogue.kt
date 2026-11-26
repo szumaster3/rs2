@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Sir Gawain dialogue.
@@ -17,11 +18,11 @@ import shared.consts.Quests
 class SirPalomedesDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
+        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL.questName)) {
             when (stage) {
                 0 -> {
                     npcl(FaceAnim.HALF_ASKING, "Hello there adventurer, what do you want of me?")
-                    val questStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL)
+                    val questStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName)
                     stage = when (questStage) {
                         0 -> 1
                         10 -> 10
@@ -41,9 +42,9 @@ class SirPalomedesDialogue(player: Player? = null) : Dialogue(player) {
         } else {
             when (stage) {
                 0 -> npcl(FaceAnim.HALF_ASKING, "Hello there adventurer, what do you want of me?").also {
-                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 0 || isQuestComplete(player!!, Quests.HOLY_GRAIL)) {
+                    if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) == 0 || isQuestComplete(player!!, Quests.HOLY_GRAIL.questName)) {
                         stage = 1
-                    } else if (getQuestStage(player!!, Quests.HOLY_GRAIL) >= 10) {
+                    } else if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) >= 10) {
                         stage = 10
                     }
                 }

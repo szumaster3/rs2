@@ -1,8 +1,9 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
-import shared.consts.Quests
 
 class AwowogeiChallengeDialogue : DialogueFile() {
 
@@ -19,7 +20,7 @@ class AwowogeiChallengeDialogue : DialogueFile() {
             8 -> npcl("I must think upon it some more and discuss the matter with my advisers. We will contact you when we are ready.",).also { stage = 99 }
             99 -> {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 46)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 46)
             }
         }
     }

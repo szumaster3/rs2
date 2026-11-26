@@ -1,5 +1,7 @@
 package content.global.skill.thieving
 
+import content.data.Quests
+
 import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.global.action.DoorActionHandler.handleAutowalkDoor
@@ -97,7 +99,7 @@ object ThievingDefinition {
                     return
                 }
 
-                if (player.location.isInRegion(10553) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                if (player.location.isInRegion(10553) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                     if (stall.fullIDs.contains(4278)) {
                         sendDialogue(player, "The fur trader is staring at you suspiciously. You cannot steal from his stall while he distrusts you.")
                         return
@@ -108,6 +110,7 @@ object ThievingDefinition {
                     }
                 }
 
+                if (node.location.isInRegion(10547)) finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 1)
                 player.animate(Animation(Animations.HUMAN_MULTI_USE_832))
                 player.locks.lockInteractions(2)
 
@@ -290,6 +293,9 @@ object ThievingDefinition {
             }
 
             delayClock(player, Clocks.SKILLING, 2)
+            if (door.id == shared.consts.Scenery.DOOR_34812 && door.location.isInRegion(10547)) {
+                finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 11)
+            }
 
             if (success) {
                 rewardXP(player, Skills.THIEVING, experience)

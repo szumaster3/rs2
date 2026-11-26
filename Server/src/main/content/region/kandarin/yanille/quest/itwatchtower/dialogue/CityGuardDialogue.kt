@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -10,7 +12,6 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the City Guard dialogue.
@@ -23,7 +24,7 @@ class CityGuardDialogue : DialogueFile() {
         npc = NPC(NPCs.CITY_GUARD_862)
         when(stage) {
             0 -> {
-                if(getQuestStage(player!!, Quests.WATCHTOWER) >= 20) {
+                if(getQuestStage(player!!, Quests.WATCHTOWER.questName) >= 20) {
                     npc(FaceAnim.OLD_DEFAULT, "What is it?")
                     stage = 13
                     return
@@ -61,7 +62,7 @@ class CityGuardDialogue : DialogueFile() {
             12 -> {
                 end()
                 addItemOrDrop(player!!, Items.SKAVID_MAP_2376, 1)
-                setQuestStage(player!!, Quests.WATCHTOWER, 20)
+                setQuestStage(player!!, Quests.WATCHTOWER.questName, 20)
                 sendMessage(player!!, "The guard gives you a map.")
             }
 

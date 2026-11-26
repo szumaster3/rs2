@@ -1,5 +1,7 @@
 package content.global.skill.agility.shortcuts
 
+import content.data.Quests
+
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
 import core.api.isQuestComplete
@@ -14,7 +16,6 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Animations
-import shared.consts.Quests
 
 /**
  * Handles the various bar squeeze shortcuts.
@@ -46,7 +47,7 @@ class BarSqueezeShortcut : AgilityShortcut(intArrayOf(9334, 9337, 2186), 66, 1.0
 
     override fun checkRequirements(player: Player): Boolean {
         val inTempleTunnel = player.location.y in 3159..3161
-        val questComplete = isQuestComplete(player, Quests.PRIEST_IN_PERIL)
+        val questComplete = isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName)
 
         if (!questComplete && !inTempleTunnel) {
             sendDialogue(player, "You need to have completed Priest in Peril in order to do this.")

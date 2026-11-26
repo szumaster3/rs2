@@ -1,5 +1,7 @@
 package content.global.plugins.item.books_and_scrolls.impl
 
+import content.data.Quests
+
 import content.global.plugins.item.books_and_scrolls.BookInterface
 import content.global.plugins.item.books_and_scrolls.BookLine
 import content.global.plugins.item.books_and_scrolls.Page
@@ -11,7 +13,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.tools.colorize
 import shared.consts.Items
-import shared.consts.Quests
 
 class BaxtorianBook : InteractionListener {
 
@@ -170,8 +171,8 @@ class BaxtorianBook : InteractionListener {
             buttonID: Int,
         ): Boolean {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
-            if (getQuestStage(player, Quests.WATERFALL_QUEST) == 20) {
-                setQuestStage(player, Quests.WATERFALL_QUEST, 30)
+            if (getQuestStage(player, Quests.WATERFALL_QUEST.questName) == 20) {
+                setQuestStage(player, Quests.WATERFALL_QUEST.questName, 30)
             }
             return true
         }

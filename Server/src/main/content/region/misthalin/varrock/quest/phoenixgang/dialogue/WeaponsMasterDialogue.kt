@@ -1,12 +1,13 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Weapons Master dialogue.
@@ -20,7 +21,7 @@ class WeaponsMasterDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV)
+        quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV.questName)
         when (quest!!.getStage(player)) {
             else -> {
                 if (args.size > 1) {

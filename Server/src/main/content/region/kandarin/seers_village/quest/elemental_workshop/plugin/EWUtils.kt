@@ -1,11 +1,12 @@
 package content.region.kandarin.seers_village.quest.elemental_workshop.plugin
 
+import content.data.Quests
+
 import content.global.plugins.item.books_and_scrolls.BookLine
 import content.global.plugins.item.books_and_scrolls.Page
 import content.global.plugins.item.books_and_scrolls.PageSet
 import core.api.getVarbit
 import core.game.node.entity.player.Player
-import shared.consts.Quests
 
 object EWUtils {
     val PAGES =
@@ -80,5 +81,5 @@ object EWUtils {
 
     fun bellowsEnabled(player: Player): Boolean = getVarbit(player, BELLOWS_STATE) == 1
 
-    fun currentStage(player: Player): Int = player.questRepository.getStage(Quests.ELEMENTAL_WORKSHOP_I)
+    fun currentStage(player: Player): Int = player.questRepository.getStage(Quests.ELEMENTAL_WORKSHOP_I.questName)
 }

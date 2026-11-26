@@ -1,5 +1,7 @@
 package content.region.fremennik.quest.olaf.npc
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.Entity
@@ -11,7 +13,6 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
 
@@ -79,7 +80,7 @@ class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
         if (killer is Player) {
             clearHintIcon(killer)
             clearUlfric(killer)
-            setQuestStage(killer, Quests.OLAFS_QUEST, 99)
+            setQuestStage(killer, Quests.OLAFS_QUEST.questName, 99)
         }
         clear()
         super.finalizeDeath(killer)

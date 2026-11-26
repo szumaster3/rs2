@@ -1,12 +1,13 @@
 package content.region.misthalin.varrock.quest.dragon.dialogue
 
+import content.data.Quests
+
 import core.api.sendNPCDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Cabin Boy dialogue.
@@ -20,7 +21,7 @@ class CabinBoyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER)
+        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER.questName)
         when (quest!!.getStage(player)) {
             20 -> {
                 npc("Ahoy! Whay d'ye think of yer ship then?")

@@ -1,5 +1,7 @@
 package content.region.misthalin.dig_site.quest.itexam.plugin
 
+import content.data.Quests
+
 import content.global.skill.thieving.ThievingDefinition
 import content.global.skill.thieving.pickpocket.PickpocketListener
 import content.region.misthalin.dig_site.quest.itexam.TheDigSite
@@ -56,7 +58,7 @@ class TheDigSitePlugin : InteractionListener {
             }
 
             val table =
-                if (getQuestStage(player, Quests.THE_DIG_SITE) == 3)
+                if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 3)
                     workmanPickpocketingTable
                 else
                     workmanPostQuestPickpocketingTable
@@ -269,7 +271,7 @@ class TheDigSitePlugin : InteractionListener {
         }
 
         onUseWith(SCENERY, Items.TROWEL_676, Scenery.SOIL_2376, Scenery.SOIL_2377, Scenery.SOIL_2378) { player, _, _ ->
-            val stage = getQuestStage(player, Quests.THE_DIG_SITE)
+            val stage = getQuestStage(player, Quests.THE_DIG_SITE.questName)
             val loc = player.location
 
             // Level 3.
@@ -330,7 +332,7 @@ class TheDigSitePlugin : InteractionListener {
 
         winches.forEach { (winchId, attribute, locations) ->
             on(winchId, SCENERY, "operate") { player, _ ->
-                val questStage = getQuestStage(player, Quests.THE_DIG_SITE)
+                val questStage = getQuestStage(player, Quests.THE_DIG_SITE.questName)
 
                 when {
                     questStage >= 11 -> descendRope(player, locations.first)
@@ -375,7 +377,7 @@ class TheDigSitePlugin : InteractionListener {
             onUseWith(IntType.SCENERY, Items.ROPE_954, winchId) { player, used, _ ->
                 if (!removeItem(player, used)) return@onUseWith true
 
-                if (getQuestStage(player, Quests.THE_DIG_SITE) >= 8) {
+                if (getQuestStage(player, Quests.THE_DIG_SITE.questName) >= 8) {
                     setAttribute(player, attribute, true)
                     sendMessage(player, "You tie the rope to the bucket.")
                 } else {
@@ -431,14 +433,14 @@ class TheDigSitePlugin : InteractionListener {
          */
 
         on(Scenery.BRICK_2362, SCENERY, "search") { player, _ ->
-            if (getQuestStage(player, Quests.THE_DIG_SITE) == 8) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 8) {
                 sendPlayerDialogue(player, "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...", FaceAnim.THINKING)
-                setQuestStage(player, Quests.THE_DIG_SITE, 9)
+                setQuestStage(player, Quests.THE_DIG_SITE.questName, 9)
             }
-            if (getQuestStage(player, Quests.THE_DIG_SITE) == 9) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 9) {
                 sendPlayerDialogue(player, "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...", FaceAnim.THINKING)
             }
-            if (getQuestStage(player, Quests.THE_DIG_SITE) == 10) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 10) {
                 sendPlayerDialogue(player, "The brick is covered with the chemicals I made.", FaceAnim.THINKING)
             }
             return@on true
@@ -625,7 +627,7 @@ class TheDigSitePlugin : InteractionListener {
          */
 
         onUseWith(SCENERY, Items.CHEMICAL_COMPOUND_707, Scenery.BRICK_2362) { player, used, _ ->
-            if (getQuestStage(player, Quests.THE_DIG_SITE) == 9) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 9) {
                 if (removeItem(player, used)) {
                     addItemOrDrop(player, Items.VIAL_229)
                     sendMessage(player, "You pour the compound over the bricks...")
@@ -634,7 +636,7 @@ class TheDigSitePlugin : InteractionListener {
                         "Ok, the mixture is all over the bricks. I need some way to ignite this compound.",
                         FaceAnim.THINKING,
                     )
-                    setQuestStage(player, Quests.THE_DIG_SITE, 10)
+                    setQuestStage(player, Quests.THE_DIG_SITE.questName, 10)
                 }
             }
             return@onUseWith true
@@ -646,8 +648,8 @@ class TheDigSitePlugin : InteractionListener {
          */
 
         onUseWith(SCENERY, Items.TINDERBOX_590, Scenery.BRICK_2362) { player, _, _ ->
-            if (getQuestStage(player, Quests.THE_DIG_SITE) == 10) {
-                setQuestStage(player, Quests.THE_DIG_SITE, 11)
+            if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 10) {
+                setQuestStage(player, Quests.THE_DIG_SITE.questName, 11)
                 lock(player, 15)
                 queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                     when (stage) {

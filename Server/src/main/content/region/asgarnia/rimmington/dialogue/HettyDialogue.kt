@@ -1,5 +1,7 @@
 package content.region.asgarnia.rimmington.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Hetty dialogue.
@@ -18,11 +19,11 @@ import shared.consts.Quests
 class HettyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if (isQuestComplete(player, Quests.WITCHS_POTION)) {
+        if (isQuestComplete(player, Quests.WITCHS_POTION.questName)) {
             npc(FaceAnim.ASKING, "How's your magic coming along?")
             stage = 0
         }
-        when (getQuestStage(player, Quests.WITCHS_POTION)) {
+        when (getQuestStage(player, Quests.WITCHS_POTION.questName)) {
             0 -> npc(FaceAnim.NEUTRAL, "What could you want with an old woman like me?").also { stage = 11}
             20 -> npc(FaceAnim.HAPPY, "So have you found the things for the potion?").also { stage = 100}
             40 -> if (args.size == 2) {
@@ -33,11 +34,11 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
         }
-        if (getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
+        if (getQuestStage(player, Quests.SWEPT_AWAY.questName) >= 1) {
             player("Hello there. Maggie sent me to ask for you help in", "enchanting her broom.")
             stage = 200
         }
-        if (getQuestStage(player, Quests.SWEPT_AWAY) >= 1 && inInventory(player, Items.NEWT_14064)) {
+        if (getQuestStage(player, Quests.SWEPT_AWAY.questName) >= 1 && inInventory(player, Items.NEWT_14064)) {
             npc("Have you managed to get that newt yet?")
             stage = 210
         }
@@ -70,12 +71,12 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
             32 -> player(FaceAnim.NEUTRAL, "What do I need?").also { stage++ }
             33 -> npc(FaceAnim.NEUTRAL, "You need an eye of newt, a rat's tail, and onion... Oh", "and a piece of burnt meat.").also { stage++ }
             34 -> player(FaceAnim.HAPPY, "Great, I'll go get them.").also {
-                setQuestStage(player, Quests.WITCHS_POTION, 20)
+                setQuestStage(player, Quests.WITCHS_POTION.questName, 20)
                 stage = END_DIALOGUE
             }
             35 -> {
                 end()
-                finishQuest(player, Quests.WITCHS_POTION)
+                finishQuest(player, Quests.WITCHS_POTION.questName)
                 updateQuestTab(player)
             }
             100 -> if (!allInInventory(player, Items.ONION_1957, Items.RATS_TAIL_300, Items.BURNT_MEAT_2146, Items.EYE_OF_NEWT_221)) {
@@ -90,7 +91,7 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
             105 -> {
                 end()
                 if (player.inventory.remove(Item(Items.ONION_1957), Item(Items.RATS_TAIL_300), Item(Items.BURNT_MEAT_2146), Item(Items.EYE_OF_NEWT_221))) {
-                    setQuestStage(player, Quests.WITCHS_POTION, 40)
+                    setQuestStage(player, Quests.WITCHS_POTION.questName, 40)
                     npc(FaceAnim.HAPPY, "Ok, now drink from the cauldron.")
                 }
             }

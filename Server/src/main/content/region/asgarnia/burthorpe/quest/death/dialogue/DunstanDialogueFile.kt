@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.death.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -7,7 +9,6 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Dunstan dialogue.
@@ -18,7 +19,7 @@ import shared.consts.Quests
 class DunstanDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU.questName)) {
             21 -> {
                 when (stage) {
                     START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage++ }
@@ -34,7 +35,7 @@ class DunstanDialogueFile : DialogueFile() {
                     10 -> npcl(FaceAnim.FRIENDLY, "My son has just turned 16 and I'd very much like him to join the Imperial Guard. The Prince's elite forces are invite only so it's very unlikely he'll get in. If you can arrange that you have a deal!").also { stage++ }
                     11 -> playerl(FaceAnim.FRIENDLY, "That won't be a problem as I'm helping out the Imperial Guard!").also { stage++ }
                     12 -> npcl(FaceAnim.FRIENDLY, "Excellent! You'll need to bring an Iron bar for the spikes!").also {
-                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 22)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 22)
                         stage = END_DIALOGUE
                     }
                 }
@@ -59,7 +60,7 @@ class DunstanDialogueFile : DialogueFile() {
                     }
                     3 -> npcl(FaceAnim.FRIENDLY, "Good but I need to have the certificate.").also { stage = END_DIALOGUE }
                     4 -> npcl(FaceAnim.FRIENDLY, "Thank you!").also {
-                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 24)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 24)
                         sendMessage(player!!, "You give Dunstan the certificate.")
                         stage = 2
                     }

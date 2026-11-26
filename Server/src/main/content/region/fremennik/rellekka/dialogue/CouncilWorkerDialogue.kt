@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.dialogue
 
+import content.data.Quests
+
 import core.api.addItem
 import core.api.getQuestStage
 import core.api.inInventory
@@ -10,7 +12,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Council Worker dialogue file.
@@ -40,7 +41,7 @@ class CouncilWorkerDialogue(val questStage: Int, var isBeerInteraction: Boolean 
             }
         } else if (questStage in 1..99) {
             when (stage) {
-                START_DIALOGUE -> if (getQuestStage(player!!, Quests.THE_FREMENNIK_TRIALS) > 0) {
+                START_DIALOGUE -> if (getQuestStage(player!!, Quests.THE_FREMENNIK_TRIALS.questName) > 0) {
                     player(FaceAnim.HALF_ASKING, "I know this is an odd question, but are you", "a member of the elder council?")
                     stage = 1
                 } else {

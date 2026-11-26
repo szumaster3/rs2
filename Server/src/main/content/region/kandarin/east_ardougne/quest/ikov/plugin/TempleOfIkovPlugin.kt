@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.east_ardougne.quest.ikov.npc.FireWarriorOfLesarkusNPC
 import core.api.*
@@ -17,7 +19,6 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class TempleOfIkovPlugin : InteractionListener {
@@ -57,8 +58,8 @@ class TempleOfIkovPlugin : InteractionListener {
 
         on(intArrayOf(Scenery.GATE_94, Scenery.GATE_95), SCENERY, "open") { player, node ->
             if (inEquipment(player, Items.PENDANT_OF_LUCIEN_86)) {
-                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 1) {
-                    setQuestStage(player, Quests.TEMPLE_OF_IKOV, 2)
+                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) == 1) {
+                    setQuestStage(player, Quests.TEMPLE_OF_IKOV.questName, 2)
                 }
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
@@ -76,8 +77,8 @@ class TempleOfIkovPlugin : InteractionListener {
             replaceScenery(node.asScenery(), 88, 3)
             animate(player, Animation(2140))
             if (getAttribute(player, GameAttributes.QUEST_IKOV_DISABLED_TRAP, false)) {
-                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 2) {
-                    setQuestStage(player, Quests.TEMPLE_OF_IKOV, 3)
+                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) == 2) {
+                    setQuestStage(player, Quests.TEMPLE_OF_IKOV.questName, 3)
                 }
             } else {
                 content.global.skill.agility.AgilityHandler.fail(
@@ -126,7 +127,7 @@ class TempleOfIkovPlugin : InteractionListener {
             if (getAttribute(player, GameAttributes.QUEST_IKOV_ICE_CHAMBER_ACCESS, false) ||
                 getQuestStage(
                     player,
-                    Quests.TEMPLE_OF_IKOV,
+                    Quests.TEMPLE_OF_IKOV.questName,
                 ) >= 4
             ) {
                 setAttribute(player, GameAttributes.QUEST_IKOV_CHEST_INTER, chestLocations.random())
@@ -167,7 +168,7 @@ class TempleOfIkovPlugin : InteractionListener {
 
         on(Scenery.DOOR_92, SCENERY, "open") { player, node ->
             removeAttribute(player, GameAttributes.QUEST_IKOV_WARRIOR_INST)
-            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 3) {
+            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) >= 3) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door won't open.")
@@ -176,7 +177,7 @@ class TempleOfIkovPlugin : InteractionListener {
         }
 
         on(Scenery.DOOR_93, SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 4) {
+            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) >= 4) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 if (getAttribute(player, GameAttributes.QUEST_IKOV_WARRIOR_INST, null) == null) {
@@ -220,7 +221,7 @@ class TempleOfIkovPlugin : InteractionListener {
         }
 
         on(Items.STAFF_OF_ARMADYL_84, IntType.GROUND_ITEM, "take") { player, node ->
-            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 6 && getAttribute(player, GameAttributes.QUEST_IKOV_SELECTED_END, 0) == 1) {
+            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) >= 6 && getAttribute(player, GameAttributes.QUEST_IKOV_SELECTED_END, 0) == 1) {
                 sendMessage(player, "You decide not to steal the staff as you have agreed to help the Guardians")
             }
             val npcID = findLocalNPCs(player, intArrayOf(NPCs.GUARDIAN_OF_ARMADYL_274, NPCs.GUARDIAN_OF_ARMADYL_275), 4)
@@ -228,8 +229,8 @@ class TempleOfIkovPlugin : InteractionListener {
                 sendChat(npcID[0], "That is not thine to take!")
                 npcID[0].attack(player)
             } else {
-                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 5) {
-                    setQuestStage(player, Quests.TEMPLE_OF_IKOV, 6)
+                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) == 5) {
+                    setQuestStage(player, Quests.TEMPLE_OF_IKOV.questName, 6)
                     setAttribute(player, GameAttributes.QUEST_IKOV_SELECTED_END, 2)
                 }
                 PickupHandler.take(player, node as GroundItem)

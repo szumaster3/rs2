@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.mcannon.dialogue
 
+import content.data.Quests
+
 import core.api.sendMessage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -7,7 +9,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class LollkDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -15,7 +16,7 @@ class LollkDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON)
+        quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON.questName)
         when (quest!!.getStage(player)) {
             40 -> npc(FaceAnim.OLD_DEFAULT, "Thank the heavens, you saved me!", "I thought I'd be goblin lunch for sure!")
             else -> end(). also { sendMessage(player, "The dwarf doesn't seem interested in talking to you.")

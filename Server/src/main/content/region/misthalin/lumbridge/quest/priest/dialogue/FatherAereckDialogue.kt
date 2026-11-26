@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.priest.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -10,14 +12,13 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.THE_RESTLESS_GHOST)
+        val questStage = getQuestStage(player, Quests.THE_RESTLESS_GHOST.questName)
         if (questStage == 10) {
             npc("Have you got rid of the ghost yet?")
             stage = 520
@@ -41,7 +42,7 @@ class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
             stage = 550
             return true
         }
-        if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST)) {
+        if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName)) {
             npc(
                 FaceAnim.HAPPY,
                 "Thank you for getting rid of that awful ghost for me!",
@@ -58,7 +59,7 @@ class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST)) {
+                if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName)) {
                     setTitle(player, 4)
                     sendOptions(
                         player,
@@ -182,7 +183,7 @@ class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
                     "Thank you. The problem is, there is a ghost in the",
                     "church graveyard. I would like you to get rid of it.",
                 ).also {
-                    setQuestStage(player, Quests.THE_RESTLESS_GHOST, 10)
+                    setQuestStage(player, Quests.THE_RESTLESS_GHOST.questName, 10)
                     updateQuestTab(player)
                     stage++
                 }

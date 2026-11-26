@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Lokar Searunner dialogue.
@@ -23,12 +24,12 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (npc.id) {
-            NPCs.LOKAR_SEARUNNER_4537 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            NPCs.LOKAR_SEARUNNER_4537 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 player("Hello there.")
             } else {
                 options("Hi Lokar, can you take me back to your ship?", "It seems you've been charming Pauline Polaris.")
             }
-            NPCs.LOKAR_SEARUNNER_4536 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            NPCs.LOKAR_SEARUNNER_4536 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 player("Hello there.")
             } else {
                 player("Hello again Lokar.")
@@ -41,7 +42,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
         when (npc.id) {
             NPCs.LOKAR_SEARUNNER_4536 -> when (stage) {
                 0 -> {
-                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                         npcl(FaceAnim.ANNOYED, "Don't talk to me outerlander! I don't have time for the likes of you!")
                         stage = 40
                     } else {
@@ -99,7 +100,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
                 38 -> playerl(FaceAnim.FRIENDLY, "She's not used to your ways. It will only spell trouble.").also { stage++ }
                 39 -> npcl(FaceAnim.FRIENDLY, "Don't worry yourself. Luckily for me, you can't decide what I do.").also { stage = END_DIALOGUE }
                 40 -> player("What makes you say that?").also { stage++ }
-                41 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                41 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                     npcl(FaceAnim.FRIENDLY, "You've experience yet to gain. Especially in keeping with the Fremenniks and their trials!").also { stage++ }
                 } else {
                     npcl(FaceAnim.NEUTRAL, "Only people who've travelled on quests far from here can talk to me!").also { stage++ }
@@ -111,7 +112,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
 
             NPCs.LOKAR_SEARUNNER_4537 -> when (stage) {
                 0 -> {
-                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                         npcl(FaceAnim.ANNOYED, "Don't talk to me outerlander! I don't have time for the likes of you!")
                         stage = 41
                     } else {
@@ -177,7 +178,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 41 -> player("What makes you say that?").also { stage++ }
-                42 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                42 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                     npcl(FaceAnim.FRIENDLY, "You've experience yet to gain. Especially in keeping with the Fremenniks and their trials!").also { stage++ }
                 } else {
                     npcl(FaceAnim.NEUTRAL, "Only people who've travelled on quests far from here can talk to me!").also { stage++ }
@@ -192,7 +193,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
         player: Player,
         location: Location,
     ) {
-        if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return
+        if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY.questName)) return
         player.lock()
         Pulser.submit(
             object : Pulse(1, player) {

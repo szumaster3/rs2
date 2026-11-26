@@ -1,5 +1,7 @@
 package content.region.misthalin.dig_site.quest.itexam.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -11,7 +13,6 @@ import core.game.node.item.Item
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class ArchaeologicalExpertPlugin : InteractionListener {
 
@@ -218,8 +219,8 @@ class ArchaeologicalExpertListenerDialogueFile(val it: Int, ) : DialogueFile() {
                 if (removeItem(player!!, Items.ANCIENT_TALISMAN_681)) {
                     addItemOrDrop(player!!, Items.INVITATION_LETTER_696)
                 }
-                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 6) {
-                    setQuestStage(player!!, Quests.THE_DIG_SITE, 7)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 6) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE.questName, 7)
                 }
                 endFile()
             }
@@ -263,8 +264,8 @@ class ArchaeologicalExpertListenerDialogueFile(val it: Int, ) : DialogueFile() {
 
             56 -> {
                 if (removeItem(player!!, Items.STONE_TABLET_699)) {
-                    if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 11) {
-                        finishQuest(player!!, Quests.THE_DIG_SITE)
+                    if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 11) {
+                        finishQuest(player!!, Quests.THE_DIG_SITE.questName)
                     }
                 }
                 endFile()

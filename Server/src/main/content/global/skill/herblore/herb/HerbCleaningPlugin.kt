@@ -1,11 +1,12 @@
 package content.global.skill.herblore.herb
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import shared.consts.Quests
 
 class HerbCleaningPlugin : InteractionListener {
 
@@ -13,8 +14,8 @@ class HerbCleaningPlugin : InteractionListener {
         on(IntType.ITEM, "clean") { player, node ->
             val item = node as? Item ?: return@on true
 
-            if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
-                sendMessage(player, "You must complete the ${Quests.DRUIDIC_RITUAL} to use the Herblore skill.")
+            if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName)) {
+                sendMessage(player, "You must complete the ${Quests.DRUIDIC_RITUAL.questName} to use the Herblore skill.")
                 return@on true
             }
 

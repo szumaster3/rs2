@@ -1,5 +1,7 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import core.api.getAttribute
 import core.api.getQuestStage
 import core.api.sendNPCDialogue
@@ -8,7 +10,6 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class DaeroHangarDialogue : DialogueFile() {
 
@@ -16,9 +17,9 @@ class DaeroHangarDialogue : DialogueFile() {
         when (stage) {
             0 -> if (getAttribute(player!!, "mm:puzzle:done", false)) {
                 npcl(FaceAnim.OLD_DEFAULT, "Well done adventurer. You have managed to break Glough's code. Now the process of reinitialisation is complete, you can truly begin your journey into the unknown.").also { stage = 21 }
-            } else if (getQuestStage(player!!, Quests.MONKEY_MADNESS) == 21) {
+            } else if (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName) == 21) {
                 npcl(FaceAnim.OLD_DEFAULT, "Welcome adventurer, to the Underground Military Glider Hangar.").also { stage++ }
-            } else if (getQuestStage(player!!, Quests.MONKEY_MADNESS) == 22) {
+            } else if (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName) == 22) {
                 npcl(FaceAnim.OLD_DEFAULT, "${player!!.username}, you will have to wait till reinitialization is complete.").also { stage = END_DIALOGUE }
             }
             1 -> playerl("Wow! Why would Gnomes need such a place?").also { stage++ }
@@ -41,7 +42,7 @@ class DaeroHangarDialogue : DialogueFile() {
             18 -> npcl(FaceAnim.OLD_DEFAULT, "Very well. Notify me when you have managed to reinitialize.").also { stage++ }
             19 -> npcl(FaceAnim.OLD_DEFAULT, "${player!!.username}, you will have to wait till reinitialization is complete.").also {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 22)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 22)
             }
             21 -> playerl("I've had some practice in the past.").also { stage++ }
             22 -> npcl(FaceAnim.OLD_DEFAULT, "You are clearly a human of many talents.").also { stage++ }
@@ -53,7 +54,7 @@ class DaeroHangarDialogue : DialogueFile() {
             28 -> npcl(FaceAnim.OLD_DEFAULT, "And ... good luck.").also { stage++ }
             29 -> {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 23)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 23)
             }
         }
     }

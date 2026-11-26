@@ -1,5 +1,7 @@
 package content.region.desert.quest.rescue.plugin
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.inInventory
 import core.api.openDialogue
@@ -18,7 +20,6 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class PrinceAliRescuePlugin : OptionHandler() {
@@ -40,7 +41,7 @@ class PrinceAliRescuePlugin : OptionHandler() {
         }
         when (id) {
             NPCs.BORDER_GUARD_7912 -> openDialogue(player, NPCs.BORDER_GUARD_7912, node.asNpc())
-            2881 -> when (getQuestStage(player, Quests.PRINCE_ALI_RESCUE)) {
+            2881 -> when (getQuestStage(player, Quests.PRINCE_ALI_RESCUE.questName)) {
                 60 -> handleAutowalkDoor(player, node as Scenery)
                 50 -> if (player.getAttribute("keli-gone", 0) > ticks) {
                     if (inInventory(player, Items.BRONZE_KEY_2418, 1)) {

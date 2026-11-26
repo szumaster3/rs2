@@ -1,12 +1,13 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Lathas dialogue.
@@ -17,7 +18,7 @@ import shared.consts.Quests
 class KingLathasBiohazardQuestDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.BIOHAZARD)
+        val questStage = getQuestStage(player!!, Quests.BIOHAZARD.questName)
         npc = NPC(NPCs.KING_LATHAS_364)
         when {
             (questStage >= 16) -> {
@@ -56,8 +57,8 @@ class KingLathasBiohazardQuestDialogue : DialogueFile() {
                     27 -> npc("How could I not do? He was my brother.").also { stage++ }
                     28 -> {
                         end()
-                        if (getQuestStage(player!!, Quests.BIOHAZARD) < 100) {
-                            finishQuest(player!!, Quests.BIOHAZARD)
+                        if (getQuestStage(player!!, Quests.BIOHAZARD.questName) < 100) {
+                            finishQuest(player!!, Quests.BIOHAZARD.questName)
                         }
                     }
                 }

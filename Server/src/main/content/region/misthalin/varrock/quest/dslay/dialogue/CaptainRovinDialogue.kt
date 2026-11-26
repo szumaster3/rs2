@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dslay.plugin.DemonSlayerUtils
 import core.api.freeSlots
 import core.api.getQuestStage
@@ -13,7 +15,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class CaptainRovinDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -24,7 +25,7 @@ class CaptainRovinDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val questStage = getQuestStage(player, Quests.DEMON_SLAYER)
+        val questStage = getQuestStage(player, Quests.DEMON_SLAYER.questName)
         val hasSecondKey = hasAnItem(player, DemonSlayerUtils.SECOND_KEY.id).container != null
         when (stage) {
             0 -> showTopics(

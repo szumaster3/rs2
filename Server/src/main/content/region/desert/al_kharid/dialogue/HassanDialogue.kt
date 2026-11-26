@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Hassan dialogue.
@@ -24,7 +25,7 @@ class HassanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
+        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE.questName)
         when (quest!!.getStage(player)) {
             100 -> npc(FaceAnim.HALF_GUILTY, "You are a friend of the town of Al-Kharid. If we have", "more tasks to complete, we will ask you. Please, keep in", "contact. Good employees are not easy to find.").also { stage = 0 }
             60 -> npc(FaceAnim.HALF_GUILTY, "You have the eternal gratitude of the Emir for", "rescuing his son. I am authorised to pay you 700", "coins.").also { stage = 0 }
@@ -41,7 +42,7 @@ class HassanDialogue(player: Player? = null) : Dialogue(player) {
             100 -> end()
             60 -> {
                 end()
-                finishQuest(player, Quests.PRINCE_ALI_RESCUE)
+                finishQuest(player, Quests.PRINCE_ALI_RESCUE.questName)
             }
 
             30, 40, 50, 20 -> end()

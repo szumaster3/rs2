@@ -1,5 +1,7 @@
 package content.region.fremennik.quest.olaf.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -21,11 +22,11 @@ class IngridHradsonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg objects: Any?): Boolean {
         npc = objects[0] as NPC
-        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
             npcl(FaceAnim.ANNOYED, "Outerlander, I have work to be getting on with... Please stop bothering me.").also { stage = END_DIALOGUE }
-        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && getQuestStage(player, Quests.OLAFS_QUEST) == 0) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) && getQuestStage(player, Quests.OLAFS_QUEST.questName) == 0) {
             npc(FaceAnim.FRIENDLY, "Good afternoon! How do you like our village?").also { stage = 10 }
-        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && getQuestStage(player, Quests.OLAFS_QUEST) == 1) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) && getQuestStage(player, Quests.OLAFS_QUEST.questName) == 1) {
             npc(FaceAnim.ASKING, "Hello again! Have you any word from my husband?").also { stage = 12 }
         } else {
             player("Excuse me, but are you Ingrid? The same Ingrid that","is married to Olaf Hradson?")

@@ -1,5 +1,7 @@
 package content.region.morytania.canifis.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.canifis.quest.fenk.dialogue.RoavarDialogueFile
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -12,7 +14,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Roavar dialogue.
@@ -32,7 +33,7 @@ class RoavarDialogue(player: Player? = null) : Dialogue(player) {
             1 -> showTopics(
                 Topic(FaceAnim.HALF_GUILTY, "Can I buy a beer?", 10, false),
                 Topic(FaceAnim.HALF_GUILTY, "Can I hear some gossip", 20, false),
-                IfTopic<RoavarDialogueFile?>(FaceAnim.HALF_GUILTY, "Can I buy something to eat?", RoavarDialogueFile(1), getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 2, false),
+                IfTopic<RoavarDialogueFile?>(FaceAnim.HALF_GUILTY, "Can I buy something to eat?", RoavarDialogueFile(1), getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 2, false),
                 Topic(FaceAnim.HALF_GUILTY, "Nothing thanks.", 40, false),
             )
 

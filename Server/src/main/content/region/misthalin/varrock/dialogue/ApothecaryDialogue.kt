@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.api.setVarbit
@@ -13,7 +15,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Apothecary dialogue.
@@ -23,12 +24,12 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.ROMEO_JULIET) == 40) {
+        if (getQuestStage(player, Quests.ROMEO_JULIET.questName) == 40) {
             player("Apothecary. Father Lawrence sent me.")
             stage = 500
             return true
         }
-        if (getQuestStage(player, Quests.ROMEO_JULIET) == 50) {
+        if (getQuestStage(player, Quests.ROMEO_JULIET.questName) == 50) {
             return if (!player.inventory.contains(Items.CADAVA_BERRIES_753, 1)) {
                 npc("Keep searching for those Cadava berries. They're needed", "for the potion.")
                 stage = 507
@@ -39,7 +40,7 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
                 true
             }
         }
-        if (getQuestStage(player, Quests.ROMEO_JULIET) == 60) {
+        if (getQuestStage(player, Quests.ROMEO_JULIET.questName) == 60) {
             if (!player.inventory.contains(Items.CADAVA_POTION_756, 1) && !player.bank.contains(Items.CADAVA_POTION_756, 1)) {
                 return if (player.inventory.contains(Items.CADAVA_BERRIES_753, 1)) {
                     npc("Well done. You have the berries.")
@@ -218,7 +219,7 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             506 -> {
-                setQuestStage(player, Quests.ROMEO_JULIET, 50)
+                setQuestStage(player, Quests.ROMEO_JULIET.questName, 50)
                 player("Ok, thanks.")
                 stage = 507
             }
@@ -245,7 +246,7 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             640 -> {
-                setQuestStage(player, Quests.ROMEO_JULIET, 60)
+                setQuestStage(player, Quests.ROMEO_JULIET.questName, 60)
                 end()
             }
         }

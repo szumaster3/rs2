@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.falador.quest.rd.RecruitmentDrive
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -12,7 +14,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Makeover Mage dialogue.
@@ -67,7 +68,7 @@ class MakeOverMageDialogue(player: Player? = null) : Dialogue(player) {
                     sendDialogueLines(player, "You need to take off all your equipment before the mage", "can change your appearance.")
                     return true
                 } else {
-                    if (getQuestStage(player, Quests.RECRUITMENT_DRIVE) >= 1 && player.isMale) {
+                    if (getQuestStage(player, Quests.RECRUITMENT_DRIVE.questName) >= 1 && player.isMale) {
                         setAttribute(player, RecruitmentDrive.makeoverTicket, true)
                     }
                     openInterface(player, Components.MAKEOVER_MAGE_205)

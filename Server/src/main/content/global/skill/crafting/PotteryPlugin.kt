@@ -1,5 +1,7 @@
 package content.global.skill.crafting
 
+import content.data.Quests
+
 import content.region.misthalin.lumbridge.diary.LumbridgeAchievementDiary
 import content.region.misthalin.varrock.diary.VarrockAchievementDiary
 import core.api.*
@@ -103,7 +105,7 @@ class PotteryPlugin : InteractionListener {
     }
 
     private fun firePottery(player: Player, pottery: CraftingDefinition.Pottery, oven: Node): Boolean {
-        if (oven.id == Scenery.POTTERY_OVEN_4308 && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+        if (oven.id == Scenery.POTTERY_OVEN_4308 && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
             sendMessage(player, "Only Fremenniks may use this ${oven.name.lowercase(Locale.getDefault())}.")
             return false
         }

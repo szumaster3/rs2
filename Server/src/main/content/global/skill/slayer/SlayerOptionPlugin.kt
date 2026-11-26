@@ -1,5 +1,7 @@
 package content.global.skill.slayer
 
+import content.data.Quests
+
 import core.api.*
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
@@ -10,7 +12,6 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
 import shared.consts.Components
-import shared.consts.Quests
 import shared.consts.Scenery
 import shared.consts.Sounds
 
@@ -40,7 +41,7 @@ class SlayerOptionPlugin : InteractionListener {
      * Handles enter to the brine rat cave.
      */
     private fun enterCavern(player: Player) {
-        if(getQuestStage(player, Quests.OLAFS_QUEST) == 4) {
+        if(getQuestStage(player, Quests.OLAFS_QUEST.questName) == 4) {
             lock(player, 6)
             sendMessage(player, "You dig a hole...", 1)
             closeOverlay(player)
@@ -106,7 +107,7 @@ class SlayerOptionPlugin : InteractionListener {
          */
 
         on(CAVE_ENTRANCE, IntType.SCENERY, "enter") { player, _ ->
-            if (!hasRequirement(player, Quests.CABIN_FEVER)) return@on false
+            if (!hasRequirement(player, Quests.CABIN_FEVER.questName)) return@on false
             teleport(player, Location(3748, 9373, 0), TeleportManager.TeleportType.INSTANT)
             return@on true
         }

@@ -121,7 +121,9 @@ class LarryDialogue(player: Player? = null) : Dialogue(player) {
             }
             30 -> {
                 end()
-                addItem(player, Items.COINS_995, 6500 * player.getAttribute(GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, 0))
+                val redeemed = player.getAttribute(GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, 0)
+                if (redeemed <= 0 || !addItem(player, Items.COINS_995, 6500 * redeemed)) return true
+                if (player.location.x in 2600..2640 && player.location.y in 3260..3290) finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 12)
                 removeAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE)
                 npc(FaceAnim.HAPPY, "Well done finding those penguins. Keep up the hard", "work, they'll keep moving around.")
             }
@@ -165,6 +167,7 @@ class LarryDialogue(player: Player? = null) : Dialogue(player) {
         log(this.javaClass, Log.INFO, "exp: $expGained")
         player.skills.addExperience(skill, expGained!!)
         setAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, 0)
+        if (player.location.x in 2600..2640 && player.location.y in 3260..3290) finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 12)
     }
 
     override fun newInstance(player: Player?): Dialogue = LarryDialogue(player)

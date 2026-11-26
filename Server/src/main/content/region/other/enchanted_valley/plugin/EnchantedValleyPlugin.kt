@@ -1,5 +1,7 @@
 package content.region.other.enchanted_valley.plugin
 
+import content.data.Quests
+
 import content.data.skill.SkillingTool
 import core.api.*
 import core.game.interaction.IntType
@@ -186,7 +188,7 @@ class EnchantedValleyPlugin : InteractionListener {
                     visualize(this, -1, shared.consts.Graphics.WATER_SPLASH_68)
                     p.animate(Animation(1441, Animator.Priority.HIGH))
                     forceMove(p, p.location, p.location.transform(0, -1, 0), 0, 60, Direction.NORTH)
-                    sendChat(this, if (hasRequirement(p, Quests.SWAN_SONG, false))
+                    sendChat(this, if (hasRequirement(p, Quests.SWAN_SONG.questName, false))
                         "You killed da Sea Troll Queen - you die now!"
                     else "Fishies be mine, leave dem fishies!")
                 }

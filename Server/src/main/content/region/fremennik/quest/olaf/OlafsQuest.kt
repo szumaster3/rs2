@@ -1,16 +1,17 @@
 package content.region.fremennik.quest.olaf
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class OlafsQuest : Quest(Quests.OLAFS_QUEST, 137, 136, 1, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534, 0, 1, 80) {
+class OlafsQuest : Quest(Quests.OLAFS_QUEST) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -25,7 +26,7 @@ class OlafsQuest : Quest(Quests.OLAFS_QUEST, 137, 136, 1, Vars.VARBIT_QUEST_OLAF
             line(player, "40 Firemaking", line++, getStatLevel(player, Skills.FIREMAKING) >= 40)
             line(player, "</col>Good Agility would be an advantage.", line++)
             line(player, "</col>Must be able to defeat a level 100 monster.", line++)
-            line(player,     if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)
+            line(player,     if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)
             ) {
                 "---I need to have completed the Fremennik Trails Quest./--"
             } else {

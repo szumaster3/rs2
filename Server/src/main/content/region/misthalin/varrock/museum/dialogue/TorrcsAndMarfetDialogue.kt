@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.museum.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class TorrcsAndMarfetDialogue(player: Player? = null) : Dialogue(player) {
@@ -19,7 +20,7 @@ class TorrcsAndMarfetDialogue(player: Player? = null) : Dialogue(player) {
                 START_DIALOGUE -> npcl(FaceAnim.HALF_GUILTY, "Hello!").also { stage++ }
                 1 -> playerl(FaceAnim.HALF_GUILTY, "Hi, have you seen the Dig Site displays?").also { stage++ }
                 2 -> npcl(FaceAnim.HALF_GUILTY, "Yes, good aren't they! Have you done the quest?").also { stage++ }
-                3 -> if (!isQuestComplete(player, Quests.THE_DIG_SITE)) {
+                3 -> if (!isQuestComplete(player, Quests.THE_DIG_SITE.questName)) {
                     playerl(FaceAnim.HALF_GUILTY, "Not yet.").also { stage++ }
                 } else {
                     playerl(FaceAnim.HALF_GUILTY, "Yes, I did it all.").also { stage = 6 }
@@ -50,7 +51,7 @@ class TorrcsAndMarfetDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> playerl(FaceAnim.HALF_GUILTY, "Really? Tell me something I didn't know!").also { stage++ }
                 4 -> npcl(FaceAnim.HALF_GUILTY, "Well, did you know that Bob the Cat is... no, no... you'd never believe me anyway.").also { stage++ }
                 5 -> playerl(FaceAnim.HALF_GUILTY, "He's what? Tell me!").also { stage = END_DIALOGUE }
-                6 -> if (!isQuestComplete(player, Quests.A_TAIL_OF_TWO_CATS)) {
+                6 -> if (!isQuestComplete(player, Quests.A_TAIL_OF_TWO_CATS.questName)) {
                     npcl(FaceAnim.HALF_GUILTY, "No, no. Couldn't possibly ruin the surprise.").also { stage++ }
                 } else {
                     npcl(FaceAnim.HALF_GUILTY, "He's a very famous hero! Robert the Strong!").also { stage = 9 }

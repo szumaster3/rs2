@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Kringk dialogue.
@@ -21,7 +22,7 @@ class KringkDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         npc = NPC(NPCs.KRINGK_7058)
         when (stage) {
-            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
+            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT.questName)) {
                 playerl(FaceAnim.ASKING, "What's going on here?").also { stage++ }
             } else {
                 npcl(FaceAnim.CHILD_NORMAL, "I would offer haircut, but it hard to do style for puny human with puny head. Me know. You want wig intead? Me give you big-big discount!").also { stage = 5 }

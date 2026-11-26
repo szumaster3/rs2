@@ -3,6 +3,9 @@ package core.game.node.entity.player.link.quest
 import com.google.gson.JsonObject
 import core.cache.def.impl.VarpDefinition
 import core.api.log
+import core.api.getVarp
+import core.api.getVarbit
+import core.cache.def.impl.QuestDefinition
 import core.api.setVarbit
 import core.api.setVarp
 import core.game.node.entity.player.Player
@@ -19,6 +22,7 @@ class QuestRepository(private val player: Player) {
 
         @JvmStatic
         fun register(quest: Quest) {
+            check(QUESTS.values.none { it.index == quest.index }) { "Duplicate quest definition ${quest.index}" }
             QUESTS[quest.name] = quest
         }
 
@@ -57,9 +61,32 @@ class QuestRepository(private val player: Player) {
      */
     fun syncronizeTab(player: Player) {
         setVarp(player, 101, points)
+        setVarp(player, 904, QuestDefinition.loadAll().values.sumOf { it.questPoints })
 
         for (quest in QUESTS.values) {
-            val config = quest.getConfig(player, getStage(quest))
+            val stage = getStage(quest)
+            val definition = checkNotNull(quest.definition)
+            val progress = definition.varps + definition.varbits
+            // Shared/multi-variable quests require their existing explicit gameplay configuration.
+            val native = progress.singleOrNull()
+            val shared = native != null && QuestDefinition.loadAll().values.any { other ->
+                other.id != definition.id && (if (definition.varbits.isNotEmpty()) other.varbits else other.varps).any { it.variable == native.variable }
+            }
+            val custom = quest.javaClass.getMethod("getConfig", Player::class.java, Int::class.javaPrimitiveType!!).declaringClass != Quest::class.java
+            if (native != null && !shared && !custom) {
+                val bit = definition.varbits.isNotEmpty()
+                val current = if (bit) getVarbit(player, native.variable) else getVarp(player, native.variable)
+                val value = when {
+                    stage == 0 -> 0
+                    stage >= 100 -> maxOf(current, native.completed)
+                    current in native.started until native.completed -> current
+                    else -> native.started
+                }
+                if (bit) setVarbit(player, native.variable, value) else setVarp(player, native.variable, value)
+                quest.updateVarps(player)
+                continue
+            }
+            val config = quest.getConfig(player, stage)
 
             // {questVarpId, questVarbitId, valueToSet}
             if (config.size == 3) {
@@ -76,6 +103,8 @@ class QuestRepository(private val player: Player) {
 
             quest.updateVarps(player)
         }
+        // ql4_init registers this varp as the quest list refresh trigger.
+        setVarp(player, 1384, getVarp(player, 1384) xor 1)
     }
 
     /**
@@ -137,14 +166,6 @@ class QuestRepository(private val player: Player) {
         return total
     }
 
-    /**
-     * Finds a quest by its button ID.
-     */
-    fun forButtonId(buttonId: Int): Quest? {
-        return QUESTS.values.firstOrNull {
-            it.buttonId == buttonId
-        }
-    }
 
     /**
      * Finds a quest by its index.
@@ -166,7 +187,7 @@ class QuestRepository(private val player: Player) {
      * Checks whether a quest is complete.
      */
     fun isComplete(name: String): Boolean {
-        val quest = QUESTS[name]
+        val quest = getQuest(name)
 
         if (quest == null) {
             log(
@@ -182,7 +203,7 @@ class QuestRepository(private val player: Player) {
      * Checks whether a quest has been started.
      */
     fun hasStarted(name: String): Boolean {
-        val quest = QUESTS[name]
+        val quest = getQuest(name)
 
         if (quest == null) {
             log(
@@ -198,7 +219,7 @@ class QuestRepository(private val player: Player) {
      * Gets the stage of a quest by name.
      */
     fun getStage(name: String): Int {
-        val quest = QUESTS[name] ?: return 0
+        val quest = getQuest(name) ?: return 0
         return getStage(quest)
     }
 
@@ -219,6 +240,6 @@ class QuestRepository(private val player: Player) {
      * Gets a quest by name.
      */
     fun getQuest(name: String): Quest? {
-        return QUESTS[name]
+        return QUESTS[name] ?: QuestDefinition.forName(name)?.let { forIndex(it.id) }
     }
 }

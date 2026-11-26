@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.zogre.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import content.region.kandarin.yanille.quest.handsand.SandpitCutscene
@@ -27,9 +29,9 @@ class ZavisticRarveDialogues : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val p = player!!
         npc = NPC(NPCs.ZAVISTIC_RARVE_2059)
-        val questComplete = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS) == 100
-        val zogreProgress = isQuestInProgress(p, Quests.ZOGRE_FLESH_EATERS, 1, 99)
-        val canStartMiniQuest = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS) == 100 && isQuestComplete(player!!, Quests.THE_HAND_IN_THE_SAND)
+        val questComplete = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS.questName) == 100
+        val zogreProgress = isQuestInProgress(p, Quests.ZOGRE_FLESH_EATERS.questName, 1, 99)
+        val canStartMiniQuest = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS.questName) == 100 && isQuestComplete(player!!, Quests.THE_HAND_IN_THE_SAND.questName)
         val miniquestComplete = getVarbit(p, Vars.VARBIT_MINIQUEST_RETURNING_CLARENCE_PROGRESS_4054) == 1
         val hasMiniQuestDiaryItem = inInventory(p, Items.UNLOCKED_DIARY_11762)
         val hasBlackPrism = inInventory(p, Items.BLACK_PRISM_4808) && !getAttribute(p, ZogreUtils.TALK_ABOUT_BLACK_PRISM, false)
@@ -37,7 +39,7 @@ class ZavisticRarveDialogues : DialogueFile() {
         val usedTankard = inInventory(p, Items.DRAGON_INN_TANKARD_4811) && !getAttribute(p, ZogreUtils.TALK_ABOUT_TANKARD, false)
         val hasOrLostStrangePotion = getAttribute(p, ZogreUtils.TALK_WITH_ZAVISTIC_DONE, false)
         val saleBlackPrism = questComplete && inInventory(p, Items.BLACK_PRISM_4808)
-        val handProgress = getQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND)
+        val handProgress = getQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND.questName)
         val handVarbit = getVarbit(player!!, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
         val hasScryingOrb = inInventory(player!!, Items.MAGICAL_ORB_6950) || inBank(player!!, Items.MAGICAL_ORB_6950)
         val hasScryingOrbA = inInventory(player!!, Items.MAGICAL_ORB_A_6951) || inBank(player!!, Items.MAGICAL_ORB_A_6951)
@@ -45,7 +47,7 @@ class ZavisticRarveDialogues : DialogueFile() {
 
         when (stage) {
             START_DIALOGUE -> if(getAttribute(player!!, ZogreUtils.NPC_ACTIVE, false)) {
-                if (isQuestComplete(player!!, Quests.THE_HAND_IN_THE_SAND)) {
+                if (isQuestComplete(player!!, Quests.THE_HAND_IN_THE_SAND.questName)) {
                     npcl(FaceAnim.NEUTRAL, "What are you doing... Oh, it's you... sorry... didn't realise... what can I do for you?"). also { stage = 3 }
                 } else {
                     npcl(FaceAnim.NEUTRAL, "What are you doing ringing that bell?! Don't you think some of us have work to do?").also { stage = 1 }
@@ -211,7 +213,7 @@ class ZavisticRarveDialogues : DialogueFile() {
             15 -> npcl(FaceAnim.FRIENDLY, "Ooohh, no thanks required. It's I who should be thanking you my friend...your investigative mind has shown how vigilant we really should be for this type of evil use of the magical arts.").also { stage = 5 }
             16 -> if(!inInventory(player!!, Items.HAND_11763)) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage++ }
-            } else if(hasRequirement(player!!, Quests.BACK_TO_MY_ROOTS, false)) {
+            } else if(hasRequirement(player!!, Quests.BACK_TO_MY_ROOTS.questName, false)) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage = 41 }
             } else if(getAttribute(player!!,GameAttributes.RETURNING_CLARENCE_CHECKPOINT, false)) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage = 49 }
@@ -604,7 +606,7 @@ class ZavisticRarveDialogues : DialogueFile() {
             151 -> npcl(FaceAnim.HALF_ASKING, "Bert? Ahh yes, the sandman who seems to have been working very long hours recently. Let's see that hand...").also { stage++ }
             152 -> sendItemDialogue(player!!, Items.BEER_SOAKED_HAND_6946, "You hand it over.").also {
                 removeItem(player!!, Items.BEER_SOAKED_HAND_6946)
-                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND, 3)
+                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND.questName, 3)
                 stage++
             }
             153 -> npcl(FaceAnim.HALF_ASKING, "Oh my! This is most definitely Clarence, my most able student! You must find out who did this!").also { stage++ }
@@ -625,7 +627,7 @@ class ZavisticRarveDialogues : DialogueFile() {
                 } else {
                     sendItemDialogue(player!!, Items.MAGICAL_ORB_6950,"You exchange the scroll for the magical scrying orb. Perhaps Zavistic can give you even more of a hand to find the murderer?")
                     setVarbit(player!!, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 3, true)
-                    setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND, 7)
+                    setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND.questName, 7)
                     addItem(player!!, Items.MAGICAL_ORB_6950)
                     stage = END_DIALOGUE
                 }
@@ -661,7 +663,7 @@ class ZavisticRarveDialogues : DialogueFile() {
             174 -> npcl(FaceAnim.FRIENDLY, "It's ok, I saw the whole thing as the orb is connected via magic to me as I enchanted it.").also { stage++ }
             175 -> npcl(FaceAnim.HALF_THINKING, "I think this Sandy needs a lesson, please bring me 5 earth runes and a bucket of sand.").also { stage++ }
             176 -> playerl(FaceAnim.HAPPY, "Umm.. ok, I'll get you the 5 earth runes and bucket of sand.").also {
-                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND, 11)
+                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND.questName, 11)
                 stage = END_DIALOGUE
             }
             177 -> npcl(FaceAnim.THINKING, "Well, well...I think this Sandy needs a lesson, please bring me 5 earth runes and a bucket of sand.").also { stage++ }
@@ -671,14 +673,14 @@ class ZavisticRarveDialogues : DialogueFile() {
             181 -> {
                 end()
                 SandpitCutscene(player!!).start(true)
-                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND, 12)
+                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND.questName, 12)
             }
             182 -> playerl(FaceAnim.HALF_GUILTY, "Not yet no. I've been running around like a headless chicken, but I'll get to it!").also { stage = END_DIALOGUE }
             183 -> npcl(FaceAnim.HAPPY, "Alas poor Clarence. I knew him, ${player!!.username}.").also { stage++ }
             184 -> npcl(FaceAnim.FRIENDLY, "Thank you - we shall bury him today. I have sent word for the guards to arrest Sandy, so no one will ever see him again!").also { stage++ }
             185 -> {
                 end()
-                finishQuest(player!!, Quests.THE_HAND_IN_THE_SAND)
+                finishQuest(player!!, Quests.THE_HAND_IN_THE_SAND.questName)
             }
 
         }

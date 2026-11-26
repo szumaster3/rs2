@@ -1,5 +1,7 @@
 package content.region.asgarnia.mudskipper_point
 
+import content.data.Quests
+
 import content.global.skill.slayer.npc.MogreNPC
 import core.api.*
 import core.game.interaction.NodeUsageEvent
@@ -42,7 +44,7 @@ class FishingExplosiveHandler : UseWithHandler(Items.FISHING_EXPLOSIVE_6664, Ite
             return true
         }
 
-        if (event.usedItem.id == Items.SUPER_FISHING_EXPLOSIVE_12633 && !hasRequirement(player, Quests.KENNITHS_CONCERNS)) {
+        if (event.usedItem.id == Items.SUPER_FISHING_EXPLOSIVE_12633 && !hasRequirement(player, Quests.KENNITHS_CONCERNS.questName)) {
             sendMessage(player, "You must complete Kennith's Concerns to use this explosive.")
             return true
         }
@@ -66,7 +68,7 @@ class FishingExplosiveHandler : UseWithHandler(Items.FISHING_EXPLOSIVE_6664, Ite
                 mogre.sendChat(MESSAGES[RandomFunction.random(MESSAGES.size)])
                 HintIconManager.registerHintIcon(player, mogre)
 
-                if (event.usedItem.id == Items.SUPER_FISHING_EXPLOSIVE_12633 && hasRequirement(player, Quests.KENNITHS_CONCERNS)) {
+                if (event.usedItem.id == Items.SUPER_FISHING_EXPLOSIVE_12633 && hasRequirement(player, Quests.KENNITHS_CONCERNS.questName)) {
                     impact(mogre, 15, ImpactHandler.HitsplatType.NORMAL)
                 }
 

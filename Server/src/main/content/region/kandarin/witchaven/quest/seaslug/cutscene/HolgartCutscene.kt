@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug.cutscene
 
+import content.data.Quests
+
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
@@ -7,7 +9,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Regions
 
 /**
@@ -63,7 +64,7 @@ class HolgartCutscene(
 
             5 -> {
                 end()
-                setQuestStage(player, Quests.SEA_SLUG, 5)
+                setQuestStage(player, Quests.SEA_SLUG.questName, 5)
             }
         }
     }

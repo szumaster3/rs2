@@ -1,6 +1,7 @@
 package content.region.kandarin.east_ardougne.dialogue.market
 
 import content.global.skill.thieving.ThievingDefinition
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -113,11 +114,12 @@ class SilkMerchantDialogue(player: Player? = null) : Dialogue(player) {
         end()
         val amt = player.inventory.getAmount(silk)
         val remove = Item(silk.id, amt)
-        if (!player.inventory.containsItem(remove)) {
+        if (amt <= 0 || !player.inventory.containsItem(remove)) {
             return
         }
         if (player.inventory.remove(remove)) {
             player.inventory.add(Item(Items.COINS_995, price * amt))
+            if (price == 60) player.achievementDiaryManager.finishTask(player, DiaryType.ARDOUGNE, 0, 2)
         }
     }
 

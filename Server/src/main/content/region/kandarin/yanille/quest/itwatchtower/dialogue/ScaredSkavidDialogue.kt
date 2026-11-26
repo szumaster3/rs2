@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,7 +15,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Scared Skavid dialogue.
@@ -29,13 +30,13 @@ class ScaredSkavidDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(getQuestStage(player, Quests.WATCHTOWER) in 25..40) {
+        if(getQuestStage(player, Quests.WATCHTOWER.questName) in 25..40) {
             npcl(FaceAnim.OLD_DEFAULT, "Master, how are you doing learning our language?")
             stage = 18
             return true
         }
 
-        if(getQuestStage(player, Quests.WATCHTOWER) >= 45) {
+        if(getQuestStage(player, Quests.WATCHTOWER.questName) >= 45) {
             npc(FaceAnim.OLD_DEFAULT, "Master, my kinsmen tell me you have learned skavid.", "You should speak to the ad ones in their cave.")
             return true
         }
@@ -84,7 +85,7 @@ class ScaredSkavidDialogue(player: Player? = null) : Dialogue(player) {
                                 }
                                 4 -> {
                                     sendGraphics(86, ogreChieftain.location)
-                                    setQuestStage(player, Quests.WATCHTOWER, 25)
+                                    setQuestStage(player, Quests.WATCHTOWER.questName, 25)
                                     ogreChieftain.clear()
                                     npc(FaceAnim.OLD_NEUTRAL, "I cannot help you, but the others can.").also { stage = 15 }
                                     return true

@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.troll.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.hasAnItem
 import core.game.dialogue.DialogueFile
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Denulth (Troll stronghold) dialogue.
@@ -18,7 +19,7 @@ import shared.consts.Quests
 class DenulthTrollDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.TROLL_STRONGHOLD)) {
+        when (getQuestStage(player!!, Quests.TROLL_STRONGHOLD.questName)) {
             in 1..7 -> when (stage) {
                 START_DIALOGUE -> npcl(FaceAnim.FRIENDLY, "How are you getting on with rescuing Godric?").also { stage++ }
                 1 -> if (hasAnItem(player!!, Items.CLIMBING_BOOTS_3105).exists()) {

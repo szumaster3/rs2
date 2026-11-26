@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.priest.plugin
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.inEquipment
 import core.api.inInventory
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Restless ghost dialogue.
@@ -34,17 +35,17 @@ class RestlessGhostDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 1
                     return true
                 }
-                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST) == 20) {
+                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST.questName) == 20) {
                     npc(FaceAnim.HALF_GUILTY, "Not very good actually.")
                     stage = 18
                     return true
                 }
-                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST) == 30) {
+                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST.questName) == 30) {
                     npc(FaceAnim.HALF_GUILTY, "How are you doing finding my skull?")
                     stage = 32
                     return true
                 }
-                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST) == 40) {
+                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST.questName) == 40) {
                     npc(FaceAnim.HALF_GUILTY, "How are you doing finding my skull?").also { stage = 35 }
                 } else {
                     npc("Fine, thanks.").also { stage = END_DIALOGUE }
@@ -89,7 +90,7 @@ class RestlessGhostDialogue(player: Player? = null) : Dialogue(player) {
             27 -> player(FaceAnim.HALF_GUILTY, "Do you know where this warlock might be now?").also { stage++ }
             28 -> npc(FaceAnim.HALF_GUILTY, "I think it was one of the warlocks who lives in the big", "tower by the sea south-west from here.").also { stage++ }
             29 -> player(FaceAnim.HALF_GUILTY, "Ok. I will try and get the skull back for you, then you", "can rest in peace.").also {
-                setQuestStage(player, Quests.THE_RESTLESS_GHOST, 30)
+                setQuestStage(player, Quests.THE_RESTLESS_GHOST.questName, 30)
                 stage++
             }
             30 -> npc(FaceAnim.HAPPY, "Ooh, thank you. That would be such a great relief!").also { stage++ }

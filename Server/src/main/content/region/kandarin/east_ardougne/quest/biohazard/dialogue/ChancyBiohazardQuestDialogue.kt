@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Chancy dialogue.
@@ -27,7 +28,7 @@ class ChancyBiohazardQuestDialogue(player: Player? = null) : Dialogue(player) {
 
         val delivered = getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false) ||
             getAttribute(player, GameAttributes.FIRST_VIAL_WRONG, false)
-        val questStage = getQuestStage(player, Quests.BIOHAZARD)
+        val questStage = getQuestStage(player, Quests.BIOHAZARD.questName)
         val inRimmington = npc.id == NPCs.CHANCY_338
 
         when {

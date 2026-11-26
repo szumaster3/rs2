@@ -1,5 +1,7 @@
 package content.region.asgarnia.goblin_village.quest.gobdip.cutscene;
 
+import content.data.Quests;
+
 import content.region.asgarnia.goblin_village.quest.gobdip.dialogue.GrubFoot;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
@@ -27,7 +29,6 @@ import core.net.packet.out.PacketContext.CameraContext;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import shared.consts.NPCs;
-import shared.consts.Quests;
 
 import static core.api.ContentAPIKt.*;
 
@@ -55,7 +56,7 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
 
     @Override
     public boolean start(final Player player, final boolean login, Object... args) {
-        Quest quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY);
+        Quest quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY.getQuestName());
         final NPC grubfoot = NPC.create(quest.getStage(player) == 10 ? NPCs.GENERAL_WARTFACE_4495 : quest.getStage(player) == 20 ? 4497 : quest.getStage(player) == 30 ? 4498 : 4496, getBase().transform(10, 55, 0));
         grubfoot.setWalks(false);
         npcs.add(grubfoot);
@@ -181,9 +182,9 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
             type = GrubFoot.forConfig(player);
             dialIndex = RandomFunction.random(DIALOGUES.length);
             other = Repository.findNPC(npc.getId() == NPCs.GENERAL_WARTFACE_4494 ? NPCs.GENERAL_BENTNOZE_4493 : NPCs.GENERAL_WARTFACE_4494);
-            quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY);
+            quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY.getQuestName());
 
-            if (player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 43) {
+            if (player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE.getQuestName()).getStage(player) == 43) {
                 player("Have you heard of the Dorgeshuun?");
                 stage = 5000;
                 return true;
@@ -368,7 +369,7 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
                         unlockEmote(player, Emotes.GOBLIN_BOW);
                         unlockEmote(player, Emotes.GOBLIN_SALUTE);
                         setVarbit(player, 532, 7, true);
-                        player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).setStage(player, 44);
+                        player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE.getQuestName()).setStage(player, 44);
                         stage++;
                         break;
                     case 5055:

@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.quest.ahoy
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,11 +10,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class GhostsAhoy : Quest(Quests.GHOSTS_AHOY, 68, 67, 2, Vars.VARBIT_QUEST_GHOST_AHOY_PROGRESS_217, 0, 1, 8) {
+class GhostsAhoy : Quest(Quests.GHOSTS_AHOY) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -44,8 +45,8 @@ class GhostsAhoy : Quest(Quests.GHOSTS_AHOY, 68, 67, 2, Vars.VARBIT_QUEST_GHOST_
 
             line(player, "I must also have completed the following quests:", line++, false)
 
-            line(player, questText(Quests.PRIEST_IN_PERIL, isQuestComplete(player, Quests.PRIEST_IN_PERIL)), line++, false)
-            line(player, questText(Quests.THE_RESTLESS_GHOST, isQuestComplete(player, Quests.THE_RESTLESS_GHOST)), line++, false)
+            line(player, questText(Quests.PRIEST_IN_PERIL.questName, isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName)), line++, false)
+            line(player, questText(Quests.THE_RESTLESS_GHOST.questName, isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName)), line++, false)
 
             line++
         }

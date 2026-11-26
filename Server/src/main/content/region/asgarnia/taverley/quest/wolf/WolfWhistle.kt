@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.quest.wolf
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -7,14 +9,13 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * The type Wolf whistle.
  */
 @Initializable
-class WolfWhistle : Quest(Quests.WOLF_WHISTLE, 146, 145, 1) {
+class WolfWhistle : Quest(Quests.WOLF_WHISTLE) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

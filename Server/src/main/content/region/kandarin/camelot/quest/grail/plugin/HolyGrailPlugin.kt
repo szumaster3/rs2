@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.grail.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.camelot.quest.grail.HolyGrail
 import content.region.kandarin.camelot.quest.grail.dialogue.*
 import core.api.*
@@ -20,7 +22,6 @@ import core.game.world.map.zone.ZoneBorders
 import core.tools.secondsToTicks
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Handles all interactions and logic related to the Holy Grail quest.
@@ -106,7 +107,7 @@ class HolyGrailPlugin : InteractionListener {
          */
 
         on(Items.MAGIC_GOLD_FEATHER_18, IntType.ITEM, "blow-on") { player, _ ->
-            if (getQuestStage(player, Quests.HOLY_GRAIL) != 40) {
+            if (getQuestStage(player, Quests.HOLY_GRAIL.questName) != 40) {
                 sendMessage(player, "Nothing interesting happens.")
                 return@on true
             }
@@ -144,7 +145,7 @@ class HolyGrailPlugin : InteractionListener {
             var destLoc = Location.create(2806, 4715, 0)
 
             if (zoneCanTeleport.insideBorder(player)) {
-                if (getQuestStage(player, Quests.HOLY_GRAIL) >= 50) {
+                if (getQuestStage(player, Quests.HOLY_GRAIL.questName) >= 50) {
                     destLoc = Location.create(2678, 4715, 0)
                 }
             } else if (zoneIsDiseased.insideBorder(player) || zoneIsHealthy.insideBorder(player)) {
@@ -171,7 +172,7 @@ class HolyGrailPlugin : InteractionListener {
                 return@on true
             }
 
-            if (getQuestStage(player, Quests.HOLY_GRAIL) <= 40) {
+            if (getQuestStage(player, Quests.HOLY_GRAIL.questName) <= 40) {
                 sendDialogueLines(
                     player,
                     "You feel that the Grail shouldn't be moved.",
@@ -235,11 +236,11 @@ class HolyGrailPlugin : InteractionListener {
          */
 
         on(shared.consts.Scenery.DOOR_24, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.HOLY_GRAIL) == 0) {
+            if (getQuestStage(player, Quests.HOLY_GRAIL.questName) == 0) {
                 sendMessage(player, "The door won't open.")
                 return@on false
             }
-            if (getQuestStage(player, Quests.HOLY_GRAIL) >= 10) {
+            if (getQuestStage(player, Quests.HOLY_GRAIL.questName) >= 10) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
@@ -258,7 +259,7 @@ class HolyGrailPlugin : InteractionListener {
             val moveToY = if (player.location.y <= 3361) 3362 else 3361
             DoorActionHandler.handleAutowalkDoor(player, door as Scenery, Location.create(3106, moveToY, 2))
 
-            if (getQuestStage(player, Quests.HOLY_GRAIL) == 30 && player.hasItem(Item(Items.HOLY_TABLE_NAPKIN_15, 1))) {
+            if (getQuestStage(player, Quests.HOLY_GRAIL.questName) == 30 && player.hasItem(Item(Items.HOLY_TABLE_NAPKIN_15, 1))) {
                 GroundItemManager.create(
                     GroundItem(
                         Item(Items.MAGIC_WHISTLE_16, 1),

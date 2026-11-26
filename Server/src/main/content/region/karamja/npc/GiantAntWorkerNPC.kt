@@ -1,5 +1,7 @@
 package content.region.karamja.npc
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -9,7 +11,6 @@ import core.game.node.item.Item
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Regions
 
 /**
@@ -39,8 +40,8 @@ class GiantAntWorkerNPC : NPCBehavior(NPCs.GIANT_ANT_WORKER_6379, NPCs.GIANT_ANT
         if (killer !is Player) return
 
         if (self.location.regionId != Regions.JADE_VINE_MAZE_11566) return
-        if (!hasRequirement(killer, Quests.THE_HAND_IN_THE_SAND, false)) return
-//      if(isQuestComplete(killer, Quests.THE_HAND_IN_THE_SAND) && getAttribute(killer, GameAttributes.RETURNING_CLARENCE_COMPLETE, false))  return
+        if (!hasRequirement(killer, Quests.THE_HAND_IN_THE_SAND.questName, false)) return
+//      if(isQuestComplete(killer, Quests.THE_HAND_IN_THE_SAND.questName) && getAttribute(killer, GameAttributes.RETURNING_CLARENCE_COMPLETE, false))  return
         for (part in BODY_PARTS) {
             val hasPart = killer.inventory.contains(part, 1) || killer.bank.contains(part, 1)
             if (!hasPart && RandomFunction.roll(16)) {

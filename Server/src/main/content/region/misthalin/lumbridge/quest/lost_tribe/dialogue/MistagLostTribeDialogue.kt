@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.lumbridge.quest.lost_tribe.cutscene.LostTribeCutscene
 import core.api.setQuestStage
 import core.game.component.Component
@@ -7,7 +9,6 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import shared.consts.Quests
 
 class MistagLostTribeDialogue(
     val isGreeting: Boolean,
@@ -54,7 +55,7 @@ class MistagLostTribeDialogue(
                         "people that we want to make peace.",
                     ).also {
                         stage = END_DIALOGUE
-                        setQuestStage(player!!, Quests.THE_LOST_TRIBE, 46)
+                        setQuestStage(player!!, Quests.THE_LOST_TRIBE.questName, 46)
                     }
             }
         } else {
@@ -93,7 +94,7 @@ class MistagLostTribeDialogue(
                             "people that we want to make peace.",
                         ).also {
                             stage = END_DIALOGUE
-                            setQuestStage(player!!, Quests.THE_LOST_TRIBE, 46)
+                            setQuestStage(player!!, Quests.THE_LOST_TRIBE.questName, 46)
                         }
                 }
             }

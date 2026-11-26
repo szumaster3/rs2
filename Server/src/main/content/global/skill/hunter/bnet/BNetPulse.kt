@@ -1,5 +1,7 @@
 package content.global.skill.hunter.bnet
 
+import content.data.Quests
+
 import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.combat.DeathTask
@@ -13,7 +15,6 @@ import core.tools.RandomFunction
 import core.tools.StringUtils
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Sounds
 import kotlin.random.Random
 
@@ -33,7 +34,7 @@ class BNetPulse(player: Player?, node: NPC?, private val type: BNetNode) : Skill
             sendMessage(player, "You need a Hunter level of at least " + type.level + " in order to do that.")
             return false
         }
-        if (!hasRequirement(player, Quests.ROCKING_OUT, false) &&
+        if (!hasRequirement(player, Quests.ROCKING_OUT.questName, false) &&
             (node!!.asNpc().id == NPCs.PIRATE_IMPLING_7845 || node!!.asNpc().id == NPCs.PIRATE_IMPLING_7846)
         ) {
             sendMessage(player, "You can't catch pirate implings until you have completed Rocking Out.")

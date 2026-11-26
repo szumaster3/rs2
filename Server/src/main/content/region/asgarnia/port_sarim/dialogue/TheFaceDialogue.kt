@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.sendDialogue
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Face dialogue.
@@ -30,7 +31,7 @@ class TheFaceDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> if (!hasRequirement(player, Quests.RATCATCHERS)) {
+            0 -> if (!hasRequirement(player, Quests.RATCATCHERS.questName)) {
                 sendDialogue(player!!, "She looks through you as if you don't exist.").also { stage = END_DIALOGUE }
             } else {
                 npcl(FaceAnim.FRIENDLY, "Oh it's you again.").also { stage++ }

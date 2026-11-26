@@ -1,5 +1,7 @@
 package content.global.skill.fletching
 
+import content.data.Quests
+
 import content.global.skill.slayer.SlayerManager.Companion.getInstance
 import core.api.*
 import core.game.dialogue.SkillDialogueHandler
@@ -1320,7 +1322,7 @@ class FletchingListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
 
-                            if (!isQuestComplete(player, Quests.THE_TOURIST_TRAP)) {
+                            if (!isQuestComplete(player, Quests.THE_TOURIST_TRAP.questName)) {
                                 sendDialogue(player, "You need to have completed Tourist Trap to fletch darts.")
                                 return@queueScript stopExecuting(player)
                             }

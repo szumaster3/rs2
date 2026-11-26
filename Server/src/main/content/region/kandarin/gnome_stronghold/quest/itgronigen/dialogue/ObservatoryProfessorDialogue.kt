@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.itgronigen.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -16,7 +18,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Observatory Professor dialogue.
@@ -29,7 +30,7 @@ class ObservatoryProfessorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, Quests.OBSERVATORY_QUEST)) {
+        if (!isQuestComplete(player, Quests.OBSERVATORY_QUEST.questName)) {
             setTitle(player, 2)
             sendOptions(player, "What would you like to talk about?", "Talk about the Observatory Quest.", "Talk about Treasure Trails.").also { stage = 4 }
         } else {
@@ -49,7 +50,7 @@ class ObservatoryProfessorDialogue(player: Player? = null) : Dialogue(player) {
             2 -> npcl(FaceAnim.NEUTRAL, "Fair enough. Not everyone is interested in this place, I suppose.").also { stage++ }
             3 -> sendDialogue(player, "The professor carries on with his studies.").also { stage = 21 }
             4 -> when (buttonId) {
-                1 -> if (getQuestStage(player, Quests.OBSERVATORY_QUEST) < 100) {
+                1 -> if (getQuestStage(player, Quests.OBSERVATORY_QUEST.questName) < 100) {
                     end().also { openDialogue(player, ProfessorDialogueFile()) }
                 } else {
                     npcl(FaceAnim.ASKING, "Hello, friend. Welcome back. Thanks for all your help with the telescope. What can I do for you?").also { stage++ }
@@ -111,13 +112,13 @@ private class ProfessorDialogueFile : DialogueFile() {
         npc = NPC(NPCs.OBSERVATORY_PROFESSOR_488)
         when (stage) {
             0 -> when {
-                getQuestStage(player!!, Quests.OBSERVATORY_QUEST) in 2..3 -> player("Hi again!").also { stage = 40 }
-                getQuestStage(player!!, Quests.OBSERVATORY_QUEST) in 4..5 -> npcl("The traveller returns!").also { stage = 48 }
-                getQuestStage(player!!, Quests.OBSERVATORY_QUEST) in 7..8 -> npcl("How are you getting on finding me some molten glass?").also { stage = 61 }
-                getQuestStage(player!!, Quests.OBSERVATORY_QUEST) in 9..10 -> npcl("Did you bring me the mould?").also { stage = 72 }
-                getQuestStage(player!!, Quests.OBSERVATORY_QUEST) == 11 -> npc("Is the lens finished?").also { stage = 82 }
-                getQuestStage(player!!, Quests.OBSERVATORY_QUEST) == 13 -> npc("Hello, friend.").also { stage = 92 }
-                getQuestStage(player!!, Quests.OBSERVATORY_QUEST) == 14 -> npc("Hello, friend.").also { stage = 94 }
+                getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName) in 2..3 -> player("Hi again!").also { stage = 40 }
+                getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName) in 4..5 -> npcl("The traveller returns!").also { stage = 48 }
+                getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName) in 7..8 -> npcl("How are you getting on finding me some molten glass?").also { stage = 61 }
+                getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName) in 9..10 -> npcl("Did you bring me the mould?").also { stage = 72 }
+                getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName) == 11 -> npc("Is the lens finished?").also { stage = 82 }
+                getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName) == 13 -> npc("Hello, friend.").also { stage = 92 }
+                getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName) == 14 -> npc("Hello, friend.").also { stage = 94 }
                 else -> player("Hi, I was...").also { stage++ }
             }
             1 -> npcl(FaceAnim.FRIENDLY, "Welcome to the magnificent wonder of the Observatory, where wonder is all around you, where the stars can be clutched from the heavens!").also { stage++ }
@@ -163,7 +164,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             34 -> playerl(FaceAnim.HALF_GUILTY, "Okay, I'll be right back.").also { stage++ }
             35 -> {
                 end()
-                setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 2)
+                setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 2)
             }
             40 -> npcl(FaceAnim.HAPPY, "It's my helping hand, back again.").also { stage++ }
             41 -> npcl(FaceAnim.ASKING, "Do you have the planks yet?").also { stage++ }
@@ -185,7 +186,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             46 -> npcl(FaceAnim.FRIENDLY, "Okay, okay, ask me if you need any help, ${player!!.username}.").also { stage++ }
             47 -> {
                 end()
-                setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 4)
+                setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 4)
             }
             48 -> player("Still working hard?").also { stage++ }
             49 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Some of us are.").also { stage++ }
@@ -212,7 +213,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             59 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Calm down old man, I heard. ${player!!.username}, I'm here if you need any help.").also { stage++ }
             60 -> npcl(FaceAnim.NEUTRAL, "Thank you. Wait a minute, who are you calling 'old'?").also {
                 end()
-                setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 6)
+                setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 6)
             }
             61 -> if (!inInventory(player!!, Items.MOLTEN_GLASS_1775)) {
                 player("Still working on it.").also { stage++ }
@@ -237,7 +238,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             70 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "What have I done to deserve this?").also { stage++ }
             71 -> {
                 end()
-                setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 8)
+                setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 8)
             }
             72 -> if (!inInventory(player!!, Items.LENS_MOULD_602)) {
                 player("Still looking for it.").also { stage++ }
@@ -264,7 +265,7 @@ private class ProfessorDialogueFile : DialogueFile() {
                         "The professor gives you back the molten glass.",
                     )
                     addItemOrDrop(player!!, Items.MOLTEN_GLASS_1775)
-                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 11)
+                    setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 11)
                 }
             }
             82 -> if (!inInventory(player!!, Items.OBSERVATORY_LENS_603)) {
@@ -292,7 +293,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             91 -> {
                 end()
                 setAttribute(player!!, GameAttributes.OBSERVATORY_CHEST_FAIL_COUNTER, 0)
-                setQuestStage(player!!, Quests.OBSERVATORY_QUEST, 12)
+                setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 12)
             }
             92 -> player("Hi, this really is impressive.").also { stage++ }
             93 -> npc("Certainly is. Please, take a look through the telescope", "and tell me what you see.").also { stage = END_DIALOGUE }
@@ -301,7 +302,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             96 -> player("it was...").also { stage++ }
             97 -> {
                 end()
-                if (isQuestComplete(player!!, Quests.OBSERVATORY_QUEST)) {
+                if (isQuestComplete(player!!, Quests.OBSERVATORY_QUEST.questName)) {
                     return
                 }
                 openDialogue(player!!, ProfessorConstellationsDialogue())
@@ -453,7 +454,7 @@ private class ProfessorConstellationsDialogue : DialogueFile() {
                 }
                 end()
                 removeAttribute(player!!, GameAttributes.OBSERVATORY_CONSTELLATION)
-                finishQuest(player!!, Quests.OBSERVATORY_QUEST)
+                finishQuest(player!!, Quests.OBSERVATORY_QUEST.questName)
             }
 
         }

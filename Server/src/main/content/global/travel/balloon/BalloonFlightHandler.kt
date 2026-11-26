@@ -1,5 +1,7 @@
 package content.global.travel.balloon
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.isQuestComplete
 import core.api.openDialogue
@@ -8,7 +10,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import shared.consts.Components
-import shared.consts.Quests
 import shared.consts.Scenery
 
 /**
@@ -89,8 +90,8 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
          */
 
         on(ASSISTANT_NPC_IDS + 5049, IntType.NPC, "Fly") { player, node ->
-            if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY)) {
-                sendMessage(player, "You must complete ${Quests.ENLIGHTENED_JOURNEY} before you can use it.")
+            if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY.questName)) {
+                sendMessage(player, "You must complete ${Quests.ENLIGHTENED_JOURNEY.questName} before you can use it.")
                 return@on true
             }
 

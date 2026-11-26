@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult.npc
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.hazeelcult.plugin.HazeelCultPlugin
 import core.api.isQuestInProgress
 import core.api.produceGroundItem
@@ -10,7 +12,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class AlomoneNPC(
@@ -32,7 +33,7 @@ class AlomoneNPC(
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
-            if (isQuestInProgress(killer, Quests.HAZEEL_CULT, 3, 4)) {
+            if (isQuestInProgress(killer, Quests.HAZEEL_CULT.questName, 3, 4)) {
                 produceGroundItem(killer, Items.CARNILLEAN_ARMOUR_2405, 1, this.location)
             }
             super.finalizeDeath(killer)

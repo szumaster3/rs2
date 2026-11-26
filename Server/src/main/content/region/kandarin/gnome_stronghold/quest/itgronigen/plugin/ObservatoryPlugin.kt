@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.itgronigen.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.gnome_stronghold.quest.itgronigen.cutscene.ObservatoryCutscene
 import content.region.kandarin.gnome_stronghold.quest.itgronigen.dialogue.ObservatoryAssistantDialogue
@@ -57,7 +59,7 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(DUNGEON_STAIRS_UP, IntType.SCENERY, "climb up") { player, node ->
-            val questStage = getQuestStage(player, Quests.OBSERVATORY_QUEST)
+            val questStage = getQuestStage(player, Quests.OBSERVATORY_QUEST.questName)
 
             if (node.location.x == 2335 && node.location.y == 9351 && questStage in 12..13) {
                 ObservatoryCutscene(player).start()
@@ -90,7 +92,7 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(KEY_CHEST, IntType.SCENERY, "open") { player, node ->
-            if (isQuestComplete(player, Quests.OBSERVATORY_QUEST)) {
+            if (isQuestComplete(player, Quests.OBSERVATORY_QUEST.questName)) {
                 sendMessage(player, "It looks like this chest has already been looted.")
                 return@on true
             }
@@ -263,7 +265,7 @@ class ObservatoryPlugin : InteractionListener {
             playAudio(player, 3804)
             runTask(player, telescopeAnim.duration) {
                 openInterface(player, Components.TELESCOPE_552)
-                setQuestStage(player, Quests.OBSERVATORY_QUEST, 14)
+                setQuestStage(player, Quests.OBSERVATORY_QUEST.questName, 14)
             }
             return@on true
         }

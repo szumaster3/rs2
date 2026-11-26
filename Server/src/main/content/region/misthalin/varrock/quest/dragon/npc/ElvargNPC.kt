@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.npc
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
 import core.api.*
 import core.game.node.entity.Entity
@@ -26,7 +28,6 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 import kotlin.math.ceil
 
 class ElvargNPC : AbstractNPC {
@@ -105,14 +106,14 @@ class ElvargNPC : AbstractNPC {
             return super.isAttackable(entity, style, message)
         }
         val player = entity.asPlayer()
-        if (getQuestStage(player, Quests.DRAGON_SLAYER) == 40 && (inInventory(player, DragonSlayer.ELVARG_HEAD.id))) {
+        if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) == 40 && (inInventory(player, DragonSlayer.ELVARG_HEAD.id))) {
             if (message) {
                 sendMessage(player, "You have already slain the dragon. Now you just need to return to Oziach for")
                 sendMessage(player, "your reward!")
             }
             return false
         }
-        if (getQuestStage(player, Quests.DRAGON_SLAYER) > 40) {
+        if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) > 40) {
             if (message) {
                 sendMessage(player, "You have already slain Elvarg.")
             }

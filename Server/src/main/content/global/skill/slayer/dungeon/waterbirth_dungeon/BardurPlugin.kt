@@ -1,5 +1,7 @@
 package content.global.skill.slayer.dungeon.waterbirth_dungeon
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -17,7 +19,6 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class BardurPlugin : InteractionListener {
 
@@ -36,7 +37,7 @@ class BardurPlugin : InteractionListener {
                 return@onUseWith false
             }
 
-            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 sendNPCDialogue(player, NPCs.BARDUR_2879, "I do not trust you outerlander, I will not accept your gifts, no matter what your intention...")
             } else {
                 npc.impactHandler.disabledTicks = 60
@@ -59,7 +60,7 @@ class BardurPlugin : InteractionListener {
 
         override fun open(vararg args: Any?): Boolean {
             npc = args[0] as NPC
-            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 npcl(FaceAnim.ANNOYED, "Ah! Outlander! Do not interrupt me in my business! I must cull these fiends!")
                 return true
             }

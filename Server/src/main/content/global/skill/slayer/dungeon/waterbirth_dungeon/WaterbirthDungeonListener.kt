@@ -1,12 +1,13 @@
 package content.global.skill.slayer.dungeon.waterbirth_dungeon
 
+import content.data.Quests
+
 import core.api.*
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.warning.WarningManager
 import core.game.node.entity.player.link.warning.WarningType
 import core.game.world.map.Location
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class WaterbirthDungeonListener : InteractionListener {
@@ -96,7 +97,7 @@ class WaterbirthDungeonListener : InteractionListener {
          */
 
         on(Scenery.LADDER_10217, SCENERY, "climb-up") { player, _ ->
-            if (isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
+            if (isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP.questName)) {
                 ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location(1957, 4373, 1))
             } else {
                 sendMessage(player, "You need to have completed Horror from the Deep in order to do this.")

@@ -1,16 +1,17 @@
 package content.region.kandarin.seers_village.quest.murder
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class MurderMystery : Quest(Quests.MURDER_MYSTERY, 93, 92, 3, Vars.VARP_QUEST_MURDER_MYSTERY_PROGRESS_192, 0, 1, 2) {
+class MurderMystery : Quest(Quests.MURDER_MYSTERY) {
 
     companion object {
         const val attributeRandomMurderer =
@@ -69,7 +70,7 @@ class MurderMystery : Quest(Quests.MURDER_MYSTERY, 93, 92, 3, Vars.VARP_QUEST_MU
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, Quests.MURDER_MYSTERY) > 0
+        var started = getQuestStage(player, Quests.MURDER_MYSTERY.questName) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to one of the !!Guards?? at", line++, false)

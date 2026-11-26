@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.scorpcatcher.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.seers_village.quest.scorpcatcher.plugin.ScorpionCatcherPlugin
 import core.api.*
@@ -10,7 +12,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Seer's dialogue extension for [ScorpionCatcherPlugin] quest.
@@ -65,7 +66,7 @@ class SeerMirrorDialogue : DialogueFile() {
             12 -> {
                 end()
                 removeAttribute(player!!, ScorpionCatcherPlugin.ATTRIBUTE_MIRROR)
-                setQuestStage(player!!, Quests.SCORPION_CATCHER, 10)
+                setQuestStage(player!!, Quests.SCORPION_CATCHER.questName, 10)
             }
             13 -> npcl(FaceAnim.HALF_ASKING, "Do you need to locate any particular scorpion? Scorpions are a creature somewhat in abundance.").also { stage++ }
             14 -> playerl(FaceAnim.FRIENDLY, "I'm looking for some lesser Kharid scorpions. They belong to Thormac the sorcerer.").also { stage = 4 }

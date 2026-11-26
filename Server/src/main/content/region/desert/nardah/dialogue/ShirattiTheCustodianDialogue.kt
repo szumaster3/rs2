@@ -1,10 +1,11 @@
 package content.region.desert.nardah.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Shiratti The Custodian dialogue.
@@ -13,7 +14,7 @@ class ShirattiTheCustodianDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> if (!hasRequirement(player!!, Quests.SPIRITS_OF_THE_ELID, false)) {
+            0 -> if (!hasRequirement(player!!, Quests.SPIRITS_OF_THE_ELID.questName, false)) {
                 options("Good day to you.", "What is this building?")
             } else {
                 npcl(FaceAnim.FRIENDLY, "Thanks for returning the statuette. You have freed us of our curse. May you forever be considered a friend of Elidinis and her followers.").also { stage = END_DIALOGUE }

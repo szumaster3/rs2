@@ -1,5 +1,7 @@
 package content.region.misthalin.dig_site.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.dig_site.quest.itexam.TheDigSite
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Examiner dialogue.
@@ -34,7 +35,7 @@ class ExaminerDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             START_DIALOGUE -> {
-                stage = when (getQuestStage(player!!, Quests.THE_DIG_SITE)) {
+                stage = when (getQuestStage(player!!, Quests.THE_DIG_SITE.questName)) {
                     100 -> 900
                     in 6..12 -> 10
                     5 -> 100
@@ -440,8 +441,8 @@ class ExaminerDialogueFile : DialogueFile() {
             }
 
             166 -> {
-                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 5) {
-                    setQuestStage(player!!, Quests.THE_DIG_SITE, 6)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 5) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE.questName, 6)
                 }
                 openInterface(player!!, 444)
                 sendString(player!!, player!!.username, 444, 5)
@@ -766,8 +767,8 @@ class ExaminerDialogueFile : DialogueFile() {
             }
 
             264 -> {
-                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 4) {
-                    setQuestStage(player!!, Quests.THE_DIG_SITE, 5)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 4) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE.questName, 5)
                 }
                 openInterface(player!!, 441)
                 sendString(player!!, player!!.username, 441, 5)
@@ -777,10 +778,10 @@ class ExaminerDialogueFile : DialogueFile() {
             // Initial letter and level 1 exam.
             300 -> {
                 stage = when {
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 2 &&
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 2 &&
                             !inInventory(player!!, Items.SEALED_LETTER_683) -> 301
 
-                    else -> getQuestStage(player!!, Quests.THE_DIG_SITE)
+                    else -> getQuestStage(player!!, Quests.THE_DIG_SITE.questName)
                 }
             }
 
@@ -873,8 +874,8 @@ class ExaminerDialogueFile : DialogueFile() {
                     removeItem(player!!, Items.SEALED_LETTER_683)
                 }
 
-                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 2) {
-                    setQuestStage(player!!, Quests.THE_DIG_SITE, 3)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 2) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE.questName, 3)
                 }
                 stage = 323
             }
@@ -1171,8 +1172,8 @@ class ExaminerDialogueFile : DialogueFile() {
             }
 
             554 -> {
-                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 3) {
-                    setQuestStage(player!!, Quests.THE_DIG_SITE, 4)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE.questName, 4)
                 }
                 openInterface(player!!, 440)
                 sendString(player!!, player!!.username, 440, 5)
@@ -1289,8 +1290,8 @@ class ExaminerDialogueFile : DialogueFile() {
             }
 
             616 -> {
-                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 0) {
-                    setQuestStage(player!!, Quests.THE_DIG_SITE, 1)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 0) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE.questName, 1)
                 }
                 endFile()
             }

@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.interaction.Option
@@ -14,7 +16,6 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import core.plugin.Plugin
-import shared.consts.Quests
 
 class MiningCampZone : MapZone("mining camp", true), Plugin<Any> {
 
@@ -64,11 +65,11 @@ class MiningCampZone : MapZone("mining camp", true), Plugin<Any> {
         if (p.getAttribute("ana-delay", 0) > ticks) {
             return false
         }
-        if (getQuestStage(p, Quests.THE_TOURIST_TRAP) in 61..94 && p.inventory.containsItem(TouristTrap.ANNA_BARREL)) {
+        if (getQuestStage(p, Quests.THE_TOURIST_TRAP.questName) in 61..94 && p.inventory.containsItem(TouristTrap.ANNA_BARREL)) {
             p.inventory.remove(TouristTrap.ANNA_BARREL)
             p.lock(5)
             TouristTrap.addConfig(p, (1 shl 4))
-            setQuestStage(p,Quests.THE_TOURIST_TRAP,61)
+            setQuestStage(p,Quests.THE_TOURIST_TRAP.questName,61)
             p.properties.teleportLocation = Location.create(3285, 3034, 0)
             p.packetDispatch.sendMessage("The guards spot anna and throw you in jail.")
             return true

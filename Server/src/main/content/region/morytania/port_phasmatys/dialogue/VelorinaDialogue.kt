@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.VelorinaAhoyDialogue
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.*
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Velorina dialogue.
@@ -30,7 +31,7 @@ class VelorinaDialogue(player: Player? = null) : Dialogue(player) {
 
         // Handling quest completion and dialogue options.
         when {
-            isQuestComplete(player, Quests.GHOSTS_AHOY) -> {
+            isQuestComplete(player, Quests.GHOSTS_AHOY.questName) -> {
                 options(
                     "I thought you were going to pass over to the next world.",
                     "Can I have another Ectophial?",
@@ -38,7 +39,7 @@ class VelorinaDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             // If the quest is not complete.
-            !isQuestComplete(player, Quests.GHOSTS_AHOY) -> {
+            !isQuestComplete(player, Quests.GHOSTS_AHOY.questName) -> {
                 openDialogue(player, VelorinaAhoyDialogue())
             }
 

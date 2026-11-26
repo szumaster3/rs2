@@ -1,5 +1,7 @@
 package content.global.plugins.`object`
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -7,7 +9,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.tools.Log
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class TotemPoleOptionPlugin : InteractionListener {
@@ -19,7 +20,7 @@ class TotemPoleOptionPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, (combatBracelets + skillsNecklaces), Scenery.TOTEM_POLE_2938) { player, used, with ->
-            if (!hasRequirement(player, Quests.LEGENDS_QUEST)) return@onUseWith false
+            if (!hasRequirement(player, Quests.LEGENDS_QUEST.questName)) return@onUseWith false
 
             val baseItem = when (used.id) {
                 in skillsNecklaces -> Items.SKILLS_NECKLACE4_11105
@@ -32,6 +33,7 @@ class TotemPoleOptionPlugin : InteractionListener {
 
             if (slot != -1) {
                 inventory.replace(Item(baseItem), slot, true)
+                if (used.id != baseItem) finishDiaryTask(player, DiaryType.ARDOUGNE, 2, 0)
                 player.dialogueInterpreter.sendItemMessage(
                     used.id,
                     if (used.name.contains("bracelet", ignoreCase = true)) {

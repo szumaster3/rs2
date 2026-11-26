@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import content.region.desert.quest.rescue.dialogue.NedDialogueFile
 import content.region.misthalin.lumbridge.diary.dialogue.NedDiaryDialogue
 import content.region.misthalin.varrock.quest.dragon.dialogue.NedDialogue
@@ -16,7 +18,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Ned dialogue.
@@ -37,11 +38,11 @@ class NedDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                val dSlayerStage = player.questRepository.getStage(Quests.DRAGON_SLAYER)
-                val parStage = player.questRepository.getStage(Quests.PRINCE_ALI_RESCUE)
+                val dSlayerStage = player.questRepository.getStage(Quests.DRAGON_SLAYER.questName)
+                val parStage = player.questRepository.getStage(Quests.PRINCE_ALI_RESCUE.questName)
                 showTopics(
-                    IfTopic("I'd like to talk about ${Quests.DRAGON_SLAYER}.", NedDialogue(dSlayerStage), dSlayerStage == 20 || dSlayerStage == 30),
-                    IfTopic("I'd like to talk about ${Quests.PRINCE_ALI_RESCUE}.", NedDialogueFile(parStage), parStage == 20 || parStage == 30 || parStage == 40 || parStage == 50),
+                    IfTopic("I'd like to talk about ${Quests.DRAGON_SLAYER.questName}.", NedDialogue(dSlayerStage), dSlayerStage == 20 || dSlayerStage == 30),
+                    IfTopic("I'd like to talk about ${Quests.PRINCE_ALI_RESCUE.questName}.", NedDialogueFile(parStage), parStage == 20 || parStage == 30 || parStage == 40 || parStage == 50),
                     Topic("Yes, I would like some rope.", 10),
                     Topic("No thanks Ned, I don't need any.", END_DIALOGUE),
                     Topic("I'd like to ask about my Achievement Diary.", NedDiaryDialogue()),

@@ -1,5 +1,7 @@
 package content.region.fremennik.jatizso.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Keepa Kettilon dialogue.
@@ -17,7 +18,7 @@ class KeepaKettilonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage) {
-            0  -> if(!isQuestComplete(player, Quests.THE_FREMENNIK_ISLES)) {
+            0  -> if(!isQuestComplete(player, Quests.THE_FREMENNIK_ISLES.questName)) {
                 npcl(FaceAnim.FRIENDLY, "Oh, hello stranger. If you're new to town you should speak with our ruler, King Gjuki Sorvott IV. He'll want to meet you - he always wants to have a chat with any strangers in town. They could be spies you know.").also { stage++ }
             } else {
                 npcl(FaceAnim.FRIENDLY, "Go away and let me wallow in self loathing.").also { stage = 14 }

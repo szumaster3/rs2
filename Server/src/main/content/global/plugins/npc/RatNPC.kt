@@ -1,5 +1,7 @@
 package content.global.plugins.npc
 
+import content.data.Quests
+
 import core.api.getQuest
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -10,7 +12,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class RatNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -20,7 +21,7 @@ class RatNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         if (killer is Player) {
-            if (getQuest(killer, Quests.WITCHS_POTION).isStarted(killer.asPlayer())) {
+            if (getQuest(killer, Quests.WITCHS_POTION.questName).isStarted(killer.asPlayer())) {
                 GroundItemManager.create(RAT_TAIL, getLocation(), killer.asPlayer())
             }
         }

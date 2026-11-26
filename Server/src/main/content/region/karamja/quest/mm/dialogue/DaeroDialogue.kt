@@ -1,5 +1,7 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.game.world.map.Location
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 
 class DaeroDialogue : DialogueFile() {
 
@@ -19,7 +20,7 @@ class DaeroDialogue : DialogueFile() {
             0 -> playerl("Are you Daero?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_DEFAULT, "Indeed i am - and you are?").also { stage++ }
             2 -> playerl("I am an adventurer. I am currently in service of your King.").also { stage++ }
-            3 -> if (getQuestStage(player!!, Quests.MONKEY_MADNESS) <= 11) {
+            3 -> if (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName) <= 11) {
                 end()
             } else {
                 npcl(FaceAnim.OLD_DEFAULT, "I see. You must be the individual who helped defeat my predecessor Glough. I hope you'll find me a more honest replacement.").also { stage++ }
@@ -116,7 +117,7 @@ class DaeroDialogue : DialogueFile() {
                             openOverlay(player!!, Components.FADE_FROM_BLACK_170)
                             teleport(player!!, Location.create(2390, 9886, 0)).also {
                                 end()
-                                setQuestStage(player!!, Quests.MONKEY_MADNESS, 21)
+                                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 21)
                             }
                             return true
                         }

@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.plugin
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.plugin.EnergyBarrier.passGate
 import content.region.morytania.port_phasmatys.plugin.EnergyBarrier.passGateAfterQuest
 import core.api.*
@@ -115,7 +117,7 @@ class PhasmatysListener : InteractionListener {
                                 return
                             }
 
-                            if (isQuestComplete(player, Quests.GHOSTS_AHOY) && inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+                            if (isQuestComplete(player, Quests.GHOSTS_AHOY.questName) && inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
                                 npcl(FaceAnim.FRIENDLY, "All visitors to Port Phasmatys must pay a toll charge of 2 Ectotokens. However, you have done the ghosts of our town a service that surpasses all value, so you may pass without charge.")
                                 stage = 7
                             } else {

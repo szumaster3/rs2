@@ -1,5 +1,7 @@
 package content.region.other.entrana.quest.zep.cutscene
 
+import content.data.Quests
+
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Regions
 
 class ExperimentCutscene(player: Player) : Cutscene(player) {
@@ -46,7 +47,7 @@ class ExperimentCutscene(player: Player) : Cutscene(player) {
                 Projectile
                     .create(player, null,879, 45, 45, 1, 70, 0)
                     .transform(player, player.location.transform(Direction.SOUTH, player.direction.ordinal + 1), false, 70, 140).send()
-                if(getQuestStage(player,Quests.ENLIGHTENED_JOURNEY) <= 4) timedUpdate(3) else runStage(13)
+                if(getQuestStage(player,Quests.ENLIGHTENED_JOURNEY.questName) <= 4) timedUpdate(3) else runStage(13)
             }
             4 -> {
                 moveCamera(63, 29, 600)

@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.firedup
 
+import content.data.Quests
+
 import content.minigame.allfiredup.plugin.AFUBeacon
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,14 +10,13 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the All Fired Up quest.
  */
 @Initializable
-class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1) {
+class AllFiredUp : Quest(Quests.ALL_FIRED_UP) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -27,7 +28,7 @@ class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1) {
             line++
             line(player, "Minimum requirements:", line++)
             line(player, "I need level !!43 Firemaking?? to start the quest.", line++, getStatLevel(player, Skills.FIREMAKING) >= 43)
-            line(player, "I need to have completed !!${Quests.PRIEST_IN_PERIL}??.", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL))
+            line(player, "I need to have completed !!${Quests.PRIEST_IN_PERIL.questName}??.", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName))
             limitScrolling(player, line, true)
         } else {
             line(player, "I have agreed to help King Roald test the beacon network", line++, true)

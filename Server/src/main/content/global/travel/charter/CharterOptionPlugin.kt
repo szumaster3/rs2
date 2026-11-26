@@ -1,5 +1,7 @@
 package content.global.travel.charter
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -11,7 +13,6 @@ import core.game.world.map.Location
 import core.game.world.repository.Repository.findNPC
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class CharterOptionPlugin : InteractionListener, InterfaceListener {
@@ -51,7 +52,7 @@ class CharterOptionPlugin : InteractionListener, InterfaceListener {
 
         on(Scenery.GANGPLANK_2593, IntType.SCENERY, "cross") { player, _ ->
             when {
-                isQuestComplete(player, Quests.DRAGON_SLAYER) -> player.dialogueInterpreter.open(
+                isQuestComplete(player, Quests.DRAGON_SLAYER.questName) -> player.dialogueInterpreter.open(
                     NPCs.KLARENSE_744,
                     findNPC(NPCs.KLARENSE_744),
                     true

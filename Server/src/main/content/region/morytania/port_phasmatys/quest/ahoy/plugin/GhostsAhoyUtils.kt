@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.quest.ahoy.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.component.Component
 import core.game.interaction.QueueStrength
@@ -47,8 +49,8 @@ object GhostsAhoyUtils {
         player != null && (inEquipment(player, Items.GHOSTSPEAK_AMULET_552) || inEquipment(player, Items.GHOSTSPEAK_AMULET_4250))
 
     fun advanceQuest(player: Player, stage: Int) {
-        if (getQuestStage(player, Quests.GHOSTS_AHOY) < stage) {
-            setQuestStage(player, Quests.GHOSTS_AHOY, stage)
+        if (getQuestStage(player, Quests.GHOSTS_AHOY.questName) < stage) {
+            setQuestStage(player, Quests.GHOSTS_AHOY.questName, stage)
         }
     }
 

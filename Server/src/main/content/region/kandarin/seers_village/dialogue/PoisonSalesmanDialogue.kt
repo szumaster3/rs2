@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import core.api.*
@@ -14,7 +16,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Poison Salesman dialogue.
@@ -27,8 +28,8 @@ import shared.consts.Quests
 class PoisonSalesmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val murderMysteryStage = getQuestStage(player, Quests.MURDER_MYSTERY)
-        val fremennikTrialQuestStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS)
+        val murderMysteryStage = getQuestStage(player, Quests.MURDER_MYSTERY.questName)
+        val fremennikTrialQuestStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName)
         if(murderMysteryStage == 0 && fremennikTrialQuestStage == 0) {
             npcl(FaceAnim.SAD, "I'm afraid I'm all sold out of poison at the moment. People know a bargain when they see it!")
         } else {
@@ -39,8 +40,8 @@ class PoisonSalesmanDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val murderMysteryStage = getQuestStage(player, Quests.MURDER_MYSTERY)
-        val fremennikTrialQuestStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS)
+        val murderMysteryStage = getQuestStage(player, Quests.MURDER_MYSTERY.questName)
+        val fremennikTrialQuestStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName)
         when (stage) {
             START_DIALOGUE -> when (buttonId) {
                 1 -> when (murderMysteryStage) {

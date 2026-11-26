@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,7 +15,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CuratorHaigHalenDialogue(player: Player? = null) : Dialogue(player) {
@@ -21,15 +22,15 @@ class CuratorHaigHalenDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.NEUTRAL, "Welcome to Varrock Museum!").also {
-                if (getQuestStage(player, Quests.THE_DIG_SITE) == 1 && inInventory(player, Items.UNSTAMPED_LETTER_682)) { stage = 11 }
+                if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 1 && inInventory(player, Items.UNSTAMPED_LETTER_682)) { stage = 11 }
                 stage++
             }
             1 -> showTopics(
                 Topic(FaceAnim.FRIENDLY, "Have you any interesting news?", 2),
                 Topic(FaceAnim.FRIENDLY, "Do you know where I could find any treasure?", 8),
-                IfTopic(FaceAnim.FRIENDLY, "I've lost the letter of recommendation.", 17, getQuestStage(player, Quests.THE_DIG_SITE) == 2 && !inInventory(player, Items.SEALED_LETTER_683)),
-                IfTopic("I have the ${Quests.SHIELD_OF_ARRAV}", 18, getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 70, false),
-                IfTopic("I'm looking for a statuette recovered from the city of Uzer.", 34, getQuestStage(player, Quests.THE_GOLEM) == 3, false),
+                IfTopic(FaceAnim.FRIENDLY, "I've lost the letter of recommendation.", 17, getQuestStage(player, Quests.THE_DIG_SITE.questName) == 2 && !inInventory(player, Items.SEALED_LETTER_683)),
+                IfTopic("I have the ${Quests.SHIELD_OF_ARRAV.questName}", 18, getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) == 70, false),
+                IfTopic("I'm looking for a statuette recovered from the city of Uzer.", 34, getQuestStage(player, Quests.THE_GOLEM.questName) == 3, false),
             )
             2 -> npcl(FaceAnim.FRIENDLY, "Yes, we found a rather interesting island to the north of Morytania. We believe that it may be of archaeological significance.").also { stage++ }
             3 -> playerl(FaceAnim.FRIENDLY, "Oh? That sounds interesting.").also { stage++ }
@@ -51,8 +52,8 @@ class CuratorHaigHalenDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
             16 -> playerl(FaceAnim.FRIENDLY, "Ok, I will. Thanks, see you later.").also {
-                if (getQuestStage(player, Quests.THE_DIG_SITE) == 1) {
-                    setQuestStage(player, Quests.THE_DIG_SITE, 2)
+                if (getQuestStage(player, Quests.THE_DIG_SITE.questName) == 1) {
+                    setQuestStage(player, Quests.THE_DIG_SITE.questName, 2)
                 }
                 stage = 1
             }

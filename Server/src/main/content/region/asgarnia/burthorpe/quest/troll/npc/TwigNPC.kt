@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.troll.npc
 
+import content.data.Quests
+
 import core.api.inInventory
 import core.api.isQuestInProgress
 import core.api.produceGroundItem
@@ -11,7 +13,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class TwigNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -40,7 +41,7 @@ class TwigNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locatio
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD, 8, 10) && !inInventory(killer, Items.CELL_KEY_1_3136)) {
+        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD.questName, 8, 10) && !inInventory(killer, Items.CELL_KEY_1_3136)) {
             produceGroundItem(killer, Items.CELL_KEY_1_3136, 1, this.location)
         }
         super.finalizeDeath(killer)

@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.KingLathasBiohazardQuestDialogue
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the King Lathas dialogue.
@@ -22,7 +23,7 @@ class KingLathasDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args.getOrNull(0) as? NPC ?: return false
 
-        val questStage = getQuestStage(player, Quests.BIOHAZARD)
+        val questStage = getQuestStage(player, Quests.BIOHAZARD.questName)
         val progress = getVarbit(player, MHUtils.PROGRESS)
 
         when {
@@ -74,7 +75,7 @@ class KingLathasDialogue(player: Player? = null) : Dialogue(player) {
                     end()
                     playerl(FaceAnim.FRIENDLY, "Thank you.")
                     addItemOrDrop(player, Items.LETTER_6757)
-                    setQuestStage(player, Quests.MAKING_HISTORY, 99)
+                    setQuestStage(player, Quests.MAKING_HISTORY.questName, 99)
                 }
             }
             9 -> playerl(FaceAnim.FRIENDLY, "I'm working on it!").also { stage = END_DIALOGUE }

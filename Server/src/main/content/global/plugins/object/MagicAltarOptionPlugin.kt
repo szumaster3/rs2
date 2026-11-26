@@ -1,5 +1,7 @@
 package content.global.plugins.`object`
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.skill.Skills
 import shared.consts.Animations
-import shared.consts.Quests
 import shared.consts.Scenery
 import shared.consts.Sounds
 
@@ -31,7 +32,7 @@ class MagicAltarOptionPlugin : InteractionListener {
 
     private fun meetsRequirements(player: Player, altar: Node): Boolean {
         val isAncient = altar.id == ANCIENT_ALTAR
-        val requiredQuest = if (isAncient) Quests.DESERT_TREASURE else Quests.LUNAR_DIPLOMACY
+        val requiredQuest = if (isAncient) Quests.DESERT_TREASURE.questName else Quests.LUNAR_DIPLOMACY.questName
         val level = if (isAncient) 50 else 65
 
         if (!hasRequirement(player, requiredQuest)) return false

@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.hetty
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -7,11 +9,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class WitchPotion : Quest(Quests.WITCHS_POTION, 31, 30, 1, Vars.VARP_QUEST_WITCHS_POTION_PROGRESS_67, 0, 1, 3) {
+class WitchPotion : Quest(Quests.WITCHS_POTION) {
     override fun drawJournal(
         player: Player,
         stage: Int,

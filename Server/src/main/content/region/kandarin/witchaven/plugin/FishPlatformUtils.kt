@@ -1,12 +1,13 @@
 package content.region.kandarin.witchaven.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.Components
 import shared.consts.Music
-import shared.consts.Quests
 
 /**
  * Represents a travel routes.
@@ -49,7 +50,7 @@ object FishingPlatformBoat {
                 }
                 2 -> {
                     openInterface(player, Components.FADE_FROM_BLACK_170)
-                    val message = if (getQuestStage(player, Quests.SEA_SLUG) > 50) {
+                    val message = if (getQuestStage(player, Quests.SEA_SLUG.questName) > 50) {
                         "The boat arrives ${travel.destName}."
                     } else {
                         "You arrive ${travel.destName}."

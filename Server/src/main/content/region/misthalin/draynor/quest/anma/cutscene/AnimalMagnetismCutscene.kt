@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.anma.cutscene
 
+import content.data.Quests
+
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class AnimalMagnetismCutscene(player: Player) : Cutscene(player) {
 
@@ -225,7 +226,7 @@ class AnimalMagnetismCutscene(player: Player) : Cutscene(player) {
 
             32 -> {
                 end {
-                    setQuestStage(player, Quests.ANIMAL_MAGNETISM, 20)
+                    setQuestStage(player, Quests.ANIMAL_MAGNETISM.questName, 20)
                 }
             }
         }

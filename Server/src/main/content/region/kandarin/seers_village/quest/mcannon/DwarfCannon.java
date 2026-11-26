@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.mcannon;
 
+import content.data.Quests;
+
 import content.region.kandarin.seers_village.quest.mcannon.dialogue.CaptainLawgofDialogue;
 import content.region.kandarin.seers_village.quest.mcannon.dialogue.LollkDialogue;
 import content.region.kandarin.seers_village.quest.mcannon.dialogue.NulodionDialogue;
@@ -11,7 +13,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
-import shared.consts.Quests;
 
 import static core.api.ContentAPIKt.*;
 
@@ -50,7 +51,7 @@ public class DwarfCannon extends Quest {
      * Instantiates a new Dwarf cannon.
      */
     public DwarfCannon() {
-        super(Quests.DWARF_CANNON, 49, 48, 1);
+        super(Quests.DWARF_CANNON);
     }
 
     @Override

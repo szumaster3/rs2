@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.mcannon.plugin;
 
+import content.data.Quests;
+
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
@@ -12,7 +14,6 @@ import core.game.node.item.Item;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import shared.consts.Quests;
 
 /**
  * The type Dwarf multi cannon plugin.
@@ -73,7 +74,7 @@ public final class DwarfMultiCannonPlugin extends OptionHandler {
                 player.getPacketDispatch().sendMessage("You don't have all the cannon components!");
                 return true;
             }
-            if (!player.getQuestRepository().isComplete(Quests.DWARF_CANNON) && player.getDetails().getRights() != Rights.ADMINISTRATOR) {
+            if (!player.getQuestRepository().isComplete(Quests.DWARF_CANNON.getQuestName()) && player.getDetails().getRights() != Rights.ADMINISTRATOR) {
                 player.getPacketDispatch().sendMessage("You have to complete the Dwarf Cannon to know how to use this.");
                 return true;
             }

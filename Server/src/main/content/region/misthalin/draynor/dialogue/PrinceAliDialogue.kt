@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import core.api.removeAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -12,7 +14,6 @@ import core.game.world.GameWorld.Pulser
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Prince Ali dialogue.
@@ -24,7 +25,7 @@ class PrinceAliDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
+        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE.questName)
         when (quest!!.getStage(player)) {
             50 -> {
                 player("Prince, I come to rescue you.")

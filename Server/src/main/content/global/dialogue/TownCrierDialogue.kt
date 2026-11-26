@@ -1,5 +1,6 @@
 package content.global.dialogue
 
+import content.region.kandarin.west_ardougne.diary.dialogue.TownCrierDiaryDialogue
 import content.global.plugins.item.books_and_scrolls.impl.GeneralRuleBook
 import core.api.*
 import core.game.dialogue.*
@@ -34,7 +35,8 @@ class TownCrierDialogue(player: Player? = null) : Dialogue(player) {
                         "Tell me about Player Moderators.",
                         "Tell me about the Rules of " + settings!!.name + ".",
                         "Can you give me a handy tip please?",
-                        "Nothing thanks."
+                        "Nothing thanks.",
+                        *(if (npc?.location?.let { it.x in 2600..2700 && it.y in 3270..3350 } == true) arrayOf("Tell me about the Achievement Diary.") else emptyArray())
                     ).also { stage++ }
 
             }
@@ -44,6 +46,7 @@ class TownCrierDialogue(player: Player? = null) : Dialogue(player) {
                     2 -> npc("At once. Take a look at my book here.").also { stage = 70 }
                     3 -> player(FaceAnim.HALF_ASKING, "Can you give me a handy tip please?").also { stage = 100 }
                     4 -> player("Nothing thanks.").also { stage = END_DIALOGUE }
+                    5 -> if (npc?.location?.let { it.x in 2600..2700 && it.y in 3270..3350 } == true) openDialogue(player!!, TownCrierDiaryDialogue(), npc!!)
                 }
             }
             2 -> options("Tell me about Player Moderators.", "Tell me about the Rules of " + settings!!.name + ".", "Can you give me a handy tip please?", "Nothing thanks.").also { stage++ }

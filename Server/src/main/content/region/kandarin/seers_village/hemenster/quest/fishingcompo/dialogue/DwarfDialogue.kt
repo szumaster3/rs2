@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.hemenster.quest.fishingcompo.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.seers_village.hemenster.quest.fishingcompo.FishingContest.FishingQuestCompleteDialogue
 import core.api.*
@@ -14,7 +16,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Austri & Vestri dwarfs dialogue.
@@ -28,7 +29,7 @@ class DwarfDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        val questStage = getQuestStage(player, Quests.FISHING_CONTEST)
+        val questStage = getQuestStage(player, Quests.FISHING_CONTEST.questName)
         val hasFishingPass = inInventory(player, Items.FISHING_PASS_27, 1)
         val hasFishingTrophy = inInventory(player, Items.FISHING_TROPHY_26, 1)
         val hasWonFishingCompetition = getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_WON, false)
@@ -142,7 +143,7 @@ class DwarfDialogue(player: Player? = null) : Dialogue(player) {
             62 -> {
                 sendItemDialogue(player, Items.FISHING_PASS_27, "You got the Fishing Contest Pass!")
                 addItemOrDrop(player, Items.FISHING_PASS_27, 1)
-                setQuestStage(player, Quests.FISHING_CONTEST, 10)
+                setQuestStage(player, Quests.FISHING_CONTEST.questName, 10)
                 stage++
             }
             63 -> npc(FaceAnim.OLD_HAPPY, "Go to Hemenster and do us proud!").also { stage = END_DIALOGUE }
@@ -164,7 +165,7 @@ class DwarfDialogue(player: Player? = null) : Dialogue(player) {
             2004 -> if (removeItem(player, Items.FISHING_TROPHY_26)) {
                 end()
                 setAttribute(player, "temp-npc", npc.id)
-                finishQuest(player, Quests.FISHING_CONTEST)
+                finishQuest(player, Quests.FISHING_CONTEST.questName)
                 stage = END_DIALOGUE
             } else {
                 player(FaceAnim.HALF_GUILTY,"No, I haven't.").also { stage = END_DIALOGUE }

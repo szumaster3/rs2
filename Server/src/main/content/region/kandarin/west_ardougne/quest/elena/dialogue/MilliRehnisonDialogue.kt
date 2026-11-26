@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Milli Rehnison dialogue.
@@ -22,7 +23,7 @@ class MilliRehnisonDialogue(player: Player? = null) : Dialogue(player) {
     
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.PLAGUE_CITY) == 9) {
+        if (getQuestStage(player, Quests.PLAGUE_CITY.questName) == 9) {
             playerl(FaceAnim.FRIENDLY, "Hello. Your parents say you saw what happened to Elena...")
         } else {
             npcl(FaceAnim.CHILD_NORMAL, "Any luck finding Elena yet?")
@@ -31,14 +32,14 @@ class MilliRehnisonDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             9 -> when (stage) {
                 0 -> npcl(FaceAnim.CHILD_NORMAL, "*sniff* Yes I was near the south east corner when I saw Elena walking by. I was about to run to greet her when some men jumped out. They shoved a sack over her head and dragged her into a building.").also { stage++ }
                 1 -> playerl(FaceAnim.FRIENDLY, "Which building?").also { stage++ }
                 2 -> npcl(FaceAnim.CHILD_NORMAL, "It was the boarded up building with no windows in the south east corner of West Ardougne.").also { stage++ }
                 3 -> {
                     end()
-                    setQuestStage(player!!, Quests.PLAGUE_CITY, 11)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 11)
                     stage = END_DIALOGUE
                 }
             }

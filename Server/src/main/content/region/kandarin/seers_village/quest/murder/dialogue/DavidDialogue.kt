@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.murder.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import core.api.*
 import core.game.dialogue.*
@@ -8,7 +10,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class DavidDialogue(player: Player? = null) : Dialogue(player) {
@@ -28,7 +29,7 @@ class DavidDialogue(player: Player? = null) : Dialogue(player) {
 
 class DavidDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.MURDER_MYSTERY)) {
+        when (getQuestStage(player!!, Quests.MURDER_MYSTERY.questName)) {
             0 -> sendDialogue(player!!, "They are ignoring you.").also { stage = END_DIALOGUE }
             1 -> when (stage) {
                 0 -> playerl(FaceAnim.NEUTRAL, "I'm here to help the guards with their investigation.").also { stage++ }

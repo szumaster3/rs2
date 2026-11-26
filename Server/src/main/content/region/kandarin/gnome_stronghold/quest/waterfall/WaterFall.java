@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.waterfall;
 
+import content.data.Quests;
+
 import content.region.kandarin.gnome_stronghold.quest.waterfall.dialogue.GolrieDialogue;
 import content.region.kandarin.gnome_stronghold.quest.waterfall.dialogue.HadleyDialogue;
 import content.region.kandarin.gnome_stronghold.quest.waterfall.dialogue.HudonDialogue;
@@ -11,7 +13,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
-import shared.consts.Quests;
 import shared.consts.Vars;
 
 /**
@@ -25,7 +26,7 @@ public class WaterFall extends Quest {
      * Instantiates a new Water fall.
      */
     public WaterFall() {
-        super(Quests.WATERFALL_QUEST, 65, 64, 1, Vars.VARP_QUEST_WATERFALL_PROGRESS_65, 0, 1, 10);
+        super(Quests.WATERFALL_QUEST, Vars.VARP_QUEST_WATERFALL_PROGRESS_65, 0, 1, 10);
     }
 
     @Override

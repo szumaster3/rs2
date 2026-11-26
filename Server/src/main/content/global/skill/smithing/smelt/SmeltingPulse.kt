@@ -1,5 +1,7 @@
 package content.global.skill.smithing.smelt
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.smithing.bar.BarItem
 import core.api.*
@@ -17,7 +19,6 @@ import core.tools.RandomFunction
 import core.tools.StringUtils
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class SmeltingPulse : SkillPulse<Item?> {
@@ -54,7 +55,7 @@ class SmeltingPulse : SkillPulse<Item?> {
             return false
         }
 
-        if (barItem == BarItem.BLURITE && !isQuestComplete(player, Quests.THE_KNIGHTS_SWORD)) {
+        if (barItem == BarItem.BLURITE && !isQuestComplete(player, Quests.THE_KNIGHTS_SWORD.questName)) {
             sendDialogue(player, "You need complete the Knights' Sword to smelt this bar.")
             return false
         }

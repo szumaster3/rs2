@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,7 +15,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sir Kay dialogue.
@@ -35,8 +36,8 @@ class SirKayDialogue(player: Player? = null) : Dialogue(player) {
         val hardDiaryComplete = Diary.hasCompletedLevel(player!!, DiaryType.SEERS_VILLAGE, diaryLevel)
 
         // Quest consts.
-        var merlinQuestStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL)
-        var holyGrailQuestStage = getQuestStage(player!!, Quests.HOLY_GRAIL)
+        var merlinQuestStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName)
+        var holyGrailQuestStage = getQuestStage(player!!, Quests.HOLY_GRAIL.questName)
 
         when (stage) {
             0 -> when (buttonId) {

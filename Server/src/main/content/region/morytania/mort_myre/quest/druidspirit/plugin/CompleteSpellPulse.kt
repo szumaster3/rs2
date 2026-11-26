@@ -1,12 +1,13 @@
 package content.region.morytania.mort_myre.quest.druidspirit.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class CompleteSpellPulse(val player: Player) : Pulse(2) {
     var counter = 0
@@ -24,7 +25,7 @@ class CompleteSpellPulse(val player: Player) : Pulse(2) {
     override fun pulse(): Boolean {
         when (counter++) {
             0 -> repeat(6) { spawnProjectile(locations[it], dest, 268, 0, 1000, 0, 40, 20) }
-            1 -> setQuestStage(player, Quests.NATURE_SPIRIT, 60)
+            1 -> setQuestStage(player, Quests.NATURE_SPIRIT.questName, 60)
             2 -> player.teleport(player.location.transform(0, 0, 1))
             3 -> openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
                 .also {

@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.quest.hunt.plugin
 
+import content.data.Quests
+
 import content.region.asgarnia.port_sarim.quest.hunt.PiratesTreasure
 import core.api.*
 import core.game.interaction.IntType
@@ -62,7 +64,7 @@ class PiratesTreasureListener : InteractionListener {
 
         DIG_LOCATIONS.forEach { location ->
             onDig(location) { player ->
-                val quest = getQuest(player, Quests.PIRATES_TREASURE)
+                val quest = getQuest(player, Quests.PIRATES_TREASURE.questName)
                 if (quest.getStage(player) != 20) {
                     sendMessage(player, "You dig a hole in the ground...")
                     sendMessage(player, "But find nothing.")

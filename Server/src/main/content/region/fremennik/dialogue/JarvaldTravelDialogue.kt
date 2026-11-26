@@ -1,5 +1,7 @@
 package content.region.fremennik.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.plugin.FremennikBoat
 import content.region.fremennik.rellekka.plugin.Travel
 import core.api.isQuestComplete
@@ -13,14 +15,13 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Handles travel options for Jarvald NPC.
  */
 class JarvaldTravelDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val questComplete = isQuestComplete(player!!, Quests.THE_FREMENNIK_TRIALS)
+        val questComplete = isQuestComplete(player!!, Quests.THE_FREMENNIK_TRIALS.questName)
         val atWaterbirdIsland = player!!.location.isInRegion(10042)
         when (stage) {
             0 -> {

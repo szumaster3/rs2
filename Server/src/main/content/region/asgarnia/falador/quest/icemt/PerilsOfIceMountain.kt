@@ -1,17 +1,18 @@
 package content.region.asgarnia.falador.quest.icemt
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 // @Initializable
 class PerilsOfIceMountain :
-    Quest(Quests.PERILS_OF_ICE_MOUNTAIN, 151, 150, 1, Vars.VARBIT_QUEST_PERILS_OF_ICE_MOUNTAIN_PROGRESS_4684, 0, 1, 150) {
+    Quest(Quests.PERILS_OF_ICE_MOUNTAIN, Vars.VARBIT_QUEST_PERILS_OF_ICE_MOUNTAIN_PROGRESS_4684, 0, 1, 150) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

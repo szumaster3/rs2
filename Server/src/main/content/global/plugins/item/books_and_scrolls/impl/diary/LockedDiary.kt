@@ -1,5 +1,7 @@
 package content.global.plugins.item.books_and_scrolls.impl.diary
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.plugins.item.books_and_scrolls.BookInterface
 import content.global.plugins.item.books_and_scrolls.BookLine
@@ -626,7 +628,7 @@ class LockedDiary : InteractionListener {
          */
 
         on(Scenery.SANDY_S_DESK_10805, IntType.SCENERY, "search") { player, _ ->
-            val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)
+            val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName)
             val varbitProgress = getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
 
             if (questStage == 5 || varbitProgress == 2) {

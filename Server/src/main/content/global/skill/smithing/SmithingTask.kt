@@ -1,5 +1,7 @@
 package content.global.skill.smithing
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillingTask
@@ -13,7 +15,6 @@ import core.game.event.ResourceProducedEvent
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.Location
 import core.tools.StringUtils
-import shared.consts.Quests
 
 class SmithingTask(
     player: Player,
@@ -41,22 +42,22 @@ class SmithingTask(
             return false
         }
 
-        if (!isQuestComplete(player, Quests.THE_TOURIST_TRAP) && bar.smithingType == SmithingType.TYPE_DART_TIP) {
+        if (!isQuestComplete(player, Quests.THE_TOURIST_TRAP.questName) && bar.smithingType == SmithingType.TYPE_DART_TIP) {
             sendDialogue(player, "You need to complete Tourist Trap to smith dart tips.")
             return false
         }
 
-        if (!isQuestComplete(player, Quests.DEATH_PLATEAU) && bar.smithingType == SmithingType.TYPE_CLAWS) {
+        if (!isQuestComplete(player, Quests.DEATH_PLATEAU.questName) && bar.smithingType == SmithingType.TYPE_CLAWS) {
             sendDialogue(player, "You need to complete Death Plateau to smith claws.")
             return false
         }
 
-        if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD) && bar.smithingType == SmithingType.TYPE_Crossbow_Bolt) {
+        if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD.questName) && bar.smithingType == SmithingType.TYPE_Crossbow_Bolt) {
             sendDialogue(player, "You need to complete Knights' Sword to smith bolts.")
             return false
         }
 
-        if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD) && bar.smithingType == SmithingType.TYPE_Crossbow_Limb) {
+        if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD.questName) && bar.smithingType == SmithingType.TYPE_Crossbow_Limb) {
             sendDialogue(player, "You need to complete Knights' Sword to smith limb.")
             return false
         }

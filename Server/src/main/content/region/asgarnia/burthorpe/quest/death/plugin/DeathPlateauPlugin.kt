@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.death.plugin
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.death.dialogue.DoorPlateauDialogueFile
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -14,7 +16,6 @@ import core.game.world.map.zone.ZoneBorders
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class DeathPlateauPlugin : InteractionListener, MapArea {
@@ -22,11 +23,11 @@ class DeathPlateauPlugin : InteractionListener, MapArea {
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2866, 3609, 2866, 3609))
 
     override fun areaEnter(entity: Entity) {
-        if (entity is Player && getQuestStage(entity, Quests.DEATH_PLATEAU) == 25) {
+        if (entity is Player && getQuestStage(entity, Quests.DEATH_PLATEAU.questName) == 25) {
             sendPlayerDialogue(entity, "I think this is far enough, I can see Death Plateau and it looks like the trolls haven't found the path. I'd better go and tell Denulth.")
             sendMessage(entity, "You can see that there are no trolls on the secret path")
             sendMessage(entity, "You should go and speak to Denulth")
-            setQuestStage(entity, Quests.DEATH_PLATEAU, 26)
+            setQuestStage(entity, Quests.DEATH_PLATEAU.questName, 26)
         }
     }
 
@@ -53,7 +54,7 @@ class DeathPlateauPlugin : InteractionListener, MapArea {
         }
 
         on(Items.IOU_3103, ITEM, "read") { player, _ ->
-            if(getQuestStage(player, Quests.DEATH_PLATEAU) in 15..16) {
+            if(getQuestStage(player, Quests.DEATH_PLATEAU.questName) in 15..16) {
                 openDialogue(player, ScrollDialogue())
             }
             return@on true
@@ -79,16 +80,16 @@ class DeathPlateauPlugin : InteractionListener, MapArea {
                 GroundItemManager.get(Items.STONE_BALL_3112, location(2895, 3563, 0), player) != null &&
                 GroundItemManager.get(Items.STONE_BALL_3113, location(2895, 3564, 0), player) != null
             ) {
-                if (getQuestStage(player, Quests.DEATH_PLATEAU) == 16) {
+                if (getQuestStage(player, Quests.DEATH_PLATEAU.questName) == 16) {
                     sendMessage(player, "The equipment room door has unlocked.")
-                    setQuestStage(player, Quests.DEATH_PLATEAU, 19)
+                    setQuestStage(player, Quests.DEATH_PLATEAU.questName, 19)
                 }
             }
             return@onUseWith true
         }
 
         on(Scenery.LARGE_DOOR_3743, SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.DEATH_PLATEAU) > 16) {
+            if (getQuestStage(player, Quests.DEATH_PLATEAU.questName) > 16) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door is locked.")
@@ -118,7 +119,7 @@ class DeathPlateauPlugin : InteractionListener, MapArea {
                     }
 
                     addItemOrDrop(p, Items.COMBINATION_3102)
-                    setQuestStage(p, Quests.DEATH_PLATEAU, 16)
+                    setQuestStage(p, Quests.DEATH_PLATEAU.questName, 16)
                     sendItemDialogue(p, Items.COMBINATION_3102, "You have found the combination!")
                     lockInteractions(p, 3)
 

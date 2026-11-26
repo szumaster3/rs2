@@ -1,11 +1,12 @@
 package content.region.misthalin.draynor.quest.haunted.npc
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the abstract NPC class to handle Ernest the Chicken.
@@ -35,7 +36,7 @@ class ErnestNPC(
             return true
         }
 
-        if (isQuestComplete(player, Quests.ERNEST_THE_CHICKEN)) {
+        if (isQuestComplete(player, Quests.ERNEST_THE_CHICKEN.questName)) {
             clear()
             return super.isHidden(player)
         }

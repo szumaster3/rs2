@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.GroundItemManager
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Guildmaster dialogue.
@@ -24,7 +25,7 @@ class GuildmasterDialogue(player: Player? = null) : Dialogue(player) {
         if (player.getQuestRepository().points < 32) {
             return true
         }
-        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER)
+        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER.questName)
         npc("Greetings!")
         stage = if (quest!!.getStage(player) == 10) {
             0

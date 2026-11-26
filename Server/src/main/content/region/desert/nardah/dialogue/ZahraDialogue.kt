@@ -1,10 +1,11 @@
 package content.region.desert.nardah.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Zahra dialogue.
@@ -13,7 +14,7 @@ class ZahraDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> if (!hasRequirement(player!!, Quests.SPIRITS_OF_THE_ELID, false)) {
+            0 -> if (!hasRequirement(player!!, Quests.SPIRITS_OF_THE_ELID.questName, false)) {
                 player(FaceAnim.FRIENDLY, "Good day to you.").also { stage++ }
             } else {
                 playerl(FaceAnim.FRIENDLY, "How's life now the curse has been lifted?").also { stage = 6 }

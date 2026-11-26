@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.falador.quest.dorics.cutscene.DoricCutscene
 import content.region.asgarnia.falador.quest.dorics.dialogue.DoricDialogue
 import core.api.*
@@ -14,7 +16,6 @@ import core.game.world.GameWorld.settings
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Doric dialogue.
@@ -27,7 +28,7 @@ class DoricDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quesStage = getQuestStage(player, Quests.DORICS_QUEST)
+        val quesStage = getQuestStage(player, Quests.DORICS_QUEST.questName)
         when (quesStage) {
             0 -> npcl(FaceAnim.OLD_NORMAL, "Hello traveller, what brings you to my humble smithy?").also { stage = 0 }
             in 1..99 -> openDialogue(player, DoricDialogue(30), npc)

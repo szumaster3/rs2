@@ -1,5 +1,7 @@
 package content.region.karamja.quest.totem.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
@@ -16,9 +17,9 @@ class RPDTEmployeeDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npcl(FaceAnim.HAPPY, "Welcome to R.P.D.T.!")
         stage =
-            if (getQuestStage(player, Quests.TRIBAL_TOTEM) == 20) {
+            if (getQuestStage(player, Quests.TRIBAL_TOTEM.questName) == 20) {
                 5
-            } else if(isQuestComplete(player, Quests.TRIBAL_TOTEM) && getQuestStage(player, Quests.BACK_TO_MY_ROOTS) >= 2) {
+            } else if(isQuestComplete(player, Quests.TRIBAL_TOTEM.questName) && getQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName) >= 2) {
                 8
             } else if(getVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055) >= 20) {
                 24
@@ -34,7 +35,7 @@ class RPDTEmployeeDialogue(player: Player? = null) : Dialogue(player) {
             5 -> playerl(FaceAnim.ASKING, "So, when are you going to deliver this crate?").also { stage++ }
             6 -> {
                 npcl(FaceAnim.THINKING, "Well... I guess we could do it now...")
-                setQuestStage(player, Quests.TRIBAL_TOTEM, 25)
+                setQuestStage(player, Quests.TRIBAL_TOTEM.questName, 25)
                 stage = 7
             }
             7 -> end()
@@ -57,7 +58,7 @@ class RPDTEmployeeDialogue(player: Player? = null) : Dialogue(player) {
             23 -> playerl(FaceAnim.HALF_ASKING, "I guess I'll have to if I'm not to disillusion the wizard.").also {
                 // Unhidden options for smelly package.
                 setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 15, true)
-                setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 3)
+                setQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName, 3)
                 stage = END_DIALOGUE
             }
 

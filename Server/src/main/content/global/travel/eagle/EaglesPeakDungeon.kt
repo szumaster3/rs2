@@ -1,18 +1,19 @@
 package content.global.travel.eagle
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class EaglesPeakDungeon : InteractionListener {
 
     override fun defineListeners() {
         on(Scenery.ROCKY_OUTCROP_19925, IntType.SCENERY, "inspect") { player, _ ->
-            if(!hasRequirement(player, Quests.EAGLES_PEAK)) {
+            if(!hasRequirement(player, Quests.EAGLES_PEAK.questName)) {
                 sendDialogueLines(
                     player,
                     "This area of rock doesn't quite seem to match the rest of the cliff",

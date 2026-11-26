@@ -1,5 +1,7 @@
 package content.global.dialogue
 
+import content.data.Quests
+
 import content.global.skill.thieving.ThievingDefinition
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Fishmongers dialogue.
@@ -33,7 +34,7 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
                         npc.sendChat("Guards, guards!", 2)
                         return true
                     }
-                    val dialogue = if (!hasRequirement(player, Quests.THRONE_OF_MISCELLANIA, false)) {
+                    val dialogue = if (!hasRequirement(player, Quests.THRONE_OF_MISCELLANIA.questName, false)) {
                         "Greetings, Sir. Get your fresh fish here!"
                     } else {
                         "Greetings, Your Highness. Have some fresh fish!"
@@ -42,7 +43,7 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 1
                 }
                 NPCs.FISH_MONGER_1315 -> {
-                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                         npc(FaceAnim.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
                     } else {
                         if (!canTrade) return false

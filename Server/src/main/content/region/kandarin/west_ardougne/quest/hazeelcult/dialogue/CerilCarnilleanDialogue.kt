@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
@@ -17,7 +18,7 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.HAZEEL_CULT)
+        val questStage = getQuestStage(player, Quests.HAZEEL_CULT.questName)
         val hasCarnillean = getAttribute(player!!, "hazeelcult:carnillean", true)
         val insideBorders = inBorders(player, 2571, 3267, 2575, 3273)
 
@@ -31,7 +32,7 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.HAZEEL_CULT)) {
+        when (getQuestStage(player!!, Quests.HAZEEL_CULT.questName)) {
             0 -> {
                 when (stage) {
                     0 -> npcl(FaceAnim.HALF_GUILTY, "Blooming, thieving cultists! Why don't they leave me alone? String them all up, that's what I say!").also { stage++ }
@@ -64,7 +65,7 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
                     19 -> playerl(FaceAnim.FRIENDLY, "Right... I'll see if I can find this cave.").also { stage++ }
                     20 -> {
                         end()
-                        setQuestStage(player, Quests.HAZEEL_CULT, 1)
+                        setQuestStage(player, Quests.HAZEEL_CULT.questName, 1)
                     }
                     21 -> npcl(FaceAnim.FRIENDLY, "Well no wonder I'm the one with the big house and you're the one on the streets.").also { stage = END_DIALOGUE }
                     22 -> npcl(FaceAnim.FRIENDLY, "And who are you to judge me? You look like a peasant anyway. I'm wasting my time talking to you.").also { stage = END_DIALOGUE }
@@ -109,7 +110,7 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> npcl(FaceAnim.SAD, "W-what? JONES! Get over here! We're going to blooming-well sort this out, once and for all!").also { stage++ }
                 4 -> {
                     end()
-                    setQuestStage(player, Quests.HAZEEL_CULT, 5)
+                    setQuestStage(player, Quests.HAZEEL_CULT.questName, 5)
                 }
             }
 
@@ -128,7 +129,7 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
                 7 -> sendDialogue(player, "Jones smirks at you. You are going to need more than words to prove his treachery.").also { stage++ }
                 8 -> {
                     end()
-                    finishQuest(player, Quests.HAZEEL_CULT)
+                    finishQuest(player, Quests.HAZEEL_CULT.questName)
                 }
             }
 

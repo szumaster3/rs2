@@ -1,5 +1,7 @@
 package content.region.kandarin.guild.wizards.plugin
 
+import content.data.Quests
+
 import content.global.travel.EssenceTeleport.teleport
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -12,7 +14,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 /**
@@ -66,7 +67,7 @@ class WizardsGuildPlugin : InteractionListener {
          */
 
         on(NPCs.WIZARD_DISTENTOR_462, IntType.NPC, "teleport") { player, node ->
-            if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+            if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                 sendMessage(player, "You need to have completed the Rune Mysteries Quest to use this feature.")
                 return@on false
             }

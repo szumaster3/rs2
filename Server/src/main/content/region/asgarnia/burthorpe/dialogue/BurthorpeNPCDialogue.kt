@@ -1,12 +1,13 @@
 package content.region.asgarnia.burthorpe.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import core.tools.START_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Burthorpe dialogues.
@@ -15,7 +16,7 @@ class BurthorpeNPCDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         val random = RandomFunction.random(1, 3)
-        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
+        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU.questName)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage = random }
                 1 -> npcl(FaceAnim.HAPPY, "I heard about what you did, thank you!").also { stage = END_DIALOGUE }

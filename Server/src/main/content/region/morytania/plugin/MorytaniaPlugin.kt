@@ -1,5 +1,7 @@
 package content.region.morytania.plugin
 
+import content.data.Quests
+
 import content.global.skill.agility.AgilityHandler
 import content.region.morytania.mort_myre.dialogue.AbidorCrankDialogue
 import core.api.*
@@ -33,7 +35,7 @@ class MorytaniaPlugin : InteractionListener, MapArea {
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3426, 3191, 3715, 3588))
 
     override fun areaEnter(entity: Entity) {
-        if (entity is Player && !isQuestComplete(entity, Quests.PRIEST_IN_PERIL) && entity.details.rights != Rights.ADMINISTRATOR) {
+        if (entity is Player && !isQuestComplete(entity, Quests.PRIEST_IN_PERIL.questName) && entity.details.rights != Rights.ADMINISTRATOR) {
             kickThemOut(entity)
         }
     }
@@ -71,7 +73,7 @@ class MorytaniaPlugin : InteractionListener, MapArea {
 
     override fun defineListeners() {
         on(SWAMP_BOAT, IntType.SCENERY, "board", "Board ( Pay 10 )") { player, node ->
-            if (!isQuestComplete(player, Quests.NATURE_SPIRIT)) return@on false
+            if (!isQuestComplete(player, Quests.NATURE_SPIRIT.questName)) return@on false
 
             val isForward = node.id == 6970
             val overlay = if (isForward) Components.SWAMP_BOATJOURNEY_321 else Components.SWAMP_BOATJOURNEY_BACK_322

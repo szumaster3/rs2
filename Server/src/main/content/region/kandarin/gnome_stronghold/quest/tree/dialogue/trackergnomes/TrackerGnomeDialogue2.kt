@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.dialogue.trackergnomes
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.inInventory
 import core.api.sendDialogue
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class TrackerGnomeDialogue2(player: Player? = null) : Dialogue(player) {
@@ -20,7 +21,7 @@ class TrackerGnomeDialogue2(player: Player? = null) : Dialogue(player) {
         componentID: Int,
         buttonID: Int,
     ): Boolean {
-        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName)
         when {
             questStage == 100 -> when (stage) {
                 0 -> sendDialogue(player, "Tracker Gnome seems too busy to talk.").also { stage = END_DIALOGUE }

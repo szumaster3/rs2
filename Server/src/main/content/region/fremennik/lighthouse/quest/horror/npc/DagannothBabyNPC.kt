@@ -1,5 +1,7 @@
 package content.region.fremennik.lighthouse.quest.horror.npc
 
+import content.data.Quests
+
 import content.region.fremennik.lighthouse.quest.horror.dialogue.JossikLighthouseDialogue
 import core.api.*
 import core.api.setQuestStage
@@ -12,7 +14,6 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class DagannothBabyNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -51,7 +52,7 @@ class DagannothBabyNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
-            setQuestStage(killer, Quests.HORROR_FROM_THE_DEEP, 60)
+            setQuestStage(killer, Quests.HORROR_FROM_THE_DEEP.questName, 60)
             clearHintIcon(killer)
             queueScript(killer, 1, QueueStrength.SOFT) {
                 face(findNPC(NPCs.JOSSIK_1335)).also {

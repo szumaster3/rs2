@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Droalak dialogue.
@@ -19,7 +20,7 @@ import shared.consts.Quests
 class DroalakDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
+        val questStage = getQuestStage(player, Quests.MAKING_HISTORY.questName)
         val droalakProgress = getVarbit(player, MHUtils.DROALAK_PROGRESS)
 
         return when {

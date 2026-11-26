@@ -222,6 +222,8 @@ internal object GameAttributes {
     const val QUEST_SEA_SLUG_TALK_WITH_KENT = "/save:seaslug:kent-dialogue"
 
     // Achievements alternative teleportation options.
+    const val ATTRIBUTE_RING_OF_LIFE_ALT_TELE = "/save:diaries:ardougne:ring-of-life-alt-tele"
+    const val ATTRIBUTE_WATCHTOWER_ALT_TELE = "/save:diaries:ardougne:watchtower-alt-tele"
     const val ATTRIBUTE_VARROCK_ALT_TELE = "/save:diaries:varrock:alttele"
     const val ATTRIBUTE_CAMELOT_ALT_TELE = "/save:diaries:camelot:alttele"
 

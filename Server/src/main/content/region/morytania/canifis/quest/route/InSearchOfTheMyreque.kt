@@ -1,14 +1,15 @@
 package content.region.morytania.canifis.quest.route
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 class InSearchOfTheMyreque :
-    Quest(Quests.IN_SEARCH_OF_THE_MYREQUE, 80, 79, 2, Vars.VARP_QUEST_IN_SEARCH_OF_MYREQUE_PROGRESS_387, 0, 1, 101) {
+    Quest(Quests.IN_SEARCH_OF_THE_MYREQUE, Vars.VARP_QUEST_IN_SEARCH_OF_MYREQUE_PROGRESS_387, 0, 1, 101) {
     override fun drawJournal(
         player: Player,
         stage: Int,
@@ -22,10 +23,10 @@ class InSearchOfTheMyreque :
             line(player, "!!Morytania.??", line++, stage >= 3)
             line++
             line(player, "I need to complete the following quest:-", line++, stage >= 3)
-            if (isQuestComplete(player, Quests.NATURE_SPIRIT)) {
+            if (isQuestComplete(player, Quests.NATURE_SPIRIT.questName)) {
                 line(player, "<str><col=000000>Nature Spirit</col></str>", line++, false)
             } else {
-                line(player, Quests.NATURE_SPIRIT, line++, false)
+                line(player, Quests.NATURE_SPIRIT.questName, line++, false)
             }
             line(player, "I also need to be able to defeat a level !!97 foe??.", line++, false)
         }

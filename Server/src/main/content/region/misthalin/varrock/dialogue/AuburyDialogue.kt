@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import content.global.travel.EssenceTeleport.teleport
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -14,7 +16,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Aubury dialogue.
@@ -24,7 +25,7 @@ class AuburyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quest = getQuestStage(player, Quests.RUNE_MYSTERIES)
+        val quest = getQuestStage(player, Quests.RUNE_MYSTERIES.questName)
         if (quest == 40) {
             npc(
                 "My gratitude to you adventurer for bringing me these",
@@ -45,7 +46,7 @@ class AuburyDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = getQuestStage(player, Quests.RUNE_MYSTERIES)
+        val quest = getQuestStage(player, Quests.RUNE_MYSTERIES.questName)
         when (stage) {
             0 -> {
                 if (quest == 30) {
@@ -75,7 +76,7 @@ class AuburyDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 950
                     return true
                 }
-                stage = if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+                stage = if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                     options("Yes please!", "Oh, it's a rune shop. No thank you, then.")
                     100
                 } else {
@@ -104,7 +105,7 @@ class AuburyDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             902 -> {
-                setQuestStage(player, Quests.RUNE_MYSTERIES, 50)
+                setQuestStage(player, Quests.RUNE_MYSTERIES.questName, 50)
                 if (!player.inventory.add(NOTES)) {
                     GroundItemManager.create(GroundItem(NOTES, player.location, player))
                 }
@@ -211,7 +212,7 @@ class AuburyDialogue(player: Player? = null) : Dialogue(player) {
 
             806 -> end()
             807 -> if (removeItem(player, PACKAGE)) {
-                setQuestStage(player, Quests.RUNE_MYSTERIES, 40)
+                setQuestStage(player, Quests.RUNE_MYSTERIES.questName, 40)
                 npc(
                     "This... this is incredible. Please, give me a few moments",
                     "to quickly look over this, and then talk to me again.",

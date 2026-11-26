@@ -1,16 +1,17 @@
 package content.region.karamja.quest.roots
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 0, 1, 65) {
+class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS) {
 
     private val requirements = BooleanArray(8)
 
@@ -30,10 +31,10 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
             ln++
 
             line(player, "I also need to have completed:", ln++)
-            line(player, "!!${Quests.ONE_SMALL_FAVOUR}??.", ln++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false))
-            line(player, "!!${Quests.TRIBAL_TOTEM}??.", ln++, isQuestComplete(player, Quests.TRIBAL_TOTEM))
-            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", ln++, isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND))
-            line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS}??.", ln++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false))
+            line(player, "!!${Quests.ONE_SMALL_FAVOUR.questName}??.", ln++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR.questName, false))
+            line(player, "!!${Quests.TRIBAL_TOTEM.questName}??.", ln++, isQuestComplete(player, Quests.TRIBAL_TOTEM.questName))
+            line(player, "!!${Quests.THE_HAND_IN_THE_SAND.questName}??.", ln++, isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND.questName))
+            line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS.questName}??.", ln++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS.questName, false))
             ln++
         }
 
@@ -113,10 +114,10 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
     }
 
     override fun hasRequirements(player: Player): Boolean {
-        requirements[0] = hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false)
-        requirements[1] = isQuestComplete(player, Quests.TRIBAL_TOTEM)
-        requirements[2] = isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)
-        requirements[3] = hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false)
+        requirements[0] = hasRequirement(player, Quests.ONE_SMALL_FAVOUR.questName, false)
+        requirements[1] = isQuestComplete(player, Quests.TRIBAL_TOTEM.questName)
+        requirements[2] = isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND.questName)
+        requirements[3] = hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS.questName, false)
         requirements[4] = getStatLevel(player, Skills.WOODCUTTING) >= 72
         requirements[5] = getStatLevel(player, Skills.FIREMAKING) >= 53
         requirements[6] = getStatLevel(player, Skills.SLAYER) >= 59

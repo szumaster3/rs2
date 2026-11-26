@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.diary
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.prayer.Bones
@@ -258,7 +260,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
             }
         }
 
-        if (isQuestComplete(player, Quests.DRAGON_SLAYER)) {
+        if (isQuestComplete(player, Quests.DRAGON_SLAYER.questName)) {
             if (event.target.id == NPCs.OZIACH_747 && event.option == "trade" && inBorders(player, OZIACH_SHOP_AREA)) {
                 finishTask(
                     player,

@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -76,7 +77,7 @@ class GunnjornDialogue(player: Player? = null): Dialogue(player) {
                 end()
                 npc("Sure. Here you go.")
                 addItem(player!!, Items.LIGHTHOUSE_KEY_3848)
-                setQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP, 5)
+                setQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP.questName, 5)
             }
         }
         return true

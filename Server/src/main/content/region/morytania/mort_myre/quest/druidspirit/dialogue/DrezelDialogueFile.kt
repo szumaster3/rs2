@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.quest.druidspirit.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -11,7 +13,6 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 
 /**
@@ -27,7 +28,7 @@ class DrezelDialogueFile : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        questStage = getQuestStage(player!!, Quests.NATURE_SPIRIT)
+        questStage = getQuestStage(player!!, Quests.NATURE_SPIRIT.questName)
         if (questStage <= 5) {
             when (stage) {
                 0 -> options("Sorry, not interested...", "Well, what is it, I may be able to help?").also { stage++ }
@@ -98,14 +99,14 @@ class DrezelDialogueFile : DialogueFile() {
                     if (questStage == 0) {
                         repeat(3) { addItemOrDrop(player!!, Items.MEAT_PIE_2327, 1) }
                         repeat(3) { addItemOrDrop(player!!, Items.APPLE_PIE_2323, 1) }
-                        setQuestStage(player!!, Quests.NATURE_SPIRIT, 5)
+                        setQuestStage(player!!, Quests.NATURE_SPIRIT.questName, 5)
                     }
                     stage++
                 }
                 23 -> npcl(FaceAnim.NEUTRAL, "Please take this food to Filliman, he'll probably appreciate a bit of cooked food. Now, he's never revealed where he lives in the swamps but I guess he'd be to the south, search for him won't you?").also { stage++ }
                 24 -> playerl(FaceAnim.FRIENDLY, "I'll do my very best, don't worry, if he's in there and he's still alive I'll definitely find him.").also {
                     stage = END_DIALOGUE
-                    setQuestStage(player!!, Quests.NATURE_SPIRIT, 10)
+                    setQuestStage(player!!, Quests.NATURE_SPIRIT.questName, 10)
                 }
             }
         } else if (questStage == 15) {
@@ -131,7 +132,7 @@ class DrezelDialogueFile : DialogueFile() {
         } else if (questStage == 40) {
             npcl(FaceAnim.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also {
                 stage = END_DIALOGUE
-                setQuestStage(player!!, Quests.NATURE_SPIRIT, 45)
+                setQuestStage(player!!, Quests.NATURE_SPIRIT.questName, 45)
             }
         } else if (questStage == 100) {
             when (stage) {
@@ -184,7 +185,7 @@ private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse() {
 
             4 -> {
                 unlock(player)
-                setQuestStage(player, Quests.NATURE_SPIRIT, 40)
+                setQuestStage(player, Quests.NATURE_SPIRIT.questName, 40)
                 return true
             }
         }

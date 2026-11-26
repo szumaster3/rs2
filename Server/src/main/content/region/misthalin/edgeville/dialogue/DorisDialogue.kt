@@ -1,5 +1,7 @@
 package content.region.misthalin.edgeville.dialogue
 
+import content.data.Quests
+
 import content.global.skill.summoning.pets.Pet
 import core.api.hasRequirement
 import core.api.sendMessage
@@ -15,7 +17,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Doris dialogue.
@@ -25,7 +26,7 @@ class DorisDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.RECIPE_FOR_DISASTER, false)) {
+        if (!hasRequirement(player, Quests.RECIPE_FOR_DISASTER.questName, false)) {
             npc(FaceAnim.ANNOYED,"What are you doing in my house?")
         } else {
             npc(FaceAnim.HALF_ASKING,"Hello again dearie. How are you doing?").also { stage = 5 }

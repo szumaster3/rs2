@@ -1,5 +1,7 @@
 package content.region.karamja.tbw.quest.junglepotion.dialogue
 
+import content.data.Quests
+
 import content.region.karamja.tbw.quest.junglepotion.plugin.JunglePotionListener
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Trufitus dialogue.
@@ -22,7 +23,7 @@ class TrufitusDialogue(player: Player? = null) : Dialogue(player) {
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
-        quest = player.getQuestRepository().getQuest(Quests.JUNGLE_POTION)
+        quest = player.getQuestRepository().getQuest(Quests.JUNGLE_POTION.questName)
         when (val stageValue = quest!!.getStage(player)) {
             0 -> npc("Greetings Bwana! I am Trufitus Shakaya of the Tai", "Bwo Wannai village.")
             in listOf(10, 20, 30, 40, 50) -> {
@@ -139,7 +140,7 @@ class TrufitusDialogue(player: Player? = null) : Dialogue(player) {
                 600 -> npc("Many blessings on you! I must now prepare, please", "excuse me while I make the arrangements.").also { stage = -1 }
                -1 -> sendDialogueLines(player, "Trufitus shows you some techniques in Herblore. You gain some", "experience in Herblore.").also { stage++ }
                 0 -> {
-                    finishQuest(player, Quests.JUNGLE_POTION)
+                    finishQuest(player, Quests.JUNGLE_POTION.questName)
                     end()
                 }
             }

@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.hero.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.hero.HeroesQuest
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Achietties dialogue.
@@ -23,7 +24,7 @@ class AchiettiesDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player!!, Quests.HEROES_QUEST)) {
+        when (getQuestStage(player!!, Quests.HEROES_QUEST.questName)) {
             0 -> npc(FaceAnim.FRIENDLY, "Greetings. Welcome to the Heroes' Guild.").also { stage = 0 }
             1, 2, 3, 4 -> npc(FaceAnim.FRIENDLY, "Greetings. Welcome to the Heroes' Guild.").also { stage = 10 }
             6 -> npc(FaceAnim.FRIENDLY, "Greetings. Welcome to the Heroes' Guild.").also { stage = 20 }
@@ -43,8 +44,8 @@ class AchiettiesDialogue(player: Player? = null) : Dialogue(player) {
             }
             3 -> {
                 if (HeroesQuest.hasRequirements(player)) {
-                    if (getQuestStage(player, Quests.HEROES_QUEST) == 0) {
-                        setQuestStage(player, Quests.HEROES_QUEST, 1)
+                    if (getQuestStage(player, Quests.HEROES_QUEST.questName) == 0) {
+                        setQuestStage(player, Quests.HEROES_QUEST.questName, 1)
                     }
                     npcl(FaceAnim.FRIENDLY, "Well you seem to meet our initial requirements, so you may now begin the tasks to earn membership in the Heroes' Guild.").also { stage++ }
                 } else {
@@ -80,8 +81,8 @@ class AchiettiesDialogue(player: Player? = null) : Dialogue(player) {
                     removeItem(player, Items.LAVA_EEL_2149)
                     removeItem(player, Items.THIEVES_ARMBAND_1579)
 
-                    if (getQuestStage(player, Quests.HEROES_QUEST) == 6) {
-                        finishQuest(player, Quests.HEROES_QUEST)
+                    if (getQuestStage(player, Quests.HEROES_QUEST.questName) == 6) {
+                        finishQuest(player, Quests.HEROES_QUEST.questName)
                     }
                 }
 

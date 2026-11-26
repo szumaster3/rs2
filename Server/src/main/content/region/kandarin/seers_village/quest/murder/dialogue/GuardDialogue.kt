@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.murder.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,7 +15,6 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GuardDialogue(player: Player? = null) : Dialogue(player) {
@@ -57,7 +58,7 @@ class GuardDialogueFile : DialogueFile() {
         }
         val EVIDENCE = (1796..1822).toList().toIntArray()
 
-        when (getQuestStage(player!!, Quests.MURDER_MYSTERY)) {
+        when (getQuestStage(player!!, Quests.MURDER_MYSTERY.questName)) {
             0 -> when (stage) {
                 0 -> playerl(FaceAnim.NEUTRAL, "What's going on here?").also { stage++ }
                 1 -> npcl(
@@ -79,7 +80,7 @@ class GuardDialogueFile : DialogueFile() {
                     "Look around and investigate who might be responsible. The Sarge said every murder leaves clues to who done it, but frankly we're out of our depth here."
                 )
                     .also { setAttribute(player!!, MurderMystery.attributeRandomMurderer, RandomFunction.random(5)) }
-                    .also { setQuestStage(player!!, Quests.MURDER_MYSTERY, 1) }
+                    .also { setQuestStage(player!!, Quests.MURDER_MYSTERY.questName, 1) }
                     .also { stage = END_DIALOGUE }
 
                 8 -> npcl("Get lost then, this is private property! ...Unless you'd like to be taken in for questioning yourself?").also {
@@ -268,7 +269,7 @@ class GuardDialogueFile : DialogueFile() {
                 60 -> npcl("You have our gratitude, and I'm sure the rest of the family's as well, in helping to apprehend the murderer. I'll just take the evidence from you now.").also { stage++ }
                 61 -> sendDialogue(player!!, "You hand over all the evidence.").also { stage++ }
                 62 -> npcl(FaceAnim.HAPPY, "Please accept this reward from the family!").also { stage++ }
-                63 -> finishQuest(player!!, Quests.MURDER_MYSTERY)
+                63 -> finishQuest(player!!, Quests.MURDER_MYSTERY.questName)
                     .also {
                         player!!.inventory.removeAll(EVIDENCE)
                         player!!.bank.removeAll(EVIDENCE)

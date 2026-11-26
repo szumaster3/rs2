@@ -1,5 +1,7 @@
 package content.region.asgarnia.goblin_village.quest.gobdip.dialogue
 
+import content.data.Quests
+
 import core.api.sendNPCDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Grubfoot dialogue.
@@ -22,7 +23,7 @@ class GrubfootDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY)
+        quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY.questName)
         when (quest!!.getStage(player)) {
             100 -> npc(FaceAnim.OLD_NORMAL, "Me lonely.")
             30 -> npc(FaceAnim.OLD_NORMAL, "Me not like this blue colour.")

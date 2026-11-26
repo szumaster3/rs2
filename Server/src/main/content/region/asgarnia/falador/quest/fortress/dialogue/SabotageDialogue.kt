@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.quest.fortress.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -43,7 +45,7 @@ class SabotageDialogue(player: Player? = null) : Dialogue(player) {
             8 -> {
                 end()
                 animate(player, Animations.GET_UP_FROM_LISTENING_TO_DOOR_4197)
-                setQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS, 20)
+                setQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS.questName, 20)
             }
 
             10 -> {
@@ -64,7 +66,7 @@ class SabotageDialogue(player: Player? = null) : Dialogue(player) {
                 if (removeItem(player, Items.CABBAGE_1965)) {
                     end()
                     setVarbit(player, 2494, 1, true)
-                    setQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS, 30)
+                    setQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS.questName, 30)
                     player(FaceAnim.HAPPY, "Looks like my work here is done. Seems like that's", "successfully sabotaged their little secret weapon plan.")
                 }
             }

@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
@@ -23,7 +25,7 @@ import kotlin.random.Random
 class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player!!, Quests.RUM_DEAL)) {
+        if (!hasRequirement(player!!, Quests.RUM_DEAL.questName)) {
             sendDialogue(player, "The Pirate Pete is too busy to talk.").also { stage = END_DIALOGUE }
         } else {
             // Quest dialogue:

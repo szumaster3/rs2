@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.waterfall.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendMessage
 import core.api.setQuestStage
@@ -7,12 +9,11 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
-import shared.consts.Quests
 
 class HudonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        stage = if (getQuestStage(player, Quests.WATERFALL_QUEST) >= 20) {
+        stage = if (getQuestStage(player, Quests.WATERFALL_QUEST.questName) >= 20) {
             player(FaceAnim.HALF_GUILTY, "So you're still here.")
             20
         } else {
@@ -30,7 +31,7 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
                 end()
             }
 
-            0 -> if (getQuestStage(player, Quests.WATERFALL_QUEST) == 10) {
+            0 -> if (getQuestStage(player, Quests.WATERFALL_QUEST.questName) == 10) {
                 interpreter.sendDialogues(305, FaceAnim.CHILD_NORMAL, "It looks like you need the help.")
                 stage = 1
             }
@@ -72,7 +73,7 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
 
             6 -> {
                 interpreter.sendDialogues(305, FaceAnim.CHILD_NORMAL, "I'm fine alone.")
-                setQuestStage(player, Quests.WATERFALL_QUEST, 20)
+                setQuestStage(player, Quests.WATERFALL_QUEST.questName, 20)
                 stage = 101
             }
 
@@ -82,7 +83,7 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.CHILD_NORMAL,
                     "I'll find that treasure soon, just you wait and see.",
                 )
-                stage = if (getQuestStage(player, Quests.WATERFALL_QUEST) == 100) {
+                stage = if (getQuestStage(player, Quests.WATERFALL_QUEST.questName) == 100) {
                     21
                 } else {
                     100

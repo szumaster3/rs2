@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Bonafido dialogue.
@@ -20,7 +21,7 @@ import shared.consts.Quests
 class BonafidoDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE)) {
+        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE.questName)) {
             0 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi there.").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "A'up, babe, how's it goin'?").also { stage++ }
@@ -47,7 +48,7 @@ class BonafidoDialogue(player: Player? = null) : Dialogue(player) {
                 12 -> playerl(FaceAnim.FRIENDLY, "Count me in!").also { stage++ }
                 13 -> {
                     end()
-                    setQuestStage(player, Quests.TOWER_OF_LIFE, 2)
+                    setQuestStage(player, Quests.TOWER_OF_LIFE.questName, 2)
                     setAttribute(player, GameAttributes.TOL_BUILDER_COSTUME, 0)
                 }
             }

@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.arthur.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.camelot.quest.arthur.npc.ThrantaxTheMightyNPC
 import core.api.sendDialogue
@@ -16,7 +18,6 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Thrantax dialogue.
@@ -100,7 +101,7 @@ class ThrantaxDialogue : DialogueFile() {
             12 -> npc(FaceAnim.OLD_HAPPY, "Thou mayst now shatter Merlins' crystal with", "excalibur, ").also { stage++ }
             13 -> npc(FaceAnim.OLD_HAPPY, "and I can once more rest. Begone! And leave me once", "more in peace.").also { stage++ }
             14 -> {
-                setQuestStage(player!!, Quests.MERLINS_CRYSTAL, 50)
+                setQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName, 50)
                 disappear(player!!)
                 end()
                 stage = END_DIALOGUE

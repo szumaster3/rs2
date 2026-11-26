@@ -1,10 +1,11 @@
 package content.region.fremennik.lighthouse.quest.horror.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.interaction.InterfaceListener
 import shared.consts.Components
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class MetalDoorInterface : InterfaceListener {
@@ -24,7 +25,7 @@ class MetalDoorInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         onOpen(Components.HORROR_METALDOOR_142) { player, _ ->
-            if (isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) return@onOpen true
+            if (isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP.questName)) return@onOpen true
 
             runeComponents.forEach { (attribute, componentIndex) ->
                 val used = getAttribute(player, attribute, 0) == 1
@@ -35,7 +36,7 @@ class MetalDoorInterface : InterfaceListener {
                 closeInterface(player)
                 sendMessage(player, "You hear the sound of something moving within the wall.")
                 playAudio(player, Sounds.STRANGEDOOR_SOUND_1627, 1)
-                setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, QUEST_STAGE_OPEN_DOOR)
+                setQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName, QUEST_STAGE_OPEN_DOOR)
             }
             return@onOpen true
         }

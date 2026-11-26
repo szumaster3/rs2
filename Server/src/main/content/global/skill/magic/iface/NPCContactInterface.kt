@@ -1,5 +1,7 @@
 package content.global.skill.magic.iface
 
+import content.data.Quests
+
 import content.region.kandarin.yanille.dialogue.BertDialogue
 import content.region.kandarin.yanille.quest.handsand.TheHandintheSand.Companion.getStoreFile
 import core.api.*
@@ -14,7 +16,6 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the NPC contact interface.
@@ -72,7 +73,7 @@ class NPCContactInterface : InterfaceListener {
                     closeInterface(player)
 
                     val dialogue = randomDialogue.filter { dialogue ->
-                        dialogue.npc?.id != NPCs.BERT_3108 || hasRequirement(player, Quests.THE_HAND_IN_THE_SAND)
+                        dialogue.npc?.id != NPCs.BERT_3108 || hasRequirement(player, Quests.THE_HAND_IN_THE_SAND.questName)
                     }
 
                     val random = dialogue.randomOrNull()
@@ -105,7 +106,7 @@ class NPCContactInterface : InterfaceListener {
             player.interfaceManager.close()
             var npcId = contactNPCs[index]
 
-            if (npcId == NPCs.BERT_3108 && !hasRequirement(player, Quests.THE_HAND_IN_THE_SAND)) {
+            if (npcId == NPCs.BERT_3108 && !hasRequirement(player, Quests.THE_HAND_IN_THE_SAND.questName)) {
                 npcId = contactNPCs.filter { it != NPCs.BERT_3108 }.random()
             }
 
@@ -561,7 +562,7 @@ class NPCContactInterface : InterfaceListener {
             when (stage) {
                 0 -> player("Hi there.").also { stage++ }
                 1 -> {
-                    if (!isQuestComplete(player!!, Quests.MY_ARMS_BIG_ADVENTURE)) {
+                    if (!isQuestComplete(player!!, Quests.MY_ARMS_BIG_ADVENTURE.questName)) {
                         npcl(FaceAnim.CHILD_FRIENDLY, "Is dat you, ${player!!.username}? My Arm can hear you but you not here.").also { stage++ }
                     } else {
                         npcl(FaceAnim.CHILD_THINKING, "Voice in my head?").also { stage = 3 }

@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.troll.npc
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.troll.dialogue.DadDialogueFile
 import core.api.*
 import core.game.interaction.QueueStrength
@@ -10,7 +12,6 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class DadNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -23,7 +24,7 @@ class DadNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location
         val attackable = super.isAttackable(entity, style, message)
         val player = entity.asPlayer()
 
-        when (getQuestStage(player, Quests.TROLL_STRONGHOLD)) {
+        when (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName)) {
             3 -> openDialogue(player, DadDialogueFile(2), this.asNpc()).also { return false }
             4 -> {
                 return attackable
@@ -42,8 +43,8 @@ class DadNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location
         if (opponent.skills.lifepoints < 30) {
             player.properties.combatPulse.stop()
             opponent.properties.combatPulse.stop()
-            if (getQuestStage(player!!.asPlayer(), Quests.TROLL_STRONGHOLD) == 4) {
-                setQuestStage(player.asPlayer(), Quests.TROLL_STRONGHOLD, 5)
+            if (getQuestStage(player!!.asPlayer(), Quests.TROLL_STRONGHOLD.questName) == 4) {
+                setQuestStage(player.asPlayer(), Quests.TROLL_STRONGHOLD.questName, 5)
             }
             queueScript(player, 3, QueueStrength.SOFT) {
                 openDialogue(player.asPlayer(), DadDialogueFile(3), opponent.asNpc())
@@ -54,8 +55,8 @@ class DadNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location
 
     override fun finalizeDeath(killer: Entity?) {
         super.finalizeDeath(killer)
-        if (getQuestStage(killer!!.asPlayer(), Quests.TROLL_STRONGHOLD) == 4) {
-            setQuestStage(killer.asPlayer(), Quests.TROLL_STRONGHOLD, 5)
+        if (getQuestStage(killer!!.asPlayer(), Quests.TROLL_STRONGHOLD.questName) == 4) {
+            setQuestStage(killer.asPlayer(), Quests.TROLL_STRONGHOLD.questName, 5)
         }
     }
 }

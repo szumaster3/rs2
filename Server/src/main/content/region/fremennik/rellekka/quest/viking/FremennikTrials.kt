@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -7,11 +9,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_QUEST_FREMENNIK_TRIALS_PROGRESS_347, 0, 1, 10) {
+class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS) {
 
     class SkillRequirement(val skill: Int?, val level: Int?)
 
@@ -20,7 +21,7 @@ class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11
-        val started = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0
+        val started = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName) > 0
 
         if (!started) {
             line(player, "Requirements to complete quest:", line++)

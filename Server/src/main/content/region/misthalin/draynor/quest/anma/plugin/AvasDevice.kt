@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.anma.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.event.EventHook
 import core.game.event.TickEvent
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.tools.colorize
 import core.tools.secondsToTicks
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Handles functionality related to Ava's devices.
@@ -19,7 +20,7 @@ class AvasDevice : InteractionListener, EventHook<TickEvent> {
 
     override fun defineListeners() {
         onEquip(devices) { player, _ ->
-            if (!isQuestComplete(player, Quests.ANIMAL_MAGNETISM)) {
+            if (!isQuestComplete(player, Quests.ANIMAL_MAGNETISM.questName)) {
                 sendMessage(player, "You need to complete Animal Magnetism to equip this.")
                 return@onEquip false
             }

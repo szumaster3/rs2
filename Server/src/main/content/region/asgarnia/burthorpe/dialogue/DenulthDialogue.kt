@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.death.dialogue.DenulthDialogueFile
 import content.region.asgarnia.burthorpe.quest.troll.dialogue.DenulthTrollDialogue
 import core.api.isQuestComplete
@@ -14,7 +16,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Denulth dialogue.
@@ -28,7 +29,7 @@ class DenulthDialogue(player: Player? = null) : Dialogue(player) {
          * When Troll Stronghold is complete.
          */
 
-        if (isQuestComplete(player!!, Quests.TROLL_STRONGHOLD)) {
+        if (isQuestComplete(player!!, Quests.TROLL_STRONGHOLD.questName)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
                 1 -> npcl(FaceAnim.HAPPY, "Welcome back friend!").also { stage++ }
@@ -54,7 +55,7 @@ class DenulthDialogue(player: Player? = null) : Dialogue(player) {
          * Troll Stronghold in progress.
          */
 
-        if (isQuestInProgress(player!!, Quests.TROLL_STRONGHOLD, 1, 99)) {
+        if (isQuestInProgress(player!!, Quests.TROLL_STRONGHOLD.questName, 1, 99)) {
             openDialogue(player!!, DenulthTrollDialogue(), npc)
             return true
         }
@@ -63,7 +64,7 @@ class DenulthDialogue(player: Player? = null) : Dialogue(player) {
          * When Death Plateau is completed, start Troll Stronghold.
          */
 
-        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
+        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU.questName)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
                 1 -> npcl(FaceAnim.HAPPY, "Welcome back friend!").also { stage++ }
@@ -86,7 +87,7 @@ class DenulthDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 16 -> npcl(FaceAnim.HAPPY, "God speed friend! I would send some of my men with you, but none of them are brave enough to follow.").also {
                     end()
-                    setQuestStage(player!!, Quests.TROLL_STRONGHOLD, 1)
+                    setQuestStage(player!!, Quests.TROLL_STRONGHOLD.questName, 1)
                 }
                 20 -> npcl(FaceAnim.ANGRY, "You are right citizen. The White Knights have taken advantage of the old and weak king, they control most of Asgarnia, including Falador. However they do not control Burthorpe!").also { stage++ }
                 21 -> npcl(FaceAnim.EVIL_LAUGH, "We are the prince's elite troops! We keep Burthorpe secure!").also { stage++ }

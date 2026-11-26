@@ -1,5 +1,7 @@
 package content.region.karamja.quest.totem.dialogue
 
+import content.data.Quests
+
 import content.global.travel.EssenceTeleport
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -30,7 +32,7 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
             stage = 39
             return true
         }
-        if(getQuestStage(player, Quests.BACK_TO_MY_ROOTS) >= 1) {
+        if(getQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName) >= 1) {
             showTopics(
                 Topic("Talk about Back to my Roots", 27, true),
                 Topic("Talk about something else", 0, true)
@@ -50,7 +52,7 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> playerl(FaceAnim.HAPPY, "Two jobs? That's got to be tough.").also { stage = 4 }
                 2 -> playerl(FaceAnim.ASKING, "So, what have you invented?").also { stage = 8 }
                 3 -> playerl(FaceAnim.HAPPY, "Can you teleport me to the Rune Essence?").also {
-                    if (isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+                    if (isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                         end()
                         EssenceTeleport.teleport(npc!!, player)
                     } else {
@@ -89,7 +91,7 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
             22 -> npcl(FaceAnim.HAPPY, "As you wish.").also { stage = 1000 }
             23 -> npcl(FaceAnim.HAPPY, "Okey dokey! Ready?").also { stage++ }
             24 -> {
-                if (isQuestInProgress(player, Quests.TRIBAL_TOTEM, 1, 49)) {
+                if (isQuestInProgress(player, Quests.TRIBAL_TOTEM.questName, 1, 49)) {
                     npcl(FaceAnim.HAPPY, "Okay, I got a signal. Get ready!").also { stage = 26 }
                 } else {
                     npcl(FaceAnim.THINKING, "Hmmm... that's odd... I can't seem to get a signal...").also { stage++ }
@@ -100,7 +102,7 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
                 questTeleport(player, npc)
                 end()
             }
-            27 -> if(getQuestStage(player, Quests.BACK_TO_MY_ROOTS) == 4) {
+            27 -> if(getQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName) == 4) {
                 if(!inInventory(player, Items.POT_LID_4440)) {
                     npc("Have you made the pot lid yet?").also { stage = 41 }
                 } else {
@@ -120,7 +122,7 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
             36 -> player(FaceAnim.HALF_ASKING, "Okay, okay, I'll go see what I can do about it.").also { stage++ }
             37 -> npc(FaceAnim.FRIENDLY, "Oh, would you? I'd be ever so grateful... and might even", "let you use my new magical preservation magic", "thingummy.").also { stage++ }
             38 -> player(FaceAnim.HALF_ASKING, "*sigh* I guess I'd better see what's happening at the", "R.P.D.T. depot then.").also {
-                setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 2)
+                setQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName, 2)
                 // Showing smelly table.
                 setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 10, true)
                 stage = 1000
@@ -159,7 +161,7 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
             54 -> playerl(FaceAnim.SCARED, "No! I'll walk, thanks!").also { stage++ }
             55 -> npcl(FaceAnim.THINKING, "You can walk on water? How impressive... I'll want to talk to you about that sometime. Perhaps I could manipulate the molecules and make them somehow get friendlier and then I could...").also {
                 sendDialogueLines(player, "You think it best to depart before Wizard Cromperty thinks up", "anymore inventions.")
-                setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 5)
+                setQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName, 5)
                 stage = END_DIALOGUE
             }
             1000 -> end()
@@ -186,13 +188,13 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
         GameWorld.Pulser.submit(
             object : Pulse(1) {
                 var counter = 0
-                var delivered = player.questRepository.getStage(Quests.TRIBAL_TOTEM) >= 25
+                var delivered = player.questRepository.getStage(Quests.TRIBAL_TOTEM.questName) >= 25
 
                 override fun pulse(): Boolean {
                     when (counter++) {
                         2 -> {
                             if (delivered) {
-                                setQuestStage(player, Quests.TRIBAL_TOTEM, 30)
+                                setQuestStage(player, Quests.TRIBAL_TOTEM.questName, 30)
                                 player.properties.teleportLocation = LOCATIONS[1]
                             } else {
                                 player.properties.teleportLocation = LOCATIONS[0]
@@ -226,7 +228,7 @@ private class WizardCrompertyDialogue : DialogueFile() {
             7 -> playerl(FaceAnim.FRIENDLY, "Some people make pottery to earn a living, but not me: I just run errands for potty wizards...").also { stage++ }
             8 -> npcl(FaceAnim.HALF_ASKING, "Why, you young whippersnapper! Don't you know that only foolish potters make wisecracks?").also { stage++ }
             9 -> playerl(FaceAnim.FRIENDLY, "Okay, okay, I'll make your pot lid.").also {
-                setQuestStage(player!!, Quests.BACK_TO_MY_ROOTS, 4)
+                setQuestStage(player!!, Quests.BACK_TO_MY_ROOTS.questName, 4)
                 setVarbit(player!!, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 30, true)
                 stage = END_DIALOGUE
             }

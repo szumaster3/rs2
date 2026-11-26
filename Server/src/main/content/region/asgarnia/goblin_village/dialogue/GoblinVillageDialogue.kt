@@ -1,5 +1,7 @@
 package content.region.asgarnia.goblin_village.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Goblin Village dialogue.
@@ -29,7 +30,7 @@ class GoblinVillageDialogue(player: Player? = null) : Dialogue(player) {
             1 -> npc(FaceAnim.OLD_DEFAULT, "Go away smelly human!").also { stage = 17 }
             2 -> npc(FaceAnim.OLD_DEFAULT, "Happy goblin new century!").also { stage = 0 }
             3 -> npc(FaceAnim.OLD_DEFAULT, "What you doing here?").also { stage = 2 }
-            4 -> if (isQuestComplete(player, Quests.GOBLIN_DIPLOMACY)) {
+            4 -> if (isQuestComplete(player, Quests.GOBLIN_DIPLOMACY.questName)) {
                 npc(FaceAnim.OLD_DEFAULT, "Brown armour best!").also { stage = 7 }
             } else {
                 npc(FaceAnim.OLD_DEFAULT, "Go away smelly human!").also { stage = 17 }

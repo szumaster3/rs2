@@ -1,5 +1,7 @@
 package content.global.skill.agility.shortcuts
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
@@ -16,7 +18,6 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import shared.consts.Animations
 import shared.consts.Components
-import shared.consts.Quests
 
 /**
  * Handles the GWD shortcut.
@@ -27,7 +28,7 @@ class GodWarsBoulderShortcut : AgilityShortcut(intArrayOf(26338), 0, 0.0, "move"
     private var boulder: Scenery? = null
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
-        if (!isQuestComplete(player, Quests.TROLL_STRONGHOLD)) {
+        if (!isQuestComplete(player, Quests.TROLL_STRONGHOLD.questName)) {
             sendMessage(player, "You need to complete the Troll Stronghold quest to move this boulder.")
             return
         }

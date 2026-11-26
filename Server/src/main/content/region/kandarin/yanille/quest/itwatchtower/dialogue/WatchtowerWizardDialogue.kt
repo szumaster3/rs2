@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -24,7 +26,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.WATCHTOWER)
+        val questStage = getQuestStage(player, Quests.WATCHTOWER.questName)
         if (npc.id == NPCs.WIZARD_5195) {
             if (questStage == 75) {
                 player(FaceAnim.HALF_ASKING, "Any chance of advice about this potion?")
@@ -211,7 +213,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
             28 -> npc("I will tell the guards to let you past - that way, you", "can just use the ladder to get in and out.").also { stage++ }
             29 -> {
                 end()
-                setQuestStage(player, Quests.WATCHTOWER, 1)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 1)
             }
 
             30 -> {
@@ -273,7 +275,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
             57 -> npc("In the meantime, I'll throw those fingernails out for", "you.").also { stage++ }
             58 -> {
                 end()
-                setQuestStage(player, Quests.WATCHTOWER, 2)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 2)
             }
 
             100 -> npc("You'll have to speak with the Watchtower Wizard", "about that.").also { stage = END_DIALOGUE }
@@ -299,7 +301,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
                 if(allInInventory(player, *relics)){
                     removeAll(player, relics)
                     sendItemDialogue(player, Items.OGRE_RELIC_2372, "The wizard gives you a complete statue.")
-                    setQuestStage(player, Quests.WATCHTOWER, 10)
+                    setQuestStage(player, Quests.WATCHTOWER.questName, 10)
                     addItemOrDrop(player, Items.OGRE_RELIC_2372, 1)
                 }
             }
@@ -362,7 +364,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
             902 -> npc(FaceAnim.NEUTRAL, "It is essential to return it to me before you use it, so", "that I can empower it with my magic.").also { stage++ }
             903 -> npc(FaceAnim.NEUTRAL, "Be very careful how you mix it as it is extremely", "volatile. Mixing ingredients of this type in the wrong", "order can cause explosions!").also { stage++ }
             904 -> npc(FaceAnim.NEUTRAL, "I hope you've been brushing up Herblore and Magic? I", "must warn you, only experienced magicians can use the", "potion. It is too dangerous in the hands of the unskilled.").also {
-                setQuestStage(player, Quests.WATCHTOWER, 75)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 75)
                 stage = END_DIALOGUE
             }
 
@@ -460,7 +462,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
 
             1200 -> npc(FaceAnim.NEUTRAL, "Now the shield generator can be activated and, once", "again, Yanille will be safe from the threat of the ogres.").also { stage++ }
             1201 -> npc(FaceAnim.NEUTRAL, "Put the crystals on the pillars there and throw the lever", "to activate the system.").also {
-                setQuestStage(player, Quests.WATCHTOWER, 95)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 95)
                 stage = END_DIALOGUE
             }
 

@@ -1,11 +1,12 @@
 package content.global.skill.smithing.smelt
 
+import content.data.Quests
+
 import content.global.skill.smithing.bar.BarItem
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.impl.PulseType
 import shared.consts.Components
-import shared.consts.Quests
 
 class SmeltingInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
@@ -19,7 +20,7 @@ class SmeltingInterface : InterfaceListener {
 
             sendItemZoomOnInterface(player, Components.SMELTING_311, 4, BarItem.BRONZE.product.id, 150)
 
-            if (isQuestComplete(player, Quests.THE_KNIGHTS_SWORD)) {
+            if (isQuestComplete(player, Quests.THE_KNIGHTS_SWORD.questName)) {
                 sendString(player, "<br><br><br><br><col=000000>Blurite", Components.SMELTING_311, 20)
             }
 

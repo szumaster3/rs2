@@ -1,5 +1,7 @@
 package content.region.misthalin.barbarian_village.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestInProgress
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Peksa dialogue.
@@ -29,7 +30,7 @@ class PeksaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> if (isQuestInProgress(player, Quests.SCORPION_CATCHER, 10, 99)) {
+            0 -> if (isQuestInProgress(player, Quests.SCORPION_CATCHER.questName, 10, 99)) {
                 options("I could be, yes.", "No, I'll pass on that.", "I've heard you have a small scorpion in your possession.").also { stage++ }
             } else {
                 options("I could be, yes.", "No, I'll pass on that.").also { stage++ }

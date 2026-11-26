@@ -1,5 +1,7 @@
 package content.region.karamja.plugin
 
+import content.data.Quests
+
 import content.data.skill.SkillingTool
 import content.global.skill.gather.SkillUtils
 import content.global.skill.gather.woodcutting.WoodcuttingNode
@@ -46,7 +48,7 @@ class KaramjaPlugin : InteractionListener {
          */
 
         on(CUSTOM_OFFICERS, IntType.NPC, "pay-fare") { player, node ->
-            if (!isQuestComplete(player, Quests.PIRATES_TREASURE)) {
+            if (!isQuestComplete(player, Quests.PIRATES_TREASURE.questName)) {
                 openDialogue(player, node.asNpc().id, node)
                 sendMessage(player, "You may only use the Pay-fare option after completing Pirate's Treasure.")
                 return@on true
@@ -180,7 +182,7 @@ class KaramjaPlugin : InteractionListener {
          */
 
         on(NPCs.TIADECHE_1164, IntType.NPC, "trade") { player, _ ->
-            if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) return@on false
+            if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO.questName)) return@on false
             openNpcShop(player, NPCs.TIADECHE_1164)
             return@on true
         }

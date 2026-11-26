@@ -1,8 +1,9 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter.data.impl
 
+import content.data.Quests
+
 import content.region.misthalin.lumbridge.plugin.gnomecopter.data.IntroductionPage
 import core.tools.RED
-import shared.consts.Quests
 
 enum class BurthorpeInformationTab(
     vararg info: String,
@@ -150,11 +151,11 @@ enum class BurthorpeInformationTab(
     FOURTEENTH_PAGE(
         "Several quests call for the",
         "player to venture into the troll",
-        "lands, including {RED}${Quests.DEATH_PLATEAU}</col>,",
-        "{RED}${Quests.TROLL_STRONGHOLD}</col>, the eccentric,",
-        "{RED}${Quests.EADGARS_RUSE}</col>, the romantic",
-        "drama {RED}${Quests.TROLL_ROMANCE}</col>, the",
-        "challenging {RED}${Quests.DESERT_TREASURE}</col>",
+        "lands, including {RED}${Quests.DEATH_PLATEAU.questName}</col>,",
+        "{RED}${Quests.TROLL_STRONGHOLD.questName}</col>, the eccentric,",
+        "{RED}${Quests.EADGARS_RUSE.questName}</col>, the romantic",
+        "drama {RED}${Quests.TROLL_ROMANCE.questName}</col>, the",
+        "challenging {RED}${Quests.DESERT_TREASURE.questName}</col>",
         "and the wacky odyssey {RED}My</col>,",
         "{RED}Arm's Big Adventure</col>.",
     ),

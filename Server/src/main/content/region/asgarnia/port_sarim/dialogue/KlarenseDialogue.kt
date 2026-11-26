@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import core.api.removeItem
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Klarense dialogue.
@@ -22,7 +23,7 @@ class KlarenseDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER)
+        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER.questName)
         if (args.size > 1) {
             npc(FaceAnim.ANGRY, "Hey, stay off my ship! That's private property!").also { stage = END_DIALOGUE }
             return true

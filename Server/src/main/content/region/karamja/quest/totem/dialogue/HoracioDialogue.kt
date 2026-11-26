@@ -1,5 +1,7 @@
 package content.region.karamja.quest.totem.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -18,7 +19,7 @@ import shared.consts.Vars
 class HoracioDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if(getQuestStage(player, Quests.BACK_TO_MY_ROOTS) >= 1) {
+        if(getQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName) >= 1) {
             npc("How goes the hunt, brave gardener?").also { stage = 27 }
         } else {
             npcl(FaceAnim.HAPPY, "It's a fine day to be out in a garden, isn't it?")
@@ -27,7 +28,7 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val afterTribalTotemQuest = isQuestComplete(player, Quests.TRIBAL_TOTEM)
+        val afterTribalTotemQuest = isQuestComplete(player, Quests.TRIBAL_TOTEM.questName)
         when (stage) {
             0 -> showTopics(
                 Topic("Yes it's very nice.", 1, false),
@@ -51,10 +52,10 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             7 -> npcl(FaceAnim.HAPPY, "It's rather easy, it's his middle name.").also { stage++ }
             8 -> playerl(FaceAnim.ASKING, "Whose middle name?").also { stage++ }
             9 -> npcl(FaceAnim.ANNOYED, "Hum. I probably shouldn't have said that. Forget I mentioned it.").also { stage = END_DIALOGUE }
-            10 -> if(!hasRequirement(player, Quests.BACK_TO_MY_ROOTS, false)) {
+            10 -> if(!hasRequirement(player, Quests.BACK_TO_MY_ROOTS.questName, false)) {
                 npc(FaceAnim.HAPPY, "Actually, now you mention it, yes... but you're not", "experienced enough to help me just yet.").also { stage = END_DIALOGUE }
                 sendMessage(player, "Check your quest journal for the requirements to start the Back to my Roots quest.")
-            } else if (isQuestComplete(player, Quests.BACK_TO_MY_ROOTS)) {
+            } else if (isQuestComplete(player, Quests.BACK_TO_MY_ROOTS.questName)) {
                 npc(FaceAnim.HAPPY, "You've done more than enough to help.", "Hope you're enjoying your vine patch!").also { stage = END_DIALOGUE }
             } else {
                 npc(FaceAnim.HAPPY, "Actually, now you mention it, yes... I'm going to", "improve the garden around the house. Would you be", "willing to help me?").also { stage++ }
@@ -79,12 +80,12 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             25 -> player(FaceAnim.HAPPY, "Okay, I'm off to see the wizard... so long as he's not", "going to teleport me places again, we should be fine!").also { stage++ }
             26 -> npc(FaceAnim.FRIENDLY, "That would be excellent!").also {
                 // Unlocks: Crmoperty dialogue.
-                setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 1)
+                setQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName, 1)
                 setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 1, true)
                 stage = END_DIALOGUE
             }
 
-            27 -> when(getQuestStage(player, Quests.BACK_TO_MY_ROOTS)){
+            27 -> when(getQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName)){
                 8 -> npcl(FaceAnim.FRIENDLY, "You call yourself a farmer? How could you let the vine go wild like that?").also { stage = 44 }
                 7 -> player("Guess what? I got you a cutting... and it should still be alive, too!").also { stage++ }
                 6 -> npcl(FaceAnim.HALF_ASKING, "Umm. Have you had time to plant that vine yet?").also { stage = 39 }
@@ -121,7 +122,7 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             52 -> npc(FaceAnim.FRIENDLY, "haven't fought a strongylodon macrobotrys vine for a", "long time, we thought they'd been hunted to extinction", "at one point. Still, your jade vine may prove useful for", "training your Slayer abilities.").also { stage++ }
             53 -> {
                 end()
-                finishQuest(player, Quests.BACK_TO_MY_ROOTS)
+                finishQuest(player, Quests.BACK_TO_MY_ROOTS.questName)
                 stage = END_DIALOGUE
             }
 

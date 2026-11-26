@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils.resetLines
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -36,10 +38,10 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
         if(npc.id == NPCs.AGGIE_8207) {
-            if (getQuestStage(player, Quests.SWEPT_AWAY) == 3) {
+            if (getQuestStage(player, Quests.SWEPT_AWAY.questName) == 3) {
                 player("Woah, I felt that down to my toes!")
                 stage = 911
-            } else if(getQuestStage(player, Quests.SWEPT_AWAY) == 2 && player.getAttribute("total_sweeps", 0) >= 0) {
+            } else if(getQuestStage(player, Quests.SWEPT_AWAY.questName) == 2 && player.getAttribute("total_sweeps", 0) >= 0) {
                 npcl(FaceAnim.SAD, "Hmm, that doesn't look quite right. To enchant the broom, you need to sweep away 4 lines to make a pattern of 4 small triangles - and no extra lines or shapes.").also { stage = 921 }
             } else {
                 player(FaceAnim.HALF_ASKING,"Woah! Where are we and what are we doing here?")
@@ -47,7 +49,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             }
             return true
         }
-        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
+        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE.questName)
         npc(FaceAnim.HALF_ASKING,"What can I help you with?")
         stage = 0
         return true
@@ -74,7 +76,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 720
                     return true
                 }
-                if (!isQuestComplete(player, Quests.SWEPT_AWAY) && getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
+                if (!isQuestComplete(player, Quests.SWEPT_AWAY.questName) && getQuestStage(player, Quests.SWEPT_AWAY.questName) >= 1) {
                     options(
                         "What could you make for me?",
                         "Cool, do you turn people into frogs?",
@@ -219,7 +221,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
 
             736 -> end()
             1 ->
-                if (!isQuestComplete(player, Quests.SWEPT_AWAY)) {
+                if (!isQuestComplete(player, Quests.SWEPT_AWAY.questName)) {
                     when (buttonId) {
                         1 -> {
                             player(FaceAnim.HALF_ASKING,"What could you make for me?")
@@ -540,7 +542,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             910 -> {
                 player("Okay, thanks. I'll give it a try.")
                 end()
-                setQuestStage(player, Quests.SWEPT_AWAY, 2)
+                setQuestStage(player, Quests.SWEPT_AWAY.questName, 2)
                 stage = END_DIALOGUE
             }
             911 -> npcl(FaceAnim.HAPPY, "You did it! The enchantment form the sand pattern has infused Maggie's broom. There's nothing more to do here howl come have a chat when you're ready and I'll take you back to Draynor with me.").also { stage++ }

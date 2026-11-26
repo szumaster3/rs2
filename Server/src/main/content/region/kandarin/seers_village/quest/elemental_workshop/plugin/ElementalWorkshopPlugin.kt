@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.elemental_workshop.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.elemental_workshop.plugin.EWUtils.BELLOWS_STATE
 import content.region.kandarin.seers_village.quest.elemental_workshop.plugin.EWUtils.FURNACE_STATE
 import content.region.kandarin.seers_village.quest.elemental_workshop.plugin.EWUtils.LEFT_WATER_CONTROL_STATE
@@ -125,7 +127,7 @@ class ElementalWorkshopPlugin : InteractionListener {
                         sendMessage(player, "Inside you find a small, old, battered key.")
                         replaceSlot(player, with.asItem().slot, slashedBook)
                         addItemOrDrop(player, Items.BATTERED_KEY_2887)
-                        setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I, 3)
+                        setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I.questName, 3)
                         return@queueScript stopExecuting(player)
                     }
 
@@ -158,8 +160,8 @@ class ElementalWorkshopPlugin : InteractionListener {
                 return@on true
             }
 
-            if (getQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I) < 5) {
-                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I, 5)
+            if (getQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I.questName) < 5) {
+                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I.questName, 5)
             }
 
             sendMessage(player, "You use the battered key to open the doors.")
@@ -183,7 +185,7 @@ class ElementalWorkshopPlugin : InteractionListener {
                     "Now to explore this area thoroughly, to find what " + "forgotten secrets it contains.",
                     FaceAnim.NEUTRAL,
                 )
-                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I, 7)
+                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I.questName, 7)
             }
             return@on true
         }
@@ -272,8 +274,8 @@ class ElementalWorkshopPlugin : InteractionListener {
                 sendMessage(player, "Following the instructions in the book you make an elemental shield.")
             }
 
-            if (!isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_I)) {
-                finishQuest(player, Quests.ELEMENTAL_WORKSHOP_I)
+            if (!isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_I.questName)) {
+                finishQuest(player, Quests.ELEMENTAL_WORKSHOP_I.questName)
             }
             return@onUseWith true
         }

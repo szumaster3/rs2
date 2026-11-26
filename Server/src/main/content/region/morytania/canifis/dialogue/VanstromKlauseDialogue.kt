@@ -1,5 +1,7 @@
 package content.region.morytania.canifis.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.canifis.quest.route.dialogue.VanstromKlauseQuestDialogue
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -8,7 +10,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import shared.consts.Quests
 
 /**
  * Represents the Vanstrom Klause dialogue.
@@ -28,7 +29,7 @@ class VanstromKlauseDialogue(player: Player? = null) : Dialogue(player) {
             1 -> npcl(FaceAnim.HALF_GUILTY, "Quite well my self.").also { stage++ }
             2 -> {
                 when {
-                    getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE) > 1 -> {
+                    getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE.questName) > 1 -> {
                         openDialogue(player, VanstromKlauseQuestDialogue(), npc)
                     }
                     else -> end()

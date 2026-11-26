@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Drezel dialogue.
@@ -19,16 +20,16 @@ class DrezelDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 13) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 13) {
             playerl(FaceAnim.HALF_GUILTY, "Hello.")
             stage = 0
-        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 14) {
+        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 14) {
             npc(FaceAnim.HALF_GUILTY, "How does it adventurer? Any luck in finding the key to", "the cell or a way of stopping the vampire yet?")
             stage = 600
-        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 15) {
+        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 15) {
             player(FaceAnim.HALF_GUILTY, "The key fitted the lock! You're free to leave now!")
             stage = 701
-        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 16) {
+        } else if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 16) {
             player(FaceAnim.HALF_GUILTY, "I poured the blessed water over the vampires coffin. I", "think that should trap him in there long enough for you", "to escape.")
             stage = 800
         }
@@ -97,7 +98,7 @@ class DrezelDialogue(player: Player? = null) : Dialogue(player) {
             517 -> npc(FaceAnim.HALF_GUILTY, "Depending on the severity of the damage, I may", "require further assistance from you in restoring its", "purity.").also { stage++ }
             518 -> player(FaceAnim.HALF_GUILTY, "Okay, well first thing's first; let's get you out of here.").also { stage++ }
             519 -> {
-                setQuestStage(player, Quests.PRIEST_IN_PERIL, 14)
+                setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 14)
                 end()
             }
             600 -> player(FaceAnim.HALF_GUILTY, "No, not yet...").also { stage++ }
@@ -135,7 +136,7 @@ class DrezelDialogue(player: Player? = null) : Dialogue(player) {
             800 -> npc(FaceAnim.HALF_GUILTY, "Excellent work adventurer! I am free at last! Let me", "ensure that evil vampire is trapped for good. I will", "meet you down by the monument.").also { stage++ }
             801 -> npc(FaceAnim.HALF_GUILTY, "Look for me down there, I need to assess what damage", "has been done to our holy barrier by those evil", "Zamorakians!").also { stage++ }
             802 -> {
-                setQuestStage(player, Quests.PRIEST_IN_PERIL, 17)
+                setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 17)
                 end()
             }
         }

@@ -7,11 +7,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class TheFremennikIsles : Quest(Quests.THE_FREMENNIK_ISLES, 133, 132, 1, Vars.VARBIT_QUEST_FREMENNIK_ISLES_PROGRESS_3311, 0, 1, 340) {
+class TheFremennikIsles : Quest(Quests.THE_FREMENNIK_ISLES, Vars.VARBIT_QUEST_FREMENNIK_ISLES_PROGRESS_3311, 0, 1, 340) {
 
     /*
      * Sources:

@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.plugin
 
+import content.data.Quests
+
 import core.api.findLocalNPC
 import core.api.sendMessage
 import core.api.sendNPCDialogue
@@ -11,7 +13,6 @@ import core.game.node.entity.player.link.warning.WarningType
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class MortMyreSwampPlugin : InteractionListener {
@@ -37,7 +38,7 @@ class MortMyreSwampPlugin : InteractionListener {
             }
 
             if (player.location.y == 3458) {
-                if (!player.questRepository.hasStarted(Quests.NATURE_SPIRIT)) {
+                if (!player.questRepository.hasStarted(Quests.NATURE_SPIRIT.questName)) {
                     sendNPCDialogue(
                         player,
                         NPCs.ULIZIUS_1054,

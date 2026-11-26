@@ -1,5 +1,7 @@
 package content.region.other.entrana.quest.zep
 
+import content.data.Quests
+
 import core.api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
@@ -7,11 +9,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class EnlightenedJourney : Quest(Quests.ENLIGHTENED_JOURNEY, 55, 54, 1, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_PROGRESS_2866, 0, 1, 200) {
+class EnlightenedJourney : Quest(Quests.ENLIGHTENED_JOURNEY) {
 
     class SkillRequirement(val skill: Int?, val level: Int?)
     val requirements = arrayListOf<SkillRequirement>()

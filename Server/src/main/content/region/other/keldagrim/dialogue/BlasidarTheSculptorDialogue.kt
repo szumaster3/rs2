@@ -1,5 +1,7 @@
 package content.region.other.keldagrim.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.openInterface
 import core.api.sendOptions
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Blasidar The Sculptor dialogue.
@@ -22,7 +23,7 @@ class BlasidarTheSculptorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(!hasRequirement(player, Quests.THE_GIANT_DWARF)){
+        if(!hasRequirement(player, Quests.THE_GIANT_DWARF.questName)){
             npc(FaceAnim.OLD_NORMAL, "Hello!")
         } else {
             showTopics(
@@ -39,7 +40,7 @@ class BlasidarTheSculptorDialogue(player: Player? = null) : Dialogue(player) {
             1 -> npc(FaceAnim.OLD_NORMAL, "Only the most famous sculptor in all of Keldagrim.").also { stage++ }
             2 -> player(FaceAnim.HALF_ASKING, "Does Keldagrim have a lot of sculptors then?").also { stage++ }
             3 -> npc(FaceAnim.OLD_NORMAL, "Well... I'm the best outside of Keldagrim too, I tell you! Especially here in the north.").also { stage++ }
-            4 -> if(!hasRequirement(player, Quests.MOUNTAIN_DAUGHTER)) {
+            4 -> if(!hasRequirement(player, Quests.MOUNTAIN_DAUGHTER.questName)) {
                 player("Sure, sure, of course.").also { stage = END_DIALOGUE }
             } else {
                 player(FaceAnim.HAPPY, "Yeah, maybe you should visit the mountain people topside of this mountain some time... all they have is a big lump of stone!").also { stage++ }

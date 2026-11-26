@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setAttribute
 import core.api.setQuestStage
@@ -19,7 +21,6 @@ import core.plugin.Initializable
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Professor Oddenstein dialogue.
@@ -29,7 +30,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN.questName)) {
             0, 10 -> {
                 npc(FaceAnim.HALF_GUILTY, "Be careful in here, there's lots of dangerous equipment.")
                 stage = 0
@@ -49,7 +50,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN.questName)) {
             0, 100 -> when (stage) {
                 0 -> {
                     options("What does this machine do?", "Is this your house?")
@@ -238,7 +239,7 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 18 -> {
-                    setQuestStage(player, Quests.ERNEST_THE_CHICKEN, 20)
+                    setQuestStage(player, Quests.ERNEST_THE_CHICKEN.questName, 20)
                     end()
                 }
             }

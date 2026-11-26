@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Pikkupstix dialogue.
@@ -29,7 +30,7 @@ class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE)
+        quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE.questName)
         when (quest!!.getStage(player)) {
             0 -> npc(FaceAnim.FRIENDLY,"You there! What are you doing here, as if I didn't have", "enough troubles?")
             10 -> {

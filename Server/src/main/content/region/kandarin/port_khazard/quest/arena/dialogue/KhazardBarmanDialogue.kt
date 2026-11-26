@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import core.api.addItem
 import core.api.getQuestStage
 import core.api.removeItem
@@ -13,7 +15,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.Items.COINS_995
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Khazard Barman dialogue.
@@ -25,7 +26,7 @@ import shared.consts.Quests
 class KhazardBarmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        if (getQuestStage(player!!, Quests.FIGHT_ARENA) in 50..100) {
+        if (getQuestStage(player!!, Quests.FIGHT_ARENA.questName) in 50..100) {
             when (stage) {
                 0 -> playerl(FaceAnim.HAPPY, "Hello.").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Hi, what can I get you? We have a range of quality brews.").also { stage++ }
@@ -56,7 +57,7 @@ class KhazardBarmanDialogue(player: Player? = null) : Dialogue(player) {
                 } else {
                     end()
                     addItem(player!!, Items.KHALI_BREW_77, 1)
-                    setQuestStage(player!!, Quests.FIGHT_ARENA, 60)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA.questName, 60)
                 }
             }
         } else {

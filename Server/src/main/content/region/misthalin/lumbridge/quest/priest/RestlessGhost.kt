@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.priest
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -7,11 +9,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class RestlessGhost : Quest(Quests.THE_RESTLESS_GHOST, 25, 24, 1, Vars.VARP_QUEST_RESTLESS_GHOST_PROGRESS_107, 0, 4, 5) {
+class RestlessGhost : Quest(Quests.THE_RESTLESS_GHOST) {
     override fun drawJournal(
         player: Player,
         stage: Int,
@@ -77,7 +78,7 @@ class RestlessGhost : Quest(Quests.THE_RESTLESS_GHOST, 25, 24, 1, Vars.VARP_QUES
         drawReward(player, Items.GHOSTS_SKULL_553)
         drawReward(player, "1 Quest Point", 10)
         drawReward(player, "1125 Prayer XP", 11)
-        sendString(player, "You have completed ${Quests.THE_RESTLESS_GHOST}!", Components.QUEST_COMPLETE_SCROLL_277, 4)
+        sendString(player, "You have completed ${Quests.THE_RESTLESS_GHOST.questName}!", Components.QUEST_COMPLETE_SCROLL_277, 4)
         rewardXP(player, Skills.PRAYER, 1125.0)
         closeChatBox(player)
         setVarp(player, Vars.VARP_RESTLESS_GHOST_728, 31, true)

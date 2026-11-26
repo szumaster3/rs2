@@ -1,5 +1,7 @@
 package content.region.fremennik.lighthouse.quest.horror.npc
 
+import content.data.Quests
+
 import core.api.*
 import core.api.finishQuest
 import core.game.interaction.QueueStrength
@@ -16,7 +18,6 @@ import core.game.world.map.Location
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class DagannothMotherNPC(id: Int = 0, location: Location? = null, session: DagannothSession? = null) : AbstractNPC(id, location) {
 
@@ -111,7 +112,7 @@ class DagannothMotherNPC(id: Int = 0, location: Location? = null, session: Dagan
 
             queueScript(killer, 1, QueueStrength.SOFT) {
                 teleport(killer, Location(2515, 10000, 1), TeleportManager.TeleportType.INSTANT)
-                finishQuest(killer, Quests.HORROR_FROM_THE_DEEP)
+                finishQuest(killer, Quests.HORROR_FROM_THE_DEEP.questName)
                 if (!hasCasket) {
                     addItemOrDrop(killer, Items.RUSTY_CASKET_3849)
                 }

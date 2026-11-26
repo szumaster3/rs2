@@ -1,5 +1,7 @@
 package content.region.karamja.brimhaven.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
@@ -9,7 +11,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Garv dialogue.
@@ -46,7 +47,7 @@ class GarvDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             START_DIALOGUE -> {
-                stage = when (getQuestStage(player!!, Quests.HEROES_QUEST)) {
+                stage = when (getQuestStage(player!!, Quests.HEROES_QUEST.questName)) {
                     in 0..2 -> 1
                     in 3..6, 100 -> 10
                     else -> 100
@@ -120,8 +121,8 @@ class GarvDialogueFile : DialogueFile() {
             21 -> {
                 if (inInventory(player!!, Items.ID_PAPERS_1584)) {
                     npcl("You'd better come in then, Grip will want to talk to you.")
-                    if (getQuestStage(player!!, Quests.HEROES_QUEST) == 3) {
-                        setQuestStage(player!!, Quests.HEROES_QUEST, 4)
+                    if (getQuestStage(player!!, Quests.HEROES_QUEST.questName) == 3) {
+                        setQuestStage(player!!, Quests.HEROES_QUEST.questName, 4)
                     }
                     endFile()
                 } else {

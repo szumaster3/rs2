@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.lumbridge.quest.ariane1.dialogue.DukeHoracioRMDialogue
 import content.region.misthalin.lumbridge.quest.lost_tribe.dialogue.DukeHoracioLostTribeDialogue
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
@@ -13,7 +15,6 @@ import core.game.node.entity.player.Player
 import core.tools.DIALOGUE_INITIAL_OPTIONS_HANDLE
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Duke Horacio dialogues.
@@ -24,23 +25,23 @@ class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if ((
-                    getQuestStage(player, Quests.DRAGON_SLAYER) == 100 &&
+                    getQuestStage(player, Quests.DRAGON_SLAYER.questName) == 100 &&
                     !player.inventory.containsItem(DragonSlayer.SHIELD) &&
                     !player.bank.containsItem(DragonSlayer.SHIELD)
             ) ||
             (
-                    getQuestStage(player, Quests.DRAGON_SLAYER) > 0 &&
-                            !isQuestComplete(player, Quests.DRAGON_SLAYER)
+                    getQuestStage(player, Quests.DRAGON_SLAYER.questName) > 0 &&
+                            !isQuestComplete(player, Quests.DRAGON_SLAYER.questName)
             )
         ) {
-            addOption(Quests.DRAGON_SLAYER, DukeDragonSlayerDialogue(player.questRepository.getStage(Quests.DRAGON_SLAYER)))
+            addOption(Quests.DRAGON_SLAYER.questName, DukeDragonSlayerDialogue(player.questRepository.getStage(Quests.DRAGON_SLAYER.questName)))
         }
-        if (!isQuestComplete(player, Quests.THE_LOST_TRIBE) &&
-            getQuestStage(player, Quests.THE_LOST_TRIBE) > 0
+        if (!isQuestComplete(player, Quests.THE_LOST_TRIBE.questName) &&
+            getQuestStage(player, Quests.THE_LOST_TRIBE.questName) > 0
         ) {
             addOption(
-                Quests.THE_LOST_TRIBE,
-                DukeHoracioLostTribeDialogue(player.questRepository.getStage(Quests.THE_LOST_TRIBE)),
+                Quests.THE_LOST_TRIBE.questName,
+                DukeHoracioLostTribeDialogue(player.questRepository.getStage(Quests.THE_LOST_TRIBE.questName)),
             )
         }
         if (!sendChoices()) {
@@ -78,8 +79,8 @@ class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
                 }
             20 -> {
                 npc("Let me see...")
-                if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
-                    loadFile(DukeHoracioRMDialogue(player.questRepository.getStage(Quests.RUNE_MYSTERIES)))
+                if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
+                    loadFile(DukeHoracioRMDialogue(player.questRepository.getStage(Quests.RUNE_MYSTERIES.questName)))
                 } else {
                     stage++
                 }

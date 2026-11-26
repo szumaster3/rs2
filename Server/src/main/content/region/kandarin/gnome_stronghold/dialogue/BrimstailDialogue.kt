@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.dialogue
 
+import content.data.Quests
+
 import content.global.travel.EssenceTeleport
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Brimstail dialogue.
@@ -24,7 +25,7 @@ class BrimstailDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> if (isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+            0 -> if (isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                 options("Hello, just wanted a chat.", "Nothing for now, thanks!", "I need to mine some rune essence.").also { stage++ }
             } else {
                 options("Hello, just wanted a chat.", "Nothing for now, thanks!").also { stage++ }

@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -28,7 +30,7 @@ import shared.consts.*
 class OgreCityGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val stage = getQuestStage(player, Quests.WATCHTOWER)
+        val stage = getQuestStage(player, Quests.WATCHTOWER.questName)
 
         if (stage in 10..100) {
             end()

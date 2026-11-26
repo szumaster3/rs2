@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Glough dialogue.
@@ -19,7 +20,7 @@ class GloughDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.THE_GRAND_TREE) >= 40) {
+        if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) >= 40) {
             openDialogue(player, content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.GloughDialogue(), npc)
         } else {
             playerl(FaceAnim.FRIENDLY, "Hello there!")

@@ -1,5 +1,7 @@
 package content.region.other.zanaris.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Fairy Fixit dialogue.
@@ -19,7 +20,7 @@ class FairyFixitDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (hasRequirement(player, Quests.FAIRYTALE_II_CURE_A_QUEEN)) {
+        if (hasRequirement(player, Quests.FAIRYTALE_II_CURE_A_QUEEN.questName)) {
             npc(FaceAnim.OLD_CALM_TALK1, "Pssst! Human! I've got something for you.").also { stage = 20 }
         } else {
             npc(FaceAnim.OLD_DISTRESSED, "What is it, human? Busy busy busy!")

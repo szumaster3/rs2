@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.GravingasAhoyDialogue
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.getQuestStage
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Gravingas dialogue.
@@ -24,7 +25,7 @@ class GravingasDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         when {
             // If the player has the bedsheet and has completed the quest.
-            getQuestStage(player, Quests.GHOSTS_AHOY) in 1..99 && (hasGhostspeak(player) || inEquipment(player, Items.BEDSHEET_4285)) -> {
+            getQuestStage(player, Quests.GHOSTS_AHOY.questName) in 1..99 && (hasGhostspeak(player) || inEquipment(player, Items.BEDSHEET_4285)) -> {
                 end()
                 openDialogue(player, GravingasAhoyDialogue())
                 return true

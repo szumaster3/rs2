@@ -1,5 +1,7 @@
 package content.region.other.keldagrim.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 private const val DWARVEN_MINE_CONDUCTOR = NPCs.CART_CONDUCTOR_2186
 private const val WHITE_WOLF_CONDUCTOR = NPCs.CART_CONDUCTOR_2185
@@ -78,7 +79,7 @@ class CartConductorDialogue(player: Player? = null) : Dialogue(player) {
             3 -> when (npc.id) {
                 DWARVEN_MINE_CONDUCTOR -> npcl(FaceAnim.OLD_DEFAULT, "This track leads right up to Keldagrim. Only stop.").also { stage = 0 }
                 WHITE_WOLF_CONDUCTOR -> npcl(FaceAnim.OLD_DRUNK_LEFT, "North, north, north *hic* north to Keldagrim!").also { stage = 0 }
-                else -> npcl(FaceAnim.OLD_NORMAL, "Let's see, we can take you to the mines under Ice Mountain and to the Grand Exchange in Varrock.").also { stage = if (isQuestComplete(player, Quests.FISHING_CONTEST)) 4 else 0 }
+                else -> npcl(FaceAnim.OLD_NORMAL, "Let's see, we can take you to the mines under Ice Mountain and to the Grand Exchange in Varrock.").also { stage = if (isQuestComplete(player, Quests.FISHING_CONTEST.questName)) 4 else 0 }
             }
 
             4 -> {

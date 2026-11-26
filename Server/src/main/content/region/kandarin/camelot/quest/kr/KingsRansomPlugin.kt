@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.kr
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -9,7 +11,6 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class KingsRansomPlugin : InteractionListener, MapArea {
@@ -68,11 +69,11 @@ class KingsRansomPlugin : InteractionListener, MapArea {
 
             val destroyMessage = when {
                 // After Holy Grail, during King's Ransom.
-                isQuestComplete(player, Quests.HOLY_GRAIL) && !isQuestComplete(player, Quests.KINGS_RANSOM) ->
+                isQuestComplete(player, Quests.HOLY_GRAIL.questName) && !isQuestComplete(player, Quests.KINGS_RANSOM.questName) ->
                     "If you destroy the Holy Grail, you will need to return to the Fisher King's realm to obtain another."
 
                 // Complete King's Ransom.
-                isQuestComplete(player, Quests.KINGS_RANSOM) ->
+                isQuestComplete(player, Quests.KINGS_RANSOM.questName) ->
                     "If you destroy the Holy Grail, you can obtain another from Keep Le Faye or reclaim one from the quest storage chest."
 
                 // During Holy Grail.

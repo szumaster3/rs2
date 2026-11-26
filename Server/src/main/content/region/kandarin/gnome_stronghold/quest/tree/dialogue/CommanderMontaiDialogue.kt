@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.inInventory
 import core.api.removeItem
@@ -11,13 +13,12 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CommanderMontaiDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName)
         if (questStage == 10) {
             when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
@@ -34,7 +35,7 @@ class CommanderMontaiDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 9 -> npcl(FaceAnim.OLD_NORMAL, "That's a shame, we could have done with your help.").also { stage = END_DIALOGUE }
                 10 -> npcl(FaceAnim.OLD_NORMAL, "Please be as quick as you can, I don't know how much longer we can hold out.").also {
-                    setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 20)
+                    setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 20)
                     stage = END_DIALOGUE
                 }
             }
@@ -48,7 +49,7 @@ class CommanderMontaiDialogue(player: Player? = null) : Dialogue(player) {
                         for (i in 1..6) {
                             removeItem(player!!, Items.LOGS_1511)
                         }
-                        setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 25)
+                        setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 25)
                         npcl(FaceAnim.OLD_NORMAL, "That's excellent, now we can make more defensive battlements. Give me a moment to organize the troops and then come speak to me. I'll inform you of our next phase of attack.")
                         stage = END_DIALOGUE
                     }
@@ -80,7 +81,7 @@ class CommanderMontaiDialogue(player: Player? = null) : Dialogue(player) {
                 11 -> npcl(FaceAnim.OLD_NORMAL, "Thank you, you're braver than most.").also { stage++ }
                 12 -> npcl(FaceAnim.OLD_NORMAL, "I don't know how long I will be able to hold out. Once you have the coordinates come back and fire the ballista right into those monsters.").also { stage++ }
                 13 -> npcl(FaceAnim.OLD_NORMAL, "If you can retrieve the orb and bring safety back to my people, none of the blood spilled on this field will be in vain.").also {
-                    setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 30)
+                    setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 30)
                     stage = END_DIALOGUE
                 }
             }

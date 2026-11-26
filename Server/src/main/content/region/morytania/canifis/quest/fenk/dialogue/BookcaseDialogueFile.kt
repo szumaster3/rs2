@@ -1,5 +1,7 @@
 package content.region.morytania.canifis.quest.fenk.dialogue
 
+import content.data.Quests
+
 import content.global.plugins.item.books_and_scrolls.BookInterface
 import content.global.plugins.item.books_and_scrolls.BookLine
 import content.global.plugins.item.books_and_scrolls.Page
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 class BookcaseWest : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
@@ -51,7 +52,7 @@ class BookcaseEastDialogueFile : DialogueFile() {
 
             2 -> {
                 end()
-                if (getQuestStage(player!!, Quests.CREATURE_OF_FENKENSTRAIN) == 2) {
+                if (getQuestStage(player!!, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 2) {
                     sendItemDialogue(player!!, Items.OBSIDIAN_AMULET_4188, "You find an obsidian amulet in the secret compartment.")
                     addItemOrDrop(player!!, Items.OBSIDIAN_AMULET_4188, 1)
                 } else {

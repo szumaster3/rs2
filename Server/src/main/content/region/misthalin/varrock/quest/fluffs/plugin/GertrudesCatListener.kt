@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.fluffs.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -17,13 +19,13 @@ class GertrudesCatListener : InteractionListener {
 
     override fun defineListeners() {
         on(CRATE, IntType.SCENERY, "search") { player, node ->
-            if (getQuestStage(player, Quests.GERTRUDES_CAT) == 50 &&
+            if (getQuestStage(player, Quests.GERTRUDES_CAT.questName) == 50 &&
                 hasAnItem(
                     player,
                     Items.THREE_LITTLE_KITTENS_13236,
                 ).container != null
             ) {
-                setQuestStage(player, Quests.GERTRUDES_CAT, 40)
+                setQuestStage(player, Quests.GERTRUDES_CAT.questName, 40)
             }
 
             if (node is NPC) {
@@ -31,9 +33,9 @@ class GertrudesCatListener : InteractionListener {
                 sendMessage(player, "You find nothing.", 1)
             }
 
-            if (getQuestStage(player, Quests.GERTRUDES_CAT) == 40) {
+            if (getQuestStage(player, Quests.GERTRUDES_CAT.questName) == 40) {
                 if (getAttribute(player, "findkitten", false) && freeSlots(player) > 0) {
-                    setQuestStage(player, Quests.GERTRUDES_CAT, 50)
+                    setQuestStage(player, Quests.GERTRUDES_CAT.questName, 50)
                     sendDialogue(player, "You find a kitten! You carefully place it in your backpack.")
                     addItem(player, Items.THREE_LITTLE_KITTENS_13236)
                 }
@@ -52,17 +54,17 @@ class GertrudesCatListener : InteractionListener {
         }
 
         onUseWith(IntType.NPC, Items.BUCKET_OF_MILK_1927, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
-            if (getQuestStage(player, Quests.GERTRUDES_CAT) == 20 && removeItem(player, used.asItem())) {
+            if (getQuestStage(player, Quests.GERTRUDES_CAT.questName) == 20 && removeItem(player, used.asItem())) {
                 addItem(player, Items.BUCKET_1925)
                 animate(player, Animations.HUMAN_BURYING_BONES_827)
                 sendChat(with.asNpc(), "Mew!")
-                setQuestStage(player, Quests.GERTRUDES_CAT, 30)
+                setQuestStage(player, Quests.GERTRUDES_CAT.questName, 30)
             }
             return@onUseWith true
         }
 
         onUseWith(IntType.NPC, Items.DOOGLE_SARDINE_1552, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
-            if (getQuestStage(player, Quests.GERTRUDES_CAT) < 30){
+            if (getQuestStage(player, Quests.GERTRUDES_CAT.questName) < 30){
                 sendMessage(player, "Fluffs doesn't seem to be hungry right now.")
                         return@onUseWith true
             }
@@ -70,7 +72,7 @@ class GertrudesCatListener : InteractionListener {
                 animate(player, Animations.HUMAN_BURYING_BONES_827)
                 sendChat(with.asNpc(), "Mew!")
                 playAudio(player, Sounds.KITTENS_MEW_339)
-                setQuestStage(player, Quests.GERTRUDES_CAT, 40)
+                setQuestStage(player, Quests.GERTRUDES_CAT.questName, 40)
             }
             return@onUseWith true
         }
@@ -82,7 +84,7 @@ class GertrudesCatListener : InteractionListener {
 
         onUseWith(IntType.NPC, Items.THREE_LITTLE_KITTENS_13236, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
             if (removeItem(player, used.asItem())) {
-                setQuestStage(player, Quests.GERTRUDES_CAT, 60)
+                setQuestStage(player, Quests.GERTRUDES_CAT.questName, 60)
                 Pulser.submit(
                     object : Pulse(1) {
                         var count = 0

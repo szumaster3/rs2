@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.anma.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
 import core.api.addItemOrDrop
 import core.api.inInventory
@@ -11,14 +13,13 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class WitchDialogue(player: Player? = null) : Dialogue(player) {
 
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
-        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
+        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM.questName)
         when (quest!!.getStage(player)) {
             25 -> npc("Hello, hello, my poppet. What brings you to my little", "room?")
             26 -> if (!player.inventory.containsItem(IRON_BARS)) {
@@ -49,7 +50,7 @@ class WitchDialogue(player: Player? = null) : Dialogue(player) {
                 5 -> player("I'll be back.").also { stage++ }
                 6 -> {
                     end()
-                    setQuestStage(player, Quests.ANIMAL_MAGNETISM, 26)
+                    setQuestStage(player, Quests.ANIMAL_MAGNETISM.questName, 26)
                 }
             }
 
@@ -63,7 +64,7 @@ class WitchDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> npc("Go to the iron mine just north-east of Rimmington and", "hit the bar with a plain old smithing hammer while facing", "north. Then take your new magnet to Ava. Poor girl,", "having to deal with whippersnappers like you.").also { stage++ }
                 4 -> if (player.inventory.remove(IRON_BARS)) {
                     addItemOrDrop(player,AnimalMagnetism.SELECTED_IRON)
-                    setQuestStage(player, Quests.ANIMAL_MAGNETISM, 27)
+                    setQuestStage(player, Quests.ANIMAL_MAGNETISM.questName, 27)
                     end()
                 }
 

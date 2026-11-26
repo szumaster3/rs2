@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.swept
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.removeAttribute
 import core.api.drawReward
@@ -9,14 +11,13 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the Swept Away quest.
  */
 @Initializable
-class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_AWAY_PROGRESS_5448, 0, 1, 50) {
+class SweptAway : Quest(Quests.SWEPT_AWAY) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

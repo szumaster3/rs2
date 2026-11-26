@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -7,12 +9,11 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MercenaryDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             10 -> npc("Yeah, what do you want?")
             100 -> npc("What are you looking at?")
             else -> npc("What are you doing here?")
@@ -21,7 +22,7 @@ class MercenaryDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             10 -> when (stage) {
                 0 -> {
                     player("I'm looking for a woman called Ana, have you seen her?")
@@ -180,7 +181,7 @@ class MercenaryDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 25 -> {
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 11)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 11)
                     end()
                 }
             }

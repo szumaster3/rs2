@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.tree
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -7,11 +9,10 @@ import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class TreeGnomeVillage : Quest(Quests.TREE_GNOME_VILLAGE, 125, 124, 2, Vars.VARP_QUEST_TREE_GNOME_VILLAGE_PROGRESS_111, 0, 1, 9) {
+class TreeGnomeVillage : Quest(Quests.TREE_GNOME_VILLAGE) {
     companion object {
         val mazeVillage = Location(2515, 3159, 0)
         val mazeEntrance = Location(2504, 3192, 0)

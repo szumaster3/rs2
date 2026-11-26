@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Hooknosed Jack dialogue.
@@ -416,7 +417,7 @@ class HooknosedJackDialogue(player: Player? = null) : Dialogue(player) {
 
             91 -> playerl(FaceAnim.FRIENDLY, "Thanks for your help.").also { stage++ }
             92 -> npcl(FaceAnim.FRIENDLY, "Do you have any other questions about the pits?").also { stage = 60 }
-            93 -> if (!hasRequirement(player, Quests.RATCATCHERS)) {
+            93 -> if (!hasRequirement(player, Quests.RATCATCHERS.questName)) {
                 npcl(FaceAnim.FRIENDLY, "Step away from that manhole, you've no business down there.").also {
                     stage = END_DIALOGUE
                 }

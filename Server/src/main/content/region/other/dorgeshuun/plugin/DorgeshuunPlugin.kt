@@ -1,5 +1,7 @@
 package content.region.other.dorgeshuun.plugin
 
+import content.data.Quests
+
 import content.region.other.dorgeshuun.dialogue.CaveGoblinsDialogueFile
 import content.region.other.dorgeshuun.dialogue.SpitgoblinDialogue
 import core.api.*
@@ -11,7 +13,6 @@ import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class DorgeshuunPlugin : InteractionListener {
@@ -69,7 +70,7 @@ class DorgeshuunPlugin : InteractionListener {
         onUseWith(IntType.NPC, Items.BROOCH_5008, NPCs.MISTAG_2084) { player, used, npc ->
             val randomReward = arrayOf(Items.MINING_HELMET_5013, Items.MINING_HELMET_5014).random()
 
-            if (!isQuestComplete(player, Quests.THE_LOST_TRIBE) || !removeItem(
+            if (!isQuestComplete(player, Quests.THE_LOST_TRIBE.questName) || !removeItem(
                     player,
                     used.asItem(),
                     Container.INVENTORY
@@ -89,7 +90,7 @@ class DorgeshuunPlugin : InteractionListener {
         on(BONE_DOORS, IntType.SCENERY, "open") { player, node ->
             when (node.id) {
                 Scenery.BONE_DOOR_32952, Scenery.BONE_DOOR_32953 -> {
-                    if (!isQuestComplete(player, Quests.THE_LOST_TRIBE)) {
+                    if (!isQuestComplete(player, Quests.THE_LOST_TRIBE.questName)) {
                         sendNPCDialogue(
                             player,
                             NPCs.CAVE_GOBLIN_GUARD_2073,

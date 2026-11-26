@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.hazeelcult.npc.AlomoneNPC
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -50,7 +52,7 @@ class HazeelCultPlugin : InteractionListener {
 
         on(SEWERS, IntType.SCENERY, "turn-left") { player, node ->
             val nodeLocation = node.asScenery().location
-            if (withinDistance(player, nodeLocation, 2) && getQuestStage(player, Quests.HAZEEL_CULT) >= 1) {
+            if (withinDistance(player, nodeLocation, 2) && getQuestStage(player, Quests.HAZEEL_CULT.questName) >= 1) {
                 lock(player, 4)
                 animate(player, TURN_VALVE_ANIMATION)
                 sendDialogueLines(player, "Turn the large metal valve to the left. Beneath your feet you", "can hear the sudden sound of rushing water from the sewer.")
@@ -60,10 +62,10 @@ class HazeelCultPlugin : InteractionListener {
 
         on(SEWER_1, IntType.SCENERY, "turn-left") { player, node ->
             val nodeLocation = node.asScenery().location
-            if (getQuestStage(player, Quests.HAZEEL_CULT) >= 1 && getAttribute(player, "hazeelcult:sewer-left", 0) == 0) {
+            if (getQuestStage(player, Quests.HAZEEL_CULT.questName) >= 1 && getAttribute(player, "hazeelcult:sewer-left", 0) == 0) {
                 setAttribute(player, "/save:hazeelcult:sewer-left", 1)
             }
-            if (getQuestStage(player, Quests.HAZEEL_CULT) == 10 && getAttribute(player, "hazeelcult:sewer-right:2", 0) == 1) {
+            if (getQuestStage(player, Quests.HAZEEL_CULT.questName) == 10 && getAttribute(player, "hazeelcult:sewer-right:2", 0) == 1) {
                 setAttribute(player, "/save:hazeelcult:sewer-right:3", 1)
             }
             if (!withinDistance(player, nodeLocation, 2)) return@on true
@@ -84,7 +86,7 @@ class HazeelCultPlugin : InteractionListener {
         on(SEWERS, IntType.SCENERY, "turn-right") { player, node ->
             if (!player.location.withinDistance(node.asScenery().location, 2)) return@on true
 
-            val questStage = getQuestStage(player, Quests.HAZEEL_CULT)
+            val questStage = getQuestStage(player, Quests.HAZEEL_CULT.questName)
             val currentSewer = node.id
 
             if (questStage >= 1 && questStage != 10) {
@@ -123,7 +125,7 @@ class HazeelCultPlugin : InteractionListener {
         onUseWith(IntType.SCENERY, POISON, COOKING_RANGE) { player, _, _ ->
             if (getAttribute(player, "hazeelcult:mahjarrat", true) && removeItem(player, POISON)) {
                 sendDialogueLines(player, "You pour the poison into the hot pot.", "The poison dissolves into the soup.")
-                setQuestStage(player, Quests.HAZEEL_CULT, 3)
+                setQuestStage(player, Quests.HAZEEL_CULT.questName, 3)
             } else {
                 sendNPCDialogue(player, NPCs.CLAUS_THE_CHEF_886, "Oi - I don't want people messing around with my range!")
             }
@@ -131,7 +133,7 @@ class HazeelCultPlugin : InteractionListener {
         }
 
         on(CRATE, IntType.SCENERY, "search") { player, _ ->
-            if (getQuestStage(player, Quests.HAZEEL_CULT) >= 1 &&
+            if (getQuestStage(player, Quests.HAZEEL_CULT.questName) >= 1 &&
                 getAttribute(player, "hazeelcult:mahjarrat", true) &&
                 !getAttribute(player, "hazeelcult:carnillean", true) &&
                 freeSlots(player) > 1

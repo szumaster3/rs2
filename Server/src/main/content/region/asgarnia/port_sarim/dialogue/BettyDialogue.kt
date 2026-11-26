@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils
 import core.api.*
@@ -24,7 +26,7 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) >= 7 && getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527) == 4 && !inInventory(player, Items.ROSE_TINTED_LENS_6956)) {
+        if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName) >= 7 && getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527) == 4 && !inInventory(player, Items.ROSE_TINTED_LENS_6956)) {
             npcl(FaceAnim.HALF_ASKING, "Hello deary! Have you managed to make that lens yet?").also { stage = 38 }
         } else {
             npc("Welcome to the magic emporium.")
@@ -36,11 +38,11 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
         val hasBottle = inInventory(player, Items.BOTTLED_WATER_6953) && inBank(player, Items.BOTTLED_WATER_6953)
         val handProgress = getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
         when (stage) {
-            0 -> if (getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
+            0 -> if (getQuestStage(player, Quests.SWEPT_AWAY.questName) >= 1) {
                 options("Talk to Betty about Swept Away.", "Talk to Betty about her shop.", "Talk to Betty about pink dye.").also { stage = 10 }
-            } else if (isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)) {
+            } else if (isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND.questName)) {
                 options("Can I see your wares?", "Sorry, I'm not into magic.", "Talk to Betty about pink dye.").also { stage++ }
-            } else if(isQuestInProgress(player, Quests.THE_HAND_IN_THE_SAND, 7, 99)) {
+            } else if(isQuestInProgress(player, Quests.THE_HAND_IN_THE_SAND.questName, 7, 99)) {
                 showTopics(
                     Topic("Talk to Betty about the Hand in the Sand.", 34, true),
                     Topic("Talk to Betty about her shop.", 33, true)

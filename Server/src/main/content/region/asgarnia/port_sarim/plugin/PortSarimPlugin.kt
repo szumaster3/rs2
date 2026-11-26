@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.plugin
 
+import content.data.Quests
+
 import content.region.asgarnia.port_sarim.dialogue.*
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -149,7 +151,7 @@ class PortSarimPlugin : InteractionListener {
          */
 
         on(NPCs.WORMBRAIN_745, IntType.NPC, "attack") { player, node ->
-            if (getQuestStage(player, Quests.DRAGON_SLAYER) != 20) {
+            if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) != 20) {
                 sendMessage(player, "The goblin is already in prison. You have no reason to attack him.")
             } else {
                 player.properties.combatPulse.attack(node)

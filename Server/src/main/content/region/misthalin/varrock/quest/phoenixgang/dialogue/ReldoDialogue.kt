@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -12,7 +14,6 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.GroundItemManager
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Reldo dialogue.
@@ -26,14 +27,14 @@ class ReldoDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        knightSword = player.getQuestRepository().getQuest(Quests.THE_KNIGHTS_SWORD)
-        shieldArrav = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV)
+        knightSword = player.getQuestRepository().getQuest(Quests.THE_KNIGHTS_SWORD.questName)
+        shieldArrav = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV.questName)
         if (args.size == 2 && args[1] == "book") {
             player("Aha! 'The Shield of Arrav'! Exactly what I was looking", "for.")
             stage = 3
             return true
         }
-        if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 40 && player.inventory.contains(Items.BROOCH_5008, 1)) {
+        if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 40 && player.inventory.contains(Items.BROOCH_5008, 1)) {
             options("Hello stranger.", "I have a question about my Achievement Diary.", "Ask about the brooch.")
         } else {
             options("Hello stranger.", "I have a question about my Achievement Diary.")
@@ -270,7 +271,7 @@ class ReldoDialogue(player: Player? = null) : Dialogue(player) {
                         "It's somewhere on the west end of the library, I think.",
                         "Maybe that will be of some use.",
                     )
-                    setQuestStage(player, Quests.THE_LOST_TRIBE, 42)
+                    setQuestStage(player, Quests.THE_LOST_TRIBE.questName, 42)
                     stage++
                 }
 

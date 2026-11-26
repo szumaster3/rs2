@@ -1,6 +1,8 @@
 
 package content.global.skill.herblore.item
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import shared.consts.Items
-import shared.consts.Quests
 
 class GuthixRestMakePlugin : InteractionListener {
 
@@ -25,7 +26,7 @@ class GuthixRestMakePlugin : InteractionListener {
     }
 
     private fun handleMix(player: Player, from: Item, to: Item): Boolean {
-        if (!hasRequirement(player, Quests.DRUIDIC_RITUAL) || !hasRequirement(player, Quests.ONE_SMALL_FAVOUR)) {
+        if (!hasRequirement(player, Quests.DRUIDIC_RITUAL.questName) || !hasRequirement(player, Quests.ONE_SMALL_FAVOUR.questName)) {
             return false
         }
 

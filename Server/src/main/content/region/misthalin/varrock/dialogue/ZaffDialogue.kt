@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import com.google.gson.JsonObject
 import core.ServerStore
 import core.ServerStore.Companion.getInt
@@ -20,7 +22,6 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Zaff dialogue.
@@ -49,7 +50,7 @@ class ZaffDialogue : OptionHandler() {
 
         override fun open(vararg args: Any?): Boolean {
             npc = args[0] as NPC
-            quest = player.questRepository.getQuest(Quests.WHAT_LIES_BELOW)
+            quest = player.questRepository.getQuest(Quests.WHAT_LIES_BELOW.questName)
             if (!GameWorld.settings!!.isMembers || getQuestStage(player, quest!!.name) == 0) {
                 npc(FaceAnim.HALF_GUILTY, "Would you like to buy or sell some staves?")
             } else {

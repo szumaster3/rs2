@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.elena.plugin.PlagueCityPlugin
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Alrena dialogue.
@@ -24,7 +25,7 @@ class AlrenaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.PLAGUE_CITY) == 1) {
+        if (getQuestStage(player, Quests.PLAGUE_CITY.questName) == 1) {
             playerl(FaceAnim.FRIENDLY, "Hello, Edmond has asked me to help find your daughter.")
         } else {
             playerl(FaceAnim.FRIENDLY, "Hello Madam.")
@@ -33,7 +34,7 @@ class AlrenaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             0 -> when (stage) {
                 START_DIALOGUE -> npcl(FaceAnim.NEUTRAL, "Oh, hello there.").also { stage = 2 }
                 2 -> playerl(FaceAnim.FRIENDLY, "Are you ok?").also { stage++ }
@@ -63,7 +64,7 @@ class AlrenaDialogue(player: Player? = null) : Dialogue(player) {
                 7 -> {
                     end()
                     addItem(player!!, Items.GAS_MASK_1506)
-                    setQuestStage(player!!, Quests.PLAGUE_CITY, 2)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 2)
                     setAttribute(player!!, PlagueCityPlugin.BUCKET_USES_ATTRIBUTE, 0)
                     sendNPCDialogue(player!!, NPCs.ALRENA_710, "I'll make a spare mask. I'll hide it in the wardrobe in case the mourners come in.")
                 }

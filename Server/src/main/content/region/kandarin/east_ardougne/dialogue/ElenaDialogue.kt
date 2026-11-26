@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.ElenaBiohazardQuestDialogue
 import core.api.isQuestComplete
 import core.api.openDialogue
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Elena dialogue.
@@ -20,7 +21,7 @@ class ElenaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestComplete(player, Quests.PLAGUE_CITY)){
+        if (isQuestComplete(player, Quests.PLAGUE_CITY.questName)){
             end()
             openDialogue(player, ElenaBiohazardQuestDialogue())
         } else {

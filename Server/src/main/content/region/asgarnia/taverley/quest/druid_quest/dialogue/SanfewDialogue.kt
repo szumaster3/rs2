@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.quest.druid_quest.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.api.updateQuestTab
@@ -11,7 +13,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class SanfewDialogue(player: Player? = null) : Dialogue(player) {
@@ -23,7 +24,7 @@ class SanfewDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val questStage = getQuestStage(player, Quests.DRUIDIC_RITUAL)
+        val questStage = getQuestStage(player, Quests.DRUIDIC_RITUAL.questName)
         when (stage) {
             0 -> {
                 when (questStage) {
@@ -115,7 +116,7 @@ class SanfewDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             10 -> {
-                setQuestStage(player, Quests.DRUIDIC_RITUAL, 20)
+                setQuestStage(player, Quests.DRUIDIC_RITUAL.questName, 20)
                 end()
             }
 
@@ -174,7 +175,7 @@ class SanfewDialogue(player: Player? = null) : Dialogue(player) {
                     Item(Items.ENCHANTED_BEAR_MEAT_524, 1),
                     Item(Items.ENCHANTED_CHICKEN_525, 1),
                 )
-                setQuestStage(player, Quests.DRUIDIC_RITUAL, 99)
+                setQuestStage(player, Quests.DRUIDIC_RITUAL.questName, 99)
                 updateQuestTab(player)
                 npc(
                     "Now go and talk to Kaqemeex and he will introduce",

@@ -1,15 +1,16 @@
 package content.region.asgarnia.falador.quest.rd
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 
 @Initializable
-class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 103, 102, 1, 496, 0, 1, 2) {
+class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 496, 0, 1, 2) {
     companion object {
         const val stagePass = "rd:passedstage"
         const val stageFail = "rd:failedstage"
@@ -30,20 +31,20 @@ class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 103, 102, 1, 496, 0, 1,
         super.drawJournal(player, stage)
         var line = 11
         var stage = getStage(player)
-        var started = getQuestStage(player, Quests.RECRUITMENT_DRIVE) > 0
+        var started = getQuestStage(player, Quests.RECRUITMENT_DRIVE.questName) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Sir Amik Varze??,", line++)
             line(player, "upstairs in !!Falador Castle??.", line++)
-            if (isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
-                line(player, "with the ${Quests.DRUIDIC_RITUAL} Quest completed,", line++, isQuestComplete(player, Quests.DRUIDIC_RITUAL))
+            if (isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName)) {
+                line(player, "with the ${Quests.DRUIDIC_RITUAL.questName} Quest completed,", line++, isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName))
             } else {
-                line(player, "I have to completed the !!${Quests.DRUIDIC_RITUAL} Quest??,", line++)
+                line(player, "I have to completed the !!${Quests.DRUIDIC_RITUAL.questName} Quest??,", line++)
             }
-            if (isQuestComplete(player, Quests.BLACK_KNIGHTS_FORTRESS)) {
-                line(player, "and since I have completed the ${Quests.BLACK_KNIGHTS_FORTRESS}.", line++, isQuestComplete(player, Quests.BLACK_KNIGHTS_FORTRESS))
+            if (isQuestComplete(player, Quests.BLACK_KNIGHTS_FORTRESS.questName)) {
+                line(player, "and since I have completed the ${Quests.BLACK_KNIGHTS_FORTRESS.questName}.", line++, isQuestComplete(player, Quests.BLACK_KNIGHTS_FORTRESS.questName))
             } else {
-                line(player, "and I have to completed the !!${Quests.BLACK_KNIGHTS_FORTRESS}??.", line++)
+                line(player, "and I have to completed the !!${Quests.BLACK_KNIGHTS_FORTRESS.questName}??.", line++)
             }
             line++
         } else {

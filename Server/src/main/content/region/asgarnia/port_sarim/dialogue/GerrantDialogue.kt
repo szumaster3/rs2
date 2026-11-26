@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Gerrant dialogue.
@@ -21,12 +22,12 @@ class GerrantDialogue : DialogueFile() {
             1 -> showTopics(
                 Topic("Let's see what you've got then.", 2, false),
                 Topic("Sorry, I'm not interested.", END_DIALOGUE),
-                IfTopic(FaceAnim.HALF_GUILTY, "I've lost my oily fishing rod.", 7, isQuestComplete(player!!, Quests.HEROES_QUEST) && !inInventory(player!!, Items.OILY_FISHING_ROD_1585) && !inBank(player!!, Items.OILY_FISHING_ROD_1585)),
-                IfTopic("I want to find out how to catch a lava eel.", 3, isQuestInProgress(player!!, Quests.HEROES_QUEST, 1, 99)),
+                IfTopic(FaceAnim.HALF_GUILTY, "I've lost my oily fishing rod.", 7, isQuestComplete(player!!, Quests.HEROES_QUEST.questName) && !inInventory(player!!, Items.OILY_FISHING_ROD_1585) && !inBank(player!!, Items.OILY_FISHING_ROD_1585)),
+                IfTopic("I want to find out how to catch a lava eel.", 3, isQuestInProgress(player!!, Quests.HEROES_QUEST.questName, 1, 99)),
             )
             2 -> end().also { openNpcShop(player!!, NPCs.GERRANT_558) }
             3 -> npc(FaceAnim.HALF_THINKING,"Lava eels eh? That's a tricky one that is, you'll need a", "lava-proof fishing line. The method for making this would", "be to take an ordinary fishing rod, and then cover it", "with the fire-proof Blamish Oil.").also { stage++ }
-            4 -> if (isQuestComplete(player!!, Quests.HEROES_QUEST)) {
+            4 -> if (isQuestComplete(player!!, Quests.HEROES_QUEST.questName)) {
                 npc(FaceAnim.FRIENDLY,"Of course, you knew that already.").also { stage = 7 }
             } else {
                 npc(FaceAnim.THINKING,"You know... thinking about it... I may have a jar of", "Blamish Slime around here somewhere... Now where did", "I put it?").also { stage++ }

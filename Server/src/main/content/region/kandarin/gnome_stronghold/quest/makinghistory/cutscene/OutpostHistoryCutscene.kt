@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory.cutscene
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import core.api.*
 import core.game.activity.Cutscene
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 // TODO: Correct camera movement.
 class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
@@ -85,7 +86,7 @@ class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
             }
 
             12 -> {
-                setQuestStage(player, Quests.MAKING_HISTORY, 1)
+                setQuestStage(player, Quests.MAKING_HISTORY.questName, 1)
                 setVarbit(player, MHUtils.PROGRESS, 1, true)
                 end {
                     openDialogue(player, OutpostHistoryDialogue())

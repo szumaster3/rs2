@@ -1,10 +1,11 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.npc.NPC
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Nurse Sarah dialogue.
@@ -18,7 +19,7 @@ class NurseSarahDialogue : DialogueFile() {
         npc = NPC(NPCs.NURSE_SARAH_373)
         when (stage) {
             0 -> player("Hello nurse.").also { stage++ }
-            1 -> if (getQuestStage(player!!, Quests.BIOHAZARD) <= 6) {
+            1 -> if (getQuestStage(player!!, Quests.BIOHAZARD.questName) <= 6) {
                 npc("I don't know how much longer I can cope here.").also { stage = 4 }
             } else {
                 npc("Oh hello there. I'm afraid I can't stop and talk, a", "group of mourners have become ill with food poisoning. I need", "to go over and see what I can do.").also { stage++ }

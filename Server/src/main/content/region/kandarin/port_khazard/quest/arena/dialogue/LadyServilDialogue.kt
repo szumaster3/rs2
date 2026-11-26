@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Lady Servil dialogue.
@@ -24,11 +25,11 @@ class LadyServilDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.FRIENDLY, "Hi there, looks like you're in some trouble.")
-        if (getQuestStage(player, Quests.FIGHT_ARENA) == 10) {
+        if (getQuestStage(player, Quests.FIGHT_ARENA.questName) == 10) {
             playerl(FaceAnim.FRIENDLY, "Hello Lady Servil.")
-        } else if (getQuestStage(player, Quests.FIGHT_ARENA) == 30) {
+        } else if (getQuestStage(player, Quests.FIGHT_ARENA.questName) == 30) {
             playerl(FaceAnim.FRIENDLY, "Lady Servil, I have managed to infiltrate General Khazard's arena.")
-        } else if (getQuestStage(player, Quests.FIGHT_ARENA) == 70) {
+        } else if (getQuestStage(player, Quests.FIGHT_ARENA.questName) == 70) {
             playerl(
                 FaceAnim.FRIENDLY,
                 "Lady Servil. I freed your son, however he has returned to the arena to help your husband."
@@ -42,7 +43,7 @@ class LadyServilDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA.questName)) {
             0 -> when (stage) {
                 0 -> npcl(FaceAnim.SAD, "Oh I wish this broken cart was my only problem. *sob* I've got to find my family.. **sob**").also { stage++ }
                 1 -> options("I hope you can, good luck.", "Can I help you?").also { stage++ }
@@ -59,7 +60,7 @@ class LadyServilDialogue(player: Player? = null) : Dialogue(player) {
                 8 -> playerl(FaceAnim.FRIENDLY, "I'll try my best to return your family.").also { stage++ }
                 9 -> {
                     end()
-                    setQuestStage(player!!, Quests.FIGHT_ARENA, 10)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA.questName, 10)
                     npcl(FaceAnim.SAD, "Please do. My family is wealthy and can reward you handsomely. I'll be waiting here for you.").also { stage = END_DIALOGUE }
                 }
             }
@@ -89,7 +90,7 @@ class LadyServilDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> npcl(FaceAnim.FRIENDLY, "All I can offer in return is material wealth. Please take these coins as a sign of my gratitude.").also { stage++ }
                 3 -> {
                     end()
-                    finishQuest(player, Quests.FIGHT_ARENA)
+                    finishQuest(player, Quests.FIGHT_ARENA.questName)
                 }
             }
 

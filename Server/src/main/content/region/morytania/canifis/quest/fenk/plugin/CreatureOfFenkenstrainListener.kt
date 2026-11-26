@@ -1,5 +1,7 @@
 package content.region.morytania.canifis.quest.fenk.plugin
 
+import content.data.Quests
+
 import content.region.morytania.canifis.quest.fenk.CreatureOfFenkenstrain
 import content.region.morytania.canifis.quest.fenk.dialogue.BookcaseEastDialogueFile
 import content.region.morytania.canifis.quest.fenk.dialogue.BookcaseWest
@@ -15,7 +17,6 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 /*
@@ -76,7 +77,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
         addClimbDest(Location.create(3504, 9970, 0), Location.create(3504, 3571, 0))
 
         on(Items.NULL_5164, SCENERY, "read") { player, _ ->
-            if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) < 7) {
+            if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) < 7) {
                 sendDialogueLines(
                     player,
                     "The signpost has a note pinned onto it. The note says:",
@@ -91,10 +92,10 @@ class CreatureOfFenkenstrainListener : InteractionListener {
                     "'AAARRGGGHHHHH!!!!!'",
                 )
             }
-            if (getQuest(player, Quests.CREATURE_OF_FENKENSTRAIN).hasRequirements(player) &&
-                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 0
+            if (getQuest(player, Quests.CREATURE_OF_FENKENSTRAIN.questName).hasRequirements(player) &&
+                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 0
             ) {
-                setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 1)
+                setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName, 1)
             }
             return@on true
         }
@@ -219,7 +220,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedMemorial, false) ||
                 getQuestStage(
                     player,
-                    Quests.CREATURE_OF_FENKENSTRAIN,
+                    Quests.CREATURE_OF_FENKENSTRAIN.questName,
                 ) > 2
             ) {
                 animateScenery(player, scenery, 1620)
@@ -256,7 +257,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
         on(Items.NULL_5167, SCENERY, "push") { player, node ->
             val scenery = node.asScenery()
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedMemorial, false) ||
-                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 2
+                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) > 2
             ) {
                 animateScenery(player, scenery, 1620)
                 var dest: Location? = null
@@ -286,7 +287,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
                 getQuestStage(
                     player,
-                    Quests.CREATURE_OF_FENKENSTRAIN,
+                    Quests.CREATURE_OF_FENKENSTRAIN.questName,
                 ) >= 5
             ) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
@@ -305,7 +306,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
                 getQuestStage(
                     player,
-                    Quests.CREATURE_OF_FENKENSTRAIN,
+                    Quests.CREATURE_OF_FENKENSTRAIN.questName,
                 ) >= 5
             ) {
                 DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
@@ -389,8 +390,8 @@ class CreatureOfFenkenstrainListener : InteractionListener {
                 return@on true
             }
             if (removeItem(player, Items.CONDUCTOR_4201)) {
-                if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 4) {
-                    setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 5)
+                if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 4) {
+                    setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName, 5)
                 }
                 sendDialogue(
                     player,
@@ -404,7 +405,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
         }
 
         on(Scenery.DOOR_5172, SCENERY, "open") { player, node ->
-            if (inInventory(player, Items.TOWER_KEY_4185) || getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 7
+            if (inInventory(player, Items.TOWER_KEY_4185) || getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) > 7
             ) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
@@ -421,10 +422,10 @@ class CreatureOfFenkenstrainListener : InteractionListener {
         }
 
         on(NPCs.DR_FENKENSTRAIN_1670, NPC, "pickpocket") { player, _ ->
-            if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 7) {
+            if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 7) {
                 sendMessage(player, "You steal the Ring of Charos from Fenkenstrain.")
-                finishQuest(player, Quests.CREATURE_OF_FENKENSTRAIN)
-            } else if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 7 &&
+                finishQuest(player, Quests.CREATURE_OF_FENKENSTRAIN.questName)
+            } else if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) > 7 &&
                 hasAnItem(player, Items.RING_OF_CHAROS_4202).container == null
             ) {
                 addItemOrDrop(player, Items.RING_OF_CHAROS_4202, 1)

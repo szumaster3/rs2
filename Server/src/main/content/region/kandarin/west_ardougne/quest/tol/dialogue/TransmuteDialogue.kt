@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.getQuestStage
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Transmute dialogue.
@@ -19,7 +20,7 @@ import shared.consts.Quests
 class TransmuteDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE)) {
+        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE.questName)) {
             in 0..2 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi there. What is this place?").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Ah, this be the Tower of Life! Beautiful, isn't it?").also { stage++ }

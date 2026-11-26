@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.dialogue
 
+import content.data.Quests
+
 import core.api.animate
 import core.api.getQuestStage
 import core.api.runTask
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Gerald dialogue.
@@ -21,7 +22,7 @@ class GeraldDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.WATERFALL_QUEST) >= 1) {
+        if (getQuestStage(player, Quests.WATERFALL_QUEST.questName) >= 1) {
             player("Hello.")
             stage = 5
             return true

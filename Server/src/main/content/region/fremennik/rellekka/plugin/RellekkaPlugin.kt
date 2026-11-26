@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.plugin
 
+import content.data.Quests
+
 import content.global.skill.agility.AgilityHandler
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -11,7 +13,6 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class RellekkaPlugin : InteractionListener, MapArea {
@@ -77,7 +78,7 @@ class RellekkaPlugin : InteractionListener, MapArea {
          */
 
         on(NPCs.FISH_MONGER_1315, IntType.NPC, "talk-to") { player, node ->
-            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 sendNPCDialogue(player, node.id, "I don't sell to outerlanders.", FaceAnim.ANNOYED)
             } else {
                 sendNPCDialogue(player, node.id, "Hello there, ${FremennikTrials.getFremennikName(player)}. Looking for fresh fish?")

@@ -1,5 +1,7 @@
 package content.region.desert.pollniveach.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils
 import core.api.*
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Ali The Hag dialogue.
@@ -22,10 +23,10 @@ class AliTheHagDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestComplete(player, Quests.SWEPT_AWAY) && getDynLevel(player, Skills.MAGIC) > 33 && inInventory(player, Items.BROOMSTICK_14057) && !getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_ALI_THE_HAG_ENCH_RECEIVED, false)) {
+        if (isQuestComplete(player, Quests.SWEPT_AWAY.questName) && getDynLevel(player, Skills.MAGIC) > 33 && inInventory(player, Items.BROOMSTICK_14057) && !getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_ALI_THE_HAG_ENCH_RECEIVED, false)) {
             options("Good day, Ali.", "Could you enchant this broom for me?")
             stage = 10
-        } else if (hasRequirement(player, Quests.THE_FEUD)) {
+        } else if (hasRequirement(player, Quests.THE_FEUD.questName)) {
             player("Good day, Hag.").also { stage = 20 }
         } else {
             player(FaceAnim.FRIENDLY, "Good day, old hag.")
@@ -43,7 +44,7 @@ class AliTheHagDialogue(player: Player? = null) : Dialogue(player) {
             5 -> npc(FaceAnim.ANNOYED, "I'm busy brewing potions, so if you", "disturb me again without reason,", "I will turn you into a frog!").also { stage++ }
             6 -> player(FaceAnim.SCARED, "Oh I'm sorry I won't let it happen again.").also { stage = END_DIALOGUE }
             10 -> when (buttonId) {
-                1 -> if (hasRequirement(player, Quests.THE_FEUD)) {
+                1 -> if (hasRequirement(player, Quests.THE_FEUD.questName)) {
                     player("Good day, Hag.").also { stage = 20 }
                 } else {
                     player(FaceAnim.FRIENDLY, "Good day, old hag.").also { stage = 0 }

@@ -1,5 +1,7 @@
 package content.region.kandarin.quest.luc2.dialogue
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.getQuestStage
 import core.api.inInventory
@@ -12,14 +14,13 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class KhazardLaundererDialogue : DialogueFile() {
     override fun handle(
         componentID: Int,
         buttonID: Int,
     ) {
-        val questStage = getQuestStage(player!!, Quests.WHILE_GUTHIX_SLEEPS)
+        val questStage = getQuestStage(player!!, Quests.WHILE_GUTHIX_SLEEPS.questName)
         npc = NPC(NPCs.KHAZARD_LAUNDERER_8428)
         when (questStage) {
             0 -> npc(FaceAnim.NEUTRAL,"I just do the washing around here.").also { stage = END_DIALOGUE }

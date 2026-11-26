@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.mcannon.dialogue
 
+import content.data.Quests
+
 import core.api.sendMessage
 import core.api.setVarp
 import core.game.dialogue.Dialogue
@@ -8,14 +10,13 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class CaptainLawgofDialogue(player: Player? = null) : Dialogue(player) {
 
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
-        quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON)
+        quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON.questName)
         when (quest!!.getStage(player)) {
             80 -> player("Hi.")
             50 ->

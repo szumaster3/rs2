@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.sendDialogue
 import core.api.sendOptions
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Chief Tess dialogue.
@@ -21,7 +22,7 @@ class ChiefTessDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         // Start quest dialogue.
-        if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
+        if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT.questName)) {
             npc(FaceAnim.CHILD_FRIENDLY, "You want discuss da resort or ar-key-olo-gy?")
         } else {
             sendDialogue(player, "Chief Tess seems too busy to talk.").also { stage = END_DIALOGUE }

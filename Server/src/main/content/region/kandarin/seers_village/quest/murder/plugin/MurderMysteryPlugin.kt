@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.murder.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import content.region.kandarin.seers_village.quest.murder.dialogue.FlypaperDialogue
 import content.region.kandarin.seers_village.quest.murder.dialogue.FountainDialogue
@@ -10,7 +12,6 @@ import core.game.node.item.GroundItem
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class MurderMysteryPlugin : InteractionListener {
@@ -67,7 +68,7 @@ class MurderMysteryPlugin : InteractionListener {
          */
 
         on(Items.CRIMINALS_DAGGER_1813, IntType.GROUND_ITEM, "take") { player, groundItem ->
-            when (getQuestStage(player, Quests.MURDER_MYSTERY)) {
+            when (getQuestStage(player, Quests.MURDER_MYSTERY.questName)) {
                 1 -> {
                     if (inInventory(player, Items.CRIMINALS_DAGGER_1813) || inInventory(
                             player,
@@ -94,7 +95,7 @@ class MurderMysteryPlugin : InteractionListener {
          */
 
         on(Items.PUNGENT_POT_1812, GROUND_ITEM, "take") { player, groundItem ->
-            when (getQuestStage(player, Quests.MURDER_MYSTERY)) {
+            when (getQuestStage(player, Quests.MURDER_MYSTERY.questName)) {
                 1 -> {
                     if (inInventory(player, Items.PUNGENT_POT_1812)) {
                         sendDialogue(player, "I already have the poisoned pot.")
@@ -117,7 +118,7 @@ class MurderMysteryPlugin : InteractionListener {
          */
 
         on(intArrayOf(Scenery.STURDY_WOODEN_GATE_2664, Scenery.STURDY_WOODEN_GATE_2665), SCENERY, "investigate") { player, _ ->
-            when (getQuestStage(player, Quests.MURDER_MYSTERY)) {
+            when (getQuestStage(player, Quests.MURDER_MYSTERY.questName)) {
                 1 -> {
                     sendDialogue(player, "As you approach the gate the guard dog starts barking loudly at you. There is no way an intruder could have committed the murder. It must have been someone the dog knew to get past it quietly.")
                     setAttribute(player, MurderMystery.attributeNoiseClue, true)
@@ -137,7 +138,7 @@ class MurderMysteryPlugin : InteractionListener {
          */
 
         on(Scenery.SMASHED_WINDOW_26110, SCENERY, "investigate") { player, _ ->
-            when (getQuestStage(player, Quests.MURDER_MYSTERY)) {
+            when (getQuestStage(player, Quests.MURDER_MYSTERY.questName)) {
                 1 -> {
                     sendDialogue(player, "Some thread seems to have been caught on a loose nail on the window.")
                     if (inInventory(player, Items.CRIMINALS_THREAD_1808) || inInventory(player, Items.CRIMINALS_THREAD_1809) || inInventory(player, Items.CRIMINALS_THREAD_1810)) {
@@ -189,7 +190,7 @@ class MurderMysteryPlugin : InteractionListener {
          */
 
         on(Scenery.SACKS_2663, SCENERY, "investigate") { player, _ ->
-            when (getQuestStage(player, Quests.MURDER_MYSTERY)) {
+            when (getQuestStage(player, Quests.MURDER_MYSTERY.questName)) {
                 1 -> {
                     openDialogue(player, FlypaperDialogue())
                     return@on true
@@ -207,7 +208,7 @@ class MurderMysteryPlugin : InteractionListener {
          */
 
         on(MURDER_MYSTERY_SCENERY_IDS, SCENERY, "search") { player, node ->
-            when (getQuestStage(player, Quests.MURDER_MYSTERY)) {
+            when (getQuestStage(player, Quests.MURDER_MYSTERY.questName)) {
                 1 -> {
                     when (node.id) {
                         Scenery.ANNA_S_BARREL_2656 -> {

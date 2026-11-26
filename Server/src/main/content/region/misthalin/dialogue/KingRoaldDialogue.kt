@@ -1,5 +1,7 @@
 package content.region.misthalin.dialogue
 
+import content.data.Quests
+
 import content.minigame.allfiredup.dialogue.KingRoaldAFUDialogue
 import content.region.misthalin.silvarea.quest.priest.dialogue.KingRoaldPriestInPerilDialogue
 import content.region.misthalin.varrock.quest.firedup.dialogue.KingRoaldDialogueFile
@@ -16,7 +18,6 @@ import core.tools.DIALOGUE_INITIAL_OPTIONS_HANDLE
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class KingRoaldDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -27,16 +28,16 @@ class KingRoaldDialogue(player: Player? = null) : Dialogue(player) {
             loadFile(KingRoaldAFUDialogue())
             return true
         }
-        if (isQuestComplete(player, Quests.PRIEST_IN_PERIL)) {
-            if (!hasStarted(player, Quests.ALL_FIRED_UP) || getQuestStage(player, Quests.ALL_FIRED_UP) == 90) {
-                addOption(Quests.ALL_FIRED_UP, KingRoaldDialogueFile(getQuestStage(player, Quests.ALL_FIRED_UP)))
+        if (isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName)) {
+            if (!hasStarted(player, Quests.ALL_FIRED_UP.questName) || getQuestStage(player, Quests.ALL_FIRED_UP.questName) == 90) {
+                addOption(Quests.ALL_FIRED_UP.questName, KingRoaldDialogueFile(getQuestStage(player, Quests.ALL_FIRED_UP.questName)))
             }
         } else {
-            addOption(Quests.PRIEST_IN_PERIL, KingRoaldPriestInPerilDialogue(getQuestStage(player, Quests.PRIEST_IN_PERIL)))
+            addOption(Quests.PRIEST_IN_PERIL.questName, KingRoaldPriestInPerilDialogue(getQuestStage(player, Quests.PRIEST_IN_PERIL.questName)))
         }
         if (
-            getQuestStage(player, Quests.SHIELD_OF_ARRAV) > 0 && !isQuestComplete(player, Quests.SHIELD_OF_ARRAV)) {
-            addOption(Quests.SHIELD_OF_ARRAV, KingRoaldDialogue())
+            getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) > 0 && !isQuestComplete(player, Quests.SHIELD_OF_ARRAV.questName)) {
+            addOption(Quests.SHIELD_OF_ARRAV.questName, KingRoaldDialogue())
         }
         if (!sendChoices()) {
             player("Greetings, your Majesty.")

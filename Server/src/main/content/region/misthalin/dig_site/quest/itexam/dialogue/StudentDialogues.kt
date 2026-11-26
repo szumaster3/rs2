@@ -1,5 +1,7 @@
 package content.region.misthalin.dig_site.quest.itexam.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.dig_site.quest.itexam.TheDigSite
 import core.api.*
 import core.game.dialogue.*
@@ -8,7 +10,6 @@ import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class StudentGreenDialogue(player: Player? = null) : Dialogue(player) {
@@ -27,12 +28,12 @@ class StudentGreenDialogueFile : DialogueFile() {
         when (stage) {
             START_DIALOGUE -> {
                 stage = when {
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) in 6..13 || getQuestStage(player!!, Quests.THE_DIG_SITE) == 100 -> 100
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 5 -> 200
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 4 -> 300
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 && getAttribute(player!!, TheDigSite.attrGreenExam1ObtainAnswer, false) -> 400
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 && getAttribute(player!!, TheDigSite.attrGreenExam1Talked, false) -> 500
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 -> 600
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) in 6..13 || getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 100 -> 100
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 5 -> 200
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 4 -> 300
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 && getAttribute(player!!, TheDigSite.attrGreenExam1ObtainAnswer, false) -> 400
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 && getAttribute(player!!, TheDigSite.attrGreenExam1Talked, false) -> 500
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 -> 600
                     else -> 700
                 }
             }
@@ -308,13 +309,13 @@ class StudentPurpleDialogueFile : DialogueFile() {
         when (stage) {
             START_DIALOGUE -> {
                 stage = when {
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 5 && getAttribute(player!!, TheDigSite.attrPurpleExam3ObtainAnswer, false) -> 100
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 5 && getAttribute(player!!, TheDigSite.attrPurpleExam3Talked, false) -> 200
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 5 -> 300
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 4 -> 400
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 && getAttribute(player!!, TheDigSite.attrPurpleExam1ObtainAnswer, false) -> 500
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 && getAttribute(player!!, TheDigSite.attrPurpleExam1Talked, false) -> 600
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 -> 700
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 5 && getAttribute(player!!, TheDigSite.attrPurpleExam3ObtainAnswer, false) -> 100
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 5 && getAttribute(player!!, TheDigSite.attrPurpleExam3Talked, false) -> 200
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 5 -> 300
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 4 -> 400
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 && getAttribute(player!!, TheDigSite.attrPurpleExam1ObtainAnswer, false) -> 500
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 && getAttribute(player!!, TheDigSite.attrPurpleExam1Talked, false) -> 600
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 -> 700
                     else -> 800
                 }
             }
@@ -468,11 +469,11 @@ class StudentBrownDialogueFile : DialogueFile() {
         when (stage) {
             START_DIALOGUE -> {
                 stage = when {
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 5 -> 100
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 4 -> 200
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 && getAttribute(player!!, TheDigSite.attrBrownExam1ObtainAnswer, false) -> 300
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 && getAttribute(player!!, TheDigSite.attrBrownExam1Talked, false) -> 400
-                    getQuestStage(player!!, Quests.THE_DIG_SITE) == 3 -> 500
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 5 -> 100
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 4 -> 200
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 && getAttribute(player!!, TheDigSite.attrBrownExam1ObtainAnswer, false) -> 300
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 && getAttribute(player!!, TheDigSite.attrBrownExam1Talked, false) -> 400
+                    getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 3 -> 500
                     else -> 600
                 }
             }

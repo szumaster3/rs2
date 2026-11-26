@@ -1,5 +1,7 @@
 package content.global.skill.slayer.dungeon.ancient_cavern
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -20,7 +22,7 @@ class DragonForgePlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, DRAGON_ANVIL, *RUINED_PIECES) { player, _, _ ->
-            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS)) return@onUseWith false
+            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS.questName)) return@onUseWith false
 
             if (getStatLevel(player, Skills.SMITHING) < 92) {
                 sendMessage(player, "You need at least 92 Smithing level to do this.")
@@ -58,7 +60,7 @@ class DragonForgePlugin : InteractionListener {
          */
 
         on(MITHRIL_DOOR, IntType.SCENERY, "open") { player, node ->
-            if (!inInventory(player, Items.DRAGONKIN_KEY_14471) && !hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
+            if (!inInventory(player, Items.DRAGONKIN_KEY_14471) && !hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS.questName, false)) {
                 sendDialogue(player, "The door is solid and resists all attempts to open it. There's no way past it at all, so best to ignore it.")
             } else {
                 sendMessage(player, "The door opens easily.")
@@ -74,7 +76,7 @@ class DragonForgePlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.DRAGONKIN_KEY_14471, *MITHRIL_DOOR) { player, _, node ->
-            if (!inInventory(player, Items.DRAGONKIN_KEY_14471) && !hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
+            if (!inInventory(player, Items.DRAGONKIN_KEY_14471) && !hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS.questName, false)) {
                 sendDialogue(player, "The door is solid and resists all attempts to open it. There's no way past it at all, so best to ignore it.")
             } else {
                 sendMessage(player, "The door opens easily.")
@@ -91,7 +93,7 @@ class DragonForgePlugin : InteractionListener {
         onUseWith(IntType.NPC, STRANGE_KEYS, *MITHRIL_DRAGON_NPC) { player, _, with ->
             val npc = with.asNpc()
 
-            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
+            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS.questName, false)) {
                 sendMessage(player, "You cannot currently use items on this dragon yet.")
                 return@onUseWith false
             }

@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.OldManAhoyDialogue
 import core.api.getQuestStage
 import core.api.isQuestComplete
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Old Man dialogue.
@@ -22,8 +23,8 @@ class OldManDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
-            isQuestComplete(player, Quests.GHOSTS_AHOY) -> player("How is it going?").also { stage = 5 }
-            getQuestStage(player, Quests.GHOSTS_AHOY) >= 4 -> openDialogue(player, OldManAhoyDialogue())
+            isQuestComplete(player, Quests.GHOSTS_AHOY.questName) -> player("How is it going?").also { stage = 5 }
+            getQuestStage(player, Quests.GHOSTS_AHOY.questName) >= 4 -> openDialogue(player, OldManAhoyDialogue())
             else -> player("What are you doing on this shipwreck?")
         }
         return true

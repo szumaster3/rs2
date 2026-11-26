@@ -1,5 +1,7 @@
 package core.game.node.entity.player.link.emote
 
+import content.data.Quests
+
 import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.QueueStrength
@@ -15,7 +17,6 @@ import core.game.world.update.flag.context.Graphics
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 enum class Emotes(
     val buttonId: Int,
@@ -201,7 +202,7 @@ enum class Emotes(
         lockedMessage = "This emote can be unlocked during the Lost Tribe quest.",
     ) {
         override fun play(player: Player) {
-            if (isEligibleForGoblinBow(player) && getQuestStage(player, Quests.THE_LOST_TRIBE) == 45) {
+            if (isEligibleForGoblinBow(player) && getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 45) {
                 val mistag = getLocalNpcs(player).firstOrNull { npc ->
                     npc.id == NPCs.MISTAG_2084 && withinDistance(npc, player.location, 3)
                 }

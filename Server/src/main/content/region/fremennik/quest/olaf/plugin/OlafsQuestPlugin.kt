@@ -1,5 +1,7 @@
 package content.region.fremennik.quest.olaf.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.quest.olaf.npc.UlfricNPC
 import core.api.*
@@ -52,7 +54,7 @@ class OlafsQuestPlugin : InteractionListener {
                 faceLocation(player, node.asScenery().location)
                 animate(player, Animations.TINDERBOX_3658)
                 sendDialogue(player, "You managed to get fire going!")
-                setQuestStage(player, Quests.OLAFS_QUEST, 3)
+                setQuestStage(player, Quests.OLAFS_QUEST.questName, 3)
                 setVarbit(player, 3537, 0)
             } else {
                 sendMessage(player, "You need some driftwood to light this fire.")
@@ -95,22 +97,22 @@ class OlafsQuestPlugin : InteractionListener {
          */
 
         on(Scenery.CHEST_14197, IntType.SCENERY, "open") { player, node ->
-            if (isQuestComplete(player, Quests.OLAFS_QUEST)) {
+            if (isQuestComplete(player, Quests.OLAFS_QUEST.questName)) {
                 sendMessage(player, "The chest is empty.")
                 return@on true
             }
-            if (getQuestStage(player, Quests.OLAFS_QUEST) != 99) {
+            if (getQuestStage(player, Quests.OLAFS_QUEST.questName) != 99) {
                 if (UlfricNPC.spawnUlfric(player)) {
                     replaceScenery(node.asScenery(), node.id -1, 3)
                     sendMessage(player, "You open the chest and the vengeful spirit of fremennik captain appears!", 2)
-                    setQuestStageNonmonotonic(player, 137, 98)
+                    setQuestStageNonmonotonic(player, 153, 98)
                 } else {
                     sendMessage(player, "You can't do that right now.")
                 }
             } else {
                 sendMessage(player, "You find a note in the chest...")
                 sendMessage(player, "...and a huge heap of treasure!")
-                finishQuest(player, Quests.OLAFS_QUEST)
+                finishQuest(player, Quests.OLAFS_QUEST.questName)
             }
             return@on true
         }

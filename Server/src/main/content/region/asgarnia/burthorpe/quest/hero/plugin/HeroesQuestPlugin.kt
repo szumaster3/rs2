@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.hero.plugin
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.hero.HeroesQuest
 import content.region.karamja.brimhaven.dialogue.CharlieTheCookDialogueFile
 import content.region.karamja.brimhaven.dialogue.GarvDialogueFile
@@ -19,14 +21,13 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class HeroesQuestPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(Scenery.DOOR_2626, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.HEROES_QUEST) >= 2 &&
+            if (getQuestStage(player, Quests.HEROES_QUEST.questName) >= 2 &&
                 getAttribute(player, HeroesQuest.attributeGruborLetsYouIn, false) &&
                 HeroesQuest.isBlackArm(player)
             ) {
@@ -38,7 +39,7 @@ class HeroesQuestPlugin : InteractionListener {
         }
 
         on(Scenery.DOOR_2628, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.HEROES_QUEST) >= 3 && HeroesQuest.isPhoenix(player)) {
+            if (getQuestStage(player, Quests.HEROES_QUEST.questName) >= 3 && HeroesQuest.isPhoenix(player)) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "This door is locked.")
@@ -47,7 +48,7 @@ class HeroesQuestPlugin : InteractionListener {
         }
 
         on(Scenery.WALL_2629, IntType.SCENERY, "push") { player, node ->
-            if (getQuestStage(player, Quests.HEROES_QUEST) >= 4 && HeroesQuest.isPhoenix(player)) {
+            if (getQuestStage(player, Quests.HEROES_QUEST.questName) >= 4 && HeroesQuest.isPhoenix(player)) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, CharlieTheCookDialogueFile(), NPC(NPCs.CHARLIE_THE_COOK_794))
@@ -56,7 +57,7 @@ class HeroesQuestPlugin : InteractionListener {
         }
 
         on(Scenery.DOOR_2627, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.HEROES_QUEST) >= 4 && HeroesQuest.isBlackArm(player)) {
+            if (getQuestStage(player, Quests.HEROES_QUEST.questName) >= 4 && HeroesQuest.isBlackArm(player)) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, GarvDialogueFile(), NPC(NPCs.GARV_788))
@@ -125,8 +126,8 @@ class HeroesQuestPlugin : InteractionListener {
             if (inInventory(player, Items.PETES_CANDLESTICK_1577)) {
                 sendMessage(player, "You search the chest but find nothing.")
             } else {
-                if (getQuestStage(player, Quests.HEROES_QUEST) == 4) {
-                    setQuestStage(player, Quests.HEROES_QUEST, 5)
+                if (getQuestStage(player, Quests.HEROES_QUEST.questName) == 4) {
+                    setQuestStage(player, Quests.HEROES_QUEST.questName, 5)
                 }
                 sendDialogue(
                     player,

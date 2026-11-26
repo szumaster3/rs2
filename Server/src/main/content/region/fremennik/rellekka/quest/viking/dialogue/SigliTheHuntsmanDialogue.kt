@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -10,7 +12,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sigli The Huntsman dialogue.
@@ -62,12 +63,12 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 100
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 playerl(FaceAnim.HAPPY, "Hello again Sigli.")
                 stage = 180
             }
 
-            player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
+            player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npc("What do you want outerlander?")
             }
 

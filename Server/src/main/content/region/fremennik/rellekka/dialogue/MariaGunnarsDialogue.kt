@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.plugin.FremennikBoat
 import content.region.fremennik.rellekka.plugin.Travel
 import core.api.*
@@ -10,14 +12,13 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class MariaGunnarsDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (npc.id == NPCs.MARIA_GUNNARS_5508) {
-            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 npcl(FaceAnim.HALF_GUILTY, "I do not speak to outerlanders. Maybe you should speak with Rellekka's Chieftain.").also { stage = END_DIALOGUE }
             } else {
                 npcl(FaceAnim.HAPPY, "Welcome back, ${getAttribute(player!!, "fremennikname", "name")}. Do you have any questions?").also { stage = 22 }
@@ -138,7 +139,7 @@ class MariaGunnarsDialogue(player: Player? = null) : Dialogue(player) {
             90 -> npc("Let's set sail then.").also { stage++ }
             91 -> {
                 end()
-                if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return true
+                if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "")) return true
                 FremennikBoat.sail(player, Travel.RELLEKKA_TO_NEITIZNOT)
             }
             92 -> npc("Thanks!").also { stage++ }

@@ -1,5 +1,7 @@
 package content.global.skill.firemaking
 
+import content.data.Quests
+
 import content.data.items.DyeItem
 import core.api.*
 import core.game.interaction.Clocks
@@ -12,7 +14,6 @@ import core.game.node.item.Item
 import core.game.world.map.RegionManager.getObject
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import java.util.*
 import kotlin.math.min
 
@@ -25,8 +26,8 @@ class OrigamiBalloonPlugin : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.PAPYRUS_970, Items.BALL_OF_WOOL_1759) { player, used, wool ->
-            if (getQuestStage(player, Quests.ENLIGHTENED_JOURNEY) < 1) {
-                sendMessage(player, "You need to start the ${Quests.ENLIGHTENED_JOURNEY} quest in order to make this.")
+            if (getQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName) < 1) {
+                sendMessage(player, "You need to start the ${Quests.ENLIGHTENED_JOURNEY.questName} quest in order to make this.")
                 return@onUseWith false
             }
 

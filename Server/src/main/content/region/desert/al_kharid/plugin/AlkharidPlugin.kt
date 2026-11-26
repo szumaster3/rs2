@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.plugin
 
+import content.data.Quests
+
 import content.region.desert.al_kharid.dialogue.*
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class AlkharidPlugin : InteractionListener {
@@ -25,7 +26,7 @@ class AlkharidPlugin : InteractionListener {
             val door = node.asScenery()
 
             if (usedOption == "pay-toll(10gp)") {
-                if (getQuestStage(player, Quests.PRINCE_ALI_RESCUE) > 50) {
+                if (getQuestStage(player, Quests.PRINCE_ALI_RESCUE.questName) > 50) {
                     sendMessage(player, "The guards let you through for free.")
                     DoorActionHandler.handleAutowalkDoor(player, door)
                 } else if (removeItem(player, Item(Items.COINS_995, 10))) {

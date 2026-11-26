@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.plugin.EnchantedKeyTreasures
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,11 +10,10 @@ import core.game.node.entity.skill.Skills
 import core.game.world.GameWorld
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_MAKING_HISTORY_PROGRESS_1383, 0, 1, 4) {
+class MakingHistory : Quest(Quests.MAKING_HISTORY) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -23,7 +24,7 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
             line(player, "!!North West of West Ardougne??.", line++)
             line += 1
             line(player, "Minimum requirements:", line++)
-            line(player, "!!I must have completed the ${Quests.PRIEST_IN_PERIL} Quest??", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL))
+            line(player, "!!I must have completed the ${Quests.PRIEST_IN_PERIL.questName} Quest??", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName))
             line(player, "It will be easier with", line++)
             line(player, "!!Crafting lvl 24??", line++, getStatLevel(player, Skills.CRAFTING) >= 24)
             line(player, "!!Smithing lvl 40??", line++, getStatLevel(player, Skills.SMITHING) >= 40)

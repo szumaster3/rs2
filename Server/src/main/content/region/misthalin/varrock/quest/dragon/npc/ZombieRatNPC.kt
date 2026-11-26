@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.npc
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.produceGroundItem
 import core.game.node.entity.Entity
@@ -9,7 +11,6 @@ import core.game.world.map.Location
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class ZombieRatNPC : AbstractNPC {
     constructor() : super(0, null)
@@ -23,12 +24,12 @@ class ZombieRatNPC : AbstractNPC {
 
         if (killer !is Player) return
 
-        if (getQuestStage(killer, Quests.DRAGON_SLAYER) in 1..99) {
+        if (getQuestStage(killer, Quests.DRAGON_SLAYER.questName) in 1..99) {
             if (RandomFunction.random(5) == 2) {
                 produceGroundItem(killer, Items.KEY_1543, 1, getLocation())
             }
         }
-        if (getQuestStage(killer, Quests.WITCHS_POTION) in 1..99) {
+        if (getQuestStage(killer, Quests.WITCHS_POTION.questName) in 1..99) {
             produceGroundItem(killer, Items.RATS_TAIL_300, 1, getLocation())
         }
         produceGroundItem(killer, Items.BONES_526, 1, getLocation())

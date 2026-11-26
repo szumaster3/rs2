@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.plugin
 
+import content.data.Quests
+
 import content.region.morytania.mort_myre.quest.druidspirit.plugin.NSUtils.castBloom
 import core.api.*
 import core.game.interaction.IntType
@@ -8,7 +10,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 
 class SilverSicklePlugin : InteractionListener {
 
@@ -16,7 +17,7 @@ class SilverSicklePlugin : InteractionListener {
 
     override fun defineListeners() {
         on(sickleIDs, IntType.ITEM, "operate", "cast bloom") { player, node ->
-            val questStage = getQuestStage(player, Quests.NATURE_SPIRIT)
+            val questStage = getQuestStage(player, Quests.NATURE_SPIRIT.questName)
             if (questStage < 75) {
                 sendDialogue(player, "You need to start the Nature Spirit to use this.")
                 return@on true
@@ -93,7 +94,7 @@ class SilverSicklePlugin : InteractionListener {
                 return@onUseWith true
             }
 
-            if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE)) {
+            if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE.questName)) {
                 return@onUseWith true
             }
 

@@ -1,5 +1,7 @@
 package content.global.skill.runecrafting
 
+import content.data.Quests
+
 import content.global.skill.runecrafting.item.RunePouchPlugin
 import content.global.skill.runecrafting.item.Talisman
 import content.global.travel.EssenceTeleport.home
@@ -23,7 +25,6 @@ import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Components
-import shared.consts.Quests
 
 @Initializable
 class RunecraftingPlugin : OptionHandler() {
@@ -44,7 +45,7 @@ class RunecraftingPlugin : OptionHandler() {
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        if (!isQuestComplete(player, Quests.RUNE_MYSTERIES) && player.details.rights !== Rights.ADMINISTRATOR) {
+        if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName) && player.details.rights !== Rights.ADMINISTRATOR) {
             sendMessage(player, "You need to finish the Rune Mysteries Quest in order to do this.")
             return true
         }
@@ -88,7 +89,7 @@ class RunecraftingPlugin : OptionHandler() {
                 }
                 val a = Altar.forScenery((node.asScenery()))
                 if (a == Altar.ASTRAL) {
-                    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return false
+                    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY.questName)) return false
                 }
                 player.pulseManager.run(RunecraftPulse(player, null, a!!, false, null))
             }

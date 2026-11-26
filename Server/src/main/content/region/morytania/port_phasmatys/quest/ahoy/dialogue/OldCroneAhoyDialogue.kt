@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.quest.ahoy.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -12,7 +14,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Old Crone (Ghosts Ahoy quest) dialogue.
@@ -57,7 +58,7 @@ class OldCroneAhoyDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         val p = player!!
-        val questStage = getQuestStage(p, Quests.GHOSTS_AHOY)
+        val questStage = getQuestStage(p, Quests.GHOSTS_AHOY.questName)
         val enlightened = getAttribute(p, GhostsAhoyUtils.croneEnlightened, false)
         npc = NPC(NPCs.OLD_CRONE_1695)
 

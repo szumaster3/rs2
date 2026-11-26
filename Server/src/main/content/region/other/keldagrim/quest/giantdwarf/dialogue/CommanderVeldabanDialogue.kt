@@ -1,5 +1,7 @@
 package content.region.other.keldagrim.quest.giantdwarf.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Commander Veldaban dialogue (The Giant Dwarf start).
@@ -16,7 +17,7 @@ import shared.consts.Quests
 class CommanderVeldabanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.THE_GIANT_DWARF)) {
+        when (getQuestStage(player!!, Quests.THE_GIANT_DWARF.questName)) {
             in 2..3 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_DEFAULT, "Identify yourself, human!").also { stage++ }
                 1 -> playerl(FaceAnim.FRIENDLY, "I err, I'm ${player.name}. I was told I was under arrest. I had a little accident on the way in here.").also { stage++ }

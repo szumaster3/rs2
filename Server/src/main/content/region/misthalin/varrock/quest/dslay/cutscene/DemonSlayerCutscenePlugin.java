@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay.cutscene;
 
+import content.data.Quests;
+
 import content.region.misthalin.varrock.quest.dslay.plugin.DemonSlayerUtils;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
@@ -29,7 +31,6 @@ import core.net.packet.out.PacketContext.CameraContext;
 import core.net.packet.out.PacketContext.MinimapStateContext;
 import shared.consts.Music;
 import shared.consts.NPCs;
-import shared.consts.Quests;
 import shared.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
@@ -102,7 +103,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
     }
 
     @Override
-    public boolean start(final Player player, final boolean login, java.lang.Object... args) {
+    public boolean start(final Player player, final boolean login, Object... args) {
         final NPC[] npcs = new NPC[]{NPC.create(NPCs.DARK_WIZARD_4658, base.transform(29, 43, 0)), NPC.create(4659, base.transform(29, 40, 0)), NPC.create(4662, base.transform(26, 40, 0)), NPC.create(4660, base.transform(26, 43, 0))};
         for (NPC n : npcs) {
             playAudio(player, DELRITH_APPEAR);
@@ -139,7 +140,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
             return true;
         }
         final Player player = ((Player) entity);
-        final Quest quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
+        final Quest quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER.getQuestName());
         boolean in = player.getAttribute("demon-slayer:cutscene", false);
         if (quest.getStage(player) == 30 && !in && (player.getEquipment().containsItem(DemonSlayerUtils.SILVERLIGHT) || player.getInventory().containsItem(DemonSlayerUtils.SILVERLIGHT))) {
             ActivityManager.start(player, "Demon Slayer Cutscene", false);
@@ -226,7 +227,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
         }
 
         @Override
-        public AbstractNPC construct(int id, Location location, java.lang.Object... objects) {
+        public AbstractNPC construct(int id, Location location, Object... objects) {
             return new DarkWizardNPC(id, location);
         }
 
@@ -270,7 +271,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
         }
 
         @Override
-        public AbstractNPC construct(int id, Location location, java.lang.Object... objects) {
+        public AbstractNPC construct(int id, Location location, Object... objects) {
             return new DelrithNPC(id, location);
         }
 
@@ -342,7 +343,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
         }
 
         @Override
-        public boolean open(java.lang.Object... args) {
+        public boolean open(Object... args) {
             cutscene = player.getAttribute("cutscene", null);
             player("Now what was that incantation again?");
             stage = 0;
@@ -403,7 +404,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
                             cutscene.end();
                             cutscene.delrith.clear();
                             setVarp(player, 222, 5653570, true);
-                            player.getQuestRepository().getQuest(Quests.DEMON_SLAYER).finish(player);
+                            player.getQuestRepository().getQuest(Quests.DEMON_SLAYER.getQuestName()).finish(player);
                             end();
                             return true;
                         }
@@ -453,7 +454,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
         }
 
         @Override
-        public boolean open(java.lang.Object... args) {
+        public boolean open(Object... args) {
             npc = ((NPC) args[0]);
             cutscene = ((DemonSlayerCutscenePlugin) args[1]);
             npc("Arise, O mighty Delrith! Bring destruction to this soft,", "weak city!");

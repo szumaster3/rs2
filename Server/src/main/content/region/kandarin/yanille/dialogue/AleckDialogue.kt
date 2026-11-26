@@ -1,6 +1,8 @@
 package content.region.kandarin.yanille.dialogue
 
+import content.region.kandarin.west_ardougne.diary.dialogue.AleckDiaryDialogue
 import core.api.openNpcShop
+import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
@@ -25,7 +27,8 @@ class AleckDialogue(player: Player? = null) : Dialogue(player) {
             2 -> showTopics(
                 Topic("Ok, let's see what you've got.",4),
                 Topic("I'm not interested, thanks.",end()),
-                Topic("Who's that guy over there?",30)
+                Topic("Who's that guy over there?",30),
+                Topic("Tell me about the Achievement Diary.", 40)
             )
             4 -> player("Ok, let's see what you've got!").also { stage = 10 }
             5 -> player("I'm not interested, thanks.").also { stage = END_DIALOGUE }
@@ -34,6 +37,7 @@ class AleckDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 openNpcShop(player, NPCs.ALECK_5110)
             }
+            40 -> openDialogue(player, AleckDiaryDialogue(), npc!!)
             30 -> npc("Him? I think he might be crazy. Either that or he's", "seeking attention.").also { stage++ }
             31 -> npc("He keeps trying to sell me these barmy looking weapons", "he's invented. I can't see them working, personally.").also { stage = END_DIALOGUE }
         }

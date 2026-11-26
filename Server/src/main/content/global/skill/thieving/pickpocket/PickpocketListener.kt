@@ -1,5 +1,7 @@
 package content.global.skill.thieving.pickpocket
 
+import content.data.Quests
+
 import content.global.plugins.item.equipment.GlovesOfSilence
 import content.global.skill.thieving.blackjack.BlackjackUtils
 import content.global.skill.thieving.pickpocket.loot.FremennikCitizenLootTable
@@ -34,7 +36,7 @@ class PickpocketListener : InteractionListener {
                 return@on true
             }
 
-            if (npc.id in FremennikCitizenLootTable.NPC_ID && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if (npc.id in FremennikCitizenLootTable.NPC_ID && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 data.message?.let { npc.sendChat(it) }
                 sendMessage(player, "They are too suspicious of you for you to get close enough to steal from them.")
                 return@on true
@@ -47,6 +49,7 @@ class PickpocketListener : InteractionListener {
             animate(player, Animation(if (knockedOut) Animations.HUMAN_BURYING_BONES_827 else Animations.HUMAN_PICKPOCKETING_881))
             sendMessage(player, "You attempt to pick the $npcName's pocket.")
 
+            if (npc.id == NPCs.GUARD_32 && npc.location.isInRegion(10547)) finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 1)
             val loot = if (knockedOut) data.loot.roll() else pickpocketRoll(player, data.low, data.high, data.loot)
 
             if (loot == null) {
@@ -93,6 +96,12 @@ class PickpocketListener : InteractionListener {
 
         sendMessage(player, if (npc.id == NPCs.CURATOR_HAIG_HALEN_646) "You steal a tiny key." else "You pick the $npcName's pocket.")
         rewardXP(player, Skills.THIEVING, data.xp)
+        if (npc.id in intArrayOf(NPCs.MASTER_FARMER_2234, NPCs.MASTER_FARMER_2235) && npc.location.isInRegion(10548)) {
+            finishDiaryTask(player, DiaryType.ARDOUGNE, 1, 12)
+        }
+        if (npc.id == NPCs.WATCHMAN_34 && inEquipment(player, Items.GLOVES_OF_SILENCE_10075)) {
+            finishDiaryTask(player, DiaryType.ARDOUGNE, 2, 6)
+        }
 
         when {
             inBorders(player, VARROCK_PALACE) && npc.id == NPCs.GUARD_5920 -> {

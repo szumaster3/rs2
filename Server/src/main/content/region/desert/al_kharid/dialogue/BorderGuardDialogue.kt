@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.getScenery
 import core.api.removeItem
@@ -9,7 +11,6 @@ import core.game.global.action.DoorActionHandler
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Border Guard dialogue.
@@ -20,7 +21,7 @@ class BorderGuardDialogue : DialogueFile() {
         val gates = if (player!!.location.y == 3227) getScenery(3268, 3227, 0) else getScenery(3268, 3227, 0)
         when (stage) {
             0 -> player("Can I come through this gate?").also { stage++ }
-            1 -> if (getQuestStage(player!!, Quests.PRINCE_ALI_RESCUE) < 50) {
+            1 -> if (getQuestStage(player!!, Quests.PRINCE_ALI_RESCUE.questName) < 50) {
                 npc("You must pay a toll of 10 gold coins to pass.").also { stage++ }
             } else {
                 npc("You may pass for free, you are a friend of Al-Kharid.").also { stage = 100 }

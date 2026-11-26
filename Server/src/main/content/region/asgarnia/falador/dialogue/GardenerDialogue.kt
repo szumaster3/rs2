@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import content.global.skill.farming.FarmerPayOptionDialogue
 import content.global.skill.farming.Farmers
 import content.global.skill.farming.FarmingPatch
@@ -16,7 +18,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Gardener (Falador) dialogue.
@@ -41,7 +42,7 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
             START_DIALOGUE -> {
                 val patch = patches[0].getPatchFor(player)
                 showTopics(
-                    IfTopic("Talk about the Back o my Roots quest.", openDialogue(player, GarthDialogue()), npc.id == 2330 && getQuestStage(player, Quests.BACK_TO_MY_ROOTS) >= 5),
+                    IfTopic("Talk about the Back o my Roots quest.", openDialogue(player, GarthDialogue()), npc.id == 2330 && getQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName) >= 5),
                     IfTopic(FaceAnim.ASKING, "Would you chop my tree down for me?", 1000, patch.patch.type == PatchType.TREE_PATCH && patch.plantable != null && patch.isGrown()),
                     IfTopic(FaceAnim.ASKING, "Would you look after my crops for me?", 10, !(patch.patch.type == PatchType.TREE_PATCH && patch.plantable != null && patch.isGrown())),
                     Topic(FaceAnim.ASKING, "Can you give me any farming advice?", 2000),

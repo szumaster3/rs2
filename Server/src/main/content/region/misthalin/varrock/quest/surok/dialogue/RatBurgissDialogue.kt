@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.surok.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.diary.dialogue.RatBurgissDiaryDialogue
 import content.region.misthalin.varrock.quest.surok.WhatLiesBelow
 import core.api.*
@@ -12,7 +14,6 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Rat Burgiss dialogue.
@@ -27,7 +28,7 @@ class RatBurgissDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW)
+        quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW.questName)
         options("Hello there!", "I have a question about my Achievement Diary.")
         stage = -1
         return true

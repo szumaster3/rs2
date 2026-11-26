@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.chompybird
 
+import content.data.Quests
+
 import content.global.skill.fletching.FletchingDefinition
 import core.api.*
 import core.game.interaction.IntType
@@ -16,8 +18,7 @@ import shared.consts.*
 import kotlin.random.Random
 
 @Initializable
-class BigChompyBirdHunting :
-    Quest(Quests.BIG_CHOMPY_BIRD_HUNTING, 35, 34, 2, Vars.VARP_QUEST_CHOMPY_PROGRESS_293, 0, 1, 65),
+class BigChompyBirdHunting : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING),
     InteractionListener {
 
     companion object {

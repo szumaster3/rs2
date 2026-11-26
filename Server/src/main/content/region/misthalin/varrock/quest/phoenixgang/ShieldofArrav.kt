@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang
 
+import content.data.Quests
+
 import content.region.misthalin.dialogue.KingRoaldDialogue
 import content.region.misthalin.varrock.quest.phoenixgang.dialogue.*
 import content.region.misthalin.varrock.quest.phoenixgang.plugin.JohnnyBeardNPC
@@ -13,14 +15,13 @@ import core.game.node.item.Item
 import core.plugin.ClassScanner
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the Shield of Arrav quest.
  */
 @Initializable
-class ShieldofArrav : Quest(Quests.SHIELD_OF_ARRAV, 29, 28, 1, Vars.VARP_QUEST_SHIELD_OF_ARRAV_PROGRESS_145, 0, 1, 7) {
+class ShieldofArrav : Quest(Quests.SHIELD_OF_ARRAV, Vars.VARP_QUEST_SHIELD_OF_ARRAV_PROGRESS_145, 0, 1, 7) {
 
     companion object {
         /**

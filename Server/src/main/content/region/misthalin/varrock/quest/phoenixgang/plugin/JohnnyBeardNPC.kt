@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.plugin
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.getQuestStage
 import core.api.inBank
@@ -11,7 +13,6 @@ import core.game.node.item.GroundItemManager
 import core.game.world.map.Location
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class JohnnyBeardNPC : AbstractNPC {
     constructor() : super(0, null)
@@ -28,7 +29,7 @@ class JohnnyBeardNPC : AbstractNPC {
         super.finalizeDeath(killer)
         if (killer is Player) {
             val player = killer.asPlayer()
-            val quest = getQuestStage(player, Quests.SHIELD_OF_ARRAV)
+            val quest = getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName)
             if (quest == 60 &&
                 ShieldofArrav.isPhoenixMission(player) &&
                 (!inInventory(player, Items.INTEL_REPORT_761) && !inBank(player, Items.INTEL_REPORT_761))

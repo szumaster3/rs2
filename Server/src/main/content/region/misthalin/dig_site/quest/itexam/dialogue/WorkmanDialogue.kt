@@ -1,5 +1,7 @@
 package content.region.misthalin.dig_site.quest.itexam.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.removeItem
 import core.api.setQuestStage
@@ -10,7 +12,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class WorkmanDialogue(player: Player? = null) : Dialogue(player) {
@@ -63,8 +64,8 @@ class DigsiteWorkmanDialogueFile : DialogueFile() {
 
             2 -> {
                 removeItem(player!!, Items.INVITATION_LETTER_696)
-                if (getQuestStage(player!!, Quests.THE_DIG_SITE) == 7) {
-                    setQuestStage(player!!, Quests.THE_DIG_SITE, 8)
+                if (getQuestStage(player!!, Quests.THE_DIG_SITE.questName) == 7) {
+                    setQuestStage(player!!, Quests.THE_DIG_SITE.questName, 8)
                 }
                 endFile()
             }

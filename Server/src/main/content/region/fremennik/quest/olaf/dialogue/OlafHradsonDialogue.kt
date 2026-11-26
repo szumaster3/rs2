@@ -1,5 +1,7 @@
 package content.region.fremennik.quest.olaf.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -20,24 +22,24 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg objects: Any?): Boolean {
         npc = objects[0] as NPC
         // If The Fremennik Trials has not been completed.
-        if(!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+        if(!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
             npcl(FaceAnim.ANGRY, "Outerlander, I have work to be getting on with... Please stop bothering me.").also { stage = END_DIALOGUE }
             return false
         }
         // Talking to Olaf after the quest.
-        if (isQuestComplete(player, Quests.OLAFS_QUEST)) {
+        if (isQuestComplete(player, Quests.OLAFS_QUEST.questName)) {
             npc(FaceAnim.NEUTRAL, "Good to see you again!")
             stage = END_DIALOGUE
             return true
         }
         // Start the Olaf quest.
-        if (getQuestStage(player, Quests.OLAFS_QUEST) == 0) {
+        if (getQuestStage(player, Quests.OLAFS_QUEST.questName) == 0) {
             handleIntroduction(stage)
             return true
         }
 
         // Talking to Olaf with the windswept logs.
-        if (getQuestStage(player, Quests.OLAFS_QUEST) == 1) {
+        if (getQuestStage(player, Quests.OLAFS_QUEST.questName) == 1) {
             if (removeItem(player, Items.WINDSWEPT_LOGS_11035)) {
                 handleCarvings(stage)
             } else {
@@ -48,19 +50,19 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
 
-        if (getQuestStage(player, Quests.OLAFS_QUEST) == 2) {
+        if (getQuestStage(player, Quests.OLAFS_QUEST.questName) == 2) {
             handleFreezing(stage)
             return true
         }
 
         // Talking to Olaf Hradson again after lighting the fire.
-        if (getQuestStage(player, Quests.OLAFS_QUEST) == 3) {
+        if (getQuestStage(player, Quests.OLAFS_QUEST.questName) == 3) {
             handleFire(stage)
             return true
         }
 
         // Talking to Olaf Hradson again after receiving Sven's last map.
-        if (getQuestStage(player, Quests.OLAFS_QUEST) == 4) {
+        if (getQuestStage(player, Quests.OLAFS_QUEST.questName) == 4) {
             // If the player has Sven's last map.
             if(inInventory(player, Items.SVENS_LAST_MAP_11034)){
                 npcl(FaceAnim.NEUTRAL, "Hey! I'm trying to carve and you're standing in my light! Move it!")
@@ -72,7 +74,7 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
 
-        if (getQuestStage(player, Quests.OLAFS_QUEST) == 100) {
+        if (getQuestStage(player, Quests.OLAFS_QUEST.questName) == 100) {
             npc(FaceAnim.NEUTRAL, "I'll sit here and practise carving.")
             stage = END_DIALOGUE
             return true
@@ -108,7 +110,7 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             else -> {
-                when (getQuestStage(player, Quests.OLAFS_QUEST)) {
+                when (getQuestStage(player, Quests.OLAFS_QUEST.questName)) {
                     0 -> handleIntroduction(stage)
                     1 -> handleCarvings(stage)
                     2 -> handleFreezing(stage)
@@ -155,7 +157,7 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             23 -> npc(FaceAnim.NEUTRAL, "Could you bring me some of that wood so I can work", "it?").also { stage++ }
             24 -> player("Wow, you must have pretty good eyes to be able to see", "a single tree from the water during a heavy storm.").also { stage++ }
             25 -> npc(FaceAnim.NEUTRAL, "Yes...great eyes...they run in the family.").also {
-                setQuestStage(p, Quests.OLAFS_QUEST, 1)
+                setQuestStage(p, Quests.OLAFS_QUEST.questName, 1)
                 setVarbit(p, Vars.VARBIT_QUEST_OLAFS_QUEST_PROGRESS_3534, 1, save = true)
                 stage = END_DIALOGUE
             }
@@ -185,7 +187,7 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             8 -> npc(FaceAnim.FRIENDLY, "And this one is for my son, Volf. Kids love planks in", "my experience. Tell him I said hello.").also { stage++ }
             9 -> player("Alright. They live in Rellekka, right?").also { stage++ }
             10 -> npc(FaceAnim.NEUTRAL, "Yes. Hurry back! And don't forget the story: I'm not", "here, I'm someplace far away.").also {
-                setQuestStage(player, Quests.OLAFS_QUEST, 2)
+                setQuestStage(player, Quests.OLAFS_QUEST.questName, 2)
                 stage = END_DIALOGUE
             }
         }
@@ -315,7 +317,7 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             13 -> npc(FaceAnim.NEUTRAL, "I'll sit here and practise carving.").also { stage++ }
             14 -> npc(FaceAnim.NEUTRAL, "If you pass this way again, I'll be glad if you drop my", "next load of work off with my family.").also { stage++ }
             15 -> npc(FaceAnim.NEUTRAL, "That or bring me some food before I starve.","Whichever.").also {
-                setQuestStage(player, Quests.OLAFS_QUEST, 4)
+                setQuestStage(player, Quests.OLAFS_QUEST.questName, 4)
                 addItemOrDrop(player, Items.SVENS_LAST_MAP_11034)
                 stage = END_DIALOGUE
             }

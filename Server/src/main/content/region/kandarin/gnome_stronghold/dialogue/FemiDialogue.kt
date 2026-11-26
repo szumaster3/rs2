@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.grandtree.plugin.TheGrandTreeUtils
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Femi dialogue.
@@ -18,7 +19,7 @@ class FemiDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val grandTreeStage = getQuestStage(player, Quests.THE_GRAND_TREE)
+        val grandTreeStage = getQuestStage(player, Quests.THE_GRAND_TREE.questName)
         val inArea = inBorders(player!!, 2456, 3406, 2462, 3410)
 
         when {
@@ -26,7 +27,7 @@ class FemiDialogue(player: Player? = null) : Dialogue(player) {
                 npc(FaceAnim.OLD_DEFAULT, "Now, to get this lot to the Grand Tree!")
                 stage = 7
             }
-            !inArea && isQuestInProgress(player, Quests.THE_GRAND_TREE, 1, 54) -> {
+            !inArea && isQuestInProgress(player, Quests.THE_GRAND_TREE.questName, 1, 54) -> {
                 npc(FaceAnim.OLD_DEFAULT, "Hello there.")
             }
             else -> {

@@ -1,5 +1,7 @@
 package content.region.other.entrana.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,13 +11,12 @@ import core.game.node.entity.player.Player
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MazionDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val handProgress = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)
+        val handProgress = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName)
 
         if (handProgress == 12) {
             player("Hello there!")
@@ -58,7 +59,7 @@ class MazionDialogue(player: Player? = null) : Dialogue(player) {
             } else {
                 sendItemDialogue(player, Items.WIZARDS_HEAD_6957, "Mazion gives you the head.")
                 addItem(player, Items.WIZARDS_HEAD_6957, 1)
-                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 13)
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName, 13)
                 stage = END_DIALOGUE
             }
 

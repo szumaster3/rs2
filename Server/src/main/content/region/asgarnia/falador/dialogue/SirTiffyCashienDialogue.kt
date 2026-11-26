@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import content.data.RespawnPoint
 import content.region.asgarnia.falador.quest.rd.cutscene.EnterTestingRoomCutscene
 import content.region.asgarnia.falador.quest.rd.RDUtils
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sir Tiffy Cashien dialogue.
@@ -22,7 +23,7 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestInProgress(player!!, Quests.RECRUITMENT_DRIVE, 1, 99)) {
+        if (isQuestInProgress(player!!, Quests.RECRUITMENT_DRIVE.questName, 1, 99)) {
             openDialogue(player, SirTiffyCashienDialogueFile(), npc)
             return true
         } else {
@@ -36,7 +37,7 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npc("What ho, " + (if (player.isMale) "sirrah" else "milady") + ". Spiffing day for a walk in the park,", "what?").also { stage++ }
             1 -> player(FaceAnim.HALF_ASKING,"Spiffing?").also { stage++ }
             2 -> npc("Absolutely, top-hole! Well, can't stay and chat all day,", "dontchaknow! Ta-ta for now!").also { stage++ }
-            3 -> if (!isQuestComplete(player, Quests.RECRUITMENT_DRIVE)) {
+            3 -> if (!isQuestComplete(player, Quests.RECRUITMENT_DRIVE.questName)) {
                 playerl(FaceAnim.HALF_GUILTY, "Erm...goodbye.").also { stage = END_DIALOGUE }
             } else {
                 options("Do you have any jobs for me yet?", "Can you explain the Gaze of Saradomin to me?", "Can I buy some armours?", "Can I switch respawns please?", "Goodbye.").also {
@@ -119,7 +120,7 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
         override fun handle(componentID: Int, buttonID: Int) {
             when (stage) {
                 START_DIALOGUE -> {
-                    when (getQuestStage(player!!, Quests.RECRUITMENT_DRIVE)) {
+                    when (getQuestStage(player!!, Quests.RECRUITMENT_DRIVE.questName)) {
                         1 -> {
                             playerl(
                                 FaceAnim.FRIENDLY,
@@ -530,8 +531,8 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
                 61 -> endFile()
 
                 62 -> {
-                    if (getQuestStage(player!!, Quests.RECRUITMENT_DRIVE) == 1) {
-                        setQuestStage(player!!, Quests.RECRUITMENT_DRIVE, 2)
+                    if (getQuestStage(player!!, Quests.RECRUITMENT_DRIVE.questName) == 1) {
+                        setQuestStage(player!!, Quests.RECRUITMENT_DRIVE.questName, 2)
                     }
                     RDUtils.shuffleTask(player!!)
                     EnterTestingRoomCutscene(player!!).start()
@@ -606,7 +607,7 @@ class SirTiffyCashienDialogue(player: Player? = null) : Dialogue(player) {
 
                 // Quest completion.
                 90 -> {
-                    finishQuest(player!!, Quests.RECRUITMENT_DRIVE)
+                    finishQuest(player!!, Quests.RECRUITMENT_DRIVE.questName)
                     endFile()
                 }
             }

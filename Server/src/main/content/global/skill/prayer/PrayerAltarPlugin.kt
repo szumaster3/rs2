@@ -1,5 +1,7 @@
 package content.global.skill.prayer
 
+import content.data.Quests
+
 import core.api.*
 import core.game.event.PrayerPointsRechargeEvent
 import core.game.interaction.IntType
@@ -15,7 +17,7 @@ import shared.consts.*
 class PrayerAltarPlugin : InteractionListener {
     override fun defineListeners() {
         on(ALTAR, IntType.SCENERY, "pray", "pray-at") { player, node ->
-            if (node.id == Scenery.TRIBAL_STATUE_3863 && !hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) {
+            if (node.id == Scenery.TRIBAL_STATUE_3863 && !hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO.questName)) {
                 return@on true
             }
 

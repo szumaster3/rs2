@@ -6,7 +6,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Items
-import shared.consts.Quests
 
 class EnchantedKeyPlugin : InteractionListener {
 

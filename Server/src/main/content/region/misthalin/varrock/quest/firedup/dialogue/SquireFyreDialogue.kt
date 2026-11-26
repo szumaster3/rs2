@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.firedup.dialogue
 
+import content.data.Quests
+
 import content.minigame.allfiredup.plugin.BeaconState
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -12,7 +14,6 @@ import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -22,7 +23,7 @@ import shared.consts.Vars
 class SquireFyreDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val questStage = getQuestStage(player, Quests.ALL_FIRED_UP)
+        val questStage = getQuestStage(player, Quests.ALL_FIRED_UP.questName)
         if(!GameWorld.settings!!.isMembers) {
             player("Hello there. Could I ask you about the-").also { stage = 7 }
         } else if(questStage == 100) {
@@ -41,7 +42,7 @@ class SquireFyreDialogue(player: Player? = null) : Dialogue(player) {
             1 -> player("Terrific! Blaze has asked me to light this fire as well, so", "he can see how things look from his vantage point.").also { stage++ }
             2 -> npc("Be my guest!").also {
                 stage++
-                setQuestStage(player, Quests.ALL_FIRED_UP, 50)
+                setQuestStage(player, Quests.ALL_FIRED_UP.questName, 50)
                 setVarbit(player, Vars.VARBIT_BEACON_RIVER_SALVE_5146, BeaconState.DYING.ordinal)
             }
             3 -> options("How do I light the beacon?", "I suppose you don't have any logs I could have?", "Okay, thanks.").also { stage++ }

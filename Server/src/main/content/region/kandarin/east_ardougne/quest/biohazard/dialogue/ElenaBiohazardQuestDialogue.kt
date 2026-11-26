@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Elena dialogue.
@@ -27,7 +28,7 @@ class ElenaBiohazardQuestDialogue : DialogueFile() {
     )
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.BIOHAZARD)
+        val questStage = getQuestStage(player!!, Quests.BIOHAZARD.questName)
         npc = NPC(NPCs.ELENA_3209)
         when {
             (questStage == 0) -> {
@@ -54,7 +55,7 @@ class ElenaBiohazardQuestDialogue : DialogueFile() {
 
                     12 -> {
                         end()
-                        setQuestStage(player!!, Quests.BIOHAZARD, 1)
+                        setQuestStage(player!!, Quests.BIOHAZARD.questName, 1)
                     }
                 }
             }
@@ -184,7 +185,7 @@ class ElenaBiohazardQuestDialogue : DialogueFile() {
                     9 -> npc(FaceAnim.HALF_GUILTY, "You need to see the King of East Ardougne!").also { stage++ }
                     10 -> {
                         end()
-                        setQuestStage(player!!, Quests.BIOHAZARD, 99)
+                        setQuestStage(player!!, Quests.BIOHAZARD.questName, 99)
                     }
                 }
             }

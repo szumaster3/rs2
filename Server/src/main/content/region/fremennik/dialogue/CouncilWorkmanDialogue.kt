@@ -1,5 +1,7 @@
 package content.region.fremennik.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.diary.dialogue.CouncilWorkmanDiaryDialogue
 import content.region.fremennik.rellekka.dialogue.CouncilWorkerDialogue
 import core.api.getQuestStage
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Council Workman dialogue.
@@ -20,7 +21,7 @@ class CouncilWorkmanDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         end()
-        if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) in 1..99) {
+        if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName) in 1..99) {
             player.dialogueInterpreter.open((CouncilWorkerDialogue(1)))
         } else {
             openDialogue(player, CouncilWorkmanDiaryDialogue(), npc)

@@ -1,5 +1,7 @@
 package core.game.shops
 
+import content.data.Quests
+
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
@@ -21,7 +23,6 @@ import core.tools.secondsToTicks
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import java.io.FileReader
 
 /**
@@ -216,7 +217,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         }
 
         on(NPCs.FUR_TRADER_1316, IntType.NPC, "trade") { player, node ->
-            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 sendMessage(player, "Only Fremenniks may purchase furs here.")
                 return@on true
             }
@@ -225,7 +226,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         }
 
         on(NPCs.CANDLE_MAKER_562, IntType.NPC, "trade") { player, node ->
-            if (getQuestStage(player, Quests.MERLINS_CRYSTAL) > 60) {
+            if (getQuestStage(player, Quests.MERLINS_CRYSTAL.questName) > 60) {
                 openId(player, 56)
             } else {
                 shopsByNpc[node.id]?.openFor(player)
@@ -234,7 +235,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         }
 
         on(NPCs.OZIACH_747, IntType.NPC, "trade") { player, node ->
-            val questStage = getQuestStage(player, Quests.DRAGON_SLAYER)
+            val questStage = getQuestStage(player, Quests.DRAGON_SLAYER.questName)
             when (questStage) {
                 0 -> sendNPCDialogue(player, node.id, "I ain't got nothing to sell ye, adventurer. Leave me be!", FaceAnim.ANNOYED)
                 in 1..99 -> sendNPCDialogue(player, node.id, "I'm not sellin' ye anything till you've slayed that dragon! Now be off wi' ye.", FaceAnim.ANNOYED)

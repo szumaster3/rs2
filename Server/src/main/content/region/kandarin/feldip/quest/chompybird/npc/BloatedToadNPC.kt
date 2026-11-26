@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.chompybird.npc
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -15,7 +17,6 @@ import core.tools.RandomFunction
 import shared.consts.Graphics
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Handles the Bloated Toad NPC.
@@ -133,12 +134,12 @@ class BloatedToadListeners :
                 return@on true
             }
 
-            if (getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING) < 30) {
+            if (getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName) < 30) {
                 sendPlayerDialogue(player, "I don't know what you want from me.")
                 return@on true
             }
 
-            if (getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING) in 30..40) {
+            if (getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName) in 30..40) {
                 if (player.location == Location.create(2635, 2966, 0) ||
                     player.location ==
                     Location.create(
@@ -147,7 +148,7 @@ class BloatedToadListeners :
                         0,
                     )
                 ) {
-                    setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING, 40)
+                    setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName, 40)
                 } else {
                     sendPlayerDialogue(player, "I should probably put this where Rantz told me.")
                     return@on true

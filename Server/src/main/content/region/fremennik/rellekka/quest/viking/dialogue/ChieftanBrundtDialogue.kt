@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import kotlin.random.Random
 
 /**
@@ -70,7 +71,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 530
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npcl(FaceAnim.HAPPY, "Hello again, ${if (player?.isMale == true) "brother" else "sister"} ${FremennikTrials.getFremennikName(player!!)}. I hope your travels have brought you wealth and joy! What compels you to visit me on this day?")
                 stage = 600
             }
@@ -120,7 +121,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("That sounds too complicated to me.").also { stage = 322 }
             }
             320 -> npc("As I say outerlander, you must find and speak to the", "twelve members of the council of elders, and see what", "tasks they might set you.").also { stage++ }
-            321 -> npc("If you can gain the support of seven of the twelve, then", "you will be accepted as one of us without question.").also { startQuest(player, Quests.THE_FREMENNIK_TRIALS); stage = END_DIALOGUE }
+            321 -> npc("If you can gain the support of seven of the twelve, then", "you will be accepted as one of us without question.").also { startQuest(player, Quests.THE_FREMENNIK_TRIALS.questName); stage = END_DIALOGUE }
             322 -> npc("Well, that's what I expect from an outerlander.").also { stage = END_DIALOGUE }
 
             500 -> npcl(FaceAnim.THINKING, "A reduction on sales taxes? Why, I am the only one in the Fremennik who may authorise such a thing. What does an outerlander want with that?").also { stage++ }
@@ -162,7 +163,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             550 -> npcl(FaceAnim.HAPPY, "If you need any help with your trials, I suggest you speak to Askeladden. He is currently doing his own trials of manhood to become a true Fremennik.").also { stage = END_DIALOGUE }
             560 -> npcl(FaceAnim.HAPPY, "From this day onward, you are outerlander no more! In honour of your acceptance into the Fremennik, you gain a new name: ${FremennikTrials.getFremennikName(player)}.",).also {
                 cleanupAttributes(player)
-                finishQuest(player, Quests.THE_FREMENNIK_TRIALS)
+                finishQuest(player, Quests.THE_FREMENNIK_TRIALS.questName)
                 stage = END_DIALOGUE
             }
             600 -> options("I just came to say hello.", "Do you have any quests?", "Nice hat!", "Can I hear the history of your people?", "Can I have a seal of passage?").also { stage++ }

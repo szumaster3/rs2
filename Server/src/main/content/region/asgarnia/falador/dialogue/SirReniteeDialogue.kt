@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.construction.CrestType
 import core.ServerConstants
@@ -18,7 +20,6 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Sir Renitee.
@@ -219,7 +220,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 val (quest, name, portraitItemId) = portraits[stage]!!
 
                 val hasReq = when (quest) {
-                    Quests.PLAGUE_CITY -> isQuestComplete(player, quest)
+                    Quests.PLAGUE_CITY.questName -> isQuestComplete(player, quest)
                     else -> hasRequirement(player, quest, false)
                 }
 
@@ -265,7 +266,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 val (requiredQuests, locationName, landscapeItemId) = landscapes[stage]!!
                 val hasAll = requiredQuests.all { quest ->
                     when (quest) {
-                        Quests.THE_FEUD, Quests.SHADES_OF_MORTTON, Quests.GHOSTS_AHOY, Quests.HAUNTED_MINE, Quests.TAI_BWO_WANNAI_TRIO, Quests.SHILO_VILLAGE -> hasRequirement(
+                        Quests.THE_FEUD.questName, Quests.SHADES_OF_MORTTON.questName, Quests.GHOSTS_AHOY.questName, Quests.HAUNTED_MINE.questName, Quests.TAI_BWO_WANNAI_TRIO.questName, Quests.SHILO_VILLAGE.questName -> hasRequirement(
                             player, quest, false
                         )
 
@@ -311,17 +312,17 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
             45 to Triple(151, "large", Items.LARGE_MAP_8006)
         )
         val portraits = mapOf(
-            47 to Triple(Quests.HOLY_GRAIL, "King Arthur", Items.ARTHUR_PORTRAIT_7995),
-            48 to Triple(Quests.PLAGUE_CITY, "Elena", Items.ELENA_PORTRAIT_7996),
-            49 to Triple(Quests.THE_GIANT_DWARF, "Giant Dwarf", Items.KELDAGRIM_PORTRAIT_7997),
-            50 to Triple(Quests.THRONE_OF_MISCELLANIA, "Prince and Princess of Miscellania", Items.MISC_PORTRAIT_7998)
+            47 to Triple(Quests.HOLY_GRAIL.questName, "King Arthur", Items.ARTHUR_PORTRAIT_7995),
+            48 to Triple(Quests.PLAGUE_CITY.questName, "Elena", Items.ELENA_PORTRAIT_7996),
+            49 to Triple(Quests.THE_GIANT_DWARF.questName, "Giant Dwarf", Items.KELDAGRIM_PORTRAIT_7997),
+            50 to Triple(Quests.THRONE_OF_MISCELLANIA.questName, "Prince and Princess of Miscellania", Items.MISC_PORTRAIT_7998)
         )
         val landscapes = mapOf(
-            54 to Triple(listOf(Quests.COOKS_ASSISTANT, Quests.RUNE_MYSTERIES, Quests.THE_RESTLESS_GHOST), "River Lum", Items.LUMBRIDGE_PAINTING_8002),
-            55 to Triple(listOf(Quests.THE_TOURIST_TRAP, Quests.THE_FEUD, Quests.THE_GOLEM), "Kharid Desert", Items.DESERT_PAINTING_7999),
-            56 to Triple(listOf(Quests.CREATURE_OF_FENKENSTRAIN, Quests.SHADES_OF_MORTTON, Quests.GHOSTS_AHOY, Quests.HAUNTED_MINE), "Morytania", Items.MORYTANIA_PAINTING_8003),
-            57 to Triple(listOf(Quests.PIRATES_TREASURE, Quests.TAI_BWO_WANNAI_TRIO, Quests.SHILO_VILLAGE), "Karamja", Items.KARAMJA_PAINTING_8001),
-            58 to Triple(listOf(Quests.ROVING_ELVES), "Isafdar", Items.ISAFDAR_PAINTING_8000)
+            54 to Triple(listOf(Quests.COOKS_ASSISTANT.questName, Quests.RUNE_MYSTERIES.questName, Quests.THE_RESTLESS_GHOST.questName), "River Lum", Items.LUMBRIDGE_PAINTING_8002),
+            55 to Triple(listOf(Quests.THE_TOURIST_TRAP.questName, Quests.THE_FEUD.questName, Quests.THE_GOLEM.questName), "Kharid Desert", Items.DESERT_PAINTING_7999),
+            56 to Triple(listOf(Quests.CREATURE_OF_FENKENSTRAIN.questName, Quests.SHADES_OF_MORTTON.questName, Quests.GHOSTS_AHOY.questName, Quests.HAUNTED_MINE.questName), "Morytania", Items.MORYTANIA_PAINTING_8003),
+            57 to Triple(listOf(Quests.PIRATES_TREASURE.questName, Quests.TAI_BWO_WANNAI_TRIO.questName, Quests.SHILO_VILLAGE.questName), "Karamja", Items.KARAMJA_PAINTING_8001),
+            58 to Triple(listOf(Quests.ROVING_ELVES.questName), "Isafdar", Items.ISAFDAR_PAINTING_8000)
         )
     }
 }

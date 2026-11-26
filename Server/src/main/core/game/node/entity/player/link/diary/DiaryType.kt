@@ -7,9 +7,6 @@ import shared.consts.Items
 import shared.consts.NPCs
 import java.util.*
 
-/**
- * The Diary type.
- */
 enum class DiaryType(
     val displayName: String,
     val childIds: IntArray,
@@ -21,7 +18,7 @@ enum class DiaryType(
 ) {
     KARAMJA(
         "Karamja",
-        intArrayOf(11,12,13,14),
+        intArrayOf(10,11,12,13),
         arrayOf("Easy", "Medium", "Hard"),
         arrayOf(
             arrayOf(
@@ -81,7 +78,7 @@ enum class DiaryType(
     ),
     VARROCK(
         "Varrock",
-        intArrayOf(15,16,17,18),
+        intArrayOf(14,15,16,17),
         arrayOf("Easy", "Medium", "Hard"),
         arrayOf(
             arrayOf(
@@ -230,7 +227,7 @@ enum class DiaryType(
     ),
     FALADOR(
         "Falador",
-        intArrayOf(23,24,25,26),
+        intArrayOf(22,23,24,25),
         arrayOf("Easy", "Medium", "Hard"),
         arrayOf(
             arrayOf(
@@ -288,7 +285,7 @@ enum class DiaryType(
     ),
     FREMENNIK(
         "Fremennik",
-        intArrayOf(19,20,21,22),
+        intArrayOf(18,19,20,21),
         arrayOf("Easy", "Medium", "Hard"),
         arrayOf(
             arrayOf(
@@ -338,7 +335,7 @@ enum class DiaryType(
     ),
     SEERS_VILLAGE(
         "Seers' Village",
-        intArrayOf(27,28,29,30),
+        intArrayOf(26,27,28,29),
         arrayOf("Easy", "Medium", "Hard"),
         arrayOf(
             arrayOf(
@@ -390,6 +387,61 @@ enum class DiaryType(
         ),
         "To start marking off tasks in your journal, speak to<br><br>any seer in Seers' Village, Stankers by the coal<br><br>trucks or Sir Kay in Camelot.",
         intArrayOf(NPCs.SEER_388, NPCs.STANKERS_383, NPCs.SIR_KAY_241)
+    ),
+    ARDOUGNE(
+        "Ardougne",
+        intArrayOf(30, 31, 32, 33, 34),
+        arrayOf("Easy", "Medium", "Hard", "Elite"),
+        arrayOf(
+            arrayOf(
+                "Have Wizard Cromperty teleport you to the essence mine.",
+                "Attempt to steal from any stall in Ardougne Market, or from any guard.",
+                "Sell silk to the silk trader in Ardougne for 60 coins each.",
+                "Use the altar in West Ardougne's church.",
+                "Enter the Castle Wars waiting room.",
+                "Go out fishing on the Fishing Trawler.",
+                "Enter the Combat Training Camp north of Ardougne.",
+                "Talk to a civilian in West Ardougne about selling a cat.",
+                "Kill a Unicow in the Tower of Life.",
+                "Get a civilian to throw a tomato at the army recruiter<br><br>in West Ardougne.",
+                "Sail from East Ardougne to Karamja.",
+                "Attempt to pick-lock a certain door east of the gem stall<br><br>in Ardougne's marketplace.",
+                "Spend some Penguin points with Larry at Ardougne Zoo.",
+                "Use the Summoning obelisk to the east of the Fight Arena.",
+                "Pop a balloon in the monastery south of Ardougne.",
+                "Buy a water-filled vial from the general store run<br><br>by Aemad and Kortan.",
+                "Use the noticeboard near the Observatory to gather information<br><br>about shooting stars.",
+                "Kill something on the Khazard Battlefield.",
+                "Buy a skewered kebab from the Poison Arrow pub.",
+                "View the Hunter equipment in Aleck's shop.",
+                "Talk to the head servant at the servants' guild to find out about <br><br>servants for your house.",
+                "Use a Ring of Dueling to teleport to Castle Wars.",
+                "Talk to Tindel Merchant about identifying swords."
+            ),
+            arrayOf(
+                "Enter the unicorn pen in Ardougne Zoo using the fairy rings.",
+                "Teleport to the Wilderness using the lever in Ardougne.",
+                "Grapple over Yanille's southern wall.",
+                "Craft some runes (any kind) at Ourania Altar.",
+                "Sell some rubium to Ezekial Lovecraft in the town of Witchaven.",
+                "Pick watermelons from the Farming patch north of Ardougne.",
+                "Cast the Ardougne Teleport spell.",
+                "Travel to Castle Wars by hot-air balloon.",
+                "Claim buckets of sand from bert",
+                "Return to past and talk to sarah",
+                "Catch fish at fishing platform",
+                "Cross river dougne using log balance",
+                "Pickpocket master farmer",
+                "Steal nature rune from chest",
+                "Mine coal east of ard",
+                "Kill swordchick in tower of life"
+            ),
+            arrayOf("Recharge bracelet or necklace at legends guild", "Kill shadow warrior in legends guild basement", "Enter magic guild in yanille", "Use magic guild portal to thormacs tower", "Be on winning side in castle wars", "Cast ourania teleport spell", "Pickpocket watchman while wearing gloves", "Kill frogeel in tower of life", "Zookeeper put you in monkey cage", "Kill own jade vine after back to my roots", "Use air guitar emote near musician", "Cast the Watchtower Teleport spell", "Cross monkey bars in agility dungeon", "Catch red salamander outside ourania altar", "Pick papaya or coconut near tree gnome village", "Steal blood runes from chaos druid tower", "Use catapult in castle wars after construction"),
+            arrayOf("Catch a manta ray in the Fishing Trawler minigame.", "Have an abyssal titan hold essence while runecrafting at Ourania Altar.", "Attempt to picklock the basement door in Yanille Agility Dungeon.", "Remove pure essence from a giant pouch at Ourania Altar.", "Make a rune crossbow from scratch in Witchaven or Yanille.")
+        ),
+        arrayOf(arrayOf(Item(Items.ARDOUGNE_CLOAK_1_15345), Item(Items.ANTIQUE_LAMP_15346)), arrayOf(Item(Items.ARDOUGNE_CLOAK_2_15347), Item(Items.ANTIQUE_LAMP_15348)), arrayOf(Item(Items.ARDOUGNE_CLOAK_3_15349), Item(Items.ANTIQUE_LAMP_15350)), arrayOf(Item(Items.ANTIQUE_LAMP_15351, 4))),
+        "Speak to Doctor Orbon, the Ardougne town crier or Aleck to claim your rewards.",
+        intArrayOf(NPCs.DOCTOR_ORBON_290, NPCs.TOWN_CRIER_6138, NPCs.ALECK_5110)
     );
 
     /**

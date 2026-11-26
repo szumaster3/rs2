@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.hemenster.quest.fishingcompo.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -17,7 +19,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Bonzo dialogue.
@@ -30,7 +31,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         val init = args.size < 2
-        val questStage = getQuestStage(player, Quests.FISHING_CONTEST)
+        val questStage = getQuestStage(player, Quests.FISHING_CONTEST.questName)
         val hasFishingTrophy = hasAnItem(player, Items.FISHING_TROPHY_26).container != null
         val duringContest = getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_CONTEST, false)
         val hasRod = inInventory(player, Items.FISHING_ROD_307)
@@ -44,7 +45,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
                 npc("Sorry, $gender, but you need a fishing", "rod to compete.")
                 stage = END_DIALOGUE
             } else {
-                if(!hasFishingTrophy && getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_WON, false) && !isQuestComplete(player, Quests.FISHING_CONTEST)) {
+                if(!hasFishingTrophy && getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_WON, false) && !isQuestComplete(player, Quests.FISHING_CONTEST.questName)) {
                     npc(FaceAnim.HAPPY, "Hello champ!")
                     stage = 11
                 } else {
@@ -254,7 +255,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
                         clean(player, originalLocation, region)
                         sendItemDialogue(player, Items.FISHING_TROPHY_26, "You are given the Hemenster fishing trophy!")
                         addItemOrDrop(player, Items.FISHING_TROPHY_26, 1)
-                        setQuestStage(player, Quests.FISHING_CONTEST, 20)
+                        setQuestStage(player, Quests.FISHING_CONTEST.questName, 20)
                         return true
                     }
                 }

@@ -1,5 +1,7 @@
 package content.minigame.sorceress.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils
 import core.api.*
@@ -16,7 +18,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sorceress Apprentice dialogue.
@@ -29,7 +30,7 @@ class SorceressApprenticeDialogue(player: Player? = null) : Dialogue(player) {
         if (player.getSavedData().globalData.hasSpokenToApprentice()) {
             player(FaceAnim.HALF_GUILTY, "Hey apprentice, do you want to try out", "your teleport skills again?")
         } else {
-            if (isQuestComplete(player, Quests.SWEPT_AWAY) && inInventory(player, Items.BROOMSTICK_14057) && !getAttribute(player, GameAttributes.BROOM_ENCHANTMENT_TP, false)) {
+            if (isQuestComplete(player, Quests.SWEPT_AWAY.questName) && inInventory(player, Items.BROOMSTICK_14057) && !getAttribute(player, GameAttributes.BROOM_ENCHANTMENT_TP, false)) {
                 options("Hello. What are you doing?", "Could you enchant this broom for me?")
                 stage = 100
             }
@@ -96,7 +97,7 @@ class SorceressApprenticeDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player("Cleaning, cleaning, always cleaning. This apprenticeship", "isn't all that it was cracked up to be.").also { stage = 11 }
                 2 -> player("Could you enchant this broom for me?").also { stage++ }
             }
-            101 -> if (!isQuestComplete(player, Quests.PRINCE_ALI_RESCUE) && !getAttribute(player, GameAttributes.TALK_ABOUT_SQ_IRKJUICE, false)) {
+            101 -> if (!isQuestComplete(player, Quests.PRINCE_ALI_RESCUE.questName) && !getAttribute(player, GameAttributes.TALK_ABOUT_SQ_IRKJUICE, false)) {
                 npc("Not right now; I have too much housework to do at the", "moment.").also { stage++ }
             } else {
                 npc("Ah, of course. I'll just cast this little spell on it and then", "you can teleport to Sorceress's Garden. All you need to", "do is wield the broom and operate it.").also { stage = 103 }
@@ -121,7 +122,7 @@ class SorceressApprenticeDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
         fun teleport(npc: NPC, player: Player) {
-            if (!hasRequirement(player, Quests.PRINCE_ALI_RESCUE)) return
+            if (!hasRequirement(player, Quests.PRINCE_ALI_RESCUE.questName)) return
             npc.faceTemporary(player, 4)
             npc.graphics(Graphics(108))
             player.lock()

@@ -1,5 +1,7 @@
 package content.region.karamja.tbw.quest.junglepotion.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.Clocks
 import core.game.interaction.IntType
@@ -11,7 +13,6 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery
 import core.game.node.scenery.Scenery as SceneryNode
 
@@ -78,7 +79,7 @@ class JunglePotionListener : InteractionListener {
             val herb = Herb.forId(node.id) ?: return@on true
             val scenery = node.asScenery()
 
-            if (getQuestStage(player, Quests.JUNGLE_POTION) < herb.stage) {
+            if (getQuestStage(player, Quests.JUNGLE_POTION.questName) < herb.stage) {
                 sendMessage(player, "Unfortunately, you find nothing of interest.", 1)
                 return@on true
             }

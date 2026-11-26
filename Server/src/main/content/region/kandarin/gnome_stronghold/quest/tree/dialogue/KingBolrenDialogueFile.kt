@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.tree.TreeGnomeVillage
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -13,13 +15,12 @@ import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class KingBolrenDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.KING_BOLREN_469)
-        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName)
         when {
             questStage < 10 -> {
                 when (stage) {
@@ -53,7 +54,7 @@ class KingBolrenDialogueFile : DialogueFile() {
                     21 -> {
                         teleport(player!!, TreeGnomeVillage.mazeEntrance)
                         sendNPCDialogue(player!!, NPCs.ELKOY_5179, "We're out of the maze now. Please hurry, we must have the orb if we are to survive.", FaceAnim.OLD_NORMAL)
-                        setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 10)
+                        setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 10)
                         stage = END_DIALOGUE
                     }
                 }
@@ -92,7 +93,7 @@ class KingBolrenDialogueFile : DialogueFile() {
                         17 -> {
                             if (removeItem(player!!, Items.ORB_OF_PROTECTION_587)) {
                                 teleport(player!!, TreeGnomeVillage.mazeEntrance)
-                                setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 40)
+                                setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 40)
                                 sendNPCDialogue(player!!, NPCs.ELKOY_5179, "Good luck friend.")
                             }
                             stage = END_DIALOGUE
@@ -177,7 +178,7 @@ class KingBolrenDialogueFile : DialogueFile() {
                             )
 
                             if (removeItem(player!!, Items.ORBS_OF_PROTECTION_588)) {
-                                setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 99)
+                                setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 99)
                             }
                             stage = 0
                         }
@@ -200,7 +201,7 @@ class KingBolrenDialogueFile : DialogueFile() {
                     3 -> npcl(FaceAnim.OLD_NORMAL, "Please, for your efforts take this amulet. It's made from the same sacred stone as the orbs of protection. It will help keep you safe on your journeys.").also { stage++ }
                     4 -> playerl(FaceAnim.FRIENDLY, "Thank you King Bolren.").also { stage++ }
                     5 -> npcl(FaceAnim.OLD_NORMAL, "The tree has many other powers, some of which I cannot reveal. As a friend of the gnome people, I can now allow you to use the tree's magic to teleport to other trees grown from related seeds.").also {
-                        finishQuest(player!!, Quests.TREE_GNOME_VILLAGE)
+                        finishQuest(player!!, Quests.TREE_GNOME_VILLAGE.questName)
                         stage = END_DIALOGUE
                     }
                 }

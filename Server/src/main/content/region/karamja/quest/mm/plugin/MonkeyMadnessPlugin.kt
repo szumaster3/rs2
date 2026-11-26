@@ -1,5 +1,7 @@
 package content.region.karamja.quest.mm.plugin
 
+import content.data.Quests
+
 import content.region.karamja.quest.mm.dialogue.*
 import content.region.other.ape_atoll.dialogue.ZooknockAfterBattleDialogueFile
 import content.region.other.ape_atoll.dialogue.ZooknockDialogue
@@ -30,12 +32,12 @@ class MonkeyMadnessPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(intArrayOf(NPCs.ZOOKNOCK_1425, NPCs.ZOOKNOCK_1426), IntType.NPC, "talk-to") { player, npc ->
-            if (getQuestStage(player, Quests.MONKEY_MADNESS) == 96) {
+            if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 96) {
                 openDialogue(player, ZooknockAfterBattleDialogueFile(), npc)
-            } else if (getQuestStage(player, Quests.MONKEY_MADNESS) == 30 ||
+            } else if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 30 ||
                 getQuestStage(
                     player,
-                    Quests.MONKEY_MADNESS,
+                    Quests.MONKEY_MADNESS.questName,
                 ) == 31
             ) {
                 openDialogue(player, ZooknockDialogue(), npc)
@@ -56,7 +58,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         on(NPCs.MONKEY_1463, IntType.NPC, "talk-to") { player, npc ->
             if (player.equipment.containsAtLeastOneItem(IntArray(4031 - 4024 + 1) { it + 4024 }) &&
                 player.equipment.containsAtLeastOneItem(IntArray(4022 - 4021 + 1) { it + 4021 }) &&
-                getQuestStage(player, Quests.MONKEY_MADNESS) == 33
+                getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 33
             ) {
                 openDialogue(player, MonkeyDialogue(), npc)
             }
@@ -90,7 +92,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         }
 
         on(NPCs.KRUK_1441, IntType.NPC, "talk-to") { player, npc ->
-            if (getQuestStage(player, Quests.MONKEY_MADNESS) >= 35) {
+            if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) >= 35) {
                 openDialogue(player, KrukDialogue(), npc)
             }
             return@on true
@@ -121,7 +123,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         }
 
         on(NPCs.DAERO_1407, IntType.NPC, "talk-to") { player, npc ->
-            if (getQuestStage(player, Quests.MONKEY_MADNESS) == 100 &&
+            if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 100 &&
                 !getAttribute(player, "mm:xp_reward", false)
             ) {
                 openDialogue(player, DaeroTrainingPostQuestDialogue(), npc)
@@ -136,7 +138,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         }
 
         on(Scenery.AWOWOGEI_4771, IntType.SCENERY, "talk-to") { player, _ ->
-            if (getQuestStage(player, Quests.MONKEY_MADNESS) == 32) {
+            if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 32) {
                 openDialogue(player, AwowogeiDialogue(), NPC(NPCs.AWOWOGEI_1448))
             } else {
                 openDialogue(player, AwowogeiChallengeDialogue(), NPC(NPCs.AWOWOGEI_1448))
@@ -209,7 +211,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         onEquip(Items.TENTH_SQUAD_SIGIL_4035) { player, _ ->
             /*
             sendOptions(player, "Let the sigil teleport you when worn?", "Yes", "No")
-            setQuestStage(player, Quests.MONKEY_MADNESS, 94)
+            setQuestStage(player, Quests.MONKEY_MADNESS.questName, 94)
 
             PacketRepository.send(
                 Encoders530.CAMERA_VIEW_PACKET,
@@ -226,7 +228,7 @@ class MonkeyMadnessPlugin : InteractionListener {
                 npc.attack(player)
 
                 if (DeathTask.isDead(npc)) {
-                    setQuestStage(player, Quests.MONKEY_MADNESS, 95)
+                    setQuestStage(player, Quests.MONKEY_MADNESS.questName, 95)
                 }
             }
 

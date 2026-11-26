@@ -1,5 +1,7 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves.plugin
 
+import content.data.Quests
+
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
 import core.api.*
 import core.game.interaction.InteractionListener
@@ -41,7 +43,7 @@ class RovingElvesListeners : InteractionListener {
     override fun defineListeners() {
 
         on(Scenery.TREE_8742, SCENERY, "pass") { player, node ->
-            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I)) {
+            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I.questName)) {
                 return@on false
             }
 
@@ -146,7 +148,7 @@ class RovingElvesListeners : InteractionListener {
          */
 
         on(RovingElves.CONSECRATION_SEED_CHARGED, ITEM, "plant") { player, _ ->
-            if (Location(2603, 9911).getDistance(player.location) > 3 || getQuestStage(player, Quests.ROVING_ELVES) != 15) {
+            if (Location(2603, 9911).getDistance(player.location) > 3 || getQuestStage(player, Quests.ROVING_ELVES.questName) != 15) {
                 return@on true
             }
 
@@ -172,7 +174,7 @@ class RovingElvesListeners : InteractionListener {
 
                         6 -> {
                             removeItem(player, RovingElves.CONSECRATION_SEED_CHARGED)
-                            setQuestStage(player, Quests.ROVING_ELVES, 20)
+                            setQuestStage(player, Quests.ROVING_ELVES.questName, 20)
                             sendGraphics(Graphics.GRAPHIC_719, Location(2604, 9907, 0))
                             sendMessage(player, "The seed vanishes in a puff of smoke.")
                             return true

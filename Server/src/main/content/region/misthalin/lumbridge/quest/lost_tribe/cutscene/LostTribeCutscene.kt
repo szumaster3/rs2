@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.cutscene
 
+import content.data.Quests
+
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.component.Component
@@ -11,7 +13,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.tools.DARK_RED
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class LostTribeCutscene(
     player: Player,
@@ -163,7 +164,7 @@ class LostTribeCutscene(
 
             19 -> {
                 end {
-                    finishQuest(player, Quests.THE_LOST_TRIBE)
+                    finishQuest(player, Quests.THE_LOST_TRIBE.questName)
                 }
             }
         }

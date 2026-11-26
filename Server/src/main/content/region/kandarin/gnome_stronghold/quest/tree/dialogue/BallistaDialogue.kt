@@ -1,9 +1,10 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class BallistaDialogue : DialogueFile() {
@@ -11,7 +12,7 @@ class BallistaDialogue : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName)
         if (questStage > 30) {
             when (stage) {
                 0 -> sendDialogue(player!!, "The Khazard stronghold has already been breached.").also { stage = END_DIALOGUE }
@@ -40,7 +41,7 @@ class BallistaDialogue : DialogueFile() {
                         answer -> {
                             playAudio(player!!, Sounds.TREEVILLAGE_CATABOW_HIT_3487, 1)
                             sendDialogue(player!!, "The huge spear flies through the air and screams down directly into the Khazard stronghold. A deafening crash echoes over the battlefield as the front entrance is reduced to rubble.")
-                            setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 31)
+                            setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 31)
                         }
 
                         else -> {

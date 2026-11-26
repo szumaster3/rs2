@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.port_khazard.quest.arena.cutscene.FightTreeCutscene
 import content.region.kandarin.port_khazard.quest.arena.cutscene.PrisonCutscene
 import content.region.kandarin.port_khazard.quest.arena.plugin.FightArenaPlugin.Companion.General
@@ -11,7 +13,6 @@ import core.game.world.map.RegionManager
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the General Khazard dialogue.
@@ -24,7 +25,7 @@ class GeneralKhazardDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.GENERAL_KHAZARD_258)
         val general = findNPC(NPCs.GENERAL_KHAZARD_258)!!
-        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA.questName)) {
             in 68..70 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_DEFAULT, "Out of the way, guard! I don't tolerate disruption when I'm watching slaves being slaughtered.").also { stage = END_DIALOGUE }
             }
@@ -118,7 +119,7 @@ class GeneralKhazardDialogue : DialogueFile() {
                 4 -> npcl(FaceAnim.OLD_EVIL_LAUGH, "You however have coused me much trouble today. You must remain here so that I may at least have the pleasure of killing you myself.").also { stage++ }
                 5 -> {
                     end()
-                    setQuestStage(player!!, Quests.FIGHT_ARENA, 97)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA.questName, 97)
                     RegionManager.getNpc(player!!.location, NPCs.GENERAL_KHAZARD_258, 15)
                     sendChat(findNPC(General.id)!!, "You shall die for your insolence.")
                     General.attack(player!!)

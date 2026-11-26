@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Swensen The Navigator dialogue.
@@ -57,12 +58,12 @@ class SwensenTheNavigatorDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1000
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 playerl(FaceAnim.HAPPY, "Hello!")
                 stage = 140
             }
 
-            player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
+            player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 player("Hello!")
             }
 

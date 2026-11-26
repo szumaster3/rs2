@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.haunted.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.api.isQuestComplete
 import core.api.playGlobalAudio
@@ -10,7 +12,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Sounds
 
 @Initializable
@@ -43,13 +44,13 @@ class ErnestDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun finish() {
-        if (isQuestComplete(player, Quests.ERNEST_THE_CHICKEN)) {
+        if (isQuestComplete(player, Quests.ERNEST_THE_CHICKEN.questName)) {
             playGlobalAudio(player.location, Sounds.CHICKEN_INTO_HUMAN_1564)
             npc.clear()
             return
         }
         npc.clear()
-        finishQuest(player, Quests.ERNEST_THE_CHICKEN)
+        finishQuest(player, Quests.ERNEST_THE_CHICKEN.questName)
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.ERNEST_287)

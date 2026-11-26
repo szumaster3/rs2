@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
 import core.api.finishQuest
 import core.api.isQuestComplete
@@ -11,7 +13,6 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents The Oziach Langley dialogue.
@@ -26,7 +27,7 @@ class OziachDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER)
+        quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER.questName)
         when (quest!!.getStage(player)) {
             100 -> {
                 npc("Aye, 'tis a fair day, my mighty dragon-slaying friend.")
@@ -270,8 +271,8 @@ class OziachDialogue(player: Player? = null) : Dialogue(player) {
                 6 -> {
                     end()
                     val heads = player.inventory.getAmount(DragonSlayer.ELVARG_HEAD)
-                    if (player.inventory.remove(Item(DragonSlayer.ELVARG_HEAD.id, heads)) && !isQuestComplete(player, Quests.DRAGON_SLAYER)) {
-                        finishQuest(player, Quests.DRAGON_SLAYER)
+                    if (player.inventory.remove(Item(DragonSlayer.ELVARG_HEAD.id, heads)) && !isQuestComplete(player, Quests.DRAGON_SLAYER.questName)) {
+                        finishQuest(player, Quests.DRAGON_SLAYER.questName)
                     }
                 }
             }

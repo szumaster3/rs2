@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dslay.plugin.DemonSlayerUtils
 import core.api.sendMessage
 import core.api.sendNPCDialogue
@@ -20,7 +22,6 @@ import core.net.packet.PacketRepository
 import core.net.packet.out.Encoders530
 import core.net.packet.out.PacketContext.CameraContext
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class GypsyArisDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -30,7 +31,7 @@ class GypsyArisDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER)
+        quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER.questName)
         when (quest!!.getStage(player)) {
             100 -> npc("Greetings young one.").also { stage = 0 }
             30, 10, 20 -> {

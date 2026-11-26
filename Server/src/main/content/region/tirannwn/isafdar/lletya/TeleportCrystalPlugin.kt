@@ -1,5 +1,7 @@
 package content.region.tirannwn.isafdar.lletya
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.interaction.IntType
@@ -10,7 +12,6 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.impl.WildernessZone
 import shared.consts.Items
-import shared.consts.Quests
 
 class TeleportCrystalPlugin : InteractionListener {
 
@@ -21,7 +22,7 @@ class TeleportCrystalPlugin : InteractionListener {
          */
 
         on(crystalIDs, IntType.ITEM, "activate") { player, node ->
-            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I)) return@on false
+            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I.questName)) return@on false
             if (!WildernessZone.checkTeleport(player, 20)) {
                 sendMessage(player, "The crystal is unresponsive.")
                 return@on false

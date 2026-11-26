@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Homunculus dialogue.
@@ -18,7 +19,7 @@ import shared.consts.Quests
 class HomunculusDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE)) {
+        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE.questName)) {
             7 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello?").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_NORMAL, "Leeet mwwe free. Argyyghh.").also { stage++ }
@@ -148,7 +149,7 @@ class HomunculusDialogue(player: Player? = null) : Dialogue(player) {
                 5 -> npcl(FaceAnim.OLD_NORMAL, "Thrank you. For reward you speak me, I makes monsters.").also { stage++ }
                 6 -> {
                     end()
-                    setQuestStage(player, Quests.TOWER_OF_LIFE, 100)
+                    setQuestStage(player, Quests.TOWER_OF_LIFE.questName, 100)
                 }
             }
 

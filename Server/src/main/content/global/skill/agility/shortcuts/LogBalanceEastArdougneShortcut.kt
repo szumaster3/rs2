@@ -82,6 +82,7 @@ class LogBalanceEastArdougneShortcut : InteractionListener {
         {
             resetAnimator(player)
             clearLogoutListener(player, "balance-log")
+            finishDiaryTask(player, DiaryType.ARDOUGNE, 1, 11)
         }
     }
 

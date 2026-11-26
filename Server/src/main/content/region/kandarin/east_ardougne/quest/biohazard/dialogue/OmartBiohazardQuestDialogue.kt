@@ -1,12 +1,13 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.TeleportManager
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Kilron dialogue.
@@ -17,7 +18,7 @@ import shared.consts.Quests
 class OmartBiohazardQuestDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.BIOHAZARD)
+        val questStage = getQuestStage(player!!, Quests.BIOHAZARD.questName)
         npc = NPC(NPCs.OMART_350)
         when {
             (questStage in 2..3) -> {

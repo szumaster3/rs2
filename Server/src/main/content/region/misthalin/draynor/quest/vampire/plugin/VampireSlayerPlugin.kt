@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.vampire.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -34,17 +36,17 @@ class VampireSlayerPlugin: InteractionListener {
         }
 
         on(Scenery.COFFIN_2614, IntType.SCENERY, "open") { player, node ->
-            if (isQuestComplete(player, Quests.VAMPIRE_SLAYER)) {
+            if (isQuestComplete(player, Quests.VAMPIRE_SLAYER.questName)) {
                 sendPlayerDialogue(player, "I should tell Morgan that I've killed the vampire!")
                 return@on true
             }
-            if (getQuestStage(player, Quests.VAMPIRE_SLAYER) != 30) {
+            if (getQuestStage(player, Quests.VAMPIRE_SLAYER.questName) != 30) {
                 sendMessage(player, "The coffin is sealed shut.")
                 return@on true
             }
             animate(player, Animations.HUMAN_MULTI_USE_832)
             playAudio(player, Sounds.OPEN_HEAVY_54)
-            if (getQuestStage(player, Quests.VAMPIRE_SLAYER) == 30) {
+            if (getQuestStage(player, Quests.VAMPIRE_SLAYER.questName) == 30) {
                 replaceScenery(node.asScenery(), Scenery.COFFIN_11208, 6)
                 runTask(player, 3) {
                     val o = player.getAttribute<NPC>("count", null)

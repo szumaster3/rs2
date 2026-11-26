@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.ariane1
 
+import content.data.Quests
+
 import core.api.sendItemZoomOnInterface
 import core.api.setVarbit
 import core.game.node.entity.player.Player
@@ -7,11 +9,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class RuneMysteries : Quest(Quests.RUNE_MYSTERIES, 27, 26, 1, Vars.VARP_QUEST_RUNE_MYSTERIES_PROGRESS_63, 0, 1, 6) {
+class RuneMysteries : Quest(Quests.RUNE_MYSTERIES) {
     override fun drawJournal(
         player: Player,
         stage: Int,

@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.drawReward
 import core.api.rewardXP
@@ -8,7 +10,6 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -20,7 +21,7 @@ import shared.consts.Vars
  * - [YouTube #3](https://www.youtube.com/watch?v=Xh-tE6Bdv1U)
  */
 @Initializable
-class SeaSlugQuest : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PROGRESS_159, 0, 1, 13) {
+class SeaSlugQuest : Quest(Quests.SEA_SLUG, Vars.VARP_QUEST_SEA_SLUG_PROGRESS_159, 0, 1, 13) {
 
     override fun drawJournal(
         player: Player,

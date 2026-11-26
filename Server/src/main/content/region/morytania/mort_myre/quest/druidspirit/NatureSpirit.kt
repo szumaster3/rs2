@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.quest.druidspirit
 
+import content.data.Quests
+
 import content.region.morytania.mort_myre.quest.druidspirit.plugin.NSUtils
 import core.api.rewardXP
 import core.api.sendItemZoomOnInterface
@@ -9,11 +11,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class NatureSpirit : Quest(Quests.NATURE_SPIRIT, 95, 94, 2, Vars.VARP_QUEST_NATURE_SPIRIT_PROGRESS_307, 0, 1, 110) {
+class NatureSpirit : Quest(Quests.NATURE_SPIRIT) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

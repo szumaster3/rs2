@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.quest.druid_quest
 
+import content.data.Quests
+
 import core.api.*
 import core.game.component.Component
 import core.game.interaction.QueueStrength
@@ -10,10 +12,9 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
-class DruidicRitual : Quest(Quests.DRUIDIC_RITUAL, 48, 47, 4, 80, 0, 3, 4) {
+class DruidicRitual : Quest(Quests.DRUIDIC_RITUAL) {
 
     override fun drawJournal(
         player: Player,
@@ -23,7 +24,7 @@ class DruidicRitual : Quest(Quests.DRUIDIC_RITUAL, 48, 47, 4, 80, 0, 3, 4) {
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, Quests.DRUIDIC_RITUAL) > 0
+        var started = getQuestStage(player, Quests.DRUIDIC_RITUAL.questName) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Kaqemeex?? who is at", line++)

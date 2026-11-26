@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.fluffs.dialogue
 
+import content.data.Quests
+
 import core.api.animate
 import core.api.getQuestStage
 import core.api.sendChat
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GertrudesCatDialogue(player: Player? = null) : Dialogue(player) {
@@ -27,7 +28,7 @@ class GertrudesCatDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = getQuestStage(player, Quests.GERTRUDES_CAT)
+        val quest = getQuestStage(player, Quests.GERTRUDES_CAT.questName)
         when (stage) {
             545 -> end()
             0 -> when (buttonId) {

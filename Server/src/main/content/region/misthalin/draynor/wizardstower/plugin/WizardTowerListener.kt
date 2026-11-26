@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.wizardstower.plugin
 
+import content.data.Quests
+
 import content.global.travel.EssenceTeleport
 import content.region.misthalin.lumbridge.diary.LumbridgeAchievementDiary
 import core.api.*
@@ -15,7 +17,6 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class WizardTowerListener : InteractionListener {
@@ -35,7 +36,7 @@ class WizardTowerListener : InteractionListener {
          */
 
         on(NPCs.SEDRIDOR_300, IntType.NPC, "teleport") { player, node ->
-            if (!hasRequirement(player, Quests.RUNE_MYSTERIES)) return@on false
+            if (!hasRequirement(player, Quests.RUNE_MYSTERIES.questName)) return@on false
             EssenceTeleport.teleport((node as NPC), player)
             return@on true
         }

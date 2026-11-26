@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.itgronigen.cutscene
 
+import content.data.Quests
+
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.game.world.map.Location
 import core.tools.DARK_RED
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 class ObservatoryCutscene(player: Player) : Cutscene(player) {
@@ -156,7 +157,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
             26 -> {
                 end()
                 setVarbit(player, Vars.VARBIT_QUEST_OBSERVATORY_TELESCOPE_REPAIRED_3838, 1, true)
-                setQuestStage(player, Quests.OBSERVATORY_QUEST, 13)
+                setQuestStage(player, Quests.OBSERVATORY_QUEST.questName, 13)
             }
         }
     }

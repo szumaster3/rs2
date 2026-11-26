@@ -1,5 +1,7 @@
 package content.region.other.keldagrim.dialogue
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.hasRequirement
 import core.api.removeItem
@@ -13,7 +15,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Kjut dialogue.
@@ -45,7 +46,7 @@ class KjutDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npcl(FaceAnim.OLD_ANGRY1, "Yes? Are you going to give me that one gold coin then?").also { stage++ }
             4 -> playerl(FaceAnim.FRIENDLY, "Sorry, I don't seem to have any money on me.").also { stage++ }
             5 -> npcl(FaceAnim.OLD_DEFAULT, "The bank is Keldagrim-West. Hurry back!").also { stage = END_DIALOGUE }
-            6 -> if (hasRequirement(player, Quests.FORGETTABLE_TALE)) {
+            6 -> if (hasRequirement(player, Quests.FORGETTABLE_TALE.questName)) {
                 npcl(FaceAnim.OLD_DEFAULT, "I thought you would know plenty!").also { stage = 14 }
             } else {
                 npcl(FaceAnim.OLD_DEFAULT, "Just go out in the streets, they can't be hard to find!").also { stage = 7 }

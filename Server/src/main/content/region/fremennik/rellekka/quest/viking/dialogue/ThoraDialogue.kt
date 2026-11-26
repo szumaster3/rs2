@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Thora dialogue.
@@ -50,7 +51,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npcl(FaceAnim.HAPPY, "Hello again, ${FremennikTrials.getFremennikName(player!!)}. I suppose you want a drink? Or are you going to try another scam with that terrible Askeladden again?")
                 stage = 50
             }

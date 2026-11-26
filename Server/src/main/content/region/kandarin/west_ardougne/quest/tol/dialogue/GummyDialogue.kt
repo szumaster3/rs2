@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.getQuestStage
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Gummy dialogue.
@@ -19,7 +20,7 @@ import shared.consts.Quests
 class GummyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE)) {
+        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE.questName)) {
             in 0..1 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "What are you up to?").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Rock, Paper, Scissors. Can't you tell?").also { stage++ }

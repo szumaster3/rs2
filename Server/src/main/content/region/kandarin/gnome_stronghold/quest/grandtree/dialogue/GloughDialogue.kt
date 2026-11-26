@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -11,7 +13,6 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Glough dialogue.
@@ -23,7 +24,7 @@ class GloughDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.GLOUGH_671)
-        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE.questName)) {
             40 -> {
                 when (stage) {
                     0 -> playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
@@ -37,7 +38,7 @@ class GloughDialogue : DialogueFile() {
                     7 -> npcl(FaceAnim.OLD_DEFAULT, "I should've known! The humans are going to invade!").also { stage++ }
                     8 -> playerl(FaceAnim.FRIENDLY, "Never!").also { stage++ }
                     9 -> npcl(FaceAnim.OLD_DEFAULT, "Your type can't be trusted! I'll take care of this! Go back to the King.").also {
-                        setQuestStage(player!!, Quests.THE_GRAND_TREE, 45)
+                        setQuestStage(player!!, Quests.THE_GRAND_TREE.questName, 45)
                         stage = END_DIALOGUE
                     }
                 }
@@ -80,7 +81,7 @@ class GloughDialogue : DialogueFile() {
                                             7 -> animate(player!!, ladderClimbAnimation)
                                             8 -> {
                                                 npc.clear()
-                                                setQuestStage(player!!, Quests.THE_GRAND_TREE, 50)
+                                                setQuestStage(player!!, Quests.THE_GRAND_TREE.questName, 50)
                                                 teleport(player!!, cell)
                                                 player!!.unlock()
                                                 return true

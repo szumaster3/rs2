@@ -1,17 +1,18 @@
 package content.region.morytania.canifis.quest.fenk
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
 class CreatureOfFenkenstrain :
-    Quest(Quests.CREATURE_OF_FENKENSTRAIN, 41, 40, 2, Vars.VARP_QUEST_CREATURE_OF_FENKENSTRAIN_PROGRESS_399, 0, 1, 9) {
+    Quest(Quests.CREATURE_OF_FENKENSTRAIN, Vars.VARP_QUEST_CREATURE_OF_FENKENSTRAIN_PROGRESS_399, 0, 1, 9) {
     companion object {
         const val attributeArms = "/save:quest:cof-arms"
         const val attributeLegs = "/save:quest:cof-legs"
@@ -31,7 +32,7 @@ class CreatureOfFenkenstrain :
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 0
+        var started = getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) > 0
 
         if (!started) {
             line(player, "I can start this quest by reading the signpost in the", line++, false)
@@ -41,8 +42,8 @@ class CreatureOfFenkenstrain :
             line(player, "!!Level 20 Crafting??", line++, hasLevelStat(player, Skills.CRAFTING, 20))
             line(player, "!!Level 25 Thieving??", line++, hasLevelStat(player, Skills.THIEVING, 25))
             line(player, "I also need to have completed the following quests:", line++, false)
-            line(player, "!!${Quests.PRIEST_IN_PERIL}??", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL))
-            line(player, "!!${Quests.THE_RESTLESS_GHOST}??", line++, isQuestComplete(player, Quests.THE_RESTLESS_GHOST))
+            line(player, "!!${Quests.PRIEST_IN_PERIL.questName}??", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName))
+            line(player, "!!${Quests.THE_RESTLESS_GHOST.questName}??", line++, isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName))
             limitScrolling(player, line, false)
         } else {
             line(player, "I read the signpost in Canifis, which tells of a butler", line++, true)
@@ -120,8 +121,8 @@ class CreatureOfFenkenstrain :
         arrayOf(
             hasLevelStat(player, Skills.CRAFTING, 20),
             hasLevelStat(player, Skills.THIEVING, 25),
-            isQuestComplete(player, Quests.PRIEST_IN_PERIL),
-            isQuestComplete(player, Quests.THE_RESTLESS_GHOST),
+            isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName),
+            isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName),
         ).all { it }
 
     override fun reset(player: Player) {
@@ -159,10 +160,10 @@ class CreatureOfFenkenstrain :
     }
 
     override fun updateVarps(player: Player) {
-        if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 4) {
+        if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 4) {
             setVarp(player, Vars.VARP_QUEST_CREATURE_OF_FENKENSTRAIN_PROGRESS_399, 3, true)
         }
-        if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) >= 8) {
+        if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) >= 8) {
             setVarp(player, Vars.VARP_QUEST_CREATURE_OF_FENKENSTRAIN_PROGRESS_399, 8, true)
         }
     }

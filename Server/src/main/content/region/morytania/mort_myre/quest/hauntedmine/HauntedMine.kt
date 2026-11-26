@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.quest.hauntedmine
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.getStatLevel
 import core.api.isQuestComplete
@@ -8,10 +10,9 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
-class HauntedMine : Quest(Quests.HAUNTED_MINE, 73, 72, 2, Vars.VARP_QUEST_HAUNTED_MINE_PROGRESS_382, 0, 1, 11) {
+class HauntedMine : Quest(Quests.HAUNTED_MINE) {
     override fun drawJournal(
         player: Player,
         stage: Int,
@@ -47,8 +48,8 @@ class HauntedMine : Quest(Quests.HAUNTED_MINE, 73, 72, 2, Vars.VARP_QUEST_HAUNTE
             )
             line(
                 player,
-                if (isQuestComplete(player, Quests.PRIEST_IN_PERIL) &&
-                    isQuestComplete(player, Quests.NATURE_SPIRIT)
+                if (isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName) &&
+                    isQuestComplete(player, Quests.NATURE_SPIRIT.questName)
                 ) {
                     "---Access to Morytania./--"
                 } else {

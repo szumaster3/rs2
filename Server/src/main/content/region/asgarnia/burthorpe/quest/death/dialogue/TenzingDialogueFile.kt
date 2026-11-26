@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.death.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Tenzing dialogue.
@@ -19,7 +20,7 @@ import shared.consts.Quests
 class TenzingDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU.questName)) {
             20 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Hello. How can I help?").also { stage++ }
@@ -43,7 +44,7 @@ class TenzingDialogueFile : DialogueFile() {
                     sendItemDialogue(player!!, Items.CLIMBING_BOOTS_3105, "Tenzing has given you his climbing boots.")
                     sendMessage(player!!, "Tenzing has given you his climbing boots.")
                     addItemOrDrop(player!!, Items.CLIMBING_BOOTS_3105, 1)
-                    setQuestStage(player!!, Quests.DEATH_PLATEAU, 21)
+                    setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 21)
                 }
                 30 -> npcl(FaceAnim.ANNOYED, "Hmph.").also { stage = END_DIALOGUE }
             }
@@ -122,7 +123,7 @@ class TenzingDialogueFile : DialogueFile() {
                 9 -> npcl(FaceAnim.FRIENDLY, "I don't think the Trolls have found the secret way yet, if they had I would've been attacked by now.").also { stage++ }
                 10 -> playerl(FaceAnim.FRIENDLY, "OK thanks but I think I'd better check the path. I don't want to send the Imperial Guards to their death!").also { stage++ }
                 11 -> npcl(FaceAnim.FRIENDLY, "You are wise for one so young.").also {
-                    setQuestStage(player!!, Quests.DEATH_PLATEAU, 25)
+                    setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 25)
                     stage = END_DIALOGUE
                 }
             }

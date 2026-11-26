@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.swept_cat.dialogue
 
+import content.data.Quests
+
 import content.global.skill.summoning.pets.Pets
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Wendy dialogue.
@@ -27,7 +28,7 @@ class WendyDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (!isQuestComplete(player, Quests.SWEPT_AWAY))
+                if (!isQuestComplete(player, Quests.SWEPT_AWAY.questName))
                     options("Who are you?", "What are you doing?", "You look a little lost.")
                 else
                     options(

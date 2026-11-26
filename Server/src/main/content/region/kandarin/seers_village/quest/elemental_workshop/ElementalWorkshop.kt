@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.elemental_workshop
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.elemental_workshop.plugin.EWUtils
 import core.api.*
 import core.game.node.entity.player.Player
@@ -9,12 +11,11 @@ import core.game.system.command.Privilege
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
 class ElementalWorkshop :
-    Quest(Quests.ELEMENTAL_WORKSHOP_I, 52, 51, 1),
+    Quest(Quests.ELEMENTAL_WORKSHOP_I),
     Commands {
     override fun newInstance(`object`: Any?): Quest = this
 
@@ -138,7 +139,7 @@ class ElementalWorkshop :
             setAttribute(player, "/save:ew1:got_needle", false)
             setAttribute(player, "/save:ew1:got_leather", false)
             setAttribute(player, "/save:ew1:bellows_fixed", false)
-            setQuestStageNonmonotonic(player, 52, 0)
+            setQuestStageNonmonotonic(player, 8, 0)
             setVarp(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP_PROGRESS_299, 0)
             player.teleport(Location.create(2715, 3481, 0))
             player.inventory.clear()
@@ -155,7 +156,7 @@ class ElementalWorkshop :
             setAttribute(player, "/save:ew1:got_needle", true)
             setAttribute(player, "/save:ew1:got_leather", true)
             setAttribute(player, "/save:ew1:bellows_fixed", true)
-            setQuestStageNonmonotonic(player, 52, 95)
+            setQuestStageNonmonotonic(player, 8, 95)
             setVarbit(player, EWUtils.BELLOWS_STATE, enabled, true)
             setVarbit(player, EWUtils.FURNACE_STATE, enabled, true)
             setVarbit(player, EWUtils.WATER_WHEEL_STATE, enabled, true)

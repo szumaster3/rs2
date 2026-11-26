@@ -1,5 +1,7 @@
 package content.region.morytania.canifis.quest.fenk.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.canifis.quest.fenk.CreatureOfFenkenstrain
 import core.api.*
 import core.game.dialogue.*
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
@@ -77,7 +78,7 @@ class DrFenkenstrainDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val p = player ?: return
 
-        when (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN)) {
+        when (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName)) {
 
             // Quest stage 0
             0 -> {
@@ -294,8 +295,8 @@ class DrFenkenstrainDialogueFile : DialogueFile() {
                     }
 
                     34 -> {
-                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN) == 1) {
-                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN, 2)
+                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 1) {
+                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName, 2)
                         }
                         endFile()
                     }
@@ -443,8 +444,8 @@ class DrFenkenstrainDialogueFile : DialogueFile() {
                     }
 
                     209 -> {
-                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN) == 2) {
-                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN, 3)
+                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 2) {
+                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName, 3)
                         }
                         endFile()
                     }
@@ -639,8 +640,8 @@ class DrFenkenstrainDialogueFile : DialogueFile() {
                     }
 
                     312 -> {
-                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN) == 3) {
-                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN, 4)
+                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 3) {
+                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName, 4)
                         }
                         endFile()
                     }
@@ -728,8 +729,8 @@ class DrFenkenstrainDialogueFile : DialogueFile() {
                     }
 
                     510 -> {
-                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN) == 5) {
-                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN, 6)
+                        if (getQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 5) {
+                            setQuestStage(p, Quests.CREATURE_OF_FENKENSTRAIN.questName, 6)
                         }
                         addItemOrDrop(p, Items.TOWER_KEY_4185)
                         endFile()

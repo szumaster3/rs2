@@ -1,5 +1,7 @@
 package content.region.fremennik.lighthouse.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.inInventory
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -23,7 +24,7 @@ import shared.consts.Vars
 class LarrissaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val questStage = getQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP)
+        val questStage = getQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP.questName)
         when (questStage) {
             0 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hello there.").also { stage++ }
@@ -72,7 +73,7 @@ class LarrissaDialogue(player: Player? = null) : Dialogue(player) {
                 24 -> {
                     end()
                     npcl(FaceAnim.FRIENDLY, "Thank you so much!")
-                    // setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 1)
+                    // setQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName, 1)
                 }
             }
 
@@ -106,7 +107,7 @@ class LarrissaDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> playerl(FaceAnim.FRIENDLY, "Okay, I will see what I can do.").also { stage++ }
                 2 -> {
                     end()
-                    setQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP, 31)
+                    setQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP.questName, 31)
                 }
             }
 

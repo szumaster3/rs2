@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.grail.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
@@ -8,7 +10,6 @@ import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Crone dialogue.
@@ -33,8 +34,8 @@ class CroneDialogue(val forced: Boolean) : DialogueFile() {
             when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Wait!").also { stage++ }
                 1 -> npcl(FaceAnim.NEUTRAL, "Did you say the Grail? You are a Grail knight, yes? Well you'd better hurry. A Fisher King is in pain.").also {
-                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 20) {
-                        setQuestStage(player!!, Quests.HOLY_GRAIL, 30)
+                    if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) == 20) {
+                        setQuestStage(player!!, Quests.HOLY_GRAIL.questName, 30)
                     }
                     stage++
                 }

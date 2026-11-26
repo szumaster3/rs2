@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.murder.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GossipDialogue(player: Player? = null) : Dialogue(player) {
@@ -31,7 +32,7 @@ class GossipDialogue(player: Player? = null) : Dialogue(player) {
 
 class GossipDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.MURDER_MYSTERY)) {
+        when (getQuestStage(player!!, Quests.MURDER_MYSTERY.questName)) {
             0 -> npcl("There's some kind of commotion up at the Sinclair place I hear. Not surprising all things considered.").also {
                 stage = END_DIALOGUE
             }

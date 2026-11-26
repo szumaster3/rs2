@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.gather.woodcutting.WoodcuttingPulse
 import content.region.fremennik.plugin.LyreTeleport
@@ -34,7 +36,6 @@ import core.tools.secondsToTicks
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery as Objects
 
 class FremennikTrialsPlugin : InteractionListener {
@@ -280,8 +281,8 @@ class FremennikTrialsPlugin : InteractionListener {
                 return@on true
             }
 
-            if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) < 20 ||
-                !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)
+            if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName) < 20 ||
+                !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)
             ) {
                 sendMessage(player, "You lack the knowledge to play this.")
                 return@on true
@@ -356,7 +357,7 @@ class FremennikTrialsPlugin : InteractionListener {
                     sendMessage(player, "You try to open the trapdoor but it won't budge!")
                     sendMessage(player, "It looks like the trapdoor can only be opened from the other side.")
                 }
-                getAttribute(player, GameAttributes.QUEST_VIKING_SWENSEN_VOTE, false) || isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+                getAttribute(player, GameAttributes.QUEST_VIKING_SWENSEN_VOTE, false) || isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                     sendPlayerDialogue(player, "No way am I doing that maze again!", FaceAnim.SCARED)
                 }
                 else -> {
@@ -371,7 +372,7 @@ class FremennikTrialsPlugin : InteractionListener {
          */
 
         on(THORVALD_LADDER, IntType.SCENERY, "climb-down") { player, _ ->
-            if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) ||
+            if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) ||
                 getAttribute(player, GameAttributes.QUEST_VIKING_THORVALD_VOTE, false)
             ) {
                 sendMessage(player, "You have no reason to go back down there.")
@@ -431,7 +432,7 @@ class FremennikTrialsPlugin : InteractionListener {
          */
 
         on(SHOPNPCS, IntType.NPC, "Trade") { player, npc ->
-            if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 openNpcShop(player, npc.id)
                 return@on true
             }

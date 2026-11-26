@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.quest.hauntedmine.plugin
 
+import content.data.Quests
+
 import core.api.openInterface
 import core.api.removeItem
 import core.api.sendMessage
@@ -14,7 +16,7 @@ class HauntedMinePlugin : InteractionListener {
     override fun defineListeners() {
         on(NPCs.ZEALOT_1528, IntType.NPC, "pickpocket") { player, _ ->
             /*
-            if (isQuestInProgress(player, Quests.HAUNTED_MINE, 1, 2)) {
+            if (isQuestInProgress(player, Quests.HAUNTED_MINE.questName, 1, 2)) {
                 lock(player, 1)
                 animate(player, Animations.HUMAN_PICKPOCKETING_881)
                 if (freeSlots(player) == 0) {
@@ -27,7 +29,7 @@ class HauntedMinePlugin : InteractionListener {
                 } else {
                     sendMessage(
                         player,
-                        if (getQuestStage(player, Quests.HAUNTED_MINE) <
+                        if (getQuestStage(player, Quests.HAUNTED_MINE.questName) <
                             2
                         ) {
                             "I doubt he's got much of value on him."

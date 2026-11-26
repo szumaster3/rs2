@@ -1,5 +1,7 @@
 package core.game.node.entity.player.info.login
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.data.GlobalStore
 import core.ServerConstants
@@ -20,7 +22,6 @@ import core.plugin.Plugin
 import core.tools.Log
 import core.tools.colorize
 import shared.consts.Components
-import shared.consts.Quests
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
@@ -224,11 +225,11 @@ object LoginConfiguration {
         val currentBook = SpellBookManager.SpellBook.forInterface(manager.spellBook) ?: SpellBookManager.SpellBook.MODERN
 
         when {
-            currentBook == SpellBookManager.SpellBook.ANCIENT && !isQuestComplete(player, Quests.DESERT_TREASURE) -> {
+            currentBook == SpellBookManager.SpellBook.ANCIENT && !isQuestComplete(player, Quests.DESERT_TREASURE.questName) -> {
                 sendMessage(player, colorize("%RAs you can no longer use Ancient Magic, you have been set back to Modern."))
                 manager.setSpellBook(SpellBookManager.SpellBook.MODERN)
             }
-            currentBook == SpellBookManager.SpellBook.LUNAR && !hasRequirement(player, Quests.LUNAR_DIPLOMACY) -> {
+            currentBook == SpellBookManager.SpellBook.LUNAR && !hasRequirement(player, Quests.LUNAR_DIPLOMACY.questName) -> {
                 sendMessage(player, colorize("%RAs you can no longer use Lunar Magic, you have been set back to Modern."))
                 manager.setSpellBook(SpellBookManager.SpellBook.MODERN)
             }
@@ -240,7 +241,7 @@ object LoginConfiguration {
 
     private fun setConfigs(player: Player) {
         setVarbit(player, 4322, 1)
-        setVarbit(player, 3537, if(getQuestStage(player, Quests.OLAFS_QUEST) != 3) 1 else 0)
+        setVarbit(player, 3537, if(getQuestStage(player, Quests.OLAFS_QUEST.questName) != 3) 1 else 0)
 
         if (getAttribute(player, GameAttributes.KW_COMPLETE, false)) {
             setVarbit(player, 3909, 8)
@@ -248,7 +249,7 @@ object LoginConfiguration {
             setVarbit(player, 3909, 0)
         }
 
-        if(hasRequirement(player, Quests.EAGLES_PEAK, false))
+        if(hasRequirement(player, Quests.EAGLES_PEAK.questName, false))
             // setVarbit(player, 2780, 15)
             setVarbit(player, 3109, 3)
             // setVarbit(player, 4056, 199)

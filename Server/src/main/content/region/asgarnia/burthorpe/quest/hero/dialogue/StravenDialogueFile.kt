@@ -1,11 +1,12 @@
 
 package content.region.asgarnia.burthorpe.quest.hero.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.tools.START_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Straven dialogue file.
@@ -18,7 +19,7 @@ class StravenDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             START_DIALOGUE -> {
-                when (getQuestStage(player!!, Quests.HEROES_QUEST)) {
+                when (getQuestStage(player!!, Quests.HEROES_QUEST.questName)) {
                     1 -> {
                         player("How would I go about getting a Master Thief armband?")
                         stage = 1
@@ -77,8 +78,8 @@ class StravenDialogueFile : DialogueFile() {
             }
 
             6 -> {
-                if (getQuestStage(player!!, Quests.HEROES_QUEST) == 1) {
-                    setQuestStage(player!!, Quests.HEROES_QUEST, 2)
+                if (getQuestStage(player!!, Quests.HEROES_QUEST.questName) == 1) {
+                    setQuestStage(player!!, Quests.HEROES_QUEST.questName, 2)
                 }
                 endFile()
             }
@@ -143,8 +144,8 @@ class StravenDialogueFile : DialogueFile() {
                 if (removeItem(player!!, Items.PETES_CANDLESTICK_1577)) {
                     addItemOrDrop(player!!, Items.THIEVES_ARMBAND_1579)
 
-                    if (getQuestStage(player!!, Quests.HEROES_QUEST) == 5) {
-                        setQuestStage(player!!, Quests.HEROES_QUEST, 6)
+                    if (getQuestStage(player!!, Quests.HEROES_QUEST.questName) == 5) {
+                        setQuestStage(player!!, Quests.HEROES_QUEST.questName, 6)
                     }
                 }
                 endFile()

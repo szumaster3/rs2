@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.priest.npc
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
@@ -9,7 +11,6 @@ import core.game.world.GameWorld.ticks
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class RestlessGhostNPC(
@@ -61,7 +62,7 @@ class RestlessGhostNPC(
         if (this.respawnTick > ticks) {
             return true
         }
-        return isQuestComplete(player, Quests.THE_RESTLESS_GHOST) || (pl != null && player !== pl)
+        return isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName) || (pl != null && player !== pl)
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.SKELETON_459, NPCs.RESTLESS_GHOST_457)

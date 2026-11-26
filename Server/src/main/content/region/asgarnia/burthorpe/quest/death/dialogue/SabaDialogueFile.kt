@@ -1,12 +1,13 @@
 package content.region.asgarnia.burthorpe.quest.death.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Saba dialogue.
@@ -17,7 +18,7 @@ import shared.consts.Quests
 class SabaDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU.questName)) {
             19 -> when (stage) {
                 0 -> player(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
                 1 -> npc(FaceAnim.ANNOYED, "What?!").also { stage++ }
@@ -40,7 +41,7 @@ class SabaDialogueFile : DialogueFile() {
                 29 -> npcl(FaceAnim.HALF_GUILTY, "Before the trolls came there used to be a nettlesome Sherpa that took humans exploring or something equally stupid. Perhaps he'd know another way.").also { stage++ }
                 30 -> playerl(FaceAnim.FRIENDLY, "Where does this Sherpa live?").also { stage++ }
                 31 -> npcl(FaceAnim.ANNOYED, "I don't know but it can't be far as he used to be around all the time!").also {
-                    setQuestStage(player!!, Quests.DEATH_PLATEAU, 20)
+                    setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 20)
                     stage = END_DIALOGUE
                 }
             }

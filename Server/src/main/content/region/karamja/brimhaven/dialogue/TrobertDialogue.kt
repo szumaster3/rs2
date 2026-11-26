@@ -1,5 +1,7 @@
 package content.region.karamja.brimhaven.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class TrobertDialogue(player: Player? = null) : Dialogue(player) {
@@ -32,7 +33,7 @@ private class TrobertDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val p = player ?: return
 
-        when (getQuestStage(p, Quests.HEROES_QUEST)) {
+        when (getQuestStage(p, Quests.HEROES_QUEST.questName)) {
 
             0, 1 -> {
                 when (stage) {
@@ -134,8 +135,8 @@ private class TrobertDialogueFile : DialogueFile() {
 
                     19 -> {
                         addItemOrDrop(p, Items.ID_PAPERS_1584)
-                        if (getQuestStage(p, Quests.HEROES_QUEST) == 2) {
-                            setQuestStage(p, Quests.HEROES_QUEST, 3)
+                        if (getQuestStage(p, Quests.HEROES_QUEST.questName) == 2) {
+                            setQuestStage(p, Quests.HEROES_QUEST.questName, 3)
                         }
                         endFile()
                     }

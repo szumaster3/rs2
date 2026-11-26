@@ -1,14 +1,15 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 class KhazardWarlordDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName)
         if (questStage == 31) {
             when (stage) {
                 0 -> playerl("Hello there.").also { stage++ }

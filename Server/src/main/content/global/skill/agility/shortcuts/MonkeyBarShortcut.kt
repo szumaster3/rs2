@@ -111,6 +111,7 @@ class MonkeyBarShortcut : AgilityShortcut {
                             null,
                         )
                         player.logoutListeners.remove("monkey-bar")
+                        finishDiaryTask(player, DiaryType.ARDOUGNE, 2, 12)
                         return true
                     }
                     return false

@@ -1,5 +1,7 @@
 package content.global.skill.summoning.item
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
@@ -11,7 +13,6 @@ import core.game.world.update.flag.context.Graphics
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class EnchantedHeadgearPlugin : InteractionListener {
 
@@ -23,7 +24,7 @@ class EnchantedHeadgearPlugin : InteractionListener {
 
         on(NPCs.PIKKUPSTIX_6970, IntType.NPC, "Enchant") { player, _ ->
 
-            if (!isQuestComplete(player, Quests.WOLF_WHISTLE)) {
+            if (!isQuestComplete(player, Quests.WOLF_WHISTLE.questName)) {
                 sendMessage(player, "You need to complete Wolf Whistle to enchant the headgear.")
                 return@on true
             }

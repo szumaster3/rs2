@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.witchaven.plugin.FishingPlatformBoat
 import content.region.kandarin.witchaven.plugin.Travel
 import core.api.isQuestComplete
@@ -10,14 +12,13 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class JebDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, Quests.SEA_SLUG)) {
+        if (!isQuestComplete(player, Quests.SEA_SLUG.questName)) {
             npc(FaceAnim.FRIENDLY, "Hello there.").also { stage = END_DIALOGUE }
         } else {
             playerl(FaceAnim.FRIENDLY, "I understand you can take me to the Fishing Platform.")

@@ -93,6 +93,10 @@ class FruitAndBerryPicker : OptionHandler() {
                     if (plantable == Plantable.POISON_IVY_SEED && patch.patch == FarmingPatch.CHAMPIONS_GUILD_BUSH) {
                         player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 0)
                     }
+                    if (fPatch == FarmingPatch.TREE_GNOME_VILLAGE_FRUIT_TREE &&
+                        (plantable == Plantable.PAPAYA_SAPLING || plantable == Plantable.PALM_SAPLING)) {
+                        finishDiaryTask(player, DiaryType.ARDOUGNE, 2, 14)
+                    }
                     return patch.getFruitOrBerryCount() == 0
                 }
             },

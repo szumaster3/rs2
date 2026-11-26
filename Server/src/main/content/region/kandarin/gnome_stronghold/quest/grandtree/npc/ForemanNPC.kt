@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.npc
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.produceGroundItem
 import core.api.sendMessage
@@ -10,7 +12,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Foreman NPC.
@@ -32,7 +33,7 @@ class ForemanNPC(
     override fun getIds(): IntArray = intArrayOf(NPCs.FOREMAN_674)
 
     override fun finalizeDeath(killer: Entity?) {
-        if (getQuestStage(killer as Player, Quests.THE_GRAND_TREE) == 55) {
+        if (getQuestStage(killer as Player, Quests.THE_GRAND_TREE.questName) == 55) {
             sendMessage(killer, "The foreman drops a piece of paper as he dies.")
             produceGroundItem(killer, Items.LUMBER_ORDER_787, 1, this.location)
         }

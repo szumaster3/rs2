@@ -1,5 +1,7 @@
 package content.region.karamja.quest.totem.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,18 +10,17 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class KangaiMauDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         when {
-            isQuestComplete(player, Quests.TRIBAL_TOTEM) -> {
+            isQuestComplete(player, Quests.TRIBAL_TOTEM.questName) -> {
                 npcl(FaceAnim.HAPPY, "Many greetings esteemed thief.")
                 stage = 28
             }
-            player.questRepository.hasStarted(Quests.TRIBAL_TOTEM) -> {
+            player.questRepository.hasStarted(Quests.TRIBAL_TOTEM.questName) -> {
                 npcl(FaceAnim.ASKING, "Have you got our totem back?")
                 stage = 24
             }
@@ -50,7 +51,7 @@ class KangaiMauDialogue(player: Player? = null) : Dialogue(player) {
             20 -> playerl(FaceAnim.THINKING, "How can I find Handlemoret's house? Ardougne IS a big place...").also { stage++ }
             21 -> npcl(FaceAnim.ANNOYED, "I don't know Ardougne. You tell me.").also { stage++ }
             22 -> playerl(FaceAnim.HAPPY, "Ok, I will get it back.").also {
-                setQuestStage(player, Quests.TRIBAL_TOTEM, 10)
+                setQuestStage(player, Quests.TRIBAL_TOTEM.questName, 10)
                 stage++
             }
             23 -> npcl(FaceAnim.HAPPY, "Best of luck with that adventurer").also { stage = END_DIALOGUE }
@@ -65,7 +66,7 @@ class KangaiMauDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 removeItem(player, Items.TOTEM_1857)
                 sendItemDialogue(player, Items.TOTEM_1857, "You hand over the Tribal Totem.")
-                finishQuest(player, Quests.TRIBAL_TOTEM)
+                finishQuest(player, Quests.TRIBAL_TOTEM.questName)
             }
             28 -> player(FaceAnim.NEUTRAL, "Hey.").also { stage = END_DIALOGUE }
         }

@@ -1,5 +1,7 @@
 package content.region.kandarin.baxtorian
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
@@ -232,7 +233,7 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
             220 -> playerl(FaceAnim.HAPPY, "I thank you Otto, it makes a bit more sense now.").also { stage = 20 }
 
             // Smithing
-            300 -> if(!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) {
+            300 -> if(!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO.questName)) {
                 npcl(FaceAnim.FRIENDLY, "The next step is to manufacture a spear, suitable for combat.").also { stage++ }
             } else {
                 npc(FaceAnim.FRIENDLY, "Many warriors complain that spears are difficult to find", "We barbarians thus forge our own.").also { stage = 306 }

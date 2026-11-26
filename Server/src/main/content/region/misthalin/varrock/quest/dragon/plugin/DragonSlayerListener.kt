@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.plugin
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
 import core.api.*
 import core.game.global.action.ClimbActionHandler
@@ -64,10 +66,10 @@ class DragonSlayerListener : InteractionListener {
 
         on(NPCs.ELVARG_742, IntType.NPC, "attack") { player, node ->
             when {
-                getQuestStage(player, Quests.DRAGON_SLAYER) == 40 && inInventory(player, DragonSlayer.ELVARG_HEAD.id) -> {
+                getQuestStage(player, Quests.DRAGON_SLAYER.questName) == 40 && inInventory(player, DragonSlayer.ELVARG_HEAD.id) -> {
                     sendMessage(player, "You have already slain the dragon. Now you just need to return to Oziach for your reward!")
                 }
-                getQuestStage(player, Quests.DRAGON_SLAYER) > 40 -> {
+                getQuestStage(player, Quests.DRAGON_SLAYER.questName) > 40 -> {
                     sendMessage(player, "You have already slain Elvarg the dragon.")
                 }
                 else -> {
@@ -84,7 +86,7 @@ class DragonSlayerListener : InteractionListener {
 
         on(Scenery.WALL_25161, IntType.SCENERY, "climb-over") { player, _ ->
             if (player.location.x >= 2847) {
-                if (getQuestStage(player, Quests.DRAGON_SLAYER) == 40 && !inInventory(player, DragonSlayer.ELVARG_HEAD.id)) {
+                if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) == 40 && !inInventory(player, DragonSlayer.ELVARG_HEAD.id)) {
                     if (player.location.x <= 2845) {
                         val npcs = RegionManager.getLocalNpcs(player)
                         for (n in npcs) {
@@ -102,7 +104,7 @@ class DragonSlayerListener : InteractionListener {
                 sendMessage(player, "You have already slain the dragon. Now you just need to return to Oziach for your reward!")
                 return@on true
             }
-            if (isQuestComplete(player, Quests.DRAGON_SLAYER)) {
+            if (isQuestComplete(player, Quests.DRAGON_SLAYER.questName)) {
                 sendMessage(player, "You have already slain Elvarg the dragon.")
                 return@on true
             }
@@ -213,7 +215,7 @@ class DragonSlayerListener : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, magicDoorRequiredItemIds, Scenery.MAGIC_DOOR_25115) { player, used, _ ->
-            if (getQuestStage(player, Quests.DRAGON_SLAYER) < 20) {
+            if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) < 20) {
                 return@onUseWith true
             }
             if (!removeItem(player, used)) {

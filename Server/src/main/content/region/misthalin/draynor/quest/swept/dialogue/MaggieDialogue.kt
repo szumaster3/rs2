@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.swept.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -31,7 +32,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         hasBroomstick = hasAnItem(player, Items.BROOMSTICK_14057).container != null
         // Also replaces a lost broom while the quest is in progress, otherwise the player would be stuck.
-        if (!hasBroomstick && getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
+        if (!hasBroomstick && getQuestStage(player, Quests.SWEPT_AWAY.questName) >= 1) {
             npcl(FaceAnim.FRIENDLY, "First things first. Where's that broomstick that I gave you?")
             stage = 1
         } else {
@@ -74,9 +75,9 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             5 -> {
-                val questStage = getQuestStage(player, Quests.SWEPT_AWAY)
+                val questStage = getQuestStage(player, Quests.SWEPT_AWAY.questName)
                 mode = when {
-                    isQuestComplete(player, Quests.SWEPT_AWAY) -> 4
+                    isQuestComplete(player, Quests.SWEPT_AWAY.questName) -> 4
                     questStage >= 4 -> 3
                     questStage == 3 -> 2
                     questStage >= 1 -> 1
@@ -379,9 +380,9 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             47 -> {
-                if (getQuestStage(player, Quests.SWEPT_AWAY) < 1) {
+                if (getQuestStage(player, Quests.SWEPT_AWAY.questName) < 1) {
                     addItemOrDrop(player, Items.BROOMSTICK_14057, 1)
-                    setQuestStage(player, Quests.SWEPT_AWAY, 1)
+                    setQuestStage(player, Quests.SWEPT_AWAY.questName, 1)
                     setVarbit(player, Vars.VARBIT_QUEST_SWEPT_AWAY_PROGRESS_5448, 1)
                 }
                 player("Of course.")
@@ -501,7 +502,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
 
             72 -> {
                 player("Sounds easy enough.")
-                setQuestStage(player, Quests.SWEPT_AWAY, 4)
+                setQuestStage(player, Quests.SWEPT_AWAY.questName, 4)
                 stage = END_DIALOGUE
             }
 
@@ -581,7 +582,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             90 -> {
-                finishQuest(player, Quests.SWEPT_AWAY)
+                finishQuest(player, Quests.SWEPT_AWAY.questName)
                 stage = END_DIALOGUE
             }
         }

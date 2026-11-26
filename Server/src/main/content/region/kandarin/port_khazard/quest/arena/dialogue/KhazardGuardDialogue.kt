@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import core.api.allInEquipment
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class KhazardGuardDialogue(player: Player? = null) : Dialogue(player) {
@@ -19,7 +20,7 @@ class KhazardGuardDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
 
         val hasArmour = allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)
-        val hasCompleteFightArena = isQuestComplete(player, Quests.FIGHT_ARENA)
+        val hasCompleteFightArena = isQuestComplete(player, Quests.FIGHT_ARENA.questName)
 
         when{
             hasCompleteFightArena -> npcl(FaceAnim.FRIENDLY, "It's you! I don't believe it. You beat the General! You are a traitor to the uniform!").also { stage = END_DIALOGUE }

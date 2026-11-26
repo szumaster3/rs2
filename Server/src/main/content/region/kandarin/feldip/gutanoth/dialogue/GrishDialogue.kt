@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.gutanoth.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.feldip.quest.zogre.dialogue.GrishFinishDialogue
 import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
@@ -23,7 +24,7 @@ class GrishDialogue(player: Player? = null) : Dialogue(player) {
             openDialogue(player, GrishFinishDialogue())
             return true
         }
-        if (isQuestComplete(player, Quests.ZOGRE_FLESH_EATERS)) {
+        if (isQuestComplete(player, Quests.ZOGRE_FLESH_EATERS.questName)) {
             player("How's everything going now?")
             stage = 27
             return true

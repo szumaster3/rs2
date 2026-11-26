@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.grail.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -13,7 +15,6 @@ import core.tools.END_DIALOGUE
 import core.tools.secondsToTicks
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sir Percival dialogue.
@@ -35,7 +36,7 @@ class SirPercivalDialogue(val interactionType: String) : DialogueFile() {
                     sendDialogue(player!!, "You hear a muffled groan. The sack wriggles slightly.")
                     stage = END_DIALOGUE
                 } else if (interactionType == "Open") {
-                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) != 40) {
+                    if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) != 40) {
                         sendMessage(player!!, "I have no reason to do that.")
                         end()
                         stage = END_DIALOGUE
@@ -44,7 +45,7 @@ class SirPercivalDialogue(val interactionType: String) : DialogueFile() {
                         stage++
                     }
                 } else {
-                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 50) {
+                    if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) == 50) {
                         npcl(FaceAnim.NEUTRAL, "I said I will see you there then!").also { stage = END_DIALOGUE }
                     } else {
                         createSirAndSpeak()
@@ -90,7 +91,7 @@ class SirPercivalDialogue(val interactionType: String) : DialogueFile() {
             17 -> {
                 player!!.inventory.remove(Item(Items.MAGIC_WHISTLE_16, 1))
                 npcl(FaceAnim.NEUTRAL, "Ok, I will see you there then!").also {
-                    setQuestStage(player!!, Quests.HOLY_GRAIL, 50)
+                    setQuestStage(player!!, Quests.HOLY_GRAIL.questName, 50)
                     stage = END_DIALOGUE
                 }
             }

@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.fluffs.plugin
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
@@ -8,7 +10,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.RandomFunction
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class LumberKittenNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -40,7 +41,7 @@ class LumberKittenNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
     }
 
     override fun isHidden(player: Player): Boolean =
-        hidden || getQuestStage(player, Quests.GERTRUDES_CAT) !in 20..50
+        hidden || getQuestStage(player, Quests.GERTRUDES_CAT.questName) !in 20..50
 
     override fun getIds(): IntArray = intArrayOf(NPCs.CRATE_767)
 }

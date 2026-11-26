@@ -1,5 +1,7 @@
 package content.region.desert.uzer.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,14 +10,13 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class FatherBaddenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player, Quests.DESERT_TREASURE)) {
+        when (getQuestStage(player, Quests.DESERT_TREASURE.questName)) {
             in 1..15 -> {
                 npcl(FaceAnim.FRIENDLY, "What brings you to this godsforsaken desert?")
             }

@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.surok.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.surok.WhatLiesBelow
 import content.region.misthalin.varrock.quest.surok.plugin.WhatLiesBelowCutscene
 import core.api.*
@@ -13,7 +15,6 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Handles the Surok Magis dialogue.
@@ -35,7 +36,7 @@ class SurokMagisDialogue : Dialogue {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW) ?: return false
+        quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW.questName) ?: return false
 
         when (quest?.getStage(player)) {
             20 -> player("Hello.")
@@ -213,7 +214,7 @@ class SurokMagisDialogue : Dialogue {
                 6 -> npc("I am Dagon'hai! I run from nothing. My spell has", "been completed and it is time for you to meet your", "end, " + player.username + "! The king is now under my control!").also { stage++ }
                 7 -> {
                     end()
-                    ActivityManager.start(player, Quests.WHAT_LIES_BELOW, false);
+                    ActivityManager.start(player, Quests.WHAT_LIES_BELOW.questName, false);
                 }
 
                 10 -> {

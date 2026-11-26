@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.troll.npc
 
+import content.data.Quests
+
 import core.api.inInventory
 import core.api.isQuestInProgress
 import core.api.produceGroundItem
@@ -10,7 +12,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class TrollGeneralsNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -20,7 +21,7 @@ class TrollGeneralsNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
     override fun getIds(): IntArray = intArrayOf(NPCs.TROLL_GENERAL_1115, NPCs.TROLL_GENERAL_1116, NPCs.TROLL_GENERAL_1117)
 
     override fun finalizeDeath(killer: Entity?) {
-        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD, 1, 7) && !inInventory(killer, Items.PRISON_KEY_3135)) {
+        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD.questName, 1, 7) && !inInventory(killer, Items.PRISON_KEY_3135)) {
             produceGroundItem(killer, Items.PRISON_KEY_3135, 1, this.location)
         }
         super.finalizeDeath(killer)

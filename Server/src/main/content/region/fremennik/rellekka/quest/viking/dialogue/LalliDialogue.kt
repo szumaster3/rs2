@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Lalli dialogue.
@@ -24,7 +25,7 @@ class LalliDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         when {
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 playerl(FaceAnim.NEUTRAL, "Hello there.")
                 stage = 100
             }
@@ -70,7 +71,7 @@ class LalliDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 50
             }
 
-            getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 -> {
+            getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName) > 0 -> {
                 player("Hello there.")
             }
 

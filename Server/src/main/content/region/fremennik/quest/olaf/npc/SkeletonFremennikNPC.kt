@@ -1,5 +1,7 @@
 package content.region.fremennik.quest.olaf.npc
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.produceGroundItem
 import core.game.node.entity.Entity
@@ -9,7 +11,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class SkeletonFremennikNPC(
@@ -34,7 +35,7 @@ class SkeletonFremennikNPC(
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
-            val questStage = getQuestStage(killer, Quests.OLAFS_QUEST)
+            val questStage = getQuestStage(killer, Quests.OLAFS_QUEST.questName)
 
             if (
                 questStage >= 4 &&

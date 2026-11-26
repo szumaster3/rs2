@@ -1,5 +1,7 @@
 package content.region.other.zanaris.plugin
 
+import content.data.Quests
+
 import content.global.travel.fairyring.FairyRingInterface
 import content.region.other.zanaris.dialogue.FairyShopkeeperDialogue
 import content.region.other.zanaris.dialogue.MagicDoorDialogue
@@ -27,7 +29,7 @@ class ZanarisPlugin : InteractionListener {
          * Checks requirements to use rings.
          */
         private fun fairyMagic(player: Player): Boolean {
-            if (!hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS) ||
+            if (!hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS.questName) ||
                 !anyInEquipment(player, Items.DRAMEN_STAFF_772, Items.LUNAR_STAFF_9084)
             ) {
                 sendMessage(player, "The fairy ring only works for those who weld fairy magic.")

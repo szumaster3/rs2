@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendNPCDialogue
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Justin Servil dialogue.
@@ -20,7 +21,7 @@ import shared.consts.Quests
 class JustinServilDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA.questName)) {
             in 0..68 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "You've incurred the anger of Khazard himself. He won't let any of us go easily.").also { stage = END_DIALOGUE }

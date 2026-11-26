@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dslay.cutscene.DemonSlayerCutscenePlugin
 import content.region.misthalin.varrock.quest.dslay.cutscene.WallyCutscenePlugin
 import content.region.misthalin.varrock.quest.dslay.dialogue.CaptainRovinDialogue
@@ -17,14 +19,13 @@ import core.game.node.item.Item
 import core.plugin.ClassScanner
 import core.plugin.Initializable
 import shared.consts.Components
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the Demon slayer quest journal.
  */
 @Initializable
-class DemonSlayer : Quest(Quests.DEMON_SLAYER, 16, 15, 3, Vars.VARP_QUEST_DEMON_SLAYER_PROGRESS_222, 0, 1, 3) {
+class DemonSlayer : Quest(Quests.DEMON_SLAYER, Vars.VARP_QUEST_DEMON_SLAYER_PROGRESS_222, 0, 1, 3) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

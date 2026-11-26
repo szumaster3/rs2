@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.fluffs.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GertrudesChildrenDialogue(player: Player? = null) : Dialogue(player) {
@@ -24,7 +25,7 @@ class GertrudesChildrenDialogue(player: Player? = null) : Dialogue(player) {
             is Int -> arg
             else -> 0
         }
-        val quest = getQuestStage(player, Quests.GERTRUDES_CAT)
+        val quest = getQuestStage(player, Quests.GERTRUDES_CAT.questName)
         stage = when (quest) {
             0 -> {
                 player(FaceAnim.HALF_GUILTY, "Hello again.")
@@ -84,7 +85,7 @@ class GertrudesChildrenDialogue(player: Player? = null) : Dialogue(player) {
                     return true
                 } else {
                     sendItemDialogue(player, Items.COINS_8896, "You give the lad 100 coins.")
-                    setQuestStage(player, Quests.GERTRUDES_CAT, 20)
+                    setQuestStage(player, Quests.GERTRUDES_CAT.questName, 20)
                     stage++
                 }
             }

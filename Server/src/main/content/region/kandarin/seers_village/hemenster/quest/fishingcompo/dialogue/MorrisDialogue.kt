@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.hemenster.quest.fishingcompo.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -33,7 +34,7 @@ class MorrisDialogue(player: Player? = null) : Dialogue(player) {
         /*
          * After Fishing contest quest.
          */
-        else if(isQuestComplete(player, Quests.FISHING_CONTEST) && getQuestStage(player, Quests.LAND_OF_THE_GOBLINS) >= 1) {
+        else if(isQuestComplete(player, Quests.FISHING_CONTEST.questName) && getQuestStage(player, Quests.LAND_OF_THE_GOBLINS.questName) >= 1) {
             player("I need to catch a Hemenster whitefish.")
             stage = 8
         }

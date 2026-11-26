@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.dialogue
 
+import content.data.Quests
+
 import core.api.openNpcShop
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Gem Trader dialogue.
@@ -18,7 +19,7 @@ class GemTraderDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST.questName) ?: -1
         if (qstage == 12) {
             npc("Good day to you, traveller.", "Would you be interested in buying some gems?")
             stage = 1
@@ -58,7 +59,7 @@ class GemTraderDialogue(player: Player? = null) : Dialogue(player) {
             103 -> npc("Well, maybe we'll all get lucky", "and the scorpions will deal with him.").also { stage++ }
             104 -> {
                 end()
-                setQuestStage(player, Quests.FAMILY_CREST, 13)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 13)
             }
         }
         return true

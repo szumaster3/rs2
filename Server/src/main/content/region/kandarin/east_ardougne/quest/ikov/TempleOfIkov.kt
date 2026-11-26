@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,17 +10,16 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class TempleOfIkov : Quest(Quests.TEMPLE_OF_IKOV, 121, 120, 1, Vars.VARP_QUEST_TEMPLE_OF_IKOV_PROGRESS_26, 0, 1, 80) {
+class TempleOfIkov : Quest(Quests.TEMPLE_OF_IKOV) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
-        var started = getQuestStage(player, Quests.TEMPLE_OF_IKOV) > 0
+        var started = getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) > 0
         if (!started) {
             line(player, "I can start this quest at the !!Flying Horse Inn?? in !!Ardougne??", line++, false)
             line(player, "by speaking to !!Lucien??", line++, false)
@@ -145,9 +146,9 @@ class TempleOfIkov : Quest(Quests.TEMPLE_OF_IKOV, 121, 120, 1, Vars.VARP_QUEST_T
         var ln = 10
         super.finish(player)
         when (getAttribute(player, GameAttributes.QUEST_IKOV_SELECTED_END, 0)) {
-            1 -> sendString(player, "${Quests.TEMPLE_OF_IKOV} Quest completed for Armadyl!", Components.QUEST_COMPLETE_SCROLL_277, 4)
-            2 -> sendString(player, "${Quests.TEMPLE_OF_IKOV} Quest completed for Lucien!", Components.QUEST_COMPLETE_SCROLL_277, 4)
-            else -> sendString(player, "${Quests.TEMPLE_OF_IKOV} Quest completed!!", Components.QUEST_COMPLETE_SCROLL_277, 4)
+            1 -> sendString(player, "${Quests.TEMPLE_OF_IKOV.questName} Quest completed for Armadyl!", Components.QUEST_COMPLETE_SCROLL_277, 4)
+            2 -> sendString(player, "${Quests.TEMPLE_OF_IKOV.questName} Quest completed for Lucien!", Components.QUEST_COMPLETE_SCROLL_277, 4)
+            else -> sendString(player, "${Quests.TEMPLE_OF_IKOV.questName} Quest completed!!", Components.QUEST_COMPLETE_SCROLL_277, 4)
         }
         player.packetDispatch.sendItemZoomOnInterface(Items.YEW_LONGBOW_855, 230, Components.QUEST_COMPLETE_SCROLL_277, 5)
         drawReward(player, "1 Quest Point", ln++)

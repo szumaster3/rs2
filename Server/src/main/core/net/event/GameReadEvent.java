@@ -168,6 +168,36 @@ public final class GameReadEvent extends IoReadEvent {
                 payload.get(); // console flag
                 String command = readText(payload);
                 return command.isEmpty() ? null : new Packet.Command(player, command.toLowerCase(Locale.ROOT));
+            // Revision 578 social packets: FriendsList, IgnoreList and ClanChat.
+            case 18: return new Packet.AddFriend(player, readText(payload));
+            case 53: return new Packet.RemoveFriend(player, readText(payload));
+            case 24: return new Packet.RemoveIgnore(player, readText(payload));
+            case 16: {
+                String name = ByteBufferUtils.getString(payload);
+                if (payload.remaining() != 1) return null;
+                int temporary = Byte.toUnsignedInt(payload.get());
+                // Existing ignore storage is permanent; do not persist temporary ignores.
+                return temporary == 0 ? new Packet.AddIgnore(player, name) : null;
+            }
+            case 15: return new Packet.KickFromClan(player, readText(payload));
+            case 64: return new Packet.JoinClan(player, payload.hasRemaining() ? readText(payload) : "");
+            case 71: return new Packet.Ping(player);
+            case 20: return new Packet.TrackFinished(player, payload.getInt());
+            // Ground item options, Protocol.java and Static327 menu ordering.
+            case 22: { int id = leA(payload), z = beA(payload), x = leA(payload); payload.get(); return new Packet.GroundItemAction(player, 0, id, x, z); }
+            case 5: { int z = le(payload), id = be(payload); payload.get(); int x = beA(payload); return new Packet.GroundItemAction(player, 1, id, x, z); }
+            case 80: { int id = leA(payload); payload.get(); int z = be(payload), x = le(payload); return new Packet.GroundItemAction(player, 2, id, x, z); }
+            case 79: { int id = be(payload); payload.get(); int x = beA(payload), z = be(payload); return new Packet.GroundItemAction(player, 3, id, x, z); }
+            case 26: { int z = leA(payload), x = be(payload); payload.get(); int id = le(payload); return new Packet.GroundItemAction(player, 4, id, x, z); }
+            case 39: payload.get(); return new Packet.PlayerAction(player, 0, leA(payload));
+            case 32: { int id = leA(payload); payload.get(); return new Packet.PlayerAction(player, 1, id); }
+            case 41: payload.get(); return new Packet.PlayerAction(player, 2, le(payload));
+            case 69: payload.get(); return new Packet.PlayerAction(player, 3, le(payload));
+            case 36: { int id = le(payload); payload.get(); return new Packet.PlayerAction(player, 4, id); }
+            case 45: { int id = le(payload); payload.get(); return new Packet.PlayerAction(player, 5, id); }
+            case 27: payload.get(); return new Packet.PlayerAction(player, 6, leA(payload));
+            case 35: { int id = leA(payload); payload.get(); return new Packet.PlayerAction(player, 7, id); }
+            case 58: return new Packet.GESetOfferItem(player, be(payload)); // ScriptRunner 3110
             default:
                 // Keep-alives and as-yet unmapped frames end here.
                 return null;

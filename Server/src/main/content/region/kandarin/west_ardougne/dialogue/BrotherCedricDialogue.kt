@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.drunkmonk.dialogue.BrotherCedricDialogueFile
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Brother Cedric dialogue.
@@ -19,7 +20,7 @@ class BrotherCedricDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.MONKS_FRIEND) in 10..100) {
+        if (getQuestStage(player, Quests.MONKS_FRIEND.questName) in 10..100) {
             end()
             openDialogue(player, BrotherCedricDialogueFile())
         } else {

@@ -1,5 +1,7 @@
 package content.region.other.keldagrim.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Riki The Sculptor dialogue.
@@ -18,7 +19,7 @@ class RikiTheSculptorsDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(!hasRequirement(player, Quests.THE_GIANT_DWARF)){
+        if(!hasRequirement(player, Quests.THE_GIANT_DWARF.questName)){
             player("Hello there, what are you doing here?")
         } else {
             player(FaceAnim.HAPPY, "I'm glad I don't have to talk to you anymore!")

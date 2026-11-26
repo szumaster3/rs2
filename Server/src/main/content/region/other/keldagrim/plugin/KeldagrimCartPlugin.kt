@@ -1,5 +1,7 @@
 package content.region.other.keldagrim.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.interaction.IntType
@@ -11,7 +13,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class KeldagrimCartPlugin : InteractionListener {
@@ -39,12 +40,12 @@ class KeldagrimCartPlugin : InteractionListener {
          * Travel pulses.
          */
         private fun startTravelToKeldagrim(player: Player) {
-            if (hasRequirement(player, Quests.THE_GIANT_DWARF))
+            if (hasRequirement(player, Quests.THE_GIANT_DWARF.questName))
                 submitWorldPulse(TravelToKeldagrimPulse(player))
         }
 
         private fun startTravelFromKeldagrim(player: Player, dest: Location) {
-            if (hasRequirement(player, Quests.THE_GIANT_DWARF))
+            if (hasRequirement(player, Quests.THE_GIANT_DWARF.questName))
                 submitWorldPulse(TravelFromKeldagrimPulse(player, dest))
         }
 
@@ -151,7 +152,7 @@ class KeldagrimCartPlugin : InteractionListener {
 
             when (node.id) {
                 Scenery.TRAIN_CART_7028 -> {
-                    val questDone = isQuestComplete(player, Quests.FISHING_CONTEST)
+                    val questDone = isQuestComplete(player, Quests.FISHING_CONTEST.questName)
 
                     val options = if (questDone)
                         arrayOf("To the Grand Exchange", "To Ice Mountain", "To White Wolf Mountain", "Stay here.")

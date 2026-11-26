@@ -1,5 +1,7 @@
 package content.global.dialogue
 
+import content.data.Quests
+
 import content.global.skill.thieving.ThievingDefinition
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.isQuestComplete
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Fur trader dialogue.
@@ -29,7 +30,7 @@ class FurTradeDialogue(player: Player? = null) : Dialogue(player) {
         )
 
         when(npc.id) {
-            NPCs.FUR_TRADER_1316 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            NPCs.FUR_TRADER_1316 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 npc(FaceAnim.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
             } else {
                 if (!canTrade) return false

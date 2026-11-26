@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.quest.ball.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
@@ -11,7 +13,6 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class WitchHouseListener : InteractionListener {
@@ -58,7 +59,7 @@ class WitchHouseListener : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.DOOR_KEY_2409, Scenery.DOOR_2861) { player, _, with ->
-            if (isQuestComplete(player, Quests.WITCHS_HOUSE)) {
+            if (isQuestComplete(player, Quests.WITCHS_HOUSE.questName)) {
                 sendMessage(player, "The lock has seemed to changed since the last time you visited.")
             }
 
@@ -76,7 +77,7 @@ class WitchHouseListener : InteractionListener {
          */
 
         on(Scenery.DOOR_2861, IntType.SCENERY, "open") { player, node ->
-            if (isQuestComplete(player, Quests.WITCHS_HOUSE)) {
+            if (isQuestComplete(player, Quests.WITCHS_HOUSE.questName)) {
                 sendMessage(player, "The lock has seemed to changed since the last time you visited.")
                 return@on true
             }

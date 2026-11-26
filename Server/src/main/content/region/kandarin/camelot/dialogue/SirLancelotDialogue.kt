@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.hasRequirement
 import core.api.setQuestStage
@@ -12,7 +14,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Sir Lancelot dialogue.
@@ -27,8 +28,8 @@ class SirLancelotDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val merlinStage = getQuestStage(player, Quests.MERLINS_CRYSTAL)
-        val kingRansomRequirements = hasRequirement(player, Quests.KINGS_RANSOM, false)
+        val merlinStage = getQuestStage(player, Quests.MERLINS_CRYSTAL.questName)
+        val kingRansomRequirements = hasRequirement(player, Quests.KINGS_RANSOM.questName, false)
 
         when (stage) {
             0 -> {
@@ -85,7 +86,7 @@ class SirLancelotDialogue(player: Player? = null) : Dialogue(player) {
             10 -> {
                 end()
                 npcl(FaceAnim.NEUTRAL, "They take all their deliveries by boat.")
-                setQuestStage(player!!, Quests.MERLINS_CRYSTAL, 30)
+                setQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName, 30)
             }
 
             // Holy Grail: Searching for a quest.

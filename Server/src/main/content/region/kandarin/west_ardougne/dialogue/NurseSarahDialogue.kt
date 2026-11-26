@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.isQuestInProgress
 import core.api.openDialogue
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Nurse Sarah dialogue.
@@ -20,7 +21,7 @@ class NurseSarahDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestInProgress(player, Quests.BIOHAZARD, 6, 7)) {
+        if (isQuestInProgress(player, Quests.BIOHAZARD.questName, 6, 7)) {
             end()
             openDialogue(player, NurseSarahDialogue())
             return true
@@ -31,7 +32,7 @@ class NurseSarahDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> if (isQuestComplete(player, Quests.PLAGUE_CITY)) {
+            0 -> if (isQuestComplete(player, Quests.PLAGUE_CITY.questName)) {
                 npcl(FaceAnim.NEUTRAL, "The plague itself was a fake, but the image of West Ardougne as a plague city wasn't too far from the truth. Malnutrition, poor sanitation... it's no wonder these people aren't healthy.").also { stage = 4 }
             } else {
                 npcl(FaceAnim.FRIENDLY, "Hello my dear, how are you feeling?").also { stage++ }

@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.setTitle
 import core.game.dialogue.DialogueFile
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.IfTopic
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 class LongbowBenDialogue : DialogueFile() {
 
@@ -17,9 +18,9 @@ class LongbowBenDialogue : DialogueFile() {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Arrr, matey!").also { stage++ }
             1 -> {
-                setTitle(player!!, if(!isQuestComplete(player!!, Quests.PIRATES_TREASURE)) 3 else 2)
+                setTitle(player!!, if(!isQuestComplete(player!!, Quests.PIRATES_TREASURE.questName)) 3 else 2)
                 showTopics(
-                    IfTopic(FaceAnim.NEUTRAL, "I'm looking for Redbeard Frank.", 2, !isQuestComplete(player!!, Quests.PIRATES_TREASURE)),
+                    IfTopic(FaceAnim.NEUTRAL, "I'm looking for Redbeard Frank.", 2, !isQuestComplete(player!!, Quests.PIRATES_TREASURE.questName)),
                     Topic(FaceAnim.ASKING, "Why are you called Longbow Ben?", 5),
                     Topic(FaceAnim.ASKING, "Have you got any quests I could do?", 11)
                 )
@@ -34,14 +35,14 @@ class LongbowBenDialogue : DialogueFile() {
             9 -> npc(FaceAnim.NEUTRAL, "So I shot him and took my ship back.").also { stage++ }
             10 -> player(FaceAnim.HALF_GUILTY, "Right...").also { stage = 1 }
             11 -> {
-                if (isQuestComplete(player!!, Quests.PIRATES_TREASURE) && !isQuestComplete(player!!, Quests.GOBLIN_DIPLOMACY)) {
+                if (isQuestComplete(player!!, Quests.PIRATES_TREASURE.questName) && !isQuestComplete(player!!, Quests.GOBLIN_DIPLOMACY.questName)) {
                     npc(FaceAnim.NEUTRAL, "Nay, I've got nothing for ye to do.").also { stage = 13 }
                 } else {
                     npc(FaceAnim.HALF_GUILTY, "Nay, but the barkeep hears most of the news around here.").also { stage++ }
                 }
             }
             12 -> {
-                if (isQuestComplete(player!!, Quests.PIRATES_TREASURE) && !isQuestComplete(player!!, Quests.GOBLIN_DIPLOMACY)) {
+                if (isQuestComplete(player!!, Quests.PIRATES_TREASURE.questName) && !isQuestComplete(player!!, Quests.GOBLIN_DIPLOMACY.questName)) {
                     npc(FaceAnim.NEUTRAL, "Perhaps ye should be asking him for a quest.").also { stage = 14 }
                 } else {
                     npc(FaceAnim.HALF_GUILTY, "Or Redbeard Frank, he's often spoken of buried treasure.", "Perhaps ye should be asking them for quests.").also { stage = 14 }

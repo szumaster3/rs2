@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.vampire.npc;
 
+import content.data.Quests;
+
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -13,7 +15,6 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import shared.consts.Items;
 import shared.consts.NPCs;
-import shared.consts.Quests;
 
 import static core.api.ContentAPIKt.inInventory;
 import static core.api.ContentAPIKt.sendMessage;
@@ -115,8 +116,8 @@ public class CountDraynorNPC extends AbstractNPC {
         if (killer instanceof Player) {
             Player p = (Player) killer;
             if (inInventory(p, Items.HAMMER_2347, 1) && p.getInventory().remove(new Item(Items.STAKE_1549))) {
-                if (p.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).getStage(p) == 30) {
-                    p.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).finish(p);
+                if (p.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER.getQuestName()).getStage(p) == 30) {
+                    p.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER.getQuestName()).finish(p);
                     sendMessage(p, "You hammer the stake into the vampire's chest!", null);
                 }
             } else {

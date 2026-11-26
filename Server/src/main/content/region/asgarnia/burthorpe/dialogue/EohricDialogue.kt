@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.death.dialogue.EohricDialogueFile
 import core.api.isQuestComplete
 import core.api.openDialogue
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Eohric dialogue.
@@ -20,7 +21,7 @@ class EohricDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, Quests.DEATH_PLATEAU)) {
+        if (!isQuestComplete(player, Quests.DEATH_PLATEAU.questName)) {
             openDialogue(player!!, EohricDialogueFile(), npc)
         } else {
             player(FaceAnim.FRIENDLY, "Hi!")

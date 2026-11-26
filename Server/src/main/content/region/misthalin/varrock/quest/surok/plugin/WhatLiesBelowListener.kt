@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.surok.plugin
 
+import content.data.Quests
+
 import content.data.skill.SkillingTool.Companion.getPickaxe
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -40,10 +42,10 @@ class WhatLiesBelowListener : InteractionListener {
         }
 
         on(Items.BEACON_RING_11014, IntType.ITEM, "summon", "operate") { player, _ ->
-            if (getQuestStage(player, Quests.WHAT_LIES_BELOW) > 70) {
+            if (getQuestStage(player, Quests.WHAT_LIES_BELOW.questName) > 70) {
                 sendMessage(player, "Zaff has removed the summon charges from the ring. It will not summon him again.")
             } else {
-                if (getQuestStage(player, Quests.WHAT_LIES_BELOW) == 70 && player.zoneMonitor.isInZone(Quests.WHAT_LIES_BELOW)) {
+                if (getQuestStage(player, Quests.WHAT_LIES_BELOW.questName) == 70 && player.zoneMonitor.isInZone(Quests.WHAT_LIES_BELOW.questName)) {
                     val cutscene = player.getAttribute<WhatLiesBelowCutscene>("cutscene", null)
                     cutscene.summonZaff()
                     return@on true
@@ -77,7 +79,7 @@ class WhatLiesBelowListener : InteractionListener {
         }
 
         on(Scenery.STATUE_23057, IntType.SCENERY, "excavate") { player, _ ->
-            if (getQuestStage(player, Quests.WHAT_LIES_BELOW) < 30) {
+            if (getQuestStage(player, Quests.WHAT_LIES_BELOW.questName) < 30) {
                 val tool = getPickaxe(player)
                 if (tool == null) {
                     sendMessage(player, "You need a pickaxe in order to do that.")
@@ -99,7 +101,7 @@ class WhatLiesBelowListener : InteractionListener {
                                 }
 
                                 4 -> {
-                                    setQuestStage(player, Quests.WHAT_LIES_BELOW, 40)
+                                    setQuestStage(player, Quests.WHAT_LIES_BELOW.questName, 40)
                                     resetAnimator(player)
                                     playAudio(player, 3535)
                                     setVarp(player, 992, 1 shl 8, true)

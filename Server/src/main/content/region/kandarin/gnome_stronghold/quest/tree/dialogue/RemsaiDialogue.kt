@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.inInventory
 import core.game.dialogue.Dialogue
@@ -10,16 +12,15 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class RemsaiDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (inInventory(player!!, Items.ORBS_OF_PROTECTION_588) || getQuestStage(player, Quests.TREE_GNOME_VILLAGE) > 40) {
+        if (inInventory(player!!, Items.ORBS_OF_PROTECTION_588) || getQuestStage(player, Quests.TREE_GNOME_VILLAGE.questName) > 40) {
             playerl(FaceAnim.FRIENDLY, "I've returned.")
-        } else if (getQuestStage(player, Quests.TREE_GNOME_VILLAGE) == 40) {
+        } else if (getQuestStage(player, Quests.TREE_GNOME_VILLAGE.questName) == 40) {
             playerl(FaceAnim.ASKING, "Are you ok?")
         } else {
             playerl(FaceAnim.FRIENDLY, "Hello Remsai.")
@@ -28,7 +29,7 @@ class RemsaiDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName)
         when {
             inInventory(player!!, Items.ORBS_OF_PROTECTION_588) -> {
                 when (stage) {

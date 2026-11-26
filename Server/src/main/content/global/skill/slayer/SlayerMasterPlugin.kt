@@ -1,5 +1,7 @@
 package content.global.skill.slayer
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.component.Component
 import core.game.interaction.IntType
@@ -7,7 +9,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import shared.consts.Components
-import shared.consts.Quests
 
 class SlayerMasterPlugin : InteractionListener {
 
@@ -21,7 +22,7 @@ class SlayerMasterPlugin : InteractionListener {
     }
 
     private fun handleRewardOption(player: Player, node: Node) {
-        if (!hasRequirement(player, Quests.SMOKING_KILLS)) return
+        if (!hasRequirement(player, Quests.SMOKING_KILLS.questName)) return
         player.interfaceManager.open(Component(Components.SMKI_BUY_164))
         val opened = player.interfaceManager.opened
         if (opened != null) {

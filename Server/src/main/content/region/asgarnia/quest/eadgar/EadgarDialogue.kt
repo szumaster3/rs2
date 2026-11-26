@@ -1,5 +1,7 @@
 package content.region.asgarnia.quest.eadgar
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.sendDialogue
 import core.game.dialogue.Dialogue
@@ -9,14 +11,13 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class EadgarDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, Quests.TROLL_STRONGHOLD)) {
+        if (!isQuestComplete(player, Quests.TROLL_STRONGHOLD.questName)) {
             sendDialogue(player, "Mad Eadgar seems too busy to talk.").also { stage = END_DIALOGUE }
         } else {
             npcl(FaceAnim.HALF_GUILTY, "Welcome to Mad Eadgar's! Happiness in a bowl! Would you care to sample our delicious home cooking?")

@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.diary.dialogue.YrsaDiaryDialogue
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
@@ -15,7 +17,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Yrsa dialogue.
@@ -54,7 +55,7 @@ class YrsaDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npcl(FaceAnim.HAPPY, "Welcome to my clothes shop. I can change your shoes, or I've got a fine selection of clothes for sale.")
                 stage = 30
             }

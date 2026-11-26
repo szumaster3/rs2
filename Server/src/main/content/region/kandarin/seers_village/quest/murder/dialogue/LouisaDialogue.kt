@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.murder.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import core.api.getAttribute
 import core.api.getQuestStage
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class LouisaDialogue(player: Player? = null) : Dialogue(player) {
@@ -29,7 +30,7 @@ class LouisaDialogue(player: Player? = null) : Dialogue(player) {
 
 class LouisaDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.MURDER_MYSTERY)) {
+        when (getQuestStage(player!!, Quests.MURDER_MYSTERY.questName)) {
             0 -> npcl("I'm far too upset to talk to random people right now.").also { stage = END_DIALOGUE }
             1 -> when (stage) {
                 0 -> playerl(FaceAnim.NEUTRAL, "I'm here to help the guards with their investigation.").also { stage++ }

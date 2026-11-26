@@ -1,5 +1,7 @@
 package content.region.asgarnia.trollheim.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.death.dialogue.TenzingDialogueFile
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Tenzing dialogue.
@@ -23,7 +24,7 @@ class TenzingDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 20, 29)) {
+        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU.questName, 20, 29)) {
             openDialogue(player!!, TenzingDialogueFile(), npc)
         } else {
             player(FaceAnim.FRIENDLY, "Hello Tenzing!").also { stage = 1 }
@@ -37,7 +38,7 @@ class TenzingDialogue(player: Player? = null) : Dialogue(player) {
             2 -> showTopics(
                 Topic("What does a Sherpa do?",6),
                 Topic("How did you find out about the secret way?",7),
-                IfTopic("Can I buy some Climbing boots?",3, isQuestComplete(player, Quests.DEATH_PLATEAU)),
+                IfTopic("Can I buy some Climbing boots?",3, isQuestComplete(player, Quests.DEATH_PLATEAU.questName)),
                 Topic("Nice place you have here.",8),
                 Topic("Nothing, thanks!", END_DIALOGUE),
             )

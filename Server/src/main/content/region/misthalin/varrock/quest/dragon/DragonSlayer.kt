@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon
 
+import content.data.Quests
+
 import content.global.skill.agility.AgilityHandler
 import content.region.misthalin.lumbridge.dialogue.DukeHoracioDialogue
 import content.region.misthalin.varrock.quest.dragon.cutscene.DragonSlayerCutscene
@@ -30,7 +32,7 @@ import shared.consts.*
  * Represents the dragon slayer quest.
  */
 @Initializable
-class DragonSlayer : Quest(Quests.DRAGON_SLAYER, 18, 17, 2, Vars.VARP_QUEST_DRAGON_SLAYER_PROGRESS_176, 0, 1, 10), LoginListener {
+class DragonSlayer : Quest(Quests.DRAGON_SLAYER), LoginListener {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

@@ -1,19 +1,20 @@
 package content.region.misthalin.draynor.quest.anma.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class OldCroneAnimalDialogue : DialogueFile() {
     override fun handle(
         componentID: Int,
         buttonID: Int,
     ) {
-        val questStage = getQuestStage(player!!, Quests.ANIMAL_MAGNETISM)
+        val questStage = getQuestStage(player!!, Quests.ANIMAL_MAGNETISM.questName)
         val hasCroneAmulet = hasAnItem(player!!, Items.CRONE_MADE_AMULET_10500).container != null
         npc = NPC(NPCs.OLD_CRONE_1695)
 
@@ -31,7 +32,7 @@ class OldCroneAnimalDialogue : DialogueFile() {
                 9 -> npc("The second amulet will be useful for the purpose you", "desire, thought it won't work for any other ghost or", "human other than the farmer and his wife.").also { stage++ }
                 10 -> {
                     end()
-                    setQuestStage(player!!, Quests.ANIMAL_MAGNETISM, 17)
+                    setQuestStage(player!!, Quests.ANIMAL_MAGNETISM.questName, 17)
                 }
             }
 
@@ -57,7 +58,7 @@ class OldCroneAnimalDialogue : DialogueFile() {
                 6 -> {
                     end()
                     addItemOrDrop(player!!, Items.CRONE_MADE_AMULET_10500)
-                    setQuestStage(player!!, Quests.ANIMAL_MAGNETISM, 18)
+                    setQuestStage(player!!, Quests.ANIMAL_MAGNETISM.questName, 18)
                 }
             }
 

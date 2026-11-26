@@ -1,5 +1,7 @@
 package content.region.fremennik.miscellania.plugin
 
+import content.data.Quests
+
 import content.region.fremennik.miscellania.dialogue.FerdDialogue
 import content.region.fremennik.miscellania.dialogue.FullangrDialogue
 import core.api.*
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MiscellaniaPlugin : InteractionListener {
 
@@ -69,7 +70,7 @@ class MiscellaniaPlugin : InteractionListener {
         }
 
         on(NPCs.GREENGROCER_1394, IntType.NPC, "talk-to") { player, node ->
-            if (!hasRequirement(player, Quests.THRONE_OF_MISCELLANIA, false)) {
+            if (!hasRequirement(player, Quests.THRONE_OF_MISCELLANIA.questName, false)) {
                 sendNPCDialogueLines(player, node.id, FaceAnim.NEUTRAL, false, "Welcome, Sir.", "I sell only the finest and freshest vegetables!")
             } else {
                 sendNPCDialogueLines(player, node.id, FaceAnim.NEUTRAL, false, "Welcome, Your Royal Highness.", "I sell only the finest and freshest vegetables.")

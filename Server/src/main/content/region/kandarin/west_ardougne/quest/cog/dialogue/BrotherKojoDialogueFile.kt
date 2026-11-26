@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.cog.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.cog.ClockTower
 import core.api.finishQuest
 import core.api.getAttribute
@@ -10,7 +12,6 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import shared.consts.Quests
 
 class BrotherKojoDialogueFile : DialogueFile() {
 
@@ -25,7 +26,7 @@ class BrotherKojoDialogueFile : DialogueFile() {
             }
             return
         }
-        when (getQuestStage(player!!, Quests.CLOCK_TOWER)) {
+        when (getQuestStage(player!!, Quests.CLOCK_TOWER.questName)) {
             0 -> when (stage) {
                 START_DIALOGUE -> player(FaceAnim.FRIENDLY, "Hello monk.").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Hello adventurer. My name is Brother Kojo. Do you happen to know the time?").also { stage++ }
@@ -44,7 +45,7 @@ class BrotherKojoDialogueFile : DialogueFile() {
                 32 -> player(FaceAnim.FRIENDLY, "Well, I'll do my best.").also { stage++ }
                 33 -> npcl(FaceAnim.HAPPY, "Thank you again! And remember to be careful, the cellar is full of strange beasts!").also {
                     end()
-                    setQuestStage(player!!, Quests.CLOCK_TOWER, 1)
+                    setQuestStage(player!!, Quests.CLOCK_TOWER.questName, 1)
                 }
             }
 
@@ -88,7 +89,7 @@ class BrotherKojoDialogueFile : DialogueFile() {
                 2 -> npcl(FaceAnim.FRIENDLY, "The townsfolk will all be able to know the correct time now! Thank you so much for all of your help! And as promised, here is your reward!").also { stage++ }
                 3 -> {
                     end()
-                    finishQuest(player!!, Quests.CLOCK_TOWER)
+                    finishQuest(player!!, Quests.CLOCK_TOWER.questName)
                 }
             }
 

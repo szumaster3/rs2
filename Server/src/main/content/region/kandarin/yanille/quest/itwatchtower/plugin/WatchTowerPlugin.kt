@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.data.skill.SkillingTool
 import content.region.kandarin.yanille.quest.itwatchtower.cutscene.EnclaveCutscene
@@ -38,7 +40,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         on(Scenery.LADDER_2833, IntType.SCENERY, "climb-up") { player, _ ->
-            if (getQuestStage(player, Quests.WATCHTOWER) >= 1) {
+            if (getQuestStage(player, Quests.WATCHTOWER.questName) >= 1) {
                 sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "It is the wizards' helping hand - let 'em up.", FaceAnim.FRIENDLY)
                 addDialogueAction(player) { _, _ ->
                     ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2544, 3112, 1))
@@ -99,7 +101,7 @@ class WatchTowerPlugin : InteractionListener {
                 else -> null
             }
 
-            if(!inInventory(player, Items.SKAVID_MAP_2376) || getQuestStage(player, Quests.WATCHTOWER) < 10) {
+            if(!inInventory(player, Items.SKAVID_MAP_2376) || getQuestStage(player, Quests.WATCHTOWER.questName) < 10) {
                 lock(player, 6)
                 openInterface(player, Components.FADE_TO_BLACK_115)
                 sendMessage(player, "There's no way I can find my way through without a map of some kind.")
@@ -227,7 +229,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         on(NPCs.GORAD_856, IntType.NPC, "attack") { player, node ->
-            if (isQuestComplete(player, Quests.WATCHTOWER)) {
+            if (isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                 sendNPCDialogueLines(player, node.id, FaceAnim.OLD_DEFAULT, false, "Ho Ho! why would I want to fight a worm?", "Get lost!")
             } else {
                 player.attack(node)
@@ -240,7 +242,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         on(OGRE_CITY_NW_GATE, IntType.SCENERY, "open") { player, node ->
-            if(isQuestComplete(player, Quests.WATCHTOWER) || getAttribute(player, GameAttributes.WATCHTOWER_GATE_UNLOCK, false)) {
+            if(isQuestComplete(player, Quests.WATCHTOWER.questName) || getAttribute(player, GameAttributes.WATCHTOWER_GATE_UNLOCK, false)) {
                 if (player.location.x < 2504) {
                     sendNPCDialogue(player, NPCs.OGRE_GUARD_859, "It's the small creature; you may pass.", FaceAnim.OLD_DEFAULT)
                 }
@@ -256,7 +258,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         on(OGRE_CITY_SE_GATE, IntType.SCENERY, "open") { player, node ->
-            if(isQuestComplete(player, Quests.WATCHTOWER) || getAttribute(player, GameAttributes.WATCHTOWER_GOLD_GATE_UNLOCK, false)) {
+            if(isQuestComplete(player, Quests.WATCHTOWER.questName) || getAttribute(player, GameAttributes.WATCHTOWER_GOLD_GATE_UNLOCK, false)) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, OgreGuardSouthEastGateDialogue())
@@ -287,7 +289,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         on(Scenery.BATTLEMENT_2832, IntType.SCENERY, "climb-over") { player, _ ->
-            if(!isQuestComplete(player, Quests.WATCHTOWER)) {
+            if(!isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                 openDialogue(player, BattlementDialogue())
             } else {
                 val destination = if(player.location.x > 2506) player.location.transform(-2,0,0) else player.location.transform(2,0,0)
@@ -302,7 +304,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         on(NPCs.OGRE_GUARD_860, IntType.NPC, "talk-to") { player, node ->
-            if(isQuestComplete(player, Quests.WATCHTOWER)) {
+            if(isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                 sendNPCDialogue(player, node.id, "It's that creature again. This time we will let it go.", FaceAnim.OLD_DEFAULT)
             } else {
                 openDialogue(player, BattlementDialogue())
@@ -317,7 +319,7 @@ class WatchTowerPlugin : InteractionListener {
         onUseWith(IntType.NPC, Items.ROCK_CAKE_2379, NPCs.OGRE_GUARD_860) { player, _, with ->
             if (!inInventory(player, Items.ROCK_CAKE_2379)) return@onUseWith true
 
-            if(isQuestComplete(player, Quests.WATCHTOWER)) {
+            if(isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                 sendMessage(player, "Nothing interesting happens.")
                 return@onUseWith true
             }
@@ -448,7 +450,7 @@ class WatchTowerPlugin : InteractionListener {
 
             addDialogueAction(player) { _, _ ->
                 WarningManager.trigger(player, WarningType.WATCHTOWER_SHAMAN_CAVE) {
-                    if (isQuestComplete(player, Quests.WATCHTOWER)) {
+                    if (isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                         teleport(player, Location.create(2588, 9410, 0), TeleportManager.TeleportType.INSTANT)
                         sendMessage(player, "You run past the guard while he's busy.")
                     } else {
@@ -478,7 +480,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, OGRE_POTIONS, NPCs.WATCHTOWER_WIZARD_872) { player, used, with ->
-            if (isQuestComplete(player, Quests.WATCHTOWER)) {
+            if (isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                 openDialogue(player, WatchtowerDialogue(used.asItem()))
                 return@onUseWith true
             }
@@ -532,7 +534,7 @@ class WatchTowerPlugin : InteractionListener {
             queueScript(player, anim.duration, QueueStrength.WEAK) {
                 npc.asNpc().clear()
                 if (killCount >= 6) {
-                    setQuestStage(player, Quests.WATCHTOWER, 90)
+                    setQuestStage(player, Quests.WATCHTOWER.questName, 90)
                     removeAttribute(player, GameAttributes.WATCHTOWER_OGRE_DESTROY_COUNT)
                     sendItemDialogue(player, Items.CRYSTAL_2382, "A crystal drops from the hand of the dissappearing ogre. You snatch it up quickly.")
                     addItemOrDrop(player, Items.CRYSTAL_2382, 1)
@@ -616,7 +618,7 @@ class WatchTowerPlugin : InteractionListener {
             val npc = NPC(NPCs.WATCHTOWER_WIZARD_872)
             sendMessage(player,"You pull the lever...")
 
-            if(isQuestComplete(player, Quests.WATCHTOWER) || getQuestStage(player, Quests.WATCHTOWER) == 0) {
+            if(isQuestComplete(player, Quests.WATCHTOWER.questName) || getQuestStage(player, Quests.WATCHTOWER.questName) == 0) {
                 val message = when(node.location) {
                     Location.create(2927, 4715, 2) -> "The lever is stuck in the down position."
                     else -> "It had no effect."
@@ -682,7 +684,7 @@ class WatchTowerPlugin : InteractionListener {
                 1 -> npc(FaceAnim.HAPPY, "Your help was invaluable. Take this payment as a token", "of my gratitude.").also { stage++ }
                 2 -> npcl(FaceAnim.HAPPY, "Also, let me improve your Magic level for you.").also { stage++ }
                 3 -> npc(FaceAnim.HAPPY, "Here is a special item for you - it's a new spell. Read", "the scroll and you will be able to teleport yourself here.").also { stage++ }
-                4 -> end().also { finishQuest(player!!, Quests.WATCHTOWER) }
+                4 -> end().also { finishQuest(player!!, Quests.WATCHTOWER.questName) }
             }
         }
     }
@@ -788,7 +790,7 @@ class WatchTowerPlugin : InteractionListener {
          * Searches a bush for a quest-related item.
          */
         private fun searchBush(player: Player, item: Pair<Int, String>?): Boolean {
-            if (item == null || getQuestStage(player, Quests.WATCHTOWER) < 1) {
+            if (item == null || getQuestStage(player, Quests.WATCHTOWER.questName) < 1) {
                 sendPlayerDialogue(player, "Hmmm, nothing here.", FaceAnim.NEUTRAL)
                 return true
             }

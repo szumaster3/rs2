@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dslay.plugin.DemonSlayerUtils
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class SirPyrsinDialogue(player: Player? = null) : Dialogue(player) {
@@ -26,7 +27,7 @@ class SirPyrsinDialogue(player: Player? = null) : Dialogue(player) {
         } else if (args[0] is Int) {
             id = args[0] as Int
         }
-        quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER)
+        quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER.questName)
         when (quest!!.getStage(player)) {
             30 -> {
                 npc(id, "Have you sorted that demon out yet?")

@@ -1,5 +1,7 @@
 package content.region.kandarin.guild.wizards.dialogue
 
+import content.data.Quests
+
 import content.global.travel.EssenceTeleport
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Wizard Distentor dialogue.
@@ -33,7 +34,7 @@ class WizardDistentorDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player("Hello there.").also { stage++ }
             1 -> npc("What can I do for you?").also { stage++ }
             2 -> {
-                if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+                if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                     player("Nothing thanks, I'm just looking around.").also { stage = 4 }
                 } else {
                     options("Nothing thanks, I'm just looking around.", "Can you teleport me to Rune Essence?").also { stage++ }

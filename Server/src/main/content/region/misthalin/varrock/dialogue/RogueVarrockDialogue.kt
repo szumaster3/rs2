@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import content.region.wilderness.plugin.rogue_castle.RogueCastleDialogue
 import core.api.hasRequirement
 import core.api.inBorders
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Rogue (Varrock) dialogue.
@@ -21,7 +22,7 @@ class RogueVarrockDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.SUMMERS_END)) return false
+        if (!hasRequirement(player, Quests.SUMMERS_END.questName)) return false
         if (inBorders(player, 3282, 3934, 3287, 3942)) {
             end()
             openDialogue(player, RogueCastleDialogue(), npc)

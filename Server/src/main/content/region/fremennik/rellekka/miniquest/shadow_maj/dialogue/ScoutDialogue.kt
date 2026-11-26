@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.miniquest.shadow_maj.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.miniquest.shadow_maj.GeneralShadow
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the scouts dialogue.
@@ -75,10 +76,10 @@ private class ScoutDialogueFile : DialogueFile() {
             13 -> player("So what have you discovered on your travels though", "the desert?").also { stage++ }
             14 -> npc("The fighting in the desert has come to a stop. However,", "there is still much distrust between Menaphos and Al", "Kharid. It seems like it would be possible to reignite the", "war if needed.").also { stage++ }
 
-            15 -> if (isQuestComplete(player!!, Quests.DESERT_TREASURE)) {
+            15 -> if (isQuestComplete(player!!, Quests.DESERT_TREASURE.questName)) {
                 npc("I have heard whisperings in the bandit camp that the", "prisoner of Jaldraocht is now free.").also { stage++ }
-            } else if (hasRequirement(player!!, Quests.ENAKHRAS_LAMENT) &&
-                !isQuestComplete(player!!, Quests.DESERT_TREASURE)) {
+            } else if (hasRequirement(player!!, Quests.ENAKHRAS_LAMENT.questName) &&
+                !isQuestComplete(player!!, Quests.DESERT_TREASURE.questName)) {
                 npc("I followed one called Lazim. He let slip that he had", "discovered the buried temple. Now the two others who", "were there are on the move. The General may find there are new players at", "the ritual this time.").also {
                     stage++
                 }
@@ -102,7 +103,7 @@ private class ScoutDialogueFile : DialogueFile() {
             106 -> player("The other what? Who are you slaughtering?").also { stage++ }
             107 -> npc("Ah, not for your ears, messenger!").also { stage++ }
             108 -> player("So how's your mission going. Enjoying the Draynor", "woods?").also { stage++ }
-            109 -> if (isQuestComplete(player!!, Quests.VAMPIRE_SLAYER)) {
+            109 -> if (isQuestComplete(player!!, Quests.VAMPIRE_SLAYER.questName)) {
                 npc("There is talk in the village that the Count of Draynor", "Manor has been Slain by some meddling adventurer. I will", "need to enter the manor to verify this.").also { stage++ }
             } else {
                 player("Have you been in touch with any of the other scouts?").also { stage = 111 }
@@ -125,12 +126,12 @@ private class ScoutDialogueFile : DialogueFile() {
             208 -> npc("Thank you, messenger.").also { stage++ }
             209 -> player("So, how's your mission going?").also { stage++ }
             210 -> npc("There is nothing pleasant about this land. The animals", "are vile, the temperature is unbearable and the plant life", "is often more dangerous than the animals.").also { stage++ }
-            211 -> if (isQuestComplete(player!!, Quests.JUNGLE_POTION)) {
+            211 -> if (isQuestComplete(player!!, Quests.JUNGLE_POTION.questName)) {
                 npc("There were some strange occurrences in Tai Bwo", "Wannai. The people fled their village because their gods", "were angry with them, or the like, but now they have", "returned. I must investigate why.").also { stage++ }
             } else {
                 player("Well, there's always something interesting going on here.").also { stage++ }
             }
-            212 -> if (!hasRequirement(player!!, Quests.SHILO_VILLAGE)) {
+            212 -> if (!hasRequirement(player!!, Quests.SHILO_VILLAGE.questName)) {
                 player("Well, there's always something interesting going on here.").also { stage++ }
             } else {
                 npc("Shilo Village was overrun with the undead, but someone", "of great ability has brought the situation under control.").also { stage++ }
@@ -151,19 +152,19 @@ private class ScoutDialogueFile : DialogueFile() {
             306 -> player(FaceAnim.ANGRY, "Oi! I am one of the filth, I mean, humans! Besides, we", "were here first.").also { stage++ }
             307 -> npc(FaceAnim.EXTREMELY_SHOCKED, "Haa, haa, haa. Oh, you naive mortals. There were many", "here before you. The last time the General went north,", "all this land belonged to the elves. Do not think so", "highly of your race.").also { stage++ }
             308 -> player("Discovered anything interesting on your travels?").also { stage++ }
-            309 -> if (hasRequirement(player!!, Quests.BIOHAZARD) || isQuestComplete(player!!, Quests.PLAGUE_CITY)) {
+            309 -> if (hasRequirement(player!!, Quests.BIOHAZARD.questName) || isQuestComplete(player!!, Quests.PLAGUE_CITY.questName)) {
                 npc("As I passed through Ardougne, I overheard some news.", "The plague in the west grows worse. King Lathas's", "popularity continues to increase, while the people are", "becoming more and more hostile to Tyras. I suspect").also { stage++ }
             } else {
                 player("That is all that I have heard.").also { stage = 313 }
             }
 
             310 -> npc("there is more to be learned, but my mission is to", "observe gnomes, not humans.").also { stage++ }
-            311 -> if (!hasRequirement(player!!, Quests.HAZEEL_CULT)) {
+            311 -> if (!hasRequirement(player!!, Quests.HAZEEL_CULT.questName)) {
                 npcl(FaceAnim.FRIENDLY, "I have heard that the cultists, who think they are so well hidden in the sewers, have failed in their ritual.").also { stage++ }
             } else {
                 npcl(FaceAnim.FRIENDLY, "I have heard that the cultists, who think they are so well hidden in the sewers, have succeeded in their ritual.").also { stage++ }
             }
-            312 -> if (!isQuestComplete(player!!, Quests.THE_GRAND_TREE)) {
+            312 -> if (!isQuestComplete(player!!, Quests.THE_GRAND_TREE.questName)) {
                 player("That is all that I have heard.").also { stage = 314 }
             } else {
                 npcl(FaceAnim.FRIENDLY, "I head to the land of the gnomes; rumours say it is peaceful right now.").also { stage++ }

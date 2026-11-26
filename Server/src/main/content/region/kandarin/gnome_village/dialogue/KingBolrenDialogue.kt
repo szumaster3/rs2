@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_village.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.tree.dialogue.KingBolrenDialogueFile
 import core.api.addItemOrDrop
 import core.api.hasAnItem
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the King Bolren dialogue.
@@ -23,7 +24,7 @@ class KingBolrenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestComplete(player, Quests.TREE_GNOME_VILLAGE)) {
+        if (isQuestComplete(player, Quests.TREE_GNOME_VILLAGE.questName)) {
             playerl(FaceAnim.FRIENDLY, "Hello again Bolren.")
         } else {
             end()

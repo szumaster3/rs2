@@ -4199,7 +4199,7 @@ fun setQuestStage(
     quest: String,
     stage: Int,
 ) {
-    player.questRepository.setStage(QuestRepository.getQuests()[quest]!!, stage)
+    player.questRepository.setStage(player.questRepository.getQuest(quest)!!, stage)
     player.questRepository.syncronizeTab(player)
 }
 
@@ -4217,6 +4217,8 @@ fun setQuestStageNonmonotonic(
 ) {
     player.questRepository.forIndex(questIndex)?.let {
         player.questRepository.setStageNonmonotonic(it, stage)
+        player.questRepository.syncPoints()
+        player.questRepository.syncronizeTab(player)
     }
 }
 

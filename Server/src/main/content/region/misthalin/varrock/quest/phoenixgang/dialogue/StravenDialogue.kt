@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.hero.dialogue.StravenDialogueFile
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.getQuestStage
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.GroundItemManager
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Straven dialogue.
@@ -24,11 +25,11 @@ class StravenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV)
+        quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV.questName)
         when (quest!!.getStage(player)) {
             100 -> {
                 if (ShieldofArrav.isPhoenix(player)) {
-                    if (getQuestStage(player, Quests.HEROES_QUEST) in 1 until 100) {
+                    if (getQuestStage(player, Quests.HEROES_QUEST.questName) in 1 until 100) {
                         openDialogue(player, StravenDialogueFile(), npc)
                         return true
                     }

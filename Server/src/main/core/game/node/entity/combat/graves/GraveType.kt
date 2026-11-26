@@ -1,7 +1,8 @@
 package core.game.node.entity.combat.graves
 
+import content.data.Quests
+
 import core.cache.def.impl.DataMap
-import shared.consts.Quests
 
 enum class GraveType(val text: String) {
     MemorialPlaque("In memory of @name,<br>who died here."),
@@ -60,9 +61,9 @@ enum class GraveType(val text: String) {
     val prerequisite: String?
         get() = when (this)
         {
-            SymbolofBandos     -> Quests.LAND_OF_THE_GOBLINS
-            SymbolofArmadyl    -> Quests.TEMPLE_OF_IKOV
-            AncientZarosSymbol -> Quests.DESERT_TREASURE
+            SymbolofBandos     -> Quests.LAND_OF_THE_GOBLINS.questName
+            SymbolofArmadyl    -> Quests.TEMPLE_OF_IKOV.questName
+            AncientZarosSymbol -> Quests.DESERT_TREASURE.questName
             else -> null
         }
 

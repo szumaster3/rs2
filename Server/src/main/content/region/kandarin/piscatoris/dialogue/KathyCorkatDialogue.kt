@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -15,7 +17,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Kathy Corkat dialogue.
@@ -25,7 +26,7 @@ class KathyCorkatDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.SWAN_SONG)) {
+        if (!hasRequirement(player, Quests.SWAN_SONG.questName)) {
             if (npc.id == NPCs.KATHY_CORKAT_3831) {
                 npcl(FaceAnim.HALF_ASKING, "I'll be glad to get away from this place, dearie! Fancy a lift up the river?").also { stage = 20 }
             } else {

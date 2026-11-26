@@ -1,12 +1,13 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Chemist dialogue.
@@ -19,7 +20,7 @@ class ChemistBiohazardQuestDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.CHEMIST_367)
         when {
-            (getQuestStage(player!!, Quests.BIOHAZARD) in 10..15) -> {
+            (getQuestStage(player!!, Quests.BIOHAZARD.questName) in 10..15) -> {
                 when (stage) {
                     0 -> npc("Sorry, I'm afraid we're just closing now. You'll have to", "come back another time.").also { stage++ }
                     1 -> options("This can't wait, I'm carrying a plague sample.", "It's ok, I'm Elena's friend.").also { stage++ }
@@ -56,8 +57,8 @@ class ChemistBiohazardQuestDialogue : DialogueFile() {
                             sendMessage(player!!, "He gives you the touch paper.")
                             addItemOrDrop(player!!, Items.TOUCH_PAPER_419)
                         }
-                        if (getQuestStage(player!!, Quests.BIOHAZARD) < 11) {
-                            setQuestStage(player!!, Quests.BIOHAZARD, 11)
+                        if (getQuestStage(player!!, Quests.BIOHAZARD.questName) < 11) {
+                            setQuestStage(player!!, Quests.BIOHAZARD.questName, 11)
                         }
                     }
                 }

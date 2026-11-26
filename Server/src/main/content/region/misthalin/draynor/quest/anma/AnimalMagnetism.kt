@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.anma
 
+import content.data.Quests
+
 import content.region.misthalin.draynor.quest.anma.dialogue.AliceDialogue
 import content.region.misthalin.draynor.quest.anma.dialogue.AliceHusbandDialogue
 import content.region.misthalin.draynor.quest.anma.dialogue.AvaDialogue
@@ -13,13 +15,12 @@ import core.game.node.entity.skill.Skills
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * The Animal magnetism quest journal.
  */
 @Initializable
-class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM, 33, 32, 1) {
+class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM) {
 
     private val requirements = BooleanArray(7)
 
@@ -213,9 +214,9 @@ class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM, 33, 32, 1) {
     }
 
     override fun hasRequirements(player: Player): Boolean {
-        requirements[0] = isQuestComplete(player, Quests.THE_RESTLESS_GHOST)
-        requirements[1] = isQuestComplete(player, Quests.ERNEST_THE_CHICKEN)
-        requirements[2] = isQuestComplete(player, Quests.PRIEST_IN_PERIL)
+        requirements[0] = isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName)
+        requirements[1] = isQuestComplete(player, Quests.ERNEST_THE_CHICKEN.questName)
+        requirements[2] = isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName)
         requirements[3] = getStatLevel(player, Skills.RANGE) >= 30
         requirements[4] = getStatLevel(player, Skills.SLAYER) >= 18
         requirements[5] = getStatLevel(player, Skills.CRAFTING) >= 19

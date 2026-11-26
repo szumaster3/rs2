@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import content.global.skill.summoning.pets.Pets
 import core.api.hasRequirement
 import core.api.openInterface
@@ -19,7 +21,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Felkrash dialogue.
@@ -34,14 +35,14 @@ class FelkrashDialogue : Dialogue {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(!hasRequirement(player, Quests.RATCATCHERS)) {
+        if(!hasRequirement(player, Quests.RATCATCHERS.questName)) {
             playerl(FaceAnim.HALF_GUILTY, "What was it I heard about some pits around here?")
         } else {
             showTopics(
                 Topic("Can you train my cat for me?", 20),
                 Topic("Can you rename my cat?",40),
                 Topic("What was it I heard about some pits around here?", 60),
-                IfTopic("Can you tell me more about Wily cats?", 70, hasRequirement(player, Quests.RATCATCHERS))
+                IfTopic("Can you tell me more about Wily cats?", 70, hasRequirement(player, Quests.RATCATCHERS.questName))
             )
         }
         return true

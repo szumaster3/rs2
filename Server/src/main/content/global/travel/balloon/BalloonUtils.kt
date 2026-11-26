@@ -1,5 +1,7 @@
 package content.global.travel.balloon
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.cache.def.impl.ItemDefinition
@@ -140,7 +142,7 @@ object BalloonUtils {
         closeOverlay(player)
         closeInterface(player)
 
-        if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY))
+        if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY.questName))
             setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 1, true)
     }
 
@@ -328,6 +330,9 @@ object BalloonUtils {
                     finishDiaryTask(player, DiaryType.VARROCK, 1, 17)
                     setVarbit(player, 4023, 1, true)
                 }
+                BalloonTravelDefinition.CASTLE_WARS -> {
+                    if (player.location == destination.destination) finishDiaryTask(player, DiaryType.ARDOUGNE, 1, 7)
+                }
                 else -> {}
             }
             return@queueScript stopExecuting(player)
@@ -342,7 +347,7 @@ object BalloonUtils {
             setVarbit(player, destination.varbitId, 1, true)
 
             val xp = 2000.0
-            if (isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY)) {
+            if (isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY.questName)) {
                 rewardXP(player, Skills.FIREMAKING, xp)
             }
 

@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Sounds
 
 /**
@@ -27,9 +28,9 @@ class KentDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         when {
             // Post-Quest Dialogue.
-            isQuestComplete(player, Quests.SEA_SLUG) -> npc("Hello there, ${player.username}!").also { stage = 200 }
+            isQuestComplete(player, Quests.SEA_SLUG.questName) -> npc("Hello there, ${player.username}!").also { stage = 200 }
             // Kent Be Found.
-            getQuestStage(player, Quests.SEA_SLUG) < 15 -> npc("Oh thank Saradomin! I thought I'd be left out here", "forever.").also { stage = 0 }
+            getQuestStage(player, Quests.SEA_SLUG.questName) < 15 -> npc("Oh thank Saradomin! I thought I'd be left out here", "forever.").also { stage = 0 }
             else -> player("Hello.").also { stage = 100 }
         }
         return true
@@ -46,7 +47,7 @@ class KentDialogue(player: Player? = null) : Dialogue(player) {
             6 -> npc(FaceAnim.NEUTRAL, "I told Kennith to hide until I returned but I was", "washed up here.").also { stage++ }
             7 -> npc(FaceAnim.NEUTRAL, "Please go back and get my boy, you can send help for", "me later.").also { stage++ }
             8 -> npc(FaceAnim.SCARED, "${player.username} wait!").also {
-                setQuestStage(player!!, Quests.SEA_SLUG, 15)
+                setQuestStage(player!!, Quests.SEA_SLUG.questName, 15)
                 setAttribute(player, GameAttributes.QUEST_SEA_SLUG_TALK_WITH_KENT, true)
                 stage++
             }

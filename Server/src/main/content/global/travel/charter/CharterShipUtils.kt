@@ -1,5 +1,7 @@
 package content.global.travel.charter
 
+import content.data.Quests
+
 import core.api.*
 import core.game.component.Component
 import core.game.interaction.QueueStrength
@@ -12,7 +14,6 @@ import core.tools.StringUtils
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Utility for charter ship travel.
@@ -102,7 +103,7 @@ object CharterShipUtils {
         CATHERBY(loc(2792, 3417, 1), 25, intArrayOf(480, 0, 480, 625, 1600, 3250, 1000, 1600, 3200, 3400), loc(2797, 3414), 3, 14),
         PORT_PHASMATYS(loc(3705, 3503, 1), 24, intArrayOf(3650, 3250, 1850, 0, 0, 0, 2050, 1850, 3200, 1100), loc(3702, 3502), 2, 13) {
             override fun checkTravel(player: Player) =
-                requireQuest(player, Quests.PRIEST_IN_PERIL, "to go there.")
+                requireQuest(player, Quests.PRIEST_IN_PERIL.questName, "to go there.")
         },
         CRANDOR(loc(2792, 3417, 1), 32, intArrayOf(0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800), null, 10, 21),
         BRIMHAVEN(loc(2763, 3238, 1), 28, intArrayOf(0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800), loc(2760, 3238), 6, 17) {

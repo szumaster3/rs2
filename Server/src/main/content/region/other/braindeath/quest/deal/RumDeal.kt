@@ -1,14 +1,15 @@
 package content.region.other.braindeath.quest.deal
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
-class RumDeal : Quest(Quests.RUM_DEAL, 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PROGRESS_600, 0, 1, 19) {
+class RumDeal : Quest(Quests.RUM_DEAL, Vars.VARP_QUEST_RUM_DEAL_PROGRESS_600, 0, 1, 19) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -22,7 +23,7 @@ class RumDeal : Quest(Quests.RUM_DEAL, 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PRO
             line(player, "!!47 Prayer??" ,line++, hasLevelStat(player, Skills.PRAYER, 47))
             line(player, "!!42 Crafting??" ,line++, hasLevelStat(player, Skills.CRAFTING, 42))
             line(player, "!!42 Slayer??" ,line++, hasLevelStat(player, Skills.SLAYER, 42))
-            line(player, "!!I must have completed Zogre Flesh Eaters??", line++, isQuestComplete(player, Quests.ZOGRE_FLESH_EATERS))
+            line(player, "!!I must have completed Zogre Flesh Eaters??", line++, isQuestComplete(player, Quests.ZOGRE_FLESH_EATERS.questName))
             line(player, "!!To be able to defeat a level 150 Monster??", line++)
         }
 

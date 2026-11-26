@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.rewardXP
 import core.api.sendItemZoomOnInterface
@@ -9,11 +11,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class FightArena : Quest(Quests.FIGHT_ARENA, 61, 60, 2, Vars.VARP_QUEST_FIGHT_ARENA_PROGRESS_17, 0, 1, 14) {
+class FightArena : Quest(Quests.FIGHT_ARENA) {
     override fun drawJournal(
         player: Player,
         stage: Int,

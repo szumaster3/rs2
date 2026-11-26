@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.api.setQuestStage
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Sir Gawain dialogue.
@@ -21,12 +22,12 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
     val STAGE_PROGRESS = 15
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
+        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL.questName)) {
             when (stage) {
                 0 -> {
                     val title = if (player!!.isMale) "sir" else "madam"
                     npcl(FaceAnim.HAPPY, "Good day to you $title!")
-                    val questStage = getQuestStage(player, Quests.MERLINS_CRYSTAL)
+                    val questStage = getQuestStage(player, Quests.MERLINS_CRYSTAL.questName)
                     stage = when (questStage) {
                         0 -> 1
                         10 -> 10
@@ -73,7 +74,7 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
 
                 17 -> {
                     npc("She lives in her stronghold to the south of here,", "guarded by some renegade knights led by Sir Mordred.")
-                    setQuestStage(player!!, Quests.MERLINS_CRYSTAL, 20)
+                    setQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName, 20)
                     player!!.getQuestRepository().syncronizeTab(player)
                     stage++
                 }
@@ -115,9 +116,9 @@ class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
         } else {
             when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Good day to you sir!").also {
-                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 0 || isQuestComplete(player!!, Quests.HOLY_GRAIL)) {
+                    if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) == 0 || isQuestComplete(player!!, Quests.HOLY_GRAIL.questName)) {
                         stage = 1
-                    } else if (getQuestStage(player!!, Quests.HOLY_GRAIL) >= 10) {
+                    } else if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) >= 10) {
                         stage = 10
                     }
                 }

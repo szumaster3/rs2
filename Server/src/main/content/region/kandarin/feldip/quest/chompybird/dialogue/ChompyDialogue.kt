@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.chompybird.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.feldip.quest.chompybird.BigChompyBirdHunting
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -9,7 +11,6 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Chompy dialogue.
@@ -20,7 +21,7 @@ import shared.consts.Quests
 class ChompyDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.BIG_CHOMPY_BIRD_HUNTING)) {
+        when (getQuestStage(player!!, Quests.BIG_CHOMPY_BIRD_HUNTING.questName)) {
             0 -> handleQuestStartDialogue(player, buttonID)
             in 20 until 30 -> handleToadsiesDialogue(player, buttonID)
             in 30 until 40 -> handlePlaceToadsiesDialogue(player, buttonID)
@@ -50,7 +51,7 @@ class ChompyDialogue : DialogueFile() {
             8 -> playerl("Ah, so 'da chompy' is some kind of bird?").also { stage++ }
             9 -> npcl(FaceAnim.OLD_NORMAL, "Yeah, is what Rantz sayed, Da chompy is da big flapper and is bestest yummies. But Rantz needs stabbers to stick da chompy... Will creatures make dem stabbers for us?").also { stage = 1 }
             10 -> npcl(FaceAnim.OLD_NORMAL, "Good you creature, you need sticksies from achey tree and stabbies from dog bones.").also { stage = END_DIALOGUE; if (player != null) {
-                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING, 10)
+                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName, 10)
             }
             }
         }
@@ -87,7 +88,7 @@ class ChompyDialogue : DialogueFile() {
 
             101 -> {
                 npcl(FaceAnim.OLD_NORMAL, "Ahh, der creature has dem...goodly, goodly. Now us can stick der chompy bird...")
-                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING, 20)
+                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName, 20)
                 stage = 3
             }
         }
@@ -128,7 +129,7 @@ class ChompyDialogue : DialogueFile() {
             101 -> npcl(FaceAnim.OLD_NORMAL, "Dat's a good fatsy toady, now we's need to put it for da chompy to come.").also { stage++ }
             102 -> {
                 playerl("Where do I put the 'fatsy toadies'?").also { stage++ }
-                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING, 30)
+                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName, 30)
                 stage = 0
             }
         }
@@ -170,7 +171,7 @@ class ChompyDialogue : DialogueFile() {
             8 -> {
                 sendItemDialogue(player!!, Items.OGRE_BOW_2883, "Rantz hands over an ogre bow. It's huge! You can barely drawn back the string!")
                 addItemOrDrop(player, Items.OGRE_BOW_2883)
-                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING, 60)
+                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName, 60)
                 stage = END_DIALOGUE
             }
         }
@@ -201,7 +202,7 @@ class ChompyDialogue : DialogueFile() {
             105 -> npcl(FaceAnim.OLD_NORMAL, "Yep, da spit's over der! Last time Rantz did yummies, got very bad, did bad things to food.. and belly.").also { stage++ }
             106 -> {
                 playerl("HUH!")
-                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING, 70)
+                setQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName, 70)
                 stage = END_DIALOGUE
             }
         }
@@ -228,7 +229,7 @@ class ChompyDialogue : DialogueFile() {
             103 -> sendDialogue(player, "~The family of ogres sit down together~").also { stage++ }
             104 -> sendDialogue(player, "~and enjoy your well cooked chompy bird.~").also { stage++ }
             105 -> playerl("It's my pleasure!").also {
-                finishQuest(player, Quests.BIG_CHOMPY_BIRD_HUNTING)
+                finishQuest(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName)
                 stage = END_DIALOGUE
             }
         }

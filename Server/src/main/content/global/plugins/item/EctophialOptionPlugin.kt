@@ -1,5 +1,7 @@
 package content.global.plugins.item
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -35,7 +37,7 @@ class EctophialOptionPlugin : InteractionListener {
         }
 
         on(Items.ECTOPHIAL_4251, IntType.ITEM, "empty") { player, node ->
-            if (!hasRequirement(player, Quests.GHOSTS_AHOY)) return@on false
+            if (!hasRequirement(player, Quests.GHOSTS_AHOY.questName)) return@on false
 
             if (player.isTeleBlocked) {
                 sendMessage(player, "A magical force has stopped you from teleporting.")

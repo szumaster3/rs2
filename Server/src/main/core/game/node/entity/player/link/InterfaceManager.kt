@@ -1,5 +1,7 @@
 package core.game.node.entity.player.link
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.other.tutorial_island.plugin.TutorialStage
 import content.region.other.tutorial_island.plugin.TutorialStage.hideTabs
@@ -19,7 +21,6 @@ import core.net.packet.out.PacketContext.InterfaceContext
 import core.net.packet.out.PacketContext.WindowsPaneContext
 import core.tools.Log
 import shared.consts.Components
-import shared.consts.Quests
 
 /**
  * Manages interface components for a player.
@@ -470,7 +471,7 @@ class InterfaceManager(
             InterfaceContext(player, windowPaneId, if (isResizable) 171 else 137, Components.TOPSTAT_RUN_750, true)
         )
         //Summoning bar
-        if (isQuestComplete(player, Quests.WOLF_WHISTLE) && settings?.isMembers == true) {
+        if (isQuestComplete(player, Quests.WOLF_WHISTLE.questName) && settings?.isMembers == true) {
             PacketRepository.send(
                 Encoders530.INTERFACE,
                 InterfaceContext(player, windowPaneId, if (isResizable) 172 else 139, Components.TOPSTAT_LORE_747, true)
@@ -522,6 +523,7 @@ class InterfaceManager(
         }
         component.open(player)
         tabs[slot] = component
+        if (component.id == 190) core.api.sendIfaceSettings(player, 2, 18, 190, 0, 166)
         val index = protocolTabIndex(slot)
         val button = if (slot == 14) (if (isResizable) 168 else 133)
             else if (isResizable) 124 + index else if (index < 8) 81 + index else 51 + index - 8

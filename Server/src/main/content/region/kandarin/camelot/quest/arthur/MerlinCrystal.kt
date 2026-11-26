@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.arthur
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.camelot.dialogue.MerlinDialogue
 import core.api.*
@@ -8,11 +10,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.plugin.ClassScanner
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class MerlinCrystal : Quest(Quests.MERLINS_CRYSTAL, 87, 86, 6, Vars.VARP_QUEST_MERLIN_CRYSTAL_PROGRESS_14, 0, 1, 7) {
+class MerlinCrystal : Quest(Quests.MERLINS_CRYSTAL) {
 
     init {
         ClassScanner.definePlugin(MerlinDialogue())

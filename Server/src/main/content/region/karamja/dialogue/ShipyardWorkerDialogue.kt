@@ -1,5 +1,7 @@
 package content.region.karamja.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.ShipyardWorkerDialogueFile
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Shipyard Worker dialogue.
@@ -19,7 +20,7 @@ class ShipyardWorkerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
         when (stage) {
-            0 -> if (getQuestStage(player, Quests.THE_GRAND_TREE) == 55 && npc.id == NPCs.SHIPYARD_WORKER_675) {
+            0 -> if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) == 55 && npc.id == NPCs.SHIPYARD_WORKER_675) {
                 end().also { openDialogue(player, ShipyardWorkerDialogueFile(), NPC(NPCs.SHIPYARD_WORKER_675)) }
             } else {
                 playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }

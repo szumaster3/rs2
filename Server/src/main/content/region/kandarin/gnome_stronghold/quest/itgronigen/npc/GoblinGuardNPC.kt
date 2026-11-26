@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.itgronigen.npc
 
+import content.data.Quests
+
 import core.api.produceGroundItem
 import core.api.sendChat
 import core.api.setQuestStage
@@ -11,7 +13,6 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class GoblinGuardNPC(
     id: Int = 0,
@@ -58,7 +59,7 @@ class GoblinGuardNPC(
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
-            setQuestStage(killer, Quests.OBSERVATORY_QUEST, 10)
+            setQuestStage(killer, Quests.OBSERVATORY_QUEST.questName, 10)
             produceGroundItem(killer, Items.BONES_526, 1, this.location)
         }
         super.finalizeDeath(killer)

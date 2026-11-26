@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.inEquipment
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Cats dialogue.
@@ -20,7 +21,7 @@ class CatsDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER) && inEquipment(player, Items.CATSPEAK_AMULET_4677)) {
+        if (hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER.questName) && inEquipment(player, Items.CATSPEAK_AMULET_4677)) {
             playerl(FaceAnim.HALF_GUILTY, "Did you understand what went on in that quest with the devourer and Icthlarin?")
         } else {
             npcl(FaceAnim.CHILD_NEUTRAL, "Meow!").also { stage = END_DIALOGUE }

@@ -1,5 +1,7 @@
 package content.minigame.allfiredup.plugin
 
+import content.data.Quests
+
 import content.global.skill.construction.items.NailType
 import core.api.*
 import core.game.interaction.IntType
@@ -13,7 +15,6 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery
 import kotlin.random.Random
 
@@ -30,7 +31,7 @@ class AFURepairPlugin : InteractionListener {
          * Handles option of repairable scenery.
          */
         on(repairIDs, IntType.SCENERY, "repair") { player, _ ->
-            if (!requireQuest(player, Quests.ALL_FIRED_UP, "")) return@on false
+            if (!requireQuest(player, Quests.ALL_FIRED_UP.questName, "")) return@on false
             val rco = getClimbingObject(player) ?: return@on false
             repair(player, rco)
             return@on true
@@ -41,7 +42,7 @@ class AFURepairPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, itemIDs, *repairIDs) { player, used, with ->
-            if (!requireQuest(player, Quests.ALL_FIRED_UP, "")) return@onUseWith false
+            if (!requireQuest(player, Quests.ALL_FIRED_UP.questName, "")) return@onUseWith false
             val rco = getClimbingObject(player) ?: return@onUseWith false
             repair(player, rco)
             return@onUseWith true

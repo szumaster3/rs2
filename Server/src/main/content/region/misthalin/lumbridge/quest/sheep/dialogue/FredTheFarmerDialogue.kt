@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.sheep.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.lumbridge.quest.sheep.SheepShearer
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 class FredTheFarmerDialogue(
     val questStage: Int,
@@ -128,7 +129,7 @@ class FredTheFarmerDialogue(
                 }
             1301 -> player(FaceAnim.HALF_GUILTY, "I'm not convinced.").also { stage = END_DIALOGUE }
             2000 -> {
-                startQuest(player!!, Quests.SHEEP_SHEARER)
+                startQuest(player!!, Quests.SHEEP_SHEARER.questName)
                 npc(
                     FaceAnim.NEUTRAL,
                     "Good! Now one more thing, do you actually know how",
@@ -325,7 +326,7 @@ class FredTheFarmerDialogue(
             30101 -> {
                 val ballsOfWoolDelivered = SheepShearer.deliverBallsOfWool(player!!)
                 if (SheepShearer.getBallsOfWoolRequired(player!!) == 0) {
-                    setQuestStage(player!!, Quests.SHEEP_SHEARER, 90)
+                    setQuestStage(player!!, Quests.SHEEP_SHEARER.questName, 90)
                     player(FaceAnim.HAPPY, "That's the last of them.").also { stage = 30300 }
                 } else {
                     sendDialogue(player!!, "You give Fred $ballsOfWoolDelivered balls of wool").also { stage = 30200 }
@@ -341,7 +342,7 @@ class FredTheFarmerDialogue(
                 }
             30202 -> player(FaceAnim.NEUTRAL, "Ok I'll work on it.").also { stage = END_DIALOGUE }
             30300 -> npc(FaceAnim.SAD, "I guess I'd better pay you then.").also { stage++ }
-            STAGE_FINISH_QUEST -> finishQuest(player!!, Quests.SHEEP_SHEARER).also { stage = END_DIALOGUE }
+            STAGE_FINISH_QUEST -> finishQuest(player!!, Quests.SHEEP_SHEARER.questName).also { stage = END_DIALOGUE }
             31000 ->
                 npc(
                     FaceAnim.NEUTRAL,

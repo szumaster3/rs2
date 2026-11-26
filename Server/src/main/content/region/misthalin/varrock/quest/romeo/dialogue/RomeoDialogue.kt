@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.romeo.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.romeo.cutscene.RomeoAndJulietCutscene
 import core.api.*
 import core.game.activity.ActivityManager
@@ -18,7 +20,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Juliet dialogue.
@@ -37,7 +38,7 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
             stage = 740
             return true
         }
-        when (getQuestStage(player, Quests.ROMEO_JULIET)) {
+        when (getQuestStage(player, Quests.ROMEO_JULIET.questName)) {
             0 -> {
                 npc(FaceAnim.HALF_GUILTY, "Juliet. Juliet, where art thou Juliet?", "Have you seen my Juliet?")
                 stage = 0
@@ -189,7 +190,7 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
 
             100 -> {
                 npcl(FaceAnim.HALF_GUILTY, "Oh great! And tell her that I want to kiss her a give.")
-                setQuestStage(player, Quests.ROMEO_JULIET, 10)
+                setQuestStage(player, Quests.ROMEO_JULIET.questName, 10)
                 updateQuestTab(player)
                 stage = 101
             }
@@ -425,7 +426,7 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             422 -> {
-                setQuestStage(player, Quests.ROMEO_JULIET, 30)
+                setQuestStage(player, Quests.ROMEO_JULIET.questName, 30)
                 updateQuestTab(player)
                 player.inventory.remove(Item(755))
                 player("FATHER LAWRENCE!")
@@ -862,7 +863,7 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
             751 -> {
                 end()
                 cutscene!!.stop(true)
-                finishQuest(player, Quests.ROMEO_JULIET)
+                finishQuest(player, Quests.ROMEO_JULIET.questName)
             }
         }
         return true

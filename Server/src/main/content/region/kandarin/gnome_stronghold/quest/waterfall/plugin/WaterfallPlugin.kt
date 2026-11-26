@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.waterfall.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
@@ -23,7 +25,6 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Plugin
-import shared.consts.Quests
 
 class WaterfallPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -57,7 +58,7 @@ class WaterfallPlugin : OptionHandler() {
         option: String,
     ): Boolean {
         val id = node.id
-        val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
+        val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST.questName)
         if (quest == null) {
             sendMessage(player, "Error! Waterfall quest cannot be found.")
             return true
@@ -506,7 +507,7 @@ class WaterfallPlugin : OptionHandler() {
 
             if (useditem.id == AMULET.id &&
                 scenery.id == 2006 &&
-                getQuestStage(player, Quests.WATERFALL_QUEST) != 100 &&
+                getQuestStage(player, Quests.WATERFALL_QUEST.questName) != 100 &&
                 player.location !=
                 Location(
                     2603,
@@ -545,7 +546,7 @@ class WaterfallPlugin : OptionHandler() {
                 }
             }
 
-            if (useditem.id == URN.id && scenery.id == 2014 && getQuestStage(player, Quests.WATERFALL_QUEST) != 100) {
+            if (useditem.id == URN.id && scenery.id == 2014 && getQuestStage(player, Quests.WATERFALL_QUEST.questName) != 100) {
                 if (player.inventory.freeSlots() < 5) {
                     player.packetDispatch.sendMessage("You'll need 5 free inventory slots to take Glarial's treasure.")
                     return false
@@ -562,7 +563,7 @@ class WaterfallPlugin : OptionHandler() {
                     player.pulseManager.run(
                         object : Pulse(8, player) {
                             override fun pulse(): Boolean {
-                                finishQuest(player, Quests.WATERFALL_QUEST)
+                                finishQuest(player, Quests.WATERFALL_QUEST.questName)
                                 return true
                             }
                         },

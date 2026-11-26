@@ -1,5 +1,7 @@
 package content.global.skill.runecrafting.abyss
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
@@ -8,7 +10,6 @@ import core.game.node.entity.skill.Skills
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -21,7 +22,7 @@ class MageOfZamorakDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         varrockMage = npc.id == NPCs.MAGE_OF_ZAMORAK_2261 || npc.id == NPCs.MAGE_OF_ZAMORAK_2260
-        if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+        if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
             end()
             sendMessage(player, "The mage doesn't seem interested in talking to you.")
             return true

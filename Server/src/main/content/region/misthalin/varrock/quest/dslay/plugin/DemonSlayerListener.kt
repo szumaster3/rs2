@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
@@ -40,7 +42,7 @@ class DemonSlayerListener : InteractionListener {
          */
 
         on(Objects.VARROCK_PALACE_DRAIN_KEY_17424, IntType.SCENERY, "search") { player, _ ->
-            val questStage = getQuestStage(player, Quests.DEMON_SLAYER)
+            val questStage = getQuestStage(player, Quests.DEMON_SLAYER.questName)
             if (questStage == 20) {
                 player.dialogueInterpreter.open(883, 883, "key")
             } else {
@@ -55,7 +57,7 @@ class DemonSlayerListener : InteractionListener {
         }
 
         on(Objects.VARROCK_SEWER_RUSTY_KEY_17429, IntType.SCENERY, "take") { player, _ ->
-            val questStage = getQuestStage(player, Quests.DEMON_SLAYER)
+            val questStage = getQuestStage(player, Quests.DEMON_SLAYER.questName)
             if (questStage == 20) {
                 if (player.inventory.add(DemonSlayerUtils.FIRST_KEY)) {
                     setVarbit(player, Vars.VARBIT_QUEST_DEMON_SLAYER_DRAIN_2568, 0, true)
@@ -100,7 +102,7 @@ class DemonSlayerListener : InteractionListener {
             Items.BUCKET_OF_WATER_1929,
             Objects.VARROCK_PALACE_DRAIN_KEY_17424
         ) { player, _, _ ->
-            val quest = getQuestStage(player, Quests.DEMON_SLAYER)
+            val quest = getQuestStage(player, Quests.DEMON_SLAYER.questName)
             val hasAnKey = hasAnItem(player, DemonSlayerUtils.FIRST_KEY.id).container != null
 
             if (player.inventory.remove(BUCKET_OF_WATER)) {

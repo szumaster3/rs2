@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult.dialogue
 
+import content.data.Quests
+
 import core.api.getAttribute
 import core.api.getQuestStage
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class HazeelCultistDialogue(player: Player? = null) : Dialogue(player) {
@@ -17,7 +18,7 @@ class HazeelCultistDialogue(player: Player? = null) : Dialogue(player) {
         componentID: Int,
         buttonID: Int,
     ): Boolean {
-        val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT)
+        val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT.questName)
 
         when {
             (questStage in 1..99) -> when (stage) {

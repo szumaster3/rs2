@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.tree.plugin
 
+import content.data.Quests
+
 import content.global.skill.agility.AgilityHandler
 import content.region.kandarin.gnome_stronghold.quest.tree.TreeGnomeVillage.Companion.mazeEntrance
 import content.region.kandarin.gnome_stronghold.quest.tree.TreeGnomeVillage.Companion.mazeVillage
@@ -21,7 +23,6 @@ import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class TreeGnomeVillagePlugin : InteractionListener {
@@ -121,7 +122,7 @@ class TreeGnomeVillagePlugin : InteractionListener {
             if (inBorders(player!!, 2507, 3254, 2512, 3259)) {
                 return sendMessage(player!!, "I can't get over the wall from this side.")
             }
-            if (getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE) > 30) {
+            if (getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName) > 30) {
                 when (stage) {
                     0 -> sendDialogue(player!!, "The wall has been reduced to rubble. It should be possible to climb over the remains").also { stage++ }
                     1 -> AgilityHandler.forceWalk(player!!, -1, player!!.location, player!!.location.transform(Direction.NORTH, 2), climbAnimation, 15, 0.0, null).also {

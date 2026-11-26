@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Snert dialogue.
@@ -25,7 +26,7 @@ class SnertDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val rand = RandomFunction.random(0, 8)
-        if (hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
+        if (hasRequirement(player, Quests.AS_A_FIRST_RESORT.questName)) {
             when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hi, ogre.").also { stage++ }
                 1 -> options("How are you today?", "Can you tell me about this copper-coloured pool?").also { stage++ }

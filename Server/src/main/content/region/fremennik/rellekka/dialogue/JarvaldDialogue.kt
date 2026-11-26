@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.plugin.FremennikBoat
 import content.region.fremennik.rellekka.plugin.Travel
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
@@ -13,7 +15,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Jarvald dialogue.
@@ -27,7 +28,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (npc.id == NPCs.JARVALD_2438) {
-            if(!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            if(!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 npcl(FaceAnim.HALF_ASKING, "Ah, you live yet, outerlander! Have you had your fill of the hunt and wish to return, or are you still feeling the joy of the cull?")
                 stage = 56
             } else {
@@ -36,7 +37,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
             }
             return true
         }
-        if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+        if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
             npcl(FaceAnim.HAPPY, "Greetings, ${FremennikTrials.getFremennikName(player)}!").also { stage = 4 }
         } else {
             npc(FaceAnim.ANNOYED, "What do you want from me outerlander?", "It is our policy not to associate with those not of our tribe.")
@@ -86,7 +87,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
             )
             21 -> {
                 end()
-                if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                     if (!hasPaid) {
                         sendMessage(player, "You cannot afford that.")
                         npcl(FaceAnim.NEUTRAL, "Ah, outerlander... I go beyond my duty to allow you to accompany me, and you attempt to swindle me out of a reasonable fee? This is no way even for an outerlander to behave...")
@@ -95,7 +96,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
                     }
                 }
                 if (firstTimeJoin != 1) {
-                    val message = if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                    val message = if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                         "I suggest you head to the cave with some urgency outerlander, the cold air out here might be too much for the likes of you..."
                     } else {
                         "I would head straight for the cave and not tarry too long ${FremennikTrials.getFremennikName(player)}, the cold winds on this island can cut right through you should you spend too long in them."
@@ -169,7 +170,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
             57 -> when (buttonId) {
                 1 -> {
                     end()
-                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                    if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                         if (!hasPaid) {
                             sendMessage(player, "You cannot afford that.")
                             npcl(FaceAnim.NEUTRAL, "Ah, outerlander... I go beyond my duty to allow you to accompany me, and you attempt to swindle me out of a reasonable fee? This is no way even for an outerlander to behave...")

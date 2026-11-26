@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.port_khazard.quest.arena.cutscene.FightOneCutscene
 import content.region.kandarin.port_khazard.quest.arena.cutscene.PrisonCutscene
 import content.region.kandarin.port_khazard.quest.arena.dialogue.*
@@ -145,7 +147,7 @@ class FightArenaPlugin : InteractionListener {
             sendGraphics(Graphics.SLEEPING_ZZZ_1056, Location.create(2617, 3144, 0))
             animate(player, Animations.HUMAN_MULTI_USE_832)
             addItemOrDrop(player, CELL_KEY, 1)
-            setQuestStage(player, Quests.FIGHT_ARENA, 68)
+            setQuestStage(player, Quests.FIGHT_ARENA.questName, 68)
             sendMessage(player, "You pick up the keys from the table.")
             return@on true
         }
@@ -180,9 +182,9 @@ class FightArenaPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, CELL_KEY, CELL_DOOR_2) { player, _, _ ->
-            if (getQuestStage(player, Quests.FIGHT_ARENA) == 88) {
+            if (getQuestStage(player, Quests.FIGHT_ARENA.questName) == 88) {
                 PrisonCutscene(player).start()
-            } else if (getQuestStage(player, Quests.FIGHT_ARENA) >= 68) {
+            } else if (getQuestStage(player, Quests.FIGHT_ARENA.questName) >= 68) {
                 setAttribute(player, "spawn-ogre", true)
                 FightOneCutscene(player).start()
             }
@@ -194,7 +196,7 @@ class FightArenaPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, CELL_KEY, CELL_DOOR_1) { player, _, _ ->
-            if (getQuestStage(player, Quests.FIGHT_ARENA) >= 68) {
+            if (getQuestStage(player, Quests.FIGHT_ARENA.questName) >= 68) {
                 sendDialogue(player, "I don't want to attract too much attention by freeing all the prisoners. I need to find Jeremy and he's not in this cell.")
             } else {
                 sendMessage(player, "The cell gate is securely locked.")

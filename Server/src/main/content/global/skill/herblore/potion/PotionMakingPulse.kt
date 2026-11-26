@@ -1,5 +1,7 @@
 package content.global.skill.herblore.potion
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
@@ -7,7 +9,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class PotionMakingPulse(player: Player?, node: Item?, private var amount: Int, private val potion: GenericPotion) : SkillPulse<Item?>(player, node) {
@@ -16,8 +17,8 @@ class PotionMakingPulse(player: Player?, node: Item?, private var amount: Int, p
     private var cycles = 0
 
     override fun checkRequirements(): Boolean {
-        if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
-            sendMessage(player, "You must complete the ${Quests.DRUIDIC_RITUAL} quest before you can use Herblore.")
+        if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName)) {
+            sendMessage(player, "You must complete the ${Quests.DRUIDIC_RITUAL.questName} quest before you can use Herblore.")
             return false
         }
 
@@ -28,7 +29,7 @@ class PotionMakingPulse(player: Player?, node: Item?, private var amount: Int, p
 
         val watchtowerPotions = intArrayOf(Items.VIAL_2389, Items.VIAL_2390, Items.POTION_2394)
         potion.product?.let {
-            if (watchtowerPotions.contains(it) && !isQuestComplete(player, Quests.WATCHTOWER)) {
+            if (watchtowerPotions.contains(it) && !isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                 sendMessage(player, "Hmmm...perhaps I shouldn't try to mix these items together.")
                 sendMessage(player, "It might have unpredictable results...")
                 return false

@@ -1,6 +1,8 @@
 
 package content.region.morytania.canifis.quest.fenk.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.canifis.quest.fenk.npc.GardenerGhostNPC
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GardenerGhostDialogue(player: Player? = null) : Dialogue(player) {
@@ -37,7 +38,7 @@ class GardenerGhostDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
 
-        val questStage = getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN)
+        val questStage = getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName)
 
         when {
             questStage == 4 -> {
@@ -62,7 +63,7 @@ class GardenerGhostDialogue(player: Player? = null) : Dialogue(player) {
 
         when (stage) {
             0 -> {
-                val questStage = getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN)
+                val questStage = getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName)
 
                 when {
                     questStage == 4 -> {

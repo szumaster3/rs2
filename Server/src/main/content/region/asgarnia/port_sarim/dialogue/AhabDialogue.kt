@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Ahab dialogue.
@@ -55,7 +56,7 @@ class AhabDialogue(player: Player? = null) : Dialogue(player) {
             25 -> npc("Yon peg-leg kept getting stuck in the floorboards.").also { stage++ }
             26 -> player("Right...").also { stage++ }
             27 -> npc(FaceAnim.HALF_ASKING,"Perhaps a bright young laddie like yerself would like to", "help me? I be needing another ship to go a-hunting my", "enemy.").also { stage++ }
-            28 -> if (!isQuestComplete(player, Quests.DRAGON_SLAYER)) {
+            28 -> if (!isQuestComplete(player, Quests.DRAGON_SLAYER.questName)) {
                 player("No, I don't have a ship.").also { stage = 39 }
             } else {
                 player("Well, I do have a ship that I'm not using.", "It's the Lady Lumbridge.").also { stage++ }

@@ -1,5 +1,7 @@
 package content.region.karamja.brimhaven.dialogue
 
+import content.data.Quests
+
 import content.global.travel.charter.CharterShip
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,13 +15,12 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CaptainShanksDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (!hasRequirement(player, Quests.SHILO_VILLAGE, false))
+        if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName, false))
         {
             npcl(FaceAnim.HALF_GUILTY, "Oh dear, this ship is in a terrible state. And I just can't get the items I need to repair it because Shilo village is overrun with zombies.")
             return false

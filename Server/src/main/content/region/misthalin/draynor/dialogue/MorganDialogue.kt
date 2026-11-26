@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.draynor.quest.vampire.dialogue.MorganVampireDialogue
 import core.api.getQuest
 import core.api.getQuestStage
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Morgan dialogue.
@@ -23,7 +24,7 @@ class MorganDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.VAMPIRE_SLAYER) > 1) {
+        if (getQuestStage(player, Quests.VAMPIRE_SLAYER.questName) > 1) {
             end()
             openDialogue(player, MorganVampireDialogue())
         } else {
@@ -46,7 +47,7 @@ class MorganDialogue(player: Player? = null) : Dialogue(player) {
             5 -> npc(FaceAnim.HALF_GUILTY, "an old soak these days. Mention his old friend Morgan,", "I'm sure he wouldn't want me killed by a vampire.").also { stage++ }
             6 -> player(FaceAnim.HALF_GUILTY, "I'll look him up then.").also { stage++ }
             7 -> {
-                getQuest(player, Quests.VAMPIRE_SLAYER).start(player)
+                getQuest(player, Quests.VAMPIRE_SLAYER.questName).start(player)
                 updateQuestTab(player)
                 end()
             }

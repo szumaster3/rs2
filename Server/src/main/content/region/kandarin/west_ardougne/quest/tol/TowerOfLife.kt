@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol
 
+import content.data.Quests
+
 import core.api.hasLevelStat
 import core.api.rewardXP
 import core.api.sendItemOnInterface
@@ -9,10 +11,9 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
-class TowerOfLife : Quest(Quests.TOWER_OF_LIFE, 134, 133, 2, Vars.VARBIT_QUEST_TOWER_OF_LIFE_PROGRESS_3337, 0, 1, 18) {
+class TowerOfLife : Quest(Quests.TOWER_OF_LIFE) {
     override fun drawJournal(
         player: Player,
         stage: Int,

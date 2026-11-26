@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.inInventory
 import core.api.setQuestStage
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Charlie The Tramp dialogue.
@@ -79,10 +80,10 @@ class CharlieTheTrampDialogue(player: Player? = null) : Dialogue(player) {
             283 -> npcl(FaceAnim.FRIENDLY, "I also heard that Reldo the librarian knows more about them, go talk to him.").also { stage++ }
 
             284 -> {
-                if (!player.questRepository.hasStarted(Quests.SHIELD_OF_ARRAV)) {
-                    setQuestStage(player, Quests.SHIELD_OF_ARRAV, 50)
+                if (!player.questRepository.hasStarted(Quests.SHIELD_OF_ARRAV.questName)) {
+                    setQuestStage(player, Quests.SHIELD_OF_ARRAV.questName, 50)
                 } else if (!ShieldofArrav.isBlackArm(player) && !ShieldofArrav.isPhoenix(player)) {
-                    setQuestStage(player, Quests.SHIELD_OF_ARRAV, 50)
+                    setQuestStage(player, Quests.SHIELD_OF_ARRAV.questName, 50)
                 }
                 end()
             }

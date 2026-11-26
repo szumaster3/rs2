@@ -1,5 +1,7 @@
 package content.global.skill.slayer
 
+import content.data.Quests
+
 import content.global.skill.slayer.SlayerManager.Companion.getInstance
 import content.global.skill.slayer.SlayerMaster.Companion.forId
 import content.global.skill.slayer.SlayerMaster.Companion.hasSameTask
@@ -17,7 +19,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class SlayerMasterDialogue(player: Player? = null) : Dialogue(player) {
@@ -32,7 +33,7 @@ class SlayerMasterDialogue(player: Player? = null) : Dialogue(player) {
             npc = args[0] as NPC
         }
         master = forId(if (args[0] is NPC) (args[0] as NPC).id else args[0] as Int)
-        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
+        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM.questName)
 
         if (master == SlayerMaster.DURADEL) {
             if (isMaster(player, Skills.SLAYER)) {

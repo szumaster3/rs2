@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.plugin;
 
+import content.data.Quests;
+
 import content.global.skill.agility.AgilityHandler;
 import content.region.kandarin.gnome_stronghold.dialogue.GnomeGateGuardDialogue;
 import core.cache.def.impl.SceneryDefinition;
@@ -19,7 +21,6 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import shared.consts.Quests;
 import shared.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
@@ -53,7 +54,7 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
             case 9317:
                 final boolean scale = player.getLocation().getY() <= scenery.getLocation().getY();
                 final Location end = scenery.getLocation().transform(scale ? 3 : -3, scale ? 6 : -6, 0);
-                if (getQuestStage(player, Quests.THE_GRAND_TREE) == 55) {
+                if (getQuestStage(player, Quests.THE_GRAND_TREE.getQuestName()) == 55) {
                     sendDialogue(player, "You feel eyes upon you. It wouldn't be a good idea to enter this way right now.");
                     break;
                 }
@@ -101,7 +102,7 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
     }
 
     private void openGates(Player player, final Scenery scenery) {
-        if (inBorders(player, 2460, 3381, 2463, 3383) && getQuestStage(player, Quests.THE_GRAND_TREE) == 55) {
+        if (inBorders(player, 2460, 3381, 2463, 3383) && getQuestStage(player, Quests.THE_GRAND_TREE.getQuestName()) == 55) {
             openDialogue(player, new GnomeGateGuardDialogue());
         } else {
             if (scenery.getCharge() == 0) {

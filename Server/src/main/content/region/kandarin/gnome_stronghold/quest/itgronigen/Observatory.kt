@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.itgronigen
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -7,11 +9,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class Observatory : Quest(Quests.OBSERVATORY_QUEST, 96, 95, 2, Vars.VARP_QUEST_OBSERVATORY_QUEST_PROGRESS_112, 0, 1, 7)
+class Observatory : Quest(Quests.OBSERVATORY_QUEST)
 {
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

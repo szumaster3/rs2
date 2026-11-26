@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.book
 
+import content.data.Quests
+
 import content.global.plugins.item.books_and_scrolls.BookInterface
 import content.global.plugins.item.books_and_scrolls.BookLine
 import content.global.plugins.item.books_and_scrolls.Page
@@ -10,7 +12,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import shared.consts.Items
-import shared.consts.Quests
 
 class ShieldofArravBook : InteractionListener {
 
@@ -86,8 +87,8 @@ class ShieldofArravBook : InteractionListener {
         private fun display(player: Player, pageNum: Int, buttonID: Int): Boolean {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
             if (BookInterface.isLastPage(pageNum, CONTENTS.size)) {
-                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 10) {
-                    setQuestStage(player, Quests.SHIELD_OF_ARRAV, 20)
+                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) == 10) {
+                    setQuestStage(player, Quests.SHIELD_OF_ARRAV.questName, 20)
                 }
             }
             return true

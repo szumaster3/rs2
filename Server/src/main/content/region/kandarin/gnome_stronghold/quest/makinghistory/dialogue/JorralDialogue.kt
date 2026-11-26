@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.cutscene.OutpostHistoryCutscene
 import core.api.*
@@ -12,7 +14,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Jorral dialogue.
@@ -22,7 +23,7 @@ import shared.consts.Quests
 class JorralDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
+        val questStage = getQuestStage(player, Quests.MAKING_HISTORY.questName)
         val progress = getVarbit(player, MHUtils.PROGRESS)
         val dronProgress = getVarbit(player, MHUtils.DRON_PROGRESS)
 
@@ -60,7 +61,7 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
                 playerl(FaceAnim.FRIENDLY, "I've been to see the king and he gave me this letter.")
                 stage = 88
             }
-            isQuestComplete(player, Quests.MAKING_HISTORY) -> {
+            isQuestComplete(player, Quests.MAKING_HISTORY.questName) -> {
                 options("How's the outpost?", "Anything else I can help you with?")
                 stage = 94
             }
@@ -220,7 +221,7 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
             92 -> npcl(FaceAnim.FRIENDLY, "I can now continue with my plans for this place. Thank you.").also { stage++ }
             93 -> {
                 end()
-                finishQuest(player!!, Quests.MAKING_HISTORY)
+                finishQuest(player!!, Quests.MAKING_HISTORY.questName)
             }
 
             94 -> when (buttonID) {
@@ -243,7 +244,7 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
         getStatLevel(player, Skills.CRAFTING) >= 24 &&
                 getStatLevel(player, Skills.MINING) >= 40 &&
                 getStatLevel(player, Skills.SMITHING) >= 40 &&
-                isQuestComplete(player, Quests.PRIEST_IN_PERIL)
+                isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName)
 
     private fun checkProgress(player: Player) {
         if (getVarbit(player, MHUtils.ERIN_PROGRESS) == 4 &&

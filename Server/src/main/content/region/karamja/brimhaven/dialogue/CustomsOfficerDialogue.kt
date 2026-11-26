@@ -1,5 +1,7 @@
 package content.region.karamja.brimhaven.dialogue
 
+import content.data.Quests
+
 import content.global.travel.charter.CharterShip
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CustomsOfficerDialogue(player: Player? = null) : Dialogue(player) {
@@ -21,7 +22,7 @@ class CustomsOfficerDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (args.size > 1) {
-            if (player.getQuestRepository().isComplete(Quests.PIRATES_TREASURE)) {
+            if (player.getQuestRepository().isComplete(Quests.PIRATES_TREASURE.questName)) {
                 if (inInventory(player, Items.KARAMJAN_RUM_431)) {
                     npc(FaceAnim.HALF_THINKING,"Aha, trying to smuggle rum are we?").also { stage = 900 }
                     return true

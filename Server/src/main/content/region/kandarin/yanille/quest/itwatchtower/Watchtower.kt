@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,11 +10,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class Watchtower : Quest(Quests.WATCHTOWER, 131, 130, 4, Vars.VARP_QUEST_WATCHTOWER_PROGRESS_212, 0, 1, 13) {
+class Watchtower : Quest(Quests.WATCHTOWER, Vars.VARP_QUEST_WATCHTOWER_PROGRESS_212, 0, 1, 13) {
 
     private val evidences = intArrayOf(
         Items.FINGERNAILS_2384,

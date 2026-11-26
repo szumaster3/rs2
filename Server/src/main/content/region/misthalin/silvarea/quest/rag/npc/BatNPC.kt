@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.quest.rag.npc
 
+import content.data.Quests
+
 import core.api.isQuestInProgress
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -9,7 +11,6 @@ import core.game.node.item.Item
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class BatNPC : NPCBehavior(*BAT_NPC) {
     companion object {
@@ -23,7 +24,7 @@ class BatNPC : NPCBehavior(*BAT_NPC) {
     ) {
         super.onDropTableRolled(self, killer, drops)
 
-        if (killer is Player && isQuestInProgress(killer, Quests.RAG_AND_BONE_MAN, 1, 99)) {
+        if (killer is Player && isQuestInProgress(killer, Quests.RAG_AND_BONE_MAN.questName, 1, 99)) {
             if (RandomFunction.roll(4)) {
                 drops.add(Item(Items.BAT_WING_7833))
             }

@@ -19,7 +19,8 @@ class DiaryManager(val player: Player) {
         Diary(DiaryType.LUMBRIDGE),
         Diary(DiaryType.FALADOR),
         Diary(DiaryType.FREMENNIK),
-        Diary(DiaryType.SEERS_VILLAGE)
+        Diary(DiaryType.SEERS_VILLAGE),
+        Diary(DiaryType.ARDOUGNE)
     )
 
     /**
@@ -121,7 +122,7 @@ class DiaryManager(val player: Player) {
      * Checks if a diary is fully complete.
      */
     fun isComplete(type: DiaryType): Boolean =
-        diaries[type.ordinal].isComplete
+        getDiary(type)?.isComplete == true
 
     /**
      * Resets all diary rewards from inventory, bank, and equipment.

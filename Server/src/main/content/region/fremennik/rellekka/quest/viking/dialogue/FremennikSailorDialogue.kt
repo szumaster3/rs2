@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.addItemOrDrop
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Fremennik Sailor dialogue.
@@ -26,7 +27,7 @@ class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         when {
-            !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
+            !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npcl(FaceAnim.ANNOYED, "Don't talk to me outerlander. I need to fix this longboat. Go talk to the chieftain.").also { stage = END_DIALOGUE }
             }
 

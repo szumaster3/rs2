@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Thorval dialogue.
@@ -53,7 +54,7 @@ class ThorvaldDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 150
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 playerl(FaceAnim.HAPPY, "Howdy Thorvald!")
             }
 
@@ -62,7 +63,7 @@ class ThorvaldDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 160
             }
 
-            !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
+            !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npcl(FaceAnim.ANNOYED, "Leave me be, outerlander. I have nothing to say to the likes of you.").also { stage = END_DIALOGUE }
             }
 

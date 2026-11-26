@@ -1,12 +1,13 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Mourner (West) dialogue.
@@ -18,7 +19,7 @@ class MournerArdougneDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.MOURNER_718)
-        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             in 0..5 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
                 1 -> npcl(FaceAnim.NEUTRAL, "What are you up to with old man Edmond?").also { stage++ }

@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Skavid dialogue.
@@ -37,10 +38,10 @@ class SkavidDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val questStage = getQuestStage(player, Quests.WATCHTOWER)
+        val questStage = getQuestStage(player, Quests.WATCHTOWER.questName)
         when (stage) {
             0 -> {
-                if (getQuestStage(player, Quests.WATCHTOWER) < 25) {
+                if (getQuestStage(player, Quests.WATCHTOWER.questName) < 25) {
                     player(" ???")
                     sendMessage(player, "You don't know any skavid words yet!")
                     stage = END_DIALOGUE
@@ -67,25 +68,25 @@ class SkavidDialogue(player: Player? = null) : Dialogue(player) {
             2 -> {
                 npc(FaceAnim.OLD_DEFAULT, "Cur, cur tanath!")
                 sendMessage(player, "It seems the skavid understood you.")
-                setQuestStage(player, Quests.WATCHTOWER, 30)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 30)
                 stage = END_DIALOGUE
             }
             3 -> {
                 npc(FaceAnim.OLD_DEFAULT, "Ar, ar cur!")
                 sendMessage(player, "It seems the skavid understood you.")
-                setQuestStage(player, Quests.WATCHTOWER, 35)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 35)
                 stage = END_DIALOGUE
             }
             4 -> {
                 npc(FaceAnim.OLD_DEFAULT, "Ig! Bidth ig!")
                 sendMessage(player, "It seems the skavid understood you.")
-                setQuestStage(player, Quests.WATCHTOWER, 40)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 40)
                 stage = END_DIALOGUE
             }
             5 -> {
                 npc(FaceAnim.OLD_DEFAULT, "Nod, gor nod!")
                 sendMessage(player, "It seems the skavid understood you.")
-                setQuestStage(player, Quests.WATCHTOWER, 45)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 45)
                 stage = END_DIALOGUE
             }
             6 -> {
@@ -103,7 +104,7 @@ class SkavidDialogue(player: Player? = null) : Dialogue(player) {
             }
             9 -> {
                 sendItemDialogue(player, Items.CRYSTAL_2381, "The skavid gives you a large crystal.")
-                setQuestStage(player, Quests.WATCHTOWER, 50)
+                setQuestStage(player, Quests.WATCHTOWER.questName, 50)
             }
         }
         return true

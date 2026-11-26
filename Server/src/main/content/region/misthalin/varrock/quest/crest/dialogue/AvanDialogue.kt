@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.crest.plugin.FamilyCrestListener
 import core.api.getAttribute
 import core.api.setQuestStage
@@ -10,7 +12,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class AvanDialogue(player: Player? = null) : Dialogue(player) {
@@ -19,7 +20,7 @@ class AvanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST.questName) ?: -1
 
         if (qstage == 100) {
             options("Can you change my gauntlets for me?", "Nevermind.")
@@ -63,7 +64,7 @@ class AvanDialogue(player: Player? = null) : Dialogue(player) {
             13 -> npc("I thought I had found a solid lead on its whereabouts", "when I heard of a dwarf who is an expert", "on gold who goes by the name of 'Boot'.").also { stage++ }
             14 -> npc("Unfortunately he has apparently returned to this home,", "somewhere in the mountains,", "and I have no idea how to find him.").also { stage++ }
             15 -> player("Well, I'll see what I can do.").also {
-                setQuestStage(player, Quests.FAMILY_CREST, 14)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 14)
                 stage = 1000
             }
             100 -> player("I'm still after that 'perfect gold'.").also { stage++ }
@@ -77,7 +78,7 @@ class AvanDialogue(player: Player? = null) : Dialogue(player) {
             }
             201 -> npc("Well, I won't entrust you with my piece of the crest", "until you have brought me a necklace of perfect gold", "with a red precious stone, and a perfect gold ring to match.").also { stage = 1000 }
             300 -> sendDialogue("You hand Avan the perfect gold ring and necklace.").also {
-                setQuestStage(player, Quests.FAMILY_CREST, 16)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 16)
                 player.inventory.remove(Item(774), Item(773))
                 player.inventory.add(crestAvan)
                 stage++

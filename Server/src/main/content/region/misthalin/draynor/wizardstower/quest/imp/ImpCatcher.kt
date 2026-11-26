@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.wizardstower.quest.imp
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -7,11 +9,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class ImpCatcher : Quest(Quests.IMP_CATCHER, 21, 20, 1, Vars.VARP_QUEST_IMP_CATCHER_PROGRESS_160, 0, 1, 2) {
+class ImpCatcher : Quest(Quests.IMP_CATCHER) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

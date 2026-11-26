@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Lumbridge Guide dialogue.
@@ -17,8 +18,8 @@ import shared.consts.Quests
 class LumbridgeGuideDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val sheepShearerComplete = isQuestComplete(player, Quests.SHEEP_SHEARER)
-        val cooksAssistantComplete = isQuestComplete(player, Quests.COOKS_ASSISTANT)
+        val sheepShearerComplete = isQuestComplete(player, Quests.SHEEP_SHEARER.questName)
+        val cooksAssistantComplete = isQuestComplete(player, Quests.COOKS_ASSISTANT.questName)
 
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Greetings, adventurer. I am Phileas, the Lumbridge Guide. I am here to give information and directions to new players. Do you require any help?").also { stage++ }

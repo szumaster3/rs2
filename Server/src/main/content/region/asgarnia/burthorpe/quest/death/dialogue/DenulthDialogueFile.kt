@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.death.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -7,7 +9,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Denulth dialogue.
@@ -19,7 +20,7 @@ class DenulthDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.DENULTH_1060)
-        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU.questName)) {
             in 0..4 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Hello citizen, how can I help you?").also { stage++ }
@@ -54,7 +55,7 @@ class DenulthDialogueFile : DialogueFile() {
                 23 -> playerl(FaceAnim.SUSPICIOUS, "I'll get on it right away!").also { stage++ }
                 24 -> {
                     end()
-                    setQuestStage(player!!, Quests.DEATH_PLATEAU, 5)
+                    setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 5)
                 }
             }
 
@@ -102,7 +103,7 @@ class DenulthDialogueFile : DialogueFile() {
                 12 -> playerl(FaceAnim.FRIENDLY, "Thank you Denulth, I shall be back shortly!").also { stage++ }
                 13 -> {
                     end()
-                    setQuestStage(player!!, Quests.DEATH_PLATEAU, 23)
+                    setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 23)
                 }
             }
 
@@ -156,7 +157,7 @@ class DenulthDialogueFile : DialogueFile() {
                 10 -> npcl(FaceAnim.FRIENDLY, "You are now an honorary member of the Imperial Guard!").also { stage++ }
                 11 -> {
                     end()
-                    finishQuest(player!!, Quests.DEATH_PLATEAU)
+                    finishQuest(player!!, Quests.DEATH_PLATEAU.questName)
                 }
             }
         }

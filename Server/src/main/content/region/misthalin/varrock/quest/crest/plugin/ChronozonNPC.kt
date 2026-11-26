@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest.plugin
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendMessage
 import core.api.setQuestStage
@@ -10,7 +12,6 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class ChronozonNPC(id: Int, location: Location) : AbstractNPC(id, location) {
 
@@ -80,8 +81,8 @@ class ChronozonNPC(id: Int, location: Location) : AbstractNPC(id, location) {
         val target = targetPlayer
 
         if (player != null && player == target) {
-            if (getQuestStage(player, Quests.FAMILY_CREST) != 20) {
-                setQuestStage(player, Quests.FAMILY_CREST, 20)
+            if (getQuestStage(player, Quests.FAMILY_CREST.questName) != 20) {
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 20)
             }
         }
 

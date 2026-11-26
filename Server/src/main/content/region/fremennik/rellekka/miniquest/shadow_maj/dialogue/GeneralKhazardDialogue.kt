@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.miniquest.shadow_maj.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.miniquest.shadow_maj.GeneralShadow
 import core.api.*
 import core.api.isQuestComplete
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the General Khazard dialogue.
@@ -45,7 +46,7 @@ private class GeneralKhazardDialogueFile: DialogueFile() {
                 }
 
                 // Check requirements and start the mini-quest.
-                if (hasWeapon != null || hasShield != null || !GeneralShadow.hasGhostlySet(player!!) || !isQuestComplete(player!!, Quests.FIGHT_ARENA)) {
+                if (hasWeapon != null || hasShield != null || !GeneralShadow.hasGhostlySet(player!!) || !isQuestComplete(player!!, Quests.FIGHT_ARENA.questName)) {
                     npc(FaceAnim.OLD_DISTRESSED2, "You can see into the Shadow Realm and yet you are", "not of it. Oh well, you will be of no use.")
                     stage = END_DIALOGUE
                 }

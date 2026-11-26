@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.api.updateQuestTab
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Veronica (Draynor Mansion) dialogue.
@@ -19,7 +20,7 @@ class VeronicaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN.questName)) {
             0 -> {
                 npc(FaceAnim.HALF_ASKING, "Can you please help me? I'm in a terrible spot of", "trouble.")
                 stage = 0
@@ -44,7 +45,7 @@ class VeronicaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN)) {
+        when (getQuestStage(player, Quests.ERNEST_THE_CHICKEN.questName)) {
             0 -> when (stage) {
                 0 -> {
                     options("Aha, sounds like a quest. I'll help.", "No, I'm looking for something to kill.")
@@ -103,7 +104,7 @@ class VeronicaDialogue(player: Player? = null) : Dialogue(player) {
 
                 8 -> {
                     npc(FaceAnim.HALF_GUILTY, "Thank you, thank you. I'm very grateful.")
-                    setQuestStage(player, Quests.ERNEST_THE_CHICKEN, 10)
+                    setQuestStage(player, Quests.ERNEST_THE_CHICKEN.questName, 10)
                     updateQuestTab(player)
                     stage = 9
                 }

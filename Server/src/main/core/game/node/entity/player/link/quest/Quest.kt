@@ -1,6 +1,8 @@
 package core.game.node.entity.player.link.quest
 
 import core.api.*
+import content.data.Quests
+import core.cache.def.impl.QuestDefinition
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.plugin.Plugin
@@ -14,10 +16,16 @@ import shared.consts.Components
  */
 @PluginManifest(type = PluginType.QUEST)
 abstract class Quest(
-    val name: String, val index: Int, val buttonId: Int, val questPoints: Int, vararg configs: Int
+    val index: Int, vararg configs: Int
 ) : Plugin<Any> {
 
+    constructor(quest: Quests, vararg configs: Int) : this(quest.id, *configs)
+
     val configs: IntArray = configs
+
+    val definition: QuestDefinition by lazy { checkNotNull(QuestDefinition.forId(index)) { "Missing cache quest definition $index" } }
+    val name: String get() = definition.let { checkNotNull(it.name) }
+    val questPoints: Int get() = definition.questPoints
 
     companion object {
         const val RED = core.tools.DARK_RED
@@ -153,6 +161,13 @@ abstract class Quest(
      * @return The config data.
      */
     open fun getConfig(player: Player, stage: Int): IntArray {
+        if (configs.isEmpty()) {
+            val def = checkNotNull(definition) { "Missing cache quest definition for $name" }
+            val progress = (def.varps + def.varbits).single()
+            val value = if (stage == 0) 0 else if (stage >= 100) progress.completed else progress.started
+            return if (def.varbits.isNotEmpty()) intArrayOf(0, progress.variable, value)
+            else intArrayOf(progress.variable, value)
+        }
         if (configs.size < 4) {
             throw IndexOutOfBoundsException(
                 "Quest -> $name configs array length was not valid. config length = ${configs.size}!"
@@ -213,5 +228,5 @@ abstract class Quest(
     open fun hasRequirements(player: Player): Boolean = true
 
     override fun toString(): String =
-        "Quest [name=$name, index=$index, buttonId=$buttonId, questPoints=$questPoints, configs=${configs.contentToString()}]"
+        "Quest [name=$name, index=$index, questPoints=$questPoints, configs=${configs.contentToString()}]"
 }

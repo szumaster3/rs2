@@ -1,5 +1,7 @@
 package content.region.asgarnia.rimmington.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.falador.diary.dialogue.ChemistDiaryDialogue
 import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.ChemistBiohazardQuestDialogue
 import core.api.*
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Chemist dialogue.
@@ -23,7 +24,7 @@ class ChemistDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         setTitle(player, 4)
-        if (!isQuestComplete(player, Quests.BIOHAZARD) && isQuestInProgress(player, Quests.BIOHAZARD, 10, 99)) {
+        if (!isQuestComplete(player, Quests.BIOHAZARD.questName) && isQuestInProgress(player, Quests.BIOHAZARD.questName, 10, 99)) {
             sendOptions(player, "Do you want to talk about lamps?", "Yes.", "Your quest.", "Impling jars.", "Falador Achievement Diary.").also { stage = 1 }
         } else {
             sendOptions(player, "Do you want to talk about lamps?", "Yes.", "No.", "Impling jars.", "Falador Achievement Diary.")

@@ -1,5 +1,7 @@
 package content.region.karamja.plugin
 
+import content.data.Quests
+
 import content.data.skill.SkillingTool
 import content.global.skill.agility.AgilityHandler
 import core.api.*
@@ -489,7 +491,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
             ) {
                 addItemOrDrop(player, Items.SEALED_POT_11777)
                 setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 50)
-                setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 7)
+                setQuestStage(player, Quests.BACK_TO_MY_ROOTS.questName, 7)
             }
 
 

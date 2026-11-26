@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import core.api.getQuestStage
 import core.api.getVarbit
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Blanin dialogue.
@@ -20,7 +21,7 @@ import shared.consts.Quests
 class BlaninDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
+        val questStage = getQuestStage(player, Quests.MAKING_HISTORY.questName)
         val dronProgress = getVarbit(player, MHUtils.DRON_PROGRESS)
 
         when {

@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.cutscene
 
+import content.data.Quests
+
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Underground cutscene.
@@ -116,7 +117,7 @@ class UndergroundCutscene(player: Player) : Cutscene(player) {
 
             14 -> {
                 end {
-                    setQuestStage(player, Quests.PLAGUE_CITY, 7)
+                    setQuestStage(player, Quests.PLAGUE_CITY.questName, 7)
                 }
             }
         }

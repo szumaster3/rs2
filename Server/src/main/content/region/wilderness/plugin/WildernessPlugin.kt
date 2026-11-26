@@ -1,5 +1,7 @@
 package content.region.wilderness.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.wilderness.dialogue.CapeMerchantDialogue
 import content.region.wilderness.dialogue.FatTonyDialogue
@@ -11,6 +13,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.node.entity.player.link.warning.WarningManager
@@ -172,7 +175,7 @@ class WildernessPlugin : InteractionListener {
         }
 
         on(Scenery.TRAPDOOR_39188, IntType.SCENERY, "open") { player, _ ->
-            if (!hasRequirement(player, Quests.DEFENDER_OF_VARROCK)) return@on false
+            if (!hasRequirement(player, Quests.DEFENDER_OF_VARROCK.questName)) return@on false
             ClimbActionHandler.climb(
                 player,
                 ClimbActionHandler.CLIMB_DOWN,
@@ -257,7 +260,9 @@ class WildernessPlugin : InteractionListener {
                         sendMessage(player!!, "You pull the lever...")
                         queueScript(player!!, 1, QueueStrength.NORMAL) {
                             if (!hasTimerActive(player!!, GameAttributes.TELEBLOCK_TIMER)) {
-                                teleport(player!!, Location(3154, 3923, 0))
+                                if (teleport(player!!, Location(3154, 3923, 0))) {
+                                    finishDiaryTask(player!!, DiaryType.ARDOUGNE, 1, 1)
+                                }
                                 sendMessage(player!!, "...And teleport into the wilderness.", 5)
                             } else {
                                 sendMessage(player!!, "A magical force has stopped you from teleporting.")

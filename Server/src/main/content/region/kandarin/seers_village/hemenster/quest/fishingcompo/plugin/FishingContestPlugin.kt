@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.hemenster.quest.fishingcompo.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -32,7 +34,7 @@ class FishingContestPlugin : InteractionListener {
          */
 
         on(TUNNEL_STAIRS, IntType.SCENERY, "climb-down") { player, node ->
-            if (!isQuestComplete(player, Quests.FISHING_CONTEST)) {
+            if (!isQuestComplete(player, Quests.FISHING_CONTEST.questName)) {
                 when (node.id) {
                     Scenery.STAIRS_55 -> Repository.findNPC(NPCs.VESTRI_3679)?.let {
                         openDialogue(player, NPCs.VESTRI_3679, it)
@@ -106,7 +108,7 @@ class FishingContestPlugin : InteractionListener {
          */
 
         on(NPCs.BONZO_225, IntType.NPC, "pay") { player, node ->
-            if(getQuestStage(player, Quests.FISHING_CONTEST) >= 20) {
+            if(getQuestStage(player, Quests.FISHING_CONTEST.questName) >= 20) {
                 sendMessage(player, "You've already won the Fishing Competition and don't need to enter again.")
                 return@on true
             }

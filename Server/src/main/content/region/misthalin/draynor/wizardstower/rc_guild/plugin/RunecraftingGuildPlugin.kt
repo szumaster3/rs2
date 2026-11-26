@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.wizardstower.rc_guild.plugin
 
+import content.data.Quests
+
 import content.global.skill.runecrafting.item.Talisman
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -152,7 +154,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
                 sendDialogue(player, "You require $MIN_RC_LEVEL Runecrafting to enter the Runecrafters' Guild.")
                 return@on true
             }
-            if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+            if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                 sendDialogue(player, "You need to complete Rune Mysteries to enter the Runecrafting guild.")
                 return@on true
             }

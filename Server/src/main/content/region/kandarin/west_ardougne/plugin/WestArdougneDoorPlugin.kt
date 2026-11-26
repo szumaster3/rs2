@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.global.action.DoorActionHandler
@@ -14,7 +16,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Sounds
 
 /**
@@ -41,7 +42,7 @@ class WestArdougneDoorPlugin : OptionHandler() {
         val door = node as? Scenery ?: return false
         val pairedDoor = DoorActionHandler.getSecondDoor(door)
 
-        if (!isQuestComplete(player, Quests.BIOHAZARD)) {
+        if (!isQuestComplete(player, Quests.BIOHAZARD.questName)) {
             sendMessage(player, "You try to open the large wooden doors...")
             sendMessage(player, "...But they will not open.", 1)
             if (player.location.x > 2557) {

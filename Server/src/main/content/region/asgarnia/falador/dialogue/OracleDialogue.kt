@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -8,7 +10,6 @@ import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Oracle dialogue for the Dragon Slayer quest.
@@ -16,7 +17,7 @@ import shared.consts.Quests
 @Initializable
 class OracleDialogue(player: Player? = null) : Dialogue(player) {
 
-    private val quest: Quest? = player?.getQuestRepository()?.getQuest(Quests.DRAGON_SLAYER)
+    private val quest: Quest? = player?.getQuestRepository()?.getQuest(Quests.DRAGON_SLAYER.questName)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC

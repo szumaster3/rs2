@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.vampire.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.game.dialogue.DialogueFile
@@ -7,14 +9,13 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MorganVampireDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.MORGAN_755)
-        val questStage = getQuestStage(player!!, Quests.VAMPIRE_SLAYER)
+        val questStage = getQuestStage(player!!, Quests.VAMPIRE_SLAYER.questName)
         when (stage) {
-            0 -> if (!isQuestComplete(player!!, Quests.VAMPIRE_SLAYER) || questStage == 10 || questStage == 20 || questStage == 30) {
+            0 -> if (!isQuestComplete(player!!, Quests.VAMPIRE_SLAYER.questName) || questStage == 10 || questStage == 20 || questStage == 30) {
                 npc(FaceAnim.HALF_GUILTY, "How are you doing with the quest?").also { stage = 10 }
             } else {
                 player(FaceAnim.HALF_GUILTY, "I have slain the foul creature!").also { stage = 101 }

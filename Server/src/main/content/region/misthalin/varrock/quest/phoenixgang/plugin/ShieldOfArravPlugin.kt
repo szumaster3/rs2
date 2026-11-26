@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.phoenixgang.plugin
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.*
 import core.cache.def.impl.ItemDefinition
@@ -21,7 +23,6 @@ import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.plugin.Plugin
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class ShieldOfArravPlugin : OptionHandler() {
     @Throws(Throwable::class)
@@ -82,7 +83,7 @@ class ShieldOfArravPlugin : OptionHandler() {
             2401 ->
                 when (option) {
                     "search" -> {
-                        if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 70 && ShieldofArrav.isBlackArm(player)) {
+                        if (getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) == 70 && ShieldofArrav.isBlackArm(player)) {
                             if (!player.inventory.containsItem(ShieldofArrav.BLACKARM_SHIELD) &&
                                 !player.bank.containsItem(ShieldofArrav.BLACKARM_SHIELD)
                             ) {
@@ -129,7 +130,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                     "close" -> SceneryBuilder.replace(node as Scenery, node.transform(2403))
 
                     "search" -> {
-                        if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 70 && ShieldofArrav.isPhoenix(player)) {
+                        if (getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) == 70 && ShieldofArrav.isPhoenix(player)) {
                             if (!inBank(player, ShieldofArrav.PHOENIX_SHIELD.id) &&
                                 !inInventory(player, ShieldofArrav.PHOENIX_SHIELD.id)
                             ) {
@@ -147,7 +148,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                 }
 
             2398 -> {
-                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 60 &&
+                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) == 60 &&
                     ShieldofArrav.isBlackArmMission(player) &&
                     !inInventory(
                         player,
@@ -155,7 +156,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                     )
                 ) {
                     sendDialogue(player, "This is the door to the weapon stash you were looking for...")
-                } else if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 60 && inInventory(player, ShieldofArrav.KEY.id)) {
+                } else if (getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) == 60 && inInventory(player, ShieldofArrav.KEY.id)) {
                     DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
                 } else {
                     sendMessage(player, "The door is securely locked.")
@@ -180,7 +181,7 @@ class ShieldOfArravPlugin : OptionHandler() {
             }
 
             2402 -> {
-                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 10 &&
+                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) == 10 &&
                     !inInventory(player, ShieldofArrav.BOOK.id) &&
                     !inBank(
                         player,

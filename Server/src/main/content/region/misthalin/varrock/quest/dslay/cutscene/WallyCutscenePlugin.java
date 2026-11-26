@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay.cutscene;
 
+import content.data.Quests;
+
 import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
 import core.game.node.entity.player.Player;
@@ -11,7 +13,6 @@ import core.net.packet.out.Encoders530;
 import core.net.packet.out.PacketContext.CameraContext;
 import shared.consts.Music;
 import shared.consts.NPCs;
-import shared.consts.Quests;
 
 import static core.api.ContentAPIKt.playJingle;
 
@@ -58,7 +59,7 @@ public class WallyCutscenePlugin extends CutscenePlugin {
     @Override
     public void fade() {
         playJingle(player, Music.WALLY_CUTSCENE_196);
-        player.getQuestRepository().getQuest(Quests.DEMON_SLAYER).start(player);
+        player.getQuestRepository().getQuest(Quests.DEMON_SLAYER.getQuestName()).start(player);
         player.getDialogueInterpreter().open(NPCs.GYPSY_ARIS_882, Repository.findNPC(NPCs.GYPSY_ARIS_882), this);
     }
 

@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Father Lawrence dialogue.
@@ -18,11 +19,11 @@ class FatherLawrenceDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player!!, Quests.ROMEO_JULIET) < 30) {
+        if (getQuestStage(player!!, Quests.ROMEO_JULIET.questName) < 30) {
             npc(FaceAnim.HALF_GUILTY, "Oh to be a father in the times of whiskey.")
             stage = 0
         }
-        when (getQuestStage(player!!, Quests.ROMEO_JULIET)) {
+        when (getQuestStage(player!!, Quests.ROMEO_JULIET.questName)) {
             30 -> {
                 npc("...and let Saradomin light the way for you...", "Urgh!")
                 stage = 41
@@ -52,7 +53,7 @@ class FatherLawrenceDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
+        val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET.questName)
         when (stage) {
             0 -> {
                 npc(FaceAnim.HALF_GUILTY, "I sing and I drink and I wake up in gutters.")
@@ -144,7 +145,7 @@ class FatherLawrenceDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             55 -> {
-                setQuestStage(player!!, Quests.ROMEO_JULIET, 40)
+                setQuestStage(player!!, Quests.ROMEO_JULIET.questName, 40)
                 end()
             }
 

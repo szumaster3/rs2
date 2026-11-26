@@ -1,5 +1,7 @@
 package content.region.karamja.brimhaven.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.hero.HeroesQuest
 import core.api.getAttribute
 import core.api.getQuestStage
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Grubor dialogue.
@@ -51,11 +52,11 @@ class GruborDialogueFile : DialogueFile() {
         when (stage) {
             START_DIALOGUE -> {
                 stage = when {
-                    getQuestStage(player!!, Quests.HEROES_QUEST) >= 2 &&
+                    getQuestStage(player!!, Quests.HEROES_QUEST.questName) >= 2 &&
                             getAttribute(player!!, HeroesQuest.attributeGruborLetsYouIn, false) &&
                             HeroesQuest.isBlackArm(player!!) -> 1
 
-                    getQuestStage(player!!, Quests.HEROES_QUEST) >= 2 &&
+                    getQuestStage(player!!, Quests.HEROES_QUEST.questName) >= 2 &&
                             !getAttribute(player!!, HeroesQuest.attributeGruborLetsYouIn, false) &&
                             HeroesQuest.isBlackArm(player!!) -> 10
 

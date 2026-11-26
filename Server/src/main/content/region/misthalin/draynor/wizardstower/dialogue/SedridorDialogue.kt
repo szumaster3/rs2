@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.wizardstower.dialogue
 
+import content.data.Quests
+
 import content.global.travel.EssenceTeleport.teleport
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -13,7 +15,6 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class SedridorDialogue(player: Player? = null) : Dialogue(player) {
@@ -25,7 +26,7 @@ class SedridorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = getQuestStage(player, Quests.RUNE_MYSTERIES)
+        val quest = getQuestStage(player, Quests.RUNE_MYSTERIES.questName)
         when (stage) {
             0 -> {
                 if (quest == 100) {
@@ -350,7 +351,7 @@ class SedridorDialogue(player: Player? = null) : Dialogue(player) {
                     if (!player.inventory.add(Item(TALISMAN))) {
                         GroundItemManager.create(GroundItem(Item(TALISMAN), player.location, player))
                     }
-                    finishQuest(player, Quests.RUNE_MYSTERIES)
+                    finishQuest(player, Quests.RUNE_MYSTERIES.questName)
                     player.getQuestRepository().syncronizeTab(player)
                 }
                 end()
@@ -507,7 +508,7 @@ class SedridorDialogue(player: Player? = null) : Dialogue(player) {
 
             51 ->
                 if (removeItem(player, Item(TALISMAN))) {
-                    setQuestStage(player, Quests.RUNE_MYSTERIES, 20)
+                    setQuestStage(player, Quests.RUNE_MYSTERIES.questName, 20)
                     npc("Wow! This is... incredible!")
                     stage = 52
                 }
@@ -624,7 +625,7 @@ class SedridorDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             74 -> {
-                setQuestStage(player, Quests.RUNE_MYSTERIES, 30)
+                setQuestStage(player, Quests.RUNE_MYSTERIES.questName, 30)
                 npc("Best of luck with your quest, " + player.username + ".")
                 if (!player.inventory.add(Item(PACKAGE))) {
                     GroundItemManager.create(GroundItem(Item(PACKAGE), player.location, player))

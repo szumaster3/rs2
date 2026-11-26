@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.quest.fortress
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.asgarnia.falador.quest.fortress.dialogue.SirAmikVarzeDialogue
 import core.api.drawReward
@@ -10,11 +12,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.plugin.ClassScanner.definePlugins
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class BlackKnightsFortress : Quest(Quests.BLACK_KNIGHTS_FORTRESS, 14, 13, 3, Vars.VARP_QUEST_BLACK_KNIGHTS_FORTRESS_PROGRESS_130, 0, 1, 4) {
+class BlackKnightsFortress : Quest(Quests.BLACK_KNIGHTS_FORTRESS) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

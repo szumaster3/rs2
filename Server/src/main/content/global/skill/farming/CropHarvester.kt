@@ -6,6 +6,7 @@ import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -109,7 +110,11 @@ class CropHarvester : OptionHandler() {
                     playAudio(player, sound)
 
                     delay = 2
-                    addItem(player, reward.id)
+                    if (!addItem(player, reward.id)) return true
+                    if (plantable == Plantable.WATERMELON_SEED &&
+                        patch.patch in arrayOf(FarmingPatch.ARDOUGNE_ALLOTMENT_N, FarmingPatch.ARDOUGNE_ALLOTMENT_S)) {
+                        finishDiaryTask(player, DiaryType.ARDOUGNE, 1, 5)
+                    }
                     rewardXP(player, Skills.FARMING, plantable.harvestXP)
                     if (patch.patch.type in livesBased) {
                         patch.rollLivesDecrement(

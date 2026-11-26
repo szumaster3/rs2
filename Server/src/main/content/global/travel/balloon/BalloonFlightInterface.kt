@@ -1,12 +1,13 @@
 package content.global.travel.balloon
 
+import content.data.Quests
+
 import core.Util.random
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.system.command.Privilege
 import shared.consts.Components
-import shared.consts.Quests
 
 class BalloonFlightInterface : InterfaceListener, Commands {
 
@@ -160,7 +161,7 @@ class BalloonFlightInterface : InterfaceListener, Commands {
             usage = "::finbal",
             description = "Enable balloon traveling."
         ) { player, _ ->
-            finishQuest(player, Quests.ENLIGHTENED_JOURNEY)
+            finishQuest(player, Quests.ENLIGHTENED_JOURNEY.questName)
         }
     }
 

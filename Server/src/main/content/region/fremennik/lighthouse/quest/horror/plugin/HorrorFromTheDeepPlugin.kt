@@ -1,5 +1,7 @@
 package content.region.fremennik.lighthouse.quest.horror.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.lighthouse.quest.horror.dialogue.JossikLighthouseDialogue
 import content.region.fremennik.lighthouse.quest.horror.dialogue.StrangeWallDialogue
@@ -56,10 +58,10 @@ class HorrorFromTheDeepPlugin : InteractionListener {
          */
 
         on(Scenery.IRON_LADDER_4383, IntType.SCENERY, "climb") { player, _ ->
-            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP)
+            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName)
             val teleportLocation =
                 when {
-                    isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP) -> Location(2519, 9994, 1)
+                    isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP.questName) -> Location(2519, 9994, 1)
                     questStage >= 40 -> Location(2519, 4618, 1)
                     else -> null
                 }
@@ -82,10 +84,10 @@ class HorrorFromTheDeepPlugin : InteractionListener {
          */
 
         on(Scenery.DOORWAY_4577, IntType.SCENERY, "walk-through") { player, node ->
-            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP)
+            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName)
 
             when {
-                isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP) -> {
+                isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP.questName) -> {
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 }
 
@@ -99,7 +101,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
                             override fun pulse(): Boolean {
                                 if (insideLighthouse) {
                                     sendMessage(player, "You unlock the Lighthouse front door.")
-                                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 30)
+                                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName, 30)
                                 }
                                 runTask(player, 3) { teleport(player, teleportLocation) }
                                 return true
@@ -161,7 +163,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
             }
             if (removeItem(player, used.id)) {
                 replaceScenery(with.asScenery(), Scenery.LIGHTING_MECHANISM_4587, 80)
-                setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 40)
+                setQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName, 40)
                 setVarbit(player, repairedVarbit, 1, true)
                 sendMessage(player, "You use the molten glass to repair the lens.")
                 sendMessage(player, "You have managed to repair the lighthouse torch!")
@@ -198,7 +200,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
          */
 
         on(strangeDoors, IntType.SCENERY, "open") { player, node ->
-            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP)
+            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName)
             if (questStage >= 50) {
                 val leftWallID = Scenery.STRANGE_WALL_4546
                 if (node.id == leftWallID) {
@@ -209,8 +211,8 @@ class HorrorFromTheDeepPlugin : InteractionListener {
 
                 playAudio(player, 1626)
                 playAudio(player, Sounds.STRANGEDOOR_CLOSE_1625, 3)
-                if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
-                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 55)
+                if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP.questName)) {
+                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName, 55)
                     removeAttribute(player, GameAttributes.QUEST_HFTD_STRANGE_WALL_DISCOVER)
                 }
                 return@on true
@@ -227,7 +229,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.PLANK_960, *brokenBridge) { player, _, bridge ->
-            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP)
+            val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName)
             val bridgeUnlocked = getAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, 0)
 
             val isFirstHalf = bridge.id == Scenery.BROKEN_BRIDGE_4615
@@ -270,7 +272,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
                 queueScript(player, 3, QueueStrength.SOFT) {
                     animate(player, Animations.SMITH_HAMMER_898)
                     setAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, newUnlockValue)
-                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, newQuestStage)
+                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName, newQuestStage)
                     sendDialogue(player, message)
                     sendMessage(player, message)
                     return@queueScript stopExecuting(player)

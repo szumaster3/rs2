@@ -1,5 +1,7 @@
 package content.region.karamja.shilo_village.npc
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.hero.HeroesQuest
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -15,7 +17,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class GripNPC : NPCBehavior(NPCs.GRIP_792) {
 
@@ -39,8 +40,8 @@ class GripNPC : NPCBehavior(NPCs.GRIP_792) {
 
     override fun onDeathFinished(self: NPC, killer: Entity) {
         if (killer is Player) {
-            if (getQuestStage(killer, Quests.HEROES_QUEST) == 4) {
-                setQuestStage(killer, Quests.HEROES_QUEST, 5)
+            if (getQuestStage(killer, Quests.HEROES_QUEST.questName) == 4) {
+                setQuestStage(killer, Quests.HEROES_QUEST.questName, 5)
                 val gi = GroundItemManager.create(GroundItem(Item(Items.GRIPS_KEY_RING_1588), self.location, killer),)
                 gi!!.forceVisible = true
                 gi.isRemainPrivate = false

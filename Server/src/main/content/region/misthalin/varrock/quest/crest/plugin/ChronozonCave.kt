@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest.plugin
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.hasAnItem
 import core.game.node.entity.Entity
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class ChronozonCave : MapZone("FC_Chronozon_Zone", true), Plugin<Unit> {
@@ -28,7 +29,7 @@ class ChronozonCave : MapZone("FC_Chronozon_Zone", true), Plugin<Unit> {
     override fun enter(e: Entity): Boolean {
         if (!e.isPlayer) return true
         val player = e as Player
-        val stage = getQuestStage(player, Quests.FAMILY_CREST)
+        val stage = getQuestStage(player, Quests.FAMILY_CREST.questName)
         val crestPart = hasAnItem(player, Items.CREST_PART_781).container != null
         val shouldSpawn = stage in 19..99 && !crestPart
 

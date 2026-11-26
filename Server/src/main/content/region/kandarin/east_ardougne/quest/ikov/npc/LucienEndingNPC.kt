@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov.npc
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.Entity
@@ -11,7 +13,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class LucienEndingNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -37,8 +38,8 @@ class LucienEndingNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
                         when (stage) {
                             0 -> npcl("You have defeated me for now! I shall reappear in the North!").also { stage++ }
                             1 -> end().also {
-                                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 6) {
-                                    finishQuest(player, Quests.TEMPLE_OF_IKOV)
+                                if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) == 6) {
+                                    finishQuest(player, Quests.TEMPLE_OF_IKOV.questName)
                                 }
                             }
                         }

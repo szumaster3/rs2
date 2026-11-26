@@ -1,11 +1,12 @@
 package content.global.skill.thieving.blackjack
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
-import shared.consts.Quests
 
 class BlackjackListener : InteractionListener {
 
@@ -33,5 +34,5 @@ class BlackjackListener : InteractionListener {
     }
 
     private fun canBlackjack(player: Player): Boolean =
-        player.rights == Rights.ADMINISTRATOR || hasRequirement(player, Quests.THE_FEUD)
+        player.rights == Rights.ADMINISTRATOR || hasRequirement(player, Quests.THE_FEUD.questName)
 }

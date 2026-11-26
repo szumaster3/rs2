@@ -1,12 +1,13 @@
 package content.region.asgarnia.falador.plugin.temple_knights
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.shops.Shops
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Sir Vyvin dialogue.
@@ -26,7 +27,7 @@ class SirVyvinDialogue: DialogueFile() {
             // Trade.
             10 -> {
                 when {
-                    !hasRequirement(player!!, Quests.WANTED) -> npc("No, I'm sorry.").also { stage = END_DIALOGUE }
+                    !hasRequirement(player!!, Quests.WANTED.questName) -> npc("No, I'm sorry.").also { stage = END_DIALOGUE }
                     rank == WhiteKnightsRank.UNRANKED -> {
                         npcl(FaceAnim.NEUTRAL,"Well, maybe I do, but you need to prove yourself worthy as a White Knight before I will sell you anything.")
                         stage++

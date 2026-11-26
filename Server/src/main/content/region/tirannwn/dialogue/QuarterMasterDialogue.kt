@@ -1,5 +1,7 @@
 package content.region.tirannwn.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.openNpcShop
 import core.api.sendMessage
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Quarter master dialogue.
@@ -37,7 +38,7 @@ class QuarterMasterDialogue(player: Player? = null) : Dialogue(player) {
             2 -> when (buttonId) {
                 1 -> {
                     end()
-                    if (hasRequirement(player, Quests.REGICIDE, false)) {
+                    if (hasRequirement(player, Quests.REGICIDE.questName, false)) {
                         openNpcShop(player, NPCs.QUARTERMASTER_1208)
                     } else {
                         sendMessage(player, "You need to have completed Regicide Quest to access this shop.")

@@ -1,5 +1,7 @@
 package content.global.skill.smithing.smelt
 
+import content.data.Quests
+
 import content.global.skill.crafting.CraftingDefinition
 import content.global.skill.smithing.bar.BarItem
 import core.api.*
@@ -55,8 +57,8 @@ class SmeltingPlugin : InteractionListener {
         onUseWith(IntType.SCENERY, Items.STEEL_BAR_2353, *CraftingDefinition.FURNACES) { player, _, _ ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
-            if (!isQuestComplete(player, Quests.DWARF_CANNON)) {
-                sendDialogue(player, "You need to complete the ${Quests.DWARF_CANNON} quest in order to do this.")
+            if (!isQuestComplete(player, Quests.DWARF_CANNON.questName)) {
+                sendDialogue(player, "You need to complete the ${Quests.DWARF_CANNON.questName} quest in order to do this.")
                 return@onUseWith true
             }
 

@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -8,14 +10,13 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (npc.id) {
-            5001 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            5001 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 40 -> npc("Yeah, what do you want?")
                 50, 51, 52, 53, 54 -> stage = if (player.inventory.containsItem(TouristTrap.TENTI_PINEAPPLE)) {
                     player("Hey... I have something for you!")
@@ -40,7 +41,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                 else -> npc("What are you looking at?")
             }
 
-            else -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            else -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 else -> npc("What are you looking at?")
             }
         }
@@ -49,7 +50,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
-            5001 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            5001 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 51, 52, 53, 54 -> when (stage) {
                     0 -> {
                         interpreter.sendItemMessage(
@@ -60,7 +61,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     1 -> if (player.inventory.remove(TouristTrap.TENTI_PINEAPPLE)) {
-                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 60)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 60)
                         npc(
                             "Great! Just what I've been looking for! Mmmmmmm...",
                             "Delicious! This is so nice! Mmmmm, *SLURP*",
@@ -98,7 +99,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     1 -> if (player.inventory.remove(TouristTrap.TENTI_PINEAPPLE)) {
-                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 60)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 60)
                         npc(
                             "Great! Just what I've been looking for! Mmmmmmm...",
                             "Delicious!! This is so nice! Mmmmm, *SLURP*",
@@ -183,7 +184,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     10 -> {
-                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 50)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 50)
                         end()
                     }
                 }
@@ -215,7 +216,7 @@ class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
                 else -> end()
             }
 
-            else -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            else -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 else -> end()
             }
         }

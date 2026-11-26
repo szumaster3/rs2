@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.falador.diary.dialogue.SquireDiaryDialogue
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -14,7 +16,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Squire (Falador) dialogue.
@@ -33,7 +34,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
         if ((stage == -1 && buttonId == 2) || Diary.canReplaceReward(player, DiaryType.FALADOR, 2)) {
             openDialogue(player, SquireDiaryDialogue(), npc)
         } else {
-            when (getQuestStage(player, Quests.THE_KNIGHTS_SWORD)) {
+            when (getQuestStage(player, Quests.THE_KNIGHTS_SWORD.questName)) {
                 100 -> when (stage) {
                    -1 -> npc("Hello friend! Many thanks for all of your help! Vyvin", "never even realised it was a different sword, and I still", "have my job!").also { stage = END_DIALOGUE }
                 }
@@ -48,7 +49,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                     3 -> sendDialogue(player!!, "You give the sword to the squire.").also { stage++ }
                     4 -> {
                         if (removeItem(player, Item(Items.BLURITE_SWORD_667))) {
-                            finishQuest(player, Quests.THE_KNIGHTS_SWORD)
+                            finishQuest(player, Quests.THE_KNIGHTS_SWORD.questName)
                             end()
                         }
                     }
@@ -72,7 +73,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                     2 -> player("Ok, I'll try to get that then.").also { stage++ }
                     3 -> npc("Please don't let him catch you! He MUSTN'T know", "what happened!").also { stage++ }
                     4 -> {
-                        setQuestStage(player, Quests.THE_KNIGHTS_SWORD, 50)
+                        setQuestStage(player, Quests.THE_KNIGHTS_SWORD.questName, 50)
                         end()
                     }
                 }
@@ -121,7 +122,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
                     164 -> npc("Oh man... I'm in such trouble...").also { stage = END_DIALOGUE }
                     165 -> {
                         npc("Thank you very much! As I say, the best place to start", "should be with Reldo...")
-                        setQuestStage(player, Quests.THE_KNIGHTS_SWORD, 10)
+                        setQuestStage(player, Quests.THE_KNIGHTS_SWORD.questName, 10)
                         player.getQuestRepository().syncronizeTab(player)
                         end()
                     }

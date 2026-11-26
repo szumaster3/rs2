@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.sendNPCDialogue
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Thump dialogue.
@@ -19,7 +20,7 @@ class ThumpDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
+            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT.questName)) {
                 npcl(FaceAnim.CHILD_EVIL_LAUGH, "RAAAAAAAGH!").also { stage = 3 }
             } else {
                 npcl(FaceAnim.CHILD_NORMAL, "C'mere, human. Me need practice at dis massage thing.").also { stage++ }

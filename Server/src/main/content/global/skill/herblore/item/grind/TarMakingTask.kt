@@ -1,5 +1,7 @@
 package content.global.skill.herblore.item.grind
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillingTask
@@ -7,7 +9,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class TarMakingTask(
@@ -17,8 +18,8 @@ class TarMakingTask(
 ) : SkillingTask<Player>(player, cycleTicks = 4) {
 
     override fun canStart(): Boolean {
-        if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
-            sendMessage(player, "You must complete the ${Quests.DRUIDIC_RITUAL} quest before you can use Herblore.")
+        if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName)) {
+            sendMessage(player, "You must complete the ${Quests.DRUIDIC_RITUAL.questName} quest before you can use Herblore.")
             return false
         }
 

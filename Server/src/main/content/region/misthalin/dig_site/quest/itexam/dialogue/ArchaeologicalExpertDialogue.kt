@@ -1,5 +1,7 @@
 package content.region.misthalin.dig_site.quest.itexam.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,14 +11,13 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class ArchaeologicalExpertDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player, Quests.DESERT_TREASURE)) {
+        when (getQuestStage(player, Quests.DESERT_TREASURE.questName)) {
             0 -> npcl(FaceAnim.FRIENDLY, "Hello, are you Terry Balando?")
             2 -> npcl(FaceAnim.FRIENDLY, "There you go, that book contains the sum of my translating ability.").also { stage = 11 }
             in 3..15 -> npcl(FaceAnim.FRIENDLY, "Hello again.").also { stage = 14 }
@@ -44,7 +45,7 @@ class ArchaeologicalExpertDialogue(player: Player? = null) : Dialogue(player) {
             8 -> npcl(FaceAnim.FRIENDLY, "It might be slightly obscure on the finer details, but it should be good enough to understand the rough meaning of what was originally written.").also { stage++ }
             9 -> npcl(FaceAnim.FRIENDLY, "Please, just wait a moment, I will write up what I can translate into a journal for you.").also { stage++ }
             10 -> npcl(FaceAnim.FRIENDLY, " Then you can take it back to Asgarnia, I think he will be extremely interested in the translation!").also {
-                setQuestStage(player, Quests.DESERT_TREASURE, 2)
+                setQuestStage(player, Quests.DESERT_TREASURE.questName, 2)
                 end()
             }
             11 -> npcl(FaceAnim.FRIENDLY, "If you would be so kind as to take that back to Asgarnia, I think it will reassure him that he is on the right track for a find of great archaeological importance!").also { stage++ }
@@ -52,7 +53,7 @@ class ArchaeologicalExpertDialogue(player: Player? = null) : Dialogue(player) {
             13 -> npcl(FaceAnim.FRIENDLY, "What can I say? It's a skill I picked up through my many years of taking field notes!").also {
                 end()
                 addItemOrDrop(player, Items.TRANSLATION_4655)
-                setQuestStage(player, Quests.DESERT_TREASURE, 3)
+                setQuestStage(player, Quests.DESERT_TREASURE.questName, 3)
             }
             14 -> npcl(FaceAnim.FRIENDLY, "Was that translation any use to Asgarnia?").also { stage++ }
             15 -> playerl(FaceAnim.FRIENDLY, "I think it was, thanks!").also { stage = END_DIALOGUE }

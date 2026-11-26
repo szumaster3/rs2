@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Scavvo dialogue.
@@ -31,7 +32,7 @@ class ScavvoDialogue(player: Player? = null) : Dialogue(player) {
                 Topic("No - toys are for kids.", END_DIALOGUE),
                 Topic("Let's have a look, then.", 6),
                 Topic(FaceAnim.HAPPY, "Ooh, goody-goody - toys!", 6),
-                IfTopic(FaceAnim.HALF_ASKING, "Why do you sell most rune armour but not platebodies?", 5, !isQuestComplete(player, Quests.DRAGON_SLAYER)),
+                IfTopic(FaceAnim.HALF_ASKING, "Why do you sell most rune armour but not platebodies?", 5, !isQuestComplete(player, Quests.DRAGON_SLAYER.questName)),
             )
             5 -> npcl(FaceAnim.FRIENDLY, "Oh, you have to complete a special quest in order to wear rune platebodies. You should talk to the guild master downstairs about that").also { stage = END_DIALOGUE }
             6 -> {

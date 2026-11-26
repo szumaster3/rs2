@@ -1,12 +1,13 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendItemDialogue
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 class LumdoDialogue : DialogueFile() {
     override fun handle(
@@ -14,9 +15,9 @@ class LumdoDialogue : DialogueFile() {
         buttonID: Int,
     ) {
         when (stage) {
-            0 -> if (getQuestStage(player!!, Quests.MONKEY_MADNESS) == 23) {
+            0 -> if (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName) == 23) {
                 npcl("Who are you two?").also { stage++ }
-            } else if (getQuestStage(player!!, Quests.MONKEY_MADNESS) == 24) {
+            } else if (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName) == 24) {
                 playerl("You will take me to the atoll?").also { stage = 23 }
             } else {
                 end()
@@ -80,7 +81,7 @@ class LumdoDialogue : DialogueFile() {
             21 -> playerl("You will not take me?").also { stage++ }
             22 -> npcl("I will not take orders from you.").also {
                 stage = END_DIALOGUE
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 24)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 24)
             }
 
             23 -> npcl("I am under direct orders to remain here.").also { stage = END_DIALOGUE }

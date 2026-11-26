@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest.dialogue
 
+import content.data.Quests
+
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -7,14 +9,13 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class BootDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST.questName) ?: -1
 
         if (qstage < 14 || qstage > 14) {
             npc(FaceAnim.OLD_NORMAL, "Hello tall person.")
@@ -42,7 +43,7 @@ class BootDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> npc(FaceAnim.OLD_ANGRY1, "I'm called Boot, because when I was very young,", "I used to sleep, in a large boot.").also { stage = 11 }
             }
             21 -> npc(FaceAnim.OLD_DEFAULT,"I don't believe it's exactly easy to get to though...").also {
-                setQuestStage(player, Quests.FAMILY_CREST, 15)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 15)
                 stage = 1000
             }
 

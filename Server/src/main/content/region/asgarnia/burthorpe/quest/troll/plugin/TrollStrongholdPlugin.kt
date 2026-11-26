@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.troll.plugin
 
+import content.data.Quests
+
 import content.global.skill.gather.SkillUtils
 import content.region.asgarnia.burthorpe.quest.troll.dialogue.DadDialogueFile
 import core.api.*
@@ -15,18 +17,17 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class TrollStrongholdPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(intArrayOf(Scenery.ARENA_ENTRANCE_3782, Scenery.ARENA_ENTRANCE_3783), IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.TROLL_STRONGHOLD) == 1) {
+            if (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) == 1) {
                 openDialogue(player, DadDialogueFile(1), findNPC(NPCs.DAD_1125)!!)
             }
 
-            if (getQuestStage(player, Quests.TROLL_STRONGHOLD) > 0) {
+            if (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) > 0) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "You need to start the Troll Stronghold quest.")
@@ -35,7 +36,7 @@ class TrollStrongholdPlugin : InteractionListener {
         }
 
         on(intArrayOf(Scenery.ARENA_EXIT_3785, Scenery.ARENA_EXIT_3786), IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.TROLL_STRONGHOLD) < 5) {
+            if (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) < 5) {
                 openDialogue(player, DadDialogueFile(1), findNPC(NPCs.DAD_1125)!!)
             } else {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
@@ -44,12 +45,12 @@ class TrollStrongholdPlugin : InteractionListener {
         }
 
         on(Scenery.PRISON_DOOR_3780, IntType.SCENERY, "unlock") { player, node ->
-            if (getQuestStage(player, Quests.TROLL_STRONGHOLD) >= 8) {
+            if (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) >= 8) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 if (inInventory(player, Items.PRISON_KEY_3135)) {
-                    if (getQuestStage(player, Quests.TROLL_STRONGHOLD) == 5) {
-                        setQuestStage(player, Quests.TROLL_STRONGHOLD, 8)
+                    if (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) == 5) {
+                        setQuestStage(player, Quests.TROLL_STRONGHOLD.questName, 8)
                     }
                     if (removeItem(player, Items.PRISON_KEY_3135)) {
                         DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
@@ -82,7 +83,7 @@ class TrollStrongholdPlugin : InteractionListener {
                         1 -> {
                             val success = SkillUtils.success(player, Skills.THIEVING)
                             if (success) {
-                                if (isQuestInProgress(player, Quests.TROLL_STRONGHOLD, 8, 10)) {
+                                if (isQuestInProgress(player, Quests.TROLL_STRONGHOLD.questName, 8, 10)) {
                                     addItem(player, keyItem)
                                     sendMessage(player, "You find a small key on ${npc.name}.")
                                 } else {
@@ -127,7 +128,7 @@ class TrollStrongholdPlugin : InteractionListener {
         }
 
         on(Scenery.SECRET_DOOR_3762, IntType.SCENERY, "open") { player, _ ->
-            if (getQuestStage(player, Quests.TROLL_STRONGHOLD) >= 8) {
+            if (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) >= 8) {
                 player.properties.teleportLocation = Location.create(2824, 10050, 0)
             } else {
                 sendMessage(player, "You don't know how to open the secret door.")
@@ -144,8 +145,8 @@ class TrollStrongholdPlugin : InteractionListener {
 
         sendMessage(player, "You unlock the cell door.")
 
-        val currentStage = getQuestStage(player, Quests.TROLL_STRONGHOLD)
-        questStageMapping[currentStage]?.let { setQuestStage(player, Quests.TROLL_STRONGHOLD, it) }
+        val currentStage = getQuestStage(player, Quests.TROLL_STRONGHOLD.questName)
+        questStageMapping[currentStage]?.let { setQuestStage(player, Quests.TROLL_STRONGHOLD.questName, it) }
 
         val npc = findNPC(npcId)!!
         sendNPCDialogue(player, npcId, npcMessage)

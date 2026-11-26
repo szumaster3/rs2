@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.data.skill.SkillingTool
 import core.api.*
@@ -17,14 +19,14 @@ import shared.consts.*
 class LostTribePlugin : InteractionListener {
     override fun defineListeners() {
         on(CHEST, IntType.SCENERY, "open") { player, _ ->
-            if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 47 && inInventory(player, Items.KEY_423, 1)) {
+            if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 47 && inInventory(player, Items.KEY_423, 1)) {
                 removeItem(player, Item(Items.KEY_423))
                 for (item in arrayOf(Items.HAM_ROBE_4300, Items.HAM_SHIRT_4298, Items.HAM_HOOD_4302).map { Item(it) }) {
                     if (!player.inventory.add(item)) {
                         GroundItemManager.create(item, player)
                     }
                 }
-                setQuestStage(player, Quests.THE_LOST_TRIBE, 48)
+                setQuestStage(player, Quests.THE_LOST_TRIBE.questName, 48)
             } else {
                 sendMessage(player, "This chest requires a key.")
             }
@@ -41,7 +43,7 @@ class LostTribePlugin : InteractionListener {
                         when (counter++) {
                             0 -> player.animator.animate(Animation(Animations.HUMAN_PICKPOCKETING_881))
                             3 -> {
-                                if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 47 &&
+                                if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 47 &&
                                     !inInventory(
                                         player,
                                         Items.KEY_423,
@@ -76,7 +78,7 @@ class LostTribePlugin : InteractionListener {
         on(BOOKCASE, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the bookcase...")
             val hasAnBook = hasAnItem(player, Items.GOBLIN_SYMBOL_BOOK_5009).container != null
-            if (!hasAnBook && getQuestStage(player, Quests.THE_LOST_TRIBE) >= 41) {
+            if (!hasAnBook && getQuestStage(player, Quests.THE_LOST_TRIBE.questName) >= 41) {
                 sendDialogue(player, "'A History of the Goblin Race.' This must be it.")
                 addItemOrDrop(player, Items.GOBLIN_SYMBOL_BOOK_5009)
             } else {
@@ -87,10 +89,10 @@ class LostTribePlugin : InteractionListener {
 
         on(CRATE, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the bookcase...")
-            if (!inInventory(player, Items.SILVERWARE_5011) && getQuestStage(player, Quests.THE_LOST_TRIBE) == 48) {
+            if (!inInventory(player, Items.SILVERWARE_5011) && getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 48) {
                 sendItemDialogue(player, Items.SILVERWARE_5011, "You find the missing silverware!")
                 addItemOrDrop(player, Items.SILVERWARE_5011)
-                setQuestStage(player, Quests.THE_LOST_TRIBE, 49)
+                setQuestStage(player, Quests.THE_LOST_TRIBE.questName, 49)
             } else {
                 sendMessage(player, "You find nothing.")
             }
@@ -107,7 +109,7 @@ class LostTribePlugin : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, pickaxeIDs, *rubbleIDs) { player, used, _ ->
-            if (getQuestStage(player, Quests.THE_LOST_TRIBE) < 30) {
+            if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) < 30) {
                 sendItemDialogue(
                     player,
                     used.id,

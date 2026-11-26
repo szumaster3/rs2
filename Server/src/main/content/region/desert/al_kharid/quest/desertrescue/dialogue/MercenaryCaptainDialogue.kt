@@ -1,17 +1,18 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MercenaryCaptainDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             11 -> interpreter.sendDialogue("You approach the Mercenary Captain.")
             else -> npc("What are you doing here?")
         }
@@ -19,7 +20,7 @@ class MercenaryCaptainDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             11 -> when (stage) {
                 0 -> {
                     player("Wow! A real captain!")

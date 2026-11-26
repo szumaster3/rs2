@@ -1,12 +1,13 @@
 package content.region.asgarnia.burthorpe.quest.death.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Eohric dialogue.
@@ -17,7 +18,7 @@ import shared.consts.Quests
 class EohricDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU.questName)) {
             in 5..9 -> when (stage) {
                 0 -> player(FaceAnim.FRIENDLY, "Hi!").also { stage++ }
                 1 -> npc(FaceAnim.FRIENDLY, "Hi, can I help?").also { stage++ }
@@ -29,7 +30,7 @@ class EohricDialogueFile : DialogueFile() {
                 11 -> player(FaceAnim.FRIENDLY, "Do you know where he is staying?").also { stage++ }
                 12 -> npc(FaceAnim.FRIENDLY, "Harold is staying at the Toad and Chicken.").also { stage++ }
                 13 -> player(FaceAnim.FRIENDLY, "Thanks!").also {
-                    setQuestStage(player!!, Quests.DEATH_PLATEAU, 10)
+                    setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 10)
                     HaroldDialogueFile.resetNpc(player!!)
                     stage = END_DIALOGUE
                 }
@@ -51,7 +52,7 @@ class EohricDialogueFile : DialogueFile() {
                 2 -> playerl(FaceAnim.HALF_GUILTY, "I found Harold but he won't talk to me!.").also { stage++ }
                 3 -> npcl(FaceAnim.THINKING, "Hmm. Harold has got in trouble a few over his drinking and gambling. Perhaps he'd open up after a drink?").also { stage++ }
                 4 -> playerl(FaceAnim.FRIENDLY, "Thanks, I'll try that!").also {
-                    setQuestStage(player!!, Quests.DEATH_PLATEAU, 12)
+                    setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 12)
                     stage = END_DIALOGUE
                 }
             }

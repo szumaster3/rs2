@@ -1,5 +1,7 @@
 package content.region.other.zanaris.quest.lostcity.dialogue
 
+import content.data.Quests
+
 import content.region.other.zanaris.quest.lostcity.plugin.LostCityPlugin
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -8,7 +10,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Shamus dialogue.
@@ -25,7 +26,7 @@ class ShamusDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.LOST_CITY)) {
+        when (getQuestStage(player, Quests.LOST_CITY.questName)) {
             0 -> when (stage++) {
                 0 -> playerl(FaceAnim.THINKING, "I'm not sure.")
                 1 -> npcl(FaceAnim.OLD_ANGRY1, "Well you'll have to be catchin' me again when yer are, elephant!")
@@ -48,7 +49,7 @@ class ShamusDialogue(player: Player? = null) : Dialogue(player) {
                 12 -> end().also {
                     LostCityPlugin.disappearShamus()
                     sendDialogue("The leprechaun magically disappears.")
-                    setQuestStage(player, Quests.LOST_CITY, 20)
+                    setQuestStage(player, Quests.LOST_CITY.questName, 20)
                 }
             }
 

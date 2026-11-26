@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.grandtree.plugin.TheGrandTreeUtils
 import core.api.drawReward
 import core.api.hasLevelStat
@@ -11,7 +13,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -20,7 +21,7 @@ import shared.consts.Vars
  * Author: [downthecrop](https://gitlab.com/downthecrop)
  */
 @Initializable
-class TheGrandTree : Quest(Quests.THE_GRAND_TREE, 71, 70, 5, Vars.VARP_QUEST_THE_GRAND_TREE_PROGRESS_150, 0, 1, 160) {
+class TheGrandTree : Quest(Quests.THE_GRAND_TREE) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

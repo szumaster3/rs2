@@ -1,5 +1,7 @@
 package content.region.other.zanaris.quest.lostcity.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.startQuest
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Warrior dialogue.
@@ -18,7 +19,7 @@ import shared.consts.Quests
 class WarriorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        when (getQuestStage(player, Quests.LOST_CITY)) {
+        when (getQuestStage(player, Quests.LOST_CITY.questName)) {
             10 -> playerl(FaceAnim.THINKING, "So let me get this straight: I need to search the trees around here for a leprechaun; and then when I find him, he will tell me where this 'Zanaris' is?").also { stage = 1000 }
             20, 21 -> playerl(FaceAnim.HAPPY, "Have you found anything yet?").also { stage = 2000 }
             100 -> playerl(FaceAnim.HAPPY, "Hey, thanks for all the information. It REALLY helped me out in finding the lost city of Zanaris and all.").also { stage = 3000 }
@@ -50,7 +51,7 @@ class WarriorDialogue(player: Player? = null) : Dialogue(player) {
             6 -> playerl(FaceAnim.HAPPY, "So a leprechaun knows where Zanaris is eh?").also { stage = 600 }
             7 -> playerl(FaceAnim.HAPPY, "Thanks for the help!").also { stage = 700 }
             8 -> end().also {
-                startQuest(player, Quests.LOST_CITY)
+                startQuest(player, Quests.LOST_CITY.questName)
             }
             100 -> npcl(FaceAnim.HAPPY, "We're looking for Zanaris...GAH! I mean we're not here for any particular reason at all.").also { stage = 3 }
             101 -> npcl(FaceAnim.NEUTRAL, "Well we're on an adventure right now. Mind you, this is OUR adventure and we don't want to share it - find your own!").also { stage = 2 }

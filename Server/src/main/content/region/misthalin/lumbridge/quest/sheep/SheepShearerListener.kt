@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.sheep
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -18,7 +20,7 @@ class SheepShearerListener: InteractionListener {
         on(IntType.NPC, "shear") { player, node ->
             val sheep = node as NPC
             if (sheep.id == NPCs.SHEEP_3579) {
-                if (getQuestStage(player, Quests.SHEEP_SHEARER) > 0) {
+                if (getQuestStage(player, Quests.SHEEP_SHEARER.questName) > 0) {
                     setAttribute(player, SheepShearer.ATTR_IS_PENGUIN_SHEEP_SHEARED, true)
                 }
                 animate(player, Animation(Animations.SHEAR_SHEEP_893))

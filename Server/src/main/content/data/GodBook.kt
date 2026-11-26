@@ -1,12 +1,13 @@
 package content.data
 
+import content.data.Quests
+
 import core.api.asItem
 import core.api.isQuestComplete
 import core.api.removeItem
 import core.api.sendMessage
 import core.game.node.entity.player.Player
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the god books.
@@ -24,7 +25,7 @@ enum class GodBook(val bookId: Int, val damagedBookId: Int, val blessItemIds: In
      * @param pageId The id of the page being inserted.
      */
     fun insertPage(player: Player, bookId: Int, pageId: Int) {
-        if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
+        if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP.questName)) {
             sendMessage(player, "You need to complete The Horror from the Deep quest to do this.")
             return
         }

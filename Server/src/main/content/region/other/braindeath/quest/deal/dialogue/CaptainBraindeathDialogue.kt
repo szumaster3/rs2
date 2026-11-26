@@ -1,5 +1,7 @@
 package content.region.other.braindeath.quest.deal.dialogue
 
+import content.data.Quests
+
 import content.region.other.braindeath.quest.deal.cutscene.ZombieProtestCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -8,13 +10,12 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class CaptainBraindeathDialogue(private var qs: Int) : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         val check = if (!player!!.isMale) "lass" else "lad"
-        qs = getQuestStage(player!!, Quests.RUM_DEAL)
+        qs = getQuestStage(player!!, Quests.RUM_DEAL.questName)
         npc = NPC(NPCs.CAPTAIN_BRAINDEATH_2827)
         when (qs) {
             1 -> when (stage) {

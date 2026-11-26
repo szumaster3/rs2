@@ -1,5 +1,7 @@
 package content.global.travel.fairyring
 
+import content.data.Quests
+
 import core.api.*
 import core.game.event.FairyRingDialEvent
 import core.game.interaction.InterfaceListener
@@ -13,7 +15,6 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
 import shared.consts.Components
-import shared.consts.Quests
 
 /**
  * Handles the fairy ring interface.
@@ -202,32 +203,32 @@ enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int
     AKQ(Location.create(2319, 3619, 0), "Kandarin: Piscatoris Hunter area", 23),
     AKS(Location.create(2571, 2956, 0), "Feldip Hills: Jungle Hunter area", 25),
     ALQ(Location.create(3597, 3495, 0), "Morytania: Haunted Woods east of Canifis", 27) {
-        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.PRIEST_IN_PERIL, "to use this ring.")
+        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.PRIEST_IN_PERIL.questName, "to use this ring.")
     },
     ALS(Location.create(2644, 3495, 0), "Kandarin: McGrubor's Wood", 29),
     BIP(Location.create(3410, 3324, 0), "Islands: River Salve", 30),
     BIQ(Location.create(3251, 3095, 0), "Kharidian Desert: Near Kalphite hive", 31),
     BIS(Location.create(2635, 3266, 0), "Kandarin: Ardougne Zoo unicorns", 33),
     BJR(Location.create(2650, 4730, 0), "Other realms: Realm of the Fisher King", 36){
-        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.HOLY_GRAIL, "to use this ring.")
+        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.HOLY_GRAIL.questName, "to use this ring.")
     },
     BKP(Location.create(2385, 3035, 0), "Feldip Hills: South of Castle Wars", 38),
     BKQ(Location.create(3041, 4532, 0), "Other realms: Enchanted Valley", 39),
     BKR(Location.create(3469, 3431, 0), "Morytania: Mort Myre, south of Canifis", 40) {
-        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.PRIEST_IN_PERIL, "to use this ring.")
+        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.PRIEST_IN_PERIL.questName, "to use this ring.")
     },
     BLP(Location.create(2437, 5126, 0), "Dungeons: TzHaar area", 42),
     BLQ(null, "Other realms: Yu'biusk", 43),
     BLR(Location.create(2740, 3351, 0), "Kandarin: Legends' Guild", 44),
     CIP(Location.create(2513, 3884, 0), "Islands: Miscellania", 46) {
-        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "to use this ring.")
+        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "to use this ring.")
     },
     CIQ(Location.create(2528, 3127, 0), "Kandarin: North-west of Yanille", 47),
     CJR(Location.create(2705, 3576, 0), "Kandarin: Sinclair Mansion", 52),
     CKP(Location.create(2075, 4848, 0), "Other realms: Cosmic Entity's plane", 54),
     CKR(Location.create(2801, 3003, 0), "Karamja: South of Tai Bwo Wannai Village", 56),
     CKS(Location.create(3447, 3470, 0), "Morytania: Canifis", 57) {
-        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.PRIEST_IN_PERIL, "to use this ring.")
+        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.PRIEST_IN_PERIL.questName, "to use this ring.")
     },
     CLP(Location.create(3082, 3206, 0), "Islands: South of Draynor Village", 58),
     CLS(Location.create(2682, 3081, 0), "Islands: Jungle spiders near Yanille", 61),

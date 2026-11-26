@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.mcannon.dialogue
 
+import content.data.Quests
+
 import core.api.inInventory
 import core.api.removeItem
 import core.api.sendMessage
@@ -12,7 +14,6 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class NulodionDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -20,7 +21,7 @@ class NulodionDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON)
+        quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON.questName)
         when (quest!!.getStage(player)) {
             70 -> player("Hello there.")
             else -> player("Hello again.")

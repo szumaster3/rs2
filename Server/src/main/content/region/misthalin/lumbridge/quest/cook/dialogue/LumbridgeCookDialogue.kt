@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.cook.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,23 +12,22 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class LumbridgeCookDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player?.questRepository?.getQuest(Quests.THE_LOST_TRIBE)?.getStage(player) == 10) {
+        if (player?.questRepository?.getQuest(Quests.THE_LOST_TRIBE.questName)?.getStage(player) == 10) {
             player("Did you see what happened in the cellar?")
             stage = 0
             return true
         }
-        if (getQuestStage(player, Quests.COOKS_ASSISTANT) <= 0) {
+        if (getQuestStage(player, Quests.COOKS_ASSISTANT.questName) <= 0) {
             npc(FaceAnim.SAD, "What am I to do?")
             stage = 0
             return true
-        } else if (getQuestStage(player, Quests.COOKS_ASSISTANT) in 10..99) {
+        } else if (getQuestStage(player, Quests.COOKS_ASSISTANT.questName) in 10..99) {
             if (getAttribute(player, GameAttributes.ALL_SUBMITTED, false) || (getAttribute(player, GameAttributes.MILK_SUBMITTED, false) && getAttribute(player, GameAttributes.FLOUR_SUBMITTED, false) && getAttribute(player, GameAttributes.EGG_SUBMITTED, false))) {
                 npc(FaceAnim.HAPPY, "You've brought me everything I need! I am saved!", "Thank you!")
                 stage = 200
@@ -44,7 +45,7 @@ class LumbridgeCookDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 10) {
+        if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 10) {
             when (stage) {
                 0 -> npc("Last night I was in the kitchen and I heard a noise", "from the cellar. I opened the trapdoor and saw a", "creature dart into a hole in the wall.").also { stage++ }
                 1 -> npc("It looked a bit like a goblin, but it had big bulging eyes.", "It wasn't wearing armour, but it had this odd helmet", "with a light on it.").also { stage++ }
@@ -52,7 +53,7 @@ class LumbridgeCookDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> player("I believe you.").also { stage++ }
                 4 -> npc("Thank you, ${player.name}! If you can convince the Duke", "I'm telling the truth then we can get to the bottom of", "this mystery.").also {
                     stage = 1000
-                    setQuestStage(player, Quests.THE_LOST_TRIBE, 20)
+                    setQuestStage(player, Quests.THE_LOST_TRIBE.questName, 20)
                 }
 
                 5 -> end()
@@ -97,7 +98,7 @@ class LumbridgeCookDialogue(player: Player? = null) : Dialogue(player) {
             43 -> player(FaceAnim.HAPPY, "The whole hat, apron, stripy trousers ensemble. It", "works. It makes you looks like a real cook.").also { stage++ }
             44 -> npc(FaceAnim.ANGRY, "I AM a real cook! I haven't got time to be chatting", "about culinary fashion. I'm in desperate need of help!").also { stage = 21 }
             50 -> npc(FaceAnim.HAPPY, "Oh thank you, thank you. I need milk, an egg and", "flour. I'd be very grateful if you can get them for me.").also {
-                player?.questRepository?.getQuest(Quests.COOKS_ASSISTANT)?.start(player!!)
+                player?.questRepository?.getQuest(Quests.COOKS_ASSISTANT.questName)?.start(player!!)
                 stage++
             }
 
@@ -214,8 +215,8 @@ class LumbridgeCookDialogue(player: Player? = null) : Dialogue(player) {
             201 -> npc(FaceAnim.SAD, "I'm afraid not, only the big cheeses get to dine with the", "Duke.").also { stage++ }
             202 -> player(FaceAnim.NEUTRAL, "Well, maybe one day I'll be important enough to sit on", "the Duke's table.").also { stage++ }
             203 -> npc(FaceAnim.NEUTRAL, "Maybe, but I won't be holding my breath.").also { stage++ }
-            204 -> end().also { finishQuest(player, Quests.COOKS_ASSISTANT) }
-            300 -> if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 10) {
+            204 -> end().also { finishQuest(player, Quests.COOKS_ASSISTANT.questName) }
+            300 -> if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 10) {
                 player("Do you know what happened in the castle cellar?").also { stage = 600 }
             } else {
                 options("I am getting strong and mighty.", "I keep on dying.", "Can I use your range?").also { stage++ }

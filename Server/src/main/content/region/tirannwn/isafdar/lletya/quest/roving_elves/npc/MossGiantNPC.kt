@@ -1,5 +1,7 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves.npc
 
+import content.data.Quests
+
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
 import core.api.getQuestStage
 import core.api.produceGroundItem
@@ -17,7 +19,6 @@ import core.game.world.map.Location
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Plugin
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Moss giant NPC.
@@ -35,7 +36,7 @@ class MossGiantNPC : AbstractNPC {
         super.finalizeDeath(killer)
 
         if (killer is Player) {
-            if (getQuestStage(killer, Quests.ROVING_ELVES) == 15 &&
+            if (getQuestStage(killer, Quests.ROVING_ELVES.questName) == 15 &&
                 !killer.inventory.contains(RovingElves.CONSECRATION_SEED, 1)
             ) {
                 sendMessage(killer,"A small grey seed drops on the ground.")

@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Jethick dialogue.
@@ -22,7 +23,7 @@ class JethickDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.PLAGUE_CITY) >= 1) {
+        if (getQuestStage(player, Quests.PLAGUE_CITY.questName) >= 1) {
             npcl(FaceAnim.FRIENDLY, "Hello I don't recognise you. We don't get many newcomers around here.")
         } else {
             npcl(FaceAnim.FRIENDLY, "Hello. We don't get many newcomers around here.").also { stage = END_DIALOGUE }

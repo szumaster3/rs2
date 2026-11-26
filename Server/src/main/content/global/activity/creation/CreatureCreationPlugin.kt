@@ -1,5 +1,7 @@
 package content.global.activity.creation
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
@@ -24,7 +26,7 @@ class CreatureCreationPlugin : InteractionListener {
          */
 
         on(Scenery.TRAPDOOR_21921, IntType.SCENERY, "open") { player, _ ->
-            if (!hasRequirement(player, Quests.TOWER_OF_LIFE, false)) {
+            if (!hasRequirement(player, Quests.TOWER_OF_LIFE.questName, false)) {
                 sendDialogue(player, "The trapdoor won't open.")
                 return@on true
             }

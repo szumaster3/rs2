@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.romeo.cutscene;
 
+import content.data.Quests;
+
 import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
 import core.game.node.entity.npc.NPC;
@@ -11,7 +13,6 @@ import core.net.packet.PacketRepository;
 import core.net.packet.out.Encoders530;
 import core.net.packet.out.PacketContext.CameraContext;
 import core.plugin.Initializable;
-import shared.consts.Quests;
 
 /**
  * Handles Romeo and juliet cutscene.
@@ -80,7 +81,7 @@ public final class RomeoAndJulietCutscene extends CutscenePlugin {
 
     @Override
     public void fade() {
-        player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).finish(player);
+        player.getQuestRepository().getQuest(Quests.ROMEO_JULIET.getQuestName()).finish(player);
     }
 
     @Override

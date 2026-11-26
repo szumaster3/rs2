@@ -1,16 +1,17 @@
 package content.region.asgarnia.falador.quest.dorics
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class DoricsQuest : Quest(Quests.DORICS_QUEST, 17, 16, 1, Vars.VARP_QUEST_DORICS_QUEST_PROGRESS_31, 0, 1, 100) {
+class DoricsQuest : Quest(Quests.DORICS_QUEST) {
     override fun drawJournal(
         player: Player,
         stage: Int,

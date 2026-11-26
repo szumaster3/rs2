@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
@@ -27,8 +29,8 @@ class FishingPlatform : InteractionListener, MapArea {
         if (entity !is Player) return
         val player = entity
 
-        if (isQuestComplete(player, Quests.SEA_SLUG)) return
-        if (getQuestStage(player, Quests.SEA_SLUG) < 20) return
+        if (isQuestComplete(player, Quests.SEA_SLUG.questName)) return
+        if (getQuestStage(player, Quests.SEA_SLUG.questName) < 20) return
 
         val fisherman = Repository.findNPC(NPCs.FISHERMAN_703) ?: return
         if (!withinDistance(player, fisherman.location, 1)) return

@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.priest.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class FatherUhrneyDialogue(player: Player? = null) : Dialogue(player) {
@@ -23,11 +24,11 @@ class FatherUhrneyDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST) == 0) {
+                if (getQuestStage(player, Quests.THE_RESTLESS_GHOST.questName) == 0) {
                     options("Well, that's friendly.", "I've come to repossess your house.").also { stage++ }
-                } else if (getQuestStage(player, Quests.THE_RESTLESS_GHOST) == 10) {
+                } else if (getQuestStage(player, Quests.THE_RESTLESS_GHOST.questName) == 10) {
                     options("Well, that's friendly.", "I've come to repossess your house.", "Father Aereck sent me to talk to you.").also { stage = 13 }
-                } else if (getAttribute(player, "restless-ghost:urhney", false) || isQuestComplete(player, Quests.THE_RESTLESS_GHOST)) {
+                } else if (getAttribute(player, "restless-ghost:urhney", false) || isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName)) {
                     options("Well, that's friendly.", "I've come to repossess your house.", "I've lost the Amulet of Ghostspeak.").also { stage = 26 }
                 }
             }
@@ -70,7 +71,7 @@ class FatherUhrneyDialogue(player: Player? = null) : Dialogue(player) {
 
                 sendItemDialogue(player, Items.GHOSTSPEAK_AMULET_552, "Father Urhney hands you an amulet.")
                 addItem(player, Items.GHOSTSPEAK_AMULET_552, 1)
-                setQuestStage(player, Quests.THE_RESTLESS_GHOST, 20)
+                setQuestStage(player, Quests.THE_RESTLESS_GHOST.questName, 20)
                 setAttribute(player, "/save:restless-ghost:urhney", true)
 
                 stage++

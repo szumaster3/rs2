@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.plugin
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
 import core.api.getQuest
 import core.api.getQuestStage
@@ -25,7 +27,6 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.update.flag.context.Animation
 import core.plugin.Plugin
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the plugin used to handle node interactions related to dragon slayer.
@@ -88,14 +89,14 @@ class DragonSlayerPlugin : OptionHandler() {
                 }
             742 -> {
                 if (
-                    getQuestStage(player, Quests.DRAGON_SLAYER) == 40 &&
+                    getQuestStage(player, Quests.DRAGON_SLAYER.questName) == 40 &&
                     (player.inventory.containsItem(DragonSlayer.ELVARG_HEAD))
                 ) {
                     sendMessage(player, "You have already slain the dragon. Now you just need to return to Oziach for")
                     sendMessage(player, "your reward!")
                     return true
                 }
-                if (getQuestStage(player, Quests.DRAGON_SLAYER) > 40) {
+                if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) > 40) {
                     sendMessage(player, "You have already slain Elvarg the dragon.")
                     return true
                 }
@@ -115,19 +116,19 @@ class DragonSlayerPlugin : OptionHandler() {
                     return true
                 }
                 if (
-                    getQuestStage(player, Quests.DRAGON_SLAYER) == 40 &&
+                    getQuestStage(player, Quests.DRAGON_SLAYER.questName) == 40 &&
                     (player.inventory.containsItem(DragonSlayer.ELVARG_HEAD))
                 ) {
                     sendMessage(player, "You have already slain the dragon. Now you just need to return to Oziach for")
                     sendMessage(player, "your reward!")
                     return true
                 }
-                if (getQuestStage(player, Quests.DRAGON_SLAYER) > 40) {
+                if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) > 40) {
                     sendMessage(player, "You have already slain the dragon.")
                     return true
                 }
                 if (
-                    getQuestStage(player, Quests.DRAGON_SLAYER) == 40 &&
+                    getQuestStage(player, Quests.DRAGON_SLAYER.questName) == 40 &&
                     !player.inventory.containsItem(DragonSlayer.ELVARG_HEAD)
                 ) {
                     val movement =
@@ -157,7 +158,7 @@ class DragonSlayerPlugin : OptionHandler() {
                 if (
                     player.location.y < 9600 &&
                     !player.getSavedData().questData.getDragonSlayerAttribute("memorized") &&
-                    getQuestStage(player, Quests.DRAGON_SLAYER) != 100
+                    getQuestStage(player, Quests.DRAGON_SLAYER.questName) != 100
                 ) {
                     sendMessage(player, "The door is securely locked.")
                 } else {
@@ -188,7 +189,7 @@ class DragonSlayerPlugin : OptionHandler() {
                 return true
             }
             747 ->
-                when (getQuestStage(player, Quests.DRAGON_SLAYER)) {
+                when (getQuestStage(player, Quests.DRAGON_SLAYER.questName)) {
                     100 -> node.asNpc().openShop(player)
                     20,
                     30,
@@ -197,7 +198,7 @@ class DragonSlayerPlugin : OptionHandler() {
                     10 -> player.dialogueInterpreter.open((node as NPC).id, node, true)
                     else -> player.dialogueInterpreter.sendDialogues((node as NPC), null, "I ain't got nothing to sell ye, adventurer. Leave me be!")
                 }
-            else -> handleMelzarMaze(player, node, option, id, getQuest(player, Quests.DRAGON_SLAYER))
+            else -> handleMelzarMaze(player, node, option, id, getQuest(player, Quests.DRAGON_SLAYER.questName))
         }
         return true
     }

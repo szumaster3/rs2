@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -10,7 +12,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Askeladden dialogue.
@@ -38,12 +39,12 @@ class AskeladdenDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 35
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 playerl(FaceAnim.HAPPY, "Hello again Askeladden.")
                 stage = 40
             }
 
-            getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 -> {
+            getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName) > 0 -> {
                 player("Hello there.")
             }
 

@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.crest.plugin.FamilyCrestListener
 import core.api.getAttribute
 import core.api.setQuestStage
@@ -10,14 +12,13 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class JohnathonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST.questName) ?: -1
         if (qstage == 100) {
             options("Can you change my gauntlets for me?", "Nevermind.").also { stage = 6000 }
             return true
@@ -42,13 +43,13 @@ class JohnathonDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npc("The... poison... it is all...", "too much... My head...", "will not... stop spinning...").also { stage++ }
             4 -> sendDialogue("Sweat is pouring down Jonathons' face.").also {
                 stage = 1000
-                setQuestStage(player, Quests.FAMILY_CREST, 17)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 17)
             }
             100 -> npc("Ooooh... thank you... Wow!", "I'm feeling a lot better now!", "That potion really seems to have done the trick!").also { stage++ }
             101 -> npc("How can I reward you?").also { stage++ }
             102 -> player("I've come here for your piece of the Fitzharmon family crest.").also { stage++ }
             103 -> npc("You have? Unfortunately I don't have it any more...", "in my attempts to slay the fiendish Chronozon, the blood demon,", "I lost a lot of equipment in our last battle when he", "bested me and forced me away from his den. He probably still has it now.").also {
-                setQuestStage(player, Quests.FAMILY_CREST, 19)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 19)
                 stage = 200
             }
             200 -> options("So is this Chronozon hard to defeat?", "Where can I find Chronozon?", "So how did you end up getting poisoned?", "I will be on my way now.").also { stage++ }

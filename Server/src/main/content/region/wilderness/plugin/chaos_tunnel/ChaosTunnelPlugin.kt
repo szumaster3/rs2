@@ -1,5 +1,7 @@
 package content.region.wilderness.plugin.chaos_tunnel
 
+import content.data.Quests
+
 import com.google.gson.JsonObject
 import core.ServerStore.Companion.getArchive
 import core.api.*
@@ -24,7 +26,6 @@ import core.tools.RandomFunction
 import core.tools.SystemLogger
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import java.util.*
 import shared.consts.Scenery as Objects
 
@@ -123,7 +124,7 @@ class ChaosTunnelPlugin : MapArea, InteractionListener {
                     return@on true
                 }
                 Location(3142, 5545, 0) -> {
-                    if (hasRequirement(player, Quests.WHAT_LIES_BELOW)) {
+                    if (hasRequirement(player, Quests.WHAT_LIES_BELOW.questName)) {
                         commenceBorkBattle(player)
                     }
                     return@on true

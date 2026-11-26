@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.grail.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -11,7 +13,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.Items.CUP_OF_TEA_712
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Galahad dialogue.
@@ -35,9 +36,9 @@ class GalahadDialogue : DialogueFile() {
             1 -> sendDialogue(player!!, "Brother Galahad hangs a kettle over the fire.").also { stage++ }
             2 -> showTopics(
                 Topic(FaceAnim.NEUTRAL, "Are you any relation to Brother Galahad?", 3),
-                IfTopic(FaceAnim.NEUTRAL, "I'm on a quest to find the Holy Grail!", 20, getQuestStage(player!!, Quests.HOLY_GRAIL) >= 20 && !isQuestComplete(player!!, Quests.HOLY_GRAIL)),
+                IfTopic(FaceAnim.NEUTRAL, "I'm on a quest to find the Holy Grail!", 20, getQuestStage(player!!, Quests.HOLY_GRAIL.questName) >= 20 && !isQuestComplete(player!!, Quests.HOLY_GRAIL.questName)),
                 Topic(FaceAnim.NEUTRAL, "Do you get lonely here on your own?", 10),
-                IfTopic(FaceAnim.NEUTRAL, "I seek an item from the realm of the Fisher King.", 70, (getQuestStage(player!!, Quests.HOLY_GRAIL) == 30) && !player!!.hasItem(Item(Items.HOLY_TABLE_NAPKIN_15, 1)),),
+                IfTopic(FaceAnim.NEUTRAL, "I seek an item from the realm of the Fisher King.", 70, (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) == 30) && !player!!.hasItem(Item(Items.HOLY_TABLE_NAPKIN_15, 1)),),
             )
             3 -> npcl(FaceAnim.FRIENDLY, "I AM Brother Galahad.").also { stage++ }
             4 -> npcl(FaceAnim.FRIENDLY, "Although I've retired as a Knight, and now live as a solitary monk. Also, I prefer to be known as brother rather than sir now. Half a moment, your cup of tea is ready.").also { stage++ }

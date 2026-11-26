@@ -1,11 +1,12 @@
 package content.region.asgarnia.rimmington.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.sendDialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Customs Sergeant dialogue.
@@ -14,7 +15,7 @@ class CustomsSergeantDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> if (!hasRequirement(player!!, Quests.ROCKING_OUT, false)) {
+            0 -> if (!hasRequirement(player!!, Quests.ROCKING_OUT.questName, false)) {
                 npc(FaceAnim.SLEEPING, "Zzzzzzzzzzzzzzzzzzz.").also { stage++ }
             } else {
                 sendDialogue(player!!, "Customs Sergeant seems too busy to talk.").also { stage = END_DIALOGUE }

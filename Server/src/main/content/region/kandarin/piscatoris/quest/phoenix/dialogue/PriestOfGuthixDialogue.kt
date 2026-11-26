@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.quest.phoenix.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import core.api.*
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -34,7 +35,7 @@ private class PriestDialogueFile : DialogueFile() {
         when (stage) {
             0 -> {
                 when {
-                    isQuestComplete(player!!, Quests.IN_PYRE_NEED) -> {
+                    isQuestComplete(player!!, Quests.IN_PYRE_NEED.questName) -> {
                         npcl(FaceAnim.NEUTRAL, "Hail, ${player!!.username}! How are things?")
                         stage = 112
                     }
@@ -206,7 +207,7 @@ private class PriestDialogueFile : DialogueFile() {
                     player("Yes, I will help.")
                     setAttribute(player!!, GameAttributes.TALK_WITH_PRIEST, 0)
                     setVarbit(player!!, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761, 1, true)
-                    setQuestStage(player!!, Quests.IN_PYRE_NEED, 2)
+                    setQuestStage(player!!, Quests.IN_PYRE_NEED.questName, 2)
                     stage = 31
                 }
 
@@ -647,7 +648,7 @@ private class PriestDialogueFile : DialogueFile() {
 
             110 -> {
                 end()
-                finishQuest(player!!, Quests.IN_PYRE_NEED)
+                finishQuest(player!!, Quests.IN_PYRE_NEED.questName)
                 updateQuestTab(player!!)
             }
 

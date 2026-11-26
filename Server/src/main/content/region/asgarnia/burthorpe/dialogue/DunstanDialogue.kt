@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.death.dialogue.DunstanDialogueFile
 import content.region.asgarnia.burthorpe.quest.troll.dialogue.DunstanTrollDialogue
 import core.api.isQuestComplete
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Dunstan dialogue.
@@ -25,7 +26,7 @@ class DunstanDialogue(player: Player? = null) : Dialogue(player) {
         /*
          * When Troll Stronghold is complete
          */
-        if (isQuestComplete(player!!, Quests.TROLL_STRONGHOLD)) {
+        if (isQuestComplete(player!!, Quests.TROLL_STRONGHOLD.questName)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Hi! What can I do for you?").also { stage++ }
@@ -49,7 +50,7 @@ class DunstanDialogue(player: Player? = null) : Dialogue(player) {
         /*
          * Troll Stronghold in progress.
          */
-        if (isQuestInProgress(player!!, Quests.TROLL_STRONGHOLD, 1, 99)) {
+        if (isQuestInProgress(player!!, Quests.TROLL_STRONGHOLD.questName, 1, 99)) {
             openDialogue(player!!, DunstanTrollDialogue(), npc)
             return true
         }
@@ -57,7 +58,7 @@ class DunstanDialogue(player: Player? = null) : Dialogue(player) {
         /*
          * When Death Plateau is complete.
          */
-        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
+        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU.questName)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Hi! What can I do for you?").also { stage++ }
@@ -81,7 +82,7 @@ class DunstanDialogue(player: Player? = null) : Dialogue(player) {
         /*
          * Death Plateau in progress.
          */
-        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 21, 24)) {
+        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU.questName, 21, 24)) {
             openDialogue(player!!, DunstanDialogueFile(), npc)
             return true
         }

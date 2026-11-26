@@ -1,5 +1,7 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.ShipyardWorkerDialogueFile
 import core.api.getQuestStage
 import core.api.sendItemDialogue
@@ -10,14 +12,13 @@ import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 class ShipyardWorkerMMDialogue : DialogueFile() {
     override fun handle(
         componentID: Int,
         buttonID: Int,
     ) {
-        when (getQuestStage(player!!, Quests.MONKEY_MADNESS)) {
+        when (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName)) {
             0 -> ShipyardWorkerDialogueFile()
             10 -> when (stage) {
                 0 -> npcl("Hey you! What are you up to?").also { stage++ }

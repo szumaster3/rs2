@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.dialogue;
 
+import content.data.Quests;
+
 import content.data.GameAttributes;
 import content.global.skill.agility.AgilityHandler;
 import core.api.Container;
@@ -154,11 +156,11 @@ public final class RugMerchantDialogue extends Dialogue {
                 }
                 end();
                 destination = options.length == 1 ? options[0] : options[buttonId - 1];
-                if (destination == RugDestination.UZER && !hasRequirement(player, Quests.THE_GOLEM))
+                if (destination == RugDestination.UZER && !hasRequirement(player, Quests.THE_GOLEM.getQuestName()))
                     break;
-                else if (destination == RugDestination.BEDABIN_CAMP && !hasRequirement(player, Quests.THE_TOURIST_TRAP))
+                else if (destination == RugDestination.BEDABIN_CAMP && !hasRequirement(player, Quests.THE_TOURIST_TRAP.getQuestName()))
                     break;
-                else if (destination == RugDestination.SOPHANEM && !hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER))
+                else if (destination == RugDestination.SOPHANEM && !hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER.getQuestName()))
                     break;
                 if (player.getEquipment().get(EquipmentContainer.SLOT_WEAPON) != null) {
                     player.sendMessage(colorize("%RYou must unequip all your weapons before you can fly on a carpet."));

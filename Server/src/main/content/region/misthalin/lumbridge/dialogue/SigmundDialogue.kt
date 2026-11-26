@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sigmund dialogue (The Lost Tribe quest).
@@ -26,7 +27,7 @@ class SigmundDialogue : Dialogue {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         interpreter.sendDialogues(npc, FaceAnim.HALF_GUILTY, "Can I help you?")
-        if (getQuestStage(player, Quests.THE_LOST_TRIBE) in 1..99) {
+        if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) in 1..99) {
             npc("Have you found out what it was?")
             stage = 34
             return true
@@ -78,18 +79,18 @@ class SigmundDialogue : Dialogue {
 
             23 -> end()
             10 -> {
-                if (player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE) &&
+                if (player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE.questName) &&
                     !player
                         .getQuestRepository()
-                        .isComplete(Quests.THE_LOST_TRIBE)
+                        .isComplete(Quests.THE_LOST_TRIBE.questName)
                 ) {
                     npc("No, not right now.")
                     stage = 12
                     return true
                 }
-                if (player.getQuestRepository().isComplete(Quests.GOBLIN_DIPLOMACY) &&
-                    player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES) &&
-                    !player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE)
+                if (player.getQuestRepository().isComplete(Quests.GOBLIN_DIPLOMACY.questName) &&
+                    player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES.questName) &&
+                    !player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE.questName)
                 ) {
                     npc("There was recently some damage to the castle cellar.", "Part of the wall has collapsed.")
                     stage = 30
@@ -119,7 +120,7 @@ class SigmundDialogue : Dialogue {
             31 -> {
                 npc("You should ask other people around the town if they", "saw anything.")
                 stage = END_DIALOGUE
-                player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE)?.start(player)
+                player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE.questName)?.start(player)
                 player.setAttribute("/save:tlt-witness", TLTNPCS[0])
             }
 

@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.drunkmonk.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -13,7 +15,6 @@ import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Brother Omad dialogue.
@@ -21,7 +22,7 @@ import shared.consts.Quests
 class BrotherOmadDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.MONKS_FRIEND)
+        val questStage = getQuestStage(player!!, Quests.MONKS_FRIEND.questName)
         when (questStage) {
             0 -> {
                 when (stage) {
@@ -44,7 +45,7 @@ class BrotherOmadDialogueFile : DialogueFile() {
                     10 -> npcl(FaceAnim.HALF_WORRIED, "Please do. We won't be able to help you as we are peaceful men but we would be grateful for your help!").also { stage++ }
                     11 -> playerl(FaceAnim.HALF_ASKING, "Where are they?").also { stage++ }
                     12 -> npcl(FaceAnim.SAD, "They hide in a secret cave in the forest. It's hidden under a ring of stones. Please, bring back the blanket!").also {
-                        setQuestStage(player!!, Quests.MONKS_FRIEND, 10)
+                        setQuestStage(player!!, Quests.MONKS_FRIEND.questName, 10)
                         updateQuestTab(player!!)
                         stage = END_DIALOGUE
                     }
@@ -70,7 +71,7 @@ class BrotherOmadDialogueFile : DialogueFile() {
                     31 -> npcl(FaceAnim.HAPPY, "Really, that's excellent, well done! Maybe now I will be able to get some rest.").also { stage++ }
                     32 -> npcl(FaceAnim.SAD, "*yawn*..I'm off to bed! Farewell brave traveller!").also {
                         player!!.inventory.remove(Item(Items.CHILDS_BLANKET_90))
-                        setQuestStage(player!!, Quests.MONKS_FRIEND, 20)
+                        setQuestStage(player!!, Quests.MONKS_FRIEND.questName, 20)
                         stage = END_DIALOGUE
                     }
                 }
@@ -105,7 +106,7 @@ class BrotherOmadDialogueFile : DialogueFile() {
                     997 -> npcl(FaceAnim.NEUTRAL, "Of course, but we need the wine first.").also { stage = END_DIALOGUE }
                     42 -> npcl(FaceAnim.FRIENDLY, "Oh, he won't be far. Probably out in the forest.").also { stage++ }
                     43 -> playerl(FaceAnim.FRIENDLY, "Ok, I'll go and find him.").also {
-                        setQuestStage(player!!, Quests.MONKS_FRIEND, 30)
+                        setQuestStage(player!!, Quests.MONKS_FRIEND.questName, 30)
                         stage = END_DIALOGUE
                     }
                 }
@@ -208,7 +209,7 @@ class BrotherOmadDialogueFile : DialogueFile() {
                         }
 
                         25 -> if (questComplete) {
-                            finishQuest(player!!, Quests.MONKS_FRIEND)
+                            finishQuest(player!!, Quests.MONKS_FRIEND.questName)
                         }
                     }
                     count++

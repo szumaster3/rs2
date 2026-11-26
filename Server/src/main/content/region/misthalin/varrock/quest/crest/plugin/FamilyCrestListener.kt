@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -11,7 +13,6 @@ import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class FamilyCrestListener : InteractionListener {
 
@@ -19,14 +20,14 @@ class FamilyCrestListener : InteractionListener {
         onUseWith(IntType.NPC, POISON_ITEM_IDS, NPCs.JOHNATHON_668) { player, used, with ->
             val npc = with.asNpc()
             val poisonPotionItem = used.asItem()
-            val stage = getQuestStage(player, Quests.FAMILY_CREST)
+            val stage = getQuestStage(player, Quests.FAMILY_CREST.questName)
 
             val index = POISON_ITEM_IDS.indexOf(used.id)
             val returnItem = if (index + 1 == POISON_ITEM_IDS.size) Items.VIAL_229 else POISON_ITEM_IDS[index + 1]
 
             if (stage == 17 && removeItem(player, poisonPotionItem)) {
                 addItem(player, returnItem)
-                setQuestStage(player, Quests.FAMILY_CREST, 18)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 18)
                 openDialogue(player, NPCs.JOHNATHON_668, npc)
             }
             return@onUseWith true
@@ -34,7 +35,7 @@ class FamilyCrestListener : InteractionListener {
 
         on(LEVER_IDS, IntType.SCENERY, "pull") { player, node ->
             val baseId = if (node.id % 2 == 0) node.id - 1 else node.id
-            if (getQuestStage(player, Quests.FAMILY_CREST) == 0) {
+            if (getQuestStage(player, Quests.FAMILY_CREST.questName) == 0) {
                 return@on true
             }
 
@@ -65,7 +66,7 @@ class FamilyCrestListener : InteractionListener {
             val northB = player.getAttribute("family-crest:witchaven-lever:$NORTH_LEVER_B", false)
             val south  = player.getAttribute("family-crest:witchaven-lever:$SOUTH_LEVER",   false)
 
-            val questComplete = getQuestStage(player, Quests.FAMILY_CREST) >= 100
+            val questComplete = getQuestStage(player, Quests.FAMILY_CREST.questName) >= 100
 
             val canPass = when (node.id) {
                 // NORTH DOOR (2431)

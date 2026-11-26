@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.surok
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.surok.plugin.WhatLiesBelowListener
 import core.api.*
 import core.game.node.entity.player.Player
@@ -7,14 +9,13 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the What lie below quest.
  * @author Vexia
  */
 @Initializable
-class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
+class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW) {
     private val requirements = BooleanArray(4)
 
     override fun drawJournal(player: Player, stage: Int) {
@@ -27,7 +28,7 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "Before I begin I will need to:", line++)
                 line(player, "Have level 35 !!Runecrafting??.", line++, hasLevelStat(player, Skills.RUNECRAFTING, 35))
                 line(player, "Be able to defeat a !!level 47 enemy??.", line++)
-                line(player, "I need to have completed the !!Rune Mysteries?? quest.", line++, isQuestComplete(player, Quests.RUNE_MYSTERIES))
+                line(player, "I need to have completed the !!Rune Mysteries?? quest.", line++, isQuestComplete(player, Quests.RUNE_MYSTERIES.questName))
                 line(player, "Have a !!Mining?? level of 42 to use the !!Chaos Tunnel??.", line, hasLevelStat(player, Skills.MINING, 42))
             }
 
@@ -210,7 +211,7 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
         requirements[0] = getStatLevel(player, Skills.RUNECRAFTING) >= 35
         requirements[1] = false
         requirements[3] = getStatLevel(player, Skills.MINING) >= 42
-        requirements[2] = isQuestComplete(player, Quests.RUNE_MYSTERIES)
+        requirements[2] = isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)
         return requirements[0] && requirements[2] && requirements[3]
     }
 

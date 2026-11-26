@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -9,17 +11,16 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.RegionManager.getNpc
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class AnaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if ((getQuestStage(player, Quests.THE_TOURIST_TRAP) == 71 ||getQuestStage(player, Quests.THE_TOURIST_TRAP) == 72) && args.size > 1) {
+        if ((getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 71 ||getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 72) && args.size > 1) {
             sendDialogueLines(player, "You see a barrel coming to the surface. Before too long you haul it", "onto the side. The barrel seems quite heavy and you hear a muffled", "sound coming from inside.")
             stage = 400
             return true
         }
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             98 -> when (stage) {
                 0 -> {
                     npc("Great! Thanks for getting me out of that mine! And", "that barrel wasn't too bad anyway! Pop by again", "sometime, I'm sure we'll have a barrel of laughs!")
@@ -46,7 +47,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             98 -> when (stage) {
                 1 -> {
                     npc(
@@ -67,7 +68,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
                     sendMessage(player,"Ana spots Irena and waves...")
                     val irena = getNpc(player, NPCs.MERCENARY_4986)
                     irena!!.sendChat("Hi Ana!")
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 98)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 98)
                     end()
                     player.dialogueInterpreter.open(NPCs.MERCENARY_4986, irena)
                 }
@@ -80,7 +81,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 401 -> {
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 72)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 72)
                     end()
                 }
             }
@@ -245,7 +246,7 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 7 -> {
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 61)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 61)
                     end()
                 }
             }

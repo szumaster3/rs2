@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendMessage
 import core.api.setQuestStage
@@ -7,13 +9,12 @@ import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             else -> {
                 sendMessage(player,"The captain looks up from his work as you address him.")
                 npc("What are you doing in here?")
@@ -23,7 +24,7 @@ class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             52 -> when (stage) {
                 0 -> {
                     player("I wanted to have a chat?")
@@ -85,7 +86,7 @@ class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
 
                 11 -> {
                     end()
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 53)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 53)
                 }
             }
 

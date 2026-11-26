@@ -1,5 +1,7 @@
 package content.region.other.entrana.dialogue
 
+import content.data.Quests
+
 import core.api.getStatLevel
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -11,7 +13,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Cave Monk (Entrana) dialogue.
@@ -23,7 +24,7 @@ class CaveMonkDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.LOST_CITY)
+        quest = player.getQuestRepository().getQuest(Quests.LOST_CITY.questName)
         when (quest!!.getStage(player)) {
             0, 10 -> {
                 player("Hello, what are you doing here?")

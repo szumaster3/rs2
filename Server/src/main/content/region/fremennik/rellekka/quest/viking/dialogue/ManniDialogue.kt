@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -18,7 +20,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Manni dialogue.
@@ -33,7 +34,7 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         currentNPC = args[0] as? NPC
-        val questStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS)
+        val questStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS.questName)
 
         if (questStage > 0) {
             when {
@@ -78,7 +79,7 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 203
                 }
 
-                isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+                isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                     playerl(FaceAnim.HAPPY, "Howdy!")
                     stage = 190
                 }

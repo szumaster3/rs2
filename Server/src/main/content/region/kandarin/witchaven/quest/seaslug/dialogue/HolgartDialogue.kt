@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.witchaven.plugin.FishingPlatformBoat
 import content.region.kandarin.witchaven.plugin.Travel
 import content.region.kandarin.witchaven.quest.seaslug.cutscene.HolgartCutscene
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class HolgartDialogue(player: Player? = null) : Dialogue(player) {
@@ -21,8 +22,8 @@ class HolgartDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
-            isQuestComplete(player, Quests.SEA_SLUG) -> player("Hello again Holgart.").also { stage = 4 }
-            isQuestInProgress(player, Quests.SEA_SLUG, 2, 99) -> end().also { openDialogue(player, HolgartDialogueFile()) }
+            isQuestComplete(player, Quests.SEA_SLUG.questName) -> player("Hello again Holgart.").also { stage = 4 }
+            isQuestInProgress(player, Quests.SEA_SLUG.questName, 2, 99) -> end().also { openDialogue(player, HolgartDialogueFile()) }
             else -> player(FaceAnim.FRIENDLY, "Hello there.")
         }
         return true
@@ -68,7 +69,7 @@ private class HolgartDialogueFile : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        val questStage = getQuestStage(player!!, Quests.SEA_SLUG)
+        val questStage = getQuestStage(player!!, Quests.SEA_SLUG.questName)
         npc = NPC(NPCs.HOLGART_4866)
         when (questStage) {
             // Only a Few Holes.
@@ -105,7 +106,7 @@ private class HolgartDialogueFile : DialogueFile() {
 
                     20 -> {
                         end()
-                        setQuestStage(player!!, Quests.SEA_SLUG, 4)
+                        setQuestStage(player!!, Quests.SEA_SLUG.questName, 4)
                     }
                 }
             }

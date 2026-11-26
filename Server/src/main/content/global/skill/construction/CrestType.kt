@@ -1,23 +1,24 @@
 package content.global.skill.construction
 
+import content.data.Quests
+
 import core.api.anyInInventory
 import core.api.hasLevelStat
 import core.api.isQuestComplete
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
-import shared.consts.Quests
 
 enum class CrestType(
     val symbol: String,
     val cost: Int = 5000,
     val requirement: (Player) -> Boolean = { true }
 ) {
-    ARRAV("the Shield of Arrav symbol", requirement = { isQuestComplete(it, Quests.SHIELD_OF_ARRAV) }),
+    ARRAV("the Shield of Arrav symbol", requirement = { isQuestComplete(it, Quests.SHIELD_OF_ARRAV.questName) }),
     ASGARNIA("the symbol of Asgarnia"),
-    DORGESHUUN("the Dorgeshuun brooch", requirement = { isQuestComplete(it, Quests.THE_LOST_TRIBE) }),
-    DRAGON("a dragon", requirement = { isQuestComplete(it, Quests.DRAGON_SLAYER) }),
-    FAIRY("a fairy", requirement = { isQuestComplete(it, Quests.LOST_CITY) }),
+    DORGESHUUN("the Dorgeshuun brooch", requirement = { isQuestComplete(it, Quests.THE_LOST_TRIBE.questName) }),
+    DRAGON("a dragon", requirement = { isQuestComplete(it, Quests.DRAGON_SLAYER.questName) }),
+    FAIRY("a fairy", requirement = { isQuestComplete(it, Quests.LOST_CITY.questName) }),
     GUTHIX("the symbol of Guthix", requirement = { hasLevelStat(it, Skills.PRAYER, 70) }),
     HAM("the symbol of the HAM cult."),
     HORSE("a horse", requirement = { anyInInventory(it, Items.TOY_HORSEY_2524, Items.TOY_HORSEY_2520, Items.TOY_HORSEY_2526, Items.TOY_HORSEY_2522) }),

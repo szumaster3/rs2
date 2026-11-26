@@ -1,5 +1,7 @@
 package content.region.asgarnia.white_wolf_mountain.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Rohak dialogue.
@@ -17,7 +18,7 @@ class RohakDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> if(!hasRequirement(player!!, Quests.RECIPE_FOR_DISASTER, false)) {
+            0 -> if(!hasRequirement(player!!, Quests.RECIPE_FOR_DISASTER.questName, false)) {
                 npcl(FaceAnim.OLD_DEFAULT, "Hello there, youngster.").also { stage++ }
             } else {
                 npcl(FaceAnim.OLD_DEFAULT, "Hello again, youngster.").also { stage = 5 }

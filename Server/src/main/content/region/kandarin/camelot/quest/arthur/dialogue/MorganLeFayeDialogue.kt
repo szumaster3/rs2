@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.arthur.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -10,7 +12,6 @@ import core.game.node.entity.npc.NPC
 import core.game.world.repository.Repository
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Morgan Le Faye dialogue.
@@ -57,8 +58,8 @@ class MorganLeFayeDialogue : DialogueFile() {
             )
 
             STAGE_EXCALIBUR -> npcl(FaceAnim.NEUTRAL, "The lady of the lake has it. I don't know if she'll give it to you though, she can be rather temperamental.").also {
-                if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 30) {
-                    setQuestStage(player!!, Quests.MERLINS_CRYSTAL, 40)
+                if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName) == 30) {
+                    setQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName, 40)
                 }
                 stage = 31
             }

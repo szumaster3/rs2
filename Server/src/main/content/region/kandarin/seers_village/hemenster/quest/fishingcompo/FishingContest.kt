@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.hemenster.quest.fishingcompo
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.component.Component
@@ -12,7 +14,6 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the Fishing Contest quest.
@@ -20,7 +21,7 @@ import shared.consts.Quests
  * Authors: [Woah](https://gitlab.com/woahscam), szu.
  */
 @Initializable
-class FishingContest : Quest(Quests.FISHING_CONTEST, 62, 61, 1, 11, 0, 1, 5) {
+class FishingContest : Quest(Quests.FISHING_CONTEST) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

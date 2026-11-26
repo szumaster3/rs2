@@ -1,12 +1,13 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.port_khazard.quest.arena.cutscene.FightTwoCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Hengrad dialogue.
@@ -17,7 +18,7 @@ import shared.consts.Quests
 class HengradDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.HENGRAD_263)
-        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA.questName)) {
             in 72..88 ->
                 when (stage) {
                     0 -> {
@@ -53,7 +54,7 @@ class HengradDialogue : DialogueFile() {
 
                     10 -> {
                         end()
-                        setQuestStage(player!!, Quests.FIGHT_ARENA, 88)
+                        setQuestStage(player!!, Quests.FIGHT_ARENA.questName, 88)
                         FightTwoCutscene(player!!).start()
                     }
                 }

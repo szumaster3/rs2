@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue
 
+import content.data.Quests
+
 import content.global.travel.glider.GnomeGlider
 import core.api.getQuestStage
 import core.api.openInterface
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Captain Errdo dialogue.
@@ -24,7 +25,7 @@ import shared.consts.Quests
 class CaptainErrdoDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE.questName)) {
             55 -> {
                 when (player!!.location.regionId) {
                     11567 -> {

@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.quest.phoenix
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.piscatoris.quest.phoenix.plugin.RebornWarriorNPC
 import core.api.*
@@ -15,7 +17,7 @@ import core.tools.RandomFunction
 import shared.consts.*
 
 @Initializable
-class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, PROGRESS, 0, 1, 30) {
+class InPyreNeed : Quest(Quests.IN_PYRE_NEED, PROGRESS, 0, 1, 30) {
 
     // https://runescape.wiki/w/Phoenix_eggling
     // https://runescape.wiki/w/Cracked_phoenix_egg

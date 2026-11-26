@@ -1,5 +1,7 @@
 package content.region.fremennik.quest.olaf.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -21,7 +22,7 @@ class VolfOlafsonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg objects: Any?): Boolean {
         npc = objects[0] as NPC
-        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
             npc(FaceAnim.ANNOYED, "Sorry, outlander, but I have things to be doing.")
             return false
         }
@@ -30,11 +31,11 @@ class VolfOlafsonDialogue(player: Player? = null) : Dialogue(player) {
         val delivered = getAttribute(player, GameAttributes.OLAF_VOLF_DELIVERED, false)
 
         when {
-            isQuestComplete(player, Quests.OLAFS_QUEST) || progress >= 3 || delivered -> {
+            isQuestComplete(player, Quests.OLAFS_QUEST.questName) || progress >= 3 || delivered -> {
                 npcl(FaceAnim.ASKING, "Hello again, friend! Does my father send any word... or treasures like before?")
                 stage = 12
             }
-            getQuestStage(player, Quests.OLAFS_QUEST) >= 2 -> {
+            getQuestStage(player, Quests.OLAFS_QUEST.questName) >= 2 -> {
                 player("Volf? Son of Olaf Hradson?")
                 stage = 1
             }

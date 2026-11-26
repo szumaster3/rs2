@@ -1,15 +1,16 @@
 package content.region.desert.al_kharid.quest.feud
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 //@Initializable
-class TheFeud : Quest(Quests.THE_FEUD, 60, 59, 1, Vars.VARBIT_THE_FEUD_PROGRESS_334, 0, 1, 28) {
+class TheFeud : Quest(Quests.THE_FEUD) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

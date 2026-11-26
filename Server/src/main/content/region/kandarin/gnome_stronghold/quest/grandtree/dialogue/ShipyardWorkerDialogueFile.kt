@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue
 
+import content.data.Quests
+
 import core.api.getAttribute
 import core.api.getQuestStage
 import core.api.setAttribute
@@ -9,7 +11,6 @@ import core.game.global.action.DoorActionHandler
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.tools.END_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Shipyard Worker dialogue.
@@ -21,7 +22,7 @@ class ShipyardWorkerDialogueFile : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
         when(stage){
             0 -> npcl("Hey you! What are you up to?").also {
-                if(getQuestStage(player!!, Quests.THE_GRAND_TREE) == 55) {
+                if(getQuestStage(player!!, Quests.THE_GRAND_TREE.questName) == 55) {
                     setAttribute(player!!, "/save:grandtree:opt1", false)
                     setAttribute(player!!, "/save:grandtree:opt2", false)
                     setAttribute(player!!, "/save:grandtree:opt3", false)

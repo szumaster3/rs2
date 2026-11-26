@@ -1,5 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
+import content.data.Quests
+
 import core.api.setAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -14,7 +16,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Red beard Frank dialogue.
@@ -28,7 +29,7 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.PIRATES_TREASURE)
+        quest = player.getQuestRepository().getQuest(Quests.PIRATES_TREASURE.questName)
         npc("Arr, Matey!")
         stage = 0
         replacementReward = Diary.canReplaceReward(player, DiaryType.FALADOR, level)

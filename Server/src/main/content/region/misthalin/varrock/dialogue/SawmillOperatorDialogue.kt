@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -10,7 +12,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sawmill Operator dialogue.
@@ -21,7 +22,7 @@ class SawmillOperatorDialogue : DialogueFile() {
         when (stage) {
             0 -> npc(FaceAnim.NEUTRAL, "Do you want me to make some planks for you? Or", "would you be interested in some other housing supplies?").also { stage++ }
             1 -> showTopics(
-                IfTopic("I have some questions about a cat.", 30, getQuestStage(player!!, Quests.GERTRUDES_CAT) in 1..99),
+                IfTopic("I have some questions about a cat.", 30, getQuestStage(player!!, Quests.GERTRUDES_CAT.questName) in 1..99),
                 Topic("Planks please!", 10),
                 Topic("What kind of planks can you make?", 20),
                 Topic("Can I buy some housing supplies?", 12),

@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.quest.priest.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendDialogue
 import core.api.sendDialogueLines
@@ -11,7 +13,6 @@ import core.game.node.scenery.Scenery
 import core.tools.BLUE
 import core.tools.END_DIALOGUE
 import core.tools.RED
-import shared.consts.Quests
 
 /**
  * Represents the Mysterious Voice dialogue used in Priest in Peril quest.
@@ -19,7 +20,7 @@ import shared.consts.Quests
 class MysteriousVoiceDialogue(private val doors: Scenery) : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.PRIEST_IN_PERIL)
+        val questStage = getQuestStage(player!!, Quests.PRIEST_IN_PERIL.questName)
         when (stage) {
             0 -> {
                 if (questStage == 10) {
@@ -67,7 +68,7 @@ class MysteriousVoiceDialogue(private val doors: Scenery) : DialogueFile() {
                 "${RED}stuff! Please kill it for me buddy!",
             ).also { stage++ }
             10 -> player(FaceAnim.HALF_GUILTY, "Okey-dokey, one dead dog coming up.").also {
-                setQuestStage(player!!, Quests.PRIEST_IN_PERIL, 11)
+                setQuestStage(player!!, Quests.PRIEST_IN_PERIL.questName, 11)
                 stage = END_DIALOGUE
             }
             11 -> player(FaceAnim.HALF_GUILTY, "I killed that dog for you.").also { stage++ }

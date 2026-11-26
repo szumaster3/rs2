@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendNPCDialogue
 import core.api.setQuestStage
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Clerk dialogue.
@@ -28,7 +29,7 @@ class ClerkDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             11 -> when (stage) {
                 0 -> options("Who is through that door?", "I'm just looking thanks.").also { stage++ }
                 1 -> when (buttonID) {
@@ -73,7 +74,7 @@ class ClerkDialogue(player: Player? = null) : Dialogue(player) {
                 12 -> npcl(FaceAnim.HALF_GUILTY, "Mr Bravek, there's a man here who really needs to speak to you.").also { stage++ }
                 13 -> {
                     end()
-                    setQuestStage(player!!, Quests.PLAGUE_CITY, 13)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 13)
                     sendNPCDialogue(player!!, NPCs.BRAVEK_711, "I suppose they can come in then. If they keep it short.").also { stage++ }
                 }
                 14 -> npcl(FaceAnim.HALF_GUILTY, "Oh I don't know, an hour or so maybe.").also { stage = END_DIALOGUE }

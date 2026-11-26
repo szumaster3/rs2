@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.dialogue.market
 
+import content.data.Quests
+
 import content.global.skill.thieving.ThievingDefinition
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.dialogue.SilverMerchantDialogueFile
@@ -14,7 +16,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
@@ -36,14 +37,14 @@ class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasKey = hasAnItem(player, Items.ENCHANTED_KEY_6754).container != null
         val hasJournal = hasAnItem(player, Items.JOURNAL_6755).container == player.inventory
-        val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
+        val questStage = getQuestStage(player, Quests.MAKING_HISTORY.questName)
         val erinProgress = getVarbit(player, MHUtils.ERIN_PROGRESS)
 
         when (stage) {
             0 -> {
                 if (questStage >= 1) {
                     options("Yes please.", "No, thank you.", "Ask about the outpost.").also { stage = 2 }
-                } else if (isQuestComplete(player, Quests.MAKING_HISTORY)) {
+                } else if (isQuestComplete(player, Quests.MAKING_HISTORY.questName)) {
                     npc(FaceAnim.NEUTRAL,"Hello, I hope Jorral was pleased with that Journal.").also { stage = 4 }
                 } else {
                     options("Yes please.", "No, thank you.").also { stage++ }

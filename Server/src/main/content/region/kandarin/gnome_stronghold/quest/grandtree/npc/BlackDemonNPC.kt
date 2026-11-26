@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.npc
 
+import content.data.Quests
+
 import core.api.location
 import core.api.setQuestStage
 import core.game.node.entity.Entity
@@ -11,7 +13,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Black Demon NPC.
@@ -58,7 +59,7 @@ class BlackDemonNPC(
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer!!.asPlayer().location.getRegionId() == 9882) {
-            setQuestStage(killer.asPlayer(), Quests.THE_GRAND_TREE, 98)
+            setQuestStage(killer.asPlayer(), Quests.THE_GRAND_TREE.questName, 98)
             this.isRespawn = false
         }
         clear()

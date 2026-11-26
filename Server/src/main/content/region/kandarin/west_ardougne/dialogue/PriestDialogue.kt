@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Priest dialogue.
@@ -18,7 +19,7 @@ class PriestDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, Quests.PLAGUE_CITY)) {
+        if (!isQuestComplete(player, Quests.PLAGUE_CITY.questName)) {
             playerl(FaceAnim.FRIENDLY, "Hello there.")
         } else {
             npcl(FaceAnim.HAPPY, "Praise Saradomin! The Mourners are gone, and we can live free of the fear of plague!").also { stage = END_DIALOGUE }

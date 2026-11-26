@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.priest.plugin
 
+import content.data.Quests
+
 import content.region.misthalin.lumbridge.quest.priest.cutscene.RestlessGhostCutscene
 import content.region.misthalin.lumbridge.quest.priest.npc.RestlessGhostNPC
 import core.api.*
@@ -47,14 +49,14 @@ class RestlessGhostPlugin : InteractionListener {
                         Scenery.COFFIN_15053 -> sendDialogue(player, "There's a nice and complete skeleton in here!")
                         Scenery.ALTAR_15050 -> searchAltar(player, obj)
                         Scenery.ALTAR_15051 -> {
-                            if (!isQuestComplete(player, Quests.THE_RESTLESS_GHOST) &&
+                            if (!isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName) &&
                                 !inBank(player, Items.GHOSTS_SKULL_553) &&
                                 !inInventory(player, Items.GHOSTS_SKULL_553)
                             ) {
                                 sendMessage(player, "You find another skull.")
                                 addItem(player, Items.GHOSTS_SKULL_553)
                             }
-                            setQuestStageNonmonotonic(player, 25, 40)
+                            setQuestStageNonmonotonic(player, 27, 40)
                         }
                     }
             }
@@ -81,7 +83,7 @@ class RestlessGhostPlugin : InteractionListener {
                 return@onUseWith true
             }
 
-            if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST)) {
+            if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName)) {
                 sendMessage(player, "You have already put the skull in the coffin.")
                 return@onUseWith true
             }
@@ -133,7 +135,7 @@ class RestlessGhostPlugin : InteractionListener {
             message = "You " + (if (closedCoffin) "open" else "close") + " the coffin.",
         )
 
-        if (coffin.id == Scenery.COFFIN_2145 && !isQuestComplete(player, Quests.THE_RESTLESS_GHOST)) {
+        if (coffin.id == Scenery.COFFIN_2145 && !isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName)) {
             playAudio(player, Sounds.RG_GHOST_APPROACH_1743, 1)
             if (GHOST!!.isInvisible) {
                 val destination = Location.create(3250, 3192, 0)
@@ -157,7 +159,7 @@ class RestlessGhostPlugin : InteractionListener {
      * and triggers [spawnSkeleton].
      */
     private fun searchAltar(player: Player, n: Node) {
-        if (getQuestStage(player, Quests.THE_RESTLESS_GHOST) != 30) {
+        if (getQuestStage(player, Quests.THE_RESTLESS_GHOST.questName) != 30) {
             sendMessage(player, "You search the altar and find nothing.")
             return
         }
@@ -165,7 +167,7 @@ class RestlessGhostPlugin : InteractionListener {
             addItemOrDrop(player, Items.GHOSTS_SKULL_553)
             setVarp(player, Vars.VARP_RESTLESS_GHOST_728, 5, true)
             queueScript(player, 1, QueueStrength.NORMAL) {
-                setQuestStage(player, Quests.THE_RESTLESS_GHOST, 40)
+                setQuestStage(player, Quests.THE_RESTLESS_GHOST.questName, 40)
                 sendMessage(player, "The skeleton in the corner suddenly comes to life!")
                 spawnSkeleton(player)
                 return@queueScript stopExecuting(player)

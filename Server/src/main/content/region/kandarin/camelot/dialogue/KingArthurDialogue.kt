@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents King Arthur dialogue.
@@ -22,10 +23,10 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
     val STAGE_MERLIN_FINISH = 20
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val questStage = getQuestStage(player!!, Quests.HOLY_GRAIL)
-        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
+        val questStage = getQuestStage(player!!, Quests.HOLY_GRAIL.questName)
+        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL.questName)) {
             when (stage) {
-                0 -> if (getQuestStage(player, Quests.MERLINS_CRYSTAL) == 60) {
+                0 -> if (getQuestStage(player, Quests.MERLINS_CRYSTAL.questName) == 60) {
                     playerl(FaceAnim.NEUTRAL, "I have freed Merlin from his crystal!").also { stage++ }
                     stage = STAGE_MERLIN_FINISH
                 } else {
@@ -39,7 +40,7 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
                 )
 
                 2 -> {
-                    if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) > 0) {
+                    if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName) > 0) {
                         npcl(FaceAnim.NEUTRAL, "Well then you must complete your quest to rescue Merlin. Talk to my knights if you need any help.").also { stage = END_DIALOGUE }
                     } else {
                         npcl(FaceAnim.NEUTRAL, "Well, in that case I think you need to go on a quest to prove yourself worthy.").also { stage++ }
@@ -50,7 +51,7 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
                 5 -> npcl(FaceAnim.THINKING, "Back in England, he got himself trapped in some sort of magical Crystal. We've moved him from the cave we found him in and now he's upstairs in his tower.").also { stage++ }
                 6 -> {
                     playerl(FaceAnim.NEUTRAL, "I will see what I can do then.")
-                    setQuestStage(player, Quests.MERLINS_CRYSTAL, 10)
+                    setQuestStage(player, Quests.MERLINS_CRYSTAL.questName, 10)
                     stage++
                 }
                 7 -> npcl(FaceAnim.NEUTRAL, "Talk to my knights if you need any help.").also { stage = END_DIALOGUE }
@@ -60,13 +61,13 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
                 20 -> npcl(FaceAnim.NEUTRAL, "Ah, A good job, well done. I dub thee a Knight Of The Round Table. You are now an honorary knight.").also { stage++ }
                 21 -> {
                     end()
-                    finishQuest(player!!, Quests.MERLINS_CRYSTAL)
+                    finishQuest(player!!, Quests.MERLINS_CRYSTAL.questName)
                 }
             }
         } else {
             when (stage) {
                 0 -> when {
-                    isQuestComplete(player, Quests.HOLY_GRAIL) -> {
+                    isQuestComplete(player, Quests.HOLY_GRAIL.questName) -> {
                         npcl(FaceAnim.NEUTRAL, "Thank you for retrieving the Grail! You shall be long remembered as one of the greatest heroes amongst the Knights of the Round Table!")
                         stage = END_DIALOGUE
                     }
@@ -102,7 +103,7 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
                 17 -> npc(FaceAnim.NEUTRAL, "Go speak to Merlin. He may be able to give a better", "clue as to where it is now you have freed him from that", "crystal.").also { stage++ }
                 18 -> {
                     end()
-                    setQuestStage(player!!, Quests.HOLY_GRAIL, 10)
+                    setQuestStage(player!!, Quests.HOLY_GRAIL.questName, 10)
                     npcl(FaceAnim.NEUTRAL, "He has set up his workshop in the room next to the library.")
                 }
                 20 -> npcl(FaceAnim.NEUTRAL, "Be sure that you come speak to me soon then.").also { stage = END_DIALOGUE }
@@ -129,7 +130,7 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
                 61 -> npcl(FaceAnim.NEUTRAL, "Wow! Incredible! You truly are a splendid knight!").also { stage++ }
                 62 -> {
                     end()
-                    finishQuest(player!!, Quests.HOLY_GRAIL)
+                    finishQuest(player!!, Quests.HOLY_GRAIL.questName)
                 }
             }
         }

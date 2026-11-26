@@ -1,6 +1,8 @@
 package content.global.plugins.iface.tab
 
-import core.api.closeInterface
+import core.api.getStatLevel
+import core.api.getQuestPoints
+import core.cache.def.impl.QuestDefinition
 import core.api.openInterface
 import core.api.sendString
 import core.game.component.Component
@@ -11,7 +13,6 @@ import core.game.node.entity.player.link.quest.*
 import core.game.node.entity.skill.Skills
 import core.tools.colorize
 import shared.consts.Components
-import shared.consts.Quests
 import kotlin.math.max
 import kotlin.math.min
 
@@ -22,24 +23,35 @@ import kotlin.math.min
 class QuestTabInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
-        on(Components.QUESTJOURNAL_V2_274) { player, _, _, buttonID, _, _ ->
-            if (buttonID == 3) {
-                player.achievementDiaryManager.openTab()
-            } else {
-                val quest = player.questRepository.forButtonId(buttonID)
-                if (quest != null) {
-                    openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
-                    quest.drawJournal(player, quest.getStage(player))
-                } else {
-                    showRequirementsInterface(player, buttonID)
+        on(190) { player, _, _, buttonID, slot, _ ->
+            if (buttonID != 18) return@on false
+            val id = journalSlots[slot] ?: return@on false
+            val quest = player.questRepository.forIndex(id)
+            if (quest == null) {
+                val definition = QuestDefinition.forId(id) ?: return@on false
+                openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+                for (line in 0..310) sendString(player, "", Components.QUESTJOURNAL_SCROLL_275, line)
+                sendString(player, definition.name ?: return@on false, Components.QUESTJOURNAL_SCROLL_275, 2)
+                var line = 11
+                for (requirement in definition.skills) {
+                    sendString(player, "Level ${requirement.level} ${requirement.skill}", Components.QUESTJOURNAL_SCROLL_275, line++)
                 }
+                for (required in definition.prerequisiteQuests) {
+                    val name = QuestDefinition.forId(required)?.name ?: continue
+                    sendString(player, name, Components.QUESTJOURNAL_SCROLL_275, line++)
+                }
+                if (definition.requiredQuestPoints > 0) sendString(player, "${definition.requiredQuestPoints} Quest Points", Components.QUESTJOURNAL_SCROLL_275, line++)
+                sendString(player, "This quest is not implemented.", Components.QUESTJOURNAL_SCROLL_275, line)
+                return@on true
             }
+            openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+            quest.drawJournal(player, quest.getStage(player))
             return@on true
         }
 
         on(Components.AREA_TASK_259) { player, _, _, buttonID, _, _ ->
             if (buttonID == 8) {
-                player.interfaceManager.openTab(2, Component(Components.QUESTJOURNAL_V2_274))
+                player.interfaceManager.openTab(2, Component(190))
             } else {
                 player.achievementDiaryManager.getDiary(DiaryType.forChild(buttonID))?.open(player)
             }
@@ -48,236 +60,160 @@ class QuestTabInterface : InterfaceListener {
     }
 
     companion object {
+        // enum_2252 -> struct param 845 -> cache quest name.
+        private val journalSlots = mapOf(
+            1 to 6,
+            2 to 51,
+            3 to 99,
+            4 to 66,
+            5 to 15,
+            6 to 137,
+            7 to 72,
+            8 to 152,
+            9 to 60,
+            10 to 64,
+            11 to 27,
+            13 to 55,
+            14 to 83,
+            15 to 63,
+            16 to 132,
+            17 to 11,
+            18 to 43,
+            19 to 57,
+            20 to 102,
+            21 to 128,
+            22 to 0,
+            23 to 44,
+            24 to 158,
+            25 to 104,
+            26 to 92,
+            28 to 13,
+            29 to 140,
+            30 to 135,
+            31 to 123,
+            32 to 69,
+            33 to 111,
+            34 to 34,
+            35 to 75,
+            36 to 149,
+            37 to 8,
+            38 to 94,
+            39 to 97,
+            40 to 107,
+            41 to 143,
+            42 to 73,
+            43 to 154,
+            44 to 116,
+            45 to 136,
+            46 to 106,
+            47 to 76,
+            49 to 50,
+            50 to 93,
+            52 to 138,
+            53 to 82,
+            54 to 134,
+            55 to 3,
+            56 to 65,
+            57 to 150,
+            58 to 120,
+            59 to 125,
+            60 to 38,
+            61 to 112,
+            62 to 105,
+            63 to 141,
+            64 to 21,
+            65 to 19,
+            66 to 59,
+            67 to 119,
+            68 to 42,
+            69 to 37,
+            70 to 24,
+            71 to 124,
+            72 to 108,
+            73 to 130,
+            74 to 147,
+            75 to 151,
+            76 to 156,
+            77 to 129,
+            78 to 28,
+            79 to 22,
+            80 to 133,
+            81 to 54,
+            82 to 146,
+            83 to 58,
+            84 to 9,
+            85 to 68,
+            87 to 30,
+            88 to 62,
+            89 to 100,
+            90 to 110,
+            91 to 127,
+            92 to 101,
+            93 to 2,
+            94 to 121,
+            96 to 10,
+            97 to 71,
+            98 to 39,
+            99 to 70,
+            100 to 36,
+            101 to 46,
+            102 to 48,
+            103 to 89,
+            104 to 45,
+            105 to 81,
+            106 to 126,
+            107 to 157,
+            108 to 113,
+            109 to 7,
+            110 to 78,
+            111 to 40,
+            112 to 90,
+            113 to 85,
+            114 to 31,
+            115 to 103,
+            116 to 16,
+            117 to 145,
+            118 to 148,
+            119 to 1,
+            121 to 144,
+            122 to 153,
+            123 to 155,
+            124 to 79,
+            125 to 32,
+            126 to 61,
+            127 to 5,
+            128 to 49,
+            129 to 91,
+            130 to 25,
+            131 to 52,
+            133 to 23,
+            134 to 96,
+            135 to 47,
+            136 to 109,
+            137 to 139,
+            138 to 80,
+            139 to 4,
+            140 to 14,
+            141 to 142,
+            142 to 29,
+            143 to 95,
+            144 to 56,
+            145 to 86,
+            146 to 87,
+            147 to 131,
+            148 to 74,
+            149 to 115,
+            151 to 122,
+            153 to 20,
+            154 to 33,
+            155 to 77,
+            157 to 168,
+            159 to 53,
+            160 to 35,
+            161 to 167,
+            163 to 169
+        )
+
         @JvmStatic
-        private fun showRequirementsInterface(player: Player, button: Int) {
-            val questName = getNameForButton(button)
-            val questReq =
-                QuestRequirements.values().filter { it.questName.equals(questName, true) }.firstOrNull() ?: return
-            var (isMet, unmetReqs) = QuestReq(questReq).evaluate(player)
-
-            var messageList = ArrayList<String>()
-
-            val statMap = HashMap<Int, Int>()
-            val questList = HashSet<String>()
-            var maxQpReq = 0
-            var qpPenalty = 0
-            closeInterface(player)
-            for (req in unmetReqs) {
-                if (req is QuestReq) {
-                    questList.add(req.questReq.questName)
-                } else if (req is SkillReq) {
-                    if (statMap[req.skillId] == null ||
-                        (statMap[req.skillId] != null && statMap[req.skillId]!! < req.level)
-                    ) {
-                        statMap[req.skillId] =
-                            req.level
-                    }
-                } else if (req is QPReq && req.amount > maxQpReq) {
-                    maxQpReq = req.amount
-                } else if (req is QPCumulative) {
-                    qpPenalty += req.amount
-                }
-            }
-
-            messageList.add(colorize("%B[Quests Needed]"))
-            messageList.addAll(questList.map { "Completion of $it" })
-
-            messageList.add(" ")
-            messageList.add(colorize("%B[Skills Needed]"))
-
-            for ((skillId, level) in statMap) {
-                val name = Skills.SKILL_NAME[skillId]
-                messageList.add("$level $name")
-            }
-
-            messageList.add(" ")
-            messageList.add(colorize("%B[Other Reqs]"))
-
-            val totalQpRequirement = QPReq(min(max(maxQpReq, qpPenalty), player.questRepository.getAvailablePoints()))
-            val (meetsQp, _) = totalQpRequirement.evaluate(player)
-            isMet = isMet && meetsQp
-
-            if (isMet) messageList.add(colorize("%GCongratulations! You've earned this one."))
-
-            if (!meetsQp) messageList.add("A total of ${totalQpRequirement.amount} Quest Points.")
-
-            messageList.add("")
-            messageList.add(colorize("%BDISCLAIMER: If you're seeing this screen, this quest is not"))
-            messageList.add(colorize("%Bimplemented yet. These are the requirements that you need in order"))
-            messageList.add(colorize("%Bto access implemented content that would normally require this quest"))
-
-            sendString(player, questName, Components.QUESTJOURNAL_SCROLL_275, 2)
-            var lineId = 11
-            for (i in 0..299) {
-                val entry = messageList.elementAtOrNull(i)
-                if (entry != null) {
-                    sendString(player, entry, Components.QUESTJOURNAL_SCROLL_275, lineId++)
-                } else {
-                    sendString(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-                }
-            }
-            openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
-        }
-
-        private fun getNameForButton(button: Int): String {
-            val name =
-                when (button) {
-                    10 -> Quests.MYTHS_OF_THE_WHITE_LANDS
-                    11 -> Quests.MYTHS_OF_THE_WHITE_LANDS
-
-                    13 -> Quests.BLACK_KNIGHTS_FORTRESS
-                    14 -> Quests.COOKS_ASSISTANT
-                    15 -> Quests.DEMON_SLAYER
-                    16 -> Quests.DORICS_QUEST
-                    17 -> Quests.DRAGON_SLAYER
-                    18 -> Quests.ERNEST_THE_CHICKEN
-                    19 -> Quests.GOBLIN_DIPLOMACY
-                    20 -> Quests.IMP_CATCHER
-                    21 -> Quests.THE_KNIGHTS_SWORD
-                    22 -> Quests.PIRATES_TREASURE
-                    23 -> Quests.PRINCE_ALI_RESCUE
-                    24 -> Quests.THE_RESTLESS_GHOST
-                    25 -> Quests.ROMEO_JULIET
-                    26 -> Quests.RUNE_MYSTERIES
-                    27 -> Quests.SHEEP_SHEARER
-                    28 -> Quests.SHIELD_OF_ARRAV
-                    29 -> Quests.VAMPIRE_SLAYER
-                    30 -> Quests.WITCHS_POTION
-
-                    32 -> Quests.ANIMAL_MAGNETISM
-                    33 -> Quests.BETWEEN_A_ROCK
-                    34 -> Quests.BIG_CHOMPY_BIRD_HUNTING
-                    35 -> Quests.BIOHAZARD
-                    36 -> Quests.CABIN_FEVER
-                    37 -> Quests.CLOCK_TOWER
-                    38 -> Quests.CONTACT
-                    39 -> Quests.ZOGRE_FLESH_EATERS
-                    40 -> Quests.CREATURE_OF_FENKENSTRAIN
-                    41 -> Quests.DARKNESS_OF_HALLOWVALE
-                    42 -> Quests.DEATH_TO_THE_DORGESHUUN
-                    43 -> Quests.DEATH_PLATEAU
-                    44 -> Quests.DESERT_TREASURE
-                    45 -> Quests.DEVIOUS_MINDS
-                    46 -> Quests.THE_DIG_SITE
-                    47 -> Quests.DRUIDIC_RITUAL
-                    48 -> Quests.DWARF_CANNON
-                    49 -> Quests.EADGARS_RUSE
-                    50 -> Quests.EAGLES_PEAK
-                    51 -> Quests.ELEMENTAL_WORKSHOP_I
-                    52 -> Quests.ELEMENTAL_WORKSHOP_II
-                    53 -> Quests.ENAKHRAS_LAMENT
-                    54 -> Quests.ENLIGHTENED_JOURNEY
-                    55 -> Quests.THE_EYES_OF_GLOUPHRIE
-                    56 -> Quests.FAIRYTALE_I_GROWING_PAINS
-                    57 -> Quests.FAIRYTALE_II_CURE_A_QUEEN
-                    58 -> Quests.FAMILY_CREST
-                    59 -> Quests.THE_FEUD
-                    60 -> Quests.FIGHT_ARENA
-                    61 -> Quests.FISHING_CONTEST
-                    62 -> Quests.FORGETTABLE_TALE
-                    63 -> Quests.THE_FREMENNIK_TRIALS
-                    64 -> Quests.WATERFALL_QUEST
-                    65 -> Quests.GARDEN_OF_TRANQUILLITY
-                    66 -> Quests.GERTRUDES_CAT
-                    67 -> Quests.GHOSTS_AHOY
-                    68 -> Quests.THE_GIANT_DWARF
-                    69 -> Quests.THE_GOLEM
-                    70 -> Quests.THE_GRAND_TREE
-                    71 -> Quests.THE_HAND_IN_THE_SAND
-                    72 -> Quests.HAUNTED_MINE
-                    73 -> Quests.HAZEEL_CULT
-                    74 -> Quests.HEROES_QUEST
-                    75 -> Quests.HOLY_GRAIL
-                    76 -> Quests.HORROR_FROM_THE_DEEP
-                    77 -> Quests.ICTHLARINS_LITTLE_HELPER
-                    78 -> Quests.IN_AID_OF_THE_MYREQUE
-                    79 -> Quests.IN_SEARCH_OF_THE_MYREQUE
-                    80 -> Quests.JUNGLE_POTION
-                    81 -> Quests.LEGENDS_QUEST
-                    82 -> Quests.LOST_CITY
-                    83 -> Quests.THE_LOST_TRIBE
-                    84 -> Quests.LUNAR_DIPLOMACY
-                    85 -> Quests.MAKING_HISTORY
-                    86 -> Quests.MERLINS_CRYSTAL
-                    87 -> Quests.MONKEY_MADNESS
-                    88 -> Quests.MONKS_FRIEND
-                    89 -> Quests.MOUNTAIN_DAUGHTER
-                    90 -> Quests.MOURNINGS_END_PART_I
-                    91 -> Quests.MOURNINGS_END_PART_II
-                    92 -> Quests.MURDER_MYSTERY
-                    93 -> Quests.MY_ARMS_BIG_ADVENTURE
-                    94 -> Quests.NATURE_SPIRIT
-                    95 -> Quests.OBSERVATORY_QUEST
-                    96 -> Quests.ONE_SMALL_FAVOUR
-                    97 -> Quests.PLAGUE_CITY
-                    98 -> Quests.PRIEST_IN_PERIL
-                    99 -> Quests.RAG_AND_BONE_MAN
-                    100 -> Quests.RATCATCHERS
-                    101 -> Quests.RECIPE_FOR_DISASTER
-                    102 -> Quests.RECRUITMENT_DRIVE
-                    103 -> Quests.REGICIDE
-                    104 -> Quests.ROVING_ELVES
-                    105 -> Quests.ROYAL_TROUBLE
-                    106 -> Quests.RUM_DEAL
-                    107 -> Quests.SCORPION_CATCHER
-                    108 -> Quests.SEA_SLUG
-                    109 -> Quests.THE_SLUG_MENACE
-                    110 -> Quests.SHADES_OF_MORTTON
-                    111 -> Quests.SHADOW_OF_THE_STORM
-                    112 -> Quests.SHEEP_HERDER
-                    113 -> Quests.SHILO_VILLAGE
-                    114 -> Quests.A_SOULS_BANE
-                    115 -> Quests.SPIRITS_OF_THE_ELID
-                    116 -> Quests.SWAN_SONG
-                    117 -> Quests.TAI_BWO_WANNAI_TRIO
-                    118 -> Quests.A_TAIL_OF_TWO_CATS
-                    119 -> Quests.TEARS_OF_GUTHIX
-                    120 -> Quests.TEMPLE_OF_IKOV
-                    121 -> Quests.THRONE_OF_MISCELLANIA
-                    122 -> Quests.THE_TOURIST_TRAP
-                    123 -> Quests.WITCHS_HOUSE
-                    124 -> Quests.TREE_GNOME_VILLAGE
-                    125 -> Quests.TRIBAL_TOTEM
-                    126 -> Quests.TROLL_ROMANCE
-                    127 -> Quests.TROLL_STRONGHOLD
-                    128 -> Quests.UNDERGROUND_PASS
-                    129 -> Quests.WANTED
-                    130 -> Quests.WATCHTOWER
-                    131 -> Quests.COLD_WAR
-                    132 -> Quests.THE_FREMENNIK_ISLES
-                    133 -> Quests.TOWER_OF_LIFE
-                    134 -> Quests.THE_GREAT_BRAIN_ROBBERY
-                    135 -> Quests.WHAT_LIES_BELOW
-                    136 -> Quests.OLAFS_QUEST
-                    137 -> Quests.ANOTHER_SLICE_OF_HAM
-                    138 -> Quests.DREAM_MENTOR
-                    139 -> Quests.GRIM_TALES
-                    140 -> Quests.KINGS_RANSOM
-                    141 -> Quests.THE_PATH_OF_GLOUPHRIE
-                    142 -> Quests.BACK_TO_MY_ROOTS
-                    143 -> Quests.LAND_OF_THE_GOBLINS
-                    144 -> Quests.DEALING_WITH_SCABARAS
-                    145 -> Quests.WOLF_WHISTLE
-                    146 -> Quests.AS_A_FIRST_RESORT
-                    147 -> Quests.CATAPULT_CONSTRUCTION
-                    148 -> Quests.KENNITHS_CONCERNS
-                    149 -> Quests.LEGACY_OF_SEERGAZE
-                    150 -> Quests.PERILS_OF_ICE_MOUNTAIN
-                    151 -> Quests.TOKTZ_KET_DILL
-                    152 -> Quests.SMOKING_KILLS
-                    153 -> Quests.ROCKING_OUT
-                    154 -> Quests.SPIRIT_OF_SUMMER
-                    155 -> Quests.MEETING_HISTORY
-                    156 -> Quests.ALL_FIRED_UP
-                    157 -> Quests.SUMMERS_END
-                    158 -> Quests.DEFENDER_OF_VARROCK
-                    159 -> Quests.SWEPT_AWAY
-                    160 -> Quests.WHILE_GUTHIX_SLEEPS
-                    161 -> Quests.IN_PYRE_NEED
-                    162 -> Quests.MYTHS_OF_THE_WHITE_LANDS
-                    else -> ""
-                }
-            return name
-        }
     }
 }

@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.quest.priest.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.morytania.mort_myre.quest.druidspirit.dialogue.DrezelDialogueFile
 import core.api.*
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Drezel dialogue used in Priest in Peril quest.
@@ -22,12 +23,12 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 17) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 17) {
             npc(FaceAnim.HALF_GUILTY, "Ah, " + player.username + ". I see you finally made it down here.", "Things are worse than I feared. I'm not sure if I will", "be able to repair the damage.")
             stage = 900
             return true
         }
-        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 18) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 18) {
             stage =
                 if (anyInInventory(player, Items.RUNE_ESSENCE_1436, Items.PURE_ESSENCE_7936)) {
                     player(FaceAnim.HALF_GUILTY, "I brought you some Rune Essence.")
@@ -38,17 +39,17 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
                 }
             return true
         }
-        if (getQuestStage(player, Quests.PRIEST_IN_PERIL) == 100 && !player.getSavedData().questData.isTalkedDrezel) {
+        if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) == 100 && !player.getSavedData().questData.isTalkedDrezel) {
             player(FaceAnim.HALF_GUILTY, "So can I pass through that barrier now?")
             stage = 400
             return true
         }
-        if (getQuestStage(player, Quests.NATURE_SPIRIT) <= 5) {
+        if (getQuestStage(player, Quests.NATURE_SPIRIT.questName) <= 5) {
             npc(FaceAnim.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?")
             stage = 420
-        } else if (getQuestStage(player, Quests.NATURE_SPIRIT) < 100 ||
+        } else if (getQuestStage(player, Quests.NATURE_SPIRIT.questName) < 100 ||
             hasAnItem(player, Items.WOLFBANE_2952).container == null &&
-            getQuestStage(player, Quests.NATURE_SPIRIT) == 100
+            getQuestStage(player, Quests.NATURE_SPIRIT.questName) == 100
         ) {
             openDialogue(player, DrezelDialogueFile(), npc)
         } else {
@@ -199,7 +200,7 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             154 -> {
-                finishQuest(player, Quests.PRIEST_IN_PERIL)
+                finishQuest(player, Quests.PRIEST_IN_PERIL.questName)
                 end()
             }
 
@@ -284,7 +285,7 @@ class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             916 -> {
-                setQuestStage(player, Quests.PRIEST_IN_PERIL, 18)
+                setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 18)
                 end()
             }
         }

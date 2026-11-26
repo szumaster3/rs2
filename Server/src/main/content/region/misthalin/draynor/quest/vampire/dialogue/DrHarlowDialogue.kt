@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.vampire.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class DrHarlowDialogue(player: Player? = null) : Dialogue(player) {
@@ -27,15 +28,15 @@ class DrHarlowDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> if (getQuestStage(player, Quests.VAMPIRE_SLAYER) == 10) {
+            0 -> if (getQuestStage(player, Quests.VAMPIRE_SLAYER.questName) == 10) {
                 options("No, you've had enough.", "Morgan needs your help!").also { stage = 1 }
-            } else if (getQuestStage(player, Quests.VAMPIRE_SLAYER) == 20) {
+            } else if (getQuestStage(player, Quests.VAMPIRE_SLAYER.questName) == 20) {
                 if (inInventory(player, 1917, 1)) {
                     player("Here you go.").also { stage = 20 }
                 } else {
                     player("I'll just go and buy one.").also { stage = END_DIALOGUE }
                 }
-            } else if (getQuestStage(player, Quests.VAMPIRE_SLAYER) == 30) {
+            } else if (getQuestStage(player, Quests.VAMPIRE_SLAYER.questName) == 30) {
                 if (!inBank(player, Items.STAKE_1549) && !inInventory(player, Items.STAKE_1549)) {
                     if (!player.inventory.add(ITEMS[0])) {
                         val item = GroundItem(ITEMS[0], npc.location, player)
@@ -50,7 +51,7 @@ class DrHarlowDialogue(player: Player? = null) : Dialogue(player) {
                 } else {
                     player("I'll just go and buy one.").also { stage = END_DIALOGUE }
                 }
-            } else if (isQuestComplete(player, Quests.VAMPIRE_SLAYER)) {
+            } else if (isQuestComplete(player, Quests.VAMPIRE_SLAYER.questName)) {
                 npc("Oh, itsh you. What do you want?").also { stage = 30 }
             } else {
                 player("No, you've had enough.").also { stage = END_DIALOGUE }
@@ -65,13 +66,13 @@ class DrHarlowDialogue(player: Player? = null) : Dialogue(player) {
             8 -> player("But this is your friend Morgan we're talking about!").also { stage++ }
             9 -> npc(FaceAnim.DRUNK, "Buy ush a drink anyway...").also { stage++ }
             10 -> {
-                setQuestStage(player, Quests.VAMPIRE_SLAYER, 20)
+                setQuestStage(player, Quests.VAMPIRE_SLAYER.questName, 20)
                 end()
             }
 
             20 -> if (player.inventory.remove(ITEMS[1])) {
                 interpreter.sendItemMessage(1917, "You give a beer to Dr Harlow.")
-                setQuestStage(player, Quests.VAMPIRE_SLAYER, 30)
+                setQuestStage(player, Quests.VAMPIRE_SLAYER.questName, 30)
                 stage = 21
             }
 

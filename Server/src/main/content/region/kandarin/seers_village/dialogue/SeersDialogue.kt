@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.scorpcatcher.dialogue.SeerMirrorDialogue
 import core.api.isQuestInProgress
 import core.api.openDialogue
@@ -13,7 +15,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Seer's dialogue.
@@ -56,7 +57,7 @@ class SeersDialogue(player: Player? = null) : Dialogue(player) {
              */
 
             1 -> {
-                if (isQuestInProgress(player, Quests.SCORPION_CATCHER, 10, 99)) {
+                if (isQuestInProgress(player, Quests.SCORPION_CATCHER.questName, 10, 99)) {
                     end()
                     openDialogue(player, SeerMirrorDialogue())
                 } else {

@@ -112,6 +112,7 @@ private class CharterPulse(private val player: Player, private val charter: Char
                 finishDiaryTask(player, DiaryType.FALADOR, 0, 14)
                 setVarbit(player, 5705,1, true)
             }
+            CharterShip.ARDOUGNE_TO_BRIMHAVEN -> finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 10)
             else -> {}
         }
     }

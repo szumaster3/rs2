@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.cog.dialogue.BrotherKojoDialogueFile
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Brother Kojo dialogue.
@@ -18,7 +19,7 @@ import shared.consts.Quests
 class BrotherKojoDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val hasCompletedClockTowerQuest = isQuestComplete(player, Quests.CLOCK_TOWER)
+        val hasCompletedClockTowerQuest = isQuestComplete(player, Quests.CLOCK_TOWER.questName)
 
         if(!hasCompletedClockTowerQuest) {
             openDialogue(player!!, BrotherKojoDialogueFile(), npc)

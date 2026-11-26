@@ -1,5 +1,7 @@
 package content.global.skill.magic.spells.lunar
 
+import content.data.Quests
+
 import content.global.skill.magic.spells.LunarSpells
 import core.api.*
 import core.game.component.CloseEvent
@@ -21,7 +23,6 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
-import shared.consts.Quests
 import shared.consts.Sounds
 
 @Initializable
@@ -50,7 +51,7 @@ class SpellbookSwapSpell : MagicSpell(SpellBook.LUNAR, 96, 130.0, null, null, nu
             wif?.openAutocastSelect()
         }
 
-        if (!isQuestComplete(player, Quests.DESERT_TREASURE)) {
+        if (!isQuestComplete(player, Quests.DESERT_TREASURE.questName)) {
             applySpellbook(player, SpellBook.MODERN)
         } else {
             openSpellbookDialogue(player)

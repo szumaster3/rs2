@@ -1,5 +1,7 @@
 package content.region.asgarnia.trollheim.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.death.dialogue.SabaDialogueFile
 import core.api.getQuestStage
 import core.api.isQuestComplete
@@ -11,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Saba dialogue.
@@ -21,10 +22,10 @@ class SabaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, Quests.DEATH_PLATEAU)) {
+        if (!isQuestComplete(player, Quests.DEATH_PLATEAU.questName)) {
             end()
             openDialogue(player!!, SabaDialogueFile(), npc)
-        } else if (isQuestComplete(player, Quests.DEATH_PLATEAU)) {
+        } else if (isQuestComplete(player, Quests.DEATH_PLATEAU.questName)) {
             playerl(FaceAnim.HALF_GUILTY, "Hello.").also { stage = 1 }
         } else {
             playerl(FaceAnim.HALF_GUILTY, "Hi!")
@@ -36,7 +37,7 @@ class SabaDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> npcl(FaceAnim.ANNOYED, "Why won't people leave me alone?!").also { stage = END_DIALOGUE }
             1 -> npcl(FaceAnim.HALF_ASKING, "Have you got rid of those pesky trolls yet?").also { stage++ }
-            2 -> if (getQuestStage(player, Quests.TROLL_STRONGHOLD) >= 1) {
+            2 -> if (getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) >= 1) {
                 playerl(FaceAnim.HALF_GUILTY, "I'm afraid there's been some trouble...").also { stage = 5 }
             } else {
                 playerl(FaceAnim.HALF_GUILTY, "They will be gone soon! The Imperial Guard will use a secret way that starts from the back of the Sherpa's hut to destroy the troll camp!").also { stage++ }

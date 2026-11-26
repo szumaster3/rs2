@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Fremennik Fisherman dialogue.
@@ -48,7 +49,7 @@ class FremennikFishermanDialogue : DialogueFile() {
                     stage = 1
                 }
 
-                isQuestComplete(player!!, Quests.THE_FREMENNIK_TRIALS) -> {
+                isQuestComplete(player!!, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                     player(FaceAnim.FRIENDLY, "Hello there.")
                     stage = 100
                 }

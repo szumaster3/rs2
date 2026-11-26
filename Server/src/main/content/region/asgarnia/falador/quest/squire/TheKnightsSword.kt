@@ -1,19 +1,20 @@
 package content.region.asgarnia.falador.quest.squire
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * The knight's sword quest journal.
  */
 @Initializable
-class TheKnightsSword : Quest(Quests.THE_KNIGHTS_SWORD, 22, 21, 1, Vars.VARP_QUEST_KNIGHTS_SWORD_PROGRESS_122, 0, 1, 7) {
+class TheKnightsSword : Quest(Quests.THE_KNIGHTS_SWORD) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

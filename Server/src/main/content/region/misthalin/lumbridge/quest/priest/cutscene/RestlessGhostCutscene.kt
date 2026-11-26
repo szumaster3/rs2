@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.priest.cutscene
 
+import content.data.Quests
+
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.world.map.Direction
 import core.game.world.update.flag.context.Graphics
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class RestlessGhostCutscene(
     player: Player,
@@ -101,7 +102,7 @@ class RestlessGhostCutscene(
             8 -> {
                 end()
                 runTask(player, 16) {
-                    finishQuest(player, Quests.THE_RESTLESS_GHOST)
+                    finishQuest(player, Quests.THE_RESTLESS_GHOST.questName)
                 }
             }
         }

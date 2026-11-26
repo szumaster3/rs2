@@ -1,5 +1,7 @@
 package content.region.fremennik.lighthouse.quest.horror.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.lighthouse.quest.horror.cutscene.DagannothBossCutscene
 import content.region.fremennik.lighthouse.quest.horror.cutscene.DagannothCutscene
 import core.api.getQuestStage
@@ -8,7 +10,6 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Jossik dialogue under lighthouse.
@@ -20,7 +21,7 @@ class JossikLighthouseDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.JOSSIK_1335)
-        when (getQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP)) {
+        when (getQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP.questName)) {
             55 -> when (stage) {
                 0 -> npc(FaceAnim.SCARED, "*cough*", "Please...please help me...", "I think my leg is broken and those creatures will be", "back any minute now!").also { stage++ }
                 1 -> player(FaceAnim.STRUGGLE, "I guess you're Jossik then...", "What creatures are you talking about?").also { stage++ }

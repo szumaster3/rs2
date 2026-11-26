@@ -1,12 +1,13 @@
 package content.global.plugins.inter.with_item
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import shared.consts.Items
-import shared.consts.Quests
 
 class EnchantedWaterTiaraPlugin : InteractionListener {
     private val tiaraIDs = intArrayOf(Items.WATER_TIARA_5531, Items.ENCHANTED_WATER_TIARA_11969)
@@ -30,7 +31,7 @@ class EnchantedWaterTiaraPlugin : InteractionListener {
                     return@onUseWith false
                 }
 
-                if (!hasRequirement(player, Quests.DEALING_WITH_SCABARAS, false)) {
+                if (!hasRequirement(player, Quests.DEALING_WITH_SCABARAS.questName, false)) {
                     sendMessage(player, "You need to complete the quest 'Dealing with Scabaras' to enchant this tiara.")
                     return@onUseWith false
                 }

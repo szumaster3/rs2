@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.NecrovarusAhoyDialogue
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.isQuestComplete
@@ -12,7 +14,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Necrovarus dialogue.
@@ -26,12 +27,12 @@ class NecrovarusDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
 
-        if (isQuestInProgress(player, Quests.GHOSTS_AHOY, 1,99)) {
+        if (isQuestInProgress(player, Quests.GHOSTS_AHOY.questName, 1,99)) {
             openDialogue(player, NecrovarusAhoyDialogue())
             return true
         }
 
-        if (isQuestComplete(player, Quests.GHOSTS_AHOY)) {
+        if (isQuestComplete(player, Quests.GHOSTS_AHOY.questName)) {
             player("Told you I'd defeat you, Necrovarus. My advice to", "you is to pass over to the next world yourself with", "everybody else.")
             stage = 4
             return true

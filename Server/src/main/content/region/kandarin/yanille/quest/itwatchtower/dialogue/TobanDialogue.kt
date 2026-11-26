@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Toban dialogue.
@@ -24,7 +25,7 @@ class TobanDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        val questStage = getQuestStage(player, Quests.WATCHTOWER)
+        val questStage = getQuestStage(player, Quests.WATCHTOWER.questName)
 
         if (questStage == 100) {
             sendMessage(player, "The ogre is not interested in you anymore.")

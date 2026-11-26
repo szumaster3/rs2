@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.plugin
 
+import content.data.Quests
+
 import content.global.skill.thieving.ThievingDefinition
 import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.GuidorsWifeQuestDialogue
 import content.region.misthalin.varrock.dialogue.KnockatDoorDialogue
@@ -102,7 +104,7 @@ class VarrockPlugin : InteractionListener {
          */
 
         on(Scenery.BEDROOM_DOOR_2032, IntType.SCENERY, "open") { player, node ->
-            val questStage = getQuestStage(player, Quests.BIOHAZARD)
+            val questStage = getQuestStage(player, Quests.BIOHAZARD.questName)
             val hasGownTop = inEquipment(player, Items.PRIEST_GOWN_426)
             val hasGownBottom = inEquipment(player, Items.PRIEST_GOWN_428)
             val hasAnyGown = hasGownTop || hasGownBottom

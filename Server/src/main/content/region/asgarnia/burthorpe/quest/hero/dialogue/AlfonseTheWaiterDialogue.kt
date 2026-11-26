@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.hero.dialogue
 
+import content.data.Quests
+
 import content.region.asgarnia.burthorpe.quest.hero.HeroesQuest
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Alfonse The Waiter dialogue.
@@ -87,7 +88,7 @@ class AlfonseTheWaiterDialogueFile : DialogueFile() {
                     2 -> endFile()
 
                     3 -> {
-                        if (getQuestStage(player!!, Quests.HEROES_QUEST) >= 2 && HeroesQuest.isPhoenix(player!!)) {
+                        if (getQuestStage(player!!, Quests.HEROES_QUEST.questName) >= 2 && HeroesQuest.isPhoenix(player!!)) {
                             player("Do you sell Gherkins?")
                             stage = 3
                         } else {
@@ -116,8 +117,8 @@ class AlfonseTheWaiterDialogueFile : DialogueFile() {
             }
 
             6 -> {
-                if (getQuestStage(player!!, Quests.HEROES_QUEST) == 2) {
-                    setQuestStage(player!!, Quests.HEROES_QUEST, 3)
+                if (getQuestStage(player!!, Quests.HEROES_QUEST.questName) == 2) {
+                    setQuestStage(player!!, Quests.HEROES_QUEST.questName, 3)
                 }
                 endFile()
             }

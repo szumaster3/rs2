@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.diary
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.dialogue.TownCrierDialogue
 import content.global.skill.magic.TeleportMethod
@@ -492,7 +494,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
         when (event.dialogue) {
             is DukeDragonSlayerDialogue -> {
-                val dragonSlayerStage = getQuestStage(player, Quests.DRAGON_SLAYER)
+                val dragonSlayerStage = getQuestStage(player, Quests.DRAGON_SLAYER.questName)
                 if ((dragonSlayerStage == 100 && event.currentStage == 4) || event.currentStage == 12) {
                     finishTask(
                         player,

@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -8,7 +10,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Caroline dialogue extension.
@@ -21,7 +22,7 @@ class CarolineDialogueFile : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        val questStage = getQuestStage(player!!, Quests.SEA_SLUG)
+        val questStage = getQuestStage(player!!, Quests.SEA_SLUG.questName)
         npc = NPC(NPCs.CAROLINE_696)
         when (questStage) {
             // Concerned Caroline.
@@ -45,7 +46,7 @@ class CarolineDialogueFile : DialogueFile() {
                     12 -> npc(FaceAnim.HALF_GUILTY, "I'll reward you for your time. It'll give me peace of", "mind to know Kennith and my husband, Kent, are safe.").also { stage++ }
                     13 -> {
                         end()
-                        setQuestStage(player!!, Quests.SEA_SLUG, 2)
+                        setQuestStage(player!!, Quests.SEA_SLUG.questName, 2)
                     }
                 }
             }
@@ -96,7 +97,7 @@ class CarolineDialogueFile : DialogueFile() {
                     7 -> npc("Thank you. Take care of yourself ${player!!.username}.").also { stage++ }
                     8 -> {
                         end()
-                        finishQuest(player!!, Quests.SEA_SLUG)
+                        finishQuest(player!!, Quests.SEA_SLUG.questName)
                     }
                 }
             }

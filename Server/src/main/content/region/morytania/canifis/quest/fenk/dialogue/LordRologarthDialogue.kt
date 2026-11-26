@@ -1,6 +1,8 @@
 
 package content.region.morytania.canifis.quest.fenk.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -9,13 +11,12 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class LordRologarthDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        when (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN)) {
+        when (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName)) {
             6 -> {
                 playerl(FaceAnim.ANGRY,"I am commanded to destroy you, creature!")
                 stage = 0
@@ -134,8 +135,8 @@ class LordRologarthDialogue(player: Player? = null) : Dialogue(player) {
 
             19 -> {
                 end()
-                if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 6) {
-                    setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 7)
+                if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 6) {
+                    setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName, 7)
                 }
                 stage = END_DIALOGUE
             }

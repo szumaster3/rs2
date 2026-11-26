@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult.dialogue
 
+import content.data.Quests
+
 import core.api.getAttribute
 import core.api.getQuestStage
 import core.api.sendMessage
@@ -9,13 +11,12 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class HenryetaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT)
+        val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT.questName)
 
         when {
             (questStage == 0) -> {

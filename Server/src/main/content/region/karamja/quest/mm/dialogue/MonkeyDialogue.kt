@@ -1,9 +1,10 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import shared.consts.Quests
 
 class MonkeyDialogue : DialogueFile() {
 
@@ -29,7 +30,7 @@ class MonkeyDialogue : DialogueFile() {
             17 -> npcl(FaceAnim.OLD_NEUTRAL, "Ook!").also { stage++ }
             18 -> {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 40)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 40)
             }
         }
     }

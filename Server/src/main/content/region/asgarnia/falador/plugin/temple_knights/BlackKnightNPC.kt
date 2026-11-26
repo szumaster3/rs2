@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.plugin.temple_knights
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Black knight NPCs.
@@ -20,7 +21,7 @@ class BlackKnightNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         if (killer is Player) {
-            if(!hasRequirement(killer,Quests.WANTED, false)) return
+            if(!hasRequirement(killer,Quests.WANTED.questName, false)) return
             val killsToAdd = if (id > 8000) 10 else 1
             WhiteKnightRankManager.addToKillCount(killer, killsToAdd)
         }

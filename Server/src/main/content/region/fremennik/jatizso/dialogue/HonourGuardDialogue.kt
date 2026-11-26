@@ -1,5 +1,7 @@
 package content.region.fremennik.jatizso.dialogue
 
+import content.data.Quests
+
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.anyInEquipment
 import core.api.inBorders
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Honour Guard dialogue.
@@ -45,7 +46,7 @@ class HonourGuardDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
 
-        if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) || inBorders(player, ZoneBorders(2342, 3795, 2329, 3811))) {
+        if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) || inBorders(player, ZoneBorders(2342, 3795, 2329, 3811))) {
             npc("Hail, $name}!").also { stage = 1 }
         } else {
             npc("Can't talk now, I'm on duty.").also { stage = END_DIALOGUE }

@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.west_ardougne.dialogue.WomanDialogue
 import content.region.kandarin.west_ardougne.quest.elena.dialogue.HeadMournerDialogue
@@ -86,7 +88,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.MANHOLE_2543, IntType.SCENERY, "open") { player, node ->
-            if (isQuestInProgress(player, Quests.BIOHAZARD, 1, 99)) {
+            if (isQuestInProgress(player, Quests.BIOHAZARD.questName, 1, 99)) {
                 sendMessage(player, "The trapdoor is bolted on the other side.")
                 return@on true
             }
@@ -116,7 +118,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.MANHOLE_2544, IntType.SCENERY, "climb-down") { player, _ ->
-            if (isQuestInProgress(player, Quests.BIOHAZARD, 1, 100)) {
+            if (isQuestInProgress(player, Quests.BIOHAZARD.questName, 1, 100)) {
                 sendMessage(player, "The trapdoor is bolted on the other side.")
             } else {
                 animate(player, Animations.HUMAN_BURYING_BONES_827)
@@ -134,7 +136,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.DOOR_2528, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.PLAGUE_CITY) >= 13) {
+            if (getQuestStage(player, Quests.PLAGUE_CITY.questName) >= 13) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendNPCDialogue(player, NPCs.BRAVEK_711, "Go away, I'm busy! I'm... Umm... In a meeting!")
@@ -200,7 +202,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.DOOR_35991, IntType.SCENERY, "open") { player, node ->
-            val questStage = getQuestStage(player, Quests.PLAGUE_CITY)
+            val questStage = getQuestStage(player, Quests.PLAGUE_CITY.questName)
 
             when (questStage) {
                 11 -> openDialogue(player, HeadMournerDialogue())
@@ -244,7 +246,7 @@ class PlagueCityPlugin : InteractionListener {
                 )
             } else if (inEquipmentOrInventory(player, Items.GAS_MASK_1506)) {
                 sendMessage(player, "You search the wardrobe but you find nothing.")
-            } else if (getQuestStage(player, Quests.PLAGUE_CITY) >= 2) {
+            } else if (getQuestStage(player, Quests.PLAGUE_CITY.questName) >= 2) {
                 sendItemDialogue(player, Items.GAS_MASK_1506, "You find a protective mask.")
                 addItem(player, Items.GAS_MASK_1506)
             } else {
@@ -295,7 +297,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.DUG_HOLE_11417, IntType.SCENERY, "climb-down") { player, _ ->
-            if (getQuestStage(player, Quests.BIOHAZARD) > 1) {
+            if (getQuestStage(player, Quests.BIOHAZARD.questName) > 1) {
                 sendMessage(player, "The ground's been filled in and packed hard.")
                 return@on true
             }
@@ -304,7 +306,7 @@ class PlagueCityPlugin : InteractionListener {
             animate(player, 827)
             queueScript(player, 1, QueueStrength.SOFT) {
                 teleport(player, Location(2518, 9759))
-                setQuestStage(player, Quests.PLAGUE_CITY, 4)
+                setQuestStage(player, Quests.PLAGUE_CITY.questName, 4)
                 sendDialogueLines(
                     player,
                     "You fall through...",
@@ -321,11 +323,11 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.GRILL_11423, IntType.SCENERY, "open") { player, _ ->
-            if (getQuestStage(player, Quests.PLAGUE_CITY) == 4) {
+            if (getQuestStage(player, Quests.PLAGUE_CITY.questName) == 4) {
                 sendDialogue(player, "The grill is too secure. You can't pull it off alone.")
                 animate(player, Animations.PC_SEWERS_REMOVE_GRILL_3192)
                 playAudio(player, Sounds.PLAGUE_PULL_GRILL_1730)
-                setQuestStage(player, Quests.PLAGUE_CITY, 5)
+                setQuestStage(player, Quests.PLAGUE_CITY.questName, 5)
             } else {
                 sendDialogue(player, "There is a grill blocking your way.")
             }
@@ -337,7 +339,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.PIPE_2542, IntType.SCENERY, "climb-up") { player, _ ->
-            if (getQuestStage(player, Quests.PLAGUE_CITY) >= 7 && inEquipment(player, Items.GAS_MASK_1506)) {
+            if (getQuestStage(player, Quests.PLAGUE_CITY.questName) >= 7 && inEquipment(player, Items.GAS_MASK_1506)) {
                 forceMove(player, player.location, Location(2514, 9737, 0), 0, 30, Direction.SOUTH, 10580)
                 runTask(player, 3) {
                     teleport(player, Location(2529, 3304, 0))
@@ -394,7 +396,7 @@ class PlagueCityPlugin : InteractionListener {
                         return@queueScript delayScript(player, 1)
                     }
                     3 -> {
-                        setQuestStage(player, Quests.PLAGUE_CITY, 6)
+                        setQuestStage(player, Quests.PLAGUE_CITY.questName, 6)
                         sendItemDialogue(player, Items.ROPE_954, "You tie the end of the rope to the sewer pipe's grill.")
                         return@queueScript stopExecuting(player)
                     }
@@ -409,7 +411,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.DOOR_2537, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.PLAGUE_CITY) >= 9) {
+            if (getQuestStage(player, Quests.PLAGUE_CITY.questName) >= 9) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 return@on true
             }
@@ -463,7 +465,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.KEY_423, Scenery.DOOR_2526) { player, _, _ ->
-            if (getQuestStage(player, Quests.PLAGUE_CITY) >= 16) {
+            if (getQuestStage(player, Quests.PLAGUE_CITY.questName) >= 16) {
                 DoorActionHandler.handleAutowalkDoor(player, getScenery(Location(2539, 9672, 0))!!.asScenery())
                 sendMessage(player, "You unlock the door.")
             } else {
@@ -477,7 +479,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.DOOR_2526, IntType.SCENERY, "open") { player, node ->
-            if (isQuestComplete(player, Quests.PLAGUE_CITY) || player.location.x > 2539) {
+            if (isQuestComplete(player, Quests.PLAGUE_CITY.questName) || player.location.x > 2539) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 return@on true
             }
@@ -517,7 +519,7 @@ class PlagueCityPlugin : InteractionListener {
                     end()
                     removeItem(player!!, Items.BOOK_1509)
                     DoorActionHandler.handleAutowalkDoor(player!!, getScenery(2531, 3328, 0)!!)
-                    setQuestStage(player!!, Quests.PLAGUE_CITY, 9)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 9)
                     sendNPCDialogue(player!!, npc!!.id, "Thanks, I've been missing that.", FaceAnim.NEUTRAL)
                 }
             }
@@ -547,7 +549,7 @@ class PlagueCityPlugin : InteractionListener {
                 }
 
                 2 -> {
-                    if (getQuestStage(player!!, Quests.PLAGUE_CITY) < 11) {
+                    if (getQuestStage(player!!, Quests.PLAGUE_CITY.questName) < 11) {
                         options("But I think a kidnap victim is in here.", "I fear not a mere plague.", "Thanks for the warning.")
                         stage = 3
                     } else {
@@ -639,7 +641,7 @@ class PlagueCityPlugin : InteractionListener {
                         secondMourner.faceLocation(location(2537, 3273, 0))
                         secondMourner.sendChat("Well, you can't let them in...")
 
-                        setQuestStage(player!!, Quests.PLAGUE_CITY, 17)
+                        setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 17)
 
                         sendDialogueLines(
                             player!!,

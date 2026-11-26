@@ -1,21 +1,17 @@
 package content.region.asgarnia.port_sarim.quest.hunt
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class PiratesTreasure : Quest(
-    Quests.PIRATES_TREASURE,
-    23, 22, 2,
-    Vars.VARP_QUEST_PIRATES_TREASURE_PROGRESS_71,
-    0, 1, 4
-) {
+class PiratesTreasure : Quest(Quests.PIRATES_TREASURE) {
 
     companion object {
         private const val KARAMJAN_RUM = Items.KARAMJAN_RUM_431

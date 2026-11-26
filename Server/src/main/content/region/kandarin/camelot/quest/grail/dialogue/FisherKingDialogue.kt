@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.grail.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
@@ -8,7 +10,6 @@ import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Fisher king dialogue.
@@ -27,7 +28,7 @@ class FisherKingDialogue : DialogueFile() {
 
         when (stage) {
             0 -> {
-                if (getQuestStage(player!!, Quests.HOLY_GRAIL) >= 50) {
+                if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) >= 50) {
                     npcl(FaceAnim.HAPPY, "You missed all the excitement!")
                     stage = 30
                 } else {
@@ -63,8 +64,8 @@ class FisherKingDialogue : DialogueFile() {
             25 -> npcl(FaceAnim.NEUTRAL, "I believe he is a knight of the round table.").also { stage++ }
             26 -> playerl(FaceAnim.NEUTRAL, "I shall go and see if I can find him.").also {
                 stage = END_DIALOGUE
-                if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 30) {
-                    setQuestStage(player!!, Quests.HOLY_GRAIL, 40)
+                if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) == 30) {
+                    setQuestStage(player!!, Quests.HOLY_GRAIL.questName, 40)
                 }
             }
             30 -> npcl(FaceAnim.HAPPY, "I got here and agreed to take over duties as king here, then before my eyes the most miraculous changes occured here... grass and trees were growing outside before our very eyes!").also { stage++ }

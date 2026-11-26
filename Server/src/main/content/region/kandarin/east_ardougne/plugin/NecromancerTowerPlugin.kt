@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class NecromancerTowerPlugin : InteractionListener {
@@ -42,7 +43,7 @@ class NecromancerTowerPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, Items.TORN_PAGE_4809, NPCs.IRWIN_FEASELBAUM_2066) { player, _, _ ->
-            if (getQuestStage(player, Quests.ZOGRE_FLESH_EATERS) > 1) {
+            if (getQuestStage(player, Quests.ZOGRE_FLESH_EATERS.questName) > 1) {
                 openDialogue(player, IrwinFeaselbaumAboutTornPagesDialogue())
             }
             return@onUseWith true
@@ -53,7 +54,7 @@ class NecromancerTowerPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, Items.NECROMANCY_BOOK_4837, NPCs.IRWIN_FEASELBAUM_2066) { player, _, _ ->
-            if (getQuestStage(player, Quests.ZOGRE_FLESH_EATERS) > 1) {
+            if (getQuestStage(player, Quests.ZOGRE_FLESH_EATERS.questName) > 1) {
                 openDialogue(player, IrwinFeaselbaumAboutNecromancyBookDialogue())
             }
             return@onUseWith true

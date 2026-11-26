@@ -1,5 +1,7 @@
 package content.global.plugins.item.books_and_scrolls.impl
 
+import content.data.Quests
+
 import content.global.plugins.item.books_and_scrolls.BookInterface
 import content.global.plugins.item.books_and_scrolls.BookLine
 import content.global.plugins.item.books_and_scrolls.Page
@@ -10,7 +12,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import shared.consts.Items
-import shared.consts.Quests
 
 class BeatenBook : InteractionListener {
     /*
@@ -134,7 +135,7 @@ class BeatenBook : InteractionListener {
                 setVarbit(player, EW2Utils.EW2_KEY_VARBIT, 3, true)
                 runTask(player, 2) {
                     BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
-                    setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II, 2)
+                    setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II.questName, 2)
                 }
             } else {
                 BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)

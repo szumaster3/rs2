@@ -1,5 +1,7 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves.dialogue
 
+import content.data.Quests
+
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,22 +12,21 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import core.tools.END_DIALOGUE
 
 class IslwynDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         when {
-            isQuestComplete(player, Quests.ROVING_ELVES) -> {
+            isQuestComplete(player, Quests.ROVING_ELVES.questName) -> {
                 player(FaceAnim.HALF_GUILTY, "Hello Islwyn, I'm back.")
                 stage = 31
             }
-            hasStarted(player, Quests.ROVING_ELVES) && getQuestStage(player, Quests.ROVING_ELVES) >= 10 -> {
+            hasStarted(player, Quests.ROVING_ELVES.questName) && getQuestStage(player, Quests.ROVING_ELVES.questName) >= 10 -> {
                 player(FaceAnim.HALF_GUILTY, "Hello Islwyn.")
                 stage = 0
             }
-            getQuestStage(player, Quests.ROVING_ELVES) == 0 && isQuestComplete(player, Quests.WATERFALL_QUEST) -> {
+            getQuestStage(player, Quests.ROVING_ELVES.questName) == 0 && isQuestComplete(player, Quests.WATERFALL_QUEST.questName) -> {
                 player(FaceAnim.HALF_GUILTY, "Hello there.")
                 stage = 0
             }
@@ -40,7 +41,7 @@ class IslwynDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                val questStage = getQuestStage(player, Quests.ROVING_ELVES)
+                val questStage = getQuestStage(player, Quests.ROVING_ELVES.questName)
                 when (questStage) {
                     10, 15 -> {
                         interpreter.sendDialogues(NPCs.ISLWYN_1680, FaceAnim.HALF_GUILTY, "Have you spoken to Eluned yet?")
@@ -146,7 +147,7 @@ class IslwynDialogue(player: Player? = null) : Dialogue(player) {
 
             18 -> {
                 end()
-                setQuestStage(player, Quests.ROVING_ELVES, 10)
+                setQuestStage(player, Quests.ROVING_ELVES.questName, 10)
             }
 
             19 -> {
@@ -203,21 +204,21 @@ class IslwynDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
             30 -> {
-                if (!isQuestComplete(player, Quests.ROVING_ELVES)) {
+                if (!isQuestComplete(player, Quests.ROVING_ELVES.questName)) {
                     if (!addItem(player, Items.CRYSTAL_BOW_2_10_4222, 1)) {
                         GroundItemManager.create(Item(Items.CRYSTAL_BOW_2_10_4222, 1), player)
                     }
-                    finishQuest(player, Quests.ROVING_ELVES)
+                    finishQuest(player, Quests.ROVING_ELVES.questName)
                 }
                 end()
             }
 
             301 -> {
-                if (!isQuestComplete(player, Quests.ROVING_ELVES)) {
+                if (!isQuestComplete(player, Quests.ROVING_ELVES.questName)) {
                     if (!addItem(player, Items.CRYSTAL_SHIELD_2_10_4233, 1)) {
                         GroundItemManager.create(Item(Items.CRYSTAL_SHIELD_2_10_4233, 1), player)
                     }
-                    finishQuest(player, Quests.ROVING_ELVES)
+                    finishQuest(player, Quests.ROVING_ELVES.questName)
                 }
                 end()
             }
@@ -318,7 +319,7 @@ class IslwynDialogue(player: Player? = null) : Dialogue(player) {
 
             1000 -> npc(FaceAnim.HALF_GUILTY, "Hello there, it's a lovely day for a walk in the woods.", "So what can I help you with?").also { stage++ }
             1001 -> player(FaceAnim.HALF_GUILTY, "I'm just looking around.").also { stage = END_DIALOGUE }
-            2000 -> if (getQuestStage(player, Quests.ROVING_ELVES) == 15) {
+            2000 -> if (getQuestStage(player, Quests.ROVING_ELVES.questName) == 15) {
                 player(FaceAnim.HALF_GUILTY, "Yes I have! She explained that I have to visit", "Glarial's old tomb and obtain a consecration seed", "from the temple guardian in there.").also { stage++ }
             } else {
                 player(FaceAnim.HALF_GUILTY, "Not yet, I'll be back when I have.").also { stage = END_DIALOGUE }

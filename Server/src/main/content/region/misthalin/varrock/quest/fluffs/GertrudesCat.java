@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.fluffs;
 
+import content.data.Quests;
+
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.entity.skill.Skills;
@@ -7,7 +9,6 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
-import shared.consts.Quests;
 import shared.consts.Vars;
 
 import static core.api.ContentAPIKt.addItemOrBank;
@@ -22,7 +23,7 @@ public class GertrudesCat extends Quest {
      * Instantiates a new Gertrudes cat.
      */
     public GertrudesCat() {
-        super(Quests.GERTRUDES_CAT, 67, 66, 1, Vars.VARP_QUEST_GERTRUDES_CAT_PROGRESS_180, 0, 1, 100);
+        super(Quests.GERTRUDES_CAT, Vars.VARP_QUEST_GERTRUDES_CAT_PROGRESS_180, 0, 1, 100);
     }
 
     @Override

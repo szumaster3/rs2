@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.quest.phoenix.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import core.api.*
@@ -12,7 +14,6 @@ import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Regions
 
 /**
@@ -61,7 +62,7 @@ class PhoenixLair : MapArea {
         val nearbyPlayers = RegionManager.getLocalPlayers(player, 20).filter { it != player }
         if (nearbyPlayers.isNotEmpty()) return
 
-        if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+        if (!isQuestComplete(player, Quests.IN_PYRE_NEED.questName)) {
 
             if (!spawnedNPC.any { it.id == InPyreNeed.WOUNDED_PHOENIX_ID.id }) {
                 val wounded = InPyreNeed.WOUNDED_PHOENIX_ID
@@ -94,7 +95,7 @@ class PhoenixLair : MapArea {
         }
 
 
-        val npcIdsToSpawn = if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+        val npcIdsToSpawn = if (!isQuestComplete(player, Quests.IN_PYRE_NEED.questName)) {
             listOf(
                 NPCs.LESSER_REBORN_MAGE_8573,
                 NPCs.LESSER_REBORN_RANGER_8571,

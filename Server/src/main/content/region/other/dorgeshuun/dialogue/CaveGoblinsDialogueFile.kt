@@ -1,5 +1,7 @@
 package content.region.other.dorgeshuun.dialogue
 
+import content.data.Quests
+
 import content.data.LightSources
 import core.api.addItemOrDrop
 import core.api.anyInInventory
@@ -11,7 +13,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class CaveGoblinsDialogueFile : DialogueFile() {
 
@@ -21,7 +22,7 @@ class CaveGoblinsDialogueFile : DialogueFile() {
         val p = player ?: return
         npc = NPC(NPCs.CAVE_GOBLIN_MINER_2069)
 
-        if (!isQuestComplete(p, Quests.THE_LOST_TRIBE)) {
+        if (!isQuestComplete(p, Quests.THE_LOST_TRIBE.questName)) {
             if (LightSources.hasActiveLightSource(p)) {
                 npcl(FaceAnim.OLD_NORMAL, "Watch out! You don't want to let a naked flame near swamp gas! Look out for the warning marks.").also { stage = END_DIALOGUE }
                 return

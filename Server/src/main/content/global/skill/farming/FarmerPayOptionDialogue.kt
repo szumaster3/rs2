@@ -1,5 +1,7 @@
 package content.global.skill.farming
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.hasRequirement
 import core.api.inInventory
@@ -15,7 +17,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Farmer protection dialogue.
@@ -95,7 +96,7 @@ class FarmerPayOptionDialogue(val patch: Patch, private val quickPay: Boolean = 
                         val amount = if (item?.amount == 1) "one" else item?.amount
                         npc(faceAnim, "I want $amount $protectionText for that.")
                         stage = 200
-                    } else if (patch.patch.type == PatchType.CALQUAT_TREE_PATCH && !hasRequirement(player!!, Quests.JUNGLE_POTION)) {
+                    } else if (patch.patch.type == PatchType.CALQUAT_TREE_PATCH && !hasRequirement(player!!, Quests.JUNGLE_POTION.questName)) {
                         npc("Sorry, I won't protect that.").also {
                             stage = END_DIALOGUE
                         } // Cannot confirm authenticity of this line just that there should be a rejection here

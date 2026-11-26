@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.getQuestStage
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -22,7 +23,7 @@ import shared.consts.Vars
 class EffigyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE)) {
+        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE.questName)) {
             0 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi. Interesting building you have here.").also { stage++ }
                 1  -> playerl(FaceAnim.FRIENDLY, "What's it for?").also { stage++ }
@@ -56,7 +57,7 @@ class EffigyDialogue(player: Player? = null) : Dialogue(player) {
                 26 -> playerl(FaceAnim.FRIENDLY, "Nice to meet you Effigy, I'm ${player.username}. Hold on and I'll see what I can do!").also { stage++ }
                 27 -> {
                     end()
-                    setQuestStage(player, Quests.TOWER_OF_LIFE, 1)
+                    setQuestStage(player, Quests.TOWER_OF_LIFE.questName, 1)
                     setVarbit(player, Vars.VARBIT_TOWER_OF_LIFE_PROGRESS_3337, 1, true)
                 }
             }

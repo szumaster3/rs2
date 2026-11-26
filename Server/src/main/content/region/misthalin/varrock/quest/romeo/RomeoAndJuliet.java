@@ -1,9 +1,10 @@
 package content.region.misthalin.varrock.quest.romeo;
 
+import content.data.Quests;
+
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
-import shared.consts.Quests;
 import shared.consts.Vars;
 
 /**
@@ -13,7 +14,7 @@ import shared.consts.Vars;
 public class RomeoAndJuliet extends Quest {
 
     public RomeoAndJuliet() {
-        super(Quests.ROMEO_JULIET, 26, 25, 5, Vars.VARP_QUEST_ROMEO_JULIET_PROGRESS_144, 0, 1, 100);
+        super(Quests.ROMEO_JULIET, Vars.VARP_QUEST_ROMEO_JULIET_PROGRESS_144, 0, 1, 100);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class RomeoAndJuliet extends Quest {
 
     @Override
     public void finish(Player player) {
-        if (player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).isCompleted(player)) {
+        if (player.getQuestRepository().getQuest(Quests.ROMEO_JULIET.getQuestName()).isCompleted(player)) {
             return;
         }
         super.finish(player);

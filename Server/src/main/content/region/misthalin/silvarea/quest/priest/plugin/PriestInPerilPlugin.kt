@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.quest.priest.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.misthalin.silvarea.quest.priest.dialogue.MysteriousVoiceDialogue
 import core.api.*
@@ -32,7 +34,7 @@ class PriestInPerilPlugin: InteractionListener {
 
     override fun defineListeners() {
         on(Scenery.GATE_3444, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.PRIEST_IN_PERIL) <= 13) {
+            if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) <= 13) {
                 player.dialogueInterpreter.sendDialogues(
                     player,
                     FaceAnim.THINKING,
@@ -53,7 +55,7 @@ class PriestInPerilPlugin: InteractionListener {
         listOf(Scenery.LARGE_DOOR_30707, Scenery.LARGE_DOOR_30708).forEach { id ->
             on(id, IntType.SCENERY, "open", "knock-at") { player, node ->
                 val option = getUsedOption(player)
-                val questStage = getQuestStage(player, Quests.PRIEST_IN_PERIL)
+                val questStage = getQuestStage(player, Quests.PRIEST_IN_PERIL.questName)
 
                 if (option == "knock-at") {
 
@@ -244,7 +246,7 @@ class PriestInPerilPlugin: InteractionListener {
             if (!removeItem(player, used)) {
                 return@onUseWith false
             }
-            setQuestStage(player, Quests.PRIEST_IN_PERIL, 15)
+            setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 15)
             sendNPCDialogue(player, NPCs.DREZEL_7690, "Oh! Thank you! You have found the key!", FaceAnim.HALF_GUILTY)
             sendMessage(player, "You unlock the cell door.")
             return@onUseWith true
@@ -261,7 +263,7 @@ class PriestInPerilPlugin: InteractionListener {
             replaceSlot(player, used.asItem().slot, Item(Items.BUCKET_1925))
             animate(player, Animations.PRIEST_BUCKET_1077)
             playAudio(player, Sounds.HOLY_WATER_POUR_1733)
-            setQuestStage(player, Quests.PRIEST_IN_PERIL, 16)
+            setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 16)
             sendMessage(player, "You pour the blessed water over the coffin...")
             return@onUseWith true
         }
@@ -271,7 +273,7 @@ class PriestInPerilPlugin: InteractionListener {
          */
 
         on(Scenery.GATE_3445, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.PRIEST_IN_PERIL) < 17) {
+            if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) < 17) {
                 sendMessage(player, "The door is locked shut.")
             } else {
                 DoorActionHandler.handleDoor(player, node.asScenery())
@@ -284,7 +286,7 @@ class PriestInPerilPlugin: InteractionListener {
          */
 
         on(Scenery.HOLY_BARRIER_3443, IntType.SCENERY, "pass-through") { player, _ ->
-            if (!isQuestComplete(player, Quests.PRIEST_IN_PERIL)) {
+            if (!isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName)) {
                 sendMessage(player, "A magic force prevents you from passing through.")
             } else {
                 teleport(player, Location.create(3423, 3484, 0))
@@ -298,7 +300,7 @@ class PriestInPerilPlugin: InteractionListener {
          */
 
         on(Scenery.CELL_DOOR_3463, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.PRIEST_IN_PERIL) < 15) {
+            if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) < 15) {
                 sendMessage(player, "The door is securely locked shut.")
             } else {
                 DoorActionHandler.handleDoor(player, node.asScenery())
@@ -334,11 +336,11 @@ class PriestInPerilPlugin: InteractionListener {
          */
 
         on(NPCs.TEMPLE_GUARDIAN_7711, IntType.NPC, "attack") { player, node ->
-            if (getQuestStage(player, Quests.PRIEST_IN_PERIL) > 10) {
+            if (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName) > 10) {
                 node.asNpc().attack(player)
                 return@on true
             }
-            when (getQuestStage(player, Quests.PRIEST_IN_PERIL)) {
+            when (getQuestStage(player, Quests.PRIEST_IN_PERIL.questName)) {
                 10 -> sendMessage(player, "You have no reason to attack a helpless dog!")
                 12 -> sendMessage(player, "You've already killed that dog!")
                 13 -> {

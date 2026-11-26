@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult.dialogue
 
+import content.data.Quests
+
 import core.api.getAttribute
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class AlomoneDialogue(player: Player? = null) : Dialogue(player) {
@@ -18,7 +19,7 @@ class AlomoneDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.HAZEEL_CULT)
+        val questStage = getQuestStage(player, Quests.HAZEEL_CULT.questName)
         val hasMahjarrat = getAttribute(player, "hazeelcult:mahjarrat", true)
         val hasCarnillean = getAttribute(player, "hazeelcult:carnillean", true)
 
@@ -34,7 +35,7 @@ class AlomoneDialogue(player: Player? = null) : Dialogue(player) {
         componentID: Int,
         buttonID: Int,
     ): Boolean {
-        when (getQuestStage(player!!, Quests.HAZEEL_CULT)) {
+        when (getQuestStage(player!!, Quests.HAZEEL_CULT.questName)) {
             2 -> when (stage) {
                 1 -> playerl(FaceAnim.FRIENDLY, "I've come for the Carnillean family armour. Hand it over, or face the consequences.").also { stage++ }
                 2 -> npcl(FaceAnim.FRIENDLY, "I thought I made it clear to the butler you could not be allowed to interfere with our mission. The incompetent fool must be going soft.").also { stage++ }
@@ -42,7 +43,7 @@ class AlomoneDialogue(player: Player? = null) : Dialogue(player) {
                 4 -> npcl(FaceAnim.ANNOYED, "Well, you won't live long enough to tell anyone! Prepare to DIE!!!").also { stage++ }
                 5 -> {
                     end()
-                    setQuestStage(player, Quests.HAZEEL_CULT, 3)
+                    setQuestStage(player, Quests.HAZEEL_CULT.questName, 3)
                     npc!!.attack(player!!)
                 }
             }

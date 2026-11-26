@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -8,7 +10,6 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Silver merchant dialogue.
@@ -36,7 +37,7 @@ class SilverMerchantDialogueFile(override var stage: Int) : DialogueFile() {
                 end()
                 addItemOrDrop(player!!, Items.ENCHANTED_KEY_6754, 1)
                 setVarbit(player!!, MHUtils.ERIN_PROGRESS, 1, true)
-                setQuestStage(player!!, Quests.MAKING_HISTORY, 2)
+                setQuestStage(player!!, Quests.MAKING_HISTORY.questName, 2)
             }
 
             13 -> playerl(FaceAnim.NEUTRAL, "I haven't found anything yet.").also { stage++ }

@@ -1,5 +1,7 @@
 package content.region.other.entrana.quest.zep.dialogue
 
+import content.data.Quests
+
 import content.data.items.DyeItem
 import content.region.other.entrana.quest.zep.cutscene.ExperimentCutscene
 import core.api.*
@@ -31,7 +33,7 @@ class AugusteDialogue : DialogueFile() {
         val hasSapling = inInventory(player, Items.AUGUSTES_SAPLING_9932) || inBank(player, Items.AUGUSTES_SAPLING_9932)
         val hasGogglesAndCap = inInventory(player, Items.BOMBER_CAP_9945, Items.GNOME_GOGGLES_9472)
 
-        when (getQuestStage(player, Quests.ENLIGHTENED_JOURNEY)) {
+        when (getQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName)) {
             0 -> when (stage) {
                 0 -> npc(FaceAnim.HAPPY, "Greetings! would you like to be my number one", "accomplice?", "I mean, assistant?").also { stage++ }
                 1 -> player(FaceAnim.ASKING, "Who are you?").also { stage++ }
@@ -66,7 +68,7 @@ class AugusteDialogue : DialogueFile() {
                 19 -> {
                     end()
                     setVarbit(player, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_PROGRESS_2866, 1, true)
-                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 1).also { stage++ }
+                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 1).also { stage++ }
                     openInterface(player, Components.HOT_AIR_BALLOON_DIAGRAM_472)
                 }
             }
@@ -95,7 +97,7 @@ class AugusteDialogue : DialogueFile() {
                 17 -> npc(FaceAnim.ANGRY, "You're the adventurer, you should know! Think of", "logical places, like, churches; they have tons of candles.").also { stage++ }
                 18 -> {
                     end()
-                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 2)
+                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 2)
                 }
             }
 
@@ -121,7 +123,7 @@ class AugusteDialogue : DialogueFile() {
                 8 -> npc(FaceAnim.HAPPY, "Once you have done that let me know and we will", "begin our experiment.").also { stage++ }
                 9 -> {
                     end()
-                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 3)
+                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 3)
                 }
                 10 -> {
                     val missing = buildList {
@@ -155,7 +157,7 @@ class AugusteDialogue : DialogueFile() {
                     end()
                     if(removeItem(player, Items.ORIGAMI_BALLOON_9934)) {
                         ExperimentCutscene(player).start(true)
-                        setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 4)
+                        setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 4)
                     }
                 }
             }
@@ -184,7 +186,7 @@ class AugusteDialogue : DialogueFile() {
                     end()
                     if(removeItem(player, Item(Items.PAPYRUS_970, 2)) && removeItem(player, Item(Items.POTATOES10_5438, 1))) {
                         ExperimentCutscene(player).start(true)
-                        setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 5)
+                        setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 5)
                     }
                 }
 
@@ -218,7 +220,7 @@ class AugusteDialogue : DialogueFile() {
                         npcl(FaceAnim.FRIENDLY, "Looks like you don't have enough room in your inventory for the basket and the sapling. Come back when you do.")
                         return
                     }
-                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 6)
+                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 6)
                     addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932, 1)
                     addItemOrDrop(player, Items.APPLES5_5386, 1)
                 }
@@ -241,7 +243,7 @@ class AugusteDialogue : DialogueFile() {
                         hasGiven(player, "ej-sandbags"))
                     {
                         npcl(FaceAnim.FRIENDLY, "That's the last of it!")
-                        setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 7)
+                        setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 7)
                         removeAttributes(player, "ej-dye","ej-dye-red","ej-dye-yellow","ej-silk","ej-bowl","ej-sandbags")
                         stage = 28
                     }
@@ -291,7 +293,7 @@ class AugusteDialogue : DialogueFile() {
                 }
                 6 -> {
                     npcl(FaceAnim.FRIENDLY, "That's the last of it!")
-                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 7)
+                    setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 7)
                     stage = 28
                 }
                 7 -> npcl(FaceAnim.FRIENDLY, "I still need red dye for the balloon.").also { stage = END_DIALOGUE }
@@ -551,7 +553,7 @@ class AugusteFirstTalkAfterQuestDialogue : DialogueFile() {
             4 -> npcl(FaceAnim.HAPPY, "I will base my operations in Entrana. If you'd like to travel to new places, come see me there.").also { stage++ }
             5 -> {
                 end()
-                finishQuest(player!!, Quests.ENLIGHTENED_JOURNEY)
+                finishQuest(player!!, Quests.ENLIGHTENED_JOURNEY.questName)
             }
         }
     }

@@ -1,5 +1,7 @@
 package content.region.karamja.shilo_village.plugin
 
+import content.data.Quests
+
 import content.region.karamja.diary.KaramjaAchievementDiary
 import core.api.*
 import core.game.global.action.DoorActionHandler
@@ -48,7 +50,7 @@ class ShiloVillagePlugin : InteractionListener {
          */
 
         on(Scenery.BROKEN_CART_2216, IntType.SCENERY, "look-at") { player, _ ->
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName)) return@on false
 
             val playerX = player.location.x
             val location = if (playerX > 2878) Location(2876, 2952) else Location(2880, 2952)
@@ -73,7 +75,7 @@ class ShiloVillagePlugin : InteractionListener {
          */
 
         on(Scenery.TRAVEL_CART_2230, IntType.SCENERY, "pay-fare") { player, _ ->
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName)) return@on false
             quickTravel(player, NPCs.HAJEDY_510)
             return@on true
         }
@@ -86,13 +88,13 @@ class ShiloVillagePlugin : InteractionListener {
         }
 
         on(NPCs.HAJEDY_510, IntType.NPC, "pay-fare") { player, _ ->
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName)) return@on false
             quickTravel(player, NPCs.HAJEDY_510)
             return@on true
         }
 
         on(Scenery.TRAVEL_CART_2265, IntType.SCENERY, "pay-fare") { player, _ ->
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName)) return@on false
             quickTravel(player, NPCs.VIGROY_511)
             return@on true
         }
@@ -105,7 +107,7 @@ class ShiloVillagePlugin : InteractionListener {
         }
 
         on(NPCs.VIGROY_511, IntType.NPC, "pay-fare") { player, npc ->
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName)) return@on false
             quickTravel(player, npc.id)
             return@on true
         }
@@ -148,7 +150,7 @@ class ShiloVillagePlugin : InteractionListener {
          */
         @JvmStatic
         fun quickTravel(player: Player, npc: Int) {
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName)) return
             val isShilo = npc == NPCs.HAJEDY_510
             val npcName = getNPCName(npc)
 

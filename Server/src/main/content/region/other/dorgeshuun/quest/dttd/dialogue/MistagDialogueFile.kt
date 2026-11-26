@@ -1,12 +1,13 @@
 package content.region.other.dorgeshuun.quest.dttd.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Mistag dialogue.
@@ -17,7 +18,7 @@ import shared.consts.Quests
 class MistagDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.MISTAG_2084)
-        val questStage = getQuestStage(player!!, Quests.DEATH_TO_THE_DORGESHUUN)
+        val questStage = getQuestStage(player!!, Quests.DEATH_TO_THE_DORGESHUUN.questName)
         when {
             (questStage == 0) -> {
                 when (stage) {

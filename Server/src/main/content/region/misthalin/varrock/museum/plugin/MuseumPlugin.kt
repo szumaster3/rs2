@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.museum.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.misthalin.dig_site.dialogue.GateGuardDialogue
 import content.region.misthalin.varrock.museum.plugin.MusemInterfaceListener.Companion.NATURAL_HISTORY_EXAM_533
@@ -109,7 +111,7 @@ class MuseumPlugin : InteractionListener{
 
         on(intArrayOf(Scenery.GATE_24560, Scenery.GATE_24561), IntType.SCENERY, "open") { player, node ->
             if (player.viewport.region!!.id == 6483) return@on true
-            if (!isQuestComplete(player, Quests.THE_DIG_SITE)) {
+            if (!isQuestComplete(player, Quests.THE_DIG_SITE.questName)) {
                 sendMessage(player, "You can't go through there, it's for Dig Site workmen only.")
                 sendChat(findLocalNPC(player, NPCs.MUSEUM_GUARD_5942)!!, "Sorry - workman's gate only.")
             } else {

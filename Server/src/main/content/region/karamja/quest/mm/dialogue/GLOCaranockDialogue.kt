@@ -1,8 +1,9 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
-import shared.consts.Quests
 
 class GLOCaranockDialogue : DialogueFile() {
 
@@ -20,7 +21,7 @@ class GLOCaranockDialogue : DialogueFile() {
             9 -> npcl("Decommission the shipyard ... I see. Well, we have had some seriously strong southerly winds of late. They may have been blown off course during flight.").also { stage++ }
             10 -> npcl("I shall see personally to the decommission. You should report to the king immediately.").also {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 11)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 11)
             }
         }
     }

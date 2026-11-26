@@ -1,5 +1,7 @@
 package content.global.activity.tog
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.component.Component
@@ -70,9 +72,9 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
 
                     if (curr == Skills.CONSTRUCTION && !hasHouse(player)) {
                         acc
-                    } else if (curr == Skills.HERBLORE && !isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
+                    } else if (curr == Skills.HERBLORE && !isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName)) {
                         acc
-                    } else if (curr == Skills.RUNECRAFTING && !isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+                    } else if (curr == Skills.RUNECRAFTING && !isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                         acc
                     } else if (player.skills.getExperience(acc) <= player.skills.getExperience(curr)) {
                         acc

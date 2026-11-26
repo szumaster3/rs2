@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.dialogue
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.getQuestStage
 import core.api.inInventory
@@ -12,7 +14,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Black Eye dialogue.
@@ -21,7 +22,7 @@ import shared.consts.Quests
 class BlackEyeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE)) {
+        when (getQuestStage(player!!, Quests.TOWER_OF_LIFE.questName)) {
             0 -> when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "What's going on?").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Ah, we be building this 'ere tower. Lookin' good ain't it?").also { stage++ }

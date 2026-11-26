@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.npc
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -8,7 +10,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Gorad NPC.
@@ -23,7 +24,7 @@ class GoradNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locati
     override fun finalizeDeath(killer: Entity?) {
         val player = killer as? Player ?: return super.finalizeDeath(killer)
 
-        if (getQuestStage(player, Quests.WATCHTOWER) >= 2) {
+        if (getQuestStage(player, Quests.WATCHTOWER.questName) >= 2) {
             sendItemDialogue(player, Items.OGRE_TOOTH_2377, "He's dropped a tooth; I'll keep that!")
 
             if (freeSlots(player) == 0) {

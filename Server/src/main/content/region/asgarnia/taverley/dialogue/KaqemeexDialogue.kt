@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.api.getQuestStage
 import core.api.startQuest
@@ -12,7 +14,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Kaqemeex dialogue.
@@ -33,7 +34,7 @@ class KaqemeexDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val questStage = getQuestStage(player, Quests.DRUIDIC_RITUAL)
+        val questStage = getQuestStage(player, Quests.DRUIDIC_RITUAL.questName)
         when (stage) {
             0 -> {
                 when (questStage) {
@@ -208,7 +209,7 @@ class KaqemeexDialogue(player: Player? = null) : Dialogue(player) {
                     "ritual. He knows better than I what is required to",
                     "complete it.",
                 )
-                startQuest(player, Quests.DRUIDIC_RITUAL)
+                startQuest(player, Quests.DRUIDIC_RITUAL.questName)
                 stage = 27
             }
 
@@ -231,7 +232,7 @@ class KaqemeexDialogue(player: Player? = null) : Dialogue(player) {
             41 -> end()
             200 -> {
                 end()
-                finishQuest(player, Quests.DRUIDIC_RITUAL)
+                finishQuest(player, Quests.DRUIDIC_RITUAL.questName)
             }
 
             500 -> when (buttonId) {

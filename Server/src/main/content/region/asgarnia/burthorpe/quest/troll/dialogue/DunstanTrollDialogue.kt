@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.troll.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the Dunstan (Troll stronghold) dialogue.
@@ -18,7 +19,7 @@ import shared.consts.Quests
 class DunstanTrollDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.TROLL_STRONGHOLD)) {
+        when (getQuestStage(player!!, Quests.TROLL_STRONGHOLD.questName)) {
             in 1..10 -> when (stage) {
                 START_DIALOGUE -> npcl(FaceAnim.FRIENDLY, "Have you managed to rescue Godric yet?").also { stage++ }
                 1 -> playerl(FaceAnim.FRIENDLY, "Not yet.").also { stage++ }
@@ -40,7 +41,7 @@ class DunstanTrollDialogue : DialogueFile() {
                 3 -> npcl(FaceAnim.FRIENDLY, "I have very little to offer you by way of thanks, but perhaps you will accept these family heirlooms. They were found by my great-great-grandfather, but we still don't have any idea what they do.").also { stage++ }
                 4 -> {
                     end()
-                    finishQuest(player!!, Quests.TROLL_STRONGHOLD)
+                    finishQuest(player!!, Quests.TROLL_STRONGHOLD.questName)
                 }
             }
         }

@@ -1,5 +1,7 @@
 package content.global.skill.gather.mining
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.data.skill.SkillingTool
 import content.global.activity.star.ShootingStarBonus
@@ -21,7 +23,6 @@ import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 import core.tools.prependArticle
 import shared.consts.Items
-import shared.consts.Quests
 
 class MiningPlugin : InteractionListener {
     private val gemRewards = arrayOf(
@@ -433,7 +434,7 @@ class MiningPlugin : InteractionListener {
             return false
         }
 
-        if (resource.identifier == 19.toByte() && !hasRequirement(player, Quests.TOKTZ_KET_DILL)) {
+        if (resource.identifier == 19.toByte() && !hasRequirement(player, Quests.TOKTZ_KET_DILL.questName)) {
             sendDialogue(player, "You do not know the technique to mine stone slabs.")
             return false
         }

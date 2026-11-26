@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Local dialogue.
@@ -22,10 +23,10 @@ class LocalDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.FIGHT_ARENA)
+        val questStage = getQuestStage(player, Quests.FIGHT_ARENA.questName)
 
         when {
-            isQuestComplete(player, Quests.FIGHT_ARENA) -> {
+            isQuestComplete(player, Quests.FIGHT_ARENA.questName) -> {
                 npcl(FaceAnim.FRIENDLY, "Hey, you're the guy from the arena! How'd you get out?")
                 stage = END_DIALOGUE
             }

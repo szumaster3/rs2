@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.zogre
 
+import content.data.Quests
+
 import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.game.node.entity.player.Player
@@ -7,11 +9,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class ZogreFleshEaters : Quest(Quests.ZOGRE_FLESH_EATERS, 40, 39, 1, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487, 0, 1, 13) {
+class ZogreFleshEaters : Quest(Quests.ZOGRE_FLESH_EATERS, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487, 0, 1, 13) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -22,8 +23,8 @@ class ZogreFleshEaters : Quest(Quests.ZOGRE_FLESH_EATERS, 40, 39, 1, Vars.VARBIT
             line(player, "ceremonial dance place called !!Jiggig??.", line++)
             line++
             line(player, "To start this !!quest?? I should complete these quests:-", line++)
-            line(player, if (isQuestComplete(player, Quests.JUNGLE_POTION,)) { "---${Quests.JUNGLE_POTION}./--" } else { "!!${Quests.JUNGLE_POTION}.??" }, line++,)
-            line(player, if (isQuestComplete(player, Quests.BIG_CHOMPY_BIRD_HUNTING,)) { "---${Quests.BIG_CHOMPY_BIRD_HUNTING}./--" } else { "!!${Quests.BIG_CHOMPY_BIRD_HUNTING}.??" }, line++,)
+            line(player, if (isQuestComplete(player, Quests.JUNGLE_POTION.questName,)) { "---${Quests.JUNGLE_POTION.questName}./--" } else { "!!${Quests.JUNGLE_POTION.questName}.??" }, line++,)
+            line(player, if (isQuestComplete(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName,)) { "---${Quests.BIG_CHOMPY_BIRD_HUNTING.questName}./--" } else { "!!${Quests.BIG_CHOMPY_BIRD_HUNTING.questName}.??" }, line++,)
             line(player, "It would help if I had the following skill levels:-", line++, false)
             line(player, if (getStatLevel(player, Skills.RANGE) >= 30) "---Ranged level : 30/--" else "!!Ranged level : 30??", line++)
             line(player, if (getStatLevel(player, Skills.FLETCHING,) >= 30) { "---Fletching level : 30/--" } else { "!!Fletching level : 30??" }, line++,)

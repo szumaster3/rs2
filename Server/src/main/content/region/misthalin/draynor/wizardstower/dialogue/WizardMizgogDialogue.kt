@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.wizardstower.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.draynor.wizardstower.quest.imp.ImpCatcher
 import core.api.*
 import core.api.utils.PlayerCamera
@@ -28,7 +30,7 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.IMP_CATCHER) == 1) {
+        if (getQuestStage(player, Quests.IMP_CATCHER.questName) == 1) {
             npc(FaceAnim.ASKING, "So how are you doing finding my beads?").also { stage = 15 }
         } else {
             npc(FaceAnim.CALM_TALK, "What can I do for you, adventurer?")
@@ -39,8 +41,8 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> showTopics(
-                IfTopic(FaceAnim.HAPPY, "Give me a quest!", 1, getQuestStage(player, Quests.IMP_CATCHER) == 0),
-                IfTopic(FaceAnim.HALF_ASKING, "Got any more quests?", 13, isQuestComplete(player, Quests.IMP_CATCHER)),
+                IfTopic(FaceAnim.HAPPY, "Give me a quest!", 1, getQuestStage(player, Quests.IMP_CATCHER.questName) == 0),
+                IfTopic(FaceAnim.HALF_ASKING, "Got any more quests?", 13, isQuestComplete(player, Quests.IMP_CATCHER.questName)),
                 Topic(FaceAnim.HAPPY,"Do you know any interesting spells you could teach me?", 14, false)
             )
 
@@ -65,7 +67,7 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
             9 -> {
                 end()
                 npc(FaceAnim.FRIENDLY, "That's great, thank you.")
-                setQuestStage(player, Quests.IMP_CATCHER, 1)
+                setQuestStage(player, Quests.IMP_CATCHER.questName, 1)
             }
 
             10 -> npc(FaceAnim.LAUGH, "Or else what? You'll attack me?").also { stage++ }
@@ -122,7 +124,7 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
                                 12 -> {
                                     PlayerCamera(player).reset()
                                     sendMessage(player!!, "The Wizard hands you an amulet.")
-                                    finishQuest(player!!, Quests.IMP_CATCHER)
+                                    finishQuest(player!!, Quests.IMP_CATCHER.questName)
                                 }
                             }
                             return false

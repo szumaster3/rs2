@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Head Mourner dialogue.
@@ -19,7 +20,7 @@ class HeadMournerDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.HEAD_MOURNER_716)
-        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             in 8..10 -> when (stage) {
                 0 -> npcl(FaceAnim.FRIENDLY, "Hmmm, how did you get over here? You're not one of this rabble. Ah well, you'll have to stay. Can't risk you going back now.").also { stage++ }
                 1 -> options("So what's a mourner?", "I haven't got the plague though...", "I'm looking for a woman named Elena.").also { stage++ }
@@ -53,7 +54,7 @@ class HeadMournerDialogue : DialogueFile() {
                 8 -> npcl(FaceAnim.NEUTRAL, "I wouldn't get your hopes up though.").also { stage++ }
                 9 -> {
                     end()
-                    setQuestStage(player!!, Quests.PLAGUE_CITY, 12)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 12)
                     stage = END_DIALOGUE
                 }
             }

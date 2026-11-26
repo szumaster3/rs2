@@ -1,5 +1,7 @@
 package content.region.karamja.shilo_village.dialogue
 
+import content.data.Quests
+
 import content.region.karamja.shilo_village.plugin.ShiloVillagePlugin
 import core.api.hasRequirement
 import core.game.dialogue.Dialogue
@@ -9,13 +11,12 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class VigroyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if (!hasRequirement(player, Quests.SHILO_VILLAGE)) {
+        if (!hasRequirement(player, Quests.SHILO_VILLAGE.questName)) {
             npcl(FaceAnim.HALF_GUILTY, "Sorry, I'm busy. I've got to get out of here! This place is swarming with zombies.")
             return false
         }

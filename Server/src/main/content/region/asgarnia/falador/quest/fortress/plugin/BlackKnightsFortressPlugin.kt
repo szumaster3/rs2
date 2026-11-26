@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.quest.fortress.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -59,7 +61,7 @@ class BlackKnightsFortressPlugin : InteractionListener {
 
         onUseWith(IntType.SCENERY, CABBAGE_ID, Scenery.HOLE_2336) { player, used, _ ->
             when {
-                getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS) < 20 -> {
+                getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS.questName) < 20 -> {
                     sendPlayerDialogue(player, "Why exactly would I want to do that?", FaceAnim.THINKING)
                 }
                 used.id == Items.CABBAGE_1967 -> {
@@ -76,7 +78,7 @@ class BlackKnightsFortressPlugin : InteractionListener {
         }
 
         on(Scenery.GRILL_2342, IntType.SCENERY, "listen-at") { player, _ ->
-            if (getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS) < 1) {
+            if (getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS.questName) < 1) {
                 sendPlayerDialogue(player, "Why exactly would I want to do that?")
                 return@on true
             }
@@ -86,7 +88,7 @@ class BlackKnightsFortressPlugin : InteractionListener {
 
             queueScript(player, 1, QueueStrength.SOFT) {
                 animate(player, Animations.CROUCH_HIDE_4552)
-                if (getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS) >= 30) {
+                if (getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS.questName) >= 30) {
                     openDialogue(player, AfterSabotageDialogue())
                 } else {
                     openDialogue(player, 992752973)

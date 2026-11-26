@@ -1,16 +1,17 @@
 package content.region.misthalin.dig_site.quest.itexam
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class TheDigSite : Quest(Quests.THE_DIG_SITE, 47, 46, 2, 131, 0, 1, 9) {
+class TheDigSite : Quest(Quests.THE_DIG_SITE, 131, 0, 1, 9) {
     companion object {
         const val attrGreenExam1Talked = "/save:digsite:greenexam1talked"
         const val attrGreenExam1ObtainAnswer = "/save:digsite:greenexam1answer"
@@ -65,7 +66,7 @@ class TheDigSite : Quest(Quests.THE_DIG_SITE, 47, 46, 2, 131, 0, 1, 9) {
         var line = 11
         var stage = getStage(player)
 
-        var started = getQuestStage(player, Quests.THE_DIG_SITE) > 0
+        var started = getQuestStage(player, Quests.THE_DIG_SITE.questName) > 0
 
         if (!started) {
             line++

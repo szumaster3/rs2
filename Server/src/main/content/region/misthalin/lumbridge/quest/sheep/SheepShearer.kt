@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.sheep
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -8,12 +10,11 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 import kotlin.math.min
 
 @Initializable
-class SheepShearer : Quest(Quests.SHEEP_SHEARER, 28, 27, 1, Vars.VARP_QUEST_SHEEP_SHEARER_PROGRESS_179, 0, 20, 21) {
+class SheepShearer : Quest(Quests.SHEEP_SHEARER) {
     companion object {
         val ATTR_NUM_BALLS_OF_WOOL_DELIVERED = "/save:sheep-shearer:num-balls-of-wool-delivered"
         val ATTR_IS_PENGUIN_SHEEP_SHEARED = "/save:sheep-shearer:is-penguin-sheep-sheared"

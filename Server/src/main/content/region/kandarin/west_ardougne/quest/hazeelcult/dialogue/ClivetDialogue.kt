@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class ClivetDialogue(player: Player? = null) : Dialogue(player) {
@@ -17,7 +18,7 @@ class ClivetDialogue(player: Player? = null) : Dialogue(player) {
         componentID: Int,
         buttonID: Int,
     ): Boolean {
-        val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT)
+        val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT.questName)
 
         when {
             (questStage == 0) -> when (stage) {
@@ -61,7 +62,7 @@ class ClivetDialogue(player: Player? = null) : Dialogue(player) {
                     end()
                     setAttribute(player, "save:hazeelcult:carnillean", true)
                     setAttribute(player, "hazeelcult:sewer-left", 0)
-                    setQuestStage(player, Quests.HAZEEL_CULT, 2)
+                    setQuestStage(player, Quests.HAZEEL_CULT.questName, 2)
                     runTask(player, 1) {
                         teleport(npc, location(2568, 9683, 1))
                         sendDialogue(player, "The man jumps onto the raft and pushes off down into the sewer system.")
@@ -79,7 +80,7 @@ class ClivetDialogue(player: Player? = null) : Dialogue(player) {
 
                 26 -> {
                     setAttribute(player, "/save:hazeelcult:mahjarrat", true)
-                    setQuestStage(player, Quests.HAZEEL_CULT, 2)
+                    setQuestStage(player, Quests.HAZEEL_CULT.questName, 2)
                     if (freeSlots(player) < 1) {
                         end()
                         sendItemDialogue(player, Items.POISON_273, "Clivet tries to give you some poison, but you don't have enough room to take it.").also {
@@ -146,7 +147,7 @@ class ClivetDialogue(player: Player? = null) : Dialogue(player) {
 
                 8 -> {
                     end()
-                    setQuestStage(player, Quests.HAZEEL_CULT, 10)
+                    setQuestStage(player, Quests.HAZEEL_CULT.questName, 10)
                     npcl(FaceAnim.NEUTRAL, "Going from left to right, turn each of the five sewer valves above so that they follow the design of the amulet. Once you've done that, you'll be able to use the raft here to enter our hideout.")
                     stage = END_DIALOGUE
                 }

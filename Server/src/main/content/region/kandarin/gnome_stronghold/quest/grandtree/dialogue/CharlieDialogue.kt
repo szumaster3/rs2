@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -16,7 +18,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Charlie dialogue.
@@ -28,7 +29,7 @@ import shared.consts.Quests
 class CharlieDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE.questName)) {
             46 -> {
                 when (stage) {
                     0 ->
@@ -76,7 +77,7 @@ class CharlieDialogue(player: Player? = null) : Dialogue(player) {
                     9 -> playerl(FaceAnim.FRIENDLY, "OK. Thanks Charlie.").also { stage++ }
                     10 ->
                         npcl(FaceAnim.FRIENDLY, "Good luck!").also {
-                            setQuestStage(player!!, Quests.THE_GRAND_TREE, 47)
+                            setQuestStage(player!!, Quests.THE_GRAND_TREE.questName, 47)
                             stage = END_DIALOGUE
                         }
                 }
@@ -168,7 +169,7 @@ class CharlieDialogue(player: Player? = null) : Dialogue(player) {
                                             8 -> {
                                                 unlock(player!!)
                                                 npc.clear()
-                                                setQuestStage(player!!, Quests.THE_GRAND_TREE, 55)
+                                                setQuestStage(player!!, Quests.THE_GRAND_TREE.questName, 55)
                                                 return true
                                             }
                                         }
@@ -206,7 +207,7 @@ class CharlieDialogue(player: Player? = null) : Dialogue(player) {
                         7 -> npcl(FaceAnim.FRIENDLY, "Just west of the toad swamp.").also { stage++ }
                         8 ->
                             playerl(FaceAnim.FRIENDLY, "OK, I'll see what I can find.").also {
-                                setQuestStage(player!!, Quests.THE_GRAND_TREE, 60)
+                                setQuestStage(player!!, Quests.THE_GRAND_TREE.questName, 60)
                                 stage = END_DIALOGUE
                             }
                     }

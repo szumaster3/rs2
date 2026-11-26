@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.crest.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.crest.plugin.FamilyCrestListener
 import core.api.getAttribute
 import core.api.setQuestStage
@@ -11,7 +13,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CalebDialogue(player: Player? = null) : Dialogue(player) {
@@ -20,7 +21,7 @@ class CalebDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST.questName) ?: -1
 
         if (qstage == 100) {
             options("Can you change my gauntlets for me?", "Nevermind.")
@@ -70,7 +71,7 @@ class CalebDialogue(player: Player? = null) : Dialogue(player) {
             206 -> options("Ok, I will get those.", "Why don't you just give me the crest?").also { stage++ }
             207 -> when (buttonId) {
                 1 -> npc("You will? It would help me a lot!").also {
-                    setQuestStage(player, Quests.FAMILY_CREST, 11)
+                    setQuestStage(player, Quests.FAMILY_CREST.questName, 11)
                     stage = 1000
                 }
                 2 -> npc("It's a valuable family heirloom.", "I think the least you can do is prove you're worthy", "of it before I hand it over.").also { stage = 206 }
@@ -83,7 +84,7 @@ class CalebDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             301 -> sendDialogue("You exchange the fish for Caleb's piece of the crest.").also {
-                setQuestStage(player, Quests.FAMILY_CREST, 12)
+                setQuestStage(player, Quests.FAMILY_CREST.questName, 12)
                 player.inventory.remove(Item(315), Item(329), Item(361), Item(365), Item(373))
                 player.inventory.add(CREST_PIECE)
                 stage++

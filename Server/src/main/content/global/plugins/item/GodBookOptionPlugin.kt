@@ -1,5 +1,7 @@
 package content.global.plugins.item
 
+import content.data.Quests
+
 import content.data.GodBook
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -13,7 +15,6 @@ import core.game.node.entity.skill.Skills
 import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Listener handling for [GodBook].
@@ -70,7 +71,7 @@ class GodBookOptionPlugin : InteractionListener {
 
         onEquip(books.keys.toIntArray()) { player, node ->
             val type = books[node.id] ?: return@onEquip true
-            if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
+            if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP.questName)) {
                 sendMessage(player, "You need to complete The Horror from the Deep quest to equip this.")
                 return@onEquip false
             }

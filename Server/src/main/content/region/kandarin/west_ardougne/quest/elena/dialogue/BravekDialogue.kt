@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Bravek dialogue.
@@ -21,7 +22,7 @@ import shared.consts.Quests
 class BravekDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             13 -> when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "My head hurts! I'll speak to you another day...").also { stage++ }
                 1 -> options("This is really important though!", "Ok, goodbye.").also { stage++ }
@@ -51,7 +52,7 @@ class BravekDialogue(player: Player? = null) : Dialogue(player) {
                         end()
                         sendItemDialogue(player!!, Items.A_SCRUFFY_NOTE_1508, "Bravek hands you a tatty piece of paper.").also { stage++ }
                         addItem(player!!, Items.A_SCRUFFY_NOTE_1508)
-                        setQuestStage(player!!, Quests.PLAGUE_CITY, 14)
+                        setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 14)
                     }
                 }
             }
@@ -101,7 +102,7 @@ class BravekDialogue(player: Player? = null) : Dialogue(player) {
                         end()
                         sendItemDialogue(player!!, Items.WARRANT_1503, "Bravek hands you a warrant.")
                         addItem(player!!, Items.WARRANT_1503)
-                        setQuestStage(player!!, Quests.PLAGUE_CITY, 16)
+                        setQuestStage(player!!, Quests.PLAGUE_CITY.questName, 16)
                     }
                 }
             }

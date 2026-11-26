@@ -1,5 +1,7 @@
 package content.region.other.dorgeshuun.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.lumbridge.quest.lost_tribe.dialogue.MistagLostTribeDialogue
 import content.region.misthalin.lumbridge.quest.lost_tribe.plugin.GoblinFollower
 import content.region.other.dorgeshuun.quest.dttd.dialogue.MistagDialogueFile
@@ -16,7 +18,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Mistag dialogue.
@@ -26,7 +27,7 @@ class MistagDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val ltStage = getQuestStage(player, Quests.THE_LOST_TRIBE)
+        val ltStage = getQuestStage(player, Quests.THE_LOST_TRIBE.questName)
 
         if (args.size > 1 && args[1] == "greeting") {
             npc(FaceAnim.OLD_NORMAL, "A human knows ancient greeting?")
@@ -57,7 +58,7 @@ class MistagDialogue(player: Player? = null) : Dialogue(player) {
             -100 -> npc(FaceAnim.OLD_NORMAL, "Help! A surface dweller this deep in our mines? We will", "all be destroyed!").also { stage++ }
             -99 -> end()
             START_DIALOGUE -> {
-                if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 100 && getQuestStage(player, Quests.DEATH_TO_THE_DORGESHUUN) == 0) {
+                if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 100 && getQuestStage(player, Quests.DEATH_TO_THE_DORGESHUUN.questName) == 0) {
                     npc(FaceAnim.OLD_NORMAL, "It is good to see you again! The Dorgeshuun Council would like to ask a favour of you, if you are interested.").also { stage++ }
                 } else {
                     options("Can I sell you some ore?", "Why do the dorgeshuun live underground?", "What happened to your arm?", "Can you show me the way out of the mines?").also { stage = 2 }

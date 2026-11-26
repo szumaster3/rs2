@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sigmund dialogue.
@@ -39,12 +40,12 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 playerl(FaceAnim.HAPPY, "Hello there!")
                 stage = 50
             }
 
-            !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
+            !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 playerl(FaceAnim.HAPPY, "Hello there!")
                 stage = 60
             }

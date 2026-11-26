@@ -1,5 +1,7 @@
 package content.region.morytania.canifis.quest.route.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendDialogue
 import core.game.dialogue.Dialogue
@@ -10,18 +12,17 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class CyregPaddlehornDialogue(player: Player? = null) : Dialogue(player) {
     
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE) == 1) {
+        if (getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE.questName) == 1) {
             npcl(FaceAnim.FRIENDLY, "Can you tell me how to find the <col=08088A>Myreque</col>?").also { stage++ }
-        } else if (getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE) == 2) {
+        } else if (getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE.questName) == 2) {
             npcl(FaceAnim.FRIENDLY, "Will you still take me to the <col=08088A>Myreque</col>?").also { stage++ }
-        } else if (getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE) >= 3) {
+        } else if (getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE.questName) >= 3) {
             playerl(FaceAnim.FRIENDLY, "Can I ask some more questions?").also { stage++ }
         } else {
             end()
@@ -34,7 +35,7 @@ class CyregPaddlehornDialogue(player: Player? = null) : Dialogue(player) {
         componentID: Int,
         buttonID: Int,
     ): Boolean {
-        when (getQuestStage(player!!, Quests.IN_SEARCH_OF_THE_MYREQUE)) {
+        when (getQuestStage(player!!, Quests.IN_SEARCH_OF_THE_MYREQUE.questName)) {
             1 ->
                 when (stage) {
                     START_DIALOGUE ->

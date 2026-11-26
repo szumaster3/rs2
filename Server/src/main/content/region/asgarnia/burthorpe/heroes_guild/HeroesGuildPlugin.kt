@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.heroes_guild
 
+import content.data.Quests
+
 import content.data.EnchantedJewellery
 import content.data.EnchantedJewellery.Companion.idMap
 import content.global.skill.summoning.familiar.Familiar
@@ -15,7 +17,6 @@ import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class HeroesGuildPlugin : InteractionListener {
     override fun defineListeners() {
@@ -25,7 +26,7 @@ class HeroesGuildPlugin : InteractionListener {
          */
 
         on(GUILD_GATE, IntType.SCENERY, "open") { player, node ->
-            if (!hasRequirement(player, Quests.HEROES_QUEST, false)) {
+            if (!hasRequirement(player, Quests.HEROES_QUEST.questName, false)) {
                 sendMessage(player, "You need to complete the Heroes' Quest.")
                 return@on false
             }
@@ -67,7 +68,7 @@ class HeroesGuildPlugin : InteractionListener {
         val usedWith = (node as? Scenery) ?: (node as? Familiar ?: return)
 
         val jewellery = idMap[usedItem.id] ?: return
-        if (!isQuestComplete(player, Quests.HEROES_QUEST)) return
+        if (!isQuestComplete(player, Quests.HEROES_QUEST.questName)) return
 
         if (usedWith is Familiar) {
             if (!jewellery.canBeRechargedByFamiliar() || !player.familiarManager.isOwner(usedWith)) return

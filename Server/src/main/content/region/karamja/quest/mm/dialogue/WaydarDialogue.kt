@@ -1,5 +1,7 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import content.global.travel.glider.GnomeGlider
 import content.global.travel.glider.GliderPulse
 import content.region.karamja.quest.mm.cutscene.ShipyardCutscene
@@ -13,7 +15,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class WaydarDialogue : DialogueFile() {
     override fun handle(
@@ -22,7 +23,7 @@ class WaydarDialogue : DialogueFile() {
     ) {
         when (stage) {
             0 -> {
-                if (getQuestStage(player!!, Quests.MONKEY_MADNESS) <= 22) {
+                if (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName) <= 22) {
                     npcl("Sorry, I am not authorised to talk to you.").also { stage = END_DIALOGUE }
                 } else {
                     npcl(
@@ -64,7 +65,7 @@ class WaydarCrashIslandDialogue : DialogueFile() {
         npc = NPC(NPCs.WAYDAR_1408)
         when (stage) {
             0 -> {
-                if (getQuestStage(player!!, Quests.MONKEY_MADNESS) == 24) {
+                if (getQuestStage(player!!, Quests.MONKEY_MADNESS.questName) == 24) {
                     playerl("Where are we?").also { stage++ }
                 } else {
                     end()
@@ -144,7 +145,7 @@ class WaydarCrashIslandDialogue : DialogueFile() {
             22 -> npcl(FaceAnim.OLD_NORMAL, "Enough. Return here when you are done.").also {
                 stage = END_DIALOGUE
                 ShipyardCutscene(player!!).start()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 25)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 25)
             }
         }
     }

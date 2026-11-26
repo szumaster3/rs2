@@ -1,5 +1,7 @@
 package content.region.karamja.quest.mm
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.drawReward
 import core.api.updateQuestTab
@@ -7,11 +9,10 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 // @Initializable
-class MonkeyMadness : Quest(Quests.MONKEY_MADNESS, 88, 87, 3, Vars.VARP_QUEST_MONKEY_MADNESS_PROGRESS_365, 0, 1, 9) {
+class MonkeyMadness : Quest(Quests.MONKEY_MADNESS) {
     override fun drawJournal(
         player: Player,
         stage: Int,

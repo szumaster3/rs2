@@ -1,36 +1,36 @@
 package content.region.asgarnia.burthorpe.quest.troll
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class TrollStronghold :
-    Quest(Quests.TROLL_STRONGHOLD, 128, 127, 1, Vars.VARP_QUEST_TROLL_SRONGHOLD_PROGRESS_317, 0, 1, 50) {
+class TrollStronghold : Quest(Quests.TROLL_STRONGHOLD) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
-        var started = getQuestStage(player, Quests.TROLL_STRONGHOLD) > 0
+        var started = getQuestStage(player, Quests.TROLL_STRONGHOLD.questName) > 0
 
         val hasBoots = hasAnItem(player, Items.CLIMBING_BOOTS_3105).container != null
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Denulth?? in his tent at", line++)
             line(player, "the !!Imperial Guard camp?? in !!Burthorpe?? after completing the", line++)
-            line(player, "!!Death Plateau Quest??", line++, isQuestComplete(player, Quests.DEATH_PLATEAU))
+            line(player, "!!Death Plateau Quest??", line++, isQuestComplete(player, Quests.DEATH_PLATEAU.questName))
             line++
             line(player, "To complete this quest I need:", line++)
             line(player, "Level 15 Agility.", line++, hasLevelStat(player, Skills.AGILITY, 15))
             line(player, "I also need to be able to defeat a !!level 113 Troll??.", line++)
             line(player, "!!Level 30 Thieving might be useful.??", line++)
-            if (isQuestComplete(player, Quests.DEATH_PLATEAU) && hasLevelStat(player, Skills.AGILITY, 15) && hasLevelStat(player, Skills.THIEVING, 30)) {
+            if (isQuestComplete(player, Quests.DEATH_PLATEAU.questName) && hasLevelStat(player, Skills.AGILITY, 15) && hasLevelStat(player, Skills.THIEVING, 30)) {
                 line(player, "I have all the requirements to start this quest.", line)
             }
         } else {

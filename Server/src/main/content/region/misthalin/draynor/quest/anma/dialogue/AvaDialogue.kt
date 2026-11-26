@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.anma.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
 import core.api.*
 import core.game.container.Container
@@ -14,7 +16,6 @@ import core.game.world.GameWorld.settings
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class AvaDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -24,7 +25,7 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
+        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM.questName)
         if (!quest!!.hasRequirements(player)) {
             player.packetDispatch.sendMessage("She doesn't seem interested in talking to you.")
             return false

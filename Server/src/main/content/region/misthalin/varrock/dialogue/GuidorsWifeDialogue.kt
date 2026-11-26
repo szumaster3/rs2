@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Guidors wife dialogue.
@@ -16,7 +17,7 @@ import shared.consts.Quests
 class GuidorsWifeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if (getQuestStage(player, Quests.BIOHAZARD) >= 16) {
+        if (getQuestStage(player, Quests.BIOHAZARD.questName) >= 16) {
             player("Hello again.").also { stage = 2 }
         } else {
             player(FaceAnim.HALF_GUILTY, "Hello.")

@@ -1,5 +1,7 @@
 package content.global.skill.magic.items
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.cache.def.impl.ItemDefinition
@@ -12,7 +14,6 @@ import core.game.node.entity.player.link.quest.QuestRequirements
 import core.game.node.item.Item
 import core.game.world.map.Location
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 
 /**
@@ -70,7 +71,7 @@ class TeleportTabletPlugin : InteractionListener {
             Items.ARDOUGNE_TP_8011      to { p -> hasRequirement(p, QuestReq(QuestRequirements.PLAGUE_CITY)) },
             Items.WATCHTOWER_TPORT_8012 to { p -> hasRequirement(p, QuestReq(QuestRequirements.WATCHTOWER))},
             Items.ASTRAL_ALTAR_TP_13611 to { p -> hasRequirement(p, QuestReq(QuestRequirements.LUNAR_DIPLOMACY)) },
-            Items.COSMIC_ALTAR_TP_13605 to { p -> isQuestComplete(p, Quests.LOST_CITY) },
+            Items.COSMIC_ALTAR_TP_13605 to { p -> isQuestComplete(p, Quests.LOST_CITY.questName) },
             Items.DEATH_ALTAR_TP_13609  to { p -> hasRequirement(p, QuestReq(QuestRequirements.MEP_2)) },
             Items.BLOOD_ALTAR_TP_13610  to { p -> hasRequirement(p, QuestReq(QuestRequirements.SEERGAZE)) }
         )

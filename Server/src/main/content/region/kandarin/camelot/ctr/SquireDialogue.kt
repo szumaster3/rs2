@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.ctr
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.hasRequirement
@@ -12,14 +14,13 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class SquireDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         val male = player.isMale
-        if (!hasRequirement(player, Quests.KINGS_RANSOM, false)){
+        if (!hasRequirement(player, Quests.KINGS_RANSOM.questName, false)){
             npc("I'm sorry, my ${if(male) "lord" else "lady"}, but you cannot enter this area.")
             sendMessage(player, "You need to have completed the King's Ransom Quest to gain access to the Knight's Waves.")
             return true

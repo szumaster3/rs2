@@ -1,5 +1,7 @@
 package content.region.desert.sophanem.plugin
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -20,7 +22,7 @@ class SophanemPlugin : InteractionListener {
         }
 
         on(LADDER_DOWN, IntType.SCENERY, "climb-down") { player, _ ->
-            if (!hasRequirement(player, Quests.CONTACT)) return@on false
+            if (!hasRequirement(player, Quests.CONTACT.questName)) return@on false
             ClimbActionHandler.climb(player, Animation(Animations.HUMAN_BURYING_BONES_827), Location(2799, 5160, 0))
             return@on true
         }

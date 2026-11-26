@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.region.kandarin.camelot.quest.arthur.dialogue.MerlinDialogueFile
@@ -14,7 +16,6 @@ import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Merlin dialogue.
@@ -22,12 +23,12 @@ import shared.consts.Quests
 class MerlinDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         // Merlin Crystal: Freeing Merlin: Finishing.
-        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
+        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL.questName)) {
             openDialogue(player, MerlinDialogueFile(false))
         } else {
             when (stage) {
                 0 -> {
-                    val questStage = getQuestStage(player!!, Quests.HOLY_GRAIL)
+                    val questStage = getQuestStage(player!!, Quests.HOLY_GRAIL.questName)
                     val kwComplete = getAttribute(player, GameAttributes.KW_COMPLETE, false)
                     val hasGrail = player.hasItem(Item(Items.HOLY_GRAIL_19, 1))
 
@@ -49,7 +50,7 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
                             }
 
                             // Holy Grail: Post-quest dialogue.
-                            isQuestComplete(player, Quests.HOLY_GRAIL) -> {
+                            isQuestComplete(player, Quests.HOLY_GRAIL.questName) -> {
                                 npcl(FaceAnim.NEUTRAL, "Congratulations, brave knight, on aiding Camelot in so many ways! If we ever require help again, I will make sure to call upon you!")
                                 stage = 20
                             }
@@ -69,8 +70,8 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
                     }
                 }
                 1 -> npcl(FaceAnim.NEUTRAL, "Ah yes... the Holy Grail...").also {
-                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) >= 10) {
-                        setQuestStage(player!!, Quests.HOLY_GRAIL, 20)
+                    if (getQuestStage(player!!, Quests.HOLY_GRAIL.questName) >= 10) {
+                        setQuestStage(player!!, Quests.HOLY_GRAIL.questName, 20)
                     }
                     stage++
                 }

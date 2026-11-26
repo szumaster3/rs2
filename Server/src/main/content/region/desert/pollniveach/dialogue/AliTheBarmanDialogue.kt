@@ -1,5 +1,7 @@
 package content.region.desert.pollniveach.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.openNpcShop
 import core.game.dialogue.*
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Ali The Barman dialogue.
@@ -21,7 +22,7 @@ class AliTheBarmanDialogue : DialogueFile() {
             2 -> showTopics(
                 Topic("Yes, I'd like a drink please.", 3),
                 Topic("What's going on in town?", 4),
-                IfTopic("I'm looking for Ali from Pollnivneach.", 10, getQuestStage(player!!, Quests.THE_FEUD) >= 10),
+                IfTopic("I'm looking for Ali from Pollnivneach.", 10, getQuestStage(player!!, Quests.THE_FEUD.questName) >= 10),
                 Topic("The 'Asp and Snake'? What a strange name for a bar.", 18)
             )
             3 -> end().also { openNpcShop(player!!, NPCs.ALI_THE_BARMAN_1864) }

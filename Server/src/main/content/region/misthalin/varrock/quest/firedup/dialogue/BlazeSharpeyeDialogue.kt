@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.firedup.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Blaze Sharpeye (All fired up) dialogue.
@@ -16,7 +17,7 @@ import shared.consts.Quests
 class BlazeSharpeyeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val questStage = getQuestStage(player, Quests.ALL_FIRED_UP)
+        val questStage = getQuestStage(player, Quests.ALL_FIRED_UP.questName)
         when (questStage) {
             0 -> player.dialogueInterpreter.sendDialogue("He seems uninterested in talking.").also { stage = 1000 }
             10 -> player("So, what's going on?").also { stage = 100 }
@@ -51,7 +52,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : Dialogue(player) {
             114 -> player("You really enjoy your job, don't you?").also { stage++ }
             115 -> npc("Yes. Yes I do. Now, why don't you go over there and", "try lighting that beacon. Show us what you've got.").also {
                 stage++
-                setQuestStage(player, Quests.ALL_FIRED_UP, 20)
+                setQuestStage(player, Quests.ALL_FIRED_UP.questName, 20)
             }
             116 -> options("Does it matter what type of log I use?", "Okay.").also { stage++ }
             117 -> when (buttonId) {
@@ -65,7 +66,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : Dialogue(player) {
             203 -> npc("It's near the limestone quarry, north-east of Varrock,", "west of the Rag and Bone Man's hovel.").also { stage++ }
             204 -> npc("My colleague, Squire Fyre, is tending that beacon.", "She'll help you out if you run into any trouble.").also {
                 stage = 116
-                setQuestStage(player, Quests.ALL_FIRED_UP, 40)
+                setQuestStage(player, Quests.ALL_FIRED_UP.questName, 40)
             }
             300 -> player("Can you really see it from this far away?").also { stage++ }
             301 -> npc("Absolutely! I can see a warm, delicious glow on the", "horizon. If you have sharp eyes and know what to look", "for it's trivial.").also { stage++ }
@@ -74,7 +75,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : Dialogue(player) {
             304 -> npc("If a beacon's fire starts to die down, you can restore it", "to its blazing glory by adding five logs.").also { stage++ }
             305 -> npc("You wouldn't mind topping this one up for me, would", "you? Oh, how I love to see things burn!").also {
                 stage++
-                setQuestStage(player, Quests.ALL_FIRED_UP, 70)
+                setQuestStage(player, Quests.ALL_FIRED_UP.questName, 70)
             }
             306 -> options("Oh, alright, then.", "Don't you have logs of your own you can use?").also { stage++ }
             307 -> when (buttonId) {
@@ -99,7 +100,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : Dialogue(player) {
             412 -> npc("Well, what are you waiting for? This is a serious", "matter! I'm sure King Roald is on the edge of his", "throne, waiting for the news.").also { stage++ }
             413 -> player("I'll get right on that.").also {
                 stage = 1000
-                setQuestStage(player, Quests.ALL_FIRED_UP, 90)
+                setQuestStage(player, Quests.ALL_FIRED_UP.questName, 90)
             }
             420 -> npc("Yes... YES HAHAHAHA FIRE").also { stage = 412 }
             1000 -> end()

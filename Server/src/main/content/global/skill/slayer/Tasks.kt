@@ -1,11 +1,12 @@
 package content.global.skill.slayer
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.cache.def.impl.NPCDefinition
 import core.game.node.entity.player.Player
 import java.util.*
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents a slayer tasks.
@@ -29,7 +30,7 @@ enum class Tasks {
     CATABLEPONS(35, intArrayOf(NPCs.CATABLEPON_4397, NPCs.CATABLEPON_4398, NPCs.CATABLEPON_4399), arrayOf("They use the magic spell Weaken to drain up to 15% of their", "opponent's maximum Strength level."), 1, false, false),
     CAVE_BUG(1, intArrayOf(NPCs.CAVE_BUG_1832, NPCs.CAVE_BUG_5750), arrayOf("It regenerates life points quickly and seems to be a good", "herblore monster."), 7, false, false),
     CAVE_CRAWLERS(10, intArrayOf(NPCs.CAVE_CRAWLER_1600, NPCs.CAVE_CRAWLER_1601, NPCs.CAVE_CRAWLER_1602, NPCs.CAVE_CRAWLER_1603), arrayOf("The poisonous parts of them are presumably removed."), 10, false, false),
-    CAVE_HORRORS(85, intArrayOf(NPCs.CAVE_HORROR_4353, NPCs.CAVE_HORROR_4354, NPCs.CAVE_HORROR_4355, NPCs.CAVE_HORROR_4356, NPCs.CAVE_HORROR_4357), arrayOf("A Cave horror wears a creepy mask, it is", "preferred to wear a witchwood icon."), 58, Quests.CABIN_FEVER),
+    CAVE_HORRORS(85, intArrayOf(NPCs.CAVE_HORROR_4353, NPCs.CAVE_HORROR_4354, NPCs.CAVE_HORROR_4355, NPCs.CAVE_HORROR_4356, NPCs.CAVE_HORROR_4357), arrayOf("A Cave horror wears a creepy mask, it is", "preferred to wear a witchwood icon."), 58, Quests.CABIN_FEVER.questName),
     CAVE_SLIMES(15, intArrayOf(NPCs.CAVE_SLIME_1831), arrayOf("These are lesser versions of jellies, watch out they can poison you."), 17, false, false),
     COCKATRICES(25, intArrayOf(NPCs.COCKATRICE_1620, NPCs.COCKATRICE_1621, NPCs.COCKATRICE_4227), arrayOf("A Mirror shield is necessary when", "fighting these monsters."), 25, false, false),
     COWS(5, intArrayOf(NPCs.COW_CALF_1766, NPCs.COW_CALF_1768, NPCs.COW_CALF_2310, NPCs.COW_81, NPCs.COW_397, NPCs.COW_955, NPCs.COW_1767, NPCs.COW_3309), arrayOf("Cow's may seem stupid, however they know more then", "you think. Don't under estimate them."), 1, false, false),
@@ -93,7 +94,7 @@ enum class Tasks {
     ZYGOMITES(10, intArrayOf(NPCs.ZYGOMITE_3346, NPCs.ZYGOMITE_3347), arrayOf("Mutated zygomites are hard to destroy and attack with mainly magical damage. " + "They regenerate quickly, so you will need to finish them off with fungicide. " + "We have a bit of a problem with them here in Zanaris."), 1, true, false),
     SHADES(30, intArrayOf(NPCs.SHADE_3617, NPCs.LOAR_SHADE_1241, NPCs.RIYL_SHADE_1246, NPCs.ASYN_SHADE_1248, NPCs.FIYR_SHADE_1250, NPCs.SHADE_428, NPCs.LOAR_SHADOW_1240), arrayOf("Shades are undead - The town of Mort'ton in Morytania is plagued by these creatures, " + "so help if you can. There are some shades in the Stronghold of Security too, but you won't " + "learn much from fighting those; stick to Mort'ton."), 1, true, false),
     MOGRES(1, intArrayOf(NPCs.MOGRE_114), arrayOf("Mogres are a type of aquatic ogre that is often mistaken for a giant mudskipper. " + "You have to force them out of the water with a fishing explosive. " + "You can find them on the peninsula to the south of Port Sarim."), 32, false, false),
-    SUQAHS(65, intArrayOf(NPCs.SUQAH_4527, NPCs.SUQAH_4528, NPCs.SUQAH_4529, NPCs.SUQAH_4530, NPCs.SUQAH_4531, NPCs.SUQAH_4532, NPCs.SUQAH_4533), arrayOf("Suquah are big, angry folk that inhabit Lunar Isle."), 1, Quests.LUNAR_DIPLOMACY),
+    SUQAHS(65, intArrayOf(NPCs.SUQAH_4527, NPCs.SUQAH_4528, NPCs.SUQAH_4529, NPCs.SUQAH_4530, NPCs.SUQAH_4531, NPCs.SUQAH_4532, NPCs.SUQAH_4533), arrayOf("Suquah are big, angry folk that inhabit Lunar Isle."), 1, Quests.LUNAR_DIPLOMACY.questName),
     VAMPIRES(35, intArrayOf(NPCs.VAMPIRE_1023, NPCs.VAMPIRE_1220, NPCs.VAMPIRE_1223, NPCs.VAMPIRE_1225, NPCs.VAMPIRE_6214), arrayOf("Vampires are equipped with large fangs,", "they can do serious damage."), 1, false, false),
     WATERFIENDS(75, intArrayOf(NPCs.WATERFIEND_5361), arrayOf("A waterfiend takes no damage from fire!"), 1, false, false),
     WEREWOLFS(60, intArrayOf(NPCs.WEREWOLF_1665, NPCs.WEREWOLF_6006, NPCs.WEREWOLF_6007, NPCs.WEREWOLF_6008, NPCs.WEREWOLF_6009, NPCs.WEREWOLF_6010, NPCs.WEREWOLF_6011, NPCs.WEREWOLF_6012, NPCs.WEREWOLF_6013, NPCs.WEREWOLF_6014, NPCs.WEREWOLF_6015, NPCs.WEREWOLF_6016, NPCs.WEREWOLF_6017, NPCs.WEREWOLF_6018, NPCs.WEREWOLF_6019, NPCs.WEREWOLF_6020, NPCs.WEREWOLF_6021, NPCs.WEREWOLF_6022, NPCs.WEREWOLF_6023, NPCs.WEREWOLF_6024, NPCs.WEREWOLF_6025, NPCs.WEREWOLF_6212, NPCs.WEREWOLF_6213, NPCs.REVENANT_WEREWOLF_6607, NPCs.REVENANT_WEREWOLF_6609, NPCs.REVENANT_WEREWOLF_6614, NPCs.REVENANT_WEREWOLF_6617, NPCs.REVENANT_WEREWOLF_6625, NPCs.REVENANT_WEREWOLF_6632, NPCs.REVENANT_WEREWOLF_6644, NPCs.REVENANT_WEREWOLF_6663, NPCs.REVENANT_WEREWOLF_6675, NPCs.REVENANT_WEREWOLF_6686, NPCs.REVENANT_WEREWOLF_6701, NPCs.REVENANT_WEREWOLF_6712, NPCs.REVENANT_WEREWOLF_6724, NPCs.REVENANT_WEREWOLF_6728), arrayOf("There temper is alot more nasty then a regular wolf!"), 1, false, false),

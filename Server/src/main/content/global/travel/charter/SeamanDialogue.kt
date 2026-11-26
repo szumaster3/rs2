@@ -1,5 +1,7 @@
 package content.global.travel.charter
 
+import content.data.Quests
+
 import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.Dialogue
@@ -11,7 +13,6 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Seaman dialogue.
@@ -21,7 +22,7 @@ class SeamanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (args.size > 1 && isQuestComplete(player, Quests.PIRATES_TREASURE)) {
+        if (args.size > 1 && isQuestComplete(player, Quests.PIRATES_TREASURE.questName)) {
             when {
                 hasCharosRing() -> travel()
                 hasKaramjaDiscount() -> pay(15)

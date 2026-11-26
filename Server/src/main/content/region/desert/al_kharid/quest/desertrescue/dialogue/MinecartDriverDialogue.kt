@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -7,12 +9,11 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             90 -> npc("Quickly, get in the back of the cart.")
             80 -> interpreter.sendDialogue("The cart driver seems to be fastidiously cleaning his cart.", "It doesn't look as if he wants to be disturbed.")
             else -> player("Hello!")
@@ -21,7 +22,7 @@ class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             90 -> when (stage) {
                 0 -> {
                     player("Okay, sorry.")
@@ -162,7 +163,7 @@ class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
                         return true
                     }
                     if (player.inventory.remove(COINS)) {
-                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 90)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 90)
                         npc("Okay, get in the back of the cart then!")
                         stage++
                     }

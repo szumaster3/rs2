@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.scorpcatcher.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.seers_village.quest.scorpcatcher.dialogue.SeerMirrorDialogue
 import content.region.kandarin.seers_village.quest.scorpcatcher.dialogue.ThormacRequestDialogue
@@ -22,7 +24,7 @@ import shared.consts.*
  * Represents the Scorpion Catcher quest.
  */
 @Initializable
-class ScorpionCatcherPlugin : Quest(Quests.SCORPION_CATCHER, 108, 107, 1, Vars.VARP_QUEST_SCORPION_CATCHER_PROGRESS_76, 0, 1, 6), InteractionListener {
+class ScorpionCatcherPlugin : Quest(Quests.SCORPION_CATCHER), InteractionListener {
     companion object {
         const val ATTRIBUTE_MIRROR = "/save:scorpion_catcher:start-talk"
         const val ATTRIBUTE_SECRET = "/save:scorpion_catcher:secret-room"

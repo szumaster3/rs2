@@ -1,5 +1,7 @@
 package content.region.misthalin.silvarea.quest.rag
 
+import content.data.Quests
+
 import content.region.misthalin.silvarea.quest.rag.plugin.BoneBoiler
 import core.api.*
 import core.game.node.entity.player.Player
@@ -7,10 +9,9 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 
 @Initializable
-class RagAndBoneMan : Quest(Quests.RAG_AND_BONE_MAN, 100, 99, 2, 714, 0, 1, 4) {
+class RagAndBoneMan : Quest(Quests.RAG_AND_BONE_MAN, 714, 0, 1, 4) {
     companion object {
         const val attributeGoblinBone = "/save:quest:rag_goblinbonesubmit"
         const val attributeBearBone = "/save:quest:rag_bearbonesubmit"
@@ -130,7 +131,7 @@ class RagAndBoneMan : Quest(Quests.RAG_AND_BONE_MAN, 100, 99, 2, 714, 0, 1, 4) {
     override fun finish(player: Player) {
         var ln = 10
         super.finish(player)
-        player.packetDispatch.sendString("You have completed ${Quests.RAG_AND_BONE_MAN}!", 277, 4)
+        player.packetDispatch.sendString("You have completed ${Quests.RAG_AND_BONE_MAN.questName}!", 277, 4)
         drawReward(player, Items.BONE_IN_VINEGAR_7813, 240)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "500 Cooking XP and 500", ln++)

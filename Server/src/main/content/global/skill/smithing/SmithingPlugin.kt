@@ -1,5 +1,7 @@
 package content.global.skill.smithing
 
+import content.data.Quests
+
 import content.global.skill.smithing.bar.BarItem
 import content.global.skill.smithing.bar.BarType
 import content.global.skill.smithing.bar.BarItemProduct
@@ -264,11 +266,11 @@ class SmithingPlugin : InteractionListener {
                 sendDialogue(player, "You need a hammer to work the metal with.")
                 return@onUseWith false
             }
-            if (!isQuestComplete(player, Quests.DORICS_QUEST) && with.asScenery().id == Scenery.ANVIL_2782) {
+            if (!isQuestComplete(player, Quests.DORICS_QUEST.questName) && with.asScenery().id == Scenery.ANVIL_2782) {
                 sendDialogue(player, "Property of Doric the Dwarf.")
                 return@onUseWith false
             }
-            if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD) && used.id == Items.BLURITE_BAR_9467) {
+            if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD.questName) && used.id == Items.BLURITE_BAR_9467) {
                 sendDialogue(player, "You need complete the Knights' Sword to work the metal with.")
                 return@onUseWith false
             }

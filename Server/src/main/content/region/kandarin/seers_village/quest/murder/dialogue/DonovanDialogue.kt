@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.murder.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import core.api.getAttribute
 import core.api.getQuestStage
@@ -12,7 +14,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class DonovanDialogue(player: Player? = null) : Dialogue(player) {
@@ -32,7 +33,7 @@ class DonovanDialogue(player: Player? = null) : Dialogue(player) {
 
 class DonovanDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, Quests.MURDER_MYSTERY)) {
+        when (getQuestStage(player!!, Quests.MURDER_MYSTERY.questName)) {
             0 -> npcl("I have no interest in talking to gawkers.").also { stage = END_DIALOGUE }
             1 -> when (stage) {
                 0 -> playerl("I'm here to help the guards with their investigation.").also { stage++ }

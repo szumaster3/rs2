@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.anma.plugin
 
+import content.data.Quests
+
 import content.data.skill.SkillingTool.Companion.getAxe
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
 import core.api.*
@@ -60,14 +62,14 @@ class AnimalMagnetismPlugin : OptionHandler() {
 
         when (node.id) {
             Scenery.MEMORIAL_5167 -> {
-                if (!hasRequirement(player, Quests.CREATURE_OF_FENKENSTRAIN)) {
+                if (!hasRequirement(player, Quests.CREATURE_OF_FENKENSTRAIN.questName)) {
                     return true
                 }
                 teleport(player, Location(3577, 9927), TeleportManager.TeleportType.INSTANT)
             }
             NPCs.AVA_5198,
             NPCs.AVA_5199 -> {
-                if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 0) {
+                if (getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 0) {
                     player.dialogueInterpreter.sendDialogues(node as NPC, null, "Hello there, I'm busy with my research. Come back in a", "bit, could you?")
                     return true
                 }
@@ -184,7 +186,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
                         node ?: return false
                         option ?: return false
 
-                        if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) <= 28) {
+                        if (getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) <= 28) {
                             val tool = getAxe(player)
                             if (tool == null || tool.ordinal < 4) {
                                 sendMessage(player, "You don't have the required axe in order to do that.")
@@ -192,10 +194,10 @@ class AnimalMagnetismPlugin : OptionHandler() {
                             }
                             val animation = getAnimation(tool.animation)
                             player.animate(animation, 2)
-                            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28) {
-                               setQuestStage(player, Quests.ANIMAL_MAGNETISM, 29)
+                            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 28) {
+                               setQuestStage(player, Quests.ANIMAL_MAGNETISM.questName, 29)
                             }
-                            sendMessage(player, "The axe bounces off the undead wood." + (if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28 || getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 29) " I should report this to Ava." else ""))
+                            sendMessage(player, "The axe bounces off the undead wood." + (if (getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 28 || getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 29) " I should report this to Ava." else ""))
                             return true
                         }
                         if (freeSlots(player) < 1) {
@@ -233,10 +235,10 @@ class AnimalMagnetismPlugin : OptionHandler() {
             val player = event.player
             val animation = getAnimation(event.usedItem.id)
             player.animate(animation, 2)
-            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28) {
-                setQuestStage(player, Quests.ANIMAL_MAGNETISM, 29)
+            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 28) {
+                setQuestStage(player, Quests.ANIMAL_MAGNETISM.questName, 29)
             }
-            sendMessage(player, "The axe bounces off the undead wood." + (if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 28 || getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 29) " I should report this to Ava." else ""))
+            sendMessage(player, "The axe bounces off the undead wood." + (if (getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 28 || getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 29) " I should report this to Ava." else ""))
             return true
         }
 
@@ -278,7 +280,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
             val configs = getConfigs(data[0] as Int)
             player.packetDispatch.sendInterfaceConfig(Components.ANMA_RGB_480, configs[0], !toggled)
             player.packetDispatch.sendInterfaceConfig(Components.ANMA_RGB_480, data[2] as Int, toggled)
-            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 33) {
+            if (getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName) == 33) {
                 setNoteCache(player, data[0] as Int, !toggled)
                 if (isTranslated(player)) {
                     if (removeItem(player, AnimalMagnetism.RESEARCH_NOTES)) {

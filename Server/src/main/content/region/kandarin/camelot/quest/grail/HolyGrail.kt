@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.grail
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.drawReward
 import core.api.getAttribute
@@ -11,10 +13,9 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 
 @Initializable
-class HolyGrail : Quest(Quests.HOLY_GRAIL, 76, 75, 1, 5, 0, 1, 10) {
+class HolyGrail : Quest(Quests.HOLY_GRAIL) {
     override fun newInstance(`object`: Any?): Quest = this
 
     companion object {

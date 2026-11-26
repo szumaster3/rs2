@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.hazeelcult
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.getAttribute
 import core.api.rewardXP
@@ -8,11 +10,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class HazeelCult : Quest(Quests.HAZEEL_CULT, 74, 73, 1, Vars.VARP_QUEST_HAZEEL_CULT_PROGRESS_223, 0, 1, 9) {
+class HazeelCult : Quest(Quests.HAZEEL_CULT) {
     override fun drawJournal(
         player: Player,
         stage: Int,

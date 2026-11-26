@@ -1,12 +1,13 @@
 package content.region.desert.quest.deserttreasure
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 
 /**
  * Represents the *Desert Treasure* quest.
@@ -24,10 +25,10 @@ import shared.consts.Quests
  * Author: [ovenbread](https://gitlab.com/ovenbreado)
  */
 @Initializable
-class DesertTreasure : Quest(Quests.DESERT_TREASURE, 45, 44, 3, 440, 358, 0, 1, 15) {
+class DesertTreasure : Quest(Quests.DESERT_TREASURE, 440, 358, 0, 1, 15) {
 
     companion object {
-        val questName = Quests.DESERT_TREASURE
+        val questName = Quests.DESERT_TREASURE.questName
 
         /** This is an important varbit as it is literally controlling the Quest varbit (440 Varp 0-14 bits -> 358 Varbit )*/
         const val varbitDesertTreasure =
@@ -110,12 +111,12 @@ class DesertTreasure : Quest(Quests.DESERT_TREASURE, 45, 44, 3, 440, 358, 0, 1, 
                 hasLevelStat(player, Skills.FIREMAKING, 50),
                 hasLevelStat(player, Skills.MAGIC, 50),
                 hasLevelStat(player, Skills.THIEVING, 53),
-                isQuestComplete(player, Quests.THE_DIG_SITE),
-                isQuestComplete(player, Quests.THE_TOURIST_TRAP),
-                isQuestComplete(player, Quests.TEMPLE_OF_IKOV),
-                isQuestComplete(player, Quests.PRIEST_IN_PERIL),
-                isQuestComplete(player, Quests.WATERFALL_QUEST),
-                isQuestComplete(player, Quests.TROLL_STRONGHOLD),
+                isQuestComplete(player, Quests.THE_DIG_SITE.questName),
+                isQuestComplete(player, Quests.THE_TOURIST_TRAP.questName),
+                isQuestComplete(player, Quests.TEMPLE_OF_IKOV.questName),
+                isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName),
+                isQuestComplete(player, Quests.WATERFALL_QUEST.questName),
+                isQuestComplete(player, Quests.TROLL_STRONGHOLD.questName),
             ).all { it }
         }
     }
@@ -139,12 +140,12 @@ class DesertTreasure : Quest(Quests.DESERT_TREASURE, 45, 44, 3, 440, 358, 0, 1, 
             line(
                 player, "I must have completed the following quests:", line++
             ) // After - I have completed all of the required quests:
-            line(player, "The Digsite Quest", line++, isQuestComplete(player, Quests.THE_DIG_SITE))
-            line(player, "The Tourist Trap", line++, isQuestComplete(player, Quests.THE_TOURIST_TRAP))
-            line(player, "The Temple of Ikov", line++, isQuestComplete(player, Quests.TEMPLE_OF_IKOV))
-            line(player, "Priest In Peril", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL))
-            line(player, "Waterfall Quest", line++, isQuestComplete(player, Quests.WATERFALL_QUEST))
-            line(player, "Troll Stronghold", line++, isQuestComplete(player, Quests.TROLL_STRONGHOLD))
+            line(player, "The Digsite Quest", line++, isQuestComplete(player, Quests.THE_DIG_SITE.questName))
+            line(player, "The Tourist Trap", line++, isQuestComplete(player, Quests.THE_TOURIST_TRAP.questName))
+            line(player, "The Temple of Ikov", line++, isQuestComplete(player, Quests.TEMPLE_OF_IKOV.questName))
+            line(player, "Priest In Peril", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL.questName))
+            line(player, "Waterfall Quest", line++, isQuestComplete(player, Quests.WATERFALL_QUEST.questName))
+            line(player, "Troll Stronghold", line++, isQuestComplete(player, Quests.TROLL_STRONGHOLD.questName))
         } else {
 
             if (stage >= 2) {

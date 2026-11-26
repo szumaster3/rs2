@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.chompybird.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.feldip.quest.chompybird.plugin.ChompyBird
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -14,7 +16,6 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Rantz dialogue.
@@ -28,7 +29,7 @@ class RantzChompyDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        val chompyStage = getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING)
+        val chompyStage = getQuestStage(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName)
 
         val hasOgreBow =
             inInventory(player, Items.OGRE_BOW_2883) ||

@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.quest.wolf.plugin;
 
+import content.data.Quests;
+
 import core.cache.def.impl.SceneryDefinition;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
@@ -30,7 +32,6 @@ import core.net.packet.out.PacketContext.MinimapStateContext;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import shared.consts.Quests;
 
 import static core.api.ContentAPIKt.*;
 
@@ -45,7 +46,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
     private static final Item WOLF_POUCH = new Item(12047);
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.forId(28675).getHandlers().put("option:open", this);
         SceneryDefinition.forId(28676).getHandlers().put("option:climb-down", this);
         SceneryDefinition.forId(28653).getHandlers().put("option:climb-down", this);
@@ -61,7 +62,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
     public boolean handle(final Player player, Node node, String option) {
         Scenery scenery = (Scenery) node;
         Location loc = null;
-        Quest quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE);
+        Quest quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE.getQuestName());
         int questVal = quest.getStage(player) == 0 ? 0 : quest.getStage(player) > 0 && quest.getStage(player) < 100 ? 5 : 28893;
         switch (option) {
             case "close":
@@ -235,9 +236,9 @@ public final class SummoningTrainingRoom extends OptionHandler {
             }
 
             @Override
-            public boolean open(java.lang.Object... args) {
+            public boolean open(Object... args) {
                 cutscene = (CutscenePlugin) args[0];
-                quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE);
+                quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE.getQuestName());
                 fluffy = NPC.create(6990, cutscene.getBase().transform(41, 52, 1));
                 fluffy.init();
                 fluffy.faceTemporary(player, 1);

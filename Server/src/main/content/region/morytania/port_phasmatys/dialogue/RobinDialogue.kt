@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.RobinDialogueFile
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Robin dialogue.
@@ -21,7 +22,7 @@ class RobinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.GHOSTS_AHOY)
+        val questStage = getQuestStage(player, Quests.GHOSTS_AHOY.questName)
         val hasLongbow = inInventory(player!!, Items.OAK_LONGBOW_845)
         val wonRunedraw = getAttribute(player!!, GhostsAhoyUtils.getSignedBow, false)
         when {

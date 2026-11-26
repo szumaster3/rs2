@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.zogre.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -10,7 +12,6 @@ import core.tools.DARK_BLUE
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 class GrishDialogues : DialogueFile() {
@@ -123,7 +124,7 @@ class GrishFinishDialogue : DialogueFile() {
             25 -> npcl(FaceAnim.OLD_DEFAULT, "All da zogries stayin' in da olde Jiggig, we's gonna do da new Jiggig someways else. Yous creature da good-un for geddin' da oldie fings...").also { stage = END_DIALOGUE }
             26 -> {
                 end()
-                finishQuest(player!!, Quests.ZOGRE_FLESH_EATERS)
+                finishQuest(player!!, Quests.ZOGRE_FLESH_EATERS.questName)
             }
         }
     }

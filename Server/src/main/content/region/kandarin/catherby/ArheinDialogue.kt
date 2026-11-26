@@ -1,5 +1,7 @@
 package content.region.kandarin.catherby
 
+import content.data.Quests
+
 import core.ServerStore
 import core.api.*
 import core.game.dialogue.*
@@ -11,7 +13,6 @@ import core.tools.END_DIALOGUE
 import core.tools.StringUtils
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Arhein dialogue.
@@ -93,7 +94,7 @@ class ArheinDialogue(player: Player? = null) : Dialogue(player) {
             101 -> showTopics(
                 Topic("Where do you deliver to?", 120),
                 Topic("Are you rich then?", 110),
-                IfTopic("Do you deliver to the fort just down the coast?", 500, getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 30),
+                IfTopic("Do you deliver to the fort just down the coast?", 500, getQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName) == 30),
             )
             110 -> npcl(FaceAnim.NEUTRAL, "Business is going reasonably well... I wouldn't say I was the richest of merchants ever, but I'm doing fairly well all things considered.").also { stage = END_DIALOGUE }
             120 -> npcl(FaceAnim.NEUTRAL, "Various places up and down the coast. Mostly Karamja and Port Sarim.").also { stage++ }

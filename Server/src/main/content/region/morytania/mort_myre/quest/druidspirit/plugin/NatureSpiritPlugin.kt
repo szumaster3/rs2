@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.quest.druidspirit.plugin
 
+import content.data.Quests
+
 import content.region.morytania.mort_myre.npc.GhastNPC
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -70,7 +72,7 @@ class NatureSpiritPlugin : InteractionListener {
         }
 
         on(GROTTO_ENTRANCE, IntType.SCENERY, "enter") { player, _ ->
-            val questStage = getQuestStage(player, Quests.NATURE_SPIRIT)
+            val questStage = getQuestStage(player, Quests.NATURE_SPIRIT.questName)
             sendMessage(player, "You prepare to enter the Druid's grotto.")
 
             when {
@@ -104,7 +106,7 @@ class NatureSpiritPlugin : InteractionListener {
         }
 
         on(GROTTO_ALTAR, IntType.SCENERY, "search") { player, _ ->
-            val stage = getQuestStage(player, Quests.NATURE_SPIRIT)
+            val stage = getQuestStage(player, Quests.NATURE_SPIRIT.questName)
             if (stage == 55) {
                 openDialogue(player, GrottoDialogue())
                 return@on true
@@ -113,7 +115,7 @@ class NatureSpiritPlugin : InteractionListener {
         }
 
         on(WISHING_WELL, IntType.SCENERY, "make-wish") { player, _ ->
-            if (isQuestComplete(player, Quests.NATURE_SPIRIT) && isQuestComplete(player, Quests.WOLF_WHISTLE)) {
+            if (isQuestComplete(player, Quests.NATURE_SPIRIT.questName) && isQuestComplete(player, Quests.WOLF_WHISTLE.questName)) {
                 sendMessage(player, "The wishing well has a number of Summoning items in it.")
                 sendMessage(player, "If you toss in some coins, you can take the items in return.")
                 Shops.openId(player, 239)
@@ -173,7 +175,7 @@ class NatureSpiritPlugin : InteractionListener {
 
         on(DRUID_POUCHES, IntType.ITEM, "fill") { player, node ->
 
-            if (getQuestStage(player, Quests.NATURE_SPIRIT) < 75) {
+            if (getQuestStage(player, Quests.NATURE_SPIRIT.questName) < 75) {
                 sendDialogue(player, "I don't know how to use that yet.")
                 return@on true
             }
@@ -245,7 +247,7 @@ class NatureSpiritPlugin : InteractionListener {
                 }
             }
 
-            if (getQuestStage(player, Quests.NATURE_SPIRIT) == 0) {
+            if (getQuestStage(player, Quests.NATURE_SPIRIT.questName) == 0) {
                 sendMessage(player, "You try to put the item on the stone, but it just moves off.")
                 return@onUseWith true
             }
@@ -272,7 +274,7 @@ class NatureSpiritPlugin : InteractionListener {
         }
 
         onUseWith(IntType.NPC, Items.SECATEURS_5329, NPCs.NATURE_SPIRIT_1051) { player, used, _ ->
-            if (!hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS)) {
+            if (!hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS.questName)) {
                 return@onUseWith true
             }
             if (amountInInventory(player, Items.COINS_995) < 40000) {

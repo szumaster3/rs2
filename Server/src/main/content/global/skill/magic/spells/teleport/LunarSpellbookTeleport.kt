@@ -4,6 +4,7 @@ import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.LunarSpells
 import core.api.finishDiaryTask
 import core.api.playGlobalAudio
+import core.api.finishDiaryTask
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
@@ -107,6 +108,7 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
 
     private fun sendTeleport(player: Player, xp: Double, loc: Location) {
         if (player.teleporter.send(loc, TeleportManager.TeleportType.LUNAR)) {
+            if (loc == Location.create(2469, 3247, 0)) finishDiaryTask(player, DiaryType.ARDOUGNE, 2, 5)
             addXP(player, xp)
             removeRunes(player)
             setDelay(player, true)

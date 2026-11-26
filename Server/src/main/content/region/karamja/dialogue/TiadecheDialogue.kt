@@ -1,5 +1,7 @@
 package content.region.karamja.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Tiadeche dialogue.
@@ -21,7 +22,7 @@ class TiadecheDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO, false)) {
+        if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO.questName, false)) {
             npcl(FaceAnim.NEUTRAL, randomConversation.random()).also { stage = END_DIALOGUE }
         } else {
             player("Hello, Tiadeche.")

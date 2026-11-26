@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendMessage
 import core.api.teleport
@@ -7,7 +9,6 @@ import core.game.dialogue.DialogueFile
 import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Kilron dialogue.
@@ -18,7 +19,7 @@ import shared.consts.Quests
 class KilronDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.BIOHAZARD)
+        val questStage = getQuestStage(player!!, Quests.BIOHAZARD.questName)
         npc = NPC(NPCs.KILRON_349)
         when {
             (questStage >= 1) -> {

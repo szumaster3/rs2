@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.swept.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -26,7 +28,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
          */
 
         on(Scenery.TRAPDOOR_39274, IntType.SCENERY, "open") { player, _ ->
-            if (!isQuestComplete(player, Quests.SWEPT_AWAY)) {
+            if (!isQuestComplete(player, Quests.SWEPT_AWAY.questName)) {
                 setVarbit(player, SweptUtils.VARBIT_BETTY_TRAPDOOR, 1)
             } else sendMessage(player, "It's locked.")
             return@on true
@@ -42,7 +44,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
          */
 
         on(Scenery.TRAPDOOR_39330, IntType.SCENERY, "open") { player, _ ->
-            if (!isQuestComplete(player, Quests.SWEPT_AWAY) && getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
+            if (!isQuestComplete(player, Quests.SWEPT_AWAY.questName) && getQuestStage(player, Quests.SWEPT_AWAY.questName) >= 1) {
                 setVarbit(player, SweptUtils.VARBIT_RIMMINGTON_TRAPDOOR, 1)
             } else sendMessage(player, "It's locked.")
             return@on true
@@ -97,7 +99,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
         on(Scenery.MAGGIE_S_CAULDRON_39230, IntType.SCENERY, "stir") { player, _ ->
             lock(player, 1)
-            val questStage = getQuestStage(player, Quests.SWEPT_AWAY)
+            val questStage = getQuestStage(player, Quests.SWEPT_AWAY.questName)
             if (questStage >= 4) {
                 if (questStage == 4 && !inInventory(player, Items.BROOMSTICK_14057)) {
                     sendMessage(player, "You need the enchanted broomstick to stir the cauldron properly.")

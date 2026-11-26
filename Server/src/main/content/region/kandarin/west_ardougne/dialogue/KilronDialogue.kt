@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.isQuestInProgress
 import core.api.openDialogue
@@ -10,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Kilron dialogue.
@@ -21,10 +22,10 @@ class KilronDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
-            isQuestComplete(player, Quests.PLAGUE_CITY) && isQuestComplete(player, Quests.BIOHAZARD) ->
+            isQuestComplete(player, Quests.PLAGUE_CITY.questName) && isQuestComplete(player, Quests.BIOHAZARD.questName) ->
                 npcl(FaceAnim.FRIENDLY, "Looks like you won't be needing the rope ladder any more, adventurer.")
 
-            isQuestInProgress(player, Quests.BIOHAZARD, 1, 99) -> {
+            isQuestInProgress(player, Quests.BIOHAZARD.questName, 1, 99) -> {
                 end()
                 openDialogue(player, KilronDialogue())
             }

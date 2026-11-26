@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.swept_cat.plugin
 
+import content.data.Quests
+
 import content.global.skill.summoning.pets.Pets
 import content.region.misthalin.varrock.diary.VarrockAchievementDiary
 import core.api.*
@@ -51,7 +53,7 @@ class WendyCatMorphPlugin : InteractionListener {
 
             val isPurpleCat = item.id in purpleCats
 
-            if (!isQuestComplete(player, Quests.SWEPT_AWAY)) {
+            if (!isQuestComplete(player, Quests.SWEPT_AWAY.questName)) {
                 sendMessage(player, "You can't use your cat on Wendy yet.")
                 return@onUseAnyWith false
             }

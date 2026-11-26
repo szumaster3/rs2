@@ -1,5 +1,7 @@
 package content.region.karamja.tbw.quest.junglepotion
 
+import content.data.Quests
+
 import content.global.skill.herblore.herb.HerbItem
 import content.region.karamja.tbw.quest.junglepotion.dialogue.JogreCavernDialogue
 import content.region.karamja.tbw.quest.junglepotion.dialogue.TrufitusDialogue
@@ -10,11 +12,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class JunglePotion : Quest(Quests.JUNGLE_POTION, 81, 80, 1, Vars.VARP_QUEST_JUNGLE_POTION_PROGRESS_175, 0, 1, 12) {
+class JunglePotion : Quest(Quests.JUNGLE_POTION, Vars.VARP_QUEST_JUNGLE_POTION_PROGRESS_175, 0, 1, 12) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

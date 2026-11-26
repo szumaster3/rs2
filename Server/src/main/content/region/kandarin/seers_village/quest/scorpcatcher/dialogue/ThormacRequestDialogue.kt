@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.quest.scorpcatcher.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.seers_village.quest.scorpcatcher.plugin.ScorpionCatcherPlugin
 import core.api.*
@@ -13,7 +15,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Thormac dialogue extension for [ScorpionCatcherPlugin] quest.
@@ -21,7 +22,7 @@ import shared.consts.Quests
 class ThormacRequestDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.SCORPION_CATCHER)
+        val questStage = getQuestStage(player!!, Quests.SCORPION_CATCHER.questName)
         val hasAnCage = hasAnItem(player!!, Items.SCORPION_CAGE_456, Items.SCORPION_CAGE_457, Items.SCORPION_CAGE_458, Items.SCORPION_CAGE_459, Items.SCORPION_CAGE_460, Items.SCORPION_CAGE_461, Items.SCORPION_CAGE_462, Items.SCORPION_CAGE_463).container != null
         npc = NPC(NPCs.THORMAC_389)
         when (questStage) {
@@ -89,7 +90,7 @@ class ThormacRequestDialogue : DialogueFile() {
                     }
                     22 -> when (buttonID) {
                         1 -> playerl(FaceAnim.NEUTRAL, "Ok, I will do it then.").also {
-                            setQuestStage(player!!, Quests.SCORPION_CATCHER, 10)
+                            setQuestStage(player!!, Quests.SCORPION_CATCHER.questName, 10)
                             stage = END_DIALOGUE
                         }
                         2 -> playerl(FaceAnim.NEUTRAL, "I'm not interested then.").also { stage = 11 }
@@ -110,7 +111,7 @@ class ThormacRequestDialogue : DialogueFile() {
                     2 -> npcl(FaceAnim.NEUTRAL, "Ok, here's another cage. You're almost as bad at losing things as me.").also { stage++ }
                     3 -> {
                         end()
-                        setQuestStageNonmonotonic(player!!, 108, 10)
+                        setQuestStageNonmonotonic(player!!, 2, 10)
                         removeAttributes(player!!, GameAttributes.LABEL_SCORPION_TAVERLEY, GameAttributes.LABEL_SCORPION_OUTPOST,GameAttributes.LABEL_SCORPION_MONASTERY)
                         addItemOrDrop(player!!, Items.SCORPION_CAGE_456)
                         stage = END_DIALOGUE
@@ -122,7 +123,7 @@ class ThormacRequestDialogue : DialogueFile() {
                     5 -> npcl(FaceAnim.NEUTRAL, "Aha, my little scorpions home at last!").also { stage++ }
                     6 -> {
                         end()
-                        finishQuest(player!!, Quests.SCORPION_CATCHER)
+                        finishQuest(player!!, Quests.SCORPION_CATCHER.questName)
                         removeItem(player!!, Items.SCORPION_CAGE_463)
                         sendMessage(player!!, "You don't need that scorpion cage anymore.")
                         stage = END_DIALOGUE

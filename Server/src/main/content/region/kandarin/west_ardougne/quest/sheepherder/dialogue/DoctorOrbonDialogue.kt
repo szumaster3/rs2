@@ -1,5 +1,8 @@
 package content.region.kandarin.west_ardougne.quest.sheepherder.dialogue
 
+import content.region.kandarin.west_ardougne.diary.dialogue.DoctorOrbonDiaryDialogue
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.sheepherder.SheepHerder
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -11,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Doctor Orbon dialogue.
@@ -21,10 +23,10 @@ class DoctorOrbonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.SHEEP_HERDER) == 10) {
+        if (getQuestStage(player, Quests.SHEEP_HERDER.questName) == 10) {
             player("Hello doctor. I need to acquire some protective clothing", "so that I can dispose of some escaped sheep infected", "with the plague.")
         } else {
-            end()
+            openDialogue(player, DoctorOrbonDiaryDialogue(), npc!!)
         }
         return true
     }

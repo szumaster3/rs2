@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.quest.fortress.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.game.node.entity.player.link.quest.Quest
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sir Amik Varze dialogue.
@@ -23,7 +24,7 @@ class SirAmikVarzeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.BLACK_KNIGHTS_FORTRESS)
+        quest = player.getQuestRepository().getQuest(Quests.BLACK_KNIGHTS_FORTRESS.questName)
         when (quest!!.getStage(player)) {
             30 -> player(FaceAnim.HAPPY, "I have ruined the Black Knights' invincibility potion.")
             10, 20 -> npc(FaceAnim.ASKING, "How's the mission going?")
@@ -36,9 +37,9 @@ class SirAmikVarzeDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             100 -> when (stage) {
-                0 -> if (isQuestComplete(player!!, Quests.BLACK_KNIGHTS_FORTRESS) && isQuestComplete(player!!, Quests.DRUIDIC_RITUAL) && getQuestStage(player, Quests.RECRUITMENT_DRIVE) == 0) {
+                0 -> if (isQuestComplete(player!!, Quests.BLACK_KNIGHTS_FORTRESS.questName) && isQuestComplete(player!!, Quests.DRUIDIC_RITUAL.questName) && getQuestStage(player, Quests.RECRUITMENT_DRIVE.questName) == 0) {
                     playerl(FaceAnim.THINKING, "Do you have any other quests for me to do?").also { stage = 112 }
-                } else if (isQuestInProgress(player!!, Quests.RECRUITMENT_DRIVE, 1, 100)) {
+                } else if (isQuestInProgress(player!!, Quests.RECRUITMENT_DRIVE.questName, 1, 100)) {
                     options(
                         "Who are you?",
                         "Can I just skip the test to become a Temple Knight?",
@@ -73,7 +74,7 @@ class SirAmikVarzeDialogue(player: Player? = null) : Dialogue(player) {
                 114 -> player("I'll go do that, then.").also { stage++ }
                 115 -> {
                     end()
-                    setQuestStage(player!!, Quests.RECRUITMENT_DRIVE, 1)
+                    setQuestStage(player!!, Quests.RECRUITMENT_DRIVE.questName, 1)
                     updateQuestTab(player!!)
                 }
             }
@@ -86,7 +87,7 @@ class SirAmikVarzeDialogue(player: Player? = null) : Dialogue(player) {
                 4 -> {
                     end()
                     addItemOrDrop(player, Items.COINS_995, 2500)
-                    finishQuest(player, Quests.BLACK_KNIGHTS_FORTRESS)
+                    finishQuest(player, Quests.BLACK_KNIGHTS_FORTRESS.questName)
                     updateQuestTab(player)
                 }
             }

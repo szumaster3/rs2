@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.npc
 
+import content.data.Quests
+
 import content.region.kandarin.port_khazard.quest.arena.dialogue.GeneralKhazardDialogue
 import core.api.*
 import core.game.node.entity.Entity
@@ -10,7 +12,6 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class BouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -46,8 +47,8 @@ class BouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
-            if (getQuestStage(killer, Quests.FIGHT_ARENA) >= 89) {
-                setQuestStage(killer, Quests.FIGHT_ARENA, 91)
+            if (getQuestStage(killer, Quests.FIGHT_ARENA.questName) >= 89) {
+                setQuestStage(killer, Quests.FIGHT_ARENA.questName, 91)
             }
             removeAttribute(killer, "spawn-bouncer")
             openDialogue(killer, GeneralKhazardDialogue())

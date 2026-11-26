@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.dialogue
 
+import content.data.Quests
+
 import core.api.amountInInventory
 import core.api.hasRequirement
 import core.api.removeItem
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class DarkMageDialogue(player: Player? = null) : Dialogue(player) {
@@ -24,7 +25,7 @@ class DarkMageDialogue(player: Player? = null) : Dialogue(player) {
         val npc = args[0] as NPC
         this.npc = npc
         hasIbanStaff = player!!.inventory.contains(Items.IBANS_STAFF_1410, 1)
-        if (!hasRequirement(player, Quests.UNDERGROUND_PASS)) {
+        if (!hasRequirement(player, Quests.UNDERGROUND_PASS.questName)) {
             npcl(FaceAnim.NEUTRAL, "Why do you interrupt me, traveller?")
         } else {
             npcl(FaceAnim.NEUTRAL, "Oh, it's the liberator of Ardougne. Why do you interrupt me?")

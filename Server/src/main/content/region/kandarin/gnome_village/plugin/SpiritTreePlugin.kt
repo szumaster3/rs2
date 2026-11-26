@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_village.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.gnome_village.dialogue.SpiritTreeDialogue
 import core.api.getUsedOption
 import core.api.isQuestComplete
@@ -7,7 +9,6 @@ import core.api.openDialogue
 import core.api.sendDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import shared.consts.Quests
 import shared.consts.Scenery
 
 /**
@@ -24,7 +25,7 @@ class SpiritTreePlugin : InteractionListener {
          */
 
         on(spiritTrees, IntType.SCENERY, "talk-to", "teleport") { player, _ ->
-            if (!isQuestComplete(player, Quests.TREE_GNOME_VILLAGE)) {
+            if (!isQuestComplete(player, Quests.TREE_GNOME_VILLAGE.questName)) {
                 sendDialogue(player, "The tree doesn't feel like talking.")
                 return@on true
             }

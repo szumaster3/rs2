@@ -1,5 +1,7 @@
 package content.global.travel
 
+import content.data.Quests
+
 import content.global.skill.magic.TeleportMethod
 import core.api.*
 import core.game.event.TeleportEvent
@@ -33,7 +35,7 @@ object EssenceTeleport {
      * Teleports to the Rune Essence mine via NPC.
      */
     fun teleport(npc: NPC, player: Player) {
-        if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+        if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
             sendMessage(player, "You need to complete Rune Mysteries to enter the Rune Essence mine.")
             return
         }

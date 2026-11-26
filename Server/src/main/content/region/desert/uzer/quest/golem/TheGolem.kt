@@ -1,5 +1,7 @@
 package content.region.desert.uzer.quest.golem
 
+import content.data.Quests
+
 import core.api.drawReward
 import core.api.getAttribute
 import core.api.getStatLevel
@@ -9,11 +11,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class TheGolem : Quest(Quests.THE_GOLEM, 70, 69, 1, Vars.VARBIT_QUEST_THE_GOLEM_PROGRESS_346, 0, 1, 10) {
+class TheGolem : Quest(Quests.THE_GOLEM, Vars.VARBIT_QUEST_THE_GOLEM_PROGRESS_346, 0, 1, 10) {
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var ln = 11

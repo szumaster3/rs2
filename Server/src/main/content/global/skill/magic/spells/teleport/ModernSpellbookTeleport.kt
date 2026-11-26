@@ -1,5 +1,7 @@
 package content.global.skill.magic.spells.teleport
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.TeleportMethod
@@ -15,7 +17,6 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import shared.consts.Items
-import shared.consts.Quests
 
 class ModernSpellbookTeleport : SpellListener("modern") {
 
@@ -85,11 +86,11 @@ class ModernSpellbookTeleport : SpellListener("modern") {
          */
 
         onCast(ModernSpells.ARDOUGNE_TELEPORT, NONE) { player, _ ->
-            if (!hasRequirement(player, Quests.PLAGUE_CITY, true)) {
+            if (!hasRequirement(player, Quests.PLAGUE_CITY.questName, true)) {
                 return@onCast
             }
             requires(player = player, magicLevel = 51, runes = arrayOf(Item(Items.WATER_RUNE_555, 2), Item(Items.LAW_RUNE_563, 2)))
-            sendTeleport(player = player, xp = 61.0, location = Location.create(2662, 3307, 0))
+            sendTeleport(player = player, xp = 61.0, location = Location.create(2662, 3307, 0), diaryLevel = 1, diaryTask = 6)
 
         }
 
@@ -103,7 +104,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
                 return@onCast
             }
             requires(player = player, magicLevel = 58, runes = arrayOf(Item(Items.EARTH_RUNE_557, 2), Item(Items.LAW_RUNE_563, 2)))
-            sendTeleport(player = player, xp = 68.0, location = Location.create(2549, 3112, 0))
+            val alternate = isDiaryComplete(player, DiaryType.ARDOUGNE, 2) &&
+                getAttribute(player, GameAttributes.ATTRIBUTE_WATCHTOWER_ALT_TELE, false)
+            val destination = if (alternate) Location.create(2606, 3093, 0) else Location.create(2549, 3112, 0)
+            sendTeleport(player = player, xp = 68.0, location = destination, diaryLevel = 2, diaryTask = 11)
         }
 
         /*
@@ -111,7 +115,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
          */
 
         onCast(ModernSpells.TROLLHEIM_TELEPORT, NONE) { player, _ ->
-            if (!hasRequirement(player, Quests.EADGARS_RUSE)) {
+            if (!hasRequirement(player, Quests.EADGARS_RUSE.questName)) {
                 return@onCast
             }
             requires(player = player, magicLevel = 61, runes = arrayOf(Item(Items.FIRE_RUNE_554, 2), Item(Items.LAW_RUNE_563, 2)))
@@ -123,7 +127,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
          */
 
         onCast(ModernSpells.APE_ATOLL_TELEPORT, NONE) { player, _ ->
-            if (!hasRequirement(player, Quests.MONKEY_MADNESS)) {
+            if (!hasRequirement(player, Quests.MONKEY_MADNESS.questName)) {
                 return@onCast
             }
             requires(player = player, magicLevel = 64, runes = arrayOf(Item(Items.FIRE_RUNE_554, 2), Item(Items.WATER_RUNE_555, 2), Item(Items.LAW_RUNE_563, 2), Item(Items.BANANA_1963)))
@@ -140,7 +144,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
         }
     }
 
-    private fun sendTeleport(player: Player, xp: Double, location: Location) {
+    private fun sendTeleport(player: Player, xp: Double, location: Location, diaryLevel: Int = -1, diaryTask: Int = -1) {
         if (player.isTeleBlocked) {
             removeAttribute(player, "spell:runes")
             sendMessage(player, "A magical force prevents you from teleporting.")
@@ -154,6 +158,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
 
             removeRunes(player)
             addXP(player, xp)
+            if (diaryLevel >= 0) player.achievementDiaryManager.finishTask(player, DiaryType.ARDOUGNE, diaryLevel, diaryTask)
             setDelay(player, true)
         }
     }

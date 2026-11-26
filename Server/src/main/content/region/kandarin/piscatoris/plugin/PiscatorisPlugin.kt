@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.piscatoris.dialogue.KathyCorkatDialogue.Companion.sail
 import core.api.*
 import core.game.global.action.ClimbActionHandler
@@ -58,7 +60,7 @@ class PiscatorisPlugin : InteractionListener {
          */
 
         on(NET_SCENERY, IntType.SCENERY, "Take-from") { player, node ->
-            if (!hasRequirement(player, Quests.SWAN_SONG)) return@on false
+            if (!hasRequirement(player, Quests.SWAN_SONG.questName)) return@on false
 
             if (!hasSpaceFor(player, Item(Items.SEAWEED_401, 1))) {
                 sendMessage(player, "You do not have space in your inventory.")
@@ -84,7 +86,7 @@ class PiscatorisPlugin : InteractionListener {
 
 
         on(Scenery.TRAPDOOR_28741, IntType.SCENERY, "open") { player, node ->
-            if (!isQuestComplete(player, Quests.WOLF_WHISTLE)) {
+            if (!isQuestComplete(player, Quests.WOLF_WHISTLE.questName)) {
                 sendMessage(player, "You need to complete Wolf Whistle quest to do this.")
                 return@on true
             }
@@ -102,7 +104,7 @@ class PiscatorisPlugin : InteractionListener {
         }
 
         on(Scenery.TRAPDOOR_28742, IntType.SCENERY, "climb-down") { player, node ->
-            if (!isQuestComplete(player, Quests.WOLF_WHISTLE)) {
+            if (!isQuestComplete(player, Quests.WOLF_WHISTLE.questName)) {
                 sendMessage(player, "You need to complete Wolf Whistle quest to do this.")
                 return@on true
             }

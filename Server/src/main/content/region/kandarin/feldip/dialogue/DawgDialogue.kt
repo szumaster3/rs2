@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.sendNPCDialogue
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Dawg dialogue.
@@ -18,7 +19,7 @@ class DawgDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
+            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT.questName)) {
                 npcl(FaceAnim.CHILD_NEUTRAL, "Grrrr!").also { stage++ }
             } else {
                 playerl(FaceAnim.FRIENDLY, "Hi there, um, puppy... cat... thing. Good Dawg.").also { stage = 3 }

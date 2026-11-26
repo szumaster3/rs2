@@ -1,5 +1,7 @@
 package content.region.other.tutorial_island.npc
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.hasStarted
@@ -16,7 +18,6 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GiantRatNPC : AbstractNPC {
@@ -44,7 +45,7 @@ class GiantRatNPC : AbstractNPC {
             return
         }
 
-        if (hasStarted(killer, Quests.WITCHS_POTION)) {
+        if (hasStarted(killer, Quests.WITCHS_POTION.questName)) {
             produceGroundItem(killer, Items.RATS_TAIL_300, 1, getLocation())
         }
 

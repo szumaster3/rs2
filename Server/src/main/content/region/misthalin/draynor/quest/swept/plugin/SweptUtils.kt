@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.swept.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -380,9 +382,9 @@ internal object SweptUtils {
                     visualize(player, -1, BROOM_ENCHANTMENT_GFX)
                     sendPlayerDialogue(player, "Woah, I felt that down to my toes!", FaceAnim.SCARED)
                     // Never move the quest backwards (or start it) from here.
-                    val questStage = getQuestStage(player, Quests.SWEPT_AWAY)
+                    val questStage = getQuestStage(player, Quests.SWEPT_AWAY.questName)
                     if (questStage in 1..2) {
-                        setQuestStage(player, Quests.SWEPT_AWAY, 3)
+                        setQuestStage(player, Quests.SWEPT_AWAY.questName, 3)
                     }
                 }
                 player.removeAttribute("swept_lines")

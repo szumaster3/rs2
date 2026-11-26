@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.misthalin.draynor.quest.anma.dialogue.OldCroneAnimalDialogue
 import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils
@@ -14,7 +16,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Old Crone dialogue.
@@ -31,18 +32,18 @@ class OldCroneDialogue(player: Player? = null) : Dialogue(player) {
         val npc = args.getOrNull(0) as? NPC ?: return false
         this.npc = npc
 
-        val animalMagnetism = getQuestStage(player, Quests.ANIMAL_MAGNETISM)
-        val ghostsAhoy = getQuestStage(player, Quests.GHOSTS_AHOY)
+        val animalMagnetism = getQuestStage(player, Quests.ANIMAL_MAGNETISM.questName)
+        val ghostsAhoy = getQuestStage(player, Quests.GHOSTS_AHOY.questName)
         val magicLevel = getDynLevel(player, Skills.MAGIC)
 
-        val sweptAwayComplete = isQuestComplete(player, Quests.SWEPT_AWAY)
+        val sweptAwayComplete = isQuestComplete(player, Quests.SWEPT_AWAY.questName)
         val hasBroomstick = inInventory(player, Items.BROOMSTICK_14057)
         val labelsComplete = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)
         val enchantReceived = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_OLD_CRONE_ENCH_RECEIVED, false)
 
         val ghostsAhoyReady = ghostsAhoy in QUEST_STAGE_GHOSTS_AHOY_REQUIRED..QUEST_STAGE_GHOSTS_AHOY_LAST
         val animalMagnetismActive = animalMagnetism in ANIMAL_MAGNETISM_ACTIVE_RANGE
-        val animalMagnetismDoneOrStarted = animalMagnetism < QUEST_COMPLETE || isQuestComplete(player, Quests.ANIMAL_MAGNETISM)
+        val animalMagnetismDoneOrStarted = animalMagnetism < QUEST_COMPLETE || isQuestComplete(player, Quests.ANIMAL_MAGNETISM.questName)
 
         val sweptAwayReady =
             sweptAwayComplete &&

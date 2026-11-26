@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.witchaven.quest.seaslug.cutscene.KennithCutscene
 import content.region.kandarin.witchaven.quest.seaslug.dialogue.KennithDialogueFile
 import core.api.*
@@ -78,7 +80,7 @@ class SeaSlugPlugin : InteractionListener {
                 sendMessage(player, "Your torch lights.", 1)
                 addItemOrDrop(player, LIT_TORCH)
                 playAudio(player, Sounds.SLUG_TORCH_LIT_3028)
-                setQuestStage(player, Quests.SEA_SLUG, 20)
+                setQuestStage(player, Quests.SEA_SLUG.questName, 20)
             }
 
             return@on true
@@ -115,7 +117,7 @@ class SeaSlugPlugin : InteractionListener {
             playAudio(player, Sounds.SLUG_KICK_PANEL_3024)
             sendMessage(player, "You kick the loose panel.")
 
-            val questStage = getQuestStage(player, Quests.SEA_SLUG)
+            val questStage = getQuestStage(player, Quests.SEA_SLUG.questName)
 
             if (questStage < 20) {
                 sendMessage(player, "But nothing interesting happens.")
@@ -125,7 +127,7 @@ class SeaSlugPlugin : InteractionListener {
             sendMessage(player, "The wood is rotten and crumbles away...", 1)
             sendMessage(player, "...leaving an opening big enough for Kenneth to climb through.", 2)
             replaceScenery(node.asScenery(), BROKEN_WALL, -1)
-            setQuestStage(player, Quests.SEA_SLUG, 25)
+            setQuestStage(player, Quests.SEA_SLUG.questName, 25)
             return@on true
         }
 
@@ -134,9 +136,9 @@ class SeaSlugPlugin : InteractionListener {
          */
 
         on(CRANE, IntType.SCENERY, "rotate") { player, _ ->
-            if (getQuestStage(player, Quests.SEA_SLUG) == 30) {
+            if (getQuestStage(player, Quests.SEA_SLUG.questName) == 30) {
                 KennithCutscene(player).start()
-                setQuestStage(player, Quests.SEA_SLUG, 50)
+                setQuestStage(player, Quests.SEA_SLUG.questName, 50)
                 sendMessage(player, "You rotate the crane around.")
             } else {
                 sendMessage(player, "You rotate the crane around.")
@@ -151,7 +153,7 @@ class SeaSlugPlugin : InteractionListener {
         on(LADDER, IntType.SCENERY, "climb-up") { player, node ->
             sendMessage(player, "You attempt to climb up the ladder.")
 
-            val questStage = getQuestStage(player, Quests.SEA_SLUG)
+            val questStage = getQuestStage(player, Quests.SEA_SLUG.questName)
             val hasTorch = inInventory(player, Items.LIT_TORCH_594)
 
             // Before speaking with Kent.

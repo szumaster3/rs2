@@ -1,5 +1,7 @@
 package content.region.desert.quest.rescue
 
+import content.data.Quests
+
 import content.region.desert.quest.rescue.npc.LadyKeliNPC
 import content.region.desert.quest.rescue.plugin.PrinceAliRescuePlugin
 import core.api.*
@@ -11,11 +13,10 @@ import core.game.node.item.Item
 import core.plugin.ClassScanner
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class PrinceAliRescue : Quest(Quests.PRINCE_ALI_RESCUE, 24, 23, 3, Vars.VARP_QUEST_PRINCE_ALI_RESCUE_PROGRESS_273, 0, 1, 110) {
+class PrinceAliRescue : Quest(Quests.PRINCE_ALI_RESCUE) {
 
     companion object {
         private const val ROPE = Items.ROPE_954

@@ -1,5 +1,7 @@
 package content.region.other.keldagrim.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Librarian (Keldagrim) dialogue.
@@ -25,7 +26,7 @@ class LibrarianDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (!hasRequirement(player, Quests.BETWEEN_A_ROCK)) {
+                if (!hasRequirement(player, Quests.BETWEEN_A_ROCK.questName)) {
                     options("Can you tell me more about the library?", "How do these eras correspond with the Ages of the world?").also { stage++ }
                 } else {
                     options("Can you tell me more about the library?", "What do you know about impenetrable rocks?").also { stage++ }
@@ -34,7 +35,7 @@ class LibrarianDialogue(player: Player? = null) : Dialogue(player) {
             1 -> when (buttonId) {
                 1 -> playerl(FaceAnim.HALF_ASKING, "Can you tell me more about the library?").also { stage++ }
                 2 -> {
-                    if (!hasRequirement(player, Quests.BETWEEN_A_ROCK)) {
+                    if (!hasRequirement(player, Quests.BETWEEN_A_ROCK.questName)) {
                         playerl(FaceAnim.FRIENDLY, "How do these eras correspond with the Ages of the world?").also { stage = 7 }
                     } else {
                         playerl(FaceAnim.FRIENDLY, "What do you know about impenetrable rocks?").also { stage = 10 }

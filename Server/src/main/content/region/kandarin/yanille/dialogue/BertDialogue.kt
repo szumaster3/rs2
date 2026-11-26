@@ -1,8 +1,11 @@
 package content.region.kandarin.yanille.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.kandarin.yanille.quest.handsand.TheHandintheSand
 import core.api.*
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
@@ -13,7 +16,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
@@ -29,9 +31,9 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
         val username = player?.username?.lowercase() ?: ""
         val alreadyClaimed = store[username]?.asBoolean ?: false
         val hasBankSpace = hasSpaceFor(player, Item(Items.BUCKET_OF_SAND_1783, 1)) ?: false
-        val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)
+        val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName)
 
-        if (isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)) {
+        if (isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND.questName)) {
             when {
                 alreadyClaimed -> {
                     npc("'Ello there, ${player?.username}! Hope yer be havin' fun. I be a wee bi' busy to 'elp wit' yon sand. Come back tomorrow.")
@@ -121,7 +123,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
             10 -> npcl(FaceAnim.FRIENDLY, "P'raps tha smell will get t'Guard Cap'ain's nose out o'his beer fer 2 seconds!").also {
-                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 1)
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName, 1)
                 setVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 1, true)
                 setVarbit(player, 1535, 0, true)
                 stage = END_DIALOGUE
@@ -155,7 +157,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
             20 -> playerl(FaceAnim.HAPPY, "Thanks for the Rota Bert. I'll go check for the original with Sandy in Brimhaven.").also {
-                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 4)
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName, 4)
                 stage = END_DIALOGUE
             }
 
@@ -181,7 +183,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
             27 -> npcl(FaceAnim.FRIENDLY, "I's all be tha wizard's fault! Tha magic leaks fr'm yon magic guild I tells yer! Tha's why this weirrrrd scroll appeareded a week ag").also { stage++ }
             28 -> player(FaceAnim.HALF_ASKING, "A scroll appeared? Can I take a look at it while you look at the rotas?").also {
                 if(removeItem(player, Items.SANDYS_ROTA_6948)) addItem(player, Items.A_MAGIC_SCROLL_6949 , 1)
-                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 6)
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName, 6)
                 stage++
             }
             29 -> npcl(FaceAnim.FRIENDLY, "O'course ${player.username}, le's be 'avin'yon rota and 'ere be tha scroll, yer be takin' it back ta those inferrrnal wizards quick sharp!").also { stage = END_DIALOGUE }
@@ -246,6 +248,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
             140 -> {
                 end()
                 rewardSand(player,84)
+                player.achievementDiaryManager.finishTask(player, DiaryType.ARDOUGNE, 1, 8)
             }
 
         }

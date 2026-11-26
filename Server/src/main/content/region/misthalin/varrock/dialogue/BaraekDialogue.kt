@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.IfTopic
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Baraek dialogue.
@@ -22,7 +23,7 @@ class BaraekDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         showTopics(
-            IfTopic("Can you tell me where I can find the Phoenix Gang?", 0, getQuestStage(player, Quests.SHIELD_OF_ARRAV) in 30..40),
+            IfTopic("Can you tell me where I can find the Phoenix Gang?", 0, getQuestStage(player, Quests.SHIELD_OF_ARRAV.questName) in 30..40),
             Topic("Can you sell me some furs?", 11),
             Topic("Hello. I am in search of a quest.", 16),
             IfTopic("Would you like to buy my fur?", 17, inInventory(player, Items.FUR_6814)),
@@ -47,7 +48,7 @@ class BaraekDialogue(player: Player? = null) : Dialogue(player) {
             7 -> if (!removeItem(player, Item(Items.COINS_995, 20))) {
                 player("I don't have enough coins.").also { stage = END_DIALOGUE }
             } else {
-                setQuestStage(player, Quests.SHIELD_OF_ARRAV, 40)
+                setQuestStage(player, Quests.SHIELD_OF_ARRAV.questName, 40)
                 npc("Ok, to get to the gang hideout, enter Varrock through", "the south gate. Then, if you take the first turning east", "somewhere along there is an alleway to the south. The", "door at the end of there is an entrance to the Phoenix").also { stage++ }
             }
             8 -> npc("Gang. they're operating there under the name of", "VTAM Corporation. Be careful. The Phoenixes ain't", "the type to be messed about.").also { stage++ }

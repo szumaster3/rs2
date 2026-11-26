@@ -1,10 +1,11 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class AwowogeiDialogue : DialogueFile() {
 
@@ -32,7 +33,7 @@ class AwowogeiDialogue : DialogueFile() {
             19 -> playerl("Very well. I will be back later, with one of the captives.").also { stage++ }
             99 -> {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 33)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 33)
             }
         }
     }

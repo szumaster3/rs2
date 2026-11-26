@@ -1,5 +1,7 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves
 
+import content.data.Quests
+
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.dialogue.ElunedDialogue
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.dialogue.IslwynDialogue
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.npc.MossGiantNPC
@@ -14,11 +16,10 @@ import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class RovingElves : Quest(Quests.ROVING_ELVES, 105, 104, 1, Vars.VARP_QUEST_ROVING_ELVES_PROGRESS_402, 0, 1, 6) {
+class RovingElves : Quest(Quests.ROVING_ELVES) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.quest.phoenix.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
@@ -22,7 +23,7 @@ class PhoenixDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         val activityReward = getAttribute<Boolean>(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD, false)
 
-        if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+        if (!isQuestComplete(player, Quests.IN_PYRE_NEED.questName)) {
             player(FaceAnim.SCARED, "H...hello?")
             stage = 0
         } else {

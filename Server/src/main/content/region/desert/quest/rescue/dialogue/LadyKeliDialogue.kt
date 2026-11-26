@@ -1,5 +1,7 @@
 package content.region.desert.quest.rescue.dialogue
 
+import content.data.Quests
+
 import core.api.sendChat
 import core.api.sendDialogueLines
 import core.game.dialogue.Dialogue
@@ -15,7 +17,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class LadyKeliDialogue(player: Player? = null) : Dialogue(player) {
@@ -24,7 +25,7 @@ class LadyKeliDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
+        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE.questName)
         when (quest!!.getStage(player)) {
             60, 100 -> {
                 sendChat(npc, "You tricked me, and tied me up, Guards kill this stranger!")

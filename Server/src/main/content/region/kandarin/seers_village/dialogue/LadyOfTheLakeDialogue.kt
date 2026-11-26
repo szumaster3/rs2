@@ -1,5 +1,7 @@
 package content.region.kandarin.seers_village.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -14,16 +16,15 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class LadyOfTheLakeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val canSeekSword = getQuestStage(player!!, Quests.MERLINS_CRYSTAL) >= 40
+        val canSeekSword = getQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName) >= 40
         val missingSword = !player!!.hasItem(Item(Items.EXCALIBUR_35, 1))
 
-        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
+        if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL.questName)) {
             when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Good day to you sir.").also { stage++ }
                 1 -> showTopics(

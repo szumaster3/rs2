@@ -1,5 +1,7 @@
 package content.region.karamja.tzhaar_city.quest.dillo
 
+import content.data.Quests
+
 import core.api.drawReward
 import core.api.rewardXP
 import core.api.setVarbit
@@ -7,14 +9,13 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the Obsidian Armadillo Guard quest.
  */
 // @Initializable
-class TokTzKetDill : Quest(Quests.TOKTZ_KET_DILL, 152, 151, 1, Vars.VARBIT_QUEST_TOKTZ_KET_DRILL_PROGRESS_4700, 0, 1, 63) {
+class TokTzKetDill : Quest(Quests.TOKTZ_KET_DILL) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

@@ -1,5 +1,7 @@
 package content.region.fremennik.plugin
 
+import content.data.Quests
+
 import content.region.fremennik.dialogue.JarvaldTravelDialogue
 import content.region.fremennik.rellekka.plugin.FremennikBoat
 import content.region.fremennik.rellekka.plugin.Travel
@@ -8,7 +10,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 /**
@@ -22,7 +23,7 @@ class FremennikPlugin : InteractionListener {
          */
 
         on(NPCs.MARIA_GUNNARS_5508, IntType.NPC, "ferry-neitiznot") { player, _ ->
-            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
+            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "")) return@on true
             FremennikBoat.sail(player, Travel.RELLEKKA_TO_NEITIZNOT)
             return@on true
         }
@@ -41,7 +42,7 @@ class FremennikPlugin : InteractionListener {
          */
 
         on(NPCs.MORD_GUNNARS_5481, IntType.NPC, "ferry-jatizso") { player, _ ->
-            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
+            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "")) return@on true
             FremennikBoat.sail(player, Travel.RELLEKKA_TO_JATIZSO)
             return@on true
         }
@@ -60,7 +61,7 @@ class FremennikPlugin : InteractionListener {
          */
 
         on(NPCs.SAILOR_1385, IntType.NPC, "travel") { player, _ ->
-            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
+            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "")) return@on true
             FremennikBoat.sail(player, Travel.RELLEKKA_TO_MISC)
             return@on true
         }
@@ -70,7 +71,7 @@ class FremennikPlugin : InteractionListener {
          */
 
         on(NPCs.SAILOR_1304, IntType.NPC, "travel") { player, _ ->
-            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
+            if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "")) return@on true
             FremennikBoat.sail(player, Travel.MISC_TO_RELLEKKA)
             return@on true
         }

@@ -1,5 +1,7 @@
 package content.region.asgarnia.goblin_village.quest.gobdip
 
+import content.data.Quests
+
 import content.region.asgarnia.goblin_village.quest.gobdip.cutscene.GoblinDiplomacyCutscene
 import content.region.asgarnia.goblin_village.quest.gobdip.dialogue.GrubfootDialogue
 import core.api.*
@@ -9,11 +11,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.ClassScanner.definePlugins
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class GoblinDiplomacy : Quest(Quests.GOBLIN_DIPLOMACY, 20, 19, 5, Vars.VARP_QUEST_GOBLIN_DIPLOMACY_QUEST_PROGRESS_62, 0, 1, 100) {
+class GoblinDiplomacy : Quest(Quests.GOBLIN_DIPLOMACY, Vars.VARP_QUEST_GOBLIN_DIPLOMACY_QUEST_PROGRESS_62, 0, 1, 100) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

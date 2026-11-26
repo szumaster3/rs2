@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.sendOptions
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Devin Mendelberg dialogue.
@@ -19,7 +20,7 @@ class DevinMendelbergDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.SWAN_SONG) && npc.id == 3828) {
+        if (!hasRequirement(player, Quests.SWAN_SONG.questName) && npc.id == 3828) {
             playerl(FaceAnim.HALF_ASKING, "Hello! What can I do for you?")
             stage = 9
         } else {

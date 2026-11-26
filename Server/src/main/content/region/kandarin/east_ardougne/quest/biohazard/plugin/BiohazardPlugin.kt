@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.biohazard.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.global.skill.agility.AgilityHandler
 import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.GuidorDialogue
@@ -75,8 +77,8 @@ class BiohazardPlugin : InteractionListener {
             sendMessage(player, "The pigeons fly towards the watch tower.", 1)
             sendMessage(player, "The mourners are frantically trying to scare the pigeons away.", 2)
 
-            if (getQuestStage(player, Quests.BIOHAZARD) < 4) {
-                setQuestStage(player, Quests.BIOHAZARD, 4)
+            if (getQuestStage(player, Quests.BIOHAZARD.questName) < 4) {
+                setQuestStage(player, Quests.BIOHAZARD.questName, 4)
             }
             return@on true
         }
@@ -103,7 +105,7 @@ class BiohazardPlugin : InteractionListener {
         }
 
         on(Scenery.CUPBOARD_2057, IntType.SCENERY, "search") { player, node ->
-            if (getQuestStage(player, Quests.BIOHAZARD) < 2) {
+            if (getQuestStage(player, Quests.BIOHAZARD.questName) < 2) {
                 sendMessage(player, "You search the cupboard but find nothing interesting.")
                 return@on true
             }
@@ -139,22 +141,22 @@ class BiohazardPlugin : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, Items.ROTTEN_APPLE_1984, Scenery.CAULDRON_2043) { player, used, _ ->
-            val questStage = getQuestStage(player, Quests.BIOHAZARD)
+            val questStage = getQuestStage(player, Quests.BIOHAZARD.questName)
             if (questStage !in 4..5) {
                 sendMessage(player, "Nothing interesting happens.")
                 return@onUseWith true
             }
             if (removeItem(player, used.asItem())) {
                 sendMessage(player, "You place the rotten apple in the pot...")
-                setQuestStage(player, Quests.BIOHAZARD, 6)
+                setQuestStage(player, Quests.BIOHAZARD.questName, 6)
             }
             return@onUseWith true
         }
 
         on(Scenery.DOOR_2036, IntType.SCENERY, "open") { player, node ->
             if (inBorders(player, getRegionBorders(10035)) || inBorders(player, getRegionBorders(10036))) {
-                val questStage = getQuestStage(player, Quests.BIOHAZARD)
-                if (isQuestComplete(player, Quests.BIOHAZARD) ||
+                val questStage = getQuestStage(player, Quests.BIOHAZARD.questName)
+                if (isQuestComplete(player, Quests.BIOHAZARD.questName) ||
                     questStage >= 7 ||
                     player.location.y in 3321..3327
                 ) {
@@ -170,7 +172,7 @@ class BiohazardPlugin : InteractionListener {
 
                 if (questStage == 6 && inEquipment(player, Items.DOCTORS_GOWN_430)) {
                     sendNPCDialogue(player, NPCs.MOURNER_347, "In you go doc.")
-                    setQuestStage(player, Quests.BIOHAZARD, 7)
+                    setQuestStage(player, Quests.BIOHAZARD.questName, 7)
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     return@on true
                 }
@@ -226,13 +228,13 @@ class BiohazardPlugin : InteractionListener {
 
         on(Scenery.CRATE_34586, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the crate...")
-            val questStage = getQuestStage(player, Quests.BIOHAZARD)
+            val questStage = getQuestStage(player, Quests.BIOHAZARD.questName)
             if (!inInventory(player, Items.DISTILLATOR_420) &&
                 questStage in 8..10 &&
                 !getAttribute(player, GameAttributes.ELENA_REPLACE, false)
             ) {
                 if (questStage < 10) {
-                    setQuestStage(player, Quests.BIOHAZARD, 10)
+                    setQuestStage(player, Quests.BIOHAZARD.questName, 10)
                 }
                 addItemOrDrop(player, Items.DISTILLATOR_420)
                 sendMessage(player, "and find Elena's distillator.")
@@ -248,7 +250,7 @@ class BiohazardPlugin : InteractionListener {
                 Scenery.GATE_2041 -> Pair(Scenery.GATE_2041, Scenery.GATE_2039)
                 else -> null
             }
-            if (isQuestComplete(player, Quests.BIOHAZARD)) {
+            if (isQuestComplete(player, Quests.BIOHAZARD.questName)) {
                 sendNPCDialogueLines(player, NPCs.GUARD_344, FaceAnim.NEUTRAL, false, "The king has granted you access to this training area.", "Make good use of it, soon all your strength will be", "needed.")
                 addDialogueAction(player) { _, _ ->
                     if (gatePair != null) {
@@ -292,8 +294,8 @@ class BiohazardPlugin : InteractionListener {
                 2 -> {
                     end()
                     addItemOrDrop(player!!, Items.BIRD_FEED_422)
-                    if (getQuestStage(player!!, Quests.BIOHAZARD) == 2) {
-                        setQuestStage(player!!, Quests.BIOHAZARD, 3)
+                    if (getQuestStage(player!!, Quests.BIOHAZARD.questName) == 2) {
+                        setQuestStage(player!!, Quests.BIOHAZARD.questName, 3)
                     }
                 }
             }

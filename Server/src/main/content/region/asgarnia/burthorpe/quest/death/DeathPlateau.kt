@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.death
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.drawReward
 import core.api.getAttribute
@@ -9,17 +11,16 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class DeathPlateau : Quest(Quests.DEATH_PLATEAU, 44, 43, 1, Vars.VARBIT_QUEST_DEATH_PLATEAU_PROGRESS_314, 0, 1, 80) {
+class DeathPlateau : Quest(Quests.DEATH_PLATEAU) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
-        var started = player.questRepository?.getStage(Quests.DEATH_PLATEAU)!! > 0
+        var started = player.questRepository?.getStage(Quests.DEATH_PLATEAU.questName)!! > 0
         if (!started) {
             line(player, "I can start this quest by speaking to !!Denulth?? who is in his", line++)
             line(player, "tent at the !!Imperial Guard camp?? in !!Burthorpe??.", line++)

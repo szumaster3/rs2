@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.quest.ball.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Boy dialogue in Witches' House quest.
@@ -17,7 +18,7 @@ import shared.consts.Quests
 class BoyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        val quest = getQuestStage(player, Quests.WITCHS_HOUSE)
+        val quest = getQuestStage(player, Quests.WITCHS_HOUSE.questName)
 
         if (quest < 10) {
             playerl(FaceAnim.FRIENDLY, "Hello young man.")
@@ -111,7 +112,7 @@ class BoyDialogue(player: Player? = null) : Dialogue(player) {
 
             10 -> {
                 npc(FaceAnim.CHILD_FRIENDLY, "Thanks " + if (!player.isMale) "lady" else "mister" + "!")
-                startQuest(player, Quests.WITCHS_HOUSE)
+                startQuest(player, Quests.WITCHS_HOUSE.questName)
                 stage = END_DIALOGUE
             }
 
@@ -135,7 +136,7 @@ class BoyDialogue(player: Player? = null) : Dialogue(player) {
 
             14 -> {
                 end()
-                finishQuest(player, Quests.WITCHS_HOUSE)
+                finishQuest(player, Quests.WITCHS_HOUSE.questName)
             }
         }
         return true

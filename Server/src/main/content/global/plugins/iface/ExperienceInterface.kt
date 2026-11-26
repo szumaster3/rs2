@@ -1,5 +1,7 @@
 package content.global.plugins.iface
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
@@ -7,7 +9,6 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Plugin
 import core.tools.Log
 import shared.consts.Components
-import shared.consts.Quests
 import shared.consts.Sounds
 
 /**
@@ -34,22 +35,22 @@ class ExperienceInterface : InterfaceListener {
 
                     when (confirmedSkill) {
                         Skills.HERBLORE -> {
-                            if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
-                                sendMessage(player, "You need to have completed ${Quests.DRUIDIC_RITUAL} for this.")
+                            if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName)) {
+                                sendMessage(player, "You need to have completed ${Quests.DRUIDIC_RITUAL.questName} for this.")
                                 return@on true
                             }
                         }
 
                         Skills.RUNECRAFTING -> {
-                            if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+                            if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                                 sendMessage(player, "You need to have completed Rune Mysteries for this.")
                                 return@on true
                             }
                         }
 
                         Skills.SUMMONING -> {
-                            if (!isQuestComplete(player, Quests.WOLF_WHISTLE)) {
-                                sendMessage(player, "You need to have completed ${Quests.WOLF_WHISTLE} for this.")
+                            if (!isQuestComplete(player, Quests.WOLF_WHISTLE.questName)) {
+                                sendMessage(player, "You need to have completed ${Quests.WOLF_WHISTLE.questName} for this.")
                                 return@on true
                             }
                         }

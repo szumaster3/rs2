@@ -1,25 +1,26 @@
 package content.region.karamja.quest.totem
 
+import content.data.Quests
+
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the Tribal Totem quest.
  */
 @Initializable
-class TribalTotem : Quest(Quests.TRIBAL_TOTEM, 126, 125, 1, Vars.VARP_QUEST_TRIBAL_TOTEM_PROGRESS_200, 0, 1, 5) {
+class TribalTotem : Quest(Quests.TRIBAL_TOTEM) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11
         val thievingLevel = getStatLevel(player, Skills.THIEVING)
-        val started = getQuestStage(player, Quests.TRIBAL_TOTEM) > 0
+        val started = getQuestStage(player, Quests.TRIBAL_TOTEM.questName) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Kangai Mau?? in !!the??", line++)

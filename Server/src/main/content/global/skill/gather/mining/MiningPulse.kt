@@ -1,5 +1,7 @@
 package content.global.skill.gather.mining
 
+import content.data.Quests
+
 import content.data.skill.SkillingTool
 import content.global.activity.star.ShootingStarBonus
 import core.api.*
@@ -20,7 +22,6 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.prependArticle
 import shared.consts.Items
-import shared.consts.Quests
 
 class MiningPulse(private val player: Player, private val node: Node) : Pulse(1, player, node) {
 
@@ -138,7 +139,7 @@ class MiningPulse(private val player: Player, private val node: Node) : Pulse(1,
             return false
         }
 
-        if (resource!!.identifier == 19.toByte() && !hasRequirement(player, Quests.TOKTZ_KET_DILL, false)) {
+        if (resource!!.identifier == 19.toByte() && !hasRequirement(player, Quests.TOKTZ_KET_DILL.questName, false)) {
             sendDialogue(player, "You do not know the technique to mine stone slabs.")
             return false
         }

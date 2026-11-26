@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.drunkmonk.dialogue.BrotherOmadDialogueFile
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Brother Omad dialogue.
@@ -19,7 +20,7 @@ class BrotherOmadDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.MONKS_FRIEND) in 0..100) {
+        if (getQuestStage(player, Quests.MONKS_FRIEND.questName) in 0..100) {
             end()
             openDialogue(player, BrotherOmadDialogueFile())
         } else {

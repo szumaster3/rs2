@@ -1,10 +1,11 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.book
 
+import content.data.Quests
+
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import shared.consts.Components
-import shared.consts.Quests
 
 class HistoryOfTheGoblinRace : InterfaceListener {
 
@@ -12,11 +13,11 @@ class HistoryOfTheGoblinRace : InterfaceListener {
 
         onOpen(Components.GOBLIN_SYMBOL_BOOK_183) { player, component ->
             sendInterfaceConfig(player, Components.GOBLIN_SYMBOL_BOOK_183, 17, true)
-            val qstage = getQuestStage(player, Quests.THE_LOST_TRIBE)
+            val qstage = getQuestStage(player, Quests.THE_LOST_TRIBE.questName)
             component.setUncloseEvent { p, _ ->
                 if (qstage == 42 || qstage == 41) {
                     sendPlayerDialogue(p, "Hey... The symbol of the 'Dorgeshuun' tribe looks just, like the symbol on the brooch I found.")
-                    setQuestStage(p!!, Quests.THE_LOST_TRIBE, 43)
+                    setQuestStage(p!!, Quests.THE_LOST_TRIBE.questName, 43)
                 }
                 removeAttribute(p, "hgr-index")
                 return@setUncloseEvent true

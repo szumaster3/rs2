@@ -1,5 +1,7 @@
 package content.global.skill.crafting
 
+import content.data.Quests
+
 import content.global.skill.slayer.SlayerManager
 import core.api.*
 import core.game.interaction.Clocks
@@ -11,7 +13,6 @@ import core.game.node.item.Item
 import core.tools.StringUtils
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 
 class JewelleryCraftingPlugin : InteractionListener, InterfaceListener {
 
@@ -25,7 +26,7 @@ class JewelleryCraftingPlugin : InteractionListener, InterfaceListener {
          */
 
         onUseWith(IntType.SCENERY, goldBarIds, *CraftingDefinition.FURNACES) { player, used, _ ->
-            if (used.id == Items.PERFECT_GOLD_BAR_2365 && isQuestComplete(player, Quests.FAMILY_CREST)) {
+            if (used.id == Items.PERFECT_GOLD_BAR_2365 && isQuestComplete(player, Quests.FAMILY_CREST.questName)) {
                 sendMessage(player, "You can no longer smelt this.")
                 return@onUseWith false
             }

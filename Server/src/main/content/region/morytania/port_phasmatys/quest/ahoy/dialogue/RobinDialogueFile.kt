@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.quest.ahoy.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -8,14 +10,13 @@ import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Robin (Ghosts Ahoy quest) dialogue.
  */
 class RobinDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY)
+        val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY.questName)
         npc = NPC(NPCs.ROBIN_1694)
         if (questStage !in 1..79) {
             end()

@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Glum dialogue.
@@ -18,7 +19,7 @@ class GlumDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
+            START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT.questName)) {
                 npcl(FaceAnim.CHILD_NORMAL, "RAAAAAAAGH!").also { stage = 2 }
             } else {
                 npcl(FaceAnim.CHILD_NORMAL, "Do you know anything about this ship?").also { stage++ }

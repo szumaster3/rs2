@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.fluffs.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -11,14 +13,13 @@ import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getQuestStage(player, Quests.GERTRUDES_CAT)) {
+        when (getQuestStage(player, Quests.GERTRUDES_CAT.questName)) {
             0 -> player(FaceAnim.HALF_GUILTY, "Hello, are you ok?")
             10 -> player(FaceAnim.HALF_GUILTY, "Hello Gertrude.").also { stage = 210 }
             20 -> player(FaceAnim.HALF_GUILTY, "Hello Gertrude.").also { stage = 230 }
@@ -50,7 +51,7 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
             101 -> npc(FaceAnim.HALF_GUILTY, "I think my sons, Shilop and Wilough, saw the cat last.", "They'll be out in the market place.").also { stage++ }
             102 -> player(FaceAnim.HALF_GUILTY, "Alright then, I'll see what I can do.").also { stage++ }
             103 -> {
-                setQuestStage(player, Quests.GERTRUDES_CAT, 10)
+                setQuestStage(player, Quests.GERTRUDES_CAT.questName, 10)
                 updateQuestTab(player)
                 end()
             }
@@ -94,7 +95,7 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
             329 -> sendDialogue(player, "Gertrude gives you a kitten.").also { stage++ }
             330 -> {
                 end()
-                finishQuest(player, Quests.GERTRUDES_CAT)
+                finishQuest(player, Quests.GERTRUDES_CAT.questName)
                 sendMessage(player, "...and some food!", 1)
                 updateQuestTab(player)
             }

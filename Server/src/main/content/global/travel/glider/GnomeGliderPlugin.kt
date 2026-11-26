@@ -1,5 +1,7 @@
 package content.global.travel.glider
 
+import content.data.Quests
+
 import core.api.*
 import core.api.utils.PlayerCamera
 import core.game.dialogue.DialogueFile
@@ -18,7 +20,6 @@ import core.net.packet.out.PacketContext.CameraContext
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 enum class GnomeGlider(val button: Int, val location: Location, val config: Int, val npc: Int) {
@@ -69,7 +70,7 @@ class GnomeGliderPlugin : InteractionListener, InterfaceListener {
          */
 
         on(CAPTAIN_NPC_ID, IntType.NPC, "glider") { player, _ ->
-            if (!isQuestComplete(player, Quests.THE_GRAND_TREE)) {
+            if (!isQuestComplete(player, Quests.THE_GRAND_TREE.questName)) {
                 sendMessage(player, "You must complete The Grand Tree Quest to access the gnome glider.")
             } else {
                 openInterface(player, Components.GLIDERMAP_138)
@@ -165,7 +166,7 @@ class GnomeCaptainDialogue : DialogueFile() {
         when(stage) {
             0 -> npcl(FaceAnim.OLD_DEFAULT, "What do you want human?").also { stage++ }
             1 -> playerl(FaceAnim.HALF_GUILTY, "May you fly me somewhere on your glider?").also { stage++ }
-            2 -> if (!isQuestComplete(player!!, Quests.THE_GRAND_TREE)) {
+            2 -> if (!isQuestComplete(player!!, Quests.THE_GRAND_TREE.questName)) {
                 end()
                 npcl(FaceAnim.OLD_ANGRY3, "I only fly friends of the gnomes!")
                 sendMessage(player!!, "You must complete The Grand Tree Quest to access the gnome glider.")

@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.quest.ahoy.plugin
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.RobinDialogueFile
 import content.region.morytania.port_phasmatys.quest.ahoy.npc.GiantLobsterNPC.Companion.spawnGiantLobster
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.jumpRockPath
@@ -14,7 +16,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery as Objects
 
 class GhostsAhoyListener : InteractionListener, InterfaceListener {
@@ -65,7 +66,7 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         on(Objects.COFFIN_5279, IntType.SCENERY, "search") { player, _ ->
-            val questStage = getQuestStage(player, Quests.GHOSTS_AHOY)
+            val questStage = getQuestStage(player, Quests.GHOSTS_AHOY.questName)
             val hasRobes = hasAnItem(player, Items.MYSTICAL_ROBES_4247).container != null
             if (questStage in 4..79 && !hasRobes) {
                 sendItemDialogue(
@@ -146,7 +147,7 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         onDig(Location(3803, 3530, 0)) { player ->
-            val questStage = getQuestStage(player, Quests.GHOSTS_AHOY)
+            val questStage = getQuestStage(player, Quests.GHOSTS_AHOY.questName)
             val hasBook = hasAnItem(player, Items.BOOK_OF_HARICANTO_4248).container != null
             if (questStage in 4..79 && !hasBook) {
                 sendItemDialogue(player, Items.BOOK_OF_HARICANTO_4248, "You unearth the Book of Haricanto.")

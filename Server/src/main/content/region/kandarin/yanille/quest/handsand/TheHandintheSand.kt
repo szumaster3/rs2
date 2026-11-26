@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.handsand
 
+import content.data.Quests
+
 import com.google.gson.JsonObject
 import content.data.GameAttributes
 import core.ServerStore
@@ -12,14 +14,13 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 /**
  * Represents the Hand in the Sand quest journal.
  */
 @Initializable
-class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 0, 1, 160) {
+class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.quest.anma.dialogue
 
+import content.data.Quests
+
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class AliceDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -15,7 +16,7 @@ class AliceDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
+        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM.questName)
         when (quest!!.getStage(player)) {
             10, 11, 12, 13, 14, 15, 16, 17, 18 -> options(
                 "What are you selling?",

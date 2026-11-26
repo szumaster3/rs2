@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -12,7 +14,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Skulgrimen dialogue.
@@ -53,7 +54,7 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npcl(FaceAnim.HAPPY, "Hello again, ${FremennikTrials.getFremennikName(player)}. Come to see what's for sale?")
                 stage = 101
             }

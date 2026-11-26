@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.sheepherder.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.sheepherder.SheepHerder
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -7,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Halgrive dialogue.
@@ -16,7 +17,7 @@ import shared.consts.Quests
 class HalgriveDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if (getQuestStage(player, Quests.SHEEP_HERDER) < 10) {
+        if (getQuestStage(player, Quests.SHEEP_HERDER.questName) < 10) {
             player("Hello. How are you?")
             stage = 0
             return true
@@ -124,7 +125,7 @@ class HalgriveDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             105 -> {
-                setQuestStage(player!!, Quests.SHEEP_HERDER, 10)
+                setQuestStage(player!!, Quests.SHEEP_HERDER.questName, 10)
                 player.dialogueInterpreter.sendDialogue("The councillor gives you some poisoned sheep feed.")
                 player.inventory.add(SheepHerder.POISON)
                 stage++
@@ -183,7 +184,7 @@ class HalgriveDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             207 -> {
-                finishQuest(player!!, Quests.SHEEP_HERDER)
+                finishQuest(player!!, Quests.SHEEP_HERDER.questName)
                 end()
             }
         }

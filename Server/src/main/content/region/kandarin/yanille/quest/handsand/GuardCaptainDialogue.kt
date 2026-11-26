@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.handsand
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -9,7 +11,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Handles the Guard Captain dialogue in The Hand in the Sand quest.
@@ -19,7 +20,7 @@ class GuardCaptainDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)
+        val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName)
         when {
             questStage == 0 -> player(FaceAnim.FRIENDLY, "Excuse me...")
             !allInInventory(player, Items.BEER_1917, Items.SANDY_HAND_6945) -> npc(FaceAnim.OLD_DRUNK_LEFT, "Need more beer...").also { stage = END_DIALOGUE }
@@ -56,7 +57,7 @@ class GuardCaptainDialogue(player: Player? = null) : Dialogue(player) {
             }
             9 -> npc(FaceAnim.OLD_DRUNK_LEFT, "Oops, No 'arm done. S'prob'ly a wizard, i's always the", "wizards fault, go ask them, jus' ring the bell outshide the", "guild and talk to the first pointy hatted ninny you shee!").also { stage++ }
             10 -> player("Err... ok, I'll go ring the bell and talk to a wizard then.").also {
-                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 2)
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName, 2)
                 stage = END_DIALOGUE
             }
             11 -> npc(FaceAnim.OLD_DRUNK_LEFT, "Go 'way! This pint'sh nearly finished! Unlessh you got more that ish....? Wizards, s'all the wizard's fault...prob'ly that Zavistic one, he'sh the worsht!").also { stage++ }

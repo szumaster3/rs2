@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.*
 import core.game.node.entity.player.Player
@@ -7,7 +9,6 @@ import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Lucien dialogue.
@@ -30,7 +31,7 @@ class LucienDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             START_DIALOGUE -> {
-                stage = when (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV)) {
+                stage = when (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName)) {
                     100 -> 100
                     in 1..7 -> 200
                     0 -> 1
@@ -235,8 +236,8 @@ class LucienDialogueFile : DialogueFile() {
             }
 
             27 -> {
-                if (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV) == 0) {
-                    setQuestStage(player!!, Quests.TEMPLE_OF_IKOV, 1)
+                if (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName) == 0) {
+                    setQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName, 1)
                 }
                 endFile()
             }

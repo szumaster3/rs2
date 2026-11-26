@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -11,14 +13,13 @@ import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.tools.RandomFunction
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (npc.getShownNPC(player).id) {
-            4985, 825 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            4985, 825 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 40 -> npc("Do you want to trade clothes now?")
                 30 -> npc("Hello again, do you want to try and unlock my chains?", "I'd really appreciate it!")
                 20 -> npc("You look like a new 'recruit'. How long have you been", "here?")
@@ -31,7 +32,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                 else -> npc("Please, just leave me alone my life is", "terrible as it is.")
             }
 
-            826 -> stage = when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            826 -> stage = when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 else -> {
                     npc("Yay! I'm finally free.")
                     0
@@ -43,7 +44,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.getShownNPC(player).id) {
-            4985, 825 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            4985, 825 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 30 -> when (stage) {
                     0 -> {
                         player("Yeah, okay, let's give it a go.")
@@ -51,7 +52,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     1 -> {
-                        setQuestStage(player, Quests.THE_TOURIST_TRAP, 40)
+                        setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 40)
                         npc("Great! You did it! Do you want to trade clothes now?")
                         stage = 0
                     }
@@ -260,7 +261,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                             interpreter.sendDialogue("A nearby guard spots you!")
                             stage = 24
                         } else {
-                            setQuestStage(player, Quests.THE_TOURIST_TRAP, 40)
+                            setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 40)
                             npc("Great! You did it! Do you want to trade clothes now?")
                             stage = 0
                         }
@@ -302,7 +303,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
 
                                         4 -> {
                                             player.unlock()
-                                            setQuestStage(player, Quests.THE_TOURIST_TRAP, 30)
+                                            setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 30)
                                             player.properties.teleportLocation = Location.create(3285, 3034, 0)
                                             return true
                                         }
@@ -378,7 +379,7 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
 
-            826 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+            826 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 else -> end()
             }
         }

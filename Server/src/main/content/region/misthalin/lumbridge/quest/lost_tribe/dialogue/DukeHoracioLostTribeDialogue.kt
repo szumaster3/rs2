@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 class DukeHoracioLostTribeDialogue(
@@ -61,7 +62,7 @@ class DukeHoracioLostTribeDialogue(
                         "this mystery. If there is a blocked tunnel then perhaps",
                         "you should try to un-block it.",
                     )
-                    setQuestStage(player!!, Quests.THE_LOST_TRIBE, 30)
+                    setQuestStage(player!!, Quests.THE_LOST_TRIBE.questName, 30)
                     stage = END_DIALOGUE
                 }
             }
@@ -134,7 +135,7 @@ class DukeHoracioLostTribeDialogue(
                         "brooch. The librarian in Varrock might be able to help",
                         "identify the symbol.",
                     )
-                    setQuestStage(player!!, Quests.THE_LOST_TRIBE, 40)
+                    setQuestStage(player!!, Quests.THE_LOST_TRIBE.questName, 40)
                     stage = END_DIALOGUE
                 }
             }
@@ -174,7 +175,7 @@ class DukeHoracioLostTribeDialogue(
                             ", I would still like you to find out more",
                         "about this tribe. It cannot hurt to know one's enemy.",
                     )
-                    setQuestStage(player!!, Quests.THE_LOST_TRIBE, 45)
+                    setQuestStage(player!!, Quests.THE_LOST_TRIBE.questName, 45)
                     stage = END_DIALOGUE
                 }
             }
@@ -215,7 +216,7 @@ class DukeHoracioLostTribeDialogue(
 
                 4 -> {
                     npc("Unless it is returned, I am afraid I will have no option", "but war.")
-                    setQuestStage(player!!, Quests.THE_LOST_TRIBE, 47)
+                    setQuestStage(player!!, Quests.THE_LOST_TRIBE.questName, 47)
                     stage = END_DIALOGUE
                 }
             }
@@ -278,7 +279,7 @@ class DukeHoracioLostTribeDialogue(
                         "their leader to sign it.",
                     )
                     addItemOrDrop(player!!, Items.PEACE_TREATY_5012)
-                    setQuestStage(player!!, Quests.THE_LOST_TRIBE, 50)
+                    setQuestStage(player!!, Quests.THE_LOST_TRIBE.questName, 50)
                     setVarbit(player!!, Vars.VARBIT_QUEST_LOST_TRIBE_CAVE_HOLE_STATUS_532, 9, true)
                     stage = END_DIALOGUE
                 }

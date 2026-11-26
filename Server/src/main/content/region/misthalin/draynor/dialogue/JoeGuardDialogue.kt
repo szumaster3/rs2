@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.Quests
+
 import core.api.removeItem
 import core.api.sendDialogue
 import core.api.setAttribute
@@ -13,7 +15,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Joe guard dialogue.
@@ -25,7 +26,7 @@ class JoeGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
+        quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE.questName)
         when (quest!!.getStage(player)) {
             40 -> {
                 if (player.getAttribute("guard-drunk", false)) {

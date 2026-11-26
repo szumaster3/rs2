@@ -1,12 +1,13 @@
 package core.game.node.entity.player.info.login
 
+import content.data.Quests
+
 import core.ServerConstants
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.Music
-import shared.consts.Quests
 
 class SaveVersionHooks : LoginListener {
     override fun login(player: Player) {
@@ -33,10 +34,10 @@ class SaveVersionHooks : LoginListener {
                     addItemOrBank(player, Items.CRAFTING_HOOD_9782, need)
                 }
 
-                if (getQuestStage(player, Quests.WHAT_LIES_BELOW) > 70) {
+                if (getQuestStage(player, Quests.WHAT_LIES_BELOW.questName) > 70) {
                     player.musicPlayer.unlock(Music.SUROKS_THEME_250, false)
                 }
-                if(getVarbit(player, 5766) == 0 && isQuestComplete(player, Quests.IN_PYRE_NEED))
+                if(getVarbit(player, 5766) == 0 && isQuestComplete(player, Quests.IN_PYRE_NEED.questName))
                     setVarbit(player, 766, 1, true)
             }
 

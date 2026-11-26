@@ -1,5 +1,7 @@
 package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.witchaven.plugin.FishingPlatformBoat
 import content.region.kandarin.witchaven.plugin.Travel
 import core.api.getQuestStage
@@ -12,7 +14,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Holgart dialogue.
@@ -27,12 +28,12 @@ class HolgartPlatformDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         when {
             // Something's Strange - Get Me Off of This Thing (Small island).
-            isQuestComplete(player, Quests.SEA_SLUG) -> player("Hey, Holgart.").also { stage = 100 }
+            isQuestComplete(player, Quests.SEA_SLUG.questName) -> player("Hey, Holgart.").also { stage = 100 }
             npc.id == NPCs.HOLGART_699 -> player("We'd better get back to the platform so we can see", "what's going on.").also { stage = 200 }
             // Something's Strange - The Search is On (Fishing platform).
-            getQuestStage(player, Quests.SEA_SLUG) == 10 -> player(FaceAnim.HALF_THINKING, "Holgart, something strange is going on here.").also { stage = 0 }
+            getQuestStage(player, Quests.SEA_SLUG.questName) == 10 -> player(FaceAnim.HALF_THINKING, "Holgart, something strange is going on here.").also { stage = 0 }
             // Let's Go Home - End of the quest (Fishing platform).
-            getQuestStage(player, Quests.SEA_SLUG) == 50 -> player("Did you get the kid back to shore?").also {
+            getQuestStage(player, Quests.SEA_SLUG.questName) == 50 -> player("Did you get the kid back to shore?").also {
                 stage = 300
             }
 

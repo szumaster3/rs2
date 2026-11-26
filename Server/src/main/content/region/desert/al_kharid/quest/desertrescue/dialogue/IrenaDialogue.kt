@@ -1,5 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.dialogue
 
+import content.data.Quests
+
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -8,18 +10,17 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class IrenaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.THE_TOURIST_TRAP) == 95 && player.inventory.containsItem(TouristTrap.ANNA_BARREL)) {
+        if (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName) == 95 && player.inventory.containsItem(TouristTrap.ANNA_BARREL)) {
             npc(FaceAnim.HAPPY, "Hey, great you've found Ana!")
             stage = 900
             return true
         }
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             98 -> {
                 npc(FaceAnim.HAPPY, "Thank you very much for returning my daughter to", "me. I'm really very grateful... I would like to reward", "you for your bravery and daring.")
                 stage++
@@ -47,12 +48,12 @@ class IrenaDialogue(player: Player? = null) : Dialogue(player) {
             901 -> {
                 player.inventory.remove(TouristTrap.ANNA_BARREL)
                 end()
-                setQuestStage(player, Quests.THE_TOURIST_TRAP, 98)
+                setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 98)
                 player.dialogueInterpreter.open(NPCs.ANA_822)
                 return true
             }
         }
-        when (getQuestStage(player, Quests.THE_TOURIST_TRAP)) {
+        when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
             98 -> when (stage) {
                 1 -> {
                     npc("I can offer you increased knowledge in two of the", "following areas.")
@@ -89,13 +90,13 @@ class IrenaDialogue(player: Player? = null) : Dialogue(player) {
                     for (i in skills) {
                         rewardXP(player, i, 4650.0)
                     }
-                    finishQuest(player, Quests.THE_TOURIST_TRAP)
+                    finishQuest(player, Quests.THE_TOURIST_TRAP.questName)
                     end()
                 }
             }
 
             0 -> when (stage) {
-                0 -> if (hasRequirement(player, Quests.THE_TOURIST_TRAP, false)) {
+                0 -> if (hasRequirement(player, Quests.THE_TOURIST_TRAP.questName, false)) {
                     npc(FaceAnim.CRYING, "Boo hoo! Oh dear, my only daughter....")
                     stage++
                 } else {
@@ -211,7 +212,7 @@ class IrenaDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 16 -> {
-                    setQuestStage(player, Quests.THE_TOURIST_TRAP, 10)
+                    setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 10)
                     end()
                 }
 

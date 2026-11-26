@@ -1,5 +1,7 @@
 package content.global.skill.runecrafting
 
+import content.data.Quests
+
 import content.global.plugins.item.equipment.fog_gloves.FOGGlovesManager
 import content.global.skill.runecrafting.item.CombinationRune
 import content.global.skill.runecrafting.item.Rune
@@ -21,7 +23,6 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 import kotlin.math.max
 
@@ -45,13 +46,13 @@ class RunecraftPulse(
 
     override fun checkRequirements(): Boolean {
         if (altar == Altar.ASTRAL) {
-            if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return false
+            if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY.questName)) return false
         }
         if (altar == Altar.DEATH) {
-            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_II)) return false
+            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_II.questName)) return false
         }
         if (altar == Altar.BLOOD) {
-            if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE)) return false
+            if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE.questName)) return false
         }
         if (altar.isOurania() && !inInventory(player, PURE_ESSENCE)) {
             sendMessage(player, "You need pure essence to craft this rune.")
@@ -190,6 +191,7 @@ class RunecraftPulse(
                     rewardXP(player, Skills.RUNECRAFTING, rune.experience * 2)
                     addItem(player, rune.rune.id)
                 }
+                if (amount > 0) finishDiaryTask(player, DiaryType.ARDOUGNE, 1, 3)
             }
         }
     }

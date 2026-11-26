@@ -1,5 +1,7 @@
 package content.region.asgarnia.falador.quest.rd
 
+import content.data.Quests
+
 import content.region.asgarnia.falador.dialogue.SirTiffyCashienDialogue
 import content.region.asgarnia.falador.quest.rd.dialogue.SirKuamFerentseDialogue
 import content.region.asgarnia.falador.quest.rd.plugin.MissCheeversPlugin
@@ -287,8 +289,8 @@ object RDUtils {
         queueScript(player, 1, QueueStrength.SOFT) { stage ->
             when (stage) {
                 0 -> {
-                    if (getQuestStage(player, Quests.RECRUITMENT_DRIVE) == 2) {
-                        setQuestStage(player, Quests.RECRUITMENT_DRIVE, 3)
+                    if (getQuestStage(player, Quests.RECRUITMENT_DRIVE.questName) == 2) {
+                        setQuestStage(player, Quests.RECRUITMENT_DRIVE.questName, 3)
                     }
                     player.lock()
                     closeDialogue(player)

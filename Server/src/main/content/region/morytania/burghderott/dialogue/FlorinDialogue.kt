@@ -1,5 +1,7 @@
 package content.region.morytania.burghderott.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.api.sendChat
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Florin dialogue.
@@ -19,7 +20,7 @@ class FlorinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.IN_AID_OF_THE_MYREQUE) < 1) {
+        if (getQuestStage(player, Quests.IN_AID_OF_THE_MYREQUE.questName) < 1) {
             end()
             npcl(FaceAnim.HALF_GUILTY, "Get out of it! You'se aint commin' in 'ere to get our's blood or's our food!")
             sendChat(npc, "Get out of it! You'se aint commin' in 'ere to get our's blood or's our food!", 2)

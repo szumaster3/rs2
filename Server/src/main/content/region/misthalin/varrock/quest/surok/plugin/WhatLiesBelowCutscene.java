@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.surok.plugin;
 
+import content.data.Quests;
+
 import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
 import core.game.dialogue.FaceAnim;
@@ -22,7 +24,6 @@ import core.net.packet.PacketRepository;
 import core.net.packet.out.Encoders530;
 import core.net.packet.out.PacketContext.CameraContext;
 import shared.consts.Music;
-import shared.consts.Quests;
 
 import static core.api.ContentAPIKt.*;
 
@@ -38,7 +39,7 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
      * Instantiates a new What lies below cutscene.
      */
     public WhatLiesBelowCutscene() {
-        super(Quests.WHAT_LIES_BELOW);
+        super(Quests.WHAT_LIES_BELOW.getQuestName());
     }
 
     /**
@@ -53,7 +54,7 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
     }
 
     @Override
-    public boolean start(final Player player, boolean login, java.lang.Object... args) {
+    public boolean start(final Player player, boolean login, Object... args) {
         player.lock();
         setAttribute(player, "cutscene", this);
         Scenery table = RegionManager.getObject(base.transform(9, 37, 0));

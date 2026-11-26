@@ -1,5 +1,7 @@
 package content.region.kandarin.port_khazard.quest.arena.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -7,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.node.entity.npc.NPC
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Handles interaction with Fight Arena doors.
@@ -26,7 +27,7 @@ class DoorSupportDialogue(
 
         when (stage) {
             0 -> {
-                if (isQuestComplete(player!!, Quests.FIGHT_ARENA)) {
+                if (isQuestComplete(player!!, Quests.FIGHT_ARENA.questName)) {
                     npcl(
                         FaceAnim.ANGRY,
                         "You're " +
@@ -49,7 +50,7 @@ class DoorSupportDialogue(
             2 -> {
                 end()
                 lock(player!!, 2)
-                setQuestStage(player!!, Quests.FIGHT_ARENA, 20)
+                setQuestStage(player!!, Quests.FIGHT_ARENA.questName, 20)
                 DoorActionHandler.handleAutowalkDoor(player!!, getScenery(doorLoc)!!)
             }
             3 -> end()

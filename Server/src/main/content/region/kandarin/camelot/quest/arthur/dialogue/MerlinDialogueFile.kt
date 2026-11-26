@@ -1,5 +1,7 @@
 package content.region.kandarin.camelot.quest.arthur.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -10,7 +12,6 @@ import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.Location
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 /**
@@ -27,7 +28,7 @@ class MerlinDialogueFile(val forced: Boolean) : DialogueFile() {
         when (stage) {
             0 -> {
                 if (forced) {
-                    setQuestStage(player!!, Quests.MERLINS_CRYSTAL, 60)
+                    setQuestStage(player!!, Quests.MERLINS_CRYSTAL.questName, 60)
                     removeCrystal()
                     spawnMerlin()
                     npcl(FaceAnim.HAPPY, "Thank you! Thank you! Thank you!")

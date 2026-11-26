@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.dialogue
 
+import content.data.Quests
+
 import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Lachtopher dialogue.
@@ -18,7 +19,7 @@ class LachtopherDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 10) {
+        if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 10) {
             player("Do you know what happened in the cellar?").also { stage = 11 }
         } else {
             player("Hello there.")

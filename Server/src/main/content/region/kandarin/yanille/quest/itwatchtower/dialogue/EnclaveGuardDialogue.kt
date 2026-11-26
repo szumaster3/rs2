@@ -1,5 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
+import content.data.Quests
+
 import core.api.isQuestComplete
 import core.api.sendMessage
 import core.game.dialogue.Dialogue
@@ -8,7 +10,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Enclave guard dialogue.
@@ -21,7 +22,7 @@ class EnclaveGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(isQuestComplete(player, Quests.WATCHTOWER)) {
+        if(isQuestComplete(player, Quests.WATCHTOWER.questName)) {
             sendMessage(player, "The guard is occupied at the moment.")
         } else {
             npc(FaceAnim.OLD_DEFAULT, "What do you want?")

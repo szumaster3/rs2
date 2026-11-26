@@ -1,5 +1,7 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves.dialogue
 
+import content.data.Quests
+
 import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -8,13 +10,12 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import core.tools.END_DIALOGUE
 
 class ElunedDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if (getQuestStage(player, Quests.ROVING_ELVES) == 10) {
+        if (getQuestStage(player, Quests.ROVING_ELVES.questName) == 10) {
             player(FaceAnim.HALF_GUILTY, "Hey there... Islwyn said you may be able to help me.", "He told me you know how to consecrate ground for an", "elven burial. I need to reconsecrate Glarial's resting", "place.")
             stage = 1
         } else {
@@ -31,7 +32,7 @@ class ElunedDialogue(player: Player? = null) : Dialogue(player) {
             2 -> npc(FaceAnim.HALF_GUILTY, "The tomb's guardian will be protecting the seed, you'll", "need to defeat him to get it. Once you have it, return", "here and I will re-enchant it.").also  { stage++ }
             3 -> player(FaceAnim.HALF_GUILTY, "OK... I'll be back as soon as I have it.").also  { stage++ }
             4 -> {
-                setQuestStage(player, Quests.ROVING_ELVES, 15)
+                setQuestStage(player, Quests.ROVING_ELVES.questName, 15)
                 end()
             }
             5 -> sendItemDialogue(player, RovingElves.CONSECRATION_SEED, "You hand the crystal seed to Eluned.").also  { stage++ }
@@ -48,15 +49,15 @@ class ElunedDialogue(player: Player? = null) : Dialogue(player) {
             11 -> npc(FaceAnim.HALF_GUILTY, "Well done... You should go see Islwyn, but I'd guess he", "already knows.").also { stage = END_DIALOGUE }
 
             1000 -> {
-                if (getQuestStage(player, Quests.ROVING_ELVES) == 15 && !inInventory(player, RovingElves.CONSECRATION_SEED_CHARGED, 1)) {
+                if (getQuestStage(player, Quests.ROVING_ELVES.questName) == 15 && !inInventory(player, RovingElves.CONSECRATION_SEED_CHARGED, 1)) {
                     npc(FaceAnim.HALF_GUILTY, "Hello, any luck finding the consecration seed?")
                     stage = 1002
-                } else if (getQuestStage(player, Quests.ROVING_ELVES) == 15 && inInventory(player, RovingElves.CONSECRATION_SEED_CHARGED, 1)) {
+                } else if (getQuestStage(player, Quests.ROVING_ELVES.questName) == 15 && inInventory(player, RovingElves.CONSECRATION_SEED_CHARGED, 1)) {
                     npc(FaceAnim.HALF_GUILTY, "You still have the charged seed with you, I can feel it.", "Hurry adventurer, go plant the seed and free", "my grandmother's spirit.").also { stage = END_DIALOGUE }
-                } else if (getQuestStage(player, Quests.ROVING_ELVES) == 15 && inInventory(player, RovingElves.CONSECRATION_SEED, 1)) {
+                } else if (getQuestStage(player, Quests.ROVING_ELVES.questName) == 15 && inInventory(player, RovingElves.CONSECRATION_SEED, 1)) {
                     npc(FaceAnim.HALF_GUILTY, "Hello, any luck finding the consecration seed?")
                     stage = 1002
-                } else if (getQuestStage(player, Quests.ROVING_ELVES) == 20) {
+                } else if (getQuestStage(player, Quests.ROVING_ELVES.questName) == 20) {
                     npc(FaceAnim.HALF_GUILTY, "Hey... how's it going? Have you managed to", "reconsecrate Glarial's resting place?")
                     stage = 10
                 } else {
@@ -65,7 +66,7 @@ class ElunedDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
 
-            1001 -> stage = if (getQuestStage(player, Quests.ROVING_ELVES) >= 100 && inInventory(player, Items.TINY_ELF_CRYSTAL_6103, 1)) {
+            1001 -> stage = if (getQuestStage(player, Quests.ROVING_ELVES.questName) >= 100 && inInventory(player, Items.TINY_ELF_CRYSTAL_6103, 1)) {
                 player(FaceAnim.HALF_GUILTY, "I am looking to recharge teleportation crystals.")
                 1200
             } else {

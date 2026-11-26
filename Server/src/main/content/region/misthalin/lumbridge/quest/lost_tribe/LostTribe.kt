@@ -1,5 +1,7 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
@@ -8,11 +10,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class LostTribe : Quest(Quests.THE_LOST_TRIBE, 84, 83, 1) {
+class LostTribe : Quest(Quests.THE_LOST_TRIBE) {
     override fun drawJournal(
         player: Player,
         stage: Int,
@@ -24,8 +25,8 @@ class LostTribe : Quest(Quests.THE_LOST_TRIBE, 84, 83, 1) {
             line(player, "I can start this quest by speaking to !!Sigmund?? in !!Lumbridge??", line++)
             line(player, "!!Castle.??", line++)
             line(player, "I must have completed:", line++)
-            line(player, "!!${Quests.RUNE_MYSTERIES}??", line++, isQuestComplete(player, Quests.RUNE_MYSTERIES))
-            line(player, "!!${Quests.GOBLIN_DIPLOMACY}??", line++, isQuestComplete(player, Quests.GOBLIN_DIPLOMACY))
+            line(player, "!!${Quests.RUNE_MYSTERIES.questName}??", line++, isQuestComplete(player, Quests.RUNE_MYSTERIES.questName))
+            line(player, "!!${Quests.GOBLIN_DIPLOMACY.questName}??", line++, isQuestComplete(player, Quests.GOBLIN_DIPLOMACY.questName))
             line(player, "and have:", line++)
             line(player, "!!Level 17 mining??", line++, getStatLevel(player, Skills.MINING) >= 17)
             line(player, "!!Level 13 agility??", line++, getStatLevel(player, Skills.AGILITY) >= 13)

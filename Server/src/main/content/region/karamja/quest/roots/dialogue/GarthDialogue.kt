@@ -1,5 +1,7 @@
 package content.region.karamja.quest.roots.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -7,16 +9,15 @@ import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Vars
 
 class GarthDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.GARTH_2330)
         when(stage) {
-            0 -> if(getQuestStage(player!!, Quests.BACK_TO_MY_ROOTS) == 5) {
+            0 -> if(getQuestStage(player!!, Quests.BACK_TO_MY_ROOTS.questName) == 5) {
                 playerl(FaceAnim.FRIENDLY, "Horacio has told me that you know a lot about taking root cuttings.").also { stage++ }
-            } else if(getQuestStage(player!!, Quests.BACK_TO_MY_ROOTS) == 7) {
+            } else if(getQuestStage(player!!, Quests.BACK_TO_MY_ROOTS.questName) == 7) {
                 player("Hello, Garth.").also { stage = 32 }
             } else {
                 npcl(FaceAnim.FRIENDLY, "Got that cutting yet?").also { stage = 20 }
@@ -41,7 +42,7 @@ class GarthDialogue : DialogueFile() {
             18 -> playerl(FaceAnim.FRIENDLY, "Oh dear. I should go prepared then.").also { stage++ }
             19 -> npcl(FaceAnim.FRIENDLY, "Oo, oi. Most definitely. You'll have problems if you're not prepared. Just like soil if it's not been weeded. Don't forget to seal that cutting away as soon as it takes, else you'll be needing to go back there again.").also {
                 setVarbit(player!!, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 35, true)
-                setQuestStage(player!!, Quests.BACK_TO_MY_ROOTS, 6)
+                setQuestStage(player!!, Quests.BACK_TO_MY_ROOTS.questName, 6)
                 stage = END_DIALOGUE
             }
             20 -> playerl(FaceAnim.FRIENDLY, "No, do you have any more cutting remarks for me today?").also { stage++ }

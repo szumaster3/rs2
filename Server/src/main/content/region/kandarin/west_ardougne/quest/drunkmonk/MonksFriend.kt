@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.drunkmonk
 
+import content.data.Quests
+
 import core.api.addItemOrDrop
 import core.api.drawReward
 import core.api.rewardXP
@@ -8,11 +10,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class MonksFriend : Quest(Quests.MONKS_FRIEND, 89, 88, 1, Vars.VARP_QUEST_MONKS_FRIEND_PROGRESS_30, 0, 1, 80) {
+class MonksFriend : Quest(Quests.MONKS_FRIEND) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

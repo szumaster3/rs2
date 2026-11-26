@@ -1,5 +1,7 @@
 package content.minigame.pyramid_plunder.plugin
 
+import content.data.Quests
+
 import core.Util
 import core.api.*
 import core.game.interaction.IntType
@@ -10,7 +12,6 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class PyramidPlunderPlugin : InteractionListener {
 
@@ -50,7 +51,7 @@ class PyramidPlunderPlugin : InteractionListener {
          */
 
         on(SCEPTRE, IntType.ITEM, "teleport", "operate") { player, node ->
-            if (!hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER)) return@on false
+            if (!hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER.questName)) return@on false
             val sceptre = node.asItem()
 
             if (sceptre.id == SCEPTRE.last()) {

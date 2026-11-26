@@ -1,5 +1,7 @@
 package content.region.other.ape_atoll.dialogue
 
+import content.data.Quests
+
 import content.global.plugins.inter.with_npc.ItemsOnZooknockPlugin
 import content.region.karamja.quest.mm.cutscene.DungeonPlanCutscene
 import core.api.*
@@ -12,7 +14,6 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 
 class ZooknockAfterBattleDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
@@ -85,7 +86,7 @@ class ZooknockDialogueFile(val it: Int) : DialogueFile() {
             10 -> npcl("Furthermore, you will not be able to attack whilst using this, so be careful. Perhaps when I refine my spells I could look into making this possible.").also {
                 end()
                 DungeonPlanCutscene(player!!).start()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 32)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 32)
                 stage = 14
             }
             14 -> {

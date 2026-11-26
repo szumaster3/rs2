@@ -1,5 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.cog.plugin
 
+import content.data.Quests
+
 import content.region.kandarin.west_ardougne.quest.cog.ClockTower
 import core.api.*
 import core.game.global.action.DoorActionHandler
@@ -13,7 +15,6 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class ClockTowerListener : InteractionListener {
@@ -70,8 +71,8 @@ class ClockTowerListener : InteractionListener {
                 if (removeItem(player, Items.WHITE_COG_20)) {
                     sendMessage(player, "The cog fits perfectly.")
                     setAttribute(player, ClockTower.WHITE_COG_ATTR, true)
-                    if (!isQuestComplete(player, Quests.CLOCK_TOWER)) {
-                        setQuestStage(player, Quests.CLOCK_TOWER, getQuestStage(player, Quests.CLOCK_TOWER) + 1)
+                    if (!isQuestComplete(player, Quests.CLOCK_TOWER.questName)) {
+                        setQuestStage(player, Quests.CLOCK_TOWER.questName, getQuestStage(player, Quests.CLOCK_TOWER.questName) + 1)
                     }
                 }
             } else {
@@ -89,8 +90,8 @@ class ClockTowerListener : InteractionListener {
                 if (removeItem(player, Items.BLACK_COG_21)) {
                     sendMessage(player, "The cog fits perfectly.")
                     setAttribute(player, ClockTower.BLACK_COG_ATTR, true)
-                    if (!isQuestComplete(player, Quests.CLOCK_TOWER)) {
-                        setQuestStage(player, Quests.CLOCK_TOWER, getQuestStage(player, Quests.CLOCK_TOWER) + 1)
+                    if (!isQuestComplete(player, Quests.CLOCK_TOWER.questName)) {
+                        setQuestStage(player, Quests.CLOCK_TOWER.questName, getQuestStage(player, Quests.CLOCK_TOWER.questName) + 1)
                     }
                 }
             } else {
@@ -108,8 +109,8 @@ class ClockTowerListener : InteractionListener {
                 if (removeItem(player, Items.BLUE_COG_22)) {
                     sendMessage(player, "The cog fits perfectly.")
                     setAttribute(player, ClockTower.BLUE_COG_ATTR, true)
-                    if (!isQuestComplete(player, Quests.CLOCK_TOWER)) {
-                        setQuestStage(player, Quests.CLOCK_TOWER, getQuestStage(player, Quests.CLOCK_TOWER) + 1)
+                    if (!isQuestComplete(player, Quests.CLOCK_TOWER.questName)) {
+                        setQuestStage(player, Quests.CLOCK_TOWER.questName, getQuestStage(player, Quests.CLOCK_TOWER.questName) + 1)
                     }
                 }
             } else {
@@ -127,8 +128,8 @@ class ClockTowerListener : InteractionListener {
                 if (removeItem(player, Items.RED_COG_23)) {
                     sendMessage(player, "The cog fits perfectly.")
                     setAttribute(player, ClockTower.RED_COG_ATTR, true)
-                    if (!isQuestComplete(player, Quests.CLOCK_TOWER)) {
-                        setQuestStage(player, Quests.CLOCK_TOWER, getQuestStage(player, Quests.CLOCK_TOWER) + 1)
+                    if (!isQuestComplete(player, Quests.CLOCK_TOWER.questName)) {
+                        setQuestStage(player, Quests.CLOCK_TOWER.questName, getQuestStage(player, Quests.CLOCK_TOWER.questName) + 1)
                     }
                 }
             } else {

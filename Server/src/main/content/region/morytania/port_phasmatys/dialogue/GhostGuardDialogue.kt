@@ -1,5 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.port_phasmatys.plugin.EnergyBarrier
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.hasGhostspeak
 import core.api.*
@@ -11,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Ghost Guard (Port Phasmatys) dialogue.
@@ -21,7 +22,7 @@ class GhostGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val isGhostsAhoyComplete = isQuestComplete(player, Quests.GHOSTS_AHOY)
+        val isGhostsAhoyComplete = isQuestComplete(player, Quests.GHOSTS_AHOY.questName)
         val hasGhostspeakAmulet = hasGhostspeak(player)
         val hasBedsheet = inEquipment(player, Items.BEDSHEET_4285)
 

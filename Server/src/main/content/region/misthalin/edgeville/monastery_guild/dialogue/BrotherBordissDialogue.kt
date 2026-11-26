@@ -1,5 +1,7 @@
 package content.region.misthalin.edgeville.monastery_guild.dialogue
 
+import content.data.Quests
+
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -19,7 +21,7 @@ class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        // val hasQuest = hasRequirement(player!!, Quests.PERILS_OF_ICE_MOUNTAIN, false)
+        // val hasQuest = hasRequirement(player!!, Quests.PERILS_OF_ICE_MOUNTAIN.questName, false)
         // if(!hasQuest) {
         //     npc(FaceAnim.OLD_NORMAL, " ")
         //     stage = 24

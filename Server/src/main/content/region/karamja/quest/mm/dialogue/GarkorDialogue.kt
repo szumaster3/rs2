@@ -1,5 +1,7 @@
 package content.region.karamja.quest.mm.dialogue
 
+import content.data.Quests
+
 import content.region.karamja.quest.mm.cutscene.DungeonPlanWithAwowogeiCutscene
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class GarkorDialogue(player: Player? = null) : Dialogue(player) {
@@ -21,7 +22,7 @@ class GarkorDialogue(player: Player? = null) : Dialogue(player) {
             npcl(FaceAnim.AMAZED, "My my, Zooknock has outdone himself this time. You do look very much like a monkey you know.")
             return true
         }
-        when (getQuestStage(player, Quests.MONKEY_MADNESS)) {
+        when (getQuestStage(player, Quests.MONKEY_MADNESS.questName)) {
             FIRST_TALK -> playerl(FaceAnim.NEUTRAL, "Hello?").also { stage = 6 }
             AFTER_CHALLENGE -> npcl(FaceAnim.OLD_DEFAULT, "Well done on winning Awowogei trust. I overheard everything from here.").also { stage = 21 }
             FINAL_BATTLE -> playerl(FaceAnim.WORRIED, "What shall we do?").also { stage = 28 }
@@ -40,7 +41,7 @@ class GarkorDialogue(player: Player? = null) : Dialogue(player) {
             4 -> npcl(FaceAnim.OLD_DEFAULT, "You must win his trust if we are to succeed.").also { stage++ }
             5 -> {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 35)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 35)
             }
             6 -> npcl(FaceAnim.OLD_DEFAULT, "A fine day you have chosen to visit this hellish island, human.").also { stage++ }
             7 -> playerl(FaceAnim.NEUTRAL, "Good day to you too Sergeant. I've been sent by your King Narnode to -").also { stage++ }
@@ -58,7 +59,7 @@ class GarkorDialogue(player: Player? = null) : Dialogue(player) {
             19 -> npcl(FaceAnim.OLD_DEFAULT, "I remain here so that I may overhear Awowogei's plans.").also { stage++ }
             20 -> {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 30)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 30)
             }
 
             21 -> npcl(FaceAnim.OLD_DEFAULT, "However, you efforts may be in vain...").also { stage++ }
@@ -66,7 +67,7 @@ class GarkorDialogue(player: Player? = null) : Dialogue(player) {
             23 -> npcl(FaceAnim.OLD_DEFAULT, "Progress in the caves has been slow. Whilst you were in Ardougne, Bunkwicket and Waymottin overheard a slightly disturbing conversation.").also { stage++ }
             24 -> playerl(FaceAnim.NEUTRAL, "Who was speaking? What was said?").also { stage++ }
             25 -> npcl(FaceAnim.OLD_DEFAULT, "Listen closely whilst I narrate the details...").also {
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 50)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 50)
                 DungeonPlanWithAwowogeiCutscene(player!!).start()
                 stage++
             }
@@ -102,7 +103,7 @@ class GarkorDialogue(player: Player? = null) : Dialogue(player) {
             51 -> npcl(FaceAnim.OLD_DEFAULT, "Speak to Zooknock. He will arrange for you to leave.").also { stage++ }
             52 -> {
                 end()
-                setQuestStage(player!!, Quests.MONKEY_MADNESS, 96)
+                setQuestStage(player!!, Quests.MONKEY_MADNESS.questName, 96)
             }
         }
         return true

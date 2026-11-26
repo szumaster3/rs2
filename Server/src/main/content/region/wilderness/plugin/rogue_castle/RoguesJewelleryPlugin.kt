@@ -1,5 +1,7 @@
 package content.region.wilderness.plugin.rogue_castle
 
+import content.data.Quests
+
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.dialogue.DialogueFile
@@ -9,7 +11,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 import kotlin.math.min
 
 class RoguesJewelleryPlugin : InteractionListener {
@@ -21,7 +22,7 @@ class RoguesJewelleryPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, JEWELLERY, NPCs.ROGUE_8122) { player, used, _ ->
-            if (!hasRequirement(player, Quests.SUMMERS_END)) return@onUseWith false
+            if (!hasRequirement(player, Quests.SUMMERS_END.questName)) return@onUseWith false
 
             val amount = amountInInventory(player, used.id)
             if (amount <= 0) return@onUseWith false

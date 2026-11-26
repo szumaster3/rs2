@@ -1,5 +1,7 @@
 package content.global.skill.slayer.dungeon
 
+import content.data.Quests
+
 import content.region.asgarnia.taverley.npc.ArmourSuitNPC
 import core.api.inInventory
 import core.api.isQuestComplete
@@ -8,7 +10,6 @@ import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class TaverleyDungeonPlugin : InteractionListener {
@@ -46,7 +47,7 @@ class TaverleyDungeonPlugin : InteractionListener {
          */
 
         on(TAVERLEY_GATES, IntType.SCENERY, "open") { player, node ->
-            if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL) && ArmourSuitNPC.activeSuits.size < 2) {
+            if (!isQuestComplete(player, Quests.DRUIDIC_RITUAL.questName) && ArmourSuitNPC.activeSuits.size < 2) {
                 ArmourSuitNPC.spawnArmourSuit(player)
             }
 

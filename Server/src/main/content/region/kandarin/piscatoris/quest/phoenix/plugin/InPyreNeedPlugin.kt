@@ -1,5 +1,7 @@
 package content.region.kandarin.piscatoris.quest.phoenix.plugin
 
+import content.data.Quests
+
 import com.google.gson.JsonObject
 import content.data.GameAttributes
 import content.global.activity.phoenix.PhoenixSpawnCutscene
@@ -47,7 +49,7 @@ class InPyreNeedPlugin : InteractionListener {
                 }
             }
 
-            if (getQuestStage(player, Quests.IN_PYRE_NEED) < 1) {
+            if (getQuestStage(player, Quests.IN_PYRE_NEED.questName) < 1) {
                 sendNPCDialogue(player, NPCs.PRIEST_OF_GUTHIX_8555, "Hey, wait! I have something to ask you before going down there.", FaceAnim.FRIENDLY)
                 addDialogueAction(player) { p, _ ->
                     sendPlayerDialogue(p, "Maybe I should see what he has to say before entering this dark, scary, and unreasonably warm cave.", FaceAnim.THINKING)
@@ -148,7 +150,7 @@ class InPyreNeedPlugin : InteractionListener {
                 resetAnimator(player)
                 openInterface(player, Components.FADE_FROM_BLACK_170)
                 teleport(player, Location.create(2294, 3626, 0))
-                if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+                if (!isQuestComplete(player, Quests.IN_PYRE_NEED.questName)) {
                     player.dialogueInterpreter.open(NPCs.BRIAN_TWITCHER_8556)
                 }
             }
@@ -186,12 +188,12 @@ class InPyreNeedPlugin : InteractionListener {
         onUseWith(IntType.SCENERY, InPyreNeed.RIBBON_ID, Scenery.PYRE_41908) { player, _, _ ->
             val progress = getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761)
 
-            if (!isQuestComplete(player, Quests.IN_PYRE_NEED) && progress < 5) {
+            if (!isQuestComplete(player, Quests.IN_PYRE_NEED.questName) && progress < 5) {
                 sendMessage(player, "Nothing interesting happens.")
                 return@onUseWith true
             }
 
-            if (isQuestComplete(player, Quests.IN_PYRE_NEED) && getStoreFile().getBoolean(player.username.lowercase())) {
+            if (isQuestComplete(player, Quests.IN_PYRE_NEED.questName) && getStoreFile().getBoolean(player.username.lowercase())) {
                 sendMessage(player, "This can only be done once per day.")
                 return@onUseWith true
             }
@@ -214,7 +216,7 @@ class InPyreNeedPlugin : InteractionListener {
                 removeItem(player, Item(it, 1), Container.INVENTORY)
             }
 
-            if (isQuestComplete(player, Quests.IN_PYRE_NEED) && !getAttribute(player, "phoenix-spawned", false)) {
+            if (isQuestComplete(player, Quests.IN_PYRE_NEED.questName) && !getAttribute(player, "phoenix-spawned", false)) {
                 setAttribute(player, "phoenix-spawned", true)
                 PhoenixSpawnCutscene(player).start(true)
             } else {

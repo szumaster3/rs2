@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.firedup.dialogue
 
+import content.data.Quests
+
 import core.api.finishQuest
 import core.api.getStatLevel
 import core.api.setQuestStage
@@ -9,7 +11,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.skill.Skills
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import shared.consts.Quests
 
 /**
  * Represents the King Roald (All Fired up) dialogue.
@@ -51,7 +52,7 @@ class KingRoaldDialogueFile(val questStage: Int) : DialogueFile() {
                 19 -> npc("With speed, ${player!!.username}. The security of Misthalin is in", "your hands.").also { stage++ }
                 20 -> {
                     end()
-                    setQuestStage(player!!, Quests.ALL_FIRED_UP, 10)
+                    setQuestStage(player!!, Quests.ALL_FIRED_UP.questName, 10)
                     updateQuestTab(player!!)
                 }
             }
@@ -68,7 +69,7 @@ class KingRoaldDialogueFile(val questStage: Int) : DialogueFile() {
                 9 -> npc("There is much more to be done and this is but a", "pittance compared to what I'm willing to offer for", "further assistance!").also { stage++ }
                 10 -> {
                     end()
-                    finishQuest(player!!, Quests.ALL_FIRED_UP)
+                    finishQuest(player!!, Quests.ALL_FIRED_UP.questName)
                 }
             }
             else -> {

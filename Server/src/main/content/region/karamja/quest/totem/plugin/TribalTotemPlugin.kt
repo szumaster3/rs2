@@ -1,5 +1,7 @@
 package content.region.karamja.quest.totem.plugin
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.global.action.ClimbActionHandler
@@ -19,7 +21,7 @@ class TribalTotemPlugin : InteractionListener {
          */
 
         on(Scenery.DOOR_2706, IntType.SCENERY, "Open") { player, door ->
-            val questStage = getQuestStage(player, Quests.TRIBAL_TOTEM)
+            val questStage = getQuestStage(player, Quests.TRIBAL_TOTEM.questName)
             if (questStage < 35) {
                 sendMessage(player, "The door is locked shut.")
             } else {
@@ -33,7 +35,7 @@ class TribalTotemPlugin : InteractionListener {
          */
 
         on(Scenery.CRATE_2708, IntType.SCENERY, "Investigate") { player, _ ->
-            val questStage = getQuestStage(player, Quests.TRIBAL_TOTEM)
+            val questStage = getQuestStage(player, Quests.TRIBAL_TOTEM.questName)
             val hasItem = hasAnItem(player, Items.ADDRESS_LABEL_1858).container != null
             when(questStage) {
                 in 1..20 -> {
@@ -66,13 +68,13 @@ class TribalTotemPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.ADDRESS_LABEL_1858, Scenery.CRATE_2707) { player, _, _ ->
-            if (getQuestStage(player, Quests.TRIBAL_TOTEM) >= 20) {
+            if (getQuestStage(player, Quests.TRIBAL_TOTEM.questName) >= 20) {
                 sendDialogue(player, "You have already replaced the delivery address label.")
                 return@onUseWith true
             }
             if(removeItem(player, Items.ADDRESS_LABEL_1858)) {
                 sendDialogueLines(player, "You carefully place the delivery address label over the existing label,", "covering it completely.")
-                setQuestStage(player, Quests.TRIBAL_TOTEM, 20)
+                setQuestStage(player, Quests.TRIBAL_TOTEM.questName, 20)
                 addDialogueAction(player) { _, _ ->
                     sendPlayerDialogue(player, "Now I just need someone to deliver it for me.")
                     return@addDialogueAction closeDialogue(player)
@@ -155,7 +157,7 @@ class TribalTotemPlugin : InteractionListener {
             if (hasTotem) {
                 sendMessage(player, "The chest is empty.")
             } else {
-                setQuestStage(player, Quests.TRIBAL_TOTEM, 35)
+                setQuestStage(player, Quests.TRIBAL_TOTEM.questName, 35)
                 sendDialogue(player, "Inside the chest you find the tribal totem.")
                 addItem(player, Items.TOTEM_1857)
             }

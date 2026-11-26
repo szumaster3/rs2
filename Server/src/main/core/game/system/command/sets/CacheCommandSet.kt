@@ -508,7 +508,6 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                         for (quest in quests) {
                             writer.write("Name: ${quest.name}\n")
                             writer.write("Index: ${quest.index}\n")
-                            writer.write("ButtonId: ${quest.buttonId}\n")
                             writer.write("QuestPoints: ${quest.questPoints}\n")
                             writer.write("Configs: ${quest.configs.joinToString(", ")}\n")
                             writer.write("----------------------------------------\n")

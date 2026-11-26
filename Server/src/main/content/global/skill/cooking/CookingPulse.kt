@@ -1,5 +1,7 @@
 package content.global.skill.cooking
 
+import content.data.Quests
+
 import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.node.entity.impl.Animator
@@ -13,7 +15,6 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Sounds
 
 /**
@@ -70,7 +71,7 @@ open class CookingPulse(
     open fun checkRequirements(): Boolean {
         this.experience = 0.0
         if (properties != null) {
-            if (scenery.id == LUMBRIDGE_RANGE && !isQuestComplete(player, Quests.COOKS_ASSISTANT)) {
+            if (scenery.id == LUMBRIDGE_RANGE && !isQuestComplete(player, Quests.COOKS_ASSISTANT.questName)) {
                 sendDialogue(player, "That requires completion of the Cook's Assistant quest in order to use it.")
                 return false
             }

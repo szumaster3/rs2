@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.surok.dialogue
 
+import content.data.Quests
+
 import core.api.addItem
 import core.api.getQuestStage
 import core.api.inInventory
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 @Initializable
 class AnnaJonesDialogue(player: Player? = null) : Dialogue(player) {
@@ -18,8 +19,8 @@ class AnnaJonesDialogue(player: Player? = null) : Dialogue(player) {
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
-        quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW)
-        when (getQuestStage(player, Quests.WHAT_LIES_BELOW)) {
+        quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW.questName)
+        when (getQuestStage(player, Quests.WHAT_LIES_BELOW.questName)) {
             30 -> npc("Ah. You must be " + player.username + ", right? I have a bronze", "pickaxe here for you.")
             40 -> if (args.size >= 2) {
                 npc("You did it! oh, well done! How exciting!").also { stage = 10 }

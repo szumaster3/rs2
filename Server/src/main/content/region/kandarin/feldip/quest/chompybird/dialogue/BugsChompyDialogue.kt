@@ -1,5 +1,7 @@
 package content.region.kandarin.feldip.quest.chompybird.dialogue
 
+import content.data.Quests
+
 import content.region.kandarin.feldip.quest.chompybird.BigChompyBirdHunting
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Bugs dialogue.
@@ -28,7 +29,7 @@ class BugsChompyDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(componentId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player!!, Quests.BIG_CHOMPY_BIRD_HUNTING)) {
+        when (getQuestStage(player!!, Quests.BIG_CHOMPY_BIRD_HUNTING.questName)) {
             in 0 until 20 -> {
                 when (stage) {
                     0 -> npc(FaceAnim.OLD_NORMAL, "You's better talk to Dad, him chasey sneaky da chompy.").also { stage = END_DIALOGUE }

@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.npc
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
 import core.api.getQuestStage
 import core.api.inBank
@@ -12,7 +14,6 @@ import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class WormbrainNPC : AbstractNPC {
     constructor() : super(0, null)
@@ -24,7 +25,7 @@ class WormbrainNPC : AbstractNPC {
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         if (killer is Player) {
-            if (getQuestStage(killer, Quests.DRAGON_SLAYER) == 20 &&
+            if (getQuestStage(killer, Quests.DRAGON_SLAYER.questName) == 20 &&
                 !inInventory(
                     killer,
                     DragonSlayer.WORMBRAIN_PIECE.id,
@@ -44,7 +45,7 @@ class WormbrainNPC : AbstractNPC {
     ): Boolean {
         if (entity is Player) {
             val player = entity
-            if (getQuestStage(player, Quests.DRAGON_SLAYER) != 20) {
+            if (getQuestStage(player, Quests.DRAGON_SLAYER.questName) != 20) {
                 if (message) {
                     sendMessage(player, "The goblin is already in prison. You have no reason to attack him.")
                 }

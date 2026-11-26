@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.*
@@ -10,7 +12,6 @@ import core.plugin.Initializable
 import core.tools.START_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents Winelda dialogue.
@@ -33,8 +34,8 @@ class WineldaDialogueFile : DialogueFile() {
         when (stage) {
             START_DIALOGUE -> {
                 stage = when {
-                    getQuestStage(player!!, Quests.TEMPLE_OF_IKOV) in 5..7 ||
-                            getQuestStage(player!!, Quests.TEMPLE_OF_IKOV) == 100 -> 1
+                    getQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName) in 5..7 ||
+                            getQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName) == 100 -> 1
 
                     getAttribute(player!!, GameAttributes.QUEST_IKOV_WINELDA_INTER, false) -> 10
 
@@ -101,8 +102,8 @@ class WineldaDialogueFile : DialogueFile() {
             }
 
             17 -> {
-                if (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV) == 4) {
-                    setQuestStage(player!!, Quests.TEMPLE_OF_IKOV, 5)
+                if (getQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName) == 4) {
+                    setQuestStage(player!!, Quests.TEMPLE_OF_IKOV.questName, 5)
                 }
                 teleport(player!!, Location(2664, 9876, 0))
                 endFile()

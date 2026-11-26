@@ -1,5 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.plugin
 
+import content.data.Quests
+
 import content.global.plugins.item.books_and_scrolls.ScrollInterface
 import content.region.kandarin.gnome_stronghold.quest.grandtree.cutscene.GloughsPetCutscene
 import content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.ForemanDialogue
@@ -41,7 +43,7 @@ class TheGrandTreePlugin : InteractionListener {
     override fun defineListeners() {
 
         on(NPCs.FOREMAN_674, IntType.NPC, "talk-to") { player, npc ->
-            if (!isQuestComplete(player, Quests.THE_GRAND_TREE)) {
+            if (!isQuestComplete(player, Quests.THE_GRAND_TREE.questName)) {
                 openDialogue(player, ForemanDialogue(), npc)
             } else {
                 sendDialogue(player, "The foreman is too busy to talk.")
@@ -52,7 +54,7 @@ class TheGrandTreePlugin : InteractionListener {
         on(NPCs.KING_NARNODE_SHAREEN_670, IntType.NPC, "talk-to") { player, npc ->
             val aboveground = 9782
             when {
-                getQuestStage(player, Quests.THE_GRAND_TREE) == 100 ->
+                getQuestStage(player, Quests.THE_GRAND_TREE.questName) == 100 ->
                     openDialogue(
                         player,
                         KingNarnodeMMDialogue(),
@@ -86,7 +88,7 @@ class TheGrandTreePlugin : InteractionListener {
 
         on(2444, IntType.SCENERY, "open") { player, node ->
             var loc = Location(2487, 3464, 2)
-            if (node.location == loc && !isQuestComplete(player, Quests.THE_GRAND_TREE)) {
+            if (node.location == loc && !isQuestComplete(player, Quests.THE_GRAND_TREE.questName)) {
                 if (getAttribute(player, TheGrandTreeUtils.TWIG_0, false) &&
                     getAttribute(player, TheGrandTreeUtils.TWIG_1, false) &&
                     getAttribute(player, TheGrandTreeUtils.TWIG_2, false) &&
@@ -102,7 +104,7 @@ class TheGrandTreePlugin : InteractionListener {
         }
 
         on(2446, IntType.SCENERY, "open") { player, node ->
-            if (node.location == Location(2463, 3497, 0) && isQuestComplete(player, Quests.THE_GRAND_TREE)) {
+            if (node.location == Location(2463, 3497, 0) && isQuestComplete(player, Quests.THE_GRAND_TREE.questName)) {
                 player.animator.animate(Animation(828))
                 teleport(player, Location(2464, 9897, 0))
             }
@@ -124,8 +126,8 @@ class TheGrandTreePlugin : InteractionListener {
                 player.animator.animate(Animation(Animations.HUMAN_CLOSE_CHEST_538))
                 sendItemDialogue(player, Items.INVASION_PLANS_794, "You found a scroll!")
                 addItemOrDrop(player, Items.INVASION_PLANS_794)
-                if (getQuestStage(player, Quests.THE_GRAND_TREE) < 60) {
-                    setQuestStage(player, Quests.THE_GRAND_TREE, 60)
+                if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) < 60) {
+                    setQuestStage(player, Quests.THE_GRAND_TREE.questName, 60)
                 }
             } else {
                 sendDialogue(player, "The chest is locked.")
@@ -178,7 +180,7 @@ class TheGrandTreePlugin : InteractionListener {
             return@on true
         }
         on(2435, IntType.SCENERY, "search") { player, _ ->
-            if (getQuestStage(player, Quests.THE_GRAND_TREE) >= 47 &&
+            if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) >= 47 &&
                 !inInventory(
                     player,
                     Items.GLOUGHS_JOURNAL_785,
@@ -195,7 +197,7 @@ class TheGrandTreePlugin : InteractionListener {
         }
 
         on(32319, IntType.SCENERY, "search") { player, node ->
-            if (getQuestStage(player, Quests.THE_GRAND_TREE) < 99 || player.hasItem(Item(Items.DACONIA_ROCK_793))) {
+            if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) < 99 || player.hasItem(Item(Items.DACONIA_ROCK_793))) {
                 return@on true
             }
 
@@ -222,7 +224,7 @@ class TheGrandTreePlugin : InteractionListener {
                 else -> null
             } ?: return@on false
 
-            if (player.location.x > 2944 || isQuestComplete(player, Quests.THE_GRAND_TREE)) {
+            if (player.location.x > 2944 || isQuestComplete(player, Quests.THE_GRAND_TREE.questName)) {
                 DoorActionHandler.autowalkFence(player, node.asScenery(), gatePair.first, gatePair.second)
             } else {
                 openDialogue(player, ShipyardWorkerDialogueFile(), NPC(NPCs.SHIPYARD_WORKER_675))
@@ -232,7 +234,7 @@ class TheGrandTreePlugin : InteractionListener {
         }
 
         on(2451, IntType.SCENERY, "push") { player, roots ->
-            if (hasRequirement(player, Quests.THE_GRAND_TREE)) {
+            if (hasRequirement(player, Quests.THE_GRAND_TREE.questName)) {
                 val outsideMine =
                     player.location == Location.create(2467, 9903, 0) ||
                             player.location ==

@@ -1,5 +1,7 @@
 package content.region.fremennik.lighthouse.quest.horror
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.lighthouse.quest.horror.dialogue.JossikLighthouseDialogue
 import core.api.*
@@ -11,11 +13,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class HorrorFromTheDeep : Quest(Quests.HORROR_FROM_THE_DEEP, 77, 76, 2, Vars.VARBIT_QUEST_HORROR_FROM_THE_DEEP_PROGRESS_34, 0, 1, 10) {
+class HorrorFromTheDeep : Quest(Quests.HORROR_FROM_THE_DEEP) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -118,7 +119,7 @@ class HorrorFromTheDeep : Quest(Quests.HORROR_FROM_THE_DEEP, 77, 76, 2, Vars.VAR
         /*
          * Trivia: The only one interface that has different text in journal.
          */
-        sendString(player, "You have survived the ${Quests.HORROR_FROM_THE_DEEP}!", Components.QUEST_COMPLETE_SCROLL_277, 4)
+        sendString(player, "You have survived the ${Quests.HORROR_FROM_THE_DEEP.questName}!", Components.QUEST_COMPLETE_SCROLL_277, 4)
         drawReward(player, Items.RUSTY_CASKET_3849)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "4662 XP in each of: Ranged,", ln++)

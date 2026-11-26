@@ -1,5 +1,7 @@
 package content.region.asgarnia.taverley.dialogue
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Sylas dialogue.
@@ -18,7 +19,7 @@ class SylasDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.GRIM_TALES, false)) {
+        if (!hasRequirement(player, Quests.GRIM_TALES.questName, false)) {
             player("Hello!")
         } else {
             player("Hello there. My name's ${player.username}.").also { stage = 2 }

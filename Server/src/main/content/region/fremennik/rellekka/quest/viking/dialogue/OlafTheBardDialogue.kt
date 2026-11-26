@@ -1,5 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -9,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Olaf The Bard dialogue.
@@ -57,12 +58,12 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1000
             }
 
-            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
+            isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npcl(FaceAnim.HAPPY, "Hello again to you, ${FremennikTrials.getFremennikName(player)}. Us bards should stick together, what can I do for you?")
                 stage = 98
             }
 
-            player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
+            player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS.questName) -> {
                 npc(FaceAnim.HALF_ASKING, "Hello? Yes? You want something outerlander?")
             }
 

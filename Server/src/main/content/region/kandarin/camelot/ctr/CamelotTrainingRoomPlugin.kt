@@ -1,12 +1,13 @@
 package content.region.kandarin.camelot.ctr
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Scenery
 
 class CamelotTrainingRoomPlugin : InteractionListener {
@@ -16,7 +17,7 @@ class CamelotTrainingRoomPlugin : InteractionListener {
          */
 
         on(intArrayOf(Scenery.LARGE_DOOR_25594, Scenery.LARGE_DOOR_25595), IntType.SCENERY, "open") { player, _ ->
-            if (!hasRequirement(player, Quests.KINGS_RANSOM, false)) {
+            if (!hasRequirement(player, Quests.KINGS_RANSOM.questName, false)) {
                 sendMessage(player, "You need to have completed the King's Ransom Quest to gain access.")
                 return@on true
             }

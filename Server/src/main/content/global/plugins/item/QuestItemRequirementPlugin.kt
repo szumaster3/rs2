@@ -1,12 +1,13 @@
 package content.global.plugins.item
 
+import content.data.Quests
+
 import core.api.hasRequirement
 import core.api.isQuestComplete
 import core.api.sendMessage
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.quest.QuestRepository
 import shared.consts.Items
-import shared.consts.Quests
 
 class QuestItemRequirementPlugin : InteractionListener {
 
@@ -26,28 +27,28 @@ class QuestItemRequirementPlugin : InteractionListener {
     private val dagonHaiRobes = intArrayOf(Items.DAGONHAI_HAT_14499, Items.DAGONHAI_ROBE_TOP_14497, Items.DAGONHAI_ROBE_BOTTOM_14501)
     override fun defineListeners() {
         onEquip(fremennikTrialsEquipment) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.THE_FREMENNIK_TRIALS)
+            return@onEquip hasRequirement(player, Quests.THE_FREMENNIK_TRIALS.questName)
         }
 
         onEquip(fremennikIslesEquipment) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.THE_FREMENNIK_ISLES)
+            return@onEquip hasRequirement(player, Quests.THE_FREMENNIK_ISLES.questName)
         }
 
         onEquip(avasBackpacks) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.ANIMAL_MAGNETISM)
+            return@onEquip hasRequirement(player, Quests.ANIMAL_MAGNETISM.questName)
         }
 
         onEquip(lostCityWeapons) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.LOST_CITY)
+            return@onEquip hasRequirement(player, Quests.LOST_CITY.questName)
         }
 
         onEquip(Items.CAPE_OF_LEGENDS_1052) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.LEGENDS_QUEST)
+            return@onEquip hasRequirement(player, Quests.LEGENDS_QUEST.questName)
         }
 
         onEquip(dagonHaiRobes) { player, _ ->
             val miniQuestCompleted = player.getSavedData().activityData.hasKilledBork()
-            val questCompleted = isQuestComplete(player, Quests.WHAT_LIES_BELOW)
+            val questCompleted = isQuestComplete(player, Quests.WHAT_LIES_BELOW.questName)
 
             when {
                 !miniQuestCompleted && !questCompleted -> {
@@ -76,83 +77,83 @@ class QuestItemRequirementPlugin : InteractionListener {
         }
 
         onEquip(Items.WOLFBANE_2952) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.PRIEST_IN_PERIL)
+            return@onEquip hasRequirement(player, Quests.PRIEST_IN_PERIL.questName)
         }
 
         onEquip(Items.ANCIENT_MACE_11061) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.ANOTHER_SLICE_OF_HAM)
+            return@onEquip hasRequirement(player, Quests.ANOTHER_SLICE_OF_HAM.questName)
         }
 
         onEquip(Items.ANCIENT_STAFF_4675) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.DESERT_TREASURE)
+            return@onEquip hasRequirement(player, Quests.DESERT_TREASURE.questName)
         }
 
         onEquip(Items.ELEMENTAL_SHIELD_2890) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.ELEMENTAL_WORKSHOP_I)
+            return@onEquip hasRequirement(player, Quests.ELEMENTAL_WORKSHOP_I.questName)
         }
 
         onEquip(crystalEquipment) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.ROVING_ELVES)
+            return@onEquip hasRequirement(player, Quests.ROVING_ELVES.questName)
         }
 
         onEquip(dragonSlayerEquipment) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.DRAGON_SLAYER)
+            return@onEquip hasRequirement(player, Quests.DRAGON_SLAYER.questName)
         }
 
         onEquip(Items.DRAGON_SCIMITAR_4587) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.MONKEY_MADNESS)
+            return@onEquip hasRequirement(player, Quests.MONKEY_MADNESS.questName)
         }
 
         onEquip(Items.GLOVES_7462) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.RECIPE_FOR_DISASTER)
+            return@onEquip hasRequirement(player, Quests.RECIPE_FOR_DISASTER.questName)
         }
 
         onEquip(Items.SLAYER_HELMET_13263) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.SMOKING_KILLS)
+            return@onEquip hasRequirement(player, Quests.SMOKING_KILLS.questName)
         }
 
         onEquip(Items.DRAGON_HALBERD_3204) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.REGICIDE)
+            return@onEquip hasRequirement(player, Quests.REGICIDE.questName)
         }
 
         onEquip(Items.CLIMBING_BOOTS_3105) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.DEATH_PLATEAU)
+            return@onEquip hasRequirement(player, Quests.DEATH_PLATEAU.questName)
         }
 
         onEquip(godBooks) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.HORROR_FROM_THE_DEEP)
+            return@onEquip hasRequirement(player, Quests.HORROR_FROM_THE_DEEP.questName)
         }
 
         onEquip(pharaohScepters) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER)
+            return@onEquip hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER.questName)
         }
 
         onEquip(Items.DRAGON_SQ_SHIELD_1187) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.LEGENDS_QUEST)
+            return@onEquip hasRequirement(player, Quests.LEGENDS_QUEST.questName)
         }
 
         onEquip(initiateArmour) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.RECRUITMENT_DRIVE)
+            return@onEquip hasRequirement(player, Quests.RECRUITMENT_DRIVE.questName)
         }
 
         onEquip(proselyteArmour) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.THE_SLUG_MENACE)
+            return@onEquip hasRequirement(player, Quests.THE_SLUG_MENACE.questName)
         }
 
         onEquip(spiritShields) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.SUMMERS_END)
+            return@onEquip hasRequirement(player, Quests.SUMMERS_END.questName)
         }
 
         onEquip(Items.DRAGON_MACE_1434) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.HEROES_QUEST)
+            return@onEquip hasRequirement(player, Quests.HEROES_QUEST.questName)
         }
 
         onEquip(Items.DRAGON_BATTLEAXE_1377) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.HEROES_QUEST)
+            return@onEquip hasRequirement(player, Quests.HEROES_QUEST.questName)
         }
 
         onEquip(Items.DARKLIGHT_6746) { player, _ ->
-            return@onEquip hasRequirement(player, Quests.SHADOW_OF_THE_STORM)
+            return@onEquip hasRequirement(player, Quests.SHADOW_OF_THE_STORM.questName)
         }
     }
 }

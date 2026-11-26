@@ -1,5 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.biohazard
 
+import content.data.Quests
+
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.isQuestComplete
@@ -12,11 +14,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.Quests
 import shared.consts.Vars
 
 @Initializable
-class Biohazard : Quest(Quests.BIOHAZARD, 36, 35, 3, Vars.VARP_QUEST_BIOHAZARD_PROGRESS_68, 0, 1, 16) {
+class Biohazard : Quest(Quests.BIOHAZARD) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -26,8 +27,8 @@ class Biohazard : Quest(Quests.BIOHAZARD, 36, 35, 3, Vars.VARP_QUEST_BIOHAZARD_P
             line(player, "!!Ardougne??.", line++)
             line++
             line(player, "Requirements:", line++)
-            line(player, "!!I need to complete ${Quests.PLAGUE_CITY} before I can attempt this??", line++, isQuestComplete(player, Quests.PLAGUE_CITY))
-            line(player, "!!Quest??.", line++, isQuestComplete(player, Quests.PLAGUE_CITY))
+            line(player, "!!I need to complete ${Quests.PLAGUE_CITY.questName} before I can attempt this??", line++, isQuestComplete(player, Quests.PLAGUE_CITY.questName))
+            line(player, "!!Quest??.", line++, isQuestComplete(player, Quests.PLAGUE_CITY.questName))
             line++
         }
 

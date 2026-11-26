@@ -1,5 +1,7 @@
 package content.region.misthalin.varrock.quest.dslay.dialogue
 
+import content.data.Quests
+
 import content.region.misthalin.varrock.quest.dslay.plugin.DemonSlayerUtils
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -19,7 +21,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 class TraibornDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -30,7 +31,7 @@ class TraibornDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val questStage = getQuestStage(player, Quests.DEMON_SLAYER)
+        val questStage = getQuestStage(player, Quests.DEMON_SLAYER.questName)
         val talkAgain = player.getAttribute("demon-slayer:traiborn", false)
         val hasBones = player.inventory.containsItem(BONES[0]) || player.inventory.containsItem(BONES[1])
         val hasKey = hasAnItem(player, DemonSlayerUtils.THIRD_KEY.id).container != null

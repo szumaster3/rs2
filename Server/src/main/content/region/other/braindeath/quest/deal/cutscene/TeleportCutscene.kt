@@ -79,7 +79,7 @@ class TeleportCutscene(player: Player) : Cutscene(player) {
             12 -> {
                 getNPC(CAPTAIN)!!.location.transform(Direction.NORTH)!!
                 dialogueUpdate(CAPTAIN, FaceAnim.HAPPY, "We may make it through this yet...")
-                setQuestStageNonmonotonic(player, 107, 2)
+                setQuestStageNonmonotonic(player, 101, 2)
             }
 
             13 -> {

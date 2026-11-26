@@ -1,5 +1,7 @@
 package content.region.desert.uzer.quest.golem
 
+import content.data.Quests
+
 import content.global.skill.thieving.ThievingDefinition
 import content.global.skill.thieving.pickpocket.PickpocketListener
 import core.api.*
@@ -82,13 +84,13 @@ class TheGolemListener : InteractionListener, InterfaceListener {
             val rotation3 = player.getAttribute("the-golem:statuette-rotation:3", 0)
             val doorOpen = player.getAttribute("the-golem:door-open", false)
             var clientStage = 0
-            if (getQuestStage(player, Quests.THE_GOLEM) > 0) {
+            if (getQuestStage(player, Quests.THE_GOLEM.questName) > 0) {
                 clientStage = Math.max(clientStage, 1)
             }
             if (doorOpen) {
                 clientStage = Math.max(clientStage, 5)
             }
-            if (getQuestStage(player, Quests.THE_GOLEM) >= 100) {
+            if (getQuestStage(player, Quests.THE_GOLEM.questName) >= 100) {
                 clientStage = Math.max(clientStage, 10)
             }
             setVarbit(player, Vars.VARBIT_QUEST_THE_GOLEM_PROGRESS_346, clientStage, true)
@@ -131,7 +133,7 @@ class TheGolemListener : InteractionListener, InterfaceListener {
          */
 
         onUseWith(IntType.NPC, Items.SOFT_CLAY_1761, NPCs.CLAY_GOLEM_1907) { player, used, _ ->
-            if (getQuestStage(player, Quests.THE_GOLEM) == 1) {
+            if (getQuestStage(player, Quests.THE_GOLEM.questName) == 1) {
                 var clayUsed = player.getAttribute("the-golem:clay-used", 0)
                 val msg =
                     when (clayUsed) {
@@ -150,7 +152,7 @@ class TheGolemListener : InteractionListener, InterfaceListener {
                     setAttribute(player, "/save:the-golem:clay-used", clayUsed)
                     updateVarps(player)
                     if (clayUsed == 4) {
-                        setQuestStage(player, Quests.THE_GOLEM, 2)
+                        setQuestStage(player, Quests.THE_GOLEM.questName, 2)
                     }
                 }
             }
@@ -228,7 +230,7 @@ class TheGolemListener : InteractionListener, InterfaceListener {
             if (!player.getAttribute("the-golem:seen-demon", false)) {
                 sendMessage(player, "The room is dominated by a colossal horned skeleton!")
                 setAttribute(player, "/save:the-golem:seen-demon", true)
-                setQuestStage(player, Quests.THE_GOLEM, 4)
+                setQuestStage(player, Quests.THE_GOLEM.questName, 4)
                 playGlobalAudio(player.location, Sounds.GOLEM_DEMONDOOR_1848)
             }
             teleport(player, Location.create(3552, 4948, 0), TeleportManager.TeleportType.INSTANT)
@@ -364,7 +366,7 @@ class TheGolemListener : InteractionListener, InterfaceListener {
          */
 
         onUseWith(IntType.NPC, Items.STRANGE_IMPLEMENT_4619, NPCs.CLAY_GOLEM_1907) { player, _, _ ->
-            val questStage = getQuestStage(player, Quests.THE_GOLEM)
+            val questStage = getQuestStage(player, Quests.THE_GOLEM.questName)
             if (!player.getAttribute("the-golem:varmen-notes-read", false)) {
                 sendMessage(player, "You can't see a way to put the instructions in the golem's skull.")
                 return@onUseWith true
@@ -372,7 +374,7 @@ class TheGolemListener : InteractionListener, InterfaceListener {
             if (questStage == 7) {
                 sendMessage(player, "You insert the key and the golem's skull hinges open.")
                 sendMessage(player, "The golem's skull shuts automatically.")
-                setQuestStage(player, Quests.THE_GOLEM, 8)
+                setQuestStage(player, Quests.THE_GOLEM.questName, 8)
             }
             return@onUseWith true
         }

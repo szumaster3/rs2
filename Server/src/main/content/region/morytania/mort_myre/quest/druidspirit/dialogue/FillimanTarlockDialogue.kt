@@ -1,5 +1,7 @@
 package content.region.morytania.mort_myre.quest.druidspirit.dialogue
 
+import content.data.Quests
+
 import content.region.morytania.mort_myre.quest.druidspirit.plugin.NSUtils
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -14,7 +16,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Quests
 
 /**
  * Represents the Filliman Tarlock dialogue.
@@ -27,13 +28,13 @@ class FillimanTarlockDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player!!, Quests.NATURE_SPIRIT) > 10 && !inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+        if (getQuestStage(player!!, Quests.NATURE_SPIRIT.questName) > 10 && !inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
             sendDialogue(player, "This spirit seems too ethereal to communicate with.")
-            setQuestStage(player, Quests.NATURE_SPIRIT, 15)
+            setQuestStage(player, Quests.NATURE_SPIRIT.questName, 15)
             return false
         }
 
-        when (getQuestStage(player!!, Quests.NATURE_SPIRIT)) {
+        when (getQuestStage(player!!, Quests.NATURE_SPIRIT.questName)) {
             10, 15 -> sendDialogue("A shifting apparition appears in front of you.").also { stage = 1000 }
             20 -> npcl(FaceAnim.HALF_GUILTY, "Oh, hello there, do you still think I'm dead? It's hard to see how I could be dead when I'm still in the world. I can see everything quite clearly. And nothing of what you say reflects the truth.")
             25 -> npcl(FaceAnim.HALF_GUILTY, "Oh, hello... Sorry, you've caught me at a bad time, it's just that I've had a sign you see and I need to find my journal.").also { stage = 7 }
@@ -71,13 +72,13 @@ class FillimanTarlockDialogue(player: Player? = null) : Dialogue(player) {
                 if (!inInventory(player, Items.JOURNAL_2967)) {
                     playerl(FaceAnim.NEUTRAL, "Where did you put it?").also {
                         stage++
-                        setQuestStage(player, Quests.NATURE_SPIRIT, 25)
+                        setQuestStage(player, Quests.NATURE_SPIRIT.questName, 25)
                     }
                 } else {
                     sendDialogue("You give the journal to Filliman Tarlock").also {
                         removeItem(player, Items.JOURNAL_2967, Container.INVENTORY)
                         stage = 10
-                        setQuestStage(player, Quests.NATURE_SPIRIT, 30)
+                        setQuestStage(player, Quests.NATURE_SPIRIT.questName, 30)
                     }
                 }
             }
@@ -105,7 +106,7 @@ class FillimanTarlockDialogue(player: Player? = null) : Dialogue(player) {
             54 -> npcl(FaceAnim.HALF_GUILTY, "Hmm, it does and I could understand if you didn't want to help. However, if you could perhaps at least get the item from nature, that would be a start. Perhaps we can figure out the rest as we go along.").also { stage++ }
             55 -> sendDialogue(*splitLines("The druid produces a small sheet of papyrus with some writing on it.")).also {
                 addItemOrDrop(player, Items.DRUIDIC_SPELL_2968)
-                setQuestStage(player, Quests.NATURE_SPIRIT, 35)
+                setQuestStage(player, Quests.NATURE_SPIRIT.questName, 35)
                 stage++
             }
             56 -> npcl(FaceAnim.NEUTRAL, "This spell needs to be cast in the swamp after you have been blessed. I'm afraid you'll need to go to the temple to the North and ask a member of the clergy to bless you.").also { stage++ }
@@ -141,7 +142,7 @@ class FillimanTarlockDialogue(player: Player? = null) : Dialogue(player) {
             81 -> playerl(FaceAnim.NEUTRAL, "Yes, I have a fungus here that I picked.").also { stage++ }
             82 -> npcl(FaceAnim.NEUTRAL, "Wonderful, the mushroom represents 'something from nature'. Now we need to work out what the other components of the spell are!").also {
                 stage = 90
-                setQuestStage(player, Quests.NATURE_SPIRIT, 50)
+                setQuestStage(player, Quests.NATURE_SPIRIT.questName, 50)
             }
             90 -> options("What are the things that are needed?", "What should I do when I have those things?", "I think I've solved the puzzle!", "Could I have another bloom scroll please?", "Ok, thanks.").also { stage++ }
             91 -> when (buttonId) {
@@ -179,7 +180,7 @@ class FillimanTarlockDialogue(player: Player? = null) : Dialogue(player) {
                         object : Pulse(4) {
                             override fun pulse(): Boolean {
                                 sendNPCDialogue(player, npc.originalId, "Aha, everything seems to be in place! You can come through now into the grotto for the final section of my transformation.")
-                                setQuestStage(player, Quests.NATURE_SPIRIT, 55)
+                                setQuestStage(player, Quests.NATURE_SPIRIT.questName, 55)
                                 unlock(player)
                                 return true
                             }
@@ -222,17 +223,17 @@ class FillimanTarlockDialogue(player: Player? = null) : Dialogue(player) {
             1003 -> when (buttonId) {
                 1 -> playerl(FaceAnim.NEUTRAL, "I'm wearing an amulet of ghost speak!").also {
                     stage = 1010
-                    setQuestStage(player, Quests.NATURE_SPIRIT, 20)
+                    setQuestStage(player, Quests.NATURE_SPIRIT.questName, 20)
                 }
 
                 2 -> playerl(FaceAnim.NEUTRAL, "How long have you been a ghost?").also {
                     stage = 1020
-                    setQuestStage(player, Quests.NATURE_SPIRIT, 20)
+                    setQuestStage(player, Quests.NATURE_SPIRIT.questName, 20)
                 }
 
                 3 -> playerl(FaceAnim.NEUTRAL, "What's it like being a ghost?").also {
                     stage = 1030
-                    setQuestStage(player, Quests.NATURE_SPIRIT, 20)
+                    setQuestStage(player, Quests.NATURE_SPIRIT.questName, 20)
                 }
 
                 4 -> playerl(FaceAnim.NEUTRAL, "Ok, thanks.").also { stage = END_DIALOGUE }
