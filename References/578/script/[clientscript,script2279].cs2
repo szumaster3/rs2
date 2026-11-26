@@ -1,0 +1,9 @@
+[clientscript,script2279](int $int0)
+%varclient_739 = 1;
+def_int $int1 = calc(~script2246($int0) - 1);
+if ($int1 ! -1) {
+    %varclient_733 = enum(int, int, enum_1669, $int1);
+} else {
+    %varclient_733 = -1;
+}
+if_settext("", interface_744:com_110);

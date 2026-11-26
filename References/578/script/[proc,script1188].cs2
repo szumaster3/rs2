@@ -1,0 +1,9 @@
+[proc,script1188]
+if (getwindowmode >= 2) {
+    if_setgraphic(chat_background, interface_752:com_1);
+    if_setalpha(true, interface_752:com_1);
+    if_sethide(false, interface_752:com_1);
+    if_sethide(false, interface_752:com_2);
+    ~script1652(0);
+    if_sethide(true, interface_746:com_21);
+}

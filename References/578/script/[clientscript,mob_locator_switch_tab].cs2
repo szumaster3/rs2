@@ -1,0 +1,13 @@
+[clientscript,mob_locator_switch_tab](component $component0)
+if_sethide(true, interface_844:com_10);
+if_sethide(true, interface_844:com_11);
+if_setgraphic("bank_tabs,3", interface_844:com_51);
+if_setgraphic("bank_tabs,3", interface_844:com_49);
+switch_component ($component0) {
+    case interface_844:com_51 :
+        if_sethide(false, interface_844:com_10);
+        if_setgraphic("bank_tabs,2", interface_844:com_51);
+    case interface_844:com_49 :
+        if_sethide(false, interface_844:com_11);
+        if_setgraphic("bank_tabs,2", interface_844:com_49);
+}

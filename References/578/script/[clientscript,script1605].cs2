@@ -1,0 +1,2 @@
+[clientscript,script1605]
+if_setcolour(^yellow, interface_549:com_127);

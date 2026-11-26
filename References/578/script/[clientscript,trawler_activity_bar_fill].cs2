@@ -1,0 +1,16 @@
+[clientscript,trawler_activity_bar_fill]
+def_int $int0 = 0;
+def_int $int1 = 0;
+def_int $int2 = scale(%varplayerbit_651, 1000, 100);
+if ($int2 > 100) {
+    $int2 = 100;
+}
+$int0 = enum(int, int, enum_1090, $int2);
+$int1 = enum(int, int, enum_1091, $int2);
+if_setposition(40, $int0, ^setpos_abs_right, ^setpos_abs_top, interface_15:com_14);
+if_setsize(18, $int1, ^setsize_abs, ^setsize_abs, interface_15:com_14);
+if ($int2 < 25) {
+    if_setcolour(0xff9900, interface_15:com_14);
+} else {
+    if_setcolour(0x006600, interface_15:com_14);
+}

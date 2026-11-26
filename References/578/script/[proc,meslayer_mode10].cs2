@@ -1,0 +1,29 @@
+[proc,meslayer_mode10]
+if (%varclient_11 = 1) {
+    ~script675;
+}
+if (getwindowmode >= 2) {
+    if_sethide(false, interface_746:com_18);
+}
+if_sethide(false, interface_752:com_3);
+if_sethide(true, interface_752:com_7);
+if_sethide(true, interface_752:com_8);
+if_settext("Enter the player name whose channel you wish to join:", interface_752:com_4);
+%varclient_5 = 10;
+~meslayer_setupinput("");
+if_setonclick(null, interface_752:com_3);
+~script2026;
+if_setonkey("meslayer_onkey(event_keycode, event_keychar)", interface_752:com_5);
+cc_create(interface_752:com_3, ^iftype_text, 0);
+~meslayer_setupdynamicbutton;
+if (%varclient_1027 = 1 & string_length(%varclientstring_202) > 0) {
+    cc_settext("Last name entered: <%varclientstring_202>");
+} else {
+    %varclientstring_202 = removetags(chat_playername);
+    %varclient_1027 = 1;
+    cc_settext("Your name: <%varclientstring_202>");
+}
+cc_setop(1, "Use:");
+cc_setopbase("<col=ff9040><removetags(%varclientstring_202)></col>");
+cc_setonop("meslayer_lastname(%varclient_5, event_op, event_com, event_comsubid, %varclientstring_202)");
+~script1188;

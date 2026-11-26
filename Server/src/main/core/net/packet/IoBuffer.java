@@ -1,6 +1,5 @@
 package core.net.packet;
 
-import core.cache.crypto.ISAACCipher;
 import core.cache.misc.buffer.ByteBufferUtils;
 
 import java.nio.ByteBuffer;
@@ -783,9 +782,7 @@ public class IoBuffer {
      * @return
      */
     public String getJagString() {
-        byte b = buf.get();
-        if (b == 0) return "";
-        return ((char) b) + ByteBufferUtils.getString(buf);
+        return ByteBufferUtils.getString(buf);
     }
 
     /**
@@ -799,10 +796,6 @@ public class IoBuffer {
             is[i] = (byte) (buf.get() - 128);
         }
         return this;
-    }
-
-    public void cypherOpcode(ISAACCipher cipher) {
-        this.opcode += (byte) cipher.getNextValue();
     }
 
     /**

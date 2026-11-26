@@ -1,0 +1,16 @@
+[clientscript,script1847]
+def_component $component0 = ~script121(8);
+if (~script1305 ! 8 & ~script1569 = false & if_hassub(~script8(8)) = true) {
+    if ($component0 ! null) {
+        if (calc(clientclock % 40) > 20) {
+            if_sethide(false, $component0);
+            if (calc(clientclock % 40) = 21) {
+                sound_synth(synth_5009, 1, 0);
+            }
+        } else {
+            if_sethide(true, $component0);
+        }
+    }
+} else {
+    ~script1849;
+}

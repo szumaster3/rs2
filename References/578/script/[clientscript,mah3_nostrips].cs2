@@ -1,0 +1,7 @@
+[clientscript,mah3_nostrips]
+if (%varplayerbit_6303 = 1) {
+    if_sethide(true, interface_866:com_5);
+    if_sethide(true, interface_866:com_8);
+    if_sethide(true, interface_866:com_7);
+    if_sethide(true, interface_866:com_6);
+}

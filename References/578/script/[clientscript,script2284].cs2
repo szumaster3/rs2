@@ -1,0 +1,67 @@
+[clientscript,script2284]
+def_int $int0 = create_reply;
+if ($int0 = -3) {
+    return;
+}
+%varclientstring_127 = "";
+if_setontimer(null, interface_744:com_44);
+~script2231(0);
+if ($int0 = 2) {
+    if_setgraphic(login_tick, interface_744:com_159);
+    if_settext("", interface_744:com_153);
+    ~script2230(%varclient_174);
+    return;
+}
+if_setgraphic(null, interface_744:com_159);
+def_string $string0 = "";
+def_string $string1 = "";
+def_string $string2 = "";
+def_string $string3 = "";
+def_string $string4 = "";
+switch_int ($int0) {
+    case -4, -1 :
+        if_settext("Error contacting server. Please try a different world.", interface_744:com_153);
+        %varclientstring_123 = "";
+    case -5 :
+        if_settext("No response from server. Please try a different world.", interface_744:com_153);
+        %varclientstring_123 = "";
+    case 3 :
+        if_settext("Error contacting server. Please try again.", interface_744:com_153);
+        %varclientstring_123 = "";
+    case 7 :
+        if_settext("The server is currently very busy. Please try again shortly.", interface_744:com_153);
+        %varclientstring_123 = "";
+    case 9, 38 :
+        if_settext("You cannot create an account at this time. Please try again later.", interface_744:com_153);
+    case 20 :
+        if_setgraphic(login_cross, interface_744:com_159);
+        if_settext("Sorry, that username is not available. Please choose again.", interface_744:com_153);
+        %varclient_734 = 2;
+    case 21 :
+        if_setgraphic(login_cross, interface_744:com_159);
+        if_settext("Sorry, that username is not available. Please choose again.", interface_744:com_153);
+        $string0, $string1, $string2, $string3, $string4 = unknown_command_5610;
+        if (compare($string4, "") ! 0) {
+            %varclientstring_127 = "<col=673400>Sorry, that username is not available. Possible alternatives: <$string0>, <$string1>, <$string2>, <$string3>, <$string4>.</col><br><br>";
+        } else if (compare($string3, "") ! 0) {
+            %varclientstring_127 = "<col=673400>Sorry, that username is not available. Possible alternatives: <$string0>, <$string1>, <$string2>, <$string3>.</col><br><br>";
+        } else if (compare($string2, "") ! 0) {
+            %varclientstring_127 = "<col=673400>Sorry, that username is not available. Possible alternatives: <$string0>, <$string1>, <$string2>.</col><br><br>";
+        } else if (compare($string1, "") ! 0) {
+            %varclientstring_127 = "<col=673400>Sorry, that username is not available. Possible alternatives: <$string0>, <$string1>.</col><br><br>";
+        } else if (compare($string0, "") ! 0) {
+            %varclientstring_127 = "<col=673400>Sorry, that username is not available. Possible alternative: <$string0>.</col><br><br>";
+        } else {
+            %varclientstring_127 = "<col=673400>Sorry, that username is not available. We could not suggest a suitable alternative account name. Please choose again.</col><br><br>";
+        }
+    case 22 :
+        if_setgraphic(login_cross, interface_744:com_159);
+        if_settext("Please supply a valid username.", interface_744:com_153);
+        %varclient_734 = 1;
+    case 37 :
+        if_settext("RuneScape has been updated. Please reload this page.", interface_744:com_153);
+    case default :
+        if_settext("Unexpected server response. Please try again.", interface_744:com_153);
+        %varclientstring_123 = "";
+}
+~script2230(3);

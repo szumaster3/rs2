@@ -1,0 +1,10 @@
+[proc,script1478]
+%varclientstring_138 = %varclientstring_22;
+def_int $int0 = ~script1479(%varclientstring_138);
+if ($int0 > 1) {
+    mes("Search for '<escape(%varclientstring_138)>' returned <tostring($int0)> results.");
+} else if ($int0 = 1) {
+    mes("Search for '<escape(%varclientstring_138)>' returned <tostring($int0)> result.");
+} else {
+    mes("Search for '<escape(%varclientstring_138)>' returned 0 results.");
+}

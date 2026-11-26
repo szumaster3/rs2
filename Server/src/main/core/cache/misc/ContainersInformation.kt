@@ -1,7 +1,9 @@
 package core.cache.misc
 
 import core.cache.bzip2.BZip2Decompressor
-import core.cache.gzip.GZipDecompressor
+import java.io.ByteArrayInputStream
+import java.io.IOException
+import java.util.zip.GZIPInputStream
 import java.nio.ByteBuffer
 import java.util.zip.CRC32
 
@@ -9,7 +11,10 @@ class ContainersInformation(packedData: ByteArray) {
     val data = packedData.copyOf()
     val informationContainer = Container().apply {
         version = ((packedData[packedData.size - 2].toInt() and 0xFF) shl 8) or (packedData.last().toInt() and 0xFF)
-        crc = CRC32().apply { update(packedData) }.value.toInt()
+        val header = if (packedData[0].toInt() == 0) 5 else 9
+        val length = ByteBuffer.wrap(packedData, 1, 4).int
+        require(length in 0..(packedData.size - header)) { "Invalid reference table length $length" }
+        crc = CRC32().apply { update(packedData, 0, header + length) }.value.toInt()
     }
     var revision = 0
         private set
@@ -62,16 +67,24 @@ class ContainersInformation(packedData: ByteArray) {
 
         @JvmStatic
         fun unpackCacheContainer(packedData: ByteArray): ByteArray? {
+            if (packedData.size < 5) return null
             val buffer = ByteBuffer.wrap(packedData)
             val compression = buffer.get().toInt() and 0xFF
             val size = buffer.int
-            if (size !in 0..5000000) return null
+            if (size !in 0..5000000 || size > buffer.remaining()) return null
             if (compression == 0) return ByteArray(size).also { buffer.get(it) }
+            if (buffer.remaining() - size < 4) return null
             val unpackedSize = buffer.int
             if (unpackedSize !in 0..20000000) return null
             return ByteArray(unpackedSize).also {
                 if (compression == 1) BZip2Decompressor.decompress(it, packedData, size, 9)
-                else GZipDecompressor.decompress(buffer, it)
+                else try {
+                    GZIPInputStream(ByteArrayInputStream(packedData, 9, size)).use { gzip ->
+                        if (gzip.readNBytes(it, 0, it.size) != it.size || gzip.read() != -1) return null
+                    }
+                } catch (error: IOException) {
+                    return null
+                }
             }
         }
     }

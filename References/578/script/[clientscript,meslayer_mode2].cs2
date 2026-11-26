@@ -1,0 +1,17 @@
+[clientscript,meslayer_mode2]
+if (%varclient_11 = 1) {
+    ~script675;
+}
+if (getwindowmode >= 2) {
+    if_sethide(false, interface_746:com_18);
+}
+if_sethide(false, interface_752:com_3);
+if_sethide(true, interface_752:com_7);
+if_sethide(true, interface_752:com_8);
+if_settext("Enter name of friend to add to list", interface_752:com_4);
+%varclient_5 = 2;
+~meslayer_setupinput("");
+if_setonclick(null, interface_752:com_3);
+~script2026;
+if_setonkey("meslayer_onkey(event_keycode, event_keychar)", interface_752:com_5);
+~script1188;

@@ -1,0 +1,6 @@
+[clientscript,script1562]
+if (minimenuopen(interface_754:com_0, -1) = true) {
+    return;
+}
+if_setontimer(null, interface_754:com_0);
+~rebuildpmbox;

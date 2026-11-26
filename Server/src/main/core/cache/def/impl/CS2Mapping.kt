@@ -12,7 +12,7 @@ class CS2Mapping(val scriptId: Int) {
     var map: HashMap<Int, Any>? = null
     var array: Array<Any?>? = null
         private set
-    private fun load(buffer: ByteBuffer) {
+    internal fun load(buffer: ByteBuffer) {
         while (true) {
             when (val opcode = buffer.get().toInt() and 0xFF) {
                 0 -> return
@@ -33,6 +33,7 @@ class CS2Mapping(val scriptId: Int) {
                     map = values
                     array = entries
                 }
+                else -> error("Unknown CS2Mapping opcode $opcode at ${buffer.position() - 1}")
             }
         }
     }

@@ -1,0 +1,162 @@
+[proc,script1882](int $int0, int $int1, int $int2, string $string0, int $int3, string $string1, int $int4, int $int5, int $int6, int $int7)
+def_graphic $graphic8 = graphic_1541;
+def_graphic $graphic9 = graphic_1545;
+def_graphic $graphic10 = graphic_1542;
+def_graphic $graphic11 = graphic_1546;
+def_int $int12 = 0;
+def_int $int13 = 0;
+def_int $int14 = 0;
+def_int $int15 = 0;
+def_int $int16 = 0;
+if (testbit($int2, 0) = ^true) {
+    $int12 = 1;
+}
+if (testbit($int2, 1) = ^true) {
+    $int13 = 1;
+}
+if (testbit($int2, 2) = ^true) {
+    $int14 = 1;
+}
+if (testbit($int2, 3) = ^true) {
+    $int15 = 1;
+}
+if (testbit($int2, 4) = ^true) {
+    $int16 = 1;
+}
+cc_create(interface_744:com_177, ^iftype_rectangle, if_getnextsubid(interface_744:com_177));
+cc_setsize($int6, 18, ^setsize_abs, ^setsize_abs);
+cc_setposition(0, $int0, ^setpos_abs_left, ^setpos_abs_top);
+cc_setfill(true);
+cc_setonclick("script1883($int1, event_mousex)");
+.cc_create(interface_744:com_177, ^iftype_graphic, if_getnextsubid(interface_744:com_177));
+.cc_setsize(13, 12, ^setsize_abs, ^setsize_abs);
+.cc_setposition(5, calc((18 - .cc_getheight) / 2 + $int0), ^setpos_abs_left, ^setpos_abs_top);
+switch_int ($int7) {
+    case 1 :
+        cc_setonmouserepeat("script1884(interface_744:com_177, cc_getid, .cc_getid, 0x593d15, $graphic10, $graphic8, $int4, event_mousex)");
+        cc_setonmouseleave("script1885(interface_744:com_177, cc_getid, .cc_getid, 0x593d15, $graphic8)");
+        cc_setcolour(0x593d15);
+        .cc_setgraphic($graphic8);
+    case 2 :
+        cc_setonmouserepeat("script1884(interface_744:com_177, cc_getid, .cc_getid, 0x73521c, $graphic10, $graphic8, $int4, event_mousex)");
+        cc_setonmouseleave("script1885(interface_744:com_177, cc_getid, .cc_getid, 0x73521c, $graphic8)");
+        cc_setcolour(0x73521c);
+        .cc_setgraphic($graphic8);
+    case 0 :
+        cc_setonmouserepeat("script1884(interface_744:com_177, cc_getid, .cc_getid, 0x574423, $graphic11, $graphic9, $int4, event_mousex)");
+        cc_setonmouseleave("script1885(interface_744:com_177, cc_getid, .cc_getid, 0x574423, $graphic9)");
+        cc_setcolour(0x574423);
+        .cc_setgraphic($graphic9);
+    case default :
+        cc_setonmouserepeat("script1884(interface_744:com_177, cc_getid, .cc_getid, 0x45351b, $graphic11, $graphic9, $int4, event_mousex)");
+        cc_setonmouseleave("script1885(interface_744:com_177, cc_getid, .cc_getid, 0x45351b, $graphic9)");
+        cc_setcolour(0x45351b);
+        .cc_setgraphic($graphic9);
+}
+cc_create(interface_744:com_177, ^iftype_text, if_getnextsubid(interface_744:com_177));
+cc_setsize(60, 18, ^setsize_abs, ^setsize_abs);
+cc_setposition(45, $int0, ^setpos_abs_left, ^setpos_abs_top);
+cc_settextfont(p12_full);
+cc_setcolour(^white);
+cc_settext("World <tostring($int1)>");
+cc_settextalign(^settextalign_left, ^settextalign_centre, 0);
+cc_create(interface_744:com_177, ^iftype_text, if_getnextsubid(interface_744:com_177));
+cc_setsize(65, 18, ^setsize_abs, ^setsize_abs);
+cc_setposition(85, $int0, ^setpos_abs_left, ^setpos_abs_top);
+cc_settextfont(p12_full);
+cc_setcolour(^white);
+if ($int4 >= 1980) {
+    cc_settext("FULL");
+} else if ($int4 >= 0) {
+    cc_settext(tostring($int4));
+} else {
+    cc_settext("OFFLINE");
+}
+cc_settextalign(^settextalign_right, ^settextalign_top, 0);
+cc_create(interface_744:com_177, ^iftype_graphic, if_getnextsubid(interface_744:com_177));
+cc_setsize(24, 12, ^setsize_abs, ^setsize_abs);
+cc_setposition(155, calc((18 - cc_getheight) / 2 + $int0), ^setpos_abs_left, ^setpos_abs_top);
+.cc_create(interface_744:com_177, ^iftype_text, if_getnextsubid(interface_744:com_177));
+.cc_setsize(155, 18, ^setsize_abs, ^setsize_abs);
+.cc_setposition(220, $int0, ^setpos_abs_left, ^setpos_abs_top);
+.cc_settextfont(p12_full);
+.cc_setcolour(^white);
+.cc_settextalign(^settextalign_left, ^settextalign_centre, 0);
+if (map_lang = 0) {
+    if ($int16 = 1) {
+        cc_setgraphic(enum(int, graphic, enum_730, 1));
+        .cc_setcolour(^yellow);
+        .cc_settext($string0);
+    } else if (string_length($string0) > 1) {
+        cc_setgraphic(enum(int, graphic, enum_730, 1));
+        .cc_settext($string0);
+    } else {
+        cc_setgraphic(enum(int, graphic, enum_1810, $int3));
+        .cc_settext($string1);
+    }
+} else {
+    if (map_lang = 1) {
+        cc_setgraphic(graphic_1517);
+    } else if (map_lang = 2) {
+        cc_setgraphic(enum(int, graphic, enum_1810, 74));
+    } else if (map_lang = 3) {
+        cc_setgraphic(enum(int, graphic, enum_1810, 31));
+    }
+    if ($int16 = 1) {
+        .cc_setcolour(^yellow);
+        .cc_settext($string0);
+    } else if (string_length($string0) > 1) {
+        .cc_settext($string0);
+    } else if (map_lang = 1) {
+        .cc_settext("German");
+    } else if (map_lang = 2) {
+        .cc_settext("French");
+    } else if (map_lang = 3) {
+        .cc_settext("Portuguese");
+    }
+}
+cc_create(interface_744:com_177, ^iftype_graphic, if_getnextsubid(interface_744:com_177));
+cc_setsize(17, 17, ^setsize_abs, ^setsize_abs);
+cc_setposition(494, $int0, ^setpos_abs_left, ^setpos_abs_top);
+if ($int15 = 1) {
+    cc_setgraphic("options_radio_buttons,2");
+} else {
+    cc_setgraphic("options_radio_buttons,1");
+}
+cc_create(interface_744:com_177, ^iftype_graphic, if_getnextsubid(interface_744:com_177));
+cc_setsize(19, 18, ^setsize_abs, ^setsize_abs);
+cc_setposition(25, $int0, ^setpos_abs_left, ^setpos_abs_top);
+.cc_create(interface_744:com_177, ^iftype_graphic, if_getnextsubid(interface_744:com_177));
+.cc_setsize(19, 18, ^setsize_abs, ^setsize_abs);
+.cc_setposition(520, $int0, ^setpos_abs_left, ^setpos_abs_top);
+if ($int12 = 1) {
+    cc_setgraphic("world_select_stars,0");
+    .cc_setgraphic("world_select_stars,0");
+} else {
+    cc_setgraphic("world_select_stars,1");
+    .cc_setgraphic("world_select_stars,1");
+}
+cc_create(interface_744:com_177, ^iftype_text, if_getnextsubid(interface_744:com_177));
+cc_setsize(60, 18, ^setsize_abs, ^setsize_abs);
+cc_setposition(540, $int0, ^setpos_abs_left, ^setpos_abs_top);
+cc_settextfont(p12_full);
+cc_setcolour(^white);
+if ($int12 = 1) {
+    cc_settext("Members");
+} else {
+    cc_settext("Free");
+}
+cc_settextalign(^settextalign_left, ^settextalign_centre, 0);
+cc_create(interface_744:com_177, ^iftype_text, if_getnextsubid(interface_744:com_177));
+cc_setsize(30, 18, ^setsize_abs, ^setsize_abs);
+cc_setposition(600, $int0, ^setpos_abs_left, ^setpos_abs_top);
+cc_settextfont(p12_full);
+cc_setcolour(^white);
+cc_settextalign(^settextalign_right, ^settextalign_centre, 0);
+if ($int5 = -1) {
+    cc_settext("-");
+} else if ($int5 >= 1000) {
+    cc_settext("N/A");
+} else {
+    cc_settext(tostring($int5));
+}

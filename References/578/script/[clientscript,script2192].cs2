@@ -1,0 +1,2 @@
+[clientscript,script2192]
+openurl_nologin("kbase/view.ws?guid=controls_chat#quick_chat", true);

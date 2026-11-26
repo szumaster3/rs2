@@ -447,7 +447,7 @@ object RegionManager {
         val view: MutableList<RegionPlane> = LinkedList()
         for (regionX in ((entity.location.regionX shr 3) - 1)..((entity.location.regionX shr 3) + 1)) {
             for (regionY in ((entity.location.regionY shr 3) - 1)..((entity.location.regionY shr 3) + 1)) {
-                if (regionX < 0 || regionY < 0) {
+                if (regionX !in 0..255 || regionY !in 0..255) {
                     continue
                 }
                 val region = forId((regionX shl 8) or regionY)

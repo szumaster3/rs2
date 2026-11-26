@@ -46,6 +46,7 @@ class ProductionAuthenticatorTests {
         info.banEndTime = System.currentTimeMillis() + 1000L
         storageProvider.update(info)
         Assertions.assertEquals(AuthResponse.AccountDisabled, authProvider.checkLogin("test", "testing").first)
+        Assertions.assertEquals(AuthResponse.AccountDisabled, authProvider.checkReconnect("test", "testing").first)
         info.banEndTime = 0L
         storageProvider.update(info)
         Assertions.assertEquals(AuthResponse.Success, authProvider.checkLogin("test", "testing").first)
@@ -56,6 +57,8 @@ class ProductionAuthenticatorTests {
         info.online = true
         storageProvider.update(info)
         Assertions.assertEquals(AuthResponse.AlreadyOnline, authProvider.checkLogin("test", "testing").first)
+        Assertions.assertEquals(AuthResponse.InvalidCredentials, authProvider.checkReconnect("test", "wrong").first)
+        Assertions.assertEquals(AuthResponse.Success, authProvider.checkReconnect("test", "testing").first)
         info.online = false
         storageProvider.update(info)
     }

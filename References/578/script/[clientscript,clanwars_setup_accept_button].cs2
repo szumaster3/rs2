@@ -1,0 +1,11 @@
+[clientscript,clanwars_setup_accept_button](int $int0)
+if ($int0 ! 1) {
+    return;
+}
+if (%varclient_250 = true & %varclient_252 >= 2 & %varclient_251 = true & (map_members = false | %varclient_253 = true)) {
+    return;
+}
+if (%varclient_258 = false) {
+    %varclient_258 = true;
+    ~clanwars_resynch_accept;
+}

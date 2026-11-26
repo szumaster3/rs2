@@ -6,6 +6,7 @@ import core.game.node.item.GroundItem;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
 import core.net.packet.out.Encoders530;
+import core.net.packet.out.ZoneProt;
 
 /**
  * Handles an item update flag.
@@ -70,6 +71,12 @@ public final class ItemUpdateFlag extends UpdateFlag<Object> {
     @Override
     public void writeDynamic(IoBuffer buffer, Entity e) {
         if (!isRemove() && item.droppedBy((Player) e)) {
+            return;
+        }
+        if (isConstruct() && item.getDropper() != null && item.getDropper().isActive()) {
+            ZoneProt.reveal(buffer, item.getId(), item.getAmount(),
+                    (item.getLocation().getChunkOffsetX() << 4) | item.getLocation().getChunkOffsetY(),
+                    item.getDropper().getIndex());
             return;
         }
         write(buffer);

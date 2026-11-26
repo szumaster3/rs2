@@ -38,7 +38,7 @@ public class DwarfCannonPlugin extends OptionHandler {
     private static NPC lollk;
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.forId(3).getHandlers().put("option:open", this);
         SceneryDefinition.forId(5).getHandlers().put("option:inspect", this);
         SceneryDefinition.forId(2).getHandlers().put("option:enter", this);
@@ -52,7 +52,7 @@ public class DwarfCannonPlugin extends OptionHandler {
         UseWithHandler.addHandler(5, UseWithHandler.OBJECT_TYPE, new UseWithHandler(1) {
 
             @Override
-            public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+            public Plugin<Object> newInstance(Object arg) throws Throwable {
                 return this;
             }
 
@@ -254,7 +254,7 @@ public class DwarfCannonPlugin extends OptionHandler {
         private final boolean[] toggled = new boolean[3];
 
         @Override
-        public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+        public Plugin<Object> newInstance(Object arg) throws Throwable {
             ComponentDefinition.forId(Components.MCANNON_INTERFACE_409).plugin = this;
             return null;
         }

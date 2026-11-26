@@ -1,0 +1,12 @@
+[clientscript,script1329]
+if (~script1305 = 6) {
+    if (%varplayerbit_6522 = 1) {
+        if_settext("Click the flashing Prayer icon to activate the Thick Skin prayer. This prayer increases your Defence by 5%, which can be seen if you hover your mouse over the flashing Prayer icon.", interface_894:com_7);
+        if_settext("", interface_894:com_6);
+        if_setgraphic("prayeron,0", interface_894:com_4);
+    }
+} else {
+    if_settext("Click on the stone with the Prayer icon to open the Prayer side interface.", interface_894:com_7);
+    if_settext("", interface_894:com_6);
+    if_setgraphic("stonemenusideicons,6", interface_894:com_4);
+}

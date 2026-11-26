@@ -1,0 +1,5 @@
+[proc,script2465](int $int0)(boolean)
+if (if_hassub(~script8($int0)) = true) {
+    return(true);
+}
+return(false);

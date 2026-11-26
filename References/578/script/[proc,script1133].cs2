@@ -1,0 +1,7 @@
+[proc,script1133](component $component0)
+def_obj $obj1 = inv_getobj(inv_94, 3);
+if ($obj1 ! null & (oc_members($obj1) = 0 | map_members = true)) {
+    if_settext(oc_name($obj1), $component0);
+} else {
+    if_settext("Unarmed", $component0);
+}

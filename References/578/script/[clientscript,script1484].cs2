@@ -1,0 +1,5 @@
+[clientscript,script1484]
+if (%varclient_188 = 1) {
+    ~script1474;
+}
+~script675;

@@ -3,7 +3,7 @@ package core.game.dialogue
 import core.api.sendRepositionOnInterface
 import core.game.interaction.InterfaceListener
 import shared.consts.Components
-
+/*
 class DialogueInterface : InterfaceListener
 {
     override fun defineInterfaceListeners()
@@ -42,3 +42,5 @@ class DialogueInterface : InterfaceListener
         }
     }
 }
+
+ */

@@ -17,7 +17,12 @@ class CacheFile(
     fun getContainerUnpackedData(containerId: Int, xteaKeys: IntArray? = null): ByteArray? {
         var packed = getContainerData(containerId) ?: return null
         if (xteaKeys != null && xteaKeys.any { it != 0 }) {
-            packed = XTEACryption.decrypt(xteaKeys, ByteBuffer.wrap(packed), 5, packed.size).array()
+            if (packed.size < 5) return null
+            val buffer = ByteBuffer.wrap(packed)
+            val header = if (packed[0].toInt() == 0) 5 else 9
+            val length = buffer.getInt(1)
+            if (length !in 0..(packed.size - header)) return null
+            packed = XTEACryption.decrypt(xteaKeys, buffer, 5, header + length).array()
         }
         return ContainersInformation.unpackCacheContainer(packed)
     }

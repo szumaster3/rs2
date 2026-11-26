@@ -1,0 +1,17 @@
+[proc,script278](string $string0)(int)
+if (compare($string0, "Select one") = 0) {
+    return(-1);
+}
+def_int $int0 = enum_getoutputcount(enum_1626);
+def_int $int1 = 0;
+def_string $string1 = "";
+def_int $int2 = -1;
+while ($int1 < $int0) {
+    $string1 = enum(int, string, enum_1626, $int1);
+    if (compare($string0, $string1) = 0) {
+        $int2 = $int1;
+        $int1 = $int0;
+    }
+    $int1 = calc($int1 + 1);
+}
+return($int2);

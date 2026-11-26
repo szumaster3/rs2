@@ -1,0 +1,17 @@
+[proc,script2149]()(boolean)
+if (~script2155 = false) {
+    return(false);
+}
+if (%varplayer_101 < struct_param(%varclient_699, param_895)) {
+    return(false);
+}
+if (%varclient_698 < struct_param(%varclient_699, param_896)) {
+    return(false);
+}
+if (~script2153 = false) {
+    return(false);
+}
+if (struct_param(%varclient_699, param_898) = 1 & ~ql4_special_requirements(struct_param(%varclient_699, param_847)) = false) {
+    return(false);
+}
+return(true);

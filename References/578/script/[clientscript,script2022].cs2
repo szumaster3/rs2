@@ -1,0 +1,2 @@
+[clientscript,script2022]
+openurl("billing_core", "paymentoptions.ws", true);

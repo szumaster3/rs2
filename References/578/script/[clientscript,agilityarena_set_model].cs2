@@ -1,0 +1,2 @@
+[clientscript,agilityarena_set_model](component $component0)
+if_setobject(obj_14854, 0, $component0);

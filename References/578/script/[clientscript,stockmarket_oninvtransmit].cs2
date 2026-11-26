@@ -1,0 +1,2 @@
+[clientscript,stockmarket_oninvtransmit]
+~stockmarket_onstocktransmit_to_layer_move;

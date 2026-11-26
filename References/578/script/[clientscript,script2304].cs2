@@ -1,0 +1,3 @@
+[clientscript,script2304]
+if_setonmisctransmit("script2305", interface_750:com_1);
+~script2306;

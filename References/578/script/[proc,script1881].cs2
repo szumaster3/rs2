@@ -1,0 +1,9 @@
+[proc,script1881](int $int0)
+if_setscrollsize(0, $int0, interface_744:com_177);
+if ($int0 >= if_getheight(interface_744:com_177)) {
+    ~scrollbar_vertical(interface_744:com_178, interface_744:com_177, "scrollbar_parchment_dragger_v2,3", "scrollbar_parchment_dragger_v2,0", "scrollbar_parchment_dragger_v2,1", "scrollbar_parchment_dragger_v2,2", "scrollbar_parchment_v2,0", "scrollbar_parchment_v2,1");
+    ~scrollbar_resize(interface_744:com_178, interface_744:com_177, if_getscrolly(interface_744:com_177));
+} else {
+    if_setscrollpos(0, 0, interface_744:com_177);
+    cc_deleteall(interface_744:com_178);
+}

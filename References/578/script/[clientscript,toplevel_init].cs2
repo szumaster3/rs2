@@ -1,0 +1,15 @@
+[clientscript,toplevel_init]
+if (getwindowmode >= 1) {
+    if_setonvarctransmit("toplevel_fovchange{varclient_184}", interface_746:com_6);
+    if_setonvarctransmit("toplevel_fovchange{varclient_184}", interface_548:com_1);
+}
+if_setonvarctransmit("meslayer_varc_update{varclient_5}", interface_752:com_3);
+if_setonresize("script721", interface_746:com_1);
+if (getwindowmode >= 2) {
+    if_setonvartransmit("script1850(interface_746:com_167){varplayer_281, varplayer_1255}", interface_746:com_9);
+    ~script1886(interface_746:com_167);
+} else {
+    if_setonvartransmit("script1850(interface_548:com_135){varplayer_281, varplayer_1255}", interface_548:com_18);
+    ~script1886(interface_548:com_135);
+}
+formatminimenu(0x2b271c, 0, 0x6f695d, 0, rightclick_topmid, rightclick_topside, rightclick_mainbottom, rightclick_mainside, rightclick_maincorner, 0xc6b895, 0xeee5c6);

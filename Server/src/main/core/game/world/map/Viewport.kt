@@ -40,14 +40,12 @@ class Viewport {
     fun updateViewport(entity: Entity) {
         val chunk = getRegionChunk(entity.location)
         val center = chunks.size shr 1
-        if (chunks[center][center] === chunk) {
-            return
-        }
         val offset = center * -8
         val l = chunk.getCurrentBase()
         for (x in chunks.indices) {
             for (y in chunks[x].indices) {
-                chunks[x][y] = getRegionChunk(l.transform(offset + (8 * x), offset + (8 * y), 0))
+                val tile = l.transform(offset + (8 * x), offset + (8 * y), 0)
+                chunks[x][y] = if (tile.x in 0..16383 && tile.y in 0..16383) getRegionChunk(tile) else null
             }
         }
     }
@@ -63,13 +61,9 @@ class Viewport {
         }
         if (entity is Player) {
             region!!.remove(entity)
-            var region: Region? = null
-            for (r in viewingPlanes) {
-                if (region !== r.region) {
-                    region = r.region
-                    region.decrementViewAmount()
-                    region.checkInactive()
-                }
+            for (viewed in viewingPlanes.map { it.region }.distinct()) {
+                viewed.decrementViewAmount()
+                viewed.checkInactive()
             }
         } else {
             region!!.remove(entity as NPC?)

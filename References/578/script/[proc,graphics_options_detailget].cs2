@@ -1,0 +1,61 @@
+[proc,graphics_options_detailget](struct $struct0)(int)
+switch_struct ($struct0) {
+    case struct_829 :
+        return(~bool_to_int(unknown_command_6102));
+    case struct_830 :
+        if (unknown_command_6102 = true | detailget_toolkit ! 0) {
+            return(~bool_to_int(detailget_removeroofs_option));
+        }
+        return(-1);
+    case struct_831 :
+        return(~bool_to_int(detailget_grounddecor_on));
+    case struct_832 :
+        return(~bool_to_int(unknown_command_6106));
+    case struct_833 :
+        return(detailget_idleanims);
+    case struct_834 :
+        return(~bool_to_int(detailget_flickering_on));
+    case struct_835 :
+        return(~bool_to_int(unknown_command_6109));
+    case struct_836 :
+        return(~bool_to_int(unknown_command_6110));
+    case struct_837 :
+        return(unknown_command_6111);
+    case struct_838 :
+        return(~bool_to_int(detailget_lightdetail_high));
+    case struct_839 :
+        if (detailget_toolkit = 0 & ~graphics_options_detailget(struct_840) ! 1) {
+            return(-1);
+        }
+        return(~bool_to_int(detailget_waterdetail_high));
+    case struct_840 :
+        if (detailget_toolkit = 0 & ~graphics_options_detailget(struct_843) ! 1) {
+            return(-1);
+        }
+        return(~bool_to_int(detailget_fog_on));
+    case struct_841 :
+        if (unknown_command_6121 = true) {
+            return(detailget_antialiasing);
+        }
+        return(-1);
+    case struct_842 :
+        return(detailget_particles);
+    case struct_734 :
+        if (unknown_command_6126 = true) {
+            return(detailget_bloom);
+        }
+        return(-1);
+    case struct_843 :
+        return(~bool_to_int(detailget_groundblending));
+    case struct_844 :
+        if (unknown_command_6133 = true) {
+            return(~bool_to_int(%varclient_987));
+        }
+        return(-1);
+    case struct_845 :
+        return(%varclient_178);
+    case struct_908 :
+        return(detailget_cpuusage);
+    case default :
+        return(-1);
+}

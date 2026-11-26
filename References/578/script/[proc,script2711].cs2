@@ -1,0 +1,3 @@
+[proc,script2711](component $component0, component $component1)(int, int)
+def_component $component2 = if_getlayer($component0);
+return(min(if_getwidth($component1), if_getwidth($component2)), min(if_getheight($component1), if_getheight($component2)));

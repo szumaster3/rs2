@@ -1,0 +1,2 @@
+[clientscript,ql4_qp_update]
+if_settext("Quest Points: <tostring(%varplayer_101)> / <tostring(%varplayer_904)>", interface_190:com_2);

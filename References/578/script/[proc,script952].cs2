@@ -1,0 +1,25 @@
+[proc,script952]
+if_setpausetext("Make 1", interface_513:com_39);
+if_setpausetext("Make 5", interface_513:com_33);
+if_setpausetext("Make 10", interface_513:com_27);
+if_setpausetext("Make X", interface_513:com_21);
+if_setpausetext("Make 1", interface_513:com_40);
+if_setpausetext("Make 5", interface_513:com_34);
+if_setpausetext("Make 10", interface_513:com_28);
+if_setpausetext("Make X", interface_513:com_22);
+if_setpausetext("Make 1", interface_513:com_41);
+if_setpausetext("Make 5", interface_513:com_35);
+if_setpausetext("Make 10", interface_513:com_29);
+if_setpausetext("Make X", interface_513:com_23);
+if_setpausetext("Make 1", interface_513:com_42);
+if_setpausetext("Make 5", interface_513:com_36);
+if_setpausetext("Make 10", interface_513:com_30);
+if_setpausetext("Make X", interface_513:com_24);
+if_setpausetext("Make 1", interface_513:com_43);
+if_setpausetext("Make 5", interface_513:com_37);
+if_setpausetext("Make 10", interface_513:com_31);
+if_setpausetext("Make X", interface_513:com_25);
+if_setpausetext("Make 1", interface_513:com_44);
+if_setpausetext("Make 5", interface_513:com_38);
+if_setpausetext("Make 10", interface_513:com_32);
+if_setpausetext("Make X", interface_513:com_26);

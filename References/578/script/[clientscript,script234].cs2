@@ -1,0 +1,9 @@
+[clientscript,script234](int $int0)
+def_string $string0 = "";
+def_int $int1 = -1;
+if (cc_find(interface_594:com_94, $int0) = true) {
+    %varclientstring_24 = cc_getopbase;
+    %varclient_792 = %varclient_791;
+    ~snapshot_selected_highlight;
+    ~script217;
+}

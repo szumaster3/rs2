@@ -1,0 +1,2 @@
+[clientscript,tutorial3_cameracontrols_init](component $component0, component $component1, component $component2)
+if_setontimer("script2777(clientclock, $component1, $component2)", $component0);

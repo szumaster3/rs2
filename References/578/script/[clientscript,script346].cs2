@@ -1,0 +1,3 @@
+[clientscript,script346](component $component0)
+~player_kit_select($component0, %varclient_782, enum_getoutputcount(enum_753));
+~script348(%varclient_782);

@@ -80,7 +80,8 @@ public final class Settings {
      * Update chat settings.
      */
     public void updateChatSettings() {
-        player.getSession().write(new IoBuffer(232).put(publicChatSetting).put(privateChatSetting).put(tradeSetting));
+        player.getSession().write(new IoBuffer(2).putA(publicChatSetting).putS(tradeSetting));
+        player.getSession().write(new IoBuffer(45).put(privateChatSetting));
     }
 
     /**
@@ -94,6 +95,10 @@ public final class Settings {
         boolean update = false;
         if (publicChatSetting != pub) {
             publicChatSetting = pub;
+            update = true;
+        }
+        if (privateChatSetting != priv) {
+            privateChatSetting = priv;
             update = true;
         }
         if (tradeSetting != trade) {
@@ -215,7 +220,7 @@ public final class Settings {
      * @param enable the enable
      */
     public void setSpecialToggled(boolean enable) {
-        specialToggled = !specialToggled;
+        specialToggled = enable;
         setVarp(player, 301, specialToggled ? 1 : 0);
     }
 

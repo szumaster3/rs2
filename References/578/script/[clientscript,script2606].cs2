@@ -1,0 +1,59 @@
+[clientscript,script2606](component $component0)
+sound_synth(synth_2277, 1, 0);
+def_obj $obj1 = null;
+switch_int (%varclient_929) {
+    case 0 :
+        if (%varclient_930 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_930);
+        }
+    case 1 :
+        if (%varclient_931 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_931);
+        }
+    case 2 :
+        if (%varclient_932 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_932);
+        }
+    case 3 :
+        if (%varclient_933 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_933);
+        }
+    case 4 :
+        if (%varclient_934 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_934);
+        }
+    case 5 :
+        if (%varclient_935 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_935);
+        }
+    case 6 :
+        if (%varclient_936 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_936);
+        }
+    case 7 :
+        if (%varclient_937 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_937);
+        }
+    case 8 :
+        if (%varclient_938 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_938);
+        }
+    case 9 :
+        if (%varclient_939 ! -1) {
+            $obj1 = inv_getobj(inv_93, %varclient_939);
+        }
+}
+switch_component ($component0) {
+    case interface_292:com_119 :
+        if (inv_totalparam(inv_93, param_803) = 0) {
+            mes("You have no squads that need resupplying.");
+        } else {
+            mes("You do not have sufficient investment credits to resupply all your squads.");
+        }
+    case interface_292:com_122 :
+        mes("You do not have sufficient investment credits to apply the selected changes.");
+    case interface_292:com_102, interface_292:com_104, interface_292:com_103, interface_292:com_110, interface_292:com_111 :
+        mes("You must resupply this squad first.");
+    case interface_292:com_113 :
+        mes("This squad does not need resupplying.");
+}

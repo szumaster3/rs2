@@ -1,0 +1,147 @@
+[proc,script2219](int $key0, char $char1)
+if (create_reply = -3) {
+    return;
+}
+if ($key0 = ^key_escape) {
+    ~script2215;
+    return;
+}
+def_int $int2 = 0;
+if (if_gethide(interface_744:com_289) = false) {
+    $int2 = 1;
+}
+def_int $int3 = 0;
+switch_int (%varclient_174) {
+    case 10 :
+        if ($key0 = ^key_return | $key0 = ^key_tab) {
+            if (%varclient_175 >= clientclock) {
+                return;
+            }
+            if ($key0 = ^key_tab & keyheld_shift = true) {
+                ~script2257(18);
+            } else {
+                ~script2257(11);
+            }
+            return;
+        }
+        if (string_length(%varclientstring_128) >= 320 & $key0 ! ^key_backspace) {
+            return;
+        }
+        if (string_indexof_char("()[]<"">,:;\\", $char1, 0) = -1 | $key0 = ^key_backspace) {
+            %varclientstring_128 = removetags(~add_to_inputstring(%varclientstring_128, 3, $key0, $char1));
+            ~script2255(%varclientstring_128, interface_744:com_391, 10, 0);
+            if_settext("", interface_744:com_377);
+        }
+        return;
+    case 11 :
+        if ($key0 = ^key_return | $key0 = ^key_tab) {
+            if (%varclient_175 >= clientclock) {
+                return;
+            }
+            if ($key0 = ^key_tab & keyheld_shift = true) {
+                ~script2257(10);
+            } else {
+                ~script2257(14);
+            }
+            return;
+        }
+        if (string_length(%varclientstring_129) >= 320 & $key0 ! ^key_backspace) {
+            return;
+        }
+        if (string_indexof_char("()[]<"">,:;\\", $char1, 0) = -1 | $key0 = ^key_backspace) {
+            %varclientstring_129 = removetags(~add_to_inputstring(%varclientstring_129, 3, $key0, $char1));
+            ~script2255(%varclientstring_129, interface_744:com_384, 11, 0);
+            if_settext("", interface_744:com_377);
+        }
+        return;
+    case 14 :
+        if ($key0 = ^key_tab) {
+            if (%varclient_175 >= clientclock) {
+                return;
+            }
+            if ($key0 = ^key_tab & keyheld_shift = true) {
+                ~script2257(11);
+            } else {
+                ~script2257(15);
+            }
+            return;
+        }
+        if ($key0 = ^key_return | $key0 = ^key_space) {
+            ~script2267(interface_744:com_370);
+        }
+        return;
+    case 15 :
+        if ($key0 = ^key_tab) {
+            if (%varclient_175 >= clientclock) {
+                return;
+            }
+            if ($key0 = ^key_tab & keyheld_shift = true) {
+                ~script2257(14);
+            } else {
+                if ($int2 = 1) {
+                    $int3 = 16;
+                } else {
+                    $int3 = 17;
+                }
+                ~script2257($int3);
+            }
+            return;
+        }
+        if ($key0 = ^key_return | $key0 = ^key_space) {
+            ~script2267(interface_744:com_367);
+        }
+        return;
+    case 16 :
+        if ($key0 = ^key_tab) {
+            if (%varclient_175 >= clientclock) {
+                return;
+            }
+            if ($key0 = ^key_tab & keyheld_shift = true) {
+                ~script2257(15);
+            } else {
+                ~script2257(17);
+            }
+            return;
+        }
+        if ($key0 = ^key_return | $key0 = ^key_space) {
+            ~script2267(interface_744:com_364);
+        }
+        return;
+    case 17 :
+        if ($key0 = ^key_tab) {
+            if (%varclient_175 >= clientclock) {
+                return;
+            }
+            if ($key0 = ^key_tab & keyheld_shift = true) {
+                if ($int2 = 1) {
+                    $int3 = 16;
+                } else {
+                    $int3 = 15;
+                }
+                ~script2257($int3);
+            } else {
+                ~script2257(18);
+            }
+            return;
+        }
+        if ($key0 = ^key_return | $key0 = ^key_space) {
+            ~script2267(interface_744:com_298);
+        }
+        return;
+    case 18 :
+        if ($key0 = ^key_tab) {
+            if (%varclient_175 >= clientclock) {
+                return;
+            }
+            if ($key0 = ^key_tab & keyheld_shift = true) {
+                ~script2257(17);
+            } else {
+                ~script2257(10);
+            }
+            return;
+        }
+        if ($key0 = ^key_return | $key0 = ^key_space) {
+            ~script2267(interface_744:com_301);
+        }
+        return;
+}

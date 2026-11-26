@@ -1,0 +1,20 @@
+[proc,chatbox_resize_window]
+if (~script1653 = true) {
+    ~script1652(0);
+    if_sethide(true, interface_746:com_21);
+    return;
+} else if (%varclient_41 ! -1) {
+    if_sethide(false, interface_746:com_21);
+}
+if (%varclient_1037 < 142) {
+    %varclient_1037 = 142;
+} else if (%varclient_1037 > calc(if_getheight(interface_746:com_1) - 117)) {
+    ~script1651(0, 1);
+    return;
+}
+if_setsize(519, %varclient_1037, ^setsize_abs, ^setsize_abs, interface_746:com_18);
+if_setposition(0, 23, ^setpos_abs_left, ^setpos_abs_bottom, interface_746:com_18);
+if_setposition(0, calc(if_gety(interface_746:com_18) - 94), ^setpos_abs_left, ^setpos_abs_top, interface_746:com_21);
+if_setposition(0, calc(if_gety(interface_746:com_18) - 69), ^setpos_abs_left, ^setpos_abs_top, interface_746:com_19);
+~script1301(interface_137:com_159, interface_137:com_58);
+~rebuildchatbox;

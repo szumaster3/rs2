@@ -1,0 +1,6 @@
+[clientscript,ignore_init]
+if_setonfriendtransmit("ignore_transmit", interface_551:com_1);
+~scrollbar_vertical(interface_551:com_2, interface_551:com_1, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");
+if_setscrollsize(0, 0, interface_551:com_1);
+if_setscrollpos(0, 0, interface_551:com_1);
+~ignore_update;

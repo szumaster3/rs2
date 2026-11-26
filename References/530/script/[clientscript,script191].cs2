@@ -1,0 +1,2 @@
+[clientscript,script191](component $component0)
+if_setgraphic(large_button, $component0);

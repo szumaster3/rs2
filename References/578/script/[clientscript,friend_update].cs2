@@ -1,0 +1,2 @@
+[clientscript,friend_update](int $int0)
+~friend_update($int0);

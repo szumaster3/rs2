@@ -1,0 +1,7 @@
+[proc,script2372](component $component0, int $int1)
+~script2373($component0);
+if (cc_find($component0, $int1) = true) {
+    cc_setgraphic(graphic_1043);
+    cc_setonmouserepeat(null);
+    cc_setonmouseleave(null);
+}

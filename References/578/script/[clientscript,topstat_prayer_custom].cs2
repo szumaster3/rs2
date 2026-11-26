@@ -1,0 +1,15 @@
+[clientscript,topstat_prayer_custom](component $component0)
+if (%varclient_181 = 1) {
+    if (%varplayerbit_6840 = 1) {
+        if_setop(2, "Finish quick curse selection", $component0);
+        if_settext("Select your quick curses:", interface_271:com_46);
+    } else {
+        if_setop(2, "Finish quick prayer selection", $component0);
+        if_settext("Select your quick prayers:", interface_271:com_46);
+    }
+} else if (%varplayerbit_6840 = 1) {
+    if_setop(2, "Select quick curses", $component0);
+} else {
+    if_setop(2, "Select quick prayers", $component0);
+}
+~topstat_prayer_button_update;

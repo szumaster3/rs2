@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static core.api.ContentAPIKt.playAudio;
-import static core.api.ContentAPIKt.setVarp;
+import static core.api.ContentAPIKt.setVarbit;
 
 /**
  * The type Prayer.
@@ -62,7 +62,7 @@ public final class Prayer {
     public void reset() {
         // Immediately clear the lights on the client interface and terminate any bonuses
         for (PrayerType type : getActive()) {
-            setVarp(player, type.getConfig(), 0, false);
+            setVarbit(player, type.getVarbit(), 0, false);
             player.dispatch(new PrayerDeactivatedEvent(type));
         }
         getActive().clear();

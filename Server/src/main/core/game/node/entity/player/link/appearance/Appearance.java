@@ -187,7 +187,8 @@ public final class Appearance {
      * @param item the item
      */
     public void drawItem(int part, Item item) {
-        this.bodyParts[part] = item.getDefinition().getEquipId() + 0x8000;
+        int equipId = item.getDefinition().getEquipId();
+        this.bodyParts[part] = equipId >= 0 && equipId < 0x7fff ? equipId + 0x8000 : 0;
     }
 
     /**

@@ -1,0 +1,6 @@
+[clientscript,script2571](int $int0)
+if (calc(inv_totalparam(inv_93, param_803) + inv_totalparam(inv_93, param_802)) < calc(1 + $int0)) {
+    return;
+}
+%varclient_929 = $int0;
+~script2573;

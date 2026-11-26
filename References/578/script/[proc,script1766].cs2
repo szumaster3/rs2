@@ -1,0 +1,112 @@
+[proc,script1766]
+if (%varclient_232 = 0) {
+    if_setgraphic("stonemenusideicons,0", interface_548:com_89);
+    if_setgraphic("stonemenusideicons,0", interface_746:com_108);
+    if_setop(1, "Combat Styles", interface_548:com_81);
+    if_setop(1, "Combat Styles", interface_746:com_124);
+}
+if (%varclient_233 = 0) {
+    if_setgraphic("stonemenusideicons,1", interface_548:com_90);
+    if_setgraphic("stonemenusideicons,1", interface_746:com_109);
+    if_setop(1, "Stats", interface_548:com_82);
+    if_setop(1, "Stats", interface_746:com_125);
+} else if (%varclient_233 = 1) {
+    if_setgraphic(graphic_1812, interface_548:com_90);
+    if_setgraphic(graphic_1812, interface_746:com_109);
+    if_setop(1, "Camera", interface_548:com_82);
+    if_setop(1, "Camera", interface_746:com_125);
+}
+if (%varclient_234 = 0) {
+    if_setgraphic("stonemenusideicons,2", interface_548:com_91);
+    if_setgraphic("stonemenusideicons,2", interface_746:com_110);
+    if_setop(1, "Quest List", interface_548:com_83);
+    if_setop(1, "Quest List", interface_746:com_126);
+} else if (%varclient_234 = 1) {
+    if_setgraphic(graphic_1815, interface_548:com_91);
+    if_setgraphic(graphic_1815, interface_746:com_110);
+    if_setop(1, "Squad Commands", interface_548:com_83);
+    if_setop(1, "Squad Commands", interface_746:com_126);
+} else if (%varclient_234 = 2) {
+    if_setgraphic("stonemenusideicons,17", interface_548:com_91);
+    if_setgraphic("stonemenusideicons,17", interface_746:com_110);
+    if_setop(1, "Book", interface_548:com_83);
+    if_setop(1, "Book", interface_746:com_126);
+}
+if (%varclient_822 = 0) {
+    if_setgraphic("stonemenusideicons,3", interface_548:com_92);
+    if_setgraphic("stonemenusideicons,3", interface_746:com_111);
+    if_setop(1, "Achievement Diaries", interface_548:com_84);
+    if_setop(1, "Achievement Diaries", interface_746:com_127);
+} else if (%varclient_822 = 1) {
+    if_setgraphic(graphic_1813, interface_548:com_92);
+    if_setgraphic(graphic_1813, interface_746:com_111);
+    if_setop(1, "Special Units", interface_548:com_84);
+    if_setop(1, "Special Units", interface_746:com_127);
+}
+if (%varclient_235 = 0) {
+    if_setgraphic("stonemenusideicons,4", interface_548:com_93);
+    if_setgraphic("stonemenusideicons,4", interface_746:com_112);
+    if_setop(1, "Inventory", interface_548:com_85);
+    if_setop(1, "Inventory", interface_746:com_128);
+} else if (%varclient_235 = 1) {
+    if_setgraphic(graphic_1814, interface_548:com_93);
+    if_setgraphic(graphic_1814, interface_746:com_112);
+    if_setop(1, "My Squads", interface_548:com_85);
+    if_setop(1, "My Squads", interface_746:com_128);
+}
+if (%varclient_236 = 0) {
+    if_setgraphic("stonemenusideicons,5", interface_548:com_94);
+    if_setgraphic("stonemenusideicons,5", interface_746:com_113);
+    if_setop(1, "Worn Equipment", interface_548:com_86);
+    if_setop(1, "Worn Equipment", interface_746:com_129);
+} else if (%varclient_236 = 1) {
+    if_setgraphic("stonemenusideicons,16", interface_548:com_94);
+    if_setgraphic("stonemenusideicons,16", interface_746:com_113);
+    if_setop(1, "Acrobat Emotes", interface_548:com_86);
+    if_setop(1, "Acrobat Emotes", interface_746:com_129);
+} else if (%varclient_236 = 2) {
+    if_setgraphic(graphic_1816, interface_548:com_94);
+    if_setgraphic(graphic_1816, interface_746:com_113);
+    if_setop(1, "Forfeit", interface_548:com_86);
+    if_setop(1, "Forfeit", interface_746:com_129);
+}
+if (%varclient_237 = 0) {
+    if_setgraphic("stonemenusideicons,6", interface_548:com_95);
+    if_setgraphic("stonemenusideicons,6", interface_746:com_114);
+}
+if (%varclient_238 = 0) {
+    if_setgraphic("stonemenusideicons,7", interface_548:com_96);
+    if_setgraphic("stonemenusideicons,7", interface_746:com_115);
+}
+if (%varclient_823 = 0) {
+    if_setgraphic("stonemenusideicons,8", interface_548:com_59);
+    if_setgraphic("stonemenusideicons,8", interface_746:com_116);
+}
+if (%varclient_240 = 0) {
+    if_setgraphic("stonemenusideicons,9", interface_548:com_60);
+    if_setgraphic("stonemenusideicons,9", interface_746:com_117);
+}
+if (%varclient_241 = 0) {
+    if_setgraphic("stonemenusideicons,10", interface_548:com_61);
+    if_setgraphic("stonemenusideicons,10", interface_746:com_118);
+}
+if (%varclient_242 = 0) {
+    if_setgraphic("stonemenusideicons,11", interface_548:com_62);
+    if_setgraphic("stonemenusideicons,11", interface_746:com_119);
+}
+if (%varclient_243 = 0) {
+    if_setgraphic("stonemenusideicons,12", interface_548:com_63);
+    if_setgraphic("stonemenusideicons,12", interface_746:com_120);
+}
+if (%varclient_244 = 0) {
+    if_setgraphic("stonemenusideicons,13", interface_548:com_64);
+    if_setgraphic("stonemenusideicons,13", interface_746:com_121);
+}
+if (%varclient_245 = 0) {
+    if_setgraphic("stonemenusideicons,14", interface_548:com_65);
+    if_setgraphic("stonemenusideicons,14", interface_746:com_122);
+}
+if (%varclient_824 = 0) {
+    if_setgraphic("stonemenusideicons,15", interface_548:com_66);
+    if_setgraphic("stonemenusideicons,15", interface_746:com_123);
+}

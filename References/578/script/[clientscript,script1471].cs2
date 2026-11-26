@@ -1,0 +1,11 @@
+[clientscript,script1471]
+if_clearops(interface_762:com_17);
+if_setonop(null, interface_762:com_17);
+%varclient_190 = 0;
+if (%varclient_188 = 0) {
+    %varplayerbit_4893 = 0;
+    ~script1473;
+} else {
+    %varplayerbit_4893 = 1;
+    ~script1474;
+}

@@ -1,0 +1,16 @@
+[proc,script2247]
+if (cc_find(interface_744:com_27, 0) = true) {
+    cc_setvflip(false);
+}
+cc_deleteall(interface_744:com_28);
+cc_deleteall(interface_744:com_29);
+cc_deleteall(interface_744:com_30);
+if_sethide(true, interface_744:com_28);
+if_sethide(true, interface_744:com_29);
+if_sethide(true, interface_744:com_30);
+if_setonmouserepeat(null, interface_744:com_29);
+if_setontimer(null, interface_744:com_27);
+if (cc_find(interface_744:com_27, 1) = true) {
+    cc_setonmouseover("script273(interface_744:com_27, 1, true)");
+    cc_setonmouseleave("script273(interface_744:com_27, 1, false)");
+}

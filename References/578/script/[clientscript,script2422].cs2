@@ -1,0 +1,22 @@
+[clientscript,script2422]
+if_sethide(true, interface_768:com_0);
+if_sethide(true, interface_768:com_1);
+if_sethide(true, interface_768:com_2);
+if_sethide(true, interface_768:com_3);
+if (%varclient_808 = 1) {
+    if_sethide(false, interface_768:com_0);
+    if_settext("Draughts", interface_768:com_4);
+    if_settext(tostring(%varplayer_354), interface_768:com_5);
+} else if (%varclient_808 = 2) {
+    if_sethide(false, interface_768:com_1);
+    if_settext("Runelink", interface_768:com_4);
+    if_settext(tostring(%varplayer_353), interface_768:com_5);
+} else if (%varclient_808 = 3) {
+    if_sethide(false, interface_768:com_2);
+    if_settext("Runesquares", interface_768:com_4);
+    if_settext(tostring(%varplayer_648), interface_768:com_5);
+} else if (%varclient_808 = 4) {
+    if_sethide(false, interface_768:com_3);
+    if_settext("Runeversi", interface_768:com_4);
+    if_settext(tostring(%varplayer_649), interface_768:com_5);
+}

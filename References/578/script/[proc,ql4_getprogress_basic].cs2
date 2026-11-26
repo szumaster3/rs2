@@ -1,0 +1,2 @@
+[proc,ql4_getprogress_basic](int $int0, int $int1)(int)
+return(~ql4_getprogress_detail($int0, 1, $int1));

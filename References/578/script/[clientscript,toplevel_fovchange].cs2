@@ -1,0 +1,2 @@
+[clientscript,toplevel_fovchange]
+viewport_setfov(%varclient_184, %varclient_184);

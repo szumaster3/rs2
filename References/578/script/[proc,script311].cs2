@@ -1,0 +1,6 @@
+[proc,script311](string $string0, int $int0, int $int1)
+if (%varplayerbit_6177 = 1) {
+    cc_deleteall(interface_755:com_70);
+    return;
+}
+~script312($string0, calc($int0 + 3), calc($int1 + 3));

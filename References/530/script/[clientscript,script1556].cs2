@@ -1,0 +1,2 @@
+[clientscript,script1556]
+if_settext(chat_playername, interface_771:com_89);

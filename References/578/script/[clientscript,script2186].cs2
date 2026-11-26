@@ -1,0 +1,6 @@
+[clientscript,script2186]
+if (%varclient_733 ! -1) {
+    openurl_nologin("terms/terms.ws?cty=<tostring(%varclient_733)>", true);
+} else {
+    openurl_nologin("terms/terms.ws", true);
+}

@@ -1,0 +1,2 @@
+[clientscript,script401](component $component0)
+if_setcolour(^yellow, $component0);

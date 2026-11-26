@@ -1,0 +1,11 @@
+[proc,script246]
+if_setonkey("script247(event_keycode, event_keychar)", interface_594:com_53);
+if_setonkey(null, interface_137:com_52);
+%varclient_6 = false;
+%varclient_11 = 1;
+if (if_gethide(interface_752:com_3) = false) {
+    if_sethide(true, interface_752:com_3);
+    if_sethide(false, interface_752:com_8);
+    %varclient_5 = 0;
+    %varclientstring_22 = "";
+}

@@ -1,0 +1,6 @@
+[clientscript,script2074]
+if (%varclient_632 = 0) {
+    if_settext("Players needed", interface_837:com_8);
+} else {
+    if_settext("Players in game", interface_837:com_8);
+}

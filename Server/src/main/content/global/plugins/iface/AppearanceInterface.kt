@@ -30,10 +30,6 @@ class AppearanceInterface : InterfaceListener {
             if (player.interfaceManager.isResizable) openOverlay(player, Components.BLACK_OVERLAY_333)
             return@onOpen true
         }
-        on(APPEARANCE_INTERFACE_ID) { player, _, _, buttonID, _, _ ->
-            CharacterDesign.handleButtons(player, buttonID)
-            return@on true
-        }
 
         /*
          * Hairdresser.
@@ -807,7 +803,7 @@ class AppearanceInterface : InterfaceListener {
         /* ╔════════════════════════════════════════════╗
          * ║ INTERFACE IDS                              ║
          * ╚════════════════════════════════════════════╝ */
-        const val APPEARANCE_INTERFACE_ID           = Components.APPEARANCE_771 // All.
+        const val APPEARANCE_INTERFACE_ID           = CharacterDesign.INTERFACE_ID // All.
         const val YRSA_SHOE_STORE_INTERFACE_ID      = Components.YRSA_SHOE_STORE_200 // Feet appearance.
         const val MAKEOVER_MAGE_INTERFACE_ID        = Components.MAKEOVER_MAGE_205 // Skin & gender appearance.
         const val REINALD_BRACELETS_INTERFACE_ID    = Components.REINALD_SMITHING_EMPORIUM_593 // Wrists appearance.

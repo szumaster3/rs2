@@ -1,0 +1,2 @@
+[clientscript,script1513](int $int0, int $int1)
+~script311("Map link", $int0, $int1);

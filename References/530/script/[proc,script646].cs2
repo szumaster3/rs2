@@ -1,0 +1,2 @@
+[proc,script646](component $component0)
+if_setgraphic("bank_buttons,5", $component0);

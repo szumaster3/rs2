@@ -1,0 +1,131 @@
+[clientscript,script1145]
+if (%varplayerbit_276 = 0) {
+    if_sethide(true, interface_759:com_28);
+    if_sethide(true, interface_759:com_23);
+    if_sethide(false, interface_759:com_26);
+    if_sethide(false, interface_759:com_22);
+} else {
+    if_sethide(true, interface_759:com_26);
+    if_sethide(true, interface_759:com_22);
+    if_sethide(false, interface_759:com_28);
+    if_sethide(false, interface_759:com_23);
+    switch_int (%varplayerbit_276) {
+        case 1 :
+            if_setgraphic("magicon,0", interface_759:com_28);
+            if_setgraphic("magicon,0", interface_759:com_23);
+        case 2 :
+            if_setgraphic("magicon,2", interface_759:com_28);
+            if_setgraphic("magicon,2", interface_759:com_23);
+        case 3 :
+            if_setgraphic("magicon,4", interface_759:com_28);
+            if_setgraphic("magicon,4", interface_759:com_23);
+        case 4 :
+            if_setgraphic("magicon,6", interface_759:com_28);
+            if_setgraphic("magicon,6", interface_759:com_23);
+        case 5 :
+            if_setgraphic("magicon,8", interface_759:com_28);
+            if_setgraphic("magicon,8", interface_759:com_23);
+        case 6 :
+            if_setgraphic("magicon,11", interface_759:com_28);
+            if_setgraphic("magicon,11", interface_759:com_23);
+        case 7 :
+            if_setgraphic("magicon,14", interface_759:com_28);
+            if_setgraphic("magicon,14", interface_759:com_23);
+        case 8 :
+            if_setgraphic("magicon,17", interface_759:com_28);
+            if_setgraphic("magicon,17", interface_759:com_23);
+        case 9 :
+            if_setgraphic("magicon,20", interface_759:com_28);
+            if_setgraphic("magicon,20", interface_759:com_23);
+        case 10 :
+            if_setgraphic("magicon,23", interface_759:com_28);
+            if_setgraphic("magicon,23", interface_759:com_23);
+        case 11 :
+            if_setgraphic("magicon,25", interface_759:com_28);
+            if_setgraphic("magicon,25", interface_759:com_23);
+        case 12 :
+            if_setgraphic("magicon,29", interface_759:com_28);
+            if_setgraphic("magicon,29", interface_759:com_23);
+        case 13 :
+            if_setgraphic("magicon,31", interface_759:com_28);
+            if_setgraphic("magicon,31", interface_759:com_23);
+        case 14 :
+            if_setgraphic("magicon,33", interface_759:com_28);
+            if_setgraphic("magicon,33", interface_759:com_23);
+        case 15 :
+            if_setgraphic("magicon,36", interface_759:com_28);
+            if_setgraphic("magicon,36", interface_759:com_23);
+        case 16 :
+            if_setgraphic("magicon,37", interface_759:com_28);
+            if_setgraphic("magicon,37", interface_759:com_23);
+        case 17 :
+            if_setgraphic("magicon,19", interface_759:com_28);
+            if_setgraphic("magicon,19", interface_759:com_23);
+        case 18 :
+            if_setgraphic("magicon2,5", interface_759:com_28);
+            if_setgraphic("magicon2,5", interface_759:com_23);
+        case 19 :
+            if_setgraphic("magicon,45", interface_759:com_28);
+            if_setgraphic("magicon,45", interface_759:com_23);
+        case 31 :
+            if_setgraphic("magicon2,10", interface_759:com_28);
+            if_setgraphic("magicon2,10", interface_759:com_23);
+        case 32 :
+            if_setgraphic("magicon2,18", interface_759:com_28);
+            if_setgraphic("magicon2,18", interface_759:com_23);
+        case 33 :
+            if_setgraphic("magicon2,14", interface_759:com_28);
+            if_setgraphic("magicon2,14", interface_759:com_23);
+        case 34 :
+            if_setgraphic("magicon2,6", interface_759:com_28);
+            if_setgraphic("magicon2,6", interface_759:com_23);
+        case 35 :
+            if_setgraphic("magicon2,11", interface_759:com_28);
+            if_setgraphic("magicon2,11", interface_759:com_23);
+        case 36 :
+            if_setgraphic("magicon2,19", interface_759:com_28);
+            if_setgraphic("magicon2,19", interface_759:com_23);
+        case 37 :
+            if_setgraphic("magicon2,15", interface_759:com_28);
+            if_setgraphic("magicon2,15", interface_759:com_23);
+        case 38 :
+            if_setgraphic("magicon2,7", interface_759:com_28);
+            if_setgraphic("magicon2,7", interface_759:com_23);
+        case 39 :
+            if_setgraphic("magicon2,12", interface_759:com_28);
+            if_setgraphic("magicon2,12", interface_759:com_23);
+        case 40 :
+            if_setgraphic("magicon2,20", interface_759:com_28);
+            if_setgraphic("magicon2,20", interface_759:com_23);
+        case 41 :
+            if_setgraphic("magicon2,16", interface_759:com_28);
+            if_setgraphic("magicon2,16", interface_759:com_23);
+        case 42 :
+            if_setgraphic("magicon2,8", interface_759:com_28);
+            if_setgraphic("magicon2,8", interface_759:com_23);
+        case 43 :
+            if_setgraphic("magicon2,13", interface_759:com_28);
+            if_setgraphic("magicon2,13", interface_759:com_23);
+        case 44 :
+            if_setgraphic("magicon2,21", interface_759:com_28);
+            if_setgraphic("magicon2,21", interface_759:com_23);
+        case 45 :
+            if_setgraphic("magicon2,17", interface_759:com_28);
+            if_setgraphic("magicon2,17", interface_759:com_23);
+        case 46 :
+            if_setgraphic("magicon2,9", interface_759:com_28);
+            if_setgraphic("magicon2,9", interface_759:com_23);
+        case 47 :
+            if_setgraphic("magicon2,44", interface_759:com_28);
+            if_setgraphic("magicon2,44", interface_759:com_23);
+        case 48 :
+            if_setgraphic("magicon2,45", interface_759:com_28);
+            if_setgraphic("magicon2,45", interface_759:com_23);
+        case 49 :
+            if_setgraphic("magicon2,43", interface_759:com_28);
+            if_setgraphic("magicon2,43", interface_759:com_23);
+        case 50 :
+            if_setgraphic("magicon2,42", interface_759:com_28);
+            if_setgraphic("magicon2,42", interface_759:com_23);
+    }
+}

@@ -20,32 +20,32 @@ object TutorialButtonReceiver : EventHook<ButtonClickEvent> {
         if (entity !is Player) return
         val player = entity.asPlayer()
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
-            0 -> if (event.iface == Components.APPEARANCE_771 && event.buttonId == 362) {
+            0 -> if (event.iface == CharacterDesign.INTERFACE_ID && event.buttonId == CharacterDesign.CONFIRM && getAttribute(player, "char-design:accepted", false)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 39)
                 TutorialStage.load(player, 39)
             }
 
-            1 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 24) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 52)) {
+            1 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 55) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 136)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 2)
                 TutorialStage.load(player, 2)
             }
 
-            5 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 41) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 44)) {
+            5 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 85) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 128)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 6)
                 TutorialStage.load(player, 6)
             }
 
-            10 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 39) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 42)) {
+            10 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 82) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 125)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 11)
                 TutorialStage.load(player, 11)
             }
 
-            21 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 26) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 54)) {
+            21 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 57) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 138)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 22)
                 TutorialStage.load(player, 22)
             }
 
-            23 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 25) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 53)) {
+            23 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 56) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 137)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 24)
                 TutorialStage.load(player, 24)
             }
@@ -60,37 +60,37 @@ object TutorialButtonReceiver : EventHook<ButtonClickEvent> {
                 TutorialStage.load(player, 26)
             }
 
-            27 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 40) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 43)) {
+            27 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 83) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 126)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 28)
                 TutorialStage.load(player, 28)
             }
 
-            45 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 42) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 45)) {
+            45 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 86) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 129)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 46)
                 TutorialStage.load(player, 46)
             }
 
-            49 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 38) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 41)) {
+            49 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 81) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 124)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 50)
                 TutorialStage.load(player, 50)
             }
 
-            61 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 43) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 46)) {
+            61 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 87) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 130)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 62)
                 TutorialStage.load(player, 62)
             }
 
-            63 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 21) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 49)) {
+            63 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 52) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 133)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 64)
                 TutorialStage.load(player, 64)
             }
 
-            64 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 22) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 50)) {
+            64 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 53) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 134)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 65)
                 TutorialStage.load(player, 65)
             }
 
-            68 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 44) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 47)) {
+            68 -> if ((event.iface == Components.TOPLEVEL_548 && event.buttonId == 88) || (event.iface == Components.TOPLEVEL_FULLSCREEN_746 && event.buttonId == 131)) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 69)
                 TutorialStage.load(player, 69)
             }

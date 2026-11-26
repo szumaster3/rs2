@@ -1,0 +1,2 @@
+[clientscript,script1666]
+openurl_nologin("kbase/view.ws?guid=controls_banks#memberspace", true);

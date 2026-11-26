@@ -1,0 +1,9 @@
+[proc,script1569]()(boolean)
+if (getwindowmode >= 2) {
+    if (if_hassub(interface_746:com_30) = true) {
+        return(true);
+    }
+} else if (if_hassub(interface_548:com_147) = true) {
+    return(true);
+}
+return(false);

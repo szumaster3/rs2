@@ -1,0 +1,11 @@
+[proc,script2474](component $component0, component $component1, component $component2, int $int3, string $string0, string $string1, obj $obj4, int $int5, obj $obj6, int $int7, obj $obj8, int $int9, obj $obj10, int $int11)
+switch_obj ($obj4) {
+    case obj_12461 :
+        $int3, $string0, $obj4 = ~script775;
+}
+if_setopbase("<col=00ff00><$string0>", $component0);
+$string0 = append($string0, " (<tostring(%varplayerbit_4288)> Special Move points)");
+if (%varplayerbit_6454 = 1) {
+    if_setonmouserepeat("script10($component0, interface_662:com_73, $int3, $string0, $string1, $obj4, $int5, $obj6, $int7, $obj8, $int9, $obj10, $int11)", $component0);
+    if_setonmouseleave("lore_deltooltip(interface_662:com_73)", $component0);
+}

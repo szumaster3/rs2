@@ -1,0 +1,16 @@
+[clientscript,clanwars_setup_magic](int $int0)
+if (~clanwars_setup_clicktest($int0) = false) {
+    return;
+}
+if (map_members = false) {
+    if (%varclient_252 = 1) {
+        %varclient_252 = 2;
+    } else if (%varclient_252 = 2) {
+        %varclient_252 = 3;
+    } else {
+        %varclient_252 = 1;
+    }
+} else {
+    %varclient_252 = calc((%varclient_252 + 1) % 4);
+}
+~clanwars_resynch_magic;

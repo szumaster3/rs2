@@ -1,0 +1,151 @@
+[com_0]
+type=graphic
+x=2
+y=5
+width=57
+height=13
+graphic="sworddecor,1"
+colour=0x000000
+
+[com_1]
+type=graphic
+x=2
+y=5
+width=57
+height=13
+xmode=abs_right
+graphic="sworddecor,0"
+colour=0x000000
+
+[com_2]
+type=model
+x=73
+y=49
+width=65
+height=38
+model=model_2636
+modelorigin=2,10
+modelangle=159,36,0
+modelzoom=183
+unknown100=65405
+unknown101=375
+
+[com_3]
+type=model
+x=223
+y=50
+width=65
+height=38
+model=model_9836
+modelorigin=2,10
+modelangle=159,36,0
+modelzoom=183
+unknown100=65405
+unknown101=375
+
+[com_4]
+type=model
+x=382
+y=40
+width=57
+height=52
+model=model_2365
+modelorigin=0,9
+modelangle=221,1877,0
+modelzoom=400
+unknown100=65155
+unknown101=814
+
+[com_5]
+type=text
+x=52
+y=26
+width=105
+height=85
+textfont=q8_full
+textalignh=centre
+colour=0x000000
+transmitop=1,2,3,4
+op1=Churn 1
+op2=Churn 5
+op3=Churn 10
+op4=Churn X
+
+[com_6]
+type=text
+x=200
+y=23
+width=105
+height=88
+textfont=q8_full
+textalignh=centre
+colour=0x000000
+transmitop=1,2,3,4
+op1=Churn 1
+op2=Churn 5
+op3=Churn 10
+op4=Churn X
+
+[com_7]
+type=text
+x=355
+y=26
+width=105
+height=88
+textfont=q8_full
+textalignh=centre
+colour=0x000000
+transmitop=1,2,3,4
+op1=Churn 1
+op2=Churn 5
+op3=Churn 10
+op4=Churn X
+
+[com_8]
+type=text
+y=-2
+width=357
+height=38
+xmode=abs_centre
+textfont=q8_full
+text=What would you like to make?
+textalignh=centre
+textalignv=centre
+colour=0x800000
+
+[com_9]
+type=text
+x=53
+y=26
+width=104
+height=85
+textfont=q8_full
+text=Churn Cream
+textalignh=centre
+textalignv=bottom
+colour=0x000000
+
+[com_10]
+type=text
+x=202
+y=27
+width=104
+height=85
+textfont=q8_full
+text=Churn Butter
+textalignh=centre
+textalignv=bottom
+colour=0x000000
+
+[com_11]
+type=text
+x=357
+y=27
+width=104
+height=85
+textfont=q8_full
+text=Churn Cheese
+textalignh=centre
+textalignv=bottom
+colour=0x000000
+

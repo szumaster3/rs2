@@ -1,0 +1,47 @@
+[com_0]
+type=model
+x=41
+y=51
+width=32
+height=32
+model=null
+modelangle=40,166,0
+modelzoom=796
+unknown101=796
+
+[com_1]
+type=text
+x=132
+y=1
+width=370
+height=17
+textfont=q8_full
+text=Name
+textalignh=centre
+colour=0x800000
+
+[com_2]
+type=text
+x=132
+y=17
+width=370
+height=95
+textfont=q8_full
+text=Line1
+textalignh=centre
+colour=0x000000
+
+[com_3]
+type=text
+x=132
+y=111
+width=370
+height=17
+textfont=q8_full
+text=Click here to continue
+textalignh=centre
+colour=0x0000ff
+pausebutton=yes
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^blue)
+

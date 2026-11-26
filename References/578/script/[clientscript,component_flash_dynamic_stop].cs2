@@ -1,0 +1,2 @@
+[clientscript,component_flash_dynamic_stop](component $component0, int $int1)
+~component_flash_dynamic_stop($component0, $int1);

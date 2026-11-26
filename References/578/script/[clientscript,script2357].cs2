@@ -1,0 +1,11 @@
+[clientscript,script2357](component $component0)
+if (gender = 1) {
+    if_sethide(true, interface_309:com_15);
+} else {
+    %varclient_776 = 0;
+    if_sethide(false, interface_309:com_15);
+    if_setgraphic("player_kit_fancy_off,3", interface_309:com_15);
+    if_setop(1, "View Hairstyles", interface_309:com_16);
+    if_setop(1, "View Beards", interface_309:com_15);
+}
+~script2358($component0);

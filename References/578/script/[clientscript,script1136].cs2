@@ -1,0 +1,6 @@
+[clientscript,script1136](component $component0)
+if (map_members = true & oc_param(inv_getobj(inv_94, 3), param_687) ! 0) {
+    if_sethide(false, $component0);
+    return;
+}
+if_sethide(true, $component0);

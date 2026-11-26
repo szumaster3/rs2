@@ -1,0 +1,3 @@
+[clientscript,script137](component $component0, component $component1)
+if_setontimer("script250($component1)", $component0);
+~script251($component1);

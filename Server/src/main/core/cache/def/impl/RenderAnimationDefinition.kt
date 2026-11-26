@@ -46,7 +46,7 @@ class RenderAnimationDefinition {
     @JvmField var anInt992: Int = 0
     @JvmField var anInt993: Int = 0
     @JvmField var anInt994: Int = 0
-    private fun parse(buffer: ByteBuffer) {
+    internal fun parse(buffer: ByteBuffer) {
         while (true) {
             val opcode = buffer.get().toInt() and 0xff
             if (opcode == 0) return
@@ -69,8 +69,8 @@ class RenderAnimationDefinition {
             8 -> anInt985 = buffer.short.toInt() and 0xffff
             9 -> anInt957 = buffer.short.toInt() and 0xffff
             26 -> {
-                anInt973 = (4 * buffer.get().toInt()) and 0xff
-                anInt975 = buffer.get().toInt() and (0xff * 4)
+                anInt973 = 4 * (buffer.get().toInt() and 0xff)
+                anInt975 = 4 * (buffer.get().toInt() and 0xff)
             }
             27 -> {
                 val transforms = anIntArrayArray979 ?: arrayOfNulls<IntArray>(12).also { anIntArrayArray979 = it }
@@ -119,6 +119,7 @@ class RenderAnimationDefinition {
             54 -> repeat(2) { buffer.get() }
             55 -> { buffer.get(); buffer.short }
             56 -> { buffer.get(); repeat(3) { buffer.short } }
+            else -> error("Unknown BAS opcode $opcode at ${buffer.position() - 1}")
         }
     }
 

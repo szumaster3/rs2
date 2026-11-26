@@ -1,0 +1,2 @@
+[proc,script2246](int $int0)(int)
+return(calc(($int0 + if_getscrolly(interface_744:com_29)) / 15));

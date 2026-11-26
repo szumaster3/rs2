@@ -1,0 +1,5090 @@
+[com_0]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+noclickthrough=yes
+
+[com_1]
+type=rectangle
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+layer=com_0
+colour=0x000000
+fill=yes
+
+[com_2]
+type=graphic
+x=14
+y=25
+width=485
+height=300
+layer=com_35
+graphic=tradebacking
+tiling=yes
+opbase= 
+
+[com_3]
+type=graphic
+x=212
+y=66
+width=275
+height=32
+layer=com_35
+graphic="v2_stone_borders,23"
+tiling=yes
+
+[com_4]
+type=graphic
+x=477
+y=66
+width=32
+height=32
+layer=com_35
+graphic="v2_stone_borders,26"
+
+[com_5]
+type=graphic
+x=480
+y=51
+width=32
+height=243
+layer=com_35
+graphic="v2_stone_borders,3"
+tiling=yes
+
+[com_6]
+type=graphic
+y=52
+width=32
+height=242
+layer=com_35
+graphic="v2_stone_borders,1"
+tiling=yes
+
+[com_7]
+type=graphic
+x=44
+y=20
+width=424
+height=32
+layer=com_35
+graphic="v2_stone_borders,36"
+tiling=yes
+
+[com_8]
+type=graphic
+x=45
+y=306
+width=423
+height=32
+layer=com_35
+graphic="v2_stone_borders,2"
+tiling=yes
+opbase= 
+
+[com_9]
+type=graphic
+x=13
+y=20
+width=32
+height=32
+layer=com_35
+graphic="v2_stone_borders,35"
+
+[com_10]
+type=graphic
+x=13
+y=294
+width=32
+height=32
+layer=com_35
+graphic="v2_stone_borders,6"
+
+[com_11]
+type=graphic
+x=468
+y=294
+width=32
+height=32
+layer=com_35
+graphic="v2_stone_borders,7"
+
+[com_12]
+type=graphic
+x=468
+y=20
+width=32
+height=32
+layer=com_35
+graphic="v2_stone_borders,37"
+
+[com_13]
+type=text
+x=202
+y=24
+width=90
+height=15
+layer=com_35
+textfont=b12_full
+text=Mouse
+textalignh=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_14]
+type=graphic
+x=20
+y=34
+width=48
+height=48
+layer=com_35
+graphic="bank_tabs,2"
+transmitop=1
+op1=Select mouse options
+onmouseover=script44(event_com, "bank_tabs,0")
+onmouseleave=script299(interface_771:com_403, event_com, "bank_tabs,3")
+onop=script1563
+onmouserepeat=script38(event_com, interface_771:com_403, "Mouse options", 25, 120)
+
+[com_15]
+type=graphic
+x=27
+y=47
+width=32
+height=36
+layer=com_35
+graphic="side_icons,10"
+
+[com_16]
+type=graphic
+x=68
+y=34
+width=48
+height=48
+layer=com_35
+graphic="bank_tabs,3"
+transmitop=1
+op1=Select gender options
+onmouseover=script44(event_com, "bank_tabs,0")
+onmouseleave=script299(interface_771:com_403, event_com, "bank_tabs,3")
+onop=script1565
+onmouserepeat=script38(event_com, interface_771:com_403, "Gender options", 25, 120)
+
+[com_17]
+type=graphic
+x=74
+y=47
+width=35
+height=35
+layer=com_35
+graphic=graphic_1444
+
+[com_18]
+type=graphic
+x=116
+y=34
+width=48
+height=48
+layer=com_35
+graphic="bank_tabs,3"
+transmitop=1
+op1=Select head options
+onmouseover=script44(event_com, "bank_tabs,0")
+onmouseleave=script299(interface_771:com_403, event_com, "bank_tabs,3")
+onop=script1567
+onmouserepeat=script38(event_com, interface_771:com_403, "Head options", 25, 120)
+
+[com_19]
+type=graphic
+x=122
+y=47
+width=35
+height=35
+layer=com_35
+graphic=graphic_1445
+
+[com_20]
+type=graphic
+x=164
+y=34
+width=48
+height=48
+layer=com_35
+graphic="bank_tabs,3"
+transmitop=1
+op1=Select body options
+onmouseover=script44(event_com, "bank_tabs,0")
+onmouseleave=script299(interface_771:com_403, event_com, "bank_tabs,3")
+onop=script1569
+onmouserepeat=script38(event_com, interface_771:com_403, "Body options", 25, 120)
+
+[com_21]
+type=graphic
+x=170
+y=47
+width=35
+height=35
+layer=com_35
+graphic=graphic_1446
+
+[com_22]
+type=layer
+x=19
+y=81
+width=480
+height=245
+layer=com_35
+hide=yes
+onload=script1551
+
+[com_23]
+type=layer
+x=19
+y=81
+width=480
+height=245
+layer=com_35
+hide=yes
+
+[com_24]
+type=layer
+x=19
+y=81
+width=480
+height=245
+layer=com_35
+hide=yes
+
+[com_25]
+type=layer
+x=19
+y=81
+width=480
+height=245
+layer=com_35
+hide=yes
+
+[com_26]
+type=layer
+x=57
+y=109
+width=400
+height=200
+layer=com_35
+hide=yes
+onop=script1610
+
+[com_27]
+type=text
+x=213
+y=47
+width=272
+height=32
+layer=com_35
+textfont=p11_full
+text=All options selected here can be changed in various locations at a later date.
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_28]
+type=layer
+x=2
+y=6
+width=507
+height=328
+layer=com_35
+hide=yes
+onop=script1610
+
+[com_29]
+type=layer
+x=2
+y=6
+width=507
+height=328
+layer=com_35
+hide=yes
+onop=script1610
+
+[com_30]
+type=layer
+x=2
+y=3
+width=500
+height=320
+layer=com_35
+
+[com_31]
+type=layer
+x=292
+y=112
+width=200
+height=180
+layer=com_35
+
+[com_32]
+type=layer
+x=19
+y=81
+width=270
+height=245
+layer=com_35
+
+[com_33]
+type=layer
+x=19
+y=81
+width=270
+height=245
+layer=com_35
+
+[com_34]
+type=layer
+width=239
+height=180
+layer=com_35
+
+[com_35]
+type=layer
+width=513
+height=340
+xmode=abs_centre
+ymode=abs_centre
+layer=com_0
+
+[com_36]
+type=graphic
+x=1
+y=174
+width=472
+height=32
+layer=com_22
+graphic="v2_borders_slim,11"
+
+[com_37]
+type=layer
+x=79
+y=35
+width=86
+height=70
+layer=com_22
+transmitop=1
+op1=Select 2-button mouse
+onload=script1557(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script1358(interface_771:com_399, event_com)
+onmouserepeat=script38(event_com, interface_771:com_399, "Select 2-button mouse", 25, 120)
+onclick=script1572
+
+[com_38]
+type=text
+x=84
+y=87
+width=74
+height=10
+layer=com_22
+textfont=p11_full
+text=2 Button
+textalignh=centre
+textalignv=centre
+textshadow=yes
+
+[com_39]
+type=graphic
+x=104
+y=51
+width=36
+height=32
+layer=com_22
+graphic="tutorial_mouse,1"
+
+[com_40]
+type=layer
+x=312
+y=35
+width=86
+height=70
+layer=com_22
+transmitop=1
+op1=Select 1-button mouse
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script1358(interface_771:com_399, event_com)
+onmouserepeat=script38(event_com, interface_771:com_399, "Select 1-button mouse", 25, 120)
+onclick=script1573
+
+[com_41]
+type=graphic
+x=337
+y=51
+width=36
+height=32
+layer=com_22
+graphic="tutorial_mouse,0"
+
+[com_42]
+type=text
+x=319
+y=87
+width=74
+height=11
+layer=com_22
+textfont=p11_full
+text=1 Button
+textalignh=centre
+textalignv=centre
+textshadow=yes
+
+[com_43]
+type=text
+x=31
+y=3
+width=415
+height=16
+layer=com_22
+textfont=p11_full
+text=Please select your style of mouse.
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0x329900
+
+[com_44]
+type=text
+x=14
+y=114
+width=215
+height=54
+layer=com_22
+textfont=p11_full
+text=Select this option if your mouse has at least 2 buttons.
+textalignh=centre
+textshadow=yes
+colour=0xff9b00
+opbase= 
+
+[com_45]
+type=text
+x=249
+y=114
+width=215
+height=54
+layer=com_22
+textfont=p11_full
+text=Select this option if your mouse has only 1 button.
+textalignh=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_46]
+type=layer
+x=319
+y=208
+width=100
+height=25
+layer=com_22
+transmitop=1
+op1=Select next
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1574
+
+[com_47]
+type=text
+x=319
+y=208
+width=100
+height=25
+layer=com_22
+textfont=b12_full
+text=Next
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_48]
+type=graphic
+x=1
+y=174
+width=472
+height=32
+layer=com_23
+graphic="v2_borders_slim,11"
+
+[com_49]
+type=layer
+x=79
+y=35
+width=86
+height=70
+layer=com_23
+transmitop=1
+op1=Select male gender
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script1358(interface_771:com_399, event_com)
+onop=script1575
+onmouserepeat=script38(event_com, interface_771:com_399, "Select male gender", 25, 120)
+
+[com_50]
+type=graphic
+x=100
+y=39
+width=46
+height=46
+layer=com_23
+graphic=graphic_1447
+
+[com_51]
+type=text
+x=79
+y=87
+width=86
+height=15
+layer=com_23
+textfont=tutorial_font
+text=Male
+textalignh=centre
+textalignv=centre
+textshadow=yes
+
+[com_52]
+type=layer
+x=312
+y=35
+width=86
+height=70
+layer=com_23
+transmitop=1
+op1=Select female gender
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script1358(interface_771:com_399, event_com)
+onop=script1576
+onmouserepeat=script38(event_com, interface_771:com_399, "Select female gender", 25, 120)
+
+[com_53]
+type=graphic
+x=332
+y=39
+width=46
+height=46
+layer=com_23
+graphic=graphic_1448
+
+[com_54]
+type=text
+x=312
+y=87
+width=86
+height=15
+layer=com_23
+textfont=tutorial_font
+text=Female
+textalignh=centre
+textalignv=centre
+textshadow=yes
+
+[com_55]
+type=text
+x=39
+y=3
+width=400
+height=15
+layer=com_23
+textfont=p11_full
+text=Please select your character gender.
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0x329900
+
+[com_56]
+type=layer
+x=28
+y=208
+width=100
+height=25
+layer=com_23
+transmitop=1
+op1=Go back
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1577
+
+[com_57]
+type=text
+x=28
+y=208
+width=100
+height=25
+layer=com_23
+textfont=b12_full
+text=Back
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_58]
+type=layer
+x=319
+y=208
+width=100
+height=25
+layer=com_23
+transmitop=1
+op1=Select next
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1578
+
+[com_59]
+type=text
+x=319
+y=208
+width=100
+height=25
+layer=com_23
+textfont=b12_full
+text=Next
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_60]
+type=text
+x=316
+y=3
+width=90
+height=15
+layer=com_24
+textfont=b12_full
+text=Colour
+textalignh=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_61]
+type=graphic
+x=362
+y=26
+width=79
+height=20
+layer=com_24
+graphic="tabs,1"
+transmitop=1
+op1=Select skin colour
+onop=script1580
+
+[com_62]
+type=graphic
+x=285
+y=26
+width=79
+height=20
+layer=com_24
+graphic="tabs,0"
+transmitop=1
+op1=Select hair colour
+onop=script1579
+
+[com_63]
+type=text
+x=286
+y=30
+width=66
+height=15
+layer=com_24
+textfont=b12_full
+text=Hair
+textalignh=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_64]
+type=text
+x=362
+y=30
+width=71
+height=15
+layer=com_24
+textfont=b12_full
+text=Skin
+textalignh=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_65]
+type=graphic
+x=297
+y=34
+width=136
+height=32
+layer=com_24
+graphic="v2_stone_borders,23"
+tiling=yes
+
+[com_66]
+type=graphic
+x=295
+y=175
+width=136
+height=32
+layer=com_24
+graphic="v2_stone_borders,23"
+tiling=yes
+
+[com_67]
+type=graphic
+x=271
+y=63
+width=32
+height=114
+layer=com_24
+graphic="v2_stone_borders,24"
+tiling=yes
+
+[com_68]
+type=graphic
+x=426
+y=58
+width=32
+height=114
+layer=com_24
+graphic="v2_stone_borders,24"
+tiling=yes
+
+[com_69]
+type=graphic
+x=285
+y=47
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,28"
+tiling=yes
+
+[com_70]
+type=graphic
+x=411
+y=47
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,29"
+tiling=yes
+
+[com_71]
+type=graphic
+x=285
+y=159
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,30"
+tiling=yes
+
+[com_72]
+type=graphic
+x=411
+y=159
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,31"
+tiling=yes
+
+[com_73]
+type=layer
+x=24
+y=11
+width=196
+height=116
+layer=com_24
+
+[com_74]
+type=rectangle
+width=196
+height=116
+layer=com_73
+colour=0x1d1b1a
+fill=yes
+trans=200
+
+[com_75]
+type=rectangle
+x=4
+y=3
+width=188
+height=109
+layer=com_73
+colour=0x1d1b1a
+fill=yes
+trans=230
+
+[com_76]
+type=rectangle
+x=9
+y=7
+width=179
+height=102
+layer=com_73
+colour=0x1d1b1a
+fill=yes
+trans=230
+
+[com_77]
+type=rectangle
+x=14
+y=12
+width=169
+height=92
+layer=com_73
+colour=0x1d1b1a
+fill=yes
+trans=230
+
+[com_78]
+type=layer
+x=24
+y=11
+width=196
+height=115
+layer=com_24
+
+[com_79]
+type=model
+x=48
+y=-6
+width=110
+height=125
+layer=com_78
+model=null
+modelorigin=10,5
+modelangle=66,1882,0
+modelzoom=2000
+modelanim=seq_569
+unknown101=3000
+
+[com_80]
+type=graphic
+x=22
+y=114
+width=199
+height=32
+layer=com_24
+graphic="v2_stone_borders,23"
+tiling=yes
+
+[com_81]
+type=graphic
+x=18
+y=5
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,18"
+tiling=yes
+
+[com_82]
+type=graphic
+x=194
+y=5
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,19"
+tiling=yes
+
+[com_83]
+type=graphic
+x=18
+y=126
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,20"
+tiling=yes
+
+[com_84]
+type=graphic
+x=194
+y=126
+width=32
+height=32
+layer=com_24
+graphic="v2_stone_borders,21"
+tiling=yes
+
+[com_85]
+type=graphic
+x=37
+y=-9
+width=163
+height=32
+layer=com_24
+graphic="v2_stone_borders,8"
+tiling=yes
+
+[com_86]
+type=graphic
+x=37
+y=138
+width=160
+height=32
+layer=com_24
+graphic="v2_stone_borders,8"
+tiling=yes
+
+[com_87]
+type=graphic
+x=4
+y=22
+width=32
+height=107
+layer=com_24
+graphic="v2_stone_borders,13"
+tiling=yes
+
+[com_88]
+type=graphic
+x=206
+y=23
+width=32
+height=113
+layer=com_24
+graphic="v2_stone_borders,13"
+tiling=yes
+
+[com_89]
+type=text
+x=23
+y=133
+width=197
+height=15
+layer=com_24
+textfont=b12_full
+text=Your name here
+textalignh=centre
+textalignv=centre
+textshadow=yes
+onload=script1556
+
+[com_90]
+type=text
+x=62
+y=166
+width=121
+height=15
+layer=com_24
+textfont=p11_full
+text=Hair
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_91]
+type=layer
+x=60
+y=163
+width=121
+height=20
+layer=com_24
+onload=script100(event_com)
+
+[com_92]
+type=graphic
+x=29
+y=158
+width=30
+height=30
+layer=com_24
+graphic=graphic_1450
+transmitop=1
+op1=Select previous hair style
+onmouseover=script44(event_com, graphic_1449)
+onmouseleave=script299(interface_771:com_402, event_com, graphic_1450)
+onop=script1583
+onmouserepeat=script38(event_com, interface_771:com_402, "Select previous hair style", 25, 200)
+
+[com_93]
+type=graphic
+x=182
+y=158
+width=30
+height=30
+layer=com_24
+graphic=graphic_1452
+transmitop=1
+op1=Select next hair style
+onmouseover=script44(event_com, graphic_1451)
+onmouseleave=script299(interface_771:com_402, event_com, graphic_1452)
+onop=script1584
+onmouserepeat=script38(event_com, interface_771:com_402, "Select next hair style", 25, 200)
+
+[com_94]
+type=layer
+x=-19
+y=-81
+width=480
+height=345
+layer=com_24
+
+[com_95]
+type=layer
+x=79
+y=266
+width=121
+height=20
+layer=com_94
+onload=script100(event_com)
+
+[com_96]
+type=text
+x=81
+y=271
+width=121
+height=15
+layer=com_94
+textfont=p11_full
+text=Facial Hair
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_97]
+type=graphic
+x=48
+y=261
+width=30
+height=30
+layer=com_94
+graphic=graphic_1450
+transmitop=1
+op1=Select previous facial hair style
+onmouseover=script44(event_com, graphic_1449)
+onmouseleave=script299(interface_771:com_402, event_com, graphic_1450)
+onop=script1585
+onmouserepeat=script38(event_com, interface_771:com_402, "Select previous facial hair style", 25, 200)
+
+[com_98]
+type=graphic
+x=201
+y=261
+width=30
+height=30
+layer=com_94
+graphic=graphic_1452
+transmitop=1
+op1=Select next facial hair style
+onmouseover=script44(event_com, graphic_1451)
+onmouseleave=script299(interface_771:com_402, event_com, graphic_1452)
+onop=script1586
+onmouserepeat=script38(event_com, interface_771:com_402, "Select next facial hair style", 25, 200)
+
+[com_99]
+type=layer
+x=266
+y=30
+width=200
+height=200
+layer=com_24
+
+[com_100]
+type=graphic
+x=24
+y=22
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1613
+onmouserepeat=script38(event_com, interface_771:com_400, "Burgundy", 25, 120)
+
+[com_101]
+type=graphic
+x=54
+y=22
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1614
+onmouserepeat=script38(event_com, interface_771:com_400, "Red", 25, 120)
+
+[com_102]
+type=graphic
+x=84
+y=22
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1615
+onmouserepeat=script38(event_com, interface_771:com_400, "Vermillion", 25, 120)
+
+[com_103]
+type=graphic
+x=114
+y=22
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1616
+onmouserepeat=script38(event_com, interface_771:com_400, "Pink", 25, 120)
+
+[com_104]
+type=graphic
+x=144
+y=22
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1617
+onmouserepeat=script38(event_com, interface_771:com_400, "Orange", 25, 120)
+
+[com_105]
+type=graphic
+x=24
+y=49
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1618
+onmouserepeat=script38(event_com, interface_771:com_400, "Yellow", 25, 120)
+
+[com_106]
+type=graphic
+x=54
+y=49
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1619
+onmouserepeat=script38(event_com, interface_771:com_400, "Peach", 25, 120)
+
+[com_107]
+type=graphic
+x=84
+y=49
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1620
+onmouserepeat=script38(event_com, interface_771:com_400, "Brown", 25, 120)
+
+[com_108]
+type=graphic
+x=114
+y=49
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1621
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark brown", 25, 120)
+
+[com_109]
+type=graphic
+x=144
+y=49
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1622
+onmouserepeat=script38(event_com, interface_771:com_400, "Light brown", 25, 120)
+
+[com_110]
+type=graphic
+x=24
+y=76
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1623
+onmouserepeat=script38(event_com, interface_771:com_400, "Mint green", 25, 120)
+
+[com_111]
+type=graphic
+x=54
+y=76
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1624
+onmouserepeat=script38(event_com, interface_771:com_400, "Green", 25, 120)
+
+[com_112]
+type=graphic
+x=84
+y=76
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1625
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark green", 25, 120)
+
+[com_113]
+type=graphic
+x=114
+y=76
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1626
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark blue", 25, 120)
+
+[com_114]
+type=graphic
+x=144
+y=76
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1627
+onmouserepeat=script38(event_com, interface_771:com_400, "Turquoise", 25, 120)
+
+[com_115]
+type=graphic
+x=24
+y=103
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1628
+onmouserepeat=script38(event_com, interface_771:com_400, "Cyan", 25, 120)
+
+[com_116]
+type=graphic
+x=54
+y=103
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1629
+onmouserepeat=script38(event_com, interface_771:com_400, "Purple", 25, 120)
+
+[com_117]
+type=graphic
+x=84
+y=103
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1630
+onmouserepeat=script38(event_com, interface_771:com_400, "Violet", 25, 120)
+
+[com_118]
+type=graphic
+x=114
+y=103
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1631
+onmouserepeat=script38(event_com, interface_771:com_400, "Indigo", 25, 120)
+
+[com_119]
+type=graphic
+x=144
+y=103
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1632
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark grey", 25, 120)
+
+[com_120]
+type=graphic
+x=24
+y=130
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1633
+onmouserepeat=script38(event_com, interface_771:com_400, "Military grey", 25, 120)
+
+[com_121]
+type=graphic
+x=54
+y=130
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1634
+onmouserepeat=script38(event_com, interface_771:com_400, "White", 25, 120)
+
+[com_122]
+type=graphic
+x=84
+y=130
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1635
+onmouserepeat=script38(event_com, interface_771:com_400, "Light grey", 25, 120)
+
+[com_123]
+type=graphic
+x=114
+y=130
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1636
+onmouserepeat=script38(event_com, interface_771:com_400, "Taupe", 25, 120)
+
+[com_124]
+type=graphic
+x=144
+y=130
+width=28
+height=25
+layer=com_99
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1637
+onmouserepeat=script38(event_com, interface_771:com_400, "Black", 25, 120)
+
+[com_125]
+type=rectangle
+x=30
+y=28
+width=16
+height=13
+layer=com_99
+colour=0x300000
+fill=yes
+
+[com_126]
+type=rectangle
+x=60
+y=28
+width=16
+height=13
+layer=com_99
+colour=0xb03838
+fill=yes
+
+[com_127]
+type=rectangle
+x=90
+y=28
+width=16
+height=13
+layer=com_99
+colour=0x9f2800
+fill=yes
+
+[com_128]
+type=rectangle
+x=120
+y=28
+width=16
+height=13
+layer=com_99
+colour=0xc88080
+fill=yes
+
+[com_129]
+type=rectangle
+x=150
+y=28
+width=16
+height=13
+layer=com_99
+colour=0xcb823e
+fill=yes
+
+[com_130]
+type=rectangle
+x=30
+y=55
+width=16
+height=13
+layer=com_99
+colour=0xcdad53
+fill=yes
+
+[com_131]
+type=rectangle
+x=60
+y=55
+width=16
+height=13
+layer=com_99
+colour=0xc06840
+fill=yes
+
+[com_132]
+type=rectangle
+x=90
+y=55
+width=16
+height=13
+layer=com_99
+colour=0x50321e
+fill=yes
+
+[com_133]
+type=rectangle
+x=120
+y=55
+width=16
+height=13
+layer=com_99
+colour=0x302008
+fill=yes
+
+[com_134]
+type=rectangle
+x=150
+y=55
+width=16
+height=13
+layer=com_99
+colour=0x885f29
+fill=yes
+
+[com_135]
+type=rectangle
+x=30
+y=82
+width=16
+height=13
+layer=com_99
+colour=0x60b060
+fill=yes
+
+[com_136]
+type=rectangle
+x=60
+y=82
+width=16
+height=13
+layer=com_99
+colour=0x008300
+fill=yes
+
+[com_137]
+type=rectangle
+x=90
+y=82
+width=16
+height=13
+layer=com_99
+colour=0x183028
+fill=yes
+
+[com_138]
+type=rectangle
+x=120
+y=82
+width=16
+height=13
+layer=com_99
+colour=0x181890
+fill=yes
+
+[com_139]
+type=rectangle
+x=150
+y=82
+width=16
+height=13
+layer=com_99
+colour=0x008383
+fill=yes
+
+[com_140]
+type=rectangle
+x=30
+y=109
+width=16
+height=13
+layer=com_99
+colour=0x68a8f8
+fill=yes
+
+[com_141]
+type=rectangle
+x=60
+y=109
+width=16
+height=13
+layer=com_99
+colour=0xbe00c0
+fill=yes
+
+[com_142]
+type=rectangle
+x=90
+y=109
+width=16
+height=13
+layer=com_99
+colour=0x9860b0
+fill=yes
+
+[com_143]
+type=rectangle
+x=120
+y=109
+width=16
+height=13
+layer=com_99
+colour=0x581890
+fill=yes
+
+[com_144]
+type=rectangle
+x=150
+y=109
+width=16
+height=13
+layer=com_99
+colour=0x2f2a2a
+fill=yes
+
+[com_145]
+type=rectangle
+x=30
+y=136
+width=16
+height=13
+layer=com_99
+colour=0x76756c
+fill=yes
+
+[com_146]
+type=rectangle
+x=60
+y=136
+width=16
+height=13
+layer=com_99
+colour=0xd6d1d1
+fill=yes
+
+[com_147]
+type=rectangle
+x=90
+y=136
+width=16
+height=13
+layer=com_99
+colour=0x989878
+fill=yes
+
+[com_148]
+type=rectangle
+x=120
+y=136
+width=16
+height=13
+layer=com_99
+colour=0x484038
+fill=yes
+
+[com_149]
+type=rectangle
+x=150
+y=136
+width=16
+height=13
+layer=com_99
+colour=0x101010
+fill=yes
+
+[com_150]
+type=layer
+x=266
+y=30
+width=200
+height=200
+layer=com_24
+hide=yes
+
+[com_151]
+type=graphic
+x=54
+y=22
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1638
+onmouserepeat=script38(event_com, interface_771:com_400, "Pale", 25, 120)
+
+[com_152]
+type=graphic
+x=84
+y=22
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1639
+onmouserepeat=script38(event_com, interface_771:com_400, "Fair", 25, 120)
+
+[com_153]
+type=graphic
+x=114
+y=22
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1640
+onmouserepeat=script38(event_com, interface_771:com_400, "Tanned", 25, 120)
+
+[com_154]
+type=graphic
+x=144
+y=22
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1641
+onmouserepeat=script38(event_com, interface_771:com_400, "Olive", 25, 120)
+
+[com_155]
+type=graphic
+x=24
+y=49
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1642
+onmouserepeat=script38(event_com, interface_771:com_400, "Light brown", 25, 120)
+
+[com_156]
+type=graphic
+x=54
+y=49
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1643
+onmouserepeat=script38(event_com, interface_771:com_400, "Brown", 25, 120)
+
+[com_157]
+type=graphic
+x=84
+y=49
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1644
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark brown", 25, 120)
+
+[com_158]
+type=graphic
+x=24
+y=22
+width=28
+height=25
+layer=com_150
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1645
+onmouserepeat=script38(event_com, interface_771:com_400, "Very pale", 25, 120)
+
+[com_159]
+type=rectangle
+x=60
+y=28
+width=16
+height=13
+layer=com_150
+colour=0xbb8f6a
+fill=yes
+
+[com_160]
+type=rectangle
+x=90
+y=28
+width=16
+height=13
+layer=com_150
+colour=0xa47f5d
+fill=yes
+
+[com_161]
+type=rectangle
+x=120
+y=28
+width=16
+height=13
+layer=com_150
+colour=0x9e7a49
+fill=yes
+
+[com_162]
+type=rectangle
+x=150
+y=28
+width=16
+height=13
+layer=com_150
+colour=0x8e6e42
+fill=yes
+
+[com_163]
+type=rectangle
+x=30
+y=55
+width=16
+height=13
+layer=com_150
+colour=0x79582a
+fill=yes
+
+[com_164]
+type=rectangle
+x=60
+y=55
+width=16
+height=13
+layer=com_150
+colour=0x644e24
+fill=yes
+
+[com_165]
+type=rectangle
+x=90
+y=55
+width=16
+height=13
+layer=com_150
+colour=0x4c3d09
+fill=yes
+
+[com_166]
+type=rectangle
+x=30
+y=28
+width=16
+height=13
+layer=com_150
+colour=0xd5a985
+fill=yes
+
+[com_167]
+type=layer
+x=319
+y=208
+width=100
+height=25
+layer=com_24
+transmitop=1
+op1=Select next
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1582
+
+[com_168]
+type=text
+x=319
+y=208
+width=100
+height=25
+layer=com_24
+textfont=b12_full
+text=Next
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_169]
+type=layer
+x=174
+y=208
+width=100
+height=25
+layer=com_24
+transmitop=1,10
+op1=Select random
+op10= 
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+
+[com_170]
+type=text
+x=174
+y=208
+width=100
+height=25
+layer=com_24
+textfont=b12_full
+text=Randomise
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+transmitop=10
+op10= 
+
+[com_171]
+type=layer
+x=28
+y=208
+width=100
+height=25
+layer=com_24
+transmitop=1
+op1=Go back
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1581
+
+[com_172]
+type=text
+x=28
+y=208
+width=100
+height=25
+layer=com_24
+textfont=b12_full
+text=Back
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+opbase=   
+
+[com_173]
+type=text
+x=325
+y=3
+width=90
+height=15
+layer=com_25
+textfont=b12_full
+text=Colour
+textalignh=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_174]
+type=graphic
+x=400
+y=26
+width=64
+height=20
+layer=com_25
+graphic="tabs,1"
+transmitop=1
+op1=Select feet colour
+onop=script1593
+
+[com_175]
+type=text
+x=406
+y=29
+width=59
+height=15
+layer=com_25
+textfont=b12_full
+text=Feet
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_176]
+type=graphic
+x=342
+y=26
+width=64
+height=20
+layer=com_25
+graphic="tabs,1"
+transmitop=1
+op1=Select leg colour
+onop=script1592
+
+[com_177]
+type=text
+x=349
+y=29
+width=65
+height=15
+layer=com_25
+textfont=b12_full
+text=Legs
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_178]
+type=graphic
+x=283
+y=26
+width=64
+height=20
+layer=com_25
+graphic="tabs,0"
+transmitop=1
+op1=Select torso colour
+onop=script1591
+
+[com_179]
+type=text
+x=291
+y=29
+width=65
+height=15
+layer=com_25
+textfont=b12_full
+text=Torso
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_180]
+type=graphic
+x=295
+y=33
+width=146
+height=32
+layer=com_25
+graphic="v2_stone_borders,23"
+tiling=yes
+opbase= 
+
+[com_181]
+type=graphic
+x=293
+y=174
+width=151
+height=32
+layer=com_25
+graphic="v2_stone_borders,23"
+tiling=yes
+
+[com_182]
+type=graphic
+x=269
+y=62
+width=32
+height=106
+layer=com_25
+graphic="v2_stone_borders,24"
+tiling=yes
+opbase=  
+
+[com_183]
+type=graphic
+x=450
+y=57
+width=32
+height=110
+layer=com_25
+graphic="v2_stone_borders,24"
+tiling=yes
+
+[com_184]
+type=graphic
+x=283
+y=46
+width=32
+height=32
+layer=com_25
+graphic="v2_stone_borders,28"
+tiling=yes
+
+[com_185]
+type=graphic
+x=435
+y=46
+width=32
+height=32
+layer=com_25
+graphic="v2_stone_borders,29"
+tiling=yes
+
+[com_186]
+type=graphic
+x=283
+y=158
+width=32
+height=32
+layer=com_25
+graphic="v2_stone_borders,30"
+tiling=yes
+
+[com_187]
+type=graphic
+x=435
+y=158
+width=32
+height=32
+layer=com_25
+graphic="v2_stone_borders,31"
+tiling=yes
+
+[com_188]
+type=layer
+x=278
+y=29
+width=200
+height=200
+layer=com_25
+
+[com_189]
+type=graphic
+x=8
+y=22
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1646
+onmouserepeat=script38(event_com, interface_771:com_400, "Burgundy", 25, 120)
+
+[com_190]
+type=graphic
+x=38
+y=22
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1647
+onmouserepeat=script38(event_com, interface_771:com_400, "Red", 25, 120)
+
+[com_191]
+type=graphic
+x=68
+y=22
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1648
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark red", 25, 120)
+
+[com_192]
+type=graphic
+x=98
+y=22
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1649
+onmouserepeat=script38(event_com, interface_771:com_400, "Pink", 25, 120)
+
+[com_193]
+type=graphic
+x=128
+y=22
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1650
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark pink", 25, 120)
+
+[com_194]
+type=graphic
+x=157
+y=22
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1651
+onmouserepeat=script38(event_com, interface_771:com_400, "Orange", 25, 120)
+
+[com_195]
+type=graphic
+x=8
+y=49
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1652
+onmouserepeat=script38(event_com, interface_771:com_400, "Burnt orange", 25, 120)
+
+[com_196]
+type=graphic
+x=38
+y=49
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1653
+onmouserepeat=script38(event_com, interface_771:com_400, "Peach", 25, 120)
+
+[com_197]
+type=graphic
+x=68
+y=49
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1654
+onmouserepeat=script38(event_com, interface_771:com_400, "Light khaki", 25, 120)
+
+[com_198]
+type=graphic
+x=98
+y=49
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1655
+onmouserepeat=script38(event_com, interface_771:com_400, "Khaki", 25, 120)
+
+[com_199]
+type=graphic
+x=128
+y=49
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1656
+onmouserepeat=script38(event_com, interface_771:com_400, "Gold", 25, 120)
+
+[com_200]
+type=graphic
+x=157
+y=49
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1657
+onmouserepeat=script38(event_com, interface_771:com_400, "Moss green", 25, 120)
+
+[com_201]
+type=graphic
+x=8
+y=76
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1658
+onmouserepeat=script38(event_com, interface_771:com_400, "Mint green", 25, 120)
+
+[com_202]
+type=graphic
+x=38
+y=76
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1659
+onmouserepeat=script38(event_com, interface_771:com_400, "Sea green", 25, 120)
+
+[com_203]
+type=graphic
+x=68
+y=76
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1660
+onmouserepeat=script38(event_com, interface_771:com_400, "Forest green", 25, 120)
+
+[com_204]
+type=graphic
+x=98
+y=76
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1661
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark green", 25, 120)
+
+[com_205]
+type=graphic
+x=128
+y=76
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1662
+onmouserepeat=script38(event_com, interface_771:com_400, "Royal blue", 25, 120)
+
+[com_206]
+type=graphic
+x=157
+y=76
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1663
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark blue", 25, 120)
+
+[com_207]
+type=graphic
+x=8
+y=103
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1664
+onmouserepeat=script38(event_com, interface_771:com_400, "Light blue", 25, 120)
+
+[com_208]
+type=graphic
+x=38
+y=103
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1665
+onmouserepeat=script38(event_com, interface_771:com_400, "Pale blue", 25, 120)
+
+[com_209]
+type=graphic
+x=68
+y=103
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1666
+onmouserepeat=script38(event_com, interface_771:com_400, "Mauve", 25, 120)
+
+[com_210]
+type=graphic
+x=98
+y=103
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1667
+onmouserepeat=script38(event_com, interface_771:com_400, "Violet", 25, 120)
+
+[com_211]
+type=graphic
+x=128
+y=103
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1668
+onmouserepeat=script38(event_com, interface_771:com_400, "Indigo", 25, 120)
+
+[com_212]
+type=graphic
+x=157
+y=103
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1669
+onmouserepeat=script38(event_com, interface_771:com_400, "Navy blue", 25, 120)
+
+[com_213]
+type=graphic
+x=8
+y=130
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+opbase=m+mmm+m+
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1670
+onmouserepeat=script38(event_com, interface_771:com_400, "Beige", 25, 120)
+
+[com_214]
+type=graphic
+x=38
+y=130
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1671
+onmouserepeat=script38(event_com, interface_771:com_400, "Light grey", 25, 120)
+
+[com_215]
+type=graphic
+x=68
+y=130
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1672
+onmouserepeat=script38(event_com, interface_771:com_400, "Taupe", 25, 120)
+
+[com_216]
+type=graphic
+x=98
+y=130
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1673
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark grey", 25, 120)
+
+[com_217]
+type=graphic
+x=128
+y=130
+width=28
+height=25
+layer=com_188
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1674
+onmouserepeat=script38(event_com, interface_771:com_400, "Black", 25, 120)
+
+[com_218]
+type=rectangle
+x=14
+y=28
+width=16
+height=13
+layer=com_188
+colour=0x300000
+fill=yes
+
+[com_219]
+type=rectangle
+x=44
+y=28
+width=16
+height=13
+layer=com_188
+colour=0xb03838
+fill=yes
+
+[com_220]
+type=rectangle
+x=74
+y=28
+width=16
+height=13
+layer=com_188
+colour=0x752f3b
+fill=yes
+
+[com_221]
+type=rectangle
+x=104
+y=28
+width=16
+height=13
+layer=com_188
+colour=0xc88080
+fill=yes
+
+[com_222]
+type=rectangle
+x=134
+y=28
+width=16
+height=13
+layer=com_188
+colour=0xa17067
+fill=yes
+
+[com_223]
+type=rectangle
+x=163
+y=28
+width=16
+height=13
+layer=com_188
+colour=0x9d642f
+fill=yes
+
+[com_224]
+type=rectangle
+x=14
+y=55
+width=16
+height=13
+layer=com_188
+colour=0x8b3b2a
+fill=yes
+opbase=mmmm
+
+[com_225]
+type=rectangle
+x=44
+y=55
+width=16
+height=13
+layer=com_188
+colour=0xc06840
+fill=yes
+
+[com_226]
+type=rectangle
+x=74
+y=55
+width=16
+height=13
+layer=com_188
+colour=0xaa9045
+fill=yes
+
+[com_227]
+type=rectangle
+x=104
+y=55
+width=16
+height=13
+layer=com_188
+colour=0x7b6e32
+fill=yes
+
+[com_228]
+type=rectangle
+x=134
+y=55
+width=16
+height=13
+layer=com_188
+colour=0xa3970d
+fill=yes
+
+[com_229]
+type=rectangle
+x=163
+y=55
+width=16
+height=13
+layer=com_188
+colour=0x829472
+fill=yes
+
+[com_230]
+type=rectangle
+x=14
+y=82
+width=16
+height=13
+layer=com_188
+colour=0x60b060
+fill=yes
+
+[com_231]
+type=rectangle
+x=44
+y=82
+width=16
+height=13
+layer=com_188
+colour=0x2d723e
+fill=yes
+
+[com_232]
+type=rectangle
+x=74
+y=82
+width=16
+height=13
+layer=com_188
+colour=0x1c6135
+fill=yes
+
+[com_233]
+type=rectangle
+x=104
+y=82
+width=16
+height=13
+layer=com_188
+colour=0x183028
+fill=yes
+
+[com_234]
+type=rectangle
+x=134
+y=82
+width=16
+height=13
+layer=com_188
+colour=0x181890
+fill=yes
+
+[com_235]
+type=rectangle
+x=163
+y=82
+width=16
+height=13
+layer=com_188
+colour=0x2d5272
+fill=yes
+
+[com_236]
+type=rectangle
+x=14
+y=109
+width=16
+height=13
+layer=com_188
+colour=0x6088b0
+fill=yes
+
+[com_237]
+type=rectangle
+x=44
+y=109
+width=16
+height=13
+layer=com_188
+colour=0x728c94
+fill=yes
+
+[com_238]
+type=rectangle
+x=74
+y=109
+width=16
+height=13
+layer=com_188
+colour=0x83537b
+fill=yes
+
+[com_239]
+type=rectangle
+x=104
+y=109
+width=16
+height=13
+layer=com_188
+colour=0x9860b0
+fill=yes
+
+[com_240]
+type=rectangle
+x=134
+y=109
+width=16
+height=13
+layer=com_188
+colour=0x581890
+fill=yes
+
+[com_241]
+type=rectangle
+x=163
+y=109
+width=16
+height=13
+layer=com_188
+colour=0x3b3b4e
+fill=yes
+
+[com_242]
+type=rectangle
+x=14
+y=136
+width=16
+height=13
+layer=com_188
+colour=0xada481
+fill=yes
+
+[com_243]
+type=rectangle
+x=44
+y=136
+width=16
+height=13
+layer=com_188
+colour=0x989878
+fill=yes
+
+[com_244]
+type=rectangle
+x=74
+y=136
+width=16
+height=13
+layer=com_188
+colour=0x484038
+fill=yes
+
+[com_245]
+type=rectangle
+x=104
+y=136
+width=16
+height=13
+layer=com_188
+colour=0x262323
+fill=yes
+
+[com_246]
+type=rectangle
+x=134
+y=136
+width=16
+height=13
+layer=com_188
+colour=0x101010
+fill=yes
+
+[com_247]
+type=layer
+x=278
+y=29
+width=200
+height=200
+layer=com_25
+hide=yes
+
+[com_248]
+type=graphic
+x=98
+y=76
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1675
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark green", 25, 120)
+
+[com_249]
+type=graphic
+x=8
+y=22
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1676
+onmouserepeat=script38(event_com, interface_771:com_400, "Burgundy", 25, 120)
+
+[com_250]
+type=graphic
+x=38
+y=22
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1677
+onmouserepeat=script38(event_com, interface_771:com_400, "Red", 25, 120)
+
+[com_251]
+type=graphic
+x=68
+y=22
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1678
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark red", 25, 120)
+
+[com_252]
+type=graphic
+x=98
+y=22
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1679
+onmouserepeat=script38(event_com, interface_771:com_400, "Pink", 25, 120)
+
+[com_253]
+type=graphic
+x=128
+y=22
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1680
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark pink", 25, 120)
+
+[com_254]
+type=graphic
+x=157
+y=22
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1681
+onmouserepeat=script38(event_com, interface_771:com_400, "Orange", 25, 120)
+
+[com_255]
+type=graphic
+x=8
+y=49
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1682
+onmouserepeat=script38(event_com, interface_771:com_400, "Burnt orange", 25, 120)
+
+[com_256]
+type=graphic
+x=38
+y=49
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1683
+onmouserepeat=script38(event_com, interface_771:com_400, "Peach", 25, 120)
+
+[com_257]
+type=graphic
+x=68
+y=49
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1684
+onmouserepeat=script38(event_com, interface_771:com_400, "Light khaki", 25, 120)
+
+[com_258]
+type=graphic
+x=98
+y=49
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1685
+onmouserepeat=script38(event_com, interface_771:com_400, "Khaki", 25, 120)
+
+[com_259]
+type=graphic
+x=128
+y=49
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1686
+onmouserepeat=script38(event_com, interface_771:com_400, "Gold", 25, 120)
+
+[com_260]
+type=graphic
+x=157
+y=49
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1687
+onmouserepeat=script38(event_com, interface_771:com_400, "Moss green", 25, 120)
+
+[com_261]
+type=graphic
+x=8
+y=76
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1688
+onmouserepeat=script38(event_com, interface_771:com_400, "Mint green", 25, 120)
+
+[com_262]
+type=graphic
+x=38
+y=76
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1689
+onmouserepeat=script38(event_com, interface_771:com_400, "Sea green", 25, 120)
+
+[com_263]
+type=graphic
+x=68
+y=76
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1690
+onmouserepeat=script38(event_com, interface_771:com_400, "Forest green", 25, 120)
+
+[com_264]
+type=graphic
+x=128
+y=76
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1691
+onmouserepeat=script38(event_com, interface_771:com_400, "Royal blue", 25, 120)
+
+[com_265]
+type=graphic
+x=157
+y=76
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1692
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark blue", 25, 120)
+
+[com_266]
+type=graphic
+x=8
+y=103
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1693
+onmouserepeat=script38(event_com, interface_771:com_400, "Light blue", 25, 120)
+
+[com_267]
+type=graphic
+x=38
+y=103
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1694
+onmouserepeat=script38(event_com, interface_771:com_400, "Pale blue", 25, 120)
+
+[com_268]
+type=graphic
+x=68
+y=103
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1695
+onmouserepeat=script38(event_com, interface_771:com_400, "Mauve", 25, 120)
+
+[com_269]
+type=graphic
+x=98
+y=103
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1696
+onmouserepeat=script38(event_com, interface_771:com_400, "Violet", 25, 120)
+
+[com_270]
+type=graphic
+x=128
+y=103
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1697
+onmouserepeat=script38(event_com, interface_771:com_400, "Indigo", 25, 120)
+
+[com_271]
+type=graphic
+x=157
+y=103
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1698
+onmouserepeat=script38(event_com, interface_771:com_400, "Navy blue", 25, 120)
+
+[com_272]
+type=graphic
+x=8
+y=130
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+opbase=m+mmm+m+
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1699
+onmouserepeat=script38(event_com, interface_771:com_400, "Beige", 25, 120)
+
+[com_273]
+type=graphic
+x=38
+y=130
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1700
+onmouserepeat=script38(event_com, interface_771:com_400, "Light grey", 25, 120)
+
+[com_274]
+type=graphic
+x=68
+y=130
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1701
+onmouserepeat=script38(event_com, interface_771:com_400, "Taupe", 25, 120)
+
+[com_275]
+type=graphic
+x=98
+y=130
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1702
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark grey", 25, 120)
+
+[com_276]
+type=graphic
+x=128
+y=130
+width=28
+height=25
+layer=com_247
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1703
+onmouserepeat=script38(event_com, interface_771:com_400, "Black", 25, 120)
+
+[com_277]
+type=rectangle
+x=104
+y=82
+width=16
+height=13
+layer=com_247
+colour=0x183028
+fill=yes
+
+[com_278]
+type=rectangle
+x=14
+y=28
+width=16
+height=13
+layer=com_247
+colour=0x300000
+fill=yes
+
+[com_279]
+type=rectangle
+x=44
+y=28
+width=16
+height=13
+layer=com_247
+colour=0xb03838
+fill=yes
+
+[com_280]
+type=rectangle
+x=74
+y=28
+width=16
+height=13
+layer=com_247
+colour=0x752f3b
+fill=yes
+
+[com_281]
+type=rectangle
+x=104
+y=28
+width=16
+height=13
+layer=com_247
+colour=0xc88080
+fill=yes
+
+[com_282]
+type=rectangle
+x=134
+y=28
+width=16
+height=13
+layer=com_247
+colour=0xa17067
+fill=yes
+
+[com_283]
+type=rectangle
+x=163
+y=28
+width=16
+height=13
+layer=com_247
+colour=0x9d642f
+fill=yes
+
+[com_284]
+type=rectangle
+x=14
+y=55
+width=16
+height=13
+layer=com_247
+colour=0x8b3b2a
+fill=yes
+opbase=mmmm
+
+[com_285]
+type=rectangle
+x=44
+y=55
+width=16
+height=13
+layer=com_247
+colour=0xc06840
+fill=yes
+
+[com_286]
+type=rectangle
+x=74
+y=55
+width=16
+height=13
+layer=com_247
+colour=0xaa9045
+fill=yes
+
+[com_287]
+type=rectangle
+x=104
+y=55
+width=16
+height=13
+layer=com_247
+colour=0x7b6e32
+fill=yes
+
+[com_288]
+type=rectangle
+x=134
+y=55
+width=16
+height=13
+layer=com_247
+colour=0xa3970d
+fill=yes
+
+[com_289]
+type=rectangle
+x=163
+y=55
+width=16
+height=13
+layer=com_247
+colour=0x829472
+fill=yes
+
+[com_290]
+type=rectangle
+x=14
+y=82
+width=16
+height=13
+layer=com_247
+colour=0x60b060
+fill=yes
+
+[com_291]
+type=rectangle
+x=44
+y=82
+width=16
+height=13
+layer=com_247
+colour=0x2d723e
+fill=yes
+
+[com_292]
+type=rectangle
+x=74
+y=82
+width=16
+height=13
+layer=com_247
+colour=0x1c6135
+fill=yes
+
+[com_293]
+type=rectangle
+x=134
+y=82
+width=16
+height=13
+layer=com_247
+colour=0x181890
+fill=yes
+
+[com_294]
+type=rectangle
+x=163
+y=82
+width=16
+height=13
+layer=com_247
+colour=0x2d5272
+fill=yes
+
+[com_295]
+type=rectangle
+x=14
+y=109
+width=16
+height=13
+layer=com_247
+colour=0x6088b0
+fill=yes
+
+[com_296]
+type=rectangle
+x=44
+y=109
+width=16
+height=13
+layer=com_247
+colour=0x728c94
+fill=yes
+
+[com_297]
+type=rectangle
+x=74
+y=109
+width=16
+height=13
+layer=com_247
+colour=0x83537b
+fill=yes
+
+[com_298]
+type=rectangle
+x=104
+y=109
+width=16
+height=13
+layer=com_247
+colour=0x9860b0
+fill=yes
+
+[com_299]
+type=rectangle
+x=134
+y=109
+width=16
+height=13
+layer=com_247
+colour=0x581890
+fill=yes
+
+[com_300]
+type=rectangle
+x=163
+y=109
+width=16
+height=13
+layer=com_247
+colour=0x3b3b4e
+fill=yes
+
+[com_301]
+type=rectangle
+x=14
+y=136
+width=16
+height=13
+layer=com_247
+colour=0xada481
+fill=yes
+
+[com_302]
+type=rectangle
+x=44
+y=136
+width=16
+height=13
+layer=com_247
+colour=0x989878
+fill=yes
+
+[com_303]
+type=rectangle
+x=74
+y=136
+width=16
+height=13
+layer=com_247
+colour=0x484038
+fill=yes
+
+[com_304]
+type=rectangle
+x=104
+y=136
+width=16
+height=13
+layer=com_247
+colour=0x262323
+fill=yes
+
+[com_305]
+type=rectangle
+x=134
+y=136
+width=16
+height=13
+layer=com_247
+colour=0x101010
+fill=yes
+
+[com_306]
+type=layer
+x=278
+y=29
+width=200
+height=200
+layer=com_25
+hide=yes
+
+[com_307]
+type=graphic
+x=8
+y=22
+width=28
+height=25
+layer=com_306
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1704
+onmouserepeat=script38(event_com, interface_771:com_400, "Brown", 25, 120)
+
+[com_308]
+type=graphic
+x=38
+y=22
+width=28
+height=25
+layer=com_306
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1705
+onmouserepeat=script38(event_com, interface_771:com_400, "Dark green", 25, 120)
+
+[com_309]
+type=graphic
+x=68
+y=22
+width=28
+height=25
+layer=com_306
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1706
+onmouserepeat=script38(event_com, interface_771:com_400, "Pale grey", 25, 120)
+
+[com_310]
+type=graphic
+x=98
+y=22
+width=28
+height=25
+layer=com_306
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1707
+onmouserepeat=script38(event_com, interface_771:com_400, "Black", 25, 120)
+
+[com_311]
+type=graphic
+x=128
+y=22
+width=28
+height=25
+layer=com_306
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1708
+onmouserepeat=script38(event_com, interface_771:com_400, "Light brown", 25, 120)
+
+[com_312]
+type=graphic
+x=157
+y=22
+width=28
+height=25
+layer=com_306
+graphic=graphic_1437
+transmitop=1
+op1=Select colour
+onmouseover=script44(event_com, graphic_1438)
+onmouseleave=script299(interface_771:com_400, event_com, graphic_1437)
+onop=script1709
+onmouserepeat=script38(event_com, interface_771:com_400, "Grey", 25, 120)
+
+[com_313]
+type=rectangle
+x=14
+y=28
+width=16
+height=13
+layer=com_306
+colour=0x584028
+fill=yes
+
+[com_314]
+type=rectangle
+x=44
+y=28
+width=16
+height=13
+layer=com_306
+colour=0x404000
+fill=yes
+
+[com_315]
+type=rectangle
+x=74
+y=28
+width=16
+height=13
+layer=com_306
+colour=0x686048
+fill=yes
+
+[com_316]
+type=rectangle
+x=104
+y=28
+width=16
+height=13
+layer=com_306
+colour=0x302828
+fill=yes
+
+[com_317]
+type=rectangle
+x=134
+y=28
+width=16
+height=13
+layer=com_306
+colour=0x684820
+fill=yes
+
+[com_318]
+type=rectangle
+x=163
+y=28
+width=16
+height=13
+layer=com_306
+colour=0x585850
+fill=yes
+
+[com_319]
+type=layer
+x=319
+y=208
+width=100
+height=25
+layer=com_25
+transmitop=1
+op1=Select next
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1595
+
+[com_320]
+type=text
+x=319
+y=208
+width=100
+height=25
+layer=com_25
+textfont=b12_full
+text=Confirm
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_321]
+type=layer
+x=174
+y=208
+width=100
+height=25
+layer=com_25
+transmitop=1,10
+op1=Select random
+op10= 
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+
+[com_322]
+type=text
+x=174
+y=208
+width=100
+height=25
+layer=com_25
+textfont=b12_full
+text=Randomise
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+transmitop=10
+op10= 
+
+[com_323]
+type=layer
+x=28
+y=208
+width=100
+height=25
+layer=com_25
+transmitop=1
+op1=Go back
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1594
+
+[com_324]
+type=text
+x=28
+y=208
+width=100
+height=25
+layer=com_25
+textfont=b12_full
+text=Back
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_325]
+type=layer
+x=158
+y=2
+width=120
+height=202
+layer=com_25
+
+[com_326]
+type=layer
+x=1
+y=-1
+width=121
+height=237
+layer=com_325
+
+[com_327]
+type=rectangle
+x=2
+y=7
+width=112
+height=191
+layer=com_326
+colour=0x1b1a18
+fill=yes
+trans=200
+
+[com_328]
+type=rectangle
+x=4
+y=10
+width=108
+height=184
+layer=com_326
+colour=0x1b1a18
+fill=yes
+trans=230
+
+[com_329]
+type=rectangle
+x=8
+y=13
+width=100
+height=180
+layer=com_326
+colour=0x1b1a18
+fill=yes
+trans=230
+
+[com_330]
+type=rectangle
+x=12
+y=17
+width=92
+height=171
+layer=com_326
+colour=0x1b1a18
+fill=yes
+trans=230
+
+[com_331]
+type=graphic
+x=3
+y=-9
+width=110
+height=32
+layer=com_325
+graphic="v2_stone_borders,23"
+tiling=yes
+opbase= 
+
+[com_332]
+type=graphic
+x=1
+y=184
+width=105
+height=32
+layer=com_325
+graphic="v2_stone_borders,23"
+tiling=yes
+opbase= 
+
+[com_333]
+type=graphic
+x=-14
+y=36
+width=32
+height=132
+layer=com_325
+graphic="v2_stone_borders,24"
+tiling=yes
+opbase= 
+
+[com_334]
+type=graphic
+x=101
+y=13
+width=32
+height=156
+layer=com_325
+graphic="v2_stone_borders,24"
+tiling=yes
+opbase= 
+
+[com_335]
+type=graphic
+y=4
+width=32
+height=32
+layer=com_325
+graphic="v2_stone_borders,28"
+tiling=yes
+opbase= 
+
+[com_336]
+type=graphic
+x=86
+y=4
+width=32
+height=32
+layer=com_325
+graphic="v2_stone_borders,29"
+tiling=yes
+opbase= 
+
+[com_337]
+type=graphic
+y=168
+width=32
+height=32
+layer=com_325
+graphic="v2_stone_borders,30"
+tiling=yes
+opbase= 
+
+[com_338]
+type=graphic
+x=86
+y=168
+width=32
+height=32
+layer=com_325
+graphic="v2_stone_borders,31"
+tiling=yes
+opbase= 
+
+[com_339]
+type=model
+clientcode=328
+x=28
+y=11
+width=65
+height=179
+layer=com_325
+model=null
+modelorigin=0,89
+modelzoom=610
+unknown101=3000
+
+[com_340]
+type=text
+x=35
+y=27
+width=85
+height=15
+layer=com_25
+textfont=p11_full
+text=Torso
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_341]
+type=graphic
+x=3
+y=19
+width=30
+height=30
+layer=com_25
+graphic=graphic_1450
+transmitop=1
+op1=Select previous torso
+onmouseover=script44(event_com, graphic_1449)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1450)
+onop=script1597
+onmouserepeat=script38(event_com, interface_771:com_401, "Select previous torso", 25, 120)
+
+[com_342]
+type=graphic
+x=121
+y=19
+width=30
+height=30
+layer=com_25
+graphic=graphic_1452
+transmitop=1
+op1=Select next torso
+onmouseover=script44(event_com, graphic_1451)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1452)
+onop=script1596
+onmouserepeat=script38(event_com, interface_771:com_401, "Select next torso", 25, 120)
+
+[com_343]
+type=layer
+x=34
+y=24
+width=86
+height=20
+layer=com_25
+onload=script100(event_com)
+
+[com_344]
+type=text
+x=35
+y=66
+width=85
+height=15
+layer=com_25
+textfont=p11_full
+text=Arms
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_345]
+type=graphic
+x=3
+y=58
+width=30
+height=30
+layer=com_25
+graphic=graphic_1450
+transmitop=1
+op1=Select previous arms
+onmouseover=script44(event_com, graphic_1449)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1450)
+onop=script1599
+onmouserepeat=script38(event_com, interface_771:com_401, "Select previous arms", 25, 120)
+
+[com_346]
+type=graphic
+x=121
+y=58
+width=30
+height=30
+layer=com_25
+graphic=graphic_1452
+transmitop=1
+op1=Select next arms
+onmouseover=script44(event_com, graphic_1451)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1452)
+onop=script1598
+onmouserepeat=script38(event_com, interface_771:com_401, "Select next arms", 25, 120)
+
+[com_347]
+type=layer
+x=34
+y=63
+width=86
+height=20
+layer=com_25
+onload=script100(event_com)
+
+[com_348]
+type=text
+x=35
+y=104
+width=85
+height=15
+layer=com_25
+textfont=p11_full
+text=Wrists
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_349]
+type=graphic
+x=3
+y=96
+width=30
+height=30
+layer=com_25
+graphic=graphic_1450
+transmitop=1
+op1=Select previous wrists
+onmouseover=script44(event_com, graphic_1449)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1450)
+onop=script1601
+onmouserepeat=script38(event_com, interface_771:com_401, "Select previous wrists", 25, 120)
+
+[com_350]
+type=graphic
+x=121
+y=96
+width=30
+height=30
+layer=com_25
+graphic=graphic_1452
+transmitop=1
+op1=Select next wrists
+onmouseover=script44(event_com, graphic_1451)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1452)
+onop=script1600
+onmouserepeat=script38(event_com, interface_771:com_401, "Select next wrists", 25, 120)
+
+[com_351]
+type=layer
+x=34
+y=101
+width=86
+height=20
+layer=com_25
+onload=script100(event_com)
+
+[com_352]
+type=text
+x=35
+y=141
+width=85
+height=15
+layer=com_25
+textfont=p11_full
+text=Legs
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_353]
+type=graphic
+x=3
+y=134
+width=30
+height=30
+layer=com_25
+graphic=graphic_1450
+transmitop=1
+op1=Select previous legs
+onmouseover=script44(event_com, graphic_1449)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1450)
+onop=script1603
+onmouserepeat=script38(event_com, interface_771:com_401, "Select previous legs", 25, 120)
+
+[com_354]
+type=graphic
+x=121
+y=134
+width=30
+height=30
+layer=com_25
+graphic=graphic_1452
+transmitop=1
+op1=Select next legs
+onmouseover=script44(event_com, graphic_1451)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1452)
+onop=script1602
+onmouserepeat=script38(event_com, interface_771:com_401, "Select next legs", 25, 120)
+
+[com_355]
+type=layer
+x=34
+y=139
+width=86
+height=20
+layer=com_25
+onload=script100(event_com)
+
+[com_356]
+type=text
+x=35
+y=181
+width=85
+height=15
+layer=com_25
+textfont=p11_full
+text=Feet
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9b00
+
+[com_357]
+type=graphic
+x=3
+y=172
+width=30
+height=30
+layer=com_25
+graphic=graphic_1450
+transmitop=1
+op1=Select previous feet
+onmouseover=script44(event_com, graphic_1449)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1450)
+onop=script1605
+onmouserepeat=script38(event_com, interface_771:com_401, "Select previous feet", 25, 120)
+
+[com_358]
+type=graphic
+x=121
+y=172
+width=30
+height=30
+layer=com_25
+graphic=graphic_1452
+transmitop=1
+op1=Select next feet
+onmouseover=script44(event_com, graphic_1451)
+onmouseleave=script299(interface_771:com_401, event_com, graphic_1452)
+onop=script1604
+onmouserepeat=script38(event_com, interface_771:com_401, "Select next feet", 25, 120)
+
+[com_359]
+type=layer
+x=34
+y=178
+width=86
+height=20
+layer=com_25
+onload=script100(event_com)
+
+[com_360]
+type=layer
+x=220
+y=71
+width=100
+height=25
+layer=com_26
+transmitop=1
+op1=Go back
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1610
+
+[com_361]
+type=text
+x=220
+y=71
+width=100
+height=25
+layer=com_26
+textfont=tutorial_font
+text=No
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_362]
+type=layer
+x=59
+y=71
+width=100
+height=25
+layer=com_26
+transmitop=1
+op1=Confirm changes
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+onop=script1595
+
+[com_363]
+type=text
+x=59
+y=71
+width=100
+height=25
+layer=com_26
+textfont=tutorial_font
+text=Yes
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_364]
+type=text
+x=47
+y=30
+width=287
+height=32
+layer=com_26
+textfont=p12_full
+text=Do you want to accept these character settings?
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff9900
+
+[com_365]
+type=rectangle
+width=505
+height=323
+layer=com_28
+colour=0x000000
+fill=yes
+trans=133
+
+[com_366]
+type=graphic
+x=117
+y=100
+width=263
+height=165
+layer=com_28
+graphic=tradebacking
+tiling=yes
+opbase= 
+
+[com_367]
+type=graphic
+x=98
+y=124
+width=32
+height=132
+layer=com_28
+graphic="v2_stone_borders,1"
+tiling=yes
+
+[com_368]
+type=graphic
+x=367
+y=124
+width=23
+height=132
+layer=com_28
+graphic="v2_stone_borders,3"
+tiling=yes
+
+[com_369]
+type=graphic
+x=142
+y=80
+width=231
+height=26
+layer=com_28
+graphic="v2_stone_borders,0"
+tiling=yes
+opbase= 
+
+[com_370]
+type=graphic
+x=137
+y=252
+width=233
+height=24
+layer=com_28
+graphic="v2_stone_borders,2"
+tiling=yes
+opbase= 
+
+[com_371]
+type=graphic
+x=111
+y=93
+width=32
+height=32
+layer=com_28
+graphic="v2_stone_borders,4"
+
+[com_372]
+type=graphic
+x=355
+y=93
+width=32
+height=32
+layer=com_28
+graphic="v2_stone_borders,5"
+
+[com_373]
+type=graphic
+x=111
+y=240
+width=32
+height=32
+layer=com_28
+graphic="v2_stone_borders,6"
+
+[com_374]
+type=graphic
+x=355
+y=240
+width=32
+height=32
+layer=com_28
+graphic="v2_stone_borders,7"
+
+[com_375]
+type=text
+x=196
+y=105
+width=108
+height=21
+layer=com_28
+textfont=b12_full
+text=Randomise Settings?
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff981f
+
+[com_376]
+type=text
+x=138
+y=99
+width=224
+height=87
+layer=com_28
+textfont=p12_full
+text=Are you sure you want to randomise your character head settings?
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff7d1f
+
+[com_377]
+type=text
+x=90
+y=163
+width=315
+height=27
+layer=com_28
+textfont=p12_full
+text=Yes - I want a random selection
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Confirm changes
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^red)
+
+[com_378]
+type=text
+x=92
+y=187
+width=315
+height=28
+layer=com_28
+textfont=p12_full
+text=No - I'm happy with my character settings
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Go back
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^red)
+onop=script1589
+
+[com_379]
+type=layer
+x=130
+y=225
+width=270
+height=20
+layer=com_28
+
+[com_380]
+type=text
+x=-28
+y=1
+width=315
+height=15
+layer=com_379
+textfont=p12_full
+text=Don't ask me this again
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff981f
+
+[com_381]
+type=graphic
+x=37
+y=-1
+width=19
+height=19
+layer=com_379
+graphic="warning_icons,1"
+transmitop=1
+op1=Off/On
+
+[com_382]
+type=rectangle
+width=505
+height=323
+layer=com_29
+colour=0x000000
+fill=yes
+trans=133
+
+[com_383]
+type=graphic
+x=117
+y=100
+width=263
+height=165
+layer=com_29
+graphic=tradebacking
+tiling=yes
+opbase= 
+
+[com_384]
+type=graphic
+x=98
+y=124
+width=32
+height=132
+layer=com_29
+graphic="v2_stone_borders,1"
+tiling=yes
+
+[com_385]
+type=graphic
+x=367
+y=124
+width=23
+height=132
+layer=com_29
+graphic="v2_stone_borders,3"
+tiling=yes
+
+[com_386]
+type=graphic
+x=142
+y=80
+width=231
+height=26
+layer=com_29
+graphic="v2_stone_borders,0"
+tiling=yes
+opbase= 
+
+[com_387]
+type=graphic
+x=137
+y=252
+width=233
+height=24
+layer=com_29
+graphic="v2_stone_borders,2"
+tiling=yes
+opbase= 
+
+[com_388]
+type=graphic
+x=111
+y=93
+width=32
+height=32
+layer=com_29
+graphic="v2_stone_borders,4"
+
+[com_389]
+type=graphic
+x=355
+y=93
+width=32
+height=32
+layer=com_29
+graphic="v2_stone_borders,5"
+
+[com_390]
+type=graphic
+x=111
+y=240
+width=32
+height=32
+layer=com_29
+graphic="v2_stone_borders,6"
+
+[com_391]
+type=graphic
+x=355
+y=240
+width=32
+height=32
+layer=com_29
+graphic="v2_stone_borders,7"
+
+[com_392]
+type=text
+x=196
+y=105
+width=108
+height=21
+layer=com_28
+textfont=b12_full
+text=Randomise Settings?
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff981f
+
+[com_393]
+type=text
+x=138
+y=99
+width=224
+height=87
+layer=com_29
+textfont=p12_full
+text=Are you sure you want to randomise your character body settings?
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff7d1f
+
+[com_394]
+type=text
+x=90
+y=163
+width=315
+height=27
+layer=com_29
+textfont=p12_full
+text=Yes - I want a random selection
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Confirm changes
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^red)
+
+[com_395]
+type=text
+x=92
+y=187
+width=315
+height=28
+layer=com_29
+textfont=p12_full
+text=No - I'm happy with my character settings
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Go back
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^red)
+onop=script1608
+
+[com_396]
+type=layer
+x=130
+y=225
+width=270
+height=20
+layer=com_29
+
+[com_397]
+type=text
+x=-28
+y=1
+width=315
+height=15
+layer=com_396
+textfont=p12_full
+text=Don't ask me this again
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff981f
+
+[com_398]
+type=graphic
+x=37
+y=-1
+width=19
+height=19
+layer=com_396
+graphic="warning_icons,1"
+transmitop=1
+op1=Off/On toggle
+
+[com_399]
+type=layer
+x=14
+y=19
+width=480
+height=280
+layer=com_30
+
+[com_400]
+type=layer
+x=14
+y=19
+width=167
+height=147
+layer=com_31
+
+[com_401]
+type=layer
+width=480
+height=245
+layer=com_32
+
+[com_402]
+type=layer
+width=270
+height=245
+layer=com_33
+
+[com_403]
+type=layer
+x=14
+y=19
+width=167
+height=147
+layer=com_34
+
+[com_404]
+type=layer
+width=512
+height=334
+xmode=proportion_centre
+ymode=proportion_centre
+
+[com_405]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+
+[com_406]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+layer=com_405
+
+[com_407]
+type=graphic
+x=-260
+width=32
+height=334
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,1"
+tiling=yes
+
+[com_408]
+type=graphic
+y=-171
+width=462
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,0"
+tiling=yes
+
+[com_409]
+type=graphic
+y=170
+width=512
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,2"
+tiling=yes
+
+[com_410]
+type=graphic
+x=259
+width=32
+height=334
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,3"
+tiling=yes
+
+[com_411]
+type=graphic
+x=-247
+y=-158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,4"
+tiling=yes
+
+[com_412]
+type=graphic
+x=247
+y=-158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,5"
+tiling=yes
+
+[com_413]
+type=graphic
+x=247
+y=158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,7"
+tiling=yes
+
+[com_414]
+type=graphic
+x=-247
+y=158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,6"
+tiling=yes
+
+[com_415]
+type=layer
+width=8192
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_right
+ymode=abs_centre
+layer=com_406
+
+[com_416]
+type=layer
+width=8188
+height=16391
+widthmode=proportion
+heightmode=proportion
+ymode=abs_centre
+layer=com_406
+
+[com_417]
+type=layer
+width=16391
+height=8192
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+layer=com_406
+
+[com_418]
+type=layer
+width=16391
+height=8182
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_406
+
+[com_419]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+layer=com_406
+
+[com_420]
+type=graphic
+width=256
+height=16384
+widthmode=minus
+heightmode=proportion
+ymode=abs_centre
+layer=com_416
+graphic=tradebacking
+tiling=yes
+outline=2
+
+[com_421]
+type=graphic
+width=256
+height=16391
+widthmode=minus
+heightmode=proportion
+xmode=abs_right
+ymode=abs_centre
+layer=com_415
+graphic=tradebacking
+tiling=yes
+outline=2
+
+[com_422]
+type=graphic
+width=16391
+height=167
+widthmode=proportion
+heightmode=minus
+xmode=abs_centre
+layer=com_417
+graphic=tradebacking
+tiling=yes
+outline=2
+
+[com_423]
+type=graphic
+width=16391
+height=166
+widthmode=proportion
+heightmode=minus
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_418
+graphic=tradebacking
+tiling=yes
+outline=2
+
+[com_424]
+type=layer
+y=168
+width=512
+height=334
+onload=script1611
+
+[com_425]
+type=layer
+y=168
+width=512
+height=334
+transmitop=10
+op10= 
+
+[com_426]
+type=layer
+y=168
+width=512
+height=334
+transmitop=10
+op10= 
+
+[com_427]
+type=layer
+y=168
+width=512
+height=334
+transmitop=10
+op10=  
+
+[com_428]
+type=layer
+y=168
+width=512
+height=334
+transmitop=10
+op10=   
+
+[com_429]
+type=layer
+y=168
+width=512
+height=334
+transmitop=10
+op10=    
+

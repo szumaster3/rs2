@@ -1,0 +1,88 @@
+[proc,script2236]
+~script2217;
+~script2231(1);
+~script2225;
+~script2282;
+def_boolean $boolean0 = true;
+if_settext("", interface_744:com_135);
+if_setgraphic(null, interface_744:com_150);
+%varclient_735 = -1;
+def_int $int1 = string_length(%varclientstring_124);
+if (compare(%varclientstring_124, "") = 0) {
+    if_settext("Please supply a password.", interface_744:com_135);
+    $boolean0 = false;
+} else if ($int1 < 5) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Password is too short, it must be at least 5 characters long.", interface_744:com_135);
+    %varclient_735 = 5;
+    $boolean0 = false;
+} else if ($int1 > 20) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Password is too long, it must be no more than 20 characters.", interface_744:com_135);
+    %varclient_735 = 5;
+    $boolean0 = false;
+} else if (~script2202(%varclientstring_124) = true) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Passwords may only contain letters and numbers.", interface_744:com_135);
+    %varclient_735 = 5;
+    $boolean0 = false;
+} else if (compare(%varclientstring_124, %varclientstring_122) = 0) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Your password is too similar to your username.", interface_744:com_135);
+    $boolean0 = false;
+}
+def_boolean $boolean2 = true;
+if_settext("", interface_744:com_138);
+if_setgraphic(null, interface_744:com_144);
+%varclient_1039 = -1;
+$int1 = string_length(%varclientstring_125);
+if (compare(%varclientstring_125, "") = 0) {
+    if_settext("Please supply a password.", interface_744:com_138);
+    $boolean2 = false;
+} else if ($int1 < 5) {
+    if_setgraphic(login_cross, interface_744:com_144);
+    if_settext("Password is too short, it must be at least 5 characters long.", interface_744:com_138);
+    %varclient_1039 = 5;
+    $boolean2 = false;
+} else if ($int1 > 20) {
+    if_setgraphic(login_cross, interface_744:com_144);
+    if_settext("Password is too long, it must be no more than 20 characters.", interface_744:com_138);
+    %varclient_1039 = 5;
+    $boolean2 = false;
+} else if (~script2202(%varclientstring_125) = true) {
+    if_setgraphic(login_cross, interface_744:com_144);
+    if_settext("Passwords may only contain letters and numbers.", interface_744:com_138);
+    %varclient_1039 = 5;
+    $boolean2 = false;
+} else if (compare(%varclientstring_125, %varclientstring_122) = 0) {
+    if_setgraphic(login_cross, interface_744:com_144);
+    if_settext("Your password is too similar to your username.", interface_744:com_138);
+    $boolean2 = false;
+}
+def_boolean $boolean3 = true;
+if (compare(%varclientstring_124, %varclientstring_125) ! 0 & compare(%varclientstring_124, "") ! 0 & compare(%varclientstring_125, "") ! 0) {
+    if_setgraphic(login_cross, interface_744:com_144);
+    if_settext("Please make sure both passwords match.", interface_744:com_138);
+    $boolean3 = false;
+}
+def_boolean $boolean4 = true;
+if_settext("", interface_744:com_153);
+if_setgraphic(null, interface_744:com_159);
+%varclient_734 = -1;
+if (compare(%varclientstring_122, "") = 0) {
+    if_settext("Please supply a username.", interface_744:com_153);
+    if_setgraphic(null, interface_744:com_159);
+    $boolean4 = false;
+} else if (~script2203(%varclientstring_122) = false) {
+    if_setgraphic(login_cross, interface_744:com_159);
+    if_settext("Please supply a valid username.", interface_744:com_153);
+    %varclient_734 = 1;
+    $boolean4 = false;
+}
+if ($boolean4 = true) {
+    unknown_command_5604(%varclientstring_122);
+    %varclientstring_123 = %varclientstring_122;
+    if_setontimer("script2237($boolean4, $boolean0, $boolean2, $boolean3)", interface_744:com_44);
+} else {
+    ~script2238($boolean4, $boolean0, $boolean2, $boolean3);
+}

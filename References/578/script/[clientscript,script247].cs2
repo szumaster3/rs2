@@ -1,0 +1,2 @@
+[clientscript,script247](int $key0, char $char1)
+%varclientstring_24 = ~add_to_inputstring(%varclientstring_24, 2, $key0, $char1);

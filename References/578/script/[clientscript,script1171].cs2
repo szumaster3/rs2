@@ -1,0 +1,2 @@
+[clientscript,script1171]
+mes("returned <tostring(unknown_command_6505)>");

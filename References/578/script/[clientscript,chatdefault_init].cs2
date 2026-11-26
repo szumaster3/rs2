@@ -1,0 +1,69 @@
+[clientscript,chatdefault_init]
+def_int $int0 = 0;
+if_setonkey("chatdefault_onkey(event_keycode, event_keychar)", interface_137:com_52);
+if_setonchattransmit("chatdefault_updatechatbox(true)", interface_751:com_0);
+if_setonfriendtransmit("chatdefault_updatechatbox(false)", interface_751:com_0);
+if_setonmisctransmit("script82", interface_751:com_0);
+if_setonvarcstrtransmit("script710{varclientstring_0}", interface_751:com_0);
+%varclientstring_1 = "";
+%varclient_1028 = 0;
+%varclient_42 = -1;
+%varclient_41 = 0;
+%varclient_43 = chat_gethistorylength;
+%varclient_3 = -1;
+%varclient_4 = 0;
+%varclientstring_2 = "";
+%varclientstring_3 = "";
+%varclientstring_4 = "";
+%varclientstring_5 = "";
+%varclientstring_6 = "";
+%varclientstring_7 = "";
+%varclientstring_8 = "";
+%varclientstring_9 = "";
+%varclientstring_10 = "";
+%varclientstring_11 = "";
+%varclientstring_12 = "";
+%varclientstring_13 = "";
+%varclientstring_14 = "";
+%varclientstring_15 = "";
+%varclientstring_16 = "";
+%varclientstring_17 = "";
+%varclientstring_18 = "";
+%varclientstring_19 = "";
+%varclientstring_20 = "";
+%varclientstring_21 = "";
+%varclientstring_196 = "";
+~script1558(1);
+if (getwindowmode >= 2) {
+    if_sethide(true, interface_752:com_2);
+    if_setgraphic(graphic_1247, interface_752:com_1);
+    if_setalpha(true, interface_752:com_1);
+    if_sethide(false, interface_752:com_1);
+    if_sethide(true, interface_137:com_55);
+    if_sethide(false, interface_137:com_56);
+    if_sethide(false, interface_137:com_57);
+    while ($int0 < 100) {
+        if_settextshadow(true, enum(int, component, enum_579, $int0));
+        if_setcolour(^white, enum(int, component, enum_579, $int0));
+        $int0 = calc($int0 + 1);
+    }
+    if_settextshadow(true, interface_137:com_52);
+    if_setcolour(^white, interface_137:com_52);
+} else {
+    if_setgraphic(chat_background, interface_752:com_1);
+    if_sethide(false, interface_752:com_1);
+    if_sethide(false, interface_752:com_2);
+    if_sethide(false, interface_137:com_55);
+    if_sethide(true, interface_137:com_56);
+    if_sethide(true, interface_137:com_57);
+    while ($int0 < 100) {
+        if_settextshadow(false, enum(int, component, enum_579, $int0));
+        if_setcolour(^black, enum(int, component, enum_579, $int0));
+        $int0 = calc($int0 + 1);
+    }
+    if_settextshadow(false, interface_137:com_52);
+    if_setcolour(^black, interface_137:com_52);
+}
+%varclient_7 = if_getheight(interface_137:com_58);
+~redraw_chat_buttons;
+%varclientstring_0 = "";

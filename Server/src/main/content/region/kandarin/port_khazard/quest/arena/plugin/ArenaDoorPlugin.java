@@ -19,7 +19,7 @@ import shared.consts.Quests;
 public final class ArenaDoorPlugin extends OptionHandler {
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.forId(82).getHandlers().put("option:open", this);
         return this;
     }

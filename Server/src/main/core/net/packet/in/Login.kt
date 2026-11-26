@@ -27,6 +27,12 @@ import java.io.File
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer
+import java.security.KeyFactory
+import java.security.interfaces.RSAPrivateKey
+import java.security.spec.PKCS8EncodedKeySpec
+import java.util.Base64
+import core.game.system.task.Pulse
+import core.game.system.SystemManager
 
 object Login {
     private const val ENCRYPTION_VERIFICATION_BYTE: Int = 10
@@ -37,12 +43,28 @@ object Login {
     private var exceptionData: Toml? = null
     private var lastModifiedData = 0L
 
-    fun decodeFromBuffer(buffer: ByteBuffer): Pair<AuthResponse, LoginInfo?> {
+    private val loginKey: RSAPrivateKey by lazy {
+        val keyFile = File("data/", "private.pem")
+
+        require(keyFile.isFile) {
+            "RSA key not found: ${keyFile.absolutePath}"
+        }
+
+        val encoded = keyFile.readLines()
+            .filterNot { it.startsWith("-----") }
+            .joinToString("")
+            .trim()
+
+        KeyFactory.getInstance("RSA")
+            .generatePrivate(PKCS8EncodedKeySpec(Base64.getDecoder().decode(encoded))) as RSAPrivateKey
+    }
+
+    fun decodeFromBuffer(buffer: ByteBuffer, serverKey: Long): Pair<AuthResponse, LoginInfo?> {
         try {
             val info = LoginInfo.createDefault()
 
             info.opcode = buffer.get().toInt()
-            if (buffer.short.toInt() != buffer.remaining()) {
+            if ((buffer.short.toInt() and 0xffff) != buffer.remaining()) {
                 return Pair(AuthResponse.BadSessionID, null)
             }
             val revision = buffer.int
@@ -55,33 +77,36 @@ object Login {
             }
 
             noop(buffer)
-            info.showAds = buffer.get().toInt() == 1
-            noop(buffer)
-            info.windowMode = buffer.get().toInt()
-            info.screenWidth = buffer.short.toInt()
-            info.screenHeight = buffer.short.toInt()
-            info.displayMode = buffer.get().toInt()
+            info.windowMode = buffer.get().toInt() and 0xff
+            info.screenWidth = buffer.short.toInt() and 0xffff
+            info.screenHeight = buffer.short.toInt() and 0xffff
+            info.displayMode = buffer.get().toInt() and 0xff
             noop(buffer, 24) //Skip past a bunch of random (actually random) data the client sends
             ByteBufferUtils.getString(buffer) //same as above
             info.adAffiliateId = buffer.int
-            info.settingsHash = buffer.int
-            info.currentPacketCount = buffer.short.toInt()
+            noop(buffer, buffer.get().toInt() and 0xff)
+            info.currentPacketCount = buffer.short.toInt() and 0xffff
 
             //Read client-reported CRC sums
             for (i in 0 until CACHE_INDEX_COUNT) info.crcSums[i] = buffer.int
 
-            val decryptedBuffer = decryptRSABuffer(buffer, ServerConstants.EXPONENT, ServerConstants.MODULUS)
-            decryptedBuffer.rewind()
+            val decryptedBuffer = decryptRSABuffer(buffer, loginKey.privateExponent, loginKey.modulus)
+            if (buffer.hasRemaining()) return Pair(AuthResponse.BadSessionID, null)
 
             if (decryptedBuffer.get().toInt() != ENCRYPTION_VERIFICATION_BYTE) {
                 return Pair(AuthResponse.UnexpectedError, info)
             }
 
-            info.isaacPair = produceISAACPairFrom(decryptedBuffer)
+            val seed = IntArray(4) { decryptedBuffer.int }
+            if (seed[2] != (serverKey ushr 32).toInt() || seed[3] != serverKey.toInt()) {
+                return Pair(AuthResponse.BadSessionID, null)
+            }
+            info.isaacPair = produceISAACPairFrom(seed)
             info.username = StringUtils.longToString(decryptedBuffer.long)
             info.password = ByteBufferUtils.getString(decryptedBuffer)
 
-            if (Repository.getPlayerByName(info.username) != null) {
+            if (decryptedBuffer.hasRemaining()) return Pair(AuthResponse.BadSessionID, null)
+            if (info.opcode == NORMAL_LOGIN_OP && Repository.getPlayerByName(info.username) != null) {
                 return Pair(AuthResponse.AlreadyOnline, info)
             }
 
@@ -96,11 +121,7 @@ object Login {
         }
     }
 
-    private fun produceISAACPairFrom(buffer: ByteBuffer): ISAACPair {
-        val incomingSeed = IntArray(4)
-        for (i in incomingSeed.indices) {
-            incomingSeed[i] = buffer.int
-        }
+    private fun produceISAACPairFrom(incomingSeed: IntArray): ISAACPair {
         val inCipher = ISAACCipher(incomingSeed)
         for (i in incomingSeed.indices) {
             incomingSeed[i] += 50
@@ -108,6 +129,10 @@ object Login {
         val outCipher = ISAACCipher(incomingSeed)
         return ISAACPair(inCipher, outCipher)
     }
+
+    @JvmStatic
+    fun decryptRegistrationRSA(buffer: ByteBuffer): ByteBuffer =
+        decryptRSABuffer(buffer, loginKey.privateExponent, loginKey.modulus)
 
     @JvmStatic
     fun decryptRSABuffer(buffer: ByteBuffer, exponent: BigInteger, modulus: BigInteger): ByteBuffer {
@@ -128,6 +153,30 @@ object Login {
     }
 
     fun proceedWith(session: IoSession, details: PlayerDetails, opcode: Int) {
+        if (opcode == RECONNECT_LOGIN_OP) {
+            GameWorld.Pulser.submit(object : Pulse(1) {
+                override fun pulse(): Boolean {
+                    if (!session.isActive) return true
+                    if (SystemManager.isUpdating) {
+                        session.write(AuthResponse.Updating)
+                        return true
+                    }
+                    val player = Repository.getPlayerByUid(details.uid)
+                    if (player == null || player.session.isActive ||
+                        Repository.disconnectionQueue[player.name] !== player || player.details.isBanned) {
+                        session.write(AuthResponse.BadSessionID)
+                        return true
+                    }
+                    Repository.disconnectionQueue.remove(player.name)
+                    player.details.session = session
+                    session.setObject(player)
+                    session.lastPing = System.currentTimeMillis()
+                    LoginParser(player.details).reconnect(player)
+                    return true
+                }
+            })
+            return
+        }
         if (Repository.uid_map.contains(details.uid)) {
             session.write(AuthResponse.AlreadyOnline)
             return

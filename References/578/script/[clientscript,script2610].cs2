@@ -1,0 +1,86 @@
+[clientscript,script2610](component $component0)
+def_string $string0 = "";
+if (%varplayerbit_6357 = 2) {
+    if_sethide(false, $component0);
+    if (%varplayerbit_6372 = 15) {
+        if (%varplayerbit_6373 > 0) {
+            $string0 = "Collected <tostring(%varplayerbit_6373)> out of 4 rocks";
+            if_setgraphic(graphic_1985, interface_37:com_36);
+        } else {
+            $string0 = "Send a squad to collect rocks";
+            if_setgraphic(graphic_1990, interface_37:com_36);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_0, interface_37:com_41, $string0, 50, 150)", interface_37:com_0);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_0);
+        if (%varplayerbit_6373 > 1) {
+            $string0 = "Collected <tostring(%varplayerbit_6373)> out of 4 rocks";
+            if_setgraphic(graphic_1985, interface_37:com_39);
+        } else {
+            $string0 = "Send a squad to collect rocks.";
+            if_setgraphic(graphic_1990, interface_37:com_39);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_3, interface_37:com_41, $string0, 50, 150)", interface_37:com_3);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_3);
+        if (%varplayerbit_6373 > 2) {
+            $string0 = "Collected <tostring(%varplayerbit_6373)> out of 4 rocks";
+            if_setgraphic(graphic_1985, interface_37:com_38);
+        } else {
+            $string0 = "Send a squad to collect rocks.";
+            if_setgraphic(graphic_1990, interface_37:com_38);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_4, interface_37:com_41, $string0, 50, 150)", interface_37:com_4);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_4);
+        if (%varplayerbit_6373 > 3) {
+            $string0 = "Collected <tostring(%varplayerbit_6373)> out of 4 rocks";
+            if_setgraphic(graphic_1985, interface_37:com_37);
+        } else {
+            $string0 = "Send a squad to collect rocks.";
+            if_setgraphic(graphic_1990, interface_37:com_37);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_5, interface_37:com_41, $string0, 50, 150)", interface_37:com_5);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_5);
+    } else {
+        if (%varplayerbit_6368 > 0) {
+            $string0 = "Collected wheels";
+            if_setgraphic(graphic_1981, interface_37:com_36);
+        } else {
+            $string0 = "Send a squad to collect wheels.";
+            if_setgraphic(graphic_1986, interface_37:com_36);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_0, interface_37:com_41, $string0, 50, 150)", interface_37:com_0);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_0);
+        if (%varplayerbit_6370 > 0) {
+            $string0 = "Collected logs";
+            if_setgraphic(graphic_1982, interface_37:com_39);
+        } else {
+            $string0 = "Send a squad to collect logs.";
+            if_setgraphic(graphic_1987, interface_37:com_39);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_3, interface_37:com_41, $string0, 50, 150)", interface_37:com_3);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_3);
+        if (%varplayerbit_6371 > 0) {
+            $string0 = "Collected rope";
+            if_setgraphic(graphic_1983, interface_37:com_38);
+        } else {
+            $string0 = "Send a squad to collect rope.";
+            if_setgraphic(graphic_1988, interface_37:com_38);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_4, interface_37:com_41, $string0, 50, 150)", interface_37:com_4);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_4);
+        if (%varplayerbit_6369 > 0) {
+            $string0 = "Collected metal limbs";
+            if_setgraphic(graphic_1984, interface_37:com_37);
+        } else {
+            $string0 = "Send a squad to collect metal limbs.";
+            if_setgraphic(graphic_1989, interface_37:com_37);
+        }
+        if_setonmouserepeat("addtooltip(interface_37:com_5, interface_37:com_41, $string0, 50, 150)", interface_37:com_5);
+        if_setonmouseleave("deltooltip(interface_37:com_41)", interface_37:com_5);
+    }
+} else if (%varplayerbit_6357 = 1) {
+    if_sethide(true, $component0);
+} else if (%varplayerbit_6357 = 3) {
+    if_sethide(true, $component0);
+} else if (%varplayerbit_6357 = 4) {
+    if_sethide(true, $component0);
+}

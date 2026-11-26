@@ -1,0 +1,6 @@
+[proc,script1306]
+if (getwindowmode >= 2) {
+    ~script1385;
+} else {
+    ~script1386;
+}

@@ -1,0 +1,51 @@
+[proc,script2223](boolean $boolean0)
+%varclientstring_124 = "";
+%varclientstring_125 = "";
+~loginscreen_setactivemenu(interface_744:com_164);
+def_string $string0 = "";
+def_int $int1 = 0;
+def_int $int2 = 0;
+def_int $int3 = 0;
+$string0 = "Your account <col=ffbb22><%varclientstring_122></col> has now been created with the password you have chosen. We recommend that you make a note of it on a bit of paper and keep it somewhere safe, in case you forget it.";
+if_settext($string0, interface_744:com_210);
+$int1 = if_getwidth(interface_744:com_210);
+$int2 = calc(paraheight($string0, $int1, b12_full) * 14);
+if_setsize($int1, $int2, ^setsize_abs, ^setsize_abs, interface_744:com_210);
+if ($boolean0 = true) {
+    if_sethide(false, interface_744:com_211);
+    $string0 = if_gettext(interface_744:com_211);
+    $int1 = if_getwidth(interface_744:com_211);
+    $int2 = calc(paraheight($string0, $int1, b12_full) * 14);
+    if_setsize($int1, $int2, ^setsize_abs, ^setsize_abs, interface_744:com_211);
+    $int3 = calc(if_gety(interface_744:com_210) + if_getheight(interface_744:com_210) + 13);
+    if_setposition(0, $int3, ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_211);
+    if_sethide(false, interface_744:com_212);
+    $string0 = if_gettext(interface_744:com_212);
+    $int1 = if_getwidth(interface_744:com_212);
+    $int2 = calc(paraheight($string0, $int1, b12_full) * 14);
+    if_setsize($int1, $int2, ^setsize_abs, ^setsize_abs, interface_744:com_212);
+    $int3 = calc(if_gety(interface_744:com_211) + if_getheight(interface_744:com_211) + 13);
+    if_setposition(0, $int3, ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_212);
+    $string0 = if_gettext(interface_744:com_213);
+    $int1 = if_getwidth(interface_744:com_213);
+    $int2 = calc(paraheight($string0, $int1, b12_full) * 14);
+    if_setsize($int1, $int2, ^setsize_abs, ^setsize_abs, interface_744:com_213);
+    $int3 = calc(if_gety(interface_744:com_212) + if_getheight(interface_744:com_212) + 13);
+    if_setposition(0, $int3, ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_213);
+} else {
+    if_sethide(true, interface_744:com_211);
+    if_sethide(true, interface_744:com_212);
+    $string0 = if_gettext(interface_744:com_213);
+    $int1 = if_getwidth(interface_744:com_213);
+    $int2 = calc(paraheight($string0, $int1, b12_full) * 14);
+    if_setsize($int1, $int2, ^setsize_abs, ^setsize_abs, interface_744:com_213);
+    $int3 = calc(if_gety(interface_744:com_210) + if_getheight(interface_744:com_210) + 13);
+    if_setposition(0, $int3, ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_213);
+}
+$int3 = calc(if_gety(interface_744:com_213) + if_getheight(interface_744:com_213) + 13);
+if_setposition(0, $int3, ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_214);
+$int3 = calc(if_gety(interface_744:com_214) + if_getheight(interface_744:com_214) + 13);
+if_setposition(0, $int3, ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_215);
+$int2 = calc(if_gety(interface_744:com_215) + if_getheight(interface_744:com_215) + 4);
+if_setsize(if_getwidth(interface_744:com_164), $int2, ^setsize_abs, ^setsize_abs, interface_744:com_164);
+if_setsize(if_getwidth(interface_744:com_8), calc($int2 + 85), ^setsize_abs, ^setsize_abs, interface_744:com_8);

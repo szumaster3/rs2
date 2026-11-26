@@ -1,0 +1,15 @@
+[clientscript,script1127](component $component0)
+def_component $component1 = null;
+def_string $string0 = "";
+switch_component ($component0) {
+    case interface_192:com_2 :
+        $string0 = "Toggle defensive casting.";
+        $component1 = interface_192:com_96;
+    case interface_193:com_18 :
+        $string0 = "Toggle defensive casting.";
+        $component1 = interface_193:com_53;
+    case interface_430:com_20 :
+        $string0 = "Toggle defensive casting.";
+        $component1 = interface_430:com_64;
+}
+~script39($component0, $component1, $string0, 25, if_getwidth(if_getlayer($component1)));

@@ -1,0 +1,6 @@
+[proc,script2337](component $component0)
+if (getwindowmode >= 2) {
+    if_setposition(calc(if_getwidth(interface_746:com_9) + 10), 10, ^setpos_abs_right, ^setpos_abs_top, $component0);
+} else {
+    if_setposition(10, 10, ^setpos_abs_right, ^setpos_abs_top, $component0);
+}

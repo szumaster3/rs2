@@ -21,7 +21,7 @@ class BlastFurnaceAreaTests {
         TestUtils.getMockPlayer("bf-enterable").use { p ->
             p.skills.setStaticLevel(Skills.SMITHING, 60)
             p.location = Location(2932, 10195, 0)
-            TestUtils.simulateInteraction(p, RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE)!!, 0)
+            TestUtils.simulateInteraction(p, requireNotNull(RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE.z, BlastUtils.STAIRLOC_ENTRANCE.x, BlastUtils.STAIRLOC_ENTRANCE.y, BlastUtils.STAIR_ENTRANCE_ID)) { "Missing Blast Furnace entrance scenery in region 11679; verify revision 578 landscape and XTEA" }, 0)
             TestUtils.advanceTicks(5, false)
             Assertions.assertEquals(BlastUtils.ENTRANCE_LOC, p.location)
         }
@@ -39,7 +39,7 @@ class BlastFurnaceAreaTests {
     @Test fun shouldNotBeAbleToEnterWithLessThan60Smithing() {
         TestUtils.getMockPlayer("bf-60smith").use { p ->
             p.location = Location(2932, 10195, 0)
-            TestUtils.simulateInteraction(p, RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE)!!, 0)
+            TestUtils.simulateInteraction(p, requireNotNull(RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE.z, BlastUtils.STAIRLOC_ENTRANCE.x, BlastUtils.STAIRLOC_ENTRANCE.y, BlastUtils.STAIR_ENTRANCE_ID)) { "Missing Blast Furnace entrance scenery in region 11679; verify revision 578 landscape and XTEA" }, 0)
             TestUtils.advanceTicks(5, false)
             Assertions.assertNotEquals(BlastUtils.ENTRANCE_LOC, p.location)
         }
@@ -76,14 +76,14 @@ class BlastFurnaceAreaTests {
             TestUtils.simulateInteraction(p, RegionManager.getObject(BlastUtils.STAIRLOC_EXIT)!!, 0)
             TestUtils.advanceTicks(2, false)
             Assertions.assertEquals(BlastUtils.EXIT_LOC, p.location)
-            TestUtils.simulateInteraction(p, RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE)!!, 0)
+            TestUtils.simulateInteraction(p, requireNotNull(RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE.z, BlastUtils.STAIRLOC_ENTRANCE.x, BlastUtils.STAIRLOC_ENTRANCE.y, BlastUtils.STAIR_ENTRANCE_ID)) { "Missing Blast Furnace entrance scenery in region 11679; verify revision 578 landscape and XTEA" }, 0)
             TestUtils.advanceTicks(2, false)
             Assertions.assertEquals(BlastUtils.ENTRANCE_LOC, p.location)
 
             p.location = BlastUtils.EXIT_LOC
             TestUtils.advanceTicks(BlastUtils.FEE_ENTRANCE_DURATION, false)
             // should not allow free reentry if timer has run out
-            TestUtils.simulateInteraction(p, RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE)!!, 0)
+            TestUtils.simulateInteraction(p, requireNotNull(RegionManager.getObject(BlastUtils.STAIRLOC_ENTRANCE.z, BlastUtils.STAIRLOC_ENTRANCE.x, BlastUtils.STAIRLOC_ENTRANCE.y, BlastUtils.STAIR_ENTRANCE_ID)) { "Missing Blast Furnace entrance scenery in region 11679; verify revision 578 landscape and XTEA" }, 0)
             TestUtils.advanceTicks(2, false)
             Assertions.assertEquals(BlastUtils.EXIT_LOC, p.location)
         }

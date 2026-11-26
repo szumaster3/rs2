@@ -1,0 +1,3 @@
+[proc,worldmap_setzoom]
+worldmap_setzoom(%varclient_172);
+if_settext("<tostring(%varclient_172)>%", interface_755:com_14);

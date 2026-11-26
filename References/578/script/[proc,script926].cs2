@@ -1,0 +1,11 @@
+[proc,script926](obj $obj0)(boolean)
+if (~script931($obj0) = false) {
+    return(false);
+}
+if (~script932($obj0) = false) {
+    return(false);
+}
+if (~script935($obj0) = false) {
+    return(false);
+}
+return(true);

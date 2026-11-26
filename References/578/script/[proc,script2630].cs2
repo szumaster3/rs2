@@ -1,0 +1,47 @@
+[proc,script2630](component $component0)
+def_graphic $graphic1 = null;
+def_graphic $graphic2 = null;
+%varclient_905 = $component0;
+%varclient_904 = 1;
+switch_component ($component0) {
+    case interface_859:com_13 :
+        $component0 = interface_859:com_2;
+        $graphic1 = graphic_1914;
+        $graphic2 = graphic_1922;
+    case interface_859:com_14 :
+        $component0 = interface_859:com_8;
+        $graphic1 = graphic_1915;
+        $graphic2 = graphic_1923;
+    case interface_859:com_15 :
+        $component0 = interface_859:com_7;
+        $graphic1 = graphic_1916;
+        $graphic2 = graphic_1924;
+    case interface_859:com_16 :
+        if (%varplayerbit_6357 = 2) {
+            $component0 = interface_859:com_22;
+            $graphic1 = graphic_1917;
+            $graphic2 = graphic_1925;
+        }
+        if (%varplayerbit_6357 = 3) {
+            $component0 = interface_859:com_6;
+            $graphic1 = graphic_1918;
+            $graphic2 = graphic_1926;
+        }
+        if (%varplayerbit_6357 = 4) {
+            $component0 = interface_859:com_23;
+            $graphic1 = graphic_1921;
+            $graphic2 = graphic_1929;
+        }
+    case interface_859:com_17 :
+        if (%varplayerbit_6357 = 2) {
+            $component0 = interface_859:com_21;
+            $graphic1 = graphic_1920;
+            $graphic2 = graphic_1928;
+        }
+        if (%varplayerbit_6357 = 4) {
+            $component0 = interface_859:com_20;
+            $graphic1 = graphic_1919;
+            $graphic2 = graphic_1927;
+        }
+}
+if_setontimer("script2631($component0, $graphic1, $graphic2)", $component0);

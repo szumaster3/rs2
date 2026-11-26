@@ -1,0 +1,9 @@
+[proc,script2161](int $int0, int $int1, component $component2)
+if (map_members = false) {
+    mes("More advanced grouping options are available on a members' world.");
+} else if (%varplayer_281 < 1000) {
+    mes("More advanced grouping options will be available when you've finished the Tutorial.");
+} else {
+    %varclient_693 = ~script1345($int1, $component2);
+    ~ql4_sort($int0, %varclient_693, %varclient_694, %varclient_692);
+}

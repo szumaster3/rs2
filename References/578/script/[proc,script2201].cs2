@@ -1,0 +1,21 @@
+[proc,script2201](string $string0)(int)
+def_int $int0 = string_length($string0);
+if ($int0 > 4 | $int0 <= 0 | compare("", $string0) = 0) {
+    return(-1);
+}
+def_int $int1 = calc(4 - $int0);
+if ($int1 > 0) {
+    while ($int1 > 0) {
+        $string0 = "0<$string0>";
+        $int1 = calc($int1 - 1);
+    }
+}
+def_int $int2 = string_indexof_string("0123456789", substring($string0, 0, 1), 0);
+def_int $int3 = string_indexof_string("0123456789", substring($string0, 1, 2), 0);
+def_int $int4 = string_indexof_string("0123456789", substring($string0, 2, 3), 0);
+def_int $int5 = string_indexof_string("0123456789", substring($string0, 3, 4), 0);
+if ($int2 ! -1 & $int3 ! -1 & $int4 ! -1 & $int5 ! -1) {
+    return(calc($int2 * 1000 + $int3 * 100 + $int4 * 10 + $int5));
+} else {
+    return(-1);
+}

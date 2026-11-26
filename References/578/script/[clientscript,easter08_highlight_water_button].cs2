@@ -1,0 +1,2 @@
+[clientscript,easter08_highlight_water_button]
+if_sethide(false, interface_717:com_33);

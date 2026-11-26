@@ -1,0 +1,37 @@
+[proc,ql4_special_requirements](int $int0)(boolean)
+switch_int ($int0) {
+    case 79 :
+        if (%varplayerbit_888 = 0) {
+            return(false);
+        }
+    case 144 :
+        if (%varplayerbit_5394 = 0) {
+            return(false);
+        }
+    case 145 :
+        if (%varplayerbit_4310 < 10) {
+            return(false);
+        }
+    case 35 :
+        if (%varplayerbit_0 = 0) {
+            return(false);
+        }
+    case 120 :
+        if (%varplayerbit_1895 < 110) {
+            return(false);
+        }
+    case 157 :
+        if (%varplayerbit_3637 < 125) {
+            return(false);
+        }
+    case 156 :
+        if (~script2656 < 100) {
+            return(false);
+        }
+    case 163 :
+        if (%varplayerbit_5686 = 0) {
+            return(false);
+        }
+    case default :
+        return(true);
+}

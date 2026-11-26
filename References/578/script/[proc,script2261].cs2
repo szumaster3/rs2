@@ -1,0 +1,10 @@
+[proc,script2261]
+if_sethide(true, interface_744:com_305);
+if_sethide(true, interface_744:com_306);
+if_sethide(true, interface_744:com_289);
+if (enum(int, boolean, enum_2253, affiliate) = true) {
+    if_sethide(false, interface_744:com_306);
+    if_sethide(false, interface_744:com_289);
+} else {
+    if_sethide(false, interface_744:com_305);
+}

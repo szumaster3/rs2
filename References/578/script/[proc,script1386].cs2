@@ -1,0 +1,4 @@
+[proc,script1386]
+~script1312(0);
+if_setgraphic("km_helpandexit21x21,3", interface_548:com_133);
+~script1311;

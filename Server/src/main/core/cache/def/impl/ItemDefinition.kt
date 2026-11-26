@@ -21,6 +21,8 @@ import java.util.*
 import shared.consts.Items
 
 class ItemDefinition : Definition<Item>() {
+    var questIds: IntArray? = null
+        private set
     var interfaceModelId: Int = 0
     var modelZoom: Int = 0
     var modelRotationX: Int = 0
@@ -57,7 +59,7 @@ class ItemDefinition : Definition<Item>() {
     var lendTemplateId: Int = -1
     var recolourId: Int = -1
     var recolourTemplateId: Int = -1
-    var equipId: Int = 0
+    var equipId: Int = -1
     var itemRequirements: HashMap<Int, Int>? = null
     var clientScriptData: HashMap<Int, Any?>? = null
     var itemType: Int = 0
@@ -287,7 +289,7 @@ class ItemDefinition : Definition<Item>() {
         option.equals("wield", ignoreCase = true) || option.equals("wear", ignoreCase = true) || option.equals("equip", ignoreCase = true)
     }
 
-    fun hasSpecialBar(): Boolean = clientScriptData?.get(686) == 1
+    fun hasSpecialBar(): Boolean = (clientScriptData?.get(687) as? Int ?: 0) != 0
 
     fun hasPlugin(): Boolean = itemPlugin != null
 
@@ -360,9 +362,9 @@ class ItemDefinition : Definition<Item>() {
                 } else if (opcode == 23) {
                     def.maleWornModelId1 = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 24) {
-                    def.femaleWornModelId1 = buffer.getShort().toInt() and 0xFFFF
-                } else if (opcode == 25) {
                     def.maleWornModelId2 = buffer.getShort().toInt() and 0xFFFF
+                } else if (opcode == 25) {
+                    def.femaleWornModelId1 = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 26) {
                     def.femaleWornModelId2 = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode >= 30 && opcode < 35) {
@@ -455,6 +457,8 @@ class ItemDefinition : Definition<Item>() {
                 } else if (opcode == 130) {
                     buffer.get()
                     buffer.getShort()
+                } else if (opcode == 132) {
+                    def.questIds = IntArray(buffer.get().toInt() and 0xff) { buffer.short.toInt() and 0xffff }
                 } else if (opcode == 249) {
                     var length = buffer.get().toInt() and 0xFF
                     if (def.clientScriptData == null) {
@@ -467,7 +471,7 @@ class ItemDefinition : Definition<Item>() {
                         def.clientScriptData!!.put(key, value)
                     }
                 } else {
-                    break
+                    error("Item $itemId: unknown opcode $opcode at ${buffer.position() - 1}")
                 }
             }
             return def
@@ -487,11 +491,12 @@ class ItemDefinition : Definition<Item>() {
                 if (def.recolourTemplateId != -1) {
                     def.transferRecolourDefinition(forId(def.recolourId), forId(def.recolourTemplateId))
                 }
-                if (def.maleWornModelId1 >= 0 || def.maleWornModelId2 >= 0) {
-                    def.equipId = equipId++
-                }
             }
-            forId(2513).equipId = forId(3140).equipId
+            // Equipment.init() in the 578 client enumerates resolved definitions in ID order.
+            for (i in 0 until Cache.getItemDefinitionsSize()) {
+                val def = DEFINITIONS[i] ?: continue
+                def.equipId = if (def.maleWornModelId1 >= 0 || def.femaleWornModelId1 >= 0) equipId++ else -1
+            }
         }
 
         @JvmStatic

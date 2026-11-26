@@ -1,0 +1,3 @@
+[proc,script399]
+if_setcolour(^green, interface_274:com_10);
+return;

@@ -64,6 +64,9 @@ abstract class AuthProvider<T : AccountStorageProvider> {
         password: String,
     ): Pair<AuthResponse, UserAccountInfo?>
 
+    open fun checkReconnect(username: String, password: String): Pair<AuthResponse, UserAccountInfo?> =
+        checkLogin(username, password)
+
     /**
      * Validates the password for the given player.
      * This method is abstract and must be implemented by subclasses to define how password verification is done.

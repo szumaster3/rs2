@@ -1,0 +1,5 @@
+[clientscript,script51]
+if (clientclock >= %varclient_995) {
+    %varclient_995 = calc(clientclock + 500);
+    ~script776;
+}

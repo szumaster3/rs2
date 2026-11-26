@@ -1,5 +1,6 @@
 package core.cache.misc.buffer
 
+import core.tools.StringUtils
 import java.io.ObjectInputStream
 import java.nio.ByteBuffer
 
@@ -10,7 +11,7 @@ object ByteBufferUtils {
         while (true) {
             val value = buffer.get()
             if (value == 0.toByte()) break
-            append(value.toInt().toChar())
+            append(StringUtils.getFromByte(value))
         }
     }
 

@@ -1,0 +1,7 @@
+[clientscript,topstat_run_button_init](component $component0)
+%varclient_119 = %varplayer_173;
+if_setonvartransmit("topstat_run_button_vartransmit($component0){varplayer_173}", $component0);
+if_setonmouserepeat("topstat_run_button_mouseover($component0)", $component0);
+if_setonmouseleave("topstat_run_button_mouseleave($component0)", $component0);
+if_setonop("topstat_run_button_op($component0, event_op)", $component0);
+~topstat_run_button_update($component0);

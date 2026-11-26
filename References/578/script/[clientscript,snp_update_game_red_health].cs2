@@ -1,0 +1,6 @@
+[clientscript,snp_update_game_red_health]
+if (%varclient_640 > 0) {
+    if_settext("<tostring(%varclient_640)>%", interface_836:com_15);
+} else {
+    if_settext("---", interface_836:com_15);
+}

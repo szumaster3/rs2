@@ -1,0 +1,2 @@
+[clientscript,script900]
+if_sethide(true, interface_717:com_35);

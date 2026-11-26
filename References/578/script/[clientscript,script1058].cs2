@@ -1,0 +1,2 @@
+[clientscript,script1058](component $component0)
+if_setgraphic("v2_stone_close_button,4", $component0);

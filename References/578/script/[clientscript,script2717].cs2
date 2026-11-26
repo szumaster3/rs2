@@ -1,0 +1,7 @@
+[clientscript,script2717](component $component0)
+if (%varplayer_1496 ! null) {
+    ~script2726($component0, %varplayer_1496);
+    if_setoninvtransmit("script2725($component0, %varplayer_1496){%varplayer_1496}", $component0);
+    if_sethide(false, interface_620:com_22);
+    if_sethide(false, interface_620:com_21);
+}

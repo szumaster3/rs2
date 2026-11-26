@@ -1,0 +1,10 @@
+[proc,script2621]
+if (if_gethide(interface_850:com_1) = false) {
+    if_sethide(true, interface_850:com_1);
+    if_sethide(false, interface_850:com_47);
+    if_sethflip(false, interface_850:com_50);
+} else {
+    if_sethide(false, interface_850:com_1);
+    if_sethide(true, interface_850:com_47);
+    if_sethflip(true, interface_850:com_50);
+}

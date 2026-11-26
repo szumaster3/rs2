@@ -1,0 +1,20 @@
+[proc,script337](int $int0)(enum)
+if ($int0 = 0) {
+    if (gender = 1) {
+        return(enum_1590);
+    } else {
+        return(enum_689);
+    }
+} else if ($int0 = 1) {
+    if (gender = 1) {
+        return(enum_1593);
+    } else {
+        return(enum_702);
+    }
+} else if ($int0 = 2) {
+    if (gender = 1) {
+        return(enum_1606);
+    } else {
+        return(enum_1585);
+    }
+}

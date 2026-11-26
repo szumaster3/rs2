@@ -1,0 +1,101 @@
+[clientscript,loginscreen_keypress](int $key0, char $char1)
+if (%varclient_174 = 23) {
+    return;
+}
+if (%varclient_174 = 24 & $key0 = ^key_escape) {
+    ~script723(0);
+    return;
+}
+if (%varclient_174 = 0) {
+    if ($key0 = ^key_return) {
+        if (if_gethide(interface_744:com_392) = false) {
+            ~loginscreen_setactivemenu(interface_744:com_394);
+        }
+        return;
+    }
+    if ($key0 = ^key_escape & if_gethide(interface_744:com_392) = true) {
+        ~loginscreen_setactivemenu(interface_744:com_392);
+    }
+    return;
+}
+if (%varclient_174 = 1) {
+    if (login_reply = -3 | login_reply = 21 | login_reply = 1) {
+        return;
+    }
+    if ($key0 = ^key_return | $key0 = ^key_tab) {
+        if (%varclient_175 >= clientclock) {
+            return;
+        }
+        %varclient_174 = 2;
+        %varclient_175 = clientclock;
+        return;
+    }
+    if ($key0 = ^key_escape) {
+        ~loginscreen_setactivemenu(interface_744:com_392);
+        return;
+    }
+    if (string_length(%varclientstring_32) >= 12 & $key0 ! ^key_backspace) {
+        return;
+    }
+    %varclientstring_32 = removetags(~add_to_inputstring(%varclientstring_32, 0, $key0, $char1));
+    if_settext(%varclientstring_32, interface_744:com_451);
+    return;
+}
+def_string $string0 = "";
+def_int $int2 = 0;
+if (%varclient_174 = 2) {
+    if (login_reply = -3 | login_reply = 21 | login_reply = 1) {
+        return;
+    }
+    if ($key0 = ^key_return) {
+        if (%varclient_175 >= clientclock) {
+            return;
+        }
+        %varclient_175 = clientclock;
+        ~script1183;
+        return;
+    }
+    if ($key0 = ^key_tab) {
+        if (%varclient_175 >= clientclock) {
+            return;
+        }
+        %varclient_174 = 1;
+        %varclient_175 = clientclock;
+        return;
+    }
+    if ($key0 = ^key_escape) {
+        ~loginscreen_setactivemenu(interface_744:com_392);
+        return;
+    }
+    if (string_length(%varclientstring_33) >= 20 & $key0 ! ^key_backspace) {
+        return;
+    }
+    %varclientstring_33 = ~add_to_inputstring(%varclientstring_33, 0, $key0, $char1);
+    $int2 = string_length(%varclientstring_33);
+    while ($int2 > 0) {
+        $string0 = append($string0, "*");
+        $int2 = calc($int2 - 1);
+    }
+    if_settext($string0, interface_744:com_457);
+    return;
+}
+switch_int (%varclient_174) {
+    case 21 :
+        ~script2221($key0, $char1);
+        return;
+    case 22 :
+        ~script2222($key0, $char1);
+        return;
+    case 3, 4, 5, 8 :
+        ~script2218($key0, $char1);
+        return;
+    case 6, 7, 9 :
+        ~script252($key0, $char1);
+        return;
+    case 10, 11, 14, 15, 16, 17, 18 :
+        ~script2219($key0, $char1);
+        return;
+    case 12, 13, 19, 20 :
+        ~script2220($key0, $char1);
+        return;
+}

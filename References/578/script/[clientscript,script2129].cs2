@@ -1,0 +1,8 @@
+[clientscript,script2129](component $component0, component $component1, component $component2)
+switch_component ($component1) {
+    case interface_420:com_12, interface_420:com_13, interface_420:com_14, interface_420:com_15, interface_420:com_16, interface_420:com_17, interface_420:com_18, interface_420:com_19 :
+        if_setposition(if_getx($component1), if_gety($component1), ^setpos_abs_left, ^setpos_abs_top, $component0);
+        sound_synth(synth_5507, 1, 0);
+    case default :
+        if_setposition(if_getx($component2), if_gety($component2), ^setpos_abs_left, ^setpos_abs_top, $component0);
+}

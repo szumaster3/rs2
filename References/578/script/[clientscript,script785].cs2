@@ -1,0 +1,52 @@
+[clientscript,script785](component $component0)
+%varclient_988 = 0;
+%varclient_989 = 0;
+%varclient_990 = 0;
+%varclient_991 = 0;
+switch_component ($component0) {
+    case interface_192:com_7 :
+        %varclient_988 = 1;
+        if (%varplayerbit_6459 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_192:com_9 :
+        %varclient_989 = 1;
+        if (%varplayerbit_6462 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_192:com_11 :
+        %varclient_990 = 1;
+        if (%varplayerbit_6461 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_192:com_13 :
+        %varclient_991 = 1;
+        if (%varplayerbit_6460 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_430:com_5 :
+        %varclient_988 = 1;
+        if (%varplayerbit_6463 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_430:com_9 :
+        %varclient_990 = 1;
+        if (%varplayerbit_6464 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_430:com_7 :
+        %varclient_989 = 1;
+        if (%varplayerbit_6465 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_193:com_5 :
+        %varclient_988 = 1;
+        if (%varplayerbit_6466 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+    case interface_193:com_7 :
+        %varclient_989 = 1;
+        if (%varplayerbit_6467 = 1) {
+            if_setgraphic(graphic_1702, $component0);
+        }
+}

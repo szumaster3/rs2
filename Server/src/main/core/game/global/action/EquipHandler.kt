@@ -143,10 +143,8 @@ class EquipHandler : InteractionListener {
                 if (player.properties.autocastSpell != null) {
                     val itemEquipmentSlot = item.definition.getConfiguration<Int>(ItemConfigParser.EQUIP_SLOT, -1)
                     if (itemEquipmentSlot == EquipmentContainer.SLOT_WEAPON) {
-                        player.properties.autocastSpell = null
                         val wif = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
                         wif.selectAutoSpell(-1, true)
-                        wif.openAutocastSelect()
                     }
                 }
 

@@ -1,0 +1,7 @@
+[clientscript,evq_spline_funeral]
+if (%varclient_1065 ! null) {
+    ~evq_spline_funeral;
+    if_setonvarctransmit(null, interface_89:com_0);
+} else {
+    if_setonvarctransmit("evq_spline_funeral{varclient_1065}", interface_89:com_0);
+}

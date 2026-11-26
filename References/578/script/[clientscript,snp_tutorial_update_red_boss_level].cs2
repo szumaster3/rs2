@@ -1,0 +1,2 @@
+[clientscript,snp_tutorial_update_red_boss_level]
+if_settext(tostring(%varclient_642), interface_834:com_13);

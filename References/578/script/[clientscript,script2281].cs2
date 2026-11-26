@@ -1,0 +1,8 @@
+[clientscript,script2281](int $int0)
+def_int $int1 = calc(~script1345($int0, interface_744:com_35) - 1);
+if ($int1 >= 0 & $int1 <= 11) {
+    %varclient_731 = $int1;
+} else {
+    %varclient_731 = -1;
+}
+if_settext("", interface_744:com_117);

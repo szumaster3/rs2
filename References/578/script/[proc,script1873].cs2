@@ -1,0 +1,15 @@
+[proc,script1873]
+cc_deleteall(interface_744:com_177);
+~script1875;
+%varclient_995 = calc(clientclock + 50);
+if_settext("Loading...", interface_744:com_179);
+if_sethide(false, interface_744:com_179);
+~script1874;
+if_setposition(min(calc((if_getwidth(interface_744:com_175) + parawidth(if_gettext(interface_744:com_185), 512, b12_full)) / 2 + 8), calc(if_getwidth(interface_744:com_175) - if_getwidth(interface_744:com_186))), 0, ^setpos_abs_left, ^setpos_abs_centre, interface_744:com_186);
+if (map_lang = 0) {
+    if_settext("Activity / Location", interface_744:com_192);
+} else {
+    if_settext("Language", interface_744:com_192);
+}
+if_setonresize("script1880", interface_744:com_177);
+~script1299;

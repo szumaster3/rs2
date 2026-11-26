@@ -14,6 +14,12 @@ object PacketRepository {
         }
 
         try {
+            if (context is PacketContext.InterfaceContext) {
+                if (encoder == Encoders530.INTERFACE && core.cache.Cache.getIndexes()[3]?.getFileData(context.windowId, context.componentId) != null)
+                    player.interfaceManager.recordInterfaceAttachment(context.windowId, context.componentId, context.interfaceId)
+                else if (encoder == Encoders530.CLOSE_INTERFACE)
+                    player.interfaceManager.removeInterfaceAttachment(context.windowId, context.componentId)
+            }
             PacketWriteQueue.handle(encoder, context)
         } catch (e: Exception) {
             log(PacketRepository::class.java, Log.ERR, "Error writing packet ${encoder.name}: ${e.stackTraceToString()}")

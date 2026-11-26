@@ -1,0 +1,10 @@
+[clientscript,clanwars_setup_food](int $int0)
+if (~clanwars_setup_clicktest($int0) = false) {
+    return;
+}
+if (%varclient_254 = false) {
+    %varclient_254 = true;
+} else {
+    %varclient_254 = false;
+}
+~clanwars_resynch_food;

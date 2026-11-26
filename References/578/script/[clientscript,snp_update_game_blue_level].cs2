@@ -1,0 +1,6 @@
+[clientscript,snp_update_game_blue_level]
+if (%varclient_639 > 0) {
+    if_settext(tostring(%varclient_641), interface_836:com_10);
+} else {
+    if_settext("---", interface_836:com_10);
+}

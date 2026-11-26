@@ -1,5 +1,8 @@
 package core.net.packet.out
 
+import core.cache.Cache
+import core.cache.def.impl.VarpDefinition
+import core.cache.def.impl.VarbitDefinition
 import core.game.container.ContainerEvent
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
@@ -7,7 +10,6 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
-import core.game.system.config.XteaParser.Companion.getRegionXTEA
 import core.game.world.map.Location
 import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager.forId
@@ -41,7 +43,6 @@ import core.net.packet.out.PacketContext.InterfaceConfigContext
 import core.net.packet.out.PacketContext.InterfaceContext
 import core.net.packet.out.PacketContext.InterfaceSetAngleContext
 import core.net.packet.out.PacketContext.InterfaceSetModelRotationContext
-import core.net.packet.out.PacketContext.LocationContext
 import core.net.packet.out.PacketContext.MessageContext
 import core.net.packet.out.PacketContext.MinimapStateContext
 import core.net.packet.out.PacketContext.MusicContext
@@ -50,7 +51,6 @@ import core.net.packet.out.PacketContext.PositionedGraphicContext
 import core.net.packet.out.PacketContext.ResetInterfaceContext
 import core.net.packet.out.PacketContext.RunScriptContext
 import core.net.packet.out.PacketContext.SceneGraphContext
-import core.net.packet.out.PacketContext.SceneryUpdateContext
 import core.net.packet.out.PacketContext.SkillContext
 import core.net.packet.out.PacketContext.StringContext
 import core.net.packet.out.PacketContext.SystemUpdateContext
@@ -64,7 +64,6 @@ import java.net.Inet4Address
 import java.nio.ByteBuffer
 import java.util.Random
 import kotlin.math.ceil
-import shared.consts.Network
 
 private inline fun <reified T : PacketContext> encode(crossinline writer: (T) -> Unit): (PacketContext) -> Unit = { context ->
     require(context is T) { "Expected ${T::class.java.simpleName}, got ${context.javaClass.simpleName}." }
@@ -73,6 +72,48 @@ private inline fun <reified T : PacketContext> encode(crossinline writer: (T) ->
 
 @Suppress("UNINITIALIZED_ENUM_COMPANION", "UNINITIALIZED_ENUM_COMPANION_WARNING")
 enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val immediate: Boolean = false) {
+    LOC_ANIM_ABSOLUTE(encode<PacketContext.AbsoluteLocAnimation> { c ->
+        val l = c.location
+        if (l.x !in 0..16383 || l.y !in 0..16383 || l.z !in 0..3 || c.shape !in 0..22 || c.rotation !in 0..3 || c.animation !in -1..65534) return@encode
+        c.player.session.write(IoBuffer(16).putA((c.shape shl 2) or c.rotation)
+            .putIntB((l.z shl 28) or (l.x shl 14) or l.y).putLEShortA(c.animation))
+    }),
+    LOC_PREFETCH(encode<PacketContext.LocPrefetch> { c ->
+        if (c.id !in 0..65534 || c.shape !in 0..22) return@encode
+        c.player.session.write(ZoneProt.LOC_PREFETCH.start(null).putShort(c.id).put(c.shape))
+    }),
+    TEXT_COORD(encode<PacketContext.CoordText> { c ->
+        if (c.duration !in 0..65535 || c.height !in 0..255 || c.colour !in 0..0xffffff || c.text.contains('\u0000')) return@encode
+        val bytes = c.text.toByteArray(charset("windows-1252"))
+        if (bytes.size > 246 || !charset("windows-1252").newEncoder().canEncode(c.text)) return@encode
+        val b = checkedZone(c.player, c.location) ?: return@encode
+        c.player.session.write(ZoneProt.TEXT_COORD.start(b).put(0).put(tileHash(c.location))
+            .putShort(c.duration).put(c.height).putTri(c.colour).put(bytes).put(0))
+    }),
+    MAP_PROJANIM_HALF(encode<PacketContext.HalfProjectile> { c ->
+        if (c.halfX !in 0..15 || c.halfY !in 0..15 || c.dx !in -128..127 || c.dy !in -128..127 || c.target !in -32768..32767 || c.graphic !in 0..65534 || c.targetHeight !in 0..255 || c.start !in 0..65535 || c.end !in c.start..65535 || c.peak !in -1..254 || c.arc !in 0..255) return@encode
+        val source = c.sourceEntity
+        if (source == null && c.sourceHeight !in 0..255 || source != null && (source !in -32767..32767 || c.sourceHeight !in -128..127)) return@encode
+        val b = checkedZone(c.player, c.location) ?: return@encode
+        val scene = c.player.playerFlags.lastSceneGraph
+        val base = c.location.chunkBase
+        val sx = base.getSceneX(scene) * 2 + c.halfX
+        val sy = base.getSceneY(scene) * 2 + c.halfY
+        if (sx + c.dx !in 0..207 || sy + c.dy !in 0..207) return@encode
+        val zone = if (source == null) ZoneProt.MAP_PROJANIM_HALFSQ else ZoneProt.MAP_PROJANIM_SPECIFIC
+        zone.start(b).put((c.halfX shl 4) or c.halfY).put(c.dx).put(c.dy)
+        if (source != null) b.putShort(source)
+        b.putShort(c.target).putShort(c.graphic).put(c.sourceHeight).put(c.targetHeight)
+            .putShort(c.start).putShort(c.end).put(c.peak).put(c.arc)
+        c.player.session.write(b)
+    }),
+    LOC_MERGE(encode<PacketContext.LocMerge> { c ->
+        if (c.id !in 0..65534 || c.shape !in 0..22 || c.rotation !in 0..3 || c.entity == 0 || c.entity !in -32768..32767 || c.start !in 0..65535 || c.end !in c.start..65535 || listOf(c.x1,c.x2,c.y1,c.y2).any { it !in -128..127 }) return@encode
+        val b = checkedZone(c.player, c.location) ?: return@encode
+        c.player.session.write(ZoneProt.LOC_MERGE.start(b).putC(c.y2).put(tileHash(c.location))
+            .putLEShort(c.entity).putS(c.x2).putLEShortA(c.end).putLEShortA(c.start)
+            .putC(c.y1).putC(c.x1).putA((c.shape shl 2) or c.rotation).putShort(c.id))
+    }),
     // Session and status
     LOGIN_PACKET(encode<PlayerContext> { context ->
         val p = context.player
@@ -89,57 +130,54 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         p.details.session.write(buffer)
     }),
     LAST_LOGIN_INFO(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(164)
-        buffer.imp4(Inet4Address.getByName(context.player.details.ipAddress).hashCode())
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = IoBuffer(68)
+        val ip = context.player.details.accountInfo.lastUsedIp.ifEmpty { context.player.details.ipAddress }
+        val octets = ip.split('.').map { it.toIntOrNull() }
+        buffer.putInt(if (octets.size == 4 && octets.all { it != null && it in 0..255 })
+            octets.fold(0) { acc, value -> (acc shl 8) or value!! } else 0)
         context.player.session.write(buffer)
     }),
     LOGOUT(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(Network.LOGOUT_FULL)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = Encoders578.logout()
         context.player.details.session.write(buffer)
     }, immediate = true),
     PING_PACKET(encode<PlayerContext> {
         // TODO: Identify the ping opcode for revision 530.
     }),
     CLEAR_MINIMAP_FLAG(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(153)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = Encoders578.clearMinimapFlag()
         context.player.details.session.write(buffer)
     }),
     MINIMAP_STATE(encode<MinimapStateContext> { context ->
-        val buffer = IoBuffer(192).put(context.state)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = Encoders578.minimapState(context.state)
         context.player.details.session.write(buffer)
     }),
     SYSTEM_UPDATE_PACKET(encode<SystemUpdateContext> { context ->
-        val buffer = IoBuffer(85).putShort(context.time)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = IoBuffer(8).putShort(context.time)
         context.player.details.session.write(buffer)
     }),
     RUN_ENERGY(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(Network.UPDATE_RUN_ENERGY)
+        val buffer = IoBuffer(4)
         buffer.put(context.player.settings.runEnergy.toInt().toByte().toInt())
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.details.session.write(buffer)
     }),
     WEIGHT_UPDATE(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(174)
+        val buffer = IoBuffer(7)
         buffer.putShort(context.player.settings.weight.toInt())
         // TODO context.getPlayer().getSession().write(buffer);
     }),
     SKILL_LEVEL(encode<SkillContext> { context ->
-        val buffer = IoBuffer(Network.SEND_SKILL_LEVEL)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = IoBuffer(20)
         val skills = context.player.getSkills()
+        buffer.putInt(skills.getExperience(context.skillId).toInt())
+        buffer.putC(context.skillId)
         if (context.skillId == Skills.PRAYER) {
-            buffer.putA(ceil(skills.prayerPoints).toInt())
+            buffer.putS(ceil(skills.prayerPoints).toInt())
         } else if (context.skillId == Skills.HITPOINTS) {
-            buffer.putA(skills.lifepoints)
+            buffer.putS(skills.lifepoints)
         } else {
-            buffer.putA(skills.getLevel(context.skillId, true))
+            buffer.putS(skills.getLevel(context.skillId, true))
         }
-        buffer.putIntA(skills.getExperience(context.skillId).toInt()).put(context.skillId)
         context.player.details.session.write(buffer)
     }),
     UPDATE_RANDOM_FILE(encode<PlayerContext> {
@@ -157,143 +195,108 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
 
     // Interfaces
     WINDOWS_PANE(encode<WindowsPaneContext> { context ->
-        val buffer = IoBuffer(Network.WINDOW_PANE)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
-        buffer.putLEShortA(context.windowId)
-        buffer.putS(context.type)
-        buffer.putLEShortA(context.player.interfaceManager.getPacketCount(1))
+        val buffer = Encoders578.openTop(context.type, context.windowId, context.player.interfaceManager.getPacketCount(1))
         context.player.details.session.write(buffer)
     }),
     INTERFACE(encode<InterfaceContext> { context ->
-        val buffer = IoBuffer(Network.SEND_INTERFACE)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
-        buffer.put(if (context.isWalkable) 1 else 0)
-        buffer.putIntB(context.windowId shl 16 or context.componentId)
-            .putShortA(context.player.interfaceManager.getPacketCount(1)).putShort(context.interfaceId)
+        if (!validComponent578(context.windowId, context.componentId)) return@encode
+        val buffer = Encoders578.openSub(context.windowId shl 16 or context.componentId,
+            if (context.isWalkable) 3 else 0, context.interfaceId, context.player.interfaceManager.getPacketCount(1))
         context.player.details.session.write(buffer)
     }),
+    MOVE_INTERFACE(encode<PacketContext.MoveInterfaceContext> { context ->
+        val buffer = IoBuffer(66).putIntB(context.source).putIntB(context.destination)
+            .putLEShort(context.player.interfaceManager.getPacketCount(1))
+        context.player.session.write(buffer)
+    }),
     CLOSE_INTERFACE(encode<InterfaceContext> { context ->
-        val buffer = IoBuffer(Network.CLOSE_INTERFACE)
+        val buffer = IoBuffer(28)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putShort(context.windowId)
         buffer.putShort(context.componentId)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.session.write(buffer)
     }),
     RESET_INTERFACE(encode<ResetInterfaceContext> { context ->
-        val buffer = IoBuffer(Network.CLOSE_INTERFACE)
-        buffer.putShort(context.player.interfaceManager.getPacketCount(1))
-        buffer.putInt(context.interfaceId)
-        context.player.session.write(buffer)
+        System.err.println("[Protocol578] Unsupported RESET_INTERFACE for interface ${context.interfaceId}")
     }),
     ACCESS_MASK(encode<AccessMaskContext> { context ->
-        val buffer = IoBuffer(Network.ACCESS_MASK)
-        buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
-        buffer.putLEShort(context.length)
-        buffer.putInt(context.interfaceId shl 16 or context.childId)
-        buffer.putShortA(context.offset)
-        buffer.putIntA(context.id)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        val buffer = Encoders578.settings(context.interfaceId shl 16 or context.childId,
+            context.offset, context.length, context.id, context.player.interfaceManager.getPacketCount(1))
         context.player.session.write(buffer)
     }),
+    WIDGETSTRUCT_SETTING(encode<AccessMaskContext> { context ->
+        if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        context.player.session.write(
+            Encoders578.targetParam(context.interfaceId shl 16 or context.childId,
+            context.offset, context.length, context.id, context.player.interfaceManager.getPacketCount(1)))
+    }),
     INTERFACE_CONFIG(encode<InterfaceConfigContext> { context ->
-        val buffer = IoBuffer(Network.INTERFACE_SCRIPT)
-        buffer.putC(if (context.isHidden) 1 else 0)
-        buffer.putShort(context.player.interfaceManager.getPacketCount(1))
+        if (context.interfaceId !in 0..65535 || context.childId !in 0..65535 ||
+            Cache.getIndexes()[3]?.getFileData(context.interfaceId, context.childId) == null) {
+            System.err.println("[Protocol578] Rejected INTERFACE_CONFIG for missing component ${context.interfaceId}:${context.childId}")
+            return@encode
+        }
+        val buffer = IoBuffer(97)
+        buffer.putLEShortA(context.player.interfaceManager.getPacketCount(1))
         buffer.putLEInt(context.interfaceId shl 16 or context.childId)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.putS(if (context.isHidden) 1 else 0)
         context.player.session.write(buffer)
     }),
     ANIMATE_INTERFACE(encode<AnimateInterfaceContext> { context ->
-        val buffer = IoBuffer(Network.ANIMATE_INTERFACE)
-        buffer.putIntB((context.interfaceId shl 16) + context.childId)
-        buffer.putLEShort(context.animationId)
-        buffer.putShortA(context.player.interfaceManager.getPacketCount(1))
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
-        context.player.details.session.write(buffer)
+        if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        val buffer = IoBuffer(9).putInt(context.interfaceId shl 16 or context.childId)
+            .putLEShort(context.player.interfaceManager.getPacketCount(1)).putLEShortA(context.animationId)
+        context.player.session.write(buffer)
     }),
     DISPLAY_MODEL(encode<DisplayModelContext> { context ->
-        val buffer: IoBuffer
-        when (context.type) {
-            DisplayModelContext.ModelType.PLAYER -> {
-                buffer = IoBuffer(Network.DISPLAY_MODEL_PLAYER)
-                buffer.putLEShortA(context.player.interfaceManager.getPacketCount(1))
-                buffer.putIntA(context.interfaceId shl 16 or context.childId)
-            }
-
-            DisplayModelContext.ModelType.NPC -> {
-                buffer = IoBuffer(Network.DISPLAY_MODEL_NPC)
-                buffer.putShortA(context.nodeId)
-                buffer.putLEInt((context.interfaceId shl 16) or context.childId)
-                buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
-            }
-
-            DisplayModelContext.ModelType.ITEM -> {
-                val value = if (context.amount > 0) context.amount else context.zoom
-                buffer = IoBuffer(Network.DISPLAY_MODEL_ITEM)
-                buffer.putInt(value)
-                buffer.putIntB((context.interfaceId shl 16) or context.childId)
-                buffer.putLEShortA(context.nodeId)
-                buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
-            }
-
-            DisplayModelContext.ModelType.MODEL -> {
-                buffer = IoBuffer(Network.DISPLAY_MODEL)
-                buffer.putLEInt(context.interfaceId shl 16 or context.childId)
-                buffer.putLEShortA(context.player.interfaceManager.getPacketCount(1))
-                buffer.putShortA(context.nodeId)
-            }
-
+        if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        val hash = context.interfaceId shl 16 or context.childId
+        val verify = context.player.interfaceManager.getPacketCount(1)
+        val buffer = when (context.type) {
+            DisplayModelContext.ModelType.PLAYER -> IoBuffer(89).putLEInt(hash).putLEShortA(verify)
+            DisplayModelContext.ModelType.NPC -> IoBuffer(95).putIntA(hash).putShortA(context.nodeId).putLEShortA(verify)
+            DisplayModelContext.ModelType.ITEM -> IoBuffer(54).putLEShortA(verify).putLEShort(context.nodeId)
+                .putIntB(if (context.amount > 0) context.amount else context.zoom).putIntA(hash)
+            DisplayModelContext.ModelType.MODEL -> IoBuffer(81).putIntA(hash).putLEShortA(verify).putShort(context.nodeId)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.session.write(buffer)
     }),
     STRING_PACKET(encode<StringContext> { context ->
-        val buffer = IoBuffer(Network.SET_TEXT, PacketHeader.SHORT)
-        buffer.putIntB((context.interfaceId shl 16) or context.lineId)
+        if (context.interfaceId !in 0..65535 || context.lineId !in 0..65535 ||
+            Cache.getIndexes()[3]?.getFileData(context.interfaceId, context.lineId) == null) {
+            System.err.println("[Protocol578] Rejected STRING_PACKET for missing component ${context.interfaceId}:${context.lineId}")
+            return@encode
+        }
+        val buffer = IoBuffer(60, PacketHeader.SHORT)
         buffer.putString(context.string)
-        buffer.putShortA(context.player.interfaceManager.getPacketCount(1))
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
+        buffer.putIntA((context.interfaceId shl 16) or context.lineId)
         context.player.details.session.write(buffer)
     }),
     REPOSITION_CHILD(encode<ChildPositionContext> { context ->
-        val buffer = IoBuffer(119)
-            .putShortA(context.player.interfaceManager.getPacketCount(1))
-            .putLEInt(context.interfaceId shl 16 or context.childId)
-            .putShort(context.position.x)
-            .putShortA(context.position.y)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        val buffer = IoBuffer(86).putLEInt(context.interfaceId shl 16 or context.childId)
+            .putLEShort(context.player.interfaceManager.getPacketCount(1))
+            .putLEShort(context.position.y).putShortA(context.position.x)
         context.player.session.write(buffer)
     }),
     INTERFACE_SET_ANGLE(encode<InterfaceSetAngleContext> { context ->
-        val player = context.player
-        val buffer = IoBuffer(132)
-        buffer.putShort(context.pitch)
-        buffer.putShortA(player.interfaceManager.getPacketCount(1))
-        buffer.putLEShortA(context.scale)
-        buffer.putLEShortA(context.yaw)
-        buffer.putInt(context.interfaceId shl 16 or context.childId)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        val buffer = IoBuffer(57).putIntB(context.interfaceId shl 16 or context.childId)
+            .putLEShortA(context.player.interfaceManager.getPacketCount(1))
+            .putShortA(context.scale).putShortA(context.pitch).putShortA(context.yaw)
         context.player.session.write(buffer)
     }),
     INTERFACE_SET_MODEL_ROTATION(encode<InterfaceSetModelRotationContext> { context ->
-        val player = context.player
-        val buffer = IoBuffer(207)
-        val componentHash = (context.id shl 16) or context.componentId
-        val track = player.interfaceManager.getPacketCount(1)
-        val pitch = context.pitch
-        val yaw = context.yaw
-        buffer.putIntB(componentHash)
-        buffer.putShortA(track)
-        buffer.putShort(pitch)
-        buffer.putShortA(yaw)
-        buffer.cypherOpcode(player.session.isaacPair.output)
-        player.details.session.write(buffer)
+        // The legacy opcode 207 is outside the revision 578 protocol.
+        // No equivalent for independent continuous model rotation has been verified.
+        System.err.println("[Protocol578] Unsupported INTERFACE_SET_MODEL_ROTATION for ${context.id}:${context.componentId}")
     }),
     RUN_SCRIPT_PACKET(encode<RunScriptContext> { context ->
         val types = context.string
         val objects = context.objects
-        val buffer = IoBuffer(Network.RUN_SCRIPT, PacketHeader.SHORT)
+        val buffer = IoBuffer(87, PacketHeader.SHORT)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
 
         buffer.putString(types)
@@ -306,118 +309,90 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         }
 
         buffer.putInt(context.id)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.details.session.write(buffer)
     }),
 
     // Variables and containers
     CONFIG(encode<ConfigContext> { context ->
+        if (!VarpDefinition.exists(context.id)) {
+            System.err.println("[Protocol578] Rejected unknown varp ${context.id}, value=${context.value}")
+            return@encode
+        }
         val buffer: IoBuffer
         if (context.value < Byte.MIN_VALUE || context.value > Byte.MAX_VALUE) {
-            buffer = IoBuffer(226)
-            buffer.putInt(context.value)
-            buffer.putShortA(context.id)
+            buffer = IoBuffer(73)
+            buffer.putLEShortA(context.id)
+            buffer.putLEInt(context.value)
         } else {
-            buffer = IoBuffer(60)
-            buffer.putShortA(context.id)
+            buffer = IoBuffer(29)
             buffer.putC(context.value)
+            buffer.putShort(context.id)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         if (!context.player.isArtificial) {
             context.player.details.session.write(buffer)
         }
     }),
     CS_CONFIG_PACKET(encode<CSConfigContext> { context ->
-        val buffer = IoBuffer(65)
-        buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
-        buffer.putC(context.value.toByte().toInt())
-        buffer.putLEShortA(context.id)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = Encoders578.varc(context.id, context.value, context.player.interfaceManager.getPacketCount(1))
         context.player.details.session.write(buffer)
     }),
     VARBIT(encode<VarbitContext> { context ->
+        if (!VarbitDefinition.exists(context.varbitId)) {
+            System.err.println("[Protocol578] Rejected unknown varbit ${context.varbitId}, value=${context.value}")
+            return@encode
+        }
         val buffer: IoBuffer
-        if (context.value > 255) {
-            buffer = IoBuffer(84)
-            buffer.putLEInt((128 or context.value) and 255)
+        if (context.value < 0 || context.value > 255) {
+            buffer = IoBuffer(47)
+            buffer.putLEInt(context.value)
         } else {
-            buffer = IoBuffer(37)
-            buffer.put(128.toByte().toInt() or context.value)
+            buffer = IoBuffer(64)
+            buffer.put(context.value)
         }
         buffer.putLEShort(context.varbitId)
         context.player.session.write(buffer)
     }),
     VARC_UPDATE(encode<VarcUpdateContext> { context ->
         val player = context.player
-        if (context.value <= 255) {
-            val buffer = IoBuffer(65)
-            buffer.putLEShort(player.interfaceManager.getPacketCount(1))
-            buffer.putC(context.value.toByte().toInt())
-            buffer.putLEShortA(context.varcId)
-            player.session.write(buffer)
-        } else {
-            val buffer = IoBuffer(69)
-            buffer.putLEShortA(player.interfaceManager.getPacketCount(1))
-            buffer.putInt(context.value)
-            buffer.putShortA(context.varcId)
-            player.session.write(buffer)
-        }
+        player.session.write(Encoders578.varc(context.varcId, context.value, player.interfaceManager.getPacketCount(1)))
     }),
     CONTAINER_PACKET(encode<ContainerContext> { context ->
-        val buffer: IoBuffer
+        // Containers in 578 are addressed by container key, not widget hash.
         if (context.isClear) {
-            buffer = IoBuffer(Network.UPDATE_CONTAINER)
-            buffer.putIntB(context.interfaceId shl 16 or context.childId)
-        } else {
-            val slots = context.slots
-            buffer = IoBuffer(if (slots != null) 22 else 105, PacketHeader.SHORT)
-            buffer.putShort(context.interfaceId)
-            buffer.putShort(context.childId)
-            buffer.putShort(context.containerId)
-            if (slots != null) {
-                for (slot in slots) {
-                    buffer.putSmart(slot)
-                    val item = context.items!![slot]
-                    if (item != null && item != ContainerEvent.NULL_ITEM) {
-                        buffer.putShort(item.id + 1)
-                        val amount = item.amount
-                        if (amount < 0 || amount > 254) {
-                            buffer.put(255).putInt(amount)
-                        } else {
-                            buffer.put(amount)
-                        }
-                    } else {
-                        buffer.putShort(0)
-                    }
-                }
-            } else {
-                if (context.ids != null) {
-                    buffer.p2(context.length)
-                    for (i in 0 until context.length) {
-                        buffer.putS(1)
-                        buffer.p2(context.ids[i] + 1)
-                    }
+            System.err.println("[578] Unmapped widget-only container clear: ${context.interfaceId}:${context.childId}")
+            return@encode
+        }
+        val slots = context.slots
+        val buffer = IoBuffer(if (slots != null) 100 else 69, PacketHeader.SHORT)
+        buffer.putShort(context.containerId).put(if (context.isSplit) 1 else 0)
+        if (slots != null) {
+            for (slot in slots) {
+                val item = context.items!![slot]
+                buffer.putSmart(slot)
+                if (item == null || item == ContainerEvent.NULL_ITEM) {
+                    buffer.putShort(0)
                 } else {
-                    buffer.putShort(context.items!!.size)
-                    for (item in context.items) if (item != null) {
-                        val amount = item.amount
-                        if (amount < 0 || amount > 254) {
-                            buffer.putS(255).putInt(amount)
-                        } else {
-                            buffer.putS(amount)
-                        }
-                        buffer.putShort(item.id + 1)
-                    } else {
-                        buffer.putS(0).putShort(0)
-                    }
+                    buffer.putShort(item.id + 1)
+                    if (item.amount > 254 || item.amount < 0) buffer.put(255).putInt(item.amount)
+                    else buffer.put(item.amount)
                 }
             }
+        } else {
+            val count = context.length
+            buffer.putShort(count)
+            for (slot in 0 until count) {
+                val item = context.items?.getOrNull(slot)
+                val id = context.ids?.getOrNull(slot) ?: item?.id ?: -1
+                val amount = if (context.ids != null && id >= 0) 1 else item?.amount ?: 0
+                buffer.putLEShort(id + 1)
+                if (amount > 254 || amount < 0) buffer.put(255).putIntB(amount)
+                else buffer.put(amount)
+            }
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.session.write(buffer)
     }),
     GRAND_EXCHANGE_PACKET(encode<GrandExchangeContext> { context ->
-        val buffer = IoBuffer(116, PacketHeader.NORMAL)
+        val buffer = IoBuffer(71, PacketHeader.NORMAL)
         buffer.put(context.idx.toInt())
         if (context.state.toInt() == GE_REMOVED) {
             buffer.put(0).putShort(0).putInt(0).putInt(0).putInt(0).putInt(0)
@@ -432,7 +407,6 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             buffer.put(state.toInt()).putShort(context.itemID.toInt()).putInt(context.value).putInt(context.amt).putInt(context.completedAmt).putInt(context.totalCoinsExchanged)
         }
         try {
-            buffer.cypherOpcode(context.player.session.isaacPair.output)
             context.player.session.write(buffer)
         } catch (e: Exception) {
         }
@@ -440,42 +414,22 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
 
     // Scene and world updates
     UPDATE_SCENE_GRAPH(encode<SceneGraphContext> { context ->
-        val buffer = IoBuffer(Network.UPDATE_SCENE_GRAPH, PacketHeader.SHORT)
         val player = context.player
-        buffer.cypherOpcode(player.session.isaacPair.output)
         player.playerFlags.lastSceneGraph = player.location
-        buffer.putShortA(player.location.sceneX)
-        for (regionX in (player.location.regionX - 6) / 8..((player.location.regionX + 6) / 8)) {
-            for (regionY in (player.location.regionY - 6) / 8..((player.location.regionY + 6) / 8)) {
-                val keys = getRegionXTEA(regionX shl 8 or regionY)
-                for (i in 0..3) {
-                    if (keys != null) buffer.putIntB(keys[i])
-                    else buffer.putIntB(0)
-                }
-            }
-        }
-
-        buffer.putS(player.location.z)
-        buffer.putShort(player.location.regionX)
-        buffer.putShortA(player.location.regionY)
-        buffer.putShortA(player.location.sceneY)
+        player.playerFlags.isDynamicScene = false
+        val buffer = IoBuffer(98, PacketHeader.SHORT)
+        LoginWorldEncoder.appendRegion(buffer.toByteBuffer(), player.location)
         player.details.session.write(buffer)
     }, immediate = true),
     BUILD_DYNAMIC_SCENE(encode<DynamicSceneContext> { context ->
-        val buffer = IoBuffer(214, PacketHeader.SHORT)
-        val regionIds: MutableList<Int> = ArrayList(20)
         val player = context.player
-        buffer.putLEShortA(player.location.getSceneX())
-        buffer.putLEShortA(player.location.regionX)
-        buffer.putS(player.location.z)
-        buffer.putLEShortA(player.location.getSceneY())
-        buffer.setBitAccess()
         val chunks = Array(4) { Array(13) { arrayOfNulls<RegionChunk>(13) } }
         val baseX = player.location.regionX - 6
         val baseY = player.location.regionY - 6
         for (z in 0..3) {
             for (x in baseX..player.location.regionX + 6) {
                 for (y in baseY..player.location.regionY + 6) {
+                    if (x !in 0..2047 || y !in 0..2047) continue
                     val dr = forId((x shr 3) shl 8 or (y shr 3))
                     if (dr is DynamicRegion) {
                         chunks[z][x - baseX][y - baseY] = dr.chunks[z][x - (dr.x shl 3)][y - (dr.y shl 3)]
@@ -483,177 +437,99 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
                 }
             }
         }
-        for (plane in 0..3) {
-            for (offsetX in 0..12) {
-                for (offsetY in 0..12) {
-                    val c = chunks[plane][offsetX][offsetY]
-                    if (c == null || c.base.x < 0 || c.base.y < 0) {
-                        buffer.putBits(1, 0)
-                        continue
-                    }
-                    val realRegionX = c.base.regionX
-                    val realRegionY = c.base.regionY
-                    val realPlane = c.base.z
-                    val rotation = c.rotation
-                    val id = (realRegionX shr 3) shl 8 or (realRegionY shr 3)
-                    if (!regionIds.contains(id)) {
-                        regionIds.add(id)
-                    }
-                    buffer.putBits(1, 1)
-                    buffer.putBits(
-                        26,
-                        (rotation shl 1) or (realPlane shl 24) or (realRegionX shl 14) or (realRegionY shl 3)
-                    )
-                }
-            }
-        }
-        buffer.setByteAccess()
-        for (id in regionIds) {
-            val keys = getRegionXTEA(id)
-            buffer.putIntB(keys[0]).putIntB(keys[1]).putIntB(keys[2]).putIntB(keys[3])
-        }
-        buffer.putShort(player.location.regionY)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
-        context.player.session.write(buffer)
+        context.player.session.write(LoginWorldEncoder.dynamicRegion(player.location, chunks))
         player.playerFlags.lastSceneGraph = player.location
-    }, immediate = true),
-    INSTANCED_LOCATION_UPDATE(encode<LocationContext> { context ->
-        val buffer = IoBuffer(110)
-        val l = context.location
-        val player = context.player
-        var flag = l.z shl 1
-        if (context.isTeleport) {
-            flag = flag or 0x1
-        }
-        buffer.putS(flag)
-        buffer.put(l.getSceneX(player.playerFlags.lastSceneGraph))
-        buffer.putA(l.getSceneY(player.playerFlags.lastSceneGraph))
-        // TODO player.getSession().write(buffer);
+        player.playerFlags.isDynamicScene = true
     }, immediate = true),
     UPDATE_AREA_POSITION(encode<AreaPositionContext> { context ->
-        val buffer = areaPositionBuffer(context.player, context.location)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val scene = context.player.playerFlags.lastSceneGraph
+        val l = context.location
+        val buffer = IoBuffer(41).putA(l.z).putC(l.getSceneY(scene)).putS(l.getSceneX(scene))
         context.player.session.write(buffer)
     }),
     CLEAR_REGION_CHUNK(encode<ClearChunkContext> { context ->
         val l = context.player.playerFlags.lastSceneGraph
         val x = context.chunk.currentBase.getSceneX(l)
         val y = context.chunk.currentBase.getSceneY(l)
-        if (x >= 0 && y >= 0 && x < 96 && y < 96) {
-            val buffer = IoBuffer(112).put(x).putC(y)
-            buffer.cypherOpcode(context.player.session.isaacPair.output)
+        if (x >= 0 && y >= 0 && x < 104 && y < 104) {
+            val buffer = IoBuffer(42).put(x).putC(y).putA(context.chunk.currentBase.z)
             context.player.session.write(buffer)
         }
     }, immediate = true),
     CONSTRUCT_SCENERY(encode<BuildSceneryContext> { context ->
         val player = context.player
         val o = context.scenery
-        val buffer = writeSceneryAddition(areaPositionBuffer(player, o.location.chunkBase), o)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = writeSceneryAddition(checkedZone(player, o.location) ?: return@encode, o)
         player.session.write(buffer)
     }),
     CLEAR_SCENERY(encode<BuildSceneryContext> { context ->
         val player = context.player
         val scenery = context.scenery
-        val buffer = writeSceneryRemoval(areaPositionBuffer(player, scenery.location.chunkBase), scenery)
-        buffer.cypherOpcode(player.session.isaacPair.output)
+        val buffer = writeSceneryRemoval(checkedZone(player, scenery.location) ?: return@encode, scenery)
         player.session.write(buffer)
     }),
     CONSTRUCT_GROUND_ITEM(encode<BuildItemContext> { context ->
         val player = context.player
         val item = context.item
-        val buffer = writeGroundItemAddition(areaPositionBuffer(player, item.location.chunkBase), item)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = writeGroundItemAddition(checkedZone(player, item.location) ?: return@encode, item)
         player.details.session.write(buffer)
     }),
     CLEAR_GROUND_ITEM(encode<BuildItemContext> { context ->
         val player = context.player
         val item = context.item
-        val buffer = writeGroundItemRemoval(areaPositionBuffer(player, item.location.chunkBase), item)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = writeGroundItemRemoval(checkedZone(player, item.location) ?: return@encode, item)
         player.session.write(buffer)
     }),
     UPDATE_GROUND_ITEM_AMOUNT(encode<BuildItemContext> { context ->
         val player = context.player
         val item = context.item
-        val buffer = writeGroundItemAmount(areaPositionBuffer(player, item.location.chunkBase), item, context.oldAmount)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = writeGroundItemAmount(checkedZone(player, item.location) ?: return@encode, item, context.oldAmount)
         player.details.session.write(buffer)
     }),
     ANIMATE_OBJECT_PACKET(encode<AnimateObjectContext> { context ->
         val player = context.player
         val `object` = context.animation.getObject()
-        val buffer = writeObjectAnimation(areaPositionBuffer(player, `object`.location.chunkBase), context.animation)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
-        player.session.write(buffer)
-    }),
-    LOC_ADD_CHANGE_PACKET(encode<SceneryUpdateContext> { context ->
-        val player = context.player
-        val buffer = IoBuffer(202, PacketHeader.NORMAL)
-
-        buffer.cypherOpcode(player.session.isaacPair.output)
-        val packed = (context.type shl 2) or (context.rotation and 0x3)
-        buffer.p1(packed)
-        val base = player.playerFlags.lastSceneGraph
-        val localX = context.x - base.x
-        val localY = context.y - base.y
-        val tile = ((localX and 7) shl 4) or (localY and 7)
-        buffer.p1(tile)
-
-        buffer.p1add(context.int0)
-        buffer.p1add(context.int1)
-        buffer.p1sub(context.int2)
-
-        buffer.p2add(context.objectId)
-
-        buffer.ip2(context.int4)
-        buffer.p1(context.int3)
-        buffer.p2(context.int5)
-        buffer.ip2add(context.int6)
-
+        val buffer = writeObjectAnimation(checkedZone(player, `object`.location) ?: return@encode, context.animation)
         player.session.write(buffer)
     }),
     POSITIONED_GRAPHIC(encode<PositionedGraphicContext> { context ->
         val g = context.graphic
-        val offsetHash = (context.offsetX shl 4) or context.offsetY
-        val buffer = IoBuffer()
-            .put(26)                 // update current scene x and scene y client-side
-            .putC(context.sceneX)        // this has to be done for each graphics being sent
-            .put(context.sceneY)         // opcode 26 is the lastSceneX/lastSceneY update packet
-            .put(17).put(offsetHash) // send the graphics
+        val target = context.location.transform(context.offsetX, context.offsetY, 0)
+        val offsetHash = (target.chunkOffsetX shl 4) or target.chunkOffsetY
+        val scene = context.player.playerFlags.lastSceneGraph
+        val base = target.chunkBase
+        val x = base.getSceneX(scene)
+        val y = base.getSceneY(scene)
+        if (x !in 0..96 || y !in 0..96 || target.z != context.player.location.z) return@encode
+        val buffer = ZoneProt.MAP_ANIM.start(ZoneProt.enclosed(x, y, target.z))
+            .put(offsetHash)
             .putShort(g.id)
             .put(g.height)
             .putShort(g.delay)
         context.player.session.write(buffer)
     }),
     HINT_ICON(encode<HintIconContext> { context ->
-        val buffer = IoBuffer(217)
-        buffer.put(context.slot shl 6 or context.targetType).put(context.arrowId)
-        if (context.arrowId > 0) {
+        if (context.slot !in 0..7 || context.targetType !in listOf(0, 1, 2, 3, 4, 5, 6, 10)) return@encode
+        val buffer = IoBuffer(102)
+        buffer.put((context.slot shl 5) or context.targetType)
+        if (context.targetType == 0) {
+            repeat(11) { buffer.put(0) }
+        } else {
+            buffer.put(context.arrowId)
             if (context.targetType == 1 || context.targetType == 10) {
-                buffer.putShort(context.index).putShort(0) // Skip 3 bytes
-                    .put(0)
-            } else if (context.location != null) {
-                buffer.putShort(context.location.x).putShort(context.location.y).put(context.height)
+                buffer.putShort(context.index)
+                repeat(6) { buffer.put(0) }
             } else {
-                buffer.putShort(0).putShort(0).put(0) // Skip all bytes.
+                val loc = context.location ?: return@encode
+                buffer.put(loc.z).putShort(loc.x).putShort(loc.y).put(context.height).putShort(600)
             }
             buffer.putShort(context.modelId)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.session.write(buffer)
     }),
     INTERACTION_OPTION(encode<InteractionOptionContext> { context ->
-        val buffer = IoBuffer(44, PacketHeader.BYTE)
-        buffer.putLEShortA(-1)
-        if (context.isRemove) {
-            buffer.put(0)
-        } else {
-            buffer.put(if (context.index == 0) 1 else 0)
-        }
-        buffer.put(context.index + 1)
-        buffer.putString(context.name)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = Encoders578.interaction(if (context.isRemove) "null" else context.name,
+            context.index + 1, !context.isRemove && context.index == 0)
         context.player.session.write(buffer)
     }),
     SET_WALK_OPTION(encode<WalkOptionContext> {
@@ -675,128 +551,106 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
                 buffer.put(x).put(y).putShort(context.height).put(context.speed).put(context.zoomSpeed)
             }
 
-            CameraType.SET -> buffer.putLEShort(context.x)
-                .putShort(context.player.interfaceManager.getPacketCount(1)).putShort(context.y)
+            CameraType.SET -> buffer.putShort(context.x)
+                .putShortA(context.player.interfaceManager.getPacketCount(1)).putShortA(context.y)
 
             CameraType.SHAKE -> {
                 buffer.putShort(context.player.interfaceManager.getPacketCount(1))
-                buffer.put(l.x).put(l.y).put(context.speed).put(context.zoomSpeed).putShort(context.height)
+                buffer.put(context.x).put(context.y).put(context.height).put(context.speed).putShort(context.zoomSpeed)
             }
 
             CameraType.RESET -> buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         p.session.write(buffer)
     }),
     MUSIC_PACKET(encode<MusicContext> { context ->
         val buffer = if (context.isSecondary) {
-            IoBuffer(208).putTri(255).putLEShort(context.musicId)
+            IoBuffer(62).putA(255).putTri(0).putShort(context.musicId)
         } else {
-            IoBuffer(4).putLEShortA(context.musicId)
+            IoBuffer(61).putS(2).putLEShort(context.musicId).putS(255)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.details.session.write(buffer)
     }),
     AUDIO_PACKET(encode<AudioContext> { context ->
         val audio = context.audio
         val loc = context.location
         val buffer = if (loc == null) {
-            IoBuffer()
+            IoBuffer(92)
         } else {
-            areaPositionBuffer(context.player, loc.chunkBase)
+            checkedZone(context.player, loc) ?: return@encode
         }
         writeAudio(buffer, audio, loc)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.session.write(buffer)
     }),
 
     // Messages and contacts
     GAME_MESSAGE(encode<GameMessageContext> { context ->
-        val buffer = IoBuffer(Network.SEND_GAME_MESSAGE, PacketHeader.BYTE)
-        buffer.putString(context.message)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        val buffer = Encoders578.message(context.message, (System.currentTimeMillis() / 1000).toInt())
         context.player.session.write(buffer)
     }),
     COMMUNICATION_MESSAGE(encode<MessageContext> { context ->
-        val buffer = IoBuffer(context.opcode, PacketHeader.BYTE)
-        val message = context.message
         val player = context.player
         val other = context.other
-        when (context.opcode) {
-            MessageContext.SEND_MESSAGE -> {
-                val bytes = ByteArray(256)
-                val length = encryptPlayerChat(bytes, 0, 0, message.length, message.toByteArray())
-                buffer.putLong(stringToLong(other))
-                buffer.put(message.length.toByte().toInt())
-                buffer.putBytes(bytes, 0, length)
-            }
-
+        val plain = context.message.toByteArray(charset("windows-1252"))
+        val bytes = ByteArray(plain.size * 4 + 8)
+        val length = encryptPlayerChat(bytes, 0, 0, plain.size, plain)
+        if (length < 0) return@encode
+        val buffer = when (context.opcode) {
+            MessageContext.SEND_MESSAGE -> IoBuffer(76, PacketHeader.BYTE).putString(other)
             MessageContext.RECEIVE_MESSAGE -> {
-                val bytes = ByteArray(256)
-                bytes[0] = message.length.toByte()
-                val length = 1 + encryptPlayerChat(bytes, 0, 1, message.length, message.toByteArray())
                 player.setAttribute("replyTo", other)
-                buffer.putLong(stringToLong(other)).putShort(Random().nextInt(0xFFFF)).putTri(getMessageIndex(player))
-                    .put(context.chatIcon.toByte().toInt()).putBytes(bytes, 0, length)
+                IoBuffer(55, PacketHeader.BYTE).put(0).putString(other)
+                    .putShort(Random().nextInt(0xFFFF)).putTri(getMessageIndex(player)).put(context.chatIcon)
             }
-
             MessageContext.CLAN_MESSAGE -> {
                 val clan = player.communication.clan ?: return@encode
-                val bytes = ByteArray(256)
-                bytes[0] = context.message.length.toByte()
-                val length = 1 + encryptPlayerChat(bytes, 0, 1, message.length, message.toByteArray())
-                buffer.putLong(stringToLong(other))
-                buffer.put(0.toByte().toInt()) // it's just read does nothing
-                buffer.putLong(stringToLong(clan.name))
-                buffer.putShort(Random().nextInt(0xFFFF))
-                buffer.putTri(getMessageIndex(player))
-                buffer.put(context.chatIcon.toByte().toInt()) // rights
-                buffer.putBytes(bytes, 0, length)
+                IoBuffer(84, PacketHeader.BYTE).put(0).putString(other).putLong(stringToLong(clan.name))
+                    .putShort(Random().nextInt(0xFFFF)).putTri(getMessageIndex(player)).put(context.chatIcon)
             }
+            else -> return@encode
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.putSmart(plain.size).putBytes(bytes, 0, length)
         player.session.write(buffer)
     }),
     CONTACT_PACKETS(encode<ContactContext> { context ->
         val player = context.player
         val buffer = when (context.type) {
-            ContactContext.UPDATE_STATE_TYPE -> IoBuffer(197).put(2) // Always send the AVAILABLE state.
+            ContactContext.UPDATE_STATE_TYPE -> IoBuffer(19)
             ContactContext.IGNORE_LIST_TYPE -> {
-                val payload = IoBuffer(126, PacketHeader.SHORT)
-                for (string in player.communication.blocked) {
-                    if (string.length == 0) {
-                        continue
-                    }
-                    payload.putLong(stringToLong(string))
+                val payload = IoBuffer(6, PacketHeader.SHORT)
+                val blocked = player.communication.blocked.filter { it.isNotEmpty() }.take(100)
+                payload.put(blocked.size)
+                for (name in blocked) {
+                    payload.putString(name)
+                    payload.putString("")
+                    payload.putString(name)
+                    payload.putString("")
                 }
                 payload
             }
-
             ContactContext.UPDATE_FRIEND_TYPE -> {
-                val payload = IoBuffer(62, PacketHeader.BYTE)
-                context.name?.let { payload.putLong(stringToLong(it)) }
+                val name = context.name ?: return@encode
+                val payload = IoBuffer(70, PacketHeader.SHORT)
+                payload.put(0)
+                payload.putString(name)
+                payload.putString(name)
                 payload.putShort(context.worldId)
-                val c = player.communication.contacts[context.name]
-                if (c != null) {
-                    payload.put(c.rank.value.toByte().toInt())
-                } else {
-                    payload.put(0)
-                }
-                if (context.isOnline) {
+                payload.put(player.communication.contacts[name]?.rank?.value ?: 0)
+                if (context.worldId > 0) {
                     payload.putString("World " + context.worldId)
+                    payload.put(1)
                 }
                 payload
             }
             else -> return@encode
         }
-        buffer.cypherOpcode(player.session.isaacPair.output)
         player.session.write(buffer)
     }),
     UPDATE_CLAN_CHAT(encode<ClanContext> { context ->
-        val buffer = IoBuffer(55, PacketHeader.SHORT)
+        val buffer = IoBuffer(35, PacketHeader.SHORT)
         val clan = context.clan
         if (!context.isLeave) {
-            buffer.putLong(stringToLong(clan.owner))
+            buffer.putString(clan.owner).put(0)
             buffer.putLong(stringToLong(clan.name))
             buffer.put(clan.kickRequirement.value)
             var size = clan.players.size
@@ -807,45 +661,53 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             for (i in 0 until size) {
                 val entry = clan.players[i]
                 val name = entry.name
-                buffer.putLong(stringToLong(name)).putShort(entry.worldId)
+                buffer.putString(name).put(0).putShort(entry.worldId)
                 buffer.put(clan.getRank(entry).value)
                 buffer.putString("World " + entry.worldId)
             }
-        } else {
-            buffer.putLong(0)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
         context.player.session.write(buffer)
     });
 
     internal fun write(context: PacketContext) = writer(context)
 
     companion object {
+        private fun tileHash(l: Location): Int = (l.chunkOffsetX shl 4) or l.chunkOffsetY
+
+        private fun checkedZone(player: Player, location: Location): IoBuffer? {
+            val base = location.chunkBase
+            val scene = player.playerFlags.lastSceneGraph
+            val x = base.getSceneX(scene)
+            val y = base.getSceneY(scene)
+            if (x !in 0..96 || y !in 0..96 || location.z != player.location.z) return null
+            return ZoneProt.enclosed(x, y, location.z)
+        }
+
         private const val GE_REMOVED = 6
         private const val GE_ABORTED = 2
 
         fun writeObjectAnimation(buffer: IoBuffer, animation: Animation): IoBuffer {
             val `object` = animation.getObject()
             val l = `object`.location
-            buffer.put(20)
+            ZoneProt.LOC_ANIM.start(buffer).putShortA(animation.id)
             buffer.putS((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7))
             buffer.putS((`object`.type shl 2) + (`object`.rotation and 0x3))
-            buffer.putLEShort(animation.id)
             return buffer
         }
 
         private fun writeAudio(buffer: IoBuffer, audio: Audio, loc: Location?): IoBuffer {
             if (loc == null) {
-                buffer.put(172)
                 buffer.putShort(audio.id)
                 buffer.put(audio.loops)
                 buffer.putShort(audio.delay)
+                buffer.put(255)
             } else {
-                buffer.put(97)
+                ZoneProt.SOUND_AREA.start(buffer)
                 buffer.put((loc.chunkOffsetX shl 4) or loc.chunkOffsetY)
                 buffer.putShort(audio.id)
                 buffer.put((audio.radius shl 4) or (audio.loops and 7))
                 buffer.put(audio.delay)
+                buffer.put(255)
             }
             return buffer
         }
@@ -853,17 +715,15 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         @JvmStatic
         fun writeGroundItemRemoval(buffer: IoBuffer, item: Item): IoBuffer {
             val l = item.location
-            buffer.put(240)
-            buffer.putS((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7)).putShort(item.id)
+            ZoneProt.OBJ_DEL.start(buffer).putC((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7)).putLEShortA(item.id)
             return buffer
         }
 
         @JvmStatic
         fun writeSceneryRemoval(buffer: IoBuffer, scenery: Scenery): IoBuffer {
             val location = scenery.location
-            return buffer.put(195) // Opcode
+            return ZoneProt.LOC_DEL.start(buffer).putA((location.chunkOffsetX shl 4) or (location.chunkOffsetY and 0x7))
                 .putC((scenery.type shl 2) + (scenery.rotation and 3))
-                .put((location.chunkOffsetX shl 4) or (location.chunkOffsetY and 0x7))
         }
 
         private fun getMessageIndex(p: Player): Int {
@@ -875,16 +735,16 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         @JvmStatic
         fun writeGroundItemAddition(buffer: IoBuffer, item: Item): IoBuffer {
             val l = item.location
-            buffer.put(33)
-            buffer.putLEShort(item.id).put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7)).putShortA(item.amount)
+            ZoneProt.OBJ_ADD.start(buffer).putShort(item.id).putShortA(item.amount)
+                .put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7))
             return buffer
         }
 
         @JvmStatic
         fun writeSceneryAddition(buffer: IoBuffer, scenery: Scenery): IoBuffer {
             val l = scenery.location
-            buffer.put(179).putA((scenery.type shl 2) or (scenery.rotation and 0x3))
-                .put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7)).putShortA(scenery.id)
+            ZoneProt.LOC_ADD_CHANGE.start(buffer).putC((scenery.type shl 2) or (scenery.rotation and 0x3))
+                .putShortA(scenery.id).put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7))
             return buffer
         }
 
@@ -893,21 +753,22 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             val scene = player.playerFlags.lastSceneGraph
             val x = base.getSceneX(scene)
             val y = base.getSceneY(scene)
-            return IoBuffer(230, PacketHeader.SHORT).putA(y).putS(x)
+            return ZoneProt.enclosed(x, y, base.z)
         }
 
-        private fun areaPositionBuffer(player: Player, base: Location): IoBuffer {
-            val scene = player.playerFlags.lastSceneGraph
-            val x = base.getSceneX(scene)
-            val y = base.getSceneY(scene)
-            return IoBuffer(26).putC(x).put(y)
-        }
-
+    
         @JvmStatic
         fun writeGroundItemAmount(buffer: IoBuffer, item: Item, oldAmount: Int): IoBuffer {
             val l = item.location
-            buffer.put(14).put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7)).putShort(item.id).putShort(oldAmount).putShort(item.amount)
+            ZoneProt.OBJ_COUNT.start(buffer).put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7)).putShort(item.id).putShort(oldAmount).putShort(item.amount)
             return buffer
         }
     }
+}
+
+private fun validComponent578(interfaceId: Int, childId: Int): Boolean {
+    val valid = interfaceId in 0..65535 && childId in 0..65535 &&
+        Cache.getIndexes()[3]?.getFileData(interfaceId, childId) != null
+    if (!valid) System.err.println("[Protocol578] Rejected interface update for missing component $interfaceId:$childId")
+    return valid
 }

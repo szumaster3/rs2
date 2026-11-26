@@ -1,0 +1,8 @@
+[proc,clanwars_setup_clicktest](int $int0)(boolean)
+if (%varplayer_1149 = -1) {
+    return(false);
+}
+if ($int0 ! 1) {
+    return(false);
+}
+return(true);

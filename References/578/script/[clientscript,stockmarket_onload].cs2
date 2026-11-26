@@ -1,0 +1,4 @@
+[clientscript,stockmarket_onload]
+if_setonvartransmit("script588{varplayer_1109}", interface_105:com_126);
+if_setonstocktransmit("stockmarket_onstocktransmit", interface_105:com_14);
+~stockmarket_onstocktransmit_to_layer_move;

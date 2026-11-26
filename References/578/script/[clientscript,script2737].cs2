@@ -1,0 +1,8 @@
+[clientscript,script2737](int $int0, component $component1, int $int2)
+if ($int0 ! 1 | %varclient_1020 = $int2) {
+    return;
+}
+sound_synth(synth_7259, 1, 0);
+%varclient_1020 = $int2;
+~script2738;
+~script2739($component1);

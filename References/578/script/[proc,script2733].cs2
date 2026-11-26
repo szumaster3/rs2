@@ -1,0 +1,53 @@
+[proc,script2733]
+switch_int (%varplayerbit_6501) {
+    case default :
+        if (%varclient_1020 ! 0) {
+            if (%varclient_1020 ! -1) {
+                %varclient_1020 = 0;
+            }
+            ~script2739(interface_900:com_33);
+        }
+        ~script2738;
+    case 1 :
+        if (%varclient_1020 ! 1) {
+            %varclient_1020 = 1;
+            ~script2739(interface_900:com_37);
+        }
+        ~script2738;
+    case 2 :
+        if (%varclient_1020 ! 2) {
+            %varclient_1020 = 2;
+            ~script2739(interface_900:com_41);
+        }
+        ~script2738;
+    case 3 :
+        if (%varclient_1020 ! 3) {
+            %varclient_1020 = 3;
+            ~script2739(interface_900:com_45);
+        }
+        ~script2738;
+    case 4 :
+        if (%varclient_1020 ! 4) {
+            %varclient_1020 = 4;
+            ~script2739(interface_900:com_49);
+        }
+        ~script2738;
+    case 5 :
+        if (%varclient_1020 ! 5) {
+            %varclient_1020 = 5;
+            ~script2739(interface_900:com_53);
+        }
+        ~script2738;
+    case 6 :
+        if (%varclient_1020 ! 6) {
+            %varclient_1020 = 6;
+            ~script2739(interface_900:com_57);
+        }
+        ~script2738;
+    case 7 :
+        if (%varclient_1020 ! 7) {
+            %varclient_1020 = 7;
+            ~script2739(interface_900:com_61);
+        }
+        ~script2738;
+}

@@ -1,0 +1,18 @@
+[clientscript,tutorial3_cutscenes](component $component0)
+if (%varclient_1007 <= 0) {
+    cam_smoothreset;
+    return;
+}
+if (%varclient_1007 <= 100) {
+    ~tutorial3_battle($component0, ~script284(coord));
+    return;
+}
+if (%varclient_1007 <= 200) {
+    ~script2762($component0, ~script284(coord));
+    return;
+}
+if (%varclient_1007 <= 300) {
+    ~tutorial3_explosion($component0, ~script284(coord));
+    return;
+}
+~script2826($component0, ~script284(coord));

@@ -1,0 +1,6 @@
+[clientscript,prayer_load_buttons]
+%varclient_1063 = -1;
+if_setonvartransmit("prayer_mode_update_check{varplayer_1584}", interface_271:com_8);
+~prayer_init_buttons;
+cc_deleteall(interface_271:com_6);
+~prayer_refresh_scrollbar;

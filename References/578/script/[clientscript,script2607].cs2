@@ -1,0 +1,4 @@
+[clientscript,script2607](int $int0)
+if (cc_find(interface_88:com_22, $int0) = true) {
+    cc_setmodelanim(null);
+}

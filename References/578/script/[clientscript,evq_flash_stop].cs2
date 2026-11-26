@@ -1,0 +1,2 @@
+[clientscript,evq_flash_stop](component $component0)
+~fade2_flash_stop_generic($component0);

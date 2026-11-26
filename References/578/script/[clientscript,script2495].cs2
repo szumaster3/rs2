@@ -1,0 +1,7 @@
+[clientscript,script2495]
+def_int $int0 = 1;
+%varclient_837 = %varplayerbit_6350;
+~script2496;
+if (%varclient_837 > 0 & %varclient_837 <= 9) {
+    ~script2500(enum(int, component, enum_2400, %varclient_837));
+}

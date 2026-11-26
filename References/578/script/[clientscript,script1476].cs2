@@ -1,0 +1,7 @@
+[clientscript,script1476](int $int0)
+if (clientclock >= $int0) {
+    if (%varclient_5 = 11) {
+        ~script1479(%varclientstring_138);
+    }
+    if_setontimer(null, interface_762:com_17);
+}

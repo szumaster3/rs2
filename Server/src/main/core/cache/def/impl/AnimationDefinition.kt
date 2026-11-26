@@ -13,6 +13,8 @@ class AnimationDefinition {
     var anInt2136: Int = 99
     var anIntArray2139: IntArray = intArrayOf()
     var anInt2140: Int = -1
+    var tween = false
+    var aBoolean262 = false
     var aBoolean2141: Boolean = false
     var anInt2142: Int = 5
     var emoteItem: Int = -1
@@ -26,7 +28,7 @@ class AnimationDefinition {
     var anInt2162: Int = -1
     var anInt2163: Int = -1
 
-    private fun readValueLoop(buffer: ByteBuffer) {
+    internal fun readValueLoop(buffer: ByteBuffer) {
         while (true) {
             val opcode = buffer.get().toInt() and 0xFF
             if (opcode == 0) {
@@ -75,7 +77,7 @@ class AnimationDefinition {
                 durations = IntArray(count) { buffer.short.toInt() and 0xffff }
                 anIntArray2139 = IntArray(count) { buffer.short.toInt() and 0xffff }
                 repeat(count) { index ->
-                    anIntArray2139[index] += buffer.short.toInt() and (0xffff shl 16)
+                    anIntArray2139[index] += (buffer.short.toInt() and 0xffff) shl 16
                 }
             }
             2 -> anInt2163 = buffer.short.toInt() and 0xffff
@@ -96,7 +98,7 @@ class AnimationDefinition {
                 val count = buffer.get().toInt() and 0xff
                 anIntArray2151 = IntArray(count) { buffer.short.toInt() and 0xffff }
                 repeat(count) { index ->
-                    anIntArray2151[index] += buffer.short.toInt() and (0xffff shl 16)
+                    anIntArray2151[index] += (buffer.short.toInt() and 0xffff) shl 16
                 }
             }
             13 -> handledSounds = Array(buffer.short.toInt() and 0xffff) {
@@ -106,6 +108,9 @@ class AnimationDefinition {
                 }
             }
             14 -> aBoolean2141 = true
+            15 -> tween = true
+            16 -> aBoolean262 = true
+            else -> error("Unknown sequence opcode $opcode at ${buffer.position() - 1}")
         }
     }
 

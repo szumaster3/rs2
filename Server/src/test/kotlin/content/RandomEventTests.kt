@@ -72,13 +72,10 @@ class RandomEventTests {
 
     @Test fun teleportAndNotePunishmentShouldNotAffectAlreadyNotedItems() {
         TestUtils.getMockPlayer("teleportpunishment1").use { p ->
-            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
-            TestUtils.advanceTicks(5, false)
-            timer.nextExecution = getWorldTicks() + 5
-            TestUtils.advanceTicks(10, false)
+            val event = content.global.random.event.genie.GenieNPC().apply { player = p }
 
             addItem(p, Items.RAW_SHARK_384, 1000)
-            getAttribute<RandomEventNPC?>(p, AntiMacro.EVENT_NPC, null)!!.noteAndTeleport()
+            event.noteAndTeleport()
 
             Assertions.assertEquals(1000, amountInInventory(p, Items.RAW_SHARK_384))
         }
@@ -86,13 +83,10 @@ class RandomEventTests {
 
     @Test fun teleportAndNotePunishmentShouldNoteNotableUnnotedItems() {
         TestUtils.getMockPlayer("teleportpunishment2").use { p ->
-            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
-            TestUtils.advanceTicks(5, false)
-            timer.nextExecution = getWorldTicks() + 5
-            TestUtils.advanceTicks(10, false)
+            val event = content.global.random.event.genie.GenieNPC().apply { player = p }
 
             addItem(p, Items.ABYSSAL_WHIP_4151, 5)
-            getAttribute<RandomEventNPC?>(p, AntiMacro.EVENT_NPC, null)!!.noteAndTeleport()
+            event.noteAndTeleport()
 
             Assertions.assertEquals(5, amountInInventory(p, Items.ABYSSAL_WHIP_4152))
             Assertions.assertEquals(0, amountInInventory(p, Items.ABYSSAL_WHIP_4151))
@@ -101,13 +95,10 @@ class RandomEventTests {
 
     @Test fun teleportAndNotePunishmentShouldNotAffectUnnotableItems() {
         TestUtils.getMockPlayer("teleportpunishment3").use { p ->
-            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
-            TestUtils.advanceTicks(5, false)
-            timer.nextExecution = getWorldTicks() + 5
-            TestUtils.advanceTicks(10, false)
+            val event = content.global.random.event.genie.GenieNPC().apply { player = p }
 
             addItem(p, Items.AIR_RUNE_556, 30)
-            getAttribute<RandomEventNPC?>(p, AntiMacro.EVENT_NPC, null)!!.noteAndTeleport()
+            event.noteAndTeleport()
 
             Assertions.assertEquals(30, amountInInventory(p, Items.AIR_RUNE_556))
         }

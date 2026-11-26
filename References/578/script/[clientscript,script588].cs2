@@ -1,0 +1,4 @@
+[clientscript,script588]
+%varclient_82 = 0;
+%varclient_83 = 0;
+~stockmarket_onstocktransmit_to_layer_move;

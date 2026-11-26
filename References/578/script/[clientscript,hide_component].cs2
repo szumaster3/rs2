@@ -1,0 +1,2 @@
+[clientscript,hide_component](component $component0)
+if_sethide(true, $component0);

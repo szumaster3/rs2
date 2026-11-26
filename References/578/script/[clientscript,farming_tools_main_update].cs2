@@ -1,0 +1,94 @@
+[clientscript,farming_tools_main_update](component $component0, obj $obj1, int $int2, component $component3)
+def_component $component4 = if_getlayer($component0);
+def_int $int5 = 0;
+switch_obj ($obj1) {
+    case obj_5341 :
+        $int5 = %varplayerbit_1435;
+        if_settext("<oc_name($obj1)><br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_5343 :
+        $int5 = %varplayerbit_1436;
+        if_settext("Dibber<br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_952 :
+        $int5 = %varplayerbit_1437;
+        if_settext("<oc_name($obj1)><br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_5325 :
+        $int5 = %varplayerbit_1440;
+        if_settext("Trowel<br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_6059 :
+        $int5 = %varplayerbit_1778;
+        if_settext("<oc_name($obj1)><br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_1925 :
+        $int5 = %varplayerbit_1441;
+        if_settext("<oc_name($obj1)><br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_6032 :
+        $int5 = %varplayerbit_1442;
+        if_settext("<oc_name($obj1)><br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_6034 :
+        $int5 = %varplayerbit_1443;
+        if_settext("<oc_name($obj1)><br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+    case obj_5329 :
+        $int5 = %varplayerbit_1438;
+        if_settext("<oc_name($obj1)><br>(<tostring($int5)>/<tostring($int2)>)", $component3);
+        if (%varplayerbit_1848 = 1) {
+            $obj1 = obj_7409;
+        }
+    case obj_6797 :
+        switch_int (%varplayerbit_1439) {
+            case 9 :
+                $obj1 = obj_5340;
+                $int5 = 1;
+                if_settext("Watering Can (8)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (8)", $component0);
+            case 8 :
+                $obj1 = obj_5339;
+                $int5 = 1;
+                if_settext("Watering Can (7)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (7)", $component0);
+            case 7 :
+                $obj1 = obj_5338;
+                $int5 = 1;
+                if_settext("Watering Can (6)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (6)", $component0);
+            case 6 :
+                $obj1 = obj_5337;
+                $int5 = 1;
+                if_settext("Watering Can (5)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (5)", $component0);
+            case 5 :
+                $obj1 = obj_5336;
+                $int5 = 1;
+                if_settext("Watering Can (4)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (4)", $component0);
+            case 4 :
+                $obj1 = obj_5335;
+                $int5 = 1;
+                if_settext("Watering Can (3)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (3)", $component0);
+            case 3 :
+                $obj1 = obj_5334;
+                $int5 = 1;
+                if_settext("Watering Can (2)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (2)", $component0);
+            case 2 :
+                $obj1 = obj_5333;
+                $int5 = 1;
+                if_settext("Watering Can (1)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (1)", $component0);
+            case 1 :
+                $obj1 = obj_5331;
+                $int5 = 1;
+                if_settext("Watering Can (0)<br>(1/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can (0)", $component0);
+            case default :
+                $int5 = 0;
+                if_settext("Watering Can<br>(0/1)", $component3);
+                if_setopbase("<col=ff9040>Watering Can", $component0);
+        }
+}
+if_setobject_nonum($obj1, -1, $component0);
+if_setoutline(1, $component0);
+if ($int5 > 0) {
+    if_setcolour(0x7dd764, $component3);
+} else {
+    if_setcolour(0x872300, $component3);
+}

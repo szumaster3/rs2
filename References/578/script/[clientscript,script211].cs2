@@ -1,0 +1,13 @@
+[clientscript,script211](component $component0, int $int1, component $component2, int $int3)
+def_string $string0 = "Price out of range";
+if (testbit(%varclient_789, $int3) = ^true) {
+    if (cc_find($component0, $int1) = true) {
+        cc_setgraphic(graphic_1748);
+        cc_setonmouserepeat("script648($component0, $int1, $component2, $string0, 25, 106)");
+        cc_setonmouseleave("deltooltip($component2)");
+    }
+} else if (cc_find($component0, $int1) = true) {
+    cc_setgraphic(null);
+    cc_setonmouserepeat(null);
+    cc_setonmouseleave(null);
+}

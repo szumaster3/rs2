@@ -1,0 +1,83 @@
+[proc,ignore_update]
+cc_deleteall(interface_551:com_1);
+def_int $int0 = ignore_count;
+if ($int0 < 0) {
+    if_settext("Loading Ignore List.<br>Please wait.", interface_551:com_8);
+    if_sethide(false, interface_551:com_8);
+    return;
+}
+if_settext("", interface_551:com_8);
+if_sethide(true, interface_551:com_8);
+def_int $int1 = 0;
+def_string $string0 = "";
+def_string $string1 = "";
+def_string $string2 = "";
+def_int $int2 = 0;
+def_int $int3 = 0;
+def_string $string3 = "";
+def_int $int4 = 0;
+def_int $int5 = 0;
+while ($int1 < $int0) {
+    $int4 = calc($int1 * 2);
+    $int5 = calc($int1 * 15 + 5);
+    $string0, $string1 = ignore_getname($int1);
+    if (compare($string1, "") ! 0) {
+        $int2 = 1;
+    } else {
+        $int2 = 0;
+    }
+    if ($int2 = 1) {
+        $string2 = "      <$string0>";
+    } else {
+        $string2 = $string0;
+    }
+    cc_create(interface_551:com_1, ^iftype_text, $int4);
+    cc_setsize(168, 14, ^setsize_abs, ^setsize_abs);
+    cc_setposition(0, $int5, ^setpos_abs_left, ^setpos_abs_top);
+    cc_setcolour(^white);
+    cc_settextfont(friendslist_font);
+    cc_settextshadow(true);
+    cc_settextalign(^settextalign_left, ^settextalign_top, 0);
+    if ($int2 = 1) {
+        cc_settext("      <$string2>");
+    } else {
+        cc_settext($string2);
+    }
+    cc_settext($string2);
+    cc_setopbase("<col=ffffff><$string0>");
+    cc_setop(1, "Delete");
+    cc_setonop("ignore_op(ignore_getname_unfiltered($int1))");
+    if ($int2 = 1) {
+        $int3 = calc(parawidth("Last known as: <$string1>", ^max_32bit_int, friendslist_font) + 8);
+        if ($int3 > if_getwidth(interface_551:com_1)) {
+            $string3 = "Last known as:<br><$string1>";
+        } else {
+            $string3 = "Last known as: <$string1>";
+        }
+        cc_setonmouserepeat("script2467(event_com, event_comsubid, $string3, event_mousex, event_mousey, interface_551:com_1, interface_551:com_11, interface_551:com_14, friendslist_font)");
+        cc_setonmouseleave("script2469(interface_551:com_11, interface_551:com_14)");
+    }
+    cc_create(interface_551:com_1, ^iftype_graphic, calc($int4 + 1));
+    cc_setgraphic(friends_changed_name);
+    cc_setsize(14, 14, ^setsize_abs, ^setsize_abs);
+    cc_setposition(0, $int5, ^setpos_abs_left, ^setpos_abs_top);
+    if ($int2 = 0) {
+        cc_sethide(true);
+    }
+    $int1 = calc($int1 + 1);
+}
+def_int $int6 = 0;
+def_int $int7 = 0;
+if ($int1 > 12) {
+    $int6 = if_getscrolly(interface_551:com_1);
+    $int7 = calc($int1 * 15 + 10);
+    if_setscrollsize(0, $int7, interface_551:com_1);
+    if ($int6 > $int7) {
+        $int6 = $int7;
+    }
+    ~scrollbar_resize(interface_551:com_2, interface_551:com_1, $int6);
+} else {
+    if_setscrollsize(0, 0, interface_551:com_1);
+    if_setscrollpos(0, 0, interface_551:com_1);
+    ~scrollbar_resize(interface_551:com_2, interface_551:com_1, 0);
+}

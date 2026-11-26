@@ -1,0 +1,334 @@
+[proc,script996](int $int0, int $int1)(int, obj, string, string)
+switch_int ($int0) {
+    case 3 :
+        switch_int ($int1) {
+            case 0 :
+                return(4, obj_9236, "Members: Opal-tipped bronze crossbow bolt", "Members can now enchant <col=000080>opal-tipped bronze crossbow bolts</col>.");
+            case 1 :
+                return(7, obj_1607, "Sapphire items", "You can now enchant <col=000080>sapphire items</col>.");
+            case 2 :
+                return(7, obj_9240, "Members: Sapphire-tipped mithril crossbow bolt", "Members can now enchant <col=000080>sapphire-tipped crossbow bolts</col>.");
+            case 3 :
+                return(14, obj_9237, "Members: Jade-tipped blurite crossbow bolt", "Members can now enchant <col=000080>jade-tipped blurite crossbow bolts</col>.");
+            case 4 :
+                return(24, obj_9238, "Members: Pearl-tipped iron crossbow bolt", "Members can now enchant <col=000080>pearl-tipped iron crossbow bolts</col>.");
+            case 5 :
+                return(27, obj_1605, "Emerald items", "You can now enchant <col=000080>emerald items</col>.");
+            case 6 :
+                return(27, obj_9241, "Members: Emerald-tipped mithril crossbow bolt", "Members can now enchant <col=000080>emerald-tipped mithril crossbow bolts</col>.");
+            case 7 :
+                return(29, obj_9239, "Members: Red topaz-tipped steel crossbow bolt", "Members can now enchant <col=000080>red topaz-tipped steel crossbow bolts</col>.");
+            case 8 :
+                return(49, obj_1603, "Ruby items", "You can now enchant <col=000080>ruby items</col>.");
+            case 9 :
+                return(49, obj_9242, "Members: Ruby-tipped adamant crossbow bolt", "Members can now <col=000080>enchant ruby-tipped adamant crossbow bolts</col>.");
+            case 10 :
+                return(56, obj_571, "Members: Charge water orbs", "Members can now charge <col=000080>water orbs</col>.");
+            case 11 :
+                return(57, obj_1601, "Diamond items", "You can now enchant <col=000080>diamond items</col>.");
+            case 12 :
+                return(57, obj_9243, "Members: Diamond-tipped adamant crossbow bolt", "Members can now enchant <col=000080>diamond-tipped adamant crossbow bolts</col>.");
+            case 13 :
+                return(60, obj_575, "Members: Charge earth orbs", "Members can now charge <col=000080>earth orbs</col>.");
+            case 14 :
+                return(63, obj_569, "Members: Charge fire orbs", "Members can now charge <col=000080>fire orbs</col>.");
+            case 15 :
+                return(66, obj_573, "Members: Charge air orbs", "Members can now charge <col=000080>air orbs</col>.");
+            case 16 :
+                return(68, obj_1615, "Members: Dragonstone items", "Members can now enchant <col=000080>dragonstone items</col>.");
+            case 17 :
+                return(68, obj_9244, "Members: Dragonstone-tipped rune crossbow bolt", "Members can now enchant <col=000080>dragonstone-tipped rune crossbow bolts</col>.");
+            case 18 :
+                return(87, obj_6573, "Members: Onyx items", "Members can now enchant <col=000080>onyx items</col>.");
+            case 19 :
+                return(87, obj_9245, "Members: Onyx-tipped rune crossbow bolt", "Members can now enchant <col=000080>onyx-tipped rune crossbow bolts</col>.");
+        }
+    case 4 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_3755, "Members: Farseer helm<br> (after Fremennik Trials and with 45 Defence)", "Members now have the Magic level required to wear <col=000080>farseer helms</col> (after Fremennik Trials).");
+            case 1 :
+                return(1, obj_2890, "Members: Elemental shield<br> (after Elemental Workshop)", "Members can now wear <col=000080>elemental shields</col> (after Elemental Workshop).");
+            case 2 :
+                return(1, obj_9729, "Members: Elemental helmet<br> (after Elemental Workshop)", "Members can now wear <col=000080>elemental helms</col> (after Elemental Workshop).");
+            case 3 :
+                return(1, obj_9731, "Members: Mind shield<br> (after Elemental Workshop II)", "Members can now wear <col=000080>mind shields</col> (after Elemental Workshop II).");
+            case 4 :
+                return(1, obj_9733, "Members: Mind helmet<br> (after Elemental Workshop II)", "Members can now wear <col=000080>mind helmets</col> (after Elemental Workshop II).");
+            case 5 :
+                return(1, obj_6153, "Members: Skeletal gloves", "Members can now wear <col=000080>skeletal gloves</col>.");
+            case 6 :
+                return(1, obj_6147, "Members: Skeletal boots", "Members can now wear <col=000080>skeletal boots</col>.");
+            case 7 :
+                return(20, obj_2579, "Members: Wizard boots", "Members can now wear <col=000080>wizard boots.");
+            case 8 :
+                return(20, obj_12964, "Combat hood<br> (with 10 Defence)", "You now have the Magic level required to wear <col=000080>combat hoods</col>. (You also need level 10 Defence.)");
+            case 9 :
+                return(20, obj_12971, "Combat robe top<br> (with 10 Defence)", "You now have the Magic level required to wear <col=000080>combat robe tops</col>. (You also need level 10 Defence.)");
+            case 10 :
+                return(20, obj_12978, "Combat robe bottom<br> (with 10 Defence)", "You now have the Magic level required to wear <col=000080>combat robe bottoms</col>. (You also need level 10 Defence.)");
+            case 11 :
+                return(20, obj_12887, "Druidic mage hood<br> (with 10 Defence)", "You now have the Magic level required to wear <col=000080>druidic mage hoods</col>. (You also need level 10 Defence.)");
+            case 12 :
+                return(20, obj_12894, "Druidic mage top<br> (with 10 Defence)", "You now have the Magic level required to wear <col=000080>druidic mage tops</col>. (You also need level 10 Defence.)");
+            case 13 :
+                return(20, obj_12901, "Druidic mage bottom<br> (with 10 Defence)", "You now have the Magic level required to wear <col=000080>druidic mage bottoms</col>. (You also need level 10 Defence.)");
+            case 14 :
+                return(20, obj_13938, "Members: Corrupt Zuriel's hood<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>corrupt Zuriel's hood</col>. (They also need level 20 Defence.)");
+            case 15 :
+                return(20, obj_13932, "Members: Corrupt Zuriel's robe top<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>corrupt Zuriel's robe top</col>. (They also need level 20 Defence.)");
+            case 16 :
+                return(20, obj_13935, "Members: Corrupt Zuriel's robe bottom<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>corrupt Zuriel's robe bottom</col>. (They also need level 20 Defence.)");
+            case 17 :
+                return(40, obj_4089, "Members: Mystic hat<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>mystic hats</col>. (They also need level 20 Defence.)");
+            case 18 :
+                return(40, obj_4091, "Members: Mystic robe top<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>mystic robe tops</col>. (They also need level 20 Defence.)");
+            case 19 :
+                return(40, obj_4093, "Members: Mystic robe bottom<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>mystic robe bottoms</col>. (They also need level 20 Defence.)");
+            case 20 :
+                return(40, obj_4095, "Members: Mystic gloves<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>mystic gloves</col>. (They also need level 20 Defence.)");
+            case 21 :
+                return(40, obj_4097, "Members: Mystic boots<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>mystic boots</col>. (They also need level 20 Defence.)");
+            case 22 :
+                return(40, obj_14499, "Members: Dagon'hai hat<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>Dagon'hai hats</col>. (They also need level 20 Defence.)");
+            case 23 :
+                return(40, obj_14497, "Members: Dagon'hai robe top<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>Dagon'hai robe tops</col>. (They also need level 20 Defence.)");
+            case 24 :
+                return(40, obj_14501, "Members: Dagon'hai robe bottom<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>Dagon'hai robe bottoms</col>. (They also need level 20 Defence.)");
+            case 25 :
+                return(40, obj_7400, "Members: Enchanted hat<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>enchanted hats</col>. (They also need level 20 Defence.)");
+            case 26 :
+                return(40, obj_7399, "Members: Enchanted top<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>enchanted tops</col>. (They also need level 20 Defence.)");
+            case 27 :
+                return(40, obj_7398, "Members: Enchanted robe<br> (with 20 Defence)", "Members now have the Magic level required to wear <col=000080>enchanted robes</col>. (They also need level 20 Defence.)");
+            case 28 :
+                return(40, obj_3385, "Members: Splitbark helm<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>splitbark helms</col>. (They also need level 40 Defence.)");
+            case 29 :
+                return(40, obj_3387, "Members: Splitbark body<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>splitbark bodies</col>. (They also need level 40 Defence.)");
+            case 30 :
+                return(40, obj_3389, "Members: Splitbark legs<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>splitbark legs</col>. (They also need level 40 Defence.)");
+            case 31 :
+                return(40, obj_3391, "Members: Splitbark gauntlets<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>splitbark gauntlets</col>. (They also need level 40 Defence.)");
+            case 32 :
+                return(40, obj_3393, "Members: Splitbark boots<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>splitbark boots</col>. (They also need level 40 Defence.)");
+            case 33 :
+                return(40, obj_6137, "Members: Skeletal helmet<br> (after Fremennik Trials and with 40 Defence)", "Members now have the Magic level required to wear <col=000080>skeletal helmets</col> (after Fremennik Trials and with level 40 Defence).");
+            case 34 :
+                return(40, obj_6139, "Members: Skeletal top<br> (after Fremennik Trials and with 40 Defence)", "Members now have the Magic level required to wear <col=000080>skeletal tops</col> (after Fremennik Trials and with level 40 Defence).");
+            case 35 :
+                return(40, obj_6141, "Members: Skeletal bottoms<br> (after Fremennik Trials and with 40 Defence)", "Members now have the Magic level required to wear <col=000080>skeletal bottoms</col> (after Fremennik Trials and with level 40 Defence).");
+            case 36 :
+                return(40, obj_14116, "Members: Sacred clay hat<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>sacred clay hats</col>. (They also need level 40 Defence.)");
+            case 37 :
+                return(40, obj_14114, "Members: Sacred clay robe top<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>sacred clay robe tops</col>. (They also need level 40 Defence.)");
+            case 38 :
+                return(40, obj_14115, "Members: Sacred clay robe bottom<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>sacred clay robe bottoms</col>. (They also need level 40 Defence.)");
+            case 39 :
+                return(40, obj_10454, "Members: Guthix mitre<br> (with level 40 Prayer)", "Members now have the Magic level required to wear <col=000080>Guthix mitres</col> (with level 40 Prayer).");
+            case 40 :
+                return(40, obj_10452, "Members: Saradomin mitre<br> (with level 40 Prayer)", "Members now have the Magic level required to wear <col=000080>Saradomin mitres</col> (with level 40 Prayer).");
+            case 41 :
+                return(40, obj_10456, "Members: Zamorak mitre<br> (with level 40 Prayer)", "Members now have the Magic level required to wear <col=000080>Zamorak mitres</col> (with level 40 Prayer).");
+            case 42 :
+                return(50, obj_6918, "Members: Infinity hat<br> (with 25 Defence)", "Members now have the Magic level required to wear <col=000080>infinity hats</col>. (They also need level 25 Defence.)");
+            case 43 :
+                return(50, obj_6916, "Members: Infinity top<br> (with 25 Defence)", "Members now have the Magic level required to wear <col=000080>infinity tops</col>. (They also need level 25 Defence.)");
+            case 44 :
+                return(50, obj_6924, "Members: Infinity bottom<br> (with 25 Defence)", "Members now have the Magic level required to wear <col=000080>infinity bottoms</col>. (They also need level 25 Defence.)");
+            case 45 :
+                return(50, obj_6920, "Members: Infinity boots<br> (with 25 Defence)", "Members now have the Magic level required to wear <col=000080>infinity boots</col>. (They also need level 25 Defence.)");
+            case 46 :
+                return(50, obj_6922, "Members: Infinity gloves<br> (with 25 Defence)", "Members now have the Magic level required to wear <col=000080>infinity gloves</col>. (They also need level 25 Defence.)");
+            case 47 :
+                return(60, obj_2413, "Members: Guthix cape", "Members can now wear <col=000080>Guthix capes.");
+            case 48 :
+                return(60, obj_2412, "Members: Saradomin cape", "Members can now wear <col=000080>Saradomin capes.");
+            case 49 :
+                return(60, obj_2414, "Members: Zamorak cape", "Members can now wear <col=000080>Zamorak capes.");
+            case 50 :
+                return(60, obj_12866, "Members: Battle hood<br> (with 50 Defence)", "Members now have the Magic level required to wear <col=000080>battle hoods</col>. (They also need level 50 Defence.)");
+            case 51 :
+                return(60, obj_12873, "Members: Battle robe top<br> (with 50 Defence)", "Members now have the Magic level required to wear <col=000080>battle robe tops</col>. (They also need level 50 Defence.)");
+            case 52 :
+                return(60, obj_12880, "Members: Battle robe bottom<br> (with 50 Defence)", "Members now have the Magic level required to wear <col=000080>battle robe bottoms</col>. (They also need level 50 Defence.)");
+            case 53 :
+                return(65, obj_10342, "Members: Third-Age mage hat<br> (with 30 Defence)", "Members now have the Magic level required to wear <col=000080>Third-Age mage hats</col>. (They also need level 30 Defence)");
+            case 54 :
+                return(65, obj_10338, "Members: Third-Age robe top<br> (with 30 Defence)", "Members now have the Magic level required to wear <col=000080>Third-Age robe tops</col>. (They also need level 30 Defence)");
+            case 55 :
+                return(65, obj_10340, "Members: Third-Age robe<br> (with 30 Defence)", "Members now have the Magic level required to wear <col=000080>Third-Age robes</col>. (They also need level 30 Defence)");
+            case 56 :
+                return(65, obj_10344, "Members: Third-Age amulet<br> (with 30 Defence)", "Members now have the Magic level required to wear <col=000080>Third-Age amulets</col>. (They also need level 30 Defence)");
+            case 57 :
+                return(65, obj_9096, "Members: Lunar helm<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>lunar helms</col>. (They also need level 40 Defence.)");
+            case 58 :
+                return(65, obj_9097, "Members: Lunar torso<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>lunar torsos</col>. (They also need level 40 Defence.)");
+            case 59 :
+                return(65, obj_9099, "Members: Lunar gloves<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>lunar gloves</col>. (They also need level 40 Defence.)");
+            case 60 :
+                return(65, obj_9098, "Members: Lunar legs<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>lunar legs</col>. (They also need level 40 Defence.)");
+            case 61 :
+                return(65, obj_9100, "Members: Lunar boots<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>lunar boots</col>. (They also need level 40 Defence.)");
+            case 62 :
+                return(65, obj_9101, "Members: Lunar cape<br> (with 40 Defence)", "Members now have the Magic level required to wear <col=000080>lunar capes</col>. (They also need level 40 Defence.)");
+            case 63 :
+                return(65, obj_13738, "Members: Arcane spirit shield<br> (after Summer's End and with 70 Prayer and 75 Defence)", "Members now have the Magic level required to wield <col=000080>arcane spirit shields</col> (after Summer's End, with level 70 Prayer and 75 Defence).");
+            case 64 :
+                return(65, obj_13744, "Members: Spectral spirit shield<br> (after Summer's End and with 70 Prayer and 75 Defence)", "Members now have the Magic level required to wield <col=000080>spectral spirit shields</col> (after Summer's End, with level 70 Prayer and 75 Defence).");
+            case 65 :
+                return(70, obj_4708, "Members: Ahrim's hood<br> (with 70 Defence)", "Members now have the Magic level required to wear <col=000080>Ahrim's hood</col>. (They also need level 70 Defence.)");
+            case 66 :
+                return(70, obj_4712, "Members: Ahrim's robe top<br> (with 70 Defence)", "Members now have the Magic level required to wear <col=000080>Ahrim's robe top</col>. (They also need level 70 Defence.)");
+            case 67 :
+                return(70, obj_4714, "Members: Ahrim's robe skirt<br> (with 70 Defence)", "Members now have the Magic level required to wear <col=000080>Ahrim's robe skirt</col>. (They also need level 70 Defence.)");
+            case 68 :
+                return(78, obj_13864, "Members: Zuriel's hood<br> (with 78 Defence)", "Members now have the Magic level required to wear <col=000080>Zuriel's hood</col>. (They also need level 78 Defence.)");
+            case 69 :
+                return(78, obj_13858, "Members: Zuriel's robe top<br> (with 78 Defence)", "Members now have the Magic level required to wear <col=000080>Zuriel's robe top</col>. (They also need level 78 Defence.)");
+            case 70 :
+                return(78, obj_13861, "Members: Zuriel's robe bottom<br> (with 78 Defence)", "Members now have the Magic level required to wear <col=000080>Zuriel's robe bottom</col>. (They also need level 78 Defence.)");
+        }
+    case 5 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_1379, "Staff", "You can now wield <col=000080>staves</col>.");
+            case 1 :
+                return(1, obj_1389, "Magic staff", "You can now wield <col=000080>staves of magic</col>.");
+            case 2 :
+                return(1, obj_1381, "Staff of air", "You can now wield <col=000080>staves of air</col>.");
+            case 3 :
+                return(1, obj_1385, "Staff of earth", "You can now wield <col=000080>staves of earth</col>.");
+            case 4 :
+                return(1, obj_1387, "Staff of fire", "You can now wield <col=000080>staves of fires</col>.");
+            case 5 :
+                return(1, obj_1383, "Staff of water", "You can now wield <col=000080>staves of water</col>.");
+            case 6 :
+                return(20, obj_13941, "Members: Corrupt Zuriel's staff<br> (with 20 Attack)", "Members now have the Magic level required to use <col=000080>Corrupt Zuriel's staff</col>. (They also need level 20 Attack.)");
+            case 7 :
+                return(30, obj_1397, "Members: Air battlestaff<br> (with 30 Attack)", "Members now have the Magic level required to use <col=000080>air battlestaves</col>. (They also need level 30 Attack.)");
+            case 8 :
+                return(30, obj_1399, "Members: Earth battlestaff<br> (with 30 Attack)", "Members now have the Magic level required to use <col=000080>earth battlestaves</col>. (They also need level 30 Attack.)");
+            case 9 :
+                return(30, obj_1393, "Members: Fire battlestaff<br> (with 30 Attack)", "Members now have the Magic level required to use <col=000080>fire battlestaves</col>. (They also need level 30 Attack.)");
+            case 10 :
+                return(30, obj_1395, "Members: Water battlestaff<br> (with 30 Attack)", "Members now have the Magic level required to use <col=000080>water battlestaves</col>. (They also need level 30 Attack.)");
+            case 11 :
+                return(30, obj_3053, "Members: Lava battlestaff<br> (with 30 Attack)", "Members now have the Magic level required to use <col=000080>lava battlestaves</col>. (They also need level 30 Attack.)");
+            case 12 :
+                return(30, obj_6562, "Members: Mud battlestaff<br> (with 30 Attack)", "Members now have the Magic level required to use <col=000080>mud battlestaves</col>. (They also need level 30 Attack.)");
+            case 13 :
+                return(30, obj_11736, "Members: Steam battlestaff<br> (with 30 Attack)", "Members now have the Magic level required to use <col=000080>steam battlestaves</col>. (They also need level 30 Attack.)");
+            case 14 :
+                return(40, obj_1405, "Members: Mystic air staff<br> (with 40 Attack)", "Members now have the Magic level required to use <col=000080>mystic air staves</col>. (They also need level 40 Attack.)");
+            case 15 :
+                return(40, obj_1407, "Members: Mystic earth staff<br> (with 40 Attack)", "Members now have the Magic level required to use <col=000080>mystic earth staves</col>. (They also need level 40 Attack.)");
+            case 16 :
+                return(40, obj_1401, "Members: Mystic fire staff<br> (with 40 Attack)", "Members now have the Magic level required to use <col=000080>mystic fire staves</col>. (They also need level 40 Attack.)");
+            case 17 :
+                return(40, obj_1403, "Members: Mystic water staff<br> (with 40 Attack)", "Members now have the Magic level required to use <col=000080>mystic water staves</col>. (They also need level 40 Attack.)");
+            case 18 :
+                return(40, obj_3054, "Members: Mystic lava staff<br> (with 40 Attack)", "Members now have the Magic level required to use <col=000080>mystic lava staves</col>. (They also need level 40 Attack.)");
+            case 19 :
+                return(40, obj_6563, "Members: Mystic mud staff<br> (with 40 Attack)", "Members now have the Magic level required to use <col=000080>mystic mud staves</col>. (They also need level 40 Attack.)");
+            case 20 :
+                return(40, obj_11738, "Members: Mystic steam staff<br> (with 40 Attack)", "Members now have the Magic level required to use <col=000080>mystic steam staves</col>. (They also need level 40 Attack.)");
+            case 21 :
+                return(40, obj_14117, "Members: Sacred clay staff", "Members can now wield <col=000080>sacred clay staves</col>.");
+            case 22 :
+                return(50, obj_4170, "Members: Slayer's staff<br> (with 55 Slayer)", "Members now have the Magic level required to use <col=000080>Slayer staves</col>, magic weapons used for killing turoth and kurask. (They also need level 55 Slayer.)");
+            case 23 :
+                return(50, obj_1409, "Members: Iban's Staff<br> (after Underground Pass and with 50 Attack)", "Members now have the Magic level required to use <col=000080>Iban's Staff</col> (after Underground Pass and with 50 Attack).");
+            case 24 :
+                return(50, obj_4675, "Members: Ancient Staff<br> (after Desert Treasure, with 50 Attack)", "Members now have the Magic level required to use the <col=000080>Ancient Staff</col> (after Desert Treasure and with 50 Attack).");
+            case 25 :
+                return(60, obj_2415, "Members: Saradomin staff", "Members can now use <col=000080>Saradomin staves</col>.");
+            case 26 :
+                return(60, obj_2416, "Members: Guthix staff", "Members can now use the <col=000080>Guthix staves</col>.");
+            case 27 :
+                return(60, obj_2417, "Members: Zamorak staff", "Members can now use the <col=000080>Zamorak staves</col>.");
+            case 28 :
+                return(60, obj_6526, "Members: Toktz-Mej-Tal<br> (with 60 Attack)", "Members now have the Magic level required to use <col=000080>Toktz-Mej-Tal</col>. (They also need level 60 Attack.)");
+            case 29 :
+                return(70, obj_4710, "Members: Ahrim's staff<br> (with 70 Attack)", "Members now have the Magic level required to use <col=000080>Ahrim's staff</col>. (They also need level 70 Attack.)");
+            case 30 :
+                return(78, obj_13867, "Members: Zuriel's staff<br> (with 78 Attack)", "Members now have the Magic level required to use <col=000080>Zuriel's staff</col>. (They also need level 78 Attack.)");
+        }
+    case 6 :
+        switch_int ($int1) {
+            case 0 :
+                return(45, obj_6908, "Beginner wand", "Members can now use <col=000080>beginner wands</col>.");
+            case 1 :
+                return(50, obj_6910, "Apprentice wand", "Members can now use <col=000080>apprentice wands</col>.");
+            case 2 :
+                return(55, obj_6912, "Teacher wand", "Members can now use <col=000080>teacher wands</col>.");
+            case 3 :
+                return(60, obj_6914, "Master wand", "Members can now use <col=000080>master wands</col>.");
+            case 4 :
+                return(60, obj_6889, "Mage's book", "Members can now use <col=000080>mages' books</col>.");
+        }
+    case 7 :
+        switch_int ($int1) {
+            case 0 :
+                return(30, obj_10149, "Swamp lizard<br> (with 30 Attack and 30 Ranged)", "Members now have the Magic level required to use <col=000080>swamp lizards</col>. (They also need level 30 Attack and level 30 Ranged.)");
+            case 1 :
+                return(50, obj_10146, "Orange salamander<br> (with 50 Attack and 50 Ranged)", "Members now have the Magic level required to use <col=000080>orange salamanders</col>. (They also need level 50 Attack and 50 Ranged.)");
+            case 2 :
+                return(60, obj_10147, "Red salamander<br> (with 60 Attack and 60 Ranged)", "Members now have the Magic level required to use <col=000080>red salamanders</col>. (They also need level 60 Attack and 60 Ranged.)");
+            case 3 :
+                return(70, obj_10148, "Black salamander<br> (with 70 Attack and 70 Ranged)", "Members now have the Magic level required to use <col=000080>black salamanders</col>. (They also need level 70 Attack and 70 Ranged.)");
+        }
+    case 8 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_14377, "Stealing Creation - class 1 staff", "Members can now wield <col=000080>class 1 staves</col> in Stealing Creation.");
+            case 1 :
+                return(1, obj_14337, "Stealing Creation - class 1 hat", "Members can now wear <col=000080>class 1 hats</col> in Stealing Creation.");
+            case 2 :
+                return(1, obj_14317, "Stealing Creation - class 1 robe top", "Members can now wear <col=000080>class 1 robe tops</col> in Stealing Creation.");
+            case 3 :
+                return(1, obj_14327, "Stealing Creation - class 1 robe bottom", "Members can now wear <col=000080>class 1 robe bottoms</col> in Stealing Creation.");
+            case 4 :
+                return(20, obj_14379, "Stealing Creation - class 2 staff", "Members can now wield <col=000080>class 2 staves</col> in Stealing Creation.");
+            case 5 :
+                return(20, obj_14339, "Stealing Creation - class 2 hat", "Members can now wear <col=000080>class 2 hats</col> in Stealing Creation.");
+            case 6 :
+                return(20, obj_14319, "Stealing Creation - class 2 robe top", "Members can now wear <col=000080>class 2 robe tops</col> in Stealing Creation.");
+            case 7 :
+                return(20, obj_14329, "Stealing Creation - class 2 robe bottom", "Members can now wear <col=000080>class 2 robe bottoms</col> in Stealing Creation.");
+            case 8 :
+                return(40, obj_14381, "Stealing Creation - class 3 staff", "Members can now wield <col=000080>class 3 staves</col> in Stealing Creation.");
+            case 9 :
+                return(40, obj_14341, "Stealing Creation - class 3 hat", "Members can now wear <col=000080>class 3 hats</col> in Stealing Creation.");
+            case 10 :
+                return(40, obj_14321, "Stealing Creation - class 3 robe top", "Members can now wear <col=000080>class 3 robe tops</col> in Stealing Creation.");
+            case 11 :
+                return(40, obj_14331, "Stealing Creation - class 3 robe bottom", "Members can now wear <col=000080>class 3 robe bottoms</col> in Stealing Creation.");
+            case 12 :
+                return(60, obj_14383, "Stealing Creation - class 4 staff", "Members can now wield <col=000080>class 4 staves</col> in Stealing Creation.");
+            case 13 :
+                return(60, obj_14343, "Stealing Creation - class 4 hat", "Members can now wear <col=000080>class 4 hats</col> in Stealing Creation.");
+            case 14 :
+                return(60, obj_14323, "Stealing Creation - class 4 robe top", "Members can now wear <col=000080>class 4 robe tops</col> in Stealing Creation.");
+            case 15 :
+                return(60, obj_14333, "Stealing Creation - class 4 robe bottom", "Members can now wear <col=000080>class 4 robe bottoms</col> in Stealing Creation.");
+            case 16 :
+                return(80, obj_14385, "Stealing Creation - class 5 staff", "Members can now wield <col=000080>class 5 staves</col> in Stealing Creation.");
+            case 17 :
+                return(80, obj_14345, "Stealing Creation - class 5 hat", "Members can now wear <col=000080>class 5 hats</col> in Stealing Creation.");
+            case 18 :
+                return(80, obj_14325, "Stealing Creation - class 5 robe top", "Members can now wear <col=000080>class 5 robe tops</col> in Stealing Creation.");
+            case 19 :
+                return(80, obj_14335, "Stealing Creation - class 5 robe bottom", "Members can now wear <col=000080>class 5 robe bottoms</col> in Stealing Creation.");
+        }
+    case 9 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_1907, "Wizard's Mind Bomb<br> will temporarily increase your Magic level by 2 levels.", "<col=000080>Wizard's Mind Bomb</col> will now temporarily increase your Magic level by <col=000080>2 levels</col>.");
+            case 1 :
+                return(50, obj_1907, "Wizard's Mind Bomb<br> will temporarily increase your Magic level by 3 levels.", "<col=000080>Wizard's Mind Bomb</col> will now temporarily increase your Magic level by <col=000080>3 levels</col>.");
+            case 2 :
+                return(66, obj_4675, "Members: Magic Guild", "Members can now enter the <col=000080>Wizard's Guild</col>.");
+            case 3 :
+                return(99, obj_9762, "Skill mastery", "<col=000080>Congratulations! You are now a master of <col=800000>Magic<col=000080>. Members can visit the <col=800000>robe store<col=000080> in the <col=800000>Wizards' Guild<col=000080>. They have something special that is only available to true masters of the <col=800000>Magic<col=000080> skill!");
+        }
+}

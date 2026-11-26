@@ -1,0 +1,25 @@
+[clientscript,barrows_show_head]
+def_component $component0 = null;
+if (%varclient_1043 = null) {
+    return;
+}
+switch_obj (%varclient_1043) {
+    case obj_4761, obj_4762 :
+        $component0 = interface_24:com_10;
+    case obj_4763, obj_4764 :
+        $component0 = interface_24:com_8;
+    case obj_4765, obj_4766 :
+        $component0 = interface_24:com_9;
+    case obj_4767, obj_4768 :
+        $component0 = interface_24:com_11;
+    case obj_4769, obj_4770 :
+        $component0 = interface_24:com_12;
+    case obj_4771, obj_4772 :
+        $component0 = interface_24:com_13;
+}
+if ($component0 = null) {
+    return;
+}
+if_setobject(%varclient_1043, -1, $component0);
+if_setmodelzoom(1600, $component0);
+if_setmodelanim(seq_12554, $component0);

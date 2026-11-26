@@ -1,0 +1,11 @@
+[clientscript,script2560]
+if_settext(enum(int, string, enum_2385, 1), interface_845:com_10);
+if_settext(enum(int, string, enum_2385, 2), interface_845:com_14);
+if_settext(enum(int, string, enum_2385, 3), interface_845:com_18);
+if_settext(enum(int, string, enum_2385, 4), interface_845:com_22);
+if_settext(enum(int, string, enum_2385, 5), interface_845:com_26);
+if_settext("x <tostring(%varclient_828)>", interface_845:com_9);
+if_settext("x <tostring(%varclient_829)>", interface_845:com_13);
+if_settext("x <tostring(%varclient_830)>", interface_845:com_17);
+if_settext("x <tostring(%varclient_831)>", interface_845:com_21);
+if_settext("x <tostring(%varclient_832)>", interface_845:com_25);

@@ -1,0 +1,4 @@
+[clientscript,script2758](component $component0)
+if_setonvartransmit("script2759(event_com){varplayer_466}", $component0);
+if_setonvarctransmit("script2759(event_com){varclient_173}", $component0);
+~script2760($component0);

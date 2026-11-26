@@ -4,7 +4,6 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.appearance.Gender
 import core.tools.RandomFunction
-import shared.consts.Components
 import kotlin.math.abs
 
 /**
@@ -64,44 +63,112 @@ object CharacterDesign {
         Triple(4, SKIN_COLORS, 151..158)
     )
 
+    const val INTERFACE_ID = 900
+    const val CONFIRM = 81
+    private val categories = intArrayOf(33, 37, 41, 45, 49, 53, 57, 61)
+    // Generated from CS2 2739 and cache enums/struct param 788 (uncovered hair).
+    private val maleKits = arrayOf(
+        intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 91, 92, 93, 94, 95, 96, 97, 261, 262, 263, 264, 265, 266, 267, 268, 309, 314, 313, 310, 315, 312),
+        intArrayOf(14, 11, 12, 13, 10, 15, 16, 17, 98, 99, 100, 101, 102, 103, 104, 305, 306, 307, 308),
+        intArrayOf(111, 113, 114, 115, 112, 116, 18, 19, 20, 21, 22, 23, 24, 25),
+        intArrayOf(105, 108, 106, 107, 109, 110, 28, 26, 27, 29, 30, 31),
+        intArrayOf(34, 33, 84, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126),
+        intArrayOf(36, 85, 37, 89, 90, 40, 86, 88, 39, 38, 87),
+        intArrayOf(42, 43)
+    )
+    private val femaleKits = arrayOf(
+        intArrayOf(45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 353, 356, 362, 354, 355, 359, 357),
+        intArrayOf(),
+        intArrayOf(153, 155, 156, 157, 154, 158, 56, 57, 58, 59, 60),
+        intArrayOf(147, 150, 148, 149, 151, 152, 64, 61, 63, 65, 62),
+        intArrayOf(68, 67, 127, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168),
+        intArrayOf(129, 130, 128, 74, 133, 134, 77, 131, 132, 75, 73, 76, 72, 70, 71, 363),
+        intArrayOf(79, 80)
+    )
+    private val palette = arrayOf(
+        intArrayOf(7, 0, 1, 2, 3, 4, 5, 6),
+        intArrayOf(20, 19, 10, 18, 4, 5, 15, 7, 0, 6, 21, 9, 22, 17, 8, 16, 24, 11, 23, 3, 2, 1, 14, 13, 12),
+        intArrayOf(),
+        intArrayOf(24, 23, 2, 22, 12, 11, 6, 19, 4, 0, 9, 13, 25, 8, 15, 26, 21, 7, 20, 14, 10, 28, 27, 3, 5, 18, 17, 1, 16),
+        intArrayOf(),
+        intArrayOf(),
+        intArrayOf(24, 23, 3, 22, 13, 12, 7, 19, 5, 1, 10, 14, 25, 9, 0, 26, 21, 8, 20, 15, 11, 28, 27, 4, 6, 18, 17, 2, 16),
+        intArrayOf(0, 1, 2, 3, 4, 5)
+    )
+    private val colorParts = intArrayOf(4, 0, -1, 2, -1, -1, 5, 6)
+
     @JvmStatic
     fun open(player: Player) {
+        if (player.interfaceManager.hasMainComponent(INTERFACE_ID)) return
         player.unlock()
         removeAttribute(player, "char-design:accepted")
-        sendPlayerOnInterface(player, Components.APPEARANCE_771, 79)
-        sendAnimationOnInterface(player, 9806, Components.APPEARANCE_771, 79)
-        player.appearance.changeGender(player.appearance.gender)
-        player.interfaceManager.openComponent(Components.APPEARANCE_771)?.setUncloseEvent { p, _ ->
-            p.getAttribute("char-design:accepted", false)
+        val design = core.game.component.Component(INTERFACE_ID)
+        design.definition!!.type = core.game.component.InterfaceType.DEFAULT
+        design.definition.isWalkable = false
+        val component = player.interfaceManager.openTemporaryRoot(design) ?: return
+        component.setUncloseEvent { p, _ -> p.getAttribute("char-design:accepted", false) }
+        setAttribute(player, "char-design:category", 0)
+        setVarbit(player, 6501, 0)
+        for (button in categories + intArrayOf(15, 20, CONFIRM)) {
+            sendIfaceSettings(player, 2, button, INTERFACE_ID, -1, -1)
         }
-        reset(player)
-        sendInterfaceConfig(player, Components.APPEARANCE_771, 22, false)
-        sendInterfaceConfig(player, Components.APPEARANCE_771, 92, false)
-        sendInterfaceConfig(player, Components.APPEARANCE_771, 97, false)
-        setVarp(player, 1262, if (player.appearance.isMale) 1 else 0)
+        syncDesign(player)
+    }
+
+    private fun syncDesign(player: Player) {
+        val parts = player.appearance.appearanceCache
+        for (i in parts.indices) setVarc(player, 1008 + i, parts[i].look)
+        for ((i, part) in intArrayOf(0, 2, 5, 6, 4).withIndex()) {
+            setVarc(player, 1015 + i, parts[part].color)
+        }
+        val maxKits = maxOf(maleKits.maxOf { it.size }, femaleKits.maxOf { it.size })
+        sendIfaceSettings(player, 2, 66, INTERFACE_ID, 0, maxKits * 3 - 1)
+        sendIfaceSettings(player, 2, 73, INTERFACE_ID, 0, palette.maxOf { it.size } * 2 - 1)
+        refreshAppearance(player)
     }
 
     @JvmStatic
-    fun handleButtons(player: Player, buttonId: Int): Boolean {
+    fun handleButtons(player: Player, buttonId: Int, slot: Int): Boolean {
+        val category = getAttribute(player, "char-design:category", 0)
+        val parts = player.appearance.appearanceCache
         when (buttonId) {
-            37, 40 -> player.settings.toggleMouseButton()
-            92, 93 -> changeLook(player, 0, buttonId == 93)
-            97, 98 -> changeLook(player, 1, buttonId == 98)
-            341, 342 -> changeLook(player, 2, buttonId == 342)
-            345, 346 -> changeLook(player, 3, buttonId == 346)
-            349, 350 -> changeLook(player, 4, buttonId == 350)
-            353, 354 -> changeLook(player, 5, buttonId == 354)
-            357, 358 -> changeLook(player, 6, buttonId == 358)
-            49, 52 -> changeGender(player, buttonId == 49)
-            321 -> { randomize(player, false); return true }
-            169 -> { randomize(player, true); return true }
-            362 -> { confirm(player, true); return true }
+            15, 20 -> {
+                val gender = if (buttonId == 15) Gender.MALE else Gender.FEMALE
+                if (player.appearance.gender != gender) player.appearance.changeGender(gender)
+                setAttribute(player, "char-design:category", 0)
+                setVarbit(player, 6501, 0)
+            }
+            in categories -> {
+                val next = categories.indexOf(buttonId)
+                setAttribute(player, "char-design:category", next)
+                setVarbit(player, 6501, next)
+            }
+            66 -> {
+                if (category !in 1..7 || slot < 0 || slot % 3 != 2) return false
+                val kits = if (player.appearance.isMale) maleKits else femaleKits
+                val look = kits[category - 1].getOrNull(slot / 3) ?: return false
+                parts[category - 1].changeLook(look)
+            }
+            73 -> {
+                if (slot < 0 || slot % 2 != 1) return false
+                val part = colorParts[category]
+                if (part < 0) return false
+                val color = palette[category].getOrNull(slot / 2) ?: return false
+                parts[part].changeColor(color)
+            }
+            CONFIRM -> {
+                setAttribute(player, "char-design:accepted", true)
+                if (!player.interfaceManager.close()) {
+                    removeAttribute(player, "char-design:accepted")
+                    return false
+                }
+                refreshAppearance(player)
+                return true
+            }
+            else -> return false
         }
-        COLOR_MAPPINGS.find { (_, _, range) -> buttonId in range }?.let { (index, colors, range) ->
-            val startId = if (index == 4) range.last else range.first
-            changeColor(player, index, colors, startId, buttonId)
-        }
-        return false
+        syncDesign(player)
+        return true
     }
 
     private fun changeGender(player: Player, male: Boolean) {

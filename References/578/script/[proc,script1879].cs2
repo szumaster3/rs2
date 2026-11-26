@@ -1,0 +1,45 @@
+[proc,script1879]
+def_int $int0 = ~script1851;
+def_int $int1 = ~script1852;
+if ($int1 = $int0 & $int1 ! 0) {
+    $int1 = 0;
+    ~script1856(0);
+}
+switch_int ($int0) {
+    case 4 :
+        $int0 = calc($int0 + 2);
+    case 5 :
+        $int0 = calc($int0 + 2);
+    case 6 :
+        $int0 = calc($int0 + 2);
+    case 7 :
+        $int0 = calc($int0 + 2);
+    case 8 :
+        $int0 = calc($int0 + 6);
+    case 9 :
+        $int0 = calc($int0 + 6);
+    case 10 :
+        $int0 = calc($int0 + 6);
+    case 11 :
+        $int0 = calc($int0 + 6);
+}
+switch_int ($int1) {
+    case 4 :
+        $int1 = calc($int1 + 2);
+    case 5 :
+        $int1 = calc($int1 + 2);
+    case 6 :
+        $int1 = calc($int1 + 2);
+    case 7 :
+        $int1 = calc($int1 + 2);
+    case 8 :
+        $int1 = calc($int1 + 6);
+    case 9 :
+        $int1 = calc($int1 + 6);
+    case 10 :
+        $int1 = calc($int1 + 6);
+    case 11 :
+        $int1 = calc($int1 + 6);
+}
+worldlist_sort(calc($int0 / 2), ~int_to_bool(calc($int0 % 2)), calc($int1 / 2), ~int_to_bool(calc($int1 % 2)));
+~script776;

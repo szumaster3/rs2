@@ -1,0 +1,71 @@
+[com_0]
+type=graphic
+x=2
+y=5
+width=57
+height=13
+graphic="sworddecor,1"
+colour=0x000000
+
+[com_1]
+type=graphic
+x=2
+y=5
+width=57
+height=13
+xmode=abs_right
+graphic="sworddecor,0"
+colour=0x000000
+
+[com_2]
+type=model
+y=39
+width=57
+height=52
+xmode=abs_centre
+model=model_2365
+modelorigin=0,9
+modelangle=221,1877,0
+modelzoom=400
+unknown100=65155
+unknown101=814
+
+[com_3]
+type=text
+y=25
+width=100
+height=90
+xmode=abs_centre
+textfont=q8_full
+textalignh=centre
+colour=0x000000
+transmitop=1,2,3,4
+op1=Churn 1
+op2=Churn 5
+op3=Churn 10
+op4=Churn X
+
+[com_4]
+type=text
+y=1
+width=366
+height=31
+xmode=abs_centre
+textfont=q8_full
+text=What would you like to make in the churn?
+textalignh=centre
+textalignv=centre
+colour=0x800000
+
+[com_5]
+type=text
+y=26
+width=100
+height=84
+xmode=abs_centre
+textfont=q8_full
+text=Churn Cheese
+textalignh=centre
+textalignv=bottom
+colour=0x000000
+

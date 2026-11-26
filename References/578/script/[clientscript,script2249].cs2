@@ -1,0 +1,5 @@
+[clientscript,script2249](int $int0)
+if (%varclient_804 = 1) {
+    %varclient_195 = $int0;
+    %varclient_804 = 0;
+}

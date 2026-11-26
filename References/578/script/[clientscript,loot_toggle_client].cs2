@@ -1,0 +1,2 @@
+[clientscript,loot_toggle_client]
+if_setgraphic("loot_icon,2", interface_589:com_17);

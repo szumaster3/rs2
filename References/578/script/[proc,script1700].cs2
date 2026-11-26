@@ -1,0 +1,8 @@
+[proc,script1700]
+if (%varclient_1052 = 1) {
+    if_settext("Hide stat adjustments.", interface_271:com_12);
+    if_setop(1, "Hide stat adjustments", interface_271:com_12);
+} else {
+    if_settext("Show stat adjustments.", interface_271:com_12);
+    if_setop(1, "Show stat adjustments", interface_271:com_12);
+}

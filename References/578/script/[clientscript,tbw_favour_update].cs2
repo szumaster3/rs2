@@ -1,0 +1,2 @@
+[clientscript,tbw_favour_update]
+if_settext("<tostring(%varplayerbit_907)>%", interface_377:com_4);

@@ -1,0 +1,685 @@
+[com_0]
+type=layer
+x=173
+y=1
+width=16
+height=258
+
+[com_1]
+type=layer
+y=1
+width=173
+height=258
+scrollwidth=174
+scrollheight=602
+onload=scrollbar_vertical(interface_464:com_0, interface_464:com_1)
+onvartransmit=script1750{varplayer_313, varplayer_465, varplayer_802, varplayer_1085, varplayer_1328, varplayer_1374, varplayer_1404}
+
+[com_2]
+type=graphic
+x=-2
+y=6
+width=48
+height=48
+layer=com_1
+graphic="emotes,0"
+colour=0xffffffff
+transmitop=1
+op1=Yes
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Yes", 50, 150)
+
+[com_3]
+type=graphic
+x=42
+y=6
+width=48
+height=48
+layer=com_1
+graphic="emotes,1"
+colour=0xffffffff
+transmitop=1
+op1=No
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "No", 50, 150)
+
+[com_4]
+type=graphic
+x=86
+y=6
+width=48
+height=48
+layer=com_1
+graphic="emotes,3"
+colour=0xffffffff
+transmitop=1,2
+op1=Bow
+op2=Curtsy
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Bow", 50, 150)
+
+[com_5]
+type=graphic
+x=130
+y=6
+width=48
+height=48
+layer=com_1
+graphic="emotes,4"
+colour=0xffffffff
+transmitop=1
+op1=Angry
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Angry", 50, 150)
+
+[com_6]
+type=graphic
+x=-2
+y=55
+width=48
+height=48
+layer=com_1
+graphic="emotes,2"
+colour=0xffffffff
+transmitop=1
+op1=Think
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Think", 50, 150)
+
+[com_7]
+type=graphic
+x=42
+y=55
+width=48
+height=48
+layer=com_1
+graphic="emotes,8"
+colour=0xffffffff
+transmitop=1
+op1=Wave
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Wave", 50, 150)
+
+[com_8]
+type=graphic
+x=86
+y=55
+width=48
+height=48
+layer=com_1
+graphic="emotes,20"
+colour=0xffffffff
+transmitop=1
+op1=Shrug
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Shrug", 50, 150)
+
+[com_9]
+type=graphic
+x=130
+y=55
+width=48
+height=48
+layer=com_1
+graphic="emotes,7"
+colour=0xffffffff
+transmitop=1
+op1=Cheer
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Cheer", 50, 150)
+
+[com_10]
+type=graphic
+x=-3
+y=104
+width=48
+height=48
+layer=com_1
+graphic="emotes,9"
+colour=0xffffffff
+transmitop=1
+op1=Beckon
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Beckon", 50, 150)
+
+[com_11]
+type=graphic
+x=86
+y=104
+width=48
+height=48
+layer=com_1
+graphic="emotes,16"
+colour=0xffffffff
+transmitop=1
+op1=Jump for Joy
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Jump For Joy", 50, 150)
+
+[com_12]
+type=graphic
+x=39
+y=104
+width=48
+height=48
+layer=com_1
+graphic="emotes,6"
+colour=0xffffffff
+transmitop=1
+op1=Laugh
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Laugh", 50, 150)
+
+[com_13]
+type=graphic
+x=130
+y=104
+width=48
+height=48
+layer=com_1
+graphic="emotes,18"
+colour=0xffffffff
+transmitop=1
+op1=Yawn
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Yawn", 50, 150)
+
+[com_14]
+type=graphic
+x=-1
+y=153
+width=48
+height=48
+layer=com_1
+graphic="emotes,10"
+colour=0xffffffff
+transmitop=1
+op1=Dance
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Dance", 50, 150)
+
+[com_15]
+type=graphic
+x=42
+y=153
+width=48
+height=48
+layer=com_1
+graphic="emotes,13"
+colour=0xffffffff
+transmitop=1
+op1=Jig
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Jig", 50, 150)
+
+[com_16]
+type=graphic
+x=86
+y=153
+width=48
+height=48
+layer=com_1
+graphic="emotes,14"
+colour=0xffffffff
+transmitop=1
+op1=Twirl
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Twirl", 50, 150)
+
+[com_17]
+type=graphic
+x=130
+y=153
+width=48
+height=48
+layer=com_1
+graphic="emotes,15"
+colour=0xffffffff
+transmitop=1
+op1=Headbang
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Headbang", 50, 150)
+
+[com_18]
+type=graphic
+x=-1
+y=202
+width=48
+height=48
+layer=com_1
+graphic="emotes,5"
+colour=0xffffffff
+transmitop=1
+op1=Cry
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Cry", 50, 150)
+
+[com_19]
+type=graphic
+x=42
+y=202
+width=48
+height=48
+layer=com_1
+graphic="emotes,21"
+colour=0xffffffff
+transmitop=1
+op1=Blow Kiss
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Blow Kiss", 50, 150)
+
+[com_20]
+type=graphic
+x=86
+y=202
+width=48
+height=48
+layer=com_1
+graphic="emotes,12"
+colour=0xffffffff
+transmitop=1
+op1=Panic
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Panic", 50, 150)
+
+[com_21]
+type=graphic
+x=130
+y=202
+width=48
+height=48
+layer=com_1
+graphic="emotes,17"
+colour=0xffffffff
+transmitop=1
+op1=Raspberry
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Raspberry", 50, 150)
+
+[com_22]
+type=graphic
+x=-1
+y=252
+width=48
+height=48
+layer=com_1
+graphic="emotes,11"
+colour=0xffffffff
+transmitop=1
+op1=Clap
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Clap", 50, 150)
+
+[com_23]
+type=graphic
+x=42
+y=252
+width=48
+height=48
+layer=com_1
+graphic="emotes,19"
+colour=0xffffffff
+transmitop=1
+op1=Salute
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Salute", 50, 150)
+
+[com_24]
+type=graphic
+x=86
+y=252
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,6"
+colour=0xffffffff
+transmitop=1
+op1=Goblin Bow
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Goblin Bow", 50, 150)
+
+[com_25]
+type=graphic
+x=130
+y=252
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,7"
+colour=0xffffffff
+transmitop=1
+op1=Goblin Salute
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Goblin Salute", 50, 150)
+
+[com_26]
+type=graphic
+x=-2
+y=302
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,2"
+colour=0xffffffff
+transmitop=1
+op1=Glass Box
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Glass Box", 50, 150)
+
+[com_27]
+type=graphic
+x=42
+y=302
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,3"
+colour=0xffffffff
+transmitop=1
+opbase= 
+op1=Climb Rope
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Climb Rope", 50, 150)
+
+[com_28]
+type=graphic
+x=86
+y=302
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,4"
+colour=0xffffffff
+transmitop=1
+op1=Lean
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Lean", 50, 150)
+
+[com_29]
+type=graphic
+x=130
+y=302
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,5"
+colour=0xffffffff
+transmitop=1
+op1=Glass Wall
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Glass Wall", 50, 150)
+
+[com_30]
+type=graphic
+x=130
+y=352
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,9"
+colour=0xffffffff
+transmitop=1
+op1=Slap Head
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Slap Head", 50, 150)
+
+[com_31]
+type=graphic
+x=42
+y=352
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,10"
+colour=0xffffffff
+transmitop=1
+op1=Stomp
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Stomp", 50, 150)
+
+[com_32]
+type=graphic
+x=86
+y=352
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,11"
+colour=0xffffffff
+transmitop=1
+op1=Flap
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Flap", 50, 150)
+
+[com_33]
+type=graphic
+x=-6
+y=352
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,12"
+colour=0xffffffff
+transmitop=1
+op1=Idea
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Idea", 50, 150)
+
+[com_34]
+type=graphic
+x=-3
+y=403
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,13"
+colour=0xffffffff
+transmitop=1
+op1=Zombie Walk
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Zombie Walk", 50, 150)
+
+[com_35]
+type=graphic
+x=42
+y=403
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,14"
+colour=0xffffffff
+transmitop=1
+op1=Zombie Dance
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Zombie Dance", 50, 150)
+
+[com_36]
+type=graphic
+x=86
+y=403
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,17"
+colour=0xffffffff
+transmitop=1
+op1=Zombie Hand
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Zombie Hand", 50, 150)
+
+[com_37]
+type=graphic
+x=130
+y=403
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,8"
+colour=0xffffffff
+transmitop=1
+op1=Scared
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Scared", 50, 150)
+
+[com_38]
+type=graphic
+x=-3
+y=453
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,15"
+colour=0xffffffff
+transmitop=1
+op1=Bunny Hop
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Bunny-hop", 50, 150)
+
+[com_39]
+type=graphic
+x=42
+y=453
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,16"
+colour=0xffffffff
+transmitop=1
+op1=Skill Cape
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Skillcape", 50, 150)
+
+[com_40]
+type=graphic
+x=86
+y=453
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,18"
+colour=0xffffffff
+transmitop=1
+op1=Snowman Dance
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Snowman Dance", 50, 150)
+
+[com_41]
+type=graphic
+x=130
+y=453
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,19"
+colour=0xffffffff
+transmitop=1
+op1=Air Guitar
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Air Guitar", 50, 150)
+
+[com_42]
+type=graphic
+x=-2
+y=503
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,20"
+colour=0xffffffff
+transmitop=1
+op1=Safety First
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Safety First", 50, 150)
+
+[com_43]
+type=graphic
+x=42
+y=503
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,21"
+colour=0xffffffff
+transmitop=1
+op1=Explore
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Explore", 50, 150)
+
+[com_44]
+type=graphic
+x=86
+y=503
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,11"
+colour=0xffffffff
+transmitop=1
+op1=Trick
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Trick", 50, 150)
+
+[com_45]
+type=graphic
+x=130
+y=503
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,24"
+colour=0xffffffff
+transmitop=1
+op1=Freeze and Melt
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Freeze", 50, 150)
+
+[com_46]
+type=graphic
+y=554
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,25"
+colour=0xffffffff
+transmitop=1,10
+op1=Give Thanks
+op10= 
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Give Thanks", 50, 150)
+
+[com_47]
+type=graphic
+x=45
+y=554
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,26"
+colour=0xffffffff
+transmitop=1
+op1=Around the World in Eggty Days
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Around the World in Eggty Days", 50, 150)
+
+[com_48]
+type=graphic
+x=89
+y=554
+width=48
+height=48
+layer=com_1
+graphic="emotes_locked,21"
+colour=0xffffffff
+transmitop=1
+op1=Dramatic Point
+onmouseleave=deltooltip(interface_464:com_49)
+onmouserepeat=addtooltip(event_com, interface_464:com_49, "Dramatic Point", 50, 150)
+
+[com_49]
+type=layer
+x=34
+y=119
+width=100
+height=50
+layer=com_1
+

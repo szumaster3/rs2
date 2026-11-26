@@ -1,0 +1,10 @@
+[clientscript,clanwars_setup_melee](int $int0)
+if (~clanwars_setup_clicktest($int0) = false) {
+    return;
+}
+if (%varclient_250 = false) {
+    %varclient_250 = true;
+} else {
+    %varclient_250 = false;
+}
+~clanwars_resynch_melee;

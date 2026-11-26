@@ -16,6 +16,8 @@ import java.nio.ByteBuffer
 import java.util.HashMap
 
 class NPCDefinition(id: Int): Definition<NPC>() {
+    var questIds: IntArray? = null
+        private set
     @JvmField var size: Int = 1
     var combatLevel: Int = 0
     @JvmField var headIcons: Int = -1
@@ -124,7 +126,7 @@ class NPCDefinition(id: Int): Definition<NPC>() {
         }
         return forId(childNPCIds!![configValue])
     }
-    private fun parse(buffer: ByteBuffer) {
+    internal fun parse(buffer: ByteBuffer) {
         while (true) {
             var opcode = buffer.get().toInt() and 0xFF
             if (opcode == 0) {
@@ -282,7 +284,11 @@ class NPCDefinition(id: Int): Definition<NPC>() {
                 buffer.get()
                 buffer.getShort()
             }
-            137 -> buffer.getShort()
+            137, 138, 139, 142 -> buffer.short
+            140 -> buffer.get()
+            141, 143 -> Unit
+            in 150..154 -> options[opcode - 150] = ByteBufferUtils.getString(buffer)
+            160 -> questIds = IntArray(buffer.get().toInt() and 0xff) { buffer.short.toInt() and 0xffff }
             249 -> {
                 val length = buffer.get().toInt() and 0xFF
                 for (i in 0 until length) {
@@ -295,6 +301,7 @@ class NPCDefinition(id: Int): Definition<NPC>() {
                     }
                 }
             }
+            else -> error("NPC $id: unknown opcode $opcode at ${buffer.position() - 1}")
         }
     }
 

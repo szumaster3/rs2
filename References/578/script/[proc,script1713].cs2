@@ -1,0 +1,24 @@
+[proc,script1713](stat $stat0)(int)
+switch_stat ($stat0) {
+    case attack :
+        if (%varplayerbit_6830 = 1) {
+            return(~script1714(attack, ~script1718(attack, 5)));
+        }
+    case strength :
+        if (%varplayerbit_6834 = 1) {
+            return(~script1714(strength, ~script1718(strength, 5)));
+        }
+    case defence :
+        if (%varplayerbit_6833 = 1) {
+            return(~script1714(defence, ~script1718(defence, 5)));
+        }
+    case ranged :
+        if (%varplayerbit_6831 = 1) {
+            return(~script1714(ranged, ~script1718(ranged, 5)));
+        }
+    case magic :
+        if (%varplayerbit_6832 = 1) {
+            return(~script1714(magic, ~script1718(magic, 5)));
+        }
+}
+return(0);

@@ -1,0 +1,586 @@
+[com_0]
+type=rectangle
+y=25
+width=190
+height=224
+colour=0x000000
+fill=yes
+trans=200
+
+[com_1]
+type=text
+x=14
+y=11
+width=152
+height=15
+layer=com_7
+textfont=b12_full
+text=Free Play Tasks
+textshadow=yes
+colour=0xff9900
+transmitop=1
+op1=Read Journal
+
+[com_2]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Lumbridge/Draynor
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(interface_259:com_2, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1256, varplayer_1257, varplayer_1258}
+
+[com_3]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Beginner
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(interface_259:com_3, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1256, varplayer_1257, varplayer_1258}
+
+[com_4]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(interface_259:com_4, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1256, varplayer_1257, varplayer_1258}
+
+[com_5]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(interface_259:com_5, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1256, varplayer_1257, varplayer_1258}
+
+[com_6]
+type=text
+x=14
+y=61
+width=152
+height=15
+layer=com_7
+textfont=b12_full
+text=Members' Tasks
+textshadow=yes
+colour=0xff9900
+transmitop=1
+op1=Read Journal
+
+[com_7]
+type=layer
+y=24
+width=175
+height=225
+onload=script1393
+
+[com_8]
+type=text
+x=5
+y=5
+width=170
+height=14
+textfont=b12_full
+text=Achievements
+textshadow=yes
+colour=0xeb981f
+transmitop=10
+op10=  
+
+[com_9]
+type=layer
+x=174
+y=24
+width=16
+height=225
+
+[com_10]
+type=text
+x=14
+y=81
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Karamja
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1000, varplayer_1001, varplayer_1002}
+
+[com_11]
+type=text
+x=15
+y=81
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1000, varplayer_1001, varplayer_1002}
+
+[com_12]
+type=text
+x=15
+y=81
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1000, varplayer_1001, varplayer_1002}
+
+[com_13]
+type=text
+x=15
+y=81
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1000, varplayer_1001, varplayer_1002}
+
+[com_14]
+type=text
+x=14
+y=81
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Varrock
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1071, varplayer_1072, varplayer_1073}
+
+[com_15]
+type=text
+x=16
+y=79
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1071, varplayer_1072, varplayer_1073}
+
+[com_16]
+type=text
+x=16
+y=79
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1071, varplayer_1072, varplayer_1073}
+
+[com_17]
+type=text
+x=16
+y=79
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1071, varplayer_1072, varplayer_1073}
+
+[com_18]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com_7
+textfont=p11_full
+text=Fremennik
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1358, varplayer_1359}
+
+[com_19]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com_7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop=1,10
+op1=Read Journal
+op10= 
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1358, varplayer_1359}
+
+[com_20]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com_7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop=1,10
+op1=Read Journal
+op10= 
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1358, varplayer_1359}
+
+[com_21]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com_7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop=1,10
+op1=Read Journal
+op10= 
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1358, varplayer_1359}
+
+[com_22]
+type=text
+x=15
+y=129
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Falador
+textshadow=yes
+colour=0xff0000
+transmitop=1,10
+op1=Read Journal
+op10= 
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1360, varplayer_1361}
+
+[com_23]
+type=text
+x=17
+y=129
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop=1,10
+op1=Read Journal
+op10= 
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1360, varplayer_1361}
+
+[com_24]
+type=text
+x=17
+y=129
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop=1,10
+op1=Read Journal
+op10= 
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1360, varplayer_1361}
+
+[com_25]
+type=text
+x=17
+y=129
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop=1,10
+op1=Read Journal
+op10= 
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1360, varplayer_1361}
+
+[com_26]
+type=text
+x=15
+y=105
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Seers' Village
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1372, varplayer_1373, varplayer_1374}
+
+[com_27]
+type=text
+x=17
+y=103
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1372, varplayer_1373, varplayer_1374}
+
+[com_28]
+type=text
+x=17
+y=103
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1372, varplayer_1373, varplayer_1374}
+
+[com_29]
+type=text
+x=17
+y=103
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1372, varplayer_1373, varplayer_1374}
+
+[com_30]
+type=text
+x=16
+y=129
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Ardougne
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1562, varplayer_1563, varplayer_1564, varplayer_1565}
+
+[com_31]
+type=text
+x=18
+y=127
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1562, varplayer_1563, varplayer_1564, varplayer_1565}
+
+[com_32]
+type=text
+x=18
+y=127
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1562, varplayer_1563, varplayer_1564, varplayer_1565}
+
+[com_33]
+type=text
+x=18
+y=127
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1562, varplayer_1563, varplayer_1564, varplayer_1565}
+
+[com_34]
+type=text
+x=19
+y=151
+width=152
+height=15
+layer=com_7
+textfont=p11_full
+text=Elite
+textshadow=yes
+colour=0xff0000
+transmitop=1
+op1=Read Journal
+onmouseover=text_colour_swapper(event_com, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58{varplayer_1562, varplayer_1563, varplayer_1564, varplayer_1565}
+
+[com_35]
+type=graphic
+y=9
+width=190
+height=32
+graphic="v2_stone_borders,23"
+tiling=yes
+colour=0xffffffff
+transmitop=10
+op10=  
+
+[com_36]
+type=graphic
+y=236
+width=190
+height=32
+graphic="v2_stone_borders,23"
+tiling=yes
+colour=0xffffffff
+transmitop=10
+op10=  
+

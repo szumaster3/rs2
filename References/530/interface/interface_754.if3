@@ -1,0 +1,69 @@
+[com_0]
+type=layer
+width=512
+height=69
+
+[com_1]
+type=text
+width=512
+height=13
+layer=com_0
+textfont=p12_full
+textshadow=yes
+colour=0x00ffff
+transmitop=10
+op10=Report Abuse
+onop=script88(event_op, event_opbase)
+
+[com_2]
+type=text
+y=13
+width=512
+height=13
+layer=com_0
+textfont=p12_full
+textshadow=yes
+colour=0x00ffff
+transmitop=10
+op10=Report Abuse
+onop=script88(event_op, event_opbase)
+
+[com_3]
+type=text
+y=26
+width=512
+height=13
+layer=com_0
+textfont=p12_full
+textshadow=yes
+colour=0x00ffff
+transmitop=10
+op10=Report Abuse
+onop=script88(event_op, event_opbase)
+
+[com_4]
+type=text
+y=39
+width=512
+height=13
+layer=com_0
+textfont=p12_full
+textshadow=yes
+colour=0x00ffff
+transmitop=10
+op10=Report Abuse
+onop=script88(event_op, event_opbase)
+
+[com_5]
+type=text
+y=52
+width=512
+height=13
+layer=com_0
+textfont=p12_full
+textshadow=yes
+colour=0x00ffff
+transmitop=10
+op10=Report Abuse
+onop=script88(event_op, event_opbase)
+

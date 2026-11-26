@@ -683,49 +683,9 @@ enum class Decoders530(val opcode: Int) {
             return Packet.Ping(player)
         }
     },
+    // Legacy opcode retained for decoder table compatibility; revision 578 uses native packets.
     QUICKCHAT(167) {
-        override fun decode(player: Player, buffer: IoBuffer): Packet {
-            val x = buffer.toByteBuffer()
-
-            val packetType = when (x.array().size) {
-                3, 4 -> QCPacketType.STANDARD
-                5 -> QCPacketType.SINGLE
-                7 -> QCPacketType.DOUBLE
-                else -> QCPacketType.UNHANDLED.also {
-                    log(
-                        this::class.java, Log.WARN, "UNHANDLED QC PACKET TYPE Size ${x.array().size}"
-                    )
-                }
-            }
-
-            val forClan = (buffer.get() and 0xFF) == 1
-            val multiplier: Int = buffer.get()
-            val offset: Int = buffer.get()
-            var selection_a_index = -1
-            var selection_b_index = -1
-
-            when (packetType) {
-                QCPacketType.SINGLE -> {
-                    selection_a_index = buffer.short
-                }
-
-                QCPacketType.DOUBLE -> {
-                    buffer.get() //discard
-                    selection_a_index = buffer.get()
-                    buffer.get() //discard
-                    selection_b_index = buffer.get()
-                }
-
-                QCPacketType.UNHANDLED -> log(
-                    this::class.java, Log.WARN, "Unhandled packet type, skipping remaining buffer contents."
-                )
-
-                else -> {}
-            }
-            return Packet.QuickChat(
-                player, selection_a_index, selection_b_index, forClan, multiplier, offset, packetType
-            )
-        }
+        override fun decode(player: Player, buffer: IoBuffer): Packet = Packet.NoProcess()
     },
     MAP_REBUILD_STARTED(20) {
         override fun decode(player: Player, buffer: IoBuffer): Packet {

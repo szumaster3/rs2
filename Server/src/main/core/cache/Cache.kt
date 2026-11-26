@@ -15,6 +15,12 @@ object Cache {
 
     @JvmStatic
     fun init(path: String) {
+        openIndexes(path)
+        ItemDefinition.parse()
+        SceneryDefinition.parse()
+    }
+
+    internal fun openIndexes(path: String) {
         log(Cache::class.java, Log.FINE, "Initializing cache...")
         val scratch = ByteArray(520)
         val referenceIndex = RandomAccessFile(File(path, "main_file_cache.idx255"), "r")
@@ -31,8 +37,6 @@ object Cache {
                 cacheFileManagers[index] = manager
             }
         }
-        ItemDefinition.parse()
-        SceneryDefinition.parse()
     }
 
     @JvmStatic
@@ -52,23 +56,36 @@ object Cache {
 
     @JvmStatic
     fun getArchiveData(index: Int, archive: Int, priority: Boolean, encryptionValue: Int): ByteBuffer? {
-        val data = if (index == 255) reference.getContainerData(archive)
-        else cacheFileManagers[index]?.cacheFile?.getContainerData(archive)
+        val data = when {
+            index == 255 && archive == 255 -> {
+                val master = generateReferenceData()
+                ByteBuffer.allocate(5 + master.size).put(0).putInt(master.size).put(master).array()
+            }
+            index == 255 -> reference.getContainerData(archive)
+            else -> cacheFileManagers.getOrNull(index)?.cacheFile?.getContainerData(archive)
+        }
         if (data == null || data.size < 5) {
             log(Cache::class.java, Log.ERR, "Invalid JS-5 request - $index, $archive, $priority, $encryptionValue!")
             return null
         }
+        return encodeJs5Group(index, archive, priority, encryptionValue, data)
+    }
+
+    internal fun encodeJs5Group(index: Int, archive: Int, priority: Boolean, encryptionValue: Int, data: ByteArray): ByteBuffer? {
+        if (data.size < 5) return null
         val compression = data[0].toInt() and 0xFF
         val length = ByteBuffer.wrap(data, 1, 4).int
+        val header = if (compression == 0) 5 else 9
+        if (length !in 0..(data.size - header)) return null
         val settings = compression or if (priority) 0 else 0x80
-        var payloadLength = length + if (compression == 0) 0 else 4
-        // Some compressed archives omit the trailing revision. Preserve the client's CRC workaround.
-        if (index != 255 && compression != 0 && data.size - length == 9) payloadLength += 2
-        val buffer = ByteBuffer.allocate(payloadLength + 5 + payloadLength / 512 + 10)
+        val payloadLength = length + header - 5
+        // The first block carries 504 payload bytes, subsequent blocks carry 511.
+        val markers = (payloadLength + 6) / 511
+        val buffer = ByteBuffer.allocate(8 + payloadLength + markers)
         buffer.put(index.toByte()).putShort(archive.toShort()).put(settings.toByte()).putInt(length)
         for (offset in 5 until payloadLength + 5) {
             if (buffer.position() % 512 == 0) buffer.put(255.toByte())
-                buffer.put(data.getOrElse(offset) { 0 })
+            buffer.put(data[offset])
         }
         if (encryptionValue != 0) {
             for (offset in 0 until buffer.position()) {

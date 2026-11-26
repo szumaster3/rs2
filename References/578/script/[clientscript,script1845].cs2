@@ -1,0 +1,5 @@
+[clientscript,script1845]
+if_settext(%varclientstring_197, interface_893:com_9);
+if_settext(%varclientstring_198, interface_893:com_10);
+if_settext(%varclientstring_199, interface_893:com_11);
+if_settext(%varclientstring_200, interface_893:com_12);

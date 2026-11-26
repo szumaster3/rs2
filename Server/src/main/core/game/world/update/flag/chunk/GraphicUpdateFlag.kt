@@ -4,6 +4,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.UpdateFlag
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.IoBuffer
+import core.net.packet.out.ZoneProt
 
 /**
  * Handles the location graphic update.
@@ -17,7 +18,7 @@ class GraphicUpdateFlag(graphic: Graphics?,
 ) : UpdateFlag<Graphics?>(graphic) {
 
     override fun write(buffer: IoBuffer) {
-        buffer.put(17.toByte().toInt()) // opcode
+        ZoneProt.MAP_ANIM.start(buffer)
         buffer.put((location.chunkOffsetX shl 4) or (location.chunkOffsetY and 0x7))
         buffer.putShort(context!!.id)
         buffer.put(context!!.height)

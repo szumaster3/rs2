@@ -114,6 +114,7 @@ public class RegionChunk {
      * @param player The player.
      */
     public void synchronize(Player player) {
+        if (!isInScene(player)) return;
         IoBuffer buffer = Encoders530.chunkUpdateBuffer(player, currentBase);
         if (appendUpdate(player, buffer)) {
             player.getSession().write(buffer);
@@ -224,7 +225,7 @@ public class RegionChunk {
      * Sends all the update flags.
      */
     public void update(Player player) {
-        if (isUpdated()) {
+        if (isUpdated() && isInScene(player)) {
             IoBuffer buffer = Encoders530.chunkUpdateBuffer(player, currentBase);
             Object[] flagsArray = flags.toArray();
             int size = flagsArray.length;
@@ -234,6 +235,12 @@ public class RegionChunk {
             }
             player.getSession().write(buffer);
         }
+    }
+
+    private boolean isInScene(Player player) {
+        Location scene = player.getPlayerFlags().getLastSceneGraph();
+        int x = currentBase.getSceneX(scene), y = currentBase.getSceneY(scene);
+        return currentBase.getZ() == player.getLocation().getZ() && x >= 0 && x <= 96 && y >= 0 && y <= 96;
     }
 
     /**
@@ -464,9 +471,14 @@ public class RegionChunk {
                 int sourceX = base.getLocalX() + x;
                 int sourceY = base.getLocalY() + y;
                 destination[destX][destY] = source != null && source[sourceX][sourceY];
+                int sourceFlag = from.getFlags().getFlag(sourceX, sourceY);
+                if (sourceFlag < 0) {
+                    plane.getFlags().invalidateFlag(destX, destY);
+                    continue;
+                }
                 plane.getFlags().flagEmptyTile(destX, destY);
                 plane.getFlags().unflag(destX, destY, RegionFlags.SOLID_TILE);
-                if (source != null && (from.getFlags().getFlag(sourceX, sourceY) & RegionFlags.SOLID_TILE) != 0) {
+                if ((sourceFlag & RegionFlags.SOLID_TILE) != 0) {
                     plane.getFlags().flagSolidTile(destX, destY);
                 }
             }

@@ -1,0 +1,2 @@
+[clientscript,lore_topstat_mouseover](component $component0)
+~topstat_button_mouseover($component0, 1);

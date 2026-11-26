@@ -1,0 +1,4 @@
+[clientscript,script1193](boolean $boolean0)
+if ($boolean0 = true | calc(clientclock % 50) = 0) {
+    ~script1194;
+}

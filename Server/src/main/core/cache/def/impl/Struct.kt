@@ -31,17 +31,20 @@ class Struct(val id: Int) {
 
         @JvmStatic
         fun parse(id: Int, data: ByteArray?): Struct {
+            return if (data == null) Struct(id) else decode(id, ByteBuffer.wrap(data))
+        }
+
+        internal fun decode(id: Int, buffer: ByteBuffer): Struct {
             val definition = Struct(id)
-            if (data == null) return definition
-            val buffer = ByteBuffer.wrap(data)
             while (true) {
-                when (buffer.get().toInt() and 0xFF) {
+                when (val opcode = buffer.get().toInt() and 0xFF) {
                     0 -> return definition
                     249 -> repeat(buffer.get().toInt() and 0xFF) {
                         val string = buffer.get().toInt() and 0xFF == 1
                         val key = ByteBufferUtils.getMedium(buffer)
                         definition.dataStore[key] = if (string) ByteBufferUtils.getString(buffer) else buffer.int
                     }
+                    else -> error("Unknown Struct opcode $opcode at ${buffer.position() - 1}")
                 }
             }
         }

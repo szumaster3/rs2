@@ -1,0 +1,83 @@
+[proc,script766](obj $obj0)(int)
+if (oc_param($obj0, param_538) ! null & inv_total(inv_93, oc_param($obj0, param_538)) < oc_param($obj0, param_539)) {
+    return(0);
+}
+if (oc_param($obj0, param_540) ! null & inv_total(inv_93, oc_param($obj0, param_540)) < oc_param($obj0, param_541)) {
+    return(0);
+}
+if (oc_param($obj0, param_542) ! null & inv_total(inv_93, oc_param($obj0, param_542)) < oc_param($obj0, param_543)) {
+    return(0);
+}
+if (oc_param($obj0, param_697) ! null) {
+    switch_obj (oc_param($obj0, param_697)) {
+        case obj_6287 :
+            if (calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)) < oc_param($obj0, param_698)) {
+                return(0);
+            }
+        case default :
+            if (inv_total(inv_93, oc_param($obj0, param_697)) < oc_param($obj0, param_698)) {
+                return(0);
+            }
+    }
+}
+if (oc_param($obj0, param_699) ! null) {
+    switch_obj (oc_param($obj0, param_699)) {
+        case obj_6287 :
+            if (calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)) < oc_param($obj0, param_700)) {
+                return(0);
+            }
+        case default :
+            if (inv_total(inv_93, oc_param($obj0, param_699)) < oc_param($obj0, param_700)) {
+                return(0);
+            }
+    }
+}
+if (oc_param($obj0, param_701) ! null) {
+    switch_obj (oc_param($obj0, param_701)) {
+        case obj_6287 :
+            if (calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)) < oc_param($obj0, param_702)) {
+                return(0);
+            }
+        case default :
+            if (inv_total(inv_93, oc_param($obj0, param_701)) < oc_param($obj0, param_702)) {
+                return(0);
+            }
+    }
+}
+if (oc_param($obj0, param_703) ! null) {
+    switch_obj (oc_param($obj0, param_703)) {
+        case obj_6287 :
+            if (calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)) < oc_param($obj0, param_704)) {
+                return(0);
+            }
+        case default :
+            if (inv_total(inv_93, oc_param($obj0, param_703)) < oc_param($obj0, param_704)) {
+                return(0);
+            }
+    }
+}
+if (oc_param($obj0, param_705) ! null) {
+    switch_obj (oc_param($obj0, param_705)) {
+        case obj_6287 :
+            if (calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)) < oc_param($obj0, param_706)) {
+                return(0);
+            }
+        case default :
+            if (inv_total(inv_93, oc_param($obj0, param_705)) < oc_param($obj0, param_706)) {
+                return(0);
+            }
+    }
+}
+if (oc_param($obj0, param_707) ! null) {
+    switch_obj (oc_param($obj0, param_707)) {
+        case obj_6287 :
+            if (calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)) < oc_param($obj0, param_708)) {
+                return(0);
+            }
+        case default :
+            if (inv_total(inv_93, oc_param($obj0, param_707)) < oc_param($obj0, param_708)) {
+                return(0);
+            }
+    }
+}
+return(1);

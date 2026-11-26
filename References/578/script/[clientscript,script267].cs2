@@ -1,0 +1,7 @@
+[clientscript,script267]
+if (calc(%varclient_194 + 50) > clientclock) {
+    return;
+}
+if (compare(%varclientstring_141, "") ! 0) {
+    %varclientstring_141 = "";
+}

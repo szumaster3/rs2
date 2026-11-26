@@ -1,0 +1,2 @@
+[clientscript,script1481]
+mes("Please drag an item here to create a new tab.");

@@ -1,0 +1,9 @@
+[clientscript,script564]
+if (%varclient_1037 > calc(if_getheight(interface_746:com_1) - 117)) {
+    ~script1652(1);
+} else {
+    ~chatbox_resize_window;
+}
+if_setdraggable(interface_746:com_20, -1, interface_746:com_21);
+if_setondrag("script1649(event_mousey, false)", interface_746:com_21);
+if_setondragcomplete("script1649(event_mousey, true)", interface_746:com_21);

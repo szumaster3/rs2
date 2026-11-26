@@ -1,0 +1,21 @@
+[clientscript,script1623]
+if_settext(tostring(calc(15 - %varplayerbit_3433)), interface_518:com_16);
+~script1624(interface_518:com_14, 0, tostring(%varplayerbit_3414));
+~script1624(interface_518:com_14, 1, tostring(%varplayerbit_3415));
+~script1624(interface_518:com_14, 2, tostring(%varplayerbit_3416));
+~script1624(interface_518:com_14, 3, tostring(%varplayerbit_3417));
+~script1624(interface_518:com_14, 4, tostring(%varplayerbit_3418));
+~script1624(interface_518:com_14, 5, tostring(%varplayerbit_3419));
+~script1624(interface_518:com_14, 6, tostring(%varplayerbit_3420));
+~script1624(interface_518:com_14, 7, tostring(%varplayerbit_3421));
+~script1624(interface_518:com_14, 8, tostring(%varplayerbit_3422));
+~script1624(interface_518:com_14, 9, tostring(%varplayerbit_3423));
+~script1624(interface_518:com_14, 10, tostring(%varplayerbit_3424));
+~script1624(interface_518:com_14, 11, tostring(%varplayerbit_3425));
+~script1624(interface_518:com_14, 12, tostring(%varplayerbit_3426));
+~script1624(interface_518:com_14, 13, tostring(%varplayerbit_3427));
+~script1624(interface_518:com_14, 14, tostring(%varplayerbit_3428));
+~script1624(interface_518:com_14, 15, tostring(%varplayerbit_3429));
+~script1624(interface_518:com_14, 16, tostring(%varplayerbit_3430));
+~script1624(interface_518:com_14, 17, tostring(%varplayerbit_3431));
+~script1624(interface_518:com_14, 18, tostring(%varplayerbit_3432));

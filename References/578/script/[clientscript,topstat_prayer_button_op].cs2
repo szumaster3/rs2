@@ -1,0 +1,13 @@
+[clientscript,topstat_prayer_button_op](int $int0)
+if ($int0 ! 1) {
+    return;
+}
+if (%varplayer_1397 = 0) {
+    return;
+}
+if (~bool_to_int(%varclient_182) = 1) {
+    %varclient_182 = false;
+} else {
+    %varclient_182 = true;
+}
+~topstat_prayer_button_update;

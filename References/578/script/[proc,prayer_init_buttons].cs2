@@ -1,0 +1,22 @@
+[proc,prayer_init_buttons]
+if (%varclient_181 = 1) {
+    cc_deleteall(interface_271:com_7);
+    cc_deleteall(interface_271:com_8);
+    if_sethide(false, interface_271:com_42);
+    if_sethide(true, interface_271:com_0);
+    ~script1388(interface_271:com_42);
+    ~prayer_load_buttons(interface_271:com_8);
+    if_sethide(true, interface_271:com_9);
+    cc_deleteall(interface_271:com_6);
+    if_setscrollpos(0, 0, interface_271:com_5);
+    if_setsize(16384, 16384, ^setsize_rel, ^setsize_rel, interface_271:com_5);
+} else {
+    cc_deleteall(interface_271:com_42);
+    if_sethide(true, interface_271:com_42);
+    if_sethide(false, interface_271:com_0);
+    ~prayer_load_buttons(interface_271:com_8);
+    ~script1293(interface_271:com_7);
+    if_sethide(false, interface_271:com_9);
+    if_setsize(16384, calc(if_getheight(interface_271:com_9) + if_getheight(interface_271:com_0)), ^setsize_rel, ^setsize_minus, interface_271:com_5);
+    ~prayer_refresh_scrollbar;
+}

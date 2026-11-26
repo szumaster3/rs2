@@ -1,0 +1,8 @@
+[clientscript,script1403](component $component0)
+if ($component0 = interface_205:com_101 | $component0 = interface_205:com_113) {
+    if_setcolour(^green, interface_205:com_101);
+    if_setcolour(^black, interface_205:com_103);
+} else if ($component0 = interface_205:com_103 | $component0 = interface_205:com_114) {
+    if_setcolour(^green, interface_205:com_103);
+    if_setcolour(^black, interface_205:com_101);
+}

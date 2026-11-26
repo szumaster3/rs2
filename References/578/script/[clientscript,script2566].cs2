@@ -1,0 +1,16 @@
+[clientscript,script2566]
+if_settext(%varclientstring_182, interface_843:com_7);
+if_settext(%varclientstring_183, interface_843:com_8);
+if (%varclient_945 = 0) {
+    if_setmodel(model_47798, interface_843:com_18);
+} else if (%varclient_945 = 1) {
+    if_setmodel(model_47794, interface_843:com_18);
+} else if (%varclient_945 = 2) {
+    if_setmodel(model_47792, interface_843:com_18);
+} else if (%varclient_945 = 3) {
+    if_setmodel(model_47786, interface_843:com_18);
+} else if (%varclient_945 = 4) {
+    if_setmodel(model_47787, interface_843:com_18);
+} else if (%varclient_945 = 5) {
+    if_setmodel(model_47796, interface_843:com_18);
+}

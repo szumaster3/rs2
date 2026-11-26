@@ -26,7 +26,7 @@ sealed class NPCFlags(
      * Represents the primary hit update flag.
      * Expects [HitMark] context containing damage and hit type.
      */
-    class PrimaryHit : NPCFlags(0x40, 0, EntityFlag.PrimaryHit) {
+    class PrimaryHit : NPCFlags(0x2, 0, EntityFlag.PrimaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -35,7 +35,7 @@ sealed class NPCFlags(
                 logInvalidType(context, typeOf<HitMark>())
                 return
             }
-            buffer.p1(context.damage)
+            buffer.psmarts(context.damage)
             buffer.p1neg(context.type)
 
             val e = context.entity
@@ -44,7 +44,7 @@ sealed class NPCFlags(
             if (e.skills.lifepoints < max) {
                 ratio = e.skills.lifepoints * 255 / max
             }
-            buffer.p1sub(ratio)
+            buffer.p1(ratio)
         }
     }
 
@@ -52,7 +52,7 @@ sealed class NPCFlags(
      * Represents the secondary hit update flag.
      * Expects [HitMark] context.
      */
-    class SecondaryHit : NPCFlags(0x2, 1, EntityFlag.SecondaryHit) {
+    class SecondaryHit : NPCFlags(0x1, 5, EntityFlag.SecondaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -61,8 +61,8 @@ sealed class NPCFlags(
                 logInvalidType(context, typeOf<HitMark>())
                 return
             }
-            buffer.p1neg(context.damage)
-            buffer.p1sub(context.type)
+            buffer.psmarts(context.damage)
+            buffer.p1neg(context.type)
         }
     }
 
@@ -70,7 +70,7 @@ sealed class NPCFlags(
      * Represents animation update flag.
      * Expects [Animation] context.
      */
-    class Animate : NPCFlags(0x10, 2, EntityFlag.Animate) {
+    class Animate : NPCFlags(0x8, 1, EntityFlag.Animate) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -80,7 +80,7 @@ sealed class NPCFlags(
                 return
             }
             buffer.p2(context.id)
-            buffer.p1(context.delay)
+            buffer.p1sub(context.delay)
         }
     }
 
@@ -88,7 +88,7 @@ sealed class NPCFlags(
      * Flag for facing another entity.
      * Context can be [Entity] or null.
      */
-    class FaceEntity : NPCFlags(0x4, 3, EntityFlag.FaceEntity) {
+    class FaceEntity : NPCFlags(0x20, 4, EntityFlag.FaceEntity) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -98,9 +98,9 @@ sealed class NPCFlags(
                 return
             }
             if (context == null) {
-                buffer.p2add(-1)
+                buffer.p2(-1)
             } else {
-                buffer.p2add(context.clientIndex)
+                buffer.p2(context.clientIndex)
             }
         }
     }
@@ -109,7 +109,7 @@ sealed class NPCFlags(
      * Spot animation flag.
      * Expects [Graphics] context.
      */
-    class SpotAnim : NPCFlags(0x80, 4, EntityFlag.SpotAnim) {
+    class SpotAnim : NPCFlags(0x4, 3, EntityFlag.SpotAnim) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -118,7 +118,7 @@ sealed class NPCFlags(
                 logInvalidType(context, typeOf<Graphics>())
                 return
             }
-            buffer.p2add(context.id)
+            buffer.ip2add(context.id)
             buffer.ip4((context.height shl 16) + context.delay)
         }
     }
@@ -127,7 +127,7 @@ sealed class NPCFlags(
      * Type swap flag.
      * Expects an [Int] context representing new NPC type ID.
      */
-    class TypeSwap : NPCFlags(0x1, 5, EntityFlag.TypeSwap) {
+    class TypeSwap : NPCFlags(0x10, 8, EntityFlag.TypeSwap) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -144,7 +144,7 @@ sealed class NPCFlags(
      * Force chat update flag.
      * Expects a [String] context containing the forced chat text.
      */
-    class ForceChat : NPCFlags(0x20, 6, EntityFlag.ForceChat) {
+    class ForceChat : NPCFlags(0x80, 2, EntityFlag.ForceChat) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -153,7 +153,7 @@ sealed class NPCFlags(
                 logInvalidType(context, typeOf<String>())
                 return
             }
-            buffer.putString(context)
+            buffer.put(context.replace('\u0000', ' ').toByteArray(charset("windows-1252"))).p1(0)
         }
     }
 
@@ -161,14 +161,21 @@ sealed class NPCFlags(
      * Animation sequence flag.
      * Expects [Animation] context.
      */
-    class AnimationSequence : NPCFlags(0x100, 7, EntityFlag.AnimSeq) {
+    class AnimationSequence : NPCFlags(0x100, 6, EntityFlag.AnimSeq) {
+        override fun writeTo(buffer: IoBuffer, context: Any?) {
+            if (context is Animation) {
+                buffer.p1sub(1).p2add(context.id).p1neg(context.delay).p2(0xffff)
+            } else {
+                buffer.p1sub(0)
+            }
+        }
     }
 
     /**
      * Face location flag.
      * Expects [Location] context.
      */
-    class FaceLocation : NPCFlags(0x200, 8, EntityFlag.FaceLocation) {
+    class FaceLocation : NPCFlags(0x200, 7, EntityFlag.FaceLocation) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -177,8 +184,8 @@ sealed class NPCFlags(
                 logInvalidType(context, typeOf<Location>())
                 return
             }
-            buffer.p2add((context.x shl 1) + 1)
-            buffer.p2((context.y shl 1) + 1)
+            buffer.p2((context.x shl 1) + 1)
+            buffer.ip2((context.y shl 1) + 1)
         }
     }
 }

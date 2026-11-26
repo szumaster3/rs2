@@ -36,7 +36,7 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
     public static final ZoneBorders GRAND_TREE = new ZoneBorders(2465, 3491, 2466, 3493);
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.forId(190).getHandlers().put("option:open", this);
         SceneryDefinition.forId(1967).getHandlers().put("option:open", this);
         SceneryDefinition.forId(1968).getHandlers().put("option:open", this);

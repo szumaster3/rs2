@@ -1,0 +1,8 @@
+[clientscript,trawler_net_status]
+if (%varclient_818 = 1) {
+    if_settext("Net: Ripped!", interface_15:com_16);
+    if_setcolour(0xe12323, interface_15:com_16);
+} else {
+    if_settext("Net: OK", interface_15:com_16);
+    if_setcolour(0xff9900, interface_15:com_16);
+}

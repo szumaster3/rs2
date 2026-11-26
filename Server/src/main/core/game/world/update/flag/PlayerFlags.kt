@@ -1,5 +1,6 @@
 package core.game.world.update.flag
 
+import core.ServerConstants
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
@@ -7,7 +8,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.*
 import core.net.packet.IoBuffer
 import core.tools.StringUtils
-import java.nio.charset.StandardCharsets
+import java.nio.charset.Charset
 import kotlin.math.max
 import kotlin.reflect.typeOf
 
@@ -18,11 +19,14 @@ sealed class PlayerFlags(
     p: Int,
     o: Int,
     f: EntityFlag,
-) : EFlagProvider(530, EFlagType.Player, p, o, f) {
+) : EFlagProvider(ServerConstants.REVISION, EFlagType.Player, p, o, f) {
+    companion object {
+        private val cp1252 = Charset.forName("windows-1252")
+    }
     /**
      * Sends a chat message update.
      */
-    class Chat : PlayerFlags(0x80, 0, EntityFlag.Chat) {
+    class Chat : PlayerFlags(0x8, 0, EntityFlag.Chat) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -31,32 +35,36 @@ sealed class PlayerFlags(
                 logInvalidType(context, typeOf<ChatMessage>())
                 return
             }
-            buffer.ip2(context.effects)
-            if (context.isQuickChat) {
-                buffer.p1(4)
-            } else {
-                buffer.p1(context.chatIcon)
+            val quick = context.nativeQuickChat
+            if (quick != null) {
+                buffer.p2add((context.effects and 0x7fff) or 0x8000)
+                buffer.p1neg(context.chatIcon)
+                buffer.p1(quick.size)
+                buffer.putReverseA(quick, 0, quick.size - 1)
+                return
             }
-            val chatBuf = ByteArray(256)
-            chatBuf[0] = context.text.length.toByte()
-            val offset =
-                1 +
-                    StringUtils.encryptPlayerChat(
-                        chatBuf,
-                        0,
-                        1,
-                        context.text.length,
-                        context.text.toByteArray(StandardCharsets.UTF_8),
-                    )
-            buffer.p1(offset + 1)
-            buffer.putReverse(chatBuf, 0, offset)
+            buffer.p2add(context.effects and 0x7fff)
+            buffer.p1neg(context.chatIcon)
+            val text = context.text.toByteArray(cp1252)
+            val compressed = ByteArray(1024)
+            var length = minOf(text.size, 255)
+            var size: Int
+            do {
+                val prefix = if (length < 128) 1 else 2
+                if (prefix == 2) compressed[0] = ((length shr 8) + 128).toByte()
+                compressed[prefix - 1] = length.toByte()
+                size = prefix + StringUtils.encryptPlayerChat(compressed, 0, prefix, length, text)
+                length--
+            } while (size > 255)
+            buffer.p1(size)
+            buffer.putReverseA(compressed, 0, size - 1)
         }
     }
 
     /**
      * Sends primary hit damage info.
      */
-    class PrimaryHit : PlayerFlags(0x1, 1, EntityFlag.PrimaryHit) {
+    class PrimaryHit : PlayerFlags(0x40, 9, EntityFlag.PrimaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -66,7 +74,7 @@ sealed class PlayerFlags(
                 return
             }
             buffer.psmarts(context.damage)
-            buffer.p1add(context.type)
+            buffer.p1sub(context.type)
 
             var ratio = 255
             val e = context.entity
@@ -74,14 +82,14 @@ sealed class PlayerFlags(
             if (max > e.skills.lifepoints) {
                 ratio = e.skills.lifepoints * 255 / max
             }
-            buffer.p1sub(ratio)
+            buffer.p1neg(ratio)
         }
     }
 
     /**
      * Sends animation update.
      */
-    class Animate : PlayerFlags(0x8, 2, EntityFlag.Animate) {
+    class Animate : PlayerFlags(0x4, 4, EntityFlag.Animate) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -90,15 +98,15 @@ sealed class PlayerFlags(
                 logInvalidType(context, typeOf<Animation>())
                 return
             }
-            buffer.p2(context.id)
-            buffer.p1(context.delay)
+            buffer.ip2add(context.id)
+            buffer.p1add(context.delay)
         }
     }
 
     /**
      * Sends player appearance data.
      */
-    class Appearance : PlayerFlags(0x4, 3, EntityFlag.Appearance) {
+    class Appearance : PlayerFlags(0x1, 2, EntityFlag.Appearance) {
         override fun writeTo(buffer: IoBuffer, context: Any?) {
             if (context !is Player) {
                 logInvalidType(context, typeOf<Player>())
@@ -115,10 +123,11 @@ sealed class PlayerFlags(
                 settings += 0x4 // flag the player as non-PvP
             }
 
-            buffer.p1(0) // stand-in for size.
-            val startPos = buffer.toByteBuffer().position()
+            val output = buffer
+            val buffer = IoBuffer()
 
             buffer.p1(settings)
+            buffer.p1(-1)
             buffer.p1(appearance.skullIcon)
             buffer.p1(appearance.headIcon)
             val npcId = appearance.npcId
@@ -140,7 +149,7 @@ sealed class PlayerFlags(
                 buffer.p1(part.color)
             }
             buffer.p2(appearance.renderAnimation)
-            buffer.p8(StringUtils.stringToLong(context.username))
+            buffer.put(context.name.toByteArray(cp1252)).p1(0)
             if (nonPvp) {
                 buffer.p1(context.properties.currentCombatLevel) // with summoning
                 buffer.p2(context.skills.totalLevel)
@@ -160,14 +169,16 @@ sealed class PlayerFlags(
                 }
             }
             buffer.p1(0) // sound radius
-            buffer.psizeadd(buffer.toByteBuffer().position() - startPos)
+            val size = buffer.toByteBuffer().position()
+            output.p1sub(size)
+            output.putReverse(buffer.toByteBuffer().array(), 0, size - 1)
         }
     }
 
     /**
      * Sends the entity the player is facing.
      */
-    class FaceEntity : PlayerFlags(0x2, 4, EntityFlag.FaceEntity) {
+    class FaceEntity : PlayerFlags(0x10, 3, EntityFlag.FaceEntity) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -187,7 +198,7 @@ sealed class PlayerFlags(
     /**
      * Sends forced movement data for the player.
      */
-    class ForceMove : PlayerFlags(0x400, 5, EntityFlag.ForceMove) {
+    class ForceMove : PlayerFlags(0x100, 5, EntityFlag.ForceMove) {
         override fun writeToDynamic(
             buffer: IoBuffer,
             context: Any?,
@@ -201,13 +212,13 @@ sealed class PlayerFlags(
                 logInvalidType(context, typeOf<Player>())
                 return
             }
-            val l = e.playerFlags.lastSceneGraph
-            buffer.p1neg(context.start.getSceneX(l))
-            buffer.p1(context.start.getSceneY(l))
-            buffer.p1add(context.dest.getSceneX(l))
-            buffer.p1(context.dest.getSceneY(l))
-            buffer.ip2(context.startArrive)
-            buffer.ip2(max(context.startArrive + 1, context.startArrive + context.destArrive))
+            val l = e.location
+            buffer.p1add(context.start.x - l.x)
+            buffer.p1add(context.start.y - l.y)
+            buffer.p1sub(context.dest.x - l.x)
+            buffer.p1(context.dest.y - l.y)
+            buffer.p2add(context.startArrive)
+            buffer.p2add(max(context.startArrive + 1, context.startArrive + context.destArrive))
             buffer.p1neg(context.direction.toInteger())
         }
     }
@@ -215,7 +226,7 @@ sealed class PlayerFlags(
     /**
      * Sends forced chat text for the player.
      */
-    class ForceChat : PlayerFlags(0x20, 6, EntityFlag.ForceChat) {
+    class ForceChat : PlayerFlags(0x200, 7, EntityFlag.ForceChat) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -224,14 +235,14 @@ sealed class PlayerFlags(
                 logInvalidType(context, typeOf<String>())
                 return
             }
-            buffer.putString(context)
+            buffer.put(context.ifEmpty { " " }.replace('\u0000', ' ').toByteArray(cp1252)).p1(0)
         }
     }
 
     /**
      * Sends secondary hit damage info.
      */
-    class SecondaryHit : PlayerFlags(0x200, 7, EntityFlag.SecondaryHit) {
+    class SecondaryHit : PlayerFlags(0x800, 10, EntityFlag.SecondaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -248,14 +259,20 @@ sealed class PlayerFlags(
     /**
      * Sends animation sequence update.
      */
-    class AnimationSequence : PlayerFlags (0x800, 8, EntityFlag.AnimSeq) {
-
+    class AnimationSequence : PlayerFlags (0x400, 1, EntityFlag.AnimSeq) {
+        override fun writeTo(buffer: IoBuffer, context: Any?) {
+            if (context is Animation) {
+                buffer.p1sub(1).ip2(context.id).p1neg(context.delay).ip2(0xffff)
+            } else {
+                buffer.p1sub(0)
+            }
+        }
     }
 
     /**
      * Sends spot animation data.
      */
-    class SpotAnim : PlayerFlags(0x100, 9, EntityFlag.SpotAnim) {
+    class SpotAnim : PlayerFlags(0x2000, 8, EntityFlag.SpotAnim) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -264,25 +281,26 @@ sealed class PlayerFlags(
                 logInvalidType(context, typeOf<Graphics>())
                 return
             }
-            buffer.ip2(context.id)
-            buffer.mp4((context.height shl 16) + context.delay)
+            buffer.ip2add(context.id)
+            buffer.p4((context.height shl 16) + context.delay)
         }
     }
 
     /**
      * Sends location the player is facing.
      */
-    class FaceLocation : PlayerFlags(0x40, 10, EntityFlag.FaceLocation) {
-        override fun writeTo(
+    class FaceLocation : PlayerFlags(0x80, 6, EntityFlag.FaceLocation) {
+        override fun writeToDynamic(
             buffer: IoBuffer,
             context: Any?,
+            e: Entity,
         ) {
             if (context !is Location) {
                 logInvalidType(context, typeOf<Location>())
                 return
             }
-            buffer.p2((context.x shl 1) + 1)
-            buffer.ip2add((context.y shl 1) + 1)
+            val angle = kotlin.math.atan2((e.location.x - context.x).toDouble(), (e.location.y - context.y).toDouble())
+            buffer.p2((angle * (8192 / Math.PI)).toInt() and 0x3fff)
         }
     }
 }

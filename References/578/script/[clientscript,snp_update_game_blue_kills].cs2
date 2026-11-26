@@ -1,0 +1,2 @@
+[clientscript,snp_update_game_blue_kills]
+if_settext(tostring(%varclient_643), interface_836:com_9);

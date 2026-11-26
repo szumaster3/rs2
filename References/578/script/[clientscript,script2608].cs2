@@ -1,0 +1,2 @@
+[clientscript,script2608](component $component0)
+if_settext(tostring(%varplayerbit_6382), $component0);

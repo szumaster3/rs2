@@ -97,7 +97,7 @@ open class Component {
             PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(
                 player,
                 definition.getWindowPaneId(manager.isResizable),
-                definition.getChildId(manager.isResizable) + definition.tabIndex,
+                definition.getChildId(manager.isResizable) + core.game.node.entity.player.link.InterfaceManager.protocolTabIndex(definition.tabIndex),
                 id,
                 definition.isWalkable
             ))

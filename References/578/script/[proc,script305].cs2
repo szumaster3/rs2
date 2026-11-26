@@ -1,0 +1,7 @@
+[proc,script305](int $int0)
+if ($int0 = 1) {
+    if_setcolour(0xff981f, interface_755:com_14);
+} else {
+    if_setcolour(^red, interface_755:com_14);
+}
+if_setontimer("script306(clientclock, event_com)", interface_755:com_14);

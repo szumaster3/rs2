@@ -1,0 +1,407 @@
+[com_0]
+type=graphic
+x=14
+y=17
+width=482
+height=299
+graphic=tradebacking
+tiling=yes
+opbase=  
+
+[com_1]
+type=graphic
+y=21
+width=33
+height=294
+graphic="v2_stone_borders,1"
+tiling=yes
+opbase= 
+
+[com_2]
+type=graphic
+x=479
+y=20
+width=31
+height=293
+graphic="v2_stone_borders,3"
+tiling=yes
+opbase= 
+
+[com_3]
+type=graphic
+x=17
+y=298
+width=479
+height=44
+graphic="v2_stone_borders,2"
+tiling=yes
+
+[com_4]
+type=graphic
+x=14
+y=3
+width=481
+height=32
+graphic="v2_stone_borders,0"
+tiling=yes
+opbase= 
+
+[com_5]
+type=graphic
+x=467
+y=286
+width=32
+height=32
+graphic="v2_stone_borders,7"
+opbase= 
+
+[com_6]
+type=graphic
+x=13
+y=286
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+[com_7]
+type=graphic
+x=467
+y=16
+width=32
+height=32
+graphic="v2_stone_borders,5"
+opbase= 
+
+[com_8]
+type=graphic
+x=16
+y=33
+width=480
+height=31
+graphic="v2_stone_borders,8"
+tiling=yes
+
+[com_9]
+type=graphic
+x=13
+y=16
+width=32
+height=32
+graphic="v2_stone_borders,4"
+opbase= 
+
+[com_10]
+type=graphic
+x=13
+y=35
+width=32
+height=32
+graphic="v2_stone_borders,9"
+tiling=yes
+
+[com_11]
+type=graphic
+x=467
+y=35
+width=32
+height=32
+graphic="v2_stone_borders,10"
+tiling=yes
+
+[com_12]
+type=graphic
+x=471
+y=27
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+transmitop=1
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+[com_13]
+type=text
+x=20
+y=28
+width=472
+height=15
+textfont=b12_full
+text=What would you like to make?
+textalignh=centre
+colour=0xff981f
+
+[com_14]
+type=model
+x=38
+y=57
+width=64
+height=96
+model=model_2540
+modelangle=500,0,0
+modelzoom=400
+unknown101=3000
+
+[com_15]
+type=text
+x=20
+y=70
+width=100
+height=100
+textfont=q8_full
+text=Armour
+textalignh=centre
+textalignv=bottom
+textshadow=yes
+colour=0xff981f
+onload=script541(event_com, 14)
+
+[com_16]
+type=model
+x=154
+y=48
+width=64
+height=96
+model=model_2649
+modelangle=500,0,0
+modelzoom=500
+unknown101=3000
+
+[com_17]
+type=text
+x=132
+y=70
+width=100
+height=100
+textfont=q8_full
+text=Gloves
+textalignh=centre
+textalignv=bottom
+textshadow=yes
+colour=0xff981f
+onload=script541(event_com, 1)
+
+[com_18]
+type=model
+x=282
+y=72
+width=64
+height=96
+model=model_2837
+modelangle=100,100,0
+modelzoom=400
+unknown101=3000
+
+[com_19]
+type=text
+x=260
+y=70
+width=100
+height=100
+textfont=q8_full
+text=Boots
+textalignh=centre
+textalignv=bottom
+textshadow=yes
+colour=0xff981f
+onload=script541(event_com, 7)
+
+[com_20]
+type=model
+x=415
+y=56
+width=64
+height=96
+model=model_2656
+modelangle=600,0,0
+modelzoom=350
+unknown101=3000
+
+[com_21]
+type=text
+x=380
+y=70
+width=100
+height=100
+textfont=q8_full
+text=Vambraces
+textalignh=centre
+textalignv=bottom
+textshadow=yes
+colour=0xff981f
+onload=script541(event_com, 11)
+
+[com_22]
+type=model
+x=92
+y=190
+width=64
+height=96
+model=model_2555
+modelangle=500,0,0
+modelzoom=700
+unknown101=3000
+
+[com_23]
+type=text
+x=75
+y=200
+width=100
+height=100
+textfont=q8_full
+text=Chaps
+textalignh=centre
+textalignv=bottom
+textshadow=yes
+colour=0xff981f
+onload=script541(event_com, 18)
+
+[com_24]
+type=model
+x=221
+y=204
+width=64
+height=96
+model=model_2541
+modelangle=150,100,0
+modelzoom=350
+unknown101=3000
+
+[com_25]
+type=text
+x=200
+y=200
+width=100
+height=100
+textfont=q8_full
+text=Coif
+textalignh=centre
+textalignv=bottom
+textshadow=yes
+colour=0xff981f
+onload=script541(event_com, 38)
+
+[com_26]
+type=model
+x=349
+y=202
+width=64
+height=96
+model=model_3481
+modelangle=150,100,0
+modelzoom=350
+unknown101=3000
+
+[com_27]
+type=text
+x=325
+y=200
+width=100
+height=100
+textfont=q8_full
+text=Cowl
+textalignh=centre
+textalignv=bottom
+textshadow=yes
+colour=0xff981f
+onload=script541(event_com, 9)
+
+[com_28]
+type=layer
+x=25
+y=70
+width=90
+height=100
+transmitop=1,2,3,4
+opbase=<col=ff9040>Armour
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 14)
+
+[com_29]
+type=layer
+x=140
+y=70
+width=90
+height=100
+transmitop=1,2,3,4
+opbase=<col=ff9040>Gloves
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 1)
+
+[com_30]
+type=layer
+x=265
+y=70
+width=90
+height=100
+transmitop=1,2,3,4
+opbase=<col=ff9040>Boots
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 7)
+
+[com_31]
+type=layer
+x=380
+y=70
+width=90
+height=100
+transmitop=1,2,3,4
+opbase=<col=ff9040>Vambraces
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 11)
+
+[com_32]
+type=layer
+x=80
+y=200
+width=90
+height=100
+transmitop=1,2,3,4
+opbase=<col=ff9040>Chaps
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 18)
+
+[com_33]
+type=layer
+x=205
+y=200
+width=90
+height=100
+transmitop=1,2,3,4
+opbase=<col=ff9040>Coif
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 38)
+
+[com_34]
+type=layer
+x=340
+y=200
+width=90
+height=100
+transmitop=1,2,3,4
+opbase=<col=ff9040>Cowl
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 9)
+

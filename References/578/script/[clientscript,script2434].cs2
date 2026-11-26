@@ -1,0 +1,15 @@
+[clientscript,script2434](int $int0)
+%varclient_815 = calc($int0 * 300 / 10);
+if (%varclient_815 > 0) {
+    if (getwindowmode < 2) {
+        if_setontimer("gravestone_update_timer", interface_548:com_9);
+        if_sethide(false, interface_548:com_10);
+        if_sethide(false, interface_548:com_11);
+    } else {
+        if_setontimer("gravestone_update_timer", interface_746:com_10);
+        if_sethide(false, interface_746:com_161);
+        if_sethide(false, interface_746:com_160);
+    }
+} else {
+    ~gravestone_stop_timer;
+}

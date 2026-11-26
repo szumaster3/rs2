@@ -1,0 +1,6 @@
+[clientscript,snapshot_confirm_name]
+if (compare(%varclientstring_24, "") ! 0) {
+    ~script220;
+} else {
+    mes("You must first select a name from the list.");
+}

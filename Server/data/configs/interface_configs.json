@@ -132,12 +132,6 @@
     "tabIndex": "-1"
   },
   {
-    "id": "92",
-    "interfaceType": "2",
-    "walkable": "true",
-    "tabIndex": "0"
-  },
-  {
     "id": "94",
     "interfaceType": "4",
     "walkable": "false",
@@ -304,6 +298,12 @@
     "interfaceType": "4",
     "walkable": "false",
     "tabIndex": "-1"
+  },
+  {
+    "id": "190",
+    "interfaceType": "2",
+    "walkable": "true",
+    "tabIndex": "2"
   },
   {
     "id": "191",
@@ -528,22 +528,10 @@
     "tabIndex": "-1"
   },
   {
-    "id": "259",
-    "interfaceType": "2",
-    "walkable": "true",
-    "tabIndex": "2"
-  },
-  {
     "id": "261",
     "interfaceType": "2",
     "walkable": "true",
     "tabIndex": "11"
-  },
-  {
-    "id": "263",
-    "interfaceType": "1",
-    "walkable": "true",
-    "tabIndex": "-1"
   },
   {
     "id": "263",
@@ -937,12 +925,6 @@
   },
   {
     "id": "548",
-    "interfaceType": "5",
-    "walkable": "true",
-    "tabIndex": "-1"
-  },
-  {
-    "id": "549",
     "interfaceType": "5",
     "walkable": "true",
     "tabIndex": "-1"
@@ -1384,5 +1366,17 @@
     "interfaceType": "3",
     "walkable": "false",
     "tabIndex": "-1"
+  },
+  {
+    "id": "884",
+    "interfaceType": "2",
+    "walkable": "true",
+    "tabIndex": "0"
+  },
+  {
+    "id": "891",
+    "interfaceType": "2",
+    "walkable": "true",
+    "tabIndex": "7"
   }
 ]

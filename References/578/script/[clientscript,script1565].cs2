@@ -1,0 +1,16 @@
+[clientscript,script1565]
+if_settextfont(tutorial_font, interface_210:com_1);
+if_settextfont(tutorial_font, interface_211:com_1);
+if_settextfont(tutorial_font, interface_211:com_2);
+if_settextfont(tutorial_font, interface_212:com_1);
+if_settextfont(tutorial_font, interface_212:com_2);
+if_settextfont(tutorial_font, interface_212:com_3);
+if_settextfont(tutorial_font, interface_213:com_1);
+if_settextfont(tutorial_font, interface_213:com_2);
+if_settextfont(tutorial_font, interface_213:com_3);
+if_settextfont(tutorial_font, interface_213:com_3);
+if_settextfont(tutorial_font, interface_214:com_1);
+if_settextfont(tutorial_font, interface_214:com_2);
+if_settextfont(tutorial_font, interface_214:com_3);
+if_settextfont(tutorial_font, interface_214:com_4);
+if_settextfont(tutorial_font, interface_214:com_5);

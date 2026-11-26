@@ -1,0 +1,73 @@
+[proc,script2458](int $int0)(component)
+if (getwindowmode >= 2) {
+    switch_int ($int0) {
+        case 0 :
+            return(interface_746:com_124);
+        case 1 :
+            return(interface_746:com_125);
+        case 2 :
+            return(interface_746:com_126);
+        case 3 :
+            return(interface_746:com_127);
+        case 4 :
+            return(interface_746:com_128);
+        case 5 :
+            return(interface_746:com_129);
+        case 6 :
+            return(interface_746:com_130);
+        case 7 :
+            return(interface_746:com_131);
+        case 8 :
+            return(interface_746:com_132);
+        case 9 :
+            return(interface_746:com_133);
+        case 10 :
+            return(interface_746:com_134);
+        case 11 :
+            return(interface_746:com_135);
+        case 12 :
+            return(interface_746:com_136);
+        case 13 :
+            return(interface_746:com_137);
+        case 14 :
+            return(interface_746:com_138);
+        case 15 :
+            return(interface_746:com_139);
+    }
+} else {
+    switch_int ($int0) {
+        case 0 :
+            return(interface_548:com_81);
+        case 1 :
+            return(interface_548:com_82);
+        case 2 :
+            return(interface_548:com_83);
+        case 3 :
+            return(interface_548:com_84);
+        case 4 :
+            return(interface_548:com_85);
+        case 5 :
+            return(interface_548:com_86);
+        case 6 :
+            return(interface_548:com_87);
+        case 7 :
+            return(interface_548:com_88);
+        case 8 :
+            return(interface_548:com_51);
+        case 9 :
+            return(interface_548:com_52);
+        case 10 :
+            return(interface_548:com_53);
+        case 11 :
+            return(interface_548:com_54);
+        case 12 :
+            return(interface_548:com_55);
+        case 13 :
+            return(interface_548:com_56);
+        case 14 :
+            return(interface_548:com_57);
+        case 15 :
+            return(interface_548:com_58);
+    }
+}
+return(null);

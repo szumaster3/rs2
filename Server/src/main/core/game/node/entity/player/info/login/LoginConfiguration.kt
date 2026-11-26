@@ -33,86 +33,22 @@ object LoginConfiguration {
      * List of login-related plugins.
      */
     var loginPlugins = mutableListOf<Plugin<Any>>()
-    private val lobbyPane = Component(Components.TOPLEVEL_FULL_549)
-    private val lobbyInterface = Component(Components.WELCOME_SCREEN_378)
-
-    /**
-     * Lobby components for UI elements.
-     */
-    private val lobbyComponents =
-        intArrayOf(
-            Components.MESSAGE_OF_THE_WEEK_17,
-            Components.MESSAGE_OF_THE_WEEK_18,
-            Components.MESSAGE_OF_THE_WEEK_19,
-            Components.MESSAGE_OF_THE_WEEK_20,
-            Components.BANNER_PADLOCK_KEYS_15,
-            Components.BANNER_ANTI_VIRUS_16,
-            Components.BANNER_SCAMMING_21,
-            Components.BANNER_SECURITY_22,
-            Components.BANNER_XMAS_23,
-            Components.BANNER_POH_405,
-            Components.BANNER_CHATHEADS_447,
-            Components.BANNER_GROUP_622,
-            Components.BANNER_GROUP_ASSIST_623,
-            Components.BANNER_SUMMONING_679,
-            Components.BANNER_EASTER08_715,
-            Components.BANNER_HALLOWEEN_800,
-        )
-
-    /**
-     * Configures the player's lobby or game world based on their status.
-     * @param player The player to configure.
-     */
     @JvmStatic
     fun configureLobby(player: Player) {
-        //val details = PlayerDetails.getDetails(player.username)
-        //PlayerDetails.setAccountTimer(player, details)
-
         player.updateSceneGraph(true)
-        if (isTutorialCompleted(player) && player.isNotReconnecting()) {
-            sendLobbyScreen(player)
-        } else {
-            configureGameWorld(player)
-        }
+        if (player.isArtificial || !isTutorialCompleted(player) || !player.isNotReconnecting()) configureGameWorld(player)
+        else sendLobbyScreen(player)
     }
 
-    /**
-     * Displays the lobby screen for the player.
-     * @param player The player to show the lobby screen to.
-     */
     @JvmStatic
     fun sendLobbyScreen(player: Player) {
-        val selectedMessageModel = autoSelectMessageModel()
+        player.setAttribute("logging_in", true)
         Repository.lobbyPlayers.removeIf { it.name == player.name }
         Repository.lobbyPlayers.add(player)
-
-        // May 2009 message appear after login to PvP world:
-        // sendMessage(player, "This is a Bounty World, so you've been given a copy of the Bounty World manual.")
-        // addItem(player, Items.BOUNTY_GUIDE_1)
-
-        sendString(player, "Welcome to ${GameWorld.settings?.name}", lobbyInterface.id, 115)
-        sendString(player, getLastLogin(player), lobbyInterface.id, 116)
-
-        player.interfaceManager.openWindowsPane(lobbyPane)
-        player.interfaceManager.opened = lobbyInterface
-
-        // rectangle on the left
-        sendString(player, "0 unread message", lobbyInterface.id, 37)
-        sendString(player, "0", lobbyInterface.id, 39)
-
-        // center rectangle
-        if(!GameWorld.settings!!.isMembers) {
-            sendString(player, "0", lobbyInterface.id, 96)
-            sendString(player, "Not a Member", lobbyInterface.id, 93)
-            sendString(player, "You are not a member. Members get loads of extra benefits and features. Click here to become a member.", lobbyInterface.id, 94)
-        } else {
-            sendString(player, "0", lobbyInterface.id, 96)
-            sendString(player, "Never expires", lobbyInterface.id, 94)
-        }
-
-        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, lobbyPane.id, 2, Components.WELCOME_SCREEN_378, true))
-        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, lobbyPane.id, 3, selectedMessageModel, true))
-        sendString(player, GameWorld.settings?.message_string ?: "", selectedMessageModel, getMessageChild(selectedMessageModel))
+        player.interfaceManager.openWindowsPane(Component(378))
+        player.packetDispatch.sendLastLoginInfo()
+        sendString(player, "Welcome to ${GameWorld.settings?.name}", 378, 4)
+        sendIfaceSettings(player, 2, 18, 378, -1, -1)
     }
 
     /**
@@ -121,6 +57,11 @@ object LoginConfiguration {
      */
     @JvmStatic
     fun configureGameWorld(player: Player) {
+        player.removeAttribute("logging_in")
+        if (!player.isArtificial) {
+            player.details.accountInfo.lastUsedIp = player.details.ipAddress
+            player.details.setLastLogin(System.currentTimeMillis())
+        }
         sendGameConfiguration(player)
 
         Repository.lobbyPlayers.remove(player)
@@ -130,8 +71,6 @@ object LoginConfiguration {
         RegionManager.move(player)
         player.musicPlayer.init()
         player.updateAppearance()
-        player.playerFlags.lastSceneGraph = player.location
-        player.packetDispatch.sendInterfaceConfig(226, 1, true)
 
         checkEmotes(player)
         setupItems(player)
@@ -147,8 +86,6 @@ object LoginConfiguration {
     fun sendGameConfiguration(player: Player) {
         player.interfaceManager.openWindowsPane(Component(if (player.interfaceManager.isResizable) Components.TOPLEVEL_FULLSCREEN_746 else Components.TOPLEVEL_548))
         player.interfaceManager.openChatbox(Components.CHATDEFAULT_137)
-        player.interfaceManager.openDefaultTabs()
-        player.interfaceManager.openInfoBars()
         welcome(player)
         config(player)
 
@@ -210,47 +147,10 @@ object LoginConfiguration {
         player.questRepository.syncronizeTab(player)
         player.interfaceManager.close()
         player.emoteManager.refresh()
-        player.interfaceManager.openInfoBars()
         if (!player.isArtificial) {
             log(LoginConfiguration::class.java, Log.INFO, "Finished configuring player ${player.username}")
         }
     }
-
-    private fun getMessageChild(interfaceId: Int): Int =
-        when (interfaceId) {
-            Components.BANNER_GROUP_622 -> 8
-            Components.BANNER_ANTI_VIRUS_16 -> 6
-            Components.MESSAGE_OF_THE_WEEK_20,
-            Components.BANNER_GROUP_ASSIST_623,
-            -> 5
-
-            Components.BANNER_PADLOCK_KEYS_15,
-            Components.MESSAGE_OF_THE_WEEK_18,
-            Components.MESSAGE_OF_THE_WEEK_19,
-            Components.BANNER_SCAMMING_21,
-            Components.BANNER_SECURITY_22,
-            Components.BANNER_CHATHEADS_447,
-            Components.BANNER_POH_405,
-            -> 4
-
-            Components.MESSAGE_OF_THE_WEEK_17,
-            Components.BANNER_XMAS_23, Components.BANNER_HALLOWEEN_800,
-            -> 3
-
-            Components.BANNER_EASTER08_715 -> 2
-            Components.BANNER_SUMMONING_679 -> 1
-            else -> 0
-        }
-
-    /**
-     * Sends a welcome message.
-     */
-    private fun autoSelectMessageModel(): Int =
-        if (IntStream.of(lobbyComponents.size).anyMatch { it == GameWorld.settings?.message_model }) {
-            GameWorld.settings?.message_model ?: lobbyComponents.random()
-        } else {
-            lobbyComponents.random()
-        }
 
     /**
      * Gets the last login message for a player.

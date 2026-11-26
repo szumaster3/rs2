@@ -1,0 +1,4 @@
+[clientscript,script250](component $component0)
+if (calc(clientclock % 5) = 0) {
+    ~script251($component0);
+}

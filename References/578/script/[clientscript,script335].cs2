@@ -1,0 +1,19 @@
+[clientscript,script335]
+if_sethide(false, interface_729:com_85);
+if_sethide(false, interface_729:com_86);
+if_sethide(true, interface_729:com_83);
+if_sethide(true, interface_729:com_84);
+if_sethide(true, interface_729:com_81);
+if_sethide(true, interface_729:com_82);
+if_setgraphic("player_kit_fancy,2", interface_729:com_93);
+if_setgraphic("player_kit_fancy_off,1", interface_729:com_92);
+if_setgraphic("player_kit_fancy_off,0", interface_729:com_91);
+%varclient_778 = 2;
+if (gender = 1) {
+    %varclient_773 = 450;
+} else {
+    %varclient_773 = 325;
+}
+~script339(interface_729:com_85);
+~script2364(interface_729:com_86, interface_729:com_85);
+~player_kit_select(interface_729:com_85, %varclient_781, ~script336(2));

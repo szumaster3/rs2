@@ -1,0 +1,347 @@
+[proc,ql4_getprogress](int $int0)(int)
+switch_int ($int0) {
+    case 147 :
+        return(~ql4_getprogress_basic(%varplayer_281, 1000));
+    case 159 :
+        return(~ql4_getprogress_basic(%varplayer_130, 4));
+    case 1 :
+        return(~ql4_getprogress_basic(%varplayer_29, 2));
+    case 2 :
+        return(~ql4_getprogress_basic(%varplayerbit_2561, 3));
+    case 3 :
+        return(~ql4_getprogress_basic(%varplayer_31, 100));
+    case 4 :
+        return(~ql4_getprogress_basic(%varplayer_176, 10));
+    case 5 :
+        return(~ql4_getprogress_basic(%varplayer_32, 3));
+    case 6 :
+        return(~ql4_getprogress_basic(%varplayerbit_2378, 6));
+    case 7 :
+        return(~ql4_getprogress_basic(%varplayer_160, 2));
+    case 8 :
+        return(~ql4_getprogress_basic(%varplayer_122, 7));
+    case 9 :
+        return(~ql4_getprogress_basic(%varplayer_71, 4));
+    case 10 :
+        return(~ql4_getprogress_basic(%varplayer_273, 110));
+    case 11 :
+        return(~ql4_getprogress_basic(%varplayer_107, 5));
+    case 12 :
+        return(~ql4_getprogress_basic(%varplayer_144, 100));
+    case 13 :
+        return(~ql4_getprogress_basic(%varplayer_63, 6));
+    case 14 :
+        return(~ql4_getprogress_basic(%varplayer_179, 21));
+    case 15 :
+        return(~ql4_getprogress_multi(%varplayer_145, 7, %varplayer_146, 4));
+    case 16 :
+        return(~ql4_getprogress_basic(%varplayerbit_6914, 3));
+    case 17 :
+        return(~ql4_getprogress_basic(%varplayer_67, 3));
+    case 18 :
+        return(~ql4_getprogress_basic(%varplayerbit_3185, 240));
+    case 19 :
+        return(~ql4_getprogress_basic(%varplayerbit_299, 110));
+    case 20 :
+        return(~ql4_getprogress_basic(%varplayer_293, 65));
+    case 21 :
+        return(~ql4_getprogress_basic(%varplayer_68, 16));
+    case 22 :
+        return(~ql4_getprogress_basic(%varplayer_655, 140));
+    case 23 :
+        return(~ql4_getprogress_basic(%varplayer_10, 8));
+    case 24 :
+        return(~ql4_getprogress_basic(%varplayerbit_3274, 130));
+    case 25 :
+        return(~ql4_getprogress_basic(%varplayerbit_487, 14));
+    case 26 :
+        if (%varplayer_399 > 6) {
+            return(2);
+        }
+        if (%varplayer_399 = 0 & %varplayerbit_203 = 0) {
+            return(0);
+        }
+        return(1);
+    case 27 :
+        return(~ql4_getprogress_basic(%varplayerbit_2573, 320));
+    case 28 :
+        return(~ql4_getprogress_basic(%varplayerbit_2258, 13));
+    case 29 :
+        return(~ql4_getprogress_basic(%varplayer_314, 80));
+    case 30 :
+        return(~ql4_getprogress_basic(%varplayerbit_358, 15));
+    case 31 :
+        return(~ql4_getprogress_basic(%varplayerbit_1465, 80));
+    case 32 :
+        return(~ql4_getprogress_basic(%varplayer_131, 9));
+    case 33 :
+        return(~ql4_getprogress_basic(%varplayer_80, 4));
+    case 34 :
+        return(~ql4_getprogress_basic(%varplayer_0, 11));
+    case 35 :
+        return(~ql4_getprogress_basic(%varplayer_335, 110));
+    case 36 :
+        return(~ql4_getprogress_basic(%varplayerbit_2780, 40));
+    case 37 :
+        if (testbit(%varplayer_299, 20) = ^true) {
+            return(2);
+        } else if (testbit(%varplayer_299, 1) = ^false) {
+            return(0);
+        } else {
+            return(1);
+        }
+    case 38 :
+        return(~ql4_getprogress_basic(%varplayerbit_2639, 11));
+    case 39 :
+        return(~ql4_getprogress_basic(%varplayerbit_1560, 70));
+    case 40 :
+        return(~ql4_getprogress_basic(%varplayerbit_2866, 200));
+    case 41 :
+        return(~ql4_getprogress_basic(%varplayerbit_2497, 60));
+    case 42 :
+        return(~ql4_getprogress_basic(%varplayerbit_1803, 90));
+    case 43 :
+        return(~ql4_getprogress_basic(%varplayerbit_2326, 90));
+    case 44 :
+        return(~ql4_getprogress_basic(%varplayer_148, 11));
+    case 45 :
+        return(~ql4_getprogress_basic(%varplayerbit_334, 28));
+    case 46 :
+        return(~ql4_getprogress_basic(%varplayer_17, 14));
+    case 47 :
+        return(~ql4_getprogress_basic(%varplayer_11, 5));
+    case 48 :
+        return(~ql4_getprogress_basic(%varplayerbit_822, 140));
+    case 49 :
+        return(~ql4_getprogress_basic(%varplayer_347, 10));
+    case 50 :
+        return(~ql4_getprogress_basic(%varplayer_65, 10));
+    case 51 :
+        return(~ql4_getprogress_basic(%varplayerbit_961, 60));
+    case 52 :
+        return(~ql4_getprogress_basic(%varplayer_180, 6));
+    case 53 :
+        return(~ql4_getprogress_basic(%varplayerbit_217, 8));
+    case 54 :
+        return(~ql4_getprogress_basic(%varplayerbit_571, 50));
+    case 55 :
+        return(~ql4_getprogress_basic(%varplayerbit_346, 10));
+    case 56 :
+        return(~ql4_getprogress_basic(%varplayer_150, 160));
+    case 57 :
+        return(~ql4_getprogress_basic(%varplayerbit_1527, 160));
+    case 58 :
+        return(~ql4_getprogress_basic(%varplayer_382, 11));
+    case 59 :
+        return(~ql4_getprogress_basic(%varplayer_223, 9));
+    case 60 :
+        return(~ql4_getprogress_basic(%varplayer_188, 15));
+    case 61 :
+        return(~ql4_getprogress_basic(%varplayer_5, 10));
+    case 62 :
+        return(~ql4_getprogress_basic(%varplayerbit_34, 10));
+    case 63 :
+        return(~ql4_getprogress_basic(%varplayerbit_418, 26));
+    case 64 :
+        return(~ql4_getprogress_basic(%varplayerbit_1990, 430));
+    case 65 :
+        return(~ql4_getprogress_basic(%varplayer_387, 105));
+    case 66 :
+        return(~ql4_getprogress_basic(%varplayer_175, 12));
+    case 67 :
+        return(~ql4_getprogress_basic(%varplayer_139, 75));
+    case 68 :
+        return(~ql4_getprogress_basic(%varplayer_147, 6));
+    case 69 :
+        return(~ql4_getprogress_basic(%varplayerbit_532, 11));
+    case 70 :
+        return(~ql4_getprogress_basic(%varplayerbit_2448, 190));
+    case 71 :
+        return(~ql4_getprogress_basic(%varplayerbit_1383, 4));
+    case 72 :
+        return(~ql4_getprogress_basic(%varplayer_14, 7));
+    case 73 :
+        return(~ql4_getprogress_detail(%varplayer_365, 1, 9));
+    case 74 :
+        return(~ql4_getprogress_basic(%varplayer_30, 80));
+    case 75 :
+        return(~ql4_getprogress_basic(%varplayerbit_260, 70));
+    case 76 :
+        return(~ql4_getprogress_basic(%varplayer_517, 8));
+    case 77 :
+        return(~ql4_getprogress_detail(%varplayerbit_1103, 9, 60));
+    case 78 :
+        return(~ql4_getprogress_basic(%varplayer_192, 2));
+    case 79 :
+        return(~ql4_getprogress_basic(%varplayerbit_2790, 320));
+    case 80 :
+        return(~ql4_getprogress_basic(%varplayer_307, 110));
+    case 81 :
+        return(~ql4_getprogress_basic(%varplayer_112, 7));
+    case 82 :
+        return(~ql4_getprogress_basic(%varplayer_416, 280));
+    case 83 :
+        return(~ql4_getprogress_basic(%varplayer_165, 29));
+    case 84 :
+        return(~ql4_getprogress_basic(%varplayer_302, 60));
+    case 85 :
+        return(~ql4_getprogress_basic(%varplayerbit_6178, 4));
+    case 86 :
+        return(~ql4_getprogress_basic(%varplayerbit_1404, 127));
+    case 87 :
+        return(~ql4_getprogress_basic(%varplayerbit_1850, 5));
+    case 88 :
+        return(~ql4_getprogress_basic(%varplayerbit_657, 2));
+    case 89 :
+        return(~ql4_getprogress_basic(%varplayer_328, 15));
+    case 90 :
+        return(~ql4_getprogress_basic(%varplayer_402, 6));
+    case 91 :
+        return(~ql4_getprogress_basic(%varplayerbit_2140, 30));
+    case 92 :
+        return(~ql4_getprogress_basic(%varplayer_600, 19));
+    case 93 :
+        return(~ql4_getprogress_basic(%varplayer_76, 6));
+    case 94 :
+        return(~ql4_getprogress_basic(%varplayer_159, 12));
+    case 95 :
+        return(~ql4_getprogress_basic(%varplayerbit_2610, 14));
+    case 96 :
+        return(~ql4_getprogress_basic(%varplayer_339, 85));
+    case 97 :
+        return(~ql4_getprogress_basic(%varplayerbit_1372, 125));
+    case 98 :
+        return(~ql4_getprogress_basic(%varplayer_60, 3));
+    case 99 :
+        return(~ql4_getprogress_basic(%varplayer_116, 15));
+    case 100 :
+        return(~ql4_getprogress_basic(%varplayerbit_2011, 13));
+    case 101 :
+        return(~ql4_getprogress_basic(%varplayerbit_1444, 60));
+    case 102 :
+        return(~ql4_getprogress_basic(%varplayerbit_2098, 200));
+    case 103 :
+        return(~ql4_getprogress_detail(%varplayer_320, 3, 6));
+    case 104 :
+        return(~ql4_getprogress_basic(%varplayerbit_1028, 70));
+    case 105 :
+        return(~ql4_getprogress_basic(%varplayerbit_451, 2));
+    case 106 :
+        return(~ql4_getprogress_basic(%varplayer_26, 80));
+    case 107 :
+        return(~ql4_getprogress_basic(%varplayer_359, 100));
+    case 108 :
+        return(~ql4_getprogress_basic(%varplayer_197, 30));
+    case 109 :
+        return(~ql4_getprogress_basic(%varplayer_226, 7));
+    case 110 :
+        return(~ql4_getprogress_basic(%varplayer_111, 9));
+    case 111 :
+        return(~ql4_getprogress_basic(%varplayer_200, 5));
+    case 112 :
+        return(~ql4_getprogress_basic(%varplayer_385, 45));
+    case 113 :
+        return(~ql4_getprogress_basic(%varplayer_317, 50));
+    case 114 :
+        if (%varplayer_161 = 10) {
+            return(2);
+        }
+        if (testbit(%varplayer_162, 11) = ^false) {
+            return(0);
+        }
+        return(1);
+    case 115 :
+        return(~ql4_getprogress_basic(%varplayerbit_1051, 11));
+    case 116 :
+        return(~ql4_getprogress_basic(%varplayer_212, 13));
+    case 117 :
+        return(~ql4_getprogress_basic(%varplayerbit_3293, 135));
+    case 118 :
+        return(~ql4_getprogress_basic(%varplayerbit_3311, 340));
+    case 119 :
+        return(~ql4_getprogress_basic(%varplayerbit_3337, 18));
+    case 120 :
+        return(~ql4_getprogress_basic(%varplayer_980, 130));
+    case 121 :
+        return(~ql4_getprogress_basic(%varplayerbit_3523, 150));
+    case 122 :
+        return(~ql4_getprogress_basic(%varplayerbit_3534, 80));
+    case 123 :
+        return(~ql4_getprogress_basic(%varplayerbit_3550, 11));
+    case 124 :
+        return(~ql4_getprogress_basic(%varplayerbit_3618, 28));
+    case 125 :
+        return(~ql4_getprogress_basic(%varplayerbit_2783, 60));
+    case 126 :
+        return(~ql4_getprogress_basic(%varplayerbit_3888, 90));
+    case 127 :
+        return(~ql4_getprogress_basic(%varplayerbit_3954, 200));
+    case 128 :
+        return(~ql4_getprogress_basic(%varplayerbit_4055, 65));
+    case 129 :
+        return(~ql4_getprogress_basic(%varplayerbit_4105, 18));
+    case 130 :
+        return(~ql4_getprogress_basic(%varplayerbit_4230, 700));
+    case 131 :
+        return(~ql4_getprogress_basic(%varplayerbit_4302, 110));
+    case 132 :
+        return(~ql4_getprogress_detail(%varplayerbit_4321, 10, 200));
+    case 133 :
+        return(~ql4_getprogress_basic(%varplayerbit_4396, 60));
+    case 134 :
+        return(~ql4_getprogress_basic(%varplayerbit_4505, 100));
+    case 135 :
+        return(~ql4_getprogress_basic(%varplayerbit_4569, 500));
+    case 136 :
+        return(~ql4_getprogress_basic(%varplayerbit_4684, 150));
+    case 137 :
+        return(~ql4_getprogress_basic(%varplayerbit_4700, 63));
+    case 138 :
+        return(~ql4_getprogress_basic(%varplayerbit_4764, 250));
+    case 139 :
+        return(~ql4_getprogress_basic(%varplayerbit_4797, 100));
+    case 140 :
+        return(~ql4_getprogress_basic(%varplayerbit_5032, 80));
+    case 141 :
+        return(~ql4_getprogress_basic(%varplayerbit_5075, 20));
+    case 142 :
+        return(~ql4_getprogress_basic(%varplayerbit_5133, 90));
+    case 143 :
+        return(~ql4_getprogress_basic(%varplayerbit_5331, 35));
+    case 144 :
+        return(~ql4_getprogress_basic(%varplayerbit_5387, 250));
+    case 145 :
+        return(~ql4_getprogress_basic(%varplayerbit_5491, 910));
+    case 146 :
+        return(~ql4_getprogress_basic(%varplayerbit_5761, 30));
+    case 148 :
+        return(~ql4_getprogress_basic(%varplayerbit_5733, 60));
+    case 149 :
+        return(~ql4_getprogress_detail(%varplayerbit_6001, 3, 45));
+    case 150 :
+        return(~ql4_getprogress_detail(%varplayerbit_6048, 10, 250));
+    case 155 :
+        return(~ql4_getprogress_basic(%varplayerbit_6112, 60));
+    case 156 :
+        return(~ql4_getprogress_basic(%varplayerbit_6289, 240));
+    case 157 :
+        return(~ql4_getprogress_basic(%varplayerbit_6775, 90));
+    case 151 :
+        return(~ql4_getprogress_detail(%varplayerbit_6180, 2, 140));
+    case 152 :
+        return(~ql4_getprogress_basic(%varplayerbit_1938, 110));
+    case 153 :
+        return(~ql4_getprogress_basic(%varplayerbit_5448, 50));
+    case 154 :
+        return(~ql4_getprogress_detail(%varplayerbit_6307, 2, 5));
+    case 160 :
+        return(~ql4_getprogress_basic(%varplayerbit_6471, 90));
+    case 161 :
+        return(~ql4_getprogress_basic(%varplayerbit_6553, 46));
+    case 163 :
+        return(~ql4_getprogress_detail(%varplayerbit_6883, 3, 147));
+    case 166 :
+        return(~ql4_getprogress_basic(%varplayerbit_6925, 80));
+    case default :
+        return(0);
+}

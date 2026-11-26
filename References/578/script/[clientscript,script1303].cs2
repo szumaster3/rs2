@@ -1,0 +1,8 @@
+[clientscript,script1303](int $int0)
+%varclient_10 = 0;
+~script1304($int0);
+if (%varclient_168 = $int0) {
+    %varclient_168 = -1;
+} else {
+    %varclient_168 = $int0;
+}

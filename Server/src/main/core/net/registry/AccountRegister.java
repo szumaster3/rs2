@@ -2,143 +2,112 @@ package core.net.registry;
 
 import core.ServerConstants;
 import core.auth.UserAccountInfo;
+import core.cache.crypto.XTEACryption;
 import core.cache.misc.buffer.ByteBufferUtils;
-import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.net.IoSession;
 import core.net.packet.in.Login;
-import core.tools.Log;
+import core.tools.StringUtils;
 
 import java.nio.ByteBuffer;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static core.api.ContentAPIKt.log;
-
 /**
- * Handles the registry of new accounts.
- *
- * @author Vexia
+ * Handles account registration using the revision 578 protocol.
  */
 public class AccountRegister {
-    /**
-     * The pattern compiler.
-     */
     private static final Pattern PATTERN = Pattern.compile("[a-z0-9_]{1,12}");
+    private static final long BASE37_LIMIT = 6582952005840035281L;
 
-    /**
-     * Reads the incoming opcode of an account register.
-     *
-     * @param session the session.
-     * @param opcode  the opcode.
-     * @param buffer  the buffer.
-     */
-    public static void read(final IoSession session, int opcode, ByteBuffer buffer) {
-        int day, month, year, country;
+    public static void read(IoSession session, int opcode, ByteBuffer buffer) {
+        RegistryResponse result;
+        try {
+            switch (opcode) {
+                case 20:
+                    buffer.get(); // Day
+                    buffer.get(); // Month
+                    buffer.getShort(); // Year
+                    buffer.getShort(); // Country
+                    result = RegistryResponse.SUCCESS;
+                    break;
+                case 21:
+                    result = checkName(buffer.getLong());
+                    break;
+                case 22:
+                    result = createAccount(buffer);
+                    break;
+                default:
+                    result = RegistryResponse.CANNOT_CREATE;
+                    break;
+            }
+        } catch (RuntimeException e) {
+            // Never log decrypted credentials or email addresses.
+            result = RegistryResponse.CANNOT_CREATE;
+        }
+        session.queue(ByteBuffer.wrap(new byte[]{(byte) result.getId()}));
+    }
+
+    private static RegistryResponse checkName(long encodedName) {
+        String username = decodeName(encodedName);
+        if (invalidUsername(username)) return RegistryResponse.INVALID_USERNAME;
         UserAccountInfo info = UserAccountInfo.createDefault();
-        switch (opcode) {
-            case 147://details
-                day = buffer.get();
-                month = buffer.get();
-                year = buffer.getShort();
-                country = buffer.getShort();
-                response(session, RegistryResponse.SUCCESS);
-                break;
-            case 186://username
-                final String username = ByteBufferUtils.getString(buffer).replace(" ", "_").toLowerCase().replace("|", "");
-                info.setUsername(username);
-                if (username.length() <= 0 || username.length() > 12) {
-                    response(session, RegistryResponse.INVALID_USERNAME);
-                    break;
-                }
-                if (invalidUsername(username)) {
+        info.setUsername(username);
+        return GameWorld.getAuthenticator().canCreateAccountWith(info)
+                ? RegistryResponse.SUCCESS : RegistryResponse.NOT_AVAILBLE_USER;
+    }
 
-                    response(session, RegistryResponse.INVALID_USERNAME);
-                    break;
-                }
+    private static RegistryResponse createAccount(ByteBuffer buffer) {
+        int length = buffer.getShort() & 0xFFFF;
+        if (length != buffer.remaining()) return RegistryResponse.CANNOT_CREATE;
+        if ((buffer.getShort() & 0xFFFF) != ServerConstants.REVISION)
+            return RegistryResponse.CANNOT_CREATE;
 
-                if (!GameWorld.getAuthenticator().canCreateAccountWith(info)) {
-                    response(session, RegistryResponse.NOT_AVAILBLE_USER);
-                    return;
-                }
-                response(session, RegistryResponse.SUCCESS);
-                break;
-            case 36://Register details
-                buffer.get(); //Useless size being written that is already written in the RSA block
-                buffer = Login.decryptRSABuffer(buffer, ServerConstants.EXPONENT, ServerConstants.MODULUS);
-                if (buffer.get() != 10) { //RSA header (aka did this decrypt properly)
-                    log(AccountRegister.class, Log.ERR, "Decryption failed during registration :(");
-                    response(session, RegistryResponse.CANNOT_CREATE);
-                    break;
-                }
-                buffer.getShort(); // random data
-                int revision = buffer.getShort();//revision?
-                if (revision != ServerConstants.REVISION) {
-                    response(session, RegistryResponse.CANNOT_CREATE);
-                    break;
-                }
-                final String name = ByteBufferUtils.getString(buffer).replace(" ", "_").toLowerCase().replace("|", "");
-                buffer.getInt();
-                String password = ByteBufferUtils.getString(buffer);
-                info.setUsername(name);
-                info.setPassword(password);
-                if (password.length() < 5 || password.length() > 20) {
-                    response(session, RegistryResponse.INVALID_PASS_LENGTH);
-                    break;
-                }
-                if (password.equals(name)) {
-                    response(session, RegistryResponse.PASS_SIMILAR_TO_USER);
-                    break;
-                }
-                if (invalidUsername(name)) {
-                    response(session, RegistryResponse.INVALID_USERNAME);
-                    break;
-                }
-                buffer.getInt();
-                buffer.getShort();
-                day = buffer.get();
-                month = buffer.get();
-                buffer.getInt();
-                year = buffer.getShort();
-                country = buffer.getShort();
-                buffer.getInt();
-                if (!GameWorld.getAuthenticator().canCreateAccountWith(info)) {
-                    response(session, RegistryResponse.CANNOT_CREATE);
-                    return;
-                }
-                GameWorld.getAuthenticator().createAccountWith(info);
-                GameWorld.getPulser().submit(new Pulse() {
-                    @Override
-                    public boolean pulse() {
-                        response(session, RegistryResponse.SUCCESS);
-                        return true;
-                    }
-                });
-                break;
-            default:
-                log(AccountRegister.class, Log.ERR, "Unhandled account registry opcode = " + opcode);
-                break;
+        ByteBuffer rsa = Login.decryptRegistrationRSA(buffer);
+        if ((rsa.get() & 0xFF) != 10) return RegistryResponse.CANNOT_CREATE;
+        rsa.getShort(); // Newsletter opt-in flags
+        String username = decodeName(rsa.getLong());
+        int[] key = new int[4];
+        key[0] = rsa.getInt();
+        String password = ByteBufferUtils.getString(rsa);
+        key[1] = rsa.getInt();
+        rsa.getShort(); // Affiliate
+        rsa.get(); // Day
+        rsa.get(); // Month
+        key[2] = rsa.getInt();
+        rsa.getShort(); // Year
+        rsa.getShort(); // Country
+        key[3] = rsa.getInt();
+        if (rsa.hasRemaining()) return RegistryResponse.CANNOT_CREATE;
+
+        if (!buffer.hasRemaining() || buffer.remaining() % 8 != 0)
+            return RegistryResponse.CANNOT_CREATE;
+        ByteBuffer extra = buffer.slice();
+        XTEACryption.decrypt(key, extra);
+        ByteBufferUtils.getString(extra); // Email (not persisted by UserAccountInfo)
+        if (extra.remaining() < 1 || extra.remaining() > 8)
+            return RegistryResponse.CANNOT_CREATE;
+
+        if (invalidUsername(username)) return RegistryResponse.INVALID_USERNAME;
+        if (password.length() < 5 || password.length() > 20)
+            return RegistryResponse.INVALID_PASS_LENGTH;
+        if (password.equals(username)) return RegistryResponse.PASS_SIMILAR_TO_USER;
+
+        UserAccountInfo info = UserAccountInfo.createDefault();
+        info.setUsername(username);
+        info.setPassword(password);
+        synchronized (AccountRegister.class) {
+            if (!GameWorld.getAuthenticator().canCreateAccountWith(info))
+                return RegistryResponse.CANNOT_CREATE;
+            return GameWorld.getAuthenticator().createAccountWith(info)
+                    ? RegistryResponse.SUCCESS : RegistryResponse.CANNOT_CREATE;
         }
     }
 
-    /**
-     * Sends a registry response code.
-     *
-     * @param response the response.
-     */
-    private static void response(IoSession session, RegistryResponse response) {
-        ByteBuffer buf = ByteBuffer.allocate(100);
-        buf.put((byte) response.getId());
-        session.queue(buf.flip());
+    private static String decodeName(long value) {
+        return value > 0 && value < BASE37_LIMIT ? StringUtils.longToString(value) : null;
     }
 
-    /**
-     * Checks if a username is valid.
-     *
-     * @return {@code True} if so.
-     */
-    public static boolean invalidUsername(final String username) {
-        Matcher matcher = PATTERN.matcher(username);
-        return !matcher.matches();
+    public static boolean invalidUsername(String username) {
+        return username == null || !PATTERN.matcher(username).matches();
     }
 }

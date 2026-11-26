@@ -1,0 +1,8 @@
+[clientscript,mob_locator_onload]
+if_sethide(false, interface_844:com_10);
+if_sethide(true, interface_844:com_11);
+if_setgraphic("bank_tabs,2", interface_844:com_51);
+if_setgraphic("bank_tabs,3", interface_844:com_49);
+if_setobject_nonum(obj_436, 1, interface_844:com_52);
+if_setobject_nonum(obj_1511, 1, interface_844:com_50);
+~mob_locator_resource_setup;

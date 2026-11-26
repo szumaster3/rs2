@@ -1,0 +1,5 @@
+[proc,script1654]
+if (%varclient_193 <= clientclock) {
+    %varclient_193 = calc(clientclock + 10);
+    if_setontimer("script1452(%varclient_193)", interface_762:com_87);
+}

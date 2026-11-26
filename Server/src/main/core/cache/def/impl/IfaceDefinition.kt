@@ -73,6 +73,7 @@ class IfaceDefinition {
     @JvmField var unknownByteArray_2: ByteArray? = null
     @JvmField var optionBase: String? = null
     @JvmField var ops: Array<String?>? = null
+    @JvmField var pauseText: String? = null
     @JvmField var dragDeadzone: Int = 0
     @JvmField var dragDeadtime: Int = 0
     @JvmField var dragRenderBehavior: Boolean = false
@@ -111,24 +112,21 @@ class IfaceDefinition {
 
         @JvmStatic
         fun forId(id: Int): IfaceDefinition? {
-            if (defCache.containsKey(id)) {
-                return defCache.get(id)
-            }
-            var def = loadAndParse(id)
-            defCache.put(id, def!!)
+            if (id ushr 16 != 0) return forId(id ushr 16, id and 0xffff)
+            defCache[id]?.let { return it }
+            val def = loadAndParse(id) ?: return null
+            defCache[id] = def
             return def
         }
 
         @JvmStatic
         fun forId(id: Int, child: Int): IfaceDefinition? {
-            if (defCache.containsKey(child + (id shl 16)))
-                return defCache.get(child + (id shl 16))
-            var def = forId(id)
-            return def!!.children!![child]
+            return forId(id)?.children?.getOrNull(child)
         }
         private fun loadAndParse(id: Int): IfaceDefinition? {
             var def = IfaceDefinition()
             var childCount = Cache.getIndexes()[3]!!.getFilesSize(id)
+            if (childCount < 0) return null
             def.children = arrayOfNulls<IfaceDefinition>(childCount)
             def.id = id
             def.parent = id
@@ -141,15 +139,18 @@ class IfaceDefinition {
             var def = IfaceDefinition()
             def.id = childIndex + (id shl 16)
             def.parent = id
-            defCache.put(def.id, def)
             var dataRaw = Cache.getIndexes()[3]!!.getFileData(id, childIndex)
             if (dataRaw == null) return def
-            val data = IoBuffer(-1, PacketHeader.NORMAL, ByteBuffer.wrap(dataRaw))
-            if (dataRaw[0].toInt() == -1)
+            decodeComponent(def, ByteBuffer.wrap(dataRaw))
+            return def
+        }
+
+        internal fun decodeComponent(def: IfaceDefinition, buffer: ByteBuffer) {
+            val data = IoBuffer(-1, PacketHeader.NORMAL, buffer)
+            if (buffer.get(buffer.position()).toInt() == -1)
                 decodeIf3(def, data)
             else
                 decodeIf1(def, data)
-            return def
         }
         private fun decodeIf1(def: IfaceDefinition?, data: IoBuffer?) {
             data!!.g1()
@@ -359,8 +360,8 @@ class IfaceDefinition {
             def.baseHeight = data.g2()
             def.dynWidth = data.g1b()
             def.dynHeight = data.g1b()
-            def.yMode = data.g1b()
             def.xMode = data.g1b()
+            def.yMode = data.g1b()
             def.overlayer = data.g2()
             if (def.overlayer == 65535) {
                 def.overlayer = -1
@@ -412,6 +413,7 @@ class IfaceDefinition {
                 unknownLocal_5 = data.g1()
                 def.unknownIntArray_2!![unknownLocal_5] = data.g2()
             }
+            def.pauseText = data.getJagString().ifEmpty { null }
             def.dragDeadzone = data.g1()
             def.dragDeadtime = data.g1()
             def.dragRenderBehavior = data.g1() == 1
@@ -440,11 +442,12 @@ class IfaceDefinition {
             def.scripts!!.onTimer = parseIf3ScriptArgs(data)
             def.scripts!!.onOptionClick = parseIf3ScriptArgs(data)
             def.scripts!!.onMouseRepeat = parseIf3ScriptArgs(data)
+            def.scripts!!.onClick = parseIf3ScriptArgs(data)
             def.scripts!!.onClickRepeat = parseIf3ScriptArgs(data)
-            def.scripts!!.onDrag = parseIf3ScriptArgs(data)
             def.scripts!!.onRelease = parseIf3ScriptArgs(data)
             def.scripts!!.onHold = parseIf3ScriptArgs(data)
-            def.scripts!!.onDragStart = parseIf3ScriptArgs(data)
+            def.scripts!!.onDrag = parseIf3ScriptArgs(data)
+            def.scripts!!.onDragStart = def.scripts!!.onDrag
             def.scripts!!.onDragRelease = parseIf3ScriptArgs(data)
             def.scripts!!.onScroll = parseIf3ScriptArgs(data)
             def.scripts!!.onVarcTransmit = parseIf3ScriptArgs(data)
@@ -501,6 +504,7 @@ class IfaceDefinition {
                     def.shadowColor = data.g4()
                     def.vFlip = data.g1() == 1
                     def.hFlip = data.g1() == 1
+                    def.color = data.g4()
                 }
                 ComponentType.MODEL -> {
                     def.modelType = 1

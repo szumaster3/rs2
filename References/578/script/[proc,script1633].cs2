@@ -1,0 +1,5 @@
+[proc,script1633]
+if (%varclient_1034 = 1 & %varclient_1027 = 1 & string_length(%varclientstring_202) > 0) {
+    clan_joinchat(%varclientstring_202);
+    %varclient_1034 = 2;
+}

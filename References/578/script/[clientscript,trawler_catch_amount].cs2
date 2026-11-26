@@ -1,0 +1,7 @@
+[clientscript,trawler_catch_amount]
+def_int $int0 = calc(%varclient_819 / 2);
+if ($int0 < 1) {
+    if_settext("Catch: Nothing", interface_15:com_17);
+} else {
+    if_settext("Catch: <tostring($int0)> Fish", interface_15:com_17);
+}

@@ -1,0 +1,8 @@
+[clientscript,script263](component $component0, int $int1, boolean $boolean2)
+if (cc_find($component0, $int1) = true) {
+    if ($boolean2 = true) {
+        cc_setgraphic("drop_down_arrow_scroll,2");
+    } else {
+        cc_setgraphic("drop_down_arrow_scroll,0");
+    }
+}

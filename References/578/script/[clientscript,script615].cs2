@@ -1,0 +1,2 @@
+[clientscript,script615](component $component0)
+if_setgraphic("bank_buttons,8", $component0);

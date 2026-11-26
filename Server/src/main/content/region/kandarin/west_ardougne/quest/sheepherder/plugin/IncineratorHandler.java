@@ -20,7 +20,7 @@ import static core.api.ContentAPIKt.setAttribute;
 @Initializable
 public class IncineratorHandler extends PluginInteraction {
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         setIds(new int[]{SheepHerder.RED_SHEEP_BONES.getId(), SheepHerder.GREEN_SHEEP_BONES.getId(), SheepHerder.BLUE_SHEEP_BONES.getId(), SheepHerder.YELLOW_SHEEP_BONES.getId()});
         PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.USE_WITH);
         return this;
@@ -67,7 +67,7 @@ public class IncineratorHandler extends PluginInteraction {
     }
 
     @Override
-    public java.lang.Object fireEvent(String identifier, java.lang.Object... args) {
+    public Object fireEvent(String identifier, Object... args) {
         return null;
     }
 }

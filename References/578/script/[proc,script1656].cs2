@@ -1,0 +1,9 @@
+[proc,script1656]
+if (%varplayerbit_6673 = 0) {
+    if_setonop("closebutton_click", interface_767:com_10);
+    if_sethide(true, interface_767:com_51);
+} else {
+    if_setonop(null, interface_767:com_10);
+    if_sethide(false, interface_767:com_51);
+    ~v2_stone_button(interface_767:com_52);
+}

@@ -1,0 +1,2 @@
+[clientscript,script2681]
+if_settext("Number of rooms: <tostring(%varclient_944)>", interface_398:com_18);

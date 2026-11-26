@@ -1,0 +1,6 @@
+[clientscript,snp_tutorial_update_obelisk_icon_colour]
+if (%varclient_645 <= 5) {
+    if_setcolour(0x3366ff, interface_834:com_28);
+} else {
+    if_setcolour(0x666666, interface_834:com_28);
+}

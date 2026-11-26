@@ -1,0 +1,7 @@
+[clientscript,script274](int $int0, int $int1)
+if (%varclient_802 = $int0 & %varclient_803 = $int1) {
+    return;
+}
+%varclient_804 = 1;
+%varclient_802 = $int0;
+%varclient_803 = $int1;

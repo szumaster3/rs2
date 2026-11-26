@@ -1,0 +1,68 @@
+[clientscript,assist_quick_display_icon](component $component0, graphic $graphic1, graphic $graphic2, component $component3)
+def_graphic $graphic4 = null;
+def_int $int5 = 0;
+def_int $int6 = -1;
+def_component $component7 = null;
+def_component $component8 = null;
+def_boolean $boolean9 = false;
+if ($component0 = null | $graphic1 = null | $graphic2 = null) {
+    return;
+}
+if ($component0 = interface_301:com_63) {
+    $int5 = ~assist_switch_var(%varplayerbit_4090);
+    $component7 = interface_301:com_45;
+    $component8 = interface_301:com_46;
+}
+if ($component0 = interface_301:com_64) {
+    $int5 = ~assist_switch_var(%varplayerbit_4091);
+    $component7 = interface_301:com_47;
+    $component8 = interface_301:com_48;
+}
+if ($component0 = interface_301:com_65) {
+    $int5 = ~assist_switch_var(%varplayerbit_4093);
+    $component7 = interface_301:com_49;
+    $component8 = interface_301:com_50;
+}
+if ($component0 = interface_301:com_66) {
+    $int5 = ~assist_switch_var(%varplayerbit_4095);
+    $component7 = interface_301:com_51;
+    $component8 = interface_301:com_52;
+}
+if ($component0 = interface_301:com_67) {
+    $int5 = ~assist_switch_var(%varplayerbit_4096);
+    $component7 = interface_301:com_53;
+    $component8 = interface_301:com_54;
+}
+if ($component0 = interface_301:com_68) {
+    $int5 = ~assist_switch_var(%varplayerbit_4098);
+    $component7 = interface_301:com_55;
+    $component8 = interface_301:com_56;
+}
+if ($component0 = interface_301:com_69) {
+    $int5 = ~assist_switch_var(%varplayerbit_4100);
+    $component7 = interface_301:com_57;
+    $component8 = interface_301:com_58;
+}
+if ($component0 = interface_301:com_70) {
+    $int5 = ~assist_switch_var(%varplayerbit_4101);
+    $component7 = interface_301:com_59;
+    $component8 = interface_301:com_60;
+}
+if ($component0 = interface_301:com_71) {
+    $int5 = ~assist_switch_var(%varplayerbit_4102);
+    $component7 = interface_301:com_61;
+    $component8 = interface_301:com_62;
+}
+if ($int5 = 1) {
+    $graphic4 = $graphic1;
+    $boolean9 = false;
+    if_setcolour(0xfab432, $component7);
+    if_setcolour(0xfab432, $component8);
+} else {
+    $graphic4 = $graphic2;
+    $boolean9 = true;
+    if_setcolour(0x606060, $component7);
+    if_setcolour(0x606060, $component8);
+}
+if_setgraphic($graphic4, $component0);
+if_sethide($boolean9, $component3);

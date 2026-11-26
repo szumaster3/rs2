@@ -1,0 +1,6 @@
+[proc,script2206]
+if (~script2212 = true) {
+    ~script2207;
+} else {
+    ~script2211;
+}

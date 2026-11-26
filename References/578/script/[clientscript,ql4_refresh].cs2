@@ -1,0 +1,15 @@
+[clientscript,ql4_refresh]
+if (map_members = true) {
+    %varclient_693 = %varplayerbit_4536;
+} else {
+    %varclient_693 = 0;
+}
+%varclient_694 = %varplayerbit_4538;
+%varclient_692 = %varplayerbit_4537;
+~ql4_sort(1, %varclient_693, %varclient_694, %varclient_692);
+def_int $int0 = 0;
+if (map_members = true & %varplayer_281 >= 1000) {
+    ~script944(1, %varclient_693, 2, interface_190:com_16, interface_190:com_14, interface_190:com_15, null, tradebacking_dark, "scrollbar_v2,1", "scrollbar_v2,1", tradebacking_light, ^white, ^yellow, p11_full, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");
+} else {
+    ~script1355("Free/Members", interface_190:com_16, interface_190:com_14, interface_190:com_15, null, tradebacking_dark, ^yellow, p11_full);
+}

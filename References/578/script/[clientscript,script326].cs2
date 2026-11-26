@@ -1,0 +1,7 @@
+[clientscript,script326]
+if_sethide(false, interface_725:com_86);
+if_sethide(true, interface_725:com_85);
+if_setgraphic("player_kit_fancy_off,5", interface_725:com_87);
+if_setgraphic("player_kit_fancy,5", interface_725:com_88);
+%varclient_783 = 1;
+~script328(interface_725:com_86);

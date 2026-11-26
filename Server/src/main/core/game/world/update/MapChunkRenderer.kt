@@ -19,6 +19,7 @@ object MapChunkRenderer {
     @JvmStatic
     fun render(player: Player) {
         val v = player.viewport
+        v.updateViewport(player)
         val last = player.playerFlags.lastViewport
         val updated: MutableList<RegionChunk> = ArrayList()
         val current = v.chunks
@@ -38,9 +39,9 @@ object MapChunkRenderer {
             for (y in 0 until sizeY) {
                 val chunk = current[x][y]
                 if (!updated.contains(chunk)) {
-                    chunk!!.synchronize(player)
+                    chunk?.synchronize(player)
                 } else {
-                    chunk!!.update(player)
+                    chunk?.update(player)
                 }
                 last[x][y] = current[x][y]
             }

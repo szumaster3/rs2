@@ -1,0 +1,25 @@
+[clientscript,script2492]
+if (compare(%varclientstring_184, "") = 0) {
+    if_setonmouserepeat("addtooltip(interface_862:com_50, interface_862:com_11, %varclientstring_184, 50, 250)", interface_862:com_50);
+    if_setonmouseleave("deltooltip(interface_862:com_11)", interface_862:com_50);
+}
+if (compare(%varclientstring_185, "") = 0) {
+    if_setonmouserepeat("addtooltip(interface_862:com_51, interface_862:com_11, %varclientstring_185, 50, 250)", interface_862:com_51);
+    if_setonmouseleave("deltooltip(interface_862:com_11)", interface_862:com_51);
+}
+if (compare(%varclientstring_186, "") = 0) {
+    if_setonmouserepeat("addtooltip(interface_862:com_52, interface_862:com_11, %varclientstring_186, 50, 250)", interface_862:com_52);
+    if_setonmouseleave("deltooltip(interface_862:com_11)", interface_862:com_52);
+}
+if (compare(%varclientstring_187, "") = 0) {
+    if_setonmouserepeat("addtooltip(interface_862:com_53, interface_862:com_11, %varclientstring_187, 50, 250)", interface_862:com_53);
+    if_setonmouseleave("deltooltip(interface_862:com_11)", interface_862:com_53);
+}
+if (compare(%varclientstring_188, "") = 0) {
+    if_setonmouserepeat("addtooltip(interface_862:com_54, interface_862:com_11, %varclientstring_188, 50, 250)", interface_862:com_54);
+    if_setonmouseleave("deltooltip(interface_862:com_11)", interface_862:com_54);
+}
+if (compare(%varclientstring_189, "") = 0) {
+    if_setonmouserepeat("addtooltip(interface_862:com_55, interface_862:com_11, %varclientstring_189, 50, 250)", interface_862:com_55);
+    if_setonmouseleave("deltooltip(interface_862:com_11)", interface_862:com_55);
+}

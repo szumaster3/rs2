@@ -1,0 +1,6 @@
+[clientscript,script610]
+if (%varclient_83 <= 0) {
+    if_setontimer(null, interface_105:com_155);
+    ~stockmarket_onstocktransmit_to_layer_move;
+}
+%varclient_83 = calc(%varclient_83 - 1);

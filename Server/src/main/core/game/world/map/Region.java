@@ -349,7 +349,13 @@ public class Region {
             int landscapeId = regionId < 0 ? -1 : Cache.getIndexes()[5].getArchiveId("l" + regionX + "_" + regionY);
             if (landscapeId > -1) {
                 byte[] landscape = Cache.getIndexes()[5].getFileData(landscapeId, 0, XteaParser.Companion.getRegionXTEA(regionId));
-                if (landscape == null || landscape.length < 4) {
+                if (landscape == null) {
+                    boolean keyPresent = XteaParser.Companion.getREGION_XTEA().containsKey(regionId);
+                    log(Region.class, Log.ERR, "Cannot unpack landscape for region " + regionId
+                            + ", group " + landscapeId + ", XTEA entry present=" + keyPresent);
+                    return;
+                }
+                if (landscape.length < 4) {
                     return;
                 }
                 r.hasFlags = true;

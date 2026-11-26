@@ -1,0 +1,2 @@
+[clientscript,script1230](int $int0)
+%varclient_180 = ~script1345($int0, interface_744:com_379);

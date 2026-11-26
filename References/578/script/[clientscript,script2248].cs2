@@ -1,0 +1,8 @@
+[clientscript,script2248](int $int0, boolean $boolean1)
+if (cc_find(interface_744:com_27, $int0) = true) {
+    if ($boolean1 = true) {
+        cc_setgraphic("drop_down_arrow_scroll,2");
+    } else {
+        cc_setgraphic("drop_down_arrow_scroll,0");
+    }
+}

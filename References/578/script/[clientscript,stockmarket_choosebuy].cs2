@@ -1,0 +1,3 @@
+[clientscript,stockmarket_choosebuy]
+%varplayer_1113 = 0;
+~stockmarket_onstocktransmit_to_layer_move;

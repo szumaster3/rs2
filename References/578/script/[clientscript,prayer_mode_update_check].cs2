@@ -1,0 +1,5 @@
+[clientscript,prayer_mode_update_check]
+if (%varclient_1063 ! %varplayerbit_6840) {
+    %varclient_1063 = %varplayerbit_6840;
+    ~prayer_init_buttons;
+}

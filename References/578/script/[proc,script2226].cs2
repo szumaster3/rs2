@@ -1,0 +1,5 @@
+[proc,script2226]
+if_settext(%varclientstring_122, interface_744:com_158);
+if_settext(~script2200(%varclientstring_124), interface_744:com_149);
+if_settext(~script2200(%varclientstring_125), interface_744:com_143);
+if_settext(%varclientstring_126, interface_744:com_124);

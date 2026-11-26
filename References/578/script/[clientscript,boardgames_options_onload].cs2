@@ -1,0 +1,17 @@
+[clientscript,boardgames_options_onload]
+if (%varplayerbit_61 = 1) {
+    if_settext("Draughts: Options", interface_756:com_10);
+    ~script1406(interface_756:com_3);
+} else if (%varplayerbit_61 = 2) {
+    if_settext("Runelink: Options", interface_756:com_10);
+    ~script1406(interface_756:com_4);
+} else if (%varplayerbit_61 = 3) {
+    if_settext("Runesquares: Options", interface_756:com_10);
+    ~script1406(interface_756:com_8);
+} else if (%varplayerbit_61 = 4) {
+    if_settext("Runeversi: Options", interface_756:com_10);
+    ~script1406(interface_756:com_6);
+}
+~boardgames_options_ranked;
+~boardgames_options_time;
+~script1409;

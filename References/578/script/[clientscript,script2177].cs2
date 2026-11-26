@@ -1,0 +1,4 @@
+[clientscript,script2177](int $int0)
+if (cc_find(interface_190:com_18, $int0) = true) {
+    cc_setontimer("script2178($int0, cc_gettext)");
+}

@@ -1,0 +1,2 @@
+[clientscript,script2650]
+if_setsize(parawidth("<enum(int, string, enum_1093, %varplayer_1442)><chat_playername><img=3>:", if_getwidth(interface_137:com_52), p12_full), if_getheight(interface_137:com_52), ^setsize_abs, ^setsize_abs, interface_137:com_54);

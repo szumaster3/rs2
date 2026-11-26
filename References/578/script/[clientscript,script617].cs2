@@ -1,0 +1,2 @@
+[clientscript,script617](component $component0)
+if_setgraphic("grand_exchange_cancelled_buttons,1", $component0);

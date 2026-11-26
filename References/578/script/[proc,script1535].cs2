@@ -1,0 +1,194 @@
+[proc,script1535](int $int0, int $int1)(int)
+switch_int ($int0) {
+    case 0 :
+        if ($int1 = 0) {
+            if (~atjun_easy_done = ~atjun_easy_total) {
+                return(2);
+            } else if (~atjun_easy_done > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 1) {
+            if (~atjun_med_done = ~atjun_med_total) {
+                return(2);
+            } else if (~atjun_med_done > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 2) {
+            if (~atjun_hard_done = ~atjun_hard_total) {
+                return(2);
+            } else if (~atjun_hard_done > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        }
+    case 1 :
+        if ($int1 = 0) {
+            if (~script1108 = ~script1112) {
+                return(2);
+            } else if (~script1108 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 1) {
+            if (~script1113 = ~script1114) {
+                return(2);
+            } else if (~script1113 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 2) {
+            if (~script1115 = ~script1116) {
+                return(2);
+            } else if (~script1115 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        }
+    case 2 :
+        if ($int1 = 0) {
+            if (~script1541 = ~script1542) {
+                return(2);
+            } else if (~script1541 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 1) {
+            if (~script1543 = ~script1544) {
+                return(2);
+            } else if (~script1543 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 2) {
+            if (~script1545 = ~script1546) {
+                return(2);
+            } else if (~script1545 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        }
+    case 3 :
+        if ($int1 = 0) {
+            if (~script1981 = ~script1984) {
+                return(2);
+            } else if (~script1981 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 1) {
+            if (~script1982 = ~script1985) {
+                return(2);
+            } else if (~script1982 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 2) {
+            if (~script1983 = ~script1986) {
+                return(2);
+            } else if (~script1983 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        }
+    case 4 :
+        if ($int1 = 0) {
+            if (~script1975 = ~script1976) {
+                return(2);
+            } else if (~script1975 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 1) {
+            if (~script1977 = ~script1978) {
+                return(2);
+            } else if (~script1977 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 2) {
+            if (~script1979 = ~script1980) {
+                return(2);
+            } else if (~script1979 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        }
+    case 5 :
+        if ($int1 = 0) {
+            if (~script2034 = ~script2035) {
+                return(2);
+            } else if (~script2034 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 1) {
+            if (~script2036 = ~script2037) {
+                return(2);
+            } else if (~script2036 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 2) {
+            if (~script2038 = ~script2039) {
+                return(2);
+            } else if (~script2038 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        }
+    case 6 :
+        if ($int1 = 0) {
+            if (~script1641 = ~script1642) {
+                return(2);
+            } else if (~script1641 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 1) {
+            if (~script1643 = ~script1644) {
+                return(2);
+            } else if (~script1643 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 2) {
+            if (~script1645 = ~script1646) {
+                return(2);
+            } else if (~script1645 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        } else if ($int1 = 3) {
+            if (~script1647 = ~script1648) {
+                return(2);
+            } else if (%varplayerbit_6657 > 0) {
+                return(1);
+            } else {
+                return(0);
+            }
+        }
+}
+return(0);

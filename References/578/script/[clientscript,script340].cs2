@@ -1,0 +1,2 @@
+[clientscript,script340](component $component0)
+~player_kit_select($component0, %varclient_779, ~script336(0));

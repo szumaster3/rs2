@@ -1,0 +1,3 @@
+[clientscript,script1934]
+if_sethide(false, interface_811:com_3);
+if_setcolour(^white, interface_811:com_30);

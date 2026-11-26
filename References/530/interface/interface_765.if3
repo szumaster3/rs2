@@ -1,0 +1,201 @@
+[com_0]
+type=text
+x=1
+width=504
+height=17
+textfont=q8_full
+text=Select Task
+textalignh=centre
+colour=0x800000
+
+[com_1]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=Ranged task
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_2]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=I don't want to choose.
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_3]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=Fishing task
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_4]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=Cooking task
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_5]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=Magic task
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_6]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=Banking
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_7]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=Woodcutting task
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_8]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=Firemaking task
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1525
+
+[com_9]
+type=text
+x=1
+y=1
+width=504
+height=16
+layer=com_13
+hide=yes
+textfont=q8_full
+text=More...
+textalignh=centre
+colour=0x000000
+transmitop=1
+op1=Okay
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+onop=script1528
+
+[com_10]
+type=graphic
+width=57
+height=13
+layer=com_12
+graphic="sworddecor,1"
+
+[com_11]
+type=graphic
+x=280
+width=57
+height=13
+layer=com_12
+graphic="sworddecor,0"
+
+[com_12]
+type=layer
+x=80
+y=1
+width=337
+height=13
+
+[com_13]
+type=layer
+y=14
+width=506
+height=110
+onload=script1527
+

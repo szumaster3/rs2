@@ -1,0 +1,397 @@
+[com_0]
+type=layer
+width=8199
+widthmode=proportion
+heightmode=minus
+ymode=abs_centre
+
+[com_1]
+type=layer
+width=8199
+widthmode=proportion
+heightmode=minus
+xmode=abs_right
+ymode=abs_centre
+
+[com_2]
+type=layer
+y=12
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_0
+
+[com_3]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_2
+textfont=p12_full
+text=Rake
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_4]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_2
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,10
+opbase=<col=ff9040>Rake
+op1=Store
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_5341, interface_126:com_3)
+oninvtransmit=farming_tools_side_update(event_com, obj_5341, interface_126:com_3){inv_93}
+
+[com_5]
+type=layer
+y=12
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_1
+
+[com_6]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_5
+textfont=p12_full
+text=Dibber
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_7]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_5
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,10
+opbase=<col=ff9040>Dibber
+op1=Store
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_5343, interface_126:com_6)
+oninvtransmit=farming_tools_side_update(event_com, obj_5343, interface_126:com_6){inv_93}
+
+[com_8]
+type=layer
+y=60
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_0
+
+[com_9]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_8
+textfont=p12_full
+text=Spade
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_10]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_8
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,10
+opbase=<col=ff9040>Spade
+op1=Store
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_952, interface_126:com_9)
+oninvtransmit=farming_tools_side_update(event_com, obj_952, interface_126:com_9){inv_93}
+
+[com_11]
+type=layer
+y=60
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_1
+
+[com_12]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_11
+textfont=p12_full
+text=Secateurs
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_13]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_11
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,10
+opbase=<col=ff9040>Secateurs
+op1=Store
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_5329, interface_126:com_12)
+oninvtransmit=farming_tools_side_update(event_com, obj_5329, interface_126:com_12){inv_93}
+
+[com_14]
+type=layer
+y=108
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_0
+
+[com_15]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_14
+textfont=p12_full
+text=Watering Can
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_16]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_14
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,10
+opbase=<col=ff9040>Watering Can
+op1=Store
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_6797, interface_126:com_15)
+oninvtransmit=farming_tools_side_update(event_com, obj_6797, interface_126:com_15){inv_93}
+
+[com_17]
+type=layer
+y=108
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_1
+
+[com_18]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_17
+textfont=p12_full
+text=Trowel
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_19]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_17
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,10
+opbase=<col=ff9040>Trowel
+op1=Store
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_5325, interface_126:com_18)
+oninvtransmit=farming_tools_side_update(event_com, obj_5325, interface_126:com_18){inv_93}
+
+[com_20]
+type=layer
+y=156
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_1
+
+[com_21]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_20
+textfont=p12_full
+text=Bucket
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_22]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_20
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,2,3,4,10
+opbase=<col=ff9040>Bucket
+op1=Store 1
+op2=Store 5
+op3=Store All
+op4=Store X
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_1925, interface_126:com_21)
+oninvtransmit=farming_tools_side_update(event_com, obj_1925, interface_126:com_21){inv_93}
+
+[com_23]
+type=layer
+y=156
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_0
+
+[com_24]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_23
+textfont=p12_full
+text=Scarecrow
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_25]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_23
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,2,3,4,10
+opbase=<col=ff9040>Scarecrow
+op1=Store 1
+op2=Store 5
+op3=Store All
+op4=Store X
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_6059, interface_126:com_24)
+oninvtransmit=farming_tools_side_update(event_com, obj_6059, interface_126:com_24){inv_93}
+
+[com_26]
+type=layer
+y=204
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_0
+
+[com_27]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_26
+textfont=p12_full
+text=Compost
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_28]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_26
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,2,3,4,10
+opbase=<col=ff9040>Compost
+op1=Store 1
+op2=Store 5
+op3=Store All
+op4=Store X
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_6032, interface_126:com_27)
+oninvtransmit=farming_tools_side_update(event_com, obj_6032, interface_126:com_27){inv_93}
+
+[com_29]
+type=layer
+y=204
+height=47
+widthmode=minus
+xmode=abs_centre
+layer=com_1
+
+[com_30]
+type=text
+height=15
+widthmode=minus
+xmode=abs_centre
+layer=com_29
+textfont=p12_full
+text=Supercompost
+textalignh=centre
+textshadow=yes
+colour=0x872300
+
+[com_31]
+type=graphic
+width=36
+height=32
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_29
+outline=1
+graphicshadow=1
+colour=0x000000
+transmitop=1,2,3,4,10
+opbase=<col=ff9040>Supercompost
+op1=Store 1
+op2=Store 5
+op3=Store All
+op4=Store X
+op10=Examine
+onload=farming_tools_side_update(event_com, obj_6034, interface_126:com_30)
+oninvtransmit=farming_tools_side_update(event_com, obj_6034, interface_126:com_30){inv_93}
+

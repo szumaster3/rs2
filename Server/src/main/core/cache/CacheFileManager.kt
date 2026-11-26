@@ -15,10 +15,10 @@ class CacheFileManager(var cacheFile: CacheFile, var isDiscardFilesData: Boolean
         filesData = arrayOfNulls(containersSize)
     }
 
-    fun validContainer(containerId: Int): Boolean = containerId in 0 until containersSize
+    fun validContainer(containerId: Int): Boolean = information?.containers?.getOrNull(containerId) != null
 
     fun validFile(containerId: Int, fileId: Int): Boolean =
-        fileId >= 0 && fileId < getFilesSize(containerId)
+        information?.containers?.getOrNull(containerId)?.files?.getOrNull(fileId) != null
 
     fun getFileIds(containerId: Int): IntArray? = information?.containers?.getOrNull(containerId)?.filesIndexes
 

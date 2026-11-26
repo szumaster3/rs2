@@ -1,0 +1,6 @@
+[clientscript,script2102]
+~scrollbar_vertical(interface_297:com_6, interface_297:com_4, "scrollbar_parchment_dragger_v2,3", "scrollbar_parchment_dragger_v2,0", "scrollbar_parchment_dragger_v2,1", "scrollbar_parchment_dragger_v2,2", "scrollbar_parchment_v2,0", "scrollbar_parchment_v2,1");
+def_int $int0 = calc(paraheight(if_gettext(interface_297:com_7), if_getwidth(interface_297:com_7), p12_full) * 12 + 5);
+if_setsize(if_getwidth(interface_297:com_7), $int0, ^setsize_abs, ^setsize_abs, interface_297:com_7);
+if_setposition(if_getx(interface_297:com_49), calc(if_gety(interface_297:com_7) + $int0 + 5), ^setpos_abs_left, ^setpos_abs_top, interface_297:com_49);
+~script2104(0);

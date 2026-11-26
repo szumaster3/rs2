@@ -1,0 +1,10 @@
+[com_0]
+type=layer
+x=16
+y=8
+width=162
+height=250
+onload=script1448(event_com)
+onvartransmit=script1448(event_com){varplayer_1249}
+oninvtransmit=script1448(event_com){inv_93}
+

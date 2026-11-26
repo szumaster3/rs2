@@ -1,0 +1,63 @@
+package core.net.packet.out;
+
+import core.net.packet.IoBuffer;
+import core.net.packet.PacketHeader;
+import java.nio.charset.Charset;
+
+public final class Encoders578 {
+    private static final Charset CP1252 = Charset.forName("windows-1252");
+
+    private Encoders578() {}
+
+    public static IoBuffer logout() {
+        return new IoBuffer(58);
+    }
+
+    public static IoBuffer clearMinimapFlag() {
+        return new IoBuffer(17).putC(255).putS(255);
+    }
+
+    public static IoBuffer minimapState(int state) {
+        return new IoBuffer(40).put(state);
+    }
+
+    public static IoBuffer varc(int id, int value, int verify) {
+        if (value >= Byte.MIN_VALUE && value <= Byte.MAX_VALUE) {
+            return new IoBuffer(48).putA(value).putShortA(verify).putLEShortA(id);
+        }
+        return new IoBuffer(22).putShort(verify).putInt(value).putLEShort(id);
+    }
+
+    public static IoBuffer openTop(int type, int id, int verify) {
+        return new IoBuffer(93).put(type).putLEShort(id).putLEShort(verify);
+    }
+
+    public static IoBuffer openSub(int component, int type, int id, int verify) {
+        return new IoBuffer(52).putShortA(verify).putS(type).putLEInt(component).putShort(id);
+    }
+
+    public static IoBuffer settings(int component, int first, int last, int events, int verify) {
+        return new IoBuffer(38).putIntA(component).putLEShort(first).putIntB(events)
+                .putShortA(last).putLEShort(verify);
+    }
+
+    public static IoBuffer targetParam(int component, int first, int last, int param, int verify) {
+        return new IoBuffer(77).putShort(first).putLEShort(param).putShortA(last)
+                .putShort(verify).putIntA(component);
+    }
+
+    public static IoBuffer interaction(String name, int slot, boolean primary) {
+        return new IoBuffer(46, PacketHeader.BYTE).put(text(name, 250)).put(0)
+                .putShortA(-1).putS(slot).putS(primary ? 1 : 0);
+    }
+
+    public static IoBuffer message(String message, int timestamp) {
+        return new IoBuffer(99, PacketHeader.BYTE).put(0).putInt(timestamp).put(0)
+                .put(text(message, 248)).put(0);
+    }
+
+    private static byte[] text(String value, int maxLength) {
+        byte[] encoded = value.replace('\0', '?').getBytes(CP1252);
+        return encoded.length <= maxLength ? encoded : java.util.Arrays.copyOf(encoded, maxLength);
+    }
+}

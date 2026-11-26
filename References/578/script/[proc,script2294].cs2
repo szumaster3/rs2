@@ -1,0 +1,13 @@
+[proc,script2294](int $int0)(int)
+if (%varplayerbit_6840 = 1) {
+    if (struct_param(enum(int, struct, enum_863, $int0), param_739) = true) {
+        return(1);
+    } else {
+        return(0);
+    }
+}
+if (struct_param(enum(int, struct, enum_2279, $int0), param_739) = true) {
+    return(1);
+} else {
+    return(0);
+}

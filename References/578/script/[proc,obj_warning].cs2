@@ -1,0 +1,2 @@
+[proc,obj_warning]()(string)
+return(~script2706(%varclient_741));

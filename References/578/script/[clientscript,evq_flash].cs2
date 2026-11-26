@@ -1,0 +1,2 @@
+[clientscript,evq_flash](component $component0)
+~fade2_flash_generic($component0, 1, 1, 225, 255, 0xffffbb);

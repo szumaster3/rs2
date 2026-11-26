@@ -1,0 +1,4 @@
+[clientscript,script176]
+~redraw_chat_buttons;
+~rebuildchatbox;
+~rebuildpmbox;

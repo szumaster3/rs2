@@ -1777,6 +1777,7 @@ fun getVarbit(
     player: Player,
     varbitId: Int,
 ): Int {
+    if (!VarbitDefinition.exists(varbitId)) return 0
     val def = VarbitDefinition.forId(varbitId)
     return getVarbit(player, def)
 }
@@ -1796,6 +1797,10 @@ fun setVarp(
     value: Int,
     save: Boolean = false,
 ) {
+    if (!VarpDefinition.exists(varpIndex)) {
+        logWithStack(ContentAPI::class.java, Log.ERR, "Unknown varp $varpIndex (value=$value)")
+        return
+    }
     player.varpMap[varpIndex] = value
     player.saveVarp[varpIndex] = save
     player.packetDispatch.sendVarp(varpIndex, value)
@@ -1842,6 +1847,10 @@ fun setVarbit(
     value: Int,
     save: Boolean = false,
 ) {
+    if (!VarpDefinition.exists(def.varpId) || def.startBit !in 0..31 || def.endBit !in def.startBit..31) {
+        logWithStack(ContentAPI::class.java, Log.ERR, "Invalid varbit ${def.id}: base varp ${def.varpId}, bits ${def.startBit}..${def.endBit}")
+        return
+    }
     val mask = def.mask
     val current = getVarp(player, def.varpId) and (mask shl def.startBit).inv()
     val newValue = (value and mask) shl def.startBit
@@ -1863,14 +1872,12 @@ fun setVarbit(
     value: Int,
     save: Boolean = false,
 ) {
-    val def = VarbitDefinition.forId(varbitId)
-
-    if (def == null) {
+    if (!VarbitDefinition.exists(varbitId)) {
         logWithStack(ContentAPI::class.java, Log.ERR, "Trying to setVarbit $varbitId, which doesn't seem to exist.")
         return
     }
 
-    setVarbit(player, def, value, save)
+    setVarbit(player, VarbitDefinition.forId(varbitId), value, save)
 }
 
 /**
@@ -1909,14 +1916,12 @@ fun incrementVarbit(
     amount: Int = 1,
     save: Boolean = false,
 ) {
-    val def = VarbitDefinition.forId(varbitId)
-
-    if (def == null) {
+    if (!VarbitDefinition.exists(varbitId)) {
         logWithStack(ContentAPI::class.java, Log.ERR, "Trying to incrementVarbit $varbitId, which doesn't seem to exist.")
         return
     }
 
-    incrementVarbit(player, def, amount, save)
+    incrementVarbit(player, VarbitDefinition.forId(varbitId), amount, save)
 }
 
 /**
@@ -1941,6 +1946,10 @@ fun setVarc(
  */
 fun reinitVarps(player: Player) {
     for ((index, value) in player.varpMap) {
+        if (!VarpDefinition.exists(index)) {
+            log(ContentAPI::class.java, Log.WARN, "Skipping legacy saved varp $index (value=$value); retained in profile")
+            continue
+        }
         setVarp(player, index, value, player.saveVarp[index] ?: false)
     }
 }

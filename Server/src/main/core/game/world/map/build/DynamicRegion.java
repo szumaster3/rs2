@@ -13,7 +13,6 @@ import core.game.world.map.zone.impl.MultiwayCombatZone;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -179,8 +178,9 @@ public final class DynamicRegion extends Region {
         int x = 0;
         int y = 0;
         int count = 0;
-        int width = (sizeX >> 3) << 6;
-        int height = (sizeY >> 3) << 6;
+        if (sizeX <= 0 || sizeY <= 0) throw new IllegalArgumentException("Invalid dynamic area size");
+        int width = ((sizeX + 7) >> 3) << 6;
+        int height = ((sizeY + 7) >> 3) << 6;
         if (width < 64) {
             width = 64;
         }
@@ -192,8 +192,8 @@ public final class DynamicRegion extends Region {
             int endY = y + height;
             boolean reserved = false;
             for (ZoneBorders b : RESERVED_AREAS) {
-                if (b.insideBorder(x, y) || b.insideBorder(endX, endY)
-                        || b.insideBorder(x, endY) || b.insideBorder(endX, y)) {
+                if (x <= b.getNorthEastX() && endX >= b.getSouthWestX()
+                        && y <= b.getNorthEastY() && endY >= b.getSouthWestY()) {
                     reserved = true;
                     break;
                 }
@@ -230,12 +230,14 @@ public final class DynamicRegion extends Region {
                 for (int plane = 0; plane < 4; plane++) {
                     RegionChunk c = base.getPlanes()[plane].getRegionChunk(offsetX, offsetY);
                     if (c == null) {
-                        region.chunks[plane][offsetX][offsetY] = c = new RegionChunk(Location.create(0, 0, 0), 0, region.getPlanes()[plane]);
+                        region.replaceChunk(plane, offsetX, offsetY, null, base);
+                        continue;
                     } else {
-                        region.replaceChunk(plane, offsetX, offsetY, (c = c.copy(region.getPlanes()[plane])), base);
+                        c = c.copy(region.getPlanes()[plane]);
+                        c.setRotation(0);
+                        c.setBase(Location.create(x, y, plane));
+                        region.replaceChunk(plane, offsetX, offsetY, c, base);
                     }
-                    c.setRotation(0);
-                    c.setBase(Location.create(x, y, plane));
                 }
             }
         }
@@ -283,21 +285,13 @@ public final class DynamicRegion extends Region {
     }
 
     /**
-     * Rotates the region 90% clockwise.
-     * TODO: Finish this
+     * Whole-region rotation is not implemented safely.
+     * Detached chunk rotation is supported by BuildRegionChunk.
      */
     public void rotate() {
-        for (int z = 0; z < 4; z++) {
-            RegionChunk[][] c = Arrays.copyOf(chunks[z], 8);
-            for (int x = 0; x < 8; x++) {
-                for (int y = 0; y < 8; y++) {
-                    RegionChunk r = chunks[z][x][y] = c[8 - y - 1][x];
-                    if (r != null) {
-                        r.setRotation(r.getRotation() + 1);
-                    }
-                }
-            }
-        }
+        // Whole-region rotation must also relocate entities, scenery and clipping.
+        // Do not silently corrupt the installed scene with descriptor-only rotation.
+        throw new UnsupportedOperationException("Whole-region rotation is not supported; rotate detached chunks before installation");
     }
 
     /**
@@ -377,8 +371,7 @@ public final class DynamicRegion extends Region {
                 return false;
             }
             for (RegionPlane plane : getPlanes()) {
-                for (int i = 0; i < plane.getNpcs().size(); i++) {
-                    NPC npc = plane.getNpcs().get(0);
+                for (NPC npc : new ArrayList<>(plane.getNpcs())) {
                     npc.clear();
                 }
                 for (RegionChunk[] chunks : getChunks()[plane.getPlane()]) {

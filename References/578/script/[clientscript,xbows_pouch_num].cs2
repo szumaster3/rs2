@@ -1,0 +1,25 @@
+[clientscript,xbows_pouch_num]
+if_settext(tostring(%varplayerbit_2469), interface_433:com_11);
+if_settext(tostring(%varplayerbit_2470), interface_433:com_12);
+if_settext(tostring(%varplayerbit_2471), interface_433:com_13);
+if_settext(tostring(%varplayerbit_2472), interface_433:com_14);
+if (%varplayerbit_2469 = 0) {
+    if_setcolour(0xff0033, interface_433:com_11);
+} else {
+    if_setcolour(0x00c000, interface_433:com_11);
+}
+if (%varplayerbit_2470 = 0) {
+    if_setcolour(0xff0033, interface_433:com_12);
+} else {
+    if_setcolour(0x00c000, interface_433:com_12);
+}
+if (%varplayerbit_2471 = 0) {
+    if_setcolour(0xff0033, interface_433:com_13);
+} else {
+    if_setcolour(0x00c000, interface_433:com_13);
+}
+if (%varplayerbit_2472 = 0) {
+    if_setcolour(0xff0033, interface_433:com_14);
+} else {
+    if_setcolour(0x00c000, interface_433:com_14);
+}

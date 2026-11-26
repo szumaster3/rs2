@@ -1,0 +1,2 @@
+[clientscript,friend_transmit]
+~friend_update(if_getx(interface_550:com_4));

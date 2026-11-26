@@ -1,0 +1,29 @@
+[proc,script2212]()(boolean)
+if (%varclient_730 ! -1) {
+    return(true);
+}
+if (%varclient_731 ! -1) {
+    return(true);
+}
+if (%varclient_732 ! -1) {
+    return(true);
+}
+if (%varclient_739 = 1) {
+    return(true);
+}
+if (compare(%varclientstring_122, "") ! 0) {
+    return(true);
+}
+if (compare(%varclientstring_124, "") ! 0) {
+    return(true);
+}
+if (compare(%varclientstring_125, "") ! 0) {
+    return(true);
+}
+if (compare(%varclientstring_128, "") ! 0) {
+    return(true);
+}
+if (compare(%varclientstring_129, "") ! 0) {
+    return(true);
+}
+return(false);

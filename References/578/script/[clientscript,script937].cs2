@@ -1,0 +1,28 @@
+[clientscript,script937]
+cc_deleteall(interface_335:com_33);
+def_int $int0 = 0;
+def_int $int1 = 0;
+def_int $int2 = 4;
+def_int $int3 = 7;
+if (if_getscrollwidth(interface_335:com_33) > 0) {
+    $int0 = calc((if_getscrollwidth(interface_335:com_33) - 36 * $int2) / ($int2 - 1));
+} else {
+    $int0 = calc((if_getwidth(interface_335:com_33) - 36 * $int2) / ($int2 - 1));
+}
+if (if_getscrollheight(interface_335:com_33) > 0) {
+    $int1 = calc((if_getscrollheight(interface_335:com_33) - 32 * $int3) / ($int3 - 1));
+} else {
+    $int1 = calc((if_getheight(interface_335:com_33) - 32 * $int3) / ($int3 - 1));
+}
+def_int $int4 = 0;
+def_int $int5 = -1;
+while ($int4 < inv_size(inv_90)) {
+    cc_create(interface_335:com_33, ^iftype_rectangle, $int4);
+    cc_setsize(36, 32, ^setsize_abs, ^setsize_abs);
+    cc_setposition(calc((36 + $int0) * ($int4 % $int2)), calc($int4 / $int2 * (32 + $int1)), ^setpos_abs_left, ^setpos_abs_top);
+    cc_setfill(true);
+    cc_setcolour(^red);
+    cc_settrans(255);
+    $int4 = calc($int4 + 1);
+}
+if_setoninvtransmit("script938{inv_90}", interface_335:com_33);

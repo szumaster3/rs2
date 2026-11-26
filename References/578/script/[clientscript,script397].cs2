@@ -1,0 +1,8 @@
+[clientscript,script397]
+if (%varclient_743 = null & %varplayer_1109 ! null) {
+    if (calc(%varplayer_1111 * %varplayer_1110) > inv_total(inv_93, obj_995)) {
+        if_setcolour(^red, interface_449:com_25);
+    } else {
+        if_setcolour(0xff9900, interface_449:com_25);
+    }
+}

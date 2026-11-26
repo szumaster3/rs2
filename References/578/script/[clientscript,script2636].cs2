@@ -1,0 +1,10 @@
+[clientscript,script2636]
+if (%varplayerbit_6357 = 2) {
+    if_settargetverb("Attack wall", interface_859:com_16);
+    if_settargetverb("Collect", interface_859:com_17);
+} else if (%varplayerbit_6357 = 4) {
+    if_settargetverb("Rescue", interface_859:com_16);
+    if_settargetverb("Steal", interface_859:com_17);
+} else if (%varplayerbit_6357 = 3) {
+    if_settargetverb("Collect gold", interface_859:com_16);
+}

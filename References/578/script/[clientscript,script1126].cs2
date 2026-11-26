@@ -1,0 +1,19 @@
+[clientscript,script1126](component $component0)
+%varclient_993 = 0;
+switch_component ($component0) {
+    case interface_192:com_2 :
+        ~deltooltip_action(interface_192:com_96);
+        if (%varplayerbit_2668 = 0) {
+            if_setgraphic(graphic_1701, $component0);
+        }
+    case interface_193:com_18 :
+        ~deltooltip_action(interface_193:com_53);
+        if (%varplayerbit_2668 = 0) {
+            if_setgraphic(graphic_1701, $component0);
+        }
+    case interface_430:com_20 :
+        ~deltooltip_action(interface_430:com_64);
+        if (%varplayerbit_2668 = 0) {
+            if_setgraphic(graphic_1701, $component0);
+        }
+}

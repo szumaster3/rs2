@@ -2,23 +2,18 @@ package core.game.node.entity.combat.equipment;
 
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
-import core.game.component.InterfaceType;
 import core.game.container.impl.EquipmentContainer;
-import core.game.node.entity.combat.spell.CombatSpell;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.item.Item;
 import core.game.system.config.ItemConfigParser;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.PacketRepository;
 import core.net.packet.out.Encoders530;
-import core.net.packet.out.PacketContext.InterfaceConfigContext;
 import core.net.packet.out.PacketContext.InterfaceContext;
-import core.net.packet.out.PacketContext.StringContext;
 import shared.consts.Components;
+import core.game.node.entity.player.link.AutocastManager;
 
-import static core.api.ContentAPIKt.setVarp;
 
 /**
  * Represents the weapon interface component.
@@ -148,7 +143,7 @@ public final class WeaponInterface extends Component {
      * @param player The player.
      */
     public WeaponInterface(Player player) {
-        super(92);
+        super(884);
         this.player = player;
         player.addExtension(WeaponInterface.class, this);
     }
@@ -163,7 +158,7 @@ public final class WeaponInterface extends Component {
      * Opens the interface.
      */
     private void open() {
-        ComponentDefinition definition = ComponentDefinition.forId(Components.WEAPON_FISTS_SEL_92);
+        ComponentDefinition definition = ComponentDefinition.forId(884);
         boolean resizable = player.getInterfaceManager().isResizable();
         PacketRepository.send(Encoders530.INTERFACE, new InterfaceContext(player, definition.getWindowPaneId(resizable), definition.getChildId(resizable), id, definition.isWalkable()));
         int slot = ensureStyleIndex(player, player.getSettings().getAttackStyleIndex());
@@ -184,6 +179,8 @@ public final class WeaponInterface extends Component {
      */
     private int ensureStyleIndex(Player player, int slot) {
         AttackStyle style = player.getProperties().getAttackStyle();
+        if (slot < 0) return 0;
+        if (current == WeaponInterfaces.STAFF && slot > 2) return 2;
         if (slot >= current.getAttackStyles().length) {
             slot = current.getAttackStyles().length - 1;
             if (style != null) {
@@ -210,27 +207,6 @@ public final class WeaponInterface extends Component {
      *
      * @return the config.
      */
-    private int getConfig(int buttons, int interfaceId) {
-        if (interfaceId == Components.WEAPON_STAFF_SEL_90) {
-            return 87;//Return Config
-        }
-        if (interfaceId != Components.WEAPON_WHIP_SEL_93 &&
-                interfaceId != Components.WEAPON_WARHAMMER_SEL_76 &&
-                interfaceId != Components.WEAPON_XBOW_SEL_79 &&
-                interfaceId != Components.WEAPON_HALBERD_SEL_84 &&
-                interfaceId != Components.WEAPON_THROWN_SEL_91) {
-            switch (buttons) {
-                case 3:
-                    return 13;
-                case 4:
-                    return 12;
-            }
-        } else {
-            return 10;
-        }
-        return 10;
-    }
-
     /**
      * Updates the interface.
      */
@@ -238,18 +214,14 @@ public final class WeaponInterface extends Component {
         player.getInterfaceManager().tabs[0] = this;
         Item weapon = player.getEquipment().get(EquipmentContainer.SLOT_WEAPON);
         WeaponInterfaces inter = getWeaponInterface(weapon);
-        String name;
         if (weapon != null) {
-            name = weapon.getDefinition().getName();
-            specialBar = weapon.getDefinition().getConfiguration(ItemConfigParser.HAS_SPECIAL, false);
+            specialBar = weapon.getDefinition().hasSpecialBar() && weapon.getDefinition().getConfiguration(ItemConfigParser.HAS_SPECIAL, false);
             attackAnimations = weapon.getDefinition().getConfiguration(ItemConfigParser.ATTACK_ANIMS, DEFAULT_ANIMS);
         } else {
-            name = "Unarmed";
             specialBar = false;
             attackAnimations = DEFAULT_ANIMS;
         }
         if (inter != current) {
-            id = inter.interfaceId;
             current = inter;
             open();
             player.getProperties().getCombatPulse().updateStyle();
@@ -257,19 +229,9 @@ public final class WeaponInterface extends Component {
         if (player.getSettings().getAttackStyleIndex() < attackAnimations.length && !player.getAppearance().isNpc()) {
             player.getProperties().setAttackAnimation(attackAnimations[player.getSettings().getAttackStyleIndex()]);
         }
-        if (current != WeaponInterfaces.STAFF) {
-            selectAutoSpell(-1, false);
-            PacketRepository.send(Encoders530.INTERFACE_CONFIG, new InterfaceConfigContext(player, id, getConfig(current.getAttackStyles().length, current.getInterfaceId()), !specialBar));
-        } else { //if staff
-            PacketRepository.send(Encoders530.INTERFACE_CONFIG, new InterfaceConfigContext(player, id, 87, !specialBar));
+        if (player.getProperties().getAutocastSpell() != null) {
+            AutocastManager.INSTANCE.restore(player);
         }
-        if (!canAutocast(false)) {
-            if (current == WeaponInterfaces.STAFF && player.getAttribute("autocast_select", false)) {
-                open();
-            }
-            selectAutoSpell(-1, true);
-        }
-        PacketRepository.send(Encoders530.STRING_PACKET, new StringContext(player, name, id, 0));
         if (player.getSettings().isSpecialToggled()) {
             player.getSettings().toggleSpecialBar();
         }
@@ -282,22 +244,13 @@ public final class WeaponInterface extends Component {
      * @return {@code True} if the attack style got set.
      */
     public boolean setAttackStyle(int button) {
-        int slot = button - 1;
-        if (current != WeaponInterfaces.STAFF) {
-            slot--;
-        }
-        if (current == WeaponInterfaces.WARHAMMER_MAUL || (current.attackStyles.length > 2 && current.attackStyles[2].bonusType == BONUS_RANGE && current.getInterfaceId() != Components.WEAPON_THROWN_SEL_91)) {
-            slot = button == 4 ? 1 : button == 3 ? 2 : 0;
-        } else if (current == WeaponInterfaces.CLAWS) {
-            slot = button == 5 ? 1 : button == 3 ? 3 : slot;
-        }
-        if (current == WeaponInterfaces.AXE) {
-            if (button == 5) {
-                slot = 1;
-            } else if (button == 3) {
-                slot = 3;
-            }
-        }
+        if (current == null || button < 11 || button > 14) return false;
+        int slot = button - 11;
+        if (current == WeaponInterfaces.STAFF && slot >= 3) return false;
+        return applyAttackStyle(slot);
+    }
+
+    private boolean applyAttackStyle(int slot) {
         if (slot < 0 || slot >= current.getAttackStyles().length) {
             return false;
         }
@@ -307,7 +260,7 @@ public final class WeaponInterface extends Component {
         if (slot < attackAnimations.length && !player.getAppearance().isNpc()) {
             player.getProperties().setAttackAnimation(attackAnimations[slot]);
         }
-        checkStaffConfigs(button - 1);
+        checkStaffConfigs(slot);
         return true;
     }
 
@@ -317,197 +270,31 @@ public final class WeaponInterface extends Component {
      * @param slot The slot of the current attack style selected.
      */
     private void checkStaffConfigs(int slot) {
-        if (current != WeaponInterfaces.STAFF) {
-            selectAutoSpell(-1, false);
-            return;
-        }
-        boolean defensive = slot == 3;
-        setVarp(player, 439, defensive ? -5 : 0);
-        if (slot > 2) {
-            setVarp(player, 43, defensive ? -1 : 3);
-        }
     }
 
-    ;
-
-    /**
-     * Gets the autocast tab component id.
-     *
-     * @param spellId The spell id.
-     * @return The component id for the autocast select tab.
-     */
     public int getAutospellId(int spellId) {
-        boolean modern = player.getSpellBookManager().getSpellBook() == Components.MAGIC_192;
-        int[] data = modern ? MODERN_SPELL_IDS : ANCIENT_SPELL_IDS;
-        if (modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff")) {
-            data = SLAYER_STAFF_SPELL_IDS;
-        }
-        if (modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Void knight mace")) {
-            data = VOID_STAFF_SPELL_IDS;
-        }
-        for (int i = 0; i < data.length; i++) {
-            if (data[i] == spellId) {
-                return i;
-            }
-        }
-        return -1;
+        return spellId;
     }
 
-    /**
-     * Selects the current autocast spell.
-     *
-     * @param buttonId          The button id.
-     * @param adjustAttackStyle If the attack style should be adjusted.
-     */
-    public void selectAutoSpell(int buttonId, boolean adjustAttackStyle) {
-        boolean modern = player.getSpellBookManager().getSpellBook() == Components.MAGIC_192;
-        int[] data = modern ? MODERN_SPELL_IDS : ANCIENT_SPELL_IDS;
-        if (modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff")) {
-            data = SLAYER_STAFF_SPELL_IDS;
-        }
-        if (modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Void knight mace")) {
-            data = VOID_STAFF_SPELL_IDS;
-        }
-        CombatSpell current = player.getProperties().getAutocastSpell();
-        if (buttonId >= data.length) {
-            return;
-        }
-        int configStart = modern ? 45 : 13;
-        if (current != null) {
-            for (int index = 0; index < data.length; index++) {
-                if (data[index] == current.spellId) {
-                    player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, configStart + (2 * index), true);
-                    player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, 100 + configStart + (2 * index), true);
-                }
-            }
-        }
-        if (buttonId < 0) {
-            player.getProperties().setAutocastSpell(null);
+    public void selectAutoSpell(int spellId, boolean adjustAttackStyle) {
+        if (spellId < 0) {
+            AutocastManager.INSTANCE.clear(player);
             if (adjustAttackStyle && current != null) {
-                setAttackStyle(3);
-                player.getProperties().getCombatPulse().updateStyle();
+                applyAttackStyle(ensureStyleIndex(player, player.getSettings().getAttackStyleIndex()));
             }
-            return;
-        }
-        boolean defensive = player.getSettings().getAttackStyleIndex() == 3;
-        player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, 183, defensive);
-        player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, 83, !defensive);
-        current = (CombatSpell) (modern ? SpellBookManager.SpellBook.MODERN.getSpell(data[buttonId]) : SpellBookManager.SpellBook.ANCIENT.getSpell(data[buttonId]));
-        player.getProperties().setAutocastSpell(current);
-        int configId = configStart + (2 * buttonId);
-        if (modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff") || modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Void knight mace")) {
-            boolean slayer = player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff");
-            switch (buttonId) {
-                case 0:
-                    configId = 77;
-                    break;
-                case 1:
-                    if (slayer) {
-                        configId = 79;
-                    } else {
-                        configId = 81;
-                    }
-                    break;
-                case 2:
-                    configId = 69;
-                    break;
-                case 3:
-                    configId = 71;
-                    break;
-                case 4:
-                    configId = 73;
-                    break;
-                case 5:
-                    configId = 75;
-                    break;
-
-            }
-            if (configId >= 85 || configId <= 65) {
-                return;
-            } else {
-                player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, (defensive ? 100 : 0) + configId, false);
-            }
+            player.getProperties().getCombatPulse().updateStyle();
         } else {
-            configId += defensive ? 100 : 0;
-            switch (buttonId) {
-                case 16:
-                    configId = defensive ? 265 : 253;
-                    break;
-                case 17:
-                    configId = defensive ? 268 : 256;
-                    break;
-                case 18:
-                    configId = defensive ? 271 : 259;
-                    break;
-                case 19:
-                    configId = defensive ? 274 : 262;
-                    break;
-            }
-            player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, configId, false);
+            AutocastManager.INSTANCE.selectLegacy(player, spellId);
         }
-
     }
 
-    /**
-     * Opens the autocast select.
-     */
     public void openAutocastSelect() {
-        if (current != WeaponInterfaces.STAFF) {
-            return;
-        }
-        if (!canAutocast(true)) {
-            setAttackStyle(3);
-            return;
-        }
-        player.setAttribute("autocast_select", true);
-        int id = player.getSpellBookManager().getSpellBook() == 193 ? 797 : 319;
-        boolean slayer = player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff");
-        boolean mace = player.getEquipment().getNew(3).getName().equalsIgnoreCase("Void knight mace");
-        if (slayer) {
-            id = 310;
-        }
-        if (mace) {
-            id = 406;
-        }
-        Component component = new Component(id);
-        component.definition.tabIndex = 0;
-        component.definition.type = InterfaceType.TAB;
-        player.setAttribute("autocast_component", component);
-        player.getInterfaceManager().openTab(component);
+        // selects autocast directly in the active spellbook.
     }
 
-    /**
-     * Checks if the player is currently able to autocast.
-     *
-     * @param message If we should notify the player if he's unable to autocast.
-     * @return {@code True} if so.
-     */
     public boolean canAutocast(boolean message) {
-        if (current != WeaponInterfaces.STAFF) {
-            return false;
-        }
-
-        if (player.getAttribute("spell:swap", 0) != 0) {
-            if (message) {// Inauthentic message.
-                player.getPacketDispatch().sendMessage("You cannot set autocast while your spellbook is temporarily swapped.");
-            }
-            return false;
-        }
-
-        if (player.getSpellBookManager().getSpellBook() == SpellBookManager.SpellBook.LUNAR.getInterfaceId()) {
-            if (message) {
-                player.getPacketDispatch().sendMessage("You can't autocast Lunar magic.");
-            }
-            return false;
-        }
-        boolean ancientStaff = player.getEquipment().getNew(3).getName().contains("ncient staff") || player.getEquipment().getNew(3).getName().contains("uriel's staff");
-        if ((player.getSpellBookManager().getSpellBook() == Components.MAGIC_ZAROS_193 && !ancientStaff)) {
-            if (message) {
-                player.getPacketDispatch().sendMessage("You can only autocast ancient magicks with an Ancient or Zuriel's staff.");
-            }
-            return false;
-        }
-        return true;
+        return player.getAttribute("spell:swap", 0) == 0 &&
+            player.getSpellBookManager().getSpellBook() != Components.MAGIC_LUNAR_430;
     }
 
     /**
@@ -519,7 +306,9 @@ public final class WeaponInterface extends Component {
         if (weapon == null) {
             return WeaponInterfaces.values()[0];
         }
-        int slot = weapon.getDefinition().getConfiguration(ItemConfigParser.WEAPON_INTERFACE, 0);
+        Object category = weapon.getDefinition().getClientScriptData() == null ? null : weapon.getDefinition().getClientScriptData().get(686);
+        int slot = category instanceof Integer ? (Integer) category : 0;
+        if (slot < 0 || slot >= WeaponInterfaces.values().length) slot = 0;
         return WeaponInterfaces.values()[slot];
     }
 
@@ -696,7 +485,7 @@ public final class WeaponInterface extends Component {
         /**
          * The ivandis flail weapon interface (ordinal=23)
          */
-        IVANDIS_FLAIL(Components.WEAPON_SCEPTER_SEL_85, new AttackStyle(STYLE_ACCURATE, BONUS_CRUSH), new AttackStyle(STYLE_AGGRESSIVE, BONUS_CRUSH), new AttackStyle(STYLE_DEFENSIVE, BONUS_CRUSH));
+        IVANDIS_FLAIL(Components.WEAPON_SCEPTER_SEL_85, new AttackStyle(STYLE_ACCURATE, BONUS_SLASH), new AttackStyle(STYLE_AGGRESSIVE, BONUS_CRUSH), new AttackStyle(STYLE_DEFENSIVE, BONUS_SLASH));
 
         /**
          * The interface id.

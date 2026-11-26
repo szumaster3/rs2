@@ -1,0 +1,232 @@
+[proc,script1387](int $int0)
+if (getwindowmode >= 2) {
+    if (if_hassub(interface_746:com_30) = true) {
+        if ($int0 ! 98 | if_hassub(interface_746:com_31) = false) {
+            if_sethide(false, interface_746:com_30);
+            if_sethide(true, interface_746:com_31);
+            if_sethide(false, interface_746:com_29);
+            if_sethide(true, interface_746:com_32);
+        } else {
+            if_sethide(true, interface_746:com_30);
+            if_sethide(false, interface_746:com_31);
+            if_sethide(false, interface_746:com_29);
+            if_sethide(true, interface_746:com_32);
+        }
+    } else {
+        if_sethide(true, interface_746:com_30);
+        if_sethide(false, interface_746:com_32);
+        if ($int0 ! 1) {
+            ~script1659;
+        }
+        switch_int ($int0) {
+            case 0 :
+                if_setgraphic(graphic_1836, interface_746:com_124);
+                if_sethide(false, interface_746:com_33);
+                if_setgraphic(graphic_1841, interface_746:com_73);
+                if_setgraphic(graphic_1840, interface_746:com_74);
+                if_sethide(false, interface_746:com_29);
+            case 1 :
+                if_setgraphic(graphic_1836, interface_746:com_125);
+                if_sethide(false, interface_746:com_34);
+                if_setgraphic(graphic_1841, interface_746:com_75);
+                if_setgraphic(graphic_1840, interface_746:com_76);
+                if_sethide(false, interface_746:com_29);
+                ~script1658;
+            case 2 :
+                if_setgraphic(graphic_1836, interface_746:com_126);
+                if_setgraphic(graphic_1841, interface_746:com_77);
+                if_setgraphic(graphic_1840, interface_746:com_78);
+                if_sethide(false, interface_746:com_35);
+                if_sethide(false, interface_746:com_29);
+            case 3 :
+                if_setgraphic(graphic_1836, interface_746:com_127);
+                if_setgraphic(graphic_1841, interface_746:com_79);
+                if_setgraphic(graphic_1840, interface_746:com_80);
+                if_sethide(false, interface_746:com_36);
+                if_sethide(false, interface_746:com_29);
+            case 4 :
+                if_setgraphic(graphic_1836, interface_746:com_128);
+                if_setgraphic(graphic_1841, interface_746:com_81);
+                if_setgraphic(graphic_1840, interface_746:com_82);
+                if_sethide(false, interface_746:com_37);
+                if_sethide(false, interface_746:com_29);
+            case 5 :
+                if_setgraphic(graphic_1836, interface_746:com_129);
+                if_setgraphic(graphic_1841, interface_746:com_83);
+                if_setgraphic(graphic_1840, interface_746:com_84);
+                if_sethide(false, interface_746:com_38);
+                if_sethide(false, interface_746:com_29);
+            case 6 :
+                if_setgraphic(graphic_1836, interface_746:com_130);
+                if_setgraphic(graphic_1841, interface_746:com_85);
+                if_setgraphic(graphic_1840, interface_746:com_86);
+                if_sethide(false, interface_746:com_39);
+                if_sethide(false, interface_746:com_29);
+            case 7 :
+                if_setgraphic(graphic_1836, interface_746:com_131);
+                if_setgraphic(graphic_1841, interface_746:com_87);
+                if_setgraphic(graphic_1840, interface_746:com_88);
+                if_sethide(false, interface_746:com_40);
+                if_sethide(false, interface_746:com_29);
+            case 8 :
+                if_setgraphic(graphic_1836, interface_746:com_132);
+                if_setgraphic(graphic_1841, interface_746:com_89);
+                if_setgraphic(graphic_1840, interface_746:com_90);
+                if_sethide(false, interface_746:com_41);
+                if_sethide(false, interface_746:com_29);
+            case 9 :
+                if_setgraphic(graphic_1836, interface_746:com_133);
+                if_setgraphic(graphic_1841, interface_746:com_91);
+                if_setgraphic(graphic_1840, interface_746:com_92);
+                if_sethide(false, interface_746:com_42);
+                if_sethide(false, interface_746:com_29);
+            case 10 :
+                if_setgraphic(graphic_1836, interface_746:com_134);
+                if_setgraphic(graphic_1841, interface_746:com_93);
+                if_setgraphic(graphic_1840, interface_746:com_94);
+                if_sethide(false, interface_746:com_43);
+                if_sethide(false, interface_746:com_29);
+            case 11 :
+                if_setgraphic(graphic_1836, interface_746:com_135);
+                if_setgraphic(graphic_1841, interface_746:com_95);
+                if_setgraphic(graphic_1840, interface_746:com_96);
+                if_sethide(false, interface_746:com_44);
+                if_sethide(false, interface_746:com_29);
+            case 12 :
+                if_setgraphic(graphic_1836, interface_746:com_136);
+                if_setgraphic(graphic_1841, interface_746:com_97);
+                if_setgraphic(graphic_1840, interface_746:com_98);
+                if_sethide(false, interface_746:com_45);
+                if_sethide(false, interface_746:com_29);
+            case 13 :
+                if_setgraphic(graphic_1836, interface_746:com_137);
+                if_setgraphic(graphic_1841, interface_746:com_99);
+                if_setgraphic(graphic_1840, interface_746:com_100);
+                if_sethide(false, interface_746:com_46);
+                if_sethide(false, interface_746:com_29);
+            case 14 :
+                if_setgraphic(graphic_1836, interface_746:com_138);
+                if_setgraphic(graphic_1841, interface_746:com_101);
+                if_setgraphic(graphic_1840, interface_746:com_102);
+                if_sethide(false, interface_746:com_47);
+                if_sethide(false, interface_746:com_29);
+            case 15 :
+                if_setgraphic(graphic_1836, interface_746:com_139);
+                if_setgraphic(graphic_1841, interface_746:com_103);
+                if_setgraphic(graphic_1840, interface_746:com_104);
+                if_sethide(false, interface_746:com_48);
+                if_sethide(false, interface_746:com_29);
+            case 98 :
+                if_sethide(false, interface_746:com_31);
+                if_sethide(false, interface_746:com_29);
+            case 95 :
+                if_sethide(false, interface_746:com_50);
+                if_sethide(false, interface_746:com_29);
+            case 99 :
+                if_sethide(false, interface_746:com_51);
+                if_sethide(false, interface_746:com_29);
+        }
+    }
+} else if (if_hassub(interface_548:com_147) = true) {
+    if ($int0 ! 98 | if_hassub(interface_548:com_148) = false) {
+        if_sethide(false, interface_548:com_147);
+        if_sethide(true, interface_548:com_148);
+        if_sethide(true, interface_548:com_149);
+    } else {
+        if_sethide(true, interface_548:com_147);
+        if_sethide(false, interface_548:com_148);
+        if_sethide(true, interface_548:com_149);
+    }
+} else {
+    if_sethide(true, interface_548:com_147);
+    if_sethide(false, interface_548:com_149);
+    switch_int ($int0) {
+        case 0 :
+            if_setgraphic(graphic_1836, interface_548:com_81);
+            if_setgraphic(graphic_1841, interface_548:com_98);
+            if_setgraphic(graphic_1840, interface_548:com_99);
+            if_sethide(false, interface_548:com_152);
+        case 1 :
+            if_setgraphic(graphic_1836, interface_548:com_82);
+            if_setgraphic(graphic_1841, interface_548:com_100);
+            if_setgraphic(graphic_1840, interface_548:com_101);
+            if_sethide(false, interface_548:com_153);
+            ~script1659;
+        case 2 :
+            if_setgraphic(graphic_1836, interface_548:com_83);
+            if_setgraphic(graphic_1841, interface_548:com_102);
+            if_setgraphic(graphic_1840, interface_548:com_103);
+            if_sethide(false, interface_548:com_154);
+        case 3 :
+            if_setgraphic(graphic_1836, interface_548:com_84);
+            if_setgraphic(graphic_1841, interface_548:com_104);
+            if_setgraphic(graphic_1840, interface_548:com_105);
+            if_sethide(false, interface_548:com_155);
+        case 4 :
+            if_setgraphic(graphic_1836, interface_548:com_85);
+            if_setgraphic(graphic_1841, interface_548:com_106);
+            if_setgraphic(graphic_1840, interface_548:com_107);
+            if_sethide(false, interface_548:com_156);
+        case 5 :
+            if_setgraphic(graphic_1836, interface_548:com_86);
+            if_setgraphic(graphic_1841, interface_548:com_108);
+            if_setgraphic(graphic_1840, interface_548:com_109);
+            if_sethide(false, interface_548:com_157);
+        case 6 :
+            if_setgraphic(graphic_1836, interface_548:com_87);
+            if_setgraphic(graphic_1841, interface_548:com_110);
+            if_setgraphic(graphic_1840, interface_548:com_111);
+            if_sethide(false, interface_548:com_158);
+        case 7 :
+            if_setgraphic(graphic_1836, interface_548:com_88);
+            if_setgraphic(graphic_1841, interface_548:com_112);
+            if_setgraphic(graphic_1840, interface_548:com_113);
+            if_sethide(false, interface_548:com_159);
+        case 8 :
+            if_setgraphic(graphic_1836, interface_548:com_51);
+            if_setgraphic(graphic_1841, interface_548:com_35);
+            if_setgraphic(graphic_1840, interface_548:com_36);
+            if_sethide(false, interface_548:com_160);
+        case 9 :
+            if_setgraphic(graphic_1836, interface_548:com_52);
+            if_setgraphic(graphic_1841, interface_548:com_37);
+            if_setgraphic(graphic_1840, interface_548:com_38);
+            if_sethide(false, interface_548:com_161);
+        case 10 :
+            if_setgraphic(graphic_1836, interface_548:com_53);
+            if_setgraphic(graphic_1841, interface_548:com_39);
+            if_setgraphic(graphic_1840, interface_548:com_40);
+            if_sethide(false, interface_548:com_162);
+        case 11 :
+            if_setgraphic(graphic_1836, interface_548:com_54);
+            if_setgraphic(graphic_1841, interface_548:com_41);
+            if_setgraphic(graphic_1840, interface_548:com_42);
+            if_sethide(false, interface_548:com_163);
+        case 12 :
+            if_setgraphic(graphic_1836, interface_548:com_55);
+            if_setgraphic(graphic_1841, interface_548:com_43);
+            if_setgraphic(graphic_1840, interface_548:com_44);
+            if_sethide(false, interface_548:com_164);
+        case 13 :
+            if_setgraphic(graphic_1836, interface_548:com_56);
+            if_setgraphic(graphic_1841, interface_548:com_45);
+            if_setgraphic(graphic_1840, interface_548:com_46);
+            if_sethide(false, interface_548:com_165);
+        case 14 :
+            if_setgraphic(graphic_1836, interface_548:com_57);
+            if_setgraphic(graphic_1841, interface_548:com_47);
+            if_setgraphic(graphic_1840, interface_548:com_48);
+            if_sethide(false, interface_548:com_166);
+        case 15 :
+            if_setgraphic(graphic_1836, interface_548:com_58);
+            if_setgraphic(graphic_1841, interface_548:com_49);
+            if_setgraphic(graphic_1840, interface_548:com_50);
+            if_sethide(false, interface_548:com_167);
+        case 98 :
+            if_sethide(false, interface_548:com_148);
+        case 95 :
+            if_sethide(false, interface_548:com_169);
+        case 99 :
+            if_sethide(false, interface_548:com_170);
+    }
+}

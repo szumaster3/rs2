@@ -1,6 +1,7 @@
 package content.global.plugins.iface.tab
 
 import content.data.GameAttributes
+import core.api.getVarbit
 import core.api.getAttribute
 import core.api.sendDialogue
 import core.api.sendMessage
@@ -16,8 +17,9 @@ import shared.consts.Components
  */
 class PrayerTabInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
-        on(Components.PRAYER_271) { player, _, _, buttonID, _, _ ->
-            val type = PrayerType.get(buttonID) ?: return@on true
+        on(Components.PRAYER_271) { player, _, _, buttonID, slot, _ ->
+            if (buttonID != 8 || getVarbit(player, 6840) != 0) return@on true
+            val type = PrayerType.fromSlot(slot) ?: return@on true
 
             if (!additionalPrayers(player, type)) {
                 return@on true

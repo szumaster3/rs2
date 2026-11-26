@@ -9,6 +9,7 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.RegionManager;
+import core.game.world.map.build.DynamicRegion;
 import core.tools.Log;
 
 import java.util.ArrayDeque;
@@ -169,6 +170,7 @@ public final class WalkingQueue {
             footPrint = entity.getLocation();
             entity.setLocation(dest);
             RegionManager.move(entity);
+            if (isPlayer) updateRegion(dest, false);
         }
         this.walkDir = walkDirection;
         this.runDir = runDirection;
@@ -235,6 +237,9 @@ public final class WalkingQueue {
                 if (last == null) {
                     last = p.getLocation();
                 }
+                if (p.getPlayerFlags().isDynamicScene() != (RegionManager.forId(entity.getLocation().getRegionId()) instanceof DynamicRegion)) {
+                    p.getPlayerFlags().setUpdateSceneGraph(true);
+                }
                 if ((last.getRegionX() - entity.getLocation().getRegionX()) >= 4 || (last.getRegionX() - entity.getLocation().getRegionX()) <= -4) {
                     p.getPlayerFlags().setUpdateSceneGraph(true);
                 } else if ((last.getRegionY() - entity.getLocation().getRegionY()) >= 4 || (last.getRegionY() - entity.getLocation().getRegionY()) <= -4) {
@@ -261,6 +266,9 @@ public final class WalkingQueue {
         Location lastRegion = p.getPlayerFlags().getLastSceneGraph();
         if (lastRegion == null) {
             lastRegion = location;
+        }
+        if (p.getPlayerFlags().isDynamicScene() != (RegionManager.forId(location.getRegionId()) instanceof DynamicRegion)) {
+            p.getPlayerFlags().setUpdateSceneGraph(true);
         }
         int rx = lastRegion.getRegionX();
         int ry = lastRegion.getRegionY();

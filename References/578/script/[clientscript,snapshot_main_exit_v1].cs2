@@ -1,0 +1,4 @@
+[clientscript,snapshot_main_exit_v1]
+~script132;
+%varclient_11 = 0;
+%varclientstring_24 = "";

@@ -16,8 +16,7 @@ class ISAACCipher(seed: IntArray?) {
                 isaac()
                 count = SIZE - 1
             }
-            // Opcode encryption is disabled by this server's existing protocol.
-            return 0
+            return results[count]
         }
 
     init {

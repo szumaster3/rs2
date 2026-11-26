@@ -1,0 +1,61 @@
+[com_0]
+type=text
+x=3
+y=8
+width=480
+height=17
+textfont=q8_full
+text=Select an Option
+textalignh=centre
+colour=0x800000
+
+[com_1]
+type=text
+x=3
+y=51
+width=480
+height=17
+textfont=q8_full
+text=option1
+textalignh=centre
+colour=0x000000
+pausebutton=yes
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+
+[com_2]
+type=text
+x=3
+y=78
+width=480
+height=17
+textfont=q8_full
+text=option2
+textalignh=centre
+colour=0x000000
+pausebutton=yes
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+
+[com_3]
+type=layer
+x=5
+y=10
+width=476
+height=13
+
+[com_4]
+type=graphic
+width=57
+height=13
+layer=com_3
+graphic="sworddecor,1"
+
+[com_5]
+type=graphic
+x=419
+width=57
+height=13
+layer=com_3
+graphic="sworddecor,0"
+

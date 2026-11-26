@@ -1,0 +1,20 @@
+[clientscript,script249]
+%varclient_799 = calc(%varclient_799 + 1);
+if (%varclient_799 >= 30) {
+    %varclient_799 = 0;
+    if (%varclient_798 = 1) {
+        %varclient_798 = 0;
+    } else {
+        %varclient_798 = 1;
+    }
+}
+if (%varclient_798 = 1) {
+    if_settext("<escape(%varclientstring_24)><col=ffff00> ", interface_594:com_53);
+} else {
+    if_settext("<escape(%varclientstring_24)><col=ffff00>|", interface_594:com_53);
+}
+if (compare(%varclientstring_24, "") = 0) {
+    if_setcolour(0xbbbbbb, interface_594:com_58);
+} else {
+    if_setcolour(^white, interface_594:com_58);
+}

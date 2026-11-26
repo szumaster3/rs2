@@ -1,0 +1,2 @@
+[clientscript,eyeglo_machine_transmit](component $component0)
+if_setobject(%varplayer_856, 1, $component0);

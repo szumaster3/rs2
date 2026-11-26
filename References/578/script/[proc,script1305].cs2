@@ -1,0 +1,19 @@
+[proc,script1305]()(int)
+def_int $int0 = 0;
+if (~script1314(99) = false) {
+    return(99);
+}
+if (~script1314(95) = false) {
+    return(95);
+}
+if (~script1314(98) = false) {
+    return(98);
+}
+while ($int0 < 16) {
+    if (~script1314($int0) = false) {
+        return($int0);
+    } else {
+        $int0 = calc($int0 + 1);
+    }
+}
+return(-1);

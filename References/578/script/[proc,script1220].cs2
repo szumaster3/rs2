@@ -1,0 +1,8 @@
+[proc,script1220]
+if (detailget_stereo = 1) {
+    if_setgraphic(graphic_1258, interface_744:com_431);
+    if_setgraphic(graphic_1257, interface_744:com_429);
+} else {
+    if_setgraphic(graphic_1258, interface_744:com_429);
+    if_setgraphic(graphic_1257, interface_744:com_431);
+}

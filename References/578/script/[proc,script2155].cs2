@@ -1,0 +1,86 @@
+[proc,script2155]()(boolean)
+def_int $int0 = struct_param(%varclient_699, param_859);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_860);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_861);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_862);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_863);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_864);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_865);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_866);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_867);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_868);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_869);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+$int0 = struct_param(%varclient_699, param_870);
+if ($int0 = -1) {
+    return(true);
+}
+if (~ql4_getquestcomplete($int0) = false) {
+    return(false);
+}
+return(true);

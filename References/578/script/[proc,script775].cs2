@@ -1,0 +1,17 @@
+[proc,script775]()(int, string, obj)
+switch_obj (%varplayer_448) {
+    case default :
+        return(36, "Bronze Bull Rush", obj_12461);
+    case obj_12073 :
+        return(36, "Bronze Bull Rush", obj_12461);
+    case obj_12075 :
+        return(46, "Iron Bull Rush", obj_12462);
+    case obj_12077 :
+        return(56, "Steel Bull Rush", obj_12463);
+    case obj_12079 :
+        return(66, "Mithril Bull Rush", obj_12464);
+    case obj_12081 :
+        return(76, "Adamant Bull Rush", obj_12465);
+    case obj_12083 :
+        return(86, "Rune Bull Rush", obj_12466);
+}

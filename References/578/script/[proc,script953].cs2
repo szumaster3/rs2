@@ -1,0 +1,7 @@
+[proc,script953]
+if_sethide(true, interface_513:com_3);
+if_sethide(true, interface_513:com_4);
+if_sethide(true, interface_513:com_5);
+if_sethide(true, interface_513:com_6);
+if_sethide(true, interface_513:com_7);
+if_sethide(true, interface_513:com_8);

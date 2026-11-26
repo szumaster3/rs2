@@ -1,0 +1,27 @@
+[proc,script1183]
+if (string_length(%varclientstring_32) = 0) {
+    %varclient_174 = 1;
+    return;
+}
+if (string_length(%varclientstring_33) = 0) {
+    %varclient_174 = 2;
+    return;
+}
+if (~script1431 = 1 & %varclient_547 = 0) {
+    %varclient_174 = 24;
+    ~script2709(430, 337, 49);
+    if_sethide(false, interface_744:com_395);
+    sound_jingle(jingle_349, 0);
+    if (~pvpwild_world_check = 1) {
+        if_settext("Bounty World", interface_744:com_437);
+        if_settext("Warning: This is a Bounty World. Players can attack you throughout the Wilderness.<br><br>If you die, you may lose all of your items.<br><br>You have been warned.", interface_744:com_438);
+    }
+    if_sethide(true, interface_744:com_394);
+    return;
+}
+%varclient_200 = 0;
+%varclient_201 = 0;
+if_settext("Performing login...", interface_744:com_445);
+if_sethide(true, interface_744:com_458);
+if_sethide(true, interface_744:com_459);
+login_request(%varclientstring_32, %varclientstring_33, 0);

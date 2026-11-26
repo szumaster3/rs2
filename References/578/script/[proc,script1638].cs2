@@ -1,0 +1,105 @@
+[proc,script1638](int $int0)(string)
+switch_int ($int0) {
+    case 0 :
+        return(%varclientstring_224);
+    case 1 :
+        return(%varclientstring_225);
+    case 2 :
+        return(%varclientstring_226);
+    case 3 :
+        return(%varclientstring_227);
+    case 4 :
+        return(%varclientstring_228);
+    case 5 :
+        return(%varclientstring_229);
+    case 6 :
+        return(%varclientstring_230);
+    case 7 :
+        return(%varclientstring_231);
+    case 8 :
+        return(%varclientstring_232);
+    case 9 :
+        return(%varclientstring_233);
+    case 10 :
+        return(%varclientstring_234);
+    case 11 :
+        return(%varclientstring_235);
+    case 12 :
+        return(%varclientstring_236);
+    case 13 :
+        return(%varclientstring_237);
+    case 14 :
+        return(%varclientstring_238);
+    case 15 :
+        return(%varclientstring_239);
+    case 16 :
+        return(%varclientstring_240);
+    case 17 :
+        return(%varclientstring_241);
+    case 18 :
+        return(%varclientstring_242);
+    case 19 :
+        return(%varclientstring_243);
+    case 20 :
+        return(%varclientstring_244);
+    case 21 :
+        return(%varclientstring_245);
+    case 22 :
+        return(%varclientstring_246);
+    case 23 :
+        return(%varclientstring_247);
+    case 24 :
+        return(%varclientstring_248);
+    case 25 :
+        return(%varclientstring_249);
+    case 26 :
+        return(%varclientstring_250);
+    case 27 :
+        return(%varclientstring_251);
+    case 28 :
+        return(%varclientstring_252);
+    case 29 :
+        return(%varclientstring_253);
+    case 30 :
+        return(%varclientstring_254);
+    case 31 :
+        return(%varclientstring_255);
+    case 32 :
+        return(%varclientstring_256);
+    case 33 :
+        return(%varclientstring_257);
+    case 34 :
+        return(%varclientstring_258);
+    case 35 :
+        return(%varclientstring_259);
+    case 36 :
+        return(%varclientstring_260);
+    case 37 :
+        return(%varclientstring_261);
+    case 38 :
+        return(%varclientstring_262);
+    case 39 :
+        return(%varclientstring_263);
+    case 40 :
+        return(%varclientstring_264);
+    case 41 :
+        return(%varclientstring_265);
+    case 42 :
+        return(%varclientstring_266);
+    case 43 :
+        return(%varclientstring_267);
+    case 44 :
+        return(%varclientstring_268);
+    case 45 :
+        return(%varclientstring_269);
+    case 46 :
+        return(%varclientstring_270);
+    case 47 :
+        return(%varclientstring_271);
+    case 48 :
+        return(%varclientstring_272);
+    case 49 :
+        return(%varclientstring_273);
+    case default :
+        return("");
+}

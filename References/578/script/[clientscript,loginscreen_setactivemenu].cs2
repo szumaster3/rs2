@@ -1,0 +1,2 @@
+[clientscript,loginscreen_setactivemenu](component $component0)
+~loginscreen_setactivemenu($component0);

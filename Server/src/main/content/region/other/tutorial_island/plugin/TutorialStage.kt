@@ -60,13 +60,19 @@ object TutorialStage {
             player.hook(Event.FireLit, TutorialFireReceiver)
             player.hook(Event.NPCKilled, TutorialKillReceiver)
             player.hook(Event.SpellCast, TutorialCastReceiver)
-            openOverlay(player, Components.TUTORIAL_PROGRESS_371)
-            sendInterfaceConfig(player, Components.TUTORIAL_PROGRESS_371, 4, true)
             setVarbit(player, 4925, 0)
             setVarbit(player, 4895, 2)
         }
 
-        updateProgressBar(player)
+        if (stage == 0) {
+            if (player.interfaceManager.overlay?.id == Components.TUTORIAL_PROGRESS_371) closeOverlay(player)
+        } else if (stage in 1..72 && !player.interfaceManager.hasMainComponent(CharacterDesign.INTERFACE_ID)) {
+            if (player.interfaceManager.overlay?.id != Components.TUTORIAL_PROGRESS_371) {
+                openOverlay(player, Components.TUTORIAL_PROGRESS_371)
+                sendInterfaceConfig(player, Components.TUTORIAL_PROGRESS_371, 4, true)
+            }
+            updateProgressBar(player)
+        }
 
         when (stage) {
             0 -> {
@@ -74,17 +80,11 @@ object TutorialStage {
                 hideTabs(player, login)
                 CharacterDesign.open(player)
                 setMinimapState(player, 2)
-                player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                    "",
-                    "",
-                    "Getting started",
-                    "Please take a moment to design your character.",
-                    "",
-                )
+                // Character design is a full-canvas root; the tutorial chatbox resumes after Confirm.
             }
 
             39 -> {
-                player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+                player.interfaceManager.removeTutorialTabs()
                 removeHintIcon(player)
                 setMinimapState(player, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.RUNESCAPE_GUIDE_945)!!)
@@ -102,7 +102,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.OPTIONS_261))
-                setVarbit(player, FLASHING_ICON, 12)
+                setVarbit(player, FLASHING_ICON, 13)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Game Options",
@@ -161,7 +161,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.INVENTORY_149))
-                setVarbit(player, FLASHING_ICON, 4)
+                setVarbit(player, FLASHING_ICON, 5)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Viewing the items that you were given.",
@@ -391,7 +391,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.MUSIC_V3_187))
-                setVarbit(player, FLASHING_ICON, 14)
+                setVarbit(player, FLASHING_ICON, 15)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Cooking dough",
@@ -421,7 +421,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.EMOTES_464))
-                setVarbit(player, FLASHING_ICON, 13)
+                setVarbit(player, FLASHING_ICON, 14)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Emotes",
@@ -448,7 +448,7 @@ object TutorialStage {
             25 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                setVarbit(player, FLASHING_ICON, 12)
+                setVarbit(player, FLASHING_ICON, 13)
 
                 if (player.settings.isRunToggled) {
                     player.settings.toggleRun()
@@ -725,7 +725,7 @@ object TutorialStage {
             45 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                setVarbit(player, FLASHING_ICON, 5)
+                setVarbit(player, FLASHING_ICON, 6)
                 player.interfaceManager.openTab(Component(Components.WORNITEMS_387))
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -975,7 +975,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.PRAYER_271))
-                setVarbit(player, FLASHING_ICON, 6)
+                setVarbit(player, FLASHING_ICON, 7)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Your Prayer List",
@@ -1004,7 +1004,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.FRIENDS2_550))
-                setVarbit(player, FLASHING_ICON, 9)
+                setVarbit(player, FLASHING_ICON, 10)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlainMessage(
                     true,
@@ -1017,7 +1017,7 @@ object TutorialStage {
 
             64 -> {
                 hideTabs(player, login)
-                setVarbit(player, FLASHING_ICON, 10)
+                setVarbit(player, FLASHING_ICON, 11)
                 player.interfaceManager.openTab(Component(Components.IGNORE2_551))
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -1076,7 +1076,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.openTab(Component(player.spellBookManager.spellBook))
-                setVarbit(player, FLASHING_ICON, 7)
+                setVarbit(player, FLASHING_ICON, 8)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Open up your final tab.",
@@ -1154,50 +1154,28 @@ object TutorialStage {
     @JvmStatic
     fun hideTabs(player: Player, login: Boolean) {
         val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
-        if (login) {
-            player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-        }
-        if (stage > 2) {
-            player.interfaceManager.openTab(Component(Components.OPTIONS_261))
-        }
-        if (stage > 5) {
-            player.interfaceManager.openTab(Component(Components.INVENTORY_149))
-        }
-        if (stage > 10) {
-            player.interfaceManager.openTab(Component(Components.STATS_320))
-        }
-        if (stage > 21) {
-            player.interfaceManager.openTab(Component(Components.MUSIC_V3_187))
-        }
-        if (stage > 23) {
-            player.interfaceManager.openTab(Component(Components.EMOTES_464))
-        }
-        if (stage > 28) {
-            player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))
-        }
-        if (stage > 45) {
-            player.interfaceManager.openTab(Component(Components.WORNITEMS_387))
-        }
-        if (stage > 49) {
-            var wepInter = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
-            if (wepInter == null) {
-                wepInter = WeaponInterface(player)
-                player.addExtension(WeaponInterface::class.java, wepInter)
+        val manager = player.interfaceManager
+        if (login || stage == 0 || stage == 39) manager.removeTutorialTabs()
+        if (stage == 0 || stage == 39 || !login) return
+        if (stage >= 1) manager.openTab(11, Component(Components.OPTIONS_261))
+        if (stage >= 5) manager.openTab(3, Component(Components.INVENTORY_149))
+        if (stage >= 10) manager.openTab(1, Component(Components.STATS_320))
+        if (stage >= 21) manager.openTab(13, Component(Components.MUSIC_V3_187))
+        if (stage >= 23) manager.openTab(12, Component(Components.EMOTES_464))
+        if (stage >= 27) manager.openTab(2, Component(190))
+        if (stage >= 45) manager.openTab(4, Component(Components.WORNITEMS_387))
+        if (stage >= 49) {
+            var weapon = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
+            if (weapon == null) {
+                weapon = WeaponInterface(player)
+                player.addExtension(WeaponInterface::class.java, weapon)
             }
+            manager.openTab(0, weapon)
         }
-        if (stage > 61) {
-            player.interfaceManager.openTab(Component(Components.PRAYER_271))
-        }
-        if (stage > 63) {
-            player.interfaceManager.openTab(Component(Components.FRIENDS2_550))
-        }
-        if (stage > 64) {
-            player.interfaceManager.openTab(Component(Components.IGNORE2_551))
-            player.interfaceManager.openTab(Component(Components.CLANJOIN_589))
-        }
-        if (stage > 68) {
-            player.interfaceManager.openTab(Component(player.spellBookManager.spellBook))
-        }
+        if (stage >= 61) manager.openTab(5, Component(Components.PRAYER_271))
+        if (stage >= 63) manager.openTab(8, Component(Components.FRIENDS2_550))
+        if (stage >= 64) manager.openTab(9, Component(Components.IGNORE2_551))
+        if (stage >= 68) manager.openTab(6, Component(player.spellBookManager.spellBook))
     }
 
     private fun updateProgressBar(player: Player) {

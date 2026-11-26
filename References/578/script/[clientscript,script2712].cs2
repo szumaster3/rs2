@@ -1,0 +1,12 @@
+[clientscript,script2712](component $component0, component $component1, component $component2)
+if (clientclock < %varclient_177) {
+    return;
+}
+%varclient_176 = calc(%varclient_176 + 2);
+def_int $int3 = calc(%varclient_176 % 10);
+if ($int3 ! 2) {
+    %varclient_176 = calc(%varclient_176 - $int3 + 2);
+}
+if_sethide(false, $component0);
+if_setontimer("script1249($component0, $component1, $component2)", $component0);
+if_setontimer(null, $component1);

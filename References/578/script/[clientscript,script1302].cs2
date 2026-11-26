@@ -1,0 +1,4 @@
+[clientscript,script1302]
+def_int $int0 = ~script1305;
+~script71(%varclient_168);
+%varclient_10 = calc($int0 + 100);

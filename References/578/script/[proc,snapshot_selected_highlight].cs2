@@ -1,0 +1,11 @@
+[proc,snapshot_selected_highlight]
+def_int $int0 = 0;
+while ($int0 < if_getnextsubid(interface_594:com_92)) {
+    if (cc_find(interface_594:com_92, $int0) = true) {
+        cc_settrans(255);
+    }
+    $int0 = calc($int0 + 1);
+}
+if (cc_find(interface_594:com_92, %varclient_792) = true) {
+    cc_settrans(110);
+}

@@ -1,0 +1,2 @@
+[clientscript,boardgames_turn_name](component $component0, component $component1)
+~script1583($component0, %varclientstring_147, $component1);

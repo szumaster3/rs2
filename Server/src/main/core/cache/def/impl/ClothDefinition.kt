@@ -80,7 +80,7 @@ class ClothDefinition {
 
             else -> if (opcode >= 60 && opcode < 70) {
                 models[opcode - 60] = buffer.getShort().toInt() and 0xFFFF
-            }
+            } else error("Unknown IDK opcode $opcode at ${buffer.position() - 1}")
         }
     }
 

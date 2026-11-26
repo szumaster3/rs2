@@ -903,10 +903,18 @@ public class Player extends Entity {
      * @param login the login
      */
     public void updateSceneGraph(boolean login) {
-        Region region = getViewport().getRegion();
-        if (region instanceof DynamicRegion || region == null && (region = RegionManager.forId(location.getRegionId())) instanceof DynamicRegion) {
+        Location initialScene = login && getSession() != null ? getSession().initialScene : null;
+        if (initialScene != null) getSession().initialScene = null;
+        Region region = RegionManager.forId(location.getRegionId());
+        getPlayerFlags().setLastViewport(new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE]);
+        if (region instanceof DynamicRegion) {
             PacketRepository.send(Encoders530.BUILD_DYNAMIC_SCENE, new DynamicSceneContext(this, login));
         } else {
+            if (location.equals(initialScene)) {
+                getPlayerFlags().setLastSceneGraph(location);
+                getPlayerFlags().setDynamicScene(false);
+                return;
+            }
             PacketRepository.send(Encoders530.UPDATE_SCENE_GRAPH, new SceneGraphContext(this, login));
         }
     }

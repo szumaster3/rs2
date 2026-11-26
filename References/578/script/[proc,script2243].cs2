@@ -1,0 +1,7 @@
+[proc,script2243]
+if (if_gethide(interface_744:com_28) = true) {
+    if_setscrollpos(0, 0, interface_744:com_29);
+    ~script2244;
+} else {
+    ~script2247;
+}

@@ -1,0 +1,8 @@
+[proc,script2222](int $key0, char $char1)
+if (create_reply = -3) {
+    return;
+}
+if ($key0 = ^key_escape) {
+    ~loginscreen_setactivemenu(interface_744:com_392);
+    return;
+}

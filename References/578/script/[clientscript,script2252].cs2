@@ -1,0 +1,60 @@
+[clientscript,script2252]
+def_boolean $boolean0 = false;
+if (if_gethide(interface_744:com_163) = false) {
+    $boolean0 = true;
+}
+if ($boolean0 = false) {
+    ~script2258(1);
+    ~script2264;
+} else {
+    ~script2275(1);
+    ~script2271;
+}
+def_int $int1 = 1;
+def_component $component2 = interface_744:com_304;
+def_component $component3 = interface_744:com_301;
+def_component $component4 = interface_744:com_298;
+if ($boolean0 = true) {
+    $component2 = interface_744:com_236;
+    $component3 = interface_744:com_233;
+    $component4 = interface_744:com_230;
+}
+if_settext("", $component2);
+if (if_getgraphic($component3) = graphic_1717 | if_getgraphic($component4) = graphic_1717) {
+    if_settext("You must agree to our Privacy Policy and Terms & Conditions in order to create an account.", $component2);
+    $int1 = 0;
+}
+def_int $int5 = 1;
+def_component $component6 = interface_744:com_377;
+def_component $component7 = interface_744:com_390;
+def_component $component8 = interface_744:com_383;
+if ($boolean0 = true) {
+    $component6 = interface_744:com_269;
+    $component7 = interface_744:com_282;
+    $component8 = interface_744:com_275;
+}
+if_settext("", $component6);
+if_setgraphic(null, $component7);
+if_setgraphic(null, $component8);
+if (compare(%varclientstring_128, "") ! 0 | compare(%varclientstring_129, "") ! 0) {
+    if (~create_check_email(%varclientstring_128) = false) {
+        if_settext("Please supply a valid email address.", $component6);
+        if_setgraphic(login_cross, $component7);
+        $int5 = 0;
+    } else if (~create_check_email(%varclientstring_129) = false) {
+        if_settext("Please supply a valid email address.", $component6);
+        if_setgraphic(login_cross, $component8);
+        $int5 = 0;
+    } else if (compare(%varclientstring_128, %varclientstring_129) ! 0) {
+        if_settext("Please make sure both email addresses match.", $component6);
+        if_setgraphic(login_cross, $component8);
+        $int5 = 0;
+    }
+}
+if ($int1 = 1 & $int5 = 1) {
+    ~script2253($boolean0);
+} else if ($boolean0 = false) {
+    ~script2258(0);
+} else {
+    ~script2275(0);
+}

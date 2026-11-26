@@ -39,6 +39,8 @@ class ChatMessage(player: Player, text: String, effects: Int, numChars: Int) {
 
     var chatIcon = Rights.getChatIcon(player)
 
+    var nativeQuickChat: ByteArray? = null
+
     @JvmField
     var isQuickChat = false
 }

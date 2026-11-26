@@ -1,0 +1,10 @@
+[clientscript,topstat_run_button_op](component $component0, int $int1)
+if ($int1 ! 1) {
+    return;
+}
+if (%varclient_119 = 1) {
+    %varclient_119 = 0;
+} else {
+    %varclient_119 = 1;
+}
+~topstat_run_button_update($component0);

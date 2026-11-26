@@ -1,0 +1,21 @@
+[clientscript,script2510]
+if (%varclient_852 <= 0) {
+    %varclient_852 = 0;
+}
+if (%varclient_853 <= 0) {
+    %varclient_853 = 0;
+}
+if (%varclient_854 <= 0) {
+    %varclient_854 = 0;
+}
+if (%varclient_855 <= 0) {
+    %varclient_855 = 0;
+}
+if (%varclient_856 <= 0) {
+    %varclient_856 = 0;
+}
+if_settext(tostring(%varclient_852), interface_654:com_9);
+if_settext(tostring(%varclient_853), interface_654:com_58);
+if_settext(tostring(%varclient_854), interface_654:com_50);
+if_settext(tostring(%varclient_855), interface_654:com_42);
+if_settext(tostring(%varclient_856), interface_654:com_67);

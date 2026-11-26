@@ -1,0 +1,2 @@
+[clientscript,snapshot_selected_highlight](int $int0)
+%varclient_791 = $int0;

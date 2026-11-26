@@ -1,0 +1,10 @@
+[clientscript,script2556]
+if (%varclient_926 = 1) {
+    if_setgraphic("mob_cross_icon,0", interface_39:com_21);
+} else if (%varclient_926 = 2) {
+    if_setgraphic("trh168_reverted,0", interface_39:com_21);
+} else if (%varclient_926 = 3) {
+    if_setgraphic("trh168_reverted,1", interface_39:com_21);
+} else if (%varclient_926 = 4) {
+    if_setgraphic("mob_cross_icon,1", interface_39:com_21);
+}

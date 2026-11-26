@@ -1,0 +1,12 @@
+[proc,script1668](string $string0)(string)
+def_int $int0 = string_length($string0);
+def_int $int1 = 0;
+while ($int1 < $int0) {
+    if (compare(substring($string0, $int1, calc($int1 + 1)), " ") = 0) {
+        $int1 = calc($int1 + 1);
+    } else {
+        $string0 = substring($string0, $int1, string_length($string0));
+        $int1 = $int0;
+    }
+}
+return($string0);

@@ -1,0 +1,2 @@
+[proc,script132]
+if_setonkey("chatdefault_onkey(event_keycode, event_keychar)", interface_137:com_52);

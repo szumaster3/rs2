@@ -177,8 +177,6 @@ class DuelArea
 
                 271 ->
                     if (session.hasRule(DuelRule.NO_PRAYER)) {
-                        player.prayer.toggle(PrayerType.get(buttonId))
-                        player.prayer.toggle(PrayerType.get(buttonId))
                         player.sendMessage("Use of prayer has been turned off for this duel.")
                         return true
                     }

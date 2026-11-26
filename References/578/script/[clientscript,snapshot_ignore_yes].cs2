@@ -1,0 +1,9 @@
+[clientscript,snapshot_ignore_yes]
+if (friend_test(%varclientstring_24) = true) {
+    mes("Sorry, you cannot ignore players in your Friends List.");
+} else {
+    ignore_add_temp(%varclientstring_24);
+    mes("You are ignoring <%varclientstring_24> until you log out.");
+}
+%varclient_11 = 0;
+~script675;

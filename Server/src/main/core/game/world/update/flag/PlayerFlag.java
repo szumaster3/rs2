@@ -26,6 +26,10 @@ public final class PlayerFlag {
      * occured.
      */
     private Location lastSceneGraph;
+    private boolean dynamicScene;
+
+    public boolean isDynamicScene() { return dynamicScene; }
+    public void setDynamicScene(boolean dynamicScene) { this.dynamicScene = dynamicScene; }
 
     /**
      * Constructs a new {@code PlayerFlags} {@code Object}.

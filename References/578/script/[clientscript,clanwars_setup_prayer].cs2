@@ -1,0 +1,10 @@
+[clientscript,clanwars_setup_prayer](int $int0)
+if (~clanwars_setup_clicktest($int0) = false) {
+    return;
+}
+if (%varclient_256 = false) {
+    %varclient_256 = true;
+} else {
+    %varclient_256 = false;
+}
+~clanwars_resynch_prayer;

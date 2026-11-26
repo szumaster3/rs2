@@ -1,0 +1,9 @@
+[proc,cursors_login]
+setdefaultcursors(cursor_36, cursor_41);
+sethardcodedopcursors(cursor_46, null);
+if (%varclient_987 = true | %varclient_987 = false) {
+    detail_customcursors(%varclient_987);
+} else {
+    %varclient_987 = true;
+    detail_customcursors(%varclient_987);
+}

@@ -1,0 +1,93 @@
+[proc,script1004](int $int0, int $int1)(int, obj, string, string)
+switch_int ($int0) {
+    case 1 :
+        switch_int ($int1) {
+            case 0 :
+                return(10, obj_5574, "Initiate sallet<br> (after Recruitment Drive and with 20 Defence)", "Members now have the Prayer level required to wear <col=000080>initiate sallets</col> (after Recruitment Drive, with level 20 Defence).");
+            case 1 :
+                return(10, obj_5575, "Initiate hauberk<br> (after Recruitment Drive and with 20 Defence)", "Members now have the Prayer level required to wear <col=000080>initiate hauberks</col> (after Recruitment Drive, with level 20 Defence).");
+            case 2 :
+                return(10, obj_5576, "Initiate cuisse<br> (after Recruitment Drive and with 20 Defence)", "Members now have the Prayer level required to wear <col=000080>initiate cuisses</col> (after Recruitment Drive, with level 20 Defence).");
+            case 3 :
+                return(20, obj_9672, "Proselyte sallet<br> (after Slug Menace and with 30 Defence)", "Members now have the Prayer level required to wear <col=000080>proselyte sallets</col> (after Slug Menace, with level 30 Defence).");
+            case 4 :
+                return(20, obj_9674, "Proselyte hauberk<br> (after Slug Menace and with 30 Defence)", "Members now have the Prayer level required to wear <col=000080>proselyte hauberks</col> (after Slug Menace, with level 30 Defence).");
+            case 5 :
+                return(20, obj_9676, "Proselyte cuisse<br> (after Slug Menace and with 30 Defence)", "Members now have the Prayer level required to wear <col=000080>proselyte cuisses</col> (after Slug Menace, with level 30 Defence).");
+            case 6 :
+                return(20, obj_9678, "Proselyte plateskirt<br> (after Slug Menace and with 30 Defence)", "Members now have the Prayer level required to wear <col=000080>proselyte plateskirts</col> (after Slug Menace, with level 30 Defence).");
+            case 7 :
+                return(20, obj_10462, "Guthix robe top", "Members can now wear <col=000080>Guthix robe tops</col>.");
+            case 8 :
+                return(20, obj_10466, "Guthix robe legs", "Members can now wear <col=000080>Guthix robe legs</col>.");
+            case 9 :
+                return(20, obj_10458, "Saradomin robe top", "Members can now wear <col=000080>Saradomin robe tops</col>.");
+            case 10 :
+                return(20, obj_10464, "Saradomin robe legs", "Members can now wear <col=000080>Saradomin robe legs</col>.");
+            case 11 :
+                return(20, obj_10460, "Zamorak robe top", "Members can now wear <col=000080>Zamorak robe tops</col>.");
+            case 12 :
+                return(20, obj_10468, "Zamorak robe legs", "Members can now wear <col=000080>Zamorak robe legs</col>.");
+            case 13 :
+                return(25, obj_11061, "Ancient Mace<br> (after Another Slice of H.A.M., with 15 Attack)", "Members now have the Prayer level required to wield the <col=000080>Ancient Mace</col> (after Another Slice of H.A.M. with level 15 Attack).");
+            case 14 :
+                return(40, obj_10448, "Guthix cloak", "Members can now wear <col=000080>Guthix cloaks</col>.");
+            case 15 :
+                return(40, obj_10454, "Guthix mitre<br> (with level 40 Magic)", "Members now have the Prayer level required to wear <col=000080>Guthix mitres</col> (with level 40 Magic).");
+            case 16 :
+                return(40, obj_10446, "Saradomin cloak", "Members can now wear <col=000080>Saradomin cloaks</col>.");
+            case 17 :
+                return(40, obj_10452, "Saradomin mitre<br> (with level 40 Magic)", "Members now have the Prayer level required to wear <col=000080>Saradomin mitres</col> (with level 40 Magic).");
+            case 18 :
+                return(40, obj_10450, "Zamorak cloak", "Members can now wear <col=000080>Zamorak cloaks</col>.");
+            case 19 :
+                return(40, obj_10456, "Zamorak mitre<br> (with level 40 Magic)", "Members now have the Prayer level required to wear <col=000080>Zamorak mitres</col> (with level 40 Magic).");
+            case 20 :
+                return(50, obj_1716, "Use completed Prayer books<br>to bless holy and unholy symbols<br>(after Horror from the Deep)", "Members now have the Prayer level required to use completed prayer books to bless <col=000080>holy</col> and <col=000080>unholy symbols</col> (after Horror from the Deep).");
+            case 21 :
+                return(55, obj_13734, "Members: Spirit shield<br> (after Summer's End and with 40 Defence)", "Members now have the Prayer level required to wield <col=000080>spirit shields</col> (after Summer's End, with level 40 Defence).");
+            case 22 :
+                return(60, obj_10472, "Guthix stole", "Members can now wear <col=000080>Guthix stoles</col>.");
+            case 23 :
+                return(60, obj_10442, "Guthix crozier", "Members can now wield <col=000080>Guthix croziers</col>.");
+            case 24 :
+                return(60, obj_10470, "Saradomin stole", "Members can now wear <col=000080>Saradomin stoles</col>.");
+            case 25 :
+                return(60, obj_10440, "Saradomin crozier", "Members can now wield <col=000080>Saradomin croziers</col>.");
+            case 26 :
+                return(60, obj_10474, "Zamorak stole", "Members can now wear <col=000080>Zamorak stoles</col>.");
+            case 27 :
+                return(60, obj_10444, "Zamorak crozier", "Members can now wield <col=000080>Zamorak croziers</col>.");
+            case 28 :
+                return(60, obj_13736, "Blessed spirit shield<br> (after Summer's End and with 70 Defence)", "Members now have the Prayer level required to wield <col=000080>blessed spirit shields</col> (after Summer's End, with level 70 Defence).");
+            case 29 :
+                return(70, obj_13738, "Arcane spirit shield<br> (after Summer's End and with 65 Magic and 75 Defence)", "Members now have the Prayer level required to wield <col=000080>arcane spirit shields</col> (after Summer's End, with level 65 Magic and 75 Defence).");
+            case 30 :
+                return(70, obj_13744, "Spectral spirit shield<br> (after Summer's End and with 65 Magic and 75 Defence)", "Members now have the Prayer level required to wield <col=000080>spectral spirit shields</col> (after Summer's End, with level 65 Magic and 75 Defence).");
+            case 31 :
+                return(75, obj_13740, "Divine spirit shield<br> (after Summer's End and with 75 Defence)", "Members now have the Prayer level required to wield <col=000080>divine spirit shields</col> (after Summer's End, with level 75 Defence).");
+            case 32 :
+                return(75, obj_13742, "Elysian spirit shield<br> (after Summer's End and with 75 Defence)", "Members now have the Prayer level required to wield <col=000080>elysian spirit shields</col> (after Summer's End, with level 75 Defence).");
+        }
+    case 2 :
+        switch_int ($int1) {
+            case 0 :
+                return(2, obj_11948, "Repair somebody else's gravestone", "You can now <col=000080>repair</col> somebody else's <col=000080>gravestone</col>!");
+            case 1 :
+                return(31, obj_13253, "Monastery", "Abbot Langley will now let you enter the <col=000080>Monastery</col> west of <col=000080>Edgeville</col>.");
+            case 2 :
+                return(70, obj_11948, "Bless somebody else's gravestone", "You can now <col=000080>bless somebody else's <col=000080>gravestone</col>!");
+            case 3 :
+                return(85, obj_13754, "Members: Bless spirit shields<br> (after Summer's End)", "Members can now <col=000080>bless spirit shields</col> (after Summer's End).");
+            case 4 :
+                return(90, obj_13746, "Members: Create arcane spirit shields<br> (after Summer's End and with 85 Smithing)", "Members can now create <col=000080>arcane spirit shields</col> (after Summer's End, with level 85 Smithing).");
+            case 5 :
+                return(90, obj_13748, "Members: Create divine spirit shields<br> (after Summer's End and with 85 Smithing)", "Members can now create <col=000080>divine spirit shields</col> (after Summer's End, with level 85 Smithing).");
+            case 6 :
+                return(90, obj_13750, "Members: Create elysian spirit shields<br> (after Summer's End and with 85 Smithing)", "Members can now create <col=000080>elysian spirit shields</col> (after Summer's End, with level 85 Smithing).");
+            case 7 :
+                return(90, obj_13752, "Members: Create spectral spirit shields<br> (after Summer's End and with 85 Smithing)", "Members can now create <col=000080>spectral spirit shields</col> (after Summer's End, with level 85 Smithing).");
+            case 8 :
+                return(99, obj_9759, "Skill mastery", "<col=000080>Congratulations! You are now a master of <col=800000>Prayer<col=000080>. Members can visit <col=800000>Brother Jared<col=000080> upstairs at the <col=800000>Monastery<col=000080>. He has something special that is only available to true masters of the <col=800000>Prayer<col=000080> skill!");
+        }
+}

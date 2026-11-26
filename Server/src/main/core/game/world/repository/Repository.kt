@@ -158,6 +158,7 @@ object Repository {
 
     @JvmStatic
     fun removePlayer(player: Player) {
+        lobbyPlayers.remove(player)
         players.remove(player)
         uid_map.remove(player.details.uid)
         playerNames.remove(player.name)

@@ -1,0 +1,26 @@
+[clientscript,meslayer_mode12](int $int0)
+if ($int0 ! 1) {
+    return;
+}
+if (getwindowmode >= 2) {
+    if_sethide(false, interface_746:com_18);
+}
+if_sethide(false, interface_752:com_3);
+if_sethide(true, interface_752:com_7);
+if_sethide(true, interface_752:com_8);
+if (~bool_to_int(%varclient_266) = 0) {
+    %varclientstring_38 = "";
+    %varclientstring_39 = "";
+    %varclient_266 = true;
+}
+if (string_length(%varclientstring_38) > 0) {
+    if_settext("Edit the name of your caller:<br>(Delete it to disable this feature.)", interface_752:com_4);
+} else {
+    if_settext("Enter the name of your caller:", interface_752:com_4);
+}
+%varclient_5 = 12;
+~meslayer_setupinput(%varclientstring_38);
+if_setonclick("clanwars_caller_click", interface_752:com_3);
+~script2026;
+if_setonkey("meslayer_onkey(event_keycode, event_keychar)", interface_752:com_5);
+~script1188;

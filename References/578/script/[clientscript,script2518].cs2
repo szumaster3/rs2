@@ -1,0 +1,30 @@
+[clientscript,script2518](component $component0)
+def_int $int1 = ~script2520;
+switch_component ($component0) {
+    case interface_654:com_15 :
+        if (%varclient_847 < 5 & $int1 < 5) {
+            %varclient_847 = calc(%varclient_847 + 1);
+            if_settext(tostring(%varclient_847), interface_654:com_13);
+        }
+    case interface_654:com_63 :
+        if (%varclient_848 < 5 & $int1 < 5) {
+            %varclient_848 = calc(%varclient_848 + 1);
+            if_settext(tostring(%varclient_848), interface_654:com_61);
+        }
+    case interface_654:com_55 :
+        if (%varclient_849 < 5 & $int1 < 5) {
+            %varclient_849 = calc(%varclient_849 + 1);
+            if_settext(tostring(%varclient_849), interface_654:com_53);
+        }
+    case interface_654:com_47 :
+        if (%varclient_850 < 5 & $int1 < 5) {
+            %varclient_850 = calc(%varclient_850 + 1);
+            if_settext(tostring(%varclient_850), interface_654:com_45);
+        }
+    case interface_654:com_72 :
+        if (%varclient_851 < 5 & $int1 < 5) {
+            %varclient_851 = calc(%varclient_851 + 1);
+            if_settext(tostring(%varclient_851), interface_654:com_70);
+        }
+}
+~script2517;

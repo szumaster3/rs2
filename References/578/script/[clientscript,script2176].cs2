@@ -1,0 +1,13 @@
+[clientscript,script2176](component $component0)
+def_string $string0 = "";
+switch_component ($component0) {
+    case interface_190:com_9, interface_190:com_10 :
+        if (%varclient_692 = 1) {
+            $string0 = "Click to hide the quests you cannot start.<br><br>Some recommended stats and abilities (such as Combat Levels) are left for you to decide.";
+        } else {
+            $string0 = "Click to show all quests.";
+        }
+    case interface_190:com_11, interface_190:com_12 :
+        $string0 = "Click to reverse the order of groups.";
+}
+~script569(interface_190:com_19, -1, interface_190:com_20, $string0, 25, 450);

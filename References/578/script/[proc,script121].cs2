@@ -1,0 +1,44 @@
+[proc,script121](int $int0)(component)
+if (getwindowmode >= 2) {
+    return(~script1742($int0));
+} else {
+    switch_int ($int0) {
+        case 0 :
+            return(interface_548:com_89);
+        case 1 :
+            return(interface_548:com_90);
+        case 2 :
+            return(interface_548:com_91);
+        case 3 :
+            return(interface_548:com_92);
+        case 4 :
+            return(interface_548:com_93);
+        case 5 :
+            return(interface_548:com_94);
+        case 6 :
+            return(interface_548:com_95);
+        case 7 :
+            return(interface_548:com_96);
+        case 8 :
+            return(interface_548:com_59);
+        case 9 :
+            return(interface_548:com_60);
+        case 10 :
+            return(interface_548:com_61);
+        case 11 :
+            return(interface_548:com_62);
+        case 12 :
+            return(interface_548:com_63);
+        case 13 :
+            return(interface_548:com_64);
+        case 14 :
+            return(interface_548:com_65);
+        case 15 :
+            return(interface_548:com_66);
+        case 95 :
+            return(interface_747:com_8);
+        case 99 :
+            return(interface_548:com_133);
+    }
+}
+return(null);

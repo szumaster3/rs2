@@ -1,0 +1,124 @@
+[proc,loginscreen_setactivemenu](component $component0)
+%varclient_175 = clientclock;
+~deltooltip_action(interface_744:com_517);
+%varclient_1 = 0;
+if_setontimer(null, interface_744:com_9);
+%varclient_174 = 0;
+if ($component0 = interface_744:com_392) {
+    if (map_world ! -1) {
+        if_settext(~script1889, interface_744:com_468);
+    } else {
+        if_settext("World Select", interface_744:com_468);
+    }
+    ~script1868;
+    %varclient_547 = 0;
+    if_setonclick("loginscreen_setactivemenu(interface_882:com_0)", interface_744:com_471);
+    ~graphics_options_rebuild(detailget_toolkit, getwindowmode, -1, -1, 0);
+    ~loginscreen_musicvol(interface_744:com_491, interface_744:com_492);
+    if_sethide(false, interface_744:com_392);
+    ~script2709(290, 338, 49);
+} else {
+    if_sethide(true, interface_744:com_392);
+}
+if ($component0 = interface_744:com_393) {
+    %varclient_174 = 23;
+    if_sethide(false, interface_744:com_393);
+    ~script2709(290, 338, 49);
+} else {
+    if_sethide(true, interface_744:com_393);
+    if_setonclick(null, interface_744:com_461);
+    if_setonclick(null, interface_744:com_462);
+}
+if ($component0 = interface_744:com_394) {
+    if_sethide(false, interface_744:com_394);
+    if_setonclick(null, interface_744:com_445);
+    if_setontimer("script1180", interface_744:com_9);
+    if (map_world = -1) {
+        if_settext("World: Auto", interface_744:com_444);
+    } else {
+        if_settext(~script1889, interface_744:com_444);
+    }
+    if_settext(%varclientstring_32, interface_744:com_451);
+    %varclientstring_33 = "";
+    if_settext(%varclientstring_33, interface_744:com_457);
+    if (compare(%varclientstring_32, "") ! 0) {
+        %varclient_174 = 2;
+    } else {
+        %varclient_174 = 1;
+    }
+    ~script2709(290, 338, 49);
+} else {
+    if_sethide(true, interface_744:com_394);
+    %varclientstring_33 = "";
+    login_resetreply;
+}
+def_string $string0 = "";
+def_string $string1 = "";
+if ($component0 = interface_744:com_397) {
+    if_setsize(0, calc(paraheight(if_gettext(interface_744:com_398), if_getwidth(interface_744:com_398), p12_full) * 15 + 5), ^setsize_minus, ^setsize_abs, interface_744:com_398);
+    if_setposition(0, min(calc((if_getheight(interface_744:com_397) + if_getheight(interface_744:com_398)) / 2 + 45), calc(if_getheight(interface_744:com_397) - if_getheight(interface_744:com_400))), ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_400);
+    $string0 = if_gettext(interface_744:com_399);
+    if (string_length($string0) > 0) {
+        $string1 = "<col=461e00><u=461e00><$string0></u></col>";
+        if_settext($string1, interface_744:com_399);
+        if_setonmouseleave("text_swapper(interface_744:com_399, $string1)", interface_744:com_399);
+        $string1 = "<col=ffffff><u=ffffff><$string0></u></col>";
+        if_setonmouseover("text_swapper(interface_744:com_399, $string1)", interface_744:com_399);
+        if_setposition(0, min(calc((if_getheight(interface_744:com_397) + if_getheight(interface_744:com_398)) / 2 + 15), calc(if_gety(interface_744:com_400) - if_getheight(interface_744:com_399))), ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_399);
+        if_sethide(false, interface_744:com_399);
+    } else {
+        if_setonmouseover(null, interface_744:com_399);
+        if_setonmouseleave(null, interface_744:com_399);
+        if_setonclick(null, interface_744:com_399);
+        if_sethide(true, interface_744:com_399);
+    }
+    if_sethide(false, interface_744:com_397);
+    ~script2709(290, 338, 49);
+} else {
+    if_sethide(true, interface_744:com_397);
+    if_settext("", interface_744:com_399);
+    if_setonclick(null, interface_744:com_399);
+}
+if ($component0 = interface_744:com_10) {
+    if_sethide(false, interface_744:com_10);
+    ~script2709(754, 425, 10);
+    ~script2213;
+} else {
+    if_sethide(true, interface_744:com_10);
+}
+if ($component0 = interface_882:com_0) {
+    if_sethide(false, interface_744:com_165);
+    if_opensubclient(interface_744:com_165, interface_882);
+    ~graphics_options_init(1);
+    if_setonclick("loginscreen_setactivemenu(interface_744:com_392)", interface_882:com_43);
+} else {
+    if_closesubclient(interface_744:com_165);
+    if_sethide(true, interface_744:com_165);
+}
+if ($component0 = interface_744:com_396) {
+    ~script1217(interface_744:com_409, interface_744:com_436);
+    ~loginscreen_musicvol(interface_744:com_418, interface_744:com_435);
+    ~script1218(interface_744:com_427, interface_744:com_434);
+    ~script1220;
+    if_sethide(false, interface_744:com_396);
+    ~script2709(290, 338, 49);
+} else {
+    if_sethide(true, interface_744:com_396);
+}
+if ($component0 = interface_744:com_166) {
+    ~script1873;
+    if_sethide(false, interface_744:com_166);
+    if_sethide(true, interface_744:com_165);
+    ~script2709(754, -10, 0);
+    worldlist_pingworlds(true);
+} else {
+    if_sethide(true, interface_744:com_166);
+    worldlist_pingworlds(false);
+}
+if ($component0 = interface_744:com_164) {
+    %varclient_174 = 22;
+    if_sethide(false, interface_744:com_164);
+    ~script2709(754, 440, 0);
+} else {
+    if_sethide(true, interface_744:com_164);
+}

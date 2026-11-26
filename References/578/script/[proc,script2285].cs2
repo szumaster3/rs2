@@ -1,0 +1,32 @@
+[proc,script2285]
+if_settext("", interface_744:com_135);
+if_setgraphic(null, interface_744:com_150);
+%varclient_735 = -1;
+if (compare(%varclientstring_124, "") = 0) {
+    return;
+}
+def_int $int0 = string_length(%varclientstring_124);
+if ($int0 < 5) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Password is too short, it must be at least 5 characters long.", interface_744:com_135);
+    %varclient_735 = 5;
+    ~script2230(%varclient_174);
+    return;
+} else if ($int0 > 20) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Password is too long, it must be no more than 20 characters.", interface_744:com_135);
+    %varclient_735 = 5;
+    ~script2230(%varclient_174);
+    return;
+} else if (~script2202(%varclientstring_124) = true) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Passwords may only contain letters and numbers.", interface_744:com_135);
+    %varclient_735 = 5;
+    ~script2230(%varclient_174);
+    return;
+} else if (compare(%varclientstring_124, %varclientstring_122) = 0) {
+    if_setgraphic(login_cross, interface_744:com_150);
+    if_settext("Your password is too similar to your username.", interface_744:com_135);
+    ~script2230(%varclient_174);
+    return;
+}

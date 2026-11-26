@@ -1,0 +1,11 @@
+[clientscript,script2781](int $int0, int $int1, int $int2, int $int3)
+def_int $int4 = 0;
+if (%varclient_748 ! null & %varclient_749 ! null) {
+    $int4 = ~script2782(0, %varclient_748, %varclient_749, %varclientstring_191, $int0, $int1, $int2, $int3, $int4);
+}
+if (%varclient_750 ! null & %varclient_751 ! null) {
+    $int4 = ~script2782(1, %varclient_750, %varclient_751, %varclientstring_192, $int0, $int1, $int2, $int3, $int4);
+}
+if (%varclient_752 ! null & %varclient_753 ! null) {
+    $int4 = ~script2782(2, %varclient_752, %varclient_753, %varclientstring_193, $int0, $int1, $int2, $int3, $int4);
+}

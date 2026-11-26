@@ -1,0 +1,2 @@
+[clientscript,script1939]
+%varclient_556 = calc(clientclock + %varclient_558 * 30);

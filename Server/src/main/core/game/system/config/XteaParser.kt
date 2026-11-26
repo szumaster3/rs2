@@ -17,9 +17,11 @@ class XteaParser {
 
     private val gson = Gson()
 
-    fun load() {
+    fun load() = load(ServerConstants.CONFIG_PATH + "xteas.json")
+
+    fun load(path: String) {
         var count = 0
-        FileReader(ServerConstants.CONFIG_PATH + "xteas.json").use { reader ->
+        FileReader(path).use { reader ->
             val obj = gson.fromJson(reader, JsonObject::class.java)
             val configList = obj.getAsJsonArray("xteas") ?: return@use
             for (configElement in configList) {

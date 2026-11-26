@@ -1,0 +1,6 @@
+[proc,script2268]
+if_sethide(true, interface_744:com_369);
+if_sethide(true, interface_744:com_366);
+if_sethide(true, interface_744:com_363);
+if_sethide(true, interface_744:com_297);
+if_sethide(true, interface_744:com_300);

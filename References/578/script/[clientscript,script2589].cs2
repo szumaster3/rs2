@@ -1,0 +1,3 @@
+[clientscript,script2589](component $component0)
+~script2590;
+if_setgraphic("radio_buttons,1", $component0);

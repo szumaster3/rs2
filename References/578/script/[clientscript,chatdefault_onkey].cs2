@@ -1,0 +1,88 @@
+[clientscript,chatdefault_onkey](int $key0, char $char1)
+if ($key0 = ^key_f9) {
+    if (%varclient_132 ! null) {
+        ~quickchat_respond(%varclient_133, %varclientstring_29, %varclient_132);
+    }
+    return;
+}
+if ($key0 = ^key_f10) {
+    if (~script1036 ! null) {
+        ~quickchat_open_context(0, "");
+    }
+    return;
+}
+def_int $int2 = 0;
+def_int $int3 = 0;
+if ($key0 = ^key_f11) {
+    $int2 = 150;
+    $int3 = calc(clientclock - %varclient_158);
+    if ($int3 > 1500) {
+        %varclient_159 = 0;
+    }
+    if (%varclient_159 >= 7) {
+        $int2 = 600;
+    } else if (%varclient_159 >= 5) {
+        $int2 = 450;
+    } else if (%varclient_159 >= 3) {
+        $int2 = 300;
+    }
+    if ($int3 >= $int2) {
+        %varclient_158 = clientclock;
+        %varclient_159 = calc(%varclient_159 + 1);
+        if (%varclient_130 ! null) {
+            ~quickchat_phrase_resend;
+        }
+        return;
+    }
+}
+if (staffmodlevel > 0) {
+    if ($key0 = ^key_page_up) {
+        ~chatout_scrollup;
+    } else if ($key0 = ^key_page_down) {
+        ~chatout_scrolldown;
+    }
+} else if (unknown_command_3328 = true | map_quickchat = true) {
+    if ($key0 = ^key_return) {
+        ~quickchat_open(0, "");
+        return;
+    }
+    if (char_isprintable($char1) = true & compare("/", append_char("", $char1)) = 0) {
+        ~quickchat_open(2, "");
+        return;
+    }
+    return;
+}
+def_int $int4 = 0;
+def_int $int5 = 0;
+def_int $int6 = 0;
+switch_int ($key0) {
+    case ^key_return :
+        if (string_length(%varclientstring_1) <= 0) {
+            %varclientstring_1 = "";
+            ~quickchat_open(0, "");
+            return;
+        }
+        if (compare("/", %varclientstring_1) = 0) {
+            %varclientstring_1 = "";
+            ~quickchat_open(2, "");
+            return;
+        }
+        if (staffmodlevel > 0 & string_indexof_string(%varclientstring_1, "::", 0) = 0) {
+            mes("<col=ff7f7f>Use the reverse apostrophe (`) key to open the console to enter that command.");
+            mes("<col=ff7f7f>It is usually located under the ESC key.");
+            %varclientstring_1 = "";
+            ~script1558(0);
+            return;
+        }
+        chat_sendpublic(%varclientstring_1);
+        ~chatout_add(%varclientstring_1);
+        %varclientstring_1 = "";
+    case ^key_left, ^key_right, ^key_up, ^key_down, ^key_home, ^key_end :
+        if (keyheld_shift = false) {
+            return;
+        }
+        %varclient_1028 = ~script1553($key0, %varclient_1028, %varclientstring_1);
+    case default :
+        %varclientstring_1, %varclient_1028 = ~script802(%varclient_1028, %varclientstring_1, 0, $key0, $char1);
+}
+~script1558(0);

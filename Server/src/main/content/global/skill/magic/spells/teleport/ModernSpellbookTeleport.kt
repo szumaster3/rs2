@@ -4,6 +4,7 @@ import content.data.GameAttributes
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spells.ModernSpells
+import core.ServerConstants
 import core.api.*
 import core.game.event.TeleportEvent
 import core.game.node.entity.player.Player
@@ -27,7 +28,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
         onCast(ModernSpells.HOME_TELEPORT, NONE) { player, _ ->
             requires(player)
             if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
-                player.teleporter.send(Location.create(3233, 3230, 0), TeleportManager.TeleportType.HOME)
+                player.teleporter.send(ServerConstants.HOME_LOCATION!!.location, TeleportManager.TeleportType.HOME)
             } else {
                 player.teleporter.send(player.getRespawnLocation(), TeleportManager.TeleportType.HOME)
             }

@@ -1,0 +1,9 @@
+[clientscript,script276](component $component0)
+def_int $int1 = 0;
+while (cc_find($component0, $int1) = true) {
+    cc_setcolour(0x663300);
+    $int1 = calc($int1 + 1);
+}
+if (cc_find($component0, %varclient_195) = true) {
+    cc_setcolour(0xffe1be);
+}

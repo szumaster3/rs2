@@ -1,0 +1,3 @@
+[clientscript,script546](component $component0)
+%varclient_80 = 0;
+cc_deleteall($component0);

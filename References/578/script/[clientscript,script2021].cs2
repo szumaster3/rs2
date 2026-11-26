@@ -1,0 +1,11 @@
+[clientscript,script2021](component $component0)
+if (if_gethide(interface_378:com_31) = true) {
+    if_setvflip(true, interface_378:com_38);
+    if_sethide(false, interface_378:com_31);
+} else {
+    if ($component0 = interface_378:com_34 | $component0 = interface_378:com_35) {
+        if_settext(if_gettext($component0), interface_378:com_39);
+    }
+    if_setvflip(false, interface_378:com_38);
+    if_sethide(true, interface_378:com_31);
+}

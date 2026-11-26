@@ -1,0 +1,27 @@
+[clientscript,script949](component $component0)
+switch_component ($component0) {
+    case interface_513:com_15 :
+        if (compare("", %varclientstring_132) ! 0) {
+            if_settext(%varclientstring_132, $component0);
+        }
+    case interface_513:com_16 :
+        if (compare("", %varclientstring_133) ! 0) {
+            if_settext(%varclientstring_133, $component0);
+        }
+    case interface_513:com_17 :
+        if (compare("", %varclientstring_134) ! 0) {
+            if_settext(%varclientstring_134, $component0);
+        }
+    case interface_513:com_18 :
+        if (compare("", %varclientstring_135) ! 0) {
+            if_settext(%varclientstring_135, $component0);
+        }
+    case interface_513:com_19 :
+        if (compare("", %varclientstring_136) ! 0) {
+            if_settext(%varclientstring_136, $component0);
+        }
+    case interface_513:com_20 :
+        if (compare("", %varclientstring_137) ! 0) {
+            if_settext(%varclientstring_137, $component0);
+        }
+}

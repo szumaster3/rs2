@@ -1,0 +1,2 @@
+[clientscript,script1273]
+if_setobject_wearcol(obj_14870, 5, interface_686:com_24);

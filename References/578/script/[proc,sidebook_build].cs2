@@ -1,0 +1,209 @@
+[proc,sidebook_build](component $component0, component $component1, component $component2)
+cc_deleteall($component0);
+cc_deleteall($component1);
+cc_deleteall($component2);
+%varclient_656 = min(%varclient_656, calc(%varclient_657 - 1));
+def_int $int3 = 0;
+if (%varclient_658 > 0 | %varclient_659 > 0 | %varclient_660 > 0 | %varclient_661 > 0 | %varclient_662 > 0 | %varclient_663 > 0 | %varclient_664 > 0 | %varclient_665 > 0 | %varclient_666 > 0 | %varclient_667 > 0 | %varclient_668 > 0 | %varclient_669 > 0 | %varclient_670 > 0 | %varclient_658 > 13 | %varclient_672 > 0 | %varclient_673 > 0) {
+    $int3 = 1;
+}
+if ($int3 = 0 | %varclient_656 > 0) {
+    cc_create($component2, ^iftype_text, if_getnextsubid($component2));
+    cc_setsize(2, 14, ^setsize_minus, ^setsize_abs);
+    cc_setposition(0, 0, ^setpos_abs_centre, ^setpos_abs_bottom);
+    cc_settextalign(^settextalign_centre, ^settextalign_centre, 0);
+    cc_settextfont(p11_full);
+    cc_setcolour(0xff981f);
+    if ($int3 = 0) {
+        cc_settext("<tostring(calc(%varclient_656 + 1))> / <tostring(%varclient_657)>");
+    } else {
+        cc_settext("<tostring(%varclient_656)> / <tostring(calc(%varclient_657 - 1))>");
+    }
+}
+if (%varclient_656 > 0) {
+    cc_create($component2, ^iftype_text, if_getnextsubid($component2));
+    cc_setsize(2, 17, ^setsize_minus, ^setsize_minus);
+    cc_setposition(0, 1, ^setpos_abs_centre, ^setpos_abs_top);
+    cc_settextalign(^settextalign_left, ^settextalign_top, 0);
+    cc_settextfont(p12_full);
+    cc_setcolour(0xff981f);
+    switch_int (%varclient_656) {
+        case 1 :
+            cc_settext(%varclientstring_73);
+        case 2 :
+            cc_settext(%varclientstring_74);
+        case 3 :
+            cc_settext(%varclientstring_75);
+        case 4 :
+            cc_settext(%varclientstring_76);
+        case 5 :
+            cc_settext(%varclientstring_77);
+        case 6 :
+            cc_settext(%varclientstring_78);
+        case 7 :
+            cc_settext(%varclientstring_79);
+        case 8 :
+            cc_settext(%varclientstring_80);
+        case 9 :
+            cc_settext(%varclientstring_81);
+        case 10 :
+            cc_settext(%varclientstring_82);
+        case 11 :
+            cc_settext(%varclientstring_83);
+        case 12 :
+            cc_settext(%varclientstring_84);
+        case 13 :
+            cc_settext(%varclientstring_85);
+        case 14 :
+            cc_settext(%varclientstring_86);
+        case 15 :
+            cc_settext(%varclientstring_87);
+        case 16 :
+            cc_settext(%varclientstring_88);
+        case 17 :
+            cc_settext(%varclientstring_89);
+        case 18 :
+            cc_settext(%varclientstring_90);
+        case 19 :
+            cc_settext(%varclientstring_91);
+        case 20 :
+            cc_settext(%varclientstring_92);
+        case 21 :
+            cc_settext(%varclientstring_93);
+        case 22 :
+            cc_settext(%varclientstring_94);
+        case 23 :
+            cc_settext(%varclientstring_95);
+        case 24 :
+            cc_settext(%varclientstring_96);
+        case 25 :
+            cc_settext(%varclientstring_97);
+        case 26 :
+            cc_settext(%varclientstring_98);
+        case 27 :
+            cc_settext(%varclientstring_99);
+        case 28 :
+            cc_settext(%varclientstring_100);
+        case 29 :
+            cc_settext(%varclientstring_101);
+        case 30 :
+            cc_settext(%varclientstring_102);
+        case 31 :
+            cc_settext(%varclientstring_103);
+        case 32 :
+            cc_settext(%varclientstring_104);
+        case 33 :
+            cc_settext(%varclientstring_105);
+        case 34 :
+            cc_settext(%varclientstring_106);
+        case 35 :
+            cc_settext(%varclientstring_107);
+        case 36 :
+            cc_settext(%varclientstring_108);
+        case 37 :
+            cc_settext(%varclientstring_109);
+        case 38 :
+            cc_settext(%varclientstring_110);
+        case 39 :
+            cc_settext(%varclientstring_111);
+        case 40 :
+            cc_settext(%varclientstring_112);
+        case 41 :
+            cc_settext(%varclientstring_113);
+        case 42 :
+            cc_settext(%varclientstring_114);
+        case 43 :
+            cc_settext(%varclientstring_115);
+        case 44 :
+            cc_settext(%varclientstring_116);
+        case 45 :
+            cc_settext(%varclientstring_117);
+        case 46 :
+            cc_settext(%varclientstring_118);
+        case 47 :
+            cc_settext(%varclientstring_119);
+        case 48 :
+            cc_settext(%varclientstring_120);
+        case 49 :
+            cc_settext(%varclientstring_121);
+    }
+    return;
+}
+def_int $int4 = 0;
+def_string $string0 = "";
+def_int $int5 = 0;
+while ($int4 < 16) {
+    switch_int ($int4) {
+        case 0 :
+            $string0 = %varclientstring_57;
+            $int5 = %varclient_658;
+        case 1 :
+            $string0 = %varclientstring_58;
+            $int5 = %varclient_659;
+        case 2 :
+            $string0 = %varclientstring_59;
+            $int5 = %varclient_660;
+        case 3 :
+            $string0 = %varclientstring_60;
+            $int5 = %varclient_661;
+        case 4 :
+            $string0 = %varclientstring_61;
+            $int5 = %varclient_662;
+        case 5 :
+            $string0 = %varclientstring_62;
+            $int5 = %varclient_663;
+        case 6 :
+            $string0 = %varclientstring_63;
+            $int5 = %varclient_664;
+        case 7 :
+            $string0 = %varclientstring_64;
+            $int5 = %varclient_665;
+        case 8 :
+            $string0 = %varclientstring_65;
+            $int5 = %varclient_666;
+        case 9 :
+            $string0 = %varclientstring_66;
+            $int5 = %varclient_667;
+        case 10 :
+            $string0 = %varclientstring_67;
+            $int5 = %varclient_668;
+        case 11 :
+            $string0 = %varclientstring_68;
+            $int5 = %varclient_669;
+        case 12 :
+            $string0 = %varclientstring_69;
+            $int5 = %varclient_670;
+        case 13 :
+            $string0 = %varclientstring_70;
+            $int5 = %varclient_671;
+        case 14 :
+            $string0 = %varclientstring_71;
+            $int5 = %varclient_672;
+        case 15 :
+            $string0 = %varclientstring_72;
+            $int5 = %varclient_673;
+        case default :
+            $string0 = "";
+            $int5 = 0;
+    }
+    if (string_length($string0) > 0) {
+        cc_create($component2, ^iftype_text, if_getnextsubid($component2));
+        if ($int4 = calc(16 - 1)) {
+            cc_setsize(6, 17, ^setsize_minus, ^setsize_abs);
+        } else {
+            cc_setsize(2, 12, ^setsize_minus, ^setsize_abs);
+        }
+        cc_setposition(0, calc($int4 * 12 + 1), ^setpos_abs_centre, ^setpos_abs_top);
+        cc_settextalign(^settextalign_left, ^settextalign_top, 0);
+        cc_settextfont(p12_full);
+        cc_setcolour(0xff981f);
+        cc_settext($string0);
+        if ($int5 > 0) {
+            cc_setop(1, "Go");
+            cc_setonop("script2065(event_op, $int5, $component0, $component1, $component2)");
+            cc_setonmouseover("cc_text_colour_swapper(event_com, event_comsubid, ^white)");
+            cc_setonmouseleave("cc_text_colour_swapper(event_com, event_comsubid, 0xff981f)");
+        }
+    }
+    $int4 = calc($int4 + 1);
+}

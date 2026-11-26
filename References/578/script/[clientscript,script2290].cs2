@@ -1,0 +1,13 @@
+[clientscript,script2290](component $component0, int $int1)
+if (~script2297($int1) = 0) {
+    if (~script2295($int1) = 0) {
+        return;
+    }
+    if (cc_find($component0, $int1) = true) {
+        cc_setgraphic("miscgraphics,11");
+        cc_setop(1, "Deselect");
+    }
+} else if (cc_find($component0, $int1) = true) {
+    cc_setgraphic("miscgraphics,10");
+    cc_setop(1, "Select");
+}

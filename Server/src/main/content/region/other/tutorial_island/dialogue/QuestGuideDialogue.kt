@@ -34,7 +34,7 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
             27 -> {
                 sendPlainDialogue(player, true, "Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
                 setVarbit(player, Vars.VARBIT_FLASHING_TAB_ICON_3756, 3)
-                player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))
+                player.interfaceManager.openTab(2, Component(190))
             }
             28 -> when (stage) {
                 0 -> npc("When you start a quest it will change colour to yellow,", "and to green when you've finished. This is so you can", "easily see what's complete, what's started and what's left", "to begin.").also { stage++ }

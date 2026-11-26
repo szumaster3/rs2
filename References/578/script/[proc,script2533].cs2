@@ -1,0 +1,8 @@
+[proc,script2533]
+if (%varclient_910 = 1) {
+    if_setgraphic(graphic_1949, interface_39:com_48);
+} else if (%varclient_910 = 2) {
+    if_setgraphic(graphic_1946, interface_39:com_48);
+} else if (%varclient_910 = 3) {
+    if_setgraphic(graphic_1947, interface_39:com_48);
+}

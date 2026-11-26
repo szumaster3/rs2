@@ -1,0 +1,10 @@
+[clientscript,clanwars_setup_potions](int $int0)
+if (~clanwars_setup_clicktest($int0) = false) {
+    return;
+}
+if (%varclient_255 = false) {
+    %varclient_255 = true;
+} else {
+    %varclient_255 = false;
+}
+~clanwars_resynch_potions;

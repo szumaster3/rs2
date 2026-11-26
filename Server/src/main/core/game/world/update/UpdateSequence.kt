@@ -28,7 +28,8 @@ class UpdateSequence {
         lobbyList = Repository.lobbyPlayers
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
-        lobbyList!!.map { PacketRepository.send(Encoders530.CLEAR_MINIMAP_FLAG, PlayerContext(it)) }
+        // Welcome screen has no active scene UI; reset inbound throttling without ticking gameplay.
+        lobbyList!!.forEach { java.util.Arrays.fill(it.opCounts, 0.toByte()) }
 
         var npcTickStart = System.currentTimeMillis()
         npcList!!.forEach(NPC::tick)

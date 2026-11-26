@@ -1,0 +1,1091 @@
+[com_0]
+type=graphic
+x=17
+y=26
+width=480
+height=293
+graphic=tradebacking
+tiling=yes
+colour=0x000000
+opbase=  
+
+[com_1]
+type=graphic
+y=26
+width=37
+height=276
+graphic="v2_stone_borders,1"
+tiling=yes
+colour=0x000000
+opbase= 
+
+[com_2]
+type=graphic
+x=479
+y=26
+width=22
+height=281
+graphic="v2_stone_borders,3"
+tiling=yes
+colour=0x000000
+opbase= 
+
+[com_3]
+type=graphic
+x=15
+y=302
+width=468
+height=23
+graphic="v2_stone_borders,2"
+tiling=yes
+colour=0x000000
+
+[com_4]
+type=graphic
+x=14
+y=10
+width=478
+height=38
+graphic="v2_stone_borders,0"
+tiling=yes
+colour=0x000000
+opbase= 
+
+[com_5]
+type=graphic
+x=467
+y=290
+width=32
+height=32
+graphic="v2_stone_borders,7"
+colour=0x000000
+opbase= 
+
+[com_6]
+type=graphic
+x=13
+y=290
+width=32
+height=32
+graphic="v2_stone_borders,6"
+colour=0x000000
+
+[com_7]
+type=graphic
+x=13
+y=23
+width=32
+height=32
+graphic="v2_stone_borders,4"
+colour=0x000000
+opbase= 
+
+[com_8]
+type=graphic
+x=467
+y=23
+width=32
+height=32
+graphic="v2_stone_borders,5"
+colour=0x000000
+opbase= 
+
+[com_9]
+type=graphic
+x=16
+y=38
+width=477
+height=35
+graphic="v2_stone_borders,8"
+tiling=yes
+colour=0x000000
+
+[com_10]
+type=graphic
+x=13
+y=40
+width=32
+height=32
+graphic="v2_stone_borders,9"
+tiling=yes
+colour=0x000000
+
+[com_11]
+type=graphic
+x=467
+y=40
+width=32
+height=32
+graphic="v2_stone_borders,10"
+tiling=yes
+colour=0x000000
+
+[com_12]
+type=graphic
+x=471
+y=32
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+colour=0x000000
+transmitop=1
+op1=Close
+onmouseover=graphic_swapper(event_com, "v2_stone_close_button,1")
+onmouseleave=graphic_swapper(event_com, "v2_stone_close_button,0")
+onop=closebutton_click
+
+[com_13]
+type=text
+x=17
+y=29
+width=477
+height=24
+textfont=b12_full
+text=What would you like to make?
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff991f
+
+[com_14]
+type=layer
+x=24
+y=66
+width=450
+height=60
+
+[com_15]
+type=model
+x=15
+y=10
+width=32
+height=32
+layer=com_14
+model=model_2666
+modelangle=321,1833,0
+modelzoom=571
+unknown101=3000
+
+[com_16]
+type=text
+x=72
+y=24
+width=378
+height=36
+layer=com_14
+textfont=p12_full
+text=You need a ring mould to craft rings.
+textshadow=yes
+colour=0xff991f
+
+[com_17]
+type=text
+x=80
+y=66
+width=394
+height=25
+textfont=b12_full
+text=Rings
+textshadow=yes
+colour=0xff9900
+
+[com_18]
+type=layer
+x=80
+y=66
+width=394
+height=60
+
+[com_19]
+type=model
+x=20
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_20]
+type=layer
+x=20
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Gold Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_21]
+type=model
+x=65
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_22]
+type=layer
+x=65
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Sapphire Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_23]
+type=model
+x=110
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_24]
+type=layer
+x=110
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Emerald Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_25]
+type=model
+x=155
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_26]
+type=layer
+x=155
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Ruby Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_27]
+type=model
+x=200
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_28]
+type=layer
+x=200
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Diamond Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_29]
+type=model
+x=245
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_30]
+type=layer
+x=245
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Dragonstone Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_31]
+type=model
+x=290
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_32]
+type=layer
+x=290
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Onyx Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_33]
+type=model
+x=290
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_34]
+type=model
+x=335
+y=20
+width=32
+height=32
+layer=com_18
+model=null
+modelangle=268,180,0
+modelzoom=464
+unknown101=3000
+
+[com_35]
+type=layer
+x=335
+y=20
+width=32
+height=32
+layer=com_18
+transmitop=1,2,3,4
+opbase=<col=ff9040>Slayer Ring
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_36]
+type=layer
+x=24
+y=127
+width=450
+height=60
+
+[com_37]
+type=model
+x=11
+y=7
+width=43
+height=38
+layer=com_36
+model=model_2729
+modelorigin=-1,0
+modelangle=306,1797,0
+modelzoom=571
+unknown101=3000
+
+[com_38]
+type=text
+x=72
+y=24
+width=378
+height=36
+layer=com_36
+textfont=p12_full
+text=You need a necklace mould to craft necklaces.
+textshadow=yes
+colour=0xff991f
+
+[com_39]
+type=text
+x=80
+y=127
+width=394
+height=25
+textfont=b12_full
+text=Necklaces
+textshadow=yes
+colour=0xff9900
+
+[com_40]
+type=layer
+x=80
+y=128
+width=394
+height=60
+
+[com_41]
+type=model
+x=32
+y=20
+width=32
+height=32
+layer=com_40
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_42]
+type=layer
+x=32
+y=20
+width=32
+height=32
+layer=com_40
+transmitop=1,2,3,4
+opbase=<col=ff9040>Gold Necklace
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_43]
+type=model
+x=82
+y=20
+width=32
+height=32
+layer=com_40
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_44]
+type=layer
+x=82
+y=20
+width=32
+height=32
+layer=com_40
+transmitop=1,2,3,4
+opbase=<col=ff9040>Sapphire Necklace
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_45]
+type=model
+x=132
+y=20
+width=32
+height=32
+layer=com_40
+model=null
+modelzoom=200
+unknown101=3000
+
+[com_46]
+type=layer
+x=132
+y=20
+width=32
+height=32
+layer=com_40
+transmitop=1,2,3,4
+opbase=<col=ff9040>Emerald Necklace
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_47]
+type=model
+x=182
+y=20
+width=32
+height=32
+layer=com_40
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_48]
+type=layer
+x=182
+y=20
+width=32
+height=32
+layer=com_40
+transmitop=1,2,3,4
+opbase=<col=ff9040>Ruby Necklace
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_49]
+type=model
+x=233
+y=20
+width=32
+height=32
+layer=com_40
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_50]
+type=layer
+x=232
+y=20
+width=32
+height=32
+layer=com_40
+transmitop=1,2,3,4
+opbase=<col=ff9040>Diamond Necklace
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_51]
+type=model
+x=281
+y=20
+width=32
+height=32
+layer=com_40
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_52]
+type=layer
+x=282
+y=20
+width=32
+height=32
+layer=com_40
+transmitop=1,2,3,4
+opbase=<col=ff9040>Dragonstone Necklace
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_53]
+type=model
+x=332
+y=20
+width=32
+height=32
+layer=com_40
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_54]
+type=layer
+x=332
+y=20
+width=32
+height=32
+layer=com_40
+transmitop=1,2,3,4
+opbase=<col=ff9040>Onyx Necklace
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_55]
+type=layer
+x=24
+y=188
+width=450
+height=60
+
+[com_56]
+type=model
+x=15
+y=10
+width=32
+height=32
+layer=com_55
+model=model_2368
+modelangle=357,1764,0
+modelzoom=443
+unknown101=3000
+
+[com_57]
+type=text
+x=72
+y=24
+width=378
+height=36
+layer=com_55
+textfont=p12_full
+text=You need an amulet mould to craft amulets.
+textshadow=yes
+colour=0xff991f
+
+[com_58]
+type=text
+x=80
+y=188
+width=394
+height=25
+textfont=b12_full
+text=Amulets
+textshadow=yes
+colour=0xff9900
+
+[com_59]
+type=layer
+x=79
+y=190
+width=394
+height=60
+
+[com_60]
+type=model
+x=32
+y=20
+width=32
+height=32
+layer=com_59
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_61]
+type=layer
+x=33
+y=20
+width=32
+height=32
+layer=com_59
+transmitop=1,2,3,4
+opbase=<col=ff9040>Gold Amulet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_62]
+type=model
+x=83
+y=20
+width=32
+height=32
+layer=com_59
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_63]
+type=layer
+x=83
+y=20
+width=32
+height=32
+layer=com_59
+transmitop=1,2,3,4
+opbase=<col=ff9040>Sapphire Amulet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_64]
+type=model
+x=133
+y=20
+width=32
+height=32
+layer=com_59
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_65]
+type=layer
+x=133
+y=20
+width=32
+height=32
+layer=com_59
+transmitop=1,2,3,4
+opbase=<col=ff9040>Emerald Amulet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_66]
+type=model
+x=182
+y=20
+width=32
+height=32
+layer=com_59
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_67]
+type=layer
+x=183
+y=20
+width=32
+height=32
+layer=com_59
+transmitop=1,2,3,4
+opbase=<col=ff9040>Ruby Amulet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_68]
+type=model
+x=233
+y=20
+width=32
+height=32
+layer=com_59
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_69]
+type=layer
+x=233
+y=20
+width=32
+height=32
+layer=com_59
+transmitop=1,2,3,4
+opbase=<col=ff9040>Diamond Amulet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_70]
+type=model
+x=283
+y=20
+width=32
+height=32
+layer=com_59
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_71]
+type=layer
+x=283
+y=20
+width=32
+height=32
+layer=com_59
+transmitop=1,2,3,4
+opbase=<col=ff9040>Dragonstone Amulet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_72]
+type=model
+x=333
+y=20
+width=32
+height=32
+layer=com_59
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_73]
+type=layer
+x=333
+y=20
+width=32
+height=32
+layer=com_59
+transmitop=1,2,3,4
+opbase=<col=ff9040>Onyx Amulet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_74]
+type=layer
+x=24
+y=249
+width=450
+height=60
+
+[com_75]
+type=model
+x=15
+y=10
+width=32
+height=32
+layer=com_74
+model=model_24565
+modelangle=294,1743,0
+modelzoom=443
+unknown101=3000
+
+[com_76]
+type=text
+x=72
+y=24
+width=378
+height=36
+layer=com_74
+textfont=p12_full
+text=You need a bracelet mould to craft bracelets.
+textshadow=yes
+colour=0xff991f
+
+[com_77]
+type=text
+x=80
+y=249
+width=394
+height=25
+textfont=b12_full
+text=Bracelets
+textshadow=yes
+colour=0xff9900
+
+[com_78]
+type=layer
+x=80
+y=249
+width=394
+height=60
+
+[com_79]
+type=model
+x=32
+y=20
+width=32
+height=32
+layer=com_78
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_80]
+type=layer
+x=32
+y=20
+width=32
+height=32
+layer=com_78
+transmitop=1,2,3,4
+opbase=<col=ff9040>Gold Bracelet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_81]
+type=model
+x=82
+y=20
+width=32
+height=32
+layer=com_78
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_82]
+type=layer
+x=82
+y=20
+width=32
+height=32
+layer=com_78
+transmitop=1,2,3,4
+opbase=<col=ff9040>Sapphire Bracelet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_83]
+type=model
+x=132
+y=20
+width=32
+height=32
+layer=com_78
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_84]
+type=layer
+x=132
+y=20
+width=32
+height=32
+layer=com_78
+transmitop=1,2,3,4
+opbase=<col=ff9040>Emerald Bracelet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_85]
+type=model
+x=182
+y=20
+width=32
+height=32
+layer=com_78
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_86]
+type=layer
+x=182
+y=20
+width=32
+height=32
+layer=com_78
+transmitop=1,2,3,4
+opbase=<col=ff9040>Ruby Bracelet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_87]
+type=model
+x=232
+y=20
+width=32
+height=32
+layer=com_78
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_88]
+type=layer
+x=232
+y=20
+width=32
+height=32
+layer=com_78
+transmitop=1,2,3,4
+opbase=<col=ff9040>Diamond Bracelet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_89]
+type=model
+x=282
+y=20
+width=32
+height=32
+layer=com_78
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_90]
+type=layer
+x=282
+y=20
+width=32
+height=32
+layer=com_78
+transmitop=1,2,3,4
+opbase=<col=ff9040>Dragonstone Bracelet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+
+[com_91]
+type=model
+x=332
+y=20
+width=32
+height=32
+layer=com_78
+model=null
+modelzoom=400
+unknown101=3000
+
+[com_92]
+type=layer
+x=332
+y=20
+width=32
+height=32
+layer=com_78
+transmitop=1,2,3,4
+opbase=<col=ff9040>Onyx Bracelet
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+

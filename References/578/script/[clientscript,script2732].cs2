@@ -1,0 +1,5 @@
+[clientscript,script2732]
+if (%varclient_1020 = -1) {
+    %varclient_1020 = -2;
+}
+~script2733;

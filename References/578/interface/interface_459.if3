@@ -1,0 +1,503 @@
+[com_0]
+type=graphic
+x=17
+y=26
+width=480
+height=294
+graphic=tradebacking
+tiling=yes
+colour=0xffffffff
+opbase=  
+
+[com_1]
+type=graphic
+y=26
+width=36
+height=276
+graphic="v2_stone_borders,1"
+tiling=yes
+colour=0xffffffff
+opbase= 
+
+[com_2]
+type=graphic
+x=479
+y=26
+width=24
+height=272
+graphic="v2_stone_borders,3"
+tiling=yes
+colour=0xffffffff
+opbase= 
+
+[com_3]
+type=graphic
+x=15
+y=302
+width=466
+height=25
+graphic="v2_stone_borders,2"
+tiling=yes
+colour=0xffffffff
+
+[com_4]
+type=graphic
+x=14
+y=10
+width=475
+height=38
+graphic="v2_stone_borders,0"
+tiling=yes
+colour=0xffffffff
+opbase= 
+
+[com_5]
+type=graphic
+x=467
+y=290
+width=32
+height=32
+graphic="v2_stone_borders,7"
+colour=0xffffffff
+opbase= 
+
+[com_6]
+type=graphic
+x=13
+y=290
+width=32
+height=32
+graphic="v2_stone_borders,6"
+colour=0xffffffff
+
+[com_7]
+type=graphic
+x=13
+y=23
+width=32
+height=32
+graphic="v2_stone_borders,4"
+colour=0xffffffff
+opbase= 
+
+[com_8]
+type=graphic
+x=467
+y=23
+width=32
+height=32
+graphic="v2_stone_borders,5"
+colour=0xffffffff
+opbase= 
+
+[com_9]
+type=graphic
+x=16
+y=38
+width=479
+height=33
+graphic="v2_stone_borders,8"
+tiling=yes
+colour=0xffffffff
+
+[com_10]
+type=graphic
+x=13
+y=40
+width=32
+height=32
+graphic="v2_stone_borders,9"
+tiling=yes
+colour=0xffffffff
+
+[com_11]
+type=graphic
+x=467
+y=40
+width=32
+height=32
+graphic="v2_stone_borders,10"
+tiling=yes
+colour=0xffffffff
+
+[com_12]
+type=graphic
+x=471
+y=32
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+colour=0xffffffff
+transmitop=1
+op1=Close
+onmouseover=graphic_swapper(event_com, "v2_stone_close_button,1")
+onmouseleave=graphic_swapper(event_com, "v2_stone_close_button,0")
+onop=closebutton_click
+
+[com_13]
+type=text
+x=19
+y=32
+width=474
+height=15
+textfont=b12_full
+text=What would you like to spin?
+textalignh=centre
+textshadow=yes
+colour=0xff981f
+
+[com_14]
+type=model
+x=243
+y=87
+width=38
+height=39
+model=model_18331
+modelorigin=5,3
+modelangle=172,1905,0
+modelzoom=400
+unknown100=65151
+unknown101=828
+
+[com_15]
+type=text
+x=237
+y=134
+width=50
+height=16
+textfont=p12_full
+text=Bow String<br>(Flax)
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff981f
+onload=crafting_level(event_com, 10)
+
+[com_16]
+type=layer
+x=230
+y=84
+width=64
+height=80
+
+[com_17]
+type=layer
+x=72
+y=65
+width=113
+height=71
+
+[com_18]
+type=layer
+x=71
+y=65
+width=113
+height=71
+hide=yes
+
+[com_19]
+type=model
+x=53
+y=16
+width=45
+height=44
+layer=com_18
+model=model_51052
+modelorigin=1,-4
+modelangle=371,295,0
+modelzoom=736
+unknown100=65063
+unknown101=1484
+
+[com_20]
+type=model
+x=-1
+y=9
+width=64
+height=49
+layer=com_18
+model=model_2795
+modelorigin=6,10
+modelangle=134,220,0
+modelzoom=480
+unknown100=65063
+unknown101=981
+
+[com_21]
+type=model
+x=22
+y=7
+width=64
+height=49
+layer=com_17
+model=model_2795
+modelorigin=6,10
+modelangle=134,220,0
+modelzoom=480
+unknown100=65063
+unknown101=981
+
+[com_22]
+type=text
+x=1
+y=-1
+width=64
+height=80
+layer=com_16
+textfont=q8_full
+textalignh=centre
+textshadow=yes
+colour=0x000000
+transmitop=1,2,3,4
+opbase=<col=ff9040>Bow String
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=crafting_level_hide(event_com, 10)
+
+[com_23]
+type=layer
+x=95
+y=83
+width=64
+height=80
+
+[com_24]
+type=text
+x=102
+y=131
+width=50
+height=16
+textfont=p12_full
+text=Ball of Wool<br>(Wool)
+textalignh=centre
+textalignv=centre
+textshadow=yes
+colour=0xff981f
+onload=crafting_level(event_com, 1)
+
+[com_25]
+type=text
+x=1
+y=1
+width=64
+height=80
+layer=com_23
+textfont=q8_full
+textalignh=centre
+textshadow=yes
+colour=0x000000
+transmitop=1,2,3,4
+opbase=<col=ff9040>Ball of Wool
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=crafting_level_hide(event_com, 1)
+
+[com_26]
+type=layer
+x=352
+y=84
+width=64
+height=80
+
+[com_27]
+type=text
+x=2
+width=61
+height=79
+layer=com_26
+textfont=q8_full
+textalignh=centre
+textshadow=yes
+colour=0x000000
+transmitop=1,2,3,4
+opbase=<col=ff9040>Magic String
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=crafting_level_hide(event_com, 19)
+
+[com_28]
+type=model
+x=362
+y=86
+width=38
+height=39
+model=model_18331
+modelorigin=4,3
+modelangle=170,1900,0
+modelzoom=400
+unknown100=65151
+unknown101=828
+
+[com_29]
+type=text
+x=361
+y=130
+width=50
+height=16
+textfont=p12_full
+text=Magic Amulet<br>String<br>(Magic Roots)
+textlineheight=15
+textalignh=centre
+textshadow=yes
+colour=0xff981f
+onload=crafting_level(event_com, 19)
+
+[com_30]
+type=layer
+x=229
+y=204
+width=64
+height=80
+
+[com_31]
+type=text
+width=64
+height=80
+layer=com_30
+textfont=q8_full
+textalignh=centre
+textshadow=yes
+colour=0x000000
+transmitop=1,2,3,4
+opbase=<col=ff9040>Crossbow String
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=crafting_level_hide(event_com, 10)
+
+[com_32]
+type=model
+x=234
+y=199
+width=56
+height=49
+model=model_18332
+modelorigin=-2,0
+modelangle=255,84,0
+modelzoom=464
+unknown100=65078
+unknown101=948
+
+[com_33]
+type=text
+x=236
+y=252
+width=50
+height=16
+textfont=p12_full
+text=C'Bow String<br>(Sinew)
+textlineheight=15
+textalignh=centre
+textshadow=yes
+colour=0xff981f
+onload=crafting_level(event_com, 10)
+
+[com_34]
+type=layer
+x=96
+y=203
+width=64
+height=80
+
+[com_35]
+type=text
+width=64
+height=80
+layer=com_34
+textfont=q8_full
+textalignh=centre
+textshadow=yes
+colour=0x000000
+transmitop=1,2,3,4
+opbase=<col=ff9040>Crossbow String
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=crafting_level_hide(event_com, 10)
+
+[com_36]
+type=model
+x=101
+y=196
+width=56
+height=48
+model=model_18332
+modelorigin=-2,0
+modelangle=250,79,0
+modelzoom=464
+unknown100=65078
+unknown101=948
+
+[com_37]
+type=text
+x=103
+y=251
+width=50
+height=16
+textfont=p12_full
+text=C'Bow String<br>(Tree Roots)
+textlineheight=15
+textalignh=centre
+textshadow=yes
+colour=0xff981f
+onload=crafting_level(event_com, 10)
+
+[com_38]
+type=layer
+x=350
+y=204
+width=64
+height=80
+
+[com_39]
+type=text
+width=64
+height=80
+layer=com_38
+textfont=q8_full
+textalignh=centre
+textshadow=yes
+colour=0x000000
+transmitop=1,2,3,4
+opbase=<col=ff9040>Rope
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=crafting_level_hide(event_com, 30)
+
+[com_40]
+type=model
+x=357
+y=205
+width=59
+height=39
+model=model_1842
+modelorigin=-5,6
+modelangle=188,1976,0
+modelzoom=616
+unknown100=64896
+unknown101=1255
+
+[com_41]
+type=text
+x=357
+y=252
+width=50
+height=16
+textfont=p12_full
+text=Rope<br>(Yak Hair)
+textlineheight=15
+textalignh=centre
+textshadow=yes
+colour=0xff981f
+onload=crafting_level(event_com, 30)
+

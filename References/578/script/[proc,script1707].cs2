@@ -1,0 +1,15 @@
+[proc,script1707](stat $stat0)(component)
+switch_stat ($stat0) {
+    case attack :
+        return(interface_271:com_34);
+    case strength :
+        return(interface_271:com_33);
+    case defence :
+        return(interface_271:com_32);
+    case ranged :
+        return(interface_271:com_31);
+    case magic :
+        return(interface_271:com_30);
+    case default :
+        return(null);
+}

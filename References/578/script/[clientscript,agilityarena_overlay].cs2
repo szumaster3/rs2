@@ -1,0 +1,8 @@
+[clientscript,agilityarena_overlay]
+if (%varplayerbit_4456 = 0) {
+    if_setcolour(0x002300, interface_5:com_3);
+    if_setcolour(^red, interface_5:com_2);
+} else {
+    if_setcolour(^green, interface_5:com_3);
+    if_setcolour(0x230000, interface_5:com_2);
+}

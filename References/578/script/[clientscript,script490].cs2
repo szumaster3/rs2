@@ -1,0 +1,2 @@
+[clientscript,script490](int $int0, int $int1)
+~script311(struct_param(struct_425, param_596), $int0, $int1);

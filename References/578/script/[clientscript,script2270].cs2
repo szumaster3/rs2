@@ -1,0 +1,11 @@
+[clientscript,script2270]
+if (calc(clientclock % 40) < 20 & create_reply ! -3) {
+    ~script2272;
+    if (%varclient_174 = 12) {
+        ~script2255(%varclientstring_128, interface_744:com_283, 12, 1);
+    } else if (%varclient_174 = 13) {
+        ~script2255(%varclientstring_129, interface_744:com_276, 13, 1);
+    }
+} else {
+    ~script2272;
+}

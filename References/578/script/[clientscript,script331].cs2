@@ -1,0 +1,9 @@
+[clientscript,script331](component $component0, int $int1)
+def_int $int2 = 0;
+if (gender = 1) {
+    $int2 = enum_getoutputcount(enum_2363);
+} else {
+    $int2 = enum_getoutputcount(enum_2132);
+}
+~script332($int1);
+~player_kit_select($component0, $int1, $int2);

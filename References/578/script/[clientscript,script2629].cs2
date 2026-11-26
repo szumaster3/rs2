@@ -1,0 +1,7 @@
+[clientscript,script2629](component $component0)
+if (%varclient_905 = $component0 & %varclient_904 = 1) {
+    ~script2635;
+    return;
+}
+~script2635;
+~script2630($component0);

@@ -19,7 +19,15 @@ object NPCRenderer {
      */
     @JvmStatic
     fun render(player: Player) {
-        val buffer = IoBuffer(32, PacketHeader.SHORT)
+        player.session.write(encode(player, RegionManager.getLocalNpcs(player), player.playerFlags.isUpdateSceneGraph))
+    }
+
+    private val movementDirections = intArrayOf(7, 0, 1, 6, 2, 5, 4, 3)
+
+    fun encode(player: Player, nearby: List<NPC>, wide: Boolean): IoBuffer {
+        val buffer = IoBuffer(if (wide) 37 else 32, PacketHeader.SHORT)
+        val bits = if (wide) 8 else 5
+        val limit = 1 shl (bits - 1)
         val info = player.renderInfo
         val localNPCs = info.localNpcs
         val maskBuffer = IoBuffer(-1, PacketHeader.NORMAL, ByteBuffer.allocate(1 shl 16))
@@ -30,15 +38,16 @@ object NPCRenderer {
         while (it.hasNext()) {
             val npc = it.next()
             val withinDistance = player.location.withinDistance(npc.location)
-            if (npc.isHidden(player) || !withinDistance || npc.properties.isTeleporting) {
+            if (!npc.isActive || npc.isHidden(player) || !withinDistance || npc.properties.isTeleporting) {
                 buffer.putBits(1, 1).putBits(2, 3)
                 toRemove.add(npc)
                 npc.aggressiveHandler?.removeTolerance(player.index)
             } else if (npc.walkingQueue.runDir != -1) {
-                buffer.putBits(1, 1).putBits(2, 2).putBits(3, npc.walkingQueue.walkDir).putBits(3, npc.walkingQueue.runDir)
+                buffer.putBits(1, 1).putBits(2, 2).putBits(1, 1)
+                    .putBits(3, movementDirections[npc.walkingQueue.walkDir]).putBits(3, movementDirections[npc.walkingQueue.runDir])
                 flagMaskUpdate(player, buffer, maskBuffer, npc, false)
             } else if (npc.walkingQueue.walkDir != -1) {
-                buffer.putBits(1, 1).putBits(2, 1).putBits(3, npc.walkingQueue.walkDir)
+                buffer.putBits(1, 1).putBits(2, 1).putBits(3, movementDirections[npc.walkingQueue.walkDir])
                 flagMaskUpdate(player, buffer, maskBuffer, npc, false)
             } else if (npc.updateMasks.isUpdateRequired) {
                 buffer.putBits(1, 1).putBits(2, 0)
@@ -48,27 +57,24 @@ object NPCRenderer {
             }
         }
         localNPCs.removeAll(toRemove)
-        for (npc in RegionManager.getLocalNpcs(player)) {
+        for (npc in nearby) {
             if (localNPCs.size >= 255) {
                 break
             }
-            if (localNPCs.contains(npc) || npc.isHidden(player)) {
+            // 32767 terminates the new-NPC bit stream; NPC types occupy 14 bits.
+            if (npc.index !in 0 until 32767 || npc.id !in 0 until 16384 ||
+                localNPCs.any { it.index == npc.index } || !npc.isActive || npc.isHidden(player) ||
+                !player.location.withinDistance(npc.location)) {
                 continue
             }
-            val dir = npc.direction?.ordinal ?: 0
-            buffer.putBits(15, npc.index).putBits(1, if (npc.properties.isTeleporting) 1 else 0).putBits(3, dir)
+            val offsetX = npc.location.x - player.location.x
+            val offsetY = npc.location.y - player.location.y
+            if (offsetX !in -limit until limit || offsetY !in -limit until limit) continue
+            val dir = movementDirections[npc.direction.ordinal]
+            buffer.putBits(15, npc.index).putBits(bits, offsetY).putBits(bits, offsetX)
             flagMaskUpdate(player, buffer, maskBuffer, npc, true)
-            var offsetX = npc.location.x - player.location.x
-            var offsetY = npc.location.y - player.location.y
-            if (offsetX < 0) {
-                offsetX += 32
-            }
-            if (offsetY < 0) {
-                offsetY += 32
-            }
-            buffer.putBits(5, offsetY)
-            buffer.putBits(14, npc.id)
-            buffer.putBits(5, offsetX)
+            buffer.putBits(14, npc.id).putBits(3, dir).putBits(2, npc.location.z)
+                .putBits(1, if (npc.properties.isTeleporting) 1 else 0)
             if (npc.aggressiveHandler != null) {
                 npc.aggressiveHandler.playerTolerance[player.index] = GameWorld.ticks
             }
@@ -83,7 +89,7 @@ object NPCRenderer {
         } else {
             buffer.setByteAccess()
         }
-        player.session.write(buffer)
+        return buffer
     }
 
     /**
@@ -95,7 +101,7 @@ object NPCRenderer {
      * @param sync Whether this update is during synchronization.
      */
     private fun flagMaskUpdate(player: Player, buffer: IoBuffer, maskBuffer: IoBuffer, npc: NPC, sync: Boolean) {
-        if (npc.updateMasks.isUpdateRequired) {
+        if (npc.updateMasks.isUpdateRequired || (sync && npc.updateMasks.hasSynced())) {
             buffer.putBits(1, 1)
             writeMaskUpdates(player, maskBuffer, npc, sync)
         } else {

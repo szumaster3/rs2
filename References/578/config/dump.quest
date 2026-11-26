@@ -1,0 +1,863 @@
+[quest_0]
+questpoints=2
+name=Cabin Fever
+masterquestvarp=varplayer_655,10,140
+
+[quest_1]
+questpoints=2
+name=Tower of Life
+masterquestvarbit=varplayerbit_3337,2,18
+
+[quest_2]
+questpoints=1
+name=Scorpion Catcher
+masterquestvarp=varplayer_76,1,6
+
+[quest_3]
+questpoints=1
+name=The Golem
+masterquestvarbit=varplayerbit_346,1,10
+
+[quest_4]
+questpoints=2
+name=Rocking Out
+masterquestvarbit=varplayerbit_4797,10,90
+
+[quest_5]
+questpoints=1
+name=The Path of Glouphrie
+masterquestvarbit=varplayerbit_3954,1,200
+
+[quest_6]
+questpoints=1
+icon=graphic_2374
+name=Cook's Assistant
+masterquestvarp=varplayer_29,1,2
+
+[quest_7]
+questpoints=4
+name=Witch's House
+masterquestvarp=varplayer_226,1,7
+
+[quest_8]
+questpoints=1
+members=true
+name=The Elemental Workshop
+masterquestvarp=varplayer_299,1,524288
+
+[quest_9]
+questpoints=1
+name=Priest in Peril
+masterquestvarp=varplayer_302,1,60
+
+[quest_10]
+questpoints=3
+name=Shades of Mort'ton
+masterquestvarp=varplayer_339,5,85
+
+[quest_11]
+questpoints=1
+name=Witch's Potion
+masterquestvarp=varplayer_67,1,3
+
+[quest_12]
+questpoints=1
+name=Slug Menace
+masterquestvarbit=varplayerbit_2610,1,14
+
+[quest_13]
+questpoints=1
+name=Death to the Dorgeshuun
+masterquestvarbit=varplayerbit_2258,1,13
+
+[quest_14]
+questpoints=1
+name=Spirit of Summer
+masterquestvarbit=varplayerbit_5032,5,75
+
+[quest_15]
+questpoints=4
+icon=graphic_2377
+name=Ernest the Chicken
+masterquestvarp=varplayer_32,1,3
+
+[quest_16]
+questpoints=4
+name=The Watchtower
+masterquestvarp=varplayer_212,1,13
+
+[quest_17]
+questpoints=5
+name=Romeo and Juliet
+masterquestvarp=varplayer_144,10,100
+
+[quest_18]
+questpoints=1
+name=Tale of the Muspah
+masterquestvarbit=varplayerbit_6048,5,250
+
+[quest_19]
+questpoints=2
+name=In Search of the Myreque
+masterquestvarp=varplayer_387,5,105
+
+[quest_20]
+questpoints=1
+name=Swept Away
+masterquestvarbit=varplayerbit_5448,5,50
+
+[quest_21]
+questpoints=2
+name=In Aid of the Myreque
+masterquestvarp=varplayer_705,20,430
+
+[quest_22]
+questpoints=1
+name=My Arm's Big Adventure
+masterquestvarbit=varplayerbit_2790,10,320
+
+[quest_23]
+questpoints=2
+name=Catapult Construction
+masterquestvarbit=varplayerbit_4396,2,60
+
+[quest_24]
+questpoints=2
+name=Lunar Diplomacy
+masterquestvarbit=varplayerbit_2448,10,190
+
+[quest_25]
+questpoints=1
+name=Dealing with Scabaras
+masterquestvarbit=varplayerbit_4230,100,700
+
+[quest_26]
+questpoints=2
+name=The Darkness of Hallowvale
+masterquestvarbit=varplayerbit_2573,10,320
+
+[quest_27]
+questpoints=1
+icon=graphic_2376
+name=The Restless Ghost
+masterquestvarp=varplayer_107,1,5
+
+[quest_28]
+questpoints=3
+name=Murder Mystery
+masterquestvarp=varplayer_192,1,2
+
+[quest_29]
+questpoints=1
+name=All Fired Up
+masterquestvarbit=varplayerbit_5133,5,90
+
+[quest_30]
+questpoints=1
+name=Recipe for Disaster
+masterquestvarbit=varplayerbit_1850,1,5
+
+[quest_31]
+questpoints=5
+name=Underground Pass
+masterquestvarp=varplayer_161,1,10
+
+[quest_32]
+questpoints=1
+name=Grim Tales
+masterquestvarbit=varplayerbit_2783,1,60
+
+[quest_33]
+questpoints=2
+name=Fur 'n' Seek
+masterquestvarbit=varplayerbit_6307,1,5
+
+[quest_34]
+questpoints=1
+name=Dwarf Cannon
+masterquestvarp=varplayer_0,1,11
+
+[quest_35]
+questpoints=2
+name=Forgiveness of a Chaos Dwarf
+masterquestvarbit=varplayerbit_6471,10,80
+
+[quest_36]
+questpoints=1
+name=A Soul's Bane
+masterquestvarbit=varplayerbit_2011,1,13
+
+[quest_37]
+questpoints=1
+name=The Lost Tribe
+masterquestvarbit=varplayerbit_532,1,11
+
+[quest_38]
+questpoints=1
+name=Heroes' Quest
+masterquestvarp=varplayer_188,1,15
+
+[quest_39]
+questpoints=4
+name=Sheep Herder
+masterquestvarp=varplayer_60,1,3
+
+[quest_40]
+questpoints=1
+name=Tribal Totem
+masterquestvarp=varplayer_200,1,5
+
+[quest_41]
+questpoints=1
+name=As A First Resort...
+masterquestvarbit=varplayerbit_4321,1,200
+
+[quest_42]
+questpoints=3
+name=Lost City
+masterquestvarp=varplayer_147,1,6
+
+[quest_43]
+questpoints=1
+name=Animal Magnetism
+masterquestvarbit=varplayerbit_3185,10,240
+
+[quest_44]
+questpoints=1
+name=Clock Tower
+masterquestvarp=varplayer_10,1,8
+
+[quest_45]
+questpoints=2
+name=A Tail of Two Cats
+masterquestvarbit=varplayerbit_1028,5,70
+
+[quest_46]
+questpoints=2
+name=Spirits of the Elid
+masterquestvarbit=varplayerbit_1444,10,60
+
+[quest_47]
+questpoints=2
+name=Legacy of Seergaze
+masterquestvarbit=varplayerbit_4569,10,500
+
+[quest_48]
+questpoints=2
+name=Swan Song
+masterquestvarbit=varplayerbit_2098,10,200
+
+[quest_49]
+questpoints=1
+name=Back to my Roots
+masterquestvarbit=varplayerbit_4055,1,65
+
+[quest_50]
+questpoints=3
+name=The Fremennik Trials
+masterquestvarp=varplayer_347,1,10
+
+[quest_51]
+questpoints=3
+name=Demon Slayer
+masterquestvarbit=varplayerbit_2561,1,3
+
+[quest_52]
+questpoints=1
+name=Wolf Whistle
+masterquestvarbit=varplayerbit_4302,10,110
+
+[quest_53]
+name=Black Knights' Fortress
+masterquestvarp=varplayer_130,1,4
+
+[quest_54]
+questpoints=2
+name=Observatory Quest
+masterquestvarp=varplayer_112,1,7
+
+[quest_55]
+questpoints=1
+icon=quest_icon,15
+name=Rune Mysteries
+masterquestvarp=varplayer_63,1,6
+
+[quest_56]
+questpoints=2
+name=Defender of Varrock
+masterquestvarbit=varplayerbit_5387,10,250
+
+[quest_57]
+questpoints=2
+name=Between a Rock...
+masterquestvarbit=varplayerbit_299,10,110
+
+[quest_58]
+questpoints=1
+name=Plague City
+masterquestvarp=varplayer_165,1,29
+
+[quest_59]
+questpoints=1
+name=Jungle Potion
+masterquestvarp=varplayer_175,1,12
+
+[quest_60]
+questpoints=2
+name=Pirate's Treasure
+masterquestvarp=varplayer_71,1,4
+
+[quest_61]
+questpoints=1
+name=King's Ransom
+masterquestvarbit=varplayerbit_3888,5,90
+
+[quest_62]
+questpoints=1
+name=Recruitment Drive
+masterquestvarbit=varplayerbit_657,1,2
+
+[quest_63]
+questpoints=1
+name=Shield of Arrav
+masterquestvarp=varplayer_145,1,7
+masterquestvarp=varplayer_146,99999,4
+
+[quest_64]
+questpoints=3
+name=Prince Ali Rescue
+masterquestvarp=varplayer_273,10,110
+
+[quest_65]
+questpoints=5
+name=The Grand Tree
+masterquestvarp=varplayer_150,10,160
+
+[quest_66]
+questpoints=2
+name=Dragon Slayer
+masterquestvarp=varplayer_176,1,10
+
+[quest_67]
+questpoints=2
+name=Rat Catchers
+masterquestvarbit=varplayerbit_1404,5,127
+
+[quest_68]
+questpoints=2
+name=Rag and Bone Man
+masterquestvarbit=varplayerbit_6178,1,4
+
+[quest_69]
+questpoints=2
+name=Dig Site
+masterquestvarp=varplayer_131,1,9
+
+[quest_70]
+questpoints=2
+name=Shilo Village
+masterquestvarp=varplayer_116,1,15
+
+[quest_71]
+questpoints=1
+name=Shadow of the Storm
+masterquestvarbit=varplayerbit_1372,10,125
+
+[quest_72]
+questpoints=1
+name=Imp Catcher
+masterquestvarp=varplayer_160,1,2
+
+[quest_73]
+questpoints=2
+name=Fairytale I - Growing Pains
+masterquestvarbit=varplayerbit_1803,10,90
+
+[quest_74]
+questpoints=1
+name=Myths of the White Lands
+masterquestvarbit=varplayerbit_5733,5,60
+
+[quest_75]
+questpoints=1
+name=Eadgar's Ruse
+masterquestvarp=varplayer_335,10,110
+
+[quest_76]
+questpoints=1
+name=Fishing Contest
+masterquestvarp=varplayer_11,1,5
+
+[quest_77]
+questpoints=1
+name=Missing My Mummy
+masterquestvarbit=varplayerbit_6112,10,60
+
+[quest_78]
+questpoints=2
+name=Tree Gnome Village
+masterquestvarp=varplayer_111,1,9
+
+[quest_79]
+questpoints=2
+name=Dream Mentor
+masterquestvarbit=varplayerbit_3618,2,28
+
+[quest_80]
+questpoints=1
+name=Smoking Kills
+masterquestvarbit=varplayerbit_4764,10,250
+
+[quest_81]
+questpoints=1
+name=Tears of Guthix
+masterquestvarbit=varplayerbit_451,1,2
+
+[quest_82]
+questpoints=2
+name=Ghosts Ahoy
+masterquestvarbit=varplayerbit_217,1,8
+
+[quest_83]
+questpoints=1
+icon=graphic_2375
+name=Sheep Shearer
+masterquestvarp=varplayer_179,1,21
+
+[quest_84]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Starting Out
+masterquestvarbit=varplayerbit_1850,1,2
+
+[quest_85]
+questpoints=1
+name=Troll Stronghold
+masterquestvarp=varplayer_317,10,50
+
+[quest_86]
+questpoints=5
+name=While Guthix Sleeps
+masterquestvarbit=varplayerbit_5491,10,910
+
+[quest_87]
+questpoints=1
+name=In Pyre Need
+masterquestvarbit=varplayerbit_5761,10,30
+
+[quest_88]
+questpoints=2
+name=Great Brain Robbery
+masterquestvarp=varplayer_980,10,130
+
+[quest_89]
+questpoints=2
+name=Tai Bwo Wannai Trio
+masterquestvarp=varplayer_320,1,6
+
+[quest_90]
+questpoints=2
+name=Troll Romance
+masterquestvarp=varplayer_385,1,45
+
+[quest_91]
+questpoints=1
+name=Land of the Goblins
+masterquestvarbit=varplayerbit_4105,1,18
+
+[quest_92]
+questpoints=2
+name=Creature of Fenkenstrain
+masterquestvarp=varplayer_399,1,8
+
+[quest_93]
+questpoints=1
+name=Waterfall Quest
+masterquestvarp=varplayer_65,1,8
+
+[quest_94]
+questpoints=1
+name=The Elemental Workshop 2
+masterquestvarbit=varplayerbit_2639,1,11
+
+[quest_95]
+questpoints=1
+name=Summer's End
+masterquestvarbit=varplayerbit_5331,5,35
+
+[quest_96]
+questpoints=1
+name=Kennith's Concerns
+masterquestvarbit=varplayerbit_4505,5,100
+
+[quest_97]
+questpoints=2
+name=Enakhra's Lament
+masterquestvarbit=varplayerbit_1560,10,70
+
+[quest_98]
+questpoints=2
+name=Forgettable Tale of a Drunken Dwarf
+masterquestvarbit=varplayerbit_822,10,140
+
+[quest_99]
+questpoints=1
+name=Doric's Quest
+masterquestvarp=varplayer_31,10,100
+
+[quest_100]
+questpoints=3
+name=Regicide
+masterquestvarp=varplayer_328,1,13
+
+[quest_101]
+questpoints=2
+name=A Rum Deal
+masterquestvarp=varplayer_600,1,19
+
+[quest_102]
+questpoints=2
+name=Big Chompy Bird Hunting
+masterquestvarp=varplayer_293,5,65
+
+[quest_103]
+questpoints=1
+name=Wanted!
+masterquestvarbit=varplayerbit_1051,1,11
+
+[quest_104]
+questpoints=1
+name=Zogre Flesh Eaters
+masterquestvarbit=varplayerbit_487,1,14
+
+[quest_105]
+questpoints=2
+name=Horror from the Deep
+masterquestvarbit=varplayerbit_34,1,10
+
+[quest_106]
+questpoints=2
+name=Fight Arena
+masterquestvarp=varplayer_17,1,14
+
+[quest_107]
+questpoints=1
+name=Enlightened Journey
+masterquestvarbit=varplayerbit_2866,5,200
+
+[quest_108]
+questpoints=6
+name=Merlin's Crystal
+masterquestvarp=varplayer_14,1,7
+
+[quest_109]
+questpoints=1
+name=Perils of Ice Mountain
+masterquestvarbit=varplayerbit_4684,10,140
+
+[quest_110]
+questpoints=1
+name=Roving Elves
+masterquestvarp=varplayer_402,2,6
+
+[quest_111]
+questpoints=4
+name=Druidic Ritual
+masterquestvarp=varplayer_80,1,4
+
+[quest_112]
+questpoints=2
+name=Holy Grail
+masterquestvarp=varplayer_5,2,10
+
+[quest_113]
+questpoints=2
+name=The Tourist Trap
+masterquestvarp=varplayer_197,1,30
+
+[quest_114]
+name=Chosen Commander
+masterquestvarbit=varplayerbit_1938,10,110
+
+[quest_115]
+questpoints=1
+name=Glorious Memories
+masterquestvarbit=varplayerbit_6001,3,45
+
+[quest_116]
+questpoints=1
+name=Family Crest
+masterquestvarp=varplayer_148,1,11
+
+[quest_117]
+name=Curse of Arrav
+masterquestvarbit=varplayerbit_6289,10,240
+
+[quest_118]
+questpoints=2
+name=Garden of Tranquility
+masterquestvarbit=varplayerbit_961,10,60
+
+[quest_119]
+questpoints=4
+name=Legends' Quest
+masterquestvarp=varplayer_139,1,75
+
+[quest_120]
+questpoints=2
+name=Haunted Mine
+masterquestvarp=varplayer_382,1,11
+
+[quest_121]
+questpoints=1
+name=Sea Slug
+masterquestvarp=varplayer_159,1,12
+
+[quest_122]
+questpoints=1
+name=Hunt for Red Raktuber
+masterquestvarbit=varplayerbit_6180,10,140
+
+[quest_123]
+questpoints=1
+name=Devious Minds
+masterquestvarbit=varplayerbit_1465,10,80
+
+[quest_124]
+questpoints=3
+name=Making History
+masterquestvarbit=varplayerbit_1383,1,4
+
+[quest_125]
+questpoints=1
+name=Hazeel Cult
+masterquestvarp=varplayer_223,2,9
+
+[quest_126]
+questpoints=1
+name=Temple of Ikov
+masterquestvarp=varplayer_26,10,80
+
+[quest_127]
+questpoints=1
+name=Royal Trouble
+masterquestvarbit=varplayerbit_2140,10,30
+
+[quest_128]
+questpoints=3
+name=Biohazard
+masterquestvarp=varplayer_68,1,16
+
+[quest_129]
+questpoints=2
+name=Mourning's Ends Part II
+masterquestvarbit=varplayerbit_1103,10,60
+
+[quest_130]
+questpoints=3
+name=Monkey Madness
+masterquestvarp=varplayer_365,1,9
+
+[quest_131]
+questpoints=1
+name=Unstable Foundations
+masterquestvarp=varplayer_281,5,1000
+
+[quest_132]
+questpoints=3
+name=Vampire Slayer
+masterquestvarbit=varplayerbit_6914,1,3
+
+[quest_133]
+questpoints=2
+name=Nature Spirit
+masterquestvarp=varplayer_307,5,110
+
+[quest_134]
+questpoints=2
+name=The Giant Dwarf
+masterquestvarbit=varplayerbit_571,5,50
+
+[quest_135]
+questpoints=3
+name=Desert Treasure
+masterquestvarbit=varplayerbit_358,1,15
+
+[quest_136]
+questpoints=1
+name=The Feud
+masterquestvarbit=varplayerbit_334,1,28
+
+[quest_137]
+questpoints=5
+name=Goblin Diplomacy
+masterquestvarbit=varplayerbit_2378,1,6
+
+[quest_138]
+questpoints=1
+name=Gertrude's Cat
+masterquestvarp=varplayer_180,1,6
+
+[quest_139]
+questpoints=1
+name=TokTz-Ket-Dill
+masterquestvarbit=varplayerbit_4700,5,63
+
+[quest_140]
+questpoints=1
+name=Death Plateau
+masterquestvarp=varplayer_314,10,80
+
+[quest_141]
+questpoints=2
+name=Icthlarin's Little Helper
+masterquestvarbit=varplayerbit_418,1,26
+
+[quest_142]
+questpoints=1
+name=Meeting History
+masterquestvarbit=varplayerbit_5075,5,20
+
+[quest_143]
+questpoints=2
+name=The Eyes of Glouphrie
+masterquestvarbit=varplayerbit_2497,10,60
+
+[quest_144]
+questpoints=1
+name=What Lies Below
+masterquestvarbit=varplayerbit_3523,5,150
+
+[quest_145]
+questpoints=1
+name=Cold War
+masterquestvarbit=varplayerbit_3293,5,135
+
+[quest_146]
+questpoints=2
+name=One Small Favour
+masterquestvarp=varplayer_416,5,285
+
+[quest_147]
+questpoints=1
+name=Monk's Friend
+masterquestvarp=varplayer_30,10,80
+
+[quest_148]
+questpoints=1
+name=Fremennik Isles
+masterquestvarbit=varplayerbit_3311,5,340
+
+[quest_149]
+questpoints=2
+name=Eagles' Peak
+masterquestvarbit=varplayerbit_2780,5,40
+
+[quest_150]
+questpoints=1
+name=The Hand in the Sand
+masterquestvarbit=varplayerbit_1527,10,160
+
+[quest_151]
+questpoints=2
+name=Mountain Daughter
+masterquestvarbit=varplayerbit_260,10,70
+
+[quest_152]
+questpoints=1
+name=The Knight's Sword
+masterquestvarp=varplayer_122,1,7
+
+[quest_153]
+questpoints=1
+name=Olaf's Quest
+masterquestvarbit=varplayerbit_3534,10,80
+
+[quest_154]
+questpoints=2
+name=Fairytale II - Cure a Queen
+masterquestvarbit=varplayerbit_2326,10,90
+
+[quest_155]
+questpoints=1
+name=Another Slice of H.A.M.
+masterquestvarbit=varplayerbit_3550,1,11
+
+[quest_156]
+questpoints=2
+name=Mourning's Ends Part I
+masterquestvarp=varplayer_517,1,8
+
+[quest_157]
+questpoints=1
+name=Throne of Miscellania
+masterquestvarp=varplayer_359,10,100
+
+[quest_158]
+questpoints=1
+name=Contact!
+masterquestvarbit=varplayerbit_3274,10,130
+
+[quest_159]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Skrach
+masterquestvarbit=varplayerbit_1904,10,170
+
+[quest_160]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Evil Dave
+masterquestvarbit=varplayerbit_1878,1,5
+
+[quest_161]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Dwarf
+masterquestvarbit=varplayerbit_1892,10,60
+
+[quest_162]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Awowogei
+masterquestvarbit=varplayerbit_1914,5,50
+
+[quest_163]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Sir Amik Varze
+masterquestvarbit=varplayerbit_1910,5,20
+
+[quest_164]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Pirate Pete
+masterquestvarbit=varplayerbit_1895,10,110
+
+[quest_165]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Goblin Generals
+masterquestvarbit=varplayerbit_1867,5,40
+
+[quest_166]
+questpoints=1
+parent=quest_30
+name=Recipe for Disaster: Lumbridge Sage
+masterquestvarbit=varplayerbit_1896,1,5
+
+[quest_167]
+questpoints=2
+name=Within the Light
+masterquestvarbit=varplayerbit_6553,1,46
+
+[quest_168]
+questpoints=2
+name=The Temple at Senntisten
+masterquestvarbit=varplayerbit_6775,10,90
+
+[quest_169]
+questpoints=2
+name=Blood Runs Deep
+masterquestvarbit=varplayerbit_6883,3,147
+

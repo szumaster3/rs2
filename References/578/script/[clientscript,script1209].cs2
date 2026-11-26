@@ -1,0 +1,6 @@
+[clientscript,script1209](component $component0)
+if (%varplayer_170 = 0) {
+    if_settext("Right-click the object to see more options.", $component0);
+} else {
+    if_settext("Click the object to see more options.", $component0);
+}

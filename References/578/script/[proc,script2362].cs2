@@ -1,0 +1,8 @@
+[proc,script2362]()(int)
+if (%varclient_776 = 1) {
+    return(enum_getoutputcount(enum_703));
+} else if (gender = 1) {
+    return(enum_getoutputcount(enum_2341));
+} else {
+    return(enum_getoutputcount(enum_2338));
+}

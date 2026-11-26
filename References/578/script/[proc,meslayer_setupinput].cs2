@@ -1,0 +1,6 @@
+[proc,meslayer_setupinput](string $string0)
+if_settext($string0, interface_752:com_5);
+%varclientstring_22 = $string0;
+%varclient_1029 = string_length($string0);
+if_setonclick("script1556(event_mousex, event_com, event_comsubid)", interface_752:com_5);
+~script1557;

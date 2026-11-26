@@ -19,8 +19,6 @@ import core.game.ge.GrandExchange.Companion.getOfferStats
 import core.game.ge.GrandExchange.Companion.getRecommendedPrice
 import core.game.ge.GrandExchangeOffer
 import core.game.ge.PriceIndex
-import core.game.global.report.AbuseReport
-import core.game.global.report.Rule
 import core.game.interaction.*
 import core.game.node.Node
 import core.game.node.entity.combat.spell.MagicSpell
@@ -29,6 +27,7 @@ import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.login.LoginConfiguration
+import core.game.node.entity.player.link.SpellButtonMapping
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -37,7 +36,6 @@ import core.game.system.command.CommandSystem
 import core.game.system.communication.ClanRank
 import core.game.system.communication.CommunicationInfo
 import core.game.system.communication.GlobalChat
-import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -154,15 +152,23 @@ object PacketProcessor {
                 clan.kick(pkt.player, target)
             }
 
-            is Packet.QuickChat -> QCRepository.sendQC(
-                pkt.player,
-                pkt.multiplier,
-                pkt.offset,
-                pkt.type,
-                pkt.indexA,
-                pkt.indexB,
-                pkt.forClan
-            )
+            is Packet.NativeQuickChat -> {
+                if (pkt.player.details.isMuted) return
+                val payload = QuickChat.encode(pkt.player, pkt.phrase, pkt.parameters)
+                if (payload == null || payload.size > 255) {
+                    pkt.player.sendMessage("This Quick Chat phrase is not yet supported.")
+                    return
+                }
+                when (pkt.channel) {
+                    0 -> {
+                        val context = ChatMessage(pkt.player, "", 0, 0)
+                        context.nativeQuickChat = payload
+                        pkt.player.updateMasks.register(EntityFlag.Chat, context)
+                    }
+                    1 -> QuickChatDelivery.clan(pkt.player, payload)
+                    2 -> QuickChatDelivery.privateMessage(pkt.player, pkt.recipient, payload)
+                }
+            }
 
             is Packet.InputPromptResponse -> {
                 val script: ((Any) -> Boolean) =
@@ -188,8 +194,16 @@ object PacketProcessor {
                 }
                 if (pkt.target.equals(pkt.player.username, true)) {
                     pkt.player.sendMessage("You can't report yourself!")
+                    return
                 }
-                AbuseReport(pkt.player.name, pkt.target, Rule.forId(pkt.rule)).construct(pkt.player, pkt.modMute)
+                // Revision 578 uses a different offence table. Preserve its wire ID.
+                val offence = pkt.rule + 1
+                if (offence !in setOf(5, 6, 7, 8, 10, 12, 14, 16, 17, 18, 19, 20, 21, 22)) return
+                val comment = pkt.comment.replace(Regex("[\\r\\n]"), " ").take(80)
+                val muteRequested = pkt.modMute && pkt.player.details.rights != Rights.REGULAR_PLAYER
+                PlayerMonitor.log(pkt.player, LogType.COMMAND,
+                    "${pkt.player.name}-${pkt.target}-Abuse Report offence=$offence muteRequested=$muteRequested comment=$comment")
+                sendMessage(pkt.player, "Thank you, your abuse report has been received.")
             }
 
             is Packet.TrackFinished -> {
@@ -227,7 +241,7 @@ object PacketProcessor {
                 if (pkt.player.details.isMuted)
                     pkt.player.sendMessage("You have been muted due to breaking a rule.")
                 else {
-                    if (ServerConstants.ENABLE_GLOBALCHAT && pkt.message.startsWith("//")) {
+                    if (!pkt.clan && ServerConstants.ENABLE_GLOBALCHAT && pkt.message.startsWith("//")) {
                         if (getAttribute(pkt.player, GlobalChat.ATTR_GLOBAL_MUTE, false))
                             return
 
@@ -237,9 +251,10 @@ object PacketProcessor {
                                 GlobalChat.process(pkt.player.username, message, Rights.getChatIcon(pkt.player))
                         }
                         return
-                    } else if (pkt.message.startsWith("/") && pkt.player.communication.clan != null) {
+                    } else if (pkt.clan || (pkt.message.startsWith("/") && pkt.player.communication.clan != null)) {
+                        if (pkt.player.communication.clan == null) return
                         val messages = splitChatMessage(
-                            pkt.message.substring(1),
+                            if (pkt.clan) pkt.message else pkt.message.substring(1),
                             pkt.player.communication.clan.name.length + pkt.player.name.length,
                             pkt.player.details.rights.ordinal != 0
                         )
@@ -280,6 +295,7 @@ object PacketProcessor {
 
             is Packet.ContinueOption -> {
                 val player = pkt.player
+                if (player.interfaceManager.chatbox?.id != pkt.iface) return
                 player.debug("[CONTINUE OPT]----------")
                 player.debug("Iface: ${pkt.iface}")
                 player.debug("Child: ${pkt.child}")
@@ -460,11 +476,14 @@ object PacketProcessor {
         if (player.getAttribute("magic:delay", -1) > GameWorld.ticks)
             return
         val book = SpellUtils.getBookNameFromInterface(iface)
+        val spellButton = if (iface == 192 || iface == 193 || iface == 430)
+            SpellButtonMapping.getSpellId(iface, child) ?: return
+        else child
         if (book != "none")
-            SpellListeners.run(child, type, book, player, target)
+            SpellListeners.run(spellButton, type, book, player, target)
         when (iface) {
             430, 192, 193 -> SpellBookManager.SpellBook.forInterface(iface)
-                ?.let { MagicSpell.castSpell(player, it, child, target) }
+                ?.let { MagicSpell.castSpell(player, it, spellButton, target) }
 
             662 -> {
                 if (player.familiarManager.hasFamiliar())
@@ -546,16 +565,11 @@ object PacketProcessor {
 
     private fun processCloseIface(pkt: Packet.CloseIface) {
         val player = pkt.player
-        player.interfaceManager.close()
-        if (player.getAttribute<Boolean>("logging_in") != null) {
-            GameWorld.Pulser.submit(object : Pulse() {
-                override fun pulse(): Boolean {
-                    player.removeAttribute("logging_in")
-                    LoginConfiguration.configureGameWorld(player)
-                    return true
-                }
-            })
+        if (player.getAttribute("logging_in", false)) {
+            if (player.session.isActive && !player.isPlaying) LoginConfiguration.configureGameWorld(player)
+            return
         }
+        player.interfaceManager.close()
         if (player.getAttribute<Any?>("worldMap:viewing") != null) {
             player.removeAttribute("worldMap:viewing")
             player.packetDispatch.sendWindowsPane(if (player.interfaceManager.isResizable) 746 else 548, 2)
@@ -565,12 +579,13 @@ object PacketProcessor {
 
     private fun processIfAction(pkt: Packet.IfAction) {
         val player = pkt.player
+        if (player.getAttribute("logging_in", false)) return
         player.debug("[IF ACTION]--------------------------")
         player.debug("Iface: ${pkt.iface}, Button: ${pkt.child}")
         player.debug("Slot: ${pkt.slot}, ItemID: ${pkt.itemId}")
         player.debug("RCM Index: ${pkt.optIndex}, Op: ${pkt.opcode}")
         player.debug("-------------------------------------")
-        if (player.dialogueInterpreter.dialogue != null && pkt.opcode != 132 && pkt.iface != 64 && pkt.iface != 746)
+        if (pkt.iface != 900 && player.dialogueInterpreter.dialogue != null && pkt.opcode != 132 && pkt.iface != 64 && pkt.iface != 746 && pkt.iface != 548)
             player.dialogueInterpreter.close()
         if (player.locks.isComponentLocked())
             return
@@ -580,7 +595,14 @@ object PacketProcessor {
         if (c.isHidden)
             return
         val plugin = c.plugin
+        if (pkt.iface == content.region.other.tutorial_island.plugin.CharacterDesign.INTERFACE_ID) {
+            if (pkt.optIndex == 0 && content.region.other.tutorial_island.plugin.CharacterDesign.handleButtons(player, pkt.child, pkt.slot)) {
+                player.dispatch(ButtonClickEvent(c.id, pkt.child))
+            }
+            return
+        }
         player.dispatch(ButtonClickEvent(c.id, pkt.child))
+        if (core.game.node.entity.player.link.AutocastManager.handle(player, pkt.iface, pkt.child, pkt.optIndex)) return
         if (!InterfaceListeners.run(player, c, pkt.opcode, pkt.child, pkt.slot, pkt.itemId))
             plugin?.handle(player, c, pkt.opcode, pkt.child, pkt.slot, pkt.itemId)
     }

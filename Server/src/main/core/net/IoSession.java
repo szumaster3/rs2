@@ -4,6 +4,7 @@ import core.auth.AuthResponse;
 import core.cache.crypto.ISAACPair;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.ClientInfo;
+import core.game.world.map.Location;
 import core.game.world.repository.Repository;
 import core.net.producer.HSEventProducer;
 import core.net.producer.LoginEventProducer;
@@ -15,7 +16,9 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
+import core.net.event.GamePacketDecoder;
+import core.net.producer.GameEventProducer;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -47,7 +50,11 @@ public class IoSession {
      * The JS-5 queue.
      */
     private final JS5Queue js5Queue;
-    public int isaacInputOpcode = 0;
+    public final GamePacketDecoder gameInput = new GamePacketDecoder();
+    public boolean reconnecting;
+    public Location initialScene;
+    public volatile core.game.world.update.PlayerInfo578 playerInfo;
+    public final AtomicBoolean loginSubmitted = new AtomicBoolean();
     public String associatedUsername;
     /**
      * The event producer.
@@ -134,7 +141,7 @@ public class IoSession {
             // new Throwable().printStackTrace();
             return;
         }
-        if (instant) {
+        if (instant || producer instanceof GameEventProducer) {
             producer.produceWriter(this, context).run();
             return;
         }
@@ -147,14 +154,32 @@ public class IoSession {
      * @param buffer The buffer.
      */
     public void queue(ByteBuffer buffer) {
+        enqueue(buffer, -1);
+    }
+
+    public void queueGameFrame(ByteBuffer buffer, int opcode) {
+        enqueue(buffer, opcode);
+    }
+
+    private void enqueue(ByteBuffer buffer, int opcode) {
+        writingLock.lock();
         try {
-            writingLock.tryLock(1000L, TimeUnit.MILLISECONDS);
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (opcode >= 0) {
+                int isaac = isaacPair.getOutput().getNextValue();
+                int encrypted = (opcode + isaac) & 0xFF;
+
+                System.out.println(
+                        "[SERVER OUT] Opcode: " + opcode
+                                + ", encrypted: " + encrypted
+                                + ", size: " + buffer.remaining()
+                );
+
+                buffer.put(buffer.position(), (byte) encrypted);
+            }
+            writingQueue.add(buffer);
+        } finally {
             writingLock.unlock();
         }
-        writingQueue.add(buffer);
-        writingLock.unlock();
         write();
     }
 
@@ -166,13 +191,7 @@ public class IoSession {
             disconnect();
             return;
         }
-        try {
-            writingLock.tryLock(1000L, TimeUnit.MILLISECONDS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            writingLock.unlock();
-            return;
-        }
+        writingLock.lock();
         SocketChannel channel = (SocketChannel) key.channel();
         try {
             while (!writingQueue.isEmpty()) {
@@ -186,8 +205,9 @@ public class IoSession {
             }
         } catch (IOException e) {
             disconnect();
+        } finally {
+            writingLock.unlock();
         }
-        writingLock.unlock();
     }
 
     /**
@@ -198,6 +218,8 @@ public class IoSession {
             if (!active) {
                 return;
             }
+            System.out.println("[DEBUG] Disconnecting session: " + this);
+            new Exception("Disconnect trace").printStackTrace();
             active = false;
             key.cancel();
             SocketChannel channel = (SocketChannel) key.channel();

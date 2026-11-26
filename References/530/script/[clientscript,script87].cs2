@@ -1,0 +1,2 @@
+[clientscript,script87](component $component0)
+if_settext("Score: <tostring(%varplayerbit_2121)>", $component0);

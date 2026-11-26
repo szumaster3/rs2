@@ -1,0 +1,2 @@
+[clientscript,component_flashtext_dynamic_stop](int $int0, int $int1)
+%varclient_198 = 0;

@@ -1,0 +1,36 @@
+[clientscript,ra3_package_update_interface]
+if (inv_total(inv_93, obj_15249) > 0 | inv_total(inv_95, obj_15249) > 0 | %varplayerbit_6471 >= 44) {
+    if_sethide(true, interface_887:com_5);
+} else {
+    if_sethide(false, interface_887:com_5);
+}
+if (inv_total(inv_93, obj_15253) > 0 | inv_total(inv_95, obj_15253) > 0) {
+    if_sethide(true, interface_887:com_6);
+} else {
+    if_sethide(false, interface_887:com_6);
+}
+if (inv_total(inv_93, obj_15248) > 0 | inv_total(inv_95, obj_15248) > 0 | %varplayerbit_6471 = 42) {
+    if_sethide(true, interface_887:com_2);
+} else {
+    if_sethide(false, interface_887:com_2);
+}
+if (inv_total(inv_93, obj_15247) > 0 | inv_total(inv_95, obj_15247) > 0) {
+    if_sethide(true, interface_887:com_4);
+} else {
+    if_sethide(false, interface_887:com_4);
+}
+if (inv_total(inv_93, obj_15251) > 0 | inv_total(inv_95, obj_15251) > 0 | %varplayerbit_6471 >= 52 | %varplayerbit_6481 = 1) {
+    if_sethide(true, interface_887:com_8);
+} else {
+    if_sethide(false, interface_887:com_8);
+}
+if (inv_total(inv_93, obj_15250) > 0 | inv_total(inv_95, obj_15250) > 0 | %varplayerbit_6471 >= 52 | %varplayerbit_6481 = 2) {
+    if_sethide(true, interface_887:com_7);
+} else {
+    if_sethide(false, interface_887:com_7);
+}
+if (inv_total(inv_93, obj_15252) > 0 | inv_total(inv_95, obj_15252) > 0) {
+    if_sethide(true, interface_887:com_3);
+} else {
+    if_sethide(false, interface_887:com_3);
+}

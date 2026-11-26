@@ -1,0 +1,22 @@
+[proc,script2701](int $int0)
+if (getwindowmode = ^windowmode_small) {
+    if_opensubclient(interface_548:com_17, interface_883);
+} else {
+    if_opensubclient(interface_746:com_27, interface_883);
+}
+if_sethide(false, interface_746:com_27);
+if_sethide(false, interface_548:com_17);
+~script1151(interface_883:com_18);
+~script1151(interface_883:com_21);
+if_setonmouseover("script2702(true, interface_883:com_18, interface_883:com_19)", interface_883:com_17);
+if_setonmouseleave("script2702(false, interface_883:com_18, interface_883:com_19)", interface_883:com_17);
+if_setonmouseover("script2702(true, interface_883:com_21, interface_883:com_22)", interface_883:com_20);
+if_setonmouseleave("script2702(false, interface_883:com_21, interface_883:com_22)", interface_883:com_20);
+if_setonclick("script2704(true, $int0, 2)", interface_883:com_17);
+if_setonclick("script2704(false, $int0, 2)", interface_883:com_20);
+if_sethide(false, interface_548:com_141);
+if_sethide(false, interface_548:com_21);
+if_sethide(false, interface_548:com_144);
+if_sethide(false, interface_548:com_151);
+if_sethide(false, interface_548:com_114);
+if_sethide(false, interface_548:com_67);

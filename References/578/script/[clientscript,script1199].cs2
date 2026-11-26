@@ -1,0 +1,27 @@
+[clientscript,script1199](component $component0)
+switch_component ($component0) {
+    case interface_890:com_9 :
+        if (%varclient_755 ! null) {
+            if_setobject_wearcol(%varclient_755, 0, $component0);
+        }
+    case interface_890:com_10 :
+        if (%varclient_756 ! null) {
+            if_setobject_wearcol(%varclient_756, 0, $component0);
+        }
+    case interface_890:com_11 :
+        if (%varclient_757 ! null) {
+            if_setobject_wearcol(%varclient_757, 0, $component0);
+        }
+    case interface_890:com_12 :
+        if (%varclient_758 ! null) {
+            if_setobject_wearcol(%varclient_758, 0, $component0);
+        }
+    case interface_890:com_13 :
+        if (%varclient_759 ! null) {
+            if_setobject_wearcol(%varclient_759, 0, $component0);
+        }
+    case interface_890:com_14 :
+        if (%varclient_760 ! null) {
+            if_setobject_wearcol(%varclient_760, 0, $component0);
+        }
+}

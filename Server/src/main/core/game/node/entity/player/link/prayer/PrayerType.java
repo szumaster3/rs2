@@ -14,7 +14,7 @@ import shared.consts.Sounds;
 import java.util.List;
 
 import static core.api.ContentAPIKt.playAudio;
-import static core.api.ContentAPIKt.setVarp;
+import static core.api.ContentAPIKt.setVarbit;
 
 /**
  * The enum Prayer type.
@@ -277,7 +277,7 @@ public enum PrayerType {
      * @return the boolean
      */
     public boolean toggle(final Player player, final boolean on) {
-        setVarp(player, getConfig(), on ? 1 : 0);
+        setVarbit(player, getVarbit(), on ? 1 : 0);
         if (on) {
             flag(player, this);
             player.getPrayer().getActive().add(this);
@@ -411,11 +411,84 @@ public enum PrayerType {
     }
 
     /**
-     * Get prayer type.
+     * Returns the prayer associated with the specified slot.
+     * Slot mappings are based on cache enum_2279.
      *
-     * @param button the button
-     * @return the prayer type
+     * @param slot the prayer slot
+     * @return the prayer type, or null if not found
      */
+    public static PrayerType fromSlot(int slot) {
+        switch (slot) {
+            case 0: return THICK_SKIN;
+            case 1: return BURST_OF_STRENGTH;
+            case 2: return CLARITY_OF_THOUGHT;
+            case 3: return SHARP_EYE;
+            case 4: return MYSTIC_WILL;
+            case 5: return ROCK_SKIN;
+            case 6: return SUPERHUMAN_STRENGTH;
+            case 7: return IMPROVED_REFLEXES;
+            case 8: return RAPID_RESTORE;
+            case 9: return RAPID_HEAL;
+            case 10: return PROTECT_ITEMS;
+            case 11: return HAWK_EYE;
+            case 12: return MYSTIC_LORE;
+            case 13: return STEEL_SKIN;
+            case 14: return ULTIMATE_STRENGTH;
+            case 15: return INCREDIBLE_REFLEXES;
+            case 16: return PROTECT_FROM_SUMMONING;
+            case 17: return PROTECT_FROM_MAGIC;
+            case 18: return PROTECT_FROM_MISSILES;
+            case 19: return PROTECT_FROM_MELEE;
+            case 20: return EAGLE_EYE;
+            case 21: return MYSTIC_MIGHT;
+            case 22: return RETRIBUTION;
+            case 23: return REDEMPTION;
+            case 24: return SMITE;
+            case 25: return CHIVALRY;
+            case 26: return PIETY;
+            default: return null;
+        }
+    }
+
+    /**
+     * Returns the varbit controlling the prayer's activation state.
+     * Varbit mappings are based on cs 2296.
+     *
+     * @return the prayer varbit ID
+     */
+    public int getVarbit() {
+        switch (this) {
+            case THICK_SKIN: return 5942;
+            case BURST_OF_STRENGTH: return 5943;
+            case CLARITY_OF_THOUGHT: return 5944;
+            case SHARP_EYE: return 5960;
+            case MYSTIC_WILL: return 5961;
+            case ROCK_SKIN: return 5945;
+            case SUPERHUMAN_STRENGTH: return 5946;
+            case IMPROVED_REFLEXES: return 5947;
+            case RAPID_RESTORE: return 5948;
+            case RAPID_HEAL: return 5949;
+            case PROTECT_ITEMS: return 5950;
+            case HAWK_EYE: return 5962;
+            case MYSTIC_LORE: return 5963;
+            case STEEL_SKIN: return 5951;
+            case ULTIMATE_STRENGTH: return 5952;
+            case INCREDIBLE_REFLEXES: return 5953;
+            case PROTECT_FROM_SUMMONING: return 5966;
+            case PROTECT_FROM_MAGIC: return 5954;
+            case PROTECT_FROM_MISSILES: return 5955;
+            case PROTECT_FROM_MELEE: return 5956;
+            case EAGLE_EYE: return 5964;
+            case MYSTIC_MIGHT: return 5965;
+            case RETRIBUTION: return 5957;
+            case REDEMPTION: return 5958;
+            case SMITE: return 5959;
+            case CHIVALRY: return 5967;
+            case PIETY: return 5968;
+            default: throw new IllegalStateException("Unmapped prayer: " + this);
+        }
+    }
+
     public static PrayerType get(int button) {
         for (PrayerType type : PrayerType.values()) {
             if (type.getButton() == button) {

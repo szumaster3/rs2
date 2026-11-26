@@ -1,0 +1,2 @@
+[clientscript,script1586](component $component0, component $component1, fontmetrics $fontmetrics2)
+~sc_output_name(%varclientstring_219, $component0, $component1, $fontmetrics2);

@@ -1,0 +1,13 @@
+[clientscript,script1123](component $component0)
+switch_int (%varplayerbit_804) {
+    case 1 :
+        if_setobject(obj_6090, 300, $component0);
+    case 2 :
+        if_setobject(obj_6092, 300, $component0);
+    case 3 :
+        if_setobject(obj_6089, 300, $component0);
+    case 4 :
+        if_setobject(obj_6091, 300, $component0);
+    case default :
+        if_setobject(null, 300, $component0);
+}

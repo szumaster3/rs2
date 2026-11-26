@@ -71,7 +71,7 @@ class UpdateMasks(val owner: Entity) {
     fun write(p: Player?, e: Entity?, buffer: IoBuffer) {
         var maskData = presenceFlags
         if (maskData >= 0x100) {
-            maskData = maskData or if (e is Player) 0x10 else 0x8
+            maskData = maskData or if (e is Player) 0x2 else 0x40
             buffer.put(maskData).put(maskData shr 8)
         } else {
             buffer.put(maskData)
@@ -98,7 +98,7 @@ class UpdateMasks(val owner: Entity) {
         }
         maskData = maskData or synced
         if (maskData >= 0x100) {
-            maskData = maskData or if (e is Player) 0x10 else 0x8
+            maskData = maskData or if (e is Player) 0x2 else 0x40
             buffer.put(maskData).put(maskData shr 8)
         } else {
             buffer.put(maskData)
@@ -113,6 +113,26 @@ class UpdateMasks(val owner: Entity) {
             }
             element?.encoder?.writeToDynamic(buffer, element.context, p!!)
         }
+    }
+
+    /**
+     * First sight includes persistent flags and the current appearance.
+     */
+    fun playerBlock(player: Player, firstSight: Boolean, traversal: Int?): ByteArray? {
+        var bits = presenceFlags
+        if (firstSight) bits = bits or syncedPresenceFlags or 1
+        if (traversal != null) bits = bits or 0x4000
+        if (bits == 0) return null
+        val out = IoBuffer()
+        if (bits >= 256) out.put(bits or 2).put(bits shr 8) else out.put(bits)
+        for (i in elements.indices) {
+            val element = elements[i] ?: if (firstSight) syncedElements[i] else null
+            if (element != null) element.encoder.writeToDynamic(out, element.context, player)
+            else if (firstSight && i == 2) PlayerFlags.Appearance().writeTo(out, player)
+        }
+        if (traversal != null) out.p1sub(traversal)
+        val bytes = out.toByteBuffer()
+        return bytes.array().copyOf(bytes.position())
     }
 
     /**

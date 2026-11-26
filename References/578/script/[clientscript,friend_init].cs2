@@ -1,0 +1,16 @@
+[clientscript,friend_init]
+if_settext("Friends List - RuneScape <tostring(map_world)>", interface_550:com_6);
+if_setonfriendtransmit("friend_transmit", interface_550:com_2);
+if_setscrollsize(0, 0, interface_550:com_2);
+if_setscrollpos(0, 0, interface_550:com_2);
+~scrollbar_vertical(interface_550:com_1, interface_550:com_2, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");
+if (%varclient_1036 = -1) {
+    %varclient_1036 = if_getx(interface_550:com_4);
+}
+def_int $int0 = calc(if_getwidth(interface_550:com_2) - 30);
+if (%varclient_1036 < 25) {
+    %varclient_1036 = 25;
+} else if (%varclient_1036 > $int0) {
+    %varclient_1036 = $int0;
+}
+~friend_update(%varclient_1036);

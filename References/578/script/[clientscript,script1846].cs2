@@ -1,0 +1,6 @@
+[clientscript,script1846]
+if (~script1305 ! 8 & ~script1569 = false & if_hassub(~script8(8)) = true & %varplayerbit_6521 ! 3 & %varplayerbit_6521 ! 10) {
+    ~script736(~script1742(8), -1, ~script121(8), -1);
+    if_setontimer("script1847", interface_746:com_106);
+    if_setontimer("script1847", interface_548:com_80);
+}

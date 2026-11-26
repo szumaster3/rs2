@@ -71,9 +71,16 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
      * @param password The password to validate.
      * @return A pair containing an [AuthResponse] status and the associated [UserAccountInfo] if the login is successful.
      */
-    override fun checkLogin(
+    override fun checkLogin(username: String, password: String): Pair<AuthResponse, UserAccountInfo?> =
+        authenticate(username, password, false)
+
+    override fun checkReconnect(username: String, password: String): Pair<AuthResponse, UserAccountInfo?> =
+        authenticate(username, password, true)
+
+    private fun authenticate(
         username: String,
         password: String,
+        reconnect: Boolean,
     ): Pair<AuthResponse, UserAccountInfo?> {
         val info: UserAccountInfo
         try {
@@ -89,7 +96,7 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
             // Check if the account is disabled or banned.
             if (info.banEndTime > System.currentTimeMillis()) return Pair(AuthResponse.AccountDisabled, null)
             // Check if the user is already online.
-            if (info.online) return Pair(AuthResponse.AlreadyOnline, null)
+            if (info.online && !reconnect) return Pair(AuthResponse.AlreadyOnline, null)
         } catch (e: Exception) {
             // Handle any exceptions during the login check process.
             e.printStackTrace()

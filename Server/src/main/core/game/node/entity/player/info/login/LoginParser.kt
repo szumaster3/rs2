@@ -36,6 +36,7 @@ class LoginParser(val details: PlayerDetails) {
             e.printStackTrace()
             Repository.removePlayer(player)
             flag(AuthResponse.ErrorLoadingProfile)
+            return
         }
 
         GameWorld.Pulser.submit(
@@ -74,7 +75,7 @@ class LoginParser(val details: PlayerDetails) {
      *
      * @param player The player instance reconnecting.
      */
-    private fun reconnect(player: Player) {
+    fun reconnect(player: Player) {
         Repository.disconnectionQueue.remove(details.username)
         player.initReconnect()
         player.isActive = true

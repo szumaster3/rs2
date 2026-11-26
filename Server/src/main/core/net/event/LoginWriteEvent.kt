@@ -5,6 +5,7 @@ import core.net.EventProducer
 import core.net.IoSession
 import core.net.IoWriteEvent
 import core.net.producer.GameEventProducer
+import core.net.packet.out.LoginWorldEncoder
 import java.nio.ByteBuffer
 
 /**
@@ -19,16 +20,22 @@ class LoginWriteEvent(
 
     override fun write(session: IoSession, context: Any) {
         val response = context as AuthResponse
+        if (response == AuthResponse.Success) {
+            val player = session.player
+            val location = core.game.world.map.Location.create(player.location)
+            val firstWorld = LoginWorldEncoder.response(player.index, location, player.details.rights.ordinal,
+                session.reconnecting, session.isaacPair.output)
+            if (!session.reconnecting) session.initialScene = location
+            session.queue(firstWorld)
+            session.producer = GAME_PRODUCER
+            session.playerInfo = core.game.world.update.PlayerInfo578(player.index, location.x, location.y, location.z)
+            return
+        }
         val buffer = ByteBuffer.allocate(500)
 
         buffer.put(response.ordinal.toByte())
 
         when (response.ordinal) {
-            2 -> { // Successful login
-                buffer.put(worldResponse(session))
-                session.producer = GAME_PRODUCER
-            }
-
             21 -> { // Moving world
                 buffer.put(session.serverKey.toByte())
             }
@@ -41,22 +48,5 @@ class LoginWriteEvent(
     companion object {
         private val GAME_PRODUCER: EventProducer = GameEventProducer()
 
-        /**
-         * Builds the world response for a successful login.
-         */
-        private fun worldResponse(session: IoSession): ByteBuffer {
-            val player = session.player
-            return ByteBuffer.allocate(150).apply {
-                put(player.details.rights.ordinal.toByte())
-                repeat(3) { put(0) }
-                put(1)
-                put(0)
-                put(0)
-                putShort(player.index.toShort())
-                put(1) // Enable all G.E boxes.
-                put(1)
-                flip()
-            }
-        }
     }
 }

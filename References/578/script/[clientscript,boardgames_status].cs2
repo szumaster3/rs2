@@ -1,0 +1,4 @@
+[clientscript,boardgames_status](component $component0, component $component1, component $component2, component $component3)
+if_settext(%varclientstring_143, $component0);
+if_settext(%varclientstring_144, $component1);
+~boardgames_status_output($component2, %varclientstring_145, $component3);

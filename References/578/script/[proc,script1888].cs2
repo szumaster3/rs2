@@ -1,0 +1,8 @@
+[proc,script1888]
+if (~script2728 = 1 & %varplayerbit_6521 = 0) {
+    if (%varplayer_281 < 1000) {
+        return;
+    }
+    mes("Your hitpoints are low! Find a safe place away from your attacker");
+    mes("and speak to your advisor to find out what to do.");
+}

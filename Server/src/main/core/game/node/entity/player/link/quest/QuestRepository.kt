@@ -1,6 +1,7 @@
 package core.game.node.entity.player.link.quest
 
 import com.google.gson.JsonObject
+import core.cache.def.impl.VarpDefinition
 import core.api.log
 import core.api.setVarbit
 import core.api.setVarp
@@ -66,7 +67,11 @@ class QuestRepository(private val player: Player) {
                 setVarbit(player, config[1], config[2])
             } else {
                 // Original VARP quests: {questVarpId, valueToSet}
-                setVarp(player, config[0], config[1])
+                if (!VarpDefinition.exists(config[0])) {
+                    log(javaClass, Log.WARN, "Quest ${quest.name}: unmapped varp ${config[0]}")
+                } else {
+                    setVarp(player, config[0], config[1])
+                }
             }
 
             quest.updateVarps(player)

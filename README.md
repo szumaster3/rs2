@@ -1,6 +1,6 @@
 # rs2
 
-Singleplayer-only fork of the [2009scape server](https://gitlab.com/2009scape/2009scape) (RuneScape build 530, January 2009). One local player, one process, no public hosting.
+A RuneScape server based on [2009scape server](https://gitlab.com/2009scape/2009scape) (RuneScape build 578, 2009-12-21).
 
 > Not affiliated with Jagex or the upstream 2009scape team. Upstream offers no support for self-hosted servers; neither does this fork beyond its issue tracker.
 
@@ -12,7 +12,7 @@ Singleplayer-only fork of the [2009scape server](https://gitlab.com/2009scape/20
 | Maven     | Not required, the Maven Wrapper (`mvnw`) is included. |
 | Git LFS   | Required: run `git lfs pull` once after cloning.      |
 
-Windows: enable developer mode before cloning (symlinks).
+Windows users should enable Developer Mode before cloning to support symbolic links.
 
 ## Setup
 
@@ -35,6 +35,8 @@ Output: `Server/target/Server-1.0.0-jar-with-dependencies.jar`.
 
 Run from the `Server/` directory, since `worldprops/default.conf` and `data/` are resolved relative to the working directory:
 
+The server uses `data/private.pem` for RSA login authentication.
+
 ```bash
 cd Server
 java -jar target/Server-1.0.0-jar-with-dependencies.jar
@@ -42,4 +44,6 @@ java -jar target/Server-1.0.0-jar-with-dependencies.jar
 
 ## License
 
-[AGPL-3.0](LICENSE), inherited from upstream. Modified versions made available over a network must publish their source under the same license. Game cache and assets belong to Jagex and are not licensed by this project.
+Licensed under [AGPL-3.0](LICENSE), inherited from upstream.
+
+RuneScape, its cache, client and game assets belong to Jagex and are not covered by this license.

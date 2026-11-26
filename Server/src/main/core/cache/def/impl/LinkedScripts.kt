@@ -12,6 +12,7 @@ class LinkedScripts {
     @JvmField var onTimer: ScriptArgs? = null
     @JvmField var onOptionClick: ScriptArgs? = null
     @JvmField var onMouseRepeat: ScriptArgs? = null
+    @JvmField var onClick: ScriptArgs? = null
     @JvmField var onClickRepeat: ScriptArgs? = null
     @JvmField var onDrag: ScriptArgs? = null
     @JvmField var onRelease: ScriptArgs? = null

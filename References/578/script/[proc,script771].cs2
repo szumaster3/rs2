@@ -1,0 +1,7 @@
+[proc,script771](obj $obj0)(int)
+switch_obj ($obj0) {
+    case obj_6287 :
+        return(calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)));
+    case default :
+        return(~inv_total_available(inv_93, $obj0));
+}

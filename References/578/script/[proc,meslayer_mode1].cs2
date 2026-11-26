@@ -1,0 +1,27 @@
+[proc,meslayer_mode1](string $string0)
+if (%varclient_5 <= 1) {
+    if (getwindowmode >= 2) {
+        if_sethide(false, interface_746:com_18);
+    }
+    if_settextfont(q8_full, interface_752:com_4);
+    if_settextfont(q8_full, interface_752:com_5);
+    if_setsize(0, 20, ^setsize_minus, ^setsize_minus, interface_752:com_4);
+    if_setsize(0, 20, ^setsize_minus, ^setsize_abs, interface_752:com_5);
+    if_setposition(0, 0, ^setpos_abs_centre, ^setpos_abs_top, interface_752:com_4);
+    if_setposition(0, 0, ^setpos_abs_centre, ^setpos_abs_bottom, interface_752:com_5);
+    if_sethide(false, interface_752:com_3);
+    if_sethide(true, interface_752:com_7);
+    if_sethide(true, interface_752:com_8);
+    if_settext($string0, interface_752:com_4);
+    if_settext("Click here to continue", interface_752:com_5);
+    %varclient_5 = 1;
+    if_setonclick("meslayer_close", interface_752:com_3);
+    if_setonkey(null, interface_752:com_5);
+    if_setcolour(0x000080, interface_752:com_5);
+    if_setonmouserepeat("text_colour_swapper(event_com, ^white)", interface_752:com_5);
+    if_setonmouseleave("text_colour_swapper(event_com, 0x000080)", interface_752:com_5);
+    ~script1188;
+    if_sethide(true, interface_752:com_6);
+    if_setontimer(null, interface_752:com_5);
+    if_setonclick(null, interface_752:com_5);
+}

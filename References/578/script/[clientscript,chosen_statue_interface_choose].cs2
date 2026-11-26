@@ -1,0 +1,2 @@
+[clientscript,chosen_statue_interface_choose](int $int0)
+~chosen_statue_interface_choose($int0);

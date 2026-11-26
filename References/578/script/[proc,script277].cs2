@@ -1,0 +1,37 @@
+[proc,script277](int $key0, int $int1)
+def_int $int2 = %varclient_195;
+def_int $int3 = -1;
+def_int $int4 = enum_getoutputcount(enum_1626);
+def_string $string0 = "Select one";
+def_int $int5 = 0;
+def_int $int6 = 0;
+if ($key0 = ^key_up | $key0 = ^key_left | $key0 = ^key_page_up) {
+    $int2 = calc($int2 - $int1);
+} else if ($key0 = ^key_down | $key0 = ^key_right | $key0 = ^key_page_down) {
+    $int2 = calc($int2 + $int1);
+} else if ($key0 = null) {
+    $int2 = calc($int2 + $int1);
+} else {
+    return;
+}
+if ($int2 < 0) {
+    $int2 = 0;
+} else if ($int2 > $int4) {
+    $int2 = $int4;
+}
+if (if_gethide(interface_744:com_29) = true) {
+    $int3 = calc($int2 - 1);
+    if ($int3 ! -1) {
+        $string0 = enum(int, string, enum_1626, $int3);
+    }
+    ~script275($string0, 1, $int2);
+} else if (cc_find(interface_744:com_30, 1) = true) {
+    $int6 = if_getscrolly(interface_744:com_29);
+    $int5 = calc(15 * $int2);
+    if (($key0 = ^key_up | $key0 = ^key_left | $key0 = ^key_page_up | $key0 = null & $int1 < 0) & $int5 < $int6) {
+        ~scrollbar_vertical_doscroll(interface_744:com_30, interface_744:com_29, $int5, true);
+    } else if (($key0 = ^key_down | $key0 = ^key_right | $key0 = ^key_page_down | $key0 = null & $int1 > 0) & $int5 > calc($int6 + 60)) {
+        ~scrollbar_vertical_doscroll(interface_744:com_30, interface_744:com_29, calc($int5 - 60), true);
+    }
+}
+%varclient_195 = $int2;

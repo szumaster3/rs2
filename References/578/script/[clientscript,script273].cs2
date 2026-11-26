@@ -1,0 +1,8 @@
+[clientscript,script273](component $component0, int $int1, boolean $boolean2)
+if (cc_find($component0, $int1) = true) {
+    if ($boolean2 = true) {
+        cc_setcolour(0xffe1be);
+    } else {
+        cc_setcolour(0x663300);
+    }
+}

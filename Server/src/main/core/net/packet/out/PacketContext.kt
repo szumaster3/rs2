@@ -18,6 +18,13 @@ import java.awt.Point
 sealed class PacketContext {
     abstract val player: Player
 
+    class AbsoluteLocAnimation(override val player: Player, val location: Location, val shape: Int, val rotation: Int, val animation: Int) : PacketContext()
+    class LocPrefetch(override val player: Player, val id: Int, val shape: Int) : PacketContext()
+    class CoordText(override val player: Player, val location: Location, val duration: Int, val height: Int, val colour: Int, val text: String) : PacketContext()
+    // Half-tile offsets are relative to the source tile's chunk; heights are wire units.
+    class HalfProjectile(override val player: Player, val location: Location, val halfX: Int, val halfY: Int, val dx: Int, val dy: Int, val target: Int, val graphic: Int, val sourceHeight: Int, val targetHeight: Int, val start: Int, val end: Int, val peak: Int, val arc: Int, val sourceEntity: Int? = null) : PacketContext()
+    class LocMerge(override val player: Player, val location: Location, val id: Int, val shape: Int, val rotation: Int, val entity: Int, val start: Int, val end: Int, val x1: Int, val x2: Int, val y1: Int, val y2: Int) : PacketContext()
+
     class PlayerContext(override val player: Player) : PacketContext()
 
     class AccessMaskContext(
@@ -72,7 +79,7 @@ sealed class PacketContext {
         fun transform(heightOffset: Int) = CameraContext(player, type, x, y, height + heightOffset, speed, zoomSpeed)
 
         enum class CameraType(val opcode: Int) {
-            POSITION(154), ROTATION(125), SET(187), SHAKE(27), RESET(24)
+            POSITION(25), ROTATION(5), SET(14), SHAKE(23), RESET(91)
         }
     }
 
@@ -225,6 +232,8 @@ sealed class PacketContext {
         val childId: Int,
         val isHidden: Boolean,
     ) : PacketContext()
+
+    class MoveInterfaceContext(override val player: Player, val source: Int, val destination: Int) : PacketContext()
 
     class InterfaceContext(
         override val player: Player,

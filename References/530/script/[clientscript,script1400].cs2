@@ -1,0 +1,2 @@
+[clientscript,script1400]
+if_sethide(false, interface_270:com_58);

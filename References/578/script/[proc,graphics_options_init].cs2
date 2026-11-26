@@ -1,0 +1,9 @@
+[proc,graphics_options_init](int $int0)
+if (%varclient_178 <= 0) {
+    %varclient_178 = max(fullscreen_lastmode, 0);
+}
+if (%varclient_178 >= fullscreen_modecount) {
+    %varclient_178 = 0;
+}
+def_int $int1 = detailget_toolkit;
+~graphics_options_rebuild($int1, getwindowmode, ~graphics_options_reviewoptions($int1), $int0);

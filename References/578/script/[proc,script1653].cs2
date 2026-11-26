@@ -1,0 +1,6 @@
+[proc,script1653]()(boolean)
+if (if_gethide(interface_752:com_8) = true & (if_gethide(interface_752:com_3) = false | if_gethide(interface_752:com_7) = false) | if_hassub(interface_752:com_13) = true | if_hassub(interface_752:com_12) = true | if_hassub(interface_752:com_11) = true | if_hassub(interface_752:com_10) = true) {
+    return(true);
+} else {
+    return(false);
+}

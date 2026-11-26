@@ -5,7 +5,6 @@ import content.region.other.tutorial_island.plugin.TutorialStage
 import content.region.other.tutorial_island.plugin.TutorialStage.hideTabs
 import core.api.isQuestComplete
 import core.api.log
-import core.api.setVarp
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.component.InterfaceType
@@ -34,6 +33,17 @@ class InterfaceManager(
     val player: Player
 ) {
     private var packetCount = 0
+    private var temporaryRoot: Int? = null
+
+    /** Display a full-canvas modal without discarding the underlying gameframe. */
+    fun openTemporaryRoot(component: Component): Component? {
+        if (!close()) return null
+        temporaryRoot = component.id
+        opened = component
+        PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, component.id, 0))
+        player.dispatch(InterfaceOpenEvent(component))
+        return component
+    }
 
     /**
      * The root windows pane interface currently open.
@@ -123,7 +133,7 @@ class InterfaceManager(
                 Log.WARN,
                 "Set interface type to WINDOW_PANE for component " + windowsPane.id + ", definition requires updating!"
             )
-            windowsPane.definition.type = InterfaceType.SINGLE_TAB
+            windowsPane.definition.type = InterfaceType.WINDOW_PANE
         }
 
         PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, windowsPane.id, type))
@@ -192,7 +202,14 @@ class InterfaceManager(
         }
 
         if (opened != null && opened!!.close(player)) {
-            if (!opened!!.definition!!.isWalkable || opened!!.id == 14) {
+            if (temporaryRoot == opened!!.id) {
+                temporaryRoot = null
+                val oldRoot = windowPaneId
+                val newRoot = if (isResizable) 746 else 548
+                if (oldRoot != newRoot) relocateGameframe(oldRoot, newRoot)
+                else PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, newRoot, 0))
+                player.dispatch(InterfaceCloseEvent(opened!!))
+            } else if (!opened!!.definition!!.isWalkable || opened!!.id == 14) {
                 PacketRepository.send(
                     Encoders530.CLOSE_INTERFACE,
                     InterfaceContext(
@@ -212,7 +229,7 @@ class InterfaceManager(
             val tutorialComplete = player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
             val tutorialStage = player.getAttribute(GameAttributes.TUTORIAL_STAGE, -1)
             if (!tutorialComplete && tutorialStage < 72) {
-                if (!player.isArtificial) {
+                if (!player.isArtificial && !(tutorialStage == 0 && wasOpened?.id == 900 && player.getAttribute("char-design:accepted", false))) {
                     TutorialStage.load(player, tutorialStage, false)
                 }
             } else {
@@ -262,7 +279,7 @@ class InterfaceManager(
                         component.definition.getWindowPaneId(
                             isResizable
                         ),
-                        component.definition.getChildId(isResizable) + component.definition.tabIndex,
+                        component.definition.getChildId(isResizable) + protocolTabIndex(component.definition.tabIndex),
                         component.id,
                         component.definition.isWalkable
                     )
@@ -332,6 +349,14 @@ class InterfaceManager(
      *
      * @param tabs The indices of the tabs to remove.
      */
+    fun removeTutorialTabs() {
+        removeTabs(*(0..13).toList().toIntArray())
+        for (index in intArrayOf(3, 15)) {
+            PacketRepository.send(Encoders530.CLOSE_INTERFACE, InterfaceContext(player, windowPaneId,
+                (if (isResizable) 33 else 152) + index, 0, true))
+        }
+    }
+
     fun removeTabs(vararg tabs: Int) {
         var changeViewedTab = false
         for (slot in tabs) {
@@ -366,6 +391,8 @@ class InterfaceManager(
      * Restores all default tabs if missing or hidden.
      */
     fun restoreTabs() {
+        openExtraTab(3, 259)
+        openExtraTab(15, 34)
         for (i in tabs.indices) {
             val tab = tabs[i]
             if (tab == null) {
@@ -381,18 +408,13 @@ class InterfaceManager(
                     }
 
                     6 -> openTab(6, Component(player.spellBookManager.spellBook)) // Magic
-                    7 -> if (player.familiarManager.hasFamiliar()) {
-                        openTab(7, Component(Components.LORE_STATS_SIDE_662))
-                    }
+                    7 -> openTab(7, Component(891))
 
                     else -> openTab(i, Component(DEFAULT_TABS[i]))
                 }
             } else if (tab.isHidden) {
-                val child = (if (i < 7) 38 else 13) + i
-                //				boolean resize = isResizable(); //TODO:
-                player.packetDispatch.sendInterfaceConfig(windowPaneId, child, false)
-                player.packetDispatch.sendInterfaceConfig(windowPaneId, child + 7, false)
-                tabs[i]!!.isHidden = false
+                openTab(i, tab)
+                tab.isHidden = false
             }
         }
     }
@@ -407,14 +429,14 @@ class InterfaceManager(
         }
         openTab(0, inter)
         openTab(1, Component(Components.STATS_320))
-        openTab(2, Component(Components.QUESTJOURNAL_V2_274))
+        openTab(2, Component(190))
         openTab(3, Component(Components.INVENTORY_149))
         openTab(4, Component(Components.WORNITEMS_387))
         openTab(5, Component(Components.PRAYER_271))
         openTab(6, Component(player.spellBookManager.spellBook))
-        if (player.familiarManager.hasFamiliar()) {
-            openTab(7, Component(Components.LORE_STATS_SIDE_662))
-        }
+        openTab(7, Component(891))
+        openExtraTab(3, 259)
+        openExtraTab(15, 34)
         openTab(8, Component(Components.FRIENDS2_550))
         openTab(9, Component(Components.IGNORE2_551))
         openTab(10, Component(Components.CLANJOIN_589))
@@ -422,8 +444,9 @@ class InterfaceManager(
         openTab(12, Component(Components.EMOTES_464))
         openTab(13, Component(Components.MUSIC_V3_187))
         openTab(14, Component(Components.LOGOUT_182))
+        core.api.sendIfaceSettings(player, 2, 6, Components.LOGOUT_182, -1, -1)
         if (player.properties.autocastSpell != null) {
-            inter!!.selectAutoSpell(inter!!.getAutospellId(player.properties.autocastSpell!!.spellId), true)
+            AutocastManager.restore(player)
         }
     }
 
@@ -434,30 +457,26 @@ class InterfaceManager(
         //Hp orb
         PacketRepository.send(
             Encoders530.INTERFACE,
-            InterfaceContext(player, windowPaneId, if (isResizable) 13 else 70, Components.TOPSTAT_HITPOINTS_748, true)
+            InterfaceContext(player, windowPaneId, if (isResizable) 169 else 134, Components.TOPSTAT_HITPOINTS_748, true)
         )
         //Prayer orb
         PacketRepository.send(
             Encoders530.INTERFACE,
-            InterfaceContext(player, windowPaneId, if (isResizable) 14 else 71, Components.TOPSTAT_PRAYER_749, true)
+            InterfaceContext(player, windowPaneId, if (isResizable) 170 else 136, Components.TOPSTAT_PRAYER_749, true)
         )
         //Energy orb
         PacketRepository.send(
             Encoders530.INTERFACE,
-            InterfaceContext(player, windowPaneId, if (isResizable) 15 else 72, Components.TOPSTAT_RUN_750, true)
+            InterfaceContext(player, windowPaneId, if (isResizable) 171 else 137, Components.TOPSTAT_RUN_750, true)
         )
         //Summoning bar
         if (isQuestComplete(player, Quests.WOLF_WHISTLE) && settings?.isMembers == true) {
             PacketRepository.send(
                 Encoders530.INTERFACE,
-                InterfaceContext(player, windowPaneId, if (isResizable) 16 else 73, Components.TOPSTAT_LORE_747, true)
+                InterfaceContext(player, windowPaneId, if (isResizable) 172 else 139, Components.TOPSTAT_LORE_747, true)
             )
         }
-        //Split PM
-        PacketRepository.send(
-            Encoders530.INTERFACE,
-            InterfaceContext(player, windowPaneId, if (isResizable) 71 else 10, Components.PMCHAT_754, true)
-        )
+        // Split PM parent is not verified for revision 578.
     }
 
     /**
@@ -469,7 +488,7 @@ class InterfaceManager(
             close(inter) // Attack
         }
         close(Component(Components.STATS_320)) // Skills
-        close(Component(Components.QUESTJOURNAL_V2_274)) // Quest
+        close(Component(190)) // Quest
         close(Component(Components.AREA_TASK_259)) // Diary
         close(Component(Components.INVENTORY_149)) // inventory
         close(Component(Components.WORNITEMS_387)) // Equipment
@@ -492,7 +511,7 @@ class InterfaceManager(
      * @param component The component to open.
      */
     fun openTab(slot: Int, component: Component?) {
-        check(!(component!!.id == Components.WEAPON_FISTS_SEL_92 && component !is WeaponInterface)) { "Attack tab can only be instanced as " + WeaponInterface::class.java.canonicalName + "!" }
+        check(!(component!!.id == 884 && component !is WeaponInterface)) { "Attack tab can only be instanced as " + WeaponInterface::class.java.canonicalName + "!" }
         if (component.definition!!.tabIndex != slot) {
             log(this.javaClass, Log.WARN, "Set tab index to " + slot + " for component " + component.id + ", definition requires updating!")
             component.definition.tabIndex = slot
@@ -503,6 +522,10 @@ class InterfaceManager(
         }
         component.open(player)
         tabs[slot] = component
+        val index = protocolTabIndex(slot)
+        val button = if (slot == 14) (if (isResizable) 168 else 133)
+            else if (isResizable) 124 + index else if (index < 8) 81 + index else 51 + index - 8
+        core.api.sendIfaceSettings(player, 2, button, windowPaneId, -1, -1)
     }
 
     /**
@@ -535,18 +558,22 @@ class InterfaceManager(
     fun openChatbox(component: Component) {
         if (component.id == DEFAULT_CHATBOX) {
             if (chatbox == null || (chatbox!!.id != DEFAULT_CHATBOX && chatbox!!.definition!!.type == InterfaceType.CHATBOX)) {
-                PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId, if (isResizable) 23 else 14, Components.FILTERBUTTONS_751, true))
-                PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId, if (isResizable) 70 else 75, Components.CHATTOP_752, true))
-                PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, InterfaceType.CHATBOX.fixedPaneId, InterfaceType.CHATBOX.fixedChildId, Components.CHATDEFAULT_137, true))
+                openDefaultChatFrame()
             }
             chatbox = component
-            setVarp(player, 334, 1)
         } else {
+            val previous = chatbox
+            if (previous != null && previous.id != DEFAULT_CHATBOX && previous.id != component.id) {
+                PacketRepository.send(Encoders530.CLOSE_INTERFACE, InterfaceContext(player,
+                    previous.definition!!.getWindowPaneId(isResizable), previous.definition.getChildId(isResizable),
+                    previous.id, previous.definition.isWalkable))
+            }
             chatbox = component
             if (chatbox!!.definition!!.type != InterfaceType.DIALOGUE && chatbox!!.definition!!.type != InterfaceType.CHATBOX && chatbox!!.definition!!.type != InterfaceType.CS_CHATBOX) {
                 log(this.javaClass, Log.WARN, "Set interface type to CHATBOX for component " + component.id + ", definition requires updating!")
                 chatbox!!.definition!!.type = InterfaceType.DIALOGUE
             }
+            if (component.id == 372 || component.id == 421) component.definition!!.type = InterfaceType.FULL_CHATBOX
             chatbox!!.open(player)
         }
     }
@@ -556,19 +583,61 @@ class InterfaceManager(
      *
      * @param windowMode The desired window mode.
      */
+    // Track actual root attachments, including direct packet callers and extra tabs.
+    private val attachments = linkedMapOf<Int, Int>()
+
+    fun recordInterfaceAttachment(parent: Int, child: Int, id: Int) {
+        attachments[(parent shl 16) or child] = id
+    }
+
+    fun removeInterfaceAttachment(parent: Int, child: Int) {
+        attachments.remove((parent shl 16) or child)
+    }
+
     fun switchWindowMode(windowMode: Int) {
-        if (windowMode != player.session.clientInfo!!.windowMode) {
-            player.session.clientInfo!!.windowMode = windowMode
-            openWindowsPane(Component(if (isResizable) Components.TOPLEVEL_FULLSCREEN_746 else Components.TOPLEVEL_548))
-            if (!player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)) {
-                hideTabs(player, false)
-            } else {
-                openDefaultTabs()
-            }
-            openInfoBars()
-            PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId, if (isResizable) 23 else 14, Components.FILTERBUTTONS_751, true))
-            PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId, if (isResizable) 70 else 75, Components.CHATTOP_752, true))
+        val info = player.session.clientInfo ?: return
+        if (info.windowMode == windowMode) return
+        val oldRoot = windowPaneId
+        info.windowMode = windowMode
+        if (player.getAttribute("logging_in", false) || !player.isPlaying) return
+        val newRoot = if (isResizable) 746 else 548
+        if (temporaryRoot != null) return
+        if (oldRoot == newRoot || oldRoot !in intArrayOf(548, 746)) return
+        relocateGameframe(oldRoot, newRoot)
+    }
+
+    private fun relocateGameframe(oldRoot: Int, newRoot: Int) {
+        // Explicit pairs from the 578 gameframe audit; never guess unknown destinations.
+        val pairs = linkedMapOf(5 to 6, 6 to 5, 16 to 8, 147 to 30,
+            134 to 169, 136 to 170, 137 to 171, 139 to 172,
+            20 to 15, 142 to 18, 170 to 51)
+        for (index in 0..15) pairs[152 + index] = 33 + index
+        val mapping = if (oldRoot == 548) pairs else pairs.entries.associate { it.value to it.key }
+        val moves = attachments.keys.filter { it ushr 16 == oldRoot }.map { source ->
+            source to mapping[source and 65535]
         }
+        // Type 0 keeps subinterfaces alive; packet 66 relocates them without closing content.
+        windowsPane = Component(newRoot)
+        PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, newRoot, 0))
+        for ((source, child) in moves) {
+            if (child == null) {
+                log(javaClass, Log.WARN, "Unmapped window attachment ${source ushr 16}:${source and 65535}")
+                continue
+            }
+            val destination = (newRoot shl 16) or child
+            PacketRepository.send(Encoders530.MOVE_INTERFACE, core.net.packet.out.PacketContext.MoveInterfaceContext(player, source, destination))
+            attachments.remove(source)?.let { attachments[destination] = it }
+        }
+        // Root button masks belong to the new gameframe, not the moved subinterfaces.
+        for (slot in tabs.indices) {
+            if (tabs[slot] == null) continue
+            val index = protocolTabIndex(slot)
+            val button = if (slot == 14) (if (isResizable) 168 else 133)
+                else if (isResizable) 124 + index else if (index < 8) 81 + index else 51 + index - 8
+            core.api.sendIfaceSettings(player, 2, button, newRoot, -1, -1)
+        }
+        setViewedTab(currentTabIndex)
+        player.packetDispatch.sendRunEnergy()
     }
 
     /**
@@ -611,20 +680,9 @@ class InterfaceManager(
      * @param tabIndex The tab index to view.
      */
     fun setViewedTab(tabIndex: Int) {
-        var tabIndex = tabIndex
-        if (tabs[tabIndex] == null) {
-            return
-        }
+        if (tabIndex !in tabs.indices || tabs[tabIndex] == null) return
         currentTabIndex = tabIndex
-        when (tabIndex) {
-            0 -> tabIndex = 1
-            1 -> tabIndex = 2
-            2 -> tabIndex = 3
-        }
-        if (tabIndex > 9) {
-            tabIndex--
-        }
-        player.packetDispatch.sendRunScript(115, "i", tabIndex)
+        player.packetDispatch.sendRunScript(115, "i", if (tabIndex == 14) 99 else protocolTabIndex(tabIndex))
     }
 
     /**
@@ -643,6 +701,9 @@ class InterfaceManager(
      * @param component The overlay component to open.
      */
     fun openOverlay(component: Component) {
+        if (component.id == Components.TUTORIAL_PROGRESS_371 &&
+            (temporaryRoot == 900 || (!player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false) &&
+                player.getAttribute(GameAttributes.TUTORIAL_STAGE, 0) == 0))) return
         if (overlay != null && !overlay!!.close(player)) {
             return
         }
@@ -691,10 +752,10 @@ class InterfaceManager(
     /**
      * Gets the default child id used for interface placement.
      *
-     * @return 6 if resizable, otherwise 11.
+     * @return 6 if resizable, otherwise 5.
      */
     val defaultChildId: Int
-        get() = if (isResizable) 6 else 11
+        get() = InterfaceType.DEFAULT.let { if (isResizable) it.resizableChildId else it.fixedChildId }
 
     /**
      * Checks if the client is in resizable mode.
@@ -721,7 +782,27 @@ class InterfaceManager(
         return count
     }
 
+    private fun openExtraTab(index: Int, id: Int) {
+        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId,
+            (if (isResizable) 33 else 152) + index, id, true))
+    }
+
+    private fun openDefaultChatFrame() {
+        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId, if (isResizable) 15 else 20, 751, true))
+        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId, if (isResizable) 18 else 142, 752, true))
+        PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, 752, 9, 137, true))
+    }
+
     companion object {
+        // Preserve logical server slots used by existing content.
+        @JvmStatic
+        fun protocolTabIndex(slot: Int): Int = when (slot) {
+            in 0..2 -> slot
+            in 3..13 -> slot + 1
+            14 -> 18
+            else -> slot
+        }
+
         /**
          * The default windows pane component id.
          */
@@ -737,14 +818,14 @@ class InterfaceManager(
          * Default tab component ids.
          */
         val DEFAULT_TABS: IntArray = intArrayOf(
-            Components.WEAPON_FISTS_SEL_92,
+            884,
             Components.STATS_320,
-            Components.QUESTJOURNAL_V2_274,
+            190,
             Components.INVENTORY_149,
             Components.WORNITEMS_387,
             Components.PRAYER_271,
             Components.MAGIC_192,
-            Components.LORE_STATS_SIDE_662,
+            891,
             Components.FRIENDS2_550,
             Components.IGNORE2_551,
             Components.CLANJOIN_589,

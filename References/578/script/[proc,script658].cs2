@@ -1,0 +1,2 @@
+[proc,script658](int $int0)(component)
+return(enum(int, component, enum_1080, $int0));

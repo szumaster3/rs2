@@ -1,0 +1,2 @@
+[clientscript,script2301](component $component0)
+~topstat_button_mouseover($component0, ~bool_to_int(%varclient_182));

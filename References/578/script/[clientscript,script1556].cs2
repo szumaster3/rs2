@@ -1,0 +1,3 @@
+[clientscript,script1556](int $int0, component $component1, int $int2)
+%varclient_1029 = ~script1504($int0, %varclientstring_22, b12_full, $component1, $int2);
+~script1557;

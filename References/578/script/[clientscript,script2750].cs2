@@ -1,0 +1,13 @@
+[clientscript,script2750](component $component0, int $int1, int $int2, int $int3)
+~script2747($component0, $int1, 0);
+if (clientclock < calc($int3 + 146)) {
+    return;
+}
+if (cc_find(interface_900:com_68, $int2) = true) {
+    cc_sethide(false);
+}
+if (cc_find(interface_900:com_74, $int1) = true) {
+    cc_setmodelanim(seq_12284);
+    cc_setontimer("script2746(event_com, event_comsubid, 0)");
+    cc_setonhold("script2748(event_com, event_comsubid, event_mousex)");
+}

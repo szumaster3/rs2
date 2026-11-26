@@ -38,9 +38,11 @@ class DataMap(val id: Int) {
 
         @JvmStatic
         fun parse(id: Int, data: ByteArray?): DataMap {
+            return if (data == null) DataMap(id) else decode(id, ByteBuffer.wrap(data))
+        }
+
+        internal fun decode(id: Int, buffer: ByteBuffer): DataMap {
             val definition = DataMap(id)
-            if (data == null) return definition
-            val buffer = ByteBuffer.wrap(data)
             while (true) {
                 when (val opcode = buffer.get().toInt() and 0xFF) {
                     0 -> return definition
@@ -52,6 +54,7 @@ class DataMap(val id: Int) {
                         val key = buffer.int
                         definition.dataStore[key] = if (opcode == 5) ByteBufferUtils.getString(buffer) else buffer.int
                     }
+                    else -> error("Unknown DataMap opcode $opcode at ${buffer.position() - 1}")
                 }
             }
         }

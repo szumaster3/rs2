@@ -1,0 +1,133 @@
+[proc,script1309](int $int0)
+def_int $int1 = ~script1305;
+if ($int0 = 1) {
+    if ($int1 ! 0) {
+        if_setgraphic(null, interface_746:com_124);
+        if_setgraphic(null, interface_746:com_73);
+        if_setgraphic(null, interface_746:com_74);
+    }
+    if ($int1 ! 1) {
+        if_setgraphic(null, interface_746:com_125);
+        if_setgraphic(null, interface_746:com_75);
+        if_setgraphic(null, interface_746:com_76);
+    }
+    if ($int1 ! 2) {
+        if_setgraphic(null, interface_746:com_126);
+        if_setgraphic(null, interface_746:com_77);
+        if_setgraphic(null, interface_746:com_78);
+    }
+    if ($int1 ! 3) {
+        if_setgraphic(null, interface_746:com_127);
+        if_setgraphic(null, interface_746:com_79);
+        if_setgraphic(null, interface_746:com_80);
+    }
+    if ($int1 ! 4) {
+        if_setgraphic(null, interface_746:com_128);
+        if_setgraphic(null, interface_746:com_81);
+        if_setgraphic(null, interface_746:com_82);
+    }
+    if ($int1 ! 5) {
+        if_setgraphic(null, interface_746:com_129);
+        if_setgraphic(null, interface_746:com_83);
+        if_setgraphic(null, interface_746:com_84);
+    }
+    if ($int1 ! 6) {
+        if_setgraphic(null, interface_746:com_130);
+        if_setgraphic(null, interface_746:com_85);
+        if_setgraphic(null, interface_746:com_86);
+    }
+    if ($int1 ! 7) {
+        if_setgraphic(null, interface_746:com_131);
+        if_setgraphic(null, interface_746:com_87);
+        if_setgraphic(null, interface_746:com_88);
+    }
+    if ($int1 ! 8) {
+        if_setgraphic(null, interface_746:com_132);
+        if_setgraphic(null, interface_746:com_89);
+        if_setgraphic(null, interface_746:com_90);
+    }
+    if ($int1 ! 9) {
+        if_setgraphic(null, interface_746:com_133);
+        if_setgraphic(null, interface_746:com_91);
+        if_setgraphic(null, interface_746:com_92);
+    }
+    if ($int1 ! 10) {
+        if_setgraphic(null, interface_746:com_134);
+        if_setgraphic(null, interface_746:com_93);
+        if_setgraphic(null, interface_746:com_94);
+    }
+    if ($int1 ! 11) {
+        if_setgraphic(null, interface_746:com_135);
+        if_setgraphic(null, interface_746:com_95);
+        if_setgraphic(null, interface_746:com_96);
+    }
+    if ($int1 ! 12) {
+        if_setgraphic(null, interface_746:com_136);
+        if_setgraphic(null, interface_746:com_97);
+        if_setgraphic(null, interface_746:com_98);
+    }
+    if ($int1 ! 13) {
+        if_setgraphic(null, interface_746:com_137);
+        if_setgraphic(null, interface_746:com_99);
+        if_setgraphic(null, interface_746:com_100);
+    }
+    if ($int1 ! 14) {
+        if_setgraphic(null, interface_746:com_138);
+        if_setgraphic(null, interface_746:com_101);
+        if_setgraphic(null, interface_746:com_102);
+    }
+    if ($int1 ! 15) {
+        if_setgraphic(null, interface_746:com_139);
+        if_setgraphic(null, interface_746:com_103);
+        if_setgraphic(null, interface_746:com_104);
+    }
+} else {
+    if_setgraphic(null, interface_746:com_124);
+    if_setgraphic(null, interface_746:com_73);
+    if_setgraphic(null, interface_746:com_74);
+    if_setgraphic(null, interface_746:com_125);
+    if_setgraphic(null, interface_746:com_75);
+    if_setgraphic(null, interface_746:com_76);
+    if_setgraphic(null, interface_746:com_126);
+    if_setgraphic(null, interface_746:com_77);
+    if_setgraphic(null, interface_746:com_78);
+    if_setgraphic(null, interface_746:com_127);
+    if_setgraphic(null, interface_746:com_79);
+    if_setgraphic(null, interface_746:com_80);
+    if_setgraphic(null, interface_746:com_128);
+    if_setgraphic(null, interface_746:com_81);
+    if_setgraphic(null, interface_746:com_82);
+    if_setgraphic(null, interface_746:com_129);
+    if_setgraphic(null, interface_746:com_83);
+    if_setgraphic(null, interface_746:com_84);
+    if_setgraphic(null, interface_746:com_130);
+    if_setgraphic(null, interface_746:com_85);
+    if_setgraphic(null, interface_746:com_86);
+    if_setgraphic(null, interface_746:com_131);
+    if_setgraphic(null, interface_746:com_87);
+    if_setgraphic(null, interface_746:com_88);
+    if_setgraphic(null, interface_746:com_132);
+    if_setgraphic(null, interface_746:com_89);
+    if_setgraphic(null, interface_746:com_90);
+    if_setgraphic(null, interface_746:com_133);
+    if_setgraphic(null, interface_746:com_91);
+    if_setgraphic(null, interface_746:com_92);
+    if_setgraphic(null, interface_746:com_134);
+    if_setgraphic(null, interface_746:com_93);
+    if_setgraphic(null, interface_746:com_94);
+    if_setgraphic(null, interface_746:com_135);
+    if_setgraphic(null, interface_746:com_95);
+    if_setgraphic(null, interface_746:com_96);
+    if_setgraphic(null, interface_746:com_136);
+    if_setgraphic(null, interface_746:com_97);
+    if_setgraphic(null, interface_746:com_98);
+    if_setgraphic(null, interface_746:com_137);
+    if_setgraphic(null, interface_746:com_99);
+    if_setgraphic(null, interface_746:com_100);
+    if_setgraphic(null, interface_746:com_138);
+    if_setgraphic(null, interface_746:com_101);
+    if_setgraphic(null, interface_746:com_102);
+    if_setgraphic(null, interface_746:com_139);
+    if_setgraphic(null, interface_746:com_103);
+    if_setgraphic(null, interface_746:com_104);
+}

@@ -1,0 +1,4 @@
+[clientscript,booth_playermodel_update]
+def_seq $seq0 = bas_getanim_ready(oc_param(inv_getobj(inv_94, 3), param_644));
+if_setmodelanim($seq0, interface_549:com_82);
+if_setplayermodel_self(interface_549:com_82);

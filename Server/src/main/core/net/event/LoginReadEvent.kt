@@ -16,12 +16,20 @@ import java.nio.ByteBuffer
 class LoginReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(session, buffer) {
     override fun read(session: IoSession, buffer: ByteBuffer) {
         try {
-            val (response, info) = Login.decodeFromBuffer(buffer)
+            if (buffer.remaining() < 3 || buffer.remaining() - 3 < (buffer.getShort(buffer.position() + 1).toInt() and 0xffff)) {
+                queueBuffer()
+                return
+            }
+            if (!session.loginSubmitted.compareAndSet(false, true)) return
+            val (response, info) = Login.decodeFromBuffer(buffer, session.serverKey)
             if (response != AuthResponse.Success || info == null) {
                 session.write(response)
                 return
             }
-            val (authResponse, accountInfo) = GameWorld.authenticator.checkLogin(info.username, info.password)
+            val reconnect = info.opcode == 18
+            val auth = GameWorld.authenticator
+            val (authResponse, accountInfo) = if (reconnect) auth.checkReconnect(info.username, info.password)
+                else auth.checkLogin(info.username, info.password)
 
             if (authResponse != AuthResponse.Success || accountInfo == null) {
                 session.write(authResponse)
@@ -32,6 +40,7 @@ class LoginReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(ses
             details.communication.parse(accountInfo)
             session.clientInfo = ClientInfo(info.displayMode, info.windowMode, info.screenWidth, info.screenHeight)
             session.isaacPair = info.isaacPair
+            session.reconnecting = reconnect
             session.associatedUsername = info.username
             Login.proceedWith(session, details, info.opcode)
         } catch (e: Exception) {

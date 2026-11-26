@@ -222,15 +222,16 @@ public final class DialogueInterpreter {
     }
 
     public Component sendPlaneMessageWithBlueTitle(String title, String... messages) {
-        player.getPacketDispatch().sendString(title, Components.TUTORIAL_TEXT_372, 0);
-        for (int i = 0; i < messages.length; i++) {
-            player.getPacketDispatch().sendString(messages[i], Components.TUTORIAL_TEXT_372, i + 1);
-        }
         player.getInterfaceManager().openChatbox(Components.TUTORIAL_TEXT_372);
+        player.getPacketDispatch().sendString(title, Components.TUTORIAL_TEXT_372, 0);
+        for (int i = 0; i < 6; i++) {
+            player.getPacketDispatch().sendString(i < messages.length ? messages[i] : "", Components.TUTORIAL_TEXT_372, i + 1);
+        }
         return player.getInterfaceManager().chatbox;
     }
 
     public Component sendScrollMessageWithBlueTitle(String title, String... messages) {
+        player.getInterfaceManager().openChatbox(Components.TUTORIAL_TEXT2_421);
         for (int i = 0; i < 11; i++) {
             player.getPacketDispatch().sendString(" ", Components.TUTORIAL_TEXT2_421, i + 2);
         }
@@ -238,7 +239,6 @@ public final class DialogueInterpreter {
         for (int i = 0; i < messages.length; i++) {
             player.getPacketDispatch().sendString(messages[i], Components.TUTORIAL_TEXT2_421, i + 2);
         }
-        player.getInterfaceManager().openChatbox(Components.TUTORIAL_TEXT2_421);
         return player.getInterfaceManager().chatbox;
     }
 

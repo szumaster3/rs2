@@ -1,0 +1,7 @@
+[proc,script280](int $int0)
+if ($int0 >= 1 & $int0 <= 31) {
+    %varclient_730 = $int0;
+} else {
+    %varclient_730 = -1;
+}
+if_settext("", interface_744:com_117);

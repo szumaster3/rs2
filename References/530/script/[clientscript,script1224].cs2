@@ -1,0 +1,2 @@
+[clientscript,script1224]
+openurl_nologin("terms/terms.ws?cty=<tostring(%varclient_182)>", true);

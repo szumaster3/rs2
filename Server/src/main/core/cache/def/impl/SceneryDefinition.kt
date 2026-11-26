@@ -17,6 +17,12 @@ class SceneryDefinition : Definition<Scenery>() {
     var originalColors: ShortArray? = null
         private set
     @JvmField var childrenIds: IntArray? = null
+    var animationIds: IntArray? = null
+        private set
+    var animationWeights: IntArray? = null
+        private set
+    var questIds: IntArray? = null
+        private set
     var modelIds: IntArray? = null
         private set
     var modelConfiguration: IntArray? = null
@@ -342,8 +348,7 @@ class SceneryDefinition : Definition<Scenery>() {
             def.id = objectId
             while (true) {
                 if (!buffer.hasRemaining()) {
-                    log(SceneryDefinition::class.java, Log.ERR, "Buffer empty for " + objectId)
-                    break
+                    error("Missing terminator for object $objectId")
                 }
                 var opcode = buffer.get().toInt() and 0xFF
                 if (opcode == 1 || opcode == 5) {
@@ -394,10 +399,11 @@ class SceneryDefinition : Definition<Scenery>() {
                     def.anInt3878 = buffer.get().toInt()
                 } else if (opcode == 39) {
                     def.anInt3840 = buffer.get() * 5
-                } else if (opcode >= 30 && opcode < 35) {
-                    def.options[opcode - 30] = ByteBufferUtils.getString(buffer)
-                    if (def.options[opcode - 30] == "Hidden") {
-                        def.options[opcode - 30] = null
+                } else if (opcode in 30..34 || opcode in 150..154) {
+                    val slot = if (opcode >= 150) opcode - 150 else opcode - 30
+                    def.options[slot] = ByteBufferUtils.getString(buffer)
+                    if (def.options[slot] == "Hidden") {
+                        def.options[slot] = null
                         def.isHasHiddenOptions = true
                     }
                 } else if (opcode == 40) {
@@ -491,7 +497,7 @@ class SceneryDefinition : Definition<Scenery>() {
                     }
                 } else if (opcode == 81) {
                     def.aByte3912 = 2.toByte()
-                    def.anInt3882 = 256 * buffer.get().toInt() and 0xFF
+                    def.anInt3882 = 256 * (buffer.get().toInt() and 0xFF)
                 } else if (opcode == 82 || opcode == 88)
                 {} else if (opcode == 89) {
                     def.aBoolean3895 = false
@@ -506,14 +512,26 @@ class SceneryDefinition : Definition<Scenery>() {
                     def.aByte3912 = 4.toByte()
                 } else if (opcode == 95) {
                     def.aByte3912 = 5.toByte()
-                } else if (opcode == 96 || opcode == 97)
-                {} else if (opcode == 100) {
+                } else if (opcode in 96..98 || opcode == 103 || opcode == 105)
+                {} else if (opcode == 99 || opcode == 100) {
                     buffer.get()
                     buffer.getShort()
-                } else if (opcode == 101) {
+                } else if (opcode == 101 || opcode == 104) {
                     buffer.get()
-                } else if (opcode == 102) {
+                } else if (opcode == 102 || opcode == 107) {
                     buffer.getShort()
+                } else if (opcode == 106) {
+                    val count = buffer.get().toInt() and 0xff
+                    val ids = IntArray(count)
+                    val weights = IntArray(count)
+                    for (index in ids.indices) {
+                        ids[index] = buffer.short.toInt() and 0xffff
+                        weights[index] = buffer.get().toInt() and 0xff
+                    }
+                    def.animationIds = ids
+                    def.animationWeights = weights
+                } else if (opcode == 160) {
+                    def.questIds = IntArray(buffer.get().toInt() and 0xff) { buffer.short.toInt() and 0xffff }
                 } else if (opcode == 249) {
                     var length = buffer.get().toInt() and 0xFF
                     for (i in 0 until length) {
@@ -527,7 +545,7 @@ class SceneryDefinition : Definition<Scenery>() {
                     }
                 } else {
                     if (opcode != 0) {
-                        log(SceneryDefinition::class.java, Log.ERR, "Unhandled object definition opcode: " + opcode)
+                        error("Object $objectId: unknown opcode $opcode at ${buffer.position() - 1}")
                     }
                     break
                 }

@@ -1,0 +1,23 @@
+[clientscript,script2703](int $int0, int $int1, int $int2)
+def_int $int3 = calc($int0 - clientclock);
+if ($int3 <= 0) {
+    ~script2705(false, $int1, $int2, 1);
+    return;
+}
+def_int $windowmode4 = getwindowmode;
+if (testbit($int1, 1) = ^true & $windowmode4 ! ^windowmode_fullscreen) {
+    ~script2705(false, $int1, $int2, 1);
+    return;
+}
+def_component $component5 = interface_746:com_27;
+if ($int2 = 2) {
+    if ($windowmode4 = ^windowmode_small) {
+        $component5 = interface_548:com_17;
+    }
+    if (if_hassub($component5) = false) {
+        ~script2701($int1);
+    }
+    if_settext("Reverting in: <tostring(calc($int3 / 50))>", interface_883:com_16);
+} else {
+    if_settext("Reverting in: <tostring(calc($int3 / 50))>", interface_744:com_463);
+}

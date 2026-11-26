@@ -21,7 +21,7 @@ class GraphicDefinition {
     @JvmField var aShortArray1456: ShortArray? = null
     @JvmField var byteValue: Byte = 0
     @JvmField var intValue: Int = -1
-    private fun readValueLoop(buffer: ByteBuffer) {
+    internal fun readValueLoop(buffer: ByteBuffer) {
         while (true) {
             val opcode = buffer.get().toInt() and 0xff
             if (opcode == 0) return
@@ -31,8 +31,8 @@ class GraphicDefinition {
 
     fun readValues(buffer: ByteBuffer, opcode: Int) {
         when (opcode) {
-            1 -> defaultModel = buffer.short.toInt()
-            2 -> animationId = buffer.short.toInt()
+            1 -> defaultModel = buffer.short.toInt() and 0xffff
+            2 -> animationId = buffer.short.toInt() and 0xffff
             4 -> anInt1446 = buffer.short.toInt() and 0xffff
             5 -> anInt1449 = buffer.short.toInt() and 0xffff
             6 -> anInt1454 = buffer.short.toInt() and 0xffff
@@ -62,6 +62,7 @@ class GraphicDefinition {
                     aShortArray1435 = target
                 }
             }
+            else -> error("Unknown graphic opcode $opcode at ${buffer.position() - 1}")
         }
     }
 

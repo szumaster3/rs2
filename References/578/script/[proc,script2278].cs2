@@ -1,0 +1,24 @@
+[proc,script2278](int $int0, int $int1)
+if ($int0 = 12 | $int0 = 13) {
+    %varclient_738 = $int0;
+}
+if_sethide(true, interface_744:com_238);
+if_sethide(true, interface_744:com_239);
+if_setcolour(0x9d845c, interface_744:com_277);
+if_setcolour(0x9d845c, interface_744:com_270);
+if ($int0 = 12) {
+    if_sethide(false, interface_744:com_238);
+    if_setcolour(0x9c7b48, interface_744:com_277);
+} else if ($int0 = 13) {
+    if_sethide(false, interface_744:com_239);
+    if_setcolour(0x9c7b48, interface_744:com_270);
+} else {
+    if (%varclient_738 = 12) {
+        if_sethide(false, interface_744:com_238);
+        if_setcolour(0x9c7b48, interface_744:com_277);
+    }
+    if (%varclient_738 = 13) {
+        if_sethide(false, interface_744:com_239);
+        if_setcolour(0x9c7b48, interface_744:com_270);
+    }
+}

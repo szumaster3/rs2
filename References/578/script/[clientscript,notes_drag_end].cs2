@@ -1,0 +1,8 @@
+[clientscript,notes_drag_end](component $component0)
+if_sethide(true, interface_34:com_10);
+if_setgraphic("notes_add_delete_icons,3", interface_34:com_8);
+%varclient_821 = 0;
+~notes_click(0);
+if ($component0 ! null) {
+    if_sethide(false, interface_34:com_44);
+}

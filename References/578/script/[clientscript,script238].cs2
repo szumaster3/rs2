@@ -1,0 +1,4 @@
+[clientscript,script238](int $int0)
+if (cc_find(interface_594:com_93, $int0) = true) {
+    cc_settrans(255);
+}

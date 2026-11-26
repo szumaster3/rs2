@@ -1,0 +1,4 @@
+[clientscript,sc_tutorial_hide_title]
+if_settext("", interface_802:com_16);
+if_sethide(true, interface_802:com_19);
+%varclient_581 = 0;

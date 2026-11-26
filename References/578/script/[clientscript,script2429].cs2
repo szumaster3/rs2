@@ -1,0 +1,2 @@
+[clientscript,script2429](component $component0)
+if_settext(%varclientstring_146, $component0);

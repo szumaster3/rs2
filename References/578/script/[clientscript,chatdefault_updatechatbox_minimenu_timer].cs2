@@ -1,0 +1,6 @@
+[clientscript,chatdefault_updatechatbox_minimenu_timer](boolean $boolean0)
+if (minimenuopen(interface_752:com_9, -1) = true) {
+    return;
+}
+if_setontimer(null, interface_752:com_9);
+~chatdefault_updatechatbox($boolean0);

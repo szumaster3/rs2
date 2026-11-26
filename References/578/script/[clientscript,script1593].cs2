@@ -1,0 +1,6 @@
+[clientscript,script1593]
+if (minimenuopen(interface_589:com_5, -1) = true) {
+    return;
+}
+if_setontimer(null, interface_589:com_5);
+~script1594;

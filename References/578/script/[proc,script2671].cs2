@@ -1,0 +1,44 @@
+[proc,script2671]
+if (%varplayerbit_6454 = 0) {
+    if_sethide(false, interface_747:com_16);
+    if_sethide(true, interface_747:com_9);
+} else {
+    if_sethide(true, interface_747:com_16);
+    if_sethide(false, interface_747:com_9);
+}
+if (%varplayerbit_6454 = 2) {
+    if_sethide(false, interface_747:com_21);
+    if_sethide(true, interface_747:com_14);
+} else {
+    if_sethide(true, interface_747:com_21);
+    if_sethide(false, interface_747:com_14);
+}
+if (%varplayerbit_6454 = 3) {
+    if_sethide(false, interface_747:com_17);
+    if_sethide(true, interface_747:com_10);
+} else {
+    if_sethide(true, interface_747:com_17);
+    if_sethide(false, interface_747:com_10);
+}
+if (%varplayerbit_6454 = 4) {
+    if_sethide(false, interface_747:com_18);
+    if_sethide(true, interface_747:com_11);
+} else {
+    if_sethide(true, interface_747:com_18);
+    if_sethide(false, interface_747:com_11);
+}
+if (%varplayerbit_6454 = 5) {
+    if_sethide(false, interface_747:com_19);
+    if_sethide(true, interface_747:com_12);
+} else {
+    if_sethide(true, interface_747:com_19);
+    if_sethide(false, interface_747:com_12);
+}
+if (%varplayerbit_6454 = 6) {
+    if_sethide(false, interface_747:com_20);
+    if_sethide(true, interface_747:com_13);
+} else {
+    if_sethide(true, interface_747:com_20);
+    if_sethide(false, interface_747:com_13);
+}
+return;

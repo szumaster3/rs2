@@ -1,0 +1,63 @@
+[proc,script2705](boolean $boolean0, int $int1, int $int2, int $int3)
+if ($int2 = 2) {
+    if_closesubclient(interface_746:com_27);
+    if_closesubclient(interface_548:com_17);
+    if_setontimer(null, interface_746:com_27);
+    if_setontimer(null, interface_548:com_17);
+    if_sethide(true, interface_548:com_141);
+    if_sethide(true, interface_548:com_21);
+    if_sethide(true, interface_548:com_144);
+    if_sethide(true, interface_548:com_151);
+    if_sethide(true, interface_548:com_114);
+    if_sethide(true, interface_548:com_67);
+} else {
+    if_setontimer(null, interface_744:com_0);
+}
+def_int $int4 = 0;
+if ($boolean0 = true) {
+    detail_toolkit_default(detailget_toolkit);
+    if (getwindowmode ! ^windowmode_fullscreen) {
+        setdefaultwindowmode(getwindowmode);
+    }
+    detail_antialiasing_default(detailget_antialiasing);
+    if (testbit($int1, 1) = ^true) {
+        %varclient_994 = 2;
+    }
+} else {
+    if (testbit($int1, 0) = ^true) {
+        $int4 = detailget_toolkit_default;
+        detail_toolkit($int4);
+        ~script2593($int4);
+    } else {
+        $int4 = detailget_toolkit;
+    }
+    if (testbit($int1, 1) = ^true & getwindowmode ! getdefaultwindowmode) {
+        setwindowmode(getdefaultwindowmode);
+    }
+    if (testbit($int1, 2) = ^true) {
+        detail_antialiasing(detailget_antialiasing_default);
+    }
+    if (testbit($int1, 3) = ^true) {
+        detail_bloom(0);
+    }
+    if ($int2 = 2) {
+        ~graphics_options_rebuild($int4, getwindowmode, ~graphics_options_reviewoptions($int4), 2);
+        if ($int3 = 1) {
+            mes("The requested change has been cancelled.");
+        }
+    }
+}
+def_string $string0 = "kbase/view.ws?guid=controls_display_options";
+if ($int2 ! 2) {
+    if ($int3 = 1) {
+        if_settext("The change of detail mode has been cancelled.<br><br>Perhaps different graphical settings would work better for you?", interface_744:com_398);
+        if_setonclick("loginscreen_setactivemenu(interface_882:com_0)", interface_744:com_400);
+        if_settext("Advanced info", interface_744:com_399);
+        if_setonclick("script702($string0, true)", interface_744:com_399);
+        ~loginscreen_setactivemenu(interface_744:com_397);
+    } else if ($int2 ! 0) {
+        ~loginscreen_setactivemenu(interface_882:com_0);
+    } else {
+        ~loginscreen_setactivemenu(interface_744:com_392);
+    }
+}

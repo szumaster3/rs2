@@ -1,0 +1,4 @@
+[clientscript,pog_bolrie_zoom_onload]
+%varclient_51 = 300;
+%varclient_50 = 0;
+%varclient_52 = 0;

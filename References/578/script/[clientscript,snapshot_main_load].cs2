@@ -1,0 +1,21 @@
+[clientscript,snapshot_main_load]
+%varclient_6 = false;
+if (playermodlevel = 5 | playermodlevel = 6) {
+    if_settext("Suggest to mute this player for 48 hours", interface_594:com_83);
+    if_settext("Suggest to mute this player for 48 hours", interface_594:com_10);
+    if_settext("Suggest to mute this player for 48 hours", interface_594:com_60);
+} else {
+    if_settext("Mute this player for 48 hours", interface_594:com_83);
+    if_settext("Mute this player for 48 hours", interface_594:com_10);
+    if_settext("Mute this player for 48 hours", interface_594:com_60);
+}
+%varclient_11 = 1;
+if (map_lang ! 1) {
+    ~script216;
+    ~script246;
+    return;
+}
+if_setonvarcstrtransmit("snapshot_name_update{varclientstring_24}", interface_594:com_32);
+%varclient_792 = -1;
+~snapshot_namelist_generate;
+~script216;

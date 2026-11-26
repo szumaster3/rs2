@@ -1,5 +1,6 @@
 package core.net.event;
 
+import core.ServerConstants;
 import core.net.IoReadEvent;
 import core.net.IoSession;
 import core.net.lobby.WorldList;
@@ -8,8 +9,6 @@ import core.tools.Log;
 import core.tools.RandomFunction;
 
 import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.Map;
 
 import static core.api.ContentAPIKt.log;
 
@@ -20,14 +19,11 @@ import static core.api.ContentAPIKt.log;
  */
 public final class HSReadEvent extends IoReadEvent {
 
-    // debug
-    static Map<String, Integer> count = new HashMap<>();
-
     /**
-     * Constructs a new {@code HSReadEvent}.
+     * Constructs a new handshake read event.
      *
      * @param session The session.
-     * @param buffer  The buffer.
+     * @param buffer The buffer.
      */
     public HSReadEvent(IoSession session, ByteBuffer buffer) {
         super(session, buffer);
@@ -35,43 +31,71 @@ public final class HSReadEvent extends IoReadEvent {
 
     @Override
     public void read(IoSession session, ByteBuffer buffer) {
-        Integer amount = count.get(session.getAddress());
-        if (amount == null) {
-            amount = 0;
+        if (!buffer.hasRemaining()) {
+            return;
         }
-        count.put(session.getAddress(), amount + 1);
+
         int opcode = buffer.get() & 0xFF;
+
         switch (opcode) {
-            case 14:
+            case 14: // LOGIN
+                if (!buffer.hasRemaining()) {
+                    queueBuffer(opcode);
+                    return;
+                }
+
                 session.setNameHash(buffer.get() & 0xFF);
                 session.setServerKey(RandomFunction.RANDOM.nextLong());
                 session.write(true);
                 break;
-            case 15:
-                int revision = buffer.getInt();
-                //int sub_revision = buffer.getInt();
-                buffer.flip();
 
-                if (revision != 530) {//|| sub_revision != Constants.CLIENT_BUILD) {
-                    session.disconnect();
-                    break;
+            case 15: // JS5
+                if (buffer.remaining() < Integer.BYTES) {
+                    queueBuffer(opcode);
+                    return;
                 }
+
+                int revision = buffer.getInt();
+
+                if (revision != ServerConstants.REVISION) {
+                    session.queue(ByteBuffer.wrap(new byte[]{6}));
+                    session.disconnect();
+                    return;
+                }
+
                 session.write(false);
                 break;
-            case 147:
-            case 186:
-            case 36:
+
+            case 20: // REGISTER_STEP1
+                if (buffer.remaining() < 6) { queueBuffer(opcode); return; }
                 AccountRegister.read(session, opcode, buffer);
                 break;
-            case 255: // World list
-                int updateStamp = buffer.getInt();
-                WorldList.sendUpdate(session, updateStamp);
+            case 21: // VALIDATE_USERNAME
+                if (buffer.remaining() < 8) { queueBuffer(opcode); return; }
+                AccountRegister.read(session, opcode, buffer);
                 break;
+            case 22: // REGISTER_STEP2
+                if (buffer.remaining() < 2) { queueBuffer(opcode); return; }
+                int length = buffer.getShort(buffer.position()) & 0xFFFF;
+                if (buffer.remaining() < length + 2) { queueBuffer(opcode); return; }
+                AccountRegister.read(session, opcode, buffer);
+                break;
+
+            case 23: // GET_WORLDLIST
+                if (buffer.remaining() < Integer.BYTES) {
+                    queueBuffer(opcode);
+                    return;
+                }
+
+                int checksum = buffer.getInt();
+                WorldList.sendUpdate(session, checksum);
+                break;
+
             default:
-                log(this.getClass(), Log.FINE, "PKT " + opcode);
+                log(getClass(), Log.FINE,
+                        "Unknown handshake opcode: " + opcode);
                 session.disconnect();
                 break;
         }
     }
-
 }

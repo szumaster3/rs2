@@ -1,0 +1,15 @@
+[proc,script2288](component $component0, component $component1)
+if_settext("", $component0);
+if_setgraphic(null, $component1);
+if (compare(%varclientstring_129, "") = 0) {
+    return;
+}
+if (~create_check_email(%varclientstring_128) = false | ~create_check_email(%varclientstring_129) = false) {
+    if_settext("Please supply a valid email address.", $component0);
+    if_setgraphic(login_cross, $component1);
+    return;
+} else if (compare(%varclientstring_128, %varclientstring_129) ! 0) {
+    if_settext("Please make sure both email addresses match.", $component0);
+    if_setgraphic(login_cross, $component1);
+    return;
+}

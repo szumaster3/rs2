@@ -1,0 +1,8 @@
+[clientscript,script2680]
+if (%varplayerbit_2176 = 1) {
+    if_setgraphic("miscgraphics,9", interface_398:com_15);
+    if_setgraphic("miscgraphics,0", interface_398:com_1);
+} else {
+    if_setgraphic("miscgraphics,0", interface_398:com_15);
+    if_setgraphic("miscgraphics,9", interface_398:com_1);
+}
