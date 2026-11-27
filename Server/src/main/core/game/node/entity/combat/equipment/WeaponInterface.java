@@ -160,7 +160,7 @@ public final class WeaponInterface extends Component {
     private void open() {
         ComponentDefinition definition = ComponentDefinition.forId(884);
         boolean resizable = player.getInterfaceManager().isResizable();
-        PacketRepository.send(Encoders530.INTERFACE, new InterfaceContext(player, definition.getWindowPaneId(resizable), definition.getChildId(resizable), id, definition.isWalkable()));
+        PacketRepository.send(Encoders530.IF_OPENSUB, new InterfaceContext(player, definition.getWindowPaneId(resizable), definition.getChildId(resizable), id, definition.isWalkable()));
         // CS2 1143 assigns the operations dynamically; enable option 1 on their layers.
         for (int child = 11; child <= 15; child++) {
             player.getPacketDispatch().sendIfaceSettings(2, child, 884, -1, -1);

@@ -116,7 +116,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 
     private void splatterMud(Location hole) {
         for (Player p : RegionManager.getLocalPlayers(getCenterLocation(), (size() >> 1) + 2)) {
-            PacketRepository.send(Encoders530.INTERFACE, new InterfaceContext(p, Components.TOPLEVEL_548, 77, 226, true));
+            PacketRepository.send(Encoders530.IF_OPENSUB, new InterfaceContext(p, Components.TOPLEVEL_548, 77, 226, true));
             LightSources s = LightSources.getActiveLightSource(p);
             if (s == null || s.getOpen()) {
                 if (s != null) {

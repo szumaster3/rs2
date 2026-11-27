@@ -15,9 +15,9 @@ object PacketRepository {
 
         try {
             if (context is PacketContext.InterfaceContext) {
-                if (encoder == Encoders530.INTERFACE && core.cache.Cache.getIndexes()[3]?.getFileData(context.windowId, context.componentId) != null)
+                if (encoder == Encoders530.IF_OPENSUB && core.cache.Cache.getIndexes()[3]?.getFileData(context.windowId, context.componentId) != null)
                     player.interfaceManager.recordInterfaceAttachment(context.windowId, context.componentId, context.interfaceId)
-                else if (encoder == Encoders530.CLOSE_INTERFACE)
+                else if (encoder == Encoders530.IF_CLOSESUB)
                     player.interfaceManager.removeInterfaceAttachment(context.windowId, context.componentId)
             }
             PacketWriteQueue.handle(encoder, context)

@@ -186,7 +186,7 @@ object ManagementEvents {
                             sender,
                             event.receiver,
                             event.rank,
-                            MessageContext.SEND_MESSAGE,
+                            MessageContext.Kind.PRIVATE_ECHO,
                             event.message
                         ),
                     )
@@ -199,7 +199,7 @@ object ManagementEvents {
                             receiver,
                             event.sender,
                             event.rank,
-                            MessageContext.RECEIVE_MESSAGE,
+                            MessageContext.Kind.PRIVATE_RECEIVED,
                             event.message,
                         ),
                     )
@@ -361,7 +361,7 @@ object ManagementEvents {
                             member.player,
                             event.sender,
                             event.rank,
-                            MessageContext.CLAN_MESSAGE,
+                            MessageContext.Kind.CLAN,
                             event.message,
                         ),
                     )

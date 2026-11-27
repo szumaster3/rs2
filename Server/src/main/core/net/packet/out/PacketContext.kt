@@ -308,17 +308,13 @@ sealed class PacketContext {
         override val player: Player,
         val other: String,
         val chatIcon: Int,
-        val opcode: Int,
+        val kind: Kind,
         val message: String,
     ) : PacketContext() {
-        constructor(player: Player, other: Player, opcode: Int, message: String) :
-            this(player, other.name, Rights.getChatIcon(other), opcode, message)
+        constructor(player: Player, other: Player, kind: Kind, message: String) :
+            this(player, other.name, Rights.getChatIcon(other), kind, message)
 
-        companion object {
-            const val SEND_MESSAGE = 71
-            const val RECEIVE_MESSAGE = 0
-            const val CLAN_MESSAGE = 54
-        }
+        enum class Kind { PRIVATE_ECHO, PRIVATE_RECEIVED, CLAN }
     }
 
     class MinimapStateContext(override val player: Player, val state: Int) : PacketContext()

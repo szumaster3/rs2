@@ -56,7 +56,7 @@ public class InteractPlugin {
 		if (!(node instanceof Player)) {
 			return;
 		}
-		PacketRepository.send(Encoders530.INTERACTION_OPTION, new InteractionOptionContext((Player) node, index, name));
+		PacketRepository.send(Encoders530.SET_INTERACTION, new InteractionOptionContext((Player) node, index, name));
 	}
 
 	/**

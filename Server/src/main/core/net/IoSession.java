@@ -190,7 +190,7 @@ public class IoSession {
                 int encrypted = (opcode + isaac) & 0xFF;
 
                 System.out.println(
-                        "[SERVER OUT] Opcode: " + opcode
+                        "[SERVER OUT] " + ServerProt.name(opcode) + " opcode: " + opcode
                                 + ", encrypted: " + encrypted
                                 + ", size: " + buffer.remaining()
                 );

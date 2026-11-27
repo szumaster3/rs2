@@ -136,7 +136,7 @@ public class BankPinManager {
             if (message == null) {
                 continue;
             }
-            PacketRepository.send(Encoders530.STRING_PACKET, new StringContext(player, message, 14, 42 + i));
+            PacketRepository.send(Encoders530.IF_SETTEXT, new StringContext(player, message, 14, 42 + i));
         }
         status.draw(this, player);
         PinStatus.drawString(player, "Messages", 41);
@@ -406,9 +406,9 @@ public class BankPinManager {
             int child = (i > 2 ? i + 1 : i) + 11;
             int positionX = 37 + ((i % 3) * 95) + RandomFunction.random(2, 45);
             int positionY = 157 + ((i / 3) * 70) - RandomFunction.random(3, 48);
-            PacketRepository.send(Encoders530.REPOSITION_CHILD, new ChildPositionContext(player, 13, child, positionX, positionY));
+            PacketRepository.send(Encoders530.IF_SETPOSITION, new ChildPositionContext(player, 13, child, positionX, positionY));
         }
-        PacketRepository.send(Encoders530.REPOSITION_CHILD, new ChildPositionContext(player, 13, 14, 308 + RandomFunction.random(2, 45), 155 - RandomFunction.random(3, 45)));
+        PacketRepository.send(Encoders530.IF_SETPOSITION, new ChildPositionContext(player, 13, 14, 308 + RandomFunction.random(2, 45), 155 - RandomFunction.random(3, 45)));
     }
 
     private void setPin() {

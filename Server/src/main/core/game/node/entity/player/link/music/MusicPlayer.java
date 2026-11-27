@@ -191,7 +191,7 @@ public final class MusicPlayer {
     public void play(MusicEntry entry) {
         if (!playing || !looping || currentMusicId != entry.getId()) {
             PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, entry.getId(), false));
-            PacketRepository.send(Encoders530.STRING_PACKET, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
+            PacketRepository.send(Encoders530.IF_SETTEXT, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
             currentMusicId = entry.getId();
             trackEnded = false;
             playing = true;

@@ -146,7 +146,7 @@ class GrandExchangeOffer {
     fun visualize(player: Player?) {
         player ?: return
         PacketRepository.send(
-            Encoders530.GRAND_EXCHANGE_PACKET,
+            Encoders530.GRAND_EXCHANGE_OFFER,
               GrandExchangeContext(
                 player,
                 index.toByte(),

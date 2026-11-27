@@ -90,7 +90,7 @@ private constructor() : MapZone("Multicombat", true) {
         if (e is Player) {
             val p = e
             val resizable = p.interfaceManager.isResizable
-            PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(p, p.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
+            PacketRepository.send(Encoders530.IF_OPENSUB, InterfaceContext(p, p.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
             p.packetDispatch.sendInterfaceConfig(745, 1, false)
         }
         e.properties.isMultiZone = true
@@ -100,7 +100,7 @@ private constructor() : MapZone("Multicombat", true) {
     override fun leave(e: Entity, logout: Boolean): Boolean {
         if (!logout && e is Player) {
             val resizable = e.interfaceManager.isResizable
-            PacketRepository.send(Encoders530.CLOSE_INTERFACE, InterfaceContext(e, e.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
+            PacketRepository.send(Encoders530.IF_CLOSESUB, InterfaceContext(e, e.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
         }
         e.properties.isMultiZone = false
         return super.leave(e, logout)

@@ -27,7 +27,7 @@ object MapChunkRenderer {
             for (column in last) {
                 for (previous in column.filterNotNull()) {
                     if (!containsChunk(current, previous)) {
-                        PacketRepository.send(Encoders530.CLEAR_REGION_CHUNK, ClearChunkContext(player, previous))
+                        PacketRepository.send(Encoders530.UPDATE_ZONE_FULL_FOLLOWS, ClearChunkContext(player, previous))
                     } else {
                         updated.add(previous)
                     }

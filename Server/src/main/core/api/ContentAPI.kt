@@ -3923,7 +3923,7 @@ fun sendRepositionOnInterface(
     positionX: Int,
     positionY: Int,
 ) = PacketRepository.send(
-    Encoders530.REPOSITION_CHILD,
+    Encoders530.IF_SETPOSITION,
     ChildPositionContext(player, interfaceId, childId, positionX, positionY),
 )
 
@@ -4979,7 +4979,7 @@ fun sendIfaceSettings(
     offset: Int,
     length: Int
 ) {
-    PacketRepository.send(Encoders530.ACCESS_MASK, AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length))
+    PacketRepository.send(Encoders530.SET_INTERFACE_SETTINGS, AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length))
 }
 
 /**

@@ -213,7 +213,7 @@ public final class ClanRepository {
                                 p,
                                 player.getName(),
                                 Rights.getChatIcon(player),
-                                MessageContext.CLAN_MESSAGE,
+                                MessageContext.Kind.CLAN,
                                 message
                         )
                 );
@@ -252,7 +252,7 @@ public final class ClanRepository {
                             e.getPlayer(),
                             player.getName(),
                             Rights.getChatIcon(player),
-                            MessageContext.CLAN_MESSAGE,
+                            MessageContext.Kind.CLAN,
                             "[Attempting to kick/ban " + target.getUsername() + " from this Clan Chat.]"
                     )
             );

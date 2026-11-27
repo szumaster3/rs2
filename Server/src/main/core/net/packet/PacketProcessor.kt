@@ -316,13 +316,15 @@ object PacketProcessor {
             }
 
             is Packet.PacketCountUpdate -> {
-                val final = pkt.count - pkt.player.interfaceManager.getPacketCount(0)
-                pkt.player.interfaceManager.getPacketCount(final)
+                // Legacy 530-only event. The native TRANSMITVAR_VERIFYID acknowledgement
+                // is recorded separately and must never change the outgoing verify counter.
+                return
             }
 
             is Packet.ContinueOption -> {
                 val player = pkt.player
-                if (player.interfaceManager.chatbox?.id != pkt.iface) return
+                val component = player.interfaceManager.chatbox ?: return
+                if (component.id != pkt.iface) return
                 player.debug("[CONTINUE OPT]----------")
                 player.debug("Iface: ${pkt.iface}")
                 player.debug("Child: ${pkt.child}")
@@ -331,7 +333,6 @@ object PacketProcessor {
                 if (player.dialogueInterpreter.dialogue == null) {
                     player.interfaceManager.closeChatbox()
                     player.dialogueInterpreter.actions.removeFirstOrNull()?.handle(player, pkt.child)
-                    val component = player.interfaceManager.getComponent(pkt.iface) ?: return
                     if (!InterfaceListeners.run(player, component, InterfaceOperation.CONTINUE, pkt.child, pkt.slot, -1))
                         component.plugin?.handle(player, component, InterfaceOperation.CONTINUE, pkt.child, pkt.slot, -1)
                     return

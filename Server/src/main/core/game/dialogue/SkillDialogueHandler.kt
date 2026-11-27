@@ -152,7 +152,7 @@ open class SkillDialogueHandler(val player: Player, val type: SkillDialogue?, va
                     player.packetDispatch.sendItemZoomOnInterface(item.id, 160, interfaceId, 2 + i)
                     val (x, y) = POSITIONS[i]
                     PacketRepository.send(
-                        Encoders530.REPOSITION_CHILD,
+                        Encoders530.IF_SETPOSITION,
                         ChildPositionContext(player, interfaceId, 2 + i, x, y)
                     )
                 }

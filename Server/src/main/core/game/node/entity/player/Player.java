@@ -604,7 +604,7 @@ public class Player extends Entity {
         playerFlag.setUpdateSceneGraph(false);
         renderInfo.updateInformation();
         if (getSkills().isLifepointsUpdate()) {
-            PacketRepository.send(Encoders530.SKILL_LEVEL, new SkillContext(this, Skills.HITPOINTS));
+            PacketRepository.send(Encoders530.UPDATE_STAT, new SkillContext(this, Skills.HITPOINTS));
             getSkills().setLifepointsUpdate(false);
         }
         if (getAttribute("flagged-for-save", false)) {
