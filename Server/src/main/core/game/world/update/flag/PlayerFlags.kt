@@ -23,10 +23,25 @@ sealed class PlayerFlags(
     companion object {
         private val cp1252 = Charset.forName("windows-1252")
     }
+    /** Persistent client movement type: crawl=0, walk=1, run=2. */
+    class MovementType : PlayerFlags(0x20, 0, EntityFlag.MovementType) {
+        override fun writeTo(buffer: IoBuffer, context: Any?) {
+            buffer.p1add(context as Int)
+        }
+    }
+
+    /** Overhead progress bar, distinct from the hitpoint bar. */
+    class Progress : PlayerFlags(0x1000, 7, EntityFlag.ProgressBar) {
+        override fun writeTo(buffer: IoBuffer, context: Any?) {
+            val progress = context as ProgressBar
+            buffer.p2(progress.packed).p1add(progress.hold).p1sub(progress.step)
+        }
+    }
+
     /**
      * Sends a chat message update.
      */
-    class Chat : PlayerFlags(0x8, 0, EntityFlag.Chat) {
+    class Chat : PlayerFlags(0x8, 1, EntityFlag.Chat) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -64,7 +79,7 @@ sealed class PlayerFlags(
     /**
      * Sends primary hit damage info.
      */
-    class PrimaryHit : PlayerFlags(0x40, 9, EntityFlag.PrimaryHit) {
+    class PrimaryHit : PlayerFlags(0x40, 11, EntityFlag.PrimaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -89,7 +104,7 @@ sealed class PlayerFlags(
     /**
      * Sends animation update.
      */
-    class Animate : PlayerFlags(0x4, 4, EntityFlag.Animate) {
+    class Animate : PlayerFlags(0x4, 5, EntityFlag.Animate) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -106,7 +121,7 @@ sealed class PlayerFlags(
     /**
      * Sends player appearance data.
      */
-    class Appearance : PlayerFlags(0x1, 2, EntityFlag.Appearance) {
+    class Appearance : PlayerFlags(0x1, 3, EntityFlag.Appearance) {
         override fun writeTo(buffer: IoBuffer, context: Any?) {
             if (context !is Player) {
                 logInvalidType(context, typeOf<Player>())
@@ -178,7 +193,7 @@ sealed class PlayerFlags(
     /**
      * Sends the entity the player is facing.
      */
-    class FaceEntity : PlayerFlags(0x10, 3, EntityFlag.FaceEntity) {
+    class FaceEntity : PlayerFlags(0x10, 4, EntityFlag.FaceEntity) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -198,7 +213,7 @@ sealed class PlayerFlags(
     /**
      * Sends forced movement data for the player.
      */
-    class ForceMove : PlayerFlags(0x100, 5, EntityFlag.ForceMove) {
+    class ForceMove : PlayerFlags(0x100, 6, EntityFlag.ForceMove) {
         override fun writeToDynamic(
             buffer: IoBuffer,
             context: Any?,
@@ -226,7 +241,7 @@ sealed class PlayerFlags(
     /**
      * Sends forced chat text for the player.
      */
-    class ForceChat : PlayerFlags(0x200, 7, EntityFlag.ForceChat) {
+    class ForceChat : PlayerFlags(0x200, 9, EntityFlag.ForceChat) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -242,7 +257,7 @@ sealed class PlayerFlags(
     /**
      * Sends secondary hit damage info.
      */
-    class SecondaryHit : PlayerFlags(0x800, 10, EntityFlag.SecondaryHit) {
+    class SecondaryHit : PlayerFlags(0x800, 12, EntityFlag.SecondaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -259,7 +274,7 @@ sealed class PlayerFlags(
     /**
      * Sends animation sequence update.
      */
-    class AnimationSequence : PlayerFlags (0x400, 1, EntityFlag.AnimSeq) {
+    class AnimationSequence : PlayerFlags (0x400, 2, EntityFlag.AnimSeq) {
         override fun writeTo(buffer: IoBuffer, context: Any?) {
             if (context is Animation) {
                 buffer.p1sub(1).ip2(context.id).p1neg(context.delay).ip2(0xffff)
@@ -272,7 +287,7 @@ sealed class PlayerFlags(
     /**
      * Sends spot animation data.
      */
-    class SpotAnim : PlayerFlags(0x2000, 8, EntityFlag.SpotAnim) {
+    class SpotAnim : PlayerFlags(0x2000, 10, EntityFlag.SpotAnim) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -289,7 +304,7 @@ sealed class PlayerFlags(
     /**
      * Sends location the player is facing.
      */
-    class FaceLocation : PlayerFlags(0x80, 6, EntityFlag.FaceLocation) {
+    class FaceLocation : PlayerFlags(0x80, 8, EntityFlag.FaceLocation) {
         override fun writeToDynamic(
             buffer: IoBuffer,
             context: Any?,

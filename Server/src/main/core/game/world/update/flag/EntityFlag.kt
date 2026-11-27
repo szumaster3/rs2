@@ -13,4 +13,6 @@ enum class EntityFlag {
     ForceMove,
     AnimSeq,
     TypeSwap,
+    MovementType,
+    ProgressBar,
 }

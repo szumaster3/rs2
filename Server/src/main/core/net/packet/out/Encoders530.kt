@@ -649,18 +649,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         context.player.session.write(buffer)
     }),
     HINT_ICON(encode<HintIconContext> { context ->
-        if (context.slot !in 0..7 || context.targetType !in listOf(0, 1, 2, 3, 4, 5, 6, 10)) return@encode
-        if (context.targetType != 0) {
-            if (context.arrowId !in 0..255 || context.modelId !in -1..65534) return@encode
-            when (context.targetType) {
-                1 -> if (context.index !in 0..32766) return@encode
-                10 -> if (context.index !in 1..2047) return@encode
-                else -> {
-                    val loc = context.location ?: return@encode
-                    if (loc.z !in 0..3 || loc.x !in 0..16383 || loc.y !in 0..16383 || context.height !in 0..255) return@encode
-                }
-            }
-        }
+        if (!context.isValid()) return@encode
         val buffer = IoBuffer(102)
         buffer.put((context.slot shl 5) or context.targetType)
         if (context.targetType == 0) {

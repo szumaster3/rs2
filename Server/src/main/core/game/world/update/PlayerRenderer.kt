@@ -25,7 +25,8 @@ object PlayerRenderer {
             if (local.size >= 255 || added >= 10) break
             if (other === player || other.index !in 1..2047 || other.index == player.index ||
                 !other.isActive || other.isInvisible ||
-                !occupiedSlots.add(other.index)) continue
+                // A recycled slot must first be removed from the client's active list.
+                previous.containsKey(other.index) || !occupiedSlots.add(other.index)) continue
             local.add(other)
             added++
         }

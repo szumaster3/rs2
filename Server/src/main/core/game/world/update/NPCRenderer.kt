@@ -22,6 +22,7 @@ object NPCRenderer {
         player.session.write(encode(player, RegionManager.getLocalNpcs(player), player.playerFlags.isUpdateSceneGraph))
     }
 
+    // Npc.move uses N,NE,E,SE,S,SW,W,NW; spawn angle = (wire + 4) * 2048 mod 16384.
     private val movementDirections = intArrayOf(7, 0, 1, 6, 2, 5, 4, 3)
 
     fun encode(player: Player, nearby: List<NPC>, wide: Boolean): IoBuffer {
@@ -63,7 +64,9 @@ object NPCRenderer {
             }
             // 32767 terminates the new-NPC bit stream; NPC types occupy 14 bits.
             if (npc.index !in 0 until 32767 || npc.id !in 0 until 16384 ||
-                localNPCs.any { it.index == npc.index } || !npc.isActive || npc.isHidden(player) ||
+                localNPCs.any { it.index == npc.index } ||
+                // Reusing a removed index for a different NPC in the same packet retains the old client entity.
+                toRemove.any { it.index == npc.index && it !== npc } || !npc.isActive || npc.isHidden(player) ||
                 !player.location.withinDistance(npc.location)) {
                 continue
             }

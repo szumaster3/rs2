@@ -6,6 +6,7 @@ import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.HitMark
+import core.game.world.update.flag.context.ProgressBar
 import core.net.packet.IoBuffer
 import core.tools.*
 import java.util.concurrent.atomic.AtomicBoolean
@@ -23,7 +24,9 @@ class UpdateMasks(val owner: Entity) {
 
     @JvmOverloads
     fun register(flag: EntityFlag, context: Any?, sync: Boolean = false): Boolean {
-        var synced = sync
+        if (flag == EntityFlag.MovementType && (context !is Int || context !in 0..2)) return false
+        if (flag == EntityFlag.ProgressBar && (context !is ProgressBar || sync)) return false
+        var synced = sync || flag == EntityFlag.MovementType
         var provider = EntityFlags.getFlagFor(type, flag)
         if (provider == null) {
             logWithStack(
@@ -91,7 +94,9 @@ class UpdateMasks(val owner: Entity) {
      */
     fun writeSynced(p: Player?, e: Entity?, buffer: IoBuffer, appearance: Boolean) {
         var maskData = presenceFlags
-        var synced = syncedPresenceFlags
+        if (flag == EntityFlag.MovementType && (context !is Int || context !in 0..2)) return false
+        if (flag == EntityFlag.ProgressBar && (context !is ProgressBar || sync)) return false
+        var synced = sync || flag == EntityFlag.MovementTypeedPresenceFlags
         var appearanceFlag = EntityFlags.getPresenceFlag(type, EntityFlag.Appearance)
         if (!appearance && synced and appearanceFlag != 0) {
             synced = synced and appearanceFlag.inv()
@@ -120,7 +125,7 @@ class UpdateMasks(val owner: Entity) {
      */
     fun playerBlock(player: Player, firstSight: Boolean, traversal: Int?): ByteArray? {
         var bits = presenceFlags
-        if (firstSight) bits = bits or syncedPresenceFlags or 1
+        if (firstSight) bits = bits or syncedPresenceFlags or 1 or 0x20
         if (traversal != null) bits = bits or 0x4000
         if (bits == 0) return null
         val out = IoBuffer()
@@ -128,7 +133,8 @@ class UpdateMasks(val owner: Entity) {
         for (i in elements.indices) {
             val element = elements[i] ?: if (firstSight) syncedElements[i] else null
             if (element != null) element.encoder.writeToDynamic(out, element.context, owner)
-            else if (firstSight && i == 2) PlayerFlags.Appearance().writeTo(out, player)
+            else if (firstSight && i == 0) PlayerFlags.MovementType().writeTo(out, 1)
+            else if (firstSight && i == 3) PlayerFlags.Appearance().writeTo(out, player)
         }
         if (traversal != null) out.p1sub(traversal)
         val bytes = out.toByteBuffer()
@@ -197,6 +203,6 @@ class UpdateMasks(val owner: Entity) {
         /**
          * The amount of update masks.
          */
-        const val SIZE = 11
+        const val SIZE = 13
     }
 }

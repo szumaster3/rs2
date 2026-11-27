@@ -213,8 +213,8 @@ sealed class PacketContext {
         override val player: Player,
         val slot: Int,
         val arrowId: Int,
-        var targetType: Int,
-        target: Node,
+        val targetType: Int,
+        private val target: Node,
         val modelId: Int,
         val height: Int = 0,
     ) : PacketContext() {
@@ -223,6 +223,19 @@ sealed class PacketContext {
 
         val index = (target as? Entity)?.index ?: -1
         val location: Location? = if (target is Entity) null else target.location
+
+        fun removal() = HintIconContext(player, slot, arrowId, 0, target, modelId, height)
+
+        fun isValid(): Boolean {
+            if (slot !in 0..7 || targetType !in listOf(0, 1, 2, 3, 4, 5, 6, 10)) return false
+            if (targetType == 0) return true
+            if (arrowId !in 0..255 || modelId !in -1..65534) return false
+            return when (targetType) {
+                1 -> target is Entity && target !is Player && index in 0..32766
+                10 -> target is Player && index in 1..2047
+                else -> location?.let { it.z in 0..3 && it.x in 0..16383 && it.y in 0..16383 && height in 0..255 } ?: false
+            }
+        }
 
         companion object {
             private fun targetType(target: Node) = when (target) {

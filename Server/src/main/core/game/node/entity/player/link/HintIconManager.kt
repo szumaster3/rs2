@@ -103,7 +103,7 @@ class HintIconManager {
          * @return The assigned slot or -1 if invalid.
          */
         fun registerHintIcon(player: Player, target: Node?, arrowId: Int = DEFAULT_ARROW, modelId: Int = DEFAULT_MODEL, slot: Int = player.hintIconManager.freeSlot(), height: Int = 0, targetType: Int? = null): Int {
-            if (slot < 0 || target == null) return -1
+            if (slot !in 0 until MAXIMUM_SIZE || target == null) return -1
 
             val manager = player.hintIconManager
             val resolvedTargetType = targetType ?: when (target) {
@@ -113,6 +113,7 @@ class HintIconManager {
             }
 
             val icon = HintIconContext(player, slot, arrowId, resolvedTargetType, target, modelId, height)
+            if (resolvedTargetType == 0 || !icon.isValid()) return -1
             send(Encoders530.HINT_ICON, icon)
             manager.hintIcons[slot] = icon
             return slot
@@ -130,8 +131,7 @@ class HintIconManager {
             val manager = player.hintIconManager
             val icon = manager.hintIcons.getOrNull(slot) ?: return
 
-            icon.targetType = 0
-            send(Encoders530.HINT_ICON, icon)
+            send(Encoders530.HINT_ICON, icon.removal())
             manager.hintIcons[slot] = null
         }
     }

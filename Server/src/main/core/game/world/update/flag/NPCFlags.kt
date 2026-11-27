@@ -6,6 +6,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.game.world.update.flag.context.HitMark
+import core.game.world.update.flag.context.ProgressBar
 import core.net.packet.IoBuffer
 import kotlin.reflect.typeOf
 
@@ -22,11 +23,19 @@ sealed class NPCFlags(
     f: EntityFlag,
 ) : EFlagProvider(ServerConstants.REVISION, EFlagType.NPC, p, o, f) {
 
+    /** Overhead progress bar, distinct from the hitpoint bar. */
+    class Progress : NPCFlags(0x400, 0, EntityFlag.ProgressBar) {
+        override fun writeTo(buffer: IoBuffer, context: Any?) {
+            val progress = context as ProgressBar
+            buffer.p2add(progress.packed).p1sub(progress.hold).p1sub(progress.step)
+        }
+    }
+
     /**
      * Represents the primary hit update flag.
      * Expects [HitMark] context containing damage and hit type.
      */
-    class PrimaryHit : NPCFlags(0x2, 0, EntityFlag.PrimaryHit) {
+    class PrimaryHit : NPCFlags(0x2, 1, EntityFlag.PrimaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -52,7 +61,7 @@ sealed class NPCFlags(
      * Represents the secondary hit update flag.
      * Expects [HitMark] context.
      */
-    class SecondaryHit : NPCFlags(0x1, 5, EntityFlag.SecondaryHit) {
+    class SecondaryHit : NPCFlags(0x1, 6, EntityFlag.SecondaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -70,7 +79,7 @@ sealed class NPCFlags(
      * Represents animation update flag.
      * Expects [Animation] context.
      */
-    class Animate : NPCFlags(0x8, 1, EntityFlag.Animate) {
+    class Animate : NPCFlags(0x8, 2, EntityFlag.Animate) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -88,7 +97,7 @@ sealed class NPCFlags(
      * Flag for facing another entity.
      * Context can be [Entity] or null.
      */
-    class FaceEntity : NPCFlags(0x20, 4, EntityFlag.FaceEntity) {
+    class FaceEntity : NPCFlags(0x20, 5, EntityFlag.FaceEntity) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -109,7 +118,7 @@ sealed class NPCFlags(
      * Spot animation flag.
      * Expects [Graphics] context.
      */
-    class SpotAnim : NPCFlags(0x4, 3, EntityFlag.SpotAnim) {
+    class SpotAnim : NPCFlags(0x4, 4, EntityFlag.SpotAnim) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -127,7 +136,7 @@ sealed class NPCFlags(
      * Type swap flag.
      * Expects an [Int] context representing new NPC type ID.
      */
-    class TypeSwap : NPCFlags(0x10, 8, EntityFlag.TypeSwap) {
+    class TypeSwap : NPCFlags(0x10, 9, EntityFlag.TypeSwap) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -144,7 +153,7 @@ sealed class NPCFlags(
      * Force chat update flag.
      * Expects a [String] context containing the forced chat text.
      */
-    class ForceChat : NPCFlags(0x80, 2, EntityFlag.ForceChat) {
+    class ForceChat : NPCFlags(0x80, 3, EntityFlag.ForceChat) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
@@ -161,7 +170,7 @@ sealed class NPCFlags(
      * Animation sequence flag.
      * Expects [Animation] context.
      */
-    class AnimationSequence : NPCFlags(0x100, 6, EntityFlag.AnimSeq) {
+    class AnimationSequence : NPCFlags(0x100, 7, EntityFlag.AnimSeq) {
         override fun writeTo(buffer: IoBuffer, context: Any?) {
             if (context is Animation) {
                 buffer.p1sub(1).p2add(context.id).p1neg(context.delay).p2(0xffff)
@@ -175,7 +184,7 @@ sealed class NPCFlags(
      * Face location flag.
      * Expects [Location] context.
      */
-    class FaceLocation : NPCFlags(0x200, 7, EntityFlag.FaceLocation) {
+    class FaceLocation : NPCFlags(0x200, 8, EntityFlag.FaceLocation) {
         override fun writeTo(
             buffer: IoBuffer,
             context: Any?,
