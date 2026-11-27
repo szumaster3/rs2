@@ -192,7 +192,7 @@ object ManagementEvents {
                     )
                 }
 
-                if (receiver != null) {
+                if (receiver != null && !receiver.communication.isIgnoring(event.sender)) {
                     PacketRepository.send(
                         Encoders530.COMMUNICATION_MESSAGE,
                         MessageContext(
@@ -354,6 +354,7 @@ object ManagementEvents {
                 val clan = ClanRepository.get(event.clanName)
 
                 for (member in clan.players.filter { it.player != null }) {
+                    if (member.player.communication.isIgnoring(event.sender)) continue
                     PacketRepository.send(
                         Encoders530.COMMUNICATION_MESSAGE,
                         MessageContext(

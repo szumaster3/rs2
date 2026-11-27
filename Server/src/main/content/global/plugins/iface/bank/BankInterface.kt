@@ -21,16 +21,16 @@ class BankInterface : InterfaceListener {
 
     companion object {
         private const val BANK_V2_MAIN_BUTTON_CLOSE = 10
-        private const val BANK_V2_MAIN_BUTTON_INSERT_MODE = 14
-        private const val BANK_V2_MAIN_BUTTON_NOTE_MODE = 16
-        private const val BANK_V2_MAIN_BUTTON_BOB_DEPOSIT = 18
-        private const val BANK_V2_MAIN_BUTTON_SEARCH_BANK = 20
-        private const val BANK_V2_MAIN_BUTTON_HELP = 23
-        private const val BANK_V2_MENU_ELEMENT = 73
+        private const val BANK_V2_MAIN_BUTTON_INSERT_MODE = 15
+        private const val BANK_V2_MAIN_BUTTON_NOTE_MODE = 19
+        private const val BANK_V2_MAIN_BUTTON_BOB_DEPOSIT = 31
+        private const val BANK_V2_MAIN_BUTTON_SEARCH_BANK = 17
+        private const val BANK_V2_MAIN_BUTTON_HELP = 38
+        private const val BANK_V2_MENU_ELEMENT = 87
 
         private const val THRESHOLD_EXACT_QUANTITY = 100_000
 
-        private val BANK_TABS = intArrayOf(41, 39, 37, 35, 33, 31, 29, 27, 25)
+        private val BANK_TABS = intArrayOf(56, 54, 52, 50, 48, 46, 44, 42, 40)
     }
 
     /**
@@ -57,17 +57,18 @@ class BankInterface : InterfaceListener {
      */
     private fun handleBankOpen(player: Player, component: Component): Boolean {
         val settings = IfaceSettingsBuilder()
-            .enableAllOptions()
+            .enableOptions(0..6)
+            .enableOption(9)
             .enableSlotSwitch()
             .setInterfaceEventsDepth(2)
             .build()
 
         player.packetDispatch.sendIfaceSettings(
             settings,
-            73,
+            BANK_V2_MENU_ELEMENT,
             Components.BANK_V2_MAIN_762,
             0,
-            ServerConstants.BANK_SIZE
+            ServerConstants.BANK_SIZE - 1
         )
 
         resetSearch(player)
@@ -82,8 +83,8 @@ class BankInterface : InterfaceListener {
         val clickedTabIndex = -((buttonID - BANK_TABS.first()) / 2)
 
         when (opcode) {
-            155 -> if (player.bank.getTabIndex() != clickedTabIndex) player.bank.setTabIndex(clickedTabIndex)
-            196 -> player.bank.collapseTab(clickedTabIndex)
+            155 -> if (player.bank.getTabIndex() != (if (clickedTabIndex == 0) 10 else clickedTabIndex)) player.bank.setTabIndex(clickedTabIndex)
+            196 -> if (clickedTabIndex in 1..8) player.bank.collapseTab(clickedTabIndex)
         }
 
         return true
@@ -158,7 +159,7 @@ class BankInterface : InterfaceListener {
          * Handles button interactions in main bank
          */
 
-        on(Components.BANK_V2_MAIN_762) { player, _, opcode, buttonID, slot, _ ->
+        on(Components.BANK_V2_MAIN_762) { player, _, opcode, buttonID, slot, itemID ->
             if (getVarbit(player, 4895) == 2 && getVarp(player, 281) < 1000 && getVarbit(player, 4931) < 30) {
                 return@on false
             }
@@ -168,7 +169,7 @@ class BankInterface : InterfaceListener {
                 BANK_V2_MAIN_BUTTON_INSERT_MODE -> player.bank.isInsertItems = !player.bank.isInsertItems
                 BANK_V2_MAIN_BUTTON_NOTE_MODE -> player.bank.isNoteItems = !player.bank.isNoteItems
                 BANK_V2_MAIN_BUTTON_SEARCH_BANK -> setAttribute(player, "search", true)
-                BANK_V2_MENU_ELEMENT -> handleContainerMenu(player, opcode, slot, player.bank, player.inventory, true)
+                BANK_V2_MENU_ELEMENT -> if (player.bank.get(slot)?.id == itemID) handleContainerMenu(player, opcode, slot, player.bank, player.inventory, true)
                 in BANK_TABS -> handleTabInteraction(player, opcode, buttonID)
             }
             return@on true
@@ -187,8 +188,8 @@ class BankInterface : InterfaceListener {
          * Handles depositing items from side inventory panel
          */
 
-        on(Components.BANK_V2_SIDE_763) { player, _, opcode, _, slot, _ ->
-            handleContainerMenu(player, opcode, slot, player.inventory, player.bank, false)
+        on(Components.BANK_V2_SIDE_763) { player, _, opcode, child, slot, itemID ->
+            if (child == 0 && player.inventory.get(slot)?.id == itemID) handleContainerMenu(player, opcode, slot, player.inventory, player.bank, false)
             return@on true
         }
     }

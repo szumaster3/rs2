@@ -3,6 +3,12 @@ package core.net.packet.`in`
 import core.game.node.entity.player.Player
 
 sealed class Packet {
+    // Wire-only selection metadata; legacy callers keep their existing constructors.
+    var nativeSelection: NativeSelection? = null
+    var interactionRun: Boolean? = null
+    data class NativeSelection(val source: Int, val target: Int?, val sourceSlot: Int)
+    data class NativeDrag(val player: Player, val source: Int, val sourceItem: Int, val sourceSlot: Int,
+                          val target: Int, val targetItem: Int, val targetSlot: Int) : Packet()
     data class ItemAction(val player: Player, val optIndex: Int, val itemId: Int, val slot: Int, val iface: Int, val child: Int) : Packet()
     data class NpcAction(val player: Player, val optIndex: Int, val npcIndex: Int) : Packet()
     data class SceneryAction(val player: Player, val optIndex: Int, val id: Int, val x: Int, val y: Int) : Packet()
@@ -24,7 +30,7 @@ sealed class Packet {
     data class KickFromClan(val player: Player, val username: String) : Packet()
     data class AddFriend(val player: Player, val username: String) : Packet()
     data class RemoveFriend(val player: Player, val username: String) : Packet()
-    data class AddIgnore(val player: Player, val username: String) : Packet()
+    data class AddIgnore @JvmOverloads constructor(val player: Player, val username: String, val temporary: Boolean = false) : Packet()
     data class RemoveIgnore(val player: Player, val username: String) : Packet()
     data class TrackingFocus(val player: Player, val isFocused: Boolean) : Packet()
     data class TrackingCameraPos(val player: Player, val x: Int, val y: Int) : Packet()

@@ -25,6 +25,16 @@ sealed class PacketContext {
     class HalfProjectile(override val player: Player, val location: Location, val halfX: Int, val halfY: Int, val dx: Int, val dy: Int, val target: Int, val graphic: Int, val sourceHeight: Int, val targetHeight: Int, val start: Int, val end: Int, val peak: Int, val arc: Int, val sourceEntity: Int? = null) : PacketContext()
     class LocMerge(override val player: Player, val location: Location, val id: Int, val shape: Int, val rotation: Int, val entity: Int, val start: Int, val end: Int, val x1: Int, val x2: Int, val y1: Int, val y2: Int) : PacketContext()
 
+    class InterfacePlayerModelContext(override val player: Player, val interfaceId: Int, val childId: Int, val playerIndex: Int, val nameHash: Int) : PacketContext()
+    class InterfaceKitModelContext(override val player: Player, val interfaceId: Int, val childId: Int, val kit1: Int, val kit2: Int, val kit3: Int) : PacketContext()
+    class DirectNpcAnimationContext(override val player: Player, val npcIndex: Int, val sequenceId: Int, val delay: Int) : PacketContext()
+    class ClanMemberUpdateContext(override val player: Player, val name: String, val alternateName: String?, val world: Int, val rank: Int, val worldName: String?) : PacketContext()
+
+    class DeleteClientContainerContext(override val player: Player, val containerId: Int, val split: Boolean) : PacketContext()
+
+    class Component24BitValuesContext(override val player: Player, val interfaceId: Int, val firstChild: Int, val values: IntArray) : PacketContext()
+    class EntityRenderPriorityContext(override val player: Player, val mode: Int) : PacketContext()
+
     class ComponentValueContext(override val player: Player, val interfaceId: Int, val childId: Int, val value: Int) : PacketContext()
 
     class GlobalSpotAnimationContext(override val player: Player, val target: Int, val id: Int, val delay: Int, val height: Int) : PacketContext()

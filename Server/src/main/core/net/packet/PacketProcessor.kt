@@ -77,11 +77,35 @@ object PacketProcessor {
                 return
             }
             try {
-                process(pkt)
+                processWithNativeRun(pkt)
             } catch (e: Exception) {
                 e.printStackTrace(pw)
                 log(this::class.java, Log.ERR, "Error Processing ${pkt::class.java.simpleName}: $sw")
             }
+        }
+    }
+
+    private fun processWithNativeRun(pkt: Packet) {
+        val player = when (pkt) {
+            is Packet.NpcAction -> pkt.player
+            is Packet.PlayerAction -> pkt.player
+            is Packet.SceneryAction -> pkt.player
+            is Packet.GroundItemAction -> pkt.player
+            is Packet.UseWithNpc -> pkt.player
+            is Packet.UseWithPlayer -> pkt.player
+            is Packet.UseWithScenery -> pkt.player
+            is Packet.UseWithGroundItem -> pkt.player
+            is Packet.ComponentNpcAction -> pkt.player
+            is Packet.ComponentPlayerAction -> pkt.player
+            is Packet.ComponentSceneryAction -> pkt.player
+            is Packet.ComponentGroundItemAction -> pkt.player
+            else -> null
+        }
+        val previous = player?.currentMovement
+        process(pkt)
+        if (pkt.interactionRun == true && player != null) {
+            val movement = player.currentMovement
+            if (movement != null && movement !== previous && movement.isRunning) movement.enableInteractionRun()
         }
     }
 
@@ -106,7 +130,7 @@ object PacketProcessor {
 
             is Packet.AddFriend -> CommunicationInfo.add(pkt.player, pkt.username)
             is Packet.RemoveFriend -> CommunicationInfo.remove(pkt.player, pkt.username, false)
-            is Packet.AddIgnore -> CommunicationInfo.block(pkt.player, pkt.username)
+            is Packet.AddIgnore -> CommunicationInfo.block(pkt.player, pkt.username, pkt.temporary)
             is Packet.RemoveIgnore -> CommunicationInfo.remove(pkt.player, pkt.username, true)
             is Packet.ComponentItemAction,
             is Packet.ComponentPlayerAction,
@@ -114,6 +138,7 @@ object PacketProcessor {
             is Packet.ComponentSceneryAction,
             is Packet.ComponentGroundItemAction -> processComponentUseWith(pkt)
 
+            is Packet.NativeDrag -> processNativeDrag(pkt)
             is Packet.SlotSwitchSingleComponent,
             is Packet.SlotSwitchMultiComponent -> processSlotSwitch(pkt)
 
@@ -207,22 +232,21 @@ object PacketProcessor {
                 sendMessage(pkt.player, "Thank you, your abuse report has been received.")
             }
 
-            is Packet.TrackFinished -> {
-                if (pkt.player.musicPlayer.isLooping)
-                    pkt.player.musicPlayer.replay()
-                else
-                    pkt.player.musicPlayer.isPlaying = false
-            }
+            is Packet.TrackFinished -> pkt.player.musicPlayer.onTrackFinished(pkt.trackId)
 
             is Packet.GESetOfferItem -> {
-                val offer = pkt.player.getAttribute("ge-temp", GrandExchangeOffer())
+                if (!pkt.player.interfaceManager.hasMainComponent(Components.STOCKMARKET_105) ||
+                    pkt.player.interfaceManager.chatbox?.id != Components.EXCHANGE_SEARCH_389 ||
+                    pkt.player.locks.isInteractionLocked()) return
                 val index = pkt.player.getAttribute("ge-index", -1)
-                offer.itemID = pkt.itemId
-                offer.sell = false
+                if (index !in 0..5 || pkt.itemId == 65535 || ItemDefinition.getDefinitions()[pkt.itemId]?.id != pkt.itemId) return
+                val offer = pkt.player.getAttribute("ge-temp", GrandExchangeOffer())
                 if (!PriceIndex.canTrade(pkt.itemId)) {
                     sendMessage(pkt.player, "That item is blacklisted from the grand exchange.")
                     return
                 }
+                offer.itemID = pkt.itemId
+                offer.sell = false
                 offer.player = pkt.player
                 offer.amount = 1
                 offer.offeredValue = getRecommendedPrice(pkt.itemId, false)
@@ -382,6 +406,57 @@ object PacketProcessor {
         }
     }
 
+    private fun activeWidget(player: Player, hash: Int): Boolean =
+        player.interfaceManager.getComponent(hash ushr 16)?.isHidden == false
+
+    // Cache 578: inventory_init / script1448 (inv_93), script1450 (inv_95), script787 (inv_94).
+    private fun nativeContainer(player: Player, hash: Int): Container? {
+        if (!activeWidget(player, hash)) return null
+        return when (hash) {
+            (149 shl 16), (763 shl 16) -> player.inventory
+            ((762 shl 16) or 87) -> if (player.bank.isOpen) player.bank else null
+            ((667 shl 16) or 14) -> player.equipment
+            else -> null
+        }
+    }
+
+    private fun processNativeDrag(pkt: Packet.NativeDrag) {
+        val player = pkt.player
+        if (player.locks.isInteractionLocked() || player.locks.isComponentLocked() ||
+            !activeWidget(player, pkt.target)) return
+        val container = nativeContainer(player, pkt.source) ?: return
+        if (pkt.sourceSlot !in 0 until container.capacity()) return
+        val item = container[pkt.sourceSlot] ?: return
+        if (item.id != pkt.sourceItem) return
+        if (pkt.source == pkt.target) {
+            if (container !== player.inventory && container !== player.bank) return
+            if (pkt.targetSlot !in 0 until container.capacity() || pkt.sourceSlot == pkt.targetSlot) return
+            val target = container[pkt.targetSlot]
+            if ((target?.id ?: 65535) != pkt.targetItem) return
+            if (container === player.bank) {
+                // Empty cells are hidden by script1456. Cross-tab inserts need boundary updates.
+                if (target == null) return
+                if (player.bank.isInsertItems && player.bank.getTabByItemSlot(pkt.sourceSlot) != player.bank.getTabByItemSlot(pkt.targetSlot)) {
+                    player.bank.moveToTab(pkt.sourceSlot, player.bank.getTabByItemSlot(pkt.targetSlot), pkt.targetSlot)
+                } else {
+                    switchItem(pkt.sourceSlot, pkt.targetSlot, container, player.bank.isInsertItems, player)
+                }
+            } else if (pkt.source == (149 shl 16)) {
+                switchItem(pkt.sourceSlot, pkt.targetSlot, container, false, player)
+            }
+            return
+        }
+        // Static bank tab headers: enum_1613; the target is not an inventory slot.
+        if (pkt.source != ((762 shl 16) or 87) || (pkt.target ushr 16) != 762 ||
+            pkt.targetSlot != 65535 || pkt.targetItem != 65535) return
+        val tab = when (val child = pkt.target and 65535) {
+            56 -> 10 // View all: move to the ungrouped bank section.
+            54, 52, 50, 48, 46, 44, 42, 40 -> (56 - child) / 2
+            else -> return
+        }
+        player.bank.moveToTab(pkt.sourceSlot, tab, -1)
+    }
+
     private fun processSlotSwitch(pkt: Packet) {
         //TODO refactor this to function as callbacks to InterfaceListeners, e.g. onSlotSwitch
         //TODO See above TODO, I hate Arios. This was hardcoded in the packet decoder.
@@ -450,7 +525,7 @@ object PacketProcessor {
             player = pkt.player
             child = pkt.child
             iface = pkt.iface
-            target = RegionManager.getObject(player.location.z, pkt.x, pkt.y) ?: return sendClearMinimap(player)
+            target = RegionManager.getObject(player.location.z, pkt.x, pkt.y, pkt.sceneryId) ?: return sendClearMinimap(player)
             targetId = pkt.sceneryId
             type = SpellListener.OBJECT
         } else if (pkt is Packet.ComponentNpcAction) {
@@ -467,16 +542,26 @@ object PacketProcessor {
             player = pkt.player
             child = pkt.child
             iface = pkt.iface
-            target = player.inventory[pkt.slot] ?: return
+            val container = pkt.nativeSelection?.target?.let { nativeContainer(player, it) }
+                ?: if (pkt.nativeSelection == null) player.inventory else return
+            // Item-target spell listeners operate on inventory slots; do not cast on bank/equipment.
+            if (container !== player.inventory) return
+            target = container[pkt.slot] ?: return
             targetId = pkt.itemId
             type = SpellListener.ITEM
         }
 
+        val selection = pkt.nativeSelection
+        if (selection != null && (!activeWidget(player, selection.source) ||
+                (selection.target != null && !activeWidget(player, selection.target)))) return
+        if (player.locks.isInteractionLocked() || player.locks.isComponentLocked()) return
+        if (target !is Item && !target.isActive) return
         if (targetId != target.id)
             return
         if (player.getAttribute("magic:delay", -1) > GameWorld.ticks)
             return
         val book = SpellUtils.getBookNameFromInterface(iface)
+        if (book != "none" && player.spellBookManager.spellBook != iface) return
         val spellButton = if (iface == 192 || iface == 193 || iface == 430)
             SpellButtonMapping.getSpellId(iface, child) ?: return
         else child
@@ -628,6 +713,14 @@ object PacketProcessor {
             plugin?.handle(player, c, pkt.opcode, pkt.child, pkt.slot, pkt.itemId)
     }
 
+    private fun selectedContainer(pkt: Packet, player: Player, iface: Int, target: Boolean = false): Container? {
+        val native = pkt.nativeSelection ?: return getLikelyContainerForIface(player, iface)
+        val hash = if (target) native.target ?: return null else native.source
+        val container = nativeContainer(player, hash) ?: return null
+        // Native use-with content consumes inventory items; bank/equipment targets require explicit listeners.
+        return container.takeIf { it === player.inventory }
+    }
+
     private fun processUseWith(pkt: Packet) {
         val node: Node
         var childNode: Node? = null
@@ -637,7 +730,7 @@ object PacketProcessor {
         val type: IntType
         val player: Player
         if (pkt is Packet.UseWithNpc) {
-            val container = getLikelyContainerForIface(pkt.player, pkt.iface) ?: return sendClearMinimap(pkt.player)
+            val container = selectedContainer(pkt, pkt.player, pkt.iface) ?: return sendClearMinimap(pkt.player)
             itemId = pkt.itemId
             val itemSlot = pkt.slot
             item = container[itemSlot] ?: return sendClearMinimap(pkt.player)
@@ -647,8 +740,11 @@ object PacketProcessor {
             type = IntType.NPC
             player = pkt.player
         } else if (pkt is Packet.UseWithScenery) {
-            item = pkt.player.inventory[pkt.slot] ?: return sendClearMinimap(pkt.player)
-            node = RegionManager.getObject(pkt.player.location.z, pkt.x, pkt.y) ?: return sendClearMinimap(pkt.player)
+            val source = pkt.nativeSelection?.source
+            val container = if (source == null) pkt.player.inventory else nativeContainer(pkt.player, source) ?: return
+            if (container !== pkt.player.inventory) return
+            item = container[pkt.slot] ?: return sendClearMinimap(pkt.player)
+            node = RegionManager.getObject(pkt.player.location.z, pkt.x, pkt.y, pkt.sceneryId) ?: return sendClearMinimap(pkt.player)
             if (node.id != pkt.sceneryId) return sendClearMinimap(pkt.player)
             childNode = node.asScenery().getChild(pkt.player)
             itemId = pkt.itemId
@@ -656,8 +752,8 @@ object PacketProcessor {
             type = IntType.SCENERY
             player = pkt.player
         } else if (pkt is Packet.UseWithItem) {
-            val containerUsed = getLikelyContainerForIface(pkt.player, pkt.usedIface) ?: return
-            val containerWith = getLikelyContainerForIface(pkt.player, pkt.usedWithIface) ?: return
+            val containerUsed = selectedContainer(pkt, pkt.player, pkt.usedIface) ?: return
+            val containerWith = selectedContainer(pkt, pkt.player, pkt.usedWithIface, true) ?: return
             item = containerUsed[pkt.usedSlot] ?: return
             node = containerWith[pkt.usedWithSlot] ?: return
             itemId = pkt.usedId
@@ -665,7 +761,7 @@ object PacketProcessor {
             type = IntType.ITEM
             player = pkt.player
         } else if (pkt is Packet.UseWithGroundItem) {
-            val container = getLikelyContainerForIface(pkt.player, pkt.iface) ?: return
+            val container = selectedContainer(pkt, pkt.player, pkt.iface) ?: return
             item = container[pkt.slot] ?: return
             itemId = pkt.usedId
             node = GroundItemManager.get(pkt.withId, Location.create(pkt.x, pkt.y, pkt.player.location.z), pkt.player)
@@ -675,7 +771,7 @@ object PacketProcessor {
             player = pkt.player
         } else {
             if (pkt !is Packet.UseWithPlayer) return
-            val container = getLikelyContainerForIface(pkt.player, pkt.iface) ?: return sendClearMinimap(pkt.player)
+            val container = selectedContainer(pkt, pkt.player, pkt.iface) ?: return sendClearMinimap(pkt.player)
             item = container[pkt.slot] ?: return sendClearMinimap(pkt.player)
             itemId = pkt.itemId
             node = Repository.players[pkt.otherIndex] ?: return sendClearMinimap(pkt.player)
@@ -684,12 +780,13 @@ object PacketProcessor {
             player = pkt.player
         }
 
+        if (node !is Item && !node.isActive) return sendClearMinimap(player)
         if (item.id != itemId)
             return sendClearMinimap(player)
         if (node.id != nodeId)
             return sendClearMinimap(player)
 
-        if (player.locks.isInteractionLocked() || player.locks.isMovementLocked())
+        if (player.locks.isInteractionLocked() || player.locks.isMovementLocked() || player.locks.isComponentLocked())
             return sendClearMinimap(player)
 
         player.scripts.reset()
@@ -868,14 +965,12 @@ object PacketProcessor {
         if (container == null || slot < 0 || slot >= container.toArray().size || secondSlot < 0 || secondSlot >= container.toArray().size) {
             return
         }
-        val item = container[slot]
-        val second = container[secondSlot]
         if (player.interfaceManager.hasChatbox() && !getAttribute(player, "close_c_", false)) {
             player.interfaceManager.closeChatbox()
-            switchItem(secondSlot, slot, container, insert, player)
-            container.refresh()
-            return
+            if (player.interfaceManager.hasChatbox()) return
         }
+        val item = container[slot]
+        val second = container[secondSlot]
         if (item == null) {
             return
         }

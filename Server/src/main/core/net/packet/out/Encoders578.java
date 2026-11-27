@@ -2,10 +2,8 @@ package core.net.packet.out;
 
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketHeader;
-import java.nio.charset.Charset;
 
 public final class Encoders578 {
-    private static final Charset CP1252 = Charset.forName("windows-1252");
 
     private Encoders578() {}
 
@@ -56,6 +54,7 @@ public final class Encoders578 {
     }
 
     public static IoBuffer minimapState(int state) {
+        if (state < 0 || state > 255) throw new IllegalArgumentException("Invalid minimap state");
         return new IoBuffer(40).put(state);
     }
 
@@ -96,17 +95,19 @@ public final class Encoders578 {
     }
 
     public static IoBuffer interaction(String name, int slot, boolean primary) {
-        return new IoBuffer(46, PacketHeader.BYTE).put(text(name, 250)).put(0)
+        if (slot < 1 || slot > 8) throw new IllegalArgumentException("Invalid interaction slot");
+        return new IoBuffer(46, PacketHeader.BYTE).putString(wireText(name, 250))
                 .putShortA(-1).putS(slot).putS(primary ? 1 : 0);
     }
 
     public static IoBuffer message(String message, int timestamp) {
         return new IoBuffer(99, PacketHeader.BYTE).put(0).putInt(timestamp).put(0)
-                .put(text(message, 248)).put(0);
+                .putString(wireText(message, 248));
     }
 
-    private static byte[] text(String value, int maxLength) {
-        byte[] encoded = value.replace('\0', '?').getBytes(CP1252);
-        return encoded.length <= maxLength ? encoded : java.util.Arrays.copyOf(encoded, maxLength);
+    private static String wireText(String value, int maxLength) {
+        // IoBuffer uses the client's one-byte-per-UTF-16-unit CP1252 encoding.
+        String sanitized = value.replace('\0', '?');
+        return sanitized.length() <= maxLength ? sanitized : sanitized.substring(0, maxLength);
     }
 }

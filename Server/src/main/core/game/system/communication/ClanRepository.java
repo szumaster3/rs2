@@ -111,7 +111,7 @@ public final class ClanRepository {
             }
             Player o = Repository.getPlayerByName(owner);
             if (o != null) {
-                if (o.getCommunication().getBlocked().contains(player.getName())) {
+                if (o.getCommunication().isIgnoring(player.getName())) {
                     player.getPacketDispatch().sendMessage("You do not have a high enough rank to join this clan channel.:clan:");
                     return false;
                 }

@@ -55,6 +55,16 @@ public abstract class MovementPulse extends Pulse {
      * If running should be forced.
      */
     private boolean forceRun;
+    private boolean interactionRun;
+
+    /** The native interaction modifier belongs to this movement, not to the persistent run toggle. */
+    public void enableInteractionRun() {
+        interactionRun = true;
+        forceRun = true;
+        if (mover.currentMovement == this && mover.getWalkingQueue().hasPath()) {
+            mover.getWalkingQueue().setRunning(true);
+        }
+    }
 
     /**
      * The option handler.
@@ -263,6 +273,7 @@ public abstract class MovementPulse extends Pulse {
     @Override
     public void stop() {
         super.stop();
+        if (interactionRun && mover.currentMovement == this) mover.getWalkingQueue().setRunning(false);
         if (destination instanceof Entity) {
             mover.face(null);
         }

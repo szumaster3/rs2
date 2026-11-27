@@ -121,6 +121,68 @@ public final class PacketDispatch {
                 new core.net.packet.out.PacketContext.ComponentValueContext(player, interfaceId, childId, spriteId));
     }
 
+    /** Displays the local player's full appearance (model type 5), not the chat head. */
+    public void sendSelfBodyModel(int interfaceId, int childId) {
+        PacketRepository.send(Encoders530.INTERFACE_SET_SELF_BODY_MODEL,
+                new core.net.packet.out.PacketContext.ComponentValueContext(player, interfaceId, childId, 0));
+    }
+
+    /** Displays a client-visible player using its client index and exact client username hash. */
+    public void sendPlayerBodyModel(int interfaceId, int childId, int playerIndex, int nameHash) {
+        PacketRepository.send(Encoders530.INTERFACE_SET_PLAYER_BODY_MODEL,
+                new core.net.packet.out.PacketContext.InterfacePlayerModelContext(player, interfaceId, childId, playerIndex, nameHash));
+    }
+
+    /** Displays three cache-backed identity kits, tinted by the local appearance. */
+    public void sendIdentityKitModel(int interfaceId, int childId, int kit1, int kit2, int kit3) {
+        PacketRepository.send(Encoders530.INTERFACE_SET_KIT_MODEL,
+                new core.net.packet.out.PacketContext.InterfaceKitModelContext(player, interfaceId, childId, kit1, kit2, kit3));
+    }
+
+    /** Animates a client-visible NPC; caller must establish visibility and a valid sequence. */
+    public void sendDirectNpcAnimation(int npcIndex, int sequenceId, int delay) {
+        PacketRepository.send(Encoders530.NPC_ANIMATION_DIRECT,
+                new core.net.packet.out.PacketContext.DirectNpcAnimationContext(player, npcIndex, sequenceId, delay));
+    }
+
+    /** Updates one client clan member; rank -128 removes it and requires a null worldName. */
+    public void sendClanMemberUpdate(String name, String alternateName, int world, int rank, String worldName) {
+        PacketRepository.send(Encoders530.UPDATE_CLAN_MEMBER,
+                new core.net.packet.out.PacketContext.ClanMemberUpdateContext(player, name, alternateName, world, rank, worldName));
+    }
+
+    /** Sets the raw 24-bit component field exposed by client CS2 opcode 6705.
+     * The caller must establish the content meaning; values are copied for the write queue. */
+    public void sendComponent24BitValues(int interfaceId, int firstChild, int[] values) {
+        if (values == null || values.length < 1 || values.length > 82) return;
+        PacketRepository.send(Encoders530.INTERFACE_SET_24BIT_VALUES,
+                new core.net.packet.out.PacketContext.Component24BitValuesContext(player, interfaceId, firstChild, values.clone()));
+    }
+
+    /** Sets the client entity rendering priority mode (0 or 1). */
+    public void sendEntityRenderPriority(int mode) {
+        PacketRepository.send(Encoders530.ENTITY_RENDER_PRIORITY,
+                new core.net.packet.out.PacketContext.EntityRenderPriorityContext(player, mode));
+    }
+
+    /** Sets a component font; -1 clears the font ID. */
+    public void sendComponentFont(int interfaceId, int childId, int fontId) {
+        PacketRepository.send(Encoders530.INTERFACE_SET_FONT,
+                new core.net.packet.out.PacketContext.ComponentValueContext(player, interfaceId, childId, fontId));
+    }
+
+    /** Sets vertical scroll position; the client clamps it to the container bounds. */
+    public void sendComponentScrollY(int interfaceId, int childId, int scrollY) {
+        PacketRepository.send(Encoders530.INTERFACE_SET_SCROLL_Y,
+                new core.net.packet.out.PacketContext.ComponentValueContext(player, interfaceId, childId, scrollY));
+    }
+
+    /** Removes a client-side item container, not the authoritative server inventory. */
+    public void deleteClientContainer(int containerId, boolean split) {
+        PacketRepository.send(Encoders530.DELETE_CLIENT_CONTAINER,
+                new core.net.packet.out.PacketContext.DeleteClientContainerContext(player, containerId, split));
+    }
+
     public void sendVarp(int index, int value) {
         PacketRepository.send(Encoders530.CONFIG, new ConfigContext(player, index, value));
     }

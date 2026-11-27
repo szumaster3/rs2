@@ -53,6 +53,7 @@ public final class MusicPlayer {
      * Indicates whether a track is currently playing.
      */
     private boolean playing;
+    private boolean trackEnded;
 
     /**
      * Indicates whether music looping is enabled.
@@ -169,8 +170,17 @@ public final class MusicPlayer {
     public void replay() {
         MusicEntry entry = MusicEntry.forId(currentMusicId);
         if (entry != null) {
+            // A completed track must be sent again even when looping the same ID.
+            playing = false;
             play(entry);
         }
+    }
+
+    public void onTrackFinished(int trackId) {
+        if (!playing || trackId != currentMusicId) return;
+        playing = false;
+        trackEnded = true;
+        if (looping) replay();
     }
 
     /**
@@ -179,10 +189,11 @@ public final class MusicPlayer {
      * @param entry the track to play.
      */
     public void play(MusicEntry entry) {
-        if (!looping || currentMusicId != entry.getId()) {
+        if (!playing || !looping || currentMusicId != entry.getId()) {
             PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, entry.getId(), false));
             PacketRepository.send(Encoders530.STRING_PACKET, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
             currentMusicId = entry.getId();
+            trackEnded = false;
             playing = true;
         }
     }
@@ -236,7 +247,7 @@ public final class MusicPlayer {
      */
     public void tick() {
         if (GameWorld.getTicks() % 20 == 0) {
-            if (!isPlaying()) {
+            if (!isPlaying() && !trackEnded) {
                 try {
                     PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, currentMusicId, false));
                 } catch (Exception e) {

@@ -185,7 +185,7 @@ public final class BankContainer extends Container {
 		player.getInventory().refresh();
 		player.getInventory().getListeners().add(player.getBank().listener);
 		setVarp(player, 1249, lastAmountX);
-		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, SIZE);
+		player.getPacketDispatch().sendIfaceSettings(new IfaceSettingsBuilder().enableOptions(new IntRange(0, 6)).enableOption(9).enableSlotSwitch().setInterfaceEventsDepth(2).build(), 87, 762, 0, SIZE - 1);
 		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0,5)).enableExamine().enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
@@ -403,6 +403,33 @@ public final class BankContainer extends Container {
 	/**
 	 * Sets the tab configs.
 	 */
+    public void moveToTab(int fromSlot, int destinationTab, int destinationSlot) {
+        if (!open || fromSlot < 0 || fromSlot >= capacity() || get(fromSlot) == null) return;
+        if ((destinationTab < 1 || destinationTab > 8) && destinationTab != 10) return;
+        int sourceTab = getTabByItemSlot(fromSlot);
+        if ((sourceTab < 1 || sourceTab > 8) && sourceTab != 10) return;
+        if (sourceTab == destinationTab) return;
+        int last = capacity() - 1;
+        while (last >= 0 && get(last) == null) last--;
+        // The tab layout assumes contiguous occupied slots and monotonic boundaries.
+        for (int i = 0; i <= last; i++) if (get(i) == null) return;
+        for (int i = 1; i < tabStartSlot.length; i++) {
+            if (tabStartSlot[i] < tabStartSlot[i - 1] || tabStartSlot[i] > last + 1) return;
+        }
+        int start = tabStartSlot[destinationTab];
+        int end = destinationTab == 10 ? last + 1 : tabStartSlot[destinationTab + 1];
+        int boundary = destinationSlot < 0 ? end : destinationSlot;
+        if (boundary < start || boundary > end) return;
+        int to = boundary > fromSlot ? boundary - 1 : boundary;
+        if (to < 0 || to > last) return;
+        insert(fromSlot, to, false);
+        // Moving between tabs changes the boundary count, not the item count.
+        increaseTabStartSlots(destinationTab);
+        decreaseTabStartSlots(sourceTab);
+        setTabConfigurations();
+        refresh();
+    }
+
 	public void setTabConfigurations() {
 		for (int i = 0; i < 8; i++) {
 			setVarbit(player, 4885 + i, getItemsInTab(i + 1));
@@ -482,7 +509,7 @@ public final class BankContainer extends Container {
 	 * @param insertItems The insert items value.
 	 */
 	public void setInsertItems(boolean insertItems) {
-		setVarbit(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304, insertItems ? 1 : 0, true);
+		setVarp(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304, insertItems ? 1 : 0, true);
 	}
 	
 	/**
@@ -490,7 +517,7 @@ public final class BankContainer extends Container {
 	 * @return {@code True} if inserting items mode is enabled.
 	 */
 	public boolean isInsertItems() {
-		return getVarbit(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304) == 1;
+		return getVarp(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304) == 1;
 	}
 	
 	/**

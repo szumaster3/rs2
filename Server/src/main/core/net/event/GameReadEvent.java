@@ -14,6 +14,7 @@ import java.util.Locale;
 
 public final class GameReadEvent extends IoReadEvent {
     private static final int[] IF_WIRE = {12, 4, 2, 43, 63, 57, 10, 17, 54, 14};
+    // Internal content listener IDs, not network opcodes; do not replace without migrating listeners.
     private static final int[] IF_LEGACY = {155, 196, 124, 199, 234, 168, 166, 64, 53, 9};
     public GameReadEvent(IoSession session, ByteBuffer buffer) {
         super(session, buffer);
@@ -46,15 +47,21 @@ public final class GameReadEvent extends IoReadEvent {
         switch (opcode) {
             case 78:
             case 59: {
-                boolean run = ((payload.get() - 128) & 255) == 1;
+                boolean run = readModifier(payload, 1);
                 int x = Short.toUnsignedInt(payload.getShort());
                 int z = Short.toUnsignedInt(Short.reverseBytes(payload.getShort()));
                 if (opcode == 78) return new Packet.WorldspaceWalk(player, x, z, run);
                 int clickX = payload.get();
                 int clickY = payload.get();
                 int yaw = Short.toUnsignedInt(payload.getShort());
-                // Four camera/check bytes, two fine coordinates and a final check byte.
-                payload.position(payload.position() + 9);
+                // Protocol.method4427: fixed check bytes around the camera and fine coordinates.
+                if (Byte.toUnsignedInt(payload.get()) != 57) return null;
+                payload.get(); // client camera telemetry
+                payload.get(); // client camera telemetry
+                if (Byte.toUnsignedInt(payload.get()) != 89) return null;
+                payload.getShort(); // local player fine X
+                payload.getShort(); // local player fine Z
+                if (Byte.toUnsignedInt(payload.get()) != 63) return null;
                 return new Packet.MinimapWalk(player, x, z, clickX, clickY, yaw, run);
             }
             case 12: case 4: case 2: case 43: case 63:
@@ -69,18 +76,18 @@ public final class GameReadEvent extends IoReadEvent {
                         component & 65535, slot, item == 65535 ? -1 : item);
             }
             // NPC options: Static241 menu order and Protocol.java wire writes.
-            case 28: payload.get(); return new Packet.NpcAction(player, 0, le(payload));
-            case 50: { int index = leA(payload); payload.get(); return new Packet.NpcAction(player, 1, index); }
-            case 70: { int index = leA(payload); payload.get(); return new Packet.NpcAction(player, 2, index); }
-            case 31: { int index = be(payload); payload.get(); return new Packet.NpcAction(player, 3, index); }
-            case 68: { int index = be(payload); payload.get(); return new Packet.NpcAction(player, 4, index); }
+            case 28: { boolean run = readModifier(payload, 2); return withRun(new Packet.NpcAction(player, 0, le(payload)), run); }
+            case 50: { int index = leA(payload); boolean run = readModifier(payload, 3); return withRun(new Packet.NpcAction(player, 1, index), run); }
+            case 70: { int index = leA(payload); boolean run = readModifier(payload, 0); return withRun(new Packet.NpcAction(player, 2, index), run); }
+            case 31: { int index = be(payload); boolean run = readModifier(payload, 2); return withRun(new Packet.NpcAction(player, 3, index), run); }
+            case 68: { int index = be(payload); boolean run = readModifier(payload, 1); return withRun(new Packet.NpcAction(player, 4, index), run); }
             case 46: return new Packet.NpcExamine(player, be(payload));
             // Location options: Static327 menu order and Protocol.java wire writes.
-            case 73: { int id = le(payload), x = le(payload), z = le(payload); payload.get(); return new Packet.SceneryAction(player, 0, id, x, z); }
-            case 3: { int z = leA(payload), id = beA(payload), x = be(payload); payload.get(); return new Packet.SceneryAction(player, 1, id, x, z); }
-            case 40: { int id = leA(payload), z = leA(payload), x = be(payload); payload.get(); return new Packet.SceneryAction(player, 2, id, x, z); }
-            case 72: { int id = leA(payload); payload.get(); int x = be(payload), z = le(payload); return new Packet.SceneryAction(player, 3, id, x, z); }
-            case 47: { int z = beA(payload), id = le(payload), x = beA(payload); payload.get(); return new Packet.SceneryAction(player, 4, id, x, z); }
+            case 73: { int id = le(payload), x = le(payload), z = le(payload); boolean run = readModifier(payload, 0); return withRun(new Packet.SceneryAction(player, 0, id, x, z), run); }
+            case 3: { int z = leA(payload), id = beA(payload), x = be(payload); boolean run = readModifier(payload, 2); return withRun(new Packet.SceneryAction(player, 1, id, x, z), run); }
+            case 40: { int id = leA(payload), z = leA(payload), x = be(payload); boolean run = readModifier(payload, 0); return withRun(new Packet.SceneryAction(player, 2, id, x, z), run); }
+            case 72: { int id = leA(payload); boolean run = readModifier(payload, 0); int x = be(payload), z = le(payload); return withRun(new Packet.SceneryAction(player, 3, id, x, z), run); }
+            case 47: { int z = beA(payload), id = le(payload), x = beA(payload); boolean run = readModifier(payload, 2); return withRun(new Packet.SceneryAction(player, 4, id, x, z), run); }
             case 66: return new Packet.SceneryExamine(player, be(payload));
             case 0: return new Packet.ItemExamine(player, be(payload));
             case 21: {
@@ -115,15 +122,18 @@ public final class GameReadEvent extends IoReadEvent {
             case 38: // Stellar Dawn-only Face here action; not a RuneScape action.
                 payload.position(payload.limit());
                 return null;
-            case 33: // EVENT_FRAME_MAP_LOADED: desktop frame telemetry, LoginManager.java.
+            case 33: // EVENT_FRAME_MAP_LOADED: desktop frame telemetry, LoginManager.java (1057001181).
                 payload.getInt();
                 return null;
             case 55: // Client finished building the map. No reply is required.
                 return null;
-            case 8:
-                return new Packet.TrackingDisplayUpdate(player, Byte.toUnsignedInt(payload.get()),
-                        Short.toUnsignedInt(payload.getShort()), Short.toUnsignedInt(payload.getShort()),
-                        Byte.toUnsignedInt(payload.get()));
+            case 8: { // Protocol.method2002: window mode, canvas size, antialiasing mode.
+                int mode = Byte.toUnsignedInt(payload.get());
+                int width = be(payload), height = be(payload);
+                int antiAliasing = Byte.toUnsignedInt(payload.get());
+                if (mode < 1 || mode > 3 || antiAliasing > 2) return null;
+                return new Packet.TrackingDisplayUpdate(player, mode, width, height, antiAliasing);
+            }
             case 37: {
                 int timing = Short.toUnsignedInt(payload.getShort());
                 int coords = Integer.reverseBytes(payload.getInt());
@@ -134,7 +144,7 @@ public final class GameReadEvent extends IoReadEvent {
                 return new Packet.TrackingCameraPos(player, Short.toUnsignedInt(payload.getShort()),
                         Short.toUnsignedInt(Short.reverseBytes(payload.getShort())));
             case 44:
-                return new Packet.TrackingFocus(player, payload.get() == 1);
+                return new Packet.TrackingFocus(player, readModifier(payload, 0));
             case 81:
                 payload.getShort(); // Host ping result, Protocol.java:3412-3420.
                 return null;
@@ -190,7 +200,7 @@ public final class GameReadEvent extends IoReadEvent {
             case 74: // ScriptRunner.java:1341-1343
                 return new Packet.InputPromptResponse(player, readText(payload));
             case 76: // Cheat.java:428-431
-                payload.get(); // console flag
+                readModifier(payload, 0); // console flag
                 String command = readText(payload);
                 return command.isEmpty() ? null : new Packet.Command(player, command.toLowerCase(Locale.ROOT));
             // Revision 578 social packets: FriendsList, IgnoreList and ClanChat.
@@ -200,9 +210,8 @@ public final class GameReadEvent extends IoReadEvent {
             case 16: {
                 String name = ByteBufferUtils.getString(payload);
                 if (payload.remaining() != 1) return null;
-                int temporary = Byte.toUnsignedInt(payload.get());
-                // Existing ignore storage is permanent; do not persist temporary ignores.
-                return temporary == 0 ? new Packet.AddIgnore(player, name) : null;
+                boolean temporary = readModifier(payload, 0);
+                return new Packet.AddIgnore(player, name, temporary);
             }
             case 15: return new Packet.KickFromClan(player, readText(payload));
             case 64: return new Packet.JoinClan(player, payload.hasRemaining() ? readText(payload) : "");
@@ -213,75 +222,64 @@ public final class GameReadEvent extends IoReadEvent {
             case 71: return new Packet.Ping(player);
             case 20: return new Packet.TrackFinished(player, payload.getInt());
             // Ground item options, Protocol.java and Static327 menu ordering.
-            case 22: { int id = leA(payload), z = beA(payload), x = leA(payload); payload.get(); return new Packet.GroundItemAction(player, 0, id, x, z); }
-            case 5: { int z = le(payload), id = be(payload); payload.get(); int x = beA(payload); return new Packet.GroundItemAction(player, 1, id, x, z); }
-            case 80: { int id = leA(payload); payload.get(); int z = be(payload), x = le(payload); return new Packet.GroundItemAction(player, 2, id, x, z); }
-            case 79: { int id = be(payload); payload.get(); int x = beA(payload), z = be(payload); return new Packet.GroundItemAction(player, 3, id, x, z); }
-            case 26: { int z = leA(payload), x = be(payload); payload.get(); int id = le(payload); return new Packet.GroundItemAction(player, 4, id, x, z); }
-            case 39: payload.get(); return new Packet.PlayerAction(player, 0, leA(payload));
-            case 32: { int id = leA(payload); payload.get(); return new Packet.PlayerAction(player, 1, id); }
-            case 41: payload.get(); return new Packet.PlayerAction(player, 2, le(payload));
-            case 69: payload.get(); return new Packet.PlayerAction(player, 3, le(payload));
-            case 36: { int id = le(payload); payload.get(); return new Packet.PlayerAction(player, 4, id); }
-            case 45: { int id = le(payload); payload.get(); return new Packet.PlayerAction(player, 5, id); }
-            case 27: payload.get(); return new Packet.PlayerAction(player, 6, leA(payload));
-            case 35: { int id = leA(payload); payload.get(); return new Packet.PlayerAction(player, 7, id); }
+            case 22: { int id = leA(payload), z = beA(payload), x = leA(payload); boolean run = readModifier(payload, 3); return withRun(new Packet.GroundItemAction(player, 0, id, x, z), run); }
+            case 5: { int z = le(payload), id = be(payload); boolean run = readModifier(payload, 3); int x = beA(payload); return withRun(new Packet.GroundItemAction(player, 1, id, x, z), run); }
+            case 80: { int id = leA(payload); boolean run = readModifier(payload, 1); int z = be(payload), x = le(payload); return withRun(new Packet.GroundItemAction(player, 2, id, x, z), run); }
+            case 79: { int id = be(payload); boolean run = readModifier(payload, 1); int x = beA(payload), z = be(payload); return withRun(new Packet.GroundItemAction(player, 3, id, x, z), run); }
+            case 26: { int z = leA(payload), x = be(payload); boolean run = readModifier(payload, 3); int id = le(payload); return withRun(new Packet.GroundItemAction(player, 4, id, x, z), run); }
+            case 39: { boolean run = readModifier(payload, 0); return withRun(new Packet.PlayerAction(player, 0, leA(payload)), run); }
+            case 32: { int id = leA(payload); boolean run = readModifier(payload, 2); return withRun(new Packet.PlayerAction(player, 1, id), run); }
+            case 41: { boolean run = readModifier(payload, 0); return withRun(new Packet.PlayerAction(player, 2, le(payload)), run); }
+            case 69: { boolean run = readModifier(payload, 2); return withRun(new Packet.PlayerAction(player, 3, le(payload)), run); }
+            case 36: { int id = le(payload); boolean run = readModifier(payload, 3); return withRun(new Packet.PlayerAction(player, 4, id), run); }
+            case 45: { int id = le(payload); boolean run = readModifier(payload, 1); return withRun(new Packet.PlayerAction(player, 5, id), run); }
+            case 27: { boolean run = readModifier(payload, 3); return withRun(new Packet.PlayerAction(player, 6, leA(payload)), run); }
+            case 35: { int id = leA(payload); boolean run = readModifier(payload, 1); return withRun(new Packet.PlayerAction(player, 7, id), run); }
             // Protocol.method4427 and Static185.method3400: selected component target.
             case 75: {
-                int source = payload.getInt(); payload.get();
+                int source = payload.getInt(); boolean run = readModifier(payload, 3);
                 int item = leA(payload), slot = le(payload), npc = be(payload);
                 if (!active(player, source) || npc <= 0 || npc >= core.ServerConstants.MAX_NPCS) return null;
-                return item == 65535 ? new Packet.ComponentNpcAction(player, source >>> 16, source & 65535, npc)
-                        : new Packet.UseWithNpc(player, item, npc, source >>> 16, slot);
+                return withSelection(item == 65535 ? new Packet.ComponentNpcAction(player, source >>> 16, source & 65535, npc)
+                        : new Packet.UseWithNpc(player, item, npc, source >>> 16, slot), source, null, slot, run);
             }
             case 48: {
-                int source = Integer.reverseBytes(payload.getInt()); payload.get();
+                int source = Integer.reverseBytes(payload.getInt()); boolean run = readModifier(payload, 3);
                 int slot = le(payload), item = leA(payload), target = le(payload);
                 if (!active(player, source) || target <= 0 || target >= core.ServerConstants.MAX_PLAYERS) return null;
-                return item == 65535 ? new Packet.ComponentPlayerAction(player, target, source >>> 16, source & 65535)
-                        : new Packet.UseWithPlayer(player, item, target, source >>> 16, slot);
+                return withSelection(item == 65535 ? new Packet.ComponentPlayerAction(player, target, source >>> 16, source & 65535)
+                        : new Packet.UseWithPlayer(player, item, target, source >>> 16, slot), source, null, slot, run);
             }
             case 6: {
-                int item = be(payload), target = leA(payload), x = le(payload); payload.get();
+                int item = be(payload), target = leA(payload), x = le(payload); boolean run = readModifier(payload, 2);
                 int slot = leA(payload), source = intAlt3(payload), z = leA(payload);
                 if (!active(player, source) || x > 16383 || z > 16383) return null;
-                return item == 65535 ? new Packet.ComponentGroundItemAction(player, source >>> 16, source & 65535, slot, target, x, z)
-                        : new Packet.UseWithGroundItem(player, item, target, source >>> 16, source & 65535, slot, x, z);
+                return withSelection(item == 65535 ? new Packet.ComponentGroundItemAction(player, source >>> 16, source & 65535, slot, target, x, z)
+                        : new Packet.UseWithGroundItem(player, item, target, source >>> 16, source & 65535, slot, x, z), source, null, slot, run);
             }
             case 9: {
-                int target = le(payload), source = intAlt2(payload), item = be(payload); payload.get();
+                int target = le(payload), source = intAlt2(payload), item = be(payload); boolean run = readModifier(payload, 0);
                 int slot = leA(payload), x = be(payload), z = be(payload);
                 if (!active(player, source) || x > 16383 || z > 16383) return null;
-                if (item == 65535) return new Packet.ComponentSceneryAction(player, source >>> 16, source & 65535, target, x, z);
-                // Existing item-on-scenery listener uses the inventory only.
-                if ((source >>> 16) != 149) return null;
-                return new Packet.UseWithScenery(player, item, slot, target, x, z);
+                if (item == 65535) return withSelection(new Packet.ComponentSceneryAction(player, source >>> 16, source & 65535, target, x, z), source, null, slot, run);
+                return withSelection(new Packet.UseWithScenery(player, item, slot, target, x, z), source, null, slot, run);
             }
             case 11: { // Protocol.method6129: component target.
                 int target = payload.getInt(), targetSlot = beA(payload), slot = beA(payload);
                 int item = be(payload), source = intAlt3(payload), targetItem = be(payload);
                 if (!active(player, source) || !active(player, target) || targetItem == 65535) return null;
                 if (item == 65535) {
-                    if ((target >>> 16) != 149) return null;
-                    return new Packet.ComponentItemAction(player, source >>> 16, source & 65535, targetItem, targetSlot);
+                    return withSelection(new Packet.ComponentItemAction(player, source >>> 16, source & 65535, targetItem, targetSlot), source, target, slot, null);
                 }
-                return new Packet.UseWithItem(player, item, targetItem, slot, targetSlot,
-                        source >>> 16, target >>> 16, source & 65535, target & 65535);
+                return withSelection(new Packet.UseWithItem(player, item, targetItem, slot, targetSlot,
+                        source >>> 16, target >>> 16, source & 65535, target & 65535), source, target, slot, null);
             }
             case 13: { // Protocol.method5096 / Cs1ScriptRunner: source then destination.
                 int source = payload.getInt(), item = leA(payload), slot = beA(payload);
                 int target = intAlt3(payload), targetItem = leA(payload), targetSlot = le(payload);
-                int iface = source >>> 16;
-                if (!active(player, source) || !active(player, target) || iface != (target >>> 16)) return null;
-                // Restrict legacy slot switching to its known inventory/bank containers.
-                core.game.container.Container container;
-                if (iface == 149 && (source & 65535) == 0 && (target & 65535) == 0) container = player.getInventory();
-                else if (iface == 762 && (source & 65535) == 73 && (target & 65535) == 73) container = player.getBank();
-                else return null;
-                if (slot >= container.capacity() || targetSlot >= container.capacity() || slot == targetSlot) return null;
-                core.game.node.item.Item from = container.get(slot), to = container.get(targetSlot);
-                if (from == null || from.getId() != item || (to == null ? 65535 : to.getId()) != targetItem) return null;
-                return new Packet.SlotSwitchMultiComponent(player, iface, source & 65535, slot, iface, target & 65535, targetSlot);
+                if (!active(player, source) || !active(player, target)) return null;
+                // Keep both wire item IDs and widget hashes until the game-thread validation.
+                return new Packet.NativeDrag(player, source, item, slot, target, targetItem, targetSlot);
             }
             case 49: { // FriendsList.setRank: signed rank + 128, CP1252 name.
                 int rank = (byte) (payload.get() - 128);
@@ -315,7 +313,7 @@ public final class GameReadEvent extends IoReadEvent {
                 // UNRESOLVED: world-map click server behavior. This is not a movement command.
                 return null;
             }
-            case 58: return new Packet.GESetOfferItem(player, be(payload)); // ScriptRunner 3110
+            case 58: return new Packet.GESetOfferItem(player, be(payload)); // Generic wire reply; current game-thread caller is GE search only.
             default:
                 // Keep-alives and as-yet unmapped frames end here.
                 return null;
@@ -351,7 +349,19 @@ public final class GameReadEvent extends IoReadEvent {
     }
 
     private static boolean active(Player player, int component) {
-        return player.getInterfaceManager().getComponent(component >>> 16) != null;
+        core.game.component.Component widget = player.getInterfaceManager().getComponent(component >>> 16);
+        return widget != null && !widget.isHidden();
+    }
+
+    private static Packet withRun(Packet packet, boolean run) {
+        packet.setInteractionRun(run);
+        return packet;
+    }
+
+    private static Packet withSelection(Packet packet, int source, Integer target, int sourceSlot, Boolean run) {
+        packet.setNativeSelection(new Packet.NativeSelection(source, target, sourceSlot));
+        packet.setInteractionRun(run);
+        return packet;
     }
 
     // Inverse of client Packet.p4_alt2 and p4_alt3 respectively.
@@ -364,6 +374,21 @@ public final class GameReadEvent extends IoReadEvent {
         int a = Byte.toUnsignedInt(b.get()), c = Byte.toUnsignedInt(b.get());
         int d = Byte.toUnsignedInt(b.get()), e = Byte.toUnsignedInt(b.get());
         return c << 24 | a << 16 | e << 8 | d;
+    }
+
+    // Client Packet.p1 / p1_alt1 / p1_alt2 / p1_alt3 write boolean modifiers.
+    private static boolean readModifier(ByteBuffer b, int transform) {
+        int raw = Byte.toUnsignedInt(b.get());
+        int value;
+        switch (transform) {
+            case 0: value = raw; break;
+            case 1: value = (raw - 128) & 255; break;
+            case 2: value = (-raw) & 255; break;
+            case 3: value = (128 - raw) & 255; break;
+            default: throw new IllegalArgumentException("Unknown modifier transform");
+        }
+        if (value > 1) throw new IllegalArgumentException("Invalid interaction modifier");
+        return value == 1;
     }
 
     private static int be(ByteBuffer b) { return Short.toUnsignedInt(b.getShort()); }

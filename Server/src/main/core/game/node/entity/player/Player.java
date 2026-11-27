@@ -407,6 +407,7 @@ public class Player extends Entity {
     public void finishClear() {
         if (!isArtificial()) GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 
+        getCommunication().clearTemporaryIgnores();
         setPlaying(false);
         getWalkingQueue().reset();
 

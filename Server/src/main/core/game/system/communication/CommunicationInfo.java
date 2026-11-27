@@ -43,6 +43,29 @@ public final class CommunicationInfo {
      * The list of blocked players.
      */
     private final List<String> blocked = new ArrayList<>(20);
+    // Session-only ignores are never included in SQL/account serialization.
+    private final Set<String> temporaryBlocked = new LinkedHashSet<>();
+
+    private static String ignoreKey(String name) {
+        return name.toLowerCase(Locale.ROOT).replace(' ', '_');
+    }
+
+    public boolean isIgnoring(String name) {
+        String key = ignoreKey(name);
+        return temporaryBlocked.contains(key) || blocked.stream().anyMatch(n -> ignoreKey(n).equals(key));
+    }
+
+    public void clearTemporaryIgnores() {
+        temporaryBlocked.clear();
+    }
+
+    public Set<String> getTemporaryBlocked() {
+        return Collections.unmodifiableSet(temporaryBlocked);
+    }
+
+    private static void syncIgnores(Player player) {
+        PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(player, ContactContext.IGNORE_LIST_TYPE));
+    }
 
     /**
      * The player's clan name.
@@ -281,7 +304,10 @@ public final class CommunicationInfo {
         }
         CommunicationInfo info = player.getDetails().getCommunication();
         if (block) {
-            info.blocked.remove(contact);
+            String key = ignoreKey(contact);
+            info.blocked.removeIf(name -> ignoreKey(name).equals(key));
+            info.temporaryBlocked.remove(key);
+            syncIgnores(player);
             Player target = Repository.getPlayerByName(contact);
             if (target != null && hasContact(target, player.getName())) {
                 int worldId = 0;
@@ -310,25 +336,33 @@ public final class CommunicationInfo {
      * @param contact The contact to block.
      */
     public static void block(Player player, String contact) {
-        if (contact.isEmpty()) {
+        block(player, contact, false);
+    }
+
+    public static void block(Player player, String contact, boolean temporary) {
+        final String key = ignoreKey(contact);
+        if (StringUtils.invalidAccountName(key)) {
             player.sendMessage("Unable to find a player by that name. Please try again.");
             return;
         }
         if (WorldCommunicator.isEnabled()) {
-            MSPacketRepository.sendContactUpdate(player.getName(), contact, false, true, null);
+            if (!temporary) MSPacketRepository.sendContactUpdate(player.getName(), contact, false, true, null);
             return;
         }
         CommunicationInfo info = player.getDetails().getCommunication();
-        if (info.blocked.size() >= MAX_LIST_SIZE) {
+        if (info.blocked.stream().filter(n -> !n.isEmpty()).count() + info.temporaryBlocked.size() >= 100) {
             player.getPacketDispatch().sendMessage("Your ignore list is full.");
             return;
         }
-        if (info.blocked.contains(contact)) {
+        if (info.isIgnoring(key)) {
             player.getPacketDispatch().sendMessage(StringUtils.formatDisplayName(contact) + " is already on your ignore list.");
             return;
         }
-        info.blocked.add(contact);
-        Player target = Repository.getPlayerByName(contact);
+        if (key.equals(ignoreKey(player.getName())) || info.contacts.keySet().stream().anyMatch(n -> ignoreKey(n).equals(key))) return;
+        if (temporary) info.temporaryBlocked.add(key);
+        else info.blocked.add(key);
+        syncIgnores(player);
+        Player target = Repository.getPlayerByName(key);
         if (target != null && hasContact(target, player.getName())) {
             PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(target, player.getName(), 0));
         }
@@ -394,7 +428,7 @@ public final class CommunicationInfo {
         if (target.getName().equals(player.getName())) {
             return false;
         }
-        if (target.getCommunication().getBlocked().contains(player.getName())) {
+        if (target.getCommunication().isIgnoring(player.getName())) {
             return false;
         }
         switch (target.getSettings().getPrivateChatSetting()) {
