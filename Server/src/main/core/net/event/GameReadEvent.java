@@ -289,11 +289,49 @@ public final class GameReadEvent extends IoReadEvent {
                 if (name.isEmpty() || rank < 0 || rank > 6) return null;
                 return new Packet.SetClanRank(player, name, rank);
             }
+            case 34: { // ReflectionCheck.mainLogic: challenge ID, typed results, CRC32.
+                // No challenge producer is implemented; never accept an unsolicited result as verified.
+                validateReflectionEnvelope(payload);
+                return null;
+            }
+            case 52: { // Protocol.method4427, menu action 51: selected component on tile.
+                int slot = le(payload), component = payload.getInt(), z = leA(payload);
+                int item = le(payload), x = leA(payload);
+                if (!active(player, component) || x > 16383 || z > 16383) return null;
+                // UNRESOLVED: no confirmed tile-target listener or spell mapping.
+                return null;
+            }
+            case 56: { // ScriptRunner opcode 5400: two CP1252 strings and a mode byte.
+                ByteBufferUtils.getString(payload);
+                ByteBufferUtils.getString(payload);
+                payload.get();
+                if (payload.hasRemaining()) throw new IllegalArgumentException("Trailing URL request bytes");
+                // Local-only policy: never relay arbitrary client URLs or launch a browser.
+                return null;
+            }
+            case 65: { // Protocol.mainLogic / Static45: packed source coordinate, little-endian.
+                int coordinate = Integer.reverseBytes(payload.getInt());
+                if ((coordinate >>> 28) > 3) return null;
+                // UNRESOLVED: world-map click server behavior. This is not a movement command.
+                return null;
+            }
             case 58: return new Packet.GESetOfferItem(player, be(payload)); // ScriptRunner 3110
             default:
                 // Keep-alives and as-yet unmapped frames end here.
                 return null;
         }
+    }
+
+    private static void validateReflectionEnvelope(ByteBuffer payload) {
+        if (payload.remaining() < 8) throw new IllegalArgumentException("Truncated reflection response");
+        int end = payload.limit() - Integer.BYTES;
+        java.util.zip.CRC32 crc = new java.util.zip.CRC32();
+        ByteBuffer data = payload.duplicate();
+        data.limit(end);
+        crc.update(data);
+        if ((int) crc.getValue() != payload.getInt(end))
+            throw new IllegalArgumentException("Invalid reflection response CRC");
+        payload.position(payload.limit());
     }
 
     private static String readChat(ByteBuffer payload) {

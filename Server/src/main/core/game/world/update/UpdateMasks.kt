@@ -78,7 +78,7 @@ class UpdateMasks(val owner: Entity) {
         }
         for (i in elements.indices) {
             val element = elements[i]
-            element?.encoder?.writeToDynamic(buffer, element.context, p!!)
+            element?.encoder?.writeToDynamic(buffer, element.context, owner)
         }
     }
 
@@ -111,7 +111,7 @@ class UpdateMasks(val owner: Entity) {
                     continue
                 }
             }
-            element?.encoder?.writeToDynamic(buffer, element.context, p!!)
+            element?.encoder?.writeToDynamic(buffer, element.context, owner)
         }
     }
 
@@ -127,7 +127,7 @@ class UpdateMasks(val owner: Entity) {
         if (bits >= 256) out.put(bits or 2).put(bits shr 8) else out.put(bits)
         for (i in elements.indices) {
             val element = elements[i] ?: if (firstSight) syncedElements[i] else null
-            if (element != null) element.encoder.writeToDynamic(out, element.context, player)
+            if (element != null) element.encoder.writeToDynamic(out, element.context, owner)
             else if (firstSight && i == 2) PlayerFlags.Appearance().writeTo(out, player)
         }
         if (traversal != null) out.p1sub(traversal)

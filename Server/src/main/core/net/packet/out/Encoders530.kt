@@ -114,6 +114,15 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             .putLEShort(c.entity).putS(c.x2).putLEShortA(c.end).putLEShortA(c.start)
             .putC(c.y1).putC(c.x1).putA((c.shape shl 2) or c.rotation).putShort(c.id))
     }),
+    RESET_ENTITY_ANIMATIONS(encode<PlayerContext> { context ->
+        context.player.session.write(Encoders578.resetEntityAnimations())
+    }),
+    RESET_CLIENT_VARPS(encode<PlayerContext> { context ->
+        context.player.session.write(Encoders578.resetClientVarps())
+    }),
+    RUN_DIALOG_ABORT_HOOKS(encode<PlayerContext> { context ->
+        context.player.session.write(Encoders578.runDialogAbortHooks())
+    }),
     // Session and status
     LOGIN_PACKET(encode<PlayerContext> { context ->
         val p = context.player
@@ -498,6 +507,17 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     HINT_ICON(encode<HintIconContext> { context ->
         if (context.slot !in 0..7 || context.targetType !in listOf(0, 1, 2, 3, 4, 5, 6, 10)) return@encode
+        if (context.targetType != 0) {
+            if (context.arrowId !in 0..255 || context.modelId !in -1..65534) return@encode
+            when (context.targetType) {
+                1 -> if (context.index !in 0..32766) return@encode
+                10 -> if (context.index !in 1..2047) return@encode
+                else -> {
+                    val loc = context.location ?: return@encode
+                    if (loc.z !in 0..3 || loc.x !in 0..16383 || loc.y !in 0..16383 || context.height !in 0..255) return@encode
+                }
+            }
+        }
         val buffer = IoBuffer(102)
         buffer.put((context.slot shl 5) or context.targetType)
         if (context.targetType == 0) {

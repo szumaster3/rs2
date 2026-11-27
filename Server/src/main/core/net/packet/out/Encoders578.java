@@ -9,6 +9,21 @@ public final class Encoders578 {
 
     private Encoders578() {}
 
+    /** Clears the client's primary entity animations, not server animator state. */
+    public static IoBuffer resetEntityAnimations() {
+        return new IoBuffer(103);
+    }
+
+    /** Resets the client's resettable varps; callers must resynchronize server values. */
+    public static IoBuffer resetClientVarps() {
+        return new IoBuffer(75);
+    }
+
+    /** Runs onDialogAbort hooks recursively from the active top-level interface. */
+    public static IoBuffer runDialogAbortHooks() {
+        return new IoBuffer(82);
+    }
+
     public static IoBuffer logout() {
         return new IoBuffer(58);
     }

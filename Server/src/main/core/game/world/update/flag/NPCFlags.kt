@@ -133,7 +133,7 @@ sealed class NPCFlags(
             context: Any?,
         ) {
             if (context !is Int) {
-                logInvalidType(context, typeOf<Graphics>())
+                logInvalidType(context, typeOf<Int>())
                 return
             }
             buffer.ip2(context)
@@ -153,7 +153,7 @@ sealed class NPCFlags(
                 logInvalidType(context, typeOf<String>())
                 return
             }
-            buffer.put(context.replace('\u0000', ' ').toByteArray(charset("windows-1252"))).p1(0)
+            buffer.putString(context.replace('\u0000', ' '))
         }
     }
 

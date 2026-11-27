@@ -522,9 +522,7 @@ public class IoBuffer {
         return this;
     }
 
-    /**
-     * Client Cp1252Charset.encodeString: one byte per UTF-16 code unit.
-     */
+    /** Client Cp1252Charset.encodeString: one byte per UTF-16 code unit. */
     private void putCp1252(String value) {
         if (value.indexOf(0) >= 0) throw new IllegalArgumentException("NUL in protocol string");
         final String extensions = "\u20ac\0\u201a\u0192\u201e\u2026\u2020\u2021"

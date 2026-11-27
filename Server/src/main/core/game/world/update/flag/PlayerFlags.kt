@@ -149,7 +149,7 @@ sealed class PlayerFlags(
                 buffer.p1(part.color)
             }
             buffer.p2(appearance.renderAnimation)
-            buffer.put(context.name.toByteArray(cp1252)).p1(0)
+            buffer.putString(context.name)
             if (nonPvp) {
                 buffer.p1(context.properties.currentCombatLevel) // with summoning
                 buffer.p2(context.skills.totalLevel)
@@ -235,7 +235,7 @@ sealed class PlayerFlags(
                 logInvalidType(context, typeOf<String>())
                 return
             }
-            buffer.put(context.ifEmpty { " " }.replace('\u0000', ' ').toByteArray(cp1252)).p1(0)
+            buffer.putString(context.ifEmpty { " " }.replace('\u0000', ' '))
         }
     }
 

@@ -66,6 +66,21 @@ public final class PacketDispatch {
         this.context = new PlayerContext(player);
     }
 
+    /** Explicit client-only reset; does not change server animator state. */
+    public void resetClientEntityAnimations() {
+        PacketRepository.send(Encoders530.RESET_ENTITY_ANIMATIONS, getContext());
+    }
+
+    /** Caller must resend authoritative varps after resetting client values. */
+    public void resetClientVarps() {
+        PacketRepository.send(Encoders530.RESET_CLIENT_VARPS, getContext());
+    }
+
+    /** Runs the active root interface's dialog-abort hooks, without closing it. */
+    public void runDialogAbortHooks() {
+        PacketRepository.send(Encoders530.RUN_DIALOG_ABORT_HOOKS, getContext());
+    }
+
     public void sendVarp(int index, int value) {
         PacketRepository.send(Encoders530.CONFIG, new ConfigContext(player, index, value));
     }
