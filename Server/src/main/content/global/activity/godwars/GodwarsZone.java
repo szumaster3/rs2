@@ -31,7 +31,7 @@ import static core.api.ContentAPIKt.*;
  * The type Godwars zone.
  */
 @Initializable
-public final class GodwarsZone extends MapZone implements Plugin<java.lang.Object> {
+public final class GodwarsZone extends MapZone implements Plugin<Object> {
 
     private static final ZoneBorders ZAMORAK_FORTRESS = new ZoneBorders(2880, 5317, 2944, 5362);
 
@@ -330,13 +330,13 @@ public final class GodwarsZone extends MapZone implements Plugin<java.lang.Objec
     }
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         ZoneBuilder.configure(this);
         return this;
     }
 
     @Override
-    public java.lang.Object fireEvent(String identifier, java.lang.Object... args) {
+    public Object fireEvent(String identifier, Object... args) {
         return null;
     }
 

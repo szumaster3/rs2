@@ -86,7 +86,7 @@ public final class TzhaarFightCavePlugin extends ActivityPlugin {
     }
 
     @Override
-    public boolean start(final Player player, boolean login, java.lang.Object... args) {
+    public boolean start(final Player player, boolean login, Object... args) {
         player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 0, 8);
         this.player = player;
         player.lock(3);

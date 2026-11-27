@@ -106,7 +106,7 @@ class Diary(
      *
      * @param player The player for whom the diary interface is opened.
      */
-    fun open(player: Player) {
+    fun open(player: Player, selectedLevel: Int? = null) {
         // Revision 578 journal has 300 text rows at components 16..315.
         val lines = mutableListOf<String>()
         lines.add("${type.displayName} Area Tasks")
@@ -115,6 +115,7 @@ class Diary(
         }
         lines.add("")
         type.achievements.forEachIndexed { level, achievements ->
+            if (selectedLevel != null && selectedLevel != level) return@forEachIndexed
             if (type == DiaryType.ARDOUGNE && level == 3 && !isStarted(3)) return@forEachIndexed
             lines.add(getLevel(level))
             lines.add("")
@@ -136,8 +137,8 @@ class Diary(
         for (row in 0 until 300) {
             sendString(player, lines.getOrElse(row) { "" }, 16 + row)
         }
-        // CS2 1207 takes row count first, then the reset-to-top flag.
-        player.packetDispatch.sendRunScript(1207, "ii", lines.size, 1)
+        // Packet 87 serializes CS2 arguments in reverse order.
+        player.packetDispatch.sendRunScript(1207, "ii", 1, lines.size)
     }
 
     /**

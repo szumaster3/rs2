@@ -594,6 +594,26 @@ object PacketProcessor {
         val c = player.interfaceManager.getComponent(pkt.iface) ?: return
         if (c.isHidden)
             return
+        // Inventory 149:0 uses dynamic IF_BUTTON children in revision 578.
+        // inventory_init maps item options 1,2,3,4,5 to widget operations 1,2,3,7,8.
+        if (pkt.iface == Components.INVENTORY_149 && pkt.child == 0) {
+            if (pkt.slot !in 0 until player.inventory.capacity()) return
+            val item = player.inventory.get(pkt.slot) ?: return
+            if (pkt.itemId != item.id) return
+            if (pkt.optIndex == 9) {
+                sendMessage(player, item.definition.examine)
+                return
+            }
+            val itemOption = when (pkt.optIndex) {
+                0, 1, 2 -> pkt.optIndex
+                6 -> 3
+                7 -> 4
+                else -> return
+            }
+            if (itemOption !in item.interaction.options.indices) return
+            processItemAction(Packet.ItemAction(player, itemOption, item.id, pkt.slot, pkt.iface, pkt.child))
+            return
+        }
         val plugin = c.plugin
         if (pkt.iface == content.region.other.tutorial_island.plugin.CharacterDesign.INTERFACE_ID) {
             if (pkt.optIndex == 0 && content.region.other.tutorial_island.plugin.CharacterDesign.handleButtons(player, pkt.child, pkt.slot)) {

@@ -19,15 +19,15 @@ class WarningInterface : InterfaceListener {
          */
 
         on(Components.CWS_DOOMSAYER_583) { player, _, _, buttonID, _, _ ->
-            val warning = WarningType.values().find { it.buttonId == buttonID } ?: return@on true
+            val warning = WarningType.byButton[buttonID] ?: return@on true
 
-            if (buttonID == 81) {
+            if (warning == WarningType.PVP_WORLDS) {
                 sendMessage(player, "This option is only available on PvP worlds.")
                 return@on true
             }
 
             val timesSeen = getVarbit(player, warning.varbit)
-            if (timesSeen < 6) {
+            if (!warning.binaryToggle && timesSeen < 6) {
                 sendMessage(
                     player,
                     "You cannot toggle this warning screen on or off. You need to go to the area it is linked to enough times to have the option to do so."

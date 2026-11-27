@@ -30,31 +30,32 @@ class QuestTabInterface : InterfaceListener {
             if (quest == null) {
                 val definition = QuestDefinition.forId(id) ?: return@on false
                 openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
-                for (line in 0..310) sendString(player, "", Components.QUESTJOURNAL_SCROLL_275, line)
-                sendString(player, definition.name ?: return@on false, Components.QUESTJOURNAL_SCROLL_275, 2)
-                var line = 11
+                QuestJournal.clear(player, definition.name ?: return@on false)
+                var row = 0
                 for (requirement in definition.skills) {
-                    sendString(player, "Level ${requirement.level} ${requirement.skill}", Components.QUESTJOURNAL_SCROLL_275, line++)
+                    QuestJournal.writeRow(player, row++, "Level ${requirement.level} ${requirement.skill}")
                 }
                 for (required in definition.prerequisiteQuests) {
                     val name = QuestDefinition.forId(required)?.name ?: continue
-                    sendString(player, name, Components.QUESTJOURNAL_SCROLL_275, line++)
+                    QuestJournal.writeRow(player, row++, name)
                 }
-                if (definition.requiredQuestPoints > 0) sendString(player, "${definition.requiredQuestPoints} Quest Points", Components.QUESTJOURNAL_SCROLL_275, line++)
-                sendString(player, "This quest is not implemented.", Components.QUESTJOURNAL_SCROLL_275, line)
+                if (definition.requiredQuestPoints > 0) QuestJournal.writeRow(player, row++, "${definition.requiredQuestPoints} Quest Points")
+                QuestJournal.writeRow(player, row, "This quest is not implemented.")
+                QuestJournal.finish(player)
                 return@on true
             }
             openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
             quest.drawJournal(player, quest.getStage(player))
+            QuestJournal.finish(player)
             return@on true
         }
 
         on(Components.AREA_TASK_259) { player, _, _, buttonID, _, _ ->
-            if (buttonID == 8) {
-                player.interfaceManager.openTab(2, Component(190))
-            } else {
-                player.achievementDiaryManager.getDiary(DiaryType.forChild(buttonID))?.open(player)
-            }
+            val type = DiaryType.forChild(buttonID) ?: return@on false
+            val diary = player.achievementDiaryManager.getDiary(type) ?: return@on false
+            val level = type.childIds.indexOf(buttonID) - 1
+            if (type == DiaryType.ARDOUGNE && level == 3 && !diary.isStarted(3)) return@on false
+            diary.open(player, level.takeIf { it >= 0 })
             return@on true
         }
     }

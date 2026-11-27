@@ -19,7 +19,7 @@ import shared.consts.NPCs;
 import java.util.List;
 
 @Initializable
-public class GiantChinchompaNPC extends content.global.skill.summoning.familiar.Familiar {
+public class GiantChinchompaNPC extends Familiar {
     public GiantChinchompaNPC() {
         this(null, NPCs.GIANT_CHINCHOMPA_7353);
     }
@@ -37,7 +37,7 @@ public class GiantChinchompaNPC extends content.global.skill.summoning.familiar.
     public void onAttack(Entity entity) {
         super.onAttack(entity);
         if (RandomFunction.random(20) == 10) {
-            executeSpecialMove(new content.global.skill.summoning.familiar.FamiliarSpecial(null));
+            executeSpecialMove(new FamiliarSpecial(null));
         }
     }
 

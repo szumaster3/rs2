@@ -39,7 +39,7 @@ object WarningManager {
     }
 
     fun isDisabled(player: Player, warning: WarningType): Boolean =
-        getVarbit(player, warning.varbit) == 7
+        getVarbit(player, warning.varbit) == if (warning.binaryToggle) 1 else 7
 
     fun hasPending(player: Player): Boolean =
         player.pendingWarning != null
@@ -73,7 +73,11 @@ object WarningManager {
     fun toggleWarning(player: Player, warning: WarningType) {
         val current = getVarbit(player, warning.varbit)
 
-        val newValue = if (current == 7) 6 else 7
+        val newValue = if (warning.binaryToggle) {
+            if (current == 1) 0 else 1
+        } else {
+            if (current == 7) 6 else 7
+        }
         setVarbit(player, warning.varbit, newValue, true)
 
         log(this::class.java, Log.INFO, "${player.name}: Warning [$warning] toggled to [$newValue]")

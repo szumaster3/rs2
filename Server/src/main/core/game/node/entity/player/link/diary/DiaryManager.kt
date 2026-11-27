@@ -43,7 +43,7 @@ class DiaryManager(val player: Player) {
      * Opens the diary tab in the interface.
      */
     fun openTab() {
-        player.interfaceManager.openTab(2, Component(Components.AREA_TASK_259))
+        player.interfaceManager.openDiaryTab()
         diaries.forEach { it.drawStatus(player) }
     }
 

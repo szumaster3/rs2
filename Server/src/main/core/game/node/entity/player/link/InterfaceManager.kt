@@ -4,7 +4,6 @@ import content.data.Quests
 
 import content.data.GameAttributes
 import content.region.other.tutorial_island.plugin.TutorialStage
-import content.region.other.tutorial_island.plugin.TutorialStage.hideTabs
 import core.api.isQuestComplete
 import core.api.log
 import core.game.component.CloseEvent
@@ -27,16 +26,13 @@ import shared.consts.Components
  *
  * @property player The player associated with this interface manager.
  */
-class InterfaceManager(
-    /**
-     * The player associated with this interface manager.
-     */
-    val player: Player
-) {
+class InterfaceManager(val player: Player) {
     private var packetCount = 0
     private var temporaryRoot: Int? = null
 
-    /** Display a full-canvas modal without discarding the underlying gameframe. */
+    /**
+     * Display a full-canvas modal without discarding the underlying gameframe.
+     */
     fun openTemporaryRoot(component: Component): Component? {
         if (!close()) return null
         temporaryRoot = component.id
@@ -207,8 +203,11 @@ class InterfaceManager(
                 temporaryRoot = null
                 val oldRoot = windowPaneId
                 val newRoot = if (isResizable) 746 else 548
-                if (oldRoot != newRoot) relocateGameframe(oldRoot, newRoot)
-                else PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, newRoot, 0))
+                // WorldMap switches the client renderer. IF_OPENTOP type 2 invokes
+                // the native world-map cleanup and restores the previous renderer.
+                val restoreType = if (opened!!.id == Components.WORLDMAP_755) 2 else 0
+                if (oldRoot != newRoot) relocateGameframe(oldRoot, newRoot, restoreType)
+                else PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, newRoot, restoreType))
                 player.dispatch(InterfaceCloseEvent(opened!!))
             } else if (!opened!!.definition!!.isWalkable || opened!!.id == 14) {
                 PacketRepository.send(
@@ -524,6 +523,12 @@ class InterfaceManager(
         component.open(player)
         tabs[slot] = component
         if (component.id == 190) core.api.sendIfaceSettings(player, 2, 18, 190, 0, 166)
+        if (component.id == 149) {
+            val mask = core.api.IfaceSettingsBuilder().enableOptions(0, 1, 2, 6, 7, 9)
+                .setUseOnSettings(true, true, true, true, false, true)
+                .enableSlotSwitch().enableNullSlotSwitch().build()
+            core.api.sendIfaceSettings(player, mask, 0, 149, 0, 27)
+        }
         val index = protocolTabIndex(slot)
         val button = if (slot == 14) (if (isResizable) 168 else 133)
             else if (isResizable) 124 + index else if (index < 8) 81 + index else 51 + index - 8
@@ -608,7 +613,7 @@ class InterfaceManager(
         relocateGameframe(oldRoot, newRoot)
     }
 
-    private fun relocateGameframe(oldRoot: Int, newRoot: Int) {
+    private fun relocateGameframe(oldRoot: Int, newRoot: Int, restoreType: Int = 0) {
         // Explicit pairs from the 578 gameframe audit; never guess unknown destinations.
         val pairs = linkedMapOf(5 to 6, 6 to 5, 16 to 8, 147 to 30,
             134 to 169, 136 to 170, 137 to 171, 139 to 172,
@@ -618,9 +623,9 @@ class InterfaceManager(
         val moves = attachments.keys.filter { it ushr 16 == oldRoot }.map { source ->
             source to mapping[source and 65535]
         }
-        // Type 0 keeps subinterfaces alive; packet 66 relocates them without closing content.
+        // Packet 66 relocates subinterfaces without closing their content.
         windowsPane = Component(newRoot)
-        PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, newRoot, 0))
+        PacketRepository.send(Encoders530.WINDOWS_PANE, WindowsPaneContext(player, newRoot, restoreType))
         for ((source, child) in moves) {
             if (child == null) {
                 log(javaClass, Log.WARN, "Unmapped window attachment ${source ushr 16}:${source and 65535}")
@@ -661,13 +666,16 @@ class InterfaceManager(
         if (overlay != null && overlay!!.id == componentId) {
             return overlay
         }
-        if (windowsPane!!.id == componentId) {
+        if (windowsPane?.id == componentId) {
             return windowsPane
         }
         for (c in tabs) {
             if (c != null && c.id == componentId) {
                 return c
             }
+        }
+        if (componentId == 259 && attachments[(windowPaneId shl 16) or (if (isResizable) 36 else 155)] == 259) {
+            return Component(259)
         }
         if (componentId == Components.FILTERBUTTONS_751 || componentId == Components.TOPSTAT_RUN_750 || componentId == Components.TOPSTAT_LORE_747) {
             //Chatbox settings, run orb & summoning orb.
@@ -784,9 +792,21 @@ class InterfaceManager(
         return count
     }
 
+    fun openDiaryTab() {
+        openExtraTab(3, 259)
+    }
+
     private fun openExtraTab(index: Int, id: Int) {
         PacketRepository.send(Encoders530.INTERFACE, InterfaceContext(player, windowPaneId,
             (if (isResizable) 33 else 152) + index, id, true))
+        if (id == 259) {
+            for (child in 2..34) {
+                if (child in 6..9) continue
+                core.api.sendIfaceSettings(player, 2, child, 259, -1, -1)
+            }
+            core.api.sendIfaceSettings(player, 2, if (isResizable) 127 else 84, windowPaneId, -1, -1)
+            player.achievementDiaryManager.diaries.forEach { it.drawStatus(player) }
+        }
     }
 
     private fun openDefaultChatFrame() {

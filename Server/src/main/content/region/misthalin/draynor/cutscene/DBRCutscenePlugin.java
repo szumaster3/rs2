@@ -680,7 +680,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
         }
 
         @Override
-        public AbstractNPC construct(int id, Location location, java.lang.Object... objects) {
+        public AbstractNPC construct(int id, Location location, Object... objects) {
             return new DBRecordingNPC(id, location);
         }
 
@@ -710,7 +710,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
     public static final class BluePhatItem extends ItemPlugin {
 
         @Override
-        public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+        public Plugin<Object> newInstance(Object arg) throws Throwable {
             register(PARTY_HAT.getId());
             return this;
         }

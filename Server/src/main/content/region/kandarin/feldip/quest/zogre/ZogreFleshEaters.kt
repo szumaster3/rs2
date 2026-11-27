@@ -19,18 +19,18 @@ class ZogreFleshEaters : Quest(Quests.ZOGRE_FLESH_EATERS, Vars.VARBIT_QUEST_ZORG
         var line = 11
 
         if (stage == 0) {
-            line(player, "I can !!start?? this quest by talking to !!Grish?? at the Ogrish", line++)
-            line(player, "ceremonial dance place called !!Jiggig??.", line++)
+            line(player, "I can !!start?? this quest by talking to !!Grish?? at the Ogrish", line++, getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) >= 1)
+            line(player, "ceremonial dance place called !!Jiggig??.", line++, getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) >= 1)
             line++
-            line(player, "To start this !!quest?? I should complete these quests:-", line++)
-            line(player, if (isQuestComplete(player, Quests.JUNGLE_POTION.questName,)) { "---${Quests.JUNGLE_POTION.questName}./--" } else { "!!${Quests.JUNGLE_POTION.questName}.??" }, line++,)
-            line(player, if (isQuestComplete(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName,)) { "---${Quests.BIG_CHOMPY_BIRD_HUNTING.questName}./--" } else { "!!${Quests.BIG_CHOMPY_BIRD_HUNTING.questName}.??" }, line++,)
-            line(player, "It would help if I had the following skill levels:-", line++, false)
-            line(player, if (getStatLevel(player, Skills.RANGE) >= 30) "---Ranged level : 30/--" else "!!Ranged level : 30??", line++)
-            line(player, if (getStatLevel(player, Skills.FLETCHING,) >= 30) { "---Fletching level : 30/--" } else { "!!Fletching level : 30??" }, line++,)
-            line(player, if (getStatLevel(player, Skills.SMITHING,) >= 4) { "---Smithing level : 4/--" } else { "!!Smithing level : 4??" }, line++,)
-            line(player, if (getStatLevel(player, Skills.HERBLORE,) >= 8) { "---Herblore level : 8/--" } else { "!!Herblore level : 8??" }, line++,)
-            line(player, "Must be able to defeat a !!level 111?? foe.", line++)
+            line(player, "To start this !!quest?? I should complete these quests:-", line++,getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) >= 1)
+            line(player, if (isQuestComplete(player, Quests.JUNGLE_POTION.questName,)) { "---${Quests.JUNGLE_POTION.questName}./--" } else { "!!${Quests.JUNGLE_POTION.questName}.??" }, line++, getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) >= 1)
+            line(player, if (isQuestComplete(player, Quests.BIG_CHOMPY_BIRD_HUNTING.questName,)) { "---${Quests.BIG_CHOMPY_BIRD_HUNTING.questName}./--" } else { "!!${Quests.BIG_CHOMPY_BIRD_HUNTING.questName}.??" }, line++, getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) >= 1)
+            line(player, "It would help if I had the following skill levels:-", line++, getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) >= 1)
+            line(player, "!!Ranged level : 30??", line++, getStatLevel(player, Skills.RANGE) >= 30)
+            line(player, "!!Fletching level : 30??", line++,getStatLevel(player, Skills.FLETCHING) >= 30)
+            line(player, "!!Smithing level : 4??", line++, getStatLevel(player, Skills.SMITHING) >= 4)
+            line(player, "!!Herblore level : 8??", line++,getStatLevel(player, Skills.HERBLORE,) >= 8)
+            line(player, "Must be able to defeat a !!level 111?? foe.", line++,getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) >= 1)
             line++
         }
 

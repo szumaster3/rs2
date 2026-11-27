@@ -21,7 +21,7 @@ import shared.consts.NPCs;
 import java.util.List;
 
 @Initializable
-public class SmokeDevilNPC extends content.global.skill.summoning.familiar.Familiar {
+public class SmokeDevilNPC extends Familiar {
 
     public SmokeDevilNPC() {
         this(null, NPCs.SMOKE_DEVIL_6865);
@@ -32,7 +32,7 @@ public class SmokeDevilNPC extends content.global.skill.summoning.familiar.Famil
     }
 
     @Override
-    public content.global.skill.summoning.familiar.Familiar construct(Player owner, int id) {
+    public Familiar construct(Player owner, int id) {
         return new SmokeDevilNPC(owner, id);
     }
 
@@ -46,7 +46,7 @@ public class SmokeDevilNPC extends content.global.skill.summoning.familiar.Famil
 
             @Override
             public boolean handle(Player player, Node node, String option) {
-                final content.global.skill.summoning.familiar.Familiar familiar = (Familiar) node;
+                final Familiar familiar = (Familiar) node;
                 if (!player.getFamiliarManager().isOwner(familiar)) {
                     return true;
                 }

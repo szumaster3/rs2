@@ -20,7 +20,7 @@ import static core.api.ContentAPIKt.sendInputDialogue;
 public final class PortalOptionPlugin extends OptionHandler {
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         for (HouseLocation hl : HouseLocation.values()) {
             SceneryDefinition.forId(hl.getPortalId()).getHandlers().put("option:enter", this);
         }
@@ -82,7 +82,7 @@ public final class PortalOptionPlugin extends OptionHandler {
         }
 
         @Override
-        public boolean open(java.lang.Object... args) {
+        public boolean open(Object... args) {
             options("Go to your house", "Go to your house (building mode)", "Go to a friend's house", "Never mind");
             stage = 1;
             return true;

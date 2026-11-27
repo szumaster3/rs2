@@ -36,7 +36,7 @@ public final class DraynorManorPlugin extends OptionHandler {
     private static final Item KEY = new Item(275);
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.forId(156).getHandlers().put("option:search", this);
         SceneryDefinition.forId(155).getHandlers().put("option:search", this);
         SceneryDefinition.forId(160).getHandlers().put("option:pull", this);

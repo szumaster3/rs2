@@ -1,6 +1,7 @@
 package content.global.skill.hunter.impling
 
 import core.api.*
+import core.game.node.entity.player.link.quest.QuestJournal
 import core.game.node.entity.npc.NPC
 import core.game.system.command.Privilege
 import core.game.world.map.Location
@@ -30,10 +31,8 @@ class ImplingController : TickListener, Commands {
             usage = "::implings",
             description = "Lists the currently active implings/spawners",
         ) { player, _ ->
-            for (i in 0..310) {
-                sendString(player, "", 275, i)
-            }
-            sendString(player, "Implings", 275, 2)
+            openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+            QuestJournal.clear(player, "Implings")
             for ((index, impling) in activeImplings.withIndex()) {
                 var text = "This shouldn't be here -> ${impling.id}"
                 if (impling.id < 1028) {
@@ -44,9 +43,9 @@ class ImplingController : TickListener, Commands {
                 } else {
                     text = impling.name
                 }
-                sendString(player, "$text -> ${impling.location}", 275, index + 11)
+                QuestJournal.writeRow(player, index, "$text -> ${impling.location}")
             }
-            openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+            QuestJournal.finish(player)
         }
     }
 

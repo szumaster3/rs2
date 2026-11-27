@@ -50,10 +50,7 @@ abstract class Quest(
     }
 
     open fun drawJournal(player: Player, stage: Int) {
-        for (i in 0 until 311) {
-            sendString(player, "", JOURNAL_COMPONENT, i)
-        }
-        sendString(player, "$RED$name</col>", JOURNAL_COMPONENT, 2)
+        QuestJournal.clear(player, "$RED$name</col>")
     }
 
     open fun finish(player: Player) {
@@ -130,9 +127,12 @@ abstract class Quest(
                 .replace("??", "").replace("%%", "").replace("&&", "")
         }
 
-        player.packetDispatch.sendString(
-            if (crossed) "<str>$send</str>" else send, JOURNAL_COMPONENT, line
-        )
+        writeJournalLine(player, if (crossed) "<str>$send</str>" else send, line)
+    }
+
+    /** Writes preformatted journal text using a legacy quest line number. */
+    fun writeJournalLine(player: Player, message: String, line: Int) {
+        QuestJournal.writeLegacy(player, line, message)
     }
 
     /**
@@ -191,9 +191,8 @@ abstract class Quest(
      * Call this function at the end of drawJournal like: limitScrolling(player, line).
      */
     fun limitScrolling(player: Player, line: Int, startAtTop: Boolean) {
-        // sendRunScript reverses the objects you pass in
-        // (args1: 0 is to start from bottom of scroll) (args0: child-12 lines to display)
-        player.packetDispatch.sendRunScript(1207, "ii", if (startAtTop) 1 else 0, line - 9)
+        // The tab listener resizes once after all rows have been written.
+        QuestJournal.setScrollPreference(player, startAtTop)
     }
 
     open fun updateVarps(player: Player) {

@@ -1,11 +1,11 @@
 package core.game.system.command.sets
 
 import core.api.sendMessage
-import core.api.sendString
 import core.api.updateQuestTab
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.QuestRepository
+import core.game.node.entity.player.link.quest.QuestJournal
 import core.game.system.command.Privilege
 import core.game.world.repository.Repository
 import core.plugin.Initializable
@@ -153,15 +153,13 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN) {
 
     private fun sendQuests(player: Player?) {
         player!!.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
-        for (i in 0..310) {
-            sendString(player, "", Components.QUESTJOURNAL_SCROLL_275, i)
-        }
-        var lineId = 11
-        sendString(player, "<col=ecf0f1>" + "Available Quests" + "</col>", Components.QUESTJOURNAL_SCROLL_275, 2)
+        var lineId = 0
+        QuestJournal.clear(player, "<col=ecf0f1>Available Quests</col>")
         for (q in QuestRepository.getQuests().toSortedMap().values) {
             // Add a space to beginning and end of string for the strikethrough
-            sendString(player, "<col=ecf0f1>" + (if (q.isCompleted(player)) "<str> " else "") + q.name + " ", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            QuestJournal.writeRow(player, lineId++, "<col=ecf0f1>" + (if (q.isCompleted(player)) "<str> " else "") + q.name + " ")
         }
+        QuestJournal.finish(player)
     }
 
     private fun sendQuestsDebug(
@@ -169,11 +167,8 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN) {
         lookupUser: Player?,
     ) {
         admin!!.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
-        for (i in 0..310) {
-            sendString(admin, "", Components.QUESTJOURNAL_SCROLL_275, i)
-        }
-        var lineId = 11
-        sendString(admin, "<col=ecf0f1>${lookupUser!!.username}'s Quest Debug</col>", Components.QUESTJOURNAL_SCROLL_275, 2)
+        var lineId = 0
+        QuestJournal.clear(admin, "<col=ecf0f1>${lookupUser!!.username}'s Quest Debug</col>")
         for (q in QuestRepository.getQuests().values) {
             // Add a space to beginning and end of string for the strikethrough
             val stage = lookupUser.questRepository.getStage(q)
@@ -183,16 +178,16 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN) {
                     stage in 1..99 -> "ff8400"
                     else -> "ff0000"
                 }
-            sendString(admin, "<col=ecf0f1>${q.name}</col>", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-            sendString(
+            QuestJournal.writeRow(admin, lineId++, "<col=ecf0f1>${q.name}</col>")
+            QuestJournal.writeRow(
                 admin,
+                lineId++,
                 "<col=ecf0f1>Index: </col><col=ff1f1f><shad=2>${q.index}</shad></col> | <col=ecf0f1>Stage:</col> <col=$statusColor><shad=2>${
                     lookupUser.questRepository.getStage(q)
                 }</shad></col>",
-                Components.QUESTJOURNAL_SCROLL_275,
-                lineId++,
             )
-            sendString(admin, "<str>          ", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            QuestJournal.writeRow(admin, lineId++, "<str>          ")
         }
+        QuestJournal.finish(admin)
     }
 }

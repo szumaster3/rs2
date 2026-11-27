@@ -17,7 +17,7 @@ import shared.consts.Items;
 import shared.consts.NPCs;
 
 @Initializable
-public class IronTitanNPC extends content.global.skill.summoning.familiar.Familiar {
+public class IronTitanNPC extends Familiar {
 
     private static final SwitchAttack[] ATTACKS = {new SwitchAttack(CombatStyle.MELEE.getSwingHandler(), Animation.create(8183))};
     private boolean specialMove;

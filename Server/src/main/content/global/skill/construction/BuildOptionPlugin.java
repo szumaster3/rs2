@@ -23,7 +23,7 @@ import static core.api.ContentAPIKt.setTitle;
 public final class BuildOptionPlugin extends OptionHandler {
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.setOptionHandler("build", this);
         SceneryDefinition.setOptionHandler("remove", this);
         ClassScanner.definePlugin(new RemoveDialogue());
@@ -139,7 +139,7 @@ public final class BuildOptionPlugin extends OptionHandler {
         }
 
         @Override
-        public boolean open(java.lang.Object... args) {
+        public boolean open(Object... args) {
             setTitle(player, 2);
             interpreter.sendOptions("Really remove it?", "Yes", "No");
             scenery = (Scenery) args[0];

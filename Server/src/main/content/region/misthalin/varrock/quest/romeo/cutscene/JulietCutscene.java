@@ -43,7 +43,7 @@ public final class JulietCutscene extends CutscenePlugin {
     }
 
     @Override
-    public boolean start(final Player player, final boolean login, java.lang.Object... args) {
+    public boolean start(final Player player, final boolean login, Object... args) {
         NPC juliet = NPC.create(637, base.transform(29, 39, 1));
         juliet.setWalks(false);
         npcs.add(juliet);
