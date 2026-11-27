@@ -567,8 +567,10 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     ANIMATE_OBJECT_PACKET(encode<AnimateObjectContext> { context ->
         val player = context.player
-        val `object` = context.animation.getObject()
-        val buffer = writeObjectAnimation(checkedZone(player, `object`.location) ?: return@encode, context.animation)
+        val `object` = context.animation.getObject() ?: return@encode
+        if (!validSceneryShape(`object`) || context.animation.id !in -1..65535) return@encode
+        val location = `object`.location ?: return@encode
+        val buffer = writeObjectAnimation(checkedZone(player, location) ?: return@encode, context.animation)
         player.session.write(buffer)
     }),
     POSITIONED_GRAPHIC(encode<PositionedGraphicContext> { context ->
@@ -697,10 +699,20 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     COMMUNICATION_MESSAGE(encode<MessageContext> { context ->
         val player = context.player
         val other = context.other
+        if (other.contains('\u0000') || context.message.contains('\u0000') || other.length > 254 || context.message.length > 32767) return@encode
         val plain = context.message.toByteArray(charset("windows-1252"))
         val bytes = ByteArray(plain.size * 4 + 8)
         val length = encryptPlayerChat(bytes, 0, 0, plain.size, plain)
-        if (length < 0) return@encode
+        if (length < 0 || length > bytes.size || (plain.isNotEmpty() && length == 0)) return@encode
+        val fixed = when (context.opcode) {
+            MessageContext.SEND_MESSAGE -> 0
+            MessageContext.RECEIVE_MESSAGE -> 7
+            MessageContext.CLAN_MESSAGE -> 15
+            else -> return@encode
+        }
+        if (fixed != 0 && context.chatIcon !in 0..255) return@encode
+        val smartLength = if (plain.size < 128) 1 else 2
+        if (fixed + other.length + 1 + smartLength + length > 255) return@encode
         val buffer = when (context.opcode) {
             MessageContext.SEND_MESSAGE -> IoBuffer(76, PacketHeader.BYTE).putString(other)
             MessageContext.RECEIVE_MESSAGE -> {
@@ -725,6 +737,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             ContactContext.IGNORE_LIST_TYPE -> {
                 val payload = IoBuffer(6, PacketHeader.SHORT)
                 val blocked = player.communication.blocked.filter { it.isNotEmpty() }.take(100)
+                if (blocked.any { it.contains('\u0000') } || 1L + blocked.sumOf { 2L * it.length + 4 } > 65535) return@encode
                 payload.put(blocked.size)
                 for (name in blocked) {
                     payload.putString(name)
@@ -736,12 +749,16 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             }
             ContactContext.UPDATE_FRIEND_TYPE -> {
                 val name = context.name ?: return@encode
+                val rank = player.communication.contacts[name]?.rank?.value ?: 0
+                if (name.contains('\u0000') || context.worldId !in 0..65535 || rank !in -1..255) return@encode
+                val worldLength = if (context.worldId > 0) ("World " + context.worldId).length + 2 else 0
+                if (2L * name.length + 6 + worldLength > 65535) return@encode
                 val payload = IoBuffer(70, PacketHeader.SHORT)
                 payload.put(0)
                 payload.putString(name)
                 payload.putString(name)
                 payload.putShort(context.worldId)
-                payload.put(player.communication.contacts[name]?.rank?.value ?: 0)
+                payload.put(rank)
                 if (context.worldId > 0) {
                     payload.putString("World " + context.worldId)
                     payload.put(1)
@@ -756,16 +773,15 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val buffer = IoBuffer(35, PacketHeader.SHORT)
         val clan = context.clan
         if (!context.isLeave) {
+            if (clan.owner.contains('\u0000')) return@encode
+            val members = clan.players.take(100)
+            if (members.any { it.name.contains('\u0000') || it.worldId !in 0..65535 }) return@encode
+            if (12L + clan.owner.length + members.sumOf { it.name.length.toLong() + 6 + ("World " + it.worldId).length } > 65535) return@encode
             buffer.putString(clan.owner).put(0)
             buffer.putLong(stringToLong(clan.name))
             buffer.put(clan.kickRequirement.value)
-            var size = clan.players.size
-            if (size > 100) {
-                size = 100
-            }
-            buffer.put(size)
-            for (i in 0 until size) {
-                val entry = clan.players[i]
+            buffer.put(members.size)
+            for (entry in members) {
                 val name = entry.name
                 buffer.putString(name).put(0).putShort(entry.worldId)
                 buffer.put(clan.getRank(entry).value)
@@ -793,8 +809,9 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         private const val GE_ABORTED = 2
 
         fun writeObjectAnimation(buffer: IoBuffer, animation: Animation): IoBuffer {
-            val `object` = animation.getObject()
-            val l = `object`.location
+            val `object` = animation.getObject() ?: return buffer
+            if (!validSceneryShape(`object`) || animation.id !in -1..65535) return buffer
+            val l = `object`.location ?: return buffer
             ZoneProt.LOC_ANIM.start(buffer).putShortA(animation.id)
             buffer.putS((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7))
             buffer.putS((`object`.type shl 2) + (`object`.rotation and 0x3))
@@ -827,9 +844,16 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
 
         @JvmStatic
         fun writeSceneryRemoval(buffer: IoBuffer, scenery: Scenery): IoBuffer {
-            val location = scenery.location
+            if (!validSceneryShape(scenery)) return buffer
+            val location = scenery.location ?: return buffer
             return ZoneProt.LOC_DEL.start(buffer).putA((location.chunkOffsetX shl 4) or (location.chunkOffsetY and 0x7))
                 .putC((scenery.type shl 2) + (scenery.rotation and 3))
+        }
+
+        private fun validSceneryShape(scenery: Scenery): Boolean {
+            val valid = scenery.type in 0..22 && scenery.rotation in 0..3
+            if (!valid) System.err.println("[Protocol578] Rejected scenery shape ${scenery.type}, rotation ${scenery.rotation}")
+            return valid
         }
 
         private fun getMessageIndex(p: Player): Int {
@@ -848,7 +872,8 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
 
         @JvmStatic
         fun writeSceneryAddition(buffer: IoBuffer, scenery: Scenery): IoBuffer {
-            val l = scenery.location
+            if (!validSceneryShape(scenery) || scenery.id !in 0..65535) return buffer
+            val l = scenery.location ?: return buffer
             ZoneProt.LOC_ADD_CHANGE.start(buffer).putC((scenery.type shl 2) or (scenery.rotation and 0x3))
                 .putShortA(scenery.id).put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7))
             return buffer
