@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.ZoneProt;
 
 /**
@@ -85,11 +85,11 @@ public final class ItemUpdateFlag extends UpdateFlag<Object> {
     @Override
     public void write(IoBuffer buffer) {
         if (isRemove()) {
-            Encoders530.writeGroundItemRemoval(buffer, item);
+            Encoders578.writeGroundItemRemoval(buffer, item);
         } else if (isConstruct()) {
-            Encoders530.writeGroundItemAddition(buffer, item);
+            Encoders578.writeGroundItemAddition(buffer, item);
         } else {
-            Encoders530.writeGroundItemAmount(buffer, item, oldAmount);
+            Encoders578.writeGroundItemAmount(buffer, item, oldAmount);
         }
     }
 

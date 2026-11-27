@@ -7,7 +7,7 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.CameraContext;
 
 /**
@@ -121,7 +121,7 @@ public final class RemoteViewer {
     private void reset() {
         familiar.call();
         player.unlock();
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.RESET, 0, 0, HEIGHT, 1, 100));
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.RESET, 0, 0, HEIGHT, 1, 100));
     }
 
     /**
@@ -136,8 +136,8 @@ public final class RemoteViewer {
         final int x = location.getX() + xOffset;
         final int y = location.getY() + yOffset;
 
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, HEIGHT, 1, 100));
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, x + xRot, y + yRot, HEIGHT, 1, 90));
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, HEIGHT, 1, 100));
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, x + xRot, y + yRot, HEIGHT, 1, 90));
     }
 
     /**

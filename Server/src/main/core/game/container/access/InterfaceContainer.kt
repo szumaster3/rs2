@@ -4,7 +4,7 @@ import core.api.IfaceSettingsBuilder
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ContainerContext
 
 /**
@@ -62,7 +62,7 @@ object InterfaceContainer {
         val itemArray = Array(items.size) { i -> items[i] ?: Item() }
         val settings = IfaceSettingsBuilder().enableAllOptions().build()
         player.packetDispatch.sendIfaceSettings(settings, childIndex, interfaceIndex, 0, items.size)
-        PacketRepository.send(Encoders530.CONTAINER_PACKET, ContainerContext(player, -1, -2, key, itemArray, items.size, false))
+        PacketRepository.send(Encoders578.CONTAINER_PACKET, ContainerContext(player, -1, -2, key, itemArray, items.size, false))
         return increment()
     }
 

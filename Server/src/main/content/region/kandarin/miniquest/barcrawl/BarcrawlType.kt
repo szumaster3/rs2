@@ -9,7 +9,7 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.CameraContext
 import core.tools.StringUtils
 import shared.consts.Items
@@ -157,13 +157,13 @@ enum class BarcrawlType {
                 sendMessage(player, "The barmaid giggles. The barmaid signs your card.")
             } else {
                 PacketRepository.send(
-                    Encoders530.CAMERA_VIEW_PACKET,
+                    Encoders578.CAMERA_VIEW_PACKET,
                     CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1, 4, 4),
                 )
                 Pulser.submit(
                     object : Pulse(3, player) {
                         override fun pulse(): Boolean {
-                            PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.RESET, 4, 4, 1, 4, 4))
+                            PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.RESET, 4, 4, 1, 4, 4))
                             return true
                         }
                     },

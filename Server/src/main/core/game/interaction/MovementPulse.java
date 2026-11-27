@@ -15,7 +15,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.PlayerContext;
 import kotlin.Pair;
 import kotlin.jvm.functions.Function2;
@@ -250,7 +250,7 @@ public abstract class MovementPulse extends Pulse {
                         if (near) {
                             ((Player) mover).getPacketDispatch().sendMessage("I can't reach that.");
                         }
-                        PacketRepository.send(Encoders530.CLEAR_MINIMAP_FLAG, new PlayerContext((Player) mover));
+                        PacketRepository.send(Encoders578.CLEAR_MINIMAP_FLAG, new PlayerContext((Player) mover));
                     }
                     stop();
                     return true;

@@ -6,7 +6,7 @@ import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ContainerContext
 
 /**
@@ -59,11 +59,11 @@ class TradeCloseEvent : CloseEvent {
         player.removeExtension(TradeModule::class.java)
         player.interfaceManager.closeSingleTab()
         PacketRepository.send(
-            Encoders530.CONTAINER_PACKET,
+            Encoders578.CONTAINER_PACKET,
             ContainerContext(player, -1, 2, 24, emptyArray<Item>(), 27, false),
         )
         PacketRepository.send(
-            Encoders530.CONTAINER_PACKET,
+            Encoders578.CONTAINER_PACKET,
             ContainerContext(player, -1, 2, 23, emptyArray<Item>(), 27, false),
         )
         player.packetDispatch.sendRunScript(101, "")

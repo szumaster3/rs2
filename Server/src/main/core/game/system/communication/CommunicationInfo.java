@@ -9,7 +9,7 @@ import core.game.world.repository.Repository;
 import core.net.amsc.MSPacketRepository;
 import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.ContactContext;
 import core.tools.Log;
 import core.tools.StringUtils;
@@ -64,7 +64,7 @@ public final class CommunicationInfo {
     }
 
     private static void syncIgnores(Player player) {
-        PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(player, ContactContext.IGNORE_LIST_TYPE));
+        PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(player, ContactContext.IGNORE_LIST_TYPE));
     }
 
     /**
@@ -280,10 +280,10 @@ public final class CommunicationInfo {
         Player target = Repository.getPlayerByName(contact);
         if (target != null) {
             if (showActive(player, target)) {
-                PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(player, contact, GameWorld.getSettings().getWorldId()));
+                PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(player, contact, GameWorld.getSettings().getWorldId()));
             }
             if (player.getSettings().getPrivateChatSetting() == 1 && showActive(target, player)) {
-                PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(target, player.getName(), GameWorld.getSettings().getWorldId()));
+                PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(target, player.getName(), GameWorld.getSettings().getWorldId()));
             }
         }
     }
@@ -314,7 +314,7 @@ public final class CommunicationInfo {
                 if (showActive(target, player)) {
                     worldId = GameWorld.getSettings().getWorldId();
                 }
-                PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(target, player.getName(), worldId));
+                PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(target, player.getName(), worldId));
             }
         } else {
             info.contacts.remove(contact);
@@ -325,7 +325,7 @@ public final class CommunicationInfo {
             if (player.getSettings().getPrivateChatSetting() == 1) {
                 Player target = Repository.getPlayerByName(contact);
                 if (target != null) {
-                    PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(target, player.getName(), 0));
+                    PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(target, player.getName(), 0));
                 }
             }
         }
@@ -364,7 +364,7 @@ public final class CommunicationInfo {
         syncIgnores(player);
         Player target = Repository.getPlayerByName(key);
         if (target != null && hasContact(target, player.getName())) {
-            PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(target, player.getName(), 0));
+            PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(target, player.getName(), 0));
         }
     }
 
@@ -393,7 +393,7 @@ public final class CommunicationInfo {
         if (CommunicationInfo.showActive(player, contact)) {
             worldId = c.worldId;
         }
-        PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(player, contact, worldId));
+        PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(player, contact, worldId));
     }
 
     /**

@@ -8,7 +8,7 @@ import core.game.world.repository.InitializingNodeList
 import core.game.world.repository.Repository
 import core.integration.grafana.Grafana
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.PlayerContext
 
 /**

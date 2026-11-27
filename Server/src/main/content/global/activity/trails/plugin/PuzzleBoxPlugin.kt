@@ -7,7 +7,7 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ContainerContext
 import shared.consts.Components
 import shared.consts.Items
@@ -164,7 +164,7 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
     private fun sendPuzzle(player: Player, type: String, data: List<Int>? = null) {
         val puzzle = data ?: sessionState[player]?.second ?: return
         PacketRepository.send(
-            Encoders530.CONTAINER_PACKET,
+            Encoders578.CONTAINER_PACKET,
             ContainerContext(
                 player, -1, -1, 140,
                 puzzle.map { if (it != -1) Item(it) else null }.toTypedArray(),

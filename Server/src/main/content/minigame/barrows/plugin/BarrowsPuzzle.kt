@@ -7,7 +7,7 @@ import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.DisplayModelContext
 import core.plugin.Plugin
 import core.tools.RandomFunction
@@ -151,18 +151,18 @@ class BarrowsPuzzle private constructor(
             player.interfaceManager.open(COMPONENT)
             for (i in puzzle.questionModels.indices) {
                 PacketRepository.send(
-                    Encoders530.DISPLAY_MODEL,
+                    Encoders578.DISPLAY_MODEL,
                     DisplayModelContext(player, DisplayModelContext.ModelType.MODEL, puzzle.questionModels[i], 0, 25, 6 + i),
                 )
             }
             for (i in puzzle.answerModels.indices) {
                 PacketRepository.send(
-                    Encoders530.DISPLAY_MODEL,
+                    Encoders578.DISPLAY_MODEL,
                     DisplayModelContext(player, DisplayModelContext.ModelType.MODEL, puzzle.answerModels[i] and 0xFFFF, 0, 25, 2 + i),
                 )
             }
             PacketRepository.send(
-                Encoders530.DISPLAY_MODEL,
+                Encoders578.DISPLAY_MODEL,
                 DisplayModelContext(player, DisplayModelContext.ModelType.MODEL, puzzle.answerModels[2] and 0xFFFF, 0, 25, 5),
             )
         }

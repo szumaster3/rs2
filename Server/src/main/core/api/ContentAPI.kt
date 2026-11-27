@@ -79,7 +79,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.ForceMoveCtx
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.AccessMaskContext
 import core.net.packet.out.PacketContext.AudioContext
 import core.net.packet.out.PacketContext.ChildPositionContext
@@ -792,7 +792,7 @@ fun playJingle(
     player: Player,
     jingleId: Int,
 ) {
-    PacketRepository.send(Encoders530.MUSIC_PACKET, MusicContext(player, jingleId, true))
+    PacketRepository.send(Encoders578.MUSIC_PACKET, MusicContext(player, jingleId, true))
 }
 
 /**
@@ -1248,7 +1248,7 @@ fun sendAnimation(
  */
 @JvmOverloads
 fun playAudio(player: Player, id: Int, delay: Int = 0, loops: Int = 1, location: Location? = null, radius: Int = Audio.defaultAudioRadius) {
-    PacketRepository.send(Encoders530.AUDIO_PACKET, AudioContext(player, Audio(id, delay, loops, radius), location))
+    PacketRepository.send(Encoders578.AUDIO_PACKET, AudioContext(player, Audio(id, delay, loops, radius), location))
 }
 
 /**
@@ -1264,7 +1264,7 @@ fun playAudio(player: Player, id: Int, delay: Int = 0, loops: Int = 1, location:
 fun playGlobalAudio(location: Location, id: Int, delay: Int = 0, loops: Int = 1, radius: Int = Audio.defaultAudioRadius) {
     val nearbyPlayers = RegionManager.getLocalPlayers(location, radius)
     for (player in nearbyPlayers) {
-        PacketRepository.send(Encoders530.AUDIO_PACKET, AudioContext(player, Audio(id, delay, loops, radius), location))
+        PacketRepository.send(Encoders578.AUDIO_PACKET, AudioContext(player, Audio(id, delay, loops, radius), location))
     }
 }
 
@@ -3874,20 +3874,20 @@ fun openSingleTab(
 fun setMinimapState(
     player: Player,
     state: Int,
-) = PacketRepository.send(Encoders530.MINIMAP_STATE, MinimapStateContext(player, state))
+) = PacketRepository.send(Encoders578.MINIMAP_STATE, MinimapStateContext(player, state))
 
 /**
  * Show (unhide) the minimap.
  */
 fun showMinimap(player: Player) {
-    PacketRepository.send(Encoders530.MINIMAP_STATE, MinimapStateContext(player, 0))
+    PacketRepository.send(Encoders578.MINIMAP_STATE, MinimapStateContext(player, 0))
 }
 
 /**
  * Hide the minimap.
  */
 fun hideMinimap(player: Player) {
-    PacketRepository.send(Encoders530.MINIMAP_STATE, MinimapStateContext(player, 2))
+    PacketRepository.send(Encoders578.MINIMAP_STATE, MinimapStateContext(player, 2))
 }
 
 /**
@@ -3923,7 +3923,7 @@ fun sendRepositionOnInterface(
     positionX: Int,
     positionY: Int,
 ) = PacketRepository.send(
-    Encoders530.IF_SETPOSITION,
+    Encoders578.IF_SETPOSITION,
     ChildPositionContext(player, interfaceId, childId, positionX, positionY),
 )
 
@@ -4979,7 +4979,7 @@ fun sendIfaceSettings(
     offset: Int,
     length: Int
 ) {
-    PacketRepository.send(Encoders530.SET_INTERFACE_SETTINGS, AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length))
+    PacketRepository.send(Encoders578.SET_INTERFACE_SETTINGS, AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length))
 }
 
 /**

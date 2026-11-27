@@ -2,7 +2,7 @@ package core.api.utils
 
 import core.game.node.entity.player.Player
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.CameraContext
 
 class PlayerCamera(val player: Player) {
@@ -19,13 +19,13 @@ class PlayerCamera(val player: Player) {
     fun setPosition(x: Int, y: Int, height: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, 0, 100)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /** Sets pitch and yaw in the client's 2048-unit angle scale (opcode 14). */
     fun forceAngle(pitch: Int, yaw: Int) {
         require(pitch in 128..384 && yaw in 0..2047)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET,
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET,
             CameraContext(player, CameraContext.CameraType.SET, pitch, yaw, 0, 0, 0))
     }
 
@@ -40,7 +40,7 @@ class PlayerCamera(val player: Player) {
     fun rotateTo(x: Int, y: Int, height: Int, speed: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.ROTATION, x, y, height, speed.coerceIn(0, 255), 1)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -55,7 +55,7 @@ class PlayerCamera(val player: Player) {
         player ?: return
         ctx ?: return
         ctx = CameraContext(player, CameraContext.CameraType.ROTATION, ctx!!.x + diffX, ctx!!.y + diffY, ctx!!.height + diffHeight, speed.coerceIn(0, 255), 1)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -69,7 +69,7 @@ class PlayerCamera(val player: Player) {
     fun panTo(x: Int, y: Int, height: Int, speed: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.POSITION, x, y, height, speed.coerceIn(0, 255), 1)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -84,7 +84,7 @@ class PlayerCamera(val player: Player) {
     fun shake(cameraType: Int, jitter: Int, amplitude: Int, frequency: Int, speed: Int) {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.SHAKE, cameraType, jitter, amplitude, frequency, speed)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /**
@@ -98,7 +98,7 @@ class PlayerCamera(val player: Player) {
      */
     fun shake(cameraType: CameraShakeType, jitter: Int, amplitude: Int, frequency: Int, speed: Int) {
         val ctx = CameraContext(player, CameraContext.CameraType.SHAKE, cameraType.ordinal, jitter, amplitude, frequency, speed)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx)
     }
 
     /**
@@ -106,13 +106,13 @@ class PlayerCamera(val player: Player) {
      */
     fun smoothReset() {
         ctx = CameraContext(player, CameraContext.CameraType.SMOOTH_RESET, -1, -1, -1, -1, -1)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx!!)
     }
 
     /** Resets the camera immediately. */
     fun reset() {
         player ?: return
         ctx = CameraContext(player, CameraContext.CameraType.RESET, -1, -1, -1, -1, -1)
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, ctx!!)
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, ctx!!)
     }
 }

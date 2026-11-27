@@ -14,7 +14,7 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.CameraContext
 import core.tools.RandomFunction
 import shared.consts.*
@@ -172,11 +172,11 @@ object EvilTwinUtils {
                 if (entity.walkingQueue.queue.size > 1 && player.interfaceManager.singleTab != null) {
                     val l = entity.location
                     PacketRepository.send(
-                        Encoders530.CAMERA_VIEW_PACKET,
+                        Encoders578.CAMERA_VIEW_PACKET,
                         CameraContext(player, CameraContext.CameraType.POSITION, l.x + 2, l.y + 3, 520, 1, 5)
                     )
                     PacketRepository.send(
-                        Encoders530.CAMERA_VIEW_PACKET,
+                        Encoders578.CAMERA_VIEW_PACKET,
                         CameraContext(player, CameraContext.CameraType.ROTATION, l.x - 3, l.y - 3, 420, 1, 5)
                     )
                 }
@@ -205,13 +205,13 @@ object EvilTwinUtils {
         if (player.interfaceManager.singleTab != null) {
             var loc = region.baseLocation.transform(14, 20, 0)
             PacketRepository.send(
-                Encoders530.CAMERA_VIEW_PACKET,
+                Encoders578.CAMERA_VIEW_PACKET,
                 CameraContext(player, CameraContext.CameraType.POSITION, loc.x, loc.y, 520, 1, 100)
             )
             loc =
                 region.baseLocation.transform(x, 4 + y - (if (x < 14 || x > 14) (y / 4) else 0), 0)
             PacketRepository.send(
-                Encoders530.CAMERA_VIEW_PACKET,
+                Encoders578.CAMERA_VIEW_PACKET,
                 CameraContext(player, CameraContext.CameraType.ROTATION, loc.x, loc.y, 420, 1, 100)
             )
         }

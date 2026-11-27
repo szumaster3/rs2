@@ -3,7 +3,7 @@ package core.net.amsc;
 import core.game.node.entity.player.Player;
 import core.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.ContactContext;
 
 /**
@@ -47,7 +47,7 @@ public enum ManagementServerState {
      */
     public void set() {
         for (Player player : Repository.getPlayers()) {
-            PacketRepository.send(Encoders530.CONTACT_PACKETS, new ContactContext(player, ContactContext.UPDATE_STATE_TYPE));
+            PacketRepository.send(Encoders578.CONTACT_PACKETS, new ContactContext(player, ContactContext.UPDATE_STATE_TYPE));
         }
     }
 

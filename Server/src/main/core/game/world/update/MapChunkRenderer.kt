@@ -3,7 +3,7 @@ package core.game.world.update
 import core.game.node.entity.player.Player
 import core.game.world.map.RegionChunk
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ClearChunkContext
 
 /**
@@ -27,7 +27,7 @@ object MapChunkRenderer {
             for (column in last) {
                 for (previous in column.filterNotNull()) {
                     if (!containsChunk(current, previous)) {
-                        PacketRepository.send(Encoders530.UPDATE_ZONE_FULL_FOLLOWS, ClearChunkContext(player, previous))
+                        PacketRepository.send(Encoders578.UPDATE_ZONE_FULL_FOLLOWS, ClearChunkContext(player, previous))
                     } else {
                         updated.add(previous)
                     }

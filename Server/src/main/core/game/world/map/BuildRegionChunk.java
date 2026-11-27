@@ -6,7 +6,7 @@ import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.build.LandscapeParser;
 import core.net.packet.IoBuffer;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,7 @@ public class BuildRegionChunk extends RegionChunk {
             for (Scenery[] column : layer) {
                 for (Scenery object : column) {
                     if (object != null && !object.isRenderable()) {
-                        Encoders530.writeSceneryRemoval(buffer, object);
+                        Encoders578.writeSceneryRemoval(buffer, object);
                         updated = true;
                     }
                 }
@@ -68,7 +68,7 @@ public class BuildRegionChunk extends RegionChunk {
             for (Scenery[] column : layer) {
                 for (Scenery object : column) {
                     if (object instanceof Constructed && object.isRenderable()) {
-                        Encoders530.writeSceneryAddition(buffer, object);
+                        Encoders578.writeSceneryAddition(buffer, object);
                         updated = true;
                     }
                 }
@@ -78,7 +78,7 @@ public class BuildRegionChunk extends RegionChunk {
         for (GroundItem item : totalItems) {
             if (item != null && item.isActive() && item.getLocation() != null) {
                 if (!item.isPrivate() || item.droppedBy(player)) {
-                    Encoders530.writeGroundItemAddition(buffer, item);
+                    Encoders578.writeGroundItemAddition(buffer, item);
                     updated = true;
                 }
             }

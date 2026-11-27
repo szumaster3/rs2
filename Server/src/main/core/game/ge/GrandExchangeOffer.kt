@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.repository.Repository
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ContainerContext
 import core.net.packet.out.PacketContext.GrandExchangeContext
 import java.sql.ResultSet
@@ -146,7 +146,7 @@ class GrandExchangeOffer {
     fun visualize(player: Player?) {
         player ?: return
         PacketRepository.send(
-            Encoders530.GRAND_EXCHANGE_OFFER,
+            Encoders578.GRAND_EXCHANGE_OFFER,
               GrandExchangeContext(
                 player,
                 index.toByte(),
@@ -161,7 +161,7 @@ class GrandExchangeOffer {
         )
         val withdrawItems: Array<Item> = withdraw.filterNotNull().toTypedArray()
         PacketRepository.send(
-            Encoders530.CONTAINER_PACKET, ContainerContext(player, -1, -1757, 523 + index, withdrawItems, false)
+            Encoders578.CONTAINER_PACKET, ContainerContext(player, -1, -1757, 523 + index, withdrawItems, false)
         )
     }
 

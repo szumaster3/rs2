@@ -10,7 +10,7 @@ import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.ClanContext;
 import core.net.packet.out.PacketContext.MessageContext;
 import core.worker.ManagementEvents;
@@ -208,7 +208,7 @@ public final class ClanRepository {
             Player p = entry.getPlayer();
             if (p != null) {
                 PacketRepository.send(
-                        Encoders530.COMMUNICATION_MESSAGE,
+                        Encoders578.COMMUNICATION_MESSAGE,
                         new MessageContext(
                                 p,
                                 player.getName(),
@@ -247,7 +247,7 @@ public final class ClanRepository {
         }
         for (ClanEntry e : players) {
             PacketRepository.send(
-                    Encoders530.COMMUNICATION_MESSAGE,
+                    Encoders578.COMMUNICATION_MESSAGE,
                     new MessageContext(
                             e.getPlayer(),
                             player.getName(),
@@ -287,7 +287,7 @@ public final class ClanRepository {
                 banned.clear();
             }
         }
-        PacketRepository.send(Encoders530.UPDATE_CLAN_CHAT, new ClanContext(player, this, true));
+        PacketRepository.send(Encoders578.UPDATE_CLAN_CHAT, new ClanContext(player, this, true));
         player.getPacketDispatch().sendMessage(message);
         if (clanWar != null && !isDefault()) {
             clanWar.fireEvent("leavefc", player);
@@ -325,7 +325,7 @@ public final class ClanRepository {
         for (Iterator<ClanEntry> it = players.iterator(); it.hasNext(); ) {
             ClanEntry e = it.next();
             if (e.getWorldId() == GameWorld.getSettings().getWorldId() && e.getPlayer() != null) {
-                PacketRepository.send(Encoders530.UPDATE_CLAN_CHAT, new ClanContext(e.getPlayer(), this, false));
+                PacketRepository.send(Encoders578.UPDATE_CLAN_CHAT, new ClanContext(e.getPlayer(), this, false));
             }
         }
     }

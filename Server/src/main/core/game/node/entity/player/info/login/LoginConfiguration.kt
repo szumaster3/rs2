@@ -16,7 +16,7 @@ import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.InterfaceContext
 import core.plugin.Plugin
 import core.tools.Log

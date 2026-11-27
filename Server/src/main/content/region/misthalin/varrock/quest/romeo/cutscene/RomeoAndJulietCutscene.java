@@ -10,7 +10,7 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.CameraContext;
 import core.plugin.Initializable;
 
@@ -66,8 +66,8 @@ public final class RomeoAndJulietCutscene extends CutscenePlugin {
         int other = 1;
         pos = new CameraContext(player, CameraContext.CameraType.POSITION, x - 5, y - 4, height, other, speed);
         rot = new CameraContext(player, CameraContext.CameraType.ROTATION, x + 2, y, height, other, speed);
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, pos);
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, rot);
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, pos);
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, rot);
         player.lock();
         player.getLocks().lockMovement(1000000);
     }

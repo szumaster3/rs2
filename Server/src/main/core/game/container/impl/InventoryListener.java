@@ -7,7 +7,7 @@ import core.game.container.ContainerEvent;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.ContainerContext;
 import shared.consts.Components;
 
@@ -69,7 +69,7 @@ public final class InventoryListener implements ContainerListener {
      */
     @Override
     public void refresh(Container container) {
-        PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, Components.INVENTORY_149, 0, 93, container, false));
+        PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, Components.INVENTORY_149, 0, 93, container, false));
         updatePlayerState(container);
     }
 
@@ -82,7 +82,7 @@ public final class InventoryListener implements ContainerListener {
      */
     @Override
     public void update(Container container, ContainerEvent event) {
-        PacketRepository.send(Encoders530.CONTAINER_PACKET, new ContainerContext(player, Components.INVENTORY_149, 0, 93, event.getItems(), false, event.getSlots()));
+        PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, Components.INVENTORY_149, 0, 93, event.getItems(), false, event.getSlots()));
         updatePlayerState(container);
     }
 }

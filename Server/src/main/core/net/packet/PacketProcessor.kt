@@ -44,10 +44,11 @@ import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.ChatMessage
+import core.net.IoSession
 import core.net.amsc.MSPacketRepository
 import core.net.packet.`in`.Packet
 import core.net.packet.`in`.RunScript
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.PlayerContext
 import core.tools.Log
 import core.worker.ManagementEvents
@@ -61,27 +62,27 @@ import java.lang.Math.min
 import java.util.*
 
 object PacketProcessor {
-    val queue = LinkedList<Packet>()
+    // The network reader and game thread share this queue. Bind each frame to
+    // its original session so a reconnect cannot replay stale actions.
+    private class QueuedPacket(val player: Player, val session: IoSession, val packet: Packet)
+    private val queue = java.util.ArrayDeque<QueuedPacket>()
 
-    @JvmStatic fun enqueue(pkt: Packet) {
-        queue.addLast(pkt)
+    @JvmStatic fun enqueue(player: Player, session: IoSession, pkt: Packet) {
+        if (!session.isActive || player.session !== session || pkt is Packet.NoProcess) return
+        synchronized(queue) { queue.addLast(QueuedPacket(player, session, pkt)) }
     }
 
     @JvmStatic fun processQueue() {
-        var countThisCycle = queue.size
-        val sw = StringWriter()
-        val pw = PrintWriter(sw)
-        var pkt: Packet
-        while (countThisCycle-- > 0) {
-            pkt = queue.tryPop(Packet.NoProcess()) ?: return
-            if (pkt is Packet.NoProcess) {
-                queue.clear()
-                return
-            }
+        val countThisCycle = synchronized(queue) { queue.size }
+        repeat(countThisCycle) {
+            val queued = synchronized(queue) { queue.pollFirst() } ?: return
+            if (!queued.session.isActive || queued.player.session !== queued.session) return@repeat
+            val pkt = queued.packet
             try {
                 processWithNativeRun(pkt)
             } catch (e: Exception) {
-                e.printStackTrace(pw)
+                val sw = StringWriter()
+                e.printStackTrace(PrintWriter(sw))
                 log(this::class.java, Log.ERR, "Error Processing ${pkt::class.java.simpleName}: $sw")
             }
         }
@@ -963,7 +964,7 @@ object PacketProcessor {
     }
 
     private fun sendClearMinimap(player: Player) {
-        PacketRepository.send(Encoders530.CLEAR_MINIMAP_FLAG, PlayerContext(player))
+        PacketRepository.send(Encoders578.CLEAR_MINIMAP_FLAG, PlayerContext(player))
     }
 
     fun switchItem(slot: Int, secondSlot: Int, container: Container?, insert: Boolean, player: Player) {

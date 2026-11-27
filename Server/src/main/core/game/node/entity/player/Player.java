@@ -70,7 +70,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.IoSession;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.DynamicSceneContext;
 import core.net.packet.out.PacketContext.SceneGraphContext;
 import core.net.packet.out.PacketContext.SkillContext;
@@ -604,7 +604,7 @@ public class Player extends Entity {
         playerFlag.setUpdateSceneGraph(false);
         renderInfo.updateInformation();
         if (getSkills().isLifepointsUpdate()) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, new SkillContext(this, Skills.HITPOINTS));
+            PacketRepository.send(Encoders578.UPDATE_STAT, new SkillContext(this, Skills.HITPOINTS));
             getSkills().setLifepointsUpdate(false);
         }
         if (getAttribute("flagged-for-save", false)) {
@@ -909,14 +909,14 @@ public class Player extends Entity {
         Region region = RegionManager.forId(location.getRegionId());
         getPlayerFlags().setLastViewport(new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE]);
         if (region instanceof DynamicRegion) {
-            PacketRepository.send(Encoders530.BUILD_DYNAMIC_SCENE, new DynamicSceneContext(this, login));
+            PacketRepository.send(Encoders578.BUILD_DYNAMIC_SCENE, new DynamicSceneContext(this, login));
         } else {
             if (location.equals(initialScene)) {
                 getPlayerFlags().setLastSceneGraph(location);
                 getPlayerFlags().setDynamicScene(false);
                 return;
             }
-            PacketRepository.send(Encoders530.UPDATE_SCENE_GRAPH, new SceneGraphContext(this, login));
+            PacketRepository.send(Encoders578.UPDATE_SCENE_GRAPH, new SceneGraphContext(this, login));
         }
     }
 

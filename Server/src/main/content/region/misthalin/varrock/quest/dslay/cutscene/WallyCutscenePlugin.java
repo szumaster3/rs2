@@ -9,7 +9,7 @@ import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.CameraContext;
 import shared.consts.Music;
 import shared.consts.NPCs;
@@ -46,8 +46,8 @@ public class WallyCutscenePlugin extends CutscenePlugin {
     @Override
     public void open() {
         player.lock();
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 3, 305, 1, 35));
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 10, player.getLocation().getY() + 12, 305, 1, 35));
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 3, 305, 1, 35));
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 10, player.getLocation().getY() + 12, 305, 1, 35));
         player.getDialogueInterpreter().open(NPCs.GYPSY_ARIS_882, Repository.findNPC(NPCs.GYPSY_ARIS_882), this);
     }
 

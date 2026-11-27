@@ -15,7 +15,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld.settings
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.InterfaceContext
 import core.net.packet.out.PacketContext.WindowsPaneContext
 import core.tools.Log
@@ -37,7 +37,7 @@ class InterfaceManager(val player: Player) {
         if (!close()) return null
         temporaryRoot = component.id
         opened = component
-        PacketRepository.send(Encoders530.IF_OPENTOP, WindowsPaneContext(player, component.id, 0))
+        PacketRepository.send(Encoders578.IF_OPENTOP, WindowsPaneContext(player, component.id, 0))
         player.dispatch(InterfaceOpenEvent(component))
         return component
     }
@@ -106,7 +106,7 @@ class InterfaceManager(val player: Player) {
         }
 
         PacketRepository.send(
-            Encoders530.IF_OPENTOP,
+            Encoders578.IF_OPENTOP,
             WindowsPaneContext(player, windowsPane.id, if (overlap) 1 else 0)
         )
         windowsPane.open(player)
@@ -133,7 +133,7 @@ class InterfaceManager(val player: Player) {
             windowsPane.definition.type = InterfaceType.WINDOW_PANE
         }
 
-        PacketRepository.send(Encoders530.IF_OPENTOP, WindowsPaneContext(player, windowsPane.id, type))
+        PacketRepository.send(Encoders578.IF_OPENTOP, WindowsPaneContext(player, windowsPane.id, type))
         windowsPane.open(player)
 
         if (opened != null) player.dispatch(InterfaceOpenEvent(opened!!))
@@ -207,11 +207,11 @@ class InterfaceManager(val player: Player) {
                 // the native world-map cleanup and restores the previous renderer.
                 val restoreType = if (opened!!.id == Components.WORLDMAP_755) 2 else 0
                 if (oldRoot != newRoot) relocateGameframe(oldRoot, newRoot, restoreType)
-                else PacketRepository.send(Encoders530.IF_OPENTOP, WindowsPaneContext(player, newRoot, restoreType))
+                else PacketRepository.send(Encoders578.IF_OPENTOP, WindowsPaneContext(player, newRoot, restoreType))
                 player.dispatch(InterfaceCloseEvent(opened!!))
             } else if (!opened!!.definition!!.isWalkable || opened!!.id == 14) {
                 PacketRepository.send(
-                    Encoders530.IF_CLOSESUB,
+                    Encoders578.IF_CLOSESUB,
                     InterfaceContext(
                         player,
                         opened!!.definition!!.getWindowPaneId(isResizable),
@@ -274,7 +274,7 @@ class InterfaceManager(val player: Player) {
             }
             if (component.definition!!.type == InterfaceType.TAB) {
                 PacketRepository.send(
-                    Encoders530.IF_CLOSESUB, InterfaceContext(
+                    Encoders578.IF_CLOSESUB, InterfaceContext(
                         player,
                         component.definition.getWindowPaneId(
                             isResizable
@@ -287,7 +287,7 @@ class InterfaceManager(val player: Player) {
                 return true
             }
             PacketRepository.send(
-                Encoders530.IF_CLOSESUB, InterfaceContext(
+                Encoders578.IF_CLOSESUB, InterfaceContext(
                     player, component.definition.getWindowPaneId(
                         isResizable
                     ), component.definition.getChildId(isResizable), component.id, component.definition.isWalkable
@@ -352,7 +352,7 @@ class InterfaceManager(val player: Player) {
     fun removeTutorialTabs() {
         removeTabs(*(0..13).toList().toIntArray())
         for (index in intArrayOf(3, 15)) {
-            PacketRepository.send(Encoders530.IF_CLOSESUB, InterfaceContext(player, windowPaneId,
+            PacketRepository.send(Encoders578.IF_CLOSESUB, InterfaceContext(player, windowPaneId,
                 (if (isResizable) 33 else 152) + index, 0, true))
         }
     }
@@ -456,23 +456,23 @@ class InterfaceManager(val player: Player) {
     fun openInfoBars() {
         //Hp orb
         PacketRepository.send(
-            Encoders530.IF_OPENSUB,
+            Encoders578.IF_OPENSUB,
             InterfaceContext(player, windowPaneId, if (isResizable) 169 else 134, Components.TOPSTAT_HITPOINTS_748, true)
         )
         //Prayer orb
         PacketRepository.send(
-            Encoders530.IF_OPENSUB,
+            Encoders578.IF_OPENSUB,
             InterfaceContext(player, windowPaneId, if (isResizable) 170 else 136, Components.TOPSTAT_PRAYER_749, true)
         )
         //Energy orb
         PacketRepository.send(
-            Encoders530.IF_OPENSUB,
+            Encoders578.IF_OPENSUB,
             InterfaceContext(player, windowPaneId, if (isResizable) 171 else 137, Components.TOPSTAT_RUN_750, true)
         )
         //Summoning bar
         if (isQuestComplete(player, Quests.WOLF_WHISTLE.questName) && settings?.isMembers == true) {
             PacketRepository.send(
-                Encoders530.IF_OPENSUB,
+                Encoders578.IF_OPENSUB,
                 InterfaceContext(player, windowPaneId, if (isResizable) 172 else 139, Components.TOPSTAT_LORE_747, true)
             )
         }
@@ -571,7 +571,7 @@ class InterfaceManager(val player: Player) {
         } else {
             val previous = chatbox
             if (previous != null && previous.id != DEFAULT_CHATBOX && previous.id != component.id) {
-                PacketRepository.send(Encoders530.IF_CLOSESUB, InterfaceContext(player,
+                PacketRepository.send(Encoders578.IF_CLOSESUB, InterfaceContext(player,
                     previous.definition!!.getWindowPaneId(isResizable), previous.definition.getChildId(isResizable),
                     previous.id, previous.definition.isWalkable))
             }
@@ -625,14 +625,14 @@ class InterfaceManager(val player: Player) {
         }
         // Packet 66 relocates subinterfaces without closing their content.
         windowsPane = Component(newRoot)
-        PacketRepository.send(Encoders530.IF_OPENTOP, WindowsPaneContext(player, newRoot, restoreType))
+        PacketRepository.send(Encoders578.IF_OPENTOP, WindowsPaneContext(player, newRoot, restoreType))
         for ((source, child) in moves) {
             if (child == null) {
                 log(javaClass, Log.WARN, "Unmapped window attachment ${source ushr 16}:${source and 65535}")
                 continue
             }
             val destination = (newRoot shl 16) or child
-            PacketRepository.send(Encoders530.IF_MOVESUB, core.net.packet.out.PacketContext.MoveInterfaceContext(player, source, destination))
+            PacketRepository.send(Encoders578.IF_MOVESUB, core.net.packet.out.PacketContext.MoveInterfaceContext(player, source, destination))
             attachments.remove(source)?.let { attachments[destination] = it }
         }
         // Root button masks belong to the new gameframe, not the moved subinterfaces.
@@ -797,7 +797,7 @@ class InterfaceManager(val player: Player) {
     }
 
     private fun openExtraTab(index: Int, id: Int) {
-        PacketRepository.send(Encoders530.IF_OPENSUB, InterfaceContext(player, windowPaneId,
+        PacketRepository.send(Encoders578.IF_OPENSUB, InterfaceContext(player, windowPaneId,
             (if (isResizable) 33 else 152) + index, id, true))
         if (id == 259) {
             for (child in 2..34) {
@@ -810,9 +810,9 @@ class InterfaceManager(val player: Player) {
     }
 
     private fun openDefaultChatFrame() {
-        PacketRepository.send(Encoders530.IF_OPENSUB, InterfaceContext(player, windowPaneId, if (isResizable) 15 else 20, 751, true))
-        PacketRepository.send(Encoders530.IF_OPENSUB, InterfaceContext(player, windowPaneId, if (isResizable) 18 else 142, 752, true))
-        PacketRepository.send(Encoders530.IF_OPENSUB, InterfaceContext(player, 752, 9, 137, true))
+        PacketRepository.send(Encoders578.IF_OPENSUB, InterfaceContext(player, windowPaneId, if (isResizable) 15 else 20, 751, true))
+        PacketRepository.send(Encoders578.IF_OPENSUB, InterfaceContext(player, windowPaneId, if (isResizable) 18 else 142, 752, true))
+        PacketRepository.send(Encoders578.IF_OPENSUB, InterfaceContext(player, 752, 9, 137, true))
     }
 
     companion object {

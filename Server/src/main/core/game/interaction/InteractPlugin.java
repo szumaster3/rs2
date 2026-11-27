@@ -11,7 +11,7 @@ import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.InteractionOptionContext;
 import core.tools.Log;
 
@@ -56,7 +56,7 @@ public class InteractPlugin {
 		if (!(node instanceof Player)) {
 			return;
 		}
-		PacketRepository.send(Encoders530.SET_INTERACTION, new InteractionOptionContext((Player) node, index, name));
+		PacketRepository.send(Encoders578.SET_INTERACTION, new InteractionOptionContext((Player) node, index, name));
 	}
 
 	/**

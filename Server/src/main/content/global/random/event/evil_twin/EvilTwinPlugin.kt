@@ -13,7 +13,7 @@ import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.CameraContext
 import shared.consts.Components
 import shared.consts.NPCs
@@ -81,7 +81,7 @@ class EvilTwinPlugin : InteractionListener, MapArea {
                     EvilTwinUtils.cranes[player] = newCrane
                     SceneryBuilder.add(Scenery(14977, newCrane.location, 22, 0))
                     SceneryBuilder.add(newCrane)
-                    PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 0, 0, 0))
+                    PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 0, 0, 0))
                     true
                 }
             )

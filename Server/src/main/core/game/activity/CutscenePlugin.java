@@ -9,7 +9,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.MinimapStateContext;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
@@ -78,7 +78,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
         if (isFade()) {
             GameWorld.getPulser().submit(getStartPulse());
         } else {
-            PacketRepository.send(Encoders530.MINIMAP_STATE, new MinimapStateContext(player, getMapState()));
+            PacketRepository.send(Encoders578.MINIMAP_STATE, new MinimapStateContext(player, getMapState()));
             player.getInterfaceManager().removeTabs(getRemovedTabs());
             player.getProperties().setTeleportLocation(getStartLocation());
             player.unlock();
@@ -141,7 +141,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
                 }
             }
         }
-        PacketRepository.send(Encoders530.MINIMAP_STATE, new MinimapStateContext(player, 0));
+        PacketRepository.send(Encoders578.MINIMAP_STATE, new MinimapStateContext(player, 0));
         player.getInterfaceManager().restoreTabs();
         player.unlock();// incase he was locked.
         player.getWalkingQueue().reset();
@@ -177,7 +177,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
                     player.getInterfaceManager().openOverlay(new Component(115));
                     break;
                 case 3:
-                    PacketRepository.send(Encoders530.MINIMAP_STATE, new MinimapStateContext(player, getMapState()));
+                    PacketRepository.send(Encoders578.MINIMAP_STATE, new MinimapStateContext(player, getMapState()));
                     player.getInterfaceManager().removeTabs(getRemovedTabs());
                     break;
                 case 4:
@@ -225,7 +225,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
                     player.getInterfaceManager().openOverlay(new Component(115));
                     break;
                 case 3:
-                    PacketRepository.send(Encoders530.MINIMAP_STATE, new MinimapStateContext(player, getMapState()));
+                    PacketRepository.send(Encoders578.MINIMAP_STATE, new MinimapStateContext(player, getMapState()));
                     player.getInterfaceManager().removeTabs(getRemovedTabs());
                     break;
                 case 4:
@@ -237,7 +237,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
                     stop();
                     fade();// specfic for fadeout.
                     if (player.getSession().isActive()) {
-                        PacketRepository.send(Encoders530.MINIMAP_STATE, new MinimapStateContext(player, 0));
+                        PacketRepository.send(Encoders578.MINIMAP_STATE, new MinimapStateContext(player, 0));
                     }
                     player.getInterfaceManager().closeOverlay();
                     if (player.getSession().isActive()) {

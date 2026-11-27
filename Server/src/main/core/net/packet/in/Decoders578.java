@@ -199,7 +199,12 @@ public final class Decoders578 {
                 return new Packet.AddIgnore(player, name, temporary);
             }
             case ClientProt.CLAN_KICK: return new Packet.KickFromClan(player, readText(payload));
-            case ClientProt.CLAN_JOIN_LEAVE: return new Packet.JoinClan(player, payload.hasRemaining() ? readText(payload) : "");
+            case ClientProt.CLAN_JOIN_LEAVE: {
+                // ClanChat.leave sends a zero-length frame; ClanChat.join never sends an empty name.
+                if (!payload.hasRemaining()) return new Packet.JoinClan(player, "");
+                String name = readText(payload);
+                return name.isEmpty() ? null : new Packet.JoinClan(player, name);
+            }
             case ClientProt.TRANSMITVAR_VERIFYID: // Protocol.method2432: acknowledgement of the last transmit verify ID.
                 // Never let a delayed or forged acknowledgement rewind the outgoing counter.
                 player.getSession().recordTransmitVerifyId(be(payload));

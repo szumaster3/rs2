@@ -19,7 +19,7 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.CameraContext
 import shared.consts.*
 
@@ -214,7 +214,7 @@ class MonkeyMadnessPlugin : InteractionListener {
             setQuestStage(player, Quests.MONKEY_MADNESS.questName, 94)
 
             PacketRepository.send(
-                Encoders530.CAMERA_VIEW_PACKET,
+                Encoders578.CAMERA_VIEW_PACKET,
                 CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 0, 4, 4),
             )
 

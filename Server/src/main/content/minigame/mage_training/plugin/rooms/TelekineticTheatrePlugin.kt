@@ -22,7 +22,7 @@ import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.map.path.Pathfinder
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.CameraContext
 import core.tools.RandomFunction
 import shared.consts.Components
@@ -117,7 +117,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
             "reset" -> {
                 if (player.getAttribute("camera", false)) {
                     PacketRepository.send(
-                        Encoders530.CAMERA_VIEW_PACKET,
+                        Encoders578.CAMERA_VIEW_PACKET,
                         CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
                     )
                     player.setAttribute("camera", false)
@@ -211,7 +211,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
         this@TelekineticTheatrePlugin.update(player)
         player.setAttribute("camera", false)
         PacketRepository.send(
-            Encoders530.CAMERA_VIEW_PACKET,
+            Encoders578.CAMERA_VIEW_PACKET,
             CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
         )
         val mazeGuard = NPC.create(NPCs.MAZE_GUARDIAN_3102, base!!.transform(maze!!.endLocation))
@@ -266,7 +266,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
      */
     fun observe(player: Player) {
         if (player.getAttribute("camera", false)) {
-            PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20))
+            PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20))
             player.setAttribute("camera", false)
             return
         }
@@ -283,12 +283,12 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
             x += 11
             y += 15
             height = 799
-            PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
-            PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.ROTATION, x - 55, y - 25, height, 1, speed))
+            PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
+            PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.ROTATION, x - 55, y - 25, height, 1, speed))
             return
         }
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
-        PacketRepository.send(Encoders530.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.ROTATION, x + xInc, y + yInc, height, 1, speed))
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed))
+        PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, CameraContext(player, CameraContext.CameraType.ROTATION, x + xInc, y + yInc, height, 1, speed))
     }
 
     /**

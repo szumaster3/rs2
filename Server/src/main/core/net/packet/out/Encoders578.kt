@@ -75,7 +75,7 @@ private inline fun <reified T : PacketContext> encode(crossinline writer: (T) ->
 }
 
 @Suppress("UNINITIALIZED_ENUM_COMPANION", "UNINITIALIZED_ENUM_COMPANION_WARNING")
-enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val immediate: Boolean = false) {
+enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val immediate: Boolean = false) {
     LOC_ANIM_ABSOLUTE(encode<PacketContext.AbsoluteLocAnimation> { c ->
         val l = c.location
         if (l.x !in 0..16383 || l.y !in 0..16383 || l.z !in 0..3 || c.shape !in 0..22 || c.rotation !in 0..3 || c.animation !in -1..65534) return@encode
@@ -119,13 +119,13 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             .putC(c.y1).putC(c.x1).putA((c.shape shl 2) or c.rotation).putShort(c.id))
     }),
     RESET_ENTITY_ANIMATIONS(encode<PlayerContext> { context ->
-        context.player.session.write(Encoders578.resetEntityAnimations())
+        context.player.session.write(resetEntityAnimations())
     }),
     RESET_CLIENT_VARPS(encode<PlayerContext> { context ->
-        context.player.session.write(Encoders578.resetClientVarps())
+        context.player.session.write(resetClientVarps())
     }),
     RUN_DIALOG_ABORT_HOOKS(encode<PlayerContext> { context ->
-        context.player.session.write(Encoders578.runDialogAbortHooks())
+        context.player.session.write(runDialogAbortHooks())
     }),
     // Session and status
     LOGIN_PACKET(encode<PlayerContext> { context ->
@@ -151,19 +151,19 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         context.player.session.write(buffer)
     }),
     LOGOUT(encode<PlayerContext> { context ->
-        val buffer = Encoders578.logout()
+        val buffer = logout()
         context.player.details.session.write(buffer)
     }, immediate = true),
     PING_PACKET(encode<PlayerContext> {
         // No revision 578 server keep-alive encoder; client sends NO_TIMEOUT. Unused.
     }),
     CLEAR_MINIMAP_FLAG(encode<PlayerContext> { context ->
-        val buffer = Encoders578.clearMinimapFlag()
+        val buffer = clearMinimapFlag()
         context.player.details.session.write(buffer)
     }),
     MINIMAP_STATE(encode<MinimapStateContext> { context ->
         if (context.state !in 0..255) return@encode
-        val buffer = Encoders578.minimapState(context.state)
+        val buffer = minimapState(context.state)
         context.player.details.session.write(buffer)
     }),
     UPDATE_REBOOT_TIMER(encode<SystemUpdateContext> { context ->
@@ -193,17 +193,17 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         context.player.details.session.write(IoBuffer(ServerProt.UPDATE_STAT).putInt(xp.toInt()).putC(context.skillId).putS(level))
     }),
     GLOBAL_SPOT_ANIMATION(encode<PacketContext.GlobalSpotAnimationContext> { c ->
-        c.player.details.session.write(Encoders578.globalSpotAnimation(c.target, c.id, c.delay, c.height))
+        c.player.details.session.write(globalSpotAnimation(c.target, c.id, c.delay, c.height))
     }),
 
     // Interfaces
     IF_OPENTOP(encode<WindowsPaneContext> { context ->
-        val buffer = Encoders578.openTop(context.type, context.windowId, context.player.interfaceManager.getPacketCount(1))
+        val buffer = openTop(context.type, context.windowId, context.player.interfaceManager.getPacketCount(1))
         context.player.details.session.write(buffer)
     }),
     IF_OPENSUB(encode<InterfaceContext> { context ->
         if (!validComponent578(context.windowId, context.componentId)) return@encode
-        val buffer = Encoders578.openSub(context.windowId shl 16 or context.componentId,
+        val buffer = openSub(context.windowId shl 16 or context.componentId,
             if (context.isWalkable) 3 else 0, context.interfaceId, context.player.interfaceManager.getPacketCount(1))
         context.player.details.session.write(buffer)
     }),
@@ -225,7 +225,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     SET_INTERFACE_SETTINGS(encode<AccessMaskContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
         if (context.offset !in -1..65534 || context.length !in context.offset..65534) return@encode
-        val buffer = Encoders578.settings(context.interfaceId shl 16 or context.childId,
+        val buffer = settings(context.interfaceId shl 16 or context.childId,
             context.offset, context.length, context.id, context.player.interfaceManager.getPacketCount(1))
         context.player.session.write(buffer)
     }),
@@ -233,7 +233,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
         if (context.offset !in -1..65534 || context.length !in context.offset..65534 || context.id !in 0..65535) return@encode
         context.player.session.write(
-            Encoders578.targetParam(context.interfaceId shl 16 or context.childId,
+            targetParam(context.interfaceId shl 16 or context.childId,
             context.offset, context.length, context.id, context.player.interfaceManager.getPacketCount(1)))
     }),
     IF_SETHIDE(encode<InterfaceConfigContext> { context ->
@@ -452,7 +452,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[Protocol578] Rejected unknown varc ${context.id}")
             return@encode
         }
-        val buffer = Encoders578.varc(context.id, context.value, context.player.interfaceManager.getPacketCount(1))
+        val buffer = varc(context.id, context.value, context.player.interfaceManager.getPacketCount(1))
         context.player.details.session.write(buffer)
     }),
     VARBIT(encode<VarbitContext> { context ->
@@ -477,14 +477,14 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[Protocol578] Rejected unknown varc ${context.varcId}")
             return@encode
         }
-        player.session.write(Encoders578.varc(context.varcId, context.value, player.interfaceManager.getPacketCount(1)))
+        player.session.write(varc(context.varcId, context.value, player.interfaceManager.getPacketCount(1)))
     }),
     VARC_STRING_UPDATE(encode<VarcStringUpdateContext> { context ->
         if (!VarcDefinition.stringExists(context.varcId) || '\u0000' in context.value || context.value.length > 65530) {
             System.err.println("[Protocol578] Rejected varc string ${context.varcId}")
             return@encode
         }
-        context.player.session.write(Encoders578.varcString(context.varcId, context.value,
+        context.player.session.write(varcString(context.varcId, context.value,
             context.player.interfaceManager.getPacketCount(1)))
     }),
     CONTAINER_PACKET(encode<ContainerContext> { context ->
@@ -696,13 +696,13 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     SET_INTERACTION(encode<InteractionOptionContext> { context ->
         if (context.index !in 0..7) return@encode
-        val buffer = Encoders578.interaction(if (context.isRemove) "null" else context.name,
+        val buffer = interaction(if (context.isRemove) "null" else context.name,
             context.index + 1, !context.isRemove && context.index == 0)
         context.player.session.write(buffer)
     }),
     SET_WALK_OPTION(encode<WalkOptionContext> { context ->
         if (context.option.length > 254 || context.option.contains('\u0000')) return@encode
-        context.player.session.write(Encoders578.walkOption(context.option))
+        context.player.session.write(walkOption(context.option))
     }),
 
     // Camera and audio
@@ -768,7 +768,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
 
     // Messages and contacts
     MESSAGE_GAME(encode<GameMessageContext> { context ->
-        val buffer = Encoders578.message(context.message, (System.currentTimeMillis() / 1000).toInt())
+        val buffer = message(context.message, (System.currentTimeMillis() / 1000).toInt())
         context.player.session.write(buffer)
     }),
     COMMUNICATION_MESSAGE(encode<MessageContext> { context ->
@@ -997,3 +997,84 @@ private fun validComponent578(interfaceId: Int, childId: Int): Boolean {
     if (!valid) System.err.println("[Protocol578] Rejected interface update for missing component $interfaceId:$childId")
     return valid
 }
+
+// Native revision 578 frame builders. Kept private to the encoder implementation.
+private fun resetEntityAnimations(): IoBuffer = IoBuffer(ServerProt.RESET_ENTITY_ANIMATIONS)
+
+private fun resetClientVarps(): IoBuffer = IoBuffer(ServerProt.RESET_CLIENT_VARPS)
+
+private fun runDialogAbortHooks(): IoBuffer = IoBuffer(ServerProt.RUN_DIALOG_ABORT_HOOKS)
+
+/** Empty payload restores the client's localized default walk option. */
+private fun walkOption(option: String): IoBuffer {
+    require(option.length <= 254 && !option.contains('\u0000')) { "Invalid walk option" }
+    val buffer = IoBuffer(ServerProt.SET_WALK_OPTION, PacketHeader.BYTE)
+    if (option.isNotEmpty()) buffer.putString(option)
+    return buffer
+}
+
+/** Packed target: bit 30 for tiles, bit 29 for NPCs, bit 28 for players. */
+private fun globalSpotAnimation(target: Int, id: Int, delay: Int, height: Int): IoBuffer {
+    val tile = (target and 0x40000000) != 0
+    val npc = (target and 0xffff8000.toInt()) == 0x20000000
+    val player = (target and 0xfffff800.toInt()) == 0x10000000
+    require(target >= 0 && (tile || npc || player) && id in -1..65534 &&
+        delay in 0..65535 && height in 0..65535 && (!tile || (id != -1 && delay == 0))) {
+        "Invalid global spot animation"
+    }
+    return IoBuffer(ServerProt.GLOBAL_SPOT_ANIMATION).putShortA(id).putShortA(delay).putInt(target).putLEShort(height)
+}
+
+private fun logout(): IoBuffer = IoBuffer(ServerProt.LOGOUT)
+
+private fun clearMinimapFlag(): IoBuffer = IoBuffer(ServerProt.MINIMAP_FLAG).putC(255).putS(255)
+
+private fun minimapState(state: Int): IoBuffer {
+    require(state in 0..255) { "Invalid minimap state" }
+    return IoBuffer(ServerProt.MINIMAP_STATE).put(state)
+}
+
+private fun varc(id: Int, value: Int, verify: Int): IoBuffer =
+    if (value in Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()) {
+        IoBuffer(ServerProt.VARC_SMALL).putA(value).putShortA(verify).putLEShortA(id)
+    } else {
+        IoBuffer(ServerProt.VARC_LARGE).putShort(verify).putInt(value).putLEShort(id)
+    }
+
+/** Short and long string varc frames share the same delayed client state. */
+private fun varcString(id: Int, value: String?, verify: Int): IoBuffer {
+    require(id in 0..65535 && value != null && !value.contains('\u0000') && value.length <= 65530) {
+        "Invalid varc string"
+    }
+    return if (value.length <= 250) {
+        IoBuffer(ServerProt.VARCSTR_SMALL, PacketHeader.BYTE).putShort(id).putString(value).putLEShort(verify)
+    } else {
+        IoBuffer(ServerProt.VARCSTR_LARGE, PacketHeader.SHORT).putString(value).putLEShortA(id).putLEShort(verify)
+    }
+}
+
+private fun openTop(type: Int, id: Int, verify: Int): IoBuffer =
+    IoBuffer(ServerProt.IF_OPENTOP).put(type).putLEShort(id).putLEShort(verify)
+
+private fun openSub(component: Int, type: Int, id: Int, verify: Int): IoBuffer =
+    IoBuffer(ServerProt.IF_OPENSUB).putShortA(verify).putS(type).putLEInt(component).putShort(id)
+
+private fun settings(component: Int, first: Int, last: Int, events: Int, verify: Int): IoBuffer =
+    IoBuffer(ServerProt.SET_INTERFACE_SETTINGS).putIntA(component).putLEShort(first).putIntB(events)
+        .putShortA(last).putLEShort(verify)
+
+private fun targetParam(component: Int, first: Int, last: Int, param: Int, verify: Int): IoBuffer =
+    IoBuffer(ServerProt.WIDGETSTRUCT_SETTING).putShort(first).putLEShort(param).putShortA(last)
+        .putShort(verify).putIntA(component)
+
+private fun interaction(name: String, slot: Int, primary: Boolean): IoBuffer {
+    require(slot in 1..8) { "Invalid interaction slot" }
+    return IoBuffer(ServerProt.SET_INTERACTION, PacketHeader.BYTE).putString(wireText(name, 250))
+        .putShortA(-1).putS(slot).putS(if (primary) 1 else 0)
+}
+
+private fun message(message: String, timestamp: Int): IoBuffer =
+    IoBuffer(ServerProt.MESSAGE_GAME, PacketHeader.BYTE).put(0).putInt(timestamp).put(0)
+        .putString(wireText(message, 248))
+
+private fun wireText(value: String, maxLength: Int): String = value.replace('\u0000', '?').take(maxLength)

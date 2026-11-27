@@ -15,7 +15,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.CameraContext
 import core.tools.END_DIALOGUE
 import shared.consts.Components
@@ -130,7 +130,7 @@ class GliderPulse(
             }
             2 -> if (crash) {
                 PacketRepository.send(
-                    Encoders530.CAMERA_VIEW_PACKET,
+                    Encoders578.CAMERA_VIEW_PACKET,
                     CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1200, 4, 4)
                 )
                 sendMessage(player, "The glider almost gets blown from its path as it withstands heavy winds.")

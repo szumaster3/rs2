@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
-import core.net.packet.out.Encoders530;
+import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.MusicContext;
 import core.net.packet.out.PacketContext.StringContext;
 import shared.consts.Music;
@@ -190,8 +190,8 @@ public final class MusicPlayer {
      */
     public void play(MusicEntry entry) {
         if (!playing || !looping || currentMusicId != entry.getId()) {
-            PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, entry.getId(), false));
-            PacketRepository.send(Encoders530.IF_SETTEXT, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
+            PacketRepository.send(Encoders578.MUSIC_PACKET, new MusicContext(player, entry.getId(), false));
+            PacketRepository.send(Encoders578.IF_SETTEXT, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
             currentMusicId = entry.getId();
             trackEnded = false;
             playing = true;
@@ -249,7 +249,7 @@ public final class MusicPlayer {
         if (GameWorld.getTicks() % 20 == 0) {
             if (!isPlaying() && !trackEnded) {
                 try {
-                    PacketRepository.send(Encoders530.MUSIC_PACKET, new MusicContext(player, currentMusicId, false));
+                    PacketRepository.send(Encoders578.MUSIC_PACKET, new MusicContext(player, currentMusicId, false));
                 } catch (Exception e) {
                     //
                 }

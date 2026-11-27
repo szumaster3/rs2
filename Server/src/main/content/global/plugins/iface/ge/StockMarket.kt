@@ -8,7 +8,7 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ConfigContext
 import core.net.packet.out.PacketContext.ContainerContext
 import core.tools.Log
@@ -366,7 +366,7 @@ class StockMarket : InterfaceListener {
             setVarp(player, 1116, highPrice)
             if (offer != null) {
                 PacketRepository.send(
-                    Encoders530.CONTAINER_PACKET,
+                    Encoders578.CONTAINER_PACKET,
                     ContainerContext(player, -1, -1757, 523 + offer.index, offer.withdraw, false)
                 )
             }
@@ -428,8 +428,8 @@ class StockMarket : InterfaceListener {
          * Returns to the main interface.
          */
         fun toMainInterface(player: Player) {
-            PacketRepository.send(Encoders530.CONFIG, ConfigContext(player, 1112, -1))
-            PacketRepository.send(Encoders530.CONFIG, ConfigContext(player, 1112, -1))
+            PacketRepository.send(Encoders578.CONFIG, ConfigContext(player, 1112, -1))
+            PacketRepository.send(Encoders578.CONFIG, ConfigContext(player, 1112, -1))
             closeChatBox(player)
             closeSingleTab(player)
             setAttribute(player, "ge-index", -1)

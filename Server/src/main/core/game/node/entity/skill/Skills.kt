@@ -20,7 +20,7 @@ import core.game.world.GameWorld.settings
 import core.game.world.GameWorld.ticks
 import core.game.world.repository.Repository.sendNews
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.SkillContext
 import core.plugin.type.ExperiencePlugins.run
 import java.nio.ByteBuffer
@@ -226,7 +226,7 @@ class Skills(
             }
         }
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, slot))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, slot))
             entity.dispatch(XPGainEvent(slot, experienceAdd))
         }
         if (ticks - lastUpdate >= 200) {
@@ -382,7 +382,7 @@ class Skills(
         }
         val player = entity
         for (i in 0..23) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(player, i))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(player, i))
         }
         sendFlashingIcons(player, -1)
     }
@@ -520,7 +520,7 @@ class Skills(
         dynamicLevels[slot] = level
 
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, slot))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, slot))
             entity.dispatch(DynamicSkillLevelChangeEvent(slot, previousLevel, level))
         }
     }
@@ -631,7 +631,7 @@ class Skills(
     fun rechargePrayerPoints() {
         prayerPoints = staticLevels[PRAYER].toDouble()
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, PRAYER))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, PRAYER))
         }
     }
 
@@ -649,7 +649,7 @@ class Skills(
         // prayerPoints = staticLevels[PRAYER];
         // }
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, PRAYER))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, PRAYER))
         }
     }
 
@@ -667,14 +667,14 @@ class Skills(
             prayerPoints = staticLevels[PRAYER].toDouble()
         }
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, PRAYER))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, PRAYER))
         }
     }
 
     fun updatePrayerPoints(amount: Double) {
         prayerPoints = amount
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, PRAYER))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, PRAYER))
         }
     }
 
@@ -707,7 +707,7 @@ class Skills(
             dynamicLevels[skill] = maximum
         }
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, skill))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, skill))
         }
         return left
     }
@@ -738,7 +738,7 @@ class Skills(
             )
                 .toDouble()
         if (entity is Player) {
-            PacketRepository.send(Encoders530.UPDATE_STAT, SkillContext(entity, skill))
+            PacketRepository.send(Encoders578.UPDATE_STAT, SkillContext(entity, skill))
         }
     }
 

@@ -21,7 +21,9 @@ public final class GameReadEvent extends IoReadEvent {
             session.disconnect();
             return;
         }
+        if (player.getSession() != session || !session.isActive()) return;
         session.gameInput.read(buffer, session.getIsaacPair().getInput(), (opcode, payload) -> {
+            if (player.getSession() != session || !session.isActive()) return;
             session.setLastPing(System.currentTimeMillis());
             if (player.opCounts[opcode] >= 10) return;
             player.opCounts[opcode]++;
@@ -33,7 +35,7 @@ public final class GameReadEvent extends IoReadEvent {
             }
             if (player.<Boolean>getAttribute("logging_in", false) && !(packet instanceof Packet.CloseIface)
                     && !(packet instanceof Packet.TrackingDisplayUpdate)) return;
-            if (packet != null) PacketProcessor.enqueue(packet);
+            if (packet != null) PacketProcessor.enqueue(player, session, packet);
         });
     }
 

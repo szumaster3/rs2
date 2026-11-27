@@ -9,7 +9,7 @@ import core.game.world.map.build.DynamicRegion
 import core.game.world.map.build.RegionFlags
 import core.game.world.update.flag.chunk.ItemUpdateFlag
 import core.net.packet.PacketRepository.send
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.BuildItemContext
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
@@ -259,7 +259,7 @@ class RegionPlane(
         val g = item
         if (g.isPrivate) {
             if (g.dropper != null) {
-                send(Encoders530.CONSTRUCT_GROUND_ITEM, BuildItemContext(g.dropper, item))
+                send(Encoders578.CONSTRUCT_GROUND_ITEM, BuildItemContext(g.dropper, item))
             }
             return
         }
@@ -298,7 +298,7 @@ class RegionPlane(
         if (item.isPrivate) {
             // https://runescape.wiki/w/Drops
             if (item.dropper != null && item.dropper.isPlaying && item.dropper.location.withinDistance(l)) {
-                send(Encoders530.CLEAR_GROUND_ITEM, BuildItemContext(item.dropper, item))
+                send(Encoders578.CLEAR_GROUND_ITEM, BuildItemContext(item.dropper, item))
             }
             return
         }

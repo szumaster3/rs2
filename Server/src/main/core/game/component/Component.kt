@@ -7,7 +7,7 @@ import core.game.interaction.InterfaceListeners.runOpen
 import core.game.interaction.InterfaceListeners.runSlotSwitch
 import core.game.node.entity.player.Player
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.InterfaceContext
 
 /**
@@ -82,7 +82,7 @@ open class Component {
 
         if (definition == null) {
             PacketRepository.send(
-                Encoders530.IF_OPENSUB,
+                Encoders578.IF_OPENSUB,
                 InterfaceContext(player, manager.windowPaneId, manager.defaultChildId, id, false),
             )
             plugin?.open(player, this)
@@ -94,7 +94,7 @@ open class Component {
         }
 
         if (definition.type == InterfaceType.TAB) {
-            PacketRepository.send(Encoders530.IF_OPENSUB, InterfaceContext(
+            PacketRepository.send(Encoders578.IF_OPENSUB, InterfaceContext(
                 player,
                 definition.getWindowPaneId(manager.isResizable),
                 definition.getChildId(manager.isResizable) + core.game.node.entity.player.link.InterfaceManager.protocolTabIndex(definition.tabIndex),
@@ -105,7 +105,7 @@ open class Component {
             return
         }
 
-        PacketRepository.send(Encoders530.IF_OPENSUB, InterfaceContext(
+        PacketRepository.send(Encoders578.IF_OPENSUB, InterfaceContext(
             player,
             definition.getWindowPaneId(manager.isResizable),
             definition.getChildId(manager.isResizable),

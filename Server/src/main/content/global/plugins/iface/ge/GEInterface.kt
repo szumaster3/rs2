@@ -12,7 +12,7 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ContainerContext
 import shared.consts.Components
 import shared.consts.Sounds
@@ -205,7 +205,7 @@ class GEInterface : InterfaceListener {
                 playAudio(player, Sounds.GE_TRADE_OK_4044)
 
                 PacketRepository.send(
-                    Encoders530.CONTAINER_PACKET,
+                    Encoders578.CONTAINER_PACKET,
                     ContainerContext(
                         player,
                         -1,

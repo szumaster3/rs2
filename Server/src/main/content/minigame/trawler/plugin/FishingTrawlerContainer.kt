@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders530
+import core.net.packet.out.Encoders578
 import core.net.packet.out.PacketContext.ContainerContext
 import shared.consts.Components
 
@@ -142,7 +142,7 @@ class FishingTrawlerContainer(val player: Player) :
 
         override fun refresh(c: Container?) {
             PacketRepository.send(
-                Encoders530.CONTAINER_PACKET,
+                Encoders578.CONTAINER_PACKET,
                 ContainerContext(player, INTERFACE_ID, CONTAINER_CHILD, -1, c!!.toArray(), false)
             )
         }
