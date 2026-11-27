@@ -143,7 +143,8 @@ object PacketProcessor {
             }
 
             is Packet.SetClanRank -> {
-                CommunicationInfo.updateClanRank(pkt.player, pkt.username, ClanRank.values()[pkt.rank + 1])
+                val rank = ClanRank.values().firstOrNull { it.value == pkt.rank } ?: return
+                CommunicationInfo.updateClanRank(pkt.player, pkt.username, rank)
             }
 
             is Packet.KickFromClan -> {
@@ -648,6 +649,7 @@ object PacketProcessor {
         } else if (pkt is Packet.UseWithScenery) {
             item = pkt.player.inventory[pkt.slot] ?: return sendClearMinimap(pkt.player)
             node = RegionManager.getObject(pkt.player.location.z, pkt.x, pkt.y) ?: return sendClearMinimap(pkt.player)
+            if (node.id != pkt.sceneryId) return sendClearMinimap(pkt.player)
             childNode = node.asScenery().getChild(pkt.player)
             itemId = pkt.itemId
             nodeId = node.id

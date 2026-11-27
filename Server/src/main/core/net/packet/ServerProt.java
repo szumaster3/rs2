@@ -20,7 +20,7 @@ public final class ServerProt {
     };
 
     public static boolean validate(int opcode, PacketHeader header, int payload) {
-        if (opcode < 0 || opcode >= LENGTHS.length) return false;
+        if (opcode < 0 || opcode >= LENGTHS.length || payload < 0) return false;
         int expected = LENGTHS[opcode];
         if (expected == -1) return header == PacketHeader.BYTE && payload <= 255;
         if (expected == -2) return header == PacketHeader.SHORT && payload <= 65535;

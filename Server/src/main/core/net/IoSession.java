@@ -95,7 +95,16 @@ public class IoSession {
     /**
      * If the session is active.
      */
-    private boolean active = true;
+    private volatile boolean active = true;
+    private volatile int lastTransmitVerifyId = -1;
+
+    public void recordTransmitVerifyId(int id) {
+        lastTransmitVerifyId = id;
+    }
+
+    public int getLastTransmitVerifyId() {
+        return lastTransmitVerifyId;
+    }
     /**
      * The last ping time stamp.
      */
@@ -164,7 +173,9 @@ public class IoSession {
     private void enqueue(ByteBuffer buffer, int opcode) {
         writingLock.lock();
         try {
+            if (!active) return;
             if (opcode >= 0) {
+                if (!(producer instanceof GameEventProducer) || isaacPair == null) return;
                 int isaac = isaacPair.getOutput().getNextValue();
                 int encrypted = (opcode + isaac) & 0xFF;
 

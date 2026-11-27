@@ -28,7 +28,9 @@ public enum ZoneProt {
     }
 
     public IoBuffer start(IoBuffer enclosed) {
-        return enclosed == null ? new IoBuffer(opcode) : enclosed.put(enclosedId);
+        return enclosed == null
+                ? new IoBuffer(opcode, this == TEXT_COORD ? PacketHeader.BYTE : PacketHeader.NORMAL)
+                : enclosed.put(enclosedId);
     }
 
     public static IoBuffer enclosed(int x, int z, int plane) {

@@ -90,6 +90,31 @@ public final class GameReadEvent extends IoReadEvent {
             }
             case 51:
                 return new Packet.CloseIface(player);
+            case 23: // EVENT_KEYBOARD: Protocol.mainLogic, key byte + BE elapsed u16.
+                if (payload.remaining() % 3 != 0 || payload.remaining() > 225)
+                    throw new IllegalArgumentException("Invalid keyboard telemetry length");
+                while (payload.hasRemaining()) {
+                    payload.get();
+                    payload.getShort();
+                }
+                return null; // Local singleplayer does not retain keyboard telemetry.
+            case 42: // Preferences.encode: version 16, 39 bytes including version.
+                if (payload.remaining() != 39 || Byte.toUnsignedInt(payload.get()) != 16)
+                    throw new IllegalArgumentException("Invalid revision 578 preferences payload");
+                payload.position(payload.limit());
+                return null; // Client graphics/audio preferences are not player settings.
+            case 61: // EVENT_MOUSE_MOVE: compressed records in Protocol.mainLogic.
+                while (payload.hasRemaining()) {
+                    int prefix = Byte.toUnsignedInt(payload.get());
+                    if (prefix < 128) payload.get();
+                    else if (prefix < 192) payload.getShort();
+                    else if (prefix < 224) payload.getInt();
+                    else { payload.get(); payload.getInt(); }
+                }
+                return null; // Validate record boundaries; do not retain mouse movement.
+            case 38: // Stellar Dawn-only Face here action; not a RuneScape action.
+                payload.position(payload.limit());
+                return null;
             case 33: // EVENT_FRAME_MAP_LOADED: desktop frame telemetry, LoginManager.java.
                 payload.getInt();
                 return null;
@@ -181,6 +206,10 @@ public final class GameReadEvent extends IoReadEvent {
             }
             case 15: return new Packet.KickFromClan(player, readText(payload));
             case 64: return new Packet.JoinClan(player, payload.hasRemaining() ? readText(payload) : "");
+            case 25: // Protocol.method2432: acknowledgement of the last transmit verify ID.
+                // Never let a delayed or forged acknowledgement rewind the outgoing counter.
+                player.getSession().recordTransmitVerifyId(be(payload));
+                return null;
             case 71: return new Packet.Ping(player);
             case 20: return new Packet.TrackFinished(player, payload.getInt());
             // Ground item options, Protocol.java and Static327 menu ordering.
@@ -197,6 +226,69 @@ public final class GameReadEvent extends IoReadEvent {
             case 45: { int id = le(payload); payload.get(); return new Packet.PlayerAction(player, 5, id); }
             case 27: payload.get(); return new Packet.PlayerAction(player, 6, leA(payload));
             case 35: { int id = leA(payload); payload.get(); return new Packet.PlayerAction(player, 7, id); }
+            // Protocol.method4427 and Static185.method3400: selected component target.
+            case 75: {
+                int source = payload.getInt(); payload.get();
+                int item = leA(payload), slot = le(payload), npc = be(payload);
+                if (!active(player, source) || npc <= 0 || npc >= core.ServerConstants.MAX_NPCS) return null;
+                return item == 65535 ? new Packet.ComponentNpcAction(player, source >>> 16, source & 65535, npc)
+                        : new Packet.UseWithNpc(player, item, npc, source >>> 16, slot);
+            }
+            case 48: {
+                int source = Integer.reverseBytes(payload.getInt()); payload.get();
+                int slot = le(payload), item = leA(payload), target = le(payload);
+                if (!active(player, source) || target <= 0 || target >= core.ServerConstants.MAX_PLAYERS) return null;
+                return item == 65535 ? new Packet.ComponentPlayerAction(player, target, source >>> 16, source & 65535)
+                        : new Packet.UseWithPlayer(player, item, target, source >>> 16, slot);
+            }
+            case 6: {
+                int item = be(payload), target = leA(payload), x = le(payload); payload.get();
+                int slot = leA(payload), source = intAlt3(payload), z = leA(payload);
+                if (!active(player, source) || x > 16383 || z > 16383) return null;
+                return item == 65535 ? new Packet.ComponentGroundItemAction(player, source >>> 16, source & 65535, slot, target, x, z)
+                        : new Packet.UseWithGroundItem(player, item, target, source >>> 16, source & 65535, slot, x, z);
+            }
+            case 9: {
+                int target = le(payload), source = intAlt2(payload), item = be(payload); payload.get();
+                int slot = leA(payload), x = be(payload), z = be(payload);
+                if (!active(player, source) || x > 16383 || z > 16383) return null;
+                if (item == 65535) return new Packet.ComponentSceneryAction(player, source >>> 16, source & 65535, target, x, z);
+                // Existing item-on-scenery listener uses the inventory only.
+                if ((source >>> 16) != 149) return null;
+                return new Packet.UseWithScenery(player, item, slot, target, x, z);
+            }
+            case 11: { // Protocol.method6129: component target.
+                int target = payload.getInt(), targetSlot = beA(payload), slot = beA(payload);
+                int item = be(payload), source = intAlt3(payload), targetItem = be(payload);
+                if (!active(player, source) || !active(player, target) || targetItem == 65535) return null;
+                if (item == 65535) {
+                    if ((target >>> 16) != 149) return null;
+                    return new Packet.ComponentItemAction(player, source >>> 16, source & 65535, targetItem, targetSlot);
+                }
+                return new Packet.UseWithItem(player, item, targetItem, slot, targetSlot,
+                        source >>> 16, target >>> 16, source & 65535, target & 65535);
+            }
+            case 13: { // Protocol.method5096 / Cs1ScriptRunner: source then destination.
+                int source = payload.getInt(), item = leA(payload), slot = beA(payload);
+                int target = intAlt3(payload), targetItem = leA(payload), targetSlot = le(payload);
+                int iface = source >>> 16;
+                if (!active(player, source) || !active(player, target) || iface != (target >>> 16)) return null;
+                // Restrict legacy slot switching to its known inventory/bank containers.
+                core.game.container.Container container;
+                if (iface == 149 && (source & 65535) == 0 && (target & 65535) == 0) container = player.getInventory();
+                else if (iface == 762 && (source & 65535) == 73 && (target & 65535) == 73) container = player.getBank();
+                else return null;
+                if (slot >= container.capacity() || targetSlot >= container.capacity() || slot == targetSlot) return null;
+                core.game.node.item.Item from = container.get(slot), to = container.get(targetSlot);
+                if (from == null || from.getId() != item || (to == null ? 65535 : to.getId()) != targetItem) return null;
+                return new Packet.SlotSwitchMultiComponent(player, iface, source & 65535, slot, iface, target & 65535, targetSlot);
+            }
+            case 49: { // FriendsList.setRank: signed rank + 128, CP1252 name.
+                int rank = (byte) (payload.get() - 128);
+                String name = readText(payload);
+                if (name.isEmpty() || rank < 0 || rank > 6) return null;
+                return new Packet.SetClanRank(player, name, rank);
+            }
             case 58: return new Packet.GESetOfferItem(player, be(payload)); // ScriptRunner 3110
             default:
                 // Keep-alives and as-yet unmapped frames end here.
@@ -218,6 +310,22 @@ public final class GameReadEvent extends IoReadEvent {
             text.append(StringUtils.getFromByte(value));
         }
         return text.toString();
+    }
+
+    private static boolean active(Player player, int component) {
+        return player.getInterfaceManager().getComponent(component >>> 16) != null;
+    }
+
+    // Inverse of client Packet.p4_alt2 and p4_alt3 respectively.
+    private static int intAlt2(ByteBuffer b) {
+        int a = Byte.toUnsignedInt(b.get()), c = Byte.toUnsignedInt(b.get());
+        int d = Byte.toUnsignedInt(b.get()), e = Byte.toUnsignedInt(b.get());
+        return d << 24 | e << 16 | a << 8 | c;
+    }
+    private static int intAlt3(ByteBuffer b) {
+        int a = Byte.toUnsignedInt(b.get()), c = Byte.toUnsignedInt(b.get());
+        int d = Byte.toUnsignedInt(b.get()), e = Byte.toUnsignedInt(b.get());
+        return c << 24 | a << 16 | e << 8 | d;
     }
 
     private static int be(ByteBuffer b) { return Short.toUnsignedInt(b.getShort()); }

@@ -505,7 +505,7 @@ public class IoBuffer {
      * @return
      */
     public IoBuffer putString(String val) {
-        buf.put(val.getBytes());
+        putCp1252(val);
         buf.put((byte) 0);
         return this;
     }
@@ -515,10 +515,28 @@ public class IoBuffer {
      * @return
      */
     public IoBuffer putJagString(String val) {
+        if (val.indexOf(0) >= 0) throw new IllegalArgumentException("NUL in protocol string");
         buf.put((byte) 0);
-        buf.put(val.getBytes());
+        putCp1252(val);
         buf.put((byte) 0);
         return this;
+    }
+
+    /**
+     * Client Cp1252Charset.encodeString: one byte per UTF-16 code unit.
+     */
+    private void putCp1252(String value) {
+        if (value.indexOf(0) >= 0) throw new IllegalArgumentException("NUL in protocol string");
+        final String extensions = "\u20ac\0\u201a\u0192\u201e\u2026\u2020\u2021"
+                + "\u02c6\u2030\u0160\u2039\u0152\0\u017d\0"
+                + "\0\u2018\u2019\u201c\u201d\u2022\u2013\u2014"
+                + "\u02dc\u2122\u0161\u203a\u0153\0\u017e\u0178";
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            int index = extensions.indexOf(c);
+            buf.put((byte) ((c > 0 && c < 128 || c >= 160 && c <= 255)
+                    ? c : index >= 0 ? index + 128 : 63));
+        }
     }
 
     /**
