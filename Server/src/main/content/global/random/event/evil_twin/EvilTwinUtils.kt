@@ -44,7 +44,7 @@ object EvilTwinUtils {
 
     fun getRegion(player: Player): DynamicRegion {
         return regions.getOrPut(player) {
-            DynamicRegion.create(Regions.RE_EVIL_TWIN_7504)
+            DynamicRegion.create(7504)
         }
     }
 

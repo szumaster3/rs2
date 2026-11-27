@@ -48,7 +48,7 @@ class EnchantedValleyPlugin : InteractionListener {
 
             sendMessage(player, "You cast out your net...")
 
-            if (player.viewport.region?.id == Regions.ENCHANTED_VALLEY_12102) {
+            if (player.viewport.region?.id == 12102) {
                 val npc = EnchantedValleyNPC.getRandom(RIVER_TROLL_IDS, node.location, player)
                 npc.init()
             } else sendMessage(player, "Nothing interesting happens.")

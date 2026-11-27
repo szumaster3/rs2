@@ -165,7 +165,7 @@ class VarrockPlugin : InteractionListener {
          */
 
         on(Scenery.CLOSED_CHEST_24203, IntType.SCENERY, "open") { player, node ->
-            val inGuild = inBorders(player, getRegionBorders(Regions.VARROCK_CHAMPIONS_GUILD_12596))
+            val inGuild = inBorders(player, getRegionBorders(12596))
             val hasClue = inInventory(player, Items.CLUE_SCROLL_10222, 1)
             val hasKey = inInventory(player, Items.KEY_2834, 1)
 

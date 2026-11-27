@@ -122,7 +122,7 @@ class CanoePlugin : InteractionListener, InterfaceListener {
     }
 
     enum class CanoeStation(val region: Int, val varbit: Int, val chopLocation: Location, val floatLocation: Location, val facing: Location, val sinkLocation: Location, val destination: Location, val destName: String) {
-        LUMBRIDGE(Regions.LUMBRIDGE_12850, Vars.VARBIT_CANOE_STATE_LUMBRIDGE_1839, Location(3243, 3235), Location(3243, 3237), Location(-1, 0), Location(3239, 3242, 0), Location(3240, 3242, 0), "Lumbridge"),
+        LUMBRIDGE(12850, Vars.VARBIT_CANOE_STATE_LUMBRIDGE_1839, Location(3243, 3235), Location(3243, 3237), Location(-1, 0), Location(3239, 3242, 0), Location(3240, 3242, 0), "Lumbridge"),
         CHAMPIONS(12852, Vars.VARBIT_CANOE_STATE_CHAMPIONS_GUILD_1840, Location(3204, 3343), Location(3202, 3343), Location(0, -1), Location(3199, 3344, 0), Location(3199, 3344, 0), "the Champion's Guild"),
         BARBARIAN(12341, Vars.VARBIT_CANOE_STATE_BARBARIAN_VILLAGE_1841, Location(3112, 3409), Location(3112, 3411), Location(-1, 0), Location(3109, 3411, 0), Location(3109, 3415), "Barbarian Village"),
         EDGEVILLE(12342, Vars.VARBIT_CANOE_STATE_EDGEVILLE_1842, Location(3132, 3508), Location(3132, 3510), Location(-1, 0), Location(3132, 3510, 0), Location(3129, 3501, 0), "Edgeville"),

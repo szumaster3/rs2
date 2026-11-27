@@ -34,7 +34,7 @@ class DesertZone : MapZone(DESERT_ZONE, true), Plugin<Any?> {
 
     override fun configure() {
         register(getRegionBorders(12589))
-        register(getRegionBorders(BANDITS_12590))
+        register(getRegionBorders(12590))
         register(getRegionBorders(12591))
         register(getRegionBorders(12843))
         register(getRegionBorders(12844))

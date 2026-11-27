@@ -71,8 +71,10 @@ class WoodcuttingPlugin : InteractionListener {
                 return clearScripts(player)
             }
             if(inEquipmentOrInventory(player, Items.INFERNO_ADZE_13661) &&
-                player.location.isInRegion(Regions.MISCELLANIA_10044) ||
-                player.location.isInRegion(Regions.ETCETERIA_10300))
+                // MISCELLANIA
+                player.location.isInRegion(10044) ||
+                // ETCETERIA
+                player.location.isInRegion(10300))
             {
                 sendDialogue(player, "I don't think I should use the Inferno Adze in here, since there is a chance I might set the logs on fire.")
                 return clearScripts(player)

@@ -417,7 +417,7 @@ object BalloonUtils {
             return false
         }
 
-        if (!inBorders(player, getRegionBorders(Regions.ENTRANA_11060))) {
+        if (!inBorders(player, getRegionBorders(11060))) {//ENTRANA
             sendDialogue(player, "You can open new locations from Entrana.")
             return true
         }

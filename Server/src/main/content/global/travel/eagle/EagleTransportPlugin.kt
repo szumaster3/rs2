@@ -83,7 +83,7 @@ private class DesertEagleCutscene(player: Player) : Cutscene(player) {
             player.settings.toggleRun()
         }
         addNPC(NPCs.DESERT_EAGLE_5130, 12, 20, Direction.SOUTH)
-        loadRegion(Regions.UZER_DESERT_EYRIE_ENTRANCE_13617)
+        loadRegion(13617)
     }
 
     override fun runStage(stage: Int) {
@@ -125,7 +125,7 @@ private class JungleEagleCutscene(player: Player) : Cutscene(player) {
             player.settings.toggleRun()
         }
         addNPC(NPCs.JUNGLE_EAGLE_5131, 14, 42, Direction.EAST)
-        loadRegion(Regions.FELDIP_HILLS_EYRIE_ENTRANCE_10029)
+        loadRegion(10029)// FELDIP_HILLS_EYRIE_ENTRANCE
     }
 
     override fun runStage(stage: Int) {
@@ -168,7 +168,7 @@ private class EaglePeakCutscene(player: Player) : Cutscene(player) {
             player.settings.toggleRun()
         }
         addNPC(5122, 28, 33, Direction.EAST)
-        loadRegion(Regions.EAGLES_PEAK_EYRIE_ENTRANCE_9270)
+        loadRegion(9270) // EAGLES_PEAK_EYRIE_ENTRANCE
     }
 
     override fun runStage(stage: Int) {
@@ -208,7 +208,7 @@ private class PolarEagleCutscene(player: Player) : Cutscene(player) {
             player.settings.toggleRun()
         }
         addNPC(5122, 50, 58, Direction.WEST)
-        loadRegion(Regions.RELLEKKA_EYRIE_ENTRANCE_10811)
+        loadRegion(10811) // RELLEKKA_EYRIE_ENTRANCE
     }
 
     override fun runStage(stage: Int) {

@@ -70,7 +70,7 @@ class ImpetuousImpulses : MapZone("puro puro", true), Plugin<Any> {
     }
 
     override fun configure() {
-        registerRegion(Regions.PURO_PURO_10307)
+        registerRegion(10307)
         WHEAT.add(WheatSet(0, Location.create(2606, 4329, 0), Location.create(2606, 4328, 0)))
         WHEAT.add(WheatSet(1, Location.create(2596, 4331, 0), Location.create(2597, 4331, 0)))
         WHEAT.add(WheatSet(0, Location.create(2580, 4326, 0), Location.create(2580, 4325, 0)))

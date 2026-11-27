@@ -71,7 +71,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(Regions.JADE_VINE_MAZE_11566))
+        return arrayOf(getRegionBorders(11566))
     }
 
     /* Hit chance decreases with Agility (1 = 99% hit, 99 = 0% hit).

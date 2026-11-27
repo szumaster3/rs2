@@ -38,7 +38,7 @@ class ArdougneAchievementDiary : DiaryEventHookBase(DiaryType.ARDOUGNE) {
     private val PLAGUE_CITY_REGION = 10035
     private val LEGEND_GUILD_BASEMENT = 10904
     private val OURANIA_SALAMANDERS_REGION = 9778
-    private val FISHING_PLATFORM_REGION = Regions.FISHING_PLATFORM_11059
+    private val FISHING_PLATFORM_REGION = 11059
     private val CHAOS_DRUID_TOWER_UNDERGROUND_REGION = 10392
     private val FIGHT_ARENA_REGION = 10545
 

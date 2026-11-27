@@ -182,7 +182,7 @@ class ChampionChallengePlugin : InteractionListener, MapArea {
         /**
          * The location of activity.
          */
-        private const val CHAMPION_CHALLENGE_REGION = Regions.CHAMPION_CHALLENGE_12696
+        private const val CHAMPION_CHALLENGE_REGION = 12696
 
         /**
          * Displays the champion scroll content.

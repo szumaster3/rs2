@@ -21,7 +21,7 @@ class KennithCutscene(
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        loadRegion(Regions.FISHING_PLATFORM_11059)
+        loadRegion(11059)
         addNPC(NPCs.KENNITH_4864, 16, 25, Direction.EAST, 1)
     }
 
