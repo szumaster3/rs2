@@ -1,5 +1,7 @@
 package core.net.packet.out
 
+import core.net.packet.ServerProt
+
 import core.cache.crypto.ISAACCipher
 import core.game.system.config.XteaParser
 import core.game.world.map.Location
@@ -47,7 +49,7 @@ object LoginWorldEncoder {
 
     fun dynamicRegion(location: Location, chunks: Array<Array<Array<RegionChunk?>>>): IoBuffer {
         require(chunks.size == 4 && chunks.all { plane -> plane.size == 13 && plane.all { it.size == 13 } })
-        val out = IoBuffer(88, PacketHeader.SHORT)
+        val out = IoBuffer(ServerProt.REBUILD_REGION, PacketHeader.SHORT)
         out.putShort(location.regionX).putLEShort(location.regionY).putC(0).putC(1)
         val mapSquares = linkedSetOf<Int>()
         out.setBitAccess()

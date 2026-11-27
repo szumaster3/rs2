@@ -1,5 +1,7 @@
 package core.net.packet
 
+import core.game.interaction.InterfaceOperation
+
 import content.data.GameAttributes
 import content.global.plugins.iface.ge.StockMarket
 import content.global.skill.magic.SpellListener
@@ -330,8 +332,8 @@ object PacketProcessor {
                     player.interfaceManager.closeChatbox()
                     player.dialogueInterpreter.actions.removeFirstOrNull()?.handle(player, pkt.child)
                     val component = player.interfaceManager.getComponent(pkt.iface) ?: return
-                    if (!InterfaceListeners.run(player, component, pkt.opcode, pkt.child, pkt.slot, -1))
-                        component.plugin?.handle(player, component, pkt.opcode, pkt.child, pkt.slot, -1)
+                    if (!InterfaceListeners.run(player, component, InterfaceOperation.CONTINUE, pkt.child, pkt.slot, -1))
+                        component.plugin?.handle(player, component, InterfaceOperation.CONTINUE, pkt.child, pkt.slot, -1)
                     return
                 }
                 player.dialogueInterpreter.handle(pkt.iface, pkt.child)
@@ -664,18 +666,20 @@ object PacketProcessor {
     }
 
     private fun processIfAction(pkt: Packet.IfAction) {
+        if (pkt.optIndex !in 0..9) return
+        val listenerOperation = InterfaceOperation.listenerId(pkt.optIndex)
         val player = pkt.player
         if (player.getAttribute("logging_in", false)) return
         player.debug("[IF ACTION]--------------------------")
         player.debug("Iface: ${pkt.iface}, Button: ${pkt.child}")
         player.debug("Slot: ${pkt.slot}, ItemID: ${pkt.itemId}")
-        player.debug("RCM Index: ${pkt.optIndex}, Op: ${pkt.opcode}")
+        player.debug("RCM Index: ${pkt.optIndex}, Op: ${ClientProt.name(pkt.wireOpcode)}")
         player.debug("-------------------------------------")
-        if (pkt.iface != 900 && player.dialogueInterpreter.dialogue != null && pkt.opcode != 132 && pkt.iface != 64 && pkt.iface != 746 && pkt.iface != 548)
+        if (pkt.iface != 900 && player.dialogueInterpreter.dialogue != null && pkt.iface != 64 && pkt.iface != 746 && pkt.iface != 548)
             player.dialogueInterpreter.close()
         if (player.locks.isComponentLocked())
             return
-        if (player.zoneMonitor.clickButton(pkt.iface, pkt.child, pkt.slot, pkt.itemId, pkt.opcode))
+        if (player.zoneMonitor.clickButton(pkt.iface, pkt.child, pkt.slot, pkt.itemId, listenerOperation))
             return
         val c = player.interfaceManager.getComponent(pkt.iface) ?: return
         if (c.isHidden)
@@ -709,8 +713,8 @@ object PacketProcessor {
         }
         player.dispatch(ButtonClickEvent(c.id, pkt.child))
         if (core.game.node.entity.player.link.AutocastManager.handle(player, pkt.iface, pkt.child, pkt.optIndex)) return
-        if (!InterfaceListeners.run(player, c, pkt.opcode, pkt.child, pkt.slot, pkt.itemId))
-            plugin?.handle(player, c, pkt.opcode, pkt.child, pkt.slot, pkt.itemId)
+        if (!InterfaceListeners.run(player, c, listenerOperation, pkt.child, pkt.slot, pkt.itemId))
+            plugin?.handle(player, c, listenerOperation, pkt.child, pkt.slot, pkt.itemId)
     }
 
     private fun selectedContainer(pkt: Packet, player: Player, iface: Int, target: Boolean = false): Container? {

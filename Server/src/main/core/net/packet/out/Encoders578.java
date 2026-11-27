@@ -1,5 +1,7 @@
 package core.net.packet.out;
 
+import core.net.packet.ServerProt;
+
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketHeader;
 
@@ -9,17 +11,17 @@ public final class Encoders578 {
 
     /** Clears the client's primary entity animations, not server animator state. */
     public static IoBuffer resetEntityAnimations() {
-        return new IoBuffer(103);
+        return new IoBuffer(ServerProt.RESET_ENTITY_ANIMATIONS);
     }
 
     /** Resets the client's resettable varps; callers must resynchronize server values. */
     public static IoBuffer resetClientVarps() {
-        return new IoBuffer(75);
+        return new IoBuffer(ServerProt.RESET_CLIENT_VARPS);
     }
 
     /** Runs onDialogAbort hooks recursively from the active top-level interface. */
     public static IoBuffer runDialogAbortHooks() {
-        return new IoBuffer(82);
+        return new IoBuffer(ServerProt.RUN_DIALOG_ABORT_HOOKS);
     }
 
     /** Empty payload restores the client's localized default walk option. */
@@ -27,7 +29,7 @@ public final class Encoders578 {
         if (option.length() > 254 || option.indexOf(0) >= 0) {
             throw new IllegalArgumentException("Invalid walk option");
         }
-        IoBuffer buffer = new IoBuffer(11, PacketHeader.BYTE);
+        IoBuffer buffer = new IoBuffer(ServerProt.SET_WALK_OPTION, PacketHeader.BYTE);
         if (!option.isEmpty()) buffer.putString(option);
         return buffer;
     }
@@ -42,27 +44,27 @@ public final class Encoders578 {
                 || (tile && (id == -1 || delay != 0))) {
             throw new IllegalArgumentException("Invalid global spot animation");
         }
-        return new IoBuffer(0).putShortA(id).putShortA(delay).putInt(target).putLEShort(height);
+        return new IoBuffer(ServerProt.GLOBAL_SPOT_ANIMATION).putShortA(id).putShortA(delay).putInt(target).putLEShort(height);
     }
 
     public static IoBuffer logout() {
-        return new IoBuffer(58);
+        return new IoBuffer(ServerProt.LOGOUT);
     }
 
     public static IoBuffer clearMinimapFlag() {
-        return new IoBuffer(17).putC(255).putS(255);
+        return new IoBuffer(ServerProt.MINIMAP_FLAG).putC(255).putS(255);
     }
 
     public static IoBuffer minimapState(int state) {
         if (state < 0 || state > 255) throw new IllegalArgumentException("Invalid minimap state");
-        return new IoBuffer(40).put(state);
+        return new IoBuffer(ServerProt.MINIMAP_STATE).put(state);
     }
 
     public static IoBuffer varc(int id, int value, int verify) {
         if (value >= Byte.MIN_VALUE && value <= Byte.MAX_VALUE) {
-            return new IoBuffer(48).putA(value).putShortA(verify).putLEShortA(id);
+            return new IoBuffer(ServerProt.VARC_SMALL).putA(value).putShortA(verify).putLEShortA(id);
         }
-        return new IoBuffer(22).putShort(verify).putInt(value).putLEShort(id);
+        return new IoBuffer(ServerProt.VARC_LARGE).putShort(verify).putInt(value).putLEShort(id);
     }
 
     /** Short and long string varc frames share the same delayed client state. */
@@ -71,37 +73,37 @@ public final class Encoders578 {
             throw new IllegalArgumentException("Invalid varc string");
         }
         if (value.length() <= 250) {
-            return new IoBuffer(53, PacketHeader.BYTE).putShort(id).putString(value).putLEShort(verify);
+            return new IoBuffer(ServerProt.VARCSTR_SMALL, PacketHeader.BYTE).putShort(id).putString(value).putLEShort(verify);
         }
-        return new IoBuffer(85, PacketHeader.SHORT).putString(value).putLEShortA(id).putLEShort(verify);
+        return new IoBuffer(ServerProt.VARCSTR_LARGE, PacketHeader.SHORT).putString(value).putLEShortA(id).putLEShort(verify);
     }
 
     public static IoBuffer openTop(int type, int id, int verify) {
-        return new IoBuffer(93).put(type).putLEShort(id).putLEShort(verify);
+        return new IoBuffer(ServerProt.IF_OPENTOP).put(type).putLEShort(id).putLEShort(verify);
     }
 
     public static IoBuffer openSub(int component, int type, int id, int verify) {
-        return new IoBuffer(52).putShortA(verify).putS(type).putLEInt(component).putShort(id);
+        return new IoBuffer(ServerProt.IF_OPENSUB).putShortA(verify).putS(type).putLEInt(component).putShort(id);
     }
 
     public static IoBuffer settings(int component, int first, int last, int events, int verify) {
-        return new IoBuffer(38).putIntA(component).putLEShort(first).putIntB(events)
+        return new IoBuffer(ServerProt.SET_INTERFACE_SETTINGS).putIntA(component).putLEShort(first).putIntB(events)
                 .putShortA(last).putLEShort(verify);
     }
 
     public static IoBuffer targetParam(int component, int first, int last, int param, int verify) {
-        return new IoBuffer(77).putShort(first).putLEShort(param).putShortA(last)
+        return new IoBuffer(ServerProt.WIDGETSTRUCT_SETTING).putShort(first).putLEShort(param).putShortA(last)
                 .putShort(verify).putIntA(component);
     }
 
     public static IoBuffer interaction(String name, int slot, boolean primary) {
         if (slot < 1 || slot > 8) throw new IllegalArgumentException("Invalid interaction slot");
-        return new IoBuffer(46, PacketHeader.BYTE).putString(wireText(name, 250))
+        return new IoBuffer(ServerProt.SET_INTERACTION, PacketHeader.BYTE).putString(wireText(name, 250))
                 .putShortA(-1).putS(slot).putS(primary ? 1 : 0);
     }
 
     public static IoBuffer message(String message, int timestamp) {
-        return new IoBuffer(99, PacketHeader.BYTE).put(0).putInt(timestamp).put(0)
+        return new IoBuffer(ServerProt.MESSAGE_GAME, PacketHeader.BYTE).put(0).putInt(timestamp).put(0)
                 .putString(wireText(message, 248));
     }
 

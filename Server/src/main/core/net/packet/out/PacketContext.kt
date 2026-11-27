@@ -1,5 +1,7 @@
 package core.net.packet.out
 
+import core.net.packet.ServerProt
+
 import core.game.container.Container
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -100,7 +102,7 @@ sealed class PacketContext {
         fun transform(heightOffset: Int) = CameraContext(player, type, x, y, height + heightOffset, speed, zoomSpeed)
 
         enum class CameraType(val opcode: Int) {
-            POSITION(25), ROTATION(5), SET(14), SHAKE(23), RESET(91), SMOOTH_RESET(30)
+            POSITION(ServerProt.CAM_MOVE_TO), ROTATION(ServerProt.CAM_LOOK_AT), SET(ServerProt.CAM_FORCE_ANGLE), SHAKE(ServerProt.CAM_SHAKE), RESET(ServerProt.CAM_RESET), SMOOTH_RESET(ServerProt.CAM_SMOOTH_RESET)
         }
     }
 

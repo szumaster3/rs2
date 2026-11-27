@@ -1,5 +1,7 @@
 package core.net.packet.out
 
+import core.net.packet.ServerProt
+
 import core.cache.Cache
 import core.cache.def.impl.VarpDefinition
 import core.cache.def.impl.VarcDefinition
@@ -77,7 +79,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     LOC_ANIM_ABSOLUTE(encode<PacketContext.AbsoluteLocAnimation> { c ->
         val l = c.location
         if (l.x !in 0..16383 || l.y !in 0..16383 || l.z !in 0..3 || c.shape !in 0..22 || c.rotation !in 0..3 || c.animation !in -1..65534) return@encode
-        c.player.session.write(IoBuffer(16).putA((c.shape shl 2) or c.rotation)
+        c.player.session.write(IoBuffer(ServerProt.LOC_ANIM_ABSOLUTE).putA((c.shape shl 2) or c.rotation)
             .putIntB((l.z shl 28) or (l.x shl 14) or l.y).putLEShortA(c.animation))
     }),
     LOC_PREFETCH(encode<PacketContext.LocPrefetch> { c ->
@@ -141,7 +143,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         p.details.session.write(buffer)
     }),
     LAST_LOGIN_INFO(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(68)
+        val buffer = IoBuffer(ServerProt.LAST_LOGIN_INFO)
         val ip = context.player.details.accountInfo.lastUsedIp.ifEmpty { context.player.details.ipAddress }
         val octets = ip.split('.').map { it.toIntOrNull() }
         buffer.putInt(if (octets.size == 4 && octets.all { it != null && it in 0..255 })
@@ -166,17 +168,17 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     SYSTEM_UPDATE_PACKET(encode<SystemUpdateContext> { context ->
         if (context.time !in 0..65535) return@encode
-        context.player.details.session.write(IoBuffer(8).putShort(context.time))
+        context.player.details.session.write(IoBuffer(ServerProt.UPDATE_REBOOT_TIMER).putShort(context.time))
     }),
     RUN_ENERGY(encode<PlayerContext> { context ->
         val energy = context.player.settings.runEnergy
         if (!energy.isFinite() || energy < 0.0 || energy > 100.0) return@encode
-        context.player.details.session.write(IoBuffer(4).put(energy.toInt()))
+        context.player.details.session.write(IoBuffer(ServerProt.UPDATE_RUNENERGY).put(energy.toInt()))
     }),
     WEIGHT_UPDATE(encode<PlayerContext> { context ->
         val weight = context.player.settings.weight
         if (!weight.isFinite() || weight.toInt() !in -32768..32767) return@encode
-        context.player.details.session.write(IoBuffer(7).putShort(weight.toInt()))
+        context.player.details.session.write(IoBuffer(ServerProt.UPDATE_RUNWEIGHT).putShort(weight.toInt()))
     }),
     SKILL_LEVEL(encode<SkillContext> { context ->
         if (context.skillId !in Skills.SKILL_NAME.indices) return@encode
@@ -188,7 +190,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             else -> skills.getLevel(context.skillId, true)
         }
         if (!xp.isFinite() || xp < 0.0 || xp > Int.MAX_VALUE.toDouble() || level !in 0..255) return@encode
-        context.player.details.session.write(IoBuffer(20).putInt(xp.toInt()).putC(context.skillId).putS(level))
+        context.player.details.session.write(IoBuffer(ServerProt.UPDATE_STAT).putInt(xp.toInt()).putC(context.skillId).putS(level))
     }),
     GLOBAL_SPOT_ANIMATION(encode<PacketContext.GlobalSpotAnimationContext> { c ->
         c.player.details.session.write(Encoders578.globalSpotAnimation(c.target, c.id, c.delay, c.height))
@@ -206,12 +208,12 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         context.player.details.session.write(buffer)
     }),
     MOVE_INTERFACE(encode<PacketContext.MoveInterfaceContext> { context ->
-        val buffer = IoBuffer(66).putIntB(context.source).putIntB(context.destination)
+        val buffer = IoBuffer(ServerProt.IF_MOVESUB).putIntB(context.source).putIntB(context.destination)
             .putLEShort(context.player.interfaceManager.getPacketCount(1))
         context.player.session.write(buffer)
     }),
     CLOSE_INTERFACE(encode<InterfaceContext> { context ->
-        val buffer = IoBuffer(28)
+        val buffer = IoBuffer(ServerProt.IF_CLOSESUB)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putShort(context.windowId)
         buffer.putShort(context.componentId)
@@ -240,7 +242,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[Protocol578] Rejected INTERFACE_CONFIG for missing component ${context.interfaceId}:${context.childId}")
             return@encode
         }
-        val buffer = IoBuffer(97)
+        val buffer = IoBuffer(ServerProt.IF_SETHIDE)
         buffer.putLEShortA(context.player.interfaceManager.getPacketCount(1))
         buffer.putLEInt(context.interfaceId shl 16 or context.childId)
         buffer.putS(if (context.isHidden) 1 else 0)
@@ -248,7 +250,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     ANIMATE_INTERFACE(encode<AnimateInterfaceContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
-        val buffer = IoBuffer(9).putInt(context.interfaceId shl 16 or context.childId)
+        val buffer = IoBuffer(ServerProt.IF_SETANIM).putInt(context.interfaceId shl 16 or context.childId)
             .putLEShort(context.player.interfaceManager.getPacketCount(1)).putLEShortA(context.animationId)
         context.player.session.write(buffer)
     }),
@@ -257,11 +259,11 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
         val buffer = when (context.type) {
-            DisplayModelContext.ModelType.PLAYER -> IoBuffer(89).putLEInt(hash).putLEShortA(verify)
-            DisplayModelContext.ModelType.NPC -> IoBuffer(95).putIntA(hash).putShortA(context.nodeId).putLEShortA(verify)
-            DisplayModelContext.ModelType.ITEM -> IoBuffer(54).putLEShortA(verify).putLEShort(context.nodeId)
+            DisplayModelContext.ModelType.PLAYER -> IoBuffer(ServerProt.IF_SETPLAYER_MODEL_TYPE3).putLEInt(hash).putLEShortA(verify)
+            DisplayModelContext.ModelType.NPC -> IoBuffer(ServerProt.IF_SETNPC_MODEL_TYPE2).putIntA(hash).putShortA(context.nodeId).putLEShortA(verify)
+            DisplayModelContext.ModelType.ITEM -> IoBuffer(ServerProt.IF_SETOBJ).putLEShortA(verify).putLEShort(context.nodeId)
                 .putIntB(if (context.amount > 0) context.amount else context.zoom).putIntA(hash)
-            DisplayModelContext.ModelType.MODEL -> IoBuffer(81).putIntA(hash).putLEShortA(verify).putShort(context.nodeId)
+            DisplayModelContext.ModelType.MODEL -> IoBuffer(ServerProt.IF_SETMODEL).putIntA(hash).putLEShortA(verify).putShort(context.nodeId)
         }
         context.player.session.write(buffer)
     }),
@@ -272,7 +274,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             return@encode
         }
         if ('\u0000' in context.string || context.string.length > 65528) return@encode
-        val buffer = IoBuffer(60, PacketHeader.SHORT)
+        val buffer = IoBuffer(ServerProt.IF_SETTEXT, PacketHeader.SHORT)
         buffer.putString(context.string)
         buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putIntA((context.interfaceId shl 16) or context.lineId)
@@ -280,14 +282,14 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     REPOSITION_CHILD(encode<ChildPositionContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
-        val buffer = IoBuffer(86).putLEInt(context.interfaceId shl 16 or context.childId)
+        val buffer = IoBuffer(ServerProt.IF_SETPOSITION).putLEInt(context.interfaceId shl 16 or context.childId)
             .putLEShort(context.player.interfaceManager.getPacketCount(1))
             .putLEShort(context.position.y).putShortA(context.position.x)
         context.player.session.write(buffer)
     }),
     INTERFACE_SET_ANGLE(encode<InterfaceSetAngleContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
-        val buffer = IoBuffer(57).putIntB(context.interfaceId shl 16 or context.childId)
+        val buffer = IoBuffer(ServerProt.IF_SETANGLE).putIntB(context.interfaceId shl 16 or context.childId)
             .putLEShortA(context.player.interfaceManager.getPacketCount(1))
             .putShortA(context.scale).putShortA(context.pitch).putShortA(context.yaw)
         context.player.session.write(buffer)
@@ -301,32 +303,32 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         if (!validComponent578(context.interfaceId, context.childId) || context.value !in 0..32767) return@encode
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
-        context.player.session.write(IoBuffer(44).putInt(hash).putLEShortA(context.value).putShort(verify))
+        context.player.session.write(IoBuffer(ServerProt.IF_SETCOLOUR).putInt(hash).putLEShortA(context.value).putShort(verify))
     }),
     INTERFACE_SET_SPRITE(encode<PacketContext.ComponentValueContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId) || context.value !in 0..65535) return@encode
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
-        context.player.session.write(IoBuffer(36).putLEShortA(context.value).putIntA(hash).putShortA(verify))
+        context.player.session.write(IoBuffer(ServerProt.IF_SETSPRITE).putLEShortA(context.value).putIntA(hash).putShortA(verify))
     }),
     INTERFACE_SET_SELF_BODY_MODEL(encode<PacketContext.ComponentValueContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
-        context.player.session.write(IoBuffer(78).putShortA(verify).putIntA(hash))
+        context.player.session.write(IoBuffer(ServerProt.IF_SET_SELF_BODY_MODEL).putShortA(verify).putIntA(hash))
     }),
     INTERFACE_SET_PLAYER_BODY_MODEL(encode<PacketContext.InterfacePlayerModelContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId) || context.playerIndex !in 0..2047) return@encode
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
-        context.player.session.write(IoBuffer(24).putInt(hash).putIntA(context.nameHash).putShortA(verify).putLEShort(context.playerIndex))
+        context.player.session.write(IoBuffer(ServerProt.IF_SET_PLAYER_BODY_MODEL).putInt(hash).putIntA(context.nameHash).putShortA(verify).putLEShort(context.playerIndex))
     }),
     INTERFACE_SET_KIT_MODEL(encode<PacketContext.InterfaceKitModelContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId) ||
             context.kit1 !in 0..65535 || context.kit2 !in 0..65535 || context.kit3 !in 0..65535) return@encode
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
-        context.player.session.write(IoBuffer(90).putShort(context.kit1).putShort(verify)
+        context.player.session.write(IoBuffer(ServerProt.IF_SET_IDENTITY_KIT_MODEL).putShort(context.kit1).putShort(verify)
             .putShort(context.kit2).putLEShortA(context.kit3).putLEInt(hash))
     }),
     INTERFACE_SET_24BIT_VALUES(encode<PacketContext.Component24BitValuesContext> { c ->
@@ -337,7 +339,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         if (end > 65535 || c.values.any { it !in 0..0xffffff }) return@encode
         if ((c.firstChild until end).any { !validComponent578(c.interfaceId, it) }) return@encode
         val verify = c.player.interfaceManager.getPacketCount(1)
-        val buffer = IoBuffer(10, PacketHeader.BYTE).putShort(verify).putShort(c.interfaceId)
+        val buffer = IoBuffer(ServerProt.IF_COMPONENT_24BIT_VALUES, PacketHeader.BYTE).putShort(verify).putShort(c.interfaceId)
             .putShort(c.firstChild).putShort(end)
         c.values.forEach { buffer.putTri(it) }
         c.player.session.write(buffer)
@@ -346,20 +348,20 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         // Static45.method1398 explicitly distinguishes modes 0 and 1.
         if (c.mode !in 0..1) return@encode
         val verify = c.player.interfaceManager.getPacketCount(1)
-        c.player.session.write(IoBuffer(12).putShortA(verify).putC(c.mode))
+        c.player.session.write(IoBuffer(ServerProt.ENTITY_RENDER_PRIORITY).putShortA(verify).putC(c.mode))
     }),
     CLIENT_RANDOM_DATA(encode<PacketContext.ClientRandomDataContext> { c ->
         // Protocol.PACKET_26 / Packet.checkcrc / Static294.method5065.
         if (c.data.size != 24) return@encode
         val crc = java.util.zip.CRC32().apply { update(c.data) }.value.toInt()
-        c.player.session.write(IoBuffer(26).put(c.data).putInt(crc))
+        c.player.session.write(IoBuffer(ServerProt.CLIENT_RANDOM_DATA).put(c.data).putInt(crc))
     }),
     CLIENT_SETTINGS_COOKIE(encode<PacketContext.ClientSettingsCookieContext> { c ->
         // Static383.method6379 inserts the string into an applet JavaScript cookie.
         // Accept only opaque cookie-safe ASCII tokens (or empty to clear); no arbitrary JS.
         if (c.settings.length > 254 || c.settings.any { it !in 'a'..'z' && it !in 'A'..'Z' &&
                     it !in '0'..'9' && it !in "-_.~" }) return@encode
-        c.player.session.write(IoBuffer(49, PacketHeader.BYTE).putString(c.settings))
+        c.player.session.write(IoBuffer(ServerProt.CLIENT_SETTINGS_COOKIE, PacketHeader.BYTE).putString(c.settings))
     }),
     OPEN_URL(encode<PacketContext.OpenUrlContext> { c ->
         // Protocol.PACKET_56 uses PacketBit.gisaac for each payload byte, not gjstr.
@@ -371,23 +373,23 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val uri = try { java.net.URI(url) } catch (_: java.net.URISyntaxException) { return@encode }
         if (uri.scheme !in listOf("http", "https") || uri.host.isNullOrEmpty() || uri.rawUserInfo != null) return@encode
         // IoSession encrypts opcode and payload in the same queue commit, after validation.
-        c.player.session.write(IoBuffer(56, PacketHeader.BYTE).put(url.toByteArray(Charsets.US_ASCII)))
+        c.player.session.write(IoBuffer(ServerProt.OPEN_URL, PacketHeader.BYTE).put(url.toByteArray(Charsets.US_ASCII)))
     }),
     INTERFACE_SET_FONT(encode<PacketContext.ComponentValueContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId) || context.value !in -1..65534) return@encode
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
-        context.player.session.write(IoBuffer(27).putLEShort(verify).putIntB(hash).putLEShort(context.value))
+        context.player.session.write(IoBuffer(ServerProt.IF_SET_FONT).putLEShort(verify).putIntB(hash).putLEShort(context.value))
     }),
     INTERFACE_SET_SCROLL_Y(encode<PacketContext.ComponentValueContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId) || context.value !in 0..65535) return@encode
         val hash = context.interfaceId shl 16 or context.childId
         val verify = context.player.interfaceManager.getPacketCount(1)
-        context.player.session.write(IoBuffer(31).putInt(hash).putLEShort(verify).putShortA(context.value))
+        context.player.session.write(IoBuffer(ServerProt.IF_SET_SCROLL_Y).putInt(hash).putLEShort(verify).putShortA(context.value))
     }),
     DELETE_CLIENT_CONTAINER(encode<PacketContext.DeleteClientContainerContext> { context ->
         if (context.containerId !in 0..65535) return@encode
-        context.player.session.write(IoBuffer(21).putC(if (context.split) 1 else 0).putLEShortA(context.containerId))
+        context.player.session.write(IoBuffer(ServerProt.DELETE_CLIENT_CONTAINER).putC(if (context.split) 1 else 0).putLEShortA(context.containerId))
     }),
     RUN_SCRIPT_PACKET(encode<RunScriptContext> { context ->
         val types = context.string
@@ -409,7 +411,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             }
         }
         if (payloadLength > 65535) return@encode
-        val buffer = IoBuffer(87, PacketHeader.SHORT)
+        val buffer = IoBuffer(ServerProt.RUNCLIENTSCRIPT, PacketHeader.SHORT)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
 
         buffer.putString(types)
@@ -433,11 +435,11 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         }
         val buffer: IoBuffer
         if (context.value < Byte.MIN_VALUE || context.value > Byte.MAX_VALUE) {
-            buffer = IoBuffer(73)
+            buffer = IoBuffer(ServerProt.VARP_LARGE)
             buffer.putLEShortA(context.id)
             buffer.putLEInt(context.value)
         } else {
-            buffer = IoBuffer(29)
+            buffer = IoBuffer(ServerProt.VARP_SMALL)
             buffer.putC(context.value)
             buffer.putShort(context.id)
         }
@@ -460,10 +462,10 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         }
         val buffer: IoBuffer
         if (context.value < 0 || context.value > 255) {
-            buffer = IoBuffer(47)
+            buffer = IoBuffer(ServerProt.VARBIT_LARGE)
             buffer.putLEInt(context.value)
         } else {
-            buffer = IoBuffer(64)
+            buffer = IoBuffer(ServerProt.VARBIT_SMALL)
             buffer.put(context.value)
         }
         buffer.putLEShort(context.varbitId)
@@ -520,7 +522,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
                 if (payloadLength > 65535) return@encode
             }
         }
-        val buffer = IoBuffer(if (slots != null) 100 else 69, PacketHeader.SHORT)
+        val buffer = IoBuffer(if (slots != null) ServerProt.UPDATE_INV_PARTIAL else ServerProt.UPDATE_INV_FULL, PacketHeader.SHORT)
         buffer.putShort(context.containerId).put(if (context.isSplit) 1 else 0)
         if (slots != null) {
             for (slot in slots) {
@@ -551,7 +553,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     GRAND_EXCHANGE_PACKET(encode<GrandExchangeContext> { context ->
         // Revision 578 has exactly six client offer slots.
         if (context.idx.toInt() !in 0..5 || context.state.toInt() !in 0..GE_REMOVED) return@encode
-        val buffer = IoBuffer(71, PacketHeader.NORMAL)
+        val buffer = IoBuffer(ServerProt.GRAND_EXCHANGE_OFFER, PacketHeader.NORMAL)
         buffer.put(context.idx.toInt())
         if (context.state.toInt() == GE_REMOVED) {
             buffer.put(0).putShort(0).putInt(0).putInt(0).putInt(0).putInt(0)
@@ -576,7 +578,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val player = context.player
         player.playerFlags.lastSceneGraph = player.location
         player.playerFlags.isDynamicScene = false
-        val buffer = IoBuffer(98, PacketHeader.SHORT)
+        val buffer = IoBuffer(ServerProt.REBUILD_NORMAL, PacketHeader.SHORT)
         LoginWorldEncoder.appendRegion(buffer.toByteBuffer(), player.location)
         player.details.session.write(buffer)
     }, immediate = true),
@@ -606,7 +608,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val x = l.getSceneX(scene)
         val y = l.getSceneY(scene)
         if (x !in 0..96 || y !in 0..96 || l.z !in 0..3) return@encode
-        val buffer = IoBuffer(41).putA(l.z).putC(y).putS(x)
+        val buffer = IoBuffer(ServerProt.UPDATE_ZONE_PARTIAL_FOLLOWS).putA(l.z).putC(y).putS(x)
         context.player.session.write(buffer)
     }),
     CLEAR_REGION_CHUNK(encode<ClearChunkContext> { context ->
@@ -614,7 +616,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val x = context.chunk.currentBase.getSceneX(l)
         val y = context.chunk.currentBase.getSceneY(l)
         if (x in 0..96 && y in 0..96 && context.chunk.currentBase.z in 0..3) {
-            val buffer = IoBuffer(42).put(x).putC(y).putA(context.chunk.currentBase.z)
+            val buffer = IoBuffer(ServerProt.UPDATE_ZONE_FULL_FOLLOWS).put(x).putC(y).putA(context.chunk.currentBase.z)
             context.player.session.write(buffer)
         }
     }, immediate = true),
@@ -675,7 +677,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     HINT_ICON(encode<HintIconContext> { context ->
         if (!context.isValid()) return@encode
-        val buffer = IoBuffer(102)
+        val buffer = IoBuffer(ServerProt.HINT_ICON)
         buffer.put((context.slot shl 5) or context.targetType)
         if (context.targetType == 0) {
             repeat(11) { buffer.put(0) }
@@ -740,9 +742,9 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     MUSIC_PACKET(encode<MusicContext> { context ->
         if (context.musicId !in -1..65535) return@encode
         val buffer = if (context.isSecondary) {
-            IoBuffer(62).putA(255).putTri(0).putShort(context.musicId)
+            IoBuffer(ServerProt.MIDI_JINGLE).putA(255).putTri(0).putShort(context.musicId)
         } else {
-            IoBuffer(61).putS(2).putLEShort(context.musicId).putS(255)
+            IoBuffer(ServerProt.MIDI_SONG).putS(2).putLEShort(context.musicId).putS(255)
         }
         context.player.details.session.write(buffer)
     }),
@@ -756,7 +758,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             if (audio.radius !in 0..15 || audio.loops !in 0..7 || audio.delay !in 0..255) return@encode
         }
         val buffer = if (loc == null) {
-            IoBuffer(92)
+            IoBuffer(ServerProt.SOUND_SYNTH)
         } else {
             checkedZone(context.player, loc) ?: return@encode
         }
@@ -787,15 +789,15 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val smartLength = if (plain.size < 128) 1 else 2
         if (fixed + other.length + 1 + smartLength + length > 255) return@encode
         val buffer = when (context.opcode) {
-            MessageContext.SEND_MESSAGE -> IoBuffer(76, PacketHeader.BYTE).putString(other)
+            MessageContext.SEND_MESSAGE -> IoBuffer(ServerProt.MESSAGE_PRIVATE_ECHO, PacketHeader.BYTE).putString(other)
             MessageContext.RECEIVE_MESSAGE -> {
                 player.setAttribute("replyTo", other)
-                QuickChatDelivery.putMessageId(IoBuffer(55, PacketHeader.BYTE).put(0).putString(other))
+                QuickChatDelivery.putMessageId(IoBuffer(ServerProt.MESSAGE_PRIVATE, PacketHeader.BYTE).put(0).putString(other))
                     .put(context.chatIcon)
             }
             MessageContext.CLAN_MESSAGE -> {
                 val clan = player.communication.clan ?: return@encode
-                QuickChatDelivery.putMessageId(IoBuffer(84, PacketHeader.BYTE).put(0).putString(other).putLong(stringToLong(clan.name)))
+                QuickChatDelivery.putMessageId(IoBuffer(ServerProt.MESSAGE_CLAN, PacketHeader.BYTE).put(0).putString(other).putLong(stringToLong(clan.name)))
                     .put(context.chatIcon)
             }
             else -> return@encode
@@ -806,9 +808,9 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     CONTACT_PACKETS(encode<ContactContext> { context ->
         val player = context.player
         val buffer = when (context.type) {
-            ContactContext.UPDATE_STATE_TYPE -> IoBuffer(19)
+            ContactContext.UPDATE_STATE_TYPE -> IoBuffer(ServerProt.FRIENDLIST_LOADING)
             ContactContext.IGNORE_LIST_TYPE -> {
-                val payload = IoBuffer(6, PacketHeader.SHORT)
+                val payload = IoBuffer(ServerProt.UPDATE_IGNORELIST, PacketHeader.SHORT)
                 val blocked = player.communication.blocked.filter { it.isNotEmpty() }.take(100)
                 if (blocked.any { it.contains('\u0000') } || 1L + blocked.sumOf { 2L * it.length + 4 } > 65535) return@encode
                 payload.put(blocked.size)
@@ -823,7 +825,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
                 player.session.write(payload)
                 for (name in temporary) {
                     // Protocol.PACKET_50: bit 0 rename, bit 1 temporary; four CP1252 strings.
-                    player.session.write(IoBuffer(50, PacketHeader.BYTE).put(2).putString(name).putString("").putString(name).putString(""))
+                    player.session.write(IoBuffer(ServerProt.IGNORE_LIST_INCREMENTAL, PacketHeader.BYTE).put(2).putString(name).putString("").putString(name).putString(""))
                 }
                 return@encode
             }
@@ -833,7 +835,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
                 if (name.contains('\u0000') || context.worldId !in 0..65535 || rank !in -1..255) return@encode
                 val worldLength = if (context.worldId > 0) ("World " + context.worldId).length + 2 else 0
                 if (2L * name.length + 6 + worldLength > 65535) return@encode
-                val payload = IoBuffer(70, PacketHeader.SHORT)
+                val payload = IoBuffer(ServerProt.UPDATE_FRIENDLIST, PacketHeader.SHORT)
                 payload.put(0)
                 payload.putString(name)
                 payload.putString(name)
@@ -851,7 +853,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     NPC_ANIMATION_DIRECT(encode<PacketContext.DirectNpcAnimationContext> { c ->
         if (c.npcIndex !in 0..32767 || c.sequenceId !in 0..65534 || c.delay !in 0..255) return@encode
-        c.player.session.write(IoBuffer(65).putLEShort(c.npcIndex).put(c.delay).putShortA(c.sequenceId))
+        c.player.session.write(IoBuffer(ServerProt.NPC_ANIMATION_DIRECT).putLEShort(c.npcIndex).put(c.delay).putShortA(c.sequenceId))
     }),
     UPDATE_CLAN_MEMBER(encode<PacketContext.ClanMemberUpdateContext> { context ->
         val alternate = context.alternateName
@@ -863,14 +865,14 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val length = 5L + context.name.length + (alternate?.let { it.length.toLong() + 1 } ?: 0L) +
             (worldName?.let { it.length.toLong() + 1 } ?: 0L)
         if (length > 255) return@encode
-        val buffer = IoBuffer(67, PacketHeader.BYTE).putString(context.name).put(if (alternate != null) 1 else 0)
+        val buffer = IoBuffer(ServerProt.CLAN_MEMBER_INCREMENTAL, PacketHeader.BYTE).putString(context.name).put(if (alternate != null) 1 else 0)
         if (alternate != null) buffer.putString(alternate)
         buffer.putShort(context.world).put(context.rank)
         if (worldName != null) buffer.putString(worldName)
         context.player.session.write(buffer)
     }),
     UPDATE_CLAN_CHAT(encode<ClanContext> { context ->
-        val buffer = IoBuffer(35, PacketHeader.SHORT)
+        val buffer = IoBuffer(ServerProt.UPDATE_CLAN_CHAT, PacketHeader.SHORT)
         val clan = context.clan
         if (!context.isLeave) {
             if (clan.owner.contains('\u0000')) return@encode

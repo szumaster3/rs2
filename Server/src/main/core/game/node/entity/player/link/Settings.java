@@ -1,5 +1,7 @@
 package core.game.node.entity.player.link;
 
+import core.net.packet.ServerProt;
+
 import com.google.gson.JsonObject;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -80,8 +82,8 @@ public final class Settings {
      * Update chat settings.
      */
     public void updateChatSettings() {
-        player.getSession().write(new IoBuffer(2).putA(publicChatSetting).putS(tradeSetting));
-        player.getSession().write(new IoBuffer(45).put(privateChatSetting));
+        player.getSession().write(new IoBuffer(ServerProt.CHAT_FILTER_SETTINGS).putA(publicChatSetting).putS(tradeSetting));
+        player.getSession().write(new IoBuffer(ServerProt.PRIVATE_CHAT_FILTER).put(privateChatSetting));
     }
 
     /**

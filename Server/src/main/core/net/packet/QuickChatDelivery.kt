@@ -40,8 +40,8 @@ object QuickChatDelivery {
         }
         if (payload.size !in 2..255 || target.name.contains('\u0000') || sender.name.contains('\u0000') ||
             target.name.length + 1 + payload.size > 255 || sender.name.length + 8 + payload.size > 255) return
-        sender.session.write(IoBuffer(43, PacketHeader.BYTE).putString(target.name).putBytes(payload, 0, payload.size))
-        target.session.write(incoming(105, sender).putBytes(payload, 0, payload.size))
+        sender.session.write(IoBuffer(ServerProt.MESSAGE_QUICKCHAT_PRIVATE_ECHO, PacketHeader.BYTE).putString(target.name).putBytes(payload, 0, payload.size))
+        target.session.write(incoming(ServerProt.MESSAGE_QUICKCHAT_PRIVATE, sender).putBytes(payload, 0, payload.size))
         target.setAttribute("replyTo", sender.name)
         PlayerMonitor.logPrivateChat(sender, target.name, "Quick Chat phrase ${phraseId(payload)}")
     }
@@ -65,7 +65,7 @@ object QuickChatDelivery {
         for (entry in clan.players) {
             val target = entry.player ?: continue
             if (target.communication.isIgnoring(sender.name)) continue
-            target.session.write(incoming(51, sender, clan.name).putBytes(payload, 0, payload.size))
+            target.session.write(incoming(ServerProt.MESSAGE_QUICKCHAT_CLAN, sender, clan.name).putBytes(payload, 0, payload.size))
         }
     }
 

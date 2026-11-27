@@ -1,5 +1,7 @@
 package core.net;
 
+import core.net.packet.ServerProt;
+
 import core.auth.AuthResponse;
 import core.cache.crypto.ISAACPair;
 import core.game.node.entity.player.Player;
@@ -176,11 +178,11 @@ public class IoSession {
             if (!active) return;
             if (opcode >= 0) {
                 if (!(producer instanceof GameEventProducer) || isaacPair == null) return;
-                // PACKET_56 is the only revision 578 game packet whose payload is also ISAAC-coded.
+                // OPEN_URL is the only revision 578 game packet whose payload is also ISAAC-coded.
                 // Validate the whole writable frame before consuming any cipher values.
                 final int start = buffer.position();
                 if (buffer.isReadOnly() || !buffer.hasRemaining()) return;
-                if (opcode == 56) {
+                if (opcode == ServerProt.OPEN_URL) {
                     if (buffer.remaining() < 3 || buffer.remaining() > 257
                             || (buffer.get(start + 1) & 0xFF) != buffer.remaining() - 2) return;
                 }
@@ -194,7 +196,7 @@ public class IoSession {
                 );
 
                 buffer.put(start, (byte) encrypted);
-                if (opcode == 56) {
+                if (opcode == ServerProt.OPEN_URL) {
                     // PacketBit.gisaac reads one cipher value per payload byte. The BYTE length is plain.
                     // Hold writingLock until the encrypted frame enters writingQueue, so another opcode
                     // cannot consume values between the opcode and these bytes.

@@ -1,5 +1,7 @@
 package core.game.world.update
 
+import core.net.packet.ServerProt
+
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
@@ -26,7 +28,7 @@ object NPCRenderer {
     private val movementDirections = intArrayOf(7, 0, 1, 6, 2, 5, 4, 3)
 
     fun encode(player: Player, nearby: List<NPC>, wide: Boolean): IoBuffer {
-        val buffer = IoBuffer(if (wide) 37 else 32, PacketHeader.SHORT)
+        val buffer = IoBuffer(if (wide) ServerProt.NPC_INFO_LARGE else ServerProt.NPC_INFO_SMALL, PacketHeader.SHORT)
         val bits = if (wide) 8 else 5
         val limit = 1 shl (bits - 1)
         val info = player.renderInfo

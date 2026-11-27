@@ -1,5 +1,7 @@
 package core.game.world.update;
 
+import core.net.packet.ServerProt;
+
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketHeader;
 import java.util.Arrays;
@@ -36,7 +38,7 @@ public final class PlayerInfo578 {
 
     public IoBuffer encode() {
         if (current[self] == -1) throw new IllegalStateException("Missing local player");
-        IoBuffer frame = new IoBuffer(72, PacketHeader.SHORT);
+        IoBuffer frame = new IoBuffer(ServerProt.PLAYER_INFO, PacketHeader.SHORT);
         IoBuffer blocks = new IoBuffer(-1, PacketHeader.SHORT);
         for (int pass = 0; pass < 4; pass++) {
             boolean active = pass < 2;
