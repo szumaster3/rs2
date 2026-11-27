@@ -799,7 +799,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
             if (args.size < 3) {
                 reject(player, "Usage: ::setvarc index value")
             }
-            val index = args[1].toShortOrNull()
+            val index = args[1].toIntOrNull()
             val value = args[2].toIntOrNull()
 
             if (index == null || value == null) {

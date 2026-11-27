@@ -2,6 +2,7 @@ package core.net.packet.out
 
 import core.cache.Cache
 import core.cache.def.impl.VarpDefinition
+import core.cache.def.impl.VarcDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.container.ContainerEvent
 import core.game.node.entity.player.Player
@@ -56,6 +57,7 @@ import core.net.packet.out.PacketContext.StringContext
 import core.net.packet.out.PacketContext.SystemUpdateContext
 import core.net.packet.out.PacketContext.VarbitContext
 import core.net.packet.out.PacketContext.VarcUpdateContext
+import core.net.packet.out.PacketContext.VarcStringUpdateContext
 import core.net.packet.out.PacketContext.WalkOptionContext
 import core.net.packet.out.PacketContext.WindowsPaneContext
 import core.tools.StringUtils.encryptPlayerChat
@@ -218,12 +220,14 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     ACCESS_MASK(encode<AccessMaskContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        if (context.offset !in -1..65534 || context.length !in context.offset..65534) return@encode
         val buffer = Encoders578.settings(context.interfaceId shl 16 or context.childId,
             context.offset, context.length, context.id, context.player.interfaceManager.getPacketCount(1))
         context.player.session.write(buffer)
     }),
     WIDGETSTRUCT_SETTING(encode<AccessMaskContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId)) return@encode
+        if (context.offset !in -1..65534 || context.length !in context.offset..65534 || context.id !in 0..65535) return@encode
         context.player.session.write(
             Encoders578.targetParam(context.interfaceId shl 16 or context.childId,
             context.offset, context.length, context.id, context.player.interfaceManager.getPacketCount(1)))
@@ -265,6 +269,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[Protocol578] Rejected STRING_PACKET for missing component ${context.interfaceId}:${context.lineId}")
             return@encode
         }
+        if ('\u0000' in context.string || context.string.length > 65528) return@encode
         val buffer = IoBuffer(60, PacketHeader.SHORT)
         buffer.putString(context.string)
         buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
@@ -290,9 +295,38 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         // No equivalent for independent continuous model rotation has been verified.
         System.err.println("[Protocol578] Unsupported INTERFACE_SET_MODEL_ROTATION for ${context.id}:${context.componentId}")
     }),
+    INTERFACE_SET_COLOUR(encode<PacketContext.ComponentValueContext> { context ->
+        if (!validComponent578(context.interfaceId, context.childId) || context.value !in 0..32767) return@encode
+        val hash = context.interfaceId shl 16 or context.childId
+        val verify = context.player.interfaceManager.getPacketCount(1)
+        context.player.session.write(IoBuffer(44).putInt(hash).putLEShortA(context.value).putShort(verify))
+    }),
+    INTERFACE_SET_SPRITE(encode<PacketContext.ComponentValueContext> { context ->
+        if (!validComponent578(context.interfaceId, context.childId) || context.value !in 0..65535) return@encode
+        val hash = context.interfaceId shl 16 or context.childId
+        val verify = context.player.interfaceManager.getPacketCount(1)
+        context.player.session.write(IoBuffer(36).putLEShortA(context.value).putIntA(hash).putShortA(verify))
+    }),
     RUN_SCRIPT_PACKET(encode<RunScriptContext> { context ->
         val types = context.string
         val objects = context.objects
+        // Client reads the signature backwards; keep the existing wire-order API.
+        if (types.length != objects.size || '\u0000' in types) {
+            System.err.println("[Protocol578] Rejected invalid CS2 signature for ${context.id}")
+            return@encode
+        }
+        var payloadLength = 7L + types.length
+        for ((j, type) in types.reversed().withIndex()) {
+            val value = objects[j]
+            if (type == 's') {
+                if (value !is String || '\u0000' in value) return@encode
+                payloadLength += value.length.toLong() + 1
+            } else {
+                if (value !is Int) return@encode
+                payloadLength += 4
+            }
+        }
+        if (payloadLength > 65535) return@encode
         val buffer = IoBuffer(87, PacketHeader.SHORT)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
 
@@ -311,7 +345,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
 
     // Variables and containers
     CONFIG(encode<ConfigContext> { context ->
-        if (!VarpDefinition.exists(context.id)) {
+        if (context.id !in 0..65535 || !VarpDefinition.exists(context.id)) {
             System.err.println("[Protocol578] Rejected unknown varp ${context.id}, value=${context.value}")
             return@encode
         }
@@ -330,11 +364,15 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         }
     }),
     CS_CONFIG_PACKET(encode<CSConfigContext> { context ->
+        if (!VarcDefinition.exists(context.id)) {
+            System.err.println("[Protocol578] Rejected unknown varc ${context.id}")
+            return@encode
+        }
         val buffer = Encoders578.varc(context.id, context.value, context.player.interfaceManager.getPacketCount(1))
         context.player.details.session.write(buffer)
     }),
     VARBIT(encode<VarbitContext> { context ->
-        if (!VarbitDefinition.exists(context.varbitId)) {
+        if (context.varbitId !in 0..65535 || !VarbitDefinition.exists(context.varbitId)) {
             System.err.println("[Protocol578] Rejected unknown varbit ${context.varbitId}, value=${context.value}")
             return@encode
         }
@@ -351,7 +389,19 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     VARC_UPDATE(encode<VarcUpdateContext> { context ->
         val player = context.player
+        if (!VarcDefinition.exists(context.varcId)) {
+            System.err.println("[Protocol578] Rejected unknown varc ${context.varcId}")
+            return@encode
+        }
         player.session.write(Encoders578.varc(context.varcId, context.value, player.interfaceManager.getPacketCount(1)))
+    }),
+    VARC_STRING_UPDATE(encode<VarcStringUpdateContext> { context ->
+        if (!VarcDefinition.stringExists(context.varcId) || '\u0000' in context.value || context.value.length > 65530) {
+            System.err.println("[Protocol578] Rejected varc string ${context.varcId}")
+            return@encode
+        }
+        context.player.session.write(Encoders578.varcString(context.varcId, context.value,
+            context.player.interfaceManager.getPacketCount(1)))
     }),
     CONTAINER_PACKET(encode<ContainerContext> { context ->
         // Containers in 578 are addressed by container key, not widget hash.

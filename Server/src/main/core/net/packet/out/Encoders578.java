@@ -53,6 +53,17 @@ public final class Encoders578 {
         return new IoBuffer(22).putShort(verify).putInt(value).putLEShort(id);
     }
 
+    /** Short and long string varc frames share the same delayed client state. */
+    public static IoBuffer varcString(int id, String value, int verify) {
+        if (id < 0 || id > 65535 || value == null || value.indexOf(0) >= 0 || value.length() > 65530) {
+            throw new IllegalArgumentException("Invalid varc string");
+        }
+        if (value.length() <= 250) {
+            return new IoBuffer(53, PacketHeader.BYTE).putShort(id).putString(value).putLEShort(verify);
+        }
+        return new IoBuffer(85, PacketHeader.SHORT).putString(value).putLEShortA(id).putLEShort(verify);
+    }
+
     public static IoBuffer openTop(int type, int id, int verify) {
         return new IoBuffer(93).put(type).putLEShort(id).putLEShort(verify);
     }

@@ -1936,7 +1936,7 @@ fun setVarc(
     varc: Int,
     value: Int,
 ) {
-    player.packetDispatch.sendVarcUpdate(varc.toShort(), value)
+    player.packetDispatch.sendVarcUpdate(varc, value)
 }
 
 /**

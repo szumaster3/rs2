@@ -25,6 +25,8 @@ sealed class PacketContext {
     class HalfProjectile(override val player: Player, val location: Location, val halfX: Int, val halfY: Int, val dx: Int, val dy: Int, val target: Int, val graphic: Int, val sourceHeight: Int, val targetHeight: Int, val start: Int, val end: Int, val peak: Int, val arc: Int, val sourceEntity: Int? = null) : PacketContext()
     class LocMerge(override val player: Player, val location: Location, val id: Int, val shape: Int, val rotation: Int, val entity: Int, val start: Int, val end: Int, val x1: Int, val x2: Int, val y1: Int, val y2: Int) : PacketContext()
 
+    class ComponentValueContext(override val player: Player, val interfaceId: Int, val childId: Int, val value: Int) : PacketContext()
+
     class PlayerContext(override val player: Player) : PacketContext()
 
     class AccessMaskContext(
@@ -345,6 +347,8 @@ sealed class PacketContext {
     class VarbitContext(override val player: Player, val varbitId: Int, val value: Int) : PacketContext()
 
     class VarcUpdateContext(override val player: Player, val varcId: Int, val value: Int) : PacketContext()
+
+    class VarcStringUpdateContext(override val player: Player, val varcId: Int, val value: String) : PacketContext()
 
     class WalkOptionContext(override val player: Player, val option: String) : PacketContext()
 

@@ -81,12 +81,33 @@ public final class PacketDispatch {
         PacketRepository.send(Encoders530.RUN_DIALOG_ABORT_HOOKS, getContext());
     }
 
+    /** Sets a component colour using the client's packed 5-bit RGB format. */
+    public void sendComponentColour(int interfaceId, int childId, int rgb555) {
+        PacketRepository.send(Encoders530.INTERFACE_SET_COLOUR,
+                new core.net.packet.out.PacketContext.ComponentValueContext(player, interfaceId, childId, rgb555));
+    }
+
+    /** Sets the unsigned 16-bit sprite ID used by revision 578. */
+    public void sendComponentSprite(int interfaceId, int childId, int spriteId) {
+        PacketRepository.send(Encoders530.INTERFACE_SET_SPRITE,
+                new core.net.packet.out.PacketContext.ComponentValueContext(player, interfaceId, childId, spriteId));
+    }
+
     public void sendVarp(int index, int value) {
         PacketRepository.send(Encoders530.CONFIG, new ConfigContext(player, index, value));
     }
 
     public void sendVarcUpdate(short index, int value) {
+        sendVarcUpdate((int) index, value);
+    }
+
+    public void sendVarcUpdate(int index, int value) {
         PacketRepository.send(Encoders530.VARC_UPDATE, new VarcUpdateContext(player, index, value));
+    }
+
+    public void sendVarcString(int index, String value) {
+        PacketRepository.send(Encoders530.VARC_STRING_UPDATE,
+                new core.net.packet.out.PacketContext.VarcStringUpdateContext(player, index, value));
     }
 
     /**
