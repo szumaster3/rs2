@@ -409,18 +409,46 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[578] Unmapped widget-only container clear: ${context.interfaceId}:${context.childId}")
             return@encode
         }
+        // Preflight the complete payload before allocating/writing a frame.
+        if (context.containerId !in 0..65535) return@encode
         val slots = context.slots
+        val items = context.items
+        val ids = context.ids
+        var payloadLength = if (slots != null) 3 else 5
+        if (slots != null) {
+            if (items == null) return@encode
+            for (slot in slots) {
+                if (slot !in 0..32767 || slot !in items.indices) return@encode
+                val item = items[slot]
+                payloadLength += (if (slot < 128) 1 else 2) + 2
+                if (item != null && item != ContainerEvent.NULL_ITEM) {
+                    if (item.id !in 0..65534) return@encode
+                    payloadLength += if (item.amount !in 0..254) 5 else 1
+                }
+                if (payloadLength > 65535) return@encode
+            }
+        } else {
+            if (context.length !in 0..65535) return@encode
+            for (slot in 0 until context.length) {
+                val item = items?.getOrNull(slot)
+                val id = ids?.getOrNull(slot) ?: item?.id ?: -1
+                if (id !in -1..65534) return@encode
+                val amount = if (ids != null && id >= 0) 1 else item?.amount ?: 0
+                payloadLength += 2 + if (amount !in 0..254) 5 else 1
+                if (payloadLength > 65535) return@encode
+            }
+        }
         val buffer = IoBuffer(if (slots != null) 100 else 69, PacketHeader.SHORT)
         buffer.putShort(context.containerId).put(if (context.isSplit) 1 else 0)
         if (slots != null) {
             for (slot in slots) {
-                val item = context.items!![slot]
+                val item = items!![slot]
                 buffer.putSmart(slot)
                 if (item == null || item == ContainerEvent.NULL_ITEM) {
                     buffer.putShort(0)
                 } else {
                     buffer.putShort(item.id + 1)
-                    if (item.amount > 254 || item.amount < 0) buffer.put(255).putInt(item.amount)
+                    if (item.amount !in 0..254) buffer.put(255).putInt(item.amount)
                     else buffer.put(item.amount)
                 }
             }
@@ -428,11 +456,11 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             val count = context.length
             buffer.putShort(count)
             for (slot in 0 until count) {
-                val item = context.items?.getOrNull(slot)
-                val id = context.ids?.getOrNull(slot) ?: item?.id ?: -1
-                val amount = if (context.ids != null && id >= 0) 1 else item?.amount ?: 0
+                val item = items?.getOrNull(slot)
+                val id = ids?.getOrNull(slot) ?: item?.id ?: -1
+                val amount = if (ids != null && id >= 0) 1 else item?.amount ?: 0
                 buffer.putLEShort(id + 1)
-                if (amount > 254 || amount < 0) buffer.put(255).putIntB(amount)
+                if (amount !in 0..254) buffer.put(255).putIntB(amount)
                 else buffer.put(amount)
             }
         }
@@ -541,6 +569,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     }),
     POSITIONED_GRAPHIC(encode<PositionedGraphicContext> { context ->
         val g = context.graphic
+        if (g.id !in 0..65534 || g.height !in 0..255 || g.delay !in 0..65535) return@encode
         val target = context.location.transform(context.offsetX, context.offsetY, 0)
         val offsetHash = (target.chunkOffsetX shl 4) or target.chunkOffsetY
         val scene = context.player.playerFlags.lastSceneGraph
@@ -630,6 +659,7 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         p.session.write(buffer)
     }),
     MUSIC_PACKET(encode<MusicContext> { context ->
+        if (context.musicId !in -1..65535) return@encode
         val buffer = if (context.isSecondary) {
             IoBuffer(62).putA(255).putTri(0).putShort(context.musicId)
         } else {
@@ -640,6 +670,12 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     AUDIO_PACKET(encode<AudioContext> { context ->
         val audio = context.audio
         val loc = context.location
+        if (audio.id !in -1..65535) return@encode
+        if (loc == null) {
+            if (audio.loops !in 0..255 || audio.delay !in 0..65535) return@encode
+        } else {
+            if (audio.radius !in 0..15 || audio.loops !in 0..7 || audio.delay !in 0..255) return@encode
+        }
         val buffer = if (loc == null) {
             IoBuffer(92)
         } else {
