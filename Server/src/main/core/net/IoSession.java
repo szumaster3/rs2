@@ -176,6 +176,14 @@ public class IoSession {
             if (!active) return;
             if (opcode >= 0) {
                 if (!(producer instanceof GameEventProducer) || isaacPair == null) return;
+                // PACKET_56 is the only revision 578 game packet whose payload is also ISAAC-coded.
+                // Validate the whole writable frame before consuming any cipher values.
+                final int start = buffer.position();
+                if (buffer.isReadOnly() || !buffer.hasRemaining()) return;
+                if (opcode == 56) {
+                    if (buffer.remaining() < 3 || buffer.remaining() > 257
+                            || (buffer.get(start + 1) & 0xFF) != buffer.remaining() - 2) return;
+                }
                 int isaac = isaacPair.getOutput().getNextValue();
                 int encrypted = (opcode + isaac) & 0xFF;
 
@@ -185,7 +193,15 @@ public class IoSession {
                                 + ", size: " + buffer.remaining()
                 );
 
-                buffer.put(buffer.position(), (byte) encrypted);
+                buffer.put(start, (byte) encrypted);
+                if (opcode == 56) {
+                    // PacketBit.gisaac reads one cipher value per payload byte. The BYTE length is plain.
+                    // Hold writingLock until the encrypted frame enters writingQueue, so another opcode
+                    // cannot consume values between the opcode and these bytes.
+                    for (int i = start + 2; i < buffer.limit(); i++) {
+                        buffer.put(i, (byte) (buffer.get(i) + isaacPair.getOutput().getNextValue()));
+                    }
+                }
             }
             writingQueue.add(buffer);
         } finally {

@@ -35,6 +35,13 @@ sealed class PacketContext {
     class Component24BitValuesContext(override val player: Player, val interfaceId: Int, val firstChild: Int, val values: IntArray) : PacketContext()
     class EntityRenderPriorityContext(override val player: Player, val mode: Int) : PacketContext()
 
+    // Keep mutable input private to the queued packet, independent of caller changes.
+    class ClientRandomDataContext(override val player: Player, data: ByteArray) : PacketContext() {
+        val data = data.copyOf()
+    }
+    class ClientSettingsCookieContext(override val player: Player, val settings: String) : PacketContext()
+    class OpenUrlContext(override val player: Player, val url: String) : PacketContext()
+
     class ComponentValueContext(override val player: Player, val interfaceId: Int, val childId: Int, val value: Int) : PacketContext()
 
     class GlobalSpotAnimationContext(override val player: Player, val target: Int, val id: Int, val delay: Int, val height: Int) : PacketContext()

@@ -348,6 +348,31 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         val verify = c.player.interfaceManager.getPacketCount(1)
         c.player.session.write(IoBuffer(12).putShortA(verify).putC(c.mode))
     }),
+    CLIENT_RANDOM_DATA(encode<PacketContext.ClientRandomDataContext> { c ->
+        // Protocol.PACKET_26 / Packet.checkcrc / Static294.method5065.
+        if (c.data.size != 24) return@encode
+        val crc = java.util.zip.CRC32().apply { update(c.data) }.value.toInt()
+        c.player.session.write(IoBuffer(26).put(c.data).putInt(crc))
+    }),
+    CLIENT_SETTINGS_COOKIE(encode<PacketContext.ClientSettingsCookieContext> { c ->
+        // Static383.method6379 inserts the string into an applet JavaScript cookie.
+        // Accept only opaque cookie-safe ASCII tokens (or empty to clear); no arbitrary JS.
+        if (c.settings.length > 254 || c.settings.any { it !in 'a'..'z' && it !in 'A'..'Z' &&
+                    it !in '0'..'9' && it !in "-_.~" }) return@encode
+        c.player.session.write(IoBuffer(49, PacketHeader.BYTE).putString(c.settings))
+    }),
+    OPEN_URL(encode<PacketContext.OpenUrlContext> { c ->
+        // Protocol.PACKET_56 uses PacketBit.gisaac for each payload byte, not gjstr.
+        // Restrict this explicit server-only API to simple HTTP(S) URLs; do not relay client input.
+        // Exclude shell expansion/metacharacters because the original Windows client uses cmd /c start.
+        val url = c.url
+        if (url.length !in 1..255 || url.any { it !in 'a'..'z' && it !in 'A'..'Z' &&
+                    it !in '0'..'9' && it !in "?=,.+-_#:/" }) return@encode
+        val uri = try { java.net.URI(url) } catch (_: java.net.URISyntaxException) { return@encode }
+        if (uri.scheme !in listOf("http", "https") || uri.host.isNullOrEmpty() || uri.rawUserInfo != null) return@encode
+        // IoSession encrypts opcode and payload in the same queue commit, after validation.
+        c.player.session.write(IoBuffer(56, PacketHeader.BYTE).put(url.toByteArray(Charsets.US_ASCII)))
+    }),
     INTERFACE_SET_FONT(encode<PacketContext.ComponentValueContext> { context ->
         if (!validComponent578(context.interfaceId, context.childId) || context.value !in -1..65534) return@encode
         val hash = context.interfaceId shl 16 or context.childId

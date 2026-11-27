@@ -165,6 +165,28 @@ public final class PacketDispatch {
                 new core.net.packet.out.PacketContext.EntityRenderPriorityContext(player, mode));
     }
 
+    /** Explicitly writes 24 caller-supplied bytes to the client's persistent random data file.
+     * Not a login requirement; never called automatically by the local server. */
+    public void sendClientRandomData(byte[] data) {
+        if (data == null || data.length != 24) return;
+        PacketRepository.send(Encoders530.CLIENT_RANDOM_DATA,
+                new core.net.packet.out.PacketContext.ClientRandomDataContext(player, data));
+    }
+
+    /** Sets an opaque client settings cookie; an empty token clears it. No automatic caller. */
+    public void sendClientSettingsCookie(String settings) {
+        if (settings == null) return;
+        PacketRepository.send(Encoders530.CLIENT_SETTINGS_COOKIE,
+                new core.net.packet.out.PacketContext.ClientSettingsCookieContext(player, settings));
+    }
+
+    /** Opens an explicitly selected, trusted server URL. Never forward URL_REQUEST input here. */
+    public void sendOpenUrl(String url) {
+        if (url == null) return;
+        PacketRepository.send(Encoders530.OPEN_URL,
+                new core.net.packet.out.PacketContext.OpenUrlContext(player, url));
+    }
+
     /** Sets a component font; -1 clears the font ID. */
     public void sendComponentFont(int interfaceId, int childId, int fontId) {
         PacketRepository.send(Encoders530.INTERFACE_SET_FONT,
