@@ -1,5 +1,6 @@
 package content.region.kandarin.seers_village.quest.elemental_quest_2
 
+import content.data.Quests
 import content.region.kandarin.seers_village.quest.elemental_quest_2.plugin.EW2Utils
 import core.api.*
 import core.game.node.entity.player.Player
@@ -9,7 +10,7 @@ import shared.consts.Items
 import shared.consts.Vars
 
 // @Initializable
-class EW2 : Quest("Elemental Workshop II", 53, 52, 1, Vars.VARBIT_QUEST_ELEMENTAL_WORKSHOP_II_PROGRESS_2639, 0, 1, 11) {
+class EW2 : Quest(Quests.ELEMENTAL_WORKSHOP_II) {
     class SkillRequirement(
         val skill: Int?,
         val level: Int?,
@@ -23,7 +24,6 @@ class EW2 : Quest("Elemental Workshop II", 53, 52, 1, Vars.VARBIT_QUEST_ELEMENTA
     ) {
         super.drawJournal(player, stage)
         var line = 11
-        player ?: return
         if (stage == 0) {
             line(player, "I can start this quest by reading a", line++)
             line(player, "!!book?? found in !!Dig Site??.", line++)
@@ -128,10 +128,9 @@ class EW2 : Quest("Elemental Workshop II", 53, 52, 1, Vars.VARBIT_QUEST_ELEMENTA
 
     override fun finish(player: Player) {
         super.finish(player)
-        player ?: return
         var ln = 10
 
-        player.packetDispatch.sendItemZoomOnInterface(Items.ELEMENTAL_HELMET_9729, 230, 277, 5)
+        drawReward(player, Items.ELEMENTAL_HELMET_9729)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "7,500 Smithing XP,", ln++)
         drawReward(player, "7,500 Crafting XP,", ln++)
