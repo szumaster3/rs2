@@ -11,7 +11,6 @@ import core.game.node.item.Item
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Regions
 
 /**
  * Handles behavior for Giant Ant Worker and Soldier NPCs.
@@ -39,7 +38,8 @@ class GiantAntWorkerNPC : NPCBehavior(NPCs.GIANT_ANT_WORKER_6379, NPCs.GIANT_ANT
 
         if (killer !is Player) return
 
-        if (self.location.regionId != Regions.JADE_VINE_MAZE_11566) return
+        if (self.location.regionId != 11566)// JADE_VINE_MAZE
+            return
         if (!hasRequirement(killer, Quests.THE_HAND_IN_THE_SAND.questName, false)) return
 //      if(isQuestComplete(killer, Quests.THE_HAND_IN_THE_SAND.questName) && getAttribute(killer, GameAttributes.RETURNING_CLARENCE_COMPLETE, false))  return
         for (part in BODY_PARTS) {

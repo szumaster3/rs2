@@ -10,7 +10,6 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE

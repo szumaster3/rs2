@@ -10,7 +10,6 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBuilder
 import core.plugin.Initializable
 import core.plugin.Plugin
-import shared.consts.Regions
 
 /**
  * Represents the tutorial zone area.
@@ -53,13 +52,7 @@ class TutorialZone : MapZone("tutorial", true), Plugin<Any?> {
         /**
          * Represents the tutorial region ids.
          */
-        private val REGIONS = intArrayOf(
-            Regions.TUTORIAL_ISLAND_12079,
-            Regions.TUTORIAL_ISLAND_12180,
-            Regions.TUTORIAL_ISLAND_12592,
-            Regions.TUTORIAL_ISLAND_12436,
-            Regions.TUTORIAL_ISLAND_12335,
-            Regions.TUTORIAL_ISLAND_12336
+        private val REGIONS = intArrayOf(12079, 12180, 12592, 12436, 12335, 12336
         )
     }
 }

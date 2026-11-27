@@ -14,7 +14,6 @@ import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 import shared.consts.NPCs
-import shared.consts.Regions
 
 /**
  * Represents the Phoenix Lair area.
@@ -27,7 +26,7 @@ class PhoenixLair : MapArea {
     private val spawnedNPC = mutableListOf<NPC>()
     private val currentTreeLocations = mutableMapOf<Int, Location>()
 
-    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(Regions.PHOENIX_LAIR_13905), ZoneBorders.forRegion(Regions.PHOENIX_LAIR_14161))
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(13905), ZoneBorders.forRegion(14161))
     override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
 
     init {

@@ -6,13 +6,12 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Regions
 
 class LostCutscene(player: Player) : Cutscene(player) {
 
     override fun setup() {
         setExit(Location.create(3566, 5224, 0))
-        loadRegion(Regions.PHOENIX_LAIR_14161)
+        loadRegion(14161)// PHOENIX_LAIR
         addNPC(LARGE_EGG, 47, 46, Direction.SOUTH)
     }
 

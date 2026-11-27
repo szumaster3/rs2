@@ -18,7 +18,6 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
-import shared.consts.Regions
 import shared.consts.Sounds
 
 @Initializable

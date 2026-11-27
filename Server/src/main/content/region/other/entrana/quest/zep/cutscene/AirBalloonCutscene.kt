@@ -6,7 +6,6 @@ import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import shared.consts.NPCs
-import shared.consts.Regions
 import shared.consts.Vars
 
 class AirBalloonCutscene(player: Player) : Cutscene(player) {
@@ -16,7 +15,7 @@ class AirBalloonCutscene(player: Player) : Cutscene(player) {
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        loadRegion(Regions.ENTRANA_11060)
+        loadRegion(11060)//ENTRANA
         addNPC(NPCs.AUGUSTE_5049, 57, 26, Direction.WEST)
     }
 

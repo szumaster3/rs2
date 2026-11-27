@@ -9,7 +9,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Regions
 
 /**
  * Represents repair boat cutscene.
@@ -25,7 +24,7 @@ class HolgartCutscene(
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        loadRegion(Regions.WITCHAVEN_10803)
+        loadRegion(10803)// WITCHAVEN
         addNPC(NPCs.HOLGART_698, 29, 36, Direction.EAST)
     }
 

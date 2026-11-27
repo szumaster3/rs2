@@ -213,7 +213,5 @@ class QuestTabInterface : InterfaceListener {
             161 to 167,
             163 to 169
         )
-
-        @JvmStatic
     }
 }

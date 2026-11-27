@@ -8,7 +8,6 @@ import core.game.node.entity.player.Player
 import core.game.system.timer.PersistTimer
 import core.tools.colorize
 import core.tools.ticksToSeconds
-import shared.consts.Regions
 
 class IncubatorTimer : PersistTimer(500, "incubation") {
     val incubatingEggs = HashMap<Int, IncubatingEgg>()
@@ -73,7 +72,7 @@ class IncubatorTimer : PersistTimer(500, "incubation") {
     companion object {
         val TAVERLEY_REGION = 11573
         val TAVERLEY_VARBIT = 4277
-        val YANILLE_REGION = Regions.WIZARDS_GUILD_10288
+        val YANILLE_REGION = 10288
         val YANILLE_VARBIT = 4221
 
         fun varbitForRegion(region: Int): Int = when (region) {

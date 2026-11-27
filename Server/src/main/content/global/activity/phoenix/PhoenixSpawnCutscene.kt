@@ -9,7 +9,6 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Regions
 
 class PhoenixSpawnCutscene (player: Player) : Cutscene(player) {
 

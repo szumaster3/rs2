@@ -252,7 +252,7 @@ class WildernessPlugin : InteractionListener {
                     options("Yes I'm brave.", "Eep! The wilderness... No thank you.")
                     stage = 2
                 }
-                2 -> when(buttonID) {
+                2 -> when (buttonID) {
                     1 -> {
                         end()
                         animate(player!!, Animations.PULL_DOWN_LEVER_2140)
@@ -260,9 +260,8 @@ class WildernessPlugin : InteractionListener {
                         sendMessage(player!!, "You pull the lever...")
                         queueScript(player!!, 1, QueueStrength.NORMAL) {
                             if (!hasTimerActive(player!!, GameAttributes.TELEBLOCK_TIMER)) {
-                                if (teleport(player!!, Location(3154, 3923, 0))) {
-                                    finishDiaryTask(player!!, DiaryType.ARDOUGNE, 1, 1)
-                                }
+                                teleport(player!!, Location(3154, 3923, 0))
+                                finishDiaryTask(player!!, DiaryType.ARDOUGNE, 1, 1)
                                 sendMessage(player!!, "...And teleport into the wilderness.", 5)
                             } else {
                                 sendMessage(player!!, "A magical force has stopped you from teleporting.")
@@ -270,6 +269,7 @@ class WildernessPlugin : InteractionListener {
                             return@queueScript stopExecuting(player!!)
                         }
                     }
+
                     2 -> end()
                 }
             }

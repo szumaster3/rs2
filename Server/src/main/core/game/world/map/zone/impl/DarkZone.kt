@@ -19,7 +19,6 @@ import core.game.world.GameWorld.Pulser
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Components
-import shared.consts.Regions
 import shared.consts.Sounds
 import java.util.*
 
@@ -163,20 +162,20 @@ class DarkZone : MapZone("Dark zone", true), EventHook<core.game.event.Event> {
     }
 
     companion object {
-        private val GENIE_CAVE_13457 = getRegionBorders(Regions.GENIE_CAVE_13457)
-        private val FALADOR_MOLE_LAIR_6992 = getRegionBorders(Regions.FALADOR_MOLE_LAIR_6992)
-        private val FALADOR_MOLE_LAIR_6993 = getRegionBorders(Regions.FALADOR_MOLE_LAIR_6993)
-        private val SKAVID_CAVE_10131 = getRegionBorders(Regions.SKAVID_CAVE_10131)
-        private val LUMBRIDGE_DUNGEON_12949 = getRegionBorders(Regions.LUMBRIDGE_DUNGEON_12949)
+        private val GENIE_CAVE_13457 = getRegionBorders(13457)
+        private val FALADOR_MOLE_LAIR_6992 = getRegionBorders(6992)
+        private val FALADOR_MOLE_LAIR_6993 = getRegionBorders(6993)
+        private val SKAVID_CAVE_10131 = getRegionBorders(10131)
+        private val LUMBRIDGE_DUNGEON_12949 = getRegionBorders(12949)
         private val LUMBRIDGE_DUNGEON_12950 = getRegionBorders(12950)
-        private val LUMBRIDGE_DUNGEON_12693 = getRegionBorders(Regions.LUMBRIDGE_DUNGEON_12693)
-        private val TEARS_OF_GUTHIX_12948 = getRegionBorders(Regions.TEARS_OF_GUTHIX_12948)
-        private val DORGESHUUN_MINE_13206 = getRegionBorders(Regions.DORGESHUUN_MINE_13206)
-        private val MOS_LE_HARMLESS_CAVE_15251 = getRegionBorders(Regions.MOS_LE_HARMLESS_CAVE_15251)
-        private val MOS_LE_HARMLESS_CAVE_14994 = getRegionBorders(Regions.MOS_LE_HARMLESS_CAVE_14994)
-        private val MOS_LE_HARMLESS_CAVE_14995 = getRegionBorders(Regions.MOS_LE_HARMLESS_CAVE_14995)
-        private val DORGESH_KAAN_SOUTH_DUNGEON_10833 = getRegionBorders(Regions.DORGESH_KAAN_SOUTH_DUNGEON_10833)
-        private val TEMPLE_OF_IKOV_10648 = getRegionBorders(Regions.TEMPLE_OF_IKOV_10648)
+        private val LUMBRIDGE_DUNGEON_12693 = getRegionBorders(12693)
+        private val TEARS_OF_GUTHIX_12948 = getRegionBorders(12948)
+        private val DORGESHUUN_MINE_13206 = getRegionBorders(13206)
+        private val MOS_LE_HARMLESS_CAVE_15251 = getRegionBorders(15251)
+        private val MOS_LE_HARMLESS_CAVE_14994 = getRegionBorders(14994)
+        private val MOS_LE_HARMLESS_CAVE_14995 = getRegionBorders(14995)
+        private val DORGESH_KAAN_SOUTH_DUNGEON_10833 = getRegionBorders(10833)
+        private val TEMPLE_OF_IKOV_10648 = getRegionBorders(10648)
 
         val DARKNESS_OVERLAY = object : Component(Components.DARKNESS_DARK_96) {
             override fun open(player: Player) {

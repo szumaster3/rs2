@@ -12,7 +12,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Regions
 
 class ExperimentCutscene(player: Player) : Cutscene(player) {
 
@@ -21,7 +20,7 @@ class ExperimentCutscene(player: Player) : Cutscene(player) {
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        loadRegion(Regions.ENTRANA_11060)
+        loadRegion(11060)// ENTRANA
     }
 
     override fun runStage(stage: Int) {

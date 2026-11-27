@@ -13,7 +13,6 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Regions
 import shared.consts.Scenery
 
 /**
@@ -22,7 +21,7 @@ import shared.consts.Scenery
 class RangingGuildListener : InteractionListener, MapArea {
 
     override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders.forRegion(Regions.RANGING_GUILD_10549))
+        return arrayOf(ZoneBorders.forRegion(10549))
     }
 
     override fun areaEnter(entity: Entity) {

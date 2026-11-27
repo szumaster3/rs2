@@ -15,7 +15,6 @@ import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Regions
 import shared.consts.Graphics as Gfx
 
 class PestControlListener : InteractionListener {
@@ -29,7 +28,7 @@ class PestControlListener : InteractionListener {
         on(VOID_SEAL, IntType.ITEM, "rub", "operate") { player, node ->
             val operate = getUsedOption(player) == "operate"
 
-            if (player.viewport.region?.regionId != Regions.PEST_CONTROL_10536) {
+            if (player.viewport.region?.regionId != 10536) {
                 sendMessage(player, "You can only use the seal in Pest Control.")
                 return@on true
             }

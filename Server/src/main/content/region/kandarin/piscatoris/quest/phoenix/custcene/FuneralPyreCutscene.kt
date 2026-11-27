@@ -10,7 +10,6 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.NPCs
-import shared.consts.Regions
 
 class FuneralPyreCutscene(player: Player) : Cutscene(player) {
 
@@ -72,6 +71,6 @@ class FuneralPyreCutscene(player: Player) : Cutscene(player) {
 
     companion object {
         private const val PHOENIX = NPCs.WOUNDED_PHOENIX_8547
-        private const val REGION = Regions.PHOENIX_LAIR_14161
+        private const val REGION = 14161 // PHOENIX_LAIR
     }
 }

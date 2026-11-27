@@ -10,7 +10,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.tools.Log
 import shared.consts.Items
-import shared.consts.Regions
 
 class LightSourceLighter : InteractionListener {
 
@@ -53,7 +52,7 @@ class LightSourceLighter : InteractionListener {
         if (playerLevel < requiredLevel) return false
 
         // Fishing platform exception.
-        if (player.location.isInRegion(Regions.FISHING_PLATFORM_11059)) {
+        if (player.location.isInRegion(11059)) {
             sendMessage(player, "Your tinderbox is damp from the sea crossing. It won't light here.")
             return true
         }

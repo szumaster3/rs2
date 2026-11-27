@@ -6,7 +6,6 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
-import shared.consts.Regions
 
 class TempleKnightsTestRoom : MapArea {
 
@@ -25,5 +24,5 @@ class TempleKnightsTestRoom : MapArea {
             ZoneRestriction.TELEPORT
         )
 
-    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(Regions.TEMPLE_KNIGHTS_TESTING_ROOM_9805))
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(9805))
 }

@@ -34,7 +34,6 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.NPCs
-import shared.consts.Regions
 
 @Initializable
 class BorkNPC : AbstractNPC {
@@ -416,7 +415,7 @@ class BorkNPC : AbstractNPC {
         override fun getSpawnLocation(): Location? = null
 
         override fun configure() {
-            region = DynamicRegion.create(BORK_REGION)
+            region = DynamicRegion.create(BORK_CAVE_REGION)
             region.isMulticombat = true
             setRegionBase()
             registerRegion(region.id)
@@ -462,7 +461,7 @@ class BorkNPC : AbstractNPC {
     }
 
     companion object {
-        private val BORK_REGION = Regions.BORK_CAVE_12374
+        private val BORK_CAVE_REGION = 12374
         private val LEGION_CHATS = arrayOf(
             "For Bork!",
             "Die, human!",

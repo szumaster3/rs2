@@ -4,7 +4,6 @@ import core.api.MapArea
 import core.api.getRegionBorders
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
-import shared.consts.Regions
 
 class SlayerTower : MapArea {
 
@@ -17,6 +16,6 @@ class SlayerTower : MapArea {
     }
 
     companion object {
-        private val SLAYER_TOWER = getRegionBorders(Regions.MORYTANIA_SLAYER_TOWER_13623)
+        private val SLAYER_TOWER = getRegionBorders(13623)
     }
 }

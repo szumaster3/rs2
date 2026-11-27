@@ -17,7 +17,6 @@ import core.net.packet.out.Encoders530
 import core.net.packet.out.PacketContext.CameraContext
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Regions
 
 /**
  * Handles the evil twin random event.
@@ -31,7 +30,7 @@ class EvilTwinPlugin : InteractionListener, MapArea {
         private const val CONTROL_PANEL_SCENERY_ID = shared.consts.Scenery.CONTROL_PANEL_14978
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(Regions.RE_EVIL_TWIN_7504))
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(7504))
     override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
     override fun areaLeave(entity: Entity, logout: Boolean)
     {

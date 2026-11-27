@@ -8,7 +8,6 @@ import core.api.setMinimapState
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import shared.consts.Components
-import shared.consts.Regions
 
 enum class ServantDirection(val camStartX: Int, val camStartY: Int, val camRotateX: Int, val camRotateY: Int, val camMoveX: Int, val camMoveY: Int, val attrSuffix: String) {
     N(30, 43, 30, 51, 30, 46, "n"),
@@ -25,7 +24,7 @@ class ServantCutscene(
     override fun setup() {
         setExit(player.location)
         setAttribute(player, "${GameAttributes.RE_BOB_OBJ}-${dir.attrSuffix}", true)
-        loadRegion(Regions.SCAPE_RUNE_13642)
+        loadRegion(13642)// SCAPE_RUNE
     }
 
     override fun runStage(stage: Int) {
