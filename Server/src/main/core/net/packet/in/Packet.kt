@@ -45,6 +45,7 @@ sealed class Packet {
     data class SlotSwitchMultiComponent(val player: Player, val sourceIface: Int, val sourceChild: Int, val sourceSlot: Int, val destIface: Int, val destChild: Int, val destSlot: Int) : Packet()
     data class SlotSwitchSingleComponent(val player: Player, val iface: Int, val child: Int, val sourceSlot: Int, val destSlot: Int, val isInsert: Boolean) : Packet()
     data class PacketCountUpdate(val player: Player, val count: Int) : Packet()
+    data class TransmitVerifyAck(val id: Int) : Packet()
     data class PrivateMessage(val player: Player, val username: String, val message: String) : Packet()
     data class ChatMessage(val player: Player, val effects: Int, val message: String, val clan: Boolean = false) : Packet()
     data class ChatSetting(val player: Player, val public: Int, val private: Int, val trade: Int) : Packet()

@@ -129,6 +129,23 @@ public final class ClientProt {
         return opcode >= 0 && opcode < COUNT ? NAMES[opcode] : "UNKNOWN(" + opcode + ")";
     }
 
+    /** Zero-based operation index for the ten native widget action opcodes. */
+    public static int interfaceOperationIndex(int opcode) {
+        switch (opcode) {
+            case IF_BUTTON1: return 0;
+            case IF_BUTTON2: return 1;
+            case IF_BUTTON3: return 2;
+            case IF_BUTTON4: return 3;
+            case IF_BUTTON5: return 4;
+            case IF_BUTTON6: return 5;
+            case IF_BUTTON7: return 6;
+            case IF_BUTTON8: return 7;
+            case IF_BUTTON9: return 8;
+            case IF_BUTTON10: return 9;
+            default: return -1;
+        }
+    }
+
     public static int length(int opcode) {
         if (opcode < 0 || opcode >= LENGTHS.length) throw new IllegalArgumentException("Unknown client opcode " + opcode);
         return LENGTHS[opcode];

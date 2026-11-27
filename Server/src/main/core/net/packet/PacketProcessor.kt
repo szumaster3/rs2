@@ -68,8 +68,19 @@ object PacketProcessor {
     private val queue = java.util.ArrayDeque<QueuedPacket>()
 
     @JvmStatic fun enqueue(player: Player, session: IoSession, pkt: Packet) {
-        if (!session.isActive || player.session !== session || pkt is Packet.NoProcess) return
+        if (!session.isActive || player.session !== session || isLegacyOnly(pkt)) return
+        if (pkt is Packet.IfAction && (pkt.optIndex !in 0..9 || ClientProt.interfaceOperationIndex(pkt.wireOpcode) != pkt.optIndex)) return
+        if (pkt is Packet.ContinueOption && pkt.wireOpcode != ClientProt.IF_BUTTON_CONTINUE) return
         synchronized(queue) { queue.addLast(QueuedPacket(player, session, pkt)) }
+    }
+
+    private fun isLegacyOnly(pkt: Packet): Boolean = when (pkt) {
+        is Packet.SlotSwitchSingleComponent, is Packet.SlotSwitchMultiComponent,
+        is Packet.InteractWalk, is Packet.TrackingAfkTimeout,
+        is Packet.PlayerPrefsUpdate, is Packet.PacketCountUpdate,
+        is Packet.UnhandledOp, is Packet.DecodingError, is Packet.NoProcess,
+        is Packet.TransmitVerifyAck -> true
+        else -> false
     }
 
     @JvmStatic fun processQueue() {
@@ -156,7 +167,10 @@ object PacketProcessor {
 
             is Packet.Ping -> pkt.player.session.lastPing = System.currentTimeMillis()
             is Packet.JoinClan -> {
-                if (pkt.clanName.isEmpty() && pkt.player.communication.currentClan.isNotEmpty()) {
+                if (pkt.clanName.isEmpty()) {
+                    // ClanChat.leave sends an empty frame even when no channel is joined.
+                    // It must never fall through to a JoinClanRequest with an empty name.
+                    if (pkt.player.communication.currentClan.isEmpty()) return
                     val builder = LeaveClanRequest.newBuilder()
                     builder.clanName = pkt.player.communication.currentClan
                     builder.username = pkt.player.name

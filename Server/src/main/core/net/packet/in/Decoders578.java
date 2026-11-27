@@ -12,7 +12,6 @@ import java.util.Locale;
 /** Native revision 578 gameplay payload decoder. Framing and ISAAC remain in GamePacketDecoder. */
 public final class Decoders578 {
     private Decoders578() {}
-    private static final int[] IF_WIRE = {ClientProt.IF_BUTTON1, ClientProt.IF_BUTTON2, ClientProt.IF_BUTTON3, ClientProt.IF_BUTTON4, ClientProt.IF_BUTTON5, ClientProt.IF_BUTTON6, ClientProt.IF_BUTTON7, ClientProt.IF_BUTTON8, ClientProt.IF_BUTTON9, ClientProt.IF_BUTTON10};
 
     /** Decode one complete, already deciphered frame. A null result may mean intentional discard. */
     public static Packet decode(Player player, int opcode, ByteBuffer payload) {
@@ -51,8 +50,7 @@ public final class Decoders578 {
             }
             case ClientProt.IF_BUTTON1: case ClientProt.IF_BUTTON2: case ClientProt.IF_BUTTON3: case ClientProt.IF_BUTTON4: case ClientProt.IF_BUTTON5:
             case ClientProt.IF_BUTTON6: case ClientProt.IF_BUTTON7: case ClientProt.IF_BUTTON8: case ClientProt.IF_BUTTON9: case ClientProt.IF_BUTTON10: {
-                int option = 0;
-                while (IF_WIRE[option] != opcode) option++;
+                int option = ClientProt.interfaceOperationIndex(opcode);
                 int component = payload.getInt();
                 int item = (Byte.toUnsignedInt(payload.get()) << 8)
                         | ((Byte.toUnsignedInt(payload.get()) - 128) & 255);
@@ -207,8 +205,8 @@ public final class Decoders578 {
             }
             case ClientProt.TRANSMITVAR_VERIFYID: // Protocol.method2432: acknowledgement of the last transmit verify ID.
                 // Never let a delayed or forged acknowledgement rewind the outgoing counter.
-                player.getSession().recordTransmitVerifyId(be(payload));
-                return null;
+                // Bind the acknowledgement to the receiving session in GameReadEvent.
+                return new Packet.TransmitVerifyAck(be(payload));
             case ClientProt.NO_TIMEOUT: return new Packet.Ping(player);
             case ClientProt.SOUND_SONGEND: return new Packet.TrackFinished(player, payload.getInt());
             // Ground item options, Protocol.java and Static327 menu ordering.

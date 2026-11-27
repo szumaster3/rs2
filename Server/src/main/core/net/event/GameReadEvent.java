@@ -33,6 +33,13 @@ public final class GameReadEvent extends IoReadEvent {
             } catch (java.nio.BufferUnderflowException | IllegalArgumentException malformed) {
                 return;
             }
+            if (packet instanceof Packet.TransmitVerifyAck) {
+                // Never resolve the session again through player: a reconnect can replace it.
+                if (session.isActive() && player.getSession() == session) {
+                    session.recordTransmitVerifyId(((Packet.TransmitVerifyAck) packet).getId());
+                }
+                return;
+            }
             if (player.<Boolean>getAttribute("logging_in", false) && !(packet instanceof Packet.CloseIface)
                     && !(packet instanceof Packet.TrackingDisplayUpdate)) return;
             if (packet != null) PacketProcessor.enqueue(player, session, packet);
