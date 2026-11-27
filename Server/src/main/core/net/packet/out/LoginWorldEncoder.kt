@@ -46,6 +46,7 @@ object LoginWorldEncoder {
     }
 
     fun dynamicRegion(location: Location, chunks: Array<Array<Array<RegionChunk?>>>): IoBuffer {
+        require(chunks.size == 4 && chunks.all { plane -> plane.size == 13 && plane.all { it.size == 13 } })
         val out = IoBuffer(88, PacketHeader.SHORT)
         out.putShort(location.regionX).putLEShort(location.regionY).putC(0).putC(1)
         val mapSquares = linkedSetOf<Int>()
@@ -55,8 +56,11 @@ object LoginWorldEncoder {
                 out.putBits(1, 0)
                 continue
             }
-            val x = chunk.base.regionX and 0x3ff
-            val z = chunk.base.regionY and 0x7ff
+            val x = chunk.base.regionX
+            val z = chunk.base.regionY
+            require(x in 0..1023 && z in 0..2047 && chunk.base.z in 0..3 && chunk.rotation in 0..3) {
+                "Dynamic chunk cannot be represented by revision 578: $x,$z"
+            }
             out.putBits(1, 1).putBits(2, chunk.base.z).putBits(10, x)
                 .putBits(11, z).putBits(2, chunk.rotation).putBits(1, 0)
             mapSquares.add(((x shr 3) shl 8) or (z shr 3))

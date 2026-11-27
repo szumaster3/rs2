@@ -66,6 +66,34 @@ public final class PacketDispatch {
         this.context = new PlayerContext(player);
     }
 
+    /** Sends the client's signed run weight without changing the inventory calculation. */
+    public void sendRunWeight() {
+        PacketRepository.send(Encoders530.WEIGHT_UPDATE, getContext());
+    }
+
+    /** Client-only spot animation; does not modify server-side entity masks. */
+    public void sendEntitySpotAnimation(boolean npc, int index, int id, int delay, int height) {
+        if (index < 0 || index >= (npc ? 32768 : 2048)) {
+            throw new IllegalArgumentException("Invalid spot animation entity index");
+        }
+        sendGlobalSpotAnimation((npc ? 0x20000000 : 0x10000000) | index, id, delay, height);
+    }
+
+    /** Tile spot animations are immediate in the revision 578 client. */
+    public void sendTileSpotAnimation(Location location, int id, int height) {
+        if (location.getX() < 0 || location.getX() > 16383 || location.getY() < 0
+                || location.getY() > 16383 || location.getZ() < 0 || location.getZ() > 3) {
+            throw new IllegalArgumentException("Invalid spot animation tile");
+        }
+        sendGlobalSpotAnimation(0x40000000 | (location.getZ() << 28)
+                | (location.getX() << 14) | location.getY(), id, 0, height);
+    }
+
+    private void sendGlobalSpotAnimation(int target, int id, int delay, int height) {
+        PacketRepository.send(Encoders530.GLOBAL_SPOT_ANIMATION,
+                new core.net.packet.out.PacketContext.GlobalSpotAnimationContext(player, target, id, delay, height));
+    }
+
     /** Explicit client-only reset; does not change server animator state. */
     public void resetClientEntityAnimations() {
         PacketRepository.send(Encoders530.RESET_ENTITY_ANIMATIONS, getContext());

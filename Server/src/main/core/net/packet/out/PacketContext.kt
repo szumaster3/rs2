@@ -27,6 +27,8 @@ sealed class PacketContext {
 
     class ComponentValueContext(override val player: Player, val interfaceId: Int, val childId: Int, val value: Int) : PacketContext()
 
+    class GlobalSpotAnimationContext(override val player: Player, val target: Int, val id: Int, val delay: Int, val height: Int) : PacketContext()
+
     class PlayerContext(override val player: Player) : PacketContext()
 
     class AccessMaskContext(

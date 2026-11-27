@@ -164,32 +164,33 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         context.player.details.session.write(buffer)
     }),
     SYSTEM_UPDATE_PACKET(encode<SystemUpdateContext> { context ->
-        val buffer = IoBuffer(8).putShort(context.time)
-        context.player.details.session.write(buffer)
+        if (context.time !in 0..65535) return@encode
+        context.player.details.session.write(IoBuffer(8).putShort(context.time))
     }),
     RUN_ENERGY(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(4)
-        buffer.put(context.player.settings.runEnergy.toInt().toByte().toInt())
-        context.player.details.session.write(buffer)
+        val energy = context.player.settings.runEnergy
+        if (!energy.isFinite() || energy < 0.0 || energy > 100.0) return@encode
+        context.player.details.session.write(IoBuffer(4).put(energy.toInt()))
     }),
     WEIGHT_UPDATE(encode<PlayerContext> { context ->
-        val buffer = IoBuffer(7)
-        buffer.putShort(context.player.settings.weight.toInt())
-        context.player.details.session.write(buffer)
+        val weight = context.player.settings.weight
+        if (!weight.isFinite() || weight.toInt() !in -32768..32767) return@encode
+        context.player.details.session.write(IoBuffer(7).putShort(weight.toInt()))
     }),
     SKILL_LEVEL(encode<SkillContext> { context ->
-        val buffer = IoBuffer(20)
+        if (context.skillId !in Skills.SKILL_NAME.indices) return@encode
         val skills = context.player.getSkills()
-        buffer.putInt(skills.getExperience(context.skillId).toInt())
-        buffer.putC(context.skillId)
-        if (context.skillId == Skills.PRAYER) {
-            buffer.putS(ceil(skills.prayerPoints).toInt())
-        } else if (context.skillId == Skills.HITPOINTS) {
-            buffer.putS(skills.lifepoints)
-        } else {
-            buffer.putS(skills.getLevel(context.skillId, true))
+        val xp = skills.getExperience(context.skillId)
+        val level = when (context.skillId) {
+            Skills.PRAYER -> ceil(skills.prayerPoints).toInt()
+            Skills.HITPOINTS -> skills.lifepoints
+            else -> skills.getLevel(context.skillId, true)
         }
-        context.player.details.session.write(buffer)
+        if (!xp.isFinite() || xp < 0.0 || xp > Int.MAX_VALUE.toDouble() || level !in 0..255) return@encode
+        context.player.details.session.write(IoBuffer(20).putInt(xp.toInt()).putC(context.skillId).putS(level))
+    }),
+    GLOBAL_SPOT_ANIMATION(encode<PacketContext.GlobalSpotAnimationContext> { c ->
+        c.player.details.session.write(Encoders578.globalSpotAnimation(c.target, c.id, c.delay, c.height))
     }),
 
     // Interfaces
@@ -519,14 +520,17 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
     UPDATE_AREA_POSITION(encode<AreaPositionContext> { context ->
         val scene = context.player.playerFlags.lastSceneGraph
         val l = context.location
-        val buffer = IoBuffer(41).putA(l.z).putC(l.getSceneY(scene)).putS(l.getSceneX(scene))
+        val x = l.getSceneX(scene)
+        val y = l.getSceneY(scene)
+        if (x !in 0..96 || y !in 0..96 || l.z !in 0..3) return@encode
+        val buffer = IoBuffer(41).putA(l.z).putC(y).putS(x)
         context.player.session.write(buffer)
     }),
     CLEAR_REGION_CHUNK(encode<ClearChunkContext> { context ->
         val l = context.player.playerFlags.lastSceneGraph
         val x = context.chunk.currentBase.getSceneX(l)
         val y = context.chunk.currentBase.getSceneY(l)
-        if (x >= 0 && y >= 0 && x < 104 && y < 104) {
+        if (x in 0..96 && y in 0..96 && context.chunk.currentBase.z in 0..3) {
             val buffer = IoBuffer(42).put(x).putC(y).putA(context.chunk.currentBase.z)
             context.player.session.write(buffer)
         }

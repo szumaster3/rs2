@@ -366,6 +366,7 @@ public final class Settings {
             weight += item.getDefinition().getConfiguration(ItemConfigParser.WEIGHT, 0.0);
         }
         player.getPacketDispatch().sendString((int) weight + " kg", 667, 32);
+        player.getPacketDispatch().sendRunWeight();
     }
 
     /**

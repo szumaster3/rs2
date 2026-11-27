@@ -34,6 +34,19 @@ public final class Encoders578 {
         return buffer;
     }
 
+    /** Packed target: bit 30 for tiles, bit 29 for NPCs, bit 28 for players. */
+    public static IoBuffer globalSpotAnimation(int target, int id, int delay, int height) {
+        boolean tile = (target & 0x40000000) != 0;
+        boolean npc = (target & 0xffff8000) == 0x20000000;
+        boolean player = (target & 0xfffff800) == 0x10000000;
+        if (target < 0 || (!tile && !npc && !player) || id < -1 || id > 65534
+                || delay < 0 || delay > 65535 || height < 0 || height > 65535
+                || (tile && (id == -1 || delay != 0))) {
+            throw new IllegalArgumentException("Invalid global spot animation");
+        }
+        return new IoBuffer(0).putShortA(id).putShortA(delay).putInt(target).putLEShort(height);
+    }
+
     public static IoBuffer logout() {
         return new IoBuffer(58);
     }
