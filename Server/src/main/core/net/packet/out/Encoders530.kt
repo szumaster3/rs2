@@ -540,8 +540,9 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
             context.index + 1, !context.isRemove && context.index == 0)
         context.player.session.write(buffer)
     }),
-    SET_WALK_OPTION(encode<WalkOptionContext> {
-        // TODO: Verify the walk-to option packet for revision 530.
+    SET_WALK_OPTION(encode<WalkOptionContext> { context ->
+        if (context.option.length > 254 || context.option.contains('\u0000')) return@encode
+        context.player.session.write(Encoders578.walkOption(context.option))
     }),
 
     // Camera and audio
@@ -553,21 +554,28 @@ enum class Encoders530(private val writer: (PacketContext) -> Unit, internal val
         when (type) {
             CameraType.ROTATION,
             CameraType.POSITION -> {
-                buffer.putShort(context.player.interfaceManager.getPacketCount(1))
                 val x = l.getSceneX(p.playerFlags.lastSceneGraph)
                 val y = l.getSceneY(p.playerFlags.lastSceneGraph)
+                if (x !in 0..255 || y !in 0..255 || context.height !in 0..65535 ||
+                    context.speed !in 0..255 || context.zoomSpeed !in 0..255) return@encode
+                buffer.putShort(context.player.interfaceManager.getPacketCount(1))
                 buffer.put(x).put(y).putShort(context.height).put(context.speed).put(context.zoomSpeed)
             }
 
-            CameraType.SET -> buffer.putShort(context.x)
-                .putShortA(context.player.interfaceManager.getPacketCount(1)).putShortA(context.y)
+            CameraType.SET -> {
+                // Opcode 14 is forceAngle, not a world-coordinate camera move.
+                if (context.x !in 128..384 || context.y !in 0..2047) return@encode
+                buffer.putShort(context.x)
+                    .putShortA(context.player.interfaceManager.getPacketCount(1)).putShortA(context.y)
+            }
 
             CameraType.SHAKE -> {
+                if (context.x !in 0..4) return@encode
                 buffer.putShort(context.player.interfaceManager.getPacketCount(1))
                 buffer.put(context.x).put(context.y).put(context.height).put(context.speed).putShort(context.zoomSpeed)
             }
 
-            CameraType.RESET -> buffer.putShort(context.player.interfaceManager.getPacketCount(1))
+            CameraType.RESET, CameraType.SMOOTH_RESET -> buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         }
         p.session.write(buffer)
     }),

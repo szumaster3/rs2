@@ -79,7 +79,7 @@ sealed class PacketContext {
         fun transform(heightOffset: Int) = CameraContext(player, type, x, y, height + heightOffset, speed, zoomSpeed)
 
         enum class CameraType(val opcode: Int) {
-            POSITION(25), ROTATION(5), SET(14), SHAKE(23), RESET(91)
+            POSITION(25), ROTATION(5), SET(14), SHAKE(23), RESET(91), SMOOTH_RESET(30)
         }
     }
 

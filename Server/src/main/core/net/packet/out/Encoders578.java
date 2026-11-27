@@ -24,6 +24,16 @@ public final class Encoders578 {
         return new IoBuffer(82);
     }
 
+    /** Empty payload restores the client's localized default walk option. */
+    public static IoBuffer walkOption(String option) {
+        if (option.length() > 254 || option.indexOf(0) >= 0) {
+            throw new IllegalArgumentException("Invalid walk option");
+        }
+        IoBuffer buffer = new IoBuffer(11, PacketHeader.BYTE);
+        if (!option.isEmpty()) buffer.putString(option);
+        return buffer;
+    }
+
     public static IoBuffer logout() {
         return new IoBuffer(58);
     }
