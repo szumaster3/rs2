@@ -2,11 +2,7 @@ package content.global.plugins.`object`
 
 import core.api.dumpContainer
 import core.api.getUsedOption
-import core.api.removeTabs
 import core.api.sendString
-import core.game.component.CloseEvent
-import core.game.component.Component
-import core.game.container.access.InterfaceContainer.generateItems
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
@@ -28,14 +24,8 @@ class DepositBoxOptionPlugin : InteractionListener {
             }
 
 
-                player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11))?.closeEvent =
-                    CloseEvent { p, _ ->
-                        p.interfaceManager.openDefaultTabs()
-                        return@CloseEvent true
-                    }
-                sendString(player, "The Bank of " + GameWorld.settings!!.name + " - Deposit Box", Components.BANK_DEPOSIT_BOX_11, 12)
-                removeTabs(player, 0, 1, 2, 3, 4, 5, 6)
-                player.generateItems(Components.BANK_DEPOSIT_BOX_11, 15, listOf("Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1"), 5, 7)
+            player.bank.openDepositBox()
+            sendString(player, "The Bank of " + GameWorld.settings!!.name + " - Deposit Box", Components.BANK_DEPOSIT_BOX_11, 13)
 
             return true
         }

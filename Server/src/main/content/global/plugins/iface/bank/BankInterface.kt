@@ -7,6 +7,7 @@ import core.api.*
 import core.game.component.Component
 import core.game.container.Container
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.node.entity.player.Player
 import shared.consts.Components
 import shared.consts.Items
@@ -37,14 +38,14 @@ class BankInterface : InterfaceListener {
      * Opcodes for bank item interactions.
      */
     private enum class BankItemAction(val opcode: Int) {
-        WITHDRAW_ONE(155),
-        WITHDRAW_FIVE(196),
-        WITHDRAW_TEN(124),
-        WITHDRAW_LAST_X(199),
-        WITHDRAW_X(234),
-        WITHDRAW_ALL(168),
-        WITHDRAW_ALL_BUT_ONE(166),
-        EXAMINE(9);
+        WITHDRAW_ONE(InterfaceOperation.OP1),
+        WITHDRAW_FIVE(InterfaceOperation.OP2),
+        WITHDRAW_TEN(InterfaceOperation.OP3),
+        WITHDRAW_LAST_X(InterfaceOperation.OP4),
+        WITHDRAW_X(InterfaceOperation.OP5),
+        WITHDRAW_ALL(InterfaceOperation.OP6),
+        WITHDRAW_ALL_BUT_ONE(InterfaceOperation.OP7),
+        EXAMINE(InterfaceOperation.OP10);
 
         companion object {
             private val lookup = values().associateBy(BankItemAction::opcode)
@@ -83,8 +84,8 @@ class BankInterface : InterfaceListener {
         val clickedTabIndex = -((buttonID - BANK_TABS.first()) / 2)
 
         when (opcode) {
-            155 -> if (player.bank.getTabIndex() != (if (clickedTabIndex == 0) 10 else clickedTabIndex)) player.bank.setTabIndex(clickedTabIndex)
-            196 -> if (clickedTabIndex in 1..8) player.bank.collapseTab(clickedTabIndex)
+            InterfaceOperation.OP1 -> if (player.bank.getTabIndex() != (if (clickedTabIndex == 0) 10 else clickedTabIndex)) player.bank.setTabIndex(clickedTabIndex)
+            InterfaceOperation.OP2 -> if (clickedTabIndex in 1..8) player.bank.collapseTab(clickedTabIndex)
         }
 
         return true
@@ -159,9 +160,9 @@ class BankInterface : InterfaceListener {
          * Handles button interactions in main bank
          */
 
-        on(Components.BANK_V2_MAIN_762) { player, _, opcode, buttonID, slot, itemID ->
+        onNative(Components.BANK_V2_MAIN_762) { player, _, opcode, buttonID, slot, itemID ->
             if (getVarbit(player, 4895) == 2 && getVarp(player, 281) < 1000 && getVarbit(player, 4931) < 30) {
-                return@on false
+                return@onNative false
             }
             when (buttonID) {
                 BANK_V2_MAIN_BUTTON_HELP -> openDialogue(player, BankHelpDialogue())
@@ -172,25 +173,25 @@ class BankInterface : InterfaceListener {
                 BANK_V2_MENU_ELEMENT -> if (player.bank.get(slot)?.id == itemID) handleContainerMenu(player, opcode, slot, player.bank, player.inventory, true)
                 in BANK_TABS -> handleTabInteraction(player, opcode, buttonID)
             }
-            return@on true
+            return@onNative true
         }
 
         /*
          * Handles bank help interface (close button)
          */
 
-        on(Components.BANK_V2_HELP_767) { player, _, _, buttonID, _, _ ->
+        onNative(Components.BANK_V2_HELP_767) { player, _, _, buttonID, _, _ ->
             if (buttonID == BANK_V2_MAIN_BUTTON_CLOSE) openBankAccount(player)
-            return@on true
+            return@onNative true
         }
 
         /*
          * Handles depositing items from side inventory panel
          */
 
-        on(Components.BANK_V2_SIDE_763) { player, _, opcode, child, slot, itemID ->
+        onNative(Components.BANK_V2_SIDE_763) { player, _, opcode, child, slot, itemID ->
             if (child == 0 && player.inventory.get(slot)?.id == itemID) handleContainerMenu(player, opcode, slot, player.inventory, player.bank, false)
-            return@on true
+            return@onNative true
         }
     }
 }

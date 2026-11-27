@@ -62,6 +62,8 @@ class ItemDefinition : Definition<Item>() {
     var equipId: Int = -1
     var itemRequirements: HashMap<Int, Int>? = null
     var clientScriptData: HashMap<Int, Any?>? = null
+    fun getParam(key: Int, defaultValue: Int): Int = clientScriptData?.get(key) as? Int ?: defaultValue
+    fun getParam(key: Int, defaultValue: String?): String? = clientScriptData?.get(key) as? String ?: defaultValue
     var itemType: Int = 0
     val isAllowed: Boolean
         get() {

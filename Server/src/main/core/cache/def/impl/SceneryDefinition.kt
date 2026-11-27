@@ -13,6 +13,12 @@ import java.nio.ByteBuffer
 import java.util.HashMap
 
 class SceneryDefinition : Definition<Scenery>() {
+    private var cacheParams: MutableMap<Int, Any>? = null
+
+    fun getParam(key: Int, defaultValue: Int): Int = cacheParams?.get(key) as? Int ?: defaultValue
+    fun getParam(key: Int, defaultValue: String?): String? = cacheParams?.get(key) as? String ?: defaultValue
+    fun getCacheParams(): Map<Int, Any> = cacheParams?.toMap() ?: emptyMap()
+
     override val examine: String get() = super.examine!!
     var originalColors: ShortArray? = null
         private set
@@ -533,16 +539,7 @@ class SceneryDefinition : Definition<Scenery>() {
                 } else if (opcode == 160) {
                     def.questIds = IntArray(buffer.get().toInt() and 0xff) { buffer.short.toInt() and 0xffff }
                 } else if (opcode == 249) {
-                    var length = buffer.get().toInt() and 0xFF
-                    for (i in 0 until length) {
-                        var string = buffer.get().toInt() == 1
-                        ByteBufferUtils.getMedium(buffer)
-                        if (!string) {
-                            buffer.getInt()
-                        } else {
-                            ByteBufferUtils.getString(buffer)
-                        }
-                    }
+                    def.cacheParams = DefinitionParams.read(buffer, def.cacheParams)
                 } else {
                     if (opcode != 0) {
                         error("Object $objectId: unknown opcode $opcode at ${buffer.position() - 1}")

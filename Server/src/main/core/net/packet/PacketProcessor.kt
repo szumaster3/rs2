@@ -69,11 +69,17 @@ object PacketProcessor {
 
     @JvmStatic fun enqueue(player: Player, session: IoSession, pkt: Packet) {
         if (!session.isActive || player.session !== session || isLegacyOnly(pkt)) return
+        // These operations carry both the wire opcode and the semantic operation.
+        // Do not let historical decoder IDs enter the native listener boundary.
         if (pkt is Packet.IfAction && (pkt.optIndex !in 0..9 || ClientProt.interfaceOperationIndex(pkt.wireOpcode) != pkt.optIndex)) return
         if (pkt is Packet.ContinueOption && pkt.wireOpcode != ClientProt.IF_BUTTON_CONTINUE) return
         synchronized(queue) { queue.addLast(QueuedPacket(player, session, pkt)) }
     }
 
+    /** Retain the historical definitions for comparison, but never dispatch them
+     * through the native 578 queue. Verify acknowledgements are handled by the
+     * receiving session itself, before gameplay dispatch.
+     */
     private fun isLegacyOnly(pkt: Packet): Boolean = when (pkt) {
         is Packet.SlotSwitchSingleComponent, is Packet.SlotSwitchMultiComponent,
         is Packet.InteractWalk, is Packet.TrackingAfkTimeout,
@@ -348,7 +354,7 @@ object PacketProcessor {
                 if (player.dialogueInterpreter.dialogue == null) {
                     player.interfaceManager.closeChatbox()
                     player.dialogueInterpreter.actions.removeFirstOrNull()?.handle(player, pkt.child)
-                    if (!InterfaceListeners.run(player, component, InterfaceOperation.CONTINUE, pkt.child, pkt.slot, -1))
+                    if (!InterfaceListeners.runNative(player, component, InterfaceOperation.CONTINUE_INDEX, pkt.child, pkt.slot, -1))
                         component.plugin?.handle(player, component, InterfaceOperation.CONTINUE, pkt.child, pkt.slot, -1)
                     return
                 }
@@ -729,7 +735,7 @@ object PacketProcessor {
         }
         player.dispatch(ButtonClickEvent(c.id, pkt.child))
         if (core.game.node.entity.player.link.AutocastManager.handle(player, pkt.iface, pkt.child, pkt.optIndex)) return
-        if (!InterfaceListeners.run(player, c, listenerOperation, pkt.child, pkt.slot, pkt.itemId))
+        if (!InterfaceListeners.runNative(player, c, pkt.optIndex, pkt.child, pkt.slot, pkt.itemId))
             plugin?.handle(player, c, listenerOperation, pkt.child, pkt.slot, pkt.itemId)
     }
 

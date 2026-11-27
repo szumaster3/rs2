@@ -16,6 +16,12 @@ import java.nio.ByteBuffer
 import java.util.HashMap
 
 class NPCDefinition(id: Int): Definition<NPC>() {
+    private var cacheParams: MutableMap<Int, Any>? = null
+
+    fun getParam(key: Int, defaultValue: Int): Int = cacheParams?.get(key) as? Int ?: defaultValue
+    fun getParam(key: Int, defaultValue: String?): String? = cacheParams?.get(key) as? String ?: defaultValue
+    fun getCacheParams(): Map<Int, Any> = cacheParams?.toMap() ?: emptyMap()
+
     var questIds: IntArray? = null
         private set
     @JvmField var size: Int = 1
@@ -290,16 +296,7 @@ class NPCDefinition(id: Int): Definition<NPC>() {
             in 150..154 -> options[opcode - 150] = ByteBufferUtils.getString(buffer)
             160 -> questIds = IntArray(buffer.get().toInt() and 0xff) { buffer.short.toInt() and 0xffff }
             249 -> {
-                val length = buffer.get().toInt() and 0xFF
-                for (i in 0 until length) {
-                    var string = buffer.get().toInt() == 1
-                    ByteBufferUtils.getMedium(buffer)
-                    if (!string) {
-                        buffer.getInt()
-                    } else {
-                        ByteBufferUtils.getString(buffer)
-                    }
-                }
+                cacheParams = DefinitionParams.read(buffer, cacheParams)
             }
             else -> error("NPC $id: unknown opcode $opcode at ${buffer.position() - 1}")
         }

@@ -51,7 +51,7 @@ class NPCListener : InteractionListener {
             }
 
             openDepositBox(player)
-            sendString(player, "Peer the Seer's Deposits", Components.BANK_DEPOSIT_BOX_11, 12)
+            sendString(player, "Peer the Seer's Deposits", Components.BANK_DEPOSIT_BOX_11, 13)
             return@on true
         }
 

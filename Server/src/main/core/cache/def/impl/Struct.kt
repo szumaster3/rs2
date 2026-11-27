@@ -17,6 +17,8 @@ class Struct(val id: Int) {
     }
 
     fun getString(key: Int): String? = dataStore[key] as String?
+    fun getParam(key: Int, defaultValue: Int): Int = dataStore[key] as? Int ?: defaultValue
+    fun getParam(key: Int, defaultValue: String?): String? = dataStore[key] as? String ?: defaultValue
 
     override fun toString(): String = "Struct{id=$id, dataStore=$dataStore}"
 

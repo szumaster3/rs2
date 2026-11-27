@@ -22,6 +22,22 @@ interface InterfaceListener : ContentInterface {
         InterfaceListeners.add(componentID, handler)
     }
 
+    /** Native listener: operation 0..9, or CONTINUE_INDEX for chatbox continuation. */
+    fun onNative(
+        componentID: Int,
+        buttonID: Int,
+        handler: (player: Player, component: Component, operation: Int, buttonID: Int, slot: Int, itemID: Int) -> Boolean,
+    ) {
+        InterfaceListeners.addNative(componentID, buttonID, handler)
+    }
+
+    fun onNative(
+        componentID: Int,
+        handler: (player: Player, component: Component, operation: Int, buttonID: Int, slot: Int, itemID: Int) -> Boolean,
+    ) {
+        InterfaceListeners.addNative(componentID, handler)
+    }
+
     fun onSlotSwitch(
         componentID: Int,
         handler: (player: Player, component: Component, sourceSlot: Int, destSlot: Int) -> Boolean,

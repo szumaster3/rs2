@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player
 
 object InterfaceListeners {
     val buttonListeners = HashMap<String, (Player, Component, Int, Int, Int, Int) -> Boolean>(1000)
+    private val nativeOperationListeners = HashSet<String>()
     val openListeners = HashMap<String, (Player, Component) -> Boolean>(100)
     val slotSwitchListeners = HashMap<Int, (Player, Component, Int, Int) -> Boolean>()
 
@@ -14,7 +15,9 @@ object InterfaceListeners {
         buttonID: Int,
         handler: (Player, Component, Int, Int, Int, Int) -> Boolean,
     ) {
-        buttonListeners["$componentID:$buttonID"] = handler
+        val key = "$componentID:$buttonID"
+        nativeOperationListeners.remove(key)
+        buttonListeners[key] = handler
     }
 
     @JvmStatic
@@ -22,7 +25,34 @@ object InterfaceListeners {
         componentID: Int,
         handler: (Player, Component, Int, Int, Int, Int) -> Boolean,
     ) {
-        buttonListeners["$componentID"] = handler
+        val key = "$componentID"
+        nativeOperationListeners.remove(key)
+        buttonListeners[key] = handler
+    }
+
+    @JvmStatic
+    fun addNative(componentID: Int, buttonID: Int, handler: (Player, Component, Int, Int, Int, Int) -> Boolean) {
+        add(componentID, buttonID, handler)
+        nativeOperationListeners.add("$componentID:$buttonID")
+    }
+
+    @JvmStatic
+    fun addNative(componentID: Int, handler: (Player, Component, Int, Int, Int, Int) -> Boolean) {
+        add(componentID, handler)
+        nativeOperationListeners.add("$componentID")
+    }
+
+    /** Preserve exact-button precedence and legacy plugin fallback while allowing native widget operation indices. */
+    @JvmStatic
+    fun runNative(player: Player, component: Component, operation: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
+        require(operation in InterfaceOperation.OP1..InterfaceOperation.CONTINUE_INDEX)
+        val exact = "${component.id}:$buttonID"
+        val key = if (buttonListeners.containsKey(exact)) exact else "${component.id}"
+        val handler = buttonListeners[key] ?: return false
+        val listenerOperation = if (key in nativeOperationListeners) operation
+            else if (operation == InterfaceOperation.CONTINUE_INDEX) InterfaceOperation.CONTINUE
+            else InterfaceOperation.listenerId(operation)
+        return handler.invoke(player, component, listenerOperation, buttonID, slot, itemID)
     }
 
     @JvmStatic
@@ -102,7 +132,14 @@ object InterfaceListeners {
         slot: Int,
         itemID: Int,
     ): Boolean {
-        val method = get(component.id, buttonID) ?: get(component.id) ?: return false
-        return method.invoke(player, component, opcode, buttonID, slot, itemID)
+        val exact = "${component.id}:$buttonID"
+        val key = if (buttonListeners.containsKey(exact)) exact else "${component.id}"
+        val method = buttonListeners[key] ?: return false
+        // Compatibility entry point for old callers; do not pass a legacy ID to a native listener.
+        val operation = if (key in nativeOperationListeners) {
+            if (opcode == InterfaceOperation.CONTINUE) InterfaceOperation.CONTINUE_INDEX
+            else (InterfaceOperation.OP1..InterfaceOperation.OP10).firstOrNull { InterfaceOperation.listenerId(it) == opcode } ?: return false
+        } else opcode
+        return method.invoke(player, component, operation, buttonID, slot, itemID)
     }
 }

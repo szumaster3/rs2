@@ -39,23 +39,22 @@ object InterfaceContainer {
      * @return The container key used for this interface.
      */
     private fun generate(player: Player, items: List<Item?>, options: List<String> = emptyList(), interfaceIndex: Int, childIndex: Int, x: Int, y: Int, key: Int): Int {
-        val scriptArgs = arrayOfNulls<Any>(options.size + 7)
-
-        for (i in options.indices) {
-            scriptArgs[i] = options[i]
-        }
-
-        scriptArgs[options.size] = -1
-        scriptArgs[options.size + 1] = 0
-        scriptArgs[options.size + 2] = x
-        scriptArgs[options.size + 3] = y
-        scriptArgs[options.size + 4] = key
-        scriptArgs[options.size + 5] = interfaceIndex shl 16 or childIndex
-//      scriptArgs[options.size + 6] = 0
+        require(options.size <= 9) { "Script 150 supports at most nine menu options" }
+        // The existing API takes menu strings in wire order (last option first).
+        // CS2 interface_inv_init_big has six integer arguments followed by nine strings.
+        val wireOptions = List(9 - options.size) { "" } + options
+        val scriptArgs = arrayOfNulls<Any>(15)
+        wireOptions.forEachIndexed { i, option -> scriptArgs[i] = option }
+        scriptArgs[9] = -1 // optional drag component
+        scriptArgs[10] = 0 // drag mode
+        scriptArgs[11] = y
+        scriptArgs[12] = x
+        scriptArgs[13] = key
+        scriptArgs[14] = interfaceIndex shl 16 or childIndex
 
         player.packetDispatch.sendRunScript(
             CLIENT_SCRIPT_INDEX,
-            generateScriptArguments(options.size),
+            "IviiiIsssssssss",
             *scriptArgs
         )
 
@@ -63,7 +62,7 @@ object InterfaceContainer {
         val settings = IfaceSettingsBuilder().enableAllOptions().build()
         player.packetDispatch.sendIfaceSettings(settings, childIndex, interfaceIndex, 0, items.size)
         PacketRepository.send(Encoders578.CONTAINER_PACKET, ContainerContext(player, -1, -2, key, itemArray, items.size, false))
-        return increment()
+        return key
     }
 
     /**
@@ -115,17 +114,6 @@ object InterfaceContainer {
     private fun increment(): Int {
         if (index == 6999) index = 600
         return index++
-    }
-
-    /**
-     * Builds the script argument type string for the client.
-     *
-     * @param length Number of right-click options.
-     * @return The script argument string.
-     */
-    private fun generateScriptArguments(length: Int): String = buildString {
-        append("IviiiI")
-        repeat(length) { append("s") }
     }
 
     /**

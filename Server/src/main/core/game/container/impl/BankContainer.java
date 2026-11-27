@@ -119,7 +119,9 @@ public final class BankContainer extends Container {
 	 * Method used to open the deposit box.
 	 */
 	public void openDepositBox() {
-		player.getInterfaceManager().open(new Component(11)).setCloseEvent((player, c) -> {
+		Component component = player.getInterfaceManager().open(new Component(DEPOSIT_BOX));
+		if (component == null) return;
+		component.setCloseEvent((player, c) -> {
 			player.getInterfaceManager().openDefaultTabs();
 			return true;
 		});
@@ -135,11 +137,11 @@ public final class BankContainer extends Container {
 		InterfaceContainer.generateItems(
 				player,
 				DEPOSIT_BOX,
-				15,
+				17,
 				List.of("Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1"),
-				5,
 				7,
-				0
+				4,
+				93
 		);
 	}
 
