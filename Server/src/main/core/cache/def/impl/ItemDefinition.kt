@@ -21,6 +21,15 @@ import java.util.*
 import shared.consts.Items
 
 class ItemDefinition : Definition<Item>() {
+    /** ObjType opcode 65: searchable by the client's tradeable-only item finder. */
+    var cacheTradeable: Boolean = false
+        private set
+    var modelRotationZ: Int = 0
+        private set
+    var groundCursorOptions: MutableMap<Int, Int> = HashMap()
+        private set
+    var inventoryCursorOptions: MutableMap<Int, Int> = HashMap()
+        private set
     var questIds: IntArray? = null
         private set
     var interfaceModelId: Int = 0
@@ -395,23 +404,23 @@ class ItemDefinition : Definition<Item>() {
                     for (index in 0 until length)
                         def.unknownArray1!![index] = buffer.get()
                 } else if (opcode == 65) {
-                    def.isUnnoted = true
+                    def.cacheTradeable = true
                 } else if (opcode == 78) {
                     def.colourEquip1 = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 79) {
                     def.colourEquip2 = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 90) {
-                    def.maleWornModelId3 = buffer.getShort().toInt()
+                    def.maleWornModelId3 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 91) {
-                    def.femaleWornModelId3 = buffer.getShort().toInt()
+                    def.femaleWornModelId3 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 92) {
-                    def.maleWornModelId4 = buffer.getShort().toInt()
+                    def.maleWornModelId4 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 93) {
-                    def.femaleWornModelId4 = buffer.getShort().toInt()
+                    def.femaleWornModelId4 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 95) {
-                    buffer.getShort()
+                    def.modelRotationZ = buffer.short.toInt() and 0xffff
                 } else if (opcode == 96) {
-                    def.itemType = buffer.get().toInt()
+                    def.itemType = buffer.get().toInt() and 0xff
                 } else if (opcode == 97) {
                     def.noteId = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 98) {
@@ -434,7 +443,7 @@ class ItemDefinition : Definition<Item>() {
                 } else if (opcode == 114) {
                     buffer.get()
                 } else if (opcode == 115) {
-                    def.teamId = buffer.get().toInt()
+                    def.teamId = buffer.get().toInt() and 0xff
                 } else if (opcode == 121) {
                     def.lendId = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 122) {
@@ -448,17 +457,17 @@ class ItemDefinition : Definition<Item>() {
                     buffer.get()
                     buffer.get()
                 } else if (opcode == 127) {
-                    buffer.get()
-                    buffer.getShort()
+                    val option = buffer.get().toInt() and 0xff
+                    def.groundCursorOptions[option] = buffer.short.toInt() and 0xffff
                 } else if (opcode == 128) {
-                    buffer.get()
-                    buffer.getShort()
+                    val option = buffer.get().toInt() and 0xff
+                    def.groundCursorOptions[option] = buffer.short.toInt() and 0xffff
                 } else if (opcode == 129) {
-                    buffer.get()
-                    buffer.getShort()
+                    val option = buffer.get().toInt() and 0xff
+                    def.inventoryCursorOptions[option] = buffer.short.toInt() and 0xffff
                 } else if (opcode == 130) {
-                    buffer.get()
-                    buffer.getShort()
+                    val option = buffer.get().toInt() and 0xff
+                    def.inventoryCursorOptions[option] = buffer.short.toInt() and 0xffff
                 } else if (opcode == 132) {
                     def.questIds = IntArray(buffer.get().toInt() and 0xff) { buffer.short.toInt() and 0xffff }
                 } else if (opcode == 249) {

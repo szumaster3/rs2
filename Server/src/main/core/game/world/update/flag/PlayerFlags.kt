@@ -276,10 +276,14 @@ sealed class PlayerFlags(
      */
     class AnimationSequence : PlayerFlags (0x400, 2, EntityFlag.AnimSeq) {
         override fun writeTo(buffer: IoBuffer, context: Any?) {
-            if (context is Animation) {
-                buffer.p1sub(1).ip2(context.id).p1neg(context.delay).ip2(0xffff)
-            } else {
-                buffer.p1sub(0)
+            val entries = when (context) {
+                is AnimationSequenceUpdate -> context.entries
+                is Animation -> listOf(LayeredSequence(context.id, context.delay, 0xfff))
+                else -> emptyList()
+            }
+            buffer.p1sub(entries.size)
+            for (entry in entries) {
+                buffer.ip2(entry.sequenceId).p1neg(entry.delay).ip2(entry.slotMask)
             }
         }
     }

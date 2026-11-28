@@ -30,7 +30,7 @@ object EntityFlags {
     }
 
     /**
-     * Gets the flag provider for the given entity [type] and [flag] (revision 530).
+     * Gets the flag provider for the given entity [type] and [flag] (active revision).
      */
     fun getFlagFor(type: EFlagType, flag: EntityFlag): EFlagProvider? {
         val revision = ServerConstants.REVISION

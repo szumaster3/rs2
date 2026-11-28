@@ -7,6 +7,8 @@ import core.game.node.entity.player.Player
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.HitMark
 import core.game.world.update.flag.context.ProgressBar
+import core.game.world.update.flag.context.AnimationSequenceUpdate
+import core.game.world.update.flag.context.Animation
 import core.net.packet.IoBuffer
 import core.tools.*
 import java.util.concurrent.atomic.AtomicBoolean
@@ -26,6 +28,9 @@ class UpdateMasks(val owner: Entity) {
     fun register(flag: EntityFlag, context: Any?, sync: Boolean = false): Boolean {
         if (flag == EntityFlag.MovementType && (context !is Int || context !in 0..2)) return false
         if (flag == EntityFlag.ProgressBar && (context !is ProgressBar || sync)) return false
+        if (flag == EntityFlag.AnimSeq && (sync || (context !is AnimationSequenceUpdate && context !is Animation))) return false
+        if (flag == EntityFlag.AnimSeq && context is Animation && (context.id !in -1..65534 || context.delay !in 0..255)) return false
+        if (flag == EntityFlag.ForceChat && context !is String) return false
         var synced = sync || flag == EntityFlag.MovementType
         var provider = EntityFlags.getFlagFor(type, flag)
         if (provider == null) {
@@ -94,9 +99,7 @@ class UpdateMasks(val owner: Entity) {
      */
     fun writeSynced(p: Player?, e: Entity?, buffer: IoBuffer, appearance: Boolean) {
         var maskData = presenceFlags
-        if (flag == EntityFlag.MovementType && (context !is Int || context !in 0..2)) return false
-        if (flag == EntityFlag.ProgressBar && (context !is ProgressBar || sync)) return false
-        var synced = sync || flag == EntityFlag.MovementTypeedPresenceFlags
+        var synced = syncedPresenceFlags
         var appearanceFlag = EntityFlags.getPresenceFlag(type, EntityFlag.Appearance)
         if (!appearance && synced and appearanceFlag != 0) {
             synced = synced and appearanceFlag.inv()
@@ -146,6 +149,18 @@ class UpdateMasks(val owner: Entity) {
      * @param entity The entity.
      */
     fun prepare(entity: Entity) {
+        // Persist the actual traversal mode before rendering, without changing run settings.
+        if (entity is Player) {
+            val queue = entity.walkingQueue
+            val movement = when {
+                queue.runDir != -1 -> 2
+                queue.walkDir != -1 -> 1
+                else -> null
+            }
+            if (movement != null && syncedElements[0]?.context != movement) {
+                register(EntityFlag.MovementType, movement)
+            }
+        }
         val handler = entity.impactHandler
         for (i in 0..1) {
             if (handler.impactQueue.peek() == null) {

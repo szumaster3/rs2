@@ -22,6 +22,16 @@ class NPCDefinition(id: Int): Definition<NPC>() {
     fun getParam(key: Int, defaultValue: String?): String? = cacheParams?.get(key) as? String ?: defaultValue
     fun getCacheParams(): Map<Int, Any> = cacheParams?.toMap() ?: emptyMap()
 
+    var optionCursors: MutableMap<Int, Int> = HashMap()
+        private set
+    var attackCursorId: Int = -1
+        private set
+    var hitBarSpriteId: Int = -1
+        private set
+    var timerBarSpriteId: Int = -1
+        private set
+    var mapElementId: Int = -1
+        private set
     var questIds: IntArray? = null
         private set
     @JvmField var size: Int = 1
@@ -266,7 +276,7 @@ class NPCDefinition(id: Int): Definition<NPC>() {
                     buffer.get()
                 }
             }
-            122 -> buffer.getShort()
+            122 -> hitBarSpriteId = buffer.short.toInt() and 0xffff
             123 -> buffer.getShort()
             125 -> buffer.get()
             126 -> {
@@ -282,15 +292,14 @@ class NPCDefinition(id: Int): Definition<NPC>() {
                 buffer.getShort()
                 buffer.get()
             }
-            135 -> {
-                buffer.get()
-                buffer.getShort()
+            135, 136 -> {
+                val option = buffer.get().toInt() and 0xff
+                optionCursors[option] = buffer.short.toInt() and 0xffff
             }
-            136 -> {
-                buffer.get()
-                buffer.getShort()
-            }
-            137, 138, 139, 142 -> buffer.short
+            137 -> attackCursorId = buffer.short.toInt() and 0xffff
+            138 -> buffer.short
+            139 -> timerBarSpriteId = buffer.short.toInt() and 0xffff
+            142 -> mapElementId = buffer.short.toInt() and 0xffff
             140 -> buffer.get()
             141, 143 -> Unit
             in 150..154 -> options[opcode - 150] = ByteBufferUtils.getString(buffer)

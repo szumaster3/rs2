@@ -27,6 +27,12 @@ class SceneryDefinition : Definition<Scenery>() {
         private set
     var animationWeights: IntArray? = null
         private set
+    var optionCursors: MutableMap<Int, Int> = HashMap()
+        private set
+    var mapSceneId: Int = -1
+        private set
+    var mapElementId: Int = -1
+        private set
     var questIds: IntArray? = null
         private set
     var modelIds: IntArray? = null
@@ -520,12 +526,14 @@ class SceneryDefinition : Definition<Scenery>() {
                     def.aByte3912 = 5.toByte()
                 } else if (opcode in 96..98 || opcode == 103 || opcode == 105)
                 {} else if (opcode == 99 || opcode == 100) {
-                    buffer.get()
-                    buffer.getShort()
+                    val option = buffer.get().toInt() and 0xff
+                    def.optionCursors[option] = buffer.short.toInt() and 0xffff
                 } else if (opcode == 101 || opcode == 104) {
                     buffer.get()
-                } else if (opcode == 102 || opcode == 107) {
-                    buffer.getShort()
+                } else if (opcode == 102) {
+                    def.mapSceneId = buffer.short.toInt() and 0xffff
+                } else if (opcode == 107) {
+                    def.mapElementId = buffer.short.toInt() and 0xffff
                 } else if (opcode == 106) {
                     val count = buffer.get().toInt() and 0xff
                     val ids = IntArray(count)

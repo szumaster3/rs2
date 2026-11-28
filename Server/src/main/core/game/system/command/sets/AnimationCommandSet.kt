@@ -1,6 +1,11 @@
 package core.game.system.command.sets
 
 import core.api.refreshAppearance
+import core.api.sendEntityTimerBar
+import core.api.sendLayeredSequences
+import core.game.node.entity.Entity
+import core.game.world.map.RegionManager
+import core.game.world.update.flag.context.LayeredSequence
 import core.game.system.command.CommandPlugin.Companion.toInteger
 import core.game.system.command.Privilege
 import core.game.system.task.Pulse
@@ -12,6 +17,37 @@ import core.plugin.Initializable
 class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+        define("timerbar", usage = "::timerbar duration hold step [npcIndex] [alternate]",
+            description = "Tests the native overhead timer bar in client cycles.") { player, args ->
+            val duration = args.getOrNull(1)?.toIntOrNull()
+            val hold = args.getOrNull(2)?.toIntOrNull()
+            val step = args.getOrNull(3)?.toIntOrNull()
+            val target: Entity? = if (args.size > 4) {
+                val index = args[4].toIntOrNull()
+                RegionManager.getLocalNpcs(player).firstOrNull { it.index == index && it.isActive }
+            } else player
+            val alternate = if (args.size > 5) args[5].toIntOrNull() else 0
+            if (duration == null || hold == null || step == null || target == null || alternate !in listOf(0, 1) ||
+                !sendEntityTimerBar(target, duration, hold, step, alternate == 1)) {
+                reject(player, "Invalid timer bar arguments, target or update phase.")
+            }
+        }
+        define("layeranim", usage = "::layeranim sequence delay slotMask [npcIndex]",
+            description = "Tests additional animation slots (decimal mask 1-4095, sequence -1 clears).") { player, args ->
+            val sequence = args.getOrNull(1)?.toIntOrNull()
+            val delay = args.getOrNull(2)?.toIntOrNull()
+            val mask = args.getOrNull(3)?.toIntOrNull()
+            val target: Entity? = if (args.size > 4) {
+                val index = args[4].toIntOrNull()
+                RegionManager.getLocalNpcs(player).firstOrNull { it.index == index && it.isActive }
+            } else player
+            if (sequence == null || sequence !in -1..65534 || delay == null || delay !in 0..255 ||
+                mask == null || mask !in 1..4095 || target == null ||
+                !sendLayeredSequences(target, listOf(LayeredSequence(sequence, delay, mask)))) {
+                reject(player, "Invalid layered animation arguments, cache sequence, target or update phase.")
+            }
+        }
+
         /*
          * Command for playing animation on the player.nie
          */

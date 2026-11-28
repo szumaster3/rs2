@@ -46,6 +46,9 @@ class RenderAnimationDefinition {
     @JvmField var anInt992: Int = 0
     @JvmField var anInt993: Int = 0
     @JvmField var anInt994: Int = 0
+    /** BAS opcode 44, read by the client's overhead timer bar renderer. */
+    val timerBarSpriteId: Int get() = anInt955
+
     internal fun parse(buffer: ByteBuffer) {
         while (true) {
             val opcode = buffer.get().toInt() and 0xff

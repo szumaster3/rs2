@@ -7,6 +7,8 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.game.world.update.flag.context.HitMark
 import core.game.world.update.flag.context.ProgressBar
+import core.game.world.update.flag.context.AnimationSequenceUpdate
+import core.game.world.update.flag.context.LayeredSequence
 import core.net.packet.IoBuffer
 import kotlin.reflect.typeOf
 
@@ -172,10 +174,14 @@ sealed class NPCFlags(
      */
     class AnimationSequence : NPCFlags(0x100, 7, EntityFlag.AnimSeq) {
         override fun writeTo(buffer: IoBuffer, context: Any?) {
-            if (context is Animation) {
-                buffer.p1sub(1).p2add(context.id).p1neg(context.delay).p2(0xffff)
-            } else {
-                buffer.p1sub(0)
+            val entries = when (context) {
+                is AnimationSequenceUpdate -> context.entries
+                is Animation -> listOf(LayeredSequence(context.id, context.delay, 0xfff))
+                else -> emptyList()
+            }
+            buffer.p1sub(entries.size)
+            for (entry in entries) {
+                buffer.p2add(entry.sequenceId).p1neg(entry.delay).p2(entry.slotMask)
             }
         }
     }
