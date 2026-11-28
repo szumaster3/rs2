@@ -8,6 +8,8 @@ import core.game.world.map.Location;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * The Render info.
@@ -16,6 +18,13 @@ public final class RenderInfo {
     private final Player player;
     private List<Player> localPlayers = new LinkedList<Player>();
     private List<NPC> localNpcs = new LinkedList<NPC>();
+    // Slots as last sent to the client. Node.index may change after a repository removal/reinsert.
+    private final Map<Integer, Player> localPlayerIndices = new LinkedHashMap<>();
+    private final Map<Integer, NPC> localNpcIndices = new LinkedHashMap<>();
+
+    public Map<Integer, Player> getLocalPlayerIndices() { return localPlayerIndices; }
+    public Map<Integer, NPC> getLocalNpcIndices() { return localNpcIndices; }
+
     private final long[] appearanceStamps = new long[ServerConstants.MAX_PLAYERS];
     private Entity[] maskUpdates = new Entity[256];
     private int maskUpdateCount;

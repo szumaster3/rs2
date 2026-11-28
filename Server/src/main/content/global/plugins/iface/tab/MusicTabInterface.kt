@@ -2,6 +2,7 @@ package content.global.plugins.iface.tab
 
 import core.api.sendMessage
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.node.entity.player.link.music.MusicEntry
 import shared.consts.Components
 
@@ -11,17 +12,17 @@ import shared.consts.Components
  */
 class MusicTabInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
-        on(Components.MUSIC_V3_187) { player, _, opcode, buttonID, slot, _ ->
-            if (opcode == 155) {
+        onNative(Components.MUSIC_V3_187) { player, _, operation, buttonID, slot, _ ->
+            if (operation == InterfaceOperation.OP1) {
                 if (buttonID == 11) {
                     player.musicPlayer.toggleLooping()
-                    return@on true
+                    return@onNative true
                 }
 
-                if (buttonID == 1) {
+                if (buttonID == 1 && slot in 0..767) {
                     if (player.musicPlayer.unlocked[slot] != null) {
                         player.musicPlayer.play(player.musicPlayer.unlocked[slot])
-                        return@on true
+                        return@onNative true
                     }
 
                     if (player.isAdmin) {
@@ -33,10 +34,10 @@ class MusicTabInterface : InterfaceListener {
                     } else {
                         sendMessage(player, "You have not unlocked this piece of music yet!")
                     }
-                    return@on true
+                    return@onNative true
                 }
             }
-            return@on true
+            return@onNative true
         }
     }
 }

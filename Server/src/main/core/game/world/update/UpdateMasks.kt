@@ -4,6 +4,9 @@ import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
+import core.game.world.map.Location
+import core.game.world.update.flag.context.ChatMessage
+import core.game.world.update.flag.context.ForceMoveCtx
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.HitMark
 import core.game.world.update.flag.context.ProgressBar
@@ -28,6 +31,20 @@ class UpdateMasks(val owner: Entity) {
 
     @JvmOverloads
     fun register(flag: EntityFlag, context: Any?, sync: Boolean = false): Boolean {
+        // A provider must never skip its body after the presence bit has been published.
+        val valid = when (flag) {
+            EntityFlag.Chat -> context is ChatMessage && context.player === owner &&
+                (context.nativeQuickChat?.size?.let { it in 1..255 } ?: true)
+            EntityFlag.Appearance -> context is Player && context === owner
+            EntityFlag.PrimaryHit, EntityFlag.SecondaryHit -> context is HitMark &&
+                context.entity === owner && context.damage in 0..32767 && context.type in 0..255
+            EntityFlag.FaceEntity -> context == null || context is Entity
+            EntityFlag.FaceLocation -> context is Location
+            EntityFlag.ForceMove -> context is ForceMoveCtx
+            EntityFlag.TypeSwap -> context is Int && context in 0..16383
+            else -> true
+        }
+        if (!valid) return false
         if (flag == EntityFlag.MovementType && (context !is Int || context !in 0..2)) return false
         if (flag == EntityFlag.ProgressBar && (context !is ProgressBar || sync)) return false
         if (flag == EntityFlag.AnimSeq && (sync || (context !is AnimationSequenceUpdate && context !is Animation))) return false
@@ -51,10 +68,6 @@ class UpdateMasks(val owner: Entity) {
             appearanceStamp = System.currentTimeMillis()
             synced = true
         }
-        if (synced) {
-            syncedElements[provider.ordinal] = MaskElement(provider, context)
-            syncedPresenceFlags = syncedPresenceFlags or provider.presenceFlag
-        }
         // Preserve order: client processes each layered sequence separately with its own replay/priority rules.
         // Do not collapse overlapping slots: that would change those rules.
         val queuedContext = if (flag == EntityFlag.AnimSeq) {
@@ -67,6 +80,10 @@ class UpdateMasks(val owner: Entity) {
             if (combined.size > 255) return false
             AnimationSequenceUpdate(combined)
         } else if (flag == EntityFlag.Animate) (context as Animation).copy() else context
+        if (synced) {
+            syncedElements[provider.ordinal] = MaskElement(provider, queuedContext)
+            syncedPresenceFlags = syncedPresenceFlags or provider.presenceFlag
+        }
         elements[provider.ordinal] = MaskElement(provider, queuedContext)
         presenceFlags = presenceFlags or provider.presenceFlag
         return true
@@ -77,7 +94,10 @@ class UpdateMasks(val owner: Entity) {
      * @param maskData The mask data.
      * @return `True` if the mask got removed.
      */
+    fun hasSynced(ordinal: Int): Boolean = ordinal in syncedElements.indices && syncedElements[ordinal] != null
+
     fun unregisterSynced(ordinal: Int): Boolean {
+        if (ordinal !in syncedElements.indices) return false
         if (syncedElements[ordinal] != null) {
             syncedPresenceFlags = syncedPresenceFlags and syncedElements[ordinal]!!.encoder.presenceFlag.inv()
             syncedElements[ordinal] = null

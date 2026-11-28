@@ -2,6 +2,7 @@ package content.global.plugins.iface.tab
 
 import core.api.sendMessage
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.world.repository.Repository
 import shared.consts.Components
 
@@ -11,9 +12,9 @@ import shared.consts.Components
  */
 class LogoutTabInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
-        on(Components.LOGOUT_182) { player, _, _, buttonID, _, _ ->
-            if (buttonID == 6) {
-                return@on when {
+        onNative(Components.LOGOUT_182) { player, _, operation, buttonID, _, _ ->
+            if (buttonID == 6 && operation == InterfaceOperation.OP1) {
+                return@onNative when {
                     !player.zoneMonitor.canLogout() -> true
 
                     player.inCombat() -> {
@@ -32,7 +33,7 @@ class LogoutTabInterface : InterfaceListener {
                     }
                 }
             }
-            return@on true
+            return@onNative true
         }
     }
 }

@@ -676,9 +676,10 @@ public abstract class Entity extends Node {
     public boolean face(Entity entity) {
         if (entity == null) {
             int ordinal = EntityFlags.getOrdinal(EFlagType.of(this), EntityFlag.FaceEntity);
-            if (getUpdateMasks().unregisterSynced(ordinal)) {
-                return getUpdateMasks().register(EntityFlag.FaceEntity, null);
-            }
+            if (!getUpdateMasks().hasSynced(ordinal)) return true;
+            // Do not erase the persistent target before the reset mask can be registered.
+            if (!getUpdateMasks().register(EntityFlag.FaceEntity, null)) return false;
+            getUpdateMasks().unregisterSynced(ordinal);
             return true;
         }
         return getUpdateMasks().register(EntityFlag.FaceEntity, entity, true);

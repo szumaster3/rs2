@@ -2,6 +2,8 @@ package core.game.world.update
 
 import core.game.node.entity.player.Player
 import core.game.world.map.RegionManager
+import core.game.world.repository.Repository
+import core.ServerConstants
 
 object PlayerRenderer {
     @JvmStatic
@@ -9,21 +11,25 @@ object PlayerRenderer {
         val session = player.session ?: return
         val view = session.playerInfo ?: return
         val local = player.renderInfo.localPlayers
-        if (view.needsAppearance(player.index)) local.clear()
-        val previous = local.associateBy { it.index }
+        val indices = player.renderInfo.localPlayerIndices
+        if (view.needsAppearance(player.index)) {
+            local.clear()
+            indices.clear()
+        }
+        val previous = indices.toMap()
         val occupiedSlots = HashSet<Int>()
         local.clear()
-        for (other in previous.values) {
-            if (other.index in 1..2047 && other.index != player.index &&
+        for ((slot, other) in previous) {
+            if (slot == other.index && isCurrent(other) && slot != player.index &&
                 other.isActive && !other.isInvisible && other.location.withinDistance(player.location) &&
-                occupiedSlots.add(other.index)) {
+                occupiedSlots.add(slot)) {
                 local.add(other)
             }
         }
         var added = 0
         for (other in RegionManager.getLocalPlayers(player, 15)) {
             if (local.size >= 255 || added >= 10) break
-            if (other === player || other.index !in 1..2047 || other.index == player.index ||
+            if (other === player || !isCurrent(other) || other.index == player.index ||
                 !other.isActive || other.isInvisible ||
                 // A recycled slot must first be removed from the client's active list.
                 previous.containsKey(other.index) || !occupiedSlots.add(other.index)) continue
@@ -32,8 +38,14 @@ object PlayerRenderer {
         }
         track(view, player)
         for (other in local) track(view, other)
-        session.write(view.encode())
+        val frame = view.encode()
+        indices.clear()
+        for (other in local) indices[other.index] = other
+        session.write(frame)
     }
+
+    private fun isCurrent(player: Player): Boolean =
+        player.index in 1..minOf(2047, ServerConstants.MAX_PLAYERS) && Repository.players.get(player.index) === player
 
     private fun track(view: PlayerInfo, player: Player) {
         val location = player.location

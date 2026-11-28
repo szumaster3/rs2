@@ -6,6 +6,8 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
 import core.game.world.map.RegionManager
+import core.game.world.repository.Repository
+import core.ServerConstants
 import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
 import java.nio.ByteBuffer
@@ -33,24 +35,31 @@ object NPCRenderer {
         val limit = 1 shl (bits - 1)
         val info = player.renderInfo
         val localNPCs = info.localNpcs
+        val previous = info.localNpcIndices.toMap()
+        val next = LinkedHashMap<Int, NPC>()
         val maskBuffer = IoBuffer(-1, PacketHeader.NORMAL, ByteBuffer.allocate(1 shl 16))
         buffer.setBitAccess()
-        buffer.putBits(8, localNPCs.size)
-        val toRemove: MutableList<NPC> = ArrayList()
-        val it: Iterator<NPC> = localNPCs.iterator()
-        while (it.hasNext()) {
-            val npc = it.next()
+        buffer.putBits(8, previous.size)
+        val removed = HashMap<Int, NPC>()
+        for ((slot, npc) in previous) {
             val withinDistance = player.location.withinDistance(npc.location)
-            if (!npc.isActive || npc.isHidden(player) || !withinDistance || npc.properties.isTeleporting) {
+            if (slot != npc.index || !isCurrent(npc) || !npc.isActive || npc.isHidden(player) || !withinDistance || npc.properties.isTeleporting) {
                 buffer.putBits(1, 1).putBits(2, 3)
-                toRemove.add(npc)
+                removed[slot] = npc
                 npc.aggressiveHandler?.removeTolerance(player.index)
-            } else if (npc.walkingQueue.runDir != -1) {
+                continue
+            }
+            next[slot] = npc
+            val walk = npc.walkingQueue.walkDir
+            val run = npc.walkingQueue.runDir
+            if (walk in movementDirections.indices && run in movementDirections.indices) {
                 buffer.putBits(1, 1).putBits(2, 2).putBits(1, 1)
-                    .putBits(3, movementDirections[npc.walkingQueue.walkDir]).putBits(3, movementDirections[npc.walkingQueue.runDir])
+                    .putBits(3, movementDirections[walk]).putBits(3, movementDirections[run])
                 flagMaskUpdate(player, buffer, maskBuffer, npc, false)
-            } else if (npc.walkingQueue.walkDir != -1) {
-                buffer.putBits(1, 1).putBits(2, 1).putBits(3, movementDirections[npc.walkingQueue.walkDir])
+            } else if (walk in movementDirections.indices || run in movementDirections.indices) {
+                // A single queued step is encoded using the one-direction movement form.
+                val direction = if (walk in movementDirections.indices) walk else run
+                buffer.putBits(1, 1).putBits(2, 1).putBits(3, movementDirections[direction])
                 flagMaskUpdate(player, buffer, maskBuffer, npc, false)
             } else if (npc.updateMasks.isUpdateRequired) {
                 buffer.putBits(1, 1).putBits(2, 0)
@@ -59,16 +68,15 @@ object NPCRenderer {
                 buffer.putBits(1, 0)
             }
         }
-        localNPCs.removeAll(toRemove)
         for (npc in nearby) {
-            if (localNPCs.size >= 255) {
+            if (next.size >= 255) {
                 break
             }
             // 32767 terminates the new-NPC bit stream; NPC types occupy 14 bits.
-            if (npc.index !in 0 until 32767 || npc.id !in 0 until 16384 ||
-                localNPCs.any { it.index == npc.index } ||
-                // Reusing a removed index for a different NPC in the same packet retains the old client entity.
-                toRemove.any { it.index == npc.index && it !== npc } || !npc.isActive || npc.isHidden(player) ||
+            if (!isCurrent(npc) || npc.id !in 0 until 16384 ||
+                next.containsKey(npc.index) ||
+                // The client does not destroy an NPC removed and re-added in this same update.
+                (removed.containsKey(npc.index) && removed[npc.index] !== npc) || !npc.isActive || npc.isHidden(player) ||
                 !player.location.withinDistance(npc.location)) {
                 continue
             }
@@ -83,7 +91,7 @@ object NPCRenderer {
             if (npc.aggressiveHandler != null) {
                 npc.aggressiveHandler.playerTolerance[player.index] = GameWorld.ticks
             }
-            localNPCs.add(npc)
+            next[npc.index] = npc
         }
         val masks = maskBuffer.toByteBuffer()
         masks.flip()
@@ -94,8 +102,15 @@ object NPCRenderer {
         } else {
             buffer.setByteAccess()
         }
+        info.localNpcIndices.clear()
+        info.localNpcIndices.putAll(next)
+        localNPCs.clear()
+        localNPCs.addAll(next.values)
         return buffer
     }
+
+    private fun isCurrent(npc: NPC): Boolean =
+        npc.index in 1..minOf(32766, ServerConstants.MAX_NPCS) && Repository.npcs.get(npc.index) === npc
 
     /**
      * Sets the mask update flag.

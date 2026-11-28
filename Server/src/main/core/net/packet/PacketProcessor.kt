@@ -24,6 +24,7 @@ import core.game.ge.GrandExchangeOffer
 import core.game.ge.PriceIndex
 import core.game.interaction.*
 import core.game.node.Node
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.combat.spell.MagicSpell
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.LogType
@@ -417,6 +418,21 @@ object PacketProcessor {
         }
     }
 
+    // Native OPNPC/OPPLAYER and IF_ON_* carry an index, not the entity type.
+    // Reject slots that were not in the observer's last transmitted list or have since been recycled.
+    private fun resolveNpc(player: Player, index: Int): NPC? {
+        if (index !in 1..minOf(32766, ServerConstants.MAX_NPCS)) return null
+        val npc = player.renderInfo.localNpcIndices[index] ?: return null
+        return npc.takeIf { it.index == index && Repository.npcs[index] === it && it.isActive && !it.isHidden(player) }
+    }
+
+    private fun resolvePlayer(player: Player, index: Int, allowSelf: Boolean = false): Player? {
+        if (index !in 1..minOf(2047, ServerConstants.MAX_PLAYERS)) return null
+        if (index == player.index) return player.takeIf { allowSelf && it.isActive }
+        val other = player.renderInfo.localPlayerIndices[index] ?: return null
+        return other.takeIf { it.index == index && Repository.players[index] === it && it.isActive && !it.isInvisible }
+    }
+
     private fun activeWidget(player: Player, hash: Int): Boolean =
         player.interfaceManager.getComponent(hash ushr 16)?.isHidden == false
 
@@ -533,7 +549,7 @@ object PacketProcessor {
             player = pkt.player
             child = pkt.child
             iface = pkt.iface
-            target = Repository.players[pkt.otherIndex] ?: return sendClearMinimap(player)
+            target = resolvePlayer(player, pkt.otherIndex, allowSelf = true) ?: return sendClearMinimap(player)
             targetId = target.id
             type = SpellListener.PLAYER
         } else if (pkt is Packet.ComponentSceneryAction) {
@@ -544,12 +560,10 @@ object PacketProcessor {
             targetId = pkt.sceneryId
             type = SpellListener.OBJECT
         } else if (pkt is Packet.ComponentNpcAction) {
-            if (pkt.npcIndex !in 1 until ServerConstants.MAX_NPCS)
-                return sendClearMinimap(pkt.player)
             player = pkt.player
             child = pkt.child
             iface = pkt.iface
-            target = Repository.npcs[pkt.npcIndex] ?: return sendClearMinimap(player)
+            target = resolveNpc(player, pkt.npcIndex) ?: return sendClearMinimap(player)
             targetId = target.id
             type = SpellListener.NPC
         } else {
@@ -751,7 +765,7 @@ object PacketProcessor {
             itemId = pkt.itemId
             val itemSlot = pkt.slot
             item = container[itemSlot] ?: return sendClearMinimap(pkt.player)
-            node = Repository.npcs[pkt.npcIndex] ?: return sendClearMinimap(pkt.player)
+            node = resolveNpc(pkt.player, pkt.npcIndex) ?: return sendClearMinimap(pkt.player)
             childNode = node.getShownNPC(pkt.player)
             nodeId = node.id
             type = IntType.NPC
@@ -791,7 +805,7 @@ object PacketProcessor {
             val container = selectedContainer(pkt, pkt.player, pkt.iface) ?: return sendClearMinimap(pkt.player)
             item = container[pkt.slot] ?: return sendClearMinimap(pkt.player)
             itemId = pkt.itemId
-            node = Repository.players[pkt.otherIndex] ?: return sendClearMinimap(pkt.player)
+            node = resolvePlayer(pkt.player, pkt.otherIndex, allowSelf = true) ?: return sendClearMinimap(pkt.player)
             type = IntType.PLAYER
             nodeId = node.id
             player = pkt.player
@@ -849,13 +863,8 @@ object PacketProcessor {
 
     private fun processPlayerAction(pkt: Packet.PlayerAction) {
         val player = pkt.player
-        if (pkt.otherIndex !in 1 until ServerConstants.MAX_PLAYERS) {
-            return sendClearMinimap(player)
-        }
+        val other = resolvePlayer(player, pkt.otherIndex) ?: return sendClearMinimap(player)
         player.scripts.reset()
-        val other = Repository.players[pkt.otherIndex]
-        if (other == null || !other.isActive)
-            return sendClearMinimap(player)
         val option = other.interaction[pkt.optIndex] ?: return sendClearMinimap(player)
         if (!InteractionListeners.run(-1, IntType.PLAYER, option.name.lowercase(), player, other)) {
             other.interaction.handle(player, option)
@@ -919,9 +928,7 @@ object PacketProcessor {
     }
 
     private fun processNpcAction(pkt: Packet.NpcAction) {
-        if (pkt.npcIndex !in 1 until ServerConstants.MAX_NPCS)
-            return sendClearMinimap(pkt.player)
-        val npc = Repository.npcs[pkt.npcIndex] ?: return sendClearMinimap(pkt.player)
+        val npc = resolveNpc(pkt.player, pkt.npcIndex) ?: return sendClearMinimap(pkt.player)
 
         val wrapperChild = npc.getShownNPC(pkt.player)
         val option = wrapperChild.interaction[pkt.optIndex]

@@ -869,6 +869,8 @@ public class Player extends Entity {
         playerFlag.setLastViewport(new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE]);
         renderInfo.getLocalNpcs().clear();
         renderInfo.getLocalPlayers().clear();
+        renderInfo.getLocalPlayerIndices().clear();
+        renderInfo.getLocalNpcIndices().clear();
         renderInfo.setLastLocation(null);
         renderInfo.setOnFirstCycle(true);
         Arrays.fill(renderInfo.getAppearanceStamps(), 0);

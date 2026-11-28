@@ -91,12 +91,9 @@ sealed class PlayerFlags(
             buffer.psmarts(context.damage)
             buffer.p1sub(context.type)
 
-            var ratio = 255
             val e = context.entity
             val max = e.skills.maximumLifepoints
-            if (max > e.skills.lifepoints) {
-                ratio = e.skills.lifepoints * 255 / max
-            }
+            val ratio = if (max <= 0) 0 else (e.skills.lifepoints.coerceIn(0, max).toLong() * 255 / max).toInt()
             buffer.p1neg(ratio)
         }
     }
