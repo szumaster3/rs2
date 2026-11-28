@@ -480,13 +480,13 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         }
 
         val sold = Item(id, item.amount)
-        if (item.amount <= 0 || container.getMaximumAdd(sold) < item.amount)
+        if (item.amount <= 0 || container!!.getMaximumAdd(sold) < item.amount)
             return TransactionStatus.Failure("Shop cannot accept that quantity")
         val fixedPrice = fixedPriceItems[id]
         var total = if (fixedPrice != null) fixedPrice.toLong() * item.amount else profit.amount.toLong() * item.amount
         if (fixedPrice == null && currency == Items.COINS_995 && item.amount > 1) {
             val baseline = if (isPlayerStock) 0 else stock[shopSlot].amount
-            val current = container[shopSlot]?.amount ?: playerStock.getAmount(id)
+            val current = container.get(shopSlot)?.amount ?: playerStock.getAmount(id)
             val first = current.toLong() + 1
             val last = current.toLong() + item.amount - 1
             total = profit.amount.toLong()
