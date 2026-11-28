@@ -161,8 +161,11 @@ public final class ServerProt {
         return opcode >= 0 && opcode < COUNT ? NAMES[opcode] : "UNKNOWN(" + opcode + ")";
     }
 
+    // Protocol.inboundBuffer: PacketBit(5000), payload read at offset zero.
+    public static final int MAX_PAYLOAD_SIZE = 5000;
+
     public static boolean validate(int opcode, PacketHeader header, int payload) {
-        if (opcode < 0 || opcode >= LENGTHS.length || payload < 0) return false;
+        if (opcode < 0 || opcode >= LENGTHS.length || payload < 0 || payload > MAX_PAYLOAD_SIZE) return false;
         int expected = LENGTHS[opcode];
         if (expected == -1) return header == PacketHeader.BYTE && payload <= 255;
         if (expected == -2) return header == PacketHeader.SHORT && payload <= 65535;

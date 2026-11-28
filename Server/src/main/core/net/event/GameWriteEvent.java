@@ -38,6 +38,13 @@ public final class GameWriteEvent extends IoWriteEvent {
             return;
         }
         ByteBuffer buf = (ByteBuffer) buffer.toByteBuffer().flip();
+        if (buf.remaining() > ServerProt.MAX_PAYLOAD_SIZE) {
+            // Never consume ISAAC or silently omit a stateful oversized update.
+            System.err.println("[Protocol] Oversized gameplay payload " + ServerProt.name(buffer.opcode())
+                    + ": " + buf.remaining() + " bytes; closing session");
+            session.disconnect();
+            return;
+        }
         if (!ServerProt.validate(buffer.opcode(), buffer.getHeader(), buf.remaining())) {
             System.err.println("[Protocol578] Rejected outgoing opcode " + buffer.opcode()
                     + ": expected " + ServerProt.expected(buffer.opcode())

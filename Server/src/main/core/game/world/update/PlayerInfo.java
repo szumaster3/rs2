@@ -5,6 +5,8 @@ import core.net.packet.ServerProt;
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketHeader;
 import java.util.Arrays;
+import java.nio.ByteBuffer;
+import java.nio.BufferOverflowException;
 
 /** Per-connection GPI history, initialized from the login or reconnect snapshot. */
 public final class PlayerInfo {
@@ -36,10 +38,60 @@ public final class PlayerInfo {
         masks[slot] = mask;
     }
 
+    /** Whether the last successfully encoded frame contains this slot. */
+    public boolean isLocal(int slot) {
+        return slot > 0 && slot < previous.length && previous[slot] != -1;
+    }
+
     public IoBuffer encode() {
         if (current[self] == -1) throw new IllegalStateException("Missing local player");
-        IoBuffer frame = new IoBuffer(ServerProt.PLAYER_INFO, PacketHeader.SHORT);
-        IoBuffer blocks = new IoBuffer(-1, PacketHeader.SHORT);
+        // Trial encoding must not change GPI history. Prefer existing local players;
+        // if necessary, send a legal removal and re-admit in a later tick.
+        long maskBytes = 0;
+        for (byte[] mask : masks) if (mask != null) maskBytes += mask.length;
+        while (maskBytes > ServerProt.MAX_PAYLOAD_SIZE) {
+            int slot = evictionCandidate(true);
+            if (slot == -1) slot = evictionCandidate(false);
+            if (slot == -1) throw new BufferOverflowException();
+            if (masks[slot] != null) maskBytes -= masks[slot].length;
+            current[slot] = -1;
+            masks[slot] = null;
+        }
+        while (true) {
+            try {
+                return encodeFrame();
+            } catch (BufferOverflowException ex) {
+                int slot = evictionCandidate(true);
+                if (slot == -1) slot = evictionCandidate(false);
+                if (slot == -1) throw ex; // self cannot be removed
+                current[slot] = -1;
+                masks[slot] = null;
+            }
+        }
+    }
+
+    private int evictionCandidate(boolean newOnly) {
+        int candidate = -1;
+        int largest = -1;
+        for (int slot = 1; slot < current.length; slot++) {
+            if (slot == self || current[slot] == -1 || (newOnly && previous[slot] != -1)) continue;
+            int length = masks[slot] == null ? 0 : masks[slot].length;
+            if (length > largest) {
+                candidate = slot;
+                largest = length;
+            }
+        }
+        return candidate;
+    }
+
+    private IoBuffer encodeFrame() {
+        final byte[] nextFlags = flags.clone();
+        final int[] nextExternal = external.clone();
+        // The bit stream alone (<=255 remote active players) fits in this buffer.
+        IoBuffer frame = new IoBuffer(ServerProt.PLAYER_INFO, PacketHeader.SHORT,
+                ByteBuffer.allocate(ServerProt.MAX_PAYLOAD_SIZE));
+        IoBuffer blocks = new IoBuffer(-1, PacketHeader.NORMAL,
+                ByteBuffer.allocate(ServerProt.MAX_PAYLOAD_SIZE));
         for (int pass = 0; pass < 4; pass++) {
             boolean active = pass < 2;
             int group = pass == 1 || pass == 2 ? 1 : 0;
@@ -50,7 +102,7 @@ public final class PlayerInfo {
                 if ((old != -1) != active || (flags[slot] & 1) != group) continue;
                 if (next == old && masks[slot] == null) {
                     skipped++;
-                    flags[slot] |= 2;
+                    nextFlags[slot] |= 2;
                     continue;
                 }
                 writeSkip(frame, skipped);
@@ -59,10 +111,10 @@ public final class PlayerInfo {
                 boolean masked = masks[slot] != null;
                 if (!active) {
                     add(frame, slot, next, masked);
-                    flags[slot] |= 2;
+                    nextFlags[slot] |= 2;
                 } else if (next == -1) {
                     frame.putBits(1, 0).putBits(2, 0).putBits(1, 0);
-                    external[slot] = region(old);
+                    nextExternal[slot] = region(old);
                 } else {
                     frame.putBits(1, masked ? 1 : 0);
                     movement(frame, old, next);
@@ -73,7 +125,9 @@ public final class PlayerInfo {
             frame.setByteAccess();
         }
         frame.put(blocks);
-        for (int i = 1; i < flags.length; i++) flags[i] >>= 1;
+        // Only after the complete frame fits can the next tick use this history.
+        for (int i = 1; i < flags.length; i++) flags[i] = (byte) (nextFlags[i] >> 1);
+        System.arraycopy(nextExternal, 0, external, 0, external.length);
         System.arraycopy(current, 0, previous, 0, current.length);
         Arrays.fill(current, -1);
         Arrays.fill(masks, null);

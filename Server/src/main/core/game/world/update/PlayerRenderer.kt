@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.ServerConstants
+import java.nio.BufferOverflowException
 
 object PlayerRenderer {
     @JvmStatic
@@ -36,9 +37,23 @@ object PlayerRenderer {
             local.add(other)
             added++
         }
-        track(view, player)
-        for (other in local) track(view, other)
-        val frame = view.encode()
+        val frame = try {
+            track(view, player)
+            for (other in local) {
+                try {
+                    track(view, other)
+                } catch (_: BufferOverflowException) {
+                    // A single oversized remote block cannot be sent: leave it untracked.
+                }
+            }
+            view.encode()
+        } catch (_: BufferOverflowException) {
+            // The local player must be present; no legal frame can omit its update.
+            System.err.println("[Protocol] Local player update exceeds client payload capacity")
+            session.disconnect()
+            return
+        }
+        local.removeIf { !view.isLocal(it.index) }
         indices.clear()
         for (other in local) indices[other.index] = other
         session.write(frame)

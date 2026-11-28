@@ -15,6 +15,9 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.game.world.update.flag.context.LayeredSequence
 import core.net.packet.IoBuffer
+import core.net.packet.PacketHeader
+import core.net.packet.ServerProt
+import java.nio.ByteBuffer
 import core.tools.*
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -167,7 +170,7 @@ class UpdateMasks(val owner: Entity) {
         if (firstSight) bits = bits or syncedPresenceFlags or 1 or 0x20
         if (traversal != null) bits = bits or 0x4000
         if (bits == 0) return null
-        val out = IoBuffer()
+        val out = IoBuffer(-1, PacketHeader.NORMAL, ByteBuffer.allocate(ServerProt.MAX_PAYLOAD_SIZE))
         if (bits >= 256) out.put(bits or 2).put(bits shr 8) else out.put(bits)
         for (i in elements.indices) {
             val element = elements[i] ?: if (firstSight) syncedElements[i] else null

@@ -146,11 +146,10 @@ sealed class PlayerFlags(
             if (npcId == -1) {
                 val parts = appearance.bodyParts
                 for (i in 0 until 12) {
-                    if (parts[i] == 0) {
-                        buffer.p1(0)
-                    } else {
-                        buffer.p2(parts[i])
-                    }
+                    // Zero is a single-byte empty entry; all other valid entries have
+                    // a nonzero high byte. 65535 is reserved for an NPC transformation.
+                    val part = parts[i]
+                    if (part in 256..65534) buffer.p2(part) else buffer.p1(0)
                 }
             } else {
                 buffer.p2(-1)
@@ -182,6 +181,9 @@ sealed class PlayerFlags(
             }
             buffer.p1(0) // sound radius
             val size = buffer.toByteBuffer().position()
+            // Protocol.readPlayerUpdateMasks uses an unsigned one-byte length.
+            // Never emit a wrapped length; PlayerRenderer handles an unsendable block.
+            if (size !in 1..255) throw java.nio.BufferOverflowException()
             output.p1sub(size)
             output.putReverse(buffer.toByteBuffer().array(), 0, size - 1)
         }

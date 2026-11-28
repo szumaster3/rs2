@@ -594,7 +594,9 @@ public class Player extends Entity {
             updateSceneGraph(false);
         }
         PlayerRenderer.render(this);
+        if (getSession() == null || !getSession().isActive()) return;
         NPCRenderer.render(this);
+        if (getSession() == null || !getSession().isActive()) return;
         MapChunkRenderer.render(this);
     }
 

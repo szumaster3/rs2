@@ -198,7 +198,8 @@ public final class Appearance {
      * @param clothesId the clothes id
      */
     public void drawClothes(int part, int clothesId) {
-        this.bodyParts[part] = clothesId + 0x100;
+        // The client distinguishes identity kits (256..32767) from equipment (32768+).
+        this.bodyParts[part] = clothesId >= 0 && clothesId < 0x7f00 ? clothesId + 0x100 : 0;
     }
 
     /**
