@@ -23,8 +23,15 @@ class LoginWriteEvent(
         if (response == AuthResponse.Success) {
             val player = session.player
             val location = core.game.world.map.Location.create(player.location)
-            val firstWorld = LoginWorldEncoder.response(player.index, location, player.details.rights.ordinal,
-                session.reconnecting, session.isaacPair.output)
+            val firstWorld = try {
+                LoginWorldEncoder.response(player.index, location, player.details.rights.ordinal,
+                    session.reconnecting, session.isaacPair.output)
+            } catch (e: IllegalArgumentException) {
+                // Reject an invalid initial scene before publishing login success or consuming ISAAC.
+                System.err.println("[Protocol] Invalid initial scene: ${e.message}")
+                session.disconnect()
+                return
+            }
             if (!session.reconnecting) session.initialScene = location
             session.queue(firstWorld)
             session.producer = GAME_PRODUCER

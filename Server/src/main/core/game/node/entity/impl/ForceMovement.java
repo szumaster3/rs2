@@ -319,13 +319,9 @@ public class ForceMovement extends Pulse {
     @Deprecated
     public void run(final Entity e, final int speed) {
         this.entity = e;
-        int commence = (int) start.getDistance(e.getLocation());
-        if (commence != 0 && commenceSpeed != 0) {
-            commence = (int) (1 + (commence / (commenceSpeed * 0.1)));
-        }
-        int path = 1 + (int) Math.ceil(start.getDistance(destination) / (pathSpeed * 0.1));
-        this.pathSpeed = pathSpeed == 0 ? path : speed;
-        this.commenceSpeed = commence;
+        // start() converts configured speeds into tick delays. Do not convert twice;
+        // run(e) supplies 0 to retain the configured path speed, not a zero divisor.
+        if (speed > 0) this.pathSpeed = speed;
         start();
         e.lock();
         GameWorld.getPulser().submit(this);
@@ -366,8 +362,8 @@ public class ForceMovement extends Pulse {
      */
     @Override
     public void start() {
-        commenceSpeed = (int) Math.ceil(start.getDistance(entity.getLocation()) / (commenceSpeed * 0.1));
-        pathSpeed = (int) Math.ceil(start.getDistance(destination) / (pathSpeed * 0.1));
+        commenceSpeed = movementTicks(start.getDistance(entity.getLocation()), commenceSpeed);
+        pathSpeed = movementTicks(start.getDistance(destination), pathSpeed);
         if (commenceSpeed != 0) {
             entity.animate(startAnim);
             super.setDelay(commenceSpeed);
@@ -382,6 +378,15 @@ public class ForceMovement extends Pulse {
             entity.getWalkingQueue().updateRegion(destination, false);
         }
         super.start();
+    }
+
+    private static int movementTicks(double distance, int speed) {
+        if (distance == 0) return 0;
+        if (speed <= 0) throw new IllegalArgumentException("Force movement speed must be positive for a nonzero distance");
+        double ticks = Math.ceil(distance / (speed * 0.1));
+        // Preserve existing speed units, but prevent int overflow in client cycle conversion.
+        if (ticks > Integer.MAX_VALUE / 30) throw new IllegalArgumentException("Force movement duration overflows client cycles");
+        return (int) ticks;
     }
 
     /**

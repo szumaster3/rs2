@@ -43,7 +43,7 @@ class UpdateMasks(val owner: Entity) {
                 context.entity === owner && context.damage in 0..32767 && context.type in 0..255
             EntityFlag.FaceEntity -> context == null || context is Entity
             EntityFlag.FaceLocation -> context is Location
-            EntityFlag.ForceMove -> context is ForceMoveCtx
+            EntityFlag.ForceMove -> context is ForceMoveCtx && !sync
             EntityFlag.TypeSwap -> context is Int && context in 0..16383
             else -> true
         }
@@ -82,7 +82,9 @@ class UpdateMasks(val owner: Entity) {
             val combined = entries(elements[provider.ordinal]?.context) + entries(context)
             if (combined.size > 255) return false
             AnimationSequenceUpdate(combined)
-        } else if (flag == EntityFlag.Animate) (context as Animation).copy() else context
+        } else if (flag == EntityFlag.Animate) (context as Animation).copy()
+        else if (flag == EntityFlag.ForceMove) (context as ForceMoveCtx).snapshot()
+        else context
         if (synced) {
             syncedElements[provider.ordinal] = MaskElement(provider, queuedContext)
             syncedPresenceFlags = syncedPresenceFlags or provider.presenceFlag
@@ -169,10 +171,17 @@ class UpdateMasks(val owner: Entity) {
         var bits = presenceFlags
         if (firstSight) bits = bits or syncedPresenceFlags or 1 or 0x20
         if (traversal != null) bits = bits or 0x4000
+        // Recheck at serialization in case a pulse changed the player's location
+        // after prepare(). Omit the bit AND its body for this frame, never just the body.
+        val forceOrdinal = EntityFlags.getOrdinal(type, EntityFlag.ForceMove)
+        val force = elements.getOrNull(forceOrdinal)
+        val skipForce = force != null && (force.context as? ForceMoveCtx)?.isEncodableFrom(player.location) != true
+        if (skipForce) bits = bits and EntityFlags.getPresenceFlag(type, EntityFlag.ForceMove).inv()
         if (bits == 0) return null
         val out = IoBuffer(-1, PacketHeader.NORMAL, ByteBuffer.allocate(ServerProt.MAX_PAYLOAD_SIZE))
         if (bits >= 256) out.put(bits or 2).put(bits shr 8) else out.put(bits)
         for (i in elements.indices) {
+            if (skipForce && i == forceOrdinal) continue
             val element = elements[i] ?: if (firstSight) syncedElements[i] else null
             if (element != null) element.encoder.writeToDynamic(out, element.context, owner)
             else if (firstSight && i == 0) PlayerFlags.MovementType().writeTo(out, 1)
@@ -190,6 +199,18 @@ class UpdateMasks(val owner: Entity) {
     fun prepare(entity: Entity) {
         // Persist the actual traversal mode before rendering, without changing run settings.
         if (entity is Player) {
+            // Movement has already been processed by Entity.tick(). Validate against
+            // the position which will be sent in GPI, before publishing the mask bit.
+            val ordinal = EntityFlags.getOrdinal(type, EntityFlag.ForceMove)
+            if (ordinal in elements.indices) {
+                val element = elements[ordinal]
+                val movement = element?.context as? ForceMoveCtx
+                if (element != null && (movement == null || !movement.isEncodableFrom(entity.location))) {
+                    presenceFlags = presenceFlags and element.encoder.presenceFlag.inv()
+                    elements[ordinal] = null
+                    log(this::class.java, Log.WARN, "Unrepresentable force movement mask at ${entity.location}: $movement")
+                }
+            }
             val queue = entity.walkingQueue
             val movement = when {
                 queue.runDir != -1 -> 2

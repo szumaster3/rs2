@@ -2048,7 +2048,7 @@ fun forceMove(
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            player.properties.teleportLocation = dest
+            player.properties.teleportLocation = destLoc
             return@queueScript stopExecuting(player)
         }
         return@queueScript stopExecuting(player)

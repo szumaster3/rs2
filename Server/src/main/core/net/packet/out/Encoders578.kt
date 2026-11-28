@@ -264,7 +264,8 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[Protocol578] Rejected IF_SETTEXT for missing component ${context.interfaceId}:${context.lineId}")
             return@encode
         }
-        if ('\u0000' in context.string || context.string.length > 65528) return@encode
+        if ('\u0000' in context.string) return@encode
+        if (!checkPayloadLength(context.player, ServerProt.IF_SETTEXT, context.string.length.toLong() + 7)) return@encode
         val buffer = IoBuffer(ServerProt.IF_SETTEXT, PacketHeader.SHORT)
         buffer.putString(context.string)
         buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
@@ -401,7 +402,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
                 payloadLength += 4
             }
         }
-        if (payloadLength > 65535) return@encode
+        if (!checkPayloadLength(context.player, ServerProt.RUNCLIENTSCRIPT, payloadLength)) return@encode
         val buffer = IoBuffer(ServerProt.RUNCLIENTSCRIPT, PacketHeader.SHORT)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
 
@@ -476,10 +477,12 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         player.session.write(varc(context.varcId, context.value, player.interfaceManager.getPacketCount(1)))
     }),
     VARC_STRING_UPDATE(encode<VarcStringUpdateContext> { context ->
-        if (!VarcType.stringExists(context.varcId) || '\u0000' in context.value || context.value.length > 65530) {
+        if (!VarcType.stringExists(context.varcId) || '\u0000' in context.value) {
             System.err.println("[Protocol578] Rejected varc string ${context.varcId}")
             return@encode
         }
+        val opcode = if (context.value.length <= 250) ServerProt.VARCSTR_SMALL else ServerProt.VARCSTR_LARGE
+        if (!checkPayloadLength(context.player, opcode, context.value.length.toLong() + 5)) return@encode
         context.player.session.write(varcString(context.varcId, context.value,
             context.player.interfaceManager.getPacketCount(1)))
     }),
@@ -489,8 +492,15 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[578] Unmapped widget-only container clear: ${context.interfaceId}:${context.childId}")
             return@encode
         }
-        val buffer = ContainerUpdate.encode(context.containerId, context.isSplit,
-            context.entries, context.length, context.slots, context.ids) ?: return@encode
+        val buffer = try {
+            ContainerUpdate.encode(context.containerId, context.isSplit,
+                context.entries, context.length, context.slots, context.ids) ?: return@encode
+        } catch (_: java.nio.BufferOverflowException) {
+            // A full snapshot or slot delta must not be silently truncated or dropped.
+            System.err.println("[Protocol] Container ${context.containerId} exceeds client payload capacity")
+            context.player.session.disconnect()
+            return@encode
+        }
         context.player.session.write(buffer)
     }),
     GRAND_EXCHANGE_OFFER(encode<GrandExchangeContext> { context ->
@@ -519,20 +529,32 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
     // Scene and world updates
     UPDATE_SCENE_GRAPH(encode<SceneGraphContext> { context ->
         val player = context.player
-        player.playerFlags.lastSceneGraph = player.location
-        player.playerFlags.isDynamicScene = false
+        val session = player.session ?: return@encode
+        val location = Location.create(player.location)
         val buffer = IoBuffer(ServerProt.REBUILD_NORMAL, PacketHeader.SHORT)
-        LoginWorldEncoder.appendRegion(buffer.toByteBuffer(), player.location)
-        player.details.session.write(buffer)
+        try {
+            LoginWorldEncoder.appendRegion(buffer.toByteBuffer(), location)
+        } catch (e: IllegalArgumentException) {
+            System.err.println("[Protocol] Invalid normal scene: ${e.message}")
+            session.disconnect()
+            return@encode
+        }
+        session.write(buffer)
+        if (session.isActive && player.session === session) {
+            player.playerFlags.lastSceneGraph = location
+            player.playerFlags.isDynamicScene = false
+        }
     }, immediate = true),
     BUILD_DYNAMIC_SCENE(encode<DynamicSceneContext> { context ->
         val player = context.player
+        val session = player.session ?: return@encode
+        val location = Location.create(player.location)
         val chunks = Array(4) { Array(13) { arrayOfNulls<RegionChunk>(13) } }
-        val baseX = player.location.regionX - 6
-        val baseY = player.location.regionY - 6
+        val baseX = location.regionX - 6
+        val baseY = location.regionY - 6
         for (z in 0..3) {
-            for (x in baseX..player.location.regionX + 6) {
-                for (y in baseY..player.location.regionY + 6) {
+            for (x in baseX..location.regionX + 6) {
+                for (y in baseY..location.regionY + 6) {
                     if (x !in 0..2047 || y !in 0..2047) continue
                     val dr = forId((x shr 3) shl 8 or (y shr 3))
                     if (dr is DynamicRegion) {
@@ -541,9 +563,20 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
                 }
             }
         }
-        context.player.session.write(LoginWorldEncoder.dynamicRegion(player.location, chunks))
-        player.playerFlags.lastSceneGraph = player.location
-        player.playerFlags.isDynamicScene = true
+        val buffer = try {
+            LoginWorldEncoder.dynamicRegion(location, chunks)
+        } catch (e: IllegalArgumentException) {
+            // The client has no continuation packet for a dynamic scene template.
+            // Keep the old scene state and fail the connection instead of sending a partial map.
+            System.err.println("[Protocol] Invalid dynamic scene: ${e.message}")
+            session.disconnect()
+            return@encode
+        }
+        session.write(buffer)
+        if (session.isActive && player.session === session) {
+            player.playerFlags.lastSceneGraph = location
+            player.playerFlags.isDynamicScene = true
+        }
     }, immediate = true),
     UPDATE_ZONE_PARTIAL_FOLLOWS(encode<AreaPositionContext> { context ->
         val scene = context.player.playerFlags.lastSceneGraph
@@ -751,9 +784,12 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         val buffer = when (context.type) {
             ContactContext.UPDATE_STATE_TYPE -> IoBuffer(ServerProt.FRIENDLIST_LOADING)
             ContactContext.IGNORE_LIST_TYPE -> {
-                val payload = IoBuffer(ServerProt.UPDATE_IGNORELIST, PacketHeader.SHORT)
                 val blocked = player.communication.blocked.filter { it.isNotEmpty() }.take(100)
-                if (blocked.any { it.contains('\u0000') } || 1L + blocked.sumOf { 2L * it.length + 4 } > 65535) return@encode
+                if (blocked.any { it.contains('\u0000') }) return@encode
+                if (!checkPayloadLength(player, ServerProt.UPDATE_IGNORELIST, 1L + blocked.sumOf { 2L * it.length + 4 })) return@encode
+                val temporary = player.communication.temporaryBlocked.filter { it.isNotEmpty() }.take(100 - blocked.size)
+                if (temporary.any { it.contains('\u0000') || it.length * 2L + 5 > 255 }) return@encode
+                val payload = IoBuffer(ServerProt.UPDATE_IGNORELIST, PacketHeader.SHORT)
                 payload.put(blocked.size)
                 for (name in blocked) {
                     payload.putString(name)
@@ -761,8 +797,6 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
                     payload.putString(name)
                     payload.putString("")
                 }
-                val temporary = player.communication.temporaryBlocked.filter { it.isNotEmpty() }.take(100 - blocked.size)
-                if (temporary.any { it.contains('\u0000') || it.length * 2 + 5 > 255 }) return@encode
                 player.session.write(payload)
                 for (name in temporary) {
                     // Protocol.PACKET_50: bit 0 rename, bit 1 temporary; four CP1252 strings.
@@ -775,7 +809,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
                 val rank = player.communication.contacts[name]?.rank?.value ?: 0
                 if (name.contains('\u0000') || context.worldId !in 0..65535 || rank !in -1..255) return@encode
                 val worldLength = if (context.worldId > 0) ("World " + context.worldId).length + 2 else 0
-                if (2L * name.length + 6 + worldLength > 65535) return@encode
+                if (!checkPayloadLength(player, ServerProt.UPDATE_FRIENDLIST, 2L * name.length + 6 + worldLength)) return@encode
                 val payload = IoBuffer(ServerProt.UPDATE_FRIENDLIST, PacketHeader.SHORT)
                 payload.put(0)
                 payload.putString(name)
@@ -813,23 +847,26 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         context.player.session.write(buffer)
     }),
     UPDATE_CLAN_CHAT(encode<ClanContext> { context ->
-        val buffer = IoBuffer(ServerProt.UPDATE_CLAN_CHAT, PacketHeader.SHORT)
+        if (context.isLeave) {
+            context.player.session.write(IoBuffer(ServerProt.UPDATE_CLAN_CHAT, PacketHeader.SHORT))
+            return@encode
+        }
         val clan = context.clan
-        if (!context.isLeave) {
-            if (clan.owner.contains('\u0000')) return@encode
-            val members = clan.players.take(100)
-            if (members.any { it.name.contains('\u0000') || it.worldId !in 0..65535 }) return@encode
-            if (12L + clan.owner.length + members.sumOf { it.name.length.toLong() + 6 + ("World " + it.worldId).length } > 65535) return@encode
-            buffer.putString(clan.owner).put(0)
-            buffer.putLong(stringToLong(clan.name))
-            buffer.put(clan.kickRequirement.value)
-            buffer.put(members.size)
-            for (entry in members) {
-                val name = entry.name
-                buffer.putString(name).put(0).putShort(entry.worldId)
-                buffer.put(clan.getRank(entry).value)
-                buffer.putString("World " + entry.worldId)
-            }
+        if (clan.owner.contains('\u0000')) return@encode
+        val members = clan.players.take(100)
+        if (members.any { it.name.contains('\u0000') || it.worldId !in 0..65535 }) return@encode
+        if (!checkPayloadLength(context.player, ServerProt.UPDATE_CLAN_CHAT,
+                12L + clan.owner.length + members.sumOf { it.name.length.toLong() + 6 + ("World " + it.worldId).length })) return@encode
+        val buffer = IoBuffer(ServerProt.UPDATE_CLAN_CHAT, PacketHeader.SHORT)
+        buffer.putString(clan.owner).put(0)
+        buffer.putLong(stringToLong(clan.name))
+        buffer.put(clan.kickRequirement.value)
+        buffer.put(members.size)
+        for (entry in members) {
+            val name = entry.name
+            buffer.putString(name).put(0).putShort(entry.worldId)
+            buffer.put(clan.getRank(entry).value)
+            buffer.putString("World " + entry.worldId)
         }
         context.player.session.write(buffer)
     });
@@ -977,6 +1014,14 @@ private fun minimapState(state: Int): IoBuffer {
     return IoBuffer(ServerProt.MINIMAP_STATE).put(state)
 }
 
+/** Preflight stateful variable-length frames before consuming verify IDs or allocating payloads. */
+private fun checkPayloadLength(player: Player, opcode: Int, length: Long): Boolean {
+    if (length in 0L..ServerProt.MAX_PAYLOAD_SIZE.toLong()) return true
+    System.err.println("[Protocol] Oversized ${ServerProt.name(opcode)} payload: $length bytes; closing session")
+    player.session?.disconnect()
+    return false
+}
+
 private fun varc(id: Int, value: Int, verify: Int): IoBuffer =
     if (value in Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()) {
         IoBuffer(ServerProt.VARC_SMALL).putA(value).putShortA(verify).putLEShortA(id)
@@ -986,7 +1031,8 @@ private fun varc(id: Int, value: Int, verify: Int): IoBuffer =
 
 /** Short and long string varc frames share the same delayed client state. */
 private fun varcString(id: Int, value: String?, verify: Int): IoBuffer {
-    require(id in 0..65535 && value != null && !value.contains('\u0000') && value.length <= 65530) {
+    require(id in 0..65535 && value != null && !value.contains('\u0000') &&
+        value.length <= ServerProt.MAX_PAYLOAD_SIZE - 5) {
         "Invalid varc string"
     }
     return if (value.length <= 250) {

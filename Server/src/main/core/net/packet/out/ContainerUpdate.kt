@@ -30,7 +30,7 @@ internal object ContainerUpdate {
                 val entry = fullEntry(slot)
                 if (!valid(entry)) return null
                 length += 2 + amountSize(entry)
-                if (length > 65535) return null
+                if (length > ServerProt.MAX_PAYLOAD_SIZE) throw java.nio.BufferOverflowException()
             }
         } else {
             if (entries == null || slots.isEmpty()) return null
@@ -39,10 +39,11 @@ internal object ContainerUpdate {
                 val entry = entries[slot]
                 if (!valid(entry)) return null
                 length += (if (slot < 128) 1 else 2) + 2 + (if (entry == null) 0 else amountSize(entry))
-                if (length > 65535) return null
+                if (length > ServerProt.MAX_PAYLOAD_SIZE) throw java.nio.BufferOverflowException()
             }
         }
-        val buffer = IoBuffer(if (slots == null) ServerProt.UPDATE_INV_FULL else ServerProt.UPDATE_INV_PARTIAL, PacketHeader.SHORT)
+        val buffer = IoBuffer(if (slots == null) ServerProt.UPDATE_INV_FULL else ServerProt.UPDATE_INV_PARTIAL,
+            PacketHeader.SHORT, java.nio.ByteBuffer.allocate(length))
         buffer.putShort(key).put(if (split) 1 else 0)
         if (slots == null) {
             buffer.putShort(count)
@@ -61,6 +62,7 @@ internal object ContainerUpdate {
                 }
             }
         }
+        check(buffer.toByteBuffer().position() == length) { "Container payload length mismatch" }
         return buffer
     }
 }
