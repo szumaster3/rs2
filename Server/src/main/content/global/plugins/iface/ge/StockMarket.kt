@@ -5,11 +5,11 @@ import core.game.component.Component
 import core.game.dialogue.InputType
 import core.game.ge.*
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.out.Encoders578
-import core.net.packet.out.PacketContext.ConfigContext
 import core.net.packet.out.PacketContext.ContainerContext
 import core.tools.Log
 import core.tools.SystemLogger
@@ -37,6 +37,9 @@ class StockMarket : InterfaceListener {
             player.packetDispatch.sendRunScript(571, "")
             player.interfaceManager.closeChatbox()
             player.interfaceManager.closeSingleTab()
+            removeAttribute(player, "ge-temp")
+            setAttribute(player, "ge-index", -1)
+            return@onClose true
         }
 
         onClose(Components.EXCHANGE_SEARCH_389) { player, _ ->
@@ -44,19 +47,23 @@ class StockMarket : InterfaceListener {
             return@onClose true
         }
 
-        on(Components.STOCKSIDE_107) { player, _, op, button, slot, _ ->
+        onNative(Components.STOCKSIDE_107) { player, _, op, button, slot, itemId ->
             if (button != 18 || slot < 0 || slot > 27) {
-                return@on false
+                return@onNative false
             }
-            val item = player.inventory[slot] ?: return@on false
+            val item = player.inventory[slot] ?: return@onNative false
+            val main = player.interfaceManager.getComponent(Components.STOCKMARKET_105) ?: return@onNative true
+            if (main.isHidden || item.id != itemId) return@onNative true
             when (op) {
-                196 -> sendMessages(player, item.definition.examine)
-                155 -> {
-                    val offer = getAttribute(player, "ge-temp", GrandExchangeOffer())
+                InterfaceOperation.OP10 -> sendMessages(player, item.definition.examine)
+                InterfaceOperation.OP1 -> {
+                    val offer = getAttribute<GrandExchangeOffer?>(player, "ge-temp", null) ?: return@onNative true
                     val index = getAttribute(player, "ge-index", -1)
+                    if (index !in 0..5 || ExchangeHistory.getInstance(player).offerRecords[index] != null ||
+                        getVarp(player, 1113) != 1 || offer.index != index || !offer.sell) return@onNative true
                     if (item.id == 995) {
                         sendMessage(player, "You can't sell money!")
-                        return@on true
+                        return@onNative true
                     }
                     var id = item.id
                     if (!item.definition.isUnnoted) {
@@ -64,7 +71,7 @@ class StockMarket : InterfaceListener {
                     }
                     if (!PriceIndex.canTrade(id)) {
                         sendMessage(player, "This item can't be sold on the Grand Exchange.")
-                        return@on true
+                        return@onNative true
                     }
                     offer.itemID = id
                     offer.sell = true
@@ -77,33 +84,55 @@ class StockMarket : InterfaceListener {
                     sendString(player, GrandExchange.getOfferStats(id, true), 105, 142)
                 }
             }
-            return@on true
+            return@onNative true
         }
 
-        on(Components.STOCKMARKET_105) { player, _, op, button, _, _ ->
+        onNative(Components.STOCKMARKET_105) { player, component, op, button, _, _ ->
+            if (op != InterfaceOperation.OP1 && !(op == InterfaceOperation.OP2 &&
+                    button in intArrayOf(18, 34, 50, 69, 88, 107, 209, 211))) return@onNative true
             val tempOffer = getAttribute(player, "ge-temp", GrandExchangeOffer())
+            val session = player.session
             var openedIndex = getAttribute(player, "ge-index", -1)
             var openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
+            if (button in intArrayOf(157,159,162,164,166,168,170,171,173,177,180,183,185,190,194) &&
+                (openedIndex !in 0..5 || openedOffer != null || tempOffer.index != openedIndex ||
+                    getAttribute<GrandExchangeOffer?>(player, "ge-temp", null) !== tempOffer)) return@onNative true
 
             when (button) {
                 209, 211 -> if (openedOffer == null) {
                     SystemLogger.logGE("[WARN] Player tried to withdraw item with null openedOffer!")
-                    return@on false
+                    return@onNative false
                 } else {
-                    withdraw(player, openedOffer, (button - 209) shr 1, op)
+                    withdrawNative(player, openedOffer, (button - 209) shr 1, op)
+                    return@onNative true
                 }
 
-                190 -> confirmOffer(player, tempOffer, openedIndex).also { return@on true }
-                194 -> openChatbox(player, Components.EXCHANGE_SEARCH_389)
+                190 -> {
+                    if (openedIndex in 0..5 && openedOffer == null && tempOffer.amount > 0 &&
+                        tempOffer.itemID > 0 && PriceIndex.canTrade(tempOffer.itemID))
+                        confirmOffer(player, tempOffer, openedIndex)
+                    return@onNative true
+                }
+                194 -> {
+                    if (!tempOffer.sell) {
+                        openChatbox(player, Components.EXCHANGE_SEARCH_389)
+                        if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389)
+                            player.packetDispatch.sendRunScript(570, "s", "Grand Exchange Item Search")
+                    }
+                    return@onNative true
+                }
                 203 -> abortOffer(player, openedOffer)
                 18, 34, 50, 69, 88, 107 -> {
-                    openedIndex = (button - 18) shr 4
+                    openedIndex = intArrayOf(18, 34, 50, 69, 88, 107).indexOf(button)
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
-                    if (op == 196) {
+                    if (op == InterfaceOperation.OP2) {
                         abortOffer(player, openedOffer)
-                    } else {
-                        updateVarbits(player, openedOffer, openedIndex)
+                        return@onNative true
                     }
+                    if (openedOffer == null) return@onNative true
+                    removeAttribute(player, "ge-temp")
+                    setAttribute(player, "ge-index", openedIndex)
+                    updateVarbits(player, openedOffer, openedIndex)
                     if (openedOffer != null) {
                         sendString(
                             player,
@@ -112,28 +141,36 @@ class StockMarket : InterfaceListener {
                             142,
                         )
                     }
+                    return@onNative true
                 }
 
                 30, 46, 62, 81, 100, 119 -> {
-                    openedIndex = (button - 30) shr 4
+                    openedIndex = intArrayOf(30, 46, 62, 81, 100, 119).indexOf(button)
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
-                    updateVarbits(player, openedOffer, openedIndex)
+                    if (openedOffer != null) return@onNative true
+                    setAttribute(player, "ge-temp", GrandExchangeOffer().also { it.index = openedIndex; it.player = player })
+                    setAttribute(player, "ge-index", openedIndex)
+                    updateVarbits(player, null, openedIndex)
                     openChatbox(player, Components.EXCHANGE_SEARCH_389)
-                    if (player.interfaceManager.chatbox!!.id == 389) {
+                    if (player.interfaceManager.chatbox?.id == 389) {
                         player.packetDispatch.sendRunScript(570, "s", "Grand Exchange Item Search")
                     }
+                    return@onNative true
                 }
 
                 31, 47, 63, 82, 101, 120 -> {
-                    openedIndex = (button - 31) shr 4
+                    openedIndex = intArrayOf(31, 47, 63, 82, 101, 120).indexOf(button)
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
-                    updateVarbits(player, openedOffer, openedIndex, true)
-                    player.interfaceManager.openSingleTab(Component(Components.STOCKSIDE_107)).open(player)
-                    player.packetDispatch.sendRunScript(
-                        149, "IviiiIsssss", "", "", "", "Examine", "Offer", -1, 0, 7, 4, 93, 7012370
-                    )
-                    val settings = IfaceSettingsBuilder().enableOptions(0, 1).build()
-                    player.packetDispatch.sendIfaceSettings(settings, 18, 107, 0, 27)
+                    if (openedOffer != null) return@onNative true
+                    setAttribute(player, "ge-temp", GrandExchangeOffer().also { it.index = openedIndex; it.player = player; it.sell = true })
+                    setAttribute(player, "ge-index", openedIndex)
+                    updateVarbits(player, null, openedIndex, true)
+                    player.interfaceManager.openSingleTab(Component(Components.STOCKSIDE_107))
+                    player.packetDispatch.sendRunScript(150, "IviiiIsssssssss", "", "", "", "", "", "", "", "", "Offer",
+                        -1, 0, 7, 4, 93, (107 shl 16) or 18)
+                    player.packetDispatch.sendIfaceSettings(IfaceSettingsBuilder().enableOptions(0, 9).build(), 18, 107, 0, 27)
+                    refreshInventory(player)
+                    return@onNative true
                 }
 
                 157 -> {
@@ -158,15 +195,15 @@ class StockMarket : InterfaceListener {
                 }
 
                 170 -> sendInputDialogue(player, false, "Enter the amount:") { value ->
-                    if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
-                        openChatbox(player, Components.EXCHANGE_SEARCH_389)
-                    }
+                    if (player.session !== session || player.interfaceManager.getComponent(105) !== component || component.isHidden ||
+                        getAttribute<GrandExchangeOffer?>(player, "ge-temp", null) !== tempOffer ||
+                        getAttribute(player, "ge-index", -1) != openedIndex) return@sendInputDialogue
                     var s = value.toString()
                     s = s.replace("k", "000")
                     s = s.replace("K", "000")
                     s = s.replace("m", "000000")
                     s = s.replace("M", "000000")
-                    updateOfferAmount(player, tempOffer, s.toInt())
+                    updateOfferAmount(player, tempOffer, (s.toIntOrNull() ?: return@sendInputDialogue))
                     setAttribute(player, "ge-temp", tempOffer)
                 }
 
@@ -178,23 +215,30 @@ class StockMarket : InterfaceListener {
                 171 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue - 1)
                 173 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue + 1)
                 185 -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
-                    if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
-                        openChatbox(player, Components.EXCHANGE_SEARCH_389)
-                    }
+                    if (player.session !== session || player.interfaceManager.getComponent(105) !== component || component.isHidden ||
+                        getAttribute<GrandExchangeOffer?>(player, "ge-temp", null) !== tempOffer ||
+                        getAttribute(player, "ge-index", -1) != openedIndex) return@sendInputDialogue
                     var s = value.toString()
-                    updateOfferValue(player, tempOffer, s.toInt())
+                    updateOfferValue(player, tempOffer, (s.toIntOrNull() ?: return@sendInputDialogue))
                     setAttribute(player, "ge-temp", tempOffer)
                 }
 
-                195 -> closeInterface(player)
+                13 -> {
+                    closeInterface(player)
+                    return@onNative true
+                }
                 127 -> {
                     closeChatBox(player)
                     closeSingleTab(player)
+                    removeAttribute(player, "ge-temp")
+                    setAttribute(player, "ge-index", -1)
+                    return@onNative true
                 }
+                else -> return@onNative true
             }
             setAttribute(player, "ge-index", openedIndex)
             setAttribute(player, "ge-temp", tempOffer)
-            return@on true
+            return@onNative true
         }
     }
 
@@ -210,8 +254,8 @@ class StockMarket : InterfaceListener {
         offer: GrandExchangeOffer,
         newAmt: Int,
     ) {
-        offer.offeredValue = newAmt
-        setVarp(player, 1111, newAmt)
+        offer.offeredValue = newAmt.coerceAtLeast(1)
+        setVarp(player, 1111, offer.offeredValue)
     }
 
     /**
@@ -222,8 +266,8 @@ class StockMarket : InterfaceListener {
      * @param newAmt The new amount of items being offered.
      */
     private fun updateOfferAmount(player: Player, offer: GrandExchangeOffer, newAmt: Int) {
-        offer.amount = newAmt
-        setVarp(player, 1110, newAmt)
+        offer.amount = newAmt.coerceAtLeast(1)
+        setVarp(player, 1110, offer.amount)
     }
 
     /**
@@ -372,40 +416,37 @@ class StockMarket : InterfaceListener {
             }
         }
 
+        /** CS2 scripts 593 and 662 select the collection option order by item quantity. */
+        internal fun collectAsNote(canNote: Boolean, amount: Int, operation: Int): Boolean? {
+            if (amount <= 0 || operation !in InterfaceOperation.OP1..InterfaceOperation.OP2) return null
+            if (!canNote) return if (operation == InterfaceOperation.OP1) false else null
+            return if (amount > 1) operation == InterfaceOperation.OP1 else operation == InterfaceOperation.OP2
+        }
+
+        /** Historical API uses legacy listener IDs; active interface callers use native indices. */
         @JvmStatic
         fun withdraw(player: Player, offer: GrandExchangeOffer, index: Int, op: Int) {
-            val item = offer.withdraw[index]
-            if (item == null) {
-                log(this::class.java, Log.WARN, "Offer withdraw $index is null!")
-                return
-            }
+            val operation = when (op) { 155 -> InterfaceOperation.OP1; 196 -> InterfaceOperation.OP2; else -> return }
+            withdrawNative(player, offer, index, operation)
+        }
 
-            when (op) {
-                // withdraw notes
-                155 -> {
-                    val note = item.noteChange
-                    if (note == -1) {
-                        sendMessage(player, "This item cannot be noted")
-                        return
-                    }
-                    if (hasSpaceFor(player, Item(note, item.amount))) {
-                        addItem(player, note, item.amount)
-                    } else {
-                        playAudio(player, Sounds.GE_TRADE_ERROR_4039)
-                        sendMessage(player, "You do not have enough room in your inventory.")
-                        return
-                    }
-                }
-                // withdraw items
-                196 -> {
-                    if (hasSpaceFor(player, item)) {
-                        addItem(player, item.id, item.amount)
-                    } else {
-                        playAudio(player, Sounds.GE_TRADE_ERROR_4039)
-                        sendMessage(player, "You do not have enough room in your inventory.")
-                        return
-                    }
-                }
+        @JvmStatic
+        fun withdrawNative(player: Player, offer: GrandExchangeOffer, index: Int, operation: Int) {
+            if (index !in offer.withdraw.indices || offer.index !in 0..5) return
+            val record = ExchangeHistory.getInstance(player).offerRecords[offer.index] ?: return
+            if (record.uid != offer.uid) return
+            val item = offer.withdraw[index] ?: return
+            if (item.amount <= 0) return
+            val definition = item.definition
+            val noteId = definition.noteId
+            val canNote = definition.isUnnoted && noteId in 0..65534 && noteId != item.id &&
+                !itemDefinition(noteId).isUnnoted && itemDefinition(noteId).noteId == item.id
+            val takeNote = collectAsNote(canNote, item.amount, operation) ?: return
+            val result = if (takeNote) Item(noteId, item.amount) else item
+            if (!hasSpaceFor(player, result) || !addItem(player, result.id, result.amount)) {
+                playAudio(player, Sounds.GE_TRADE_ERROR_4039)
+                sendMessage(player, "You do not have enough room in your inventory.")
+                return
             }
 
             offer.withdraw[index] = null
@@ -428,8 +469,8 @@ class StockMarket : InterfaceListener {
          * Returns to the main interface.
          */
         fun toMainInterface(player: Player) {
-            PacketRepository.send(Encoders578.CONFIG, ConfigContext(player, 1112, -1))
-            PacketRepository.send(Encoders578.CONFIG, ConfigContext(player, 1112, -1))
+            setVarp(player, 1112, -1)
+            removeAttribute(player, "ge-temp")
             closeChatBox(player)
             closeSingleTab(player)
             setAttribute(player, "ge-index", -1)

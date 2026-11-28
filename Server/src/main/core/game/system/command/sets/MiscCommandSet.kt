@@ -22,7 +22,6 @@ import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.system.command.CommandMapping
 import core.game.system.command.Privilege
-import core.game.system.communication.CommunicationInfo
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
 import core.game.world.repository.Repository
@@ -373,12 +372,12 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
                 reject(player, "<col=e74c3c>Please finish what you're doing first.")
             }
             if (player.attributes.containsKey("replyTo")) {
-                player.setAttribute("keepDialogueAlive", true)
                 val replyTo = player.getAttribute("replyTo", "").replace("_".toRegex(), " ")
-                sendInputDialogue(player, InputType.MESSAGE, StringUtils.formatDisplayName(replyTo)) { value ->
-                    CommunicationInfo.sendMessage(player, replyTo.lowercase(), value as String)
-                    player.removeAttribute("keepDialogueAlive")
-                }
+                // meslayer_mode6 sends MESSAGE_PRIVATE directly. It has no RunScript callback.
+                player.removeAttribute("runscript")
+                player.removeAttribute("input-type")
+                player.removeAttribute("parseamount")
+                player.dialogueInterpreter.sendMessageInput(StringUtils.formatDisplayName(replyTo))
             } else {
                 reject(player, "<col=3498db>You have not received any recent messages to which you can reply.")
             }

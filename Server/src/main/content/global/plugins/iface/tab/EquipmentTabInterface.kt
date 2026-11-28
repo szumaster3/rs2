@@ -9,6 +9,7 @@ import core.game.global.action.EquipHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.prayer.PrayerType
@@ -65,16 +66,19 @@ class EquipmentTabInterface : InterfaceListener {
             return@onOpen true
         }
 
-        on(Components.WORNITEMS_387) { player, component, opcode, buttonID, slot, itemID ->
-            when (buttonID) {
-                28 -> {
-                    if (opcode == 81) EquipHandler.unequip(player, slot, itemID)
-                    if (opcode == 206) operateItem(player, slot)
+        // Cache 578, interface_387 and wornitems_slot: static components, sub-ID -1.
+        onNative(Components.WORNITEMS_387) { player, _, operation, buttonID, slot, itemID ->
+            val equipmentSlot = WORN_SLOTS[buttonID]
+            if (equipmentSlot != null) {
+                if (slot == -1) handleEquipmentOperation(player, operation, equipmentSlot, itemID)
+            } else if (operation == InterfaceOperation.OP1) {
+                when (buttonID) {
+                    39 -> openInterface(player, Components.EQUIP_SCREEN2_667)
+                    45 -> openInterface(player, ITEMS_KEPT_ON_DEATH_102)
+                    // 42 is Price-checker; migrate separately, not to the old death screen.
                 }
-                52 -> openInterface(player, ITEMS_KEPT_ON_DEATH_102)
-                55 -> openInterface(player, Components.EQUIP_SCREEN2_667)
             }
-            return@on true
+            return@onNative true
         }
 
         onOpen(Components.EQUIP_SCREEN2_667) { player, component ->
@@ -85,15 +89,9 @@ class EquipmentTabInterface : InterfaceListener {
             return@onOpen true
         }
 
-        on(Components.EQUIP_SCREEN2_667) { player, _, opcode, buttonID, slot, itemID ->
-            if (buttonID == 14) {
-                when (opcode) {
-                    9 -> sendMessage(player, player.equipment.get(slot).definition.examine)
-                    155 -> EquipHandler.unequip(player, slot, itemID)
-                    196 -> operateItem(player, slot)
-                }
-            }
-            return@on true
+        onNative(Components.EQUIP_SCREEN2_667) { player, _, operation, buttonID, slot, itemID ->
+            if (buttonID == 14) handleEquipmentOperation(player, operation, slot, itemID)
+            return@onNative true
         }
 
         onClose(Components.EQUIP_SCREEN2_667) { player, _ ->
@@ -102,14 +100,34 @@ class EquipmentTabInterface : InterfaceListener {
         }
 
         onOpen(Components.INVENTORY_WEAR2_670) { player, component ->
-            InterfaceContainer.generateItems(player, player.inventory.toArray().toList(), listOf("Equip"), component.id, 0, 7, 4, 93)
+            InterfaceContainer.generateItems(player, player.inventory.toArray().toList(), listOf("Equip"), component.id, 0, 4, 7, 93)
             return@onOpen true
         }
 
-        on(Components.INVENTORY_WEAR2_670) { player, _, opcode, _, slot, _ ->
-            if (opcode == 9) sendMessage(player, player.inventory.get(slot).definition.examine)
-            if (opcode == 155) equipItem(player, slot)
-            return@on true
+        onNative(Components.INVENTORY_WEAR2_670) { player, _, operation, buttonID, slot, itemID ->
+            if (buttonID != 0) return@onNative true
+            val item = player.inventory.get(slot) ?: return@onNative true
+            if (item.id != itemID) return@onNative true
+            when (operation) {
+                InterfaceOperation.OP1 -> equipItem(player, slot)
+                InterfaceOperation.OP10 -> sendMessage(player, item.definition.examine)
+            }
+            return@onNative true
+        }
+    }
+
+    private fun handleEquipmentOperation(player: Player, operation: Int, slot: Int, itemID: Int) {
+        val item = player.equipment.get(slot) ?: return
+        if (item.id != itemID) return
+        when (operation) {
+            InterfaceOperation.OP1 -> EquipHandler.unequip(player, slot, itemID)
+            InterfaceOperation.OP10 -> sendMessage(player, item.definition.examine)
+            in InterfaceOperation.OP2..InterfaceOperation.OP5 -> {
+                val option = item.definition.getParam(528 + operation - InterfaceOperation.OP2, "") ?: return
+                if (option.isBlank()) return
+                if (option.equals("operate", ignoreCase = true)) operateItem(player, slot)
+                else InteractionListeners.run(item.id, IntType.ITEM, option.lowercase(), player, item)
+            }
         }
     }
 
@@ -135,5 +153,7 @@ class EquipmentTabInterface : InterfaceListener {
 
     companion object {
         private const val ITEMS_KEPT_ON_DEATH_102 = 102
+        private val WORN_SLOTS = mapOf(8 to 0, 11 to 1, 14 to 2, 17 to 3, 20 to 4, 23 to 5,
+            26 to 7, 29 to 9, 32 to 10, 35 to 12, 38 to 13)
     }
 }

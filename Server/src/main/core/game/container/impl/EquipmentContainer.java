@@ -286,6 +286,10 @@ public final class EquipmentContainer extends Container {
 
         @Override
         public void update(Container c, ContainerEvent event) {
+            if (event.isClear()) {
+                refresh(c);
+                return;
+            }
             int[] slots = event.getSlots();
             PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, 387, 28, 94, event.getItems(), false, slots));
             update(c);
@@ -382,17 +386,20 @@ public final class EquipmentContainer extends Container {
      * @param player The player to update for.
      */
     public static void update(Player player) {
-        int index = 0;
         int[] bonuses = player.getProperties().getBonuses();
-        for (int i = 36; i < 50; i++) {
-            if (i == 47) {
-                continue;
-            }
-            int bonus = bonuses[index];
-            String bonusValue = bonus > -1 ? ("+" + bonus) : Integer.toString(bonus);
-            player.getPacketDispatch().sendString(BONUS_NAMES[index++] + bonusValue, 667, i);
+        // Cache 578 interface_667: attack 36..40, defence 41..46, other 48..51.
+        for (int index = 0; index < 11; index++) {
+            sendBonus(player, 36 + index, BONUS_NAMES[index], bonuses[index], "");
         }
+        sendBonus(player, 48, "Strength: ", bonuses[11], "");
+        sendBonus(player, 49, "Ranged Str.: ", bonuses[14], "");
+        sendBonus(player, 50, "Prayer: ", bonuses[12], "");
+        sendBonus(player, 51, "Magic Damage: ", bonuses[13], "%");
         player.getSettings().updateWeight();
         player.getPacketDispatch().sendString("Attack bonus", 667, 34);
+    }
+
+    private static void sendBonus(Player player, int child, String name, int value, String suffix) {
+        player.getPacketDispatch().sendString(name + (value >= 0 ? "+" : "") + value + suffix, 667, child);
     }
 }

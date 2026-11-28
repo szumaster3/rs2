@@ -4,6 +4,8 @@ import core.api.*
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
+import core.game.interaction.InterfaceListeners
+import core.game.interaction.InterfaceOperation
 import core.game.container.ContainerType
 import core.game.container.access.InterfaceContainer
 import core.game.container.impl.EquipmentContainer
@@ -29,19 +31,25 @@ class DuelSession(
     var acceptState = 0
     var fightState = 0
 
-    fun end() {
+    fun end(closing: Player? = null) {
         removeAttribute(player!!, "duel:partner")
         other!!.removeAttribute("duel:partner")
         removeAttribute(player, "duel:staked")
         other.removeAttribute("duel:staked")
         other.removeAttribute("duel:forfeit")
         removeAttribute(player, "duel:forfeit")
-        player.interfaceManager.close()
-        player.interfaceManager.closeSingleTab()
+        if (player !== closing && player.interfaceManager.opened?.id in setOf(631, 637, 626, 639)) player.interfaceManager.close()
+        if (staked && player.interfaceManager.getComponent(336) != null) player.interfaceManager.closeSingleTab()
         player.interfaceManager.restoreTabs()
-        other.interfaceManager.close()
-        other.interfaceManager.closeSingleTab()
+        if (other !== closing && other.interfaceManager.opened?.id in setOf(631, 637, 626, 639)) other.interfaceManager.close()
+        if (staked && other.interfaceManager.getComponent(336) != null) other.interfaceManager.closeSingleTab()
         other.interfaceManager.restoreTabs()
+        if (staked) {
+            for (p in listOf(player, other)) {
+                p.packetDispatch.deleteClientContainer(StakeContainer.KEY, false)
+                p.packetDispatch.deleteClientContainer(StakeContainer.KEY, true)
+            }
+        }
         other.locks.unlockMovement()
         player.locks.unlockMovement()
         player.hintIconManager.clear()
@@ -71,34 +79,40 @@ class DuelSession(
         setAttribute(other, "duel:staked", staked)
         removeAttribute(player, "duel:accepted")
         removeAttribute(other, "duel:accepted")
-        openRules(player, other)
-        openRules(other, player)
+        if (staked) {
+            playerContainer = StakeContainer(player, this)
+            targetContainer = StakeContainer(other, this)
+        }
+        if (!openRules(player, other) || !openRules(other, player)) {
+            decline(player)
+            return
+        }
+        if (staked) {
+            playerContainer?.sync()
+            targetContainer?.sync()
+        }
     }
 
     private fun openRules(
         player: Player,
         opponent: Player,
-    ) {
+    ): Boolean {
         setVarp(player, 286, 0)
         if (staked) {
-            val container = StakeContainer(player, this)
-            if (player === this.player) {
-                playerContainer = container
-            } else {
-                targetContainer = container
-            }
-            player.interfaceManager.open(STAKED_INTER)
+            val container = getContainer(player) ?: return false
+            if (player.interfaceManager.open(STAKED_INTER) == null) return false
             player.packetDispatch.sendString(opponent.username, 631, 25)
             player.packetDispatch.sendString(Integer.toString(opponent.properties.currentCombatLevel), 631, 27)
             player.packetDispatch.sendString("", 631, 28)
             container.open()
         } else {
-            player.interfaceManager.open(FRIENDLY_INTER)
-            player.packetDispatch.sendString(opponent.username, 637, 16)
-            player.packetDispatch.sendString(Integer.toString(opponent.properties.currentCombatLevel), 637, 18)
-            player.packetDispatch.sendString("", 637, 45)
+            if (player.interfaceManager.open(FRIENDLY_INTER) == null) return false
+            player.packetDispatch.sendString(opponent.username, 637, 15)
+            player.packetDispatch.sendString(Integer.toString(opponent.properties.currentCombatLevel), 637, 17)
+            player.packetDispatch.sendString("", 637, 44)
         }
         setVarp(player, 286, 0)
+        return true
     }
 
     fun leave(
@@ -123,8 +137,8 @@ class DuelSession(
             }
             victory(o)
         } else if (type == 1) {
-            getContainer(player!!)!!.release()
-            getContainer(o)!!.release()
+            getContainer(p)?.release()
+            getContainer(o)?.release()
             o.removeExtension(DuelSession::class.java)
             o.dialogueInterpreter.sendDialogue("Your opponent timed out, there was no winner!")
         }
@@ -134,12 +148,12 @@ class DuelSession(
     fun victory(player: Player) {
         val component: Component =
             if (staked) STAKE_VICTORY else FRIENDLY_VICTORY
-        player.interfaceManager.open(component)
-        player.packetDispatch.sendString(getOpposite(player).username, component.id, if (staked) 23 else 22)
+        if (player.interfaceManager.open(component) == null) return
+        player.packetDispatch.sendString(getOpposite(player).username, component.id, if (staked) 33 else 31)
         player.packetDispatch.sendString(
             Integer.toString(getOpposite(player).properties.currentCombatLevel),
             component.id,
-            if (staked) 22 else 21,
+            if (staked) 32 else 30,
         )
         if (staked) {
             getContainer(player)!!.release()
@@ -150,7 +164,7 @@ class DuelSession(
                     targetContainer.toArray().toList(),
                     listOf("Examine"),
                     634,
-                    33
+                    28, 5, 6
                 )
             }
             val c = core.game.container.Container(28, ContainerType.ALWAYS_STACK)
@@ -184,9 +198,14 @@ class DuelSession(
                 session.acceptState = 3
                 session.player.removeAttribute("duel:accepted")
                 session.other.removeAttribute("duel:accepted")
-                session.other.interfaceManager.open(if (session.staked) STAKED_RULE_INTER else FRIENDLY_RULE_INTER)
-                session.player.interfaceManager.open(if (session.staked) STAKED_RULE_INTER else FRIENDLY_RULE_INTER)
+                val confirmation = if (session.staked) STAKED_RULE_INTER else FRIENDLY_RULE_INTER
+                val opened = session.other.interfaceManager.open(confirmation) != null &&
+                    session.player.interfaceManager.open(confirmation) != null
                 session.acceptState = 4
+                if (!opened) {
+                    decline(player)
+                    return
+                }
                 session.player.interfaceManager.closeSingleTab()
                 session.other.interfaceManager.closeSingleTab()
                 session.player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 11, 12)
@@ -212,14 +231,14 @@ class DuelSession(
                     during.append("You will fight using normal combat.<br>")
                 }
                 for (rule in rules) {
-                    if (rule != null && rule.equipmentSlot == -1) {
+                    if (rule != null && rule.equipmentSlot == -1 && rule.info.isNotEmpty()) {
                         during.append(rule.info + "<br>")
                     }
                 }
                 val interfaceId = if (session.staked) 626 else 639
                 val childs =
                     if (staked) {
-                        intArrayOf(28, 29, 30, 31, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45)
+                        intArrayOf(28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45)
                     } else {
                         intArrayOf(16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32)
                     }
@@ -233,7 +252,7 @@ class DuelSession(
                         .toTypedArray()
                 run {
                     var i = 0
-                    while (i < tokens.size) {
+                    while (i < minOf(tokens.size, if (staked) 4 else 5)) {
                         session.player.packetDispatch.sendString(
                             tokens[i],
                             interfaceId,
@@ -254,54 +273,14 @@ class DuelSession(
                         .dropLastWhile { it.isEmpty() }
                         .toTypedArray()
                 var i = 0
-                while (i < tokens.size) {
-                    session.player.packetDispatch.sendString(tokens[i], interfaceId, if (staked) 34 + i else 22 + i)
-                    session.other.packetDispatch.sendString(tokens[i], interfaceId, if (staked) 34 + i else 22 + i)
+                while (i < minOf(tokens.size, if (staked) 12 else 11)) {
+                    session.player.packetDispatch.sendString(tokens[i], interfaceId, if (staked) 33 + i else 22 + i)
+                    session.other.packetDispatch.sendString(tokens[i], interfaceId, if (staked) 33 + i else 22 + i)
                     i++
                 }
                 if (staked) {
-                    session.player.packetDispatch.sendString(
-                        if (session.getContainer(player)!!.isEmpty) {
-                            "Absolutely nothing!"
-                        } else {
-                            getDisplayMessage(session.getContainer(player)!!.toArray())
-                        },
-                        626,
-                        25,
-                    )
-                    session.player.packetDispatch.sendString(
-                        if (session.getOppositeContainer(player)!!.isEmpty) {
-                            "Absolutely nothing!"
-                        } else {
-                            getDisplayMessage(session.getOppositeContainer(player,)!!.toArray())
-                        },
-                        626,
-                        26,
-                    )
-                    session.other.packetDispatch.sendString(
-                        if (session.getOppositeContainer(player)!!.isEmpty) {
-                            "Absolutely nothing!"
-                        } else {
-                            getDisplayMessage(
-                                session
-                                    .getOppositeContainer(
-                                        player,
-                                    )!!
-                                    .toArray(),
-                            )
-                        },
-                        626,
-                        25,
-                    )
-                    session.other.packetDispatch.sendString(
-                        if (session.getOppositeContainer(other!!)!!.isEmpty) {
-                            "Absolutely nothing!"
-                        } else {
-                            getDisplayMessage(session.getOppositeContainer(other)!!.toArray())
-                        },
-                        626,
-                        26,
-                    )
+                    session.playerContainer?.sync()
+                    session.targetContainer?.sync()
                 }
                 session.updateToolTip(player, "")
                 session.updateToolTip(getOpposite(player), "")
@@ -349,6 +328,7 @@ class DuelSession(
         index: Int,
     ) {
         val session = player!!.getExtension<DuelSession>(DuelSession::class.java) ?: return
+        if (session.acceptState !in 0..1 || index !in rules.indices) return
         session.resetAccept()
         if (rules[index] != null) {
             rules[index] = null
@@ -362,7 +342,7 @@ class DuelSession(
                 }
                 if (count == 2) {
                     session.updateToolTip(
-                        player,
+                        p,
                         "You can't have No Ranged, No Melee AND No Magic, how would you fight?",
                     )
                     p.packetDispatch.sendMessage(
@@ -371,8 +351,7 @@ class DuelSession(
                     return
                 }
             } else if (index == 8 && rules[9] != null || index == 9 && rules[8] != null) {
-                rules[9] = null
-                rules[8] = rules[9]
+                rules[if (index == 8) 9 else 8] = null
                 p.packetDispatch.sendMessage(
                     if (index ==
                         8
@@ -384,7 +363,7 @@ class DuelSession(
                 )
             }
             if (index == 15 || index == 16) {
-                player.sendMessage("Beware: You won't be able to use two-handed weapons such as bows.")
+                p.sendMessage("Beware: You won't be able to use two-handed weapons such as bows.")
             }
             rules[index] = DuelRule.values()[index]
         }
@@ -428,143 +407,98 @@ class DuelSession(
         return true
     }
 
-    override fun handle(
-        player: Player,
-        component: Component,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int,
-    ): Boolean {
-        var button = button
-        val session = player.getExtension<DuelSession>(DuelSession::class.java) ?: return false
+    override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
+        val operation = (InterfaceOperation.OP1..InterfaceOperation.OP10)
+            .firstOrNull { InterfaceOperation.listenerId(it) == opcode } ?: return true
+        return handleNative(player, component, operation, button, slot, itemId)
+    }
+
+    private fun handleNative(player: Player, component: Component, operation: Int, button: Int, slot: Int, itemId: Int): Boolean {
+        val session = player.getExtension<DuelSession>(DuelSession::class.java) ?: return true
+        if (player.interfaceManager.getComponent(component.id) !== component || component.isHidden) return true
+        val rulesInterface = if (session.staked) 631 else 637
+        val confirmInterface = if (session.staked) 626 else 639
         when (component.id) {
-            626 ->
-                if (button == 53) {
-                    requestAccept(player, component)
+            confirmInterface -> {
+                if (session.acceptState !in 4..5 || operation != InterfaceOperation.OP1) return true
+                when (button) {
+                    if (session.staked) 53 else 35 -> session.requestAccept(player, component)
+                    if (session.staked) 55 else 37 -> player.interfaceManager.close()
                 }
-
-            639 ->
-                if (button == 35) {
-                    requestAccept(player, component)
-                }
-
-            631 -> {
-                if (button == 107) {
-                    decline(player)
-                } else if (button == 102) {
-                    requestAccept(player, component)
-                }
-                val c = session.getContainer(player)
-                if (button == 103) {
-                    var amount = 0
-                    when (opcode) {
-                        155 -> amount = 1
-                        196 -> amount = 5
-                        124 -> amount = 10
-                        199 -> amount = c!!.getAmount(c[slot])
-                        234 ->
-                            sendInputDialogue(player, true, "Enter the amount:") { value: Any ->
-                                c!!.withdraw(slot, value as Int)
-                            }
-                    }
-                    c!!.withdraw(slot, amount)
-                } else if (button == 104) {
-                }
-                if (button == 107) {
-                    player.interfaceManager.close()
-                }
-                if (button >= 57 && button <= 67) {
-                    var index = 12 + (57 - button) * -1
-                    if (button == 60) {
-                        index = DuelRule.values().size - 1
-                    } else if (button == 61) {
-                        index = 15
-                    } else if (button == 62) {
-                        index = DuelRule.NO_BODY.ordinal
-                    } else if (button == 63) {
-                        index = DuelRule.NO_SHIELD.ordinal
-                    } else if (button == 64) {
-                        index = DuelRule.NO_LEGS.ordinal
-                    } else if (button == 67) {
-                        index = DuelRule.NO_GLOVES.ordinal
-                    } else if (button == 66) {
-                        index = DuelRule.NO_BOOTS.ordinal
-                    }
-                    session.toggleRule(player, index)
-                }
-                if (button >= 29 && button <= 53) {
-                    if (button > 49) {
-                        button--
-                    }
-                    var index = (button - 29) / 2
-                    if (index == 11) {
-                        index = 10
-                    } else if (index == 10) {
-                        index = 11
-                    }
-                    session.toggleRule(player, index)
-                }
-                return false
             }
-
-            637 -> {
-                if (button == 86) {
-                    player.interfaceManager.close()
-                } else if (button == 83 && session.acceptState < 2) {
-                    requestAccept(player, component)
-                }
-                if (button >= 46 && button <= 56) {
-                    var index = 0
+            rulesInterface -> {
+                if (session.acceptState !in 0..1) return true
+                if (operation == InterfaceOperation.OP1) {
                     when (button) {
-                        46 -> index = DuelRule.NO_HATS.ordinal
-                        47 -> index = DuelRule.NO_CAPES.ordinal
-                        48 -> index = DuelRule.NO_AMULET.ordinal
-                        49 -> index = DuelRule.NO_ARROWS.ordinal
-                        50 -> index = DuelRule.NO_WEAPON.ordinal
-                        51 -> index = DuelRule.NO_BODY.ordinal
-                        52 -> index = DuelRule.NO_SHIELD.ordinal
-                        53 -> index = DuelRule.NO_LEGS.ordinal
-                        54 -> index = DuelRule.NO_RINGS.ordinal
-                        55 -> index = DuelRule.NO_BOOTS.ordinal
-                        56 -> index = DuelRule.NO_GLOVES.ordinal
+                        if (session.staked) 101 else 82 -> { session.requestAccept(player, component); return true }
+                        if (session.staked) 106 else 85 -> { player.interfaceManager.close(); return true }
                     }
-                    session.toggleRule(player, index)
+                    DuelRuleComponents.rule(component.id, button)?.let {
+                        session.toggleRule(player, it.ordinal)
+                        return true
+                    }
                 }
-                if (button >= 19 && button <= 42) {
-                    session.toggleRule(player, (button - 19) / 2)
+                if (session.staked && button == 102) session.handleStakeItem(player, component, operation, slot, itemId, false)
+                if (session.staked && button == 103 && operation == InterfaceOperation.OP1) {
+                    val item = session.getOppositeContainer(player)?.get(slot)
+                    if (item != null && item.id == itemId) sendMessage(player, item.definition.examine)
                 }
-                return false
             }
-
-            336 -> {
-                val c1 = if (player === session.player) session.playerContainer else session.targetContainer
-                when (opcode) {
-                    155 -> c1!!.offer(slot, 1)
-                    196 -> c1!!.offer(slot, 5)
-                    124 -> c1!!.offer(slot, 10)
-                    199 -> c1!!.offer(slot, player.inventory.getAmount(player.inventory[slot].id))
-                    234 ->
-                        sendInputDialogue(player, true, "Enter the amount:") { value: Any ->
-                            c1!!.offer(slot, value as Int)
-                        }
-
-                    9 -> player.packetDispatch.sendMessage(player.inventory[slot].definition.examine)
-                }
+            634 -> if (session.staked && session.fightState == 2 && button == 28 &&
+                operation in intArrayOf(InterfaceOperation.OP1, InterfaceOperation.OP10)) {
+                val item = session.getOppositeContainer(player)?.get(slot)
+                if (item != null && item.id == itemId) sendMessage(player, item.definition.examine)
+            }
+            336 -> if (session.staked && session.acceptState in 0..1 && button == 0 &&
+                player.interfaceManager.getComponent(631) != null) {
+                session.handleStakeItem(player, component, operation, slot, itemId, true)
             }
         }
         return true
     }
 
+    private fun handleStakeItem(player: Player, component: Component, operation: Int, slot: Int, itemId: Int, offer: Boolean) {
+        val stake = getContainer(player) ?: return
+        val source = if (offer) player.inventory else stake
+        val item = source.get(slot) ?: return
+        if (item.id != itemId) return
+        val originalSession = player.session
+        val main = player.interfaceManager.getComponent(631) ?: return
+        fun transfer(amount: Int) {
+            if (amount <= 0 || acceptState !in 0..1 || player.session !== originalSession ||
+                player.getExtension<DuelSession>(DuelSession::class.java) !== this ||
+                player.interfaceManager.getComponent(631) !== main || main.isHidden ||
+                player.interfaceManager.getComponent(component.id) !== component || component.isHidden ||
+                source.get(slot) !== item || item.id != itemId) return
+            if (offer) stake.offer(slot, amount) else stake.withdraw(slot, amount)
+        }
+        when (operation) {
+            InterfaceOperation.OP1 -> transfer(1)
+            InterfaceOperation.OP2 -> transfer(5)
+            InterfaceOperation.OP3 -> transfer(10)
+            InterfaceOperation.OP4 -> transfer(source.getAmount(item))
+            InterfaceOperation.OP5 -> sendInputDialogue(player, true, "Enter the amount:") { value ->
+                (value as? Int)?.let { transfer(it) }
+            }
+            InterfaceOperation.OP10 -> sendMessage(player, item.definition.examine)
+        }
+    }
+
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(631, this)
-        ComponentDefinition.put(637, this)
-        ComponentDefinition.put(626, this)
-        ComponentDefinition.put(639, this)
+        for (id in intArrayOf(631, 637, 626, 639, 634)) {
+            ComponentDefinition.put(id, this)
+            InterfaceListeners.addNative(id) { player, component, operation, button, slot, itemId ->
+                handleNative(player, component, operation, button, slot, itemId)
+            }
+        }
+        // 336 is also used by TradeInterface; its native listener routes active duel stakes.
         StakeContainer.OVERLAY.plugin = this
         return this
     }
+
+    fun handleStakeSide(player: Player, component: Component, operation: Int, button: Int, slot: Int, itemId: Int): Boolean =
+        handleNative(player, component, operation, button, slot, itemId)
 
     fun requestAccept(
         player: Player,
@@ -572,6 +506,7 @@ class DuelSession(
     ) {
         val session = player.getExtension<DuelSession>(DuelSession::class.java) ?: return
 
+        if (session.acceptState !in intArrayOf(0, 1, 4, 5)) return
         if (session.acceptState == (if (session.acceptState < 3) 1 else 5) &&
             session
                 .getOpposite(player)
@@ -593,6 +528,8 @@ class DuelSession(
         acceptState = if (acceptState < 3) 0 else 4
         removeAttribute(player!!, "duel:accepted")
         removeAttribute(other!!, "duel:accepted")
+        updateToolTip(player, "")
+        updateToolTip(other, "")
     }
 
     fun clearChilds(
@@ -615,12 +552,13 @@ class DuelSession(
         if (!staked) {
             interfaceId =
                 if (acceptState < 4) FRIENDLY_INTER.id else FRIENDLY_RULE_INTER.id
-            child = if (acceptState < 4) 45 else 33
+            child = if (acceptState < 4) 44 else 33
         } else if (acceptState > 3) {
             interfaceId = STAKED_RULE_INTER.id
             child = 45
         }
-        player.packetDispatch.sendString(message, interfaceId, child)
+        if (player.interfaceManager.getComponent(interfaceId) != null)
+            player.packetDispatch.sendString(message, interfaceId, child)
     }
 
     private fun getDisplayMessage(items: Array<Item?>): String {
@@ -723,22 +661,22 @@ class DuelSession(
     companion object {
         private val FRIENDLY_INTER =
             Component(637).setUncloseEvent { player, c ->
-                decline(player)
+                decline(player, true)
                 true
             }
         private val STAKED_INTER =
             Component(631).setUncloseEvent { player, c ->
-                decline(player)
+                decline(player, true)
                 true
             }
         private val FRIENDLY_RULE_INTER =
             Component(639).setUncloseEvent { player, c ->
-                decline(player)
+                decline(player, true)
                 true
             }
         private val STAKED_RULE_INTER =
             Component(626).setUncloseEvent { player, c ->
-                decline(player)
+                decline(player, true)
                 true
             }
         private val FRIENDLY_VICTORY = Component(633)
@@ -748,9 +686,9 @@ class DuelSession(
                 true
             }
 
-        fun decline(player: Player) {
+        fun decline(player: Player, closing: Boolean = false) {
             val session = player.getExtension<DuelSession>(DuelSession::class.java) ?: return
-            if (session.acceptState == 3 || session.acceptState == 7) {
+            if (session.acceptState == 3 || session.acceptState >= 6 || session.fightState != 0) {
                 return
             }
             if (session.staked) {
@@ -760,7 +698,7 @@ class DuelSession(
             }
             session.player!!.removeExtension(DuelSession::class.java)
             session.other!!.removeExtension(DuelSession::class.java)
-            session.end()
+            session.end(if (closing) player else null)
             if (player === session.other) {
                 session.player.packetDispatch.sendMessage(
                     "Other player declined " + (if (session.staked) "stake and " else "") + "duel options.",
@@ -774,15 +712,15 @@ class DuelSession(
 
         fun reward(player: Player) {
             val session = player.getExtension<DuelSession>(DuelSession::class.java)
-            if (session == null || session.fightState == 4) {
+            if (session == null || session.fightState != 2 || !session.staked) {
                 return
             }
-            val targetContainer = session.getOppositeContainer(player)
+            val targetContainer = session.getOppositeContainer(player) ?: return
+            session.fightState = 4
             if (!player.inventory.hasSpaceFor(targetContainer)) {
                 player.bank.addAll(targetContainer)
                 player.sendMessage("An error occured & the stake transfered to your bank.")
             } else {
-                session.fightState = 4
                 player.inventory.addAll(targetContainer)
             }
             player.removeExtension(DuelSession::class.java)

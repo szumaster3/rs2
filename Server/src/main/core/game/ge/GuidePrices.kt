@@ -1,19 +1,17 @@
 package core.game.ge
 
-import core.api.sendInterfaceConfig
-import core.api.sendString
+import core.api.*
+import core.cache.def.impl.EnumType
 import core.game.component.Component
 import core.game.ge.GrandExchange.Companion.getRecommendedPrice
 import core.game.node.entity.player.Player
-import core.tools.StringUtils.formatDisplayName
-import shared.consts.Components
 import shared.consts.Items
 
 /**
  * Provides functionality for managing and displaying guide prices in the Grand Exchange.
  */
 object GuidePrices {
-    private val COMPONENT = Component(Components.EXCHANGE_GUIDE_PRICE_642)
+    const val INTERFACE_ID = 885
 
     /**
      * Opens the guide price interface for the specified player and type.
@@ -23,7 +21,8 @@ object GuidePrices {
      */
     @JvmStatic
     fun open(player: Player, type: GuideType) {
-        player.interfaceManager.open(COMPONENT)
+        setVarc(player, 1001, type.nativeCategory)
+        if (player.interfaceManager.open(Component(INTERFACE_ID)) == null) return
         type.display(player)
     }
 
@@ -33,9 +32,7 @@ object GuidePrices {
      * @param player the player whose guide price interface should be cleared.
      */
     fun clear(player: Player) {
-        for (i in 135..164) {
-            player.packetDispatch.sendInterfaceConfig(COMPONENT.id, i, true)
-        }
+        removeAttribute(player, "guide-price")
     }
 
     /**
@@ -173,6 +170,19 @@ object GuidePrices {
          */
         val items: Array<GuideItem> = items as Array<GuideItem>
 
+        val nativeCategory: Int get() = when (this) {
+            ORES -> 1
+            RUNES -> 2
+            LOGS -> 3
+            HERBS -> 4
+            WEAPONS_AND_ARMOUR -> 5
+        }
+
+        fun nativeItems(): List<Int> {
+            val enum = EnumType.get(737 + nativeCategory)
+            return enum.dataStore.toSortedMap().values.mapNotNull { it as? Int }
+        }
+
         /**
          * Displays the guide prices for the player.
          *
@@ -180,17 +190,19 @@ object GuidePrices {
          */
         fun display(player: Player) {
             player.setAttribute("guide-price", this)
-            if (this != LOGS) {
-                clear(player)
-            }
-            sendString(player, "Guide Prices: " + formatDisplayName(name), COMPONENT.id, 14)
-            for (i in childData[0] until childData[1]) {
-                sendInterfaceConfig(player, Components.EXCHANGE_GUIDE_PRICE_642, i, false)
-            }
-            for (item in items) {
-                sendString(player,
-                    "" + getRecommendedPrice(item.item, false) + " gp", COMPONENT.id, item.childData[0]
-                )
+            val items = nativeItems()
+            // CS2 1167 creates icon/text child pairs; enum 737 maps the corresponding static timer widgets.
+            // CS2 1169 installs the clock-gated 1168 on the timer widget, so no server/client clock guessing is needed.
+            val mask = IfaceSettingsBuilder().enableOption(0).build()
+            val timerWidgets = EnumType.get(737).dataStore
+            for ((index, itemId) in items.withIndex()) {
+                val icon = index * 2
+                player.packetDispatch.sendIfaceSettings(mask, 16, INTERFACE_ID, icon, icon)
+                if (!timerWidgets.containsKey(index)) continue
+                val price = getRecommendedPrice(itemId, false)
+                val label = String.format(java.util.Locale.US, "%,d", price)
+                // Logical arguments: text child, timer enum index, price string. API takes reverse wire order.
+                player.packetDispatch.sendRunScript(1169, "iis", label, index, icon + 1)
             }
         }
     }

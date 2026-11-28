@@ -2,105 +2,79 @@ package content.global.plugins.iface
 
 import core.api.sendInputDialogue
 import core.api.sendMessage
+import core.game.container.Container
 import core.game.interaction.InterfaceListener
 import core.game.interaction.InterfaceOperation
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.request.trade.TradeModule
 import core.game.node.entity.player.link.request.trade.TradeModule.Companion.getExtension
 import shared.consts.Components
 
-/**
- * Represents the interface listener used to handle all trade related functions.
- * @author Vexia
- */
+/** Revision 578 trade widgets and their native operation indices. */
 class TradeInterface : InterfaceListener {
-
     override fun defineInterfaceListeners() {
-
-        onNative(Components.TRADECONFIRM_334) { player, _, _, buttonID, _, _ ->
+        onNative(Components.TRADECONFIRM_334) { player, _, operation, button, _, _ ->
             val module = getExtension(player) ?: return@onNative true
-
-            when (buttonID) {
-                20 -> module.setAccepted(true, true)
-                21 -> module.decline()
+            if (operation == InterfaceOperation.OP1 && module.isActive(1)) {
+                when (button) {
+                    20 -> module.setAccepted(true, true)
+                    21 -> module.decline()
+                }
             }
-
-            return@onNative true
+            true
         }
 
-        onNative(Components.TRADEMAIN_335) { player, _, opcode, buttonID, slot, _ ->
+        onNative(Components.TRADEMAIN_335) { player, _, operation, button, slot, itemID ->
             val module = getExtension(player) ?: return@onNative true
-
-            when (opcode) {
-                InterfaceOperation.OP1 -> {
-                    when (buttonID) {
-                        16 -> module.setAccepted(true, true)
-                        18 -> module.decline()
-                        30 -> module.container!!.withdraw(slot, 1)
-                    }
+            if (!module.isActive(0)) return@onNative true
+            when (button) {
+                16, 18 -> if (operation == InterfaceOperation.OP1) {
+                    if (button == 16) module.setAccepted(true, true) else module.decline()
                 }
-
-                InterfaceOperation.OP2 -> module.container!!.withdraw(slot, 5)
-                InterfaceOperation.OP3 -> module.container!!.withdraw(slot, 10)
-                InterfaceOperation.OP4 -> {
-                    module.container!!.withdraw(slot, module.container!!.getAmount(module.container!![slot]))
+                TradeModule.OWN_OFFER_CHILD -> {
+                    val container = module.container ?: return@onNative true
+                    handleItem(player, module, container, operation, slot, itemID, false)
                 }
-
-                InterfaceOperation.OP5 -> {
-                    sendInputDialogue(player, false, "Enter the amount:") { value ->
-                        var amount = value.toString()
-                        amount = amount.replace("k", "000")
-                        amount = amount.replace("K", "000")
-                        amount = amount.replace("m", "000000")
-                        amount = amount.replace("M", "000000")
-
-                        module.container!!.withdraw(slot, amount.toInt())
-                    }
-                }
-
-                InterfaceOperation.OP10 -> {
-                    val target = if (buttonID == 32) {
-                        module.target
-                    } else {
-                        player
-                    }
-                    val targetModule = getExtension(target) ?: return@onNative true
-                    sendMessage(player, targetModule.container!![slot].definition.examine)
+                TradeModule.OTHER_OFFER_CHILD -> if (operation == InterfaceOperation.OP10) {
+                    val item = getExtension(module.target)?.container?.get(slot)
+                    if (item != null && item.id == itemID) sendMessage(player, item.definition.examine)
                 }
             }
-            return@onNative true
+            true
         }
 
-        onNative(Components.TRADESIDE_336) { player, _, opcode, _, slot, _ ->
+        onNative(Components.TRADESIDE_336) { player, component, operation, button, slot, itemID ->
+            val duel = player.getExtension<content.minigame.duel_arena.plugin.DuelSession>(content.minigame.duel_arena.plugin.DuelSession::class.java)
+            if (duel != null && duel.staked && player.interfaceManager.getComponent(631) != null)
+                return@onNative duel.handleStakeSide(player, component, operation, button, slot, itemID)
             val module = getExtension(player) ?: return@onNative true
+            if (button == 0 && module.isActive(0))
+                handleItem(player, module, player.inventory, operation, slot, itemID, true)
+            true
+        }
+    }
 
-            when (opcode) {
-                InterfaceOperation.OP1 -> module.container!!.offer(slot, 1)
-                InterfaceOperation.OP2 -> module.container!!.offer(slot, 5)
-                InterfaceOperation.OP3 -> module.container!!.offer(slot, 10)
-                InterfaceOperation.OP4 -> {
-                    module.container!!.offer(
-                        slot,
-                        player.inventory.getAmount(player.inventory[slot])
-                    )
-                }
-
-                InterfaceOperation.OP5 -> {
-                    sendInputDialogue(player, false, "Enter the amount:") { value ->
-                        var amount = value.toString()
-                        amount = amount.replace("k", "000")
-                        amount = amount.replace("K", "000")
-                        amount = amount.replace("m", "000000")
-                        amount = amount.replace("M", "000000")
-
-                        module.container!!.offer(slot, amount.toInt())
-                    }
-                }
-
-                InterfaceOperation.OP10 -> {
-                    sendMessage(player, player.inventory[slot].definition.examine)
-                }
+    private fun handleItem(player: Player, module: TradeModule, source: Container, operation: Int,
+                           slot: Int, itemID: Int, offer: Boolean) {
+        val item = source.get(slot) ?: return
+        if (item.id != itemID) return
+        val trade = module.container ?: return
+        fun transfer(amount: Int) {
+            // The prompt can outlive a trade or its original slot. Never act on a replacement item.
+            if (amount <= 0 || !module.isActive(0) || source.get(slot) !== item || item.id != itemID) return
+            if (offer) trade.offer(slot, amount) else trade.withdraw(slot, amount)
+        }
+        when (operation) {
+            InterfaceOperation.OP1 -> transfer(1)
+            InterfaceOperation.OP2 -> transfer(5)
+            InterfaceOperation.OP3 -> transfer(10)
+            InterfaceOperation.OP4 -> transfer(source.getAmount(item))
+            InterfaceOperation.OP5 -> sendInputDialogue(player, false, "Enter the amount:") { value ->
+                val amount = value.toString().replace("k", "000", ignoreCase = true)
+                    .replace("m", "000000", ignoreCase = true).toIntOrNull()
+                if (amount != null) transfer(amount)
             }
-
-            return@onNative true
+            InterfaceOperation.OP10 -> sendMessage(player, item.definition.examine)
         }
     }
 }

@@ -58,7 +58,7 @@ sealed class Packet {
     data class InteractWalk(val player: Player, val destX: Int, val destY: Int, val isRun: Boolean) : Packet()
     data class Ping(val player: Player) : Packet()
     data class NativeQuickChat(val player: Player, val channel: Int, val recipient: String?, val phrase: Int, val parameters: ByteArray) : Packet()
-    data class InputPromptResponse(val player: Player, val response: Any) : Packet()
+    data class InputPromptResponse @JvmOverloads constructor(val player: Player, val response: Any, val wireOpcode: Int = -1) : Packet()
     data class PlayerPrefsUpdate(val player: Player, val prefs: Int) : Packet()
 
     class NoProcess : Packet()

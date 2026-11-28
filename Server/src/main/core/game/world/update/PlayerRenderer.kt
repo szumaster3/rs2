@@ -35,7 +35,7 @@ object PlayerRenderer {
         session.write(view.encode())
     }
 
-    private fun track(view: PlayerInfo578, player: Player) {
+    private fun track(view: PlayerInfo, player: Player) {
         val location = player.location
         val traversal = when {
             player.properties.isTeleporting -> 127

@@ -269,10 +269,9 @@ class VinesweeperPlugin :
                 }
 
                 Opcode.BUYX.value -> {
-                    setAttribute(player, "runscript") { amount: Int ->
-                        buy(player, buttonID, amount)
+                    sendInputDialogue(player, true, "Enter the amount:") { amount ->
+                        buy(player, buttonID, amount as Int)
                     }
-                    player.dialogueInterpreter.sendInput(false, "Enter the amount:")
                     return@on true
                 }
 

@@ -7,7 +7,7 @@ import core.net.packet.PacketHeader;
 import java.util.Arrays;
 
 /** Per-connection GPI history, initialized from the login or reconnect snapshot. */
-public final class PlayerInfo578 {
+public final class PlayerInfo {
     private final int[] previous = new int[2048];
     private final int[] external = new int[2048];
     private final byte[] flags = new byte[2048];
@@ -20,7 +20,7 @@ public final class PlayerInfo578 {
         return firstTick || previous[slot] == -1;
     }
 
-    public PlayerInfo578(int self, int x, int z, int plane) {
+    public PlayerInfo(int self, int x, int z, int plane) {
         this.self = self;
         Arrays.fill(previous, -1);
         previous[self] = position(x, z, plane);

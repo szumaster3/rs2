@@ -29,7 +29,7 @@ object LoginWorldEncoder {
             frame.put(0).put(0).put(1).put(0)
             frame.putShort(index.toShort()).put(1).put(1)
             val isaac = cipher.nextValue
-            val encryptedOpcode = (98 + isaac) and 0xFF
+            val encryptedOpcode = (ServerProt.REBUILD_NORMAL + isaac) and 0xFF
             frame.put(encryptedOpcode.toByte())
         }
         return frame.putShort(data.remaining().toShort()).put(data).flip()

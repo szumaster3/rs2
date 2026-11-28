@@ -55,7 +55,7 @@ public class IoSession {
     public final GamePacketDecoder gameInput = new GamePacketDecoder();
     public boolean reconnecting;
     public Location initialScene;
-    public volatile core.game.world.update.PlayerInfo578 playerInfo;
+    public volatile core.game.world.update.PlayerInfo playerInfo;
     public final AtomicBoolean loginSubmitted = new AtomicBoolean();
     public String associatedUsername;
     /**

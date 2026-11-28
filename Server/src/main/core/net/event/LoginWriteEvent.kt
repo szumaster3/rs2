@@ -28,7 +28,7 @@ class LoginWriteEvent(
             if (!session.reconnecting) session.initialScene = location
             session.queue(firstWorld)
             session.producer = GAME_PRODUCER
-            session.playerInfo = core.game.world.update.PlayerInfo578(player.index, location.x, location.y, location.z)
+            session.playerInfo = core.game.world.update.PlayerInfo(player.index, location.x, location.y, location.z)
             return
         }
         val buffer = ByteBuffer.allocate(500)

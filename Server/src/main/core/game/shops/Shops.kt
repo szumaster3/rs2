@@ -14,6 +14,7 @@ import core.game.ge.GrandExchange
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.system.command.Privilege
@@ -246,55 +247,55 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
     }
 
     override fun defineInterfaceListeners() {
-        on(Components.SHOP_TEMPLATE_620) { player, _, opcode, buttonID, slot, _ ->
-            val opValue = 155
-            val opExamine = 9
-            val buyOne = 196
-            val buyFive = 124
-            val buyTen = 199
-            val buyX = 234
-
-            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@on false
+        // Compatibility path only: the 578 main shop layout is CS2 2716/2723, not this historic grid.
+        // Keep the existing stock model until a verified per-shop InvType mapping is available.
+        onNative(Components.SHOP_TEMPLATE_620) { player, component, operation, buttonID, slot, itemId ->
+            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@onNative true
+            if (player.interfaceManager.getComponent(Components.SHOP_TEMPLATE_620) !== component || component.isHidden) return@onNative true
             val isMainStock = getAttribute(player, "shop-main", true)
-
-            when (buttonID) {
-                26 -> shop.showTab(player, false).also { return@on true }
-                25 -> shop.showTab(player, true).also { return@on true }
-                27, 29 -> return@on true
+            val main = getAttribute<core.game.container.Container?>(player, "shop-cont", null) ?: return@onNative true
+            // Legacy tabs are not native 578 buttons. Do not interpret clicks on 578 stock/key widgets as transactions.
+            if (operation == InterfaceOperation.OP1 && slot == -1 && buttonID in 25..26) {
+                if (buttonID == 25 || shop.general) shop.showTab(player, buttonID == 25)
+                return@onNative true
             }
-
-            val price = shop.getBuyPrice(player, slot)
-
-            when (opcode) {
-                opValue -> sendMessage(
-                    player,
-                    "${
-                        getItemName(
-                            if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id,
-                        )
-                    }: This item currently costs ${price.amount} ${price.name.lowercase()}.",
-                )
-
-                buyOne -> shop.buy(player, slot, 1)
-                buyFive -> shop.buy(player, slot, 5)
-                buyTen -> shop.buy(player, slot, 10)
-                buyX -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to buy:") { value ->
-                    val amt = value as Int
-                    shop.buy(player, slot, amt)
+            if (buttonID != (if (isMainStock) 23 else 24)) return@onNative true
+            val source = if (isMainStock) main else shop.playerStock
+            val item = source[slot] ?: return@onNative true
+            if (item.id != itemId) return@onNative true
+            if (operation == InterfaceOperation.OP10) {
+                sendMessage(player, item.definition.examine)
+                return@onNative true
+            }
+            if (operation !in InterfaceOperation.OP1..InterfaceOperation.OP5) return@onNative true
+            val session = player.session
+            fun buy(amount: Int) {
+                if (amount <= 0 || player.session !== session || component.isHidden ||
+                    player.interfaceManager.getComponent(Components.SHOP_TEMPLATE_620) !== component ||
+                    getAttribute<Shop?>(player, "shop", null) !== shop ||
+                    getAttribute<core.game.container.Container?>(player, "shop-cont", null) !== main ||
+                    getAttribute(player, "shop-main", true) != isMainStock || source[slot] !== item || item.id != itemId) return
+                shop.buy(player, slot, amount)
+            }
+            when (operation) {
+                InterfaceOperation.OP1 -> {
+                    val price = shop.getBuyPrice(player, slot)
+                    if (price.amount >= 0 && price.id != 65535)
+                        sendMessage(player, "${item.name}: This item currently costs ${price.amount} ${price.name.lowercase()}.")
                 }
-
-                opExamine -> sendMessage(
-                    player,
-                    itemDefinition(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id).examine,
-                )
+                InterfaceOperation.OP2 -> buy(1)
+                InterfaceOperation.OP3 -> buy(5)
+                InterfaceOperation.OP4 -> buy(10)
+                InterfaceOperation.OP5 -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to buy:") { value ->
+                    (value as? Int)?.let { buy(it) }
+                }
             }
-
-            return@on true
+            true
         }
 
         onOpen(Components.SHOP_TEMPLATE_SIDE_621) { player, _ ->
-            val settings = IfaceSettingsBuilder().enableOptions(0 until 9).build()
-            player.packetDispatch.sendIfaceSettings(settings, 0, Components.SHOP_TEMPLATE_SIDE_621, 0, 28)
+            val settings = IfaceSettingsBuilder().enableOptions(0..4).enableOption(9).build()
+            player.packetDispatch.sendIfaceSettings(settings, 0, Components.SHOP_TEMPLATE_SIDE_621, 0, 27)
             player.packetDispatch.sendRunScript(
                 150,
                 "IviiiIsssssssss",
@@ -318,35 +319,44 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         }
 
         onClose(Components.SHOP_TEMPLATE_620) { player, _ ->
-            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@onClose true
-            val listener = Shop.listenerInstances[player.details.uid] ?: return@onClose true
-
-            if (getServerConfig().getBoolean(personalizedShops, false)) {
-                shop.stockInstances[player.details.uid]?.listeners?.remove(listener)
-            } else {
-                shop.stockInstances[ServerConstants.SERVER_NAME.hashCode()]!!.listeners.remove(listener)
+            val shop = getAttribute<Shop?>(player, "shop", null)
+            val listener = Shop.listenerInstances[player.details.uid]
+            if (listener != null && listener.player === player) {
+                getAttribute<core.game.container.Container?>(player, "shop-cont", null)?.listeners?.remove(listener)
+                shop?.playerStock?.listeners?.remove(listener)
             }
-
-            shop.playerStock.listeners.remove(listener)
-            player.interfaceManager.closeSingleTab()
+            removeAttribute(player, "shop")
+            removeAttribute(player, "shop-cont")
+            removeAttribute(player, "shop-main")
+            if (player.interfaceManager.getComponent(Components.SHOP_TEMPLATE_SIDE_621) != null)
+                player.interfaceManager.closeSingleTab()
             return@onClose true
         }
 
-        on(Components.SHOP_TEMPLATE_SIDE_621) { player, _, opcode, _, slot, _ ->
-            val opValue = 155
-            val sellOne = 196
-            val sellFive = 124
-            val sellTen = 199
-            val sellX = 234
+        onNative(Components.SHOP_TEMPLATE_SIDE_621) { player, component, opcode, button, slot, itemId ->
+            val opValue = InterfaceOperation.OP1
+            val sellOne = InterfaceOperation.OP2
+            val sellFive = InterfaceOperation.OP3
+            val sellTen = InterfaceOperation.OP4
+            val sellX = InterfaceOperation.OP5
 
-            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@on false
+            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@onNative false
 
+            val session = player.session
+            val main = player.interfaceManager.getComponent(Components.SHOP_TEMPLATE_620) ?: return@onNative true
+            if (main.isHidden || button != 0 || slot !in 0 until player.inventory.capacity()) return@onNative true
             val itemInSlot = player.inventory[slot]
             if (itemInSlot == null) {
                 sendMessage(player, "That item doesn't appear to be there anymore. Please try again.")
-                return@on true
+                return@onNative true
             }
 
+            if (itemInSlot.id != itemId) return@onNative true
+            if (opcode == InterfaceOperation.OP10) {
+                sendMessage(player, itemInSlot.definition.examine)
+                return@onNative true
+            }
+            if (opcode !in InterfaceOperation.OP1..InterfaceOperation.OP5) return@onNative true
             val (_, price) = shop.getSellPrice(player, slot)
             val def = itemDefinition(player.inventory[slot].id)
 
@@ -364,12 +374,16 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 sellFive -> shop.sell(player, slot, 5)
                 sellTen -> shop.sell(player, slot, 10)
                 sellX -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to sell:") { value ->
-                    val amt = value as Int
+                    val amt = value as? Int ?: return@sendInputDialogue
+                    if (amt <= 0 || player.session !== session || player.interfaceManager.getComponent(Components.SHOP_TEMPLATE_620) !== main || main.isHidden ||
+                        player.interfaceManager.getComponent(Components.SHOP_TEMPLATE_SIDE_621) !== component ||
+                        getAttribute<Shop?>(player, "shop", null) !== shop || player.inventory[slot] !== itemInSlot || itemInSlot.id != itemId)
+                        return@sendInputDialogue
                     shop.sell(player, slot, amt)
                 }
             }
 
-            return@on true
+            return@onNative true
         }
     }
 

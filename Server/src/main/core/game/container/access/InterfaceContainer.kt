@@ -59,8 +59,8 @@ object InterfaceContainer {
         )
 
         val itemArray = Array(items.size) { i -> items[i] ?: Item() }
-        val settings = IfaceSettingsBuilder().enableAllOptions().build()
-        player.packetDispatch.sendIfaceSettings(settings, childIndex, interfaceIndex, 0, items.size)
+        val settings = IfaceSettingsBuilder().enableOptions(0 until options.size).enableOption(9).build()
+        if (items.isNotEmpty()) player.packetDispatch.sendIfaceSettings(settings, childIndex, interfaceIndex, 0, items.lastIndex)
         PacketRepository.send(Encoders578.CONTAINER_PACKET, ContainerContext(player, -1, -2, key, itemArray, items.size, false))
         return key
     }

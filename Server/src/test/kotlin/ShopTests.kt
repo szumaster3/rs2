@@ -42,6 +42,26 @@ class ShopTests {
         )
     }
 
+    @Test fun invalidShopSlotsMustNotChangeInventory() {
+        testPlayer.setAttribute("shop-cont", nonGeneral.getContainer(testPlayer))
+        testPlayer.setAttribute("shop-main", true)
+        testPlayer.inventory.add(Item(Items.COINS_995, 100))
+        Assertions.assertTrue(nonGeneral.buy(testPlayer, -1, 1) is Shop.TransactionStatus.Failure)
+        Assertions.assertTrue(nonGeneral.sell(testPlayer, 28, 1) is Shop.TransactionStatus.Failure)
+        Assertions.assertEquals(100, testPlayer.inventory.getAmount(Items.COINS_995))
+    }
+
+    @Test fun bulkShardPurchaseMustRejectOverflowWithoutChangingStock() {
+        val shop = TestUtils.getMockShop("Overflow", false, false, Item(Items.SPIRIT_SHARDS_12183, 100_000_000))
+        val container = shop.getContainer(testPlayer)
+        testPlayer.setAttribute("shop-cont", container)
+        testPlayer.setAttribute("shop-main", true)
+        testPlayer.inventory.add(Item(Items.COINS_995, 100))
+        Assertions.assertTrue(shop.buy(testPlayer, 0, 100_000_000) is Shop.TransactionStatus.Failure)
+        Assertions.assertEquals(100, testPlayer.inventory.getAmount(Items.COINS_995))
+        Assertions.assertEquals(100_000_000, container[0].amount)
+    }
+
     @Test fun shouldSellItemToStore() {
         testPlayer.inventory.add(Item(4151, 1))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))

@@ -6,9 +6,7 @@ import core.cache.Cache
 import core.cache.def.impl.VarpType
 import core.cache.def.impl.VarcType
 import core.cache.def.impl.VarbitType
-import core.game.container.ContainerEvent
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -66,7 +64,6 @@ import core.net.packet.out.PacketContext.WindowsPaneContext
 import core.tools.StringUtils.encryptPlayerChat
 import core.tools.StringUtils.stringToLong
 import java.net.Inet4Address
-import java.nio.ByteBuffer
 import kotlin.math.ceil
 
 private inline fun <reified T : PacketContext> encode(crossinline writer: (T) -> Unit): (PacketContext) -> Unit = { context ->
@@ -128,19 +125,10 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         context.player.session.write(runDialogAbortHooks())
     }),
     // Session and status
-    LOGIN_PACKET(encode<PlayerContext> { context ->
-        val p = context.player
-        val buffer = ByteBuffer.allocate(9)
-        val right =
-            if (context.player.details.rights === Rights.PLAYER_MODERATOR) 1 else if (context.player.details.rights === Rights.ADMINISTRATOR) 2 else 0
-        buffer.put((right).toByte())
-        buffer.put(0.toByte()) // Something with client scripts, maybe login.
-        buffer.put(0.toByte()) // No idea.
-        buffer.put(0.toByte()) // No idea.
-        buffer.put(1.toByte()) // Boolean, possibly members.
-        buffer.putShort(p.index.toShort())
-        buffer.put(1.toByte()) // No idea. (something with client scripts, again).
-        p.details.session.write(buffer)
+    @Deprecated("Historical login response; use LoginWorldEncoder during the login phase.")
+    LOGIN_PACKET(encode<PlayerContext> {
+        // Never enqueue the old unframed login response into an ISAAC gameplay stream.
+        System.err.println("[Protocol] Rejected legacy LOGIN_PACKET")
     }),
     LAST_LOGIN_INFO(encode<PlayerContext> { context ->
         val buffer = IoBuffer(ServerProt.LAST_LOGIN_INFO)
@@ -154,6 +142,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         val buffer = logout()
         context.player.details.session.write(buffer)
     }, immediate = true),
+    @Deprecated("ClientProt.NO_TIMEOUT is client-to-server; there is no gameplay reply.")
     PING_PACKET(encode<PlayerContext> {
         // No revision 578 server keep-alive encoder; client sends NO_TIMEOUT. Unused.
     }),
@@ -219,6 +208,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         buffer.putShort(context.componentId)
         context.player.session.write(buffer)
     }),
+    @Deprecated("No verified equivalent in ServerProt; migrate callers individually.")
     RESET_INTERFACE(encode<ResetInterfaceContext> { context ->
         System.err.println("[Protocol578] Unsupported RESET_INTERFACE for interface ${context.interfaceId}")
     }),
@@ -493,61 +483,8 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
             System.err.println("[578] Unmapped widget-only container clear: ${context.interfaceId}:${context.childId}")
             return@encode
         }
-        // Preflight the complete payload before allocating/writing a frame.
-        if (context.containerId !in 0..65535) return@encode
-        val slots = context.slots
-        val items = context.items
-        val ids = context.ids
-        var payloadLength = if (slots != null) 3 else 5
-        if (slots != null) {
-            if (items == null) return@encode
-            for (slot in slots) {
-                if (slot !in 0..32767 || slot !in items.indices) return@encode
-                val item = items[slot]
-                payloadLength += (if (slot < 128) 1 else 2) + 2
-                if (item != null && item != ContainerEvent.NULL_ITEM) {
-                    if (item.id !in 0..65534) return@encode
-                    payloadLength += if (item.amount !in 0..254) 5 else 1
-                }
-                if (payloadLength > 65535) return@encode
-            }
-        } else {
-            if (context.length !in 0..65535) return@encode
-            for (slot in 0 until context.length) {
-                val item = items?.getOrNull(slot)
-                val id = ids?.getOrNull(slot) ?: item?.id ?: -1
-                if (id !in -1..65534) return@encode
-                val amount = if (ids != null && id >= 0) 1 else item?.amount ?: 0
-                payloadLength += 2 + if (amount !in 0..254) 5 else 1
-                if (payloadLength > 65535) return@encode
-            }
-        }
-        val buffer = IoBuffer(if (slots != null) ServerProt.UPDATE_INV_PARTIAL else ServerProt.UPDATE_INV_FULL, PacketHeader.SHORT)
-        buffer.putShort(context.containerId).put(if (context.isSplit) 1 else 0)
-        if (slots != null) {
-            for (slot in slots) {
-                val item = items!![slot]
-                buffer.putSmart(slot)
-                if (item == null || item == ContainerEvent.NULL_ITEM) {
-                    buffer.putShort(0)
-                } else {
-                    buffer.putShort(item.id + 1)
-                    if (item.amount !in 0..254) buffer.put(255).putInt(item.amount)
-                    else buffer.put(item.amount)
-                }
-            }
-        } else {
-            val count = context.length
-            buffer.putShort(count)
-            for (slot in 0 until count) {
-                val item = items?.getOrNull(slot)
-                val id = ids?.getOrNull(slot) ?: item?.id ?: -1
-                val amount = if (ids != null && id >= 0) 1 else item?.amount ?: 0
-                buffer.putLEShort(id + 1)
-                if (amount !in 0..254) buffer.put(255).putIntB(amount)
-                else buffer.put(amount)
-            }
-        }
+        val buffer = ContainerUpdate.encode(context.containerId, context.isSplit,
+            context.entries, context.length, context.slots, context.ids) ?: return@encode
         context.player.session.write(buffer)
     }),
     GRAND_EXCHANGE_OFFER(encode<GrandExchangeContext> { context ->

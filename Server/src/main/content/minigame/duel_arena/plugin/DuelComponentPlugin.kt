@@ -1,7 +1,9 @@
 package content.minigame.duel_arena.plugin
 
 import core.api.setAttribute
-import core.api.setVarp
+import core.api.setVarbit
+import core.game.interaction.InterfaceListeners
+import core.game.interaction.InterfaceOperation
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -13,6 +15,11 @@ class DuelComponentPlugin : ComponentPlugin() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         ComponentDefinition.forId(Components.DUEL2_SELECT_TYPE_640)?.plugin = this
+        InterfaceListeners.addNative(Components.DUEL2_SELECT_TYPE_640) { player, component, operation, button, slot, itemId ->
+            if (operation == InterfaceOperation.OP1)
+                handle(player, component, InterfaceOperation.listenerId(operation), button, slot, itemId)
+            else true
+        }
         return this
     }
 
@@ -24,6 +31,7 @@ class DuelComponentPlugin : ComponentPlugin() {
         slot: Int,
         itemId: Int,
     ): Boolean {
+        if (opcode != InterfaceOperation.listenerId(InterfaceOperation.OP1)) return true
         when (component.id) {
             Components.DUEL2_SELECT_TYPE_640 -> {
                 var staked = false
@@ -34,7 +42,7 @@ class DuelComponentPlugin : ComponentPlugin() {
                             player.packetDispatch.sendMessage("Other player is busy at the moment.")
                             return true
                         }
-                        player.interfaceManager.close()
+                        if (!player.interfaceManager.close()) return true
                         if (!player.getAttribute("duel:staked", false)) {
                             player.requestManager.request(other, DuelArenaActivity.FRIEND_REQUEST)
                         } else {
@@ -51,7 +59,8 @@ class DuelComponentPlugin : ComponentPlugin() {
                     else -> return false
                 }
                 setAttribute(player, "duel:staked", staked)
-                setVarp(player, 283, (if (staked) 2 else 1) shl 26)
+                // script561 reads varplayerbit_4157 (varp 283, bits 26..29).
+                setVarbit(player, 4157, if (staked) 2 else 1)
             }
         }
         return true

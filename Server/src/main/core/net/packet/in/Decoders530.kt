@@ -10,6 +10,8 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.nio.BufferUnderflowException
 
+/** Historical reference only. The active network reader calls Decoders578. */
+@Deprecated("Historical revision 530 decoder; not a gameplay dispatch entry point.")
 enum class Decoders530(val opcode: Int) {
     /******************************************
      * ITEM INTERACTIONS

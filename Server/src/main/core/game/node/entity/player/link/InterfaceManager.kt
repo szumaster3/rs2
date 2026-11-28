@@ -235,6 +235,8 @@ class InterfaceManager(val player: Player) {
             } else {
                 if (player.getAttribute<Any?>("runscript", null) != null) {
                     player.removeAttribute("runscript")
+                    player.removeAttribute("input-type")
+                    player.removeAttribute("parseamount")
                     player.packetDispatch.sendRunScript(101, "")
                 }
             }

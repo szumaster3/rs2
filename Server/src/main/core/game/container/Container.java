@@ -486,7 +486,7 @@ public class Container {
      * Updates the container.
      */
     public void update(boolean force) {
-        if (event.getChangeCount() < 1 && !force) {
+        if (event.getChangeCount() < 1 && !force && !event.isClear()) {
             return;
         }
         for (ContainerListener listener : listeners) {

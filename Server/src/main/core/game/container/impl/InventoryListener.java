@@ -82,6 +82,10 @@ public final class InventoryListener implements ContainerListener {
      */
     @Override
     public void update(Container container, ContainerEvent event) {
+        if (event.isClear()) {
+            refresh(container);
+            return;
+        }
         PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, Components.INVENTORY_149, 0, 93, event.getItems(), false, event.getSlots()));
         updatePlayerState(container);
     }

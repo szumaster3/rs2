@@ -1,80 +1,42 @@
 package content.global.plugins.iface.ge
 
 import core.api.*
-import core.game.container.Container
-import core.game.container.ContainerEvent
-import core.game.container.access.InterfaceContainer.generateItems
-import core.game.ge.ItemSet
+import core.cache.def.impl.EnumType
+import core.game.component.Component
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import shared.consts.Components
 
-/**
- * Handles the Exchange Item Sets interface logic.
- */
+/** Revision 578 exchange_interface_sets_setup (676), enum 1087 and inventory 93. */
 class ExchangeItemSets : InterfaceListener {
     override fun defineInterfaceListeners() {
         onClose(Components.EXCHANGE_ITEMSETS_645) { player, _ ->
-            val listener = getAttribute<InventoryListener?>(player, "ge-listener", null)
-            player.inventory.listeners.remove(listener)
-            closeSingleTab(player)
-            player.removeAttribute("container-key")
-            player.removeAttribute("ge-listener")
+            if (player.interfaceManager.getComponent(Components.EXCHANGE_SETS_SIDE_644) != null)
+                closeSingleTab(player)
             return@onClose true
         }
     }
 
     companion object {
-        /**
-         * Opens the exchange set interface.
-         */
+        /** Client uses enum keys 1..N and zero-based dynamic child indices. */
+        internal fun setId(slot: Int): Int? {
+            if (slot !in 0..73) return null
+            return EnumType.get(1087).dataStore[slot + 1] as? Int
+        }
+
         @JvmStatic
         fun openFor(player: Player) {
-            openInterface(player, Components.EXCHANGE_ITEMSETS_645)
+            if (player.interfaceManager.open(Component(Components.EXCHANGE_ITEMSETS_645)) == null) return
             openSingleTab(player, Components.EXCHANGE_SETS_SIDE_644)
-            val listener: InventoryListener
-            setAttribute(player, "ge-listener", InventoryListener(player).also { listener = it })
-            player.inventory.listeners.add(listener)
-        }
-    }
-
-    /**
-     * Update the interface.
-     */
-    private class InventoryListener(val player: Player) : ContainerListener {
-        init {
-            createContainers(player)
-        }
-
-        /**
-         * Called when the inventory container updates.
-         */
-        override fun update(c: Container?, event: ContainerEvent?) {
-            createContainers(player)
-        }
-
-        /**
-         * Called to refresh the inventory container.
-         */
-        override fun refresh(c: Container?) {
-            createContainers(player)
-        }
-
-        /**
-         * Generates and sets interface containers for the exchange based on player inventory and container set.
-         *
-         * @param player The player.
-         */
-        private fun createContainers(player: Player) {
-            setAttribute(player, "container-key", player.generateItems(player.inventory.toList(), Components.EXCHANGE_SETS_SIDE_644, 0, listOf("Exchange", "Components"), 7, 4))
-            player.generateItems(
-                ItemSet.getItemList(),
-                Components.EXCHANGE_ITEMSETS_645,
-                16,
-                listOf("Exchange", "Components"),
-                14,
-                10
-            )
+            val settings = IfaceSettingsBuilder().enableOptions(0..2).build()
+            player.packetDispatch.sendIfaceSettings(settings, 16, Components.EXCHANGE_ITEMSETS_645, 0, 73)
+            player.packetDispatch.sendRunScript(676, "")
+            player.packetDispatch.sendIfaceSettings(
+                IfaceSettingsBuilder().enableOptions(0, 1, 9).build(), 0, Components.EXCHANGE_SETS_SIDE_644, 0, 27)
+            // Script 150: options are transmitted in reverse order. Inventory listener already updates inv 93.
+            player.packetDispatch.sendRunScript(150, "IviiiIsssssssss", "", "", "", "", "", "", "", "Exchange", "Components",
+                -1, 0, 7, 4, 93, Components.EXCHANGE_SETS_SIDE_644 shl 16)
+            refreshInventory(player)
         }
     }
 }

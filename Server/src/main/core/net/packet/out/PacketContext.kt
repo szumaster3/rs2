@@ -150,13 +150,17 @@ sealed class PacketContext {
         val interfaceId: Int,
         val childId: Int,
         val containerId: Int,
-        val items: Array<out Item?>?,
+        items: Array<out Item?>?,
         val length: Int,
         val isSplit: Boolean,
-        val slots: IntArray? = null,
-        val ids: IntArray? = null,
+        slots: IntArray? = null,
+        ids: IntArray? = null,
         val isClear: Boolean = false,
     ) : PacketContext() {
+        internal val entries = items?.map { ContainerUpdate.snapshot(it) }
+        internal val slots = slots?.copyOf()
+        internal val ids = ids?.copyOf()
+
         constructor(player: Player, interfaceId: Int, childId: Int, clear: Boolean) :
             this(player, interfaceId, childId, 0, null, 1, false, isClear = clear)
 

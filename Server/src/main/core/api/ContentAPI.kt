@@ -2773,11 +2773,10 @@ fun sendInputDialogue(
     prompt: String,
     handler: (value: Any) -> Unit,
 ) {
+    removeAttribute(player, "parseamount")
     when (type) {
-        InputType.AMOUNT -> {
-            setAttribute(player, "parseamount", true)
-            player.dialogueInterpreter.sendInput(true, prompt)
-        }
+        // meslayer_mode7 handles both plain quantities and K/M suffixes in CS2.
+        InputType.AMOUNT -> player.dialogueInterpreter.sendInput(false, prompt)
 
         InputType.NUMERIC, InputType.STRING_SHORT ->
             player.dialogueInterpreter.sendInput(
@@ -2786,7 +2785,13 @@ fun sendInputDialogue(
             )
 
         InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
-        InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
+        InputType.MESSAGE -> {
+            // Native message mode sends MESSAGE_PRIVATE, not a dialogue response.
+            removeAttribute(player, "runscript")
+            removeAttribute(player, "input-type")
+            player.dialogueInterpreter.sendMessageInput(prompt)
+            return
+        }
     }
 
     setAttribute(player, "runscript", handler)

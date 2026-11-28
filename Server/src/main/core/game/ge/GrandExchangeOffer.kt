@@ -159,10 +159,12 @@ class GrandExchangeOffer {
                 totalCoinExchange,
             ),
         )
-        val withdrawItems: Array<Item> = withdraw.filterNotNull().toTypedArray()
-        PacketRepository.send(
-            Encoders578.CONTAINER_PACKET, ContainerContext(player, -1, -1757, 523 + index, withdrawItems, false)
-        )
+        if (index in 0..5) {
+            // script593 and script662 address slots 0 and 1 independently.
+            PacketRepository.send(
+                Encoders578.CONTAINER_PACKET, ContainerContext(player, -1, -1757, 523 + index, withdraw, false)
+            )
+        }
     }
 
     /**

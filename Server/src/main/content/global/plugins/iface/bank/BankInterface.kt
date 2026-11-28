@@ -164,6 +164,9 @@ class BankInterface : InterfaceListener {
             if (getVarbit(player, 4895) == 2 && getVarp(player, 281) < 1000 && getVarbit(player, 4931) < 30) {
                 return@onNative false
             }
+            if (!player.bank.isOpen) return@onNative true
+            if (buttonID != BANK_V2_MENU_ELEMENT && buttonID !in BANK_TABS && opcode != InterfaceOperation.OP1)
+                return@onNative true
             when (buttonID) {
                 BANK_V2_MAIN_BUTTON_HELP -> openDialogue(player, BankHelpDialogue())
                 BANK_V2_MAIN_BUTTON_BOB_DEPOSIT -> openDialogue(player, BankDepositDialogue())
@@ -190,7 +193,7 @@ class BankInterface : InterfaceListener {
          */
 
         onNative(Components.BANK_V2_SIDE_763) { player, _, opcode, child, slot, itemID ->
-            if (child == 0 && player.inventory.get(slot)?.id == itemID) handleContainerMenu(player, opcode, slot, player.inventory, player.bank, false)
+            if (player.bank.isOpen && child == 0 && player.inventory.get(slot)?.id == itemID) handleContainerMenu(player, opcode, slot, player.inventory, player.bank, false)
             return@onNative true
         }
     }

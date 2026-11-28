@@ -1,6 +1,7 @@
 package core.net.event;
 
 import core.net.packet.in.Decoders578;
+import core.net.packet.ClientProt;
 
 import core.game.node.entity.player.Player;
 import core.net.IoReadEvent;
@@ -25,8 +26,12 @@ public final class GameReadEvent extends IoReadEvent {
         session.gameInput.read(buffer, session.getIsaacPair().getInput(), (opcode, payload) -> {
             if (player.getSession() != session || !session.isActive()) return;
             session.setLastPing(System.currentTimeMillis());
-            if (player.opCounts[opcode] >= 10) return;
-            player.opCounts[opcode]++;
+            // The latest transmit acknowledgement belongs to the session, not the
+            // gameplay action quota. Protocol.method2432 may send it during login/UI updates.
+            if (opcode != ClientProt.TRANSMITVAR_VERIFYID) {
+                if (player.opCounts[opcode] >= 10) return;
+                player.opCounts[opcode]++;
+            }
             Packet packet;
             try {
                 packet = decode(player, opcode, payload);

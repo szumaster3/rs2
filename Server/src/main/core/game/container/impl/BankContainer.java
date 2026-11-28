@@ -165,7 +165,7 @@ public final class BankContainer extends Container {
 		player.getInventory().refresh();
 		player.getInventory().getListeners().add(listener);
 		setVarp(player, 1249, lastAmountX);
-		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableExamine().enableSlotSwitch().build();
+		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableOption(9).enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		open = true;
 	}
@@ -188,7 +188,7 @@ public final class BankContainer extends Container {
 		player.getInventory().getListeners().add(player.getBank().listener);
 		setVarp(player, 1249, lastAmountX);
 		player.getPacketDispatch().sendIfaceSettings(new IfaceSettingsBuilder().enableOptions(new IntRange(0, 6)).enableOption(9).enableSlotSwitch().setInterfaceEventsDepth(2).build(), 87, 762, 0, SIZE - 1);
-		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0,5)).enableExamine().enableSlotSwitch().build();
+		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0,5)).enableOption(9).enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
@@ -551,6 +551,10 @@ public final class BankContainer extends Container {
 
 		@Override
 		public void update(Container c, ContainerEvent event) {
+			if (event.isClear()) {
+				refresh(c);
+				return;
+			}
 			if (c instanceof BankContainer) {
 				PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, 762, 64000, 95, event.getItems(), false, event.getSlots()));
 				player.getBank().setTabConfigurations();

@@ -1,7 +1,8 @@
 package content.minigame.duel_arena.plugin
 
 import core.api.setAttribute
-import core.api.setVarp
+import core.api.setVarbit
+import core.game.component.Component
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -40,10 +41,10 @@ class ChallengeOptionPlugin : OptionHandler() {
             )
             return true
         }
-        player.interfaceManager.open(DuelArenaActivity.DUEL_TYPE_SELECT)
+        if (player.interfaceManager.open(Component(DuelArenaActivity.DUEL_TYPE_SELECT.id)) == null) return true
         setAttribute(player, "duel:staked", false)
         setAttribute(player, "duel:partner", other)
-        setVarp(player, 283, 1 shl 26)
+        setVarbit(player, 4157, 1)
         return true
     }
 }

@@ -178,10 +178,10 @@ public final class Decoders578 {
                 return new Packet.ChatSetting(player, pub, priv, trade);
             }
             case ClientProt.RESUME_P_COUNTDIALOG: // ScriptRunner.java:1326-1327
-                return new Packet.InputPromptResponse(player, payload.getInt());
+                return new Packet.InputPromptResponse(player, payload.getInt(), opcode);
             case ClientProt.RESUME_P_NAMEDIALOG: // ScriptRunner.java:1333-1335
             case ClientProt.RESUME_P_STRINGDIALOG: // ScriptRunner.java:1341-1343
-                return new Packet.InputPromptResponse(player, readText(payload));
+                return new Packet.InputPromptResponse(player, readText(payload), opcode);
             case ClientProt.CLIENT_CHEAT: // Cheat.java:428-431
                 readModifier(payload, 0); // console flag
                 String command = readText(payload);

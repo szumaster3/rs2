@@ -7,13 +7,9 @@ import core.game.ge.ExchangeHistory
 import core.game.ge.GuidePrices
 import core.game.ge.ItemSet
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.system.task.Pulse
-import core.game.world.GameWorld
-import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders578
-import core.net.packet.out.PacketContext.ContainerContext
 import shared.consts.Components
 import shared.consts.Sounds
 
@@ -22,92 +18,62 @@ import shared.consts.Sounds
  */
 class GEInterface : InterfaceListener {
 
+    companion object {
+        /** enum 1080, script662: six offer layers, two actionable children (0,2) each. */
+        internal fun collectionOfferIndex(button: Int): Int? =
+            intArrayOf(18, 23, 28, 36, 44, 52).indexOf(button).takeIf { it >= 0 }
+    }
+
     override fun defineInterfaceListeners() {
 
         /*
          * Search interface.
          */
 
-        on(Components.EXCHANGE_SEARCH_389) { player, _, _, button, _, _ ->
-            when (button) {
-                10 -> {
-                    closeChatBox(player)
-                    true
-                }
-                else -> true
-            }
+        onNative(Components.EXCHANGE_SEARCH_389) { player, _, operation, button, _, _ ->
+            if (operation == InterfaceOperation.OP1 && button == 10) closeChatBox(player)
+            true
         }
 
         /*
          * Collection box
          */
 
-        on(Components.STOCKCOLLECT_109) { player, _, opcode, button, slot, _ ->
-            GameWorld.Pulser.submit(object : Pulse(1, player) {
-                override fun pulse(): Boolean {
-                    var index = -1
-
-                    when (button) {
-                        18, 23, 28 -> index = (button - 18) shr 2
-                        36, 44, 52 -> index = 3 + ((button - 36) shr 3)
-                    }
-
-                    val records = ExchangeHistory.getInstance(player)
-                    val offer = if (index > -1) {
-                        records.getOffer(records.offerRecords[index])
-                    } else {
-                        null
-                    }
-
-                    if (offer != null) {
-                        StockMarket.withdraw(player, offer, slot shr 1, opcode)
-                    }
-                    return true
-                }
-            })
-            return@on true
+        onNative(Components.STOCKCOLLECT_109) { player, _, operation, button, slot, _ ->
+            if (slot != 0 && slot != 2) return@onNative true
+            val index = collectionOfferIndex(button) ?: return@onNative true
+            val records = ExchangeHistory.getInstance(player)
+            val offer = records.getOffer(index) ?: return@onNative true
+            StockMarket.withdrawNative(player, offer, slot / 2, operation)
+            return@onNative true
         }
 
-        /*
-         * Item sets - inventory.
-         */
-
-        on(Components.EXCHANGE_SETS_SIDE_644) { player, component, opcode, button, slot, itemId ->
-            GameWorld.Pulser.submit(object : Pulse(1, player) {
-                override fun pulse(): Boolean {
-                    handleItemSet(player, component, opcode, button, slot, itemId)
-                    return true
-                }
-            })
-            return@on true
+        onNative(Components.EXCHANGE_SETS_SIDE_644) { player, component, operation, button, slot, itemId ->
+            handleItemSet(player, component, operation, button, slot, itemId)
+            return@onNative true
         }
 
-        /*
-         * Item sets - selection list.
-         */
-
-        on(Components.EXCHANGE_ITEMSETS_645) { player, component, opcode, button, slot, itemId ->
-            GameWorld.Pulser.submit(object : Pulse(1, player) {
-                override fun pulse(): Boolean {
-                    handleItemSet(player, component, opcode, button, slot, itemId)
-                    return true
-                }
-            })
-            return@on true
+        onNative(Components.EXCHANGE_ITEMSETS_645) { player, component, operation, button, slot, itemId ->
+            handleItemSet(player, component, operation, button, slot, itemId)
+            return@onNative true
         }
 
         /*
          * Guide price.
          */
 
-        on(Components.EXCHANGE_GUIDE_PRICE_642) { player, _, opcode, button, slot, itemId ->
-            GameWorld.Pulser.submit(object : Pulse(1, player) {
-                override fun pulse(): Boolean {
-                    handleGuidePrice(player, opcode, button, slot, itemId)
-                    return true
-                }
-            })
-            return@on true
+        onNative(GuidePrices.INTERFACE_ID) { player, _, operation, button, slot, itemId ->
+            if (operation != InterfaceOperation.OP1 || button != 16 || slot < 0 || slot % 2 != 0) return@onNative true
+            val type = getAttribute<GuidePrices.GuideType?>(player, "guide-price", null) ?: return@onNative true
+            val id = type.nativeItems().getOrNull(slot / 2) ?: return@onNative true
+            if (id != itemId) return@onNative true
+            sendMessage(player, itemDefinition(id).examine)
+            sendMessage(player, "Guide price: ${core.game.ge.GrandExchange.getRecommendedPrice(id, false)} gp.")
+            return@onNative true
+        }
+        onClose(GuidePrices.INTERFACE_ID) { player, _ ->
+            GuidePrices.clear(player)
+            return@onClose true
         }
     }
 
@@ -122,45 +88,36 @@ class GEInterface : InterfaceListener {
         slot: Int,
         itemId: Int,
     ) {
-        if (button != 16 && button != 0) {
-            return
-        }
-
         val inventory = component.id == Components.EXCHANGE_SETS_SIDE_644
-        if (slot < 0 || slot >= if (inventory) 28 else ItemSet.getItemList().size) {
+        if (button != (if (inventory) 0 else 16)) return
+        val main = player.interfaceManager.getComponent(Components.EXCHANGE_ITEMSETS_645) ?: return
+        if (main.isHidden) return
+        val item: Item
+        if (inventory) {
+            if (slot !in 0 until player.inventory.capacity()) return
+            item = player.inventory[slot] ?: return
+            if (item.id != itemId) return
+        } else {
+            val id = ExchangeItemSets.setId(slot) ?: return
+            if (id != itemId) return
+            item = Item(id)
+        }
+        if (opcode == (if (inventory) InterfaceOperation.OP10 else InterfaceOperation.OP3)) {
+            sendMessage(player, item.definition.examine)
             return
         }
-
-        val item: Item
-        val set: ItemSet
-
-        if (inventory) {
-            item = player.inventory[slot] ?: return
-
-            set = ItemSet.forId(item.id) ?: run {
-                if (opcode == 127) return
-                sendMessage(player, "This isn't a set item.")
-                return
-            }
-        } else {
-            set = ItemSet.forIndex(slot) ?: return
-            item = Item(set.itemId)
+        if (opcode != InterfaceOperation.OP1 && opcode != InterfaceOperation.OP2) return
+        val set = ItemSet.forId(item.id) ?: run {
+            sendMessage(player, "This isn't a supported set item.")
+            return
         }
 
         when (opcode) {
             /*
-             * Examine.
-             */
-
-            9 -> {
-                sendMessage(player, item.definition.examine)
-            }
-
-            /*
              * Exchange set components.
              */
 
-            196 -> {
+            InterfaceOperation.OP2 -> {
                 if (inventory) {
                     if (freeSlots(player) < set.components.size - 1) {
                         sendMessage(
@@ -204,24 +161,14 @@ class GEInterface : InterfaceListener {
 
                 playAudio(player, Sounds.GE_TRADE_OK_4044)
 
-                PacketRepository.send(
-                    Encoders578.CONTAINER_PACKET,
-                    ContainerContext(
-                        player,
-                        -1,
-                        -2,
-                        player.getAttribute("container-key", 93),
-                        player.inventory,
-                        false
-                    )
-                )
+
             }
 
             /*
              * Item set description.
              */
 
-            155 -> {
+            InterfaceOperation.OP1 -> {
                 val mapping = CS2Mapping.forId(1089)
                 if (mapping != null) {
                     val message = mapping.map?.get(set.itemId) as? String ?: ""
@@ -231,43 +178,4 @@ class GEInterface : InterfaceListener {
         }
     }
 
-    /**
-     * Handles the guide price interface.
-     */
-    private fun handleGuidePrice(
-        player: Player,
-        opcode: Int,
-        buttonId: Int,
-        slot: Int,
-        itemId: Int,
-    ) {
-        if (opcode != 155) {
-            return
-        }
-
-        val type = player.getAttribute<GuidePrices.GuideType>(
-            "guide-price",
-            null
-        ) ?: return
-
-        val subtract = when (buttonId) {
-            in 15..23   -> 15
-            in 43..57   -> 43
-            in 89..103  -> 89
-            in 135..144 -> 135
-            in 167..182 -> 167
-            else -> return
-        }
-
-        val index = buttonId - subtract
-
-        if (index < 0 || index >= type.items.size) {
-            return
-        }
-
-        sendMessage(
-            player,
-            itemDefinition(type.items[index].item).examine
-        )
-    }
 }

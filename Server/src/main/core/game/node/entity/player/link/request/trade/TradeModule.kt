@@ -56,7 +56,19 @@ class TradeModule(
 
     fun update() {
         display(stage)
-        getExtension(target)!!.display(stage)
+        getExtension(target)?.display(stage)
+    }
+
+    /** Identity, reciprocal partner and stage must still match when processing a delayed action. */
+    fun isActive(expectedStage: Int): Boolean {
+        val owner = player ?: return false
+        val other = target ?: return false
+        val otherModule = getExtension(other) ?: return false
+        val interfaceId = if (expectedStage == 0) 335 else 334
+        return getExtension(owner) === this && otherModule.target === owner &&
+            stage == expectedStage && otherModule.stage == expectedStage &&
+            owner.interfaceManager.hasMainComponent(interfaceId) &&
+            other.interfaceManager.hasMainComponent(interfaceId)
     }
 
     private fun openInterface(component: Component): TradeModule =
@@ -96,25 +108,13 @@ class TradeModule(
                     Components.TRADEMAIN_335,
                     21,
                 )
-                player!!.packetDispatch.sendString(acceptMessage, Components.TRADEMAIN_335, 36)
+                player!!.packetDispatch.sendString(acceptMessage, Components.TRADEMAIN_335, 38)
             }
 
             1 -> {
-                player!!.packetDispatch.sendString(
-                    "<col=00FFFF>Trading with:<br>" + "<col=00FFFF>" +
-                        target!!
-                            .username
-                            .substring(
-                                0,
-                                1,
-                            ).uppercase(Locale.getDefault()) + target!!.username.substring(1),
-                    Components.TRADECONFIRM_334,
-                    2,
-                )
-                val acceptMessage = acceptMessage
-                if (acceptMessage !== "") {
-                    sendString(player!!, acceptMessage, Components.TRADECONFIRM_334, 33)
-                }
+                player!!.packetDispatch.sendVarcString(203, target!!.username)
+                val message = acceptMessage
+                sendString(player!!, message.ifEmpty { "Are you sure you want to make this trade?" }, Components.TRADECONFIRM_334, 33)
                 player!!.interfaceManager.restoreTabs()
             }
         }
@@ -139,14 +139,15 @@ class TradeModule(
             }
         } else {
             // Confirm
-            player!!.packetDispatch.sendInterfaceConfig(Components.TRADECONFIRM_334, 45, !isModified)
-            player!!.packetDispatch.sendInterfaceConfig(Components.TRADECONFIRM_334, 46, !otherModified)
+            // 45/46 are the trading partner label/name, not warning widgets.
+            player!!.packetDispatch.sendInterfaceConfig(Components.TRADECONFIRM_334, 47, !(isModified || otherModified))
         }
     }
 
     fun alert(slot: Int) {
-        player!!.packetDispatch.sendRunScript(143, "Iiii", *arrayOf<Any>(slot, 7, 4, 21954594))
-        target!!.packetDispatch.sendRunScript(143, "Iiii", *arrayOf<Any>(slot, 7, 4, 21954593))
+        if (!isActive(0)) return
+        player!!.packetDispatch.sendRunScript(143, "Iiii", slot, 7, 4, 335 shl 16 or OWN_FLASH_CHILD)
+        target!!.packetDispatch.sendRunScript(143, "Iiii", slot, 7, 4, 335 shl 16 or OTHER_FLASH_CHILD)
     }
 
     fun decline() {
@@ -184,10 +185,10 @@ class TradeModule(
         player!!.interfaceManager.open(MAIN_INTERFACE)
         player!!.interfaceManager.openSingleTab(OVERLAY_INTERFACE)
         player!!.inventory.refresh()
-        player!!.packetDispatch.sendIfaceSettings(1278, 30, Components.TRADEMAIN_335, 0, 27)
-        player!!.packetDispatch.sendIfaceSettings(1026, 32, Components.TRADEMAIN_335, 0, 27)
-        player!!.packetDispatch.sendIfaceSettings(1278, 0, Components.TRADESIDE_336, 0, 27)
-        player!!.packetDispatch.sendIfaceSettings(2360446, 0, Components.TRADEMAIN_335, 0, 27)
+        val offerOptions = core.api.IfaceSettingsBuilder().enableOptions(0..4).enableOption(9).build()
+        player!!.packetDispatch.sendIfaceSettings(offerOptions, OWN_OFFER_CHILD, Components.TRADEMAIN_335, 0, 27)
+        player!!.packetDispatch.sendIfaceSettings(1 shl 10, OTHER_OFFER_CHILD, Components.TRADEMAIN_335, 0, 27)
+        player!!.packetDispatch.sendIfaceSettings(offerOptions, 0, Components.TRADESIDE_336, 0, 27)
         player!!.packetDispatch.sendRunScript(150, "IviiiIsssssssss", *INVENTORY_PARAMS)
         player!!.packetDispatch.sendRunScript(150, "IviiiIsssssssss", *TRADE_PARAMS)
         player!!.packetDispatch.sendRunScript(695, "IviiiIsssssssss", *PARTENER_PARAMS)
@@ -217,6 +218,7 @@ class TradeModule(
         child: Int,
     ) {
         val split = container!!.itemCount() > 14
+        for (id in child..child + 2) player!!.packetDispatch.sendInterfaceConfig(Components.TRADECONFIRM_334, id, true)
         if (split) {
             player!!.packetDispatch.sendInterfaceConfig(Components.TRADECONFIRM_334, child + 1, false)
             player!!.packetDispatch.sendInterfaceConfig(Components.TRADECONFIRM_334, child + 2, false)
@@ -245,7 +247,7 @@ class TradeModule(
 
     private fun getDisplayMessage(items: Array<Item?>): String {
         var message = "Absolutely nothing!"
-        if (items.isNotEmpty()) {
+        if (items.any { it != null }) {
             message = ""
             for (i in items.indices) {
                 if (items[i] == null) {
@@ -345,6 +347,13 @@ class TradeModule(
     }
 
     companion object {
+        // 335:30 is the full-window initialisation layer. The paired 31/32 and 34/35
+        // layers occupy the left/right offer grids; keep flash graphics above item graphics.
+        const val OWN_OFFER_CHILD = 31
+        const val OWN_FLASH_CHILD = 32
+        const val OTHER_OFFER_CHILD = 34
+        const val OTHER_FLASH_CHILD = 35
+        const val OFFER_KEY = 90
         val OVERLAY_INTERFACE = Component(336)
 
         val MAIN_INTERFACE: Component = Component(335).setUncloseEvent(TradeCloseEvent())
@@ -356,7 +365,7 @@ class TradeModule(
                 "",
                 "",
                 "",
-                "Lend",
+                "", // lending is not implemented by this trade listener
                 "Offer-X",
                 "Offer-All",
                 "Offer-10",
@@ -385,13 +394,13 @@ class TradeModule(
                 0,
                 7,
                 4,
-                90,
-                335 shl 16 or 30,
+                OFFER_KEY,
+                335 shl 16 or OWN_OFFER_CHILD,
             )
 
-        val PARTENER_PARAMS = arrayOf<Any>("", "", "", "", "", "", "", "", "", -1, 0, 7, 4, 91, 335 shl 16 or 32)
+        val PARTENER_PARAMS = arrayOf<Any>("", "", "", "", "", "", "", "", "", -1, 0, 7, 4, OFFER_KEY, 335 shl 16 or OTHER_OFFER_CHILD)
 
-        val HIDDEN_CHILDS = intArrayOf(42, 43, 44, 42, 44, 40, 41)
+        val HIDDEN_CHILDS = intArrayOf(42, 43, 44)
 
         fun extend(
             player: Player?,
@@ -402,7 +411,7 @@ class TradeModule(
         }
 
         @JvmStatic
-        fun getExtension(player: Player?): TradeModule? = player!!.getExtension(TradeModule::class.java)
+        fun getExtension(player: Player?): TradeModule? = player?.getExtension(TradeModule::class.java)
     }
 
     init {

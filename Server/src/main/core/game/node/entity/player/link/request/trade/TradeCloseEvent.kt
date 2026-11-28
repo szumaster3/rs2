@@ -4,10 +4,6 @@ import core.api.setVarp
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
-import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders578
-import core.net.packet.out.PacketContext.ContainerContext
 
 /**
  * Handles the closing of a trade interface and ensures trade state consistency.
@@ -58,14 +54,8 @@ class TradeCloseEvent : CloseEvent {
     private fun closeInterfaces(player: Player) {
         player.removeExtension(TradeModule::class.java)
         player.interfaceManager.closeSingleTab()
-        PacketRepository.send(
-            Encoders578.CONTAINER_PACKET,
-            ContainerContext(player, -1, 2, 24, emptyArray<Item>(), 27, false),
-        )
-        PacketRepository.send(
-            Encoders578.CONTAINER_PACKET,
-            ContainerContext(player, -1, 2, 23, emptyArray<Item>(), 27, false),
-        )
+        player.packetDispatch.deleteClientContainer(TradeModule.OFFER_KEY, false)
+        player.packetDispatch.deleteClientContainer(TradeModule.OFFER_KEY, true)
         player.packetDispatch.sendRunScript(101, "")
     }
 
@@ -75,6 +65,8 @@ class TradeCloseEvent : CloseEvent {
      * @param player The player whose trade state is being reset.
      */
     private fun end(player: Player) {
+        player.removeAttribute("alert")
+        player.removeAttribute("alertSlot")
         setVarp(player, 1043, 0)
         setVarp(player, 1042, 0)
     }

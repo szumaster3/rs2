@@ -33,7 +33,8 @@ class BankDepositBoxInterface : InterfaceListener {
         }
 
         runWorldTask {
-            if (player.inventory.get(slot) !== item) return@runWorldTask
+            if (player.interfaceManager.getComponent(Components.BANK_DEPOSIT_BOX_11) !== component ||
+                component.isHidden || player.inventory.get(slot) !== item || item.id != itemID) return@runWorldTask
             when (opcode) {
                 OP_AMOUNT_ONE -> player.bank.addItem(slot, 1)
                 OP_AMOUNT_FIVE -> player.bank.addItem(slot, 5)

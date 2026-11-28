@@ -121,12 +121,11 @@ class ExchangeHistory(private val player: Player? = null) : PersistPlayer, Login
             return
         }
         player.interfaceManager.openComponent(Components.STOCKCOLLECT_109)
-        player.packetDispatch.sendIfaceSettings(6, 18, Components.STOCKCOLLECT_109, 0, 2)
-        player.packetDispatch.sendIfaceSettings(6, 23, Components.STOCKCOLLECT_109, 0, 2)
-        player.packetDispatch.sendIfaceSettings(6, 28, Components.STOCKCOLLECT_109, 0, 2)
-        player.packetDispatch.sendIfaceSettings(6, 36, Components.STOCKCOLLECT_109, 0, 2)
-        player.packetDispatch.sendIfaceSettings(6, 44, Components.STOCKCOLLECT_109, 0, 2)
-        player.packetDispatch.sendIfaceSettings(6, 52, Components.STOCKCOLLECT_109, 0, 2)
+        // enum 1080 and script662: children 0 and 2 are actionable backgrounds.
+        for (child in intArrayOf(18, 23, 28, 36, 44, 52)) {
+            player.packetDispatch.sendIfaceSettings(6, child, Components.STOCKCOLLECT_109, 0, 0)
+            player.packetDispatch.sendIfaceSettings(6, child, Components.STOCKCOLLECT_109, 2, 2)
+        }
 
         visualizeRecords()
     }
@@ -160,7 +159,7 @@ class ExchangeHistory(private val player: Player? = null) : PersistPlayer, Login
      * @return The Grand Exchange offer at the specified index, or null if no offer exists at that index.
      */
     fun getOffer(index: Int): GrandExchangeOffer? {
-        if (index == -1) return getOffer(null)
+        if (index !in offerRecords.indices) return null
         return getOffer(offerRecords[index])
     }
 

@@ -19,6 +19,7 @@ import core.game.container.impl.BankContainer
 import core.game.event.ButtonClickEvent
 import core.game.ge.GrandExchange.Companion.getOfferStats
 import core.game.ge.GrandExchange.Companion.getRecommendedPrice
+import core.game.ge.ExchangeHistory
 import core.game.ge.GrandExchangeOffer
 import core.game.ge.PriceIndex
 import core.game.interaction.*
@@ -86,6 +87,8 @@ object PacketProcessor {
         is Packet.PlayerPrefsUpdate, is Packet.PacketCountUpdate,
         is Packet.UnhandledOp, is Packet.DecodingError, is Packet.NoProcess,
         is Packet.TransmitVerifyAck -> true
+        is Packet.InputPromptResponse -> pkt.wireOpcode != ClientProt.RESUME_P_COUNTDIALOG &&
+            pkt.wireOpcode != ClientProt.RESUME_P_NAMEDIALOG && pkt.wireOpcode != ClientProt.RESUME_P_STRINGDIALOG
         else -> false
     }
 
@@ -130,6 +133,8 @@ object PacketProcessor {
     }
 
     private fun process(pkt: Packet) {
+        // Enforce the same boundary even if another internal caller is added later.
+        if (isLegacyOnly(pkt)) return
         when (pkt) {
             is Packet.ItemAction -> processItemAction(pkt)
             is Packet.NpcAction -> processNpcAction(pkt)
@@ -145,8 +150,7 @@ object PacketProcessor {
             is Packet.IfAction -> processIfAction(pkt)
             is Packet.CloseIface -> processCloseIface(pkt)
             is Packet.WorldspaceWalk,
-            is Packet.MinimapWalk,
-            is Packet.InteractWalk -> processWalkPacket(pkt)
+            is Packet.MinimapWalk -> processWalkPacket(pkt)
 
             is Packet.AddFriend -> CommunicationInfo.add(pkt.player, pkt.username)
             is Packet.RemoveFriend -> CommunicationInfo.remove(pkt.player, pkt.username, false)
@@ -159,17 +163,11 @@ object PacketProcessor {
             is Packet.ComponentGroundItemAction -> processComponentUseWith(pkt)
 
             is Packet.NativeDrag -> processNativeDrag(pkt)
-            is Packet.SlotSwitchSingleComponent,
-            is Packet.SlotSwitchMultiComponent -> processSlotSwitch(pkt)
 
             is Packet.TrackingMouseClick,
-            is Packet.TrackingAfkTimeout,
             is Packet.TrackingFocus,
             is Packet.TrackingCameraPos,
             is Packet.TrackingDisplayUpdate -> processTrackingPacket(pkt)
-
-            is Packet.PlayerPrefsUpdate -> {/*TODO implement something that cares about this */
-            }
 
             is Packet.Ping -> pkt.player.session.lastPing = System.currentTimeMillis()
             is Packet.JoinClan -> {
@@ -220,16 +218,9 @@ object PacketProcessor {
             }
 
             is Packet.InputPromptResponse -> {
-                val script: ((Any) -> Boolean) =
-                    pkt.player.getAttribute<((Any) -> Boolean)?>("runscript", null) ?: return
-                if (pkt.player.locks.isInteractionLocked())
-                    return
-                try {
-                    RunScript.processInput(pkt.player, pkt.response, script)
-                } finally {
-                    pkt.player.removeAttribute("parseamount")
-                    pkt.player.removeAttribute("runscript")
-                }
+                val script = pkt.player.getAttribute<((Any) -> Unit)?>("runscript", null) ?: return
+                if (pkt.player.locks.isInteractionLocked()) return
+                RunScript.processInput(pkt.player, pkt, script)
             }
 
             is Packet.ReportAbuse -> {
@@ -263,7 +254,9 @@ object PacketProcessor {
                     pkt.player.locks.isInteractionLocked()) return
                 val index = pkt.player.getAttribute("ge-index", -1)
                 if (index !in 0..5 || pkt.itemId == 65535 || ObjType.getDefinitions()[pkt.itemId]?.id != pkt.itemId) return
-                val offer = pkt.player.getAttribute("ge-temp", GrandExchangeOffer())
+                if (getVarp(pkt.player, 1113) != 0 || ExchangeHistory.getInstance(pkt.player).offerRecords[index] != null) return
+                val offer = pkt.player.getAttribute<GrandExchangeOffer?>("ge-temp", null) ?: return
+                if (offer.index != index || offer.sell) return
                 if (!PriceIndex.canTrade(pkt.itemId)) {
                     sendMessage(pkt.player, "That item is blacklisted from the grand exchange.")
                     return
@@ -334,12 +327,6 @@ object PacketProcessor {
                 else
                     CommunicationInfo.sendMessage(pkt.player, pkt.username, pkt.message)
                 PlayerMonitor.logPrivateChat(pkt.player, pkt.username, pkt.message)
-            }
-
-            is Packet.PacketCountUpdate -> {
-                // Legacy 530-only event. The native TRANSMITVAR_VERIFYID acknowledgement
-                // is recorded separately and must never change the outgoing verify counter.
-                return
             }
 
             is Packet.ContinueOption -> {
@@ -437,7 +424,8 @@ object PacketProcessor {
     private fun nativeContainer(player: Player, hash: Int): Container? {
         if (!activeWidget(player, hash)) return null
         return when (hash) {
-            (149 shl 16), (763 shl 16) -> player.inventory
+            (149 shl 16) -> player.inventory
+            (763 shl 16) -> if (player.bank.isOpen) player.inventory else null
             ((762 shl 16) or 87) -> if (player.bank.isOpen) player.bank else null
             ((667 shl 16) or 14) -> player.equipment
             else -> null
@@ -465,7 +453,7 @@ object PacketProcessor {
                 } else {
                     switchItem(pkt.sourceSlot, pkt.targetSlot, container, player.bank.isInsertItems, player)
                 }
-            } else if (pkt.source == (149 shl 16)) {
+            } else if (pkt.source == (149 shl 16) || pkt.source == (763 shl 16)) {
                 switchItem(pkt.sourceSlot, pkt.targetSlot, container, false, player)
             }
             return
@@ -481,6 +469,9 @@ object PacketProcessor {
         player.bank.moveToTab(pkt.sourceSlot, tab, -1)
     }
 
+    // Historical implementation kept for reference until deletion is authorized.
+    @Deprecated("Inactive 530 slot switch; use processNativeDrag for IF_DRAG.")
+    @Suppress("unused")
     private fun processSlotSwitch(pkt: Packet) {
         //TODO refactor this to function as callbacks to InterfaceListeners, e.g. onSlotSwitch
         //TODO See above TODO, I hate Arios. This was hardcoded in the packet decoder.

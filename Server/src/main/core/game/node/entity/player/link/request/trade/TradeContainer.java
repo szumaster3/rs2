@@ -116,7 +116,7 @@ public final class TradeContainer extends Container {
         if (item == null) {
             return false;
         }
-        return !(slot < 0 || slot > player.getInventory().capacity() || amount < 1);
+        return slot >= 0 && slot < container.capacity() && amount > 0;
     }
 
     private int stabalizeAmount(final Item item, int amount, final Container container) {
@@ -149,10 +149,8 @@ public final class TradeContainer extends Container {
     }
 
     private boolean canUse() {
-        if (!player.getInterfaceManager().isOpened() || TradeModule.getExtension(player) == null || TradeModule.getExtension(TradeModule.getExtension(player).getTarget()) == null || TradeModule.getExtension(player).getStage() != 0) {
-            return false;
-        }
-        return true;
+        TradeModule module = TradeModule.getExtension(player);
+        return module != null && module.isActive(0);
     }
 
     private boolean checkCapacity(final Item item, final Container container) {
@@ -166,11 +164,13 @@ public final class TradeContainer extends Container {
     }
 
     private void alert(final int slot, final boolean save) {
+        final TradeModule expected = TradeModule.getExtension(player);
+        if (expected == null) return;
         GameWorld.getPulser().submit(new Pulse(1, player) {
             @Override
             public boolean pulse() {
-                if (TradeModule.getExtension(player) != null) {
-                    TradeModule.getExtension(player).alert(slot);
+                if (TradeModule.getExtension(player) == expected && expected.isActive(0)) {
+                    expected.alert(slot);
                 }
                 return true;
             }
@@ -193,18 +193,21 @@ public final class TradeContainer extends Container {
     public final class TradeListener implements ContainerListener {
 
         @Override
-        public void update(Container c, ContainerEvent event) {//type 541 - loaning
-            PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, -1, 64212, 90, c.toArray(), c.capacity(), false));
-            if (TradeModule.getExtension(player) != null && TradeModule.getExtension(TradeModule.getExtension(player).getTarget()) != null) {
-                PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, 60981, -2, 91, TradeModule.getExtension(TradeModule.getExtension(player).getTarget()).getContainer().toArray(), 27, false));
-            }
+        public void update(Container c, ContainerEvent event) {
+            TradeModule module = TradeModule.getExtension(player);
+            if (module == null) return;
+            TradeModule partner = TradeModule.getExtension(module.getTarget());
+            if (partner == null || partner.getContainer() == null) return;
+            PacketRepository.send(Encoders578.CONTAINER_PACKET,
+                    new ContainerContext(player, 335, TradeModule.OWN_OFFER_CHILD, TradeModule.OFFER_KEY, c, false));
+            PacketRepository.send(Encoders578.CONTAINER_PACKET,
+                    new ContainerContext(player, 335, TradeModule.OTHER_OFFER_CHILD, TradeModule.OFFER_KEY, partner.getContainer(), true));
             checkAlert();
         }
 
         @Override
         public void refresh(Container c) {
-            PacketRepository.send(Encoders578.CONTAINER_PACKET, new ContainerContext(player, -1, 64209, 93, player.getInventory(), false));
+            update(c, null);
         }
-
     }
 }
