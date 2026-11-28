@@ -85,7 +85,7 @@ object LoginConfiguration {
      */
     @JvmStatic
     fun sendGameConfiguration(player: Player) {
-        player.interfaceManager.openWindowsPane(Component(if (player.interfaceManager.isResizable) Components.TOPLEVEL_FULLSCREEN_746 else Components.TOPLEVEL_548))
+        player.interfaceManager.openWindowsPane(Component(if (player.session?.clientInfo?.isResizable == true) Components.TOPLEVEL_FULLSCREEN_746 else Components.TOPLEVEL_548))
         player.interfaceManager.openChatbox(Components.CHATDEFAULT_137)
         welcome(player)
         config(player)

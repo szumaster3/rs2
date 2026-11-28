@@ -29,8 +29,7 @@ object DrillDemonUtils {
         setAttribute(player, RandomEvent.save(), player.location)
         teleport(player, Location.create(3163, 4819, 0), TeleportManager.TeleportType.NORMAL)
         player.interfaceManager.closeDefaultTabs()
-        setComponentVisibility(player, Components.TOPLEVEL_548, 69, true)
-        setComponentVisibility(player, Components.TOPLEVEL_FULLSCREEN_746, 12, true)
+        player.interfaceManager.setLogoutButtonHidden(true)
     }
 
     @JvmStatic
@@ -88,8 +87,7 @@ object DrillDemonUtils {
         removeAttribute(player, GameAttributes.DRILL_OFFSET)
         removeAttribute(player, GameAttributes.DRILL_COUNTER)
         player.interfaceManager.openDefaultTabs()
-        setComponentVisibility(player, Components.TOPLEVEL_548, 69, false)
-        setComponentVisibility(player, Components.TOPLEVEL_FULLSCREEN_746, 12, false)
+        player.interfaceManager.setLogoutButtonHidden(false)
     }
 
     @JvmStatic

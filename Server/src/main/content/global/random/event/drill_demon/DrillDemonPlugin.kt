@@ -12,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 import core.tools.secondsToTicks
-import shared.consts.Components
 import shared.consts.NPCs
 import shared.consts.Scenery
 import shared.consts.Sounds
@@ -101,8 +100,7 @@ class DrillDemonPlugin : InteractionListener, MapArea {
         if (entity is Player) {
             entity.asPlayer().interfaceManager.closeDefaultTabs()
             entity.locks.lockTeleport(1000000)
-            setComponentVisibility(entity.asPlayer(), Components.TOPLEVEL_548, 69, true)
-            setComponentVisibility(entity.asPlayer(), Components.TOPLEVEL_FULLSCREEN_746, 12, true)
+            entity.asPlayer().interfaceManager.setLogoutButtonHidden(true)
         }
     }
 }

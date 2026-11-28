@@ -8,9 +8,6 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
-import core.net.packet.PacketRepository
-import core.net.packet.out.Encoders578
-import core.net.packet.out.PacketContext.InterfaceContext
 
 /**
  * Handles the multiway combat zones.
@@ -88,10 +85,7 @@ private constructor() : MapZone("Multicombat", true) {
 
     override fun enter(e: Entity): Boolean {
         if (e is Player) {
-            val p = e
-            val resizable = p.interfaceManager.isResizable
-            PacketRepository.send(Encoders578.IF_OPENSUB, InterfaceContext(p, p.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
-            p.packetDispatch.sendInterfaceConfig(745, 1, false)
+            e.interfaceManager.setMultiwayIndicator(true)
         }
         e.properties.isMultiZone = true
         return super.enter(e)
@@ -99,8 +93,7 @@ private constructor() : MapZone("Multicombat", true) {
 
     override fun leave(e: Entity, logout: Boolean): Boolean {
         if (!logout && e is Player) {
-            val resizable = e.interfaceManager.isResizable
-            PacketRepository.send(Encoders578.IF_CLOSESUB, InterfaceContext(e, e.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
+            e.interfaceManager.setMultiwayIndicator(false)
         }
         e.properties.isMultiZone = false
         return super.leave(e, logout)

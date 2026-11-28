@@ -302,7 +302,7 @@ public final class RugMerchantDialogue extends Dialogue {
             player.getImpactHandler().setDisabledTicks(GameWorld.getTicks() + 200);
             player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
             player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614), EquipmentContainer.SLOT_WEAPON);
-            player.getPacketDispatch().sendInterfaceConfig(Components.TOPLEVEL_548, 69, true);
+            player.getInterfaceManager().setLogoutButtonHidden(true);
             playAudio(player, Sounds.CARPET_RISE_1196);
             playJingle(player, 132);
 
@@ -346,7 +346,7 @@ public final class RugMerchantDialogue extends Dialogue {
                         case 901:
                             player.getEquipment().replace(null, EquipmentContainer.SLOT_WEAPON);
                             player.getInterfaceManager().restoreTabs();
-                            player.getPacketDispatch().sendInterfaceConfig(Components.TOPLEVEL_548, 69, false);
+                            player.getInterfaceManager().setLogoutButtonHidden(false);
                             player.getImpactHandler().setDisabledTicks(0);
                             removeAttribute(player, GameAttributes.RE_LOCK);
                             player.unlock();

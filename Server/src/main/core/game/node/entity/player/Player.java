@@ -489,7 +489,7 @@ public class Player extends Entity {
                         @Override
                         public boolean pulse() {
                             player.getAnimator().reset();
-                            player.packetDispatch.sendInterfaceConfig(Components.TOPLEVEL_548, 69, false);
+                            player.getInterfaceManager().setLogoutButtonHidden(false);
                             return true;
                         }
                     });
@@ -498,7 +498,7 @@ public class Player extends Entity {
             }
         }
         if (intoWardrobe) {
-            packetDispatch.sendInterfaceConfig(Components.TOPLEVEL_548, 69, true);
+            interfaceManager.setLogoutButtonHidden(true);
             GameWorld.getPulser().submit(new wardrobePulse(this));
             inWardrobe = true;
         } else {
@@ -751,8 +751,7 @@ public class Player extends Entity {
         getPrayer().reset();
         removeAttribute("original-loc"); //in case you died inside a random event
         interfaceManager.openDefaultTabs(); //in case you died inside a random that had blanked them
-        setComponentVisibility(this, Components.TOPLEVEL_548, 69, false); //reenable the logout button (SD)
-        setComponentVisibility(this, Components.TOPLEVEL_FULLSCREEN_746, 12, false); //reenable the logout button (HD)
+        interfaceManager.setLogoutButtonHidden(false);
         super.finalizeDeath(killer);
         appearance.sync();
         if (!getSavedData().globalData.isDeathScreenDisabled()) {

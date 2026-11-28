@@ -114,7 +114,7 @@ public final class Decoders578 {
                 int mode = Byte.toUnsignedInt(payload.get());
                 int width = be(payload), height = be(payload);
                 int antiAliasing = Byte.toUnsignedInt(payload.get());
-                if (mode < 1 || mode > 3 || antiAliasing > 2) return null;
+                if (mode < 1 || mode > 3 || width == 0 || height == 0 || antiAliasing > 2) return null;
                 return new Packet.TrackingDisplayUpdate(player, mode, width, height, antiAliasing);
             }
             case ClientProt.EVENT_MOUSE_CLICK: {
