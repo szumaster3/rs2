@@ -6,6 +6,7 @@ import core.api.openInterface
 import core.api.sendMessage
 import core.game.component.Component
 import core.game.interaction.InterfaceListener
+import core.game.interaction.InterfaceOperation
 import core.game.node.entity.player.Player
 import shared.consts.Components
 
@@ -14,7 +15,7 @@ class MainGameInterface : InterfaceListener {
     val TOPLEVEL_FS = Components.TOPLEVEL_FULLSCREEN_746
     val RUN_BUTTON = Components.TOPSTAT_RUN_750
     val FILTER_BUTTONS = Components.FILTERBUTTONS_751
-    val REPORT_ABUSE = 594
+    val REPORT_ABUSE = 594 // snapshot_main_v2 (verified cache name hash; report UI in group 594)
 
     override fun defineInterfaceListeners() {
         on(FILTER_BUTTONS){player, _, _, buttonID, _, _ ->
@@ -23,9 +24,9 @@ class MainGameInterface : InterfaceListener {
             return@on true
         }
 
-        on(RUN_BUTTON){player, _, opcode, buttonID, _, _ ->
-            if (buttonID == 1 && opcode == 155) player.settings.toggleRun()
-            return@on true
+        onNative(RUN_BUTTON){player, _, operation, buttonID, _, _ ->
+            if (buttonID == 1 && operation == InterfaceOperation.OP1) player.settings.toggleRun()
+            return@onNative true
         }
 
         on(TOPLEVEL_FS){player, _, _, buttonID, _, _ ->

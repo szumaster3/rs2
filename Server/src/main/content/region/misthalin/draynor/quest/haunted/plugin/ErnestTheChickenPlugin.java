@@ -1,7 +1,7 @@
 package content.region.misthalin.draynor.quest.haunted.plugin;
 
 import content.global.skill.agility.AgilityHandler;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -46,11 +46,11 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(shared.consts.Scenery.DOOR_11450).getHandlers().put("option:open", this);
+        LocType.forId(shared.consts.Scenery.DOOR_11450).getHandlers().put("option:open", this);
         for (Lever lever : Lever.values()) {
             for (int i : lever.getObjectIds()) {
-                SceneryDefinition.forId(i).getHandlers().put("option:pull", this);
-                SceneryDefinition.forId(i).getHandlers().put("option:inspect", this);
+                LocType.forId(i).getHandlers().put("option:pull", this);
+                LocType.forId(i).getHandlers().put("option:inspect", this);
             }
         }
         ZoneBuilder.configure(new LeverZone());

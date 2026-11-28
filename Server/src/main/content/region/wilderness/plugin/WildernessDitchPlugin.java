@@ -1,6 +1,6 @@
 package content.region.wilderness.plugin;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.global.action.DoorActionHandler;
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.MovementPulse;
@@ -30,7 +30,7 @@ public final class WildernessDitchPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(23271).getHandlers().put("option:cross", this);
+        LocType.forId(23271).getHandlers().put("option:cross", this);
         return this;
     }
 

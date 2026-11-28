@@ -2,7 +2,7 @@ package content.global.activity.penguinhns
 
 import content.data.GameAttributes
 import core.api.*
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
@@ -53,7 +53,7 @@ class PenguinHNSPlugin : InteractionListener {
             }
             val count = tagged.size
             val details = tagged.joinToString(", ") { loc ->
-                val name = NPCDefinition.forId(loc.npcId)?.name ?: "Unknown"
+                val name = NpcType.forId(loc.npcId)?.name ?: "Unknown"
                 "$name ${loc.hint}"
             }
             sendDialogueLines(

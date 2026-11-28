@@ -5,7 +5,7 @@ import core.tools.StringUtils
 import java.nio.ByteBuffer
 
 /** Revision 578 client variable definitions: JS5 index 2, groups 19 and 15. */
-object VarcDefinition {
+object VarcType {
     data class Metadata(val type: Char, val persistent: Boolean)
 
     /** VarcType.decode; persistent is a client-local setting, not a player save flag. */

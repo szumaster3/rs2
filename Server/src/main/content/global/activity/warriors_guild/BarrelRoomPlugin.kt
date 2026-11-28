@@ -3,7 +3,7 @@ package content.global.activity.warriors_guild
 import core.api.playAudio
 import core.api.sendChat
 import core.api.setVarp
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -47,7 +47,7 @@ class BarrelRoomPlugin : MapZone("wg barrel", true), Plugin<Any> {
         ClassScanner.definePlugin(object : OptionHandler() {
             @Throws(Throwable::class)
             override fun newInstance(arg: Any?): Plugin<Any> {
-                SceneryDefinition.forId(15668).handlers["option:pick-up"] = this
+                LocType.forId(15668).handlers["option:pick-up"] = this
                 return this
             }
 

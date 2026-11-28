@@ -1,7 +1,7 @@
 package content.global.skill.construction.decoration.workpace
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -83,7 +83,7 @@ class ToolStoragePlugin : InteractionListener {
             (page + 1) * pageSize < tools.size
 
         private fun takeTool(p: Player, toolId: Int) {
-            val def = ItemDefinition.forId(toolId)
+            val def = ObjType.forId(toolId)
             val hasSpace =
                 freeSlots(p) > 0 ||
                         (def.isStackable && amountInInventory(p, toolId) > 0)

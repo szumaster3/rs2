@@ -5,7 +5,7 @@ import content.data.Quests
 import content.data.skill.SkillingTool
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -375,7 +375,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
         on(intArrayOf(Scenery.LOOSE_SOIL_27058, Scenery.ROOTS_27059), IntType.SCENERY, "dig", "cut") { player, node ->
             val option = getUsedOption(player)
-            val def = SceneryDefinition.forId(node.id)
+            val def = LocType.forId(node.id)
 
             if (def.varbitID <= 0) return@on true
 

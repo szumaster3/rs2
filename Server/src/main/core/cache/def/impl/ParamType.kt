@@ -6,7 +6,7 @@ import core.tools.StringUtils
 import java.nio.ByteBuffer
 
 /** Revision 578 ParamType: config index 2, group 11. Auto-disable is client free-world metadata. */
-class ParamDefinition private constructor(val id: Int) {
+class ParamType private constructor(val id: Int) {
     var type: Char = '\u0000'
         private set
     var defaultInt: Int = 0
@@ -18,14 +18,14 @@ class ParamDefinition private constructor(val id: Int) {
     fun isString(): Boolean = type == 's'
 
     companion object {
-        @JvmStatic fun forId(id: Int): ParamDefinition? {
+        @JvmStatic fun forId(id: Int): ParamType? {
             if (id < 0) return null
             val data = Cache.getIndexes().getOrNull(2)?.getFileData(11, id) ?: return null
             return parse(id, data)
         }
 
-        @JvmStatic fun parse(id: Int, data: ByteArray): ParamDefinition {
-            val result = ParamDefinition(id)
+        @JvmStatic fun parse(id: Int, data: ByteArray): ParamType {
+            val result = ParamType(id)
             val buffer = ByteBuffer.wrap(data)
             while (true) {
                 when (val opcode = buffer.get().toInt() and 0xff) {

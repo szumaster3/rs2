@@ -2,7 +2,7 @@ package content.global.plugins.inter.with_scenery
 
 import core.api.EquipmentSlot
 import core.api.sendMessage
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItemManager
@@ -11,7 +11,7 @@ import shared.consts.Scenery
 
 class HatStandPlugin : InteractionListener {
 
-    private val hats = ItemDefinition.getDefinitions().values.filter { it.getConfiguration("equipment_slot",0) == EquipmentSlot.HEAD.ordinal }.map { it.id }.toIntArray()
+    private val hats = ObjType.getDefinitions().values.filter { it.getConfiguration("equipment_slot",0) == EquipmentSlot.HEAD.ordinal }.map { it.id }.toIntArray()
     private val hatStand = Scenery.HAT_STAND_374
 
     override fun defineListeners() {
@@ -21,7 +21,7 @@ class HatStandPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, hats, hatStand) { player, used, _ ->
-            val def = ItemDefinition.forId(used.id)
+            val def = ObjType.forId(used.id)
 
             if (def.getConfiguration("equipment_slot", -1) != EquipmentSlot.HEAD.ordinal) {
                 sendMessage(player, "You can't put that on a hatstand.")

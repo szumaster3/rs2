@@ -2,7 +2,7 @@ package content.global.skill.slayer.dungeon
 
 import content.global.skill.slayer.SlayerEquipmentFlags
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -105,8 +105,8 @@ class SmokeDungeonPlugin : MapZone("smoke dungeon", true), Plugin<Any?> {
 
     private class SmokeDungeonOptionHandler : OptionHandler() {
         override fun newInstance(arg: Any?): Plugin<Any?> {
-            SceneryDefinition.forId(36002).handlers["option:climb-down"] = this
-            SceneryDefinition.forId(6439).handlers["option:climb-up"] = this
+            LocType.forId(36002).handlers["option:climb-down"] = this
+            LocType.forId(6439).handlers["option:climb-up"] = this
             return this
         }
 

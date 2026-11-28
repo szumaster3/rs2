@@ -2,7 +2,7 @@ package core.game.node.entity.player.link.diary
 
 import com.google.gson.JsonObject
 import core.api.*
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.diary.DiaryLevel
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -201,7 +201,7 @@ class Diary(
         }
 
         if (isComplete(level)) {
-            val npcName = if (type == DiaryType.ARDOUGNE && level == 1) "the Ardougne town crier" else NPCDefinition.forId(type.getNpc(level)).name
+            val npcName = if (type == DiaryType.ARDOUGNE && level == 1) "the Ardougne town crier" else NpcType.forId(type.getNpc(level)).name
             val msg =
                 "Congratulations! You have completed all of the ${getLevel(level).lowercase()} tasks in the ${type.displayName} area."
             sendMessage(player, "$msg Speak to $npcName to claim your reward.")

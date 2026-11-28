@@ -3,7 +3,7 @@ package content.global.skill.summoning.familiar.npc
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import core.api.*
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
@@ -36,8 +36,8 @@ class UnicornStallionNPC(owner: Player? = null, id: Int = NPCs.UNICORN_STALLION_
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    NPCDefinition.forId(NPCs.UNICORN_STALLION_6822).handlers["option:cure"] = this
-                    NPCDefinition.forId(NPCs.UNICORN_STALLION_6823).handlers["option:cure"] = this
+                    NpcType.forId(NPCs.UNICORN_STALLION_6822).handlers["option:cure"] = this
+                    NpcType.forId(NPCs.UNICORN_STALLION_6823).handlers["option:cure"] = this
                     return this
                 }
 

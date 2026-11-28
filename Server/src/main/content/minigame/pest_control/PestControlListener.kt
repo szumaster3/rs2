@@ -4,7 +4,7 @@ import content.global.travel.charter.CharterShip
 import content.minigame.pest_control.npc.*
 import content.minigame.pest_control.reward.PCRewardInterface
 import core.api.*
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
@@ -96,7 +96,7 @@ class PestControlListener : InteractionListener {
             when (getUsedOption(player)) {
                 "talk-to" -> {
                     if (session == null) {
-                        val handler = NPCDefinition.getOptionHandlers()[getUsedOption(player)]
+                        val handler = NpcType.getOptionHandlers()[getUsedOption(player)]
                         handler!!.handle(player, node, getUsedOption(player))
                         return@on true
                     } else {

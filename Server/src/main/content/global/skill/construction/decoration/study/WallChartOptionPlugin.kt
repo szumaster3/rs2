@@ -1,7 +1,7 @@
 package content.global.skill.construction.decoration.study
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -21,14 +21,14 @@ class WallChartOptionPlugin : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Scenery.ALCHEMICAL_CHART_13662).handlers["option:study"] = this
-        SceneryDefinition.forId(Scenery.ASTRONOMICAL_CHART_13663).handlers["option:study"] = this
-        SceneryDefinition.forId(Scenery.INFERNAL_CHART_13664).handlers["option:study"] = this
+        LocType.forId(Scenery.ALCHEMICAL_CHART_13662).handlers["option:study"] = this
+        LocType.forId(Scenery.ASTRONOMICAL_CHART_13663).handlers["option:study"] = this
+        LocType.forId(Scenery.INFERNAL_CHART_13664).handlers["option:study"] = this
         return this
     }
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
-        val def = node?.let { SceneryDefinition.forId(it.id) }
+        val def = node?.let { LocType.forId(it.id) }
         if (player != null) {
             lockInteractions(player, 1)
             player.animate(STUDY_ANIMATION)

@@ -2,7 +2,7 @@ package core.game.ge
 
 import com.google.gson.JsonArray
 import core.ServerConstants
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.integration.mysql.SQLiteProvider
 import java.sql.Connection
 
@@ -71,7 +71,7 @@ object GEDatabase {
     private fun populateInitialPriceIndex() {
         run {
             with(it.prepareStatement(PriceIndex.INSERT_QUERY)) {
-                ItemDefinition.getDefinitions().values.forEach { def ->
+                ObjType.getDefinitions().values.forEach { def ->
                     if (def.isTradeable) {
                         setInt(1, def.id)
                         setInt(2, def.getAlchemyValue(true))

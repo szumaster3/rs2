@@ -1,7 +1,7 @@
 package content.global.skill.agility.shortcuts
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
@@ -22,7 +22,7 @@ import shared.consts.Animations
 class DesertWallShortcut : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any>? {
-        SceneryDefinition.forId(SCENERY_ID).handlers["option:climb-through"] = this
+        LocType.forId(SCENERY_ID).handlers["option:climb-through"] = this
         return null
     }
 

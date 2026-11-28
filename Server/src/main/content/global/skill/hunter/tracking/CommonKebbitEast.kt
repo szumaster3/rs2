@@ -1,6 +1,6 @@
 package content.global.skill.hunter.tracking
 
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -61,14 +61,14 @@ class CommonKebbitEast : HunterTracking() {
             Scenery.BURROW_19439, Scenery.BURROW_19440
         )
 
-        inspectScenery.forEach { id -> SceneryDefinition.forId(id).handlers["option:inspect"] = this }
+        inspectScenery.forEach { id -> LocType.forId(id).handlers["option:inspect"] = this }
 
         val actionScenery = listOf(
             Scenery.BUSH_19428
         )
 
         actionScenery.forEach {
-            val def = SceneryDefinition.forId(it)
+            val def = LocType.forId(it)
             def.handlers["option:attack"] = this
             def.handlers["option:search"] = this
         }

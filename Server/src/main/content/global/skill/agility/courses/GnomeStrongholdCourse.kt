@@ -4,7 +4,7 @@ import content.global.skill.agility.AgilityCourse
 import content.global.skill.agility.AgilityHandler
 import core.api.playAudio
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -129,16 +129,16 @@ class GnomeStrongholdCourse
             npc.walkRadius = 3
         }
 
-        SceneryDefinition.forId(2295).handlers["option:walk-across"] = this
-        SceneryDefinition.forId(2285).handlers["option:climb-over"] = this
-        SceneryDefinition.forId(35970).handlers["option:climb"] = this
-        SceneryDefinition.forId(2312).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(4059).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(2314).handlers["option:climb-down"] = this
-        SceneryDefinition.forId(2315).handlers["option:climb-down"] = this
-        SceneryDefinition.forId(2286).handlers["option:climb-over"] = this
-        SceneryDefinition.forId(4058).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(154).handlers["option:squeeze-through"] = this
+        LocType.forId(2295).handlers["option:walk-across"] = this
+        LocType.forId(2285).handlers["option:climb-over"] = this
+        LocType.forId(35970).handlers["option:climb"] = this
+        LocType.forId(2312).handlers["option:walk-on"] = this
+        LocType.forId(4059).handlers["option:walk-on"] = this
+        LocType.forId(2314).handlers["option:climb-down"] = this
+        LocType.forId(2315).handlers["option:climb-down"] = this
+        LocType.forId(2286).handlers["option:climb-over"] = this
+        LocType.forId(4058).handlers["option:squeeze-through"] = this
+        LocType.forId(154).handlers["option:squeeze-through"] = this
     }
 
     override fun createInstance(player: Player): AgilityCourse = GnomeStrongholdCourse(player)

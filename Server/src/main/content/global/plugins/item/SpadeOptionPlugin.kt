@@ -2,7 +2,7 @@ package content.global.plugins.item
 
 import core.api.playAudio
 import core.api.sendMessage
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.global.action.DigSpadeHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -18,7 +18,7 @@ import shared.consts.Sounds
 @Initializable
 class SpadeOptionPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any>? {
-        ItemDefinition.forId(Items.SPADE_952).handlers["option:dig"] = this
+        ObjType.forId(Items.SPADE_952).handlers["option:dig"] = this
         return null
     }
 

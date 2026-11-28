@@ -1,7 +1,7 @@
 package content.region.desert.al_kharid.plugin
 
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -26,7 +26,7 @@ class AlKharidStairsPlugin : OptionHandler() {
         SceneryBuilder.add(zekeStairsTop)
         SceneryBuilder.replace(craftingDoorClosed, craftingDoorOpened)
         SceneryBuilder.add(craftingStairsTop)
-        SceneryDefinition.forId(27989).handlers["option:close"] = this
+        LocType.forId(27989).handlers["option:close"] = this
         return this
     }
 

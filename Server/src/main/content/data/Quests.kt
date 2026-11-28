@@ -1,6 +1,6 @@
 package content.data
 
-import core.cache.def.impl.QuestDefinition
+import core.cache.def.impl.QuestType
 
 /**
  * Symbolic identifiers for quest definitions (config group 35).
@@ -178,8 +178,8 @@ enum class Quests(val id: Int) {
     THE_TEMPLE_AT_SENNTISTEN(168),
     BLOOD_RUNS_DEEP(169);
 
-    val definition: QuestDefinition
-        get() = checkNotNull(QuestDefinition.forId(id)) { "Missing cache quest definition $id" }
+    val definition: QuestType
+        get() = checkNotNull(QuestType.forId(id)) { "Missing cache quest definition $id" }
 
     /**
      * Display name from the cache, not the enum constant name.

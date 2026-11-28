@@ -3,9 +3,9 @@ package content.region.kandarin.gnome_stronghold.quest.waterfall.plugin
 import content.data.Quests
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler.climb
 import core.game.global.action.ClimbActionHandler.climbLadder
@@ -29,26 +29,26 @@ import core.plugin.Plugin
 class WaterfallPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         definePlugin(WaterfallUseWithHandler())
-        NPCDefinition.forId(305).handlers["option:talk-to"] = this
-        SceneryDefinition.forId(1987).handlers["option:board"] = this
-        SceneryDefinition.forId(2020).handlers["option:climb"] = this
-        SceneryDefinition.forId(2022).handlers["option:get in"] = this
-        SceneryDefinition.forId(10283).handlers["option:swim"] = this
-        SceneryDefinition.forId(1996).handlers["option:swim to"] = this
-        SceneryDefinition.forId(1989).handlers["option:search"] = this
-        SceneryDefinition.forId(1990).handlers["option:search"] = this
-        SceneryDefinition.forId(1991).handlers["option:open"] = this
-        SceneryDefinition.forId(37247).handlers["option:open"] = this
-        SceneryDefinition.forId(32711).handlers["option:open"] = this
-        SceneryDefinition.forId(33046).handlers["option:open"] = this
-        SceneryDefinition.forId(42313).handlers["option:open"] = this
-        SceneryDefinition.forId(33047).handlers["option:search"] = this
-        SceneryDefinition.forId(33047).handlers["option:close"] = this
-        SceneryDefinition.forId(33066).handlers["option:search"] = this
-        SceneryDefinition.forId(1999).handlers["option:search"] = this
-        SceneryDefinition.forId(42319).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(2002).handlers["option:open"] = this
-        SceneryDefinition.forId(2014).handlers["option:take treasure"] = this
+        NpcType.forId(305).handlers["option:talk-to"] = this
+        LocType.forId(1987).handlers["option:board"] = this
+        LocType.forId(2020).handlers["option:climb"] = this
+        LocType.forId(2022).handlers["option:get in"] = this
+        LocType.forId(10283).handlers["option:swim"] = this
+        LocType.forId(1996).handlers["option:swim to"] = this
+        LocType.forId(1989).handlers["option:search"] = this
+        LocType.forId(1990).handlers["option:search"] = this
+        LocType.forId(1991).handlers["option:open"] = this
+        LocType.forId(37247).handlers["option:open"] = this
+        LocType.forId(32711).handlers["option:open"] = this
+        LocType.forId(33046).handlers["option:open"] = this
+        LocType.forId(42313).handlers["option:open"] = this
+        LocType.forId(33047).handlers["option:search"] = this
+        LocType.forId(33047).handlers["option:close"] = this
+        LocType.forId(33066).handlers["option:search"] = this
+        LocType.forId(1999).handlers["option:search"] = this
+        LocType.forId(42319).handlers["option:climb-up"] = this
+        LocType.forId(2002).handlers["option:open"] = this
+        LocType.forId(2014).handlers["option:take treasure"] = this
         return this
     }
 
@@ -456,7 +456,7 @@ class WaterfallPlugin : OptionHandler() {
                 handleAutowalkDoor(player, scenery)
             }
 
-            if (useditem.id == PEBBLE.id && scenery.id == 1992 && ItemDefinition.canEnterEntrana(player)) {
+            if (useditem.id == PEBBLE.id && scenery.id == 1992 && ObjType.canEnterEntrana(player)) {
                 if (player.familiarManager.hasFamiliar()) {
                     sendMessage(player, "You can't take a follower into the tomb.")
                     return false
@@ -475,7 +475,7 @@ class WaterfallPlugin : OptionHandler() {
                         }
                     },
                 )
-            } else if (!ItemDefinition.canEnterEntrana(player) && useditem.id == PEBBLE.id && scenery.id == 1992) {
+            } else if (!ObjType.canEnterEntrana(player) && useditem.id == PEBBLE.id && scenery.id == 1992) {
                 player.packetDispatch.sendMessage("You place the pebble in the gravestone's small indent.")
                 player.packetDispatch.sendMessage("It fits perfectly.")
                 player.packetDispatch.sendMessage("But nothing happens.", 4)

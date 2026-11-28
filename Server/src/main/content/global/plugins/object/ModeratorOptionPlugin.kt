@@ -1,7 +1,7 @@
 package content.global.plugins.`object`
 
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.ClimbActionHandler.climb
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -17,8 +17,8 @@ import shared.consts.Scenery
 @Initializable
 class ModeratorOptionPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Scenery.STAIRCASE_26806).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(Scenery.TABLE_26807).handlers["option:j-mod options"] = this
+        LocType.forId(Scenery.STAIRCASE_26806).handlers["option:climb-up"] = this
+        LocType.forId(Scenery.TABLE_26807).handlers["option:j-mod options"] = this
         return this
     }
 

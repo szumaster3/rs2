@@ -2,7 +2,7 @@ package content.global.skill.farming
 
 import content.global.skill.farming.timers.CropGrowth
 import core.api.getOrStartTimer
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 
@@ -70,7 +70,7 @@ enum class FarmingPatch(
         @JvmField
         val patches = FarmingPatch.values().map { it.varbit to it }.toMap()
         val patchNodes = ArrayList<Int>()
-        val nodeMap = HashMap<Int, SceneryDefinition>()
+        val nodeMap = HashMap<Int, LocType>()
 
         init {
             patchNodes.addAll(8550..8557)
@@ -93,7 +93,7 @@ enum class FarmingPatch(
             patchNodes.add(41339)
 
             for (patch in patchNodes) {
-                val def = SceneryDefinition.forId(patch)
+                val def = LocType.forId(patch)
                 nodeMap[def.varbitID] = def
             }
         }
@@ -103,11 +103,11 @@ enum class FarmingPatch(
 
         @JvmStatic
         fun forObjectID(id: Int): FarmingPatch? {
-            val objDef = SceneryDefinition.forId(id)
+            val objDef = LocType.forId(id)
             return patches[objDef.varbitID]
         }
 
-        fun getSceneryDefByVarbit(id: Int): SceneryDefinition? = nodeMap[id]
+        fun getSceneryDefByVarbit(id: Int): LocType? = nodeMap[id]
     }
 
     fun getPatchFor(player: Player, addPatch: Boolean = true): Patch {

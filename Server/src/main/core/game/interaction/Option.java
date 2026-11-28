@@ -1,8 +1,8 @@
 package core.game.interaction;
 
-import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.ObjType;
+import core.cache.def.impl.NpcType;
+import core.cache.def.impl.LocType;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
@@ -80,13 +80,13 @@ public final class Option {
 	public static OptionHandler defaultHandler(Node node, int nodeId, String name) {
 		name = name.toLowerCase();
 		if (node instanceof NPC) {
-			return NPCDefinition.getOptionHandler(nodeId, name);
+			return NpcType.getOptionHandler(nodeId, name);
 		}
 		if (node instanceof Scenery) {
-			return SceneryDefinition.getOptionHandler(nodeId, name);
+			return LocType.getOptionHandler(nodeId, name);
 		}
 		if (node instanceof Item) {
-			return ItemDefinition.getOptionHandler(nodeId, name);
+			return ObjType.getOptionHandler(nodeId, name);
 		}
 
 		return null;

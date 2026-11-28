@@ -3,7 +3,7 @@ package content.region.kandarin.west_ardougne.plugin
 import content.data.Quests
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
@@ -33,8 +33,8 @@ class WestArdougneDoorPlugin : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(MAIN_DOOR_ID).handlers["option:open"] = this
-        SceneryDefinition.forId(SIDE_DOOR_ID).handlers["option:open"] = this
+        LocType.forId(MAIN_DOOR_ID).handlers["option:open"] = this
+        LocType.forId(SIDE_DOOR_ID).handlers["option:open"] = this
         return this
     }
 

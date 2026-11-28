@@ -3,8 +3,8 @@ package content.global.activity.warriors_guild
 import core.api.playAudio
 import core.api.setAttribute
 import core.api.setVarp
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.LocType
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -59,8 +59,8 @@ class CatapultRoomPlugin : MapZone("wg catapult", true), Plugin<Any> {
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    ItemDefinition.forId(SHIELD_ID).handlers["option:wield"] = this
-                    SceneryDefinition.forId(Scenery.INFORMATION_SCROLL_15657).handlers["option:view"] = this
+                    ObjType.forId(SHIELD_ID).handlers["option:wield"] = this
+                    LocType.forId(Scenery.INFORMATION_SCROLL_15657).handlers["option:view"] = this
                     return this
                 }
 
@@ -77,7 +77,7 @@ class CatapultRoomPlugin : MapZone("wg catapult", true), Plugin<Any> {
                             )
                             return true
                         }
-                        ItemDefinition.getOptionHandlers()["wield"]!!.handle(player, node, option)
+                        ObjType.getOptionHandlers()["wield"]!!.handle(player, node, option)
                         if (player.equipment.getNew(EquipmentContainer.SLOT_SHIELD).id == SHIELD_ID) {
                             player.interfaceManager.removeTabs(2, 3, 5, 6, 7, 11, 12)
                             player.interfaceManager.openTab(4, Component(Components.WARGUILD_DEFENCE_MINI_411))

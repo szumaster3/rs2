@@ -4,7 +4,7 @@ import content.data.Quests
 
 import content.data.GameAttributes
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -93,7 +93,7 @@ class TeleportTabletPlugin : InteractionListener {
                         return@on true
                     }
 
-                    if (tab == Items.LAW_ALTAR_TP_13608 && !ItemDefinition.canEnterEntrana(player)) {
+                    if (tab == Items.LAW_ALTAR_TP_13608 && !ObjType.canEnterEntrana(player)) {
                         sendMessage(player, "You can't take weapons and armour into the law rift.")
                         return@on true
                     }

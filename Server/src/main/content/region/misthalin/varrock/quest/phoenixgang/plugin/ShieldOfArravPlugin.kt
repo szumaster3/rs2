@@ -4,8 +4,8 @@ import content.data.Quests
 
 import content.region.misthalin.varrock.quest.phoenixgang.ShieldofArrav
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.LocType
 import core.game.component.Component
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
@@ -42,7 +42,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                 2401 to "option:shut",
             )
 
-        handlers.forEach { (id, option) -> SceneryDefinition.forId(id).handlers[option] = this }
+        handlers.forEach { (id, option) -> LocType.forId(id).handlers[option] = this }
 
         val itemHandlers =
             listOf(
@@ -53,7 +53,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                 ShieldofArrav.BLACKARM_CERTIFICATE.id to "option:read",
             )
 
-        itemHandlers.forEach { (id, option) -> ItemDefinition.forId(id).handlers[option] = this }
+        itemHandlers.forEach { (id, option) -> ObjType.forId(id).handlers[option] = this }
 
         return this
     }

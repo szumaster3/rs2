@@ -2,7 +2,7 @@ package content.global.random.event.lostandfound
 
 import content.data.RandomEvent
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
@@ -31,7 +31,7 @@ object LostAndFoundUtils {
         val index = scenery.getWrapper().id - 8994
         val current = scenery.getWrapper().getChild(player).id
         return (0..3).none { i ->
-            index != i && SceneryDefinition.forId(8994 + i).getChildObject(player)?.id == current
+            index != i && LocType.forId(8994 + i).getChildObject(player)?.id == current
         }
     }
 

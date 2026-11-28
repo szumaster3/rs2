@@ -3,7 +3,7 @@ package content.global.plugins.`object`
 import core.api.addItem
 import core.api.inInventory
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -38,7 +38,7 @@ class SearchOptionPlugin : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("search", this)
+        LocType.setOptionHandler("search", this)
         return this
     }
 

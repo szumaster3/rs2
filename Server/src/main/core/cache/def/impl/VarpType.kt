@@ -3,7 +3,8 @@ package core.cache.def.impl
 import core.cache.Cache
 import java.nio.ByteBuffer
 
-class VarpDefinition {
+/** Player variable definition (client Class171.java / VarpTypes; opcode 5 = client code). */
+class VarpType {
     var clientCode = 0
         private set
 
@@ -20,9 +21,9 @@ class VarpDefinition {
     companion object {
         fun exists(id: Int): Boolean = id >= 0 && Cache.getIndexes().getOrNull(2)?.validFile(16, id) == true
 
-        fun forId(id: Int): VarpDefinition? {
+        fun forId(id: Int): VarpType? {
             val data = Cache.getIndexes()[2]!!.getFileData(16, id) ?: return null
-            return VarpDefinition().apply { decode(ByteBuffer.wrap(data)) }
+            return VarpType().apply { decode(ByteBuffer.wrap(data)) }
         }
     }
 }

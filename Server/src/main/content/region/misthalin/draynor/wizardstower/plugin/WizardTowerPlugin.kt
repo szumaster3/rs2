@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor.wizardstower.plugin
 
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -14,7 +14,7 @@ import core.plugin.Plugin
 class WizardTowerPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(shared.consts.Scenery.DOOR_11993).handlers["option:open"] = this
+        LocType.forId(shared.consts.Scenery.DOOR_11993).handlers["option:open"] = this
         return this
     }
 

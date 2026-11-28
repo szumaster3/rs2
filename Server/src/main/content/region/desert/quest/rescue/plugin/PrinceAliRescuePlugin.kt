@@ -6,8 +6,8 @@ import core.api.getQuestStage
 import core.api.inInventory
 import core.api.openDialogue
 import core.api.sendMessage
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler.handleAutowalkDoor
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -25,9 +25,9 @@ import shared.consts.NPCs
 class PrinceAliRescuePlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(shared.consts.Scenery.PRISON_DOOR_2881).handlers["option:open"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.DOOR_4639).handlers["option:open"] = this
-        NPCDefinition.forId(NPCs.BORDER_GUARD_7912).handlers["option:talk-to"] = this
+        LocType.forId(shared.consts.Scenery.PRISON_DOOR_2881).handlers["option:open"] = this
+        LocType.forId(shared.consts.Scenery.DOOR_4639).handlers["option:open"] = this
+        NpcType.forId(NPCs.BORDER_GUARD_7912).handlers["option:talk-to"] = this
         return this
     }
 

@@ -1,7 +1,7 @@
 package content.global.plugins.item
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
@@ -104,7 +104,7 @@ class EmptyOptionPlugin: InteractionListener {
                     emptyAudioMap.putIfAbsent(item.fullId, item.audioId)
                     emptyItemList.add(item.fullId)
                 }
-                for (item in ItemDefinition.getDefinitions().values) {
+                for (item in ObjType.getDefinitions().values) {
                     if (item.name.contains("potion") ||
                         item.name.contains("brew") ||
                         item.name.contains("poison") ||

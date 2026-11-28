@@ -1,6 +1,6 @@
 package content.global.skill.construction;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.component.Component;
 import core.game.dialogue.Dialogue;
 import core.game.dialogue.DialogueInterpreter;
@@ -24,8 +24,8 @@ public final class BuildOptionPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.setOptionHandler("build", this);
-        SceneryDefinition.setOptionHandler("remove", this);
+        LocType.setOptionHandler("build", this);
+        LocType.setOptionHandler("remove", this);
         ClassScanner.definePlugin(new RemoveDialogue());
         return this;
     }

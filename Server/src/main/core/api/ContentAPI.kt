@@ -591,7 +591,7 @@ fun animationDuration(animation: Animation): Int = animation.definition.duration
  * @return The number of cycles the animation takes.
  */
 fun animationCycles(animation: Int): Int {
-    val def = AnimationDefinition.forId(animation)
+    val def = SeqType.forId(animation)
     return def!!.cycles
 }
 
@@ -721,7 +721,7 @@ fun replaceScenery(
  * @param id The ID of the item.
  * @return The name of the item.
  */
-fun getItemName(id: Int): String = ItemDefinition.forId(id).name
+fun getItemName(id: Int): String = ObjType.forId(id).name
 
 /**
  * Checks if the player has space in their inventory for an item.
@@ -1759,7 +1759,7 @@ fun getVarp(
  */
 fun getVarbit(
     player: Player,
-    def: VarbitDefinition,
+    def: VarbitType,
 ): Int {
     val mask = def.mask
     val current = getVarp(player, def.varpId)
@@ -1777,8 +1777,8 @@ fun getVarbit(
     player: Player,
     varbitId: Int,
 ): Int {
-    if (!VarbitDefinition.exists(varbitId)) return 0
-    val def = VarbitDefinition.forId(varbitId)
+    if (!VarbitType.exists(varbitId)) return 0
+    val def = VarbitType.forId(varbitId)
     return getVarbit(player, def)
 }
 
@@ -1797,7 +1797,7 @@ fun setVarp(
     value: Int,
     save: Boolean = false,
 ) {
-    if (!VarpDefinition.exists(varpIndex)) {
+    if (!VarpType.exists(varpIndex)) {
         logWithStack(ContentAPI::class.java, Log.ERR, "Unknown varp $varpIndex (value=$value)")
         return
     }
@@ -1843,11 +1843,11 @@ fun unsaveVarp(
 @JvmOverloads
 fun setVarbit(
     player: Player,
-    def: VarbitDefinition,
+    def: VarbitType,
     value: Int,
     save: Boolean = false,
 ) {
-    if (!VarpDefinition.exists(def.varpId) || def.startBit !in 0..31 || def.endBit !in def.startBit..31) {
+    if (!VarpType.exists(def.varpId) || def.startBit !in 0..31 || def.endBit !in def.startBit..31) {
         logWithStack(ContentAPI::class.java, Log.ERR, "Invalid varbit ${def.id}: base varp ${def.varpId}, bits ${def.startBit}..${def.endBit}")
         return
     }
@@ -1872,12 +1872,12 @@ fun setVarbit(
     value: Int,
     save: Boolean = false,
 ) {
-    if (!VarbitDefinition.exists(varbitId)) {
+    if (!VarbitType.exists(varbitId)) {
         logWithStack(ContentAPI::class.java, Log.ERR, "Trying to setVarbit $varbitId, which doesn't seem to exist.")
         return
     }
 
-    setVarbit(player, VarbitDefinition.forId(varbitId), value, save)
+    setVarbit(player, VarbitType.forId(varbitId), value, save)
 }
 
 /**
@@ -1891,7 +1891,7 @@ fun setVarbit(
 @JvmOverloads
 fun incrementVarbit(
     player: Player,
-    def: VarbitDefinition,
+    def: VarbitType,
     amount: Int = 1,
     save: Boolean = false,
 ) {
@@ -1916,12 +1916,12 @@ fun incrementVarbit(
     amount: Int = 1,
     save: Boolean = false,
 ) {
-    if (!VarbitDefinition.exists(varbitId)) {
+    if (!VarbitType.exists(varbitId)) {
         logWithStack(ContentAPI::class.java, Log.ERR, "Trying to incrementVarbit $varbitId, which doesn't seem to exist.")
         return
     }
 
-    incrementVarbit(player, VarbitDefinition.forId(varbitId), amount, save)
+    incrementVarbit(player, VarbitType.forId(varbitId), amount, save)
 }
 
 /**
@@ -1946,7 +1946,7 @@ fun setVarc(
  */
 fun reinitVarps(player: Player) {
     for ((index, value) in player.varpMap) {
-        if (!VarpDefinition.exists(index)) {
+        if (!VarpType.exists(index)) {
             log(ContentAPI::class.java, Log.WARN, "Skipping legacy saved varp $index (value=$value); retained in profile")
             continue
         }
@@ -1985,8 +1985,8 @@ fun forceWalk(
  * @param player The player to move.
  * @param start The starting location.
  * @param dest The destination location.
- * @param startArrive The time to start the arrival animation (in ticks).
- * @param destArrive The time to arrive at the destination (in ticks).
+ * @param startArrive The delay before movement begins (in client cycles).
+ * @param destArrive The travel duration (in client cycles).
  * @param dir The direction to move in, or `null` to auto-calculate.
  * @param anim The animation to play while moving.
  * @param callback An optional callback to invoke once the player has arrived.
@@ -2027,8 +2027,12 @@ fun forceMove(
     queueScript(player, 0, QueueStrength.SOFT) {
         if (!finishedMoving(player)) return@queueScript keepRunning(player)
         if (!maskSet) {
-            var ctx = ForceMoveCtx(startLoc, destLoc, startArrive, destArrive, direction)
-            player.updateMasks.register(EntityFlag.ForceMove, ctx)
+            val ctx = ForceMoveCtx(startLoc, destLoc, startArrive, destArrive, direction)
+            if (!player.updateMasks.register(EntityFlag.ForceMove, ctx)) return@queueScript keepRunning(player)
+            // The client measures both endpoints relative to receipt, not to queue creation.
+            startArriveTick = getWorldTicks() + cyclesToTicks(startArrive) + 1
+            destArriveTick = startArriveTick + cyclesToTicks(destArrive)
+            delayEntity(player, destArriveTick - getWorldTicks() + 1)
             maskSet = true
         }
 
@@ -2067,7 +2071,7 @@ fun stopWalk(entity: Entity) {
  * @return An array of child object IDs for the given scenery.
  */
 fun getChildren(scenery: Int): IntArray =
-    SceneryDefinition
+    LocType
         .forId(scenery)
         .childrenIds!!
         .filter { it != -1 }
@@ -2884,9 +2888,9 @@ fun sendItemZoomOnInterface(
  * Retrieves the scenery definition for a given ID.
  *
  * @param id The ID of the scenery.
- * @return The [SceneryDefinition] object corresponding to the ID.
+ * @return The [LocType] object corresponding to the ID.
  */
-fun sceneryDefinition(id: Int): SceneryDefinition = SceneryDefinition.forId(id)
+fun sceneryDefinition(id: Int): LocType = LocType.forId(id)
 
 /**
  * Registers a map zone with specified borders.
@@ -4434,9 +4438,9 @@ fun isValidGroundItem(node: GroundItem): Boolean = GroundItemManager.getItems().
  * Retrieves the item definition for a given item id.
  *
  * @param id The id for the item.
- * @return The [ItemDefinition] associated with the provided item id.
+ * @return The [ObjType] associated with the provided item id.
  */
-fun itemDefinition(id: Int): ItemDefinition = ItemDefinition.forId(id)
+fun itemDefinition(id: Int): ObjType = ObjType.forId(id)
 
 /**
  * Checks if all specified items are present in the player's inventory.
@@ -4459,7 +4463,7 @@ fun allInInventory(
  * @param id The NPC id.
  * @return The name of the NPC as a String.
  */
-fun getNPCName(id: Int): String = NPCDefinition.forId(id).name
+fun getNPCName(id: Int): String = NpcType.forId(id).name
 
 /**
  * Decants items in a container, organizing them by dosage and creating new items with the correct dosage.
@@ -4737,7 +4741,7 @@ fun openDoor(player: Player, node: Scenery, openId: Int) {
  * @param id The id for the scenery object.
  * @return The name.
  */
-fun getSceneryName(id: Int): String = SceneryDefinition.forId(id).name
+fun getSceneryName(id: Int): String = LocType.forId(id).name
 
 /**
  * Cures the poison effect from an entity if it is currently poisoned.

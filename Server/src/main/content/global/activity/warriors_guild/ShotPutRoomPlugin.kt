@@ -2,8 +2,8 @@ package content.global.activity.warriors_guild
 
 import core.api.animate
 import core.api.removeAttribute
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.LocType
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
@@ -120,10 +120,10 @@ class ShotPutRoomPlugin(player: Player? = null) : Dialogue(player) {
                     }
 
                     override fun newInstance(arg: Any?): Plugin<Any> {
-                        SceneryDefinition.forId(shared.consts.Scenery.SHOT_15664).handlers["option:throw"] = this
-                        SceneryDefinition.forId(shared.consts.Scenery.SHOT_15665).handlers["option:throw"] = this
-                        ItemDefinition.forId(Items.EIGHTEEN_LB_SHOT_8858).handlers["option:take"] = this
-                        ItemDefinition.forId(Items.TWENTY_TWO_LB_SHOT_8859).handlers["option:take"] = this
+                        LocType.forId(shared.consts.Scenery.SHOT_15664).handlers["option:throw"] = this
+                        LocType.forId(shared.consts.Scenery.SHOT_15665).handlers["option:throw"] = this
+                        ObjType.forId(Items.EIGHTEEN_LB_SHOT_8858).handlers["option:take"] = this
+                        ObjType.forId(Items.TWENTY_TWO_LB_SHOT_8859).handlers["option:take"] = this
                         return this
                     }
                 },

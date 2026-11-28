@@ -1,7 +1,7 @@
 package content.region.misthalin.draynor.plugin;
 
 import content.global.skill.agility.AgilityHandler;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.dialogue.FaceAnim;
 import core.game.global.action.ClimbActionHandler;
 import core.game.global.action.DoorActionHandler;
@@ -37,17 +37,17 @@ public final class DraynorManorPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(156).getHandlers().put("option:search", this);
-        SceneryDefinition.forId(155).getHandlers().put("option:search", this);
-        SceneryDefinition.forId(160).getHandlers().put("option:pull", this);
-        SceneryDefinition.forId(131).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(133).getHandlers().put("option:climb-down", this);
-        SceneryDefinition.forId(134).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(135).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(152).getHandlers().put("option:search", this);
-        SceneryDefinition.forId(153).getHandlers().put("option:search", this);
-        SceneryDefinition.forId(11498).getHandlers().put("option:climb-up", this);
-        SceneryDefinition.forId(37703).getHandlers().put("option:squeeze-through", this);
+        LocType.forId(156).getHandlers().put("option:search", this);
+        LocType.forId(155).getHandlers().put("option:search", this);
+        LocType.forId(160).getHandlers().put("option:pull", this);
+        LocType.forId(131).getHandlers().put("option:open", this);
+        LocType.forId(133).getHandlers().put("option:climb-down", this);
+        LocType.forId(134).getHandlers().put("option:open", this);
+        LocType.forId(135).getHandlers().put("option:open", this);
+        LocType.forId(152).getHandlers().put("option:search", this);
+        LocType.forId(153).getHandlers().put("option:search", this);
+        LocType.forId(11498).getHandlers().put("option:climb-up", this);
+        LocType.forId(37703).getHandlers().put("option:squeeze-through", this);
         return this;
     }
 

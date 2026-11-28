@@ -2,7 +2,7 @@ package content.global.skill.farming
 
 import content.global.skill.farming.timers.Compost
 import core.api.getOrStartTimer
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 
@@ -23,7 +23,7 @@ enum class CompostBins(
 
         @JvmStatic
         fun forObjectID(id: Int): CompostBins? {
-            val objDef = SceneryDefinition.forId(id)
+            val objDef = LocType.forId(id)
             return bins[objDef.varbitID]
         }
     }

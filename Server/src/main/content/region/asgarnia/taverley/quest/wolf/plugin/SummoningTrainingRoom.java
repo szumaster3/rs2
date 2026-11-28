@@ -2,7 +2,7 @@ package content.region.asgarnia.taverley.quest.wolf.plugin;
 
 import content.data.Quests;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
@@ -47,13 +47,13 @@ public final class SummoningTrainingRoom extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(28675).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(28676).getHandlers().put("option:climb-down", this);
-        SceneryDefinition.forId(28653).getHandlers().put("option:climb-down", this);
-        SceneryDefinition.forId(28572).getHandlers().put("option:climb-up", this);
-        SceneryDefinition.forId(28676).getHandlers().put("option:close", this);
-        SceneryDefinition.forId(28714).getHandlers().put("option:climb", this);
-        SceneryDefinition.forId(28586).getHandlers().put("option:search", this);
+        LocType.forId(28675).getHandlers().put("option:open", this);
+        LocType.forId(28676).getHandlers().put("option:climb-down", this);
+        LocType.forId(28653).getHandlers().put("option:climb-down", this);
+        LocType.forId(28572).getHandlers().put("option:climb-up", this);
+        LocType.forId(28676).getHandlers().put("option:close", this);
+        LocType.forId(28714).getHandlers().put("option:climb", this);
+        LocType.forId(28586).getHandlers().put("option:search", this);
         ActivityManager.register(new FluffyCutscene());
         return this;
     }

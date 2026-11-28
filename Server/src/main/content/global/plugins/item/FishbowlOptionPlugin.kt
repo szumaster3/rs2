@@ -2,8 +2,8 @@ package content.global.plugins.item
 
 import core.Util
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.LocType
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
 import core.game.interaction.NodeUsageEvent
@@ -34,10 +34,10 @@ class FishbowlOptionPlugin : OptionHandler() {
      * Registers handlers for fishbowl.
      */
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ItemDefinition.forId(FISHBOWL_WATER).handlers["option:empty"] = this
-        ItemDefinition.forId(FISHBOWL_SEAWEED).handlers["option:empty"] = this
+        ObjType.forId(FISHBOWL_WATER).handlers["option:empty"] = this
+        ObjType.forId(FISHBOWL_SEAWEED).handlers["option:empty"] = this
         for (id in intArrayOf(FISHBOWL_BLUE, FISHBOWL_GREEN, FISHBOWL_SPINE)) {
-            val def = ItemDefinition.forId(id)
+            val def = ObjType.forId(id)
             def.handlers["option:talk-at"] = this
             def.handlers["option:play-with"] = this
             def.handlers["option:feed"] = this
@@ -201,7 +201,7 @@ class FishbowlOptionPlugin : OptionHandler() {
     class AquariumPlugin : OptionHandler() {
 
         override fun newInstance(arg: Any?): Plugin<Any?> {
-            SceneryDefinition.forId(Scenery.AQUARIUM_10091).handlers["option:fish-in"] = this
+            LocType.forId(Scenery.AQUARIUM_10091).handlers["option:fish-in"] = this
             ClassScanner.definePlugin(TinyNetHandler())
             return this
         }

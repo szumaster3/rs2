@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import core.ServerConstants
 import core.api.log
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.combat.equipment.Ammunition
 import core.game.node.entity.combat.equipment.BoltEffect
 import core.game.node.entity.combat.equipment.RangeWeapon
@@ -73,7 +73,7 @@ class RangedConfigLoader {
                 val weapon = RangeWeapon(
                     id,
                     Animation(e.get("animation").asInt),
-                    ItemDefinition.forId(id).getConfiguration("attack_speed", 4),
+                    ObjType.forId(id).getConfiguration("attack_speed", 4),
                     e.get("ammo_slot").asInt,
                     e.get("weapon_type").asInt,
                     e.get("drop_ammo").asBoolean,

@@ -1,6 +1,6 @@
 package core.game.world.update.flag.context;
 
-import core.cache.def.impl.AnimationDefinition;
+import core.cache.def.impl.SeqType;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.scenery.Scenery;
 
@@ -34,7 +34,7 @@ public class Animation {
     /**
      * The animation definitions.
      */
-    private AnimationDefinition definition;
+    private SeqType definition;
 
     /**
      * The object to animate.
@@ -96,9 +96,9 @@ public class Animation {
      *
      * @return The animation definitions.
      */
-    public AnimationDefinition getDefinition() {
+    public SeqType getDefinition() {
         if (definition == null) {
-            definition = AnimationDefinition.forId(id);
+            definition = SeqType.forId(id);
         }
         return definition;
     }
@@ -109,7 +109,7 @@ public class Animation {
      * @return The duration in ticks.
      */
     public int getDuration() {
-        AnimationDefinition def = getDefinition();
+        SeqType def = getDefinition();
         return def != null ? def.getDurationTicks() : 1;
     }
 
@@ -137,7 +137,19 @@ public class Animation {
      * @param id
      */
     public void setId(int id) {
-        this.id = id;
+        if (this.id != id) {
+            this.id = id;
+            this.definition = null;
+        }
+    }
+
+    /**
+     * Copy a mutable animation before queuing its network update. */
+    public Animation copy() {
+        Animation copy = new Animation(id, delay, priority);
+        copy.definition = definition;
+        copy.object = object;
+        return copy;
     }
 
     /**

@@ -1,7 +1,7 @@
 package content.global.plugins.item
 
 import core.api.removeAttribute
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.global.action.PickupHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -15,7 +15,7 @@ import core.plugin.Plugin
 class PickupOptionHandler : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ItemDefinition.setOptionHandler("take", this)
+        ObjType.setOptionHandler("take", this)
         return this
     }
 

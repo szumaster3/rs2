@@ -10,9 +10,9 @@ import core.api.removeItem
 import core.api.sendMessage
 import core.api.visualize
 import core.cache.def.Definition
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.OptionHandler
 import core.game.interaction.UseWithHandler
@@ -41,36 +41,36 @@ class HunterPlugin : OptionHandler() {
         for (trap in Traps.values()) {
             for (nodeId in trap.settings.nodeIds) {
                 definition =
-                    if (trap.settings.isObjectTrap) SceneryDefinition.forId(nodeId) else ItemDefinition.forId(nodeId)
+                    if (trap.settings.isObjectTrap) LocType.forId(nodeId) else ObjType.forId(nodeId)
                 definition!!.handlers["option:" + trap.settings.option] = this
             }
             if (trap.settings.failId != -1) {
-                definition = SceneryDefinition.forId(trap.settings.failId)
+                definition = LocType.forId(trap.settings.failId)
                 definition.handlers["option:dismantle"] = this
                 definition.handlers["option:deactivate"] = this
             }
             for (objectId in trap.settings.objectIds) {
-                definition = SceneryDefinition.forId(objectId)
+                definition = LocType.forId(objectId)
                 definition.handlers["option:deactivate"] = this
                 definition.handlers["option:dismantle"] = this
                 definition.handlers["option:investigate"] = this
             }
             for (node in trap.nodes) {
                 for (objectId in node.objectIds) {
-                    definition = SceneryDefinition.forId(objectId)
+                    definition = LocType.forId(objectId)
                     definition.handlers["option:check"] = this
                     definition.handlers["option:retrieve"] = this
                 }
             }
         }
         for (trap in NetTrap.values()) {
-            SceneryDefinition.forId(trap.bent).handlers["option:dismantle"] = this
-            SceneryDefinition.forId(trap.failed).handlers["option:dismantle"] = this
-            SceneryDefinition.forId(trap.net).handlers["option:dismantle"] = this
-            SceneryDefinition.forId(trap.caught).handlers["option:check"] = this
-            SceneryDefinition.forId(trap.bent).handlers["option:investigate"] = this
-            SceneryDefinition.forId(trap.failed).handlers["option:investigate"] = this
-            SceneryDefinition.forId(trap.net).handlers["option:investigate"] = this
+            LocType.forId(trap.bent).handlers["option:dismantle"] = this
+            LocType.forId(trap.failed).handlers["option:dismantle"] = this
+            LocType.forId(trap.net).handlers["option:dismantle"] = this
+            LocType.forId(trap.caught).handlers["option:check"] = this
+            LocType.forId(trap.bent).handlers["option:investigate"] = this
+            LocType.forId(trap.failed).handlers["option:investigate"] = this
+            LocType.forId(trap.net).handlers["option:investigate"] = this
         }
         definePlugin(HunterNPC())
         definePlugin(HunterNetPlugin())
@@ -176,7 +176,7 @@ class HunterPlugin : OptionHandler() {
     class HunterItemPlugin : OptionHandler() {
 
         override fun newInstance(arg: Any?): Plugin<Any?> {
-            ItemDefinition.setOptionHandler("release", this)
+            ObjType.setOptionHandler("release", this)
             for (i in BNetTypes.BABY_IMPLING.ordinal - 1 until BNetTypes.values().size) {
                 BNetTypes.values()[i].node.reward.definition.handlers["option:loot"] = this
             }
@@ -250,7 +250,7 @@ class HunterPlugin : OptionHandler() {
         override fun newInstance(arg: Any?): Plugin<Any?> {
             for (type in BNetTypes.values()) {
                 for (id in type.node.npcs) {
-                    NPCDefinition.forId(id).handlers["option:catch"] = this
+                    NpcType.forId(id).handlers["option:catch"] = this
                 }
             }
             return this

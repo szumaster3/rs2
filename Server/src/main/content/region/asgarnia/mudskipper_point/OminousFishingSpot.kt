@@ -1,7 +1,7 @@
 package content.region.asgarnia.mudskipper_point
 
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -23,7 +23,7 @@ class OminousFishingSpot: OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         OMINOUS_FISHING_SPOTS.forEach { id ->
-            val def = SceneryDefinition.forId(id)
+            val def = LocType.forId(id)
             def.handlers["option:lure"] = this
             def.handlers["option:bait"] = this
         }

@@ -5,9 +5,9 @@ import content.data.Quests
 import content.data.skill.SkillingTool.Companion.getAxe
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -43,15 +43,15 @@ class AnimalMagnetismPlugin : OptionHandler() {
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ItemDefinition.forId(Items.BUTTONS_688).handlers["option:polish"] = this
-        ItemDefinition.forId(Items.ECTOPHIAL_4251).handlers["option:empty"] = this
-        ItemDefinition.forId(Items.ECTOPHIAL_4251).handlers["option:drop"] = this
-        ItemDefinition.forId(Items.ECTOPHIAL_4252).handlers["option:drop"] = this
-        NPCDefinition.forId(NPCs.AVA_5198).handlers["option:trade"] = this
-        SceneryDefinition.forId(Scenery.MEMORIAL_5167).handlers["option:push"] = this
-        ItemDefinition.forId(AnimalMagnetism.RESEARCH_NOTES).handlers["option:translate"] = this
-        ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET).handlers["option:wear"] = this
-        ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET).handlers["option:equip"] = this
+        ObjType.forId(Items.BUTTONS_688).handlers["option:polish"] = this
+        ObjType.forId(Items.ECTOPHIAL_4251).handlers["option:empty"] = this
+        ObjType.forId(Items.ECTOPHIAL_4251).handlers["option:drop"] = this
+        ObjType.forId(Items.ECTOPHIAL_4252).handlers["option:drop"] = this
+        NpcType.forId(NPCs.AVA_5198).handlers["option:trade"] = this
+        LocType.forId(Scenery.MEMORIAL_5167).handlers["option:push"] = this
+        ObjType.forId(AnimalMagnetism.RESEARCH_NOTES).handlers["option:translate"] = this
+        ObjType.forId(AnimalMagnetism.CRONE_AMULET).handlers["option:wear"] = this
+        ObjType.forId(AnimalMagnetism.CRONE_AMULET).handlers["option:equip"] = this
         return this
     }
 
@@ -177,7 +177,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
             definePlugin(
                 object : OptionHandler() {
                     override fun newInstance(arg: Any?): Plugin<Any> {
-                        NPCDefinition.forId(NPCs.UNDEAD_TREE_5208).handlers["option:chop"] = this
+                        NpcType.forId(NPCs.UNDEAD_TREE_5208).handlers["option:chop"] = this
                         return this
                     }
 

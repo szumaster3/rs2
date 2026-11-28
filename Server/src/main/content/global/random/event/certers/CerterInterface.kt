@@ -68,7 +68,7 @@ class CerterInterface : InterfaceListener {
         val correctIndex = indexes.random()
         val correctItem = Item(correct).definition
         val iFaceModelId = correctItem!!.interfaceModelId
-        val iFaceZoom = correctItem.modelZoom
+        val iFaceZoom = correctItem.zoom2d
         indexes.remove(correctIndex)
         setAttribute(player, GameAttributes.CERTER_INDEX, correctIndex)
 

@@ -1,7 +1,7 @@
 package content.global.skill.construction.decoration;
 
 import content.global.skill.construction.*;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.dialogue.Dialogue;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.interaction.OptionHandler;
@@ -31,27 +31,27 @@ public final class StaircasePlugin extends OptionHandler {
         // 13497 - 13502 are normal stairs
         // 13503 - 13506 are spiral stairs
         for (int i = 13497; i <= 13506; i++) {
-            SceneryDefinition.forId(i).getHandlers().put("option:climb", this);
-            SceneryDefinition.forId(i).getHandlers().put("option:climb-up", this);
-            SceneryDefinition.forId(i).getHandlers().put("option:climb-down", this);
-            SceneryDefinition.forId(i).getHandlers().put("option:remove-room", this);
+            LocType.forId(i).getHandlers().put("option:climb", this);
+            LocType.forId(i).getHandlers().put("option:climb-up", this);
+            LocType.forId(i).getHandlers().put("option:climb-down", this);
+            LocType.forId(i).getHandlers().put("option:remove-room", this);
         }
         // 13409 is dungeon entrance
-        SceneryDefinition.forId(13409).getHandlers().put("option:enter", this);
-        SceneryDefinition.forId(13409).getHandlers().put("option:remove-room", this);
+        LocType.forId(13409).getHandlers().put("option:enter", this);
+        LocType.forId(13409).getHandlers().put("option:remove-room", this);
         // 13328 - 13330 are dungeon ladders
         for (int id = 13328; id <= 13330; id++) {
-            SceneryDefinition.forId(id).getHandlers().put("option:climb", this);
-            SceneryDefinition.forId(id).getHandlers().put("option:remove-room", this);
+            LocType.forId(id).getHandlers().put("option:climb", this);
+            LocType.forId(id).getHandlers().put("option:remove-room", this);
         }
         for (int id = 13675; id <= 13680; id++) {
             if (id < 13678) {
-                SceneryDefinition.forId(id).getHandlers().put("option:open", this);
+                LocType.forId(id).getHandlers().put("option:open", this);
             } else {
-                SceneryDefinition.forId(id).getHandlers().put("option:go-down", this);
-                SceneryDefinition.forId(id).getHandlers().put("option:close", this);
+                LocType.forId(id).getHandlers().put("option:go-down", this);
+                LocType.forId(id).getHandlers().put("option:close", this);
             }
-            SceneryDefinition.forId(id).getHandlers().put("option:remove-room", this);
+            LocType.forId(id).getHandlers().put("option:remove-room", this);
         }
         return this;
     }

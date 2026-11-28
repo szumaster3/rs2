@@ -7,9 +7,9 @@ import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
 import content.region.desert.al_kharid.quest.desertrescue.plugin.TouristTrapPlugin.AnnaCartHandler.AnnaCartCutscene
 import content.region.desert.al_kharid.quest.desertrescue.plugin.TouristTrapPlugin.BedabinAnvilHandler.AnnaWinchHandler
 import core.api.*
-import core.cache.def.impl.AnimationDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.SeqType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.activity.ActivityManager
 import core.game.activity.ActivityPlugin
 import core.game.activity.CutscenePlugin
@@ -48,75 +48,75 @@ import shared.consts.Vars
 class TouristTrapPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(1528).handlers["option:open"] = this
-        SceneryDefinition.forId(1529).handlers["option:close"] = this
-        SceneryDefinition.forId(2673).handlers["option:open"] = this
-        SceneryDefinition.forId(2673).handlers["option:search"] = this
-        SceneryDefinition.forId(2674).handlers["option:open"] = this
-        SceneryDefinition.forId(2674).handlers["option:search"] = this
-        SceneryDefinition.forId(2675).handlers["option:open"] = this
-        SceneryDefinition.forId(2675).handlers["option:watch"] = this
-        SceneryDefinition.forId(2676).handlers["option:open"] = this
-        SceneryDefinition.forId(2676).handlers["option:watch"] = this
-        SceneryDefinition.forId(2677).handlers["option:open"] = this
-        SceneryDefinition.forId(2678).handlers["option:search"] = this
-        SceneryDefinition.forId(2680).handlers["option:look-in"] = this
-        SceneryDefinition.forId(2680).handlers["option:search"] = this
-        SceneryDefinition.forId(2681).handlers["option:look in"] = this
-        SceneryDefinition.forId(2681).handlers["option:search"] = this
-        SceneryDefinition.forId(2684).handlers["option:look at"] = this
-        SceneryDefinition.forId(2684).handlers["option:look at"] = this
-        SceneryDefinition.forId(2684).handlers["option:search"] = this
-        SceneryDefinition.forId(2684).handlers["option:search"] = this
-        SceneryDefinition.forId(2685).handlers["option:open"] = this
-        SceneryDefinition.forId(2685).handlers["option:open"] = this
-        SceneryDefinition.forId(2686).handlers["option:search"] = this
-        SceneryDefinition.forId(2686).handlers["option:search"] = this
-        SceneryDefinition.forId(2687).handlers["option:open"] = this
-        SceneryDefinition.forId(2687).handlers["option:search"] = this
-        SceneryDefinition.forId(2688).handlers["option:open"] = this
-        SceneryDefinition.forId(2688).handlers["option:search"] = this
-        SceneryDefinition.forId(2689).handlers["option:open"] = this
-        SceneryDefinition.forId(2690).handlers["option:open"] = this
-        SceneryDefinition.forId(2691).handlers["option:open"] = this
-        SceneryDefinition.forId(2698).handlers["option:walk through"] = this
-        SceneryDefinition.forId(2699).handlers["option:walk through"] = this
+        LocType.forId(1528).handlers["option:open"] = this
+        LocType.forId(1529).handlers["option:close"] = this
+        LocType.forId(2673).handlers["option:open"] = this
+        LocType.forId(2673).handlers["option:search"] = this
+        LocType.forId(2674).handlers["option:open"] = this
+        LocType.forId(2674).handlers["option:search"] = this
+        LocType.forId(2675).handlers["option:open"] = this
+        LocType.forId(2675).handlers["option:watch"] = this
+        LocType.forId(2676).handlers["option:open"] = this
+        LocType.forId(2676).handlers["option:watch"] = this
+        LocType.forId(2677).handlers["option:open"] = this
+        LocType.forId(2678).handlers["option:search"] = this
+        LocType.forId(2680).handlers["option:look-in"] = this
+        LocType.forId(2680).handlers["option:search"] = this
+        LocType.forId(2681).handlers["option:look in"] = this
+        LocType.forId(2681).handlers["option:search"] = this
+        LocType.forId(2684).handlers["option:look at"] = this
+        LocType.forId(2684).handlers["option:look at"] = this
+        LocType.forId(2684).handlers["option:search"] = this
+        LocType.forId(2684).handlers["option:search"] = this
+        LocType.forId(2685).handlers["option:open"] = this
+        LocType.forId(2685).handlers["option:open"] = this
+        LocType.forId(2686).handlers["option:search"] = this
+        LocType.forId(2686).handlers["option:search"] = this
+        LocType.forId(2687).handlers["option:open"] = this
+        LocType.forId(2687).handlers["option:search"] = this
+        LocType.forId(2688).handlers["option:open"] = this
+        LocType.forId(2688).handlers["option:search"] = this
+        LocType.forId(2689).handlers["option:open"] = this
+        LocType.forId(2690).handlers["option:open"] = this
+        LocType.forId(2691).handlers["option:open"] = this
+        LocType.forId(2698).handlers["option:walk through"] = this
+        LocType.forId(2699).handlers["option:walk through"] = this
 
-        SceneryDefinition.forId(18869).handlers["option:bend"] = this
-        SceneryDefinition.forId(18870).handlers["option:escape"] = this
-        SceneryDefinition.forId(18871).handlers["option:climb"] = this
-        SceneryDefinition.forId(18875).handlers["option:inspect"] = this
-        SceneryDefinition.forId(18878).handlers["option:look at"] = this
-        SceneryDefinition.forId(18878).handlers["option:search"] = this
-        SceneryDefinition.forId(18879).handlers["option:look at"] = this
-        SceneryDefinition.forId(18879).handlers["option:search"] = this
-        SceneryDefinition.forId(18888).handlers["option:look at"] = this
-        SceneryDefinition.forId(18888).handlers["option:operate"] = this
-        SceneryDefinition.forId(18898).handlers["option:look at"] = this
-        SceneryDefinition.forId(18898).handlers["option:search"] = this
-        SceneryDefinition.forId(18899).handlers["option:look at"] = this
-        SceneryDefinition.forId(18899).handlers["option:search"] = this
-        SceneryDefinition.forId(18902).handlers["option:search"] = this
-        SceneryDefinition.forId(18923).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(18924).handlers["option:climb-down"] = this
-        SceneryDefinition.forId(18951).handlers["option:look at"] = this
-        SceneryDefinition.forId(18951).handlers["option:use"] = this
-        SceneryDefinition.forId(18958).handlers["option:look at"] = this
-        SceneryDefinition.forId(18958).handlers["option:search"] = this
-        SceneryDefinition.forId(18959).handlers["option:look at"] = this
-        SceneryDefinition.forId(18959).handlers["option:search"] = this
-        SceneryDefinition.forId(18962).handlers["option:look in"] = this
-        SceneryDefinition.forId(18962).handlers["option:search"] = this
-        SceneryDefinition.forId(18963).handlers["option:look in"] = this
-        SceneryDefinition.forId(18963).handlers["option:search"] = this
-        SceneryDefinition.forId(36748).handlers["option:talk-to"] = this
+        LocType.forId(18869).handlers["option:bend"] = this
+        LocType.forId(18870).handlers["option:escape"] = this
+        LocType.forId(18871).handlers["option:climb"] = this
+        LocType.forId(18875).handlers["option:inspect"] = this
+        LocType.forId(18878).handlers["option:look at"] = this
+        LocType.forId(18878).handlers["option:search"] = this
+        LocType.forId(18879).handlers["option:look at"] = this
+        LocType.forId(18879).handlers["option:search"] = this
+        LocType.forId(18888).handlers["option:look at"] = this
+        LocType.forId(18888).handlers["option:operate"] = this
+        LocType.forId(18898).handlers["option:look at"] = this
+        LocType.forId(18898).handlers["option:search"] = this
+        LocType.forId(18899).handlers["option:look at"] = this
+        LocType.forId(18899).handlers["option:search"] = this
+        LocType.forId(18902).handlers["option:search"] = this
+        LocType.forId(18923).handlers["option:climb-up"] = this
+        LocType.forId(18924).handlers["option:climb-down"] = this
+        LocType.forId(18951).handlers["option:look at"] = this
+        LocType.forId(18951).handlers["option:use"] = this
+        LocType.forId(18958).handlers["option:look at"] = this
+        LocType.forId(18958).handlers["option:search"] = this
+        LocType.forId(18959).handlers["option:look at"] = this
+        LocType.forId(18959).handlers["option:search"] = this
+        LocType.forId(18962).handlers["option:look in"] = this
+        LocType.forId(18962).handlers["option:search"] = this
+        LocType.forId(18963).handlers["option:look in"] = this
+        LocType.forId(18963).handlers["option:search"] = this
+        LocType.forId(36748).handlers["option:talk-to"] = this
 
-        NPCDefinition.forId(830).handlers["option:watch"] = this
-        NPCDefinition.forId(4975).handlers["option:talk-to"] = this
-        NPCDefinition.forId(4976).handlers["option:talk-to"] = this
-        NPCDefinition.forId(4977).handlers["option:talk-to"] = this
-        NPCDefinition.forId(4978).handlers["option:talk-to"] = this
-        NPCDefinition.forId(5002).handlers["option:talk-to"] = this
+        NpcType.forId(830).handlers["option:watch"] = this
+        NpcType.forId(4975).handlers["option:talk-to"] = this
+        NpcType.forId(4976).handlers["option:talk-to"] = this
+        NpcType.forId(4977).handlers["option:talk-to"] = this
+        NpcType.forId(4978).handlers["option:talk-to"] = this
+        NpcType.forId(5002).handlers["option:talk-to"] = this
 
         TouristTrap.TECHNICAL_PLANS.definition.handlers["option:read"] = this
         TouristTrap.ANNA_BARREL.definition.handlers["option:look"] = this
@@ -1146,7 +1146,7 @@ class TouristTrapPlugin : OptionHandler() {
             player.faceLocation(base.transform(15, 9, 0))
             player.animate(Animation.create(5054))
             Pulser.submit(
-                object : Pulse(AnimationDefinition.forId(Animations.UNTYING_5054)!!.durationTicks, player) {
+                object : Pulse(SeqType.forId(Animations.UNTYING_5054)!!.durationTicks, player) {
                     override fun pulse(): Boolean {
                         TouristTrap.addConfig(player, 2048 + (1 shl 4))
                         this@WinchCutscene.stop(true)

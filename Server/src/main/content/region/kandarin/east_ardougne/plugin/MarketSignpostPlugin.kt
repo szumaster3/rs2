@@ -3,7 +3,7 @@ package content.region.kandarin.east_ardougne.plugin
 import core.GlobalStatistics
 import core.api.registerMapZone
 import core.api.sendDialogue
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.Option
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -22,7 +22,7 @@ import shared.consts.Scenery
 class MarketSignpostPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Scenery.SIGNPOST_31300).handlers["option:read"] = this
+        LocType.forId(Scenery.SIGNPOST_31300).handlers["option:read"] = this
         registerActivity()
         return this
     }

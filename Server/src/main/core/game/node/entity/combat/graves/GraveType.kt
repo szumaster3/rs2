@@ -2,7 +2,7 @@ package core.game.node.entity.combat.graves
 
 import content.data.Quests
 
-import core.cache.def.impl.DataMap
+import core.cache.def.impl.EnumType
 
 enum class GraveType(val text: String) {
     MemorialPlaque("In memory of @name,<br>who died here."),
@@ -68,8 +68,8 @@ enum class GraveType(val text: String) {
         }
 
     companion object {
-        val npcMap: DataMap = DataMap.get(1098)
-        val costMap: DataMap = DataMap.get(1101)
+        val npcMap: EnumType = EnumType.get(1098)
+        val costMap: EnumType = EnumType.get(1101)
 
         val DEFAULT: GraveType = MemorialPlaque
 

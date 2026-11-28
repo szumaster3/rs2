@@ -4,7 +4,7 @@ import core.cache.Cache
 import java.nio.ByteBuffer
 
 /** Revision 578 CursorType: config index 2, group 33. Graphic references sprite index 8. */
-class CursorDefinition private constructor(val id: Int) {
+class CursorType private constructor(val id: Int) {
     var graphic: Int = 0
         private set
     var hotspotX: Int = 0
@@ -13,14 +13,14 @@ class CursorDefinition private constructor(val id: Int) {
         private set
 
     companion object {
-        @JvmStatic fun forId(id: Int): CursorDefinition? {
+        @JvmStatic fun forId(id: Int): CursorType? {
             if (id < 0) return null
             val data = Cache.getIndexes().getOrNull(2)?.getFileData(33, id) ?: return null
             return parse(id, data)
         }
 
-        @JvmStatic fun parse(id: Int, data: ByteArray): CursorDefinition {
-            val result = CursorDefinition(id)
+        @JvmStatic fun parse(id: Int, data: ByteArray): CursorType {
+            val result = CursorType(id)
             val buffer = ByteBuffer.wrap(data)
             while (true) {
                 when (val opcode = buffer.get().toInt() and 0xff) {

@@ -1,6 +1,6 @@
 package content.global.plugins.`object`
 
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -14,9 +14,9 @@ import core.plugin.Plugin
 class LadderOptionPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("climb-up", this)
-        SceneryDefinition.setOptionHandler("climb-down", this)
-        SceneryDefinition.setOptionHandler("climb", this)
+        LocType.setOptionHandler("climb-up", this)
+        LocType.setOptionHandler("climb-down", this)
+        LocType.setOptionHandler("climb", this)
         return this
     }
 

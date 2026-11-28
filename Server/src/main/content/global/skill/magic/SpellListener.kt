@@ -4,7 +4,7 @@ import core.api.playAudio
 import core.api.playGlobalAudio
 import core.api.sendMessage
 import core.api.setAttribute
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.Listener
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -72,7 +72,7 @@ abstract class SpellListener(
 
         for (item in specialEquipment) {
             if (!player.equipment.contains(item, 1)) {
-                sendMessage(player, "You need a ${ItemDefinition.forId(item).name} to cast this.")
+                sendMessage(player, "You need a ${ObjType.forId(item).name} to cast this.")
                 throw IllegalStateException("Missing special equipment.")
             }
         }

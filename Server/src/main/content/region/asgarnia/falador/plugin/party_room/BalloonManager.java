@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.plugin.party_room;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -53,7 +53,7 @@ public final class BalloonManager extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         for (PartyBalloon balloon : PartyBalloon.values()) {
-            SceneryDefinition.forId(balloon.getBalloonId()).getHandlers().put("option:burst", this);
+            LocType.forId(balloon.getBalloonId()).getHandlers().put("option:burst", this);
         }
         return this;
     }

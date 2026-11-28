@@ -3,7 +3,7 @@ package content.global.skill.summoning.familiar.npc
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import content.global.skill.summoning.familiar.Forager
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.combat.BattleState
@@ -148,7 +148,7 @@ class VoidFamiliarNPC : Plugin<Any?> {
                 @Throws(Throwable::class)
                 override fun newInstance(arg: Any?): Plugin<Any> {
                     for (i in ids) {
-                        NPCDefinition.forId(i).handlers["option:strike"] = this
+                        NpcType.forId(i).handlers["option:strike"] = this
                     }
                     return this
                 }

@@ -2,7 +2,7 @@ package core.game.system.command.sets
 
 import core.api.Commands
 import core.cache.def.impl.ComponentType
-import core.cache.def.impl.IfaceDefinition
+import core.cache.def.impl.InterfaceComponent
 import core.game.system.command.Privilege
 
 class IfCommandSet : Commands {
@@ -23,17 +23,17 @@ class IfCommandSet : Commands {
             val id = args.getOrNull(1)?.toIntOrNull() ?: -1
             if (id == -1) reject(player, "Must supply a valid interface ID!")
 
-            val def = IfaceDefinition.forId(id)
+            val def = InterfaceComponent.forId(id)
             notify(player, logToConsole = true, message = "Triggers for $def:")
 
             for (child in def!!.children!!) {
                 if (child!!.scripts == null) continue
                 if (child.triggers == null) continue
 
-                if (child.scripts!!.onVarpTransmit != null) {
+                if (child.scripts!!.onVarTransmit != null) {
                     notify(player, logToConsole = true, message = "$child [VARP]:")
-                    notify(player, logToConsole = true, message = "  Transmit ${child.triggers!!.varpTriggers!!.joinToString(",")} triggers script ${child.scripts!!.onVarpTransmit!!.id}",)
-                    notify(player, logToConsole = true, message = "  Default script args: ${child.scripts!!.onVarpTransmit!!.args?.joinToString(",")}")
+                    notify(player, logToConsole = true, message = "  Transmit ${child.triggers!!.varpTriggers!!.joinToString(",")} triggers script ${child.scripts!!.onVarTransmit!!.id}",)
+                    notify(player, logToConsole = true, message = "  Default script args: ${child.scripts!!.onVarTransmit!!.args?.joinToString(",")}")
                 }
                 if (child.scripts!!.onVarcTransmit != null) {
                     notify(player, logToConsole = true, message = "$child [VARC]:")
@@ -57,7 +57,7 @@ class IfCommandSet : Commands {
             val id = args.getOrNull(1)?.toIntOrNull() ?: -1
             if (id == -1) reject(player, "Must supply a valid interface ID!")
 
-            val def = IfaceDefinition.forId(id)
+            val def = InterfaceComponent.forId(id)
             notify(player, logToConsole = true, message = "Text for $def:")
 
             for (child in def!!.children!!) {
@@ -80,7 +80,7 @@ class IfCommandSet : Commands {
             val id = args.getOrNull(1)?.toIntOrNull() ?: -1
             if (id == -1) reject(player, "Must supply a valid interface ID!")
 
-            val def = IfaceDefinition.forId(id)
+            val def = InterfaceComponent.forId(id)
             notify(player, logToConsole = true, message = "Models for $def:")
 
             for (child in def!!.children!!) {
@@ -88,7 +88,7 @@ class IfCommandSet : Commands {
                 notify(
                     player,
                     logToConsole = true,
-                    message = "$child - ${child.modelId}/${child.activeModelId} - Anim: ${child.modelAnimId}/${child.activeModelAnimId}",
+                    message = "$child - ${child.modelId}/${child.activeModelId} - Anim: ${child.modelSeqId}/${child.activeModelAnimId}",
                 )
             }
         }

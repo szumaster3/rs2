@@ -4,7 +4,7 @@ import content.global.skill.agility.AgilityHandler
 import content.global.skill.summoning.familiar.BurdenBeast
 import content.minigame.castlewars.plugin.areas.CastleWarsWaitingArea
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.container.Container
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -82,7 +82,7 @@ class CastleWarsListeners : InteractionListener {
                 playAudio(player, Sounds.PICK2_2582)
             } else {
                 val formattedItemName =
-                    (ItemDefinition.forId(rewardItem).name.lowercase() + "s.")
+                    (ObjType.forId(rewardItem).name.lowercase() + "s.")
                         .replace("pes.", "pe.")
                         .replace("bronze ", "")
                 if (rewardItem == Items.TOOLKIT_4051) {

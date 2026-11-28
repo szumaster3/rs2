@@ -2,7 +2,7 @@ package content.global.skill.agility.courses
 
 import content.global.skill.agility.AgilityCourse
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.Node
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.ForceMovement
@@ -40,12 +40,12 @@ class ApeAtollCourse : AgilityCourse {
     }
 
     override fun configure() {
-        SceneryDefinition.forId(Objects.STEPPING_STONE_12568).handlers["option:jump-to"]      = this
-        SceneryDefinition.forId(Objects.TROPICAL_TREE_12570 ).handlers["option:climb"]        = this
-        SceneryDefinition.forId(Objects.MONKEYBARS_12573    ).handlers["option:swing across"] = this
-        SceneryDefinition.forId(Objects.SKULL_SLOPE_12576   ).handlers["option:climb-up"]     = this
-        SceneryDefinition.forId(Objects.ROPE_12578          ).handlers["option:swing"]        = this
-        SceneryDefinition.forId(Objects.TROPICAL_TREE_12618 ).handlers["option:climb-down"]   = this
+        LocType.forId(Objects.STEPPING_STONE_12568).handlers["option:jump-to"]      = this
+        LocType.forId(Objects.TROPICAL_TREE_12570 ).handlers["option:climb"]        = this
+        LocType.forId(Objects.MONKEYBARS_12573    ).handlers["option:swing across"] = this
+        LocType.forId(Objects.SKULL_SLOPE_12576   ).handlers["option:climb-up"]     = this
+        LocType.forId(Objects.ROPE_12578          ).handlers["option:swing"]        = this
+        LocType.forId(Objects.TROPICAL_TREE_12618 ).handlers["option:climb-down"]   = this
     }
 
     private fun checkRequirements(player: Player, level: Int = 48): Boolean {

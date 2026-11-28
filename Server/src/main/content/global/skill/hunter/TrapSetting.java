@@ -1,7 +1,7 @@
 package content.global.skill.hunter;
 
-import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.ObjType;
+import core.cache.def.impl.LocType;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -516,9 +516,9 @@ public class TrapSetting {
      */
     public String getName() {
         if (isObjectTrap()) {
-            return SceneryDefinition.forId(nodeIds[0]).getName().toLowerCase();
+            return LocType.forId(nodeIds[0]).getName().toLowerCase();
         }
-        return ItemDefinition.forId(nodeIds[0]).getName().toLowerCase();
+        return ObjType.forId(nodeIds[0]).getName().toLowerCase();
     }
 
     /**

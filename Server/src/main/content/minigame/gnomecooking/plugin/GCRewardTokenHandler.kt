@@ -1,7 +1,7 @@
 package content.minigame.gnomecooking.plugin
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -32,7 +32,7 @@ private val gnomeItems = arrayOf(
 @Initializable
 class GCRewardTokenHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        val def = ItemDefinition.forId(Items.REWARD_TOKEN_9474)
+        val def = ObjType.forId(Items.REWARD_TOKEN_9474)
         def.handlers["option:check"] = this
         def.handlers["option:activate"] = this
         return this

@@ -1,7 +1,7 @@
 package content.global.plugins.item.equipment.bolt_pouch
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.container.impl.EquipmentContainer
 import core.game.event.EventHook
 import core.game.event.ItemEquipEvent
@@ -64,7 +64,7 @@ class BoltPouchPlugin : InterfaceListener, InteractionListener
          */
 
         on(BOLT_POUCH, IntType.ITEM, "destroy") { player, item ->
-            val itemDef = ItemDefinition.forId(item.id)
+            val itemDef = ObjType.forId(item.id)
             sendDestroyItemDialogue(
                 player,
                 itemDef.id,

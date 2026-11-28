@@ -1,6 +1,6 @@
 /*package content.global.skill.hunter.tracking
 
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -87,16 +87,16 @@ class CommonKebbitWest : HunterTracking() {
             Scenery.PLANT_19387
         )
         for (id in plantIds) {
-            SceneryDefinition.forId(id).handlers["option:inspect"] = this
+            LocType.forId(id).handlers["option:inspect"] = this
         }
 
         val burrowIds = arrayOf(19443, 19444)
         for (id in burrowIds) {
-            SceneryDefinition.forId(id).handlers["option:inspect"] = this
+            LocType.forId(id).handlers["option:inspect"] = this
         }
 
-        SceneryDefinition.forId(19429).handlers["option:attack"] = this
-        SceneryDefinition.forId(19429).handlers["option:search"] = this
+        LocType.forId(19429).handlers["option:attack"] = this
+        LocType.forId(19429).handlers["option:search"] = this
 
         return this
     }

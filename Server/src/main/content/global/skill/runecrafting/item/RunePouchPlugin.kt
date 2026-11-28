@@ -1,6 +1,6 @@
 package content.global.skill.runecrafting.item
 
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -12,10 +12,10 @@ class RunePouchPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (i in Items.SMALL_POUCH_5509..Items.GIANT_POUCH_5515) {
-            ItemDefinition.forId(i).handlers["option:fill"] = this
-            ItemDefinition.forId(i).handlers["option:empty"] = this
-            ItemDefinition.forId(i).handlers["option:check"] = this
-            ItemDefinition.forId(i).handlers["option:drop"] = this
+            ObjType.forId(i).handlers["option:fill"] = this
+            ObjType.forId(i).handlers["option:empty"] = this
+            ObjType.forId(i).handlers["option:check"] = this
+            ObjType.forId(i).handlers["option:drop"] = this
         }
         return this
     }

@@ -6,7 +6,7 @@ import core.cache.misc.buffer.ByteBufferUtils
 import core.tools.Log
 import java.nio.ByteBuffer
 
-class Struct(val id: Int) {
+class StructType(val id: Int) {
     @JvmField val dataStore = HashMap<Int, Any>()
     fun getInt(key: Int): Int {
         if (!dataStore.containsKey(key)) {
@@ -20,24 +20,24 @@ class Struct(val id: Int) {
     fun getParam(key: Int, defaultValue: Int): Int = dataStore[key] as? Int ?: defaultValue
     fun getParam(key: Int, defaultValue: String?): String? = dataStore[key] as? String ?: defaultValue
 
-    override fun toString(): String = "Struct{id=$id, dataStore=$dataStore}"
+    override fun toString(): String = "StructType{id=$id, dataStore=$dataStore}"
 
     companion object {
-        private val definitions = HashMap<Int, Struct>()
+        private val definitions = HashMap<Int, StructType>()
 
         @JvmStatic
-        fun get(id: Int): Struct = definitions.getOrPut(id) { parse(id, Cache.getIndexes()[2]!!.getFileData(26, id)) }
+        fun get(id: Int): StructType = definitions.getOrPut(id) { parse(id, Cache.getIndexes()[2]!!.getFileData(26, id)) }
 
         @JvmStatic
         fun getCount(): Int = Cache.getIndexes()[2]!!.getFilesSize(26)
 
         @JvmStatic
-        fun parse(id: Int, data: ByteArray?): Struct {
-            return if (data == null) Struct(id) else decode(id, ByteBuffer.wrap(data))
+        fun parse(id: Int, data: ByteArray?): StructType {
+            return if (data == null) StructType(id) else decode(id, ByteBuffer.wrap(data))
         }
 
-        internal fun decode(id: Int, buffer: ByteBuffer): Struct {
-            val definition = Struct(id)
+        internal fun decode(id: Int, buffer: ByteBuffer): StructType {
+            val definition = StructType(id)
             while (true) {
                 when (val opcode = buffer.get().toInt() and 0xFF) {
                     0 -> return definition
@@ -46,7 +46,7 @@ class Struct(val id: Int) {
                         val key = ByteBufferUtils.getMedium(buffer)
                         definition.dataStore[key] = if (string) ByteBufferUtils.getString(buffer) else buffer.int
                     }
-                    else -> error("Unknown Struct opcode $opcode at ${buffer.position() - 1}")
+                    else -> error("Unknown StructType opcode $opcode at ${buffer.position() - 1}")
                 }
             }
         }

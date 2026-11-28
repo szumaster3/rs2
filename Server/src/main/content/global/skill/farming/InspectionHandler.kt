@@ -1,7 +1,7 @@
 package content.global.skill.farming
 
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -14,7 +14,7 @@ import core.tools.prependArticle
 class InspectionHandler : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("inspect", this)
+        LocType.setOptionHandler("inspect", this)
         return this
     }
 

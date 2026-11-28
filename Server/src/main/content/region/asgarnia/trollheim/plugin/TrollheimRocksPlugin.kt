@@ -1,7 +1,7 @@
 package content.region.asgarnia.trollheim.plugin
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.activity.ActivityManager
 import core.game.activity.ActivityPlugin
 import core.game.activity.CutscenePlugin
@@ -41,7 +41,7 @@ class TrollheimRocksPlugin : OptionHandler() {
         )
 
         rockLoc.forEach { id ->
-            SceneryDefinition.forId(id).handlers["option:climb"] = this
+            LocType.forId(id).handlers["option:climb"] = this
         }
 
         definePlugin(WarningZone())

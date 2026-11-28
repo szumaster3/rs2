@@ -2,7 +2,7 @@ package content.global.skill.slayer.dungeon.ancient_cavern
 
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.Option
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -72,7 +72,7 @@ class AncientCavernPlugin : MapZone("ancient cavern", true, ZoneRestriction.CANN
         ClassScanner.definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any?> {
-                    SceneryDefinition.forId(shared.consts.Scenery.WHIRLPOOL_25274).handlers["option:dive in"] = this
+                    LocType.forId(shared.consts.Scenery.WHIRLPOOL_25274).handlers["option:dive in"] = this
                     return this
                 }
 

@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.plugin.party_room;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -17,7 +17,7 @@ public final class DropPartyLeverOptionPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(shared.consts.Scenery.LEVER_26194).getHandlers().put("option:pull", this);
+        LocType.forId(shared.consts.Scenery.LEVER_26194).getHandlers().put("option:pull", this);
         return this;
     }
 

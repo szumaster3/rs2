@@ -2,7 +2,7 @@ package content.global.skill.farming
 
 import content.global.skill.summoning.familiar.npc.GiantEntNPC
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -20,16 +20,16 @@ import java.util.concurrent.TimeUnit
 @Initializable
 class FruitAndBerryPicker : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("pick-coconut", this)
-        SceneryDefinition.setOptionHandler("pick-banana", this)
-        SceneryDefinition.setOptionHandler("pick-apple", this)
-        SceneryDefinition.setOptionHandler("pick-orange", this)
-        SceneryDefinition.setOptionHandler("pick-pineapple", this)
-        SceneryDefinition.setOptionHandler("pick-papaya", this)
-        SceneryDefinition.setOptionHandler("pick-leaf", this)
-        SceneryDefinition.setOptionHandler("pick-from", this)
-        SceneryDefinition.setOptionHandler("pick-fruit", this)
-        SceneryDefinition.setOptionHandler("pick-spine", this)
+        LocType.setOptionHandler("pick-coconut", this)
+        LocType.setOptionHandler("pick-banana", this)
+        LocType.setOptionHandler("pick-apple", this)
+        LocType.setOptionHandler("pick-orange", this)
+        LocType.setOptionHandler("pick-pineapple", this)
+        LocType.setOptionHandler("pick-papaya", this)
+        LocType.setOptionHandler("pick-leaf", this)
+        LocType.setOptionHandler("pick-from", this)
+        LocType.setOptionHandler("pick-fruit", this)
+        LocType.setOptionHandler("pick-spine", this)
         return this
     }
 

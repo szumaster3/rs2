@@ -2,7 +2,7 @@ package content.global.skill.agility.courses.brimhaven
 
 import content.global.skill.agility.AgilityHandler
 import core.api.refreshAppearance
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
@@ -104,19 +104,19 @@ class BrimhavenCourse : OptionHandler() {
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(3566).handlers["option:swing-on"] = this
-        SceneryDefinition.forId(3578).handlers["option:jump-on"] = this
-        SceneryDefinition.forId(3565).handlers["option:climb-over"] = this
-        SceneryDefinition.forId(3553).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(3557).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(3570).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(3571).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(3572).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(3559).handlers["option:walk-across"] = this
-        SceneryDefinition.forId(3561).handlers["option:walk-across"] = this
-        SceneryDefinition.forId(3564).handlers["option:swing-across"] = this
-        SceneryDefinition.forId(3551).handlers["option:walk-on"] = this
-        SceneryDefinition.forId(3583).handlers["option:climb-across"] = this
+        LocType.forId(3566).handlers["option:swing-on"] = this
+        LocType.forId(3578).handlers["option:jump-on"] = this
+        LocType.forId(3565).handlers["option:climb-over"] = this
+        LocType.forId(3553).handlers["option:walk-on"] = this
+        LocType.forId(3557).handlers["option:walk-on"] = this
+        LocType.forId(3570).handlers["option:walk-on"] = this
+        LocType.forId(3571).handlers["option:walk-on"] = this
+        LocType.forId(3572).handlers["option:walk-on"] = this
+        LocType.forId(3559).handlers["option:walk-across"] = this
+        LocType.forId(3561).handlers["option:walk-across"] = this
+        LocType.forId(3564).handlers["option:swing-across"] = this
+        LocType.forId(3551).handlers["option:walk-on"] = this
+        LocType.forId(3583).handlers["option:climb-across"] = this
         return this
     }
 

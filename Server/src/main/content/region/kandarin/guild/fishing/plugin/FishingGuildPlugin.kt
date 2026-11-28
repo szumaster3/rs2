@@ -3,7 +3,7 @@ package content.region.kandarin.guild.fishing.plugin
 import core.api.getDynLevel
 import core.api.sendNPCDialogue
 import core.api.withinDistance
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -22,7 +22,7 @@ import shared.consts.NPCs
 class FishingGuildPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(2025).handlers["option:open"] = this
+        LocType.forId(2025).handlers["option:open"] = this
         return this
     }
 

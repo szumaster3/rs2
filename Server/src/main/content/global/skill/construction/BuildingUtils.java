@@ -1,7 +1,7 @@
 package content.global.skill.construction;
 
 import content.global.skill.construction.items.NailType;
-import core.cache.def.impl.ItemDefinition;
+import core.cache.def.impl.ObjType;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
@@ -105,7 +105,7 @@ public final class BuildingUtils {
 
             Decoration decoration = hotspot.getDecorations()[menuIndex];
             items[BUILD_INDEXES[menuIndex]] = new Item(decoration.getInterfaceItem());
-            player.getPacketDispatch().sendString(ItemDefinition.forId(decoration.getInterfaceItem()).getName(), 396, itemsStringOffset);
+            player.getPacketDispatch().sendString(ObjType.forId(decoration.getInterfaceItem()).getName(), 396, itemsStringOffset);
             boolean hasRequirements = player.getSkills().getLevel(Skills.CONSTRUCTION) >= decoration.getLevel();
             for (int j = 0; j < 4; j++) {
                 if (j >= decoration.getItems().length) {

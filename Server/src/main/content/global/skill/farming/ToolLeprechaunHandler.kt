@@ -1,7 +1,7 @@
 package content.global.skill.farming
 
 import content.minigame.vinesweeper.plugin.VinesweeperPlugin
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.component.Component
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -19,7 +19,7 @@ class ToolLeprechaunHandler : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (id in TL_IDS) {
-            val def = NPCDefinition.forId(id)
+            val def = NpcType.forId(id)
             def.handlers["option:exchange"] = this
             def.handlers["option:teleport"] = this
         }

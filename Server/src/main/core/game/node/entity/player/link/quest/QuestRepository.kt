@@ -1,11 +1,11 @@
 package core.game.node.entity.player.link.quest
 
 import com.google.gson.JsonObject
-import core.cache.def.impl.VarpDefinition
+import core.cache.def.impl.VarpType
 import core.api.log
 import core.api.getVarp
 import core.api.getVarbit
-import core.cache.def.impl.QuestDefinition
+import core.cache.def.impl.QuestType
 import core.api.setVarbit
 import core.api.setVarp
 import core.game.node.entity.player.Player
@@ -61,7 +61,7 @@ class QuestRepository(private val player: Player) {
      */
     fun syncronizeTab(player: Player) {
         setVarp(player, 101, points)
-        setVarp(player, 904, QuestDefinition.loadAll().values.sumOf { it.questPoints })
+        setVarp(player, 904, QuestType.loadAll().values.sumOf { it.questPoints })
 
         for (quest in QUESTS.values) {
             val stage = getStage(quest)
@@ -69,7 +69,7 @@ class QuestRepository(private val player: Player) {
             val progress = definition.varps + definition.varbits
             // Shared/multi-variable quests require their existing explicit gameplay configuration.
             val native = progress.singleOrNull()
-            val shared = native != null && QuestDefinition.loadAll().values.any { other ->
+            val shared = native != null && QuestType.loadAll().values.any { other ->
                 other.id != definition.id && (if (definition.varbits.isNotEmpty()) other.varbits else other.varps).any { it.variable == native.variable }
             }
             val custom = quest.javaClass.getMethod("getConfig", Player::class.java, Int::class.javaPrimitiveType!!).declaringClass != Quest::class.java
@@ -94,7 +94,7 @@ class QuestRepository(private val player: Player) {
                 setVarbit(player, config[1], config[2])
             } else {
                 // Original VARP quests: {questVarpId, valueToSet}
-                if (!VarpDefinition.exists(config[0])) {
+                if (!VarpType.exists(config[0])) {
                     log(javaClass, Log.WARN, "Quest ${quest.name}: unmapped varp ${config[0]}")
                 } else {
                     setVarp(player, config[0], config[1])
@@ -240,6 +240,6 @@ class QuestRepository(private val player: Player) {
      * Gets a quest by name.
      */
     fun getQuest(name: String): Quest? {
-        return QUESTS[name] ?: QuestDefinition.forName(name)?.let { forIndex(it.id) }
+        return QUESTS[name] ?: QuestType.forName(name)?.let { forIndex(it.id) }
     }
 }

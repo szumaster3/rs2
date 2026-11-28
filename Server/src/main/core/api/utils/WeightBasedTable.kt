@@ -5,7 +5,7 @@ import content.global.activity.trails.ClueLevel
 import content.global.activity.trails.ClueScroll
 import content.global.plugins.item.equipment.fog_gloves.FOGGlovesManager
 import core.api.inEquipment
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -293,7 +293,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         val builder = StringBuilder()
         for (item in this) {
             builder.append(
-                "${ItemDefinition.forId(
+                "${ObjType.forId(
                     item.id,
                 ).name} || Weight: ${item.weight} || MinAmt: ${item.minAmt} || maxAmt: ${item.maxAmt}",
             )

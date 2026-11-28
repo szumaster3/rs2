@@ -3,7 +3,7 @@ package content.minigame.duel_arena.plugin
 import content.global.skill.summoning.familiar.Familiar
 import core.api.inBorders
 import core.api.setAttribute
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.container.Container
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.Option
@@ -459,7 +459,7 @@ class DuelArea
         class ForfeitTrapdoorPlugin : OptionHandler() {
             @Throws(Throwable::class)
             override fun newInstance(arg: Any?): Plugin<Any> {
-                SceneryDefinition.forId(3203).handlers["option:forfeit"] = this
+                LocType.forId(3203).handlers["option:forfeit"] = this
                 return this
             }
 

@@ -1,7 +1,7 @@
 package content.global.skill.farming
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 class HealthChecker : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("check-health", this)
+        LocType.setOptionHandler("check-health", this)
         return this
     }
 

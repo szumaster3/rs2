@@ -5,7 +5,7 @@ import core.api.getVarbit
 import core.api.getAttribute
 import content.data.GameAttributes
 import content.global.activity.champions.plugin.ChampionDefinition
-import core.cache.def.impl.VarbitDefinition
+import core.cache.def.impl.VarbitType
 import content.global.activity.penguinhns.PenguinManager
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
@@ -132,7 +132,7 @@ object QuickChat {
                     5276 -> PenguinManager.tagMapping.values.count { tags ->
                         tags.any { it.asString == player.username.lowercase() }
                     }.toLong()
-                    6764 -> if (ChampionDefinition.values().all { it.varbitId == null || VarbitDefinition.exists(it.varbitId) }) {
+                    6764 -> if (ChampionDefinition.values().all { it.varbitId == null || VarbitType.exists(it.varbitId) }) {
                         val defeated = ChampionDefinition.values().count { champion ->
                             champion.varbitId?.let { getVarbit(player, it) == 1 }
                                 ?: getAttribute(player, GameAttributes.ACTIVITY_CHAMPIONS_COMPLETE, false)

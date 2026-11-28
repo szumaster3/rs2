@@ -3,7 +3,7 @@ package content.global.skill.agility.courses
 import content.global.skill.agility.AgilityCourse
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -357,14 +357,14 @@ class WildernessCourse : AgilityCourse {
     }
 
     override fun configure() {
-        SceneryDefinition.forId(2309).handlers["option:open"] = this
-        SceneryDefinition.forId(2308).handlers["option:open"] = this
-        SceneryDefinition.forId(2307).handlers["option:open"] = this
-        SceneryDefinition.forId(2288).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(2283).handlers["option:swing-on"] = this
-        SceneryDefinition.forId(37704).handlers["option:cross"] = this
-        SceneryDefinition.forId(2297).handlers["option:walk-across"] = this
-        SceneryDefinition.forId(2328).handlers["option:climb"] = this
+        LocType.forId(2309).handlers["option:open"] = this
+        LocType.forId(2308).handlers["option:open"] = this
+        LocType.forId(2307).handlers["option:open"] = this
+        LocType.forId(2288).handlers["option:squeeze-through"] = this
+        LocType.forId(2283).handlers["option:swing-on"] = this
+        LocType.forId(37704).handlers["option:cross"] = this
+        LocType.forId(2297).handlers["option:walk-across"] = this
+        LocType.forId(2328).handlers["option:climb"] = this
     }
 
     override fun createInstance(player: Player): AgilityCourse = WildernessCourse(player)

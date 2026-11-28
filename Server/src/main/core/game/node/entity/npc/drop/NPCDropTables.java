@@ -1,7 +1,7 @@
 package core.game.node.entity.npc.drop;
 
 import core.api.utils.NPCDropTable;
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.NpcType;
 import core.game.ge.GrandExchange;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
@@ -45,7 +45,7 @@ public final class NPCDropTables {
     /**
      * The NPC definitions.
      */
-    private final NPCDefinition def;
+    private final NpcType def;
 
     /**
      * The main drop table size.
@@ -62,7 +62,7 @@ public final class NPCDropTables {
      *
      * @param def The NPC definitions.
      */
-    public NPCDropTables(NPCDefinition def) {
+    public NPCDropTables(NpcType def) {
         this.def = def;
     }
 

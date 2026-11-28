@@ -2,7 +2,7 @@ package core.game.ge
 
 import core.ServerConstants
 import core.api.getAttribute
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.repository.Repository
@@ -265,7 +265,7 @@ class GrandExchangeOffer {
      * @return A string describing the offer.
      */
     override fun toString(): String =
-        "[name=" + ItemDefinition.forId(itemID).name + ", itemId=" + itemID + ", amount=" + amount + ", completedAmount=" + completedAmount + ", offeredValue=" + offeredValue + ", index=" + index + ", sell=" + sell + ", state=" + offerState + ", withdraw=" + withdraw.contentToString() + ", totalCoinExchange=" + totalCoinExchange + ", playerUID=" + playerUID + "]"
+        "[name=" + ObjType.forId(itemID).name + ", itemId=" + itemID + ", amount=" + amount + ", completedAmount=" + completedAmount + ", offeredValue=" + offeredValue + ", index=" + index + ", sell=" + sell + ", state=" + offerState + ", withdraw=" + withdraw.contentToString() + ", totalCoinExchange=" + totalCoinExchange + ", playerUID=" + playerUID + "]"
 
     companion object {
         /**
@@ -351,13 +351,13 @@ class GrandExchangeOffer {
     fun cacheValue(): Int {
         var value = 0
         if (sell) {
-            value += ItemDefinition.forId(itemID).value * amountLeft
+            value += ObjType.forId(itemID).value * amountLeft
         } else {
             value += offeredValue * amountLeft
         }
         for (item in withdraw) {
             if (item != null) {
-                value += item.definition.value * item.amount
+                value += item.definition.cost * item.amount
             }
         }
         return value

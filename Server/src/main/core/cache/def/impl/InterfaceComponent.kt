@@ -7,7 +7,8 @@ import java.nio.ByteBuffer
 import java.util.Arrays
 import java.util.HashMap
 
-class IfaceDefinition {
+/** Cache component (client Component.java); distinct from the gameplay Component class. */
+class InterfaceComponent {
     @JvmField var id: Int = 0
     @JvmField var type: ComponentType? = null
     @JvmField var version: Int = 0
@@ -16,11 +17,11 @@ class IfaceDefinition {
     @JvmField var baseY: Int = 0
     @JvmField var baseWidth: Int = 0
     @JvmField var baseHeight: Int = 0
-    @JvmField var dynWidth: Int = 0
-    @JvmField var dynHeight: Int = 0
+    @JvmField var dynamicWidthValue: Int = 0
+    @JvmField var dynamicHeightValue: Int = 0
     @JvmField var xMode: Int = 0
     @JvmField var yMode: Int = 0
-    @JvmField var overlayer: Int = 0
+    @JvmField var layer: Int = 0
     @JvmField var hidden: Boolean = false
     @JvmField var scrollMaxH: Int = 0
     @JvmField var scrollMaxV: Int = 0
@@ -45,7 +46,7 @@ class IfaceDefinition {
     @JvmField var modelYAngle: Int = 0
     @JvmField var modelYOffset: Int = 0
     @JvmField var modelZoom: Int = 0
-    @JvmField var modelAnimId: Int = 0
+    @JvmField var modelSeqId: Int = 0
     @JvmField var activeModelAnimId: Int = 0
     @JvmField var modelOrtho: Boolean = false
     @JvmField var unknownModelProp_3: Int = 0
@@ -71,13 +72,13 @@ class IfaceDefinition {
     @JvmField var unknownIntArray_2: IntArray? = null
     @JvmField var unknownByteArray_1: ByteArray? = null
     @JvmField var unknownByteArray_2: ByteArray? = null
-    @JvmField var optionBase: String? = null
+    @JvmField var opBase: String? = null
     @JvmField var ops: Array<String?>? = null
     @JvmField var pauseText: String? = null
-    @JvmField var dragDeadzone: Int = 0
-    @JvmField var dragDeadtime: Int = 0
-    @JvmField var dragRenderBehavior: Boolean = false
-    @JvmField var opCircumfix: String? = null
+    @JvmField var dragDeadZone: Int = 0
+    @JvmField var dragDeadTime: Int = 0
+    @JvmField var dragRender: Boolean = false
+    @JvmField var targetVerb: String? = null
     @JvmField var opSuffix: String? = null
     @JvmField var option: String? = null
     @JvmField var unknownProp_9: Int = 0
@@ -97,7 +98,7 @@ class IfaceDefinition {
     @JvmField var invOptions: Array<String?>? = null
     @JvmField var scripts: LinkedScripts? = null
     @JvmField var triggers: ScriptTriggers? = null
-    @JvmField var children: Array<IfaceDefinition?>? = null
+    @JvmField var children: Array<InterfaceComponent?>? = null
     @JvmField var parent: Int = 0
     override fun toString(): String {
         if (parent == id) {
@@ -108,10 +109,10 @@ class IfaceDefinition {
     }
 
     companion object {
-        private val defCache: HashMap<Int, IfaceDefinition> = HashMap<Int, IfaceDefinition>()
+        private val defCache: HashMap<Int, InterfaceComponent> = HashMap<Int, InterfaceComponent>()
 
         @JvmStatic
-        fun forId(id: Int): IfaceDefinition? {
+        fun forId(id: Int): InterfaceComponent? {
             if (id ushr 16 != 0) return forId(id ushr 16, id and 0xffff)
             defCache[id]?.let { return it }
             val def = loadAndParse(id) ?: return null
@@ -120,14 +121,14 @@ class IfaceDefinition {
         }
 
         @JvmStatic
-        fun forId(id: Int, child: Int): IfaceDefinition? {
+        fun forId(id: Int, child: Int): InterfaceComponent? {
             return forId(id)?.children?.getOrNull(child)
         }
-        private fun loadAndParse(id: Int): IfaceDefinition? {
-            var def = IfaceDefinition()
+        private fun loadAndParse(id: Int): InterfaceComponent? {
+            var def = InterfaceComponent()
             var childCount = Cache.getIndexes()[3]!!.getFilesSize(id)
             if (childCount < 0) return null
-            def.children = arrayOfNulls<IfaceDefinition>(childCount)
+            def.children = arrayOfNulls<InterfaceComponent>(childCount)
             def.id = id
             def.parent = id
             for (i in 0 until childCount) {
@@ -135,8 +136,8 @@ class IfaceDefinition {
             }
             return def
         }
-        private fun parseChild(id: Int, childIndex: Int): IfaceDefinition? {
-            var def = IfaceDefinition()
+        private fun parseChild(id: Int, childIndex: Int): InterfaceComponent? {
+            var def = InterfaceComponent()
             def.id = childIndex + (id shl 16)
             def.parent = id
             var dataRaw = Cache.getIndexes()[3]!!.getFileData(id, childIndex)
@@ -145,14 +146,14 @@ class IfaceDefinition {
             return def
         }
 
-        internal fun decodeComponent(def: IfaceDefinition, buffer: ByteBuffer) {
+        internal fun decodeComponent(def: InterfaceComponent, buffer: ByteBuffer) {
             val data = IoBuffer(-1, PacketHeader.NORMAL, buffer)
             if (buffer.get(buffer.position()).toInt() == -1)
                 decodeIf3(def, data)
             else
                 decodeIf1(def, data)
         }
-        private fun decodeIf1(def: IfaceDefinition?, data: IoBuffer?) {
+        private fun decodeIf1(def: InterfaceComponent?, data: IoBuffer?) {
             data!!.g1()
             def!!.version = 1
             def.type = ComponentType.values()[data.g1()]
@@ -162,16 +163,16 @@ class IfaceDefinition {
             def.baseY = data.g2b()
             def.baseWidth = data.g2()
             def.baseHeight = data.g2()
-            def.dynHeight = 0
-            def.dynWidth = def.dynHeight
+            def.dynamicHeightValue = 0
+            def.dynamicWidthValue = def.dynamicHeightValue
             def.yMode = 0
             def.xMode = def.yMode
             def.alpha = data.g1()
-            def.overlayer = data.g2()
-            if (def.overlayer == 65535)
-                def.overlayer = -1
+            def.layer = data.g2()
+            if (def.layer == 65535)
+                def.layer = -1
             else
-                def.overlayer += def.id and -0x10000
+                def.layer += def.id and -0x10000
             def.unknownProp_11 = data.g2()
             var unknownLocal_1 = data.g1()
             if (unknownLocal_1 > 0) {
@@ -206,10 +207,10 @@ class IfaceDefinition {
                 data.g1()
             }
             if (def.type == ComponentType.UNKNOWN_2) {
-                def.dynHeight = 3
+                def.dynamicHeightValue = 3
                 def.objCounts = IntArray(def.baseWidth * def.baseHeight)
                 def.objTypes = IntArray(def.baseWidth * def.baseHeight)
-                def.dynWidth = 3
+                def.dynamicWidthValue = 3
                 var unknownLocal_4 = data.g1()
                 var unknownLocal_5 = data.g1()
                 if (unknownLocal_4 == 1)
@@ -283,9 +284,9 @@ class IfaceDefinition {
                 def.activeModelId = data.g2()
                 if (def.activeModelId == 65535)
                     def.activeModelId = -1
-                def.modelAnimId = data.g2()
-                if (def.modelAnimId == 65535)
-                    def.modelAnimId = -1
+                def.modelSeqId = data.g2()
+                if (def.modelSeqId == 65535)
+                    def.modelSeqId = -1
                 def.activeModelAnimId = data.g2()
                 if (def.activeModelAnimId == 65535)
                     def.activeModelAnimId = -1
@@ -294,8 +295,8 @@ class IfaceDefinition {
                 def.modelYAngle = data.g2()
             }
             if (def.type == ComponentType.UNKNOWN_7) {
-                def.dynWidth = 3
-                def.dynHeight = def.dynWidth
+                def.dynamicWidthValue = 3
+                def.dynamicHeightValue = def.dynamicWidthValue
                 def.objCounts = IntArray(def.baseHeight * def.baseWidth)
                 def.objTypes = IntArray(def.baseHeight * def.baseWidth)
                 def.halign = data.g1()
@@ -322,7 +323,7 @@ class IfaceDefinition {
             if (def.type == ComponentType.UNKNOWN_8)
                 def.text = data.getJagString()
             if (def.buttonType == 2 || def.type == ComponentType.UNKNOWN_2) {
-                def.opCircumfix = data.getJagString()
+                def.targetVerb = data.getJagString()
                 def.opSuffix = data.getJagString()
                 var unknownLocal_4 = data.g2() and 0x3F
                 flags = flags or (unknownLocal_4 shl 11)
@@ -344,7 +345,7 @@ class IfaceDefinition {
                 flags = flags or 0x1
             }
         }
-        private fun decodeIf3(def: IfaceDefinition?, data: IoBuffer?) {
+        private fun decodeIf3(def: InterfaceComponent?, data: IoBuffer?) {
             data!!.g1()
             def!!.version = 3
             var type = data.g1()
@@ -358,15 +359,15 @@ class IfaceDefinition {
             def.baseY = data.g2b()
             def.baseWidth = data.g2()
             def.baseHeight = data.g2()
-            def.dynWidth = data.g1b()
-            def.dynHeight = data.g1b()
+            def.dynamicWidthValue = data.g1b()
+            def.dynamicHeightValue = data.g1b()
             def.xMode = data.g1b()
             def.yMode = data.g1b()
-            def.overlayer = data.g2()
-            if (def.overlayer == 65535) {
-                def.overlayer = -1
+            def.layer = data.g2()
+            if (def.layer == 65535) {
+                def.layer = -1
             } else {
-                def.overlayer = (def.id and -0x10000) + def.overlayer
+                def.layer = (def.id and -0x10000) + def.layer
             }
             def.hidden = data.g1() == 1
             parseIf3Type(def, data)
@@ -391,7 +392,7 @@ class IfaceDefinition {
                     unknownLocal_2 = data.g1()
                 }
             }
-            def.optionBase = data.getJagString()
+            def.opBase = data.getJagString()
             unknownLocal_2 = data.g1()
             var opCount = unknownLocal_2 and 0xF
             if (opCount > 0) {
@@ -414,11 +415,11 @@ class IfaceDefinition {
                 def.unknownIntArray_2!![unknownLocal_5] = data.g2()
             }
             def.pauseText = data.getJagString().ifEmpty { null }
-            def.dragDeadzone = data.g1()
-            def.dragDeadtime = data.g1()
-            def.dragRenderBehavior = data.g1() == 1
+            def.dragDeadZone = data.g1()
+            def.dragDeadTime = data.g1()
+            def.dragRender = data.g1() == 1
             unknownLocal_5 = -1
-            def.opCircumfix = data.getJagString()
+            def.targetVerb = data.getJagString()
             if (((unknownLocal_1 shr 11) and 0x7F) != 0) {
                 unknownLocal_5 = data.g2()
                 def.unknownProp_9 = data.g2()
@@ -434,13 +435,13 @@ class IfaceDefinition {
             def.scripts!!.unknown = parseIf3ScriptArgs(data)
             def.scripts!!.onMouseOver = parseIf3ScriptArgs(data)
             def.scripts!!.onMouseLeave = parseIf3ScriptArgs(data)
-            def.scripts!!.onUseWith = parseIf3ScriptArgs(data)
-            def.scripts!!.onUse = parseIf3ScriptArgs(data)
-            def.scripts!!.onVarpTransmit = parseIf3ScriptArgs(data)
+            def.scripts!!.onTargetLeave = parseIf3ScriptArgs(data)
+            def.scripts!!.onTargetEnter = parseIf3ScriptArgs(data)
+            def.scripts!!.onVarTransmit = parseIf3ScriptArgs(data)
             def.scripts!!.onInvTransmit = parseIf3ScriptArgs(data)
             def.scripts!!.onStatTransmit = parseIf3ScriptArgs(data)
             def.scripts!!.onTimer = parseIf3ScriptArgs(data)
-            def.scripts!!.onOptionClick = parseIf3ScriptArgs(data)
+            def.scripts!!.onOp = parseIf3ScriptArgs(data)
             def.scripts!!.onMouseRepeat = parseIf3ScriptArgs(data)
             def.scripts!!.onClick = parseIf3ScriptArgs(data)
             def.scripts!!.onClickRepeat = parseIf3ScriptArgs(data)
@@ -448,16 +449,16 @@ class IfaceDefinition {
             def.scripts!!.onHold = parseIf3ScriptArgs(data)
             def.scripts!!.onDrag = parseIf3ScriptArgs(data)
             def.scripts!!.onDragStart = def.scripts!!.onDrag
-            def.scripts!!.onDragRelease = parseIf3ScriptArgs(data)
-            def.scripts!!.onScroll = parseIf3ScriptArgs(data)
+            def.scripts!!.onDragComplete = parseIf3ScriptArgs(data)
+            def.scripts!!.onScrollWheel = parseIf3ScriptArgs(data)
             def.scripts!!.onVarcTransmit = parseIf3ScriptArgs(data)
-            def.scripts!!.onVarcstrTransmit = parseIf3ScriptArgs(data)
+            def.scripts!!.onVarcStrTransmit = parseIf3ScriptArgs(data)
             def.triggers = ScriptTriggers()
             def.triggers!!.varpTriggers = parseIf3Triggers(data)
-            def.triggers!!.inventoryTriggers = parseIf3Triggers(data)
+            def.triggers!!.invTriggers = parseIf3Triggers(data)
             def.triggers!!.statTriggers = parseIf3Triggers(data)
             def.triggers!!.varcTriggers = parseIf3Triggers(data)
-            def.triggers!!.varcstrTriggers = parseIf3Triggers(data)
+            def.triggers!!.varcStrTriggers = parseIf3Triggers(data)
         }
         private fun parseIf3ScriptArgs(data: IoBuffer?): ScriptArgs? {
             var argCount = data!!.g1()
@@ -486,7 +487,7 @@ class IfaceDefinition {
             }
             return triggers
         }
-        private fun parseIf3Type(def: IfaceDefinition?, data: IoBuffer?) {
+        private fun parseIf3Type(def: InterfaceComponent?, data: IoBuffer?) {
             when (def!!.type) {
                 ComponentType.SCROLLABLE -> {
                     def.scrollMaxH = data!!.g2()
@@ -517,16 +518,16 @@ class IfaceDefinition {
                     def.modelYAngle = data.g2()
                     def.modelYOffset = data.g2()
                     def.modelZoom = data.g2()
-                    def.modelAnimId = data.g2()
-                    if (def.modelAnimId == 65535)
-                        def.modelAnimId = -1
+                    def.modelSeqId = data.g2()
+                    if (def.modelSeqId == 65535)
+                        def.modelSeqId = -1
                     def.modelOrtho = data.g1() == 1
                     def.unknownModelProp_3 = data.g2()
                     def.unknownModelProp_4 = data.g2()
                     def.unknownModelProp_5 = data.g1() == 1
-                    if (def.dynWidth != 0)
+                    if (def.dynamicWidthValue != 0)
                         def.unknownModelProp_6 = data.g2()
-                    if (def.dynHeight != 0)
+                    if (def.dynamicHeightValue != 0)
                         def.unknownModelProp_7 = data.g2()
                 }
                 ComponentType.TEXT -> {

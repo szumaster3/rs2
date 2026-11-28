@@ -2,8 +2,8 @@ package core.game.dialogue;
 
 import content.data.GameAttributes;
 import content.region.other.tutorial_island.plugin.TutorialStage;
-import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.ObjType;
+import core.cache.def.impl.NpcType;
 import core.game.component.Component;
 import core.game.event.DialogueCloseEvent;
 import core.game.event.DialogueOpenEvent;
@@ -211,12 +211,12 @@ public final class DialogueInterpreter {
 
     public Component sendDestroyItem(int id, String message) {
         if (message == null) {
-            message = ItemDefinition.forId(id).getConfiguration(
+            message = ObjType.forId(id).getConfiguration(
                     ItemConfigParser.DESTROY_MESSAGE, "Are you sure you want to destroy this object?");
         }
         player.getInterfaceManager().openChatbox(Components.CONFIRM_DESTROY_94);
         player.getPacketDispatch().sendString(message, Components.CONFIRM_DESTROY_94, 7);
-        player.getPacketDispatch().sendString(ItemDefinition.forId(id).getName(), Components.CONFIRM_DESTROY_94, 8);
+        player.getPacketDispatch().sendString(ObjType.forId(id).getName(), Components.CONFIRM_DESTROY_94, 8);
         player.getPacketDispatch().sendItemOnInterface(id, 1, Components.CONFIRM_DESTROY_94, 9);
         return player.getInterfaceManager().chatbox;
     }
@@ -249,7 +249,7 @@ public final class DialogueInterpreter {
         String combinedMessage = String.join("<br>", messages);
         player.getInterfaceManager().openChatbox(Components.OBJBOX_519);
         player.getPacketDispatch().sendString(combinedMessage, Components.OBJBOX_519, 1);
-        if (ItemDefinition.forId(itemId) == null) throw new IllegalArgumentException("Invalid itemId: " + itemId);
+        if (ObjType.forId(itemId) == null) throw new IllegalArgumentException("Invalid itemId: " + itemId);
         player.getPacketDispatch().sendItemOnInterface(itemId, 1, Components.OBJBOX_519, 0);
         return player.getInterfaceManager().chatbox;
     }
@@ -331,7 +331,7 @@ public final class DialogueInterpreter {
         player.getPacketDispatch().sendAnimationInterface(expression, interfaceId, 2);
         if (npc) {
             player.getPacketDispatch().sendNpcOnInterface(npcId, interfaceId, 2);
-            player.getPacketDispatch().sendString(NPCDefinition.forId(npcId).getName(), interfaceId, 3);
+            player.getPacketDispatch().sendString(NpcType.forId(npcId).getName(), interfaceId, 3);
         } else {
             player.getPacketDispatch().sendPlayerOnInterface(interfaceId, 2);
             player.getPacketDispatch().sendString(player.getUsername(), interfaceId, 3);

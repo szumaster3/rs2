@@ -5,7 +5,7 @@ import core.api.EquipmentSlot
 import core.api.runTask
 import core.api.sendDialogue
 import core.api.sendInputDialogue
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.dialogue.InputType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -139,7 +139,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                     reject(player, "INVALID TARGET USERNAME.")
                 }
 
-                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.getDefinitions().size) {
+                if (itemID == null || itemID <= 0 || itemID > ObjType.getDefinitions().size) {
                     reject(player, "INVALID ITEM ID ENTERED.")
                 }
 
@@ -191,7 +191,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                     reject(player, "INVALID TARGET USERNAME.")
                 }
 
-                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.getDefinitions().size) {
+                if (itemID == null || itemID <= 0 || itemID > ObjType.getDefinitions().size) {
                     reject(player, "INVALID ITEM ID ENTERED.")
                 }
 
@@ -260,7 +260,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                     reject(player, "INVALID TARGET USERNAME.")
                 }
 
-                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.getDefinitions().size) {
+                if (itemID == null || itemID <= 0 || itemID > ObjType.getDefinitions().size) {
                     reject(player, "INVALID ITEM ID ENTERED.")
                 }
 
@@ -402,7 +402,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         player: Player,
         id: Int,
     ): Pair<Item, core.game.container.Container>? {
-        if (id !in 0 until ItemDefinition.getDefinitions().size) return null
+        if (id !in 0 until ObjType.getDefinitions().size) return null
         arrayOf(player.inventory, player.equipment, player.bank).forEach { container ->
             container.toArray().firstOrNull { it?.id == id }?.let { return Pair(it, container) }
         }

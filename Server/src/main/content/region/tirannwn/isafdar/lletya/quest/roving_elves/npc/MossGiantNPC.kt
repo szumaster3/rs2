@@ -6,7 +6,7 @@ import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
 import core.api.getQuestStage
 import core.api.produceGroundItem
 import core.api.sendMessage
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -49,7 +49,7 @@ class MossGiantNPC : AbstractNPC {
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    NPCDefinition.forId(ids[0]).handlers["option:attack"] = this
+                    NpcType.forId(ids[0]).handlers["option:attack"] = this
                     return this
                 }
 

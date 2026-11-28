@@ -2,8 +2,8 @@ package core.cache
 
 import core.ServerConstants
 import core.api.log
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.LocType
 import core.tools.Log
 import java.io.File
 import java.io.RandomAccessFile
@@ -16,8 +16,8 @@ object Cache {
     @JvmStatic
     fun init(path: String) {
         openIndexes(path)
-        ItemDefinition.parse()
-        SceneryDefinition.parse()
+        ObjType.parse()
+        LocType.parse()
     }
 
     internal fun openIndexes(path: String) {

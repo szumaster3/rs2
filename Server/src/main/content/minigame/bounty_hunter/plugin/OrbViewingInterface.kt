@@ -1,7 +1,7 @@
 package content.minigame.bounty_hunter.plugin
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.component.ComponentDefinition
@@ -23,11 +23,11 @@ class OrbViewingInterface : ComponentPlugin() {
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    SceneryDefinition.forId(Scenery.VIEWING_ORB_9391).handlers["option:look-into"] = this
-                    SceneryDefinition.forId(Scenery.VIEWING_ORB_28194).handlers["option:look-into"] = this
-                    SceneryDefinition.forId(Scenery.LOW_LEVEL_ORB_28209).handlers["option:view"] = this
-                    SceneryDefinition.forId(Scenery.MID_LEVEL_ORB_28210).handlers["option:view"] = this
-                    SceneryDefinition.forId(Scenery.HIGH_LEVEL_ORB_28211).handlers["option:view"] = this
+                    LocType.forId(Scenery.VIEWING_ORB_9391).handlers["option:look-into"] = this
+                    LocType.forId(Scenery.VIEWING_ORB_28194).handlers["option:look-into"] = this
+                    LocType.forId(Scenery.LOW_LEVEL_ORB_28209).handlers["option:view"] = this
+                    LocType.forId(Scenery.MID_LEVEL_ORB_28210).handlers["option:view"] = this
+                    LocType.forId(Scenery.HIGH_LEVEL_ORB_28211).handlers["option:view"] = this
                     return this
                 }
 

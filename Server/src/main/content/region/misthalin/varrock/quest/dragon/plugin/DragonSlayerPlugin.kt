@@ -7,8 +7,8 @@ import core.api.getQuest
 import core.api.getQuestStage
 import core.api.removeItem
 import core.api.sendMessage
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.global.action.ClimbActionHandler.climb
 import core.game.global.action.ClimbActionHandler.climbLadder
 import core.game.global.action.DoorActionHandler.handleAutowalkDoor
@@ -37,43 +37,43 @@ class DragonSlayerPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         // magic door.
-        SceneryDefinition.forId(25115).handlers["option:open"] = this;
-        NPCDefinition.forId(747).handlers["option:trade"] = this
-        SceneryDefinition.forId(2595).handlers["option:open"] = this
+        LocType.forId(25115).handlers["option:open"] = this;
+        NpcType.forId(747).handlers["option:trade"] = this
+        LocType.forId(2595).handlers["option:open"] = this
         // main
         // door.
         // maze first floor.
-        SceneryDefinition.forId(32968).handlers["option:open"] = this
-        SceneryDefinition.forId(2602).handlers["option:open"] = this
+        LocType.forId(32968).handlers["option:open"] = this
+        LocType.forId(2602).handlers["option:open"] = this
 
         // maze second floor.
-        SceneryDefinition.forId(2597).handlers["option:open"] = this
+        LocType.forId(2597).handlers["option:open"] = this
         // door.
-        SceneryDefinition.forId(1752).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(25038).handlers["option:climb-up"] = this
+        LocType.forId(1752).handlers["option:climb-up"] = this
+        LocType.forId(25038).handlers["option:climb-up"] = this
         // ladder
-        SceneryDefinition.forId(25214).handlers["option:open"] = this // trapdoor
-        SceneryDefinition.forId(1746).handlers["option:climb-down"] = this // ladder
-        SceneryDefinition.forId(2605).handlers["option:climb-down"] = this // ladder
+        LocType.forId(25214).handlers["option:open"] = this // trapdoor
+        LocType.forId(1746).handlers["option:climb-down"] = this // ladder
+        LocType.forId(2605).handlers["option:climb-down"] = this // ladder
         // door.
-        SceneryDefinition.forId(1747).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(25045).handlers["option:climb-down"] = this
+        LocType.forId(1747).handlers["option:climb-up"] = this
+        LocType.forId(25045).handlers["option:climb-down"] = this
         // chest.
-        SceneryDefinition.forId(1755).handlers["option:climb-up"] = this
+        LocType.forId(1755).handlers["option:climb-up"] = this
         // dwarv mine
-        SceneryDefinition.forId(2587).handlers["option:open"] = this
-        NPCDefinition.forId(745).handlers["option:talk-to"] = this
+        LocType.forId(2587).handlers["option:open"] = this
+        NpcType.forId(745).handlers["option:talk-to"] = this
         // lady lumby
-        SceneryDefinition.forId(25036).handlers["option:repair"] = this
-        SceneryDefinition.forId(2589).handlers["option:repair"] = this
+        LocType.forId(25036).handlers["option:repair"] = this
+        LocType.forId(2589).handlers["option:repair"] = this
 
         // crandor
-        SceneryDefinition.forId(25154).handlers["option:enter"] = this
-        SceneryDefinition.forId(2606).handlers["option:open"] = this
-        SceneryDefinition.forId(25213).handlers["option:climb"] = this
-        SceneryDefinition.forId(25161).handlers["option:climb-over"] = this
-        NPCDefinition.forId(742).handlers["option:attack"] = this
-        NPCDefinition.forId(745).handlers["option:attack"] = this
+        LocType.forId(25154).handlers["option:enter"] = this
+        LocType.forId(2606).handlers["option:open"] = this
+        LocType.forId(25213).handlers["option:climb"] = this
+        LocType.forId(25161).handlers["option:climb-over"] = this
+        NpcType.forId(742).handlers["option:attack"] = this
+        NpcType.forId(745).handlers["option:attack"] = this
         return this
     }
 

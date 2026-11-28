@@ -8,14 +8,14 @@ import java.nio.ByteBuffer
  *
  * @author Emperor
  */
-class ClothDefinition {
-    var unknown: Int = 0
+class IdkType {
+    var bodyPart: Int = 0
         private set
 
     var modelIds: IntArray = intArrayOf()
         private set
 
-    var isUnknownBool: Boolean = false
+    var disabled: Boolean = false
         private set
 
     var originalColors: IntArray = intArrayOf()
@@ -30,7 +30,7 @@ class ClothDefinition {
     var modifiedTextureColors: IntArray = intArrayOf()
         private set
 
-    val models: IntArray = intArrayOf(-1, -1, -1, -1, -1)
+    val headModelIds: IntArray = intArrayOf(-1, -1, -1, -1, -1)
 
     fun load(buffer: ByteBuffer) {
         while (true) {
@@ -48,7 +48,7 @@ class ClothDefinition {
      */
     private fun parse(opcode: Int, buffer: ByteBuffer) {
         when (opcode) {
-            1 -> unknown = buffer.get().toInt() and 0xFF
+            1 -> bodyPart = buffer.get().toInt() and 0xFF
             2 -> {
                 val length = buffer.get().toInt() and 0xFF
                 modelIds = IntArray(length)
@@ -57,7 +57,7 @@ class ClothDefinition {
                 }
             }
 
-            3 -> isUnknownBool = true
+            3 -> disabled = true
             40 -> {
                 val length = buffer.get().toInt() and 0xFF
                 originalColors = IntArray(length)
@@ -79,7 +79,7 @@ class ClothDefinition {
             }
 
             else -> if (opcode >= 60 && opcode < 70) {
-                models[opcode - 60] = buffer.getShort().toInt() and 0xFFFF
+                headModelIds[opcode - 60] = buffer.getShort().toInt() and 0xFFFF
             } else error("Unknown IDK opcode $opcode at ${buffer.position() - 1}")
         }
     }
@@ -91,8 +91,8 @@ class ClothDefinition {
          * @param clothId The clothing id.
          * @return The definition.
          */
-        fun forId(clothId: Int): ClothDefinition {
-            val def = ClothDefinition()
+        fun forId(clothId: Int): IdkType {
+            val def = IdkType()
             val bs = Cache.getIndexes()[2]!!.getFileData(3, clothId, null)
             if (bs != null) {
                 def.load(ByteBuffer.wrap(bs))

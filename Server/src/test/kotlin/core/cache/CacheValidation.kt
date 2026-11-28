@@ -10,7 +10,7 @@ import java.nio.ByteBuffer
 /**
  * Run from Server with the test and application classes on the classpath.
  */
-object Cache578Validation {
+object CacheValidation {
     @JvmStatic
     fun main(args: Array<String>) {
         val data = File(args.firstOrNull() ?: "data")
@@ -44,30 +44,37 @@ object Cache578Validation {
             println("$name $loaded/$expected")
         }
 
-        scan("Item", 19) { g, f, b -> verifyQuests(ItemDefinition.parseDefinition(g shl 8 or f, b).questIds) }
-        scan("NPC", 18) { g, f, b -> verifyQuests(NPCDefinition(g shl 7 or f).apply { parse(b) }.questIds) }
-        scan("Loc", 16) { g, f, b -> verifyQuests(SceneryDefinition.parseDefinition(g shl 8 or f, b).questIds) }
-        scan("Seq", 20) { _, _, b -> AnimationDefinition().readValueLoop(b) }
-        scan("SpotAnim", 21) { _, _, b -> GraphicDefinition().readValueLoop(b) }
-        scan("BAS", 2, 32) { _, _, b -> RenderAnimationDefinition().parse(b) }
-        scan("IDK", 2, 3) { _, _, b -> ClothDefinition().load(b) }
+        scan("Item", 19) { g, f, b -> verifyQuests(ObjType.parseDefinition(g shl 8 or f, b).questIds) }
+        scan("NPC", 18) { g, f, b -> verifyQuests(NpcType(g shl 7 or f).apply { parse(b) }.questIds) }
+        scan("Loc", 16) { g, f, b -> verifyQuests(LocType.parseDefinition(g shl 8 or f, b).questIds) }
+        scan("Seq", 20) { _, _, b -> SeqType().readValueLoop(b) }
+        scan("SpotAnim", 21) { _, _, b -> SpotAnimType().readValueLoop(b) }
+        scan("BAS", 2, 32) { _, _, b -> BasType().parse(b) }
+        scan("IDK", 2, 3) { _, _, b -> IdkType().load(b) }
         scan("Varbit", 22) { g, f, b ->
-            val varbit = VarbitDefinition(g shl 10 or f).apply { decode(b) }
+            val varbit = VarbitType(g shl 10 or f).apply { decode(b) }
             check(configs.validFile(16, varbit.varpId)) { "missing varp ${varbit.varpId}" }
             check(varbit.startBit in 0..31 && varbit.endBit in varbit.startBit..31)
         }
-        scan("Varp", 2, 16) { _, _, b -> VarpDefinition().decode(b) }
-        scan("Struct", 2, 26) { _, f, b -> Struct.decode(f, b) }
+        scan("Varp", 2, 16) { _, _, b -> VarpType().decode(b) }
+        // Byte-array APIs: verify decoding, not their internal buffer consumption.
+        fun bytes(buffer: ByteBuffer): ByteArray = ByteArray(buffer.remaining()).also { buffer.get(it) }
+        scan("Inv", 2, 5) { _, f, b -> InvType.parse(f, bytes(b)) }
+        scan("Param", 2, 11) { _, f, b -> ParamType.parse(f, bytes(b)) }
+        scan("Varc", 2, 19) { _, _, b -> VarcType.parse(bytes(b)) }
+        scan("Cursor", 2, 33) { _, f, b -> CursorType.parse(f, bytes(b)) }
+        scan("Quest", 2, 35) { _, f, b -> QuestType.fromBytes(f, bytes(b)) }
+        scan("StructType", 2, 26) { _, f, b -> StructType.decode(f, b) }
         scan("Enum", 17) { g, f, b ->
             val id = g shl 8 or f
             val copy = b.duplicate()
             CS2Mapping(id).load(copy)
             check(!copy.hasRemaining())
-            DataMap.decode(id, b)
+            EnumType.decode(id, b)
         }
         scan("Interface", 3) { g, f, b ->
-            IfaceDefinition.decodeComponent(IfaceDefinition().apply { id = g shl 16 or f }, b)
-            val child = requireNotNull(IfaceDefinition.forId(g, f))
+            InterfaceComponent.decodeComponent(InterfaceComponent().apply { id = g shl 16 or f }, b)
+            val child = requireNotNull(InterfaceComponent.forId(g, f))
             check(child.id == (g shl 16 or f) && child.parent == g && child.type != null)
         }
 

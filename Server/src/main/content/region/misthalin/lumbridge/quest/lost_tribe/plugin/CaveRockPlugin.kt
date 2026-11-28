@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.plugin
 
 import core.api.openInterface
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -16,7 +16,7 @@ import shared.consts.Scenery
 class CaveRockPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (i in Scenery.SYMBOL_6921..Scenery.SYMBOL_6924) {
-            SceneryDefinition.forId(i).handlers["option:look-at"] = this
+            LocType.forId(i).handlers["option:look-at"] = this
         }
         return this
     }

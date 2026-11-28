@@ -2,7 +2,7 @@ package content.global.skill.summoning.familiar.npc;
 
 import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.NpcType;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -38,7 +38,7 @@ public class SmokeDevilNPC extends Familiar {
 
     @Override
     public void configureFamiliar() {
-        NPCDefinition.setOptionHandler("flames", new OptionHandler() {
+        NpcType.setOptionHandler("flames", new OptionHandler() {
             @Override
             public Plugin<Object> newInstance(Object arg) throws Throwable {
                 return this;

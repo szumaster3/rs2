@@ -9,24 +9,27 @@ import java.nio.ByteBuffer
  *
  * @author Emperor
  */
-class AnimationDefinition {
-    var anInt2136: Int = 99
-    var anIntArray2139: IntArray = intArrayOf()
-    var anInt2140: Int = -1
+/** Sequence definition (client Class157.java / SeqTypes; semantic name, not an original recovered symbol). */
+class SeqType {
+    var maxLoops: Int = 99
+    var frameIds: IntArray = intArrayOf()
+    var preAnimationMovement: Int = -1
     var tween = false
-    var aBoolean262 = false
-    var aBoolean2141: Boolean = false
-    var anInt2142: Int = 5
-    var emoteItem: Int = -1
-    var anInt2144: Int = -1
+    // The client consumes opcode 16, but its functional meaning is not established.
+    var opcode16Flag = false
+    // Opcode 14 affects model animation; exact semantics not established.
+    var opcode14Flag: Boolean = false
+    var playbackPriority: Int = 5
+    var rightHandItem: Int = -1
+    var leftHandItem: Int = -1
     var handledSounds: Array<IntArray?> = emptyArray()
-    var aBooleanArray2149: BooleanArray? = null
-    var anIntArray2151: IntArray = intArrayOf()
-    var aBoolean2152: Boolean = false
+    var walkMergeMask: BooleanArray? = null
+    var interfaceFrameIds: IntArray = intArrayOf()
+    var stretches: Boolean = false
     var durations: IntArray? = null
-    var anInt2155: Int = 2
-    var anInt2162: Int = -1
-    var anInt2163: Int = -1
+    var replayMode: Int = 2
+    var postAnimationMovement: Int = -1
+    var loopFrameCount: Int = -1
 
     internal fun readValueLoop(buffer: ByteBuffer) {
         while (true) {
@@ -38,6 +41,11 @@ class AnimationDefinition {
         }
     }
 
+    /** Raw single-pass sequence duration, including long hold frames (client cycles). */
+    val fullDurationMillis: Int get() = cycles * 20
+    val fullDurationTicks: Int get() = ((cycles + 29) / 30).coerceAtLeast(1)
+
+    // Legacy gameplay duration deliberately excludes long hold frames; retain existing callers.
     val duration: Int
         /**
          * Gets the duration of this animation in milliseconds.
@@ -75,30 +83,30 @@ class AnimationDefinition {
             1 -> {
                 val count = buffer.short.toInt() and 0xffff
                 durations = IntArray(count) { buffer.short.toInt() and 0xffff }
-                anIntArray2139 = IntArray(count) { buffer.short.toInt() and 0xffff }
+                frameIds = IntArray(count) { buffer.short.toInt() and 0xffff }
                 repeat(count) { index ->
-                    anIntArray2139[index] += (buffer.short.toInt() and 0xffff) shl 16
+                    frameIds[index] += (buffer.short.toInt() and 0xffff) shl 16
                 }
             }
-            2 -> anInt2163 = buffer.short.toInt() and 0xffff
+            2 -> loopFrameCount = buffer.short.toInt() and 0xffff
             3 -> {
                 val flags = BooleanArray(256)
                 repeat(buffer.get().toInt() and 0xff) { flags[buffer.get().toInt() and 0xff] = true }
-                aBooleanArray2149 = flags
+                walkMergeMask = flags
             }
-            4 -> aBoolean2152 = true
-            5 -> anInt2142 = buffer.get().toInt() and 0xff
-            6 -> anInt2144 = buffer.short.toInt() and 0xffff
-            7 -> emoteItem = buffer.short.toInt() and 0xffff
-            8 -> anInt2136 = buffer.get().toInt() and 0xff
-            9 -> anInt2140 = buffer.get().toInt() and 0xff
-            10 -> anInt2162 = buffer.get().toInt() and 0xff
-            11 -> anInt2155 = buffer.get().toInt() and 0xff
+            4 -> stretches = true
+            5 -> playbackPriority = buffer.get().toInt() and 0xff
+            6 -> leftHandItem = buffer.short.toInt() and 0xffff
+            7 -> rightHandItem = buffer.short.toInt() and 0xffff
+            8 -> maxLoops = buffer.get().toInt() and 0xff
+            9 -> preAnimationMovement = buffer.get().toInt() and 0xff
+            10 -> postAnimationMovement = buffer.get().toInt() and 0xff
+            11 -> replayMode = buffer.get().toInt() and 0xff
             12 -> {
                 val count = buffer.get().toInt() and 0xff
-                anIntArray2151 = IntArray(count) { buffer.short.toInt() and 0xffff }
+                interfaceFrameIds = IntArray(count) { buffer.short.toInt() and 0xffff }
                 repeat(count) { index ->
-                    anIntArray2151[index] += (buffer.short.toInt() and 0xffff) shl 16
+                    interfaceFrameIds[index] += (buffer.short.toInt() and 0xffff) shl 16
                 }
             }
             13 -> handledSounds = Array(buffer.short.toInt() and 0xffff) {
@@ -107,40 +115,42 @@ class AnimationDefinition {
                     if (index == 0) ByteBufferUtils.getMedium(buffer) else buffer.short.toInt() and 0xffff
                 }
             }
-            14 -> aBoolean2141 = true
+            14 -> opcode14Flag = true
             15 -> tween = true
-            16 -> aBoolean262 = true
+            16 -> opcode16Flag = true
             else -> error("Unknown sequence opcode $opcode at ${buffer.position() - 1}")
         }
     }
 
-    fun method2394() {
-        if (anInt2140 == -1) {
-            anInt2140 = if (aBooleanArray2149 == null) 0
+    fun applyMovementDefaults() {
+        if (preAnimationMovement == -1) {
+            preAnimationMovement = if (walkMergeMask == null) 0
             else 2
         }
-        if (anInt2162 == -1) {
-            anInt2162 = if (aBooleanArray2149 == null) 0
+        if (postAnimationMovement == -1) {
+            postAnimationMovement = if (walkMergeMask == null) 0
             else 2
         }
     }
 
     companion object {
-        private val animDefs: MutableMap<Int, AnimationDefinition> = HashMap()
+        private val animDefs: MutableMap<Int, SeqType> = HashMap()
 
         @JvmStatic
-        fun forId(emoteId: Int): AnimationDefinition? {
+        fun forId(emoteId: Int): SeqType? {
             try {
                 var defs = animDefs[emoteId]
                 if (defs != null) {
                     return defs
                 }
                 val data = Cache.getIndexes()[20]!!.getFileData(emoteId ushr 7, emoteId and 0x7f, null)
-                defs = AnimationDefinition()
+                defs = SeqType()
                 if (data != null) {
-                    defs.readValueLoop(ByteBuffer.wrap(data))
+                    val buffer = ByteBuffer.wrap(data)
+                    defs.readValueLoop(buffer)
+                    check(!buffer.hasRemaining()) { "Trailing bytes in sequence $emoteId" }
                 }
-                defs.method2394()
+                defs.applyMovementDefaults()
                 animDefs[emoteId] = defs
                 return defs
             } catch (t: Throwable) {

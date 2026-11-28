@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link.request.trade;
 
 import core.api.ContainerListener;
-import core.cache.def.impl.ItemDefinition;
+import core.cache.def.impl.ObjType;
 import core.game.container.Container;
 import core.game.container.ContainerEvent;
 import core.game.container.ContainerType;
@@ -125,7 +125,7 @@ public final class TradeContainer extends Container {
     }
 
     private boolean tradeable(final Item item) {
-        final ItemDefinition definition = ItemDefinition.forId(item.getId());
+        final ObjType definition = ObjType.forId(item.getId());
         Player target = TradeModule.getExtension(player).getTarget();
         boolean playerIsBot = player.getAttribute("not_on_highscores", false);
         boolean targetIsBot = target.getAttribute("not_on_highscores", false);

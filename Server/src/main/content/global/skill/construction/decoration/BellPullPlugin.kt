@@ -2,7 +2,7 @@ package content.global.skill.construction.decoration
 
 import content.data.GameAttributes
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -21,9 +21,9 @@ import shared.consts.Scenery
 class BellPullPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Scenery.ROPE_BELL_PULL_13307).handlers["option:ring"] = this
-        SceneryDefinition.forId(Scenery.BELL_PULL_13308).handlers["option:ring"] = this
-        SceneryDefinition.forId(Scenery.POSH_BELL_PULL_13309).handlers["option:ring"] = this
+        LocType.forId(Scenery.ROPE_BELL_PULL_13307).handlers["option:ring"] = this
+        LocType.forId(Scenery.BELL_PULL_13308).handlers["option:ring"] = this
+        LocType.forId(Scenery.POSH_BELL_PULL_13309).handlers["option:ring"] = this
         return this
     }
 

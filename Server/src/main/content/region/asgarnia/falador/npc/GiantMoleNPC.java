@@ -1,7 +1,7 @@
 package content.region.asgarnia.falador.npc;
 
 import content.data.LightSources;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.global.action.DigAction;
 import core.game.global.action.DigSpadeHandler;
 import core.game.interaction.OptionHandler;
@@ -217,7 +217,7 @@ public final class GiantMoleNPC extends AbstractNPC {
         DigSpadeHandler.register(Location.create(2984, 3387, 0), action);
         DigSpadeHandler.register(Location.create(2987, 3387, 0), action);
 
-        SceneryDefinition.forId(Scenery.ROPE_12230).getHandlers().put("option:climb", new OptionHandler() {
+        LocType.forId(Scenery.ROPE_12230).getHandlers().put("option:climb", new OptionHandler() {
             @Override
             public Plugin<Object> newInstance(Object arg) throws Throwable {
                 return this;

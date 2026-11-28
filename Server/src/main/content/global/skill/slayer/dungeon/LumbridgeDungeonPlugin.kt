@@ -2,7 +2,7 @@ package content.global.skill.slayer.dungeon
 
 import content.global.skill.slayer.SlayerEquipmentFlags
 import core.api.sendMessage
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -68,7 +68,7 @@ class LumbridgeDungeonPlugin : MapZone("lumbridge swamp dungeon", true), Plugin<
             val isProtected = hasHelmet(player)
             player.face(this)
             if (!isProtected) {
-                animate(NPCDefinition.forId(NPCs.WALL_BEAST_7823).getCombatAnimation(3))
+                animate(NpcType.forId(NPCs.WALL_BEAST_7823).getCombatAnimation(3))
                 player.animate(Animation.create(1810))
                 GameWorld.Pulser.submit(
                     object : Pulse(8, player) {

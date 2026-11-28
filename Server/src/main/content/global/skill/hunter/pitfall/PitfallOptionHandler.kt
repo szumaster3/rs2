@@ -1,7 +1,7 @@
 package content.global.skill.hunter.pitfall
 
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -28,8 +28,8 @@ class PitfallOptionHandler : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (graahkPit in graahkPitIds) {
-            SceneryDefinition.forId(graahkPit).handlers["option:trap"] = this
-            NPCDefinition.forId(graahkIds).handlers["option:tease"] = this
+            LocType.forId(graahkPit).handlers["option:trap"] = this
+            NpcType.forId(graahkIds).handlers["option:tease"] = this
         }
         return this
     }

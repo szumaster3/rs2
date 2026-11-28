@@ -2,7 +2,7 @@ package content.region.kandarin.port_khazard.quest.arena.plugin;
 
 import content.data.Quests;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.dialogue.FaceAnim;
 import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -21,7 +21,7 @@ public final class ArenaDoorPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(82).getHandlers().put("option:open", this);
+        LocType.forId(82).getHandlers().put("option:open", this);
         return this;
     }
 

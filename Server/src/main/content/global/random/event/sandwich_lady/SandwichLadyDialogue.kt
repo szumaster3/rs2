@@ -3,7 +3,7 @@ package content.global.random.event.sandwich_lady
 import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.openInterface
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.item.GroundItemManager
@@ -24,7 +24,7 @@ class SandwichLadyDialogue(val isChoice: Boolean) : DialogueFile() {
         val choice = getAttribute(player!!, GameAttributes.S_LADY_ITEM_VALUE, 0)
         if (!isChoice) {
             when (stage) {
-                0 -> npc("Have a ${ItemDefinition.forId(assigned).name.lowercase()}, dear.").also { stage++ }
+                0 -> npc("Have a ${ObjType.forId(assigned).name.lowercase()}, dear.").also { stage++ }
                 1 -> {
                     end()
                     openInterface(player!!, sandwichInterface)

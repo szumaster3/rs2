@@ -1,7 +1,7 @@
 package content.region.kandarin.feldip.plugin
 
 import core.api.refreshAppearance
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
@@ -32,7 +32,7 @@ class OgreSpaPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (i in intArrayOf(29057, 29058, 29018, 29031, 29032, 29044, 29045, 29004, 29005)) {
-            SceneryDefinition.forId(i).handlers["option:climb-over"] = this
+            LocType.forId(i).handlers["option:climb-over"] = this
         }
         return this
     }

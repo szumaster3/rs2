@@ -1,6 +1,6 @@
 package content.minigame.bounty_hunter.plugin
 
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.activity.ActivityManager
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -15,13 +15,13 @@ import core.plugin.Plugin
 class BHOptionHandler : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(28110).handlers["option:exit"] = this
-        SceneryDefinition.forId(28119).handlers["option:enter"] = this
-        SceneryDefinition.forId(28120).handlers["option:enter"] = this
-        SceneryDefinition.forId(28121).handlers["option:enter"] = this
-        SceneryDefinition.forId(28122).handlers["option:exit"] = this
-        SceneryDefinition.forId(28115).handlers["option:view"] = this
-        SceneryDefinition.forId(28116).handlers["option:view"] = this
+        LocType.forId(28110).handlers["option:exit"] = this
+        LocType.forId(28119).handlers["option:enter"] = this
+        LocType.forId(28120).handlers["option:enter"] = this
+        LocType.forId(28121).handlers["option:enter"] = this
+        LocType.forId(28122).handlers["option:exit"] = this
+        LocType.forId(28115).handlers["option:view"] = this
+        LocType.forId(28116).handlers["option:view"] = this
         return this
     }
 

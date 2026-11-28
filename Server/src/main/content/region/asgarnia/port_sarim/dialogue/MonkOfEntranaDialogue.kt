@@ -2,7 +2,7 @@ package content.region.asgarnia.port_sarim.dialogue
 
 import content.global.travel.charter.CharterShip
 import core.api.sendDialogue
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
@@ -32,7 +32,7 @@ class MonkOfEntranaDialogue : DialogueFile() {
             10 -> npc(FaceAnim.HAPPY, "Very well.").also { stage = END_DIALOGUE }
             20 -> npc(FaceAnim.FRIENDLY, "Very well. One moment please.").also { stage++ }
             21 -> sendDialogue(player!!, "The monk quickly searches you.").also { stage++ }
-            22 -> if (!ItemDefinition.canEnterEntrana(player)) {
+            22 -> if (!ObjType.canEnterEntrana(player)) {
                 npc(FaceAnim.ANGRY, "NO WEAPONS OR ARMOUR are permitted on holy", "Entrana AT ALL. We will not allow you to travel there", "in breach of mighty Saradomin's edict.").also { stage++ }
             } else {
                 npc(FaceAnim.FRIENDLY, "All is satisfactory. You may board the boat now.").also { stage = 24 }
@@ -67,7 +67,7 @@ class TakeBoatDialogue() : DialogueFile() {
                 end()
                 CharterShip.ENTRANA_TO_PORT_SARIM.sail(player!!)
             } else {
-                if (!ItemDefinition.canEnterEntrana(player)) {
+                if (!ObjType.canEnterEntrana(player)) {
                     npc(
                         FaceAnim.ANGRY,
                         "NO WEAPONS OR ARMOUR are permitted on holy",

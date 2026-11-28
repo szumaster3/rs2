@@ -1,6 +1,6 @@
 package content.global.skill.agility.shortcuts
 
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
@@ -38,7 +38,7 @@ class LumberYardShortcut : OptionHandler() {
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Scenery.FENCE_31149).handlers["option:squeeze-under"] = this
+        LocType.forId(Scenery.FENCE_31149).handlers["option:squeeze-under"] = this
         return this
     }
 }

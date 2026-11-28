@@ -1,6 +1,6 @@
 package core.game.node.item
 
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -32,7 +32,7 @@ abstract class ItemPlugin : Plugin<Any> {
      */
     fun register(vararg ids: Int) {
         for (id in ids) {
-            ItemDefinition.forId(id).itemPlugin = this
+            ObjType.forId(id).itemPlugin = this
         }
     }
 

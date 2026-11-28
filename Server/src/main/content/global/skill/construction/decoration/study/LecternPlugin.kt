@@ -4,7 +4,7 @@ import content.data.GameAttributes
 import content.global.skill.construction.Decoration
 import content.region.misthalin.varrock.diary.VarrockAchievementDiary
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.InterfaceListener
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
@@ -109,7 +109,7 @@ class LecternPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         (Scenery.LECTERN_13642..Scenery.LECTERN_13648).forEach { id ->
-            SceneryDefinition.forId(id).handlers["option:study"] = this
+            LocType.forId(id).handlers["option:study"] = this
         }
         return this
     }

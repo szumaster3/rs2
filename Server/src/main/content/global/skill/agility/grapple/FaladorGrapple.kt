@@ -2,7 +2,7 @@ package content.global.skill.agility.grapple
 
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.component.Component
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -57,10 +57,10 @@ class FaladorGrapple : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(17049).handlers["option:grapple"] = this
-        SceneryDefinition.forId(17050).handlers["option:grapple"] = this
-        SceneryDefinition.forId(17051).handlers["option:jump"] = this
-        SceneryDefinition.forId(17052).handlers["option:jump"] = this
+        LocType.forId(17049).handlers["option:grapple"] = this
+        LocType.forId(17050).handlers["option:grapple"] = this
+        LocType.forId(17051).handlers["option:jump"] = this
+        LocType.forId(17052).handlers["option:jump"] = this
         return this
     }
 

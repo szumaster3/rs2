@@ -5,7 +5,7 @@ import content.global.skill.slayer.Tasks;
 import content.global.skill.summoning.familiar.Familiar;
 import core.api.utils.PlayerStatsCounter;
 import core.api.utils.Vector;
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.NpcType;
 import core.game.dialogue.Dialogue;
 import core.game.event.NPCKillEvent;
 import core.game.interaction.InteractPlugin;
@@ -49,7 +49,7 @@ import java.util.List;
 public class NPC extends Entity {
     private int id;
     private final int originalId;
-    private NPCDefinition definition;
+    private NpcType definition;
     private boolean walks;
     private boolean aggressive;
     private boolean respawn = true;
@@ -114,10 +114,10 @@ public class NPC extends Entity {
      * @param direction the direction
      */
     protected NPC(int id, Location location, Direction direction) {
-        super(NPCDefinition.forId(id).getName(), location);
+        super(NpcType.forId(id).getName(), location);
         this.id = id;
         this.originalId = id;
-        this.definition = NPCDefinition.forId(id);
+        this.definition = NpcType.forId(id);
         super.size = definition.size;
         super.direction = direction;
         super.interactPlugin = new InteractPlugin(this);
@@ -680,7 +680,7 @@ public class NPC extends Entity {
      */
     public NPC transform(int id) {
         this.id = id;
-        this.definition = NPCDefinition.forId(id);
+        this.definition = NpcType.forId(id);
         super.name = definition.getName();
         super.size = definition.size;
         super.interactPlugin = new InteractPlugin(this);
@@ -756,7 +756,7 @@ public class NPC extends Entity {
      *
      * @return the definition
      */
-    public NPCDefinition getDefinition() {
+    public NpcType getDefinition() {
         return definition;
     }
 
@@ -765,7 +765,7 @@ public class NPC extends Entity {
      *
      * @param definition the definition
      */
-    public void setDefinition(NPCDefinition definition) {
+    public void setDefinition(NpcType definition) {
         this.definition = definition;
     }
 

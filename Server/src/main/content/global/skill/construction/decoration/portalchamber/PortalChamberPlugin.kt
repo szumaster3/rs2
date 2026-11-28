@@ -6,7 +6,7 @@ import content.data.GameAttributes
 import content.global.skill.construction.Decoration
 import content.global.skill.runecrafting.item.Rune
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
 import core.game.interaction.OptionHandler
@@ -135,12 +135,12 @@ class PortalChamberPlugin : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Objects.SCRYING_POOL_13639).handlers["option:direct-portal"] = this
-        SceneryDefinition.forId(Objects.TPATION_FOCUS_13640).handlers["option:direct-portal"] = this
-        SceneryDefinition.forId(Objects.GREATER_TP_FOCUS_13641).handlers["option:direct-portal"] = this
-        SceneryDefinition.forId(Objects.SCRYING_POOL_13639).handlers["option:scry"] = this
+        LocType.forId(Objects.SCRYING_POOL_13639).handlers["option:direct-portal"] = this
+        LocType.forId(Objects.TPATION_FOCUS_13640).handlers["option:direct-portal"] = this
+        LocType.forId(Objects.GREATER_TP_FOCUS_13641).handlers["option:direct-portal"] = this
+        LocType.forId(Objects.SCRYING_POOL_13639).handlers["option:scry"] = this
         for (i in Objects.VARROCK_PORTAL_13615..Objects.KHARYRLL_PORTAL_13635) {
-            SceneryDefinition.forId(i).handlers["option:enter"] = this
+            LocType.forId(i).handlers["option:enter"] = this
         }
         ClassScanner.definePlugin(GazeIntoDialogue())
         ClassScanner.definePlugin(DirectPortalDialogue())

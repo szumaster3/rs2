@@ -11,8 +11,8 @@ import content.region.kandarin.piscatoris.quest.phoenix.custcene.WoundedPhoenixC
 import content.region.kandarin.witchaven.quest.seaslug.cutscene.KennithCutscene
 import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.VarbitDefinition
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.VarbitType
 import core.game.node.Node
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
@@ -517,7 +517,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
             container.clear()
             val drops =
-                NPCDefinition
+                NpcType
                     .forId(npcId)
                     .dropTables.table
                     .roll(player, amount)
@@ -543,7 +543,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             GlobalScope.launch {
                 player.debug("========== Found Varbits for Varp $varp ==========")
                 for (id in 0 until 10000) {
-                    val def = VarbitDefinition.forId(id)
+                    val def = VarbitType.forId(id)
                     if (def.varpId == varp) {
                         player.debug( "${def.id} -> [offset: ${def.startBit}, upperBound: ${def.endBit}]")
                     }
@@ -573,7 +573,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         ) { player, strings ->
             val name = strings.slice(1 until strings.size).joinToString(" ").lowercase()
             for (id in 0 until 9000) {
-                val def = NPCDefinition.forId(id)
+                val def = NpcType.forId(id)
                 if (def.name.isNotBlank() &&
                     (
                         def.name
@@ -585,7 +585,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                     notify(player, "$id - ${def.name}")
                 } else {
                     for ((childId, index) in def.childNPCIds?.withIndex() ?: continue) {
-                        val childDef = NPCDefinition.forId(childId)
+                        val childDef = NpcType.forId(childId)
                         if (childDef.name.lowercase().contains(name) || name.contains(childDef.name.lowercase())) {
                             notify(player, "$childId child($id) index $index - ${childDef.name}")
                         }

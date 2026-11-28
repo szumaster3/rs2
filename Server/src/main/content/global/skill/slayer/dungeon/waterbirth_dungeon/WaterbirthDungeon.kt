@@ -4,8 +4,8 @@ import core.api.playAudio
 import core.api.playGlobalAudio
 import core.api.replaceScenery
 import core.api.sendMessage
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -80,11 +80,11 @@ class WaterbirthDungeon : MapZone(
                 Scenery.DOOR_8959,
                 Scenery.DOOR_8960
             ).forEach { id ->
-                SceneryDefinition.forId(id).handlers["option:open"] = this
+                LocType.forId(id).handlers["option:open"] = this
             }
 
             DoorSupportNPC.IDS.forEach { id ->
-                NPCDefinition.forId(id).handlers["option:destroy"] = this
+                NpcType.forId(id).handlers["option:destroy"] = this
             }
 
             DoorSupportLocation.ALL.forEach { location ->

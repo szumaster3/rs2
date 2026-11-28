@@ -3,7 +3,7 @@ package content.global.skill.firemaking
 import content.data.skill.SkillingTool
 import content.region.kandarin.baxtorian.BarbarianTraining
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -36,7 +36,7 @@ class PyreBoatOptionPlugin : OptionHandler() {
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(25286).handlers["option:construct"] = this
+        LocType.forId(25286).handlers["option:construct"] = this
         ClassScanner.definePlugin(FerociousBarbarianNPC())
         return this
     }

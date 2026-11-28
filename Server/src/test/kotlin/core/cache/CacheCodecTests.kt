@@ -2,7 +2,7 @@ package core.cache
 
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.XTEACryption
-import core.cache.def.impl.AnimationDefinition
+import core.cache.def.impl.SeqType
 import core.cache.misc.ContainersInformation
 import core.cache.misc.buffer.BufferInputStream
 import core.cache.misc.buffer.ByteBufferUtils
@@ -23,10 +23,10 @@ class CacheCodecTests {
         val encoded = ByteBuffer.allocate(32)
         encoded.put(1).putShort(1).putShort(4).putShort(0x4567).putShort(0x1234)
         encoded.put(12).put(1).putShort(0x7654).putShort(0x4321).put(0).flip()
-        val sequence = AnimationDefinition()
+        val sequence = SeqType()
         sequence.readValueLoop(encoded)
-        assertArrayEquals(intArrayOf(0x12344567), sequence.anIntArray2139)
-        assertArrayEquals(intArrayOf(0x43217654), sequence.anIntArray2151)
+        assertArrayEquals(intArrayOf(0x12344567), sequence.frameIds)
+        assertArrayEquals(intArrayOf(0x43217654), sequence.interfaceFrameIds)
     }
 
     @Test

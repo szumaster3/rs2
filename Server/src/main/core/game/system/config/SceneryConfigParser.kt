@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import core.ServerConstants
 import core.api.log
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.tools.Log
 import java.io.FileReader
 
@@ -21,7 +21,7 @@ class SceneryConfigParser {
         configList.forEach { config ->
             val ids = (config["ids"] as String).split(",").map { it.toInt() }
             ids.forEach { id ->
-                val def = SceneryDefinition.forId(id)
+                val def = LocType.forId(id)
                 val handlers = def.handlers
 
                 (config["examine"] as? String)?.takeIf { it.isNotBlank() && it != "null" }?.let {

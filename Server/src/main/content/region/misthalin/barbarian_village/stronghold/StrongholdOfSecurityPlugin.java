@@ -1,7 +1,7 @@
 package content.region.misthalin.barbarian_village.stronghold;
 
 import content.region.misthalin.barbarian_village.dialogue.CradleOfLifeDialogue;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.component.Component;
 import core.game.component.ComponentPlugin;
 import core.game.dialogue.Dialogue;
@@ -57,7 +57,7 @@ public final class StrongholdOfSecurityPlugin extends MapZone implements Plugin<
         ClassScanner.definePlugin(new OptionHandler() {
             @Override
             public Plugin<Object> newInstance(Object arg) throws Throwable {
-                SceneryDefinition.forId(16154).getHandlers().put("option:climb-down", this);
+                LocType.forId(16154).getHandlers().put("option:climb-down", this);
                 return this;
             }
 

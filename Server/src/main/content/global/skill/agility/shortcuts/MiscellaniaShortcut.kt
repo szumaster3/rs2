@@ -4,7 +4,7 @@ import core.api.animationCycles
 import core.api.anyInEquipment
 import core.api.forceMove
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -22,7 +22,7 @@ import shared.consts.Scenery
 class MiscellaniaShortcut : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Scenery.BROKEN_PIER_41531).handlers["option:step"] = this
+        LocType.forId(Scenery.BROKEN_PIER_41531).handlers["option:step"] = this
         return this
     }
 

@@ -3,7 +3,7 @@ package content.global.skill.agility
 import core.api.getStatLevel
 import core.api.inEquipment
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -98,7 +98,7 @@ abstract class AgilityShortcut(
      */
     open fun configure(shortcut: AgilityShortcut) {
         shortcut.ids?.forEach { objectId ->
-            val def = SceneryDefinition.forId(objectId)
+            val def = LocType.forId(objectId)
             shortcut.options.forEach { opt ->
                 if (opt != null) {
                     def.handlers["option:$opt"] = shortcut

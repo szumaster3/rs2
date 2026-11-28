@@ -2,7 +2,7 @@ package content.global.plugins.iface.tab
 
 import core.api.getStatLevel
 import core.api.getQuestPoints
-import core.cache.def.impl.QuestDefinition
+import core.cache.def.impl.QuestType
 import core.api.openInterface
 import core.api.sendString
 import core.game.component.Component
@@ -28,7 +28,7 @@ class QuestTabInterface : InterfaceListener {
             val id = journalSlots[slot] ?: return@on false
             val quest = player.questRepository.forIndex(id)
             if (quest == null) {
-                val definition = QuestDefinition.forId(id) ?: return@on false
+                val definition = QuestType.forId(id) ?: return@on false
                 openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
                 QuestJournal.clear(player, definition.name ?: return@on false)
                 var row = 0
@@ -36,7 +36,7 @@ class QuestTabInterface : InterfaceListener {
                     QuestJournal.writeRow(player, row++, "Level ${requirement.level} ${requirement.skill}")
                 }
                 for (required in definition.prerequisiteQuests) {
-                    val name = QuestDefinition.forId(required)?.name ?: continue
+                    val name = QuestType.forId(required)?.name ?: continue
                     QuestJournal.writeRow(player, row++, name)
                 }
                 if (definition.requiredQuestPoints > 0) QuestJournal.writeRow(player, row++, "${definition.requiredQuestPoints} Quest Points")

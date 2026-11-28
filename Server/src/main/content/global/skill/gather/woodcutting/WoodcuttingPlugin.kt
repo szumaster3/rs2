@@ -7,7 +7,7 @@ import content.global.skill.farming.FarmingPatch
 import content.global.skill.firemaking.LogItem
 import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.container.impl.EquipmentContainer
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.Clocks
@@ -120,7 +120,7 @@ class WoodcuttingPlugin : InteractionListener {
                     sendItemDialogue(player, Items.LOGS_1511, "You get some logs.")
                     TutorialStage.load(player, tutStage)
                 }
-                val itemName = ItemDefinition.forId(reward).name.lowercase()
+                val itemName = ObjType.forId(reward).name.lowercase()
                 if (resource == WoodcuttingNode.DRAMEN_TREE) {
                     sendMessage(player, "You cut a branch from the Dramen tree.")
                 } else if (resource.isJungleTree()) {

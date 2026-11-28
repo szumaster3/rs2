@@ -1,6 +1,6 @@
 package content.global.activity.godwars;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.component.Component;
 import core.game.interaction.MovementPulse;
 import core.game.interaction.Option;
@@ -273,7 +273,7 @@ public final class GodwarsZone extends MapZone implements Plugin<Object> {
             @Override
             public boolean pulse() {
                 scenery.getDefinition().getOptions()[1] = "open";
-                SceneryDefinition.getOptionHandler(scenery.getId(), "open").handle(player, scenery, "open");
+                LocType.getOptionHandler(scenery.getId(), "open").handle(player, scenery, "open");
                 return true;
             }
         });

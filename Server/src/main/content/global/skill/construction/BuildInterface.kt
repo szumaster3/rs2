@@ -1,7 +1,7 @@
 package content.global.skill.construction
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -145,7 +145,7 @@ class BuildInterface : InterfaceListener {
             }
 
             if (!inInventory(player, tool, 1)) {
-                val name = ItemDefinition.forId(tool).name
+                val name = ObjType.forId(tool).name
                 sendMessage(player, "You need a $name to build this.")
                 return false
             }

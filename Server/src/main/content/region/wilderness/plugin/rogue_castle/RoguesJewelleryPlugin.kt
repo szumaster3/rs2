@@ -3,7 +3,7 @@ package content.region.wilderness.plugin.rogue_castle
 import content.data.Quests
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
@@ -26,14 +26,14 @@ class RoguesJewelleryPlugin : InteractionListener {
 
             val amount = amountInInventory(player, used.id)
             if (amount <= 0) return@onUseWith false
-            val def = ItemDefinition.forId(used.id)
+            val def = ObjType.forId(used.id)
 
             openDialogue(
                 player,
                 RogueJewelleryDialogue(
                     itemId   = used.id,
                     itemName = def.name,
-                    price    = def.value
+                    price    = def.cost
                 )
             )
 
@@ -64,7 +64,7 @@ class RoguesJewelleryPlugin : InteractionListener {
             for (id in BASE_JEWELLERY) {
                 temp[idx++] = id
 
-                val noteId = ItemDefinition.forId(id).noteId
+                val noteId = ObjType.forId(id).noteId
                 if (noteId > 0) {
                     temp[idx++] = noteId
                 }

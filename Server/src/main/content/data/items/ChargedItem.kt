@@ -1,7 +1,7 @@
 package content.data.items
 
 import core.api.toIntArray
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import shared.consts.Items
 
 /**
@@ -62,7 +62,7 @@ enum class ChargedItem(val ids: IntArray) {
         }
 
         private fun getMaxCharge(chargedItem: ChargedItem): Int {
-            return CHARGE_REGEX.find(ItemDefinition.forId(chargedItem.ids.first()).name)!!.groups[1]!!.value.toInt()
+            return CHARGE_REGEX.find(ObjType.forId(chargedItem.ids.first()).name)!!.groups[1]!!.value.toInt()
         }
 
         /**

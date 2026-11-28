@@ -1,6 +1,6 @@
 package core.game.node.entity.combat.equipment.special;
 
-import core.cache.def.impl.ItemDefinition;
+import core.cache.def.impl.ObjType;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -95,7 +95,7 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
         if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
             return -1;
         }
-        state.setFrozen(ItemDefinition.forId(state.getAmmunition().getItemId()).getName().contains("ragon arrow"));
+        state.setFrozen(ObjType.forId(state.getAmmunition().getItemId()).getName().contains("ragon arrow"));
         double mod = state.isFrozen() ? 1.5 : 1.3;
         int minDamage = state.isFrozen() ? 8 : 5;
         int max = calculateHit(entity, victim, mod);

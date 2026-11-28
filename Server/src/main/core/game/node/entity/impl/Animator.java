@@ -113,25 +113,27 @@ public final class Animator {
      */
     public boolean animate(Animation animation, Graphics graphics) {
         if (animation != null) {
-            if (ticks > GameWorld.getTicks() && priority.ordinal() > animation.getPriority().ordinal()) {
+            // Existing content uses sequence 0 as a reset alias. Never mutate its shared instance.
+            animation = animation.copy();
+            if (animation.getId() == 0) animation.setId(-1);
+            if (animation.getId() < -1 || animation.getId() > 65534 || animation.getDelay() < 0 || animation.getDelay() > 255) return false;
+            // Native client reset (-1) bypasses sequence priority (Static307.method5256).
+            if (animation.getId() != -1 && ticks > GameWorld.getTicks() && priority.ordinal() > animation.getPriority().ordinal()) {
                 return false;
             }
-            if (animation.getId() == 0) {
-                animation.setId(-1);
-            }
-            this.animation = animation;
+            if (!entity.getUpdateMasks().register(EntityFlag.Animate, animation)) return false;
+            this.animation = animation.copy();
             if (animation.getId() != -1) {
                 ticks = GameWorld.getTicks() + animation.getDuration();
             } else {
                 ticks = 0;
             }
             entity.clocks[Clocks.getANIMATION_END()] = ticks;
-            entity.getUpdateMasks().register(EntityFlag.Animate, animation);
             priority = animation.getPriority();
         }
         if (graphics != null) {
+            if (!entity.getUpdateMasks().register(EntityFlag.SpotAnim, graphics)) return false;
             this.graphics = graphics;
-            entity.getUpdateMasks().register(EntityFlag.SpotAnim, graphics);
         }
         return true;
     }
@@ -149,18 +151,20 @@ public final class Animator {
      * @param animation The animation to force.
      */
     public void forceAnimation(Animation animation) {
+        int previousTicks = ticks;
         ticks = -1;
-        animate(animation);
-        priority = Priority.HIGH;
+        if (animate(animation)) priority = Priority.HIGH;
+        else ticks = previousTicks;
     }
 
     /**
      * Resets the animation and graphics to their default state.
      */
     public void reset() {
-        animate(RESET_A);
-        entity.clocks[Clocks.getANIMATION_END()] = 0;
-        ticks = 0;
+        if (animate(RESET_A)) {
+            entity.clocks[Clocks.getANIMATION_END()] = 0;
+            ticks = 0;
+        }
     }
 
     /**

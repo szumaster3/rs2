@@ -1,7 +1,7 @@
 package content.global.plugins.inter.with_scenery
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -21,7 +21,7 @@ class GWDKnightSceneryPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any>? {
         sceneryIds.forEach { id ->
-            SceneryDefinition.forId(id).handlers["option:search"] = this
+            LocType.forId(id).handlers["option:search"] = this
         }
         return this
     }

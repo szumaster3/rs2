@@ -95,7 +95,7 @@ class ShopTests {
         )
         val saleItem = Item(saleItemId, 1)
         val alchValue = saleItem.definition.getAlchemyValue(false)
-        val value = saleItem.definition.value
+        val value = saleItem.definition.cost
         Assertions.assertEquals(
             (value * 0.4).roundToInt(),
             alchValue,
@@ -143,7 +143,7 @@ class ShopTests {
         )
         val saleItem = Item(saleItemId, 1)
         val alchValue = saleItem.definition.getAlchemyValue(true)
-        val value = saleItem.definition.value
+        val value = saleItem.definition.cost
         Assertions.assertEquals(
             (value * 0.6).roundToInt(),
             alchValue,
@@ -194,7 +194,7 @@ class ShopTests {
         val notedSaleItem = Item(notedSaleItemId, 1)
         testPlayer.inventory.add(notedSaleItem)
         val alchValue = notedSaleItem.definition.getAlchemyValue(true)
-        val value = notedSaleItem.definition.value
+        val value = notedSaleItem.definition.cost
         status = highAlch.sell(testPlayer, 0, 1)
         assertTransactionSuccess(status)
         val expectedCoins = (alchValue.toDouble() - value * 0.03).roundToInt()

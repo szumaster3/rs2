@@ -2,7 +2,7 @@ package content.global.skill.agility.grapple
 
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
@@ -54,7 +54,7 @@ class KaramjaGrapple : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(17074).handlers["option:grapple"] = this
+        LocType.forId(17074).handlers["option:grapple"] = this
         return this
     }
 

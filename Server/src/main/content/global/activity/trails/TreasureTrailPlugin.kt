@@ -4,7 +4,7 @@ import content.global.activity.trails.npc.SaradominWizardNPC
 import content.global.activity.trails.npc.ZamorakWizardNPC
 import content.global.activity.trails.plugin.*
 import core.api.sendMessage
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
@@ -28,14 +28,14 @@ class TreasureTrailPlugin : OptionHandler() {
      */
     override fun newInstance(arg: Any?): Plugin<Any> {
         IDS.forEach { id ->
-            ItemDefinition.forId(id).handlers["option:read"] = this
+            ObjType.forId(id).handlers["option:read"] = this
         }
 
         ClueLevel.values().forEach { level ->
-            ItemDefinition.forId(level.casketId).handlers["option:open"] = this
+            ObjType.forId(level.casketId).handlers["option:open"] = this
         }
 
-        ItemDefinition.forId(CoordinateScroll.SEXTANT.id).handlers["option:look through"] = this
+        ObjType.forId(CoordinateScroll.SEXTANT.id).handlers["option:look through"] = this
 
         ClassScanner.definePlugin(MapClue())
         ClassScanner.definePlugin(ClueItemPlugin())

@@ -3,7 +3,7 @@ package content.global.activity.penguinhns
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import core.api.log
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location

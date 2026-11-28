@@ -1,6 +1,6 @@
 package content.region.misthalin.varrock.plugin;
 
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.NpcType;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -20,8 +20,8 @@ public final class ShooAwayStrayDogPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        NPCDefinition.forId(5917).getHandlers().put("option:shoo-away", this);
-        NPCDefinition.setOptionHandler("shoo-away", this);
+        NpcType.forId(5917).getHandlers().put("option:shoo-away", this);
+        NpcType.setOptionHandler("shoo-away", this);
         return this;
     }
 

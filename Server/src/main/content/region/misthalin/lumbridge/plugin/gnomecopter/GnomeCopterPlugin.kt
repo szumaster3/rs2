@@ -1,6 +1,6 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter
 
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -12,7 +12,7 @@ import shared.consts.Items
 class GnomeCopterPlugin : Plugin<Any> {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ItemDefinition.forId(Items.GNOMECOPTER_12842).handlers["equipment"] = this
+        ObjType.forId(Items.GNOMECOPTER_12842).handlers["equipment"] = this
         return this
     }
 

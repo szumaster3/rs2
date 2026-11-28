@@ -1,7 +1,7 @@
 package content.region.morytania.plugin.tarnslair
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
 import core.game.node.Node
@@ -18,7 +18,7 @@ class TrapPlugin : OptionHandler() {
     private val buttonID = shared.consts.Scenery.FLOOR_20966
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(buttonID).handlers["option:search"] = this
+        LocType.forId(buttonID).handlers["option:search"] = this
         return this
     }
 

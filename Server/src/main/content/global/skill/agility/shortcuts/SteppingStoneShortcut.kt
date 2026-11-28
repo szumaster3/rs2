@@ -1,7 +1,7 @@
 package content.global.skill.agility.shortcuts
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
 import core.game.node.Node
@@ -69,7 +69,7 @@ class SteppingStoneShortcut : OptionHandler() {
     fun configure(objects: IntArray, pointA: Location, pointB: Location, option: String, levelReq: Int){
         val instance = SteppingStoneInstance(pointA,pointB, option, levelReq)
         objects.forEach {
-            SceneryDefinition.forId(it).handlers["option:$option"] = this
+            LocType.forId(it).handlers["option:$option"] = this
         }
         stones.put(pointA,instance)
         stones.put(pointB, instance)

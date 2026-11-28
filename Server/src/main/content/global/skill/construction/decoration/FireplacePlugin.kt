@@ -1,7 +1,7 @@
 package content.global.skill.construction.decoration
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
 import core.game.node.Node
@@ -24,9 +24,9 @@ import shared.consts.Scenery as Obj
 class FireplacePlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Obj.CLAY_FIREPLACE_13609        ).handlers["option:light"] = this
-        SceneryDefinition.forId(Obj.LIMESTONE_FIREPLACE_13611   ).handlers["option:light"] = this
-        SceneryDefinition.forId(Obj.MARBLE_FIREPLACE_13613      ).handlers["option:light"] = this
+        LocType.forId(Obj.CLAY_FIREPLACE_13609        ).handlers["option:light"] = this
+        LocType.forId(Obj.LIMESTONE_FIREPLACE_13611   ).handlers["option:light"] = this
+        LocType.forId(Obj.MARBLE_FIREPLACE_13613      ).handlers["option:light"] = this
         return this
     }
 

@@ -3,9 +3,9 @@ package core.net.packet.out
 import core.net.packet.ServerProt
 
 import core.cache.Cache
-import core.cache.def.impl.VarpDefinition
-import core.cache.def.impl.VarcDefinition
-import core.cache.def.impl.VarbitDefinition
+import core.cache.def.impl.VarpType
+import core.cache.def.impl.VarcType
+import core.cache.def.impl.VarbitType
 import core.game.container.ContainerEvent
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
@@ -429,7 +429,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
 
     // Variables and containers
     CONFIG(encode<ConfigContext> { context ->
-        if (context.id !in 0..65535 || !VarpDefinition.exists(context.id)) {
+        if (context.id !in 0..65535 || !VarpType.exists(context.id)) {
             System.err.println("[Protocol578] Rejected unknown varp ${context.id}, value=${context.value}")
             return@encode
         }
@@ -448,7 +448,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         }
     }),
     CS_CONFIG_PACKET(encode<CSConfigContext> { context ->
-        if (!VarcDefinition.exists(context.id)) {
+        if (!VarcType.exists(context.id)) {
             System.err.println("[Protocol578] Rejected unknown varc ${context.id}")
             return@encode
         }
@@ -456,7 +456,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         context.player.details.session.write(buffer)
     }),
     VARBIT(encode<VarbitContext> { context ->
-        if (context.varbitId !in 0..65535 || !VarbitDefinition.exists(context.varbitId)) {
+        if (context.varbitId !in 0..65535 || !VarbitType.exists(context.varbitId)) {
             System.err.println("[Protocol578] Rejected unknown varbit ${context.varbitId}, value=${context.value}")
             return@encode
         }
@@ -473,14 +473,14 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
     }),
     VARC_UPDATE(encode<VarcUpdateContext> { context ->
         val player = context.player
-        if (!VarcDefinition.exists(context.varcId)) {
+        if (!VarcType.exists(context.varcId)) {
             System.err.println("[Protocol578] Rejected unknown varc ${context.varcId}")
             return@encode
         }
         player.session.write(varc(context.varcId, context.value, player.interfaceManager.getPacketCount(1)))
     }),
     VARC_STRING_UPDATE(encode<VarcStringUpdateContext> { context ->
-        if (!VarcDefinition.stringExists(context.varcId) || '\u0000' in context.value || context.value.length > 65530) {
+        if (!VarcType.stringExists(context.varcId) || '\u0000' in context.value || context.value.length > 65530) {
             System.err.println("[Protocol578] Rejected varc string ${context.varcId}")
             return@encode
         }

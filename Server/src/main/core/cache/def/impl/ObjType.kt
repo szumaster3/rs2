@@ -20,7 +20,7 @@ import java.nio.ByteBuffer
 import java.util.*
 import shared.consts.Items
 
-class ItemDefinition : Definition<Item>() {
+class ObjType : Definition<Item>() {
     /** ObjType opcode 65: searchable by the client's tradeable-only item finder. */
     var cacheTradeable: Boolean = false
         private set
@@ -33,32 +33,36 @@ class ItemDefinition : Definition<Item>() {
     var questIds: IntArray? = null
         private set
     var interfaceModelId: Int = 0
-    var modelZoom: Int = 0
-    var modelRotationX: Int = 0
-    var modelRotationY: Int = 0
+    var zoom2d: Int = 0
+    var xAngle2d: Int = 0
+    var yAngle2d: Int = 0
     var modelOffset1: Int = 0
     var modelOffset2: Int = 0
     private var stackable: Boolean = false
-    var value: Int = 1
+    var cost: Int = 1
+    /** Legacy server API; the cache stores a single cost value (opcode 12). */
+    var value: Int
+        get() = cost
+        set(value) { cost = value }
     var isMembersOnly: Boolean = false
     var maleWornModelId1: Int = -1
     var femaleWornModelId1: Int = -1
     var maleWornModelId2: Int = -1
     var femaleWornModelId2: Int = -1
-    var maleWornModelId3: Int = -1
-    var femaleWornModelId3: Int = -1
-    var maleWornModelId4: Int = -1
-    var femaleWornModelId4: Int = -1
+    var maleHeadModelId1: Int = -1
+    var femaleHeadModelId1: Int = -1
+    var maleHeadModelId2: Int = -1
+    var femaleHeadModelId2: Int = -1
     var groundOptions: Array<String?>? = arrayOf<String?>(null, null, "take", null, null)
     var originalModelColors: ShortArray? = null
     var modifiedModelColors: ShortArray? = null
-    var textureColour1: ShortArray? = null
-    var textureColour2: ShortArray? = null
-    var unknownArray1: ByteArray? = null
+    var retextureSource: ShortArray? = null
+    var retextureDestination: ShortArray? = null
+    var recolourPaletteIndices: ByteArray? = null
     var unknownArray2: IntArray? = null
     var isUnnoted: Boolean = true
-    var colourEquip1: Int = -1
-    var colourEquip2: Int = 0
+    var maleWornModelId3: Int = -1
+    var femaleWornModelId3: Int = 0
     var noteId: Int = -1
     var noteTemplateId: Int = -1
     var stackIds: IntArray? = null
@@ -73,7 +77,7 @@ class ItemDefinition : Definition<Item>() {
     var clientScriptData: HashMap<Int, Any?>? = null
     fun getParam(key: Int, defaultValue: Int): Int = clientScriptData?.get(key) as? Int ?: defaultValue
     fun getParam(key: Int, defaultValue: String?): String? = clientScriptData?.get(key) as? String ?: defaultValue
-    var itemType: Int = 0
+    var dummyItemType: Int = 0
     val isAllowed: Boolean
         get() {
             var name = name.lowercase(Locale.getDefault())
@@ -100,16 +104,16 @@ class ItemDefinition : Definition<Item>() {
     val renderAnimationId: Int
         get() = getConfiguration<Int>(ItemConfigParser.RENDER_ANIM_ID, 1426)
     val isPlayerType: Boolean
-        get() = itemType == 0
+        get() = dummyItemType == 0
     var isStackable: Boolean
         get() = stackable || !this.isUnnoted
         set(stackable) {
             this.stackable = stackable
         }
     val maxValue: Int
-        get() = (value * 1.05).toInt().coerceAtLeast(1)
+        get() = (cost * 1.05).toInt().coerceAtLeast(1)
     val minValue: Int
-        get() = (value * .95).toInt().coerceAtLeast(1)
+        get() = (cost * .95).toInt().coerceAtLeast(1)
     var inventoryOptions: Array<String?>?
         get() = options
         set(inventoryOptions) {
@@ -159,47 +163,47 @@ class ItemDefinition : Definition<Item>() {
         options = arrayOf<String?>(null, null, null, null, "drop")
     }
 
-    fun transferNoteDefinition(reference: ItemDefinition?, templateReference: ItemDefinition?) {
+    fun transferNoteDefinition(reference: ObjType?, templateReference: ObjType?) {
         isMembersOnly = reference!!.isMembersOnly
         interfaceModelId = templateReference!!.interfaceModelId
         originalModelColors = templateReference.originalModelColors
         name = reference.name
         modelOffset2 = templateReference.modelOffset2
-        textureColour1 = templateReference.textureColour1
-        value = reference.value
-        modelRotationY = templateReference.modelRotationY
+        retextureSource = templateReference.retextureSource
+        cost = reference.cost
+        yAngle2d = templateReference.yAngle2d
         stackable = true
         isUnnoted = false
         modifiedModelColors = templateReference.modifiedModelColors
-        modelRotationX = templateReference.modelRotationX
-        modelZoom = templateReference.modelZoom
-        textureColour1 = templateReference.textureColour1
+        xAngle2d = templateReference.xAngle2d
+        zoom2d = templateReference.zoom2d
+        retextureSource = templateReference.retextureSource
         handlers.put(ItemConfigParser.TRADEABLE, true)
     }
 
-    fun transferLendDefinition(reference: ItemDefinition?, templateReference: ItemDefinition?) {
+    fun transferLendDefinition(reference: ObjType?, templateReference: ObjType?) {
         femaleWornModelId1 = reference!!.femaleWornModelId1
         maleWornModelId2 = reference.maleWornModelId2
         isMembersOnly = reference.isMembersOnly
         interfaceModelId = templateReference!!.interfaceModelId
-        textureColour2 = reference.textureColour2
+        retextureDestination = reference.retextureDestination
         groundOptions = reference.groundOptions
-        unknownArray1 = reference.unknownArray1
-        modelRotationX = templateReference.modelRotationX
-        modelRotationY = templateReference.modelRotationY
+        recolourPaletteIndices = reference.recolourPaletteIndices
+        xAngle2d = templateReference.xAngle2d
+        yAngle2d = templateReference.yAngle2d
         originalModelColors = reference.originalModelColors
         name = reference.name
         maleWornModelId1 = reference.maleWornModelId1
-        colourEquip1 = reference.colourEquip1
+        maleWornModelId3 = reference.maleWornModelId3
         teamId = reference.teamId
         modelOffset2 = templateReference.modelOffset2
         clientScriptData = reference.clientScriptData
         modifiedModelColors = reference.modifiedModelColors
-        colourEquip2 = reference.colourEquip2
+        femaleWornModelId3 = reference.femaleWornModelId3
         modelOffset1 = templateReference.modelOffset1
-        textureColour1 = reference.textureColour1
-        value = 0
-        modelZoom = templateReference.modelZoom
+        retextureSource = reference.retextureSource
+        cost = 0
+        zoom2d = templateReference.zoom2d
         options = arrayOfNulls<String>(5)
         femaleWornModelId2 = reference.femaleWornModelId2
 
@@ -208,27 +212,27 @@ class ItemDefinition : Definition<Item>() {
 
     }
 
-    fun transferRecolourDefinition(reference: ItemDefinition?, templateReference: ItemDefinition?) {
+    fun transferRecolourDefinition(reference: ObjType?, templateReference: ObjType?) {
         femaleWornModelId2 = reference!!.femaleWornModelId2
         options = arrayOfNulls<String>(5)
-        modelRotationY = templateReference!!.modelRotationY
+        yAngle2d = templateReference!!.yAngle2d
         name = reference.name
         maleWornModelId1 = reference.maleWornModelId1
         modelOffset2 = templateReference.modelOffset2
         femaleWornModelId1 = reference.femaleWornModelId1
         maleWornModelId2 = reference.maleWornModelId2
         modelOffset1 = templateReference.modelOffset1
-        unknownArray1 = reference.unknownArray1
+        recolourPaletteIndices = reference.recolourPaletteIndices
         stackable = reference.stackable
-        modelRotationX = templateReference.modelRotationX
-        textureColour1 = reference.textureColour1
-        colourEquip1 = reference.colourEquip1
-        textureColour2 = reference.textureColour2
+        xAngle2d = templateReference.xAngle2d
+        retextureSource = reference.retextureSource
+        maleWornModelId3 = reference.maleWornModelId3
+        retextureDestination = reference.retextureDestination
         modifiedModelColors = reference.modifiedModelColors
-        modelZoom = templateReference.modelZoom
-        colourEquip2 = reference.colourEquip2
+        zoom2d = templateReference.zoom2d
+        femaleWornModelId3 = reference.femaleWornModelId3
         teamId = reference.teamId
-        value = 0
+        cost = 0
         groundOptions = reference.groundOptions
         originalModelColors = reference.originalModelColors
         isMembersOnly = reference.isMembersOnly
@@ -305,7 +309,7 @@ class ItemDefinition : Definition<Item>() {
     fun hasPlugin(): Boolean = itemPlugin != null
 
     companion object {
-        private val DEFINITIONS: MutableMap<Int, ItemDefinition> = HashMap<Int, ItemDefinition>()
+        private val DEFINITIONS: MutableMap<Int, ObjType> = HashMap<Int, ObjType>()
         private val OPTION_HANDLERS: MutableMap<String, OptionHandler?> = HashMap<String, OptionHandler?>()
 
         @JvmStatic
@@ -313,30 +317,30 @@ class ItemDefinition : Definition<Item>() {
             for (itemId in 0 until Cache.getItemDefinitionsSize()) {
                 val data = Cache.getIndexes()[19]!!.getFileData(itemId.ushr(8), itemId and 0xFF, null)
                 if (data == null) {
-                    ItemDefinition.getDefinitions().put(itemId, ItemDefinition())
+                    ObjType.getDefinitions().put(itemId, ObjType())
                     continue
                 }
-                var def = ItemDefinition.parseDefinition(itemId, ByteBuffer.wrap(data))
+                var def = ObjType.parseDefinition(itemId, ByteBuffer.wrap(data))
 
                 if (itemId == 14958)
                     def.isStackable = true
-                ItemDefinition.getDefinitions().put(itemId, def)
+                ObjType.getDefinitions().put(itemId, def)
             }
-            ItemDefinition.defineTemplates()
+            ObjType.defineTemplates()
         }
 
         @JvmStatic
-        fun forId(itemId: Int): ItemDefinition {
+        fun forId(itemId: Int): ObjType {
             var def = DEFINITIONS.get(itemId)
             if (def != null) {
                 return def
             }
-            return ItemDefinition()
+            return ObjType()
         }
 
         @JvmStatic
-        fun parseDefinition(itemId: Int, buffer: ByteBuffer): ItemDefinition {
-            var def = ItemDefinition()
+        fun parseDefinition(itemId: Int, buffer: ByteBuffer): ObjType {
+            var def = ObjType()
             def.id = itemId
             while (true) {
                 var opcode = buffer.get().toInt() and 0xFF
@@ -349,11 +353,11 @@ class ItemDefinition : Definition<Item>() {
                 } else if (opcode == 3) {
                     def.handlers.put("examine", ByteBufferUtils.getString(buffer))
                 } else if (opcode == 4) {
-                    def.modelZoom = buffer.getShort().toInt() and 0xFFFF
+                    def.zoom2d = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 5) {
-                    def.modelRotationX = buffer.getShort().toInt() and 0xFFFF
+                    def.xAngle2d = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 6) {
-                    def.modelRotationY = buffer.getShort().toInt() and 0xFFFF
+                    def.yAngle2d = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 7) {
                     def.modelOffset1 = buffer.getShort().toInt() and 0xFFFF
                     if (def.modelOffset1 > 32767)
@@ -367,7 +371,7 @@ class ItemDefinition : Definition<Item>() {
                 {} else if (opcode == 11) {
                     def.stackable = true
                 } else if (opcode == 12) {
-                    def.value = ((buffer.get().toInt() and 0xFF) shl 24) + ((buffer.get().toInt() and 0xFF) shl 16) + ((buffer.get().toInt() and 0xFF) shl 8) + (buffer.get().toInt() and 0xFF)
+                    def.cost = ((buffer.get().toInt() and 0xFF) shl 24) + ((buffer.get().toInt() and 0xFF) shl 16) + ((buffer.get().toInt() and 0xFF) shl 8) + (buffer.get().toInt() and 0xFF)
                 } else if (opcode == 16) {
                     def.isMembersOnly = true
                 } else if (opcode == 23) {
@@ -392,35 +396,35 @@ class ItemDefinition : Definition<Item>() {
                     }
                 } else if (opcode == 41) {
                     var length = buffer.get().toInt() and 0xFF
-                    def.textureColour1 = ShortArray(length)
-                    def.textureColour2 = ShortArray(length)
+                    def.retextureSource = ShortArray(length)
+                    def.retextureDestination = ShortArray(length)
                     for (index in 0 until length) {
-                        def.textureColour1!![index] = buffer.getShort()
-                        def.textureColour2!![index] = buffer.getShort()
+                        def.retextureSource!![index] = buffer.getShort()
+                        def.retextureDestination!![index] = buffer.getShort()
                     }
                 } else if (opcode == 42) {
                     var length = buffer.get().toInt() and 0xFF
-                    def.unknownArray1 = ByteArray(length)
+                    def.recolourPaletteIndices = ByteArray(length)
                     for (index in 0 until length)
-                        def.unknownArray1!![index] = buffer.get()
+                        def.recolourPaletteIndices!![index] = buffer.get()
                 } else if (opcode == 65) {
                     def.cacheTradeable = true
                 } else if (opcode == 78) {
-                    def.colourEquip1 = buffer.getShort().toInt() and 0xFFFF
+                    def.maleWornModelId3 = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 79) {
-                    def.colourEquip2 = buffer.getShort().toInt() and 0xFFFF
+                    def.femaleWornModelId3 = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 90) {
-                    def.maleWornModelId3 = buffer.getShort().toInt() and 0xffff
+                    def.maleHeadModelId1 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 91) {
-                    def.femaleWornModelId3 = buffer.getShort().toInt() and 0xffff
+                    def.femaleHeadModelId1 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 92) {
-                    def.maleWornModelId4 = buffer.getShort().toInt() and 0xffff
+                    def.maleHeadModelId2 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 93) {
-                    def.femaleWornModelId4 = buffer.getShort().toInt() and 0xffff
+                    def.femaleHeadModelId2 = buffer.getShort().toInt() and 0xffff
                 } else if (opcode == 95) {
                     def.modelRotationZ = buffer.short.toInt() and 0xffff
                 } else if (opcode == 96) {
-                    def.itemType = buffer.get().toInt() and 0xff
+                    def.dummyItemType = buffer.get().toInt() and 0xff
                 } else if (opcode == 97) {
                     def.noteId = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 98) {
@@ -658,7 +662,7 @@ class ItemDefinition : Definition<Item>() {
             "satchel", "naval", " partyhat"
         )
         @JvmStatic
-        fun getDefinitions(): MutableMap<Int, ItemDefinition> = DEFINITIONS
+        fun getDefinitions(): MutableMap<Int, ObjType> = DEFINITIONS
 
         @JvmStatic
         fun getOptionHandler(nodeId: Int, name: String?): OptionHandler? =

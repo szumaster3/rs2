@@ -2,7 +2,7 @@ package core.game.node.entity.player.link.quest
 
 import core.api.*
 import content.data.Quests
-import core.cache.def.impl.QuestDefinition
+import core.cache.def.impl.QuestType
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.plugin.Plugin
@@ -23,7 +23,7 @@ abstract class Quest(
 
     val configs: IntArray = configs
 
-    val definition: QuestDefinition by lazy { checkNotNull(QuestDefinition.forId(index)) { "Missing cache quest definition $index" } }
+    val definition: QuestType by lazy { checkNotNull(QuestType.forId(index)) { "Missing cache quest definition $index" } }
     val name: String get() = definition.let { checkNotNull(it.name) }
     val questPoints: Int get() = definition.questPoints
 

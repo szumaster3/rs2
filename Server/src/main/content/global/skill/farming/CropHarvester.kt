@@ -2,7 +2,7 @@ package content.global.skill.farming
 
 import content.global.skill.summoning.familiar.npc.GiantEntNPC
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -29,8 +29,8 @@ val livesBased = arrayOf(
 @Initializable
 class CropHarvester : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("harvest", this)
-        SceneryDefinition.setOptionHandler("pick", this)
+        LocType.setOptionHandler("harvest", this)
+        LocType.setOptionHandler("pick", this)
         return this
     }
 

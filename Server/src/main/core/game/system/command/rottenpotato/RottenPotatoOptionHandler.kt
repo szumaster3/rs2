@@ -2,7 +2,7 @@ package core.game.system.command.rottenpotato
 
 import core.api.removeItem
 import core.api.sendMessage
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -20,7 +20,7 @@ class RottenPotatoOptionHandler : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (option in ROTTEN_POTATO_OPTIONS) {
-            ItemDefinition.forId(Items.ROTTEN_POTATO_5733).handlers["option:${option.lowercase()}"] = this
+            ObjType.forId(Items.ROTTEN_POTATO_5733).handlers["option:${option.lowercase()}"] = this
         }
         return this
     }

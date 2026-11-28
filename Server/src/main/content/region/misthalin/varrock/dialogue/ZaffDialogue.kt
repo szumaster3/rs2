@@ -6,7 +6,7 @@ import com.google.gson.JsonObject
 import core.ServerStore
 import core.ServerStore.Companion.getInt
 import core.api.*
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.InputType
@@ -29,7 +29,7 @@ import shared.consts.NPCs
 @Initializable
 class ZaffDialogue : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any?> {
-        NPCDefinition.setOptionHandler("buy-battlestaves", this)
+        NpcType.setOptionHandler("buy-battlestaves", this)
         ZaffQuestDialogue().init()
         ZaffBattlestaffsDialogue().init()
         return this

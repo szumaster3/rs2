@@ -5,7 +5,7 @@ import core.api.anyInEquipment
 import core.api.inEquipment
 import core.api.sendDialogue
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -57,7 +57,7 @@ class WaterOrbGrapple : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(17062).handlers["option:grapple"] = this
+        LocType.forId(17062).handlers["option:grapple"] = this
         return this
     }
 

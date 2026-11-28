@@ -4,7 +4,7 @@ import core.api.animate
 import core.api.playAudio
 import core.api.replaceScenery
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -30,10 +30,10 @@ class ObjectManagerPlugin : OptionHandler() {
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("open", this)
-        SceneryDefinition.setOptionHandler("close", this)
-        SceneryDefinition.setOptionHandler("shut", this)
-        SceneryDefinition.setOptionHandler("go-through", this)
+        LocType.setOptionHandler("open", this)
+        LocType.setOptionHandler("close", this)
+        LocType.setOptionHandler("shut", this)
+        LocType.setOptionHandler("go-through", this)
         return this
     }
 

@@ -3,7 +3,7 @@ package content.global.skill.slayer
 import content.data.Quests
 
 import core.api.hasRequirement
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.node.entity.player.Player
 import java.util.*
 import shared.consts.NPCs
@@ -219,7 +219,7 @@ enum class Tasks {
      * Gets the name of the npc for the task.
      */
     val displayName: String
-        get() = NPCDefinition.forId(npcs[0]).name
+        get() = NpcType.forId(npcs[0]).name
 
     companion object {
         /**

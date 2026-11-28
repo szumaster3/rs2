@@ -3,7 +3,7 @@ package core.game.ge
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.tools.SystemLogger
@@ -209,7 +209,7 @@ class ExchangeHistory(private val player: Player? = null) : PersistPlayer, Login
                 Components.EXCHANGE_HISTORY_643,
                 30 + i
             )
-            sendString(player, ItemDefinition.forId(o.itemID).name, Components.EXCHANGE_HISTORY_643, 35 + i)
+            sendString(player, ObjType.forId(o.itemID).name, Components.EXCHANGE_HISTORY_643, 35 + i)
             sendString(
                 player,
                 NumberFormat.getNumberInstance(Locale.US).format(o.totalCoinExchange.toLong()) + " gp",

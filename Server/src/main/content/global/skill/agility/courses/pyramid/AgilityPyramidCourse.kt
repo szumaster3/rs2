@@ -3,8 +3,8 @@ package content.global.skill.agility.courses.pyramid
 import content.global.skill.agility.AgilityCourse
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
-import core.cache.def.impl.VarbitDefinition
+import core.cache.def.impl.LocType
+import core.cache.def.impl.VarbitType
 import core.game.global.action.ClimbActionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
@@ -30,30 +30,30 @@ class AgilityPyramidCourse : AgilityCourse {
     constructor(player: Player?) : super(player, 5, 0.0)
 
     override fun configure() {
-        SceneryDefinition.forId(shared.consts.Scenery.CLIMBING_ROCKS_16535).handlers["option:climb"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.CLIMBING_ROCKS_16536).handlers["option:climb"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.CLIMBING_ROCKS_10851).handlers["option:climb"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.DOORWAY_10855).handlers["option:enter"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.DOORWAY_10856).handlers["option:enter"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.LEDGE_10860).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10861).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10862).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10863).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10864).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.PLANK_10868).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.PLANK_10867).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10882).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10883).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10884).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10885).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.LEDGE_10886).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.LEDGE_10887).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.LEDGE_10888).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.LEDGE_10889).handlers["option:cross"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.GAP_10859).handlers["option:jump"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.STAIRS_10857).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.STAIRS_10858).handlers["option:climb-down"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.LOW_WALL_10865).handlers["option:climb-over"] = this
+        LocType.forId(shared.consts.Scenery.CLIMBING_ROCKS_16535).handlers["option:climb"] = this
+        LocType.forId(shared.consts.Scenery.CLIMBING_ROCKS_16536).handlers["option:climb"] = this
+        LocType.forId(shared.consts.Scenery.CLIMBING_ROCKS_10851).handlers["option:climb"] = this
+        LocType.forId(shared.consts.Scenery.DOORWAY_10855).handlers["option:enter"] = this
+        LocType.forId(shared.consts.Scenery.DOORWAY_10856).handlers["option:enter"] = this
+        LocType.forId(shared.consts.Scenery.LEDGE_10860).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10861).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10862).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10863).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10864).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.PLANK_10868).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.PLANK_10867).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10882).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10883).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10884).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10885).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.LEDGE_10886).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.LEDGE_10887).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.LEDGE_10888).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.LEDGE_10889).handlers["option:cross"] = this
+        LocType.forId(shared.consts.Scenery.GAP_10859).handlers["option:jump"] = this
+        LocType.forId(shared.consts.Scenery.STAIRS_10857).handlers["option:climb-up"] = this
+        LocType.forId(shared.consts.Scenery.STAIRS_10858).handlers["option:climb-down"] = this
+        LocType.forId(shared.consts.Scenery.LOW_WALL_10865).handlers["option:climb-over"] = this
         RollingBlock.BlockSets.values()
         definePlugin(MovingBlockNPC())
         definePlugin(AgilityPyramidZone())
@@ -757,7 +757,7 @@ class AgilityPyramidCourse : AgilityCourse {
             value: Int,
             save: Boolean,
         ) {
-            val definition = VarbitDefinition.forSceneryId(SceneryDefinition.forId(objectId).varbitID)
+            val definition = VarbitType.forSceneryId(LocType.forId(objectId).varbitID)
             val oldVal = (definition.getValue(player) shl definition.startBit)
             val newVal = (value shl definition.startBit)
             setVarp(player, CONFIG_ID, (getVarp(player, CONFIG_ID) - oldVal) + newVal, save)

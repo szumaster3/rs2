@@ -3,7 +3,7 @@ package content.global.skill.slayer
 import com.google.gson.JsonObject
 import content.global.plugins.item.equipment.fog_gloves.FOGGlovesManager
 import core.api.*
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.event.EventHook
 import core.game.event.NPCKillEvent
 import core.game.node.entity.Entity
@@ -181,7 +181,7 @@ class SlayerManager(val player: Player? = null) : LoginListener, PersistPlayer, 
             return if (task.npcs.isEmpty()) {
                 "npc length too small report me"
             } else {
-                NPCDefinition.forId(task.npcs[0]).name.lowercase()
+                NpcType.forId(task.npcs[0]).name.lowercase()
             }
         }
 

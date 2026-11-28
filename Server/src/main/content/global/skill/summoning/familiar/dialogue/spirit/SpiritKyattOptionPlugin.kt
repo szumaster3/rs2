@@ -2,8 +2,8 @@ package content.global.skill.summoning.familiar.dialogue.spirit
 
 import content.global.skill.summoning.familiar.Familiar
 import core.api.*
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -36,12 +36,12 @@ class SpiritKyattOptionPlugin : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        NPCs.SPIRIT_KYATT_7365.let { NPCDefinition.forId(it).handlers["option:interact"] = this }
-        NPCs.SPIRIT_KYATT_7366.let { NPCDefinition.forId(it).handlers["option:interact"] = this }
-        Objects.TRAPDOOR_28741.let { SceneryDefinition.forId(it).handlers["option:open"] = this }
-        Objects.LADDER_28743.let { SceneryDefinition.forId(it).handlers["option:climb-up"] = this }
-        BRONZE_AXE_SCENERY.let { SceneryDefinition.forId(it).handlers["option:take"] = this }
-        BRONZE_PICKAXE_SCENERY.let { SceneryDefinition.forId(it).handlers["option:take"] = this }
+        NPCs.SPIRIT_KYATT_7365.let { NpcType.forId(it).handlers["option:interact"] = this }
+        NPCs.SPIRIT_KYATT_7366.let { NpcType.forId(it).handlers["option:interact"] = this }
+        Objects.TRAPDOOR_28741.let { LocType.forId(it).handlers["option:open"] = this }
+        Objects.LADDER_28743.let { LocType.forId(it).handlers["option:climb-up"] = this }
+        BRONZE_AXE_SCENERY.let { LocType.forId(it).handlers["option:take"] = this }
+        BRONZE_PICKAXE_SCENERY.let { LocType.forId(it).handlers["option:take"] = this }
         return this
     }
 

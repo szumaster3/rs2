@@ -3,7 +3,7 @@ package content.region.kandarin.seers_village.quest.mcannon.plugin;
 import content.data.Quests;
 
 import content.region.kandarin.seers_village.quest.mcannon.DwarfCannon;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -40,16 +40,16 @@ public class DwarfCannonPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(3).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(5).getHandlers().put("option:inspect", this);
-        SceneryDefinition.forId(2).getHandlers().put("option:enter", this);
-        SceneryDefinition.forId(13).getHandlers().put("option:climb-over", this);
-        SceneryDefinition.forId(15601).getHandlers().put("option:inspect", this);
+        LocType.forId(3).getHandlers().put("option:open", this);
+        LocType.forId(5).getHandlers().put("option:inspect", this);
+        LocType.forId(2).getHandlers().put("option:enter", this);
+        LocType.forId(13).getHandlers().put("option:climb-over", this);
+        LocType.forId(15601).getHandlers().put("option:inspect", this);
         for (int i = 15; i < 21; i++) {
-            SceneryDefinition.forId(i).getHandlers().put("option:inspect", this);
+            LocType.forId(i).getHandlers().put("option:inspect", this);
         }
-        SceneryDefinition.forId(15596).getHandlers().put("option:take", this);
-        SceneryDefinition.forId(1).getHandlers().put("option:search", this);
+        LocType.forId(15596).getHandlers().put("option:take", this);
+        LocType.forId(1).getHandlers().put("option:search", this);
         UseWithHandler.addHandler(5, UseWithHandler.OBJECT_TYPE, new UseWithHandler(1) {
 
             @Override

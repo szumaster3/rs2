@@ -1,6 +1,6 @@
 package content.global.skill.construction;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.dialogue.Dialogue;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.interaction.OptionHandler;
@@ -22,10 +22,10 @@ public final class PortalOptionPlugin extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         for (HouseLocation hl : HouseLocation.values()) {
-            SceneryDefinition.forId(hl.getPortalId()).getHandlers().put("option:enter", this);
+            LocType.forId(hl.getPortalId()).getHandlers().put("option:enter", this);
         }
-        SceneryDefinition.forId(13405).getHandlers().put("option:lock", this);
-        SceneryDefinition.forId(13405).getHandlers().put("option:enter", this);
+        LocType.forId(13405).getHandlers().put("option:lock", this);
+        LocType.forId(13405).getHandlers().put("option:enter", this);
         ClassScanner.definePlugin(new PortalDialogue());
         return this;
     }

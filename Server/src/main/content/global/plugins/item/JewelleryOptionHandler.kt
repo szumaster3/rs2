@@ -2,7 +2,7 @@ package content.global.plugins.item
 
 import content.data.EnchantedJewellery
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.PulseType
@@ -21,8 +21,8 @@ class JewelleryOptionHandler : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any>? {
         itemIds.forEach { id ->
-            ItemDefinition.forId(id).handlers["option:rub"] = this
-            ItemDefinition.forId(id).handlers["option:operate"] = this
+            ObjType.forId(id).handlers["option:rub"] = this
+            ObjType.forId(id).handlers["option:operate"] = this
         }
         return null
     }

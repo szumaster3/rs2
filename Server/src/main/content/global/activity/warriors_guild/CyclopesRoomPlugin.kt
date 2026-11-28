@@ -4,7 +4,7 @@ import core.api.clearLogoutListener
 import core.api.registerLogoutListener
 import core.api.removeAttribute
 import core.api.setAttribute
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
@@ -76,8 +76,8 @@ class CyclopesRoomPlugin :
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    SceneryDefinition.forId(shared.consts.Scenery.DOOR_15641).handlers["option:open"] = this
-                    SceneryDefinition.forId(shared.consts.Scenery.DOOR_15644).handlers["option:open"] = this
+                    LocType.forId(shared.consts.Scenery.DOOR_15641).handlers["option:open"] = this
+                    LocType.forId(shared.consts.Scenery.DOOR_15644).handlers["option:open"] = this
                     return this
                 }
 

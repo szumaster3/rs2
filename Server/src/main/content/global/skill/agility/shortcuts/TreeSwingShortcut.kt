@@ -2,7 +2,7 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.OptionHandler
 import core.game.interaction.UseWithHandler
@@ -70,8 +70,8 @@ class TreeSwingShortcut : OptionHandler() {
          * Handles ropeswing interaction.
          */
 
-        SceneryDefinition.forId(Scenery.ROPESWING_2325).handlers["option:swing-on"] = this
-        SceneryDefinition.forId(Scenery.ROPESWING_2324).handlers["option:swing-on"] = this
+        LocType.forId(Scenery.ROPESWING_2325).handlers["option:swing-on"] = this
+        LocType.forId(Scenery.ROPESWING_2324).handlers["option:swing-on"] = this
         return this
     }
 

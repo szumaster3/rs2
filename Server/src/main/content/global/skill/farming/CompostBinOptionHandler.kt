@@ -1,7 +1,7 @@
 package content.global.skill.farming
 
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -12,8 +12,8 @@ import core.plugin.Plugin
 class CompostBinOptionHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (i in 7836..7839) {
-            SceneryDefinition.forId(i).childrenIds!!.forEach {
-                val def = SceneryDefinition.forId(it)
+            LocType.forId(i).childrenIds!!.forEach {
+                val def = LocType.forId(it)
                 def.handlers["option:open"] = this
                 def.handlers["option:close"] = this
                 def.handlers["option:take-tomato"] = this

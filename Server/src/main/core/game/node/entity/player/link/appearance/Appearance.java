@@ -2,8 +2,8 @@ package core.game.node.entity.player.link.appearance;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.ObjType;
+import core.cache.def.impl.NpcType;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Animator.Priority;
@@ -72,7 +72,7 @@ public final class Appearance {
             player.getProperties().setDefenceAnimation(new Animation(404));
             player.getProperties().setDeathAnimation(new Animation(9055, Priority.HIGH));
         } else {
-            NPCDefinition def = NPCDefinition.forId(id);
+            NpcType def = NpcType.forId(id);
             player.setSize(def.size);
             if (def.getCombatAnimation(0) != null) {
                 player.getProperties().setAttackAnimation(def.getCombatAnimation(0));
@@ -99,7 +99,7 @@ public final class Appearance {
             if (weapon == null || weapon.getDefinition().getConfiguration(ItemConfigParser.WALK_ANIM, null) == null) {
                 setDefaultAnimations();
             } else {
-                ItemDefinition def = weapon.getDefinition();
+                ObjType def = weapon.getDefinition();
                 setStandAnimation(def.getConfiguration(ItemConfigParser.STAND_ANIM, 0x328));
                 setStandTurnAnimation(def.getConfiguration(ItemConfigParser.STAND_TURN_ANIM, 0x337));
                 setWalkAnimation(def.getConfiguration(ItemConfigParser.WALK_ANIM, 0x333));
@@ -119,7 +119,7 @@ public final class Appearance {
                 setStandTurnAnimation(8963);
             }
         } else {
-            NPCDefinition def = NPCDefinition.forId(npcId);
+            NpcType def = NpcType.forId(npcId);
             renderAnimationId = def.renderAnimationId;
             setStandAnimation(def.standAnimation);
             int turn = def.getTurnAnimation();

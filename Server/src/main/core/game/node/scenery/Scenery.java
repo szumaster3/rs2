@@ -1,7 +1,7 @@
 package core.game.node.scenery;
 
-import core.cache.def.impl.SceneryDefinition;
-import core.cache.def.impl.VarbitDefinition;
+import core.cache.def.impl.LocType;
+import core.cache.def.impl.VarbitType;
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.InteractPlugin;
 import core.game.node.Node;
@@ -43,7 +43,7 @@ public class Scenery extends Node {
     /**
      * The object's definition.
      */
-    private final SceneryDefinition definition;
+    private final LocType definition;
 
     /**
      * The restore pulse.
@@ -146,7 +146,7 @@ public class Scenery extends Node {
      * @param rotation The rotation.
      */
     public Scenery(int id, Location location, int type, int rotation) {
-        super(SceneryDefinition.forId(id).getName(), location);
+        super(LocType.forId(id).getName(), location);
         if (rotation < 0) {
             rotation += 4;
         }
@@ -160,7 +160,7 @@ public class Scenery extends Node {
         this.id = id;
         this.location = location;
         this.type = type;
-        this.definition = SceneryDefinition.forId(id);
+        this.definition = LocType.forId(id);
         super.size = definition.sizeX;
         if (definition.childrenIds != null && definition.childrenIds.length > 0) {
             this.childs = new Scenery[definition.childrenIds.length];
@@ -225,7 +225,7 @@ public class Scenery extends Node {
      */
     public Scenery getChild(Player player) {
         if (childs != null) {
-            SceneryDefinition def = definition.getChildObject(player);
+            LocType def = definition.getChildObject(player);
             for (Scenery child : childs) {
                 if (child.getId() == def.getId()) {
                     return child;
@@ -242,12 +242,12 @@ public class Scenery extends Node {
      * @param index  The child object.
      */
     public void setChildIndex(Player player, int index) {
-        SceneryDefinition def = getDefinition();
+        LocType def = getDefinition();
         if (childs == null && wrapper != null) {
             def = wrapper.getDefinition();
         }
         if (def.getVarbitID() > -1) {
-            VarbitDefinition config = def.getConfigFile();
+            VarbitType config = def.getConfigFile();
             if (config != null) {
                 setVarbit(player, def.getVarbitID(), index);
             }
@@ -357,7 +357,7 @@ public class Scenery extends Node {
      *
      * @return The definition.
      */
-    public SceneryDefinition getDefinition() {
+    public LocType getDefinition() {
         return definition;
     }
 

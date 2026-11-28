@@ -4,9 +4,9 @@ import content.global.skill.magic.spells.modern.EnchantSpell
 import content.global.skill.magic.spells.modern.TelekineticGrabSpell
 import content.minigame.mage_training.plugin.rooms.TelekineticTheatrePlugin
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -27,17 +27,17 @@ import shared.consts.*
 class MageTrainingArena : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Scenery.DOORWAY_10721).handlers["option:enter"] = this
-        NPCDefinition.forId(NPCs.REWARDS_GUARDIAN_3103).handlers["option:trade-with"] = this
+        LocType.forId(Scenery.DOORWAY_10721).handlers["option:enter"] = this
+        NpcType.forId(NPCs.REWARDS_GUARDIAN_3103).handlers["option:trade-with"] = this
         for (type in MTARoomType.values()) {
             if (type.mtaZone != null) {
                 ZoneBuilder.configure(type.mtaZone)
             }
-            SceneryDefinition.forId(type.sceneryId).handlers["option:enter"] = this
+            LocType.forId(type.sceneryId).handlers["option:enter"] = this
         }
-        ItemDefinition.forId(TelekineticTheatrePlugin.STATUE).handlers["option:observe"] = this
-        ItemDefinition.forId(TelekineticTheatrePlugin.STATUE).handlers["option:reset"] = this
-        NPCDefinition.forId(NPCs.MAZE_GUARDIAN_3102).handlers["option:talk-to"] = this
+        ObjType.forId(TelekineticTheatrePlugin.STATUE).handlers["option:observe"] = this
+        ObjType.forId(TelekineticTheatrePlugin.STATUE).handlers["option:reset"] = this
+        NpcType.forId(NPCs.MAZE_GUARDIAN_3102).handlers["option:talk-to"] = this
         definePlugins(EnchantSpell(), TelekineticGrabSpell())
         return this
     }

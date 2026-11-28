@@ -2,7 +2,7 @@ package content.region.wilderness.plugin
 
 import core.api.playAudio
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -25,12 +25,12 @@ import shared.consts.Scenery as Objects
 class WildernessObeliskPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(Objects.OBELISK_14829).handlers["option:activate"] = this
-        SceneryDefinition.forId(Objects.OBELISK_14826).handlers["option:activate"] = this
-        SceneryDefinition.forId(Objects.OBELISK_14827).handlers["option:activate"] = this
-        SceneryDefinition.forId(Objects.OBELISK_14828).handlers["option:activate"] = this
-        SceneryDefinition.forId(Objects.OBELISK_14830).handlers["option:activate"] = this
-        SceneryDefinition.forId(Objects.OBELISK_14831).handlers["option:activate"] = this
+        LocType.forId(Objects.OBELISK_14829).handlers["option:activate"] = this
+        LocType.forId(Objects.OBELISK_14826).handlers["option:activate"] = this
+        LocType.forId(Objects.OBELISK_14827).handlers["option:activate"] = this
+        LocType.forId(Objects.OBELISK_14828).handlers["option:activate"] = this
+        LocType.forId(Objects.OBELISK_14830).handlers["option:activate"] = this
+        LocType.forId(Objects.OBELISK_14831).handlers["option:activate"] = this
         return this
     }
 

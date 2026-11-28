@@ -260,7 +260,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                                 for (y in 0 until RegionPlane.REGION_SIZE) {
 
                                     val scenery = grid[x][y] ?: continue
-                                    val def = SceneryDefinition.forId(scenery.id) ?: continue
+                                    val def = LocType.forId(scenery.id) ?: continue
                                     val defName = def.name?.lowercase() ?: continue
 
                                     if (!defName.contains(nameQuery)) continue
@@ -317,7 +317,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                                     val scenery = grid[x][y] ?: continue
                                     if (scenery.id != id) continue
 
-                                    val def = SceneryDefinition.forId(scenery.id)
+                                    val def = LocType.forId(scenery.id)
                                     val loc = scenery.location
                                     writer.write(
                                         "[${scenery.id}] - (${loc.x}, ${loc.y}, ${loc.z}) " +
@@ -353,7 +353,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             GlobalScope.launch {
                 val results = mutableListOf<Pair<String, Int>>()
 
-                for (npcDef in NPCDefinition.getDefinitions().values) {
+                for (npcDef in NpcType.getDefinitions().values) {
                     val options = npcDef.options ?: continue
                     if (options.any { it.equals("pick-pocket", ignoreCase = true) || it.equals("pickpocket", ignoreCase = true) }) {
                         val name = npcDef.name ?: "Unknown"
@@ -387,7 +387,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 return@define
             }
 
-            val sceneryDef = SceneryDefinition.forId(sceneryId)
+            val sceneryDef = LocType.forId(sceneryId)
             if (sceneryDef == null) {
                 reject(player, "Scenery definition $sceneryId not found.")
                 return@define
@@ -413,7 +413,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 }
 
                 for (itemId in 0 until Cache.getItemDefinitionsSize()) {
-                    val def = ItemDefinition.forId(itemId) ?: continue
+                    val def = ObjType.forId(itemId) ?: continue
 
                     val itemModels: List<Int> = buildList {
                         def.interfaceModelId?.let { add(it) }
@@ -463,7 +463,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
                 val total = Cache.getItemDefinitionsSize()
                 for (itemId in 0 until total) {
-                    val def = ItemDefinition.forId(itemId) ?: continue
+                    val def = ObjType.forId(itemId) ?: continue
 
                     val itemModel = def.interfaceModelId ?: continue
                     if (itemModel == modelId) {
@@ -549,7 +549,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                         for (x in 0 until RegionPlane.REGION_SIZE) {
                             for (y in 0 until RegionPlane.REGION_SIZE) {
                                 val scenery = grid[x][y] ?: continue
-                                val def = SceneryDefinition.forId(scenery.id) ?: continue
+                                val def = LocType.forId(scenery.id) ?: continue
                                 def.options?.filterNotNull()?.forEach { option ->
                                     val lowerOption = option.lowercase()
                                     if (optionMap.containsKey(lowerOption)) {
@@ -605,7 +605,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                         for (x in 0 until RegionPlane.REGION_SIZE) {
                             for (y in 0 until RegionPlane.REGION_SIZE) {
                                 val scenery = grid[x][y] ?: continue
-                                val def = SceneryDefinition.forId(scenery.id) ?: continue
+                                val def = LocType.forId(scenery.id) ?: continue
                                 def.options?.filterNotNull()?.forEach { optionsSet.add(it.lowercase()) }
                             }
                         }
@@ -653,7 +653,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                             for (x in 0 until RegionPlane.REGION_SIZE) {
                                 for (y in 0 until RegionPlane.REGION_SIZE) {
                                     val scenery = grid[x][y] ?: continue
-                                    val def = SceneryDefinition.forId(scenery.id) ?: continue
+                                    val def = LocType.forId(scenery.id) ?: continue
 
                                     val matchedOption = def.options?.firstOrNull { it.equals(option, ignoreCase = true) }
                                     if (matchedOption != null) {
@@ -693,9 +693,9 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             GlobalScope.launch {
                 val allDefs = mutableListOf<Map<String, Any?>>()
                 for (id in 0 until Cache.getRenderAnimationDefinitionsSize()) {
-                    val def = RenderAnimationDefinition.forId(id) ?: continue
+                    val def = BasType.forId(id) ?: continue
                     val usedByItemIds = (0 until Cache.getItemDefinitionsSize()).filter { itemId ->
-                        val itemDef = ItemDefinition.forId(itemId) ?: return@filter false
+                        val itemDef = ObjType.forId(itemId) ?: return@filter false
                         itemDef.renderAnimationId == id
                     }
 
@@ -768,7 +768,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                         ?: continue
 
                     val firstNpcDescription = ids.mapNotNull { npcId ->
-                        NPCDefinition.forId(npcId)
+                        NpcType.forId(npcId)
                     }.firstOrNull()?.let { "${it.name} (level: ${it.combatLevel})" }
 
                     if (firstNpcDescription != null) {
@@ -863,7 +863,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                     ?: continue
 
                 val firstId = ids.firstOrNull() ?: continue
-                val objDef = SceneryDefinition.forId(firstId)
+                val objDef = LocType.forId(firstId)
 
                 val name = objDef?.name ?: "null"
                 val examine = objDef?.examine ?: e.get("examine")?.asString ?: "null"
@@ -916,7 +916,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             for (configElement in configs) {
                 val e = configElement.asJsonObject
                 val npcId = e.get("npc_id").asInt
-                val npcName = NPCDefinition.forId(npcId)?.name ?: "null"
+                val npcName = NpcType.forId(npcId)?.name ?: "null"
 
                 val locData = e.get("loc_data").asString
                 val points = locData.split("-").map { it.trim() }.filter { it.isNotEmpty() }
@@ -1029,13 +1029,13 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 return@define
             }
 
-            val iface = IfaceDefinition.forId(i)
+            val iface = InterfaceComponent.forId(i)
             if (iface == null) {
                 p.debug("Interface for id=$i not found.")
                 return@define
             }
 
-            fun dumpIface(def: IfaceDefinition, isRoot: Boolean = false): Map<String, Any?>? {
+            fun dumpIface(def: InterfaceComponent, isRoot: Boolean = false): Map<String, Any?>? {
                 val map = mutableMapOf<String, Any?>()
 
                 fun <T> addIfNotNull(key: String, value: T?) {
@@ -1053,7 +1053,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                         is Array<*> -> {
                             val filtered = value.mapNotNull {
                                 when (it) {
-                                    is IfaceDefinition -> dumpIface(it)
+                                    is InterfaceComponent -> dumpIface(it)
                                     is IntArray -> it.filter { v -> v != 0 }.takeIf { it.isNotEmpty() }
                                     is String -> if (it.isEmpty()) null else it
                                     else -> it
@@ -1079,11 +1079,11 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 addIfNotNull("baseY", def.baseY)
                 addIfNotNull("baseWidth", def.baseWidth)
                 addIfNotNull("baseHeight", def.baseHeight)
-                addIfNotNull("dynWidth", def.dynWidth)
-                addIfNotNull("dynHeight", def.dynHeight)
+                addIfNotNull("dynWidth", def.dynamicWidthValue)
+                addIfNotNull("dynHeight", def.dynamicHeightValue)
                 addIfNotNull("xMode", def.xMode)
                 addIfNotNull("yMode", def.yMode)
-                addIfNotNull("overlayer", def.overlayer)
+                addIfNotNull("overlayer", def.layer)
                 addIfNotNull("hidden", def.hidden)
                 addIfNotNull("scrollMaxH", def.scrollMaxH)
                 addIfNotNull("scrollMaxV", def.scrollMaxV)
@@ -1108,7 +1108,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 addIfNotNull("modelYAngle", def.modelYAngle)
                 addIfNotNull("modelYOffset", def.modelYOffset)
                 addIfNotNull("modelZoom", def.modelZoom)
-                addIfNotNull("modelAnimId", def.modelAnimId)
+                addIfNotNull("modelAnimId", def.modelSeqId)
                 addIfNotNull("activeModelAnimId", def.activeModelAnimId)
                 addIfNotNull("modelOrtho", def.modelOrtho)
                 addIfNotNull("unknownModelProp_3", def.unknownModelProp_3)
@@ -1134,12 +1134,12 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 addIfNotNull("unknownIntArray_2", def.unknownIntArray_2)
                 addIfNotNull("unknownByteArray_1", def.unknownByteArray_1)
                 addIfNotNull("unknownByteArray_2", def.unknownByteArray_2)
-                addIfNotNull("optionBase", def.optionBase)
+                addIfNotNull("optionBase", def.opBase)
                 addIfNotNull("ops", def.ops)
-                addIfNotNull("dragDeadzone", def.dragDeadzone)
-                addIfNotNull("dragDeadtime", def.dragDeadtime)
-                addIfNotNull("dragRenderBehavior", def.dragRenderBehavior)
-                addIfNotNull("opCircumfix", def.opCircumfix)
+                addIfNotNull("dragDeadzone", def.dragDeadZone)
+                addIfNotNull("dragDeadtime", def.dragDeadTime)
+                addIfNotNull("dragRenderBehavior", def.dragRender)
+                addIfNotNull("opCircumfix", def.targetVerb)
                 addIfNotNull("opSuffix", def.opSuffix)
                 addIfNotNull("option", def.option)
                 addIfNotNull("unknownProp_9", def.unknownProp_9)
@@ -1163,33 +1163,33 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                     s.unknown?.let { sMap["unknown"] = listOf(it.id, it.args) }
                     s.onMouseOver?.let { sMap["onMouseOver"] = listOf(it.id, it.args) }
                     s.onMouseLeave?.let { sMap["onMouseLeave"] = listOf(it.id, it.args) }
-                    s.onUseWith?.let { sMap["onUseWith"] = listOf(it.id, it.args) }
-                    s.onUse?.let { sMap["onUse"] = listOf(it.id, it.args) }
-                    s.onVarpTransmit?.let { sMap["onVarpTransmit"] = listOf(it.id, it.args) }
+                    s.onTargetLeave?.let { sMap["onUseWith"] = listOf(it.id, it.args) }
+                    s.onTargetEnter?.let { sMap["onUse"] = listOf(it.id, it.args) }
+                    s.onVarTransmit?.let { sMap["onVarpTransmit"] = listOf(it.id, it.args) }
                     s.onInvTransmit?.let { sMap["onInvTransmit"] = listOf(it.id, it.args) }
                     s.onStatTransmit?.let { sMap["onStatTransmit"] = listOf(it.id, it.args) }
                     s.onTimer?.let { sMap["onTimer"] = listOf(it.id, it.args) }
-                    s.onOptionClick?.let { sMap["onOptionClick"] = listOf(it.id, it.args) }
+                    s.onOp?.let { sMap["onOptionClick"] = listOf(it.id, it.args) }
                     s.onMouseRepeat?.let { sMap["onMouseRepeat"] = listOf(it.id, it.args) }
                     s.onClickRepeat?.let { sMap["onClickRepeat"] = listOf(it.id, it.args) }
                     s.onDrag?.let { sMap["onDrag"] = listOf(it.id, it.args) }
                     s.onRelease?.let { sMap["onRelease"] = listOf(it.id, it.args) }
                     s.onHold?.let { sMap["onHold"] = listOf(it.id, it.args) }
                     s.onDragStart?.let { sMap["onDragStart"] = listOf(it.id, it.args) }
-                    s.onDragRelease?.let { sMap["onDragRelease"] = listOf(it.id, it.args) }
-                    s.onScroll?.let { sMap["onScroll"] = listOf(it.id, it.args) }
+                    s.onDragComplete?.let { sMap["onDragRelease"] = listOf(it.id, it.args) }
+                    s.onScrollWheel?.let { sMap["onScroll"] = listOf(it.id, it.args) }
                     s.onVarcTransmit?.let { sMap["onVarcTransmit"] = listOf(it.id, it.args) }
-                    s.onVarcstrTransmit?.let { sMap["onVarcstrTransmit"] = listOf(it.id, it.args) }
+                    s.onVarcStrTransmit?.let { sMap["onVarcstrTransmit"] = listOf(it.id, it.args) }
                     if (sMap.isNotEmpty()) map["scripts"] = sMap
                 }
 
                 def.triggers?.let { t ->
                     val tMap = mutableMapOf<String, Any?>()
                     t.varpTriggers?.let { tMap["varpTriggers"] = it }
-                    t.inventoryTriggers?.let { tMap["inventoryTriggers"] = it }
+                    t.invTriggers?.let { tMap["inventoryTriggers"] = it }
                     t.statTriggers?.let { tMap["statTriggers"] = it }
                     t.varcTriggers?.let { tMap["varcTriggers"] = it }
-                    t.varcstrTriggers?.let { tMap["varcstrTriggers"] = it }
+                    t.varcStrTriggers?.let { tMap["varcstrTriggers"] = it }
                     if (tMap.isNotEmpty()) map["triggers"] = tMap
                 }
 

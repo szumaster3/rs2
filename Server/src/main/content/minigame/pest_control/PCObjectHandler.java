@@ -1,6 +1,6 @@
 package content.minigame.pest_control;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.activity.ActivityManager;
 import core.game.bots.PvMBotsBuilder;
 import core.game.interaction.OptionHandler;
@@ -33,47 +33,47 @@ public final class PCObjectHandler extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		// Barricades
-		SceneryDefinition.forId(14227).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14228).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14229).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14230).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14231).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14232).getHandlers().put("option:repair", this);
+		LocType.forId(14227).getHandlers().put("option:repair", this);
+		LocType.forId(14228).getHandlers().put("option:repair", this);
+		LocType.forId(14229).getHandlers().put("option:repair", this);
+		LocType.forId(14230).getHandlers().put("option:repair", this);
+		LocType.forId(14231).getHandlers().put("option:repair", this);
+		LocType.forId(14232).getHandlers().put("option:repair", this);
 		// Gates
-		SceneryDefinition.forId(14233).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14234).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14235).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14236).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14237).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14237).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14238).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14238).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14239).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14239).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14240).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14240).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14241).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14241).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14242).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14242).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14243).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14243).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14244).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14244).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14245).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14245).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14246).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14246).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14247).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(14247).getHandlers().put("option:repair", this);
-		SceneryDefinition.forId(14248).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(14248).getHandlers().put("option:repair", this);
+		LocType.forId(14233).getHandlers().put("option:open", this);
+		LocType.forId(14234).getHandlers().put("option:close", this);
+		LocType.forId(14235).getHandlers().put("option:open", this);
+		LocType.forId(14236).getHandlers().put("option:close", this);
+		LocType.forId(14237).getHandlers().put("option:open", this);
+		LocType.forId(14237).getHandlers().put("option:repair", this);
+		LocType.forId(14238).getHandlers().put("option:close", this);
+		LocType.forId(14238).getHandlers().put("option:repair", this);
+		LocType.forId(14239).getHandlers().put("option:open", this);
+		LocType.forId(14239).getHandlers().put("option:repair", this);
+		LocType.forId(14240).getHandlers().put("option:close", this);
+		LocType.forId(14240).getHandlers().put("option:repair", this);
+		LocType.forId(14241).getHandlers().put("option:open", this);
+		LocType.forId(14241).getHandlers().put("option:repair", this);
+		LocType.forId(14242).getHandlers().put("option:close", this);
+		LocType.forId(14242).getHandlers().put("option:repair", this);
+		LocType.forId(14243).getHandlers().put("option:open", this);
+		LocType.forId(14243).getHandlers().put("option:repair", this);
+		LocType.forId(14244).getHandlers().put("option:close", this);
+		LocType.forId(14244).getHandlers().put("option:repair", this);
+		LocType.forId(14245).getHandlers().put("option:open", this);
+		LocType.forId(14245).getHandlers().put("option:repair", this);
+		LocType.forId(14246).getHandlers().put("option:close", this);
+		LocType.forId(14246).getHandlers().put("option:repair", this);
+		LocType.forId(14247).getHandlers().put("option:open", this);
+		LocType.forId(14247).getHandlers().put("option:repair", this);
+		LocType.forId(14248).getHandlers().put("option:close", this);
+		LocType.forId(14248).getHandlers().put("option:repair", this);
 		// Towers
-		SceneryDefinition.forId(14296).getHandlers().put("option:climb", this);
+		LocType.forId(14296).getHandlers().put("option:climb", this);
 		// Lander crossing plank
-		SceneryDefinition.forId(14315).getHandlers().put("option:cross", this);
-		SceneryDefinition.forId(25631).getHandlers().put("option:cross", this);
-		SceneryDefinition.forId(25632).getHandlers().put("option:cross", this);
+		LocType.forId(14315).getHandlers().put("option:cross", this);
+		LocType.forId(25631).getHandlers().put("option:cross", this);
+		LocType.forId(25632).getHandlers().put("option:cross", this);
 		return this;
 	}
 

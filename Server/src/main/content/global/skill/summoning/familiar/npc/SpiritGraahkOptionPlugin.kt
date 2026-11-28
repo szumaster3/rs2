@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar.npc
 
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -12,8 +12,8 @@ import shared.consts.NPCs
 class SpiritGraahkOptionPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        NPCDefinition.forId(NPCs.SPIRIT_GRAAHK_7364).handlers["option:interact"] = this
-        NPCDefinition.forId(NPCs.SPIRIT_GRAAHK_7363).handlers["option:interact"] = this
+        NpcType.forId(NPCs.SPIRIT_GRAAHK_7364).handlers["option:interact"] = this
+        NpcType.forId(NPCs.SPIRIT_GRAAHK_7363).handlers["option:interact"] = this
         return this
     }
 

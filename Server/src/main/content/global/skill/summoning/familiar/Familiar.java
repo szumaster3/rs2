@@ -3,7 +3,7 @@ package content.global.skill.summoning.familiar;
 import content.global.skill.summoning.SummoningPouch;
 import content.global.skill.summoning.SummoningScroll;
 import content.global.skill.summoning.pets.Pet;
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.NpcType;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
@@ -115,7 +115,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
         this.pouchId = pouchId;
         this.pouch = SummoningPouch.get(pouchId);
         this.specialCost = specialCost;
-        this.combatFamiliar = NPCDefinition.forId(getOriginalId() + 1).getName().equals(getName());
+        this.combatFamiliar = NpcType.forId(getOriginalId() + 1).getName().equals(getName());
         this.attackStyle = attackStyle;
 
         if (pouchId == -1) {

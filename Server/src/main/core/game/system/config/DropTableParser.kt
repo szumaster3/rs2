@@ -8,7 +8,7 @@ import core.api.log
 import core.api.utils.ConfigParseException
 import core.api.utils.NPCDropTable
 import core.api.utils.WeightedItem
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.tools.Log
 import java.io.FileReader
 
@@ -31,12 +31,12 @@ class DropTableParser {
                     parseTable(tab.getAsJsonArray("default"), table, true)
 
                     for (n in ids) {
-                        val def = NPCDefinition.forId(n.toInt()).dropTables
+                        val def = NpcType.forId(n.toInt()).dropTables
                         def.table = table
                         count++
                     }
                 } catch (e: ConfigParseException) {
-                    val npcName = NPCDefinition.forId(ids[0].toInt()).name
+                    val npcName = NpcType.forId(ids[0].toInt()).name
                     log(this::class.java, Log.ERR, "Error parsing drop tables for NPC $npcName: ${exceptionToString(e)}")
                 }
             }

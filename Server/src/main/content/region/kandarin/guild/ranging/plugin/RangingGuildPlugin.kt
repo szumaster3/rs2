@@ -1,7 +1,7 @@
 package content.region.kandarin.guild.ranging.plugin
 
 import core.api.setAttribute
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.component.Component
 import core.game.global.action.ClimbActionHandler.climb
 import core.game.global.action.DoorActionHandler
@@ -22,9 +22,9 @@ import shared.consts.Components
 @Initializable
 class RangingGuildPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(2514).handlers["option:open"] = this
-        SceneryDefinition.forId(2511).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(2512).handlers["option:climb-down"] = this
+        LocType.forId(2514).handlers["option:open"] = this
+        LocType.forId(2511).handlers["option:climb-up"] = this
+        LocType.forId(2512).handlers["option:climb-down"] = this
         return this
     }
 

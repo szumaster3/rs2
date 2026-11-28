@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import core.ServerConstants
 import core.api.log
-import core.cache.def.impl.DataMap
+import core.cache.def.impl.EnumType
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.player.link.music.MusicZone
 import core.game.world.map.RegionManager
@@ -19,8 +19,8 @@ class MusicConfigLoader {
     private val gson = Gson()
 
     fun load() {
-        val songs = DataMap.get(1351)
-        val names = DataMap.get(1345)
+        val songs = EnumType.get(1351)
+        val names = EnumType.get(1345)
 
         songs.dataStore.forEach { (indexAny, songIdAny) ->
             val index = indexAny as? Int ?: return@forEach

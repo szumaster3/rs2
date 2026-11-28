@@ -1,8 +1,8 @@
 package core.game.system.command.oldsys
 
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.node.entity.player.Player
 import core.game.system.command.CommandPlugin
 import core.game.system.command.CommandSet
@@ -78,9 +78,9 @@ class DumpCommand : CommandPlugin() {
     }
 
     private fun getDefinitions(type: String) = when (type) {
-        "item" -> ItemDefinition.getDefinitions().values
-        "object" -> SceneryDefinition.getDefinitions().values
-        "npc" -> NPCDefinition.getDefinitions().values
+        "item" -> ObjType.getDefinitions().values
+        "object" -> LocType.getDefinitions().values
+        "npc" -> NpcType.getDefinitions().values
         else -> emptyList()
     }
 

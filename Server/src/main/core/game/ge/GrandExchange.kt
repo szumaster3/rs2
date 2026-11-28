@@ -2,7 +2,7 @@ package core.game.ge
 
 import core.ServerConstants
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.system.command.Privilege
@@ -243,7 +243,7 @@ class GrandExchange : StartupListener, Commands {
                 return false
             }
 
-            val itemDef = ItemDefinition.forId(itemID)
+            val itemDef = ObjType.forId(itemID)
             val offer = GrandExchangeOffer.createBotOffer(if (itemDef.isUnnoted) itemID else itemDef.noteId, amount)
             pendingOffers.addLast(offer)
 

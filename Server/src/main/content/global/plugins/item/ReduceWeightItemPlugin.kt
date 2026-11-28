@@ -1,6 +1,6 @@
 package content.global.plugins.item
 
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.InteractionListener
 import core.game.world.GameWorld
 import shared.consts.Items
@@ -25,7 +25,7 @@ class ReduceWeightItemPlugin : InteractionListener {
      * Applies a weight modifier to a single item id.
      */
     private fun applyWeight(itemId: Int, weight: Double) {
-        val def = ItemDefinition.forId(itemId) ?: return
+        val def = ObjType.forId(itemId) ?: return
         def.handlers["weight"] = weight
     }
 }

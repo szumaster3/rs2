@@ -1,7 +1,7 @@
 package content.region.morytania.plugin.tarnslair
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -16,7 +16,7 @@ import kotlin.random.Random
 @Initializable
 class SpikeWallPlugin: OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(20920).handlers["option:search"] = this
+        LocType.forId(20920).handlers["option:search"] = this
         return this
     }
 

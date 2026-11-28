@@ -1,6 +1,6 @@
 package content.region.wilderness.npc.revenants
 
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import shared.consts.NPCs
 
 enum class RevenantsType(val maxHit: Int, vararg val ids: Int) {
@@ -24,10 +24,10 @@ enum class RevenantsType(val maxHit: Int, vararg val ids: Int) {
         fun forId(id: Int): RevenantsType? = idToTypeMap[id]
 
         private val sortedByCombatLevel: List<RevenantsType> =
-            values().sortedBy { NPCDefinition.forId(it.ids[0]).combatLevel }
+            values().sortedBy { NpcType.forId(it.ids[0]).combatLevel }
 
         fun getClosestHigherOrEqual(combatLevel: Int): RevenantsType = sortedByCombatLevel.find {
-            NPCDefinition.forId(it.ids[0]).combatLevel >= combatLevel
+            NpcType.forId(it.ids[0]).combatLevel >= combatLevel
         } ?: DRAGON
 
         val allIds: List<Int> = values().flatMap { it.ids.toList() }

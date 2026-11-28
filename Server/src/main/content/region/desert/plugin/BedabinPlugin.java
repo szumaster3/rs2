@@ -1,7 +1,7 @@
 package content.region.desert.plugin;
 
-import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.NpcType;
+import core.cache.def.impl.LocType;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -26,9 +26,9 @@ public final class BedabinPlugin extends OptionHandler {
     }
 
     private void registerHandlers() {
-        SceneryDefinition.forId(2700).getHandlers().put("option:walk-through", this);
-        SceneryDefinition.forId(2672).getHandlers().put("option:use", this);
-        NPCDefinition.forId(834).getHandlers().put("option:talk-to", this);
+        LocType.forId(2700).getHandlers().put("option:walk-through", this);
+        LocType.forId(2672).getHandlers().put("option:use", this);
+        NpcType.forId(834).getHandlers().put("option:talk-to", this);
     }
 
     @Override

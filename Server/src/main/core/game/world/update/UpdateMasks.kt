@@ -9,6 +9,8 @@ import core.game.world.update.flag.context.HitMark
 import core.game.world.update.flag.context.ProgressBar
 import core.game.world.update.flag.context.AnimationSequenceUpdate
 import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.Graphics
+import core.game.world.update.flag.context.LayeredSequence
 import core.net.packet.IoBuffer
 import core.tools.*
 import java.util.concurrent.atomic.AtomicBoolean
@@ -30,6 +32,8 @@ class UpdateMasks(val owner: Entity) {
         if (flag == EntityFlag.ProgressBar && (context !is ProgressBar || sync)) return false
         if (flag == EntityFlag.AnimSeq && (sync || (context !is AnimationSequenceUpdate && context !is Animation))) return false
         if (flag == EntityFlag.AnimSeq && context is Animation && (context.id !in -1..65534 || context.delay !in 0..255)) return false
+        if (flag == EntityFlag.Animate && (context !is Animation || context.id !in -1..65534 || context.delay !in 0..255)) return false
+        if (flag == EntityFlag.SpotAnim && (context !is Graphics || context.id !in -1..65534 || context.height !in -32768..32767 || context.delay !in 0..65535)) return false
         if (flag == EntityFlag.ForceChat && context !is String) return false
         var synced = sync || flag == EntityFlag.MovementType
         var provider = EntityFlags.getFlagFor(type, flag)
@@ -51,7 +55,19 @@ class UpdateMasks(val owner: Entity) {
             syncedElements[provider.ordinal] = MaskElement(provider, context)
             syncedPresenceFlags = syncedPresenceFlags or provider.presenceFlag
         }
-        elements[provider.ordinal] = MaskElement(provider, context)
+        // Preserve order: client processes each layered sequence separately with its own replay/priority rules.
+        // Do not collapse overlapping slots: that would change those rules.
+        val queuedContext = if (flag == EntityFlag.AnimSeq) {
+            fun entries(value: Any?): List<LayeredSequence> = when (value) {
+                is AnimationSequenceUpdate -> value.entries
+                is Animation -> listOf(LayeredSequence(value.id, value.delay, 0xfff))
+                else -> emptyList()
+            }
+            val combined = entries(elements[provider.ordinal]?.context) + entries(context)
+            if (combined.size > 255) return false
+            AnimationSequenceUpdate(combined)
+        } else if (flag == EntityFlag.Animate) (context as Animation).copy() else context
+        elements[provider.ordinal] = MaskElement(provider, queuedContext)
         presenceFlags = presenceFlags or provider.presenceFlag
         return true
     }

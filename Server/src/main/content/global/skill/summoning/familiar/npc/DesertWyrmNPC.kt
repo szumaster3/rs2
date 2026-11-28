@@ -6,7 +6,7 @@ import content.global.skill.summoning.familiar.FamiliarSpecial
 import content.global.skill.summoning.familiar.Forager
 import core.api.playGlobalAudio
 import core.api.sendMessage
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -61,7 +61,7 @@ class DesertWyrmNPC @JvmOverloads constructor(
         definePlugin(object : OptionHandler() {
             override fun newInstance(arg: Any?): Plugin<Any> {
                 ids.forEach { id ->
-                    NPCDefinition.forId(id).handlers["option:burrow"] = this
+                    NpcType.forId(id).handlers["option:burrow"] = this
                 }
                 return this
             }

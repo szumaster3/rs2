@@ -3,8 +3,8 @@ package content.global.skill.construction.decoration.costumeroom
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import core.api.*
-import core.cache.def.impl.DataMap
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.EnumType
+import core.cache.def.impl.ObjType
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -210,12 +210,12 @@ class StorageBoxInterface : InterfaceListener {
 
         repeat(SIZE) { index ->
             val obj = slots[index]
-            val namesMap = DataMap.get(380)
+            val namesMap = EnumType.get(380)
             val result = when (obj) {
                 is Storable -> {
                     val displayName = namesMap.getString(obj.displayId) ?: getItemName(obj.displayId)
                     val fullName = if (type == StorableType.BOOK) {
-                        val examine = ItemDefinition.forId(obj.displayId)?.examine ?: ""
+                        val examine = ObjType.forId(obj.displayId)?.examine ?: ""
                         "$displayName<br>${core.tools.YELLOW}$examine</col>"
                     } else { displayName }
                     val available = Storable.isAvailable(player, obj, stored)

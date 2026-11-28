@@ -2,7 +2,7 @@ package content.global.plugins.`object`
 
 import content.region.misthalin.varrock.diary.VarrockAchievementDiary
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.container.Container
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.OptionHandler
@@ -26,10 +26,10 @@ class SlashWebOptionPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (objectId in sceneryIDs) {
-            SceneryDefinition.forId(objectId).handlers["option:slash"] = this
+            LocType.forId(objectId).handlers["option:slash"] = this
         }
-        SceneryDefinition.forId(shared.consts.Scenery.SPIDER_WEB_27266).handlers["option:pass"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.SPIDERWEB_29354).handlers["option:pass"] = this
+        LocType.forId(shared.consts.Scenery.SPIDER_WEB_27266).handlers["option:pass"] = this
+        LocType.forId(shared.consts.Scenery.SPIDERWEB_29354).handlers["option:pass"] = this
         return this
     }
 

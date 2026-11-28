@@ -3,7 +3,7 @@ package content.global.skill.agility.courses.werewolf
 import content.global.skill.agility.AgilityCourse
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.dialogue.FaceAnim
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -187,11 +187,11 @@ class WerewolfCourse : AgilityCourse {
     }
 
     override fun configure() {
-        SceneryDefinition.forId(shared.consts.Scenery.STEPPING_STONE_35996).handlers["option:jump-to"] = this
-        arrayOf(5133, 5134, 5135).forEach { SceneryDefinition.forId(it).handlers["option:jump"] = this }
-        SceneryDefinition.forId(shared.consts.Scenery.PIPE_5152).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(shared.consts.Scenery.SKULL_SLOPE_5136).handlers["option:climb-up"] = this
-        arrayOf(5139, 5140, 5141).forEach { SceneryDefinition.forId(it).handlers["option:teeth-grip"] = this }
+        LocType.forId(shared.consts.Scenery.STEPPING_STONE_35996).handlers["option:jump-to"] = this
+        arrayOf(5133, 5134, 5135).forEach { LocType.forId(it).handlers["option:jump"] = this }
+        LocType.forId(shared.consts.Scenery.PIPE_5152).handlers["option:squeeze-through"] = this
+        LocType.forId(shared.consts.Scenery.SKULL_SLOPE_5136).handlers["option:climb-up"] = this
+        arrayOf(5139, 5140, 5141).forEach { LocType.forId(it).handlers["option:teeth-grip"] = this }
     }
 
     override fun getDestination(node: Node, n: Node): Location?

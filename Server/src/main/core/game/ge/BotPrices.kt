@@ -1,6 +1,6 @@
 package core.game.ge
 
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import shared.consts.Items
 
 /**
@@ -13,7 +13,7 @@ class BotPrices {
          * Gets price of item by id.
          */
         @JvmStatic
-        fun getPrice(id: Int): Int = getPriceOverrides(id) ?: ItemDefinition.forId(id).value
+        fun getPrice(id: Int): Int = getPriceOverrides(id) ?: ObjType.forId(id).value
 
         /**
          * Returns price override for given item id or null if none.

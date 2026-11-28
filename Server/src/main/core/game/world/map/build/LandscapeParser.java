@@ -1,6 +1,6 @@
 package core.game.world.map.build;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.BuildRegionChunk;
@@ -96,7 +96,7 @@ public final class LandscapeParser {
      */
     public static void flagScenery(RegionPlane plane, int localX, int localY, Scenery object, boolean landscape, boolean storeObjects) {
         Region.load(plane.getRegion());
-        SceneryDefinition def = object.getDefinition();
+        LocType def = object.getDefinition();
         object.setActive(true);
         boolean add = storeObjects || !landscape || def.getChildObject(null).hasActions();
         if (add) {
@@ -111,7 +111,7 @@ public final class LandscapeParser {
     }
 
     public static boolean applyClippingFlagsFor(RegionPlane plane, int localX, int localY, Scenery object) {
-        SceneryDefinition def = object.getDefinition();
+        LocType def = object.getDefinition();
         int sizeX;
         int sizeY;
         if (object.getRotation() % 2 == 0) {
@@ -210,7 +210,7 @@ public final class LandscapeParser {
     }
 
     public static void removeClippingFlagsFor(RegionPlane plane, int localX, int localY, Scenery object) {
-        SceneryDefinition def = object.getDefinition();
+        LocType def = object.getDefinition();
         int sizeX;
         int sizeY;
         if (object.getRotation() % 2 == 0) {

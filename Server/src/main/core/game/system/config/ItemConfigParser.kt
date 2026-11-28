@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import core.ServerConstants
 import core.api.log
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.link.audio.Audio
 import core.game.world.update.flag.context.Animation
@@ -67,7 +67,7 @@ class ItemConfigParser {
             for (element in configList) {
                 val e = element.asJsonObject
                 val id = e.get("id").asInt
-                val def = ItemDefinition.forId(id)
+                val def = ObjType.forId(id)
                 val configs = def.handlers
                 val requirements = HashMap<Int, Int>()
 

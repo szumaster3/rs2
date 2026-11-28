@@ -2,7 +2,7 @@ package content.region.misthalin.lumbridge.plugin.cellar
 
 import core.api.forceMove
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
@@ -21,18 +21,18 @@ import shared.consts.Animations
 @Initializable
 class LumbridgeCellarPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(6899).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(6898).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(6912).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(5948).handlers["option:jump-across"] = this
-        SceneryDefinition.forId(5949).handlers["option:jump-across"] = this
-        SceneryDefinition.forId(6658).handlers["option:enter"] = this
-        SceneryDefinition.forId(32944).handlers["option:enter"] = this
-        SceneryDefinition.forId(40261).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(40262).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(40849).handlers["option:jump-down"] = this
-        SceneryDefinition.forId(40260).handlers["option:climb-through"] = this
-        SceneryDefinition.forId(41077).handlers["option:crawl-through"] = this
+        LocType.forId(6899).handlers["option:squeeze-through"] = this
+        LocType.forId(6898).handlers["option:squeeze-through"] = this
+        LocType.forId(6912).handlers["option:squeeze-through"] = this
+        LocType.forId(5948).handlers["option:jump-across"] = this
+        LocType.forId(5949).handlers["option:jump-across"] = this
+        LocType.forId(6658).handlers["option:enter"] = this
+        LocType.forId(32944).handlers["option:enter"] = this
+        LocType.forId(40261).handlers["option:climb-up"] = this
+        LocType.forId(40262).handlers["option:climb-up"] = this
+        LocType.forId(40849).handlers["option:jump-down"] = this
+        LocType.forId(40260).handlers["option:climb-through"] = this
+        LocType.forId(41077).handlers["option:crawl-through"] = this
         // definePlugins(LightCreatureNPC(), LightCreatureHandler())
         SceneryBuilder.add(Scenery(40260, Location.create(2526, 5828, 2), 2))
         return this

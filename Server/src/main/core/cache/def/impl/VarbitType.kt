@@ -5,7 +5,8 @@ import core.cache.Cache
 import core.game.node.entity.player.Player
 import java.nio.ByteBuffer
 
-class VarbitDefinition(val id: Int) {
+/** Client VarbitType opcode 1: base varp ID, start bit and inclusive end bit. */
+class VarbitType(val id: Int) {
     var varpId = 0
         private set
     var startBit = 0
@@ -39,17 +40,17 @@ class VarbitDefinition(val id: Int) {
     "ConfigFileDefinition [id=$id, configId=$varpId, bitShift=$startBit, bitSize=$endBit]"
 
     companion object {
-        private val definitions = HashMap<Int, VarbitDefinition>()
+        private val definitions = HashMap<Int, VarbitType>()
 
         @JvmStatic
         fun exists(id: Int): Boolean = id >= 0 && Cache.getIndexes().getOrNull(22)?.validFile(id ushr 10, id and 0x3FF) == true
 
-        @JvmStatic fun forSceneryId(id: Int): VarbitDefinition = forId(id)
-        @JvmStatic fun forNPCId(id: Int): VarbitDefinition = forId(id)
-        @JvmStatic fun forItemId(id: Int): VarbitDefinition = forId(id)
+        @JvmStatic fun forSceneryId(id: Int): VarbitType = forId(id)
+        @JvmStatic fun forNPCId(id: Int): VarbitType = forId(id)
+        @JvmStatic fun forItemId(id: Int): VarbitType = forId(id)
         @JvmStatic
-        fun forId(id: Int): VarbitDefinition = definitions.getOrPut(id) {
-            VarbitDefinition(id).apply {
+        fun forId(id: Int): VarbitType = definitions.getOrPut(id) {
+            VarbitType(id).apply {
                 val data = Cache.getIndexes()[22]!!.getFileData(id ushr 10, id and 0x3FF)
                 if (data != null) {
                     decode(ByteBuffer.wrap(data))
@@ -59,9 +60,9 @@ class VarbitDefinition(val id: Int) {
 
         @JvmStatic
         fun create(varpId: Int, varbitId: Int, startBit: Int, endBit: Int) {
-            definitions[varbitId] = VarbitDefinition(varpId, varbitId, startBit, endBit)
+            definitions[varbitId] = VarbitType(varpId, varbitId, startBit, endBit)
         }
 
-        @JvmStatic fun getMapping(): MutableMap<Int, VarbitDefinition> = definitions
+        @JvmStatic fun getMapping(): MutableMap<Int, VarbitType> = definitions
     }
 }

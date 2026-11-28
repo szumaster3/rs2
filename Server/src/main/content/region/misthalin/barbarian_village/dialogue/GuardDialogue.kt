@@ -1,7 +1,7 @@
 package content.region.misthalin.barbarian_village.dialogue
 
 import content.data.GameAttributes
-import core.api.openInterface
+import core.game.component.Component
 import core.api.runTask
 import core.api.sendMessage
 import core.api.setAttribute
@@ -12,7 +12,6 @@ import core.game.world.GameWorld.settings
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.secondsToTicks
-import shared.consts.Components
 import shared.consts.NPCs
 
 /**
@@ -53,13 +52,14 @@ class GuardDialogue(player: Player? = null) : Dialogue(player) {
             13 -> npc(FaceAnim.NEUTRAL, "In your travels around ${settings!!.name}, should you find a", "player who acts in a way that breaks one of our rules,", "you should report them.").also { stage++ }
             14 -> npc(FaceAnim.NEUTRAL, "Reporting is very simple and easy to do. Simply click", "the Report Abuse button at the button of the screen", "and you will be shown of following screen:").also { stage++ }
             15 -> {
-                openInterface(player, Components.TUTORIAL2_REPORT_ABUSE_700)
-                if (buttonId == 27) {
+                // 530 group 700 is now peng_rak_telegram; 578 report UI is snapshot_main_v2 (594).
+                val report = Component(594)
+                if (buttonId == 27 || player.interfaceManager.openTemporaryRoot(report) == null) {
                     sendMessage(player, "Please close the interface you have open before using 'Report Abuse'")
                     return false
                 }
                 runTask(player, secondsToTicks(5)) {
-                    if (player != null) player.interfaceManager.close()
+                    if (player != null && player.interfaceManager.opened === report) player.interfaceManager.close()
                     return@runTask
                 }.also { stage++ }
             }

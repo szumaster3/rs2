@@ -1,6 +1,6 @@
 package content.global.skill.hunter.tracking
 
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -67,7 +67,7 @@ class PolarKebbitHunting : HunterTracking() {
         )
 
         sceneryIds.forEach { id ->
-            val def = SceneryDefinition.forId(id)
+            val def = LocType.forId(id)
             def.handlers["option:inspect"] = this
             def.handlers["option:search"] = this
             def.handlers["option:attack"] = this

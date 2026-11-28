@@ -1,6 +1,6 @@
 package content.global.skill.hunter.bnet;
 
-import core.cache.def.impl.NPCDefinition;
+import core.cache.def.impl.NpcType;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -109,7 +109,7 @@ public class BNetNode {
             case 1:
                 player.getPacketDispatch().sendMessage("You manage to catch the butterfly.");
                 if (isBareHand(player)) {
-                    player.getPacketDispatch().sendMessage("You release the " + NPCDefinition.forId(npcs[0]).getName().toLowerCase() + " butterfly.");
+                    player.getPacketDispatch().sendMessage("You release the " + NpcType.forId(npcs[0]).getName().toLowerCase() + " butterfly.");
                 }
                 break;
         }

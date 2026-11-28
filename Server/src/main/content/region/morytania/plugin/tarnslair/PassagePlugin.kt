@@ -3,7 +3,7 @@ package content.region.morytania.plugin.tarnslair
 import core.api.queueScript
 import core.api.sendMessage
 import core.api.stopExecuting
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
 import core.game.node.Node
@@ -17,8 +17,8 @@ class PassagePlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         Passage.values().forEach { passage ->
-            SceneryDefinition.forId(passage.passage.id).handlers["option:climb"] = this
-            SceneryDefinition.forId(passage.passage.id).handlers["option:enter"] = this
+            LocType.forId(passage.passage.id).handlers["option:climb"] = this
+            LocType.forId(passage.passage.id).handlers["option:enter"] = this
         }
         return this
     }

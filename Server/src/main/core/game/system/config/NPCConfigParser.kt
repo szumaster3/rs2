@@ -5,7 +5,7 @@ import com.google.gson.JsonArray
 import content.global.activity.trails.ClueLevel
 import core.ServerConstants
 import core.api.log
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.impl.Animator
 import core.game.world.update.flag.context.Animation
@@ -61,7 +61,7 @@ class NPCConfigParser {
             for (element in configList) {
                 val e = element.asJsonObject
                 val id = e.get("id")?.asInt ?: continue
-                val def = NPCDefinition.forId(id)
+                val def = NpcType.forId(id)
                 val configs = def.handlers
 
                 for ((key, jsonElement) in e.entrySet()) {

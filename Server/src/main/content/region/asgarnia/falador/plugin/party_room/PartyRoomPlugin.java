@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.plugin.party_room;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -81,10 +81,10 @@ public final class PartyRoomPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(CLOSED_CHEST).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(OPEN_CHEST).getHandlers().put("option:deposit", this);
-        SceneryDefinition.forId(OPEN_CHEST).getHandlers().put("option:shut", this);
-        SceneryDefinition.forId(LEVER).getHandlers().put("option:pull", this);
+        LocType.forId(CLOSED_CHEST).getHandlers().put("option:open", this);
+        LocType.forId(OPEN_CHEST).getHandlers().put("option:deposit", this);
+        LocType.forId(OPEN_CHEST).getHandlers().put("option:shut", this);
+        LocType.forId(LEVER).getHandlers().put("option:pull", this);
         ClassScanner.definePlugin(new DepositInterfaceHandler());
         ClassScanner.definePlugin(new BalloonManager());
         return this;

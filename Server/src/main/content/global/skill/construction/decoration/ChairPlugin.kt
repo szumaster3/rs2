@@ -4,7 +4,7 @@ import core.api.clearLogoutListener
 import core.api.forceMove
 import core.api.registerLogoutListener
 import core.api.replaceScenery
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -23,7 +23,7 @@ class ChairPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (chair in Chairs.values()) {
-            SceneryDefinition.forId(chair.objectId).handlers["option:sit-on"] = this
+            LocType.forId(chair.objectId).handlers["option:sit-on"] = this
         }
         return this
     }

@@ -2,7 +2,7 @@ package content.global.skill.construction.decoration.chapel
 
 import content.global.skill.prayer.Bones
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -111,7 +111,7 @@ class AltarPlugin : InteractionListener {
         }
 
     private fun isLit(obj: Scenery?) =
-        obj != null && obj.id != shared.consts.Scenery.LAMP_SPACE_15271 && !SceneryDefinition.forId(obj.id).hasAction("light")
+        obj != null && obj.id != shared.consts.Scenery.LAMP_SPACE_15271 && !LocType.forId(obj.id).hasAction("light")
 
     private fun getBase(altar: Scenery?) = when (altar?.id) {
         shared.consts.Scenery.ALTAR_13182 -> 110.0

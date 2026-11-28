@@ -1,8 +1,8 @@
 package content.global.skill.hunter.falconry
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
 import core.game.activity.ActivityPlugin
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.Option
@@ -69,13 +69,13 @@ class FalconryPlugin : ActivityPlugin(FALCONRY_ZONE, false, false, false), MapAr
 
     class FalconryPlugin : OptionHandler() {
         override fun newInstance(arg: Any?): Plugin<Any> {
-            NPCDefinition.forId(NPCs.MATTHIAS_5093).handlers["option:quick-falconry"] = this
-            NPCDefinition.forId(NPCs.GYR_FALCON_5094).handlers["option:retrieve"] = this
+            NpcType.forId(NPCs.MATTHIAS_5093).handlers["option:quick-falconry"] = this
+            NpcType.forId(NPCs.GYR_FALCON_5094).handlers["option:retrieve"] = this
             for (falconCatch in FalconCatch.values()) {
-                NPCDefinition.forId(falconCatch.npc).handlers["option:catch"] = this
+                NpcType.forId(falconCatch.npc).handlers["option:catch"] = this
             }
-            ItemDefinition.forId(Items.FALCONERS_GLOVE_10023).handlers["equipment"] = this
-            ItemDefinition.forId(Items.FALCONERS_GLOVE_10024).handlers["equipment"] = this
+            ObjType.forId(Items.FALCONERS_GLOVE_10023).handlers["equipment"] = this
+            ObjType.forId(Items.FALCONERS_GLOVE_10024).handlers["equipment"] = this
             return this
         }
 

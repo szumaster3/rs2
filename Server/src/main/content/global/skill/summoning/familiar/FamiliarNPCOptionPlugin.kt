@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar
 
-import core.cache.def.impl.NPCDefinition.Companion.setOptionHandler
+import core.cache.def.impl.NpcType.Companion.setOptionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player

@@ -2,7 +2,7 @@ package content.global.skill.farming
 
 import content.data.skill.SkillingTool
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -16,8 +16,8 @@ import shared.consts.Sounds
 @Initializable
 class FruitTreeChopper : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("chop-down",this)
-        SceneryDefinition.setOptionHandler("chop down",this)
+        LocType.setOptionHandler("chop-down",this)
+        LocType.setOptionHandler("chop down",this)
         return this
     }
 

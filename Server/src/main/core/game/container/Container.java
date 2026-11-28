@@ -4,7 +4,7 @@ import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import core.api.ContainerListener;
-import core.cache.def.impl.ItemDefinition;
+import core.cache.def.impl.ObjType;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
@@ -588,7 +588,7 @@ public class Container {
             int amount = Integer.parseInt(i.get("amount").getAsString());
             int charge = Integer.parseInt(i.get("charge").getAsString());
 
-            if (id >= ItemDefinition.getDefinitions().size() || id < 0 || slot >= items.length || id == Items.MAGIC_CARPET_5614) {
+            if (id >= ObjType.getDefinitions().size() || id < 0 || slot >= items.length || id == Items.MAGIC_CARPET_5614) {
                 // skip invalid or special items
             } else {
                 Item it = items[slot] = new Item(id, amount, charge);
@@ -1087,7 +1087,7 @@ public class Container {
             if (i == null) {
                 continue;
             }
-            wealth += i.getDefinition().getValue() * i.getAmount();
+            wealth += i.getDefinition().getCost() * i.getAmount();
         }
         return wealth;
     }

@@ -11,7 +11,7 @@ import content.global.skill.summoning.familiar.FamiliarManager;
 import content.global.skill.summoning.item.EnchantedHeadgearManager;
 import core.GlobalStatistics;
 import core.ServerConstants;
-import core.cache.def.impl.ItemDefinition;
+import core.cache.def.impl.ObjType;
 import core.game.component.Component;
 import core.game.container.Container;
 import core.game.container.ContainerType;
@@ -557,11 +557,11 @@ public class Player extends Entity {
             // Calculate total wealth from inventory, bank, and other sources.
             for (Item i : inventory.toArray()) {
                 if (i == null) continue;
-                totalWealth += (long) i.getDefinition().getValue() * i.getAmount();
+                totalWealth += (long) i.getDefinition().getCost() * i.getAmount();
             }
             for (Item i : bank.toArray()) {
                 if (i == null) break;
-                totalWealth += (long) i.getDefinition().getValue() * i.getAmount();
+                totalWealth += (long) i.getDefinition().getCost() * i.getAmount();
             }
             ExchangeHistory ge = ExchangeHistory.getInstance(this);
             for (int i = 0; i < 6; i++) {
@@ -573,10 +573,10 @@ public class Player extends Entity {
 
             // Add cannon items' value if the player is constructing a cannon.
             if (this.getAttribute("dmc", null) != null) {
-                totalWealth += ItemDefinition.forId(Items.CANNON_BASE_6).getValue();
-                totalWealth += ItemDefinition.forId(Items.CANNON_STAND_8).getValue();
-                totalWealth += ItemDefinition.forId(Items.CANNON_BARRELS_10).getValue();
-                totalWealth += ItemDefinition.forId(Items.CANNON_FURNACE_12).getValue();
+                totalWealth += ObjType.forId(Items.CANNON_BASE_6).getCost();
+                totalWealth += ObjType.forId(Items.CANNON_STAND_8).getCost();
+                totalWealth += ObjType.forId(Items.CANNON_BARRELS_10).getCost();
+                totalWealth += ObjType.forId(Items.CANNON_FURNACE_12).getCost();
             }
 
             long diff = previousWealth == -1 ? 0L : totalWealth - previousWealth;

@@ -24,7 +24,7 @@ class ItemDefTests {
             val def = itemDefinition(id)
             Assertions.assertEquals(
                 expectedValue,
-                def.value,
+                def.cost,
                 "Value of ${def.name} (${def.isUnnoted}) does not match known good values!",
             )
         }

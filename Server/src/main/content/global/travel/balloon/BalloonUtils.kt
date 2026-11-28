@@ -4,7 +4,7 @@ import content.data.Quests
 
 import content.data.GameAttributes
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
@@ -393,7 +393,7 @@ object BalloonUtils {
         }
 
         if (destination == BalloonTravelDefinition.ENTRANA) {
-            if (!ItemDefinition.canEnterEntrana(player)) {
+            if (!ObjType.canEnterEntrana(player)) {
                 sendDialogue(player, "You can't take flight with weapons and armour to Entrana.")
                 return false
             }

@@ -1,7 +1,7 @@
 package content.region.kandarin.gnome_stronghold.quest.waterfall.plugin
 
 import core.api.setAttribute
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -19,7 +19,7 @@ import core.tools.RandomFunction
 @Initializable
 class MithrilSeedsPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ItemDefinition.forId(299).handlers["option:plant"] = this
+        ObjType.forId(299).handlers["option:plant"] = this
         return this
     }
 

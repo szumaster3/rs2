@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.plugin.gnomecopter
 
 import core.api.sendString
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.component.Component
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -16,7 +16,7 @@ import shared.consts.Items
 class GnomecopterTicketPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ItemDefinition.forId(Items.GNOMECOPTER_TICKET_12843).handlers["option:read"] = this
+        ObjType.forId(Items.GNOMECOPTER_TICKET_12843).handlers["option:read"] = this
         return this
     }
 

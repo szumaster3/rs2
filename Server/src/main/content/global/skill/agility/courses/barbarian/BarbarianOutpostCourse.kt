@@ -4,9 +4,9 @@ import content.global.skill.agility.AgilityCourse
 import content.global.skill.agility.AgilityHandler
 import content.region.kandarin.miniquest.barcrawl.BarcrawlManager
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.node.Node
@@ -52,9 +52,9 @@ class BarbarianOutpostCourse(player: Player? = null) : AgilityCourse(player, 6, 
             Objects.BALANCING_LEDGE_2302 to "option:walk-across",
             Objects.CRUMBLING_WALL_1948 to "option:climb-over"
         )
-        sceneryHandlers.forEach { (id, option) -> SceneryDefinition.forId(id).handlers[option] = this }
-        ItemDefinition.forId(Items.BARCRAWL_CARD_455).handlers["option:read"] = this
-        SCORPIONS.forEach { NPCDefinition.forId(it).handlers["option:pick-up"] = this }
+        sceneryHandlers.forEach { (id, option) -> LocType.forId(id).handlers[option] = this }
+        ObjType.forId(Items.BARCRAWL_CARD_455).handlers["option:read"] = this
+        SCORPIONS.forEach { NpcType.forId(it).handlers["option:pick-up"] = this }
     }
 
     override fun createInstance(player: Player): AgilityCourse = BarbarianOutpostCourse(player)

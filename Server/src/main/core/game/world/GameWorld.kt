@@ -6,7 +6,7 @@ import core.api.*
 import core.auth.Auth
 import core.auth.AuthProvider
 import core.cache.Cache
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.node.entity.player.Player
 import core.game.system.SystemManager
 import core.game.system.SystemState
@@ -187,7 +187,7 @@ object GameWorld {
         if (run) {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
         }
-        SceneryDefinition.getDefinitions().values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
+        LocType.getDefinitions().values.forEach(Consumer { obj: LocType -> obj.examine })
 
         if (ServerConstants.PRELOAD_MAP) {
             var count = 0

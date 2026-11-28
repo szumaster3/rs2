@@ -1,7 +1,7 @@
 package content.global.activity.warriors_guild
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
@@ -40,9 +40,9 @@ class DummyRoomPlugin : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(shared.consts.Scenery.INFORMATION_SCROLL_15656).handlers["option:view"] = this
+        LocType.forId(shared.consts.Scenery.INFORMATION_SCROLL_15656).handlers["option:view"] = this
         for (dummy in Dummy.values()) {
-            SceneryDefinition.forId(dummy.scenery.id).handlers["option:hit"] = this
+            LocType.forId(dummy.scenery.id).handlers["option:hit"] = this
         }
         Pulser.submit(
             object : Pulse(10) {

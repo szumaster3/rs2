@@ -1,7 +1,7 @@
 package content.region.desert.nardah.plugin.kalphite
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
@@ -34,10 +34,10 @@ class KalphiteEntrancePlugin : OptionHandler() {
         }
         UseWithHandler.addHandler(3827, UseWithHandler.OBJECT_TYPE, handler)
         UseWithHandler.addHandler(23609, UseWithHandler.OBJECT_TYPE, handler)
-        SceneryDefinition.forId(3828).handlers["option:climb-down"] = this
-        SceneryDefinition.forId(3829).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(23610).handlers["option:climb-down"] = this
-        SceneryDefinition.forId(3832).handlers["option:climb-up"] = this
+        LocType.forId(3828).handlers["option:climb-down"] = this
+        LocType.forId(3829).handlers["option:climb-up"] = this
+        LocType.forId(23610).handlers["option:climb-down"] = this
+        LocType.forId(3832).handlers["option:climb-up"] = this
         return this
     }
 

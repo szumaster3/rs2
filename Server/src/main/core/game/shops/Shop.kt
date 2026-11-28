@@ -326,7 +326,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if (mod < 1) mod = 1
         mod = max(100, min(130, mod))
 
-        val price: Int = ceil(item.definition.value * mod.toDouble() / 100.0).toInt()
+        val price: Int = ceil(item.definition.cost * mod.toDouble() / 100.0).toInt()
 
         return max(price, 1)
     }
@@ -343,7 +343,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if (overstock > 10) {
             overstock = 10
         }
-        val price = (base - (item.definition.value * 0.03 * overstock)).roundToInt()
+        val price = (base - (item.definition.cost * 0.03 * overstock)).roundToInt()
         if (price < 1) {
             return 1
         }

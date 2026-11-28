@@ -7,9 +7,9 @@ import content.global.skill.runecrafting.item.Talisman
 import content.global.travel.EssenceTeleport.home
 import content.global.travel.EssenceTeleport.teleport
 import core.api.*
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.OptionHandler
 import core.game.interaction.QueueStrength
@@ -33,14 +33,14 @@ class RunecraftingPlugin : OptionHandler() {
         addNodes()
         definePlugin(RunePouchPlugin())
         definePlugin(CombinationHandler())
-        SceneryDefinition.forId(2492).handlers["option:use"] = this
-        NPCDefinition.forId(553).handlers["option:teleport"] = this
-        NPCDefinition.forId(2328).handlers["option:teleport"] = this
-        SceneryDefinition.forId(26849).handlers["option:climb"] = this
-        SceneryDefinition.forId(26850).handlers["option:climb"] = this
-        SceneryDefinition.forId(268).handlers["option:climb"] = this
-        SceneryDefinition.forId(26844).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(26845).handlers["option:squeeze-through"] = this
+        LocType.forId(2492).handlers["option:use"] = this
+        NpcType.forId(553).handlers["option:teleport"] = this
+        NpcType.forId(2328).handlers["option:teleport"] = this
+        LocType.forId(26849).handlers["option:climb"] = this
+        LocType.forId(26850).handlers["option:climb"] = this
+        LocType.forId(268).handlers["option:climb"] = this
+        LocType.forId(26844).handlers["option:squeeze-through"] = this
+        LocType.forId(26845).handlers["option:squeeze-through"] = this
         return this
     }
 
@@ -111,11 +111,11 @@ class RunecraftingPlugin : OptionHandler() {
 
     private fun addNodes() {
         for (altar in Altar.values()) {
-            SceneryDefinition.forId(altar.scenery).handlers["option:craft-rune"] = this
-            SceneryDefinition.forId(altar.exit).handlers["option:use"] = this
+            LocType.forId(altar.scenery).handlers["option:craft-rune"] = this
+            LocType.forId(altar.exit).handlers["option:use"] = this
         }
         for (talisman in Talisman.values()) {
-            ItemDefinition.forId(talisman.item).handlers["option:locate"] = this
+            ObjType.forId(talisman.item).handlers["option:locate"] = this
         }
     }
 

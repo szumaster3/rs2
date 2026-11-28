@@ -38,6 +38,7 @@ import core.net.packet.IoBuffer
 import core.net.packet.PacketProcessor
 import core.tools.Log
 import shared.consts.Items
+import java.io.File
 import java.net.URI
 import java.nio.ByteBuffer
 
@@ -87,12 +88,17 @@ object TestUtils {
     fun preTestSetup() {
         if (ServerConstants.DATA_PATH == null) {
             ServerConfigParser.parse(this::class.java.getResource("test.conf"))
-            Cache.init(
-                this::class.java
-                    .getResource("cache")
-                    .path
-                    .toString()
-            )
+            val cacheResource = this::class.java.getResource("cache")
+            val cacheDirectory = if (cacheResource != null && cacheResource.protocol == "file") {
+                File(cacheResource.toURI())
+            } else {
+                File(requireNotNull(ServerConstants.CACHE_PATH) { "Missing paths.cache_path in test.conf" })
+            }
+            require(File(cacheDirectory, "main_file_cache.idx255").isFile &&
+                File(cacheDirectory, "main_file_cache.dat2").isFile) {
+                "Missing revision 578 cache in ${cacheDirectory.absolutePath}"
+            }
+            Cache.init(cacheDirectory.path)
             ConfigParser().prePlugin()
             ConfigParser().postPlugin()
             registerTimers()
@@ -131,6 +137,8 @@ object TestUtils {
         when (target) {
             is GroundItem ->
                 PacketProcessor.enqueue(
+                    player,
+                    player.session,
                     core.net.packet.`in`.Packet.GroundItemAction(
                         player,
                         optionIndex,
@@ -141,16 +149,22 @@ object TestUtils {
                 )
             is Item ->
                 PacketProcessor.enqueue(
+                    player,
+                    player.session,
                     core.net.packet.`in`.Packet
                         .ItemAction(player, optionIndex, target.id, target.slot, iface, child),
                 )
             is NPC ->
                 PacketProcessor.enqueue(
+                    player,
+                    player.session,
                     core.net.packet.`in`.Packet
                         .NpcAction(player, optionIndex, target.clientIndex),
                 )
             is Scenery ->
                 PacketProcessor.enqueue(
+                    player,
+                    player.session,
                     core.net.packet.`in`.Packet.SceneryAction(
                         player,
                         optionIndex,
@@ -281,6 +295,8 @@ class MockSession : IoSession(null, null) {
     override fun queue(buffer: ByteBuffer?) {}
 
     override fun write() {}
+
+    override fun isActive(): Boolean = !disconnected
 
     override fun disconnect() {
         disconnected = true

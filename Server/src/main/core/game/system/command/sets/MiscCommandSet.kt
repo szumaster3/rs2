@@ -9,9 +9,9 @@ import content.global.skill.farming.timers.CropGrowth
 import content.minigame.trawler.plugin.FishingTrawlerContainer
 import core.ServerConstants
 import core.api.*
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
-import core.cache.def.impl.VarbitDefinition
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
+import core.cache.def.impl.VarbitType
 import core.game.dialogue.InputType
 import core.game.ge.GrandExchange
 import core.game.node.entity.npc.NPC
@@ -678,7 +678,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
                 reject(player, "Syntax: ::getobjectvarp objectid")
             }
             val objectID = args[1].toInt()
-            notify(player, "${VarbitDefinition.forSceneryId(SceneryDefinition.forId(objectID).varbitID).varpId}")
+            notify(player, "${VarbitType.forSceneryId(LocType.forId(objectID).varbitID).varpId}")
         }
 
         /*
@@ -696,7 +696,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
                 reject(player, "Syntax: ::define_varbit varbitId")
             }
             val varbitID = args[1].toInt()
-            notify(player, "$varbitID: ${VarbitDefinition.forId(varbitID)}")
+            notify(player, "$varbitID: ${VarbitType.forId(varbitID)}")
         }
 
         /*
@@ -895,7 +895,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
             val npcid = args[1].toIntOrNull() ?: reject(player, "Invalid NPC ID.")
 
             GlobalScope.launch {
-                for (def in NPCDefinition.getDefinitions().values) {
+                for (def in NpcType.getDefinitions().values) {
                     def ?: continue
                     def.childNPCIds ?: continue
                     for (id in def.childNPCIds!!) {

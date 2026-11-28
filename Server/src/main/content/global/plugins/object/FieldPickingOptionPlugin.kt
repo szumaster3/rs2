@@ -1,7 +1,7 @@
 package content.global.plugins.`object`
 
 import core.api.*
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.container.impl.EquipmentContainer
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.OptionHandler
@@ -27,9 +27,9 @@ class FieldPickingOptionPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (p in PickingPlant.values().map { it.objectId }.toIntArray()) {
-            SceneryDefinition.forId(p).handlers["option:pick"] = this
+            LocType.forId(p).handlers["option:pick"] = this
         }
-        SceneryDefinition.forId(Scenery.BUDDING_BRANCH_3511).handlers["option:take-cutting"] = this
+        LocType.forId(Scenery.BUDDING_BRANCH_3511).handlers["option:take-cutting"] = this
         return this
     }
 

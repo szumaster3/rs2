@@ -4,7 +4,7 @@ import content.data.Quests;
 
 import content.global.skill.agility.AgilityHandler;
 import content.region.kandarin.gnome_stronghold.dialogue.GnomeGateGuardDialogue;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
@@ -38,11 +38,11 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(190).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(1967).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(1968).getHandlers().put("option:open", this);
-        SceneryDefinition.forId(9316).getHandlers().put("option:climb", this);
-        SceneryDefinition.forId(9317).getHandlers().put("option:climb", this);
+        LocType.forId(190).getHandlers().put("option:open", this);
+        LocType.forId(1967).getHandlers().put("option:open", this);
+        LocType.forId(1968).getHandlers().put("option:open", this);
+        LocType.forId(9316).getHandlers().put("option:climb", this);
+        LocType.forId(9317).getHandlers().put("option:climb", this);
         return this;
     }
 

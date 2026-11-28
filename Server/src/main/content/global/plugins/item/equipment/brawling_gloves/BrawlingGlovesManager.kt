@@ -7,7 +7,7 @@ import content.global.plugins.item.equipment.brawling_gloves.BrawlingGloves.Comp
 import core.api.LoginListener
 import core.api.PersistPlayer
 import core.api.setAttribute
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import java.util.*
@@ -109,7 +109,7 @@ class BrawlingGlovesManager : LoginListener, PersistPlayer {
                 gloveCharges.remove(glove)
                 player!!.equipment.remove(Item(glove))
                 player.packetDispatch.sendMessage(
-                    "<col=ff0000>You use the last charge of your " + ItemDefinition.forId(
+                    "<col=ff0000>You use the last charge of your " + ObjType.forId(
                         glove
                     ).name + " and they vanish.</col>"
                 )

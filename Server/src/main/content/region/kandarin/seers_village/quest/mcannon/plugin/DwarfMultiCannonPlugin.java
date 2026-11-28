@@ -2,8 +2,8 @@ package content.region.kandarin.seers_village.quest.mcannon.plugin;
 
 import content.data.Quests;
 
-import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.ObjType;
+import core.cache.def.impl.LocType;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -23,12 +23,12 @@ public final class DwarfMultiCannonPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ItemDefinition.forId(6).getHandlers().put("option:set-up", this);
-        SceneryDefinition.forId(6).getHandlers().put("option:fire", this);
-        SceneryDefinition.forId(6).getHandlers().put("option:pick-up", this);
-        SceneryDefinition.forId(7).getHandlers().put("option:pick-up", this);
-        SceneryDefinition.forId(8).getHandlers().put("option:pick-up", this);
-        SceneryDefinition.forId(9).getHandlers().put("option:pick-up", this);
+        ObjType.forId(6).getHandlers().put("option:set-up", this);
+        LocType.forId(6).getHandlers().put("option:fire", this);
+        LocType.forId(6).getHandlers().put("option:pick-up", this);
+        LocType.forId(7).getHandlers().put("option:pick-up", this);
+        LocType.forId(8).getHandlers().put("option:pick-up", this);
+        LocType.forId(9).getHandlers().put("option:pick-up", this);
         UseWithHandler.addHandler(6, UseWithHandler.OBJECT_TYPE, new UseWithHandler(2) {
             @Override
             public Plugin<Object> newInstance(Object arg) throws Throwable {

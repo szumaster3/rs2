@@ -1,6 +1,6 @@
 package core.game.node.item;
 
-import core.cache.def.impl.ItemDefinition;
+import core.cache.def.impl.ObjType;
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.InteractPlugin;
 import core.game.interaction.OptionHandler;
@@ -27,7 +27,7 @@ public class Item extends Node {
     /**
      * The item definition.
      */
-    private ItemDefinition definition;
+    private ObjType definition;
 
     /**
      * Constructs a new {@code Item} {@code Object}. <br> The id will be -1
@@ -66,13 +66,13 @@ public class Item extends Node {
      * @param charge The charge.
      */
     public Item(int id, int amount, int charge) {
-        super(ItemDefinition.forId(id).getName(), null);
+        super(ObjType.forId(id).getName(), null);
         super.destinationFlag = DestinationFlag.ITEM;
         super.index = -1; // Item slot.
         super.interactPlugin = new InteractPlugin(this);
         this.idHash = id << 16 | charge;
         this.amount = amount;
-        this.definition = ItemDefinition.forId(id);
+        this.definition = ObjType.forId(id);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Item extends Node {
      * @return The option handler for the operate option.
      */
     public OptionHandler getOperateHandler() {
-        return ItemDefinition.getOptionHandler(getId(), "operate");
+        return ObjType.getOptionHandler(getId(), "operate");
     }
 
     /**
@@ -104,8 +104,8 @@ public class Item extends Node {
      */
     public long getValue() {
         long value = 1;
-        if (definition.getValue() > value) {
-            value = definition.getValue();
+        if (definition.getCost() > value) {
+            value = definition.getCost();
         }
         if (definition.getAlchemyValue(true) > value) {
             value = definition.getAlchemyValue(true);
@@ -156,7 +156,7 @@ public class Item extends Node {
      */
     public void setId(int id) {
         this.idHash = id << 16 | (idHash & 0xFFFF);
-        this.definition = ItemDefinition.forId(id);
+        this.definition = ObjType.forId(id);
     }
 
     /**
@@ -232,7 +232,7 @@ public class Item extends Node {
      *
      * @return The definition.
      */
-    public ItemDefinition getDefinition() {
+    public ObjType getDefinition() {
         return definition;
     }
 
@@ -241,7 +241,7 @@ public class Item extends Node {
      *
      * @param definition The definition to set.
      */
-    public void setDefinition(ItemDefinition definition) {
+    public void setDefinition(ObjType definition) {
         this.definition = definition;
     }
 

@@ -1,7 +1,7 @@
 package content.minigame.fistofguthix.plugin
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -74,10 +74,10 @@ class FOGRewardInterface : InterfaceListener {
             }
 
             val action: (() -> Unit)? = when {
-                button >= 139 && opcode == 124 -> { { sendMessage(player, ItemDefinition.forId(stock.itemId).examine.replace("100", "")) } }
+                button >= 139 && opcode == 124 -> { { sendMessage(player, ObjType.forId(stock.itemId).examine.replace("100", "")) } }
                 opcode in listOf(196, 124, 199) -> { { handlePurchase(player, stock, opcode) } }
                 opcode == 155 -> { { sendMessage(player, "${getItemName(stock.itemId).replace("100", "")} costs ${stock.price} tokens.") } }
-                opcode == 234 -> { { sendMessage(player, ItemDefinition.forId(stock.itemId).examine.replace("100", "")) } }
+                opcode == 234 -> { { sendMessage(player, ObjType.forId(stock.itemId).examine.replace("100", "")) } }
                 else -> null
             }
 

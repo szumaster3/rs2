@@ -12,7 +12,7 @@ import core.tools.Log
 import java.nio.ByteBuffer
 import java.util.HashMap
 
-class SceneryDefinition : Definition<Scenery>() {
+class LocType : Definition<Scenery>() {
     private var cacheParams: MutableMap<Int, Any>? = null
 
     fun getParam(key: Int, defaultValue: Int): Int = cacheParams?.get(key) as? Int ?: defaultValue
@@ -38,118 +38,150 @@ class SceneryDefinition : Definition<Scenery>() {
     var modelIds: IntArray? = null
         private set
     var modelConfiguration: IntArray? = null
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anIntArray3833: IntArray? = null
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3834: Int = 0
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3835: Int = -1
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     private var aByte3837: Byte = 0
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3838: Int = -1
         private set
-    var aBoolean3839: Boolean = false
-    var anInt3840: Int = 0
+    var mirrored: Boolean = false
+    var contrast: Int = 0
         private set
-    var anInt3841: Int = 128
+    var resizeY: Int = 128
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3844: Int = -1
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var aBoolean3845: Boolean = false
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     private var aByte3847: Byte = 0
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     private var aByte3849: Byte = 0
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3850: Int = 0
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3851: Int = -1
         private set
     @JvmField var secondBool: Boolean = false
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     @JvmField var aBoolean3853: Boolean = true
-    var anInt3855: Int = -1
+    var opcode75Value: Int = -1
         private set
     @JvmField var notClipped: Boolean = false
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3857: Int = -1
         private set
-    private var aByteArray3858: ByteArray? = null
-    var anIntArray3859: IntArray? = null
+    private var recolourPaletteIndices: ByteArray? = null
+    var backgroundSoundIds: IntArray? = null
         private set
-    var anInt3860: Int = -1
+    var backgroundSoundId: Int = -1
         private set
     var varbitID: Int = -1
         private set
     var modifiedColors: ShortArray? = null
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3865: Int = 255
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var aBoolean3866: Boolean = false
-    var aBoolean3867: Boolean = false
+    var shareLight: Boolean = false
     @JvmField var projectileClipped: Boolean = true
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anIntArray3869: IntArray? = null
-    var aBoolean3870: Boolean = false
+    var opcode90Flag: Boolean = false
     @JvmField var sizeY: Int = 1
-    var aBoolean3872: Boolean = true
+    var castsShadow: Boolean = true
     var membersOnly: Boolean = false
     @JvmField var boolean1: Boolean = false
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3875: Int = 0
     @JvmField var animationId: Int = -1
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3877: Int = 0
-    var anInt3878: Int = 0
+    var ambient: Int = 0
         private set
     @JvmField var clipType: Int = 2
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3881: Int = 0
-    var anInt3882: Int = -1
+    var terrainContourValue: Int = -1
         private set
-    var anInt3883: Int = 0
+    var offsetX: Int = 0
         private set
     var loader: Any? = null
         private set
-    var anInt3889: Int = 0
+    var offsetY: Int = 0
         private set
     @JvmField var sizeX: Int = 1
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     @JvmField var aBoolean3891: Boolean = false
-    var anInt3892: Int = 64
+    var wallWidth: Int = 64
         private set
     @JvmField var interactable: Int = -1
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var aBoolean3894: Boolean = false
-    var aBoolean3895: Boolean = true
+    var randomAnimationFrame: Boolean = true
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3896: Int = 0
         private set
     var configId: Int = -1
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     private val aByteArray3899: ByteArray? = null
-    var anInt3900: Int = 0
+    var backgroundSoundMinDelay: Int = 0
         private set
-    var anInt3902: Int = 128
+    var resizeX: Int = 128
         private set
-    var anInt3904: Int = 0
+    var backgroundSoundRange: Int = 0
         private set
-    var anInt3905: Int = 0
+    var backgroundSoundMaxDelay: Int = 0
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var aBoolean3906: Boolean = false
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anIntArray3908: IntArray? = null
         private set
-    private var aByte3912: Byte = 0.toByte()
+    private var terrainContourMode: Byte = 0.toByte()
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3913: Int = -1
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     private var aByte3914: Byte = 0.toByte()
-    var anInt3915: Int = 0
+    var offsetZ: Int = 0
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anIntArrayArray3916: Array<IntArray?>? = null
-    var anInt3917: Int = 128
+    var resizeZ: Int = 128
         private set
-    private var aShortArray3919: ShortArray? = null
-    private var aShortArray3920: ShortArray? = null
+    private var retextureDestination: ShortArray? = null
+    private var retextureSource: ShortArray? = null
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var anInt3921: Int = 0
         private set
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     private val aClass194_3922: Any? = null
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var aBoolean3923: Boolean = false
+    // Legacy unmapped field: no confirmed 578 cache opcode or semantic mapping.
     var aBoolean3924: Boolean = false
     var walkingFlag: Int = 0
         private set
     var isHasHiddenOptions: Boolean = false
     var mapIcon: Short = 0
         private set
-    val configFile: VarbitDefinition?
+    val configFile: VarbitType?
         get() {
             if (varbitID != -1) {
-                return VarbitDefinition.forSceneryId(varbitID)
+                return VarbitType.forSceneryId(varbitID)
             }
             return null
         }
@@ -181,8 +213,8 @@ class SceneryDefinition : Definition<Scenery>() {
                 def.varbitID = varbitID
             }
         }
-        if (anInt3855 == -1) {
-            anInt3855 = if (clipType == 0) 0 else 1
+        if (opcode75Value == -1) {
+            opcode75Value = if (clipType == 0) 0 else 1
         }
         if (id == 31017) {
             sizeY = 2
@@ -214,14 +246,14 @@ class SceneryDefinition : Definition<Scenery>() {
         return hasOptions(false)
     }
 
-    fun getChildObject(player: Player?): SceneryDefinition {
+    fun getChildObject(player: Player?): LocType {
         if (childrenIds == null || childrenIds!!.size < 1) {
             return this
         }
         var configValue = -1
         if (player != null) {
             if (varbitID != -1) {
-                configValue = VarbitDefinition.forSceneryId(varbitID).getValue(player)
+                configValue = VarbitType.forSceneryId(varbitID).getValue(player)
             } else if (configId != -1) {
                 configValue = getVarp(player, configId)
             }
@@ -233,7 +265,7 @@ class SceneryDefinition : Definition<Scenery>() {
         return childDef
     }
 
-    fun getChildObjectAtIndex(index: Int): SceneryDefinition {
+    fun getChildObjectAtIndex(index: Int): LocType {
         if (childrenIds == null || childrenIds!!.size < 1) {
             return this
         }
@@ -247,11 +279,7 @@ class SceneryDefinition : Definition<Scenery>() {
         return forId(childrenIds!![index])
     }
 
-    fun isaBoolean3839(): Boolean = aBoolean3839
 
-    fun setaBoolean3839(aBoolean3839: Boolean) {
-        this.aBoolean3839 = aBoolean3839
-    }
 
     fun getaByte3837(): Byte = aByte3837
 
@@ -263,15 +291,11 @@ class SceneryDefinition : Definition<Scenery>() {
 
     fun isaBoolean3853(): Boolean = aBoolean3853
 
-    fun getaByteArray3858(): ByteArray? = aByteArray3858
 
     fun isaBoolean3866(): Boolean = aBoolean3866
 
-    fun isaBoolean3867(): Boolean = aBoolean3867
 
-    fun isaBoolean3870(): Boolean = aBoolean3870
 
-    fun isaBoolean3872(): Boolean = aBoolean3872
 
     fun isaBoolean3873(): Boolean = membersOnly
 
@@ -279,25 +303,31 @@ class SceneryDefinition : Definition<Scenery>() {
 
     fun isaBoolean3894(): Boolean = aBoolean3894
 
-    fun isaBoolean3895(): Boolean = aBoolean3895
 
     fun getaByteArray3899(): ByteArray? = aByteArray3899
 
     fun isaBoolean3906(): Boolean = aBoolean3906
 
-    fun getaByte3912(): Byte = aByte3912
 
     fun getaByte3914(): Byte = aByte3914
 
-    fun getaShortArray3919(): ShortArray? = aShortArray3919
 
-    fun getaShortArray3920(): ShortArray? = aShortArray3920
 
     fun getaClass194_3922(): Any? = aClass194_3922
 
     fun isaBoolean3923(): Boolean = aBoolean3923
 
     fun isaBoolean3924(): Boolean = aBoolean3924
+
+    fun isMirrored(): Boolean = mirrored
+    fun isCastsShadow(): Boolean = castsShadow
+    fun isShareLight(): Boolean = shareLight
+    fun isRandomAnimationFrame(): Boolean = randomAnimationFrame
+    fun isOpcode90Flag(): Boolean = opcode90Flag
+    fun getTerrainContourMode(): Byte = terrainContourMode
+    fun getRecolourPaletteIndices(): ByteArray? = recolourPaletteIndices
+    fun getRetextureSource(): ShortArray? = retextureSource
+    fun getRetextureDestination(): ShortArray? = retextureDestination
 
     fun hasAction(optionName: String?): Boolean = options.any { it?.equals(optionName, ignoreCase = true) == true }
 
@@ -322,10 +352,10 @@ class SceneryDefinition : Definition<Scenery>() {
     fun getClipType(): Int = clipType
 
     companion object {
-        private val definitions: MutableMap<Int, SceneryDefinition> = HashMap<Int, SceneryDefinition>()
+        private val definitions: MutableMap<Int, LocType> = HashMap<Int, LocType>()
 
         @JvmStatic
-        fun getDefinitions(): MutableMap<Int, SceneryDefinition> = definitions
+        fun getDefinitions(): MutableMap<Int, LocType> = definitions
         private val OPTION_HANDLERS: MutableMap<String, OptionHandler?> = HashMap<String, OptionHandler?>()
         @Throws(Throwable::class)
         @JvmStatic
@@ -333,30 +363,30 @@ class SceneryDefinition : Definition<Scenery>() {
             for (objectId in 0 until Cache.getObjectDefinitionsSize()) {
                 val data = Cache.getIndexes()[16]!!.getFileData(getContainerId(objectId), objectId and 0xff, null)
                 if (data == null) {
-                    SceneryDefinition.getDefinitions().put(objectId, SceneryDefinition())
+                    LocType.getDefinitions().put(objectId, LocType())
                     continue
                 }
-                var def = SceneryDefinition.parseDefinition(objectId, ByteBuffer.wrap(data))
+                var def = LocType.parseDefinition(objectId, ByteBuffer.wrap(data))
 
-                SceneryDefinition.getDefinitions().put(objectId, def)
+                LocType.getDefinitions().put(objectId, def)
             }
         }
 
         @JvmStatic
-        fun forId(objectId: Int): SceneryDefinition {
+        fun forId(objectId: Int): LocType {
             var def = definitions.get(objectId)
             if (def != null) {
                 return def
             }
-            def = SceneryDefinition()
+            def = LocType()
             definitions[objectId] = def
             def.id = objectId
             return def
         }
 
         @JvmStatic
-        fun parseDefinition(objectId: Int, buffer: ByteBuffer): SceneryDefinition {
-            var def = SceneryDefinition()
+        fun parseDefinition(objectId: Int, buffer: ByteBuffer): LocType {
+            var def = LocType()
             def.id = objectId
             while (true) {
                 if (!buffer.hasRemaining()) {
@@ -393,9 +423,9 @@ class SceneryDefinition : Definition<Scenery>() {
                 } else if (opcode == 19) {
                     def.interactable = buffer.get().toInt() and 0xFF
                 } else if (opcode == 21) {
-                    def.aByte3912 = 1.toByte()
+                    def.terrainContourMode = 1.toByte()
                 } else if (opcode == 22) {
-                    def.aBoolean3867 = true
+                    def.shareLight = true
                 } else if (opcode == 23) {
                     def.boolean1 = true
                 } else if (opcode == 24) {
@@ -406,11 +436,11 @@ class SceneryDefinition : Definition<Scenery>() {
                 } else if (opcode == 27) {
                     def.clipType = 1
                 } else if (opcode == 28) {
-                    def.anInt3892 = ((buffer.get().toInt() and 0xFF) shl 2)
+                    def.wallWidth = ((buffer.get().toInt() and 0xFF) shl 2)
                 } else if (opcode == 29) {
-                    def.anInt3878 = buffer.get().toInt()
+                    def.ambient = buffer.get().toInt()
                 } else if (opcode == 39) {
-                    def.anInt3840 = buffer.get() * 5
+                    def.contrast = buffer.get() * 5
                 } else if (opcode in 30..34 || opcode in 150..154) {
                     val slot = if (opcode >= 150) opcode - 150 else opcode - 30
                     def.options[slot] = ByteBufferUtils.getString(buffer)
@@ -428,46 +458,46 @@ class SceneryDefinition : Definition<Scenery>() {
                     }
                 } else if (opcode == 41) {
                     var length = buffer.get().toInt() and 0xFF
-                    def.aShortArray3920 = ShortArray(length)
-                    def.aShortArray3919 = ShortArray(length)
+                    def.retextureSource = ShortArray(length)
+                    def.retextureDestination = ShortArray(length)
                     for (i in 0 until length) {
-                        def.aShortArray3920!![i] = buffer.getShort()
-                        def.aShortArray3919!![i] = buffer.getShort()
+                        def.retextureSource!![i] = buffer.getShort()
+                        def.retextureDestination!![i] = buffer.getShort()
                     }
                 } else if (opcode == 42) {
                     var length = buffer.get().toInt() and 0xFF
-                    def.aByteArray3858 = ByteArray(length)
+                    def.recolourPaletteIndices = ByteArray(length)
                     for (i in 0 until length) {
-                        def.aByteArray3858!![i] = buffer.get()
+                        def.recolourPaletteIndices!![i] = buffer.get()
                     }
                 } else if (opcode == 60) {
                     def.mapIcon = buffer.getShort()
                 } else if (opcode == 62) {
-                    def.aBoolean3839 = true
+                    def.mirrored = true
                 } else if (opcode == 64) {
-                    def.aBoolean3872 = false
+                    def.castsShadow = false
                 } else if (opcode == 65) {
-                    def.anInt3902 = buffer.getShort().toInt() and 0xFFFF
+                    def.resizeX = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 66) {
-                    def.anInt3841 = buffer.getShort().toInt() and 0xFFFF
+                    def.resizeY = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 67) {
-                    def.anInt3917 = buffer.getShort().toInt() and 0xFFFF
+                    def.resizeZ = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 68) {
                     buffer.getShort()
                 } else if (opcode == 69) {
                     def.walkingFlag = buffer.get().toInt() and 0xFF
                 } else if (opcode == 70) {
-                    def.anInt3883 = buffer.getShort().toInt() shl 2
+                    def.offsetX = buffer.getShort().toInt() shl 2
                 } else if (opcode == 71) {
-                    def.anInt3889 = buffer.getShort().toInt() shl 2
+                    def.offsetY = buffer.getShort().toInt() shl 2
                 } else if (opcode == 72) {
-                    def.anInt3915 = buffer.getShort().toInt() shl 2
+                    def.offsetZ = buffer.getShort().toInt() shl 2
                 } else if (opcode == 73) {
                     def.secondBool = true
                 } else if (opcode == 74) {
                     def.notClipped = true
                 } else if (opcode == 75) {
-                    def.anInt3855 = buffer.get().toInt() and 0xFF
+                    def.opcode75Value = buffer.get().toInt() and 0xFF
                 } else if (opcode == 77 || opcode == 92) {
                     def.varbitID = buffer.getShort().toInt() and 0xFFFF
                     if (def.varbitID == 65535) {
@@ -496,34 +526,34 @@ class SceneryDefinition : Definition<Scenery>() {
                     }
                     def.childrenIds!![childrenAmount + 1] = defaultId
                 } else if (opcode == 78) {
-                    def.anInt3860 = buffer.getShort().toInt() and 0xFFFF
-                    def.anInt3904 = buffer.get().toInt() and 0xFF
+                    def.backgroundSoundId = buffer.getShort().toInt() and 0xFFFF
+                    def.backgroundSoundRange = buffer.get().toInt() and 0xFF
                 } else if (opcode == 79) {
-                    def.anInt3900 = buffer.getShort().toInt() and 0xFFFF
-                    def.anInt3905 = buffer.getShort().toInt() and 0xFFFF
-                    def.anInt3904 = buffer.get().toInt() and 0xFF
+                    def.backgroundSoundMinDelay = buffer.getShort().toInt() and 0xFFFF
+                    def.backgroundSoundMaxDelay = buffer.getShort().toInt() and 0xFFFF
+                    def.backgroundSoundRange = buffer.get().toInt() and 0xFF
                     var length = buffer.get().toInt() and 0xFF
-                    def.anIntArray3859 = IntArray(length)
+                    def.backgroundSoundIds = IntArray(length)
                     for (i in 0 until length) {
-                        def.anIntArray3859!![i] = buffer.getShort().toInt() and 0xFFFF
+                        def.backgroundSoundIds!![i] = buffer.getShort().toInt() and 0xFFFF
                     }
                 } else if (opcode == 81) {
-                    def.aByte3912 = 2.toByte()
-                    def.anInt3882 = 256 * (buffer.get().toInt() and 0xFF)
+                    def.terrainContourMode = 2.toByte()
+                    def.terrainContourValue = 256 * (buffer.get().toInt() and 0xFF)
                 } else if (opcode == 82 || opcode == 88)
                 {} else if (opcode == 89) {
-                    def.aBoolean3895 = false
+                    def.randomAnimationFrame = false
                 } else if (opcode == 90) {
-                    def.aBoolean3870 = true
+                    def.opcode90Flag = true
                 } else if (opcode == 91) {
                     def.membersOnly = true
                 } else if (opcode == 93) {
-                    def.aByte3912 = 3.toByte()
-                    def.anInt3882 = buffer.getShort().toInt() and 0xFFFF
+                    def.terrainContourMode = 3.toByte()
+                    def.terrainContourValue = buffer.getShort().toInt() and 0xFFFF
                 } else if (opcode == 94) {
-                    def.aByte3912 = 4.toByte()
+                    def.terrainContourMode = 4.toByte()
                 } else if (opcode == 95) {
-                    def.aByte3912 = 5.toByte()
+                    def.terrainContourMode = 5.toByte()
                 } else if (opcode in 96..98 || opcode == 103 || opcode == 105)
                 {} else if (opcode == 99 || opcode == 100) {
                     val option = buffer.get().toInt() and 0xff

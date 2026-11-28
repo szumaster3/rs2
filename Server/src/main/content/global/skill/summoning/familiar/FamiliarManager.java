@@ -6,7 +6,7 @@ import content.global.skill.summoning.SummoningPouch;
 import content.global.skill.summoning.pets.Pet;
 import content.global.skill.summoning.pets.PetDetails;
 import content.global.skill.summoning.pets.Pets;
-import core.cache.def.impl.ItemDefinition;
+import core.cache.def.impl.ObjType;
 import core.game.component.Component;
 import core.game.container.Container;
 import core.game.node.entity.combat.BattleState;
@@ -322,7 +322,7 @@ public final class FamiliarManager {
         for (int food : pets.food) {
             if (food == foodId) {
                 player.getInventory().remove(new Item(foodId));
-                player.getPacketDispatch().sendMessage("Your pet happily eats the " + ItemDefinition.forId(food).getName() + ".");
+                player.getPacketDispatch().sendMessage("Your pet happily eats the " + ObjType.forId(food).getName() + ".");
                 player.animate(new Animation(827));
                 npc.getDetails().updateHunger(-15.0);
                 return;

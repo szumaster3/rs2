@@ -6,7 +6,7 @@ import content.global.skill.construction.HousingStyle
 import core.api.getDynLevel
 import core.api.rewardXP
 import core.api.sendMessage
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.LocType
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -26,8 +26,8 @@ class DoorPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for ((closed, open) in OPEN_DOORS) {
-            SceneryDefinition.forId(closed).handlers["option:open"] = this
-            SceneryDefinition.forId(open).handlers["option:close"] = this
+            LocType.forId(closed).handlers["option:open"] = this
+            LocType.forId(open).handlers["option:close"] = this
         }
         return this
     }

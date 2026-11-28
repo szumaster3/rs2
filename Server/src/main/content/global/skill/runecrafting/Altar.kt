@@ -8,7 +8,7 @@ import content.global.skill.runecrafting.item.Tiara
 import core.api.hasRequirement
 import core.api.isQuestComplete
 import core.api.sendMessage
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import shared.consts.Scenery as Objects
@@ -61,7 +61,7 @@ enum class Altar(
             ASTRAL -> if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY.questName)) return
             DEATH -> if (!hasRequirement(player, Quests.MOURNINGS_END_PART_II.questName)) return
             BLOOD -> if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE.questName)) return
-            LAW -> if (!ItemDefinition.canEnterEntrana(player)) {
+            LAW -> if (!ObjType.canEnterEntrana(player)) {
                 sendMessage(player, "You can't take weapons and armour into the law rift.", null)
                 return
             }

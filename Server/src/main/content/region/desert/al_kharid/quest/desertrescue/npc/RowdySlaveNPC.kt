@@ -1,7 +1,7 @@
 package content.region.desert.al_kharid.quest.desertrescue.npc
 
 import content.region.desert.al_kharid.quest.desertrescue.TouristTrap
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -48,7 +48,7 @@ class RowdySlaveNPC : AbstractNPC {
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    NPCDefinition.forId(ids[0]).handlers["option:talk-to"] = this
+                    NpcType.forId(ids[0]).handlers["option:talk-to"] = this
                     return this
                 }
 

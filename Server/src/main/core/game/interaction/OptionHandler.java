@@ -1,6 +1,6 @@
 package core.game.interaction;
 
-import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.LocType;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
@@ -70,7 +70,7 @@ public abstract class OptionHandler implements Plugin<Object> {
 	 * @return the valid children.
 	 */
 	public int[] getValidChildren(int wrapper) {
-		final SceneryDefinition definition = SceneryDefinition.forId(wrapper);
+		final LocType definition = LocType.forId(wrapper);
 		final List<Integer> list = new ArrayList<>(20);
 		if (definition.getChildrenIds() == null) {
 			log(this.getClass(), Log.ERR,  "Null child wrapper in option handler wrapperId=" + wrapper);

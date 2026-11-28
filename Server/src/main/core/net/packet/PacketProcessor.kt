@@ -11,9 +11,9 @@ import content.global.skill.summoning.familiar.FamiliarSpecial
 import core.ServerConstants
 import core.api.*
 import core.api.utils.Vector
-import core.cache.def.impl.ItemDefinition
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.ObjType
+import core.cache.def.impl.NpcType
+import core.cache.def.impl.LocType
 import core.game.container.Container
 import core.game.container.impl.BankContainer
 import core.game.event.ButtonClickEvent
@@ -262,7 +262,7 @@ object PacketProcessor {
                     pkt.player.interfaceManager.chatbox?.id != Components.EXCHANGE_SEARCH_389 ||
                     pkt.player.locks.isInteractionLocked()) return
                 val index = pkt.player.getAttribute("ge-index", -1)
-                if (index !in 0..5 || pkt.itemId == 65535 || ItemDefinition.getDefinitions()[pkt.itemId]?.id != pkt.itemId) return
+                if (index !in 0..5 || pkt.itemId == 65535 || ObjType.getDefinitions()[pkt.itemId]?.id != pkt.itemId) return
                 val offer = pkt.player.getAttribute("ge-temp", GrandExchangeOffer())
                 if (!PriceIndex.canTrade(pkt.itemId)) {
                     sendMessage(pkt.player, "That item is blacklisted from the grand exchange.")
@@ -364,8 +364,8 @@ object PacketProcessor {
             //if (!getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)) {
             //    packetDispatch.sendRunScript(102, "s", messages[0]);
             is Packet.ItemExamine -> {
-                val def = ItemDefinition.forId(pkt.id) ?: return
-                pkt.player.debug("[ITEM] ID: ${pkt.id} Value: ${def.value} Model: ${def.interfaceModelId}")
+                val def = ObjType.forId(pkt.id) ?: return
+                pkt.player.debug("[ITEM] ID: ${pkt.id} Value: ${def.cost} Model: ${def.interfaceModelId}")
                 if (!pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false))
                     pkt.player.packetDispatch.sendRunScript(102, "s", def.examine)
                   else
@@ -374,7 +374,7 @@ object PacketProcessor {
             }
 
             is Packet.SceneryExamine -> {
-                val def = SceneryDefinition.forId(pkt.id) ?: return
+                val def = LocType.forId(pkt.id) ?: return
                 pkt.player.debug("[SCENERY]---------------------")
                 pkt.player.debug("ID: ${pkt.id}")
                 def.configFile?.let { pkt.player.debug("Varbit: ${it.id}") }
@@ -386,7 +386,7 @@ object PacketProcessor {
             }
 
             is Packet.NpcExamine -> {
-                val def = NPCDefinition.forId(pkt.id)
+                val def = NpcType.forId(pkt.id)
                 pkt.player.debug("[NPC]-------------------------")
                 pkt.player.debug("ID: ${pkt.id}")
                 if (def.configFileId != -1)

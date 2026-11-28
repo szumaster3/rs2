@@ -1,7 +1,7 @@
 package content.global.plugins.item
 
 import core.api.*
-import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.ObjType
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -36,13 +36,13 @@ class MorphOptionPlugin : Plugin<Any> {
      * Registers this plugin.
      */
     override fun newInstance(arg: Any?): Plugin<Any> {
-        with(ItemDefinition.forId(Items.EASTER_RING_7927).handlers) {
+        with(ObjType.forId(Items.EASTER_RING_7927).handlers) {
             this["equipment"] = this@MorphOptionPlugin
         }
-        with(ItemDefinition.forId(Items.EASTER_RING_10729).handlers) {
+        with(ObjType.forId(Items.EASTER_RING_10729).handlers) {
             this["equipment"] = this@MorphOptionPlugin
         }
-        with(ItemDefinition.forId(Items.RING_OF_STONE_6583).handlers) {
+        with(ObjType.forId(Items.RING_OF_STONE_6583).handlers) {
             this["equipment"] = this@MorphOptionPlugin
         }
         ClassScanner.definePlugin(MorphInterfacePlugin())

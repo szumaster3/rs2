@@ -4,7 +4,7 @@ import TestUtils
 //import content.global.skill.gathering.GatheringPlugin
 import content.global.skill.gather.woodcutting.WoodcuttingPlugin
 import core.api.log
-import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.NpcType
 import core.game.interaction.*
 import core.game.node.Node
 import core.game.node.entity.impl.PulseType
@@ -84,7 +84,7 @@ class PathfinderTests {
         val testHandler =
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    NPCDefinition.forId(0).handlers["option:testoption"] = this
+                    NpcType.forId(0).handlers["option:testoption"] = this
                     return this
                 }
 
@@ -193,7 +193,7 @@ class PathfinderTests {
         val testHandler =
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    NPCDefinition.forId(0).handlers["option:testoption"] = this
+                    NpcType.forId(0).handlers["option:testoption"] = this
                     return this
                 }
 
