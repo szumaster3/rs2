@@ -553,12 +553,12 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Tests the reset interface packet for the supplied interface ID.
+         * Historical diagnostic: revision 578 has no verified arbitrary interface reset packet.
          */
 
         define(name = "testpacket", Privilege.ADMIN, usage = "::testpacket <interfaceId>") { player, args ->
             val interfaceId = args.getOrNull(1)?.toIntOrNull() ?: return@define reject(player, "Please provide a valid interface ID.")
-            player.packetDispatch.resetInterface(interfaceId)
+            sendMessage(player, "RESET_INTERFACE is unsupported in revision 578 (interface $interfaceId). No packet sent.")
         }
 
         /*

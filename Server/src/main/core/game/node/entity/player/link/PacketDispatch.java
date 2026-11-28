@@ -15,7 +15,6 @@ import core.net.packet.out.Encoders578;
 import core.net.packet.out.PacketContext.AccessMaskContext;
 import core.net.packet.out.PacketContext.AnimateInterfaceContext;
 import core.net.packet.out.PacketContext.AnimateObjectContext;
-import core.net.packet.out.PacketContext.CSConfigContext;
 import core.net.packet.out.PacketContext.ChildPositionContext;
 import core.net.packet.out.PacketContext.ConfigContext;
 import core.net.packet.out.PacketContext.DisplayModelContext;
@@ -27,7 +26,6 @@ import core.net.packet.out.PacketContext.InterfaceSetModelRotationContext;
 import core.net.packet.out.PacketContext.MusicContext;
 import core.net.packet.out.PacketContext.PlayerContext;
 import core.net.packet.out.PacketContext.PositionedGraphicContext;
-import core.net.packet.out.PacketContext.ResetInterfaceContext;
 import core.net.packet.out.PacketContext.RunScriptContext;
 import core.net.packet.out.PacketContext.StringContext;
 import core.net.packet.out.PacketContext.SystemUpdateContext;
@@ -342,8 +340,14 @@ public final class PacketDispatch {
      * @param id    The id to set.
      * @param value The value of the config.
      */
+    @Deprecated
     public void sendScriptConfig(int id, int value, String types, Object... parameters) {
-        PacketRepository.send(Encoders578.CS_CONFIG_PACKET, new CSConfigContext(player, id, value, types, parameters));
+        // VARC_SMALL / VARC_LARGE only carry a numeric variable, not CS2 arguments.
+        if (types == null || !types.isEmpty() || parameters == null || parameters.length != 0) {
+            log(getClass(), Log.WARN, "Rejected legacy script config arguments for varc " + id);
+            return;
+        }
+        sendVarcUpdate(id, value);
     }
 
     /**
@@ -653,12 +657,15 @@ public final class PacketDispatch {
         return context;
     }
 
+    @Deprecated
     public void sendScriptConfigs(int id, int value, String type, Object... params) {
-        PacketRepository.send(Encoders578.CS_CONFIG_PACKET, new CSConfigContext(player, id, value, type, params));
+        sendScriptConfig(id, value, type, params);
     }
 
+    /** Historical API retained for compatibility only; never queue an unsupported frame. */
+    @Deprecated
     public void resetInterface(int id) {
-        PacketRepository.send(Encoders578.RESET_INTERFACE, new ResetInterfaceContext(player, id));
+        log(getClass(), Log.WARN, "Unsupported legacy RESET_INTERFACE for interface " + id);
     }
 
     public void sendLastLoginInfo() {

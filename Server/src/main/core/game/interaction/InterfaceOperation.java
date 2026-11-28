@@ -19,4 +19,13 @@ public final class InterfaceOperation {
         }
         return LISTENER_IDS[optionIndex];
     }
+
+    /** Reverse the historical listener ABI, never interpret it as a native wire opcode. */
+    public static int operationIndex(int listenerId) {
+        if (listenerId == CONTINUE) return CONTINUE_INDEX;
+        for (int index = 0; index < LISTENER_IDS.length; index++) {
+            if (LISTENER_IDS[index] == listenerId) return index;
+        }
+        return -1;
+    }
 }

@@ -278,7 +278,7 @@ sealed class PacketContext {
     class InterfaceContext(
         override val player: Player,
         val windowId: Int,
-        var componentId: Int,
+        val componentId: Int,
         val interfaceId: Int,
         val isWalkable: Boolean,
     ) : PacketContext() {
@@ -346,8 +346,11 @@ sealed class PacketContext {
         override val player: Player,
         val id: Int,
         val string: String,
-        vararg val objects: Any?,
-    ) : PacketContext()
+        vararg objects: Any?,
+    ) : PacketContext() {
+        // The caller may reuse the argument array before the write queue is flushed.
+        val objects: Array<out Any?> = objects.copyOf()
+    }
 
     class SceneGraphContext(override val player: Player, val isLogin: Boolean) : PacketContext()
 

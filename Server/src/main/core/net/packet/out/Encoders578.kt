@@ -202,6 +202,7 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
         context.player.session.write(buffer)
     }),
     IF_CLOSESUB(encode<InterfaceContext> { context ->
+        if (!validComponent578(context.windowId, context.componentId)) return@encode
         val buffer = IoBuffer(ServerProt.IF_CLOSESUB)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putShort(context.windowId)
@@ -437,7 +438,12 @@ enum class Encoders578(private val writer: (PacketContext) -> Unit, internal val
             context.player.details.session.write(buffer)
         }
     }),
+    @Deprecated("Use VARC_UPDATE for numeric variables or RUNCLIENTSCRIPT for script arguments.")
     CS_CONFIG_PACKET(encode<CSConfigContext> { context ->
+        if (context.types.isNotEmpty() || context.parameters.isNotEmpty()) {
+            System.err.println("[Protocol] Rejected legacy script config arguments for varc ${context.id}")
+            return@encode
+        }
         if (!VarcType.exists(context.id)) {
             System.err.println("[Protocol578] Rejected unknown varc ${context.id}")
             return@encode

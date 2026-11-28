@@ -137,8 +137,7 @@ object InterfaceListeners {
         val method = buttonListeners[key] ?: return false
         // Compatibility entry point for old callers; do not pass a legacy ID to a native listener.
         val operation = if (key in nativeOperationListeners) {
-            if (opcode == InterfaceOperation.CONTINUE) InterfaceOperation.CONTINUE_INDEX
-            else (InterfaceOperation.OP1..InterfaceOperation.OP10).firstOrNull { InterfaceOperation.listenerId(it) == opcode } ?: return false
+            InterfaceOperation.operationIndex(opcode).takeIf { it >= 0 } ?: return false
         } else opcode
         return method.invoke(player, component, operation, buttonID, slot, itemID)
     }

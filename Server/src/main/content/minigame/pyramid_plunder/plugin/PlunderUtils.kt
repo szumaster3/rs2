@@ -230,8 +230,11 @@ object PlunderUtils {
      */
     fun resetOverlay(player: Player) {
         setVarbit(player, 2375, 0)
-        player.packetDispatch.resetInterface(Components.NTK_OVERLAY_428)
-        player.interfaceManager.closeOverlay()
+        // ntk_timer (428:6 onvartransmit) updates from varbit 2375;
+        // close the actual overlay through IF_CLOSESUB, not a legacy reset packet.
+        if (player.interfaceManager.overlay?.id == Components.NTK_OVERLAY_428) {
+            player.interfaceManager.closeOverlay()
+        }
     }
 
     /**

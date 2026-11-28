@@ -109,9 +109,18 @@ class BalloonFlightInterface : InterfaceListener, Commands {
                 refresh(player, routeId, routeData)
 
                 if (!isLastStage) {
+                    // Reset already clears the model grid explicitly. Reopening uses
+                    // native IF_CLOSESUB / IF_OPENSUB and the existing onOpen redraw.
+                    val flight = player.interfaceManager.opened
+                    val session = player.session
+                    val nextStep = step + 1
                     runTask(player, 1) {
-                        player.packetDispatch.resetInterface(470)
-                        openInterface(player, Components.ZEP_INTERFACE_470)
+                        if (session.isActive && player.session === session &&
+                            flight?.id == Components.ZEP_INTERFACE_470 && player.interfaceManager.opened === flight &&
+                            getAttribute(player, "zep_current_route", -1) == routeId &&
+                            getAttribute(player, stepAttr, -1) == nextStep) {
+                            openInterface(player, Components.ZEP_INTERFACE_470)
+                        }
                     }
                 }
 
