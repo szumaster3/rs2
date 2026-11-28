@@ -385,12 +385,12 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
     /**
      * Ring of charos (a).
      */
-    private fun wearsCharosRing() = inEquipment(player!!, Items.RING_OF_CHAROSA_6465)
+    private fun wearsCharosRing() = inEquipment(player!!, Items.RING_OF_CHAROS_A_6465)
 
     /**
      * Any colour of the Runecrafter robes (checked by item name).
      */
     private fun wearsRunecrafterRobes() = player!!.equipment.toArray().count { it != null && it.name.startsWith("Runecrafter") } >= 3
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_ELRISS_8032)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RCGUILD_WIZARD_ELRISS_8032)
 }

@@ -28,6 +28,6 @@ class TyrasGuardTentDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TYRAS_GUARD_1206)
+        return intArrayOf(NPCs.REGICIDE_TYRAS_CAMP_TENT_GUARD_1206)
     }
 }

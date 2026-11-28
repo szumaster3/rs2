@@ -34,10 +34,10 @@ class CanoePlugin : InteractionListener, InterfaceListener {
         private val DEST_HIDE_ROW = arrayOf(10, 11, 12, 20, 18)
 
         // Animations.
-        private val TREE_FALLING_ANIM = Animation(Animations.CANOE_TREE_FALL_3304)
-        private val PLAYER_PUSHING_ANIM = Animation(Animations.HUMAN_PUSH_CANOE_3301)
-        private val PUSHING_ANIM = Animation(Animations.CANOE_TREE_FALL_3304)
-        private val SINKING_ANIM = Animation(Animations.CANOE_SINK_3305)
+        private val TREE_FALLING_ANIM = Animation(Animations.CANOEING_STATION_ANIMATIONS_3304)
+        private val PLAYER_PUSHING_ANIM = Animation(Animations.CANOEING_PUSHING_INTO_WATER_3301)
+        private val PUSHING_ANIM = Animation(Animations.CANOEING_STATION_ANIMATIONS_3304)
+        private val SINKING_ANIM = Animation(Animations.CANOEING_SINKING_3305)
 
         private val TRAVEL_ANIMATIONS = arrayOf(
             arrayOf(0, 9890, 9889, 9888, 9887),
@@ -48,14 +48,14 @@ class CanoePlugin : InteractionListener, InterfaceListener {
         )
 
         fun getAxeAnimation(axe: SkillingTool) = when (axe) {
-            SkillingTool.BRONZE_AXE -> Animation(Animations.BRONZE_AXE_6744)
-            SkillingTool.IRON_AXE -> Animation(Animations.IRON_AXE_6743)
-            SkillingTool.STEEL_AXE -> Animation(Animations.STEEL_AXE_ALT2_6742)
-            SkillingTool.BLACK_AXE -> Animation(Animations.BLACK_AXE_6741)
-            SkillingTool.MITHRIL_AXE -> Animation(Animations.MITHRIL_AXE_6740)
-            SkillingTool.ADAMANT_AXE -> Animation(Animations.ADAMANT_AXE_6739)
-            SkillingTool.RUNE_AXE -> Animation(Animations.RUNE_AXE_6738)
-            SkillingTool.DRAGON_AXE -> Animation(Animations.DRAGON_AXE_6745)
+            SkillingTool.BRONZE_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_BRONZE_AXE_6744)
+            SkillingTool.IRON_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_IRON_AXE_6743)
+            SkillingTool.STEEL_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_STEEL_AXE_6742)
+            SkillingTool.BLACK_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_BLACK_AXE_6741)
+            SkillingTool.MITHRIL_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_MITHRIL_AXE_6740)
+            SkillingTool.ADAMANT_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_ADAMANT_AXE_6739)
+            SkillingTool.RUNE_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_RUNE_AXE_6738)
+            SkillingTool.DRAGON_AXE -> Animation(Animations.BRUT_HUMAN_CANOEING_CARVE_DRAGON_AXE_6745)
             else -> Animation(axe.animation)
         }
 

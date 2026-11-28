@@ -22,7 +22,7 @@ class TeaSellerDialogue(player: Player? = null) : Dialogue(player) {
             player = player,
             stallName = "TEA_STALL",
             shopNpc = npc,
-            guardNpcIds = listOf(NPCs.GUARD_32)
+            guardNpcIds = listOf(NPCs.ARDOUGNE_GUARD_32)
         )
         if (!canTrade) return false
 

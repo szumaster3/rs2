@@ -78,9 +78,9 @@ class NatureSpiritPlugin : InteractionListener {
             when {
                 questStage < 55 -> {
                     val location = Location.create(3440, 3336, 0)
-                    val existing = findNPC(location, NPCs.FILLIMAN_TARLOCK_1050)
+                    val existing = findNPC(location, NPCs.FILLIMAN_TARLOCK_SPIRIT_1050)
                     if (existing == null) {
-                        val npc = core.game.node.entity.npc.NPC.create(NPCs.FILLIMAN_TARLOCK_1050, location)
+                        val npc = core.game.node.entity.npc.NPC.create(NPCs.FILLIMAN_TARLOCK_SPIRIT_1050, location)
                         npc.init()
                     }
                     sendMessage(player, "The aura of Filliman's camp protects you from the swamp.")
@@ -205,13 +205,13 @@ class NatureSpiritPlugin : InteractionListener {
 
         onUseWith(IntType.SCENERY, Items.SILVER_SICKLE_2961, NATURE_ALTAR) { player, _, _ ->
             if (removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)) {
-                sendItemDialogue(player, Items.SILVER_SICKLEB_2963, "You dump the sickle into the waters.")
-                addItem(player, Items.SILVER_SICKLEB_2963, 1)
+                sendItemDialogue(player, Items.SILVER_SICKLE_B_2963, "You dump the sickle into the waters.")
+                addItem(player, Items.SILVER_SICKLE_B_2963, 1)
             }
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, DRUID_POUCH, NPCs.GHAST_1052) { player, _, with ->
+        onUseWith(IntType.NPC, DRUID_POUCH, NPCs.GHAST_INVIS_1052) { player, _, with ->
             NSUtils.activatePouch(player, with as GhastNPC)
         }
 
@@ -237,11 +237,11 @@ class NatureSpiritPlugin : InteractionListener {
                     sendMessage(player, "You try to put the item on the stone, but it just moves off.")
                     return
                 }
-                val anim = Animations.HUMAN_BURYING_BONES_827
+                val anim = Animations.HUMAN_PICKUPFLOOR_827
                 animate(player, anim)
                 runTask(player, animationDuration(Animation(anim))) {
                     produceGroundItem(player, used.id, 1, with.location)
-                    sendNPCDialogue(player, NPCs.FILLIMAN_TARLOCK_1050, "Aha, yes, that seems right well done!")
+                    sendNPCDialogue(player, NPCs.FILLIMAN_TARLOCK_SPIRIT_1050, "Aha, yes, that seems right well done!")
                     sendMessage(player, message)
                     onSuccess()
                 }
@@ -299,7 +299,7 @@ class NatureSpiritPlugin : InteractionListener {
             when (stage) {
                 0 -> {
                     npcl(
-                        NPCs.FILLIMAN_TARLOCK_1050,
+                        NPCs.FILLIMAN_TARLOCK_SPIRIT_1050,
                         FaceAnim.NEUTRAL,
                         "Well, hello there again. I was just enjoying the grotto. Many thanks for your help, I couldn't have become a Spirit of nature without you."
                     )
@@ -308,7 +308,7 @@ class NatureSpiritPlugin : InteractionListener {
 
                 1 -> {
                     npcl(
-                        NPCs.FILLIMAN_TARLOCK_1050,
+                        NPCs.FILLIMAN_TARLOCK_SPIRIT_1050,
                         FaceAnim.NEUTRAL,
                         "I must complete the transformation now. Just stand there and watch the show, apparently it's quite good!"
                     )

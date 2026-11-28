@@ -43,5 +43,5 @@ class LibAssistantDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = LibAssistantDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ASSISTANT_2166)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_LIBRARY_ASSISTANT_2166)
 }

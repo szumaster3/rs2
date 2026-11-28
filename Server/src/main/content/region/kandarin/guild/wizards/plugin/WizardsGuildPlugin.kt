@@ -66,7 +66,7 @@ class WizardsGuildPlugin : InteractionListener {
          * Handling the essence teleport inside guild.
          */
 
-        on(NPCs.WIZARD_DISTENTOR_462, IntType.NPC, "teleport") { player, node ->
+        on(NPCs.GUILD_WIZARD_462, IntType.NPC, "teleport") { player, node ->
             if (!isQuestComplete(player, Quests.RUNE_MYSTERIES.questName)) {
                 sendMessage(player, "You need to have completed the Rune Mysteries Quest to use this feature.")
                 return@on false

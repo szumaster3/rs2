@@ -128,7 +128,7 @@ class BobDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         var repair = false
         var wrong = false
-        if (npc.id == NPCs.SQUIRE_3797 && args.size == 1) {
+        if (npc.id == NPCs.PEST_SQUIRE_BLACKSMITH_3797 && args.size == 1) {
             player("Can you repair my items for me?")
             stage = 3
             return true

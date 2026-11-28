@@ -89,7 +89,7 @@ class ArmourStandPlugin : UseWithHandler(*REPAIRABLE_ITEM_IDS)
     {
         val repairType = rustyMap[item.id] ?: return
         RustyItem.getRepair(repairType)?.let { repairedItem ->
-            player.animate(Animation(Animations.CHURN_PLUMING_STAND_3654))
+            player.animate(Animation(Animations.HUMAN_USE_ARMOUR_REPAIR_STAND_3654))
             player.inventory.remove(item)
             player.inventory.add(repairedItem)
             sendItemDialogue(player, repairedItem.id,
@@ -174,7 +174,7 @@ class ArmourStandPlugin : UseWithHandler(*REPAIRABLE_ITEM_IDS)
                 {
                     if (player.inventory.add(product))
                     {
-                        player.animate(Animation(Animations.CHURN_PLUMING_STAND_3654))
+                        player.animate(Animation(Animations.HUMAN_USE_ARMOUR_REPAIR_STAND_3654))
                         val costText = if (cost > 0) "${cost}gp" else "free"
                         player.sendMessage("You repair your ${product.name.lowercase()} for $costText.")
                         return

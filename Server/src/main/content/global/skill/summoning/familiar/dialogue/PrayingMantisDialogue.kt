@@ -103,5 +103,5 @@ class PrayingMantisDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PRAYING_MANTIS_6798, NPCs.PRAYING_MANTIS_6799)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_PRAYING_MANTIS_6798, NPCs.LORE_PRAYING_MANTIS_COMBAT_6799)
 }

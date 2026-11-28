@@ -113,11 +113,11 @@ class TeaMakerPlugin : InteractionListener {
             }
             val scenery = with.asScenery()
             lock(player, 7)
-            animate(player, Animations.GRAB_AND_HOLDING_ONTO_SOMETHING_BIG_3622)
+            animate(player, Animations.HUMAN_SINK_ACTIVATE_3622)
             queueScript(player,1,QueueStrength.SOFT) { stage ->
                 when (stage) {
                     0 -> {
-                        animate(player, Animations.KETTLE_3625)
+                        animate(player, Animations.HUMAN_PUMP_SINK_KETTLE_3625)
                         replaceScenery(scenery, with.id + 1, 4)
                         animateScenery(scenery, 3720)
                         return@queueScript delayScript(player, 5)
@@ -125,7 +125,7 @@ class TeaMakerPlugin : InteractionListener {
                     1 -> {
                         sendMessage(player, "You fill the kettle from the sink.")
                         replaceSlot(player, used.asItem().slot, Item(Items.FULL_KETTLE_7690))
-                        animate(player, Animations.LET_GO_OF_SOMETHING_BIG_3623)
+                        animate(player, Animations.HUMAN_SINK_STEPBACK_3623)
                         return@queueScript stopExecuting(player)
                     }
                     else -> return@queueScript stopExecuting(player)

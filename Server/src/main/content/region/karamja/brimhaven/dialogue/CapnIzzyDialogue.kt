@@ -18,7 +18,7 @@ class CapnIzzyDialogue(private val it: Int) : DialogueFile() {
             0 -> when (stage) {
                 0 -> playerl(FaceAnim.HAPPY, "Ahoy Cap'n!").also { stage++ }
                 1 -> npcl(FaceAnim.HAPPY, "Ahoy there!").also { stage++ }
-                2 -> npcl(NPCs.PARROT_4535, FaceAnim.OLD_CALM_TALK2, "Avast ye scurvy swabs!").also { stage++ }
+                2 -> npcl(NPCs.LUNAR_CAPTAINS_PARROT_4535, FaceAnim.OLD_CALM_TALK2, "Avast ye scurvy swabs!").also { stage++ }
                 3 -> playerl(FaceAnim.THINKING, "Huh?").also { stage++ }
                 4 -> npcl(FaceAnim.HAPPY, "Don't mind me parrot, he's Cracked Jenny's Tea Cup!").also { stage++ }
                 5 -> {
@@ -53,7 +53,7 @@ class CapnIzzyDialogue(private val it: Int) : DialogueFile() {
                 22 -> npcl(FaceAnim.NEUTRAL, "If ye miss a platform ye will miss out on the next ticket so try and get every platform you can! " + "When ye be done, take the tickets to Jackie over there and she'll exchange them for more stuff!").also { stage++ }
                 23 -> playerl(FaceAnim.NEUTRAL, "Thanks!").also { stage = 5 }
                 30 -> npcl(FaceAnim.NEUTRAL, "Aye, entrance be 200 coins.").also { stage++ }
-                31 -> npcl(NPCs.PARROT_4535, FaceAnim.OLD_CALM_TALK2, "Pieces of eight!").also { stage++ }
+                31 -> npcl(NPCs.LUNAR_CAPTAINS_PARROT_4535, FaceAnim.OLD_CALM_TALK2, "Pieces of eight!").also { stage++ }
                 32 -> npcl(FaceAnim.AMAZED, "A word of warning me hearty! There are dangerous traps down there!").also { stage++ }
                 33 -> options("Ok, here's 200 coins.", "Never mind.").also { stage++ }
                 34 -> when (buttonID) {
@@ -101,7 +101,7 @@ class CapnIzzyDialogue(private val it: Int) : DialogueFile() {
                 51 -> npcl(FaceAnim.HALF_ASKING, "Now, be there anything else ye'd like to know?").also { stage = 5 }
             }
             1 -> when (stage) {
-                0 -> npcl(NPCs.PARROT_4535, FaceAnim.OLD_CALM_TALK2, "Clap him in irons!").also { stage++ }
+                0 -> npcl(NPCs.LUNAR_CAPTAINS_PARROT_4535, FaceAnim.OLD_CALM_TALK2, "Clap him in irons!").also { stage++ }
                 1 -> npcl(NPCs.CAPN_IZZY_NO_BEARD_437, FaceAnim.NEUTRAL, "Ahoy there! Pay up first!").also { stage = END_DIALOGUE }
             }
             2 -> {

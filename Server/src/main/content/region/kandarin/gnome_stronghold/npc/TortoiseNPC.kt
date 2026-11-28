@@ -157,5 +157,5 @@ class TortoiseNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = TortoiseNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TORTOISE_3808)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BATTLE_TORTOISE_WAR2_3808)
 }

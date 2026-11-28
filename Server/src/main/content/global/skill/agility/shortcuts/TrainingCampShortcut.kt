@@ -24,7 +24,7 @@ class TrainingCampShortcut : AgilityShortcut(intArrayOf(LOOSE_RAILING_19171), 1,
         player.lock(3)
         GameWorld.Pulser.submit(object : Pulse(1, player) {
             override fun pulse(): Boolean {
-                AgilityHandler.forceWalk(player, -1, start, end, Animation.create(Animations.DUCK_UNDER_2240), 5, experience, null)
+                AgilityHandler.forceWalk(player, -1, start, end, Animation.create(Animations.ROGUESDEN_CONTORTION_2240), 5, experience, null)
                 return true
             }
         })

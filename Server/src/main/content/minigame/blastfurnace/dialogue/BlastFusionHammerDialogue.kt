@@ -14,7 +14,7 @@ import shared.consts.NPCs
  */
 class BlastFusionHammerDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.BLAST_FURNACE_FOREMAN_2553)
+        npc = NPC(NPCs.BLAST_FURNACE_INSTRUCTOR_2553)
         when (stage) {
             0 -> npcl(FaceAnim.OLD_DEFAULT, "For that hammer I can offer you 1,000,000 coins for the trade-in. Do you accept?").also { stage++ }
             1 -> options("Yes, I'll take your offer.", "Sorry, I'll keep hold of the hammer for now.").also { stage++ }

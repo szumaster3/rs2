@@ -15,8 +15,8 @@ import shared.consts.NPCs
 class PenguinDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object{
-        private val babyPenguin = intArrayOf(NPCs.BABY_PENGUIN_6908, NPCs.BABY_PENGUIN_7313, NPCs.BABY_PENGUIN_7316)
-        private val adultPenguin = intArrayOf(NPCs.PENGUIN_6909, NPCs.PENGUIN_6910, NPCs.PENGUIN_7314, NPCs.PENGUIN_7315, NPCs.PENGUIN_7317, NPCs.PENGUIN_7318)
+        private val babyPenguin = intArrayOf(NPCs.LORE_BABY_PENGUIN_1_6908, NPCs.LORE_BABY_PENGUIN_2_7313, NPCs.LORE_BABY_PENGUIN_3_7316)
+        private val adultPenguin = intArrayOf(NPCs.LORE_PENGUIN_1_6909, NPCs.LORE_PENGUIN_SLIDE_1_6910, NPCs.LORE_PENGUIN_2_7314, NPCs.LORE_PENGUIN_SLIDE_2_7315, NPCs.LORE_PENGUIN_3_7317, NPCs.LORE_PENGUIN_SLIDE_3_7318)
     }
 
     private var branch = 0

@@ -74,7 +74,7 @@ class DragonShieldDialogue : Dialogue {
         when (stage) {
             0 -> {
                 lock(player, 5)
-                animate(player, Animations.SMITH_HAMMER_898)
+                animate(player, Animations.HUMAN_SMITHING_898)
                 if (removeItem(player, Items.SHIELD_RIGHT_HALF_2368) && removeItem(player, Items.SHIELD_LEFT_HALF_2366)) {
                     sendDialogueLines(
                         player,
@@ -90,7 +90,7 @@ class DragonShieldDialogue : Dialogue {
 
             10 -> {
                 lock(player, 5)
-                animate(player, Animations.SMITH_HAMMER_898)
+                animate(player, Animations.HUMAN_SMITHING_898)
                 if (removeItem(player, Items.ANTI_DRAGON_SHIELD_1540) && removeItem(player, Items.DRACONIC_VISAGE_11286)) {
                     sendDialogueLines(
                         player,

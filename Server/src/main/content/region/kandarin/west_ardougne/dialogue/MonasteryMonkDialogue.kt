@@ -36,5 +36,5 @@ class MonasteryMonkDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_281)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_ARDOUGNE_281)
 }

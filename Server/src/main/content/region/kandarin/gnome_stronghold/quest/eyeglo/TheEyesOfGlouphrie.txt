@@ -10,7 +10,7 @@ import core.plugin.Initializable
 
 @Initializable
 class TheEyesOfGlouphrie :
-    Quest("The Eyes of Glouphrie", 56, 55, 2, Vars.VARBIT_QUEST_THE_EYE_OF_GLOUPHRIE_2497, 0, 1, 60) {
+    Quest("The Eyes of Glouphrie", 56, 55, 2, Vars.VARBIT_2497, 0, 1, 60) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -37,7 +37,7 @@ class TheEyesOfGlouphrie :
         rewardXP(player, Skills.WOODCUTTING, 2500.0)
         rewardXP(player, Skills.RUNECRAFTING, 6000.0)
         rewardXP(player, Skills.CONSTRUCTION, 250.0)
-        setVarbit(player, Vars.VARBIT_QUEST_THE_EYE_OF_GLOUPHRIE_2497, 60, true)
+        setVarbit(player, Vars.VARBIT_2497, 60, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

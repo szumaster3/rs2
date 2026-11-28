@@ -25,7 +25,7 @@ class HeadNPC(
         vararg objects: Any,
     ): AbstractNPC = HeadNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HEAD_3619, NPCs.HEAD_3620)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TEMPLETREK_TENTACLE_HEAD_3619, NPCs.TEMPLETREK_TENTACLE_HEAD_SPAWNING_3620)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -36,7 +36,7 @@ class HeadNPC(
 
     companion object {
         fun spawnTentacleHeadNPC(player: Player) {
-            val head = HeadNPC(NPCs.HEAD_3620)
+            val head = HeadNPC(NPCs.TEMPLETREK_TENTACLE_HEAD_SPAWNING_3620)
             head.location = Location.create(2573, 5035, 2).transform(Direction.EAST)
             head.isWalks = false
             head.isAggressive = true
@@ -53,7 +53,7 @@ class HeadNPC(
 
                     override fun pulse(): Boolean {
                         head.init()
-                        head.transform(NPCs.HEAD_3619)
+                        head.transform(NPCs.TEMPLETREK_TENTACLE_HEAD_3619)
                         head.attack(player)
                         return true
                     }

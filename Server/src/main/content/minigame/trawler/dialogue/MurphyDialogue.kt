@@ -108,5 +108,5 @@ class MurphyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = MurphyDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MURPHY_464)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MURPHY_NORMAL_464)
 }

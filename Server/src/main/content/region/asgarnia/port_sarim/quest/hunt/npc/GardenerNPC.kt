@@ -67,6 +67,6 @@ class GardenerNPC : AbstractNPC {
     override fun getIds(): IntArray = ID
 
     companion object {
-        private val ID = intArrayOf(NPCs.GARDENER_1217)
+        private val ID = intArrayOf(NPCs.FALADOR_GARDENER_1217)
     }
 }

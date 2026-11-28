@@ -43,8 +43,8 @@ class HolyGrailPlugin : InteractionListener {
          * Handles dialogue with the High Priest in Entrana.
          */
 
-        on(NPCs.HIGH_PRIEST_216, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, HighPriestDialogue(), NPCs.HIGH_PRIEST_216)
+        on(NPCs.HIGH_PRIEST_OF_ENTRANA_216, IntType.NPC, "talk-to") { player, _ ->
+            openDialogue(player, HighPriestDialogue(), NPCs.HIGH_PRIEST_OF_ENTRANA_216)
             return@on true
         }
 
@@ -52,8 +52,8 @@ class HolyGrailPlugin : InteractionListener {
          * Handles dialogue with the Fisherman NPC.
          */
 
-        on(NPCs.FISHERMAN_219, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, FishermanDialogue(), NPCs.FISHERMAN_219)
+        on(NPCs.GRAIL_FISHERMAN_219, IntType.NPC, "talk-to") { player, _ ->
+            openDialogue(player, FishermanDialogue(), NPCs.GRAIL_FISHERMAN_219)
             return@on true
         }
 
@@ -61,7 +61,7 @@ class HolyGrailPlugin : InteractionListener {
          * Handles dialogue with the sad peasant before the land is healed.
          */
 
-        on(NPCs.PEASANT_214, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.UNHAPPY_PEASANT_214, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Woe is me! Our crops are all failing... how shall I feed myself this winter?", FaceAnim.HALF_ASKING)
             return@on true
         }
@@ -70,7 +70,7 @@ class HolyGrailPlugin : InteractionListener {
          * Handles dialogue with the happy peasant after the land is healed.
          */
 
-        on(NPCs.PEASANT_215, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.HAPPY_PEASANT_215, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Oh happy day! Suddenly our crops are growing again! It'll be a bumper harvest this year!", FaceAnim.HAPPY)
             return@on true
         }
@@ -88,8 +88,8 @@ class HolyGrailPlugin : InteractionListener {
          * Handles dialogue with the Fisher King.
          */
 
-        on(NPCs.THE_FISHER_KING_220, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, FisherKingDialogue(), NPCs.THE_FISHER_KING_220)
+        on(NPCs.FISHER_KING_220, IntType.NPC, "talk-to") { player, _ ->
+            openDialogue(player, FisherKingDialogue(), NPCs.FISHER_KING_220)
             return@on true
         }
 

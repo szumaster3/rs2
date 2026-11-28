@@ -19,7 +19,7 @@ class SheepdogDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
 
         branch = when {
-            npc.id in intArrayOf(NPCs.SHEEPDOG_PUPPY_6966, NPCs.SHEEPDOG_PUPPY_7253, NPCs.SHEEPDOG_PUPPY_7255) -> 0
+            npc.id in intArrayOf(NPCs.LORE_DOG_SHEEPDOG_PUPPY_1_6966, NPCs.LORE_DOG_SHEEPDOG_PUPPY_2_7253, NPCs.LORE_DOG_SHEEPDOG_PUPPY_3_7255) -> 0
             inInventory(player, Items.BALL_OF_WOOL_1759) -> 1
             else -> (2..5).random()
         }
@@ -81,11 +81,11 @@ class SheepdogDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.SHEEPDOG_PUPPY_6966,
-        NPCs.SHEEPDOG_6967,
-        NPCs.SHEEPDOG_PUPPY_7253,
-        NPCs.SHEEPDOG_7254,
-        NPCs.SHEEPDOG_PUPPY_7255,
-        NPCs.SHEEPDOG_7256,
+        NPCs.LORE_DOG_SHEEPDOG_PUPPY_1_6966,
+        NPCs.LORE_DOG_SHEEPDOG_1_6967,
+        NPCs.LORE_DOG_SHEEPDOG_PUPPY_2_7253,
+        NPCs.LORE_DOG_SHEEPDOG_2_7254,
+        NPCs.LORE_DOG_SHEEPDOG_PUPPY_3_7255,
+        NPCs.LORE_DOG_SHEEPDOG_3_7256,
     )
 }

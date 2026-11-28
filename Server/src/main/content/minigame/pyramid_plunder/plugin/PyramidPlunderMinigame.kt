@@ -234,7 +234,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                 PlunderUtils.expel(player, false)
                 return@on true
             }
-            animate(player, Animations.HUMAN_OPEN_CHEST_536)
+            animate(player, Animations.HUMAN_OPENCHEST_536)
             runTask(player) {
                 if (RandomFunction.roll(25)) {
                     val swarm =
@@ -378,9 +378,9 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(NPCs.GUARDIAN_MUMMY_4476, IntType.NPC, "start-minigame") { player, _ ->
+        on(NPCs.NTK_MUMMY_GUARDIAN_4476, IntType.NPC, "start-minigame") { player, _ ->
             if (!getAttribute(player, "pp:mummy-spoken-to", false)) {
-                openDialogue(player, NPCs.GUARDIAN_MUMMY_4476)
+                openDialogue(player, NPCs.NTK_MUMMY_GUARDIAN_4476)
                 return@on true
             }
 

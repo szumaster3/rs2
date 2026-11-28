@@ -33,14 +33,14 @@ class ZamorakWinePlugin : InteractionListener {
             }
 
             RegionManager.getLocalNpcs(player).forEach { npc ->
-                if (npc.id == NPCs.MONK_OF_ZAMORAK_188) {
+                if (npc.id == NPCs.CHAOSMONK1_188) {
                     sendChat(npc, "STOP STEALING MY WINE! GAH!")
                     npc.attack(player)
                 }
             }
 
             drainCombatStats(player)
-            sendGraphics(Graphics.FLAMES_OF_ZAMORAK_78, player.location)
+            sendGraphics(Graphics.FLAMEWALL_1_78, player.location)
             impact(player, calculateImpact(player), ImpactHandler.HitsplatType.NORMAL)
             PickupHandler.take(player, wine as GroundItem)
             return@on true

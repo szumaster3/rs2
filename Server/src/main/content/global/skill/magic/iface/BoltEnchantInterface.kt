@@ -45,7 +45,7 @@ class BoltEnchantInterface : InterfaceListener {
                 sendMessage(player, "Not enough space in your inventory.")
                 return@on true
             }
-            visualize(player, Animations.CRAFT_ENCHANT_4462, 759)
+            visualize(player, Animations.HUMAN_XBOW_ENCHANT_ARROWTIP_4462, 759)
             queueScript(player, 1, QueueStrength.SOFT) {
                 var enchant = amount
                 if (enchant > 10) {

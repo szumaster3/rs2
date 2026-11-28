@@ -18,7 +18,7 @@ class BarrelPlugin : InteractionListener {
             val scenery = used.asScenery() ?: return@onUseWith false
 
             if (!removeItem(player, Item(BEER_GLASS))) return@onUseWith false
-            val animationId = Animations.FILLING_BEER_MUG_FROM_TAP_3661 + (scenery.id - 13569)
+            val animationId = Animations.POH_BARREL_USE2_BEER_3661 + (scenery.id - 13569)
 
             animate(player, Animation.create(animationId))
 
@@ -36,17 +36,17 @@ class BarrelPlugin : InteractionListener {
             shared.consts.Scenery.BEER_BARREL_13568,
             shared.consts.Scenery.CIDER_BARREL_13569,
             shared.consts.Scenery.ASGARNIAN_ALE_13570,
-            shared.consts.Scenery.GREENMAN_S_ALE_13571,
+            shared.consts.Scenery.GREENMANS_ALE_13571,
             shared.consts.Scenery.DRAGON_BITTER_13572,
-            shared.consts.Scenery.CHEF_S_DELIGHT_13573
+            shared.consts.Scenery.CHEFS_DELIGHT_13573
         )
         private val REWARDS = mapOf(
             shared.consts.Scenery.BEER_BARREL_13568     to Items.BEER_1917,
             shared.consts.Scenery.CIDER_BARREL_13569    to Items.CIDER_5763,
             shared.consts.Scenery.ASGARNIAN_ALE_13570   to Items.ASGARNIAN_ALE_1905,
-            shared.consts.Scenery.GREENMAN_S_ALE_13571  to Items.GREENMANS_ALE_1909,
+            shared.consts.Scenery.GREENMANS_ALE_13571  to Items.GREENMANS_ALE_1909,
             shared.consts.Scenery.DRAGON_BITTER_13572   to Items.DRAGON_BITTER_1911,
-            shared.consts.Scenery.CHEF_S_DELIGHT_13573  to Items.CHEFS_DELIGHT_5755
+            shared.consts.Scenery.CHEFS_DELIGHT_13573  to Items.CHEFS_DELIGHT_5755
         )
         private const val DEFAULT_REWARD = Items.BEER_1917
         private const val BEER_GLASS = Items.BEER_GLASS_1919

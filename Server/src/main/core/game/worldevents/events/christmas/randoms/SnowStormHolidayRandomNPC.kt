@@ -13,7 +13,7 @@ import core.tools.minutesToTicks
 import shared.consts.NPCs
 import shared.consts.Sounds
 
-class SnowStormHolidayRandomNPC : HolidayRandomEventNPC(NPCs.SNOW_6740) {
+class SnowStormHolidayRandomNPC : HolidayRandomEventNPC(NPCs.XMAS07_SNOW_IN_WIND_6740) {
     private lateinit var snowTwoNPC: NPC
     private lateinit var snowThreeNPC: NPC
     private lateinit var snowFourNPC: NPC
@@ -23,10 +23,10 @@ class SnowStormHolidayRandomNPC : HolidayRandomEventNPC(NPCs.SNOW_6740) {
     private var snowFinalized = false
 
     override fun init() {
-        snowTwoNPC = create(NPCs.SNOW_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
-        snowThreeNPC = create(NPCs.SNOW_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
-        snowFourNPC = create(NPCs.SNOW_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
-        snowFiveNPC = create(NPCs.SNOW_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
+        snowTwoNPC = create(NPCs.XMAS07_SNOW_IN_WIND_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
+        snowThreeNPC = create(NPCs.XMAS07_SNOW_IN_WIND_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
+        snowFourNPC = create(NPCs.XMAS07_SNOW_IN_WIND_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
+        snowFiveNPC = create(NPCs.XMAS07_SNOW_IN_WIND_6740, getPathableRandomLocalCoordinate(player, 3, player.location))
         snowNPCs = listOf(this, snowTwoNPC, snowThreeNPC, snowFourNPC, snowFiveNPC)
         ticksLeft = minutesToTicks(2)
         super.init()

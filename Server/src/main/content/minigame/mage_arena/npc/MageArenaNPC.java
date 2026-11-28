@@ -103,6 +103,6 @@ public final class MageArenaNPC extends AbstractNPC {
 
     @Override
     public int[] getIds() {
-        return new int[]{NPCs.BATTLE_MAGE_913, NPCs.BATTLE_MAGE_912, NPCs.BATTLE_MAGE_914};
+        return new int[]{NPCs.SARADOMIN_MAGE_913, NPCs.ZAMORAK_MAGE_912, NPCs.GUTHIX_MAGE_914};
     }
 }

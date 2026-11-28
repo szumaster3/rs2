@@ -33,5 +33,5 @@ class JimmyDazzlerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = JimmyDazzlerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JIMMY_DAZZLER_2949)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VC_JIMMY_DAZZLER_2949)
 }

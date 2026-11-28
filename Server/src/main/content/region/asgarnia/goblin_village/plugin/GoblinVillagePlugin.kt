@@ -46,7 +46,7 @@ class GoblinVillagePlugin: InteractionListener {
          * Handles talking to NPCs around village.
          */
 
-        on(NPCs.GUARD_3241, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.FALADOR_DORIC_AREA_GUARD_3241, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, GoblinVillageGuardDialogue(), node)
             return@on true
         }

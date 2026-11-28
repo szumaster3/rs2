@@ -64,7 +64,7 @@ class AncientCavernPlugin : MapZone("ancient cavern", true, ZoneRestriction.CANN
             Item(Items.ANCIENT_PAGE_11365),
             Item(Items.ANCIENT_PAGE_11366)
         )
-        private val SKELETONS = intArrayOf(NPCs.SKELETON_HERO_6103, NPCs.SKELETON_HEAVY_6106)
+        private val SKELETONS = intArrayOf(NPCs.BRUT_SKELETON1_6103, NPCs.BRUT_SKELETON5_6106)
     }
 
     override fun newInstance(arg: Any?): Plugin<Any?> {
@@ -83,7 +83,7 @@ class AncientCavernPlugin : MapZone("ancient cavern", true, ZoneRestriction.CANN
                         -1,
                         player.location,
                         player.location.transform(0, -6, 0),
-                        Animation.create(Animations.ANCIENT_CAVERN_DIVE_6723),
+                        Animation.create(Animations.BRUT_PLAYER_JUMP_WHIRLPOOL_6723),
                         10,
                         0.0,
                         null,

@@ -123,7 +123,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
         if (node.id == shared.consts.Scenery.TREE_10041) {
             sendNPCDialogue(
                 player,
-                NPCs.BANK_GUARD_2574,
+                NPCs.WOM_BANKGUARD_2574,
                 if (RandomFunction.random(2) == 1) "You'll blow my cover! I'm meant to be hidden!" else "Will you stop that?",
                 FaceAnim.FURIOUS
             )

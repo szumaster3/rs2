@@ -17,7 +17,7 @@ class CamelotPlugin : InteractionListener {
             Items.FISHBOWL_6671,
             Items.FISHBOWL_6672
         )
-        private val feedAnimation = Animation(Animations.FEED_BOWL_2781)
+        private val feedAnimation = Animation(Animations.HUMAN_FEED_PET_FISH_BLUE_2781)
     }
 
     override fun defineListeners() {

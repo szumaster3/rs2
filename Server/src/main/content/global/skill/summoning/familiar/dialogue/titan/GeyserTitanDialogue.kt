@@ -84,5 +84,5 @@ class GeyserTitanDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GEYSER_TITAN_7339, NPCs.GEYSER_TITAN_7340)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_GEYSER_TITAN_7339, NPCs.LORE_GEYSER_TITAN_COMBAT_7340)
 }

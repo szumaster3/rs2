@@ -26,11 +26,11 @@ class FurTradeDialogue(player: Player? = null) : Dialogue(player) {
             player = player,
             stallName = "FUR_STALL",
             shopNpc = npc,
-            guardNpcIds = listOf(NPCs.MARKET_GUARD_1317, NPCs.WARRIOR_1318)
+            guardNpcIds = listOf(NPCs.VIKING_GUARD_1317, NPCs.WARRIOR_1318)
         )
 
         when(npc.id) {
-            NPCs.FUR_TRADER_1316 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
+            NPCs.VIKING_FUR_MONGER_1316 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 npc(FaceAnim.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
             } else {
                 if (!canTrade) return false
@@ -47,13 +47,13 @@ class FurTradeDialogue(player: Player? = null) : Dialogue(player) {
             1 -> when (buttonId) {
                 1 -> {
                     end()
-                    openNpcShop(player, NPCs.FUR_TRADER_573)
+                    openNpcShop(player, NPCs.FUR_MERCHANT_573)
                 }
                 2 -> player(FaceAnim.HALF_GUILTY, "No, thanks.").also { stage = END_DIALOGUE }
             }
             2 -> {
                 end()
-                openNpcShop(player, NPCs.FUR_TRADER_1316)
+                openNpcShop(player, NPCs.VIKING_FUR_MONGER_1316)
             }
         }
         return true
@@ -61,5 +61,5 @@ class FurTradeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FurTradeDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FUR_TRADER_573, NPCs.FUR_TRADER_1316)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FUR_MERCHANT_573, NPCs.VIKING_FUR_MONGER_1316)
 }

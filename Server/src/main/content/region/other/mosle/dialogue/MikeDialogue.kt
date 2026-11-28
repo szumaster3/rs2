@@ -46,7 +46,7 @@ class MikeDialogue(player: Player? = null) : Dialogue(player) {
             6 -> npcl(FaceAnim.ANNOYED, "Then what are you doin' in my shop? Move along.").also { stage = END_DIALOGUE }
             7 -> {
                 end()
-                openNpcShop(player, NPCs.MIKE_3166)
+                openNpcShop(player, NPCs.FEVER_DODGY_MIKE_3166)
             }
         }
         return true
@@ -54,5 +54,5 @@ class MikeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = MikeDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MIKE_3166)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEVER_DODGY_MIKE_3166)
 }

@@ -104,11 +104,11 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
             setVarbit(player, VARBIT_TOG_SCORE, 0)
 
             player.equipment.replace(Item(Items.STONE_BOWL_4704), 3)
-            player.appearance.setAnimations(Animation(Animations.TOG_BOWL_RENDER_357))
+            player.appearance.setAnimations(Animation(Animations.OGRE_READY_357))
             player.appearance.sync()
 
             playAudio(player, Sounds.JUNA_HISS_1797)
-            junaScenery?.let { animateScenery(it, Animations.JUNA_TAIL_LIFT_2055) }
+            junaScenery?.let { animateScenery(it, Animations.TOG_SNAKE_OPENCLOSE_2055) }
             registerLogoutListener(player, "tog-bowl") {
                 removeItem(player, Items.STONE_BOWL_4704, Container.EQUIPMENT)
             }
@@ -143,7 +143,7 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
             sendMessage(player, "Your time in the cave is up.")
 
             playAudio(player, Sounds.JUNA_HISS_1797)
-            junaScenery?.let { animateScenery(it, Animations.JUNA_TAIL_LIFT_2055) }
+            junaScenery?.let { animateScenery(it, Animations.TOG_SNAKE_OPENCLOSE_2055) }
 
             queueScript(player, 1, QueueStrength.SOFT) { stage ->
                 when (stage) {
@@ -170,7 +170,7 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
 
                     3 -> {
                         playAudio(player, Sounds.DRINK_AND_MAGIC_1796)
-                        animate(player, Animations.DRINK_BOWL_2045)
+                        animate(player, Animations.TOG_DRINK_BOWL_2045)
                         sendMessage(player, "You drink the liquid...")
                         return@queueScript delayScript(player, 1)
                     }
@@ -199,7 +199,7 @@ class TearsOfGuthixActivity : MapArea, InteractionListener, EventHook<TickEvent>
     override fun defineListeners() {
         on(Scenery.WEEPING_WALL_6660, SCENERY, "collect-from") { player, node ->
             playAudio(player, Sounds.COLLECT_TEAR_1795)
-            animate(player, Animations.FILL_TOG_BOWL_2043)
+            animate(player, Animations.TOG_LEAN_FORWARD_BOWL_2043)
             val index = TearsOfGuthixListener.allWalls.indexOf(node.location)
             setAttribute(player, GameAttributes.TOG_ACTIVITY, index)
             return@on true

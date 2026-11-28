@@ -179,5 +179,5 @@ class ThorvaldDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.THORVALD_THE_WARRIOR_1289)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_THORVALD_1289)
 }

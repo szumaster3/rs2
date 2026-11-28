@@ -46,7 +46,7 @@ class WestArdougneDoorPlugin : OptionHandler() {
             sendMessage(player, "You try to open the large wooden doors...")
             sendMessage(player, "...But they will not open.", 1)
             if (player.location.x > 2557) {
-                sendNPCDialogue(player, NPCs.MOURNER_2349, "Oi! What are you doing? Get away from there!")
+                sendNPCDialogue(player, NPCs.MOURNING_OVERPASS_MOURNER1_2349, "Oi! What are you doing? Get away from there!")
             }
             return true
         }

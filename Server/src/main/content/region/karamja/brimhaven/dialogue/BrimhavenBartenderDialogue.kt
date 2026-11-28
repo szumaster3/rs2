@@ -57,5 +57,5 @@ class BrimhavenBartenderDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BrimhavenBartenderDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARTENDER_735)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DEADMANS_BARTENDER_735)
 }

@@ -49,5 +49,5 @@ class GillieGroatsDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GILLIE_GROATS_3807)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GILLIE_THE_MILKMAID_3807)
 }

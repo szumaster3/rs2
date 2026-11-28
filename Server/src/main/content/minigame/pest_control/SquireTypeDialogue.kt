@@ -70,5 +70,5 @@ class SquireTypeDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.SQUIRE_NOVICE_3802, NPCs.SQUIRE_INTERMEDIATE_6140, NPCs.SQUIRE_VETERAN_6141)
+        intArrayOf(NPCs.PEST_SQUIRE_LANDER_3802, NPCs.PEST_SQUIRE_LANDER_2_6140, NPCs.PEST_SQUIRE_LANDER_3_6141)
 }

@@ -28,7 +28,7 @@ public final class SnipeSpecialHandler extends RangeSwingHandler implements Plug
 
     private static final int SPECIAL_ENERGY = 75;
 
-    private static final Animation ANIMATION = new Animation(Animations.FIRE_CROSSBOW_4230, Priority.HIGH);
+    private static final Animation ANIMATION = new Animation(Animations.XBOWS_HUMAN_FIRE_AND_RELOAD_4230, Priority.HIGH);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

@@ -44,7 +44,7 @@ class SpinolypNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
 
             clear()
 
-            val water = NPC(NPCs.SUSPICIOUS_WATER_2895, loc)
+            val water = NPC(NPCs.DAGANNOTH_WATER_CREATURE_1X1_INVISIBLE3_2895, loc)
             water.init()
             return
         }

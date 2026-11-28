@@ -74,12 +74,12 @@ class WoodcuttingTutorDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> sendDoubleItemDialogue(player, Items.LOGS_1511, Items.OAK_LOGS_1521, "Almost every tree can be chopped down. Normal logs will be produced by chopping 'Trees' and Oak logs will come from chopping 'Oak Trees'. You can find Oak trees in amongst normal trees scatterd about the").also { stage = 5100 }
                 2 -> sendItemDialogue(player, Items.MAPLE_LOGS_1517, "Maple logs can be gleaned from Maple trees. You'll usually find Maple trees standing alone amongst other trees.").also { stage = 5200 }
                 3 -> sendItemDialogue(player, Items.MAGIC_LOGS_1513, "Magic trees are... magic. A difficult wood to work with, but worth it for the rewards. Find them in the areas south of Seers village or on the East side of the Mage arena.").also { stage = 5300 }
-                4 -> sendItemDialogue(player, Items.BRONZE_AXE_1351, "Bronze axes are easy to get, simply go visit Bob in his shop in Lumbridge, or talk to me if you have mislaid yours.").also { stage = 5400 }
+                4 -> sendItemDialogue(player, Items.BRONZE_HATCHET_1351, "Bronze axes are easy to get, simply go visit Bob in his shop in Lumbridge, or talk to me if you have mislaid yours.").also { stage = 5400 }
                 5 -> options("Tell me about different trees and axes.", "What is that cape you're wearing?", "Goodbye.").also { stage = 500 }
             }
             5400 -> npc("As you progress in your combat skill you will find you", "can wield your woodcutting axe as a weapon, it's not", "very effective, but it frees up a slot for another log.").also { stage++ }
-            5401 -> sendDoubleItemDialogue(player, Items.IRON_AXE_1349, Items.STEEL_AXE_1353, "As your woodcutting skill increases you will find yourself able to use better axes to chop trees faster.... anything up to steel you can buy from Bob's axe shop.").also { stage++ }
-            5402 -> sendItemDialogue(player, Items.RUNE_AXE_1359, "Rune axes can be player made with very high level smithing and mining. They can also be obtained through killing one of the fearsome tree spirits, though this is very rare.").also { stage = 510 }
+            5401 -> sendDoubleItemDialogue(player, Items.IRON_HATCHET_1349, Items.STEEL_HATCHET_1353, "As your woodcutting skill increases you will find yourself able to use better axes to chop trees faster.... anything up to steel you can buy from Bob's axe shop.").also { stage++ }
+            5402 -> sendItemDialogue(player, Items.RUNE_HATCHET_1359, "Rune axes can be player made with very high level smithing and mining. They can also be obtained through killing one of the fearsome tree spirits, though this is very rare.").also { stage = 510 }
             5300 -> npc("Hollow trees can be found in the Haunted Woods east", "of Canifis, but be careful of the leeches.").also { stage = 510 }
             5200 -> sendItemDialogue(player, Items.YEW_LOGS_1515, "Yew trees are few and far between. We do our best to cultivate them. Look for the tree icon on your mini map to find rare trees. Try North of Port Sarim.").also { stage = 510 }
             5100 -> sendDoubleItemDialogue(player, Items.LOGS_1511, Items.OAK_LOGS_1521, "lands.").also { stage = 5101 }
@@ -92,5 +92,5 @@ class WoodcuttingTutorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = WoodcuttingTutorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WOODCUTTING_TUTOR_4906)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WILFRED_4906)
 }

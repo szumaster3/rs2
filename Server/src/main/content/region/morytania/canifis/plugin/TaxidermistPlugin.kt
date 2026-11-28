@@ -21,7 +21,7 @@ class TaxidermistPlugin : InteractionListener {
          * https://runescape.fandom.com/wiki/Taxidermist
          */
 
-        onUseWith(IntType.NPC, ITEM_IDS, NPCs.TAXIDERMIST_4246) { player, used, with ->
+        onUseWith(IntType.NPC, ITEM_IDS, NPCs.POH_TAXIDERMIST_4246) { player, used, with ->
             val stuffed = StuffedItem.product[used.id] ?: return@onUseWith true
             val npc = with.asNpc()
             openDialogue(player, TaxidermistDialogue(stuffed, used.asItem()), npc)

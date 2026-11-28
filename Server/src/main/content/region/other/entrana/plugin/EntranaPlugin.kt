@@ -79,12 +79,12 @@ class EntranaPlugin : InteractionListener, MapArea {
          * Handles talking to NPC.
          */
 
-        on(NPCs.MONK_222, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.ENTRANA_MONK_222, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Greetings traveller.")
             return@on true
         }
 
-        on(NPCs.CRONE_217, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.GRAIL_CRONE_217, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Hello deary.",  FaceAnim.HALF_GUILTY)
             runTask(player, 3) {
                 sendPlayerDialogue(player,  "Um... hello.", FaceAnim.HALF_GUILTY)
@@ -94,7 +94,7 @@ class EntranaPlugin : InteractionListener, MapArea {
     }
 
     private fun kickThemOut(entity: Player) {
-        val monk = core.game.node.entity.npc.NPC(NPCs.MONK_4608).apply {
+        val monk = core.game.node.entity.npc.NPC(NPCs.PARANOID_CHECK_MONK_4608).apply {
             isNeverWalks = true
             isWalks = false
             location = entity.location
@@ -111,7 +111,7 @@ class EntranaPlugin : InteractionListener, MapArea {
             monk.moveStep()
             monk.face(entity)
             monk.animate(Animation.create(442))
-            entity.asPlayer().animator.animate(Animation(Animations.DEATH_836))
+            entity.asPlayer().animator.animate(Animation(Animations.HUMAN_DEATH_836))
             openInterface(entity.asPlayer(), Components.FADE_TO_BLACK_115)
             GameWorld.Pulser.submit(
                 object : Pulse(3) {
@@ -119,9 +119,9 @@ class EntranaPlugin : InteractionListener, MapArea {
                         if (getAttribute(entity, "teleporting-away", false)) return true
                         teleport(entity.asPlayer(), Location.create(3047, 3231, 1))
                         openInterface(entity.asPlayer(), Components.FADE_FROM_BLACK_170)
-                        entity.asPlayer().animator.animate(Animation(Animations.DEATH_4200))
+                        entity.asPlayer().animator.animate(Animation(Animations.DTTD_HAM_CUT_SCENE_DEATH_4200))
                         sendGraphics(
-                            Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), entity.asPlayer().location
+                            Graphics(shared.consts.Graphics.STUNNED_1_80, 96), entity.asPlayer().location
                         )
                         sendChat(entity.asPlayer(), "Urrrrrgh!", 6)
                         if (!entity.isActive) poofClear(monk)

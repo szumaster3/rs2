@@ -37,7 +37,7 @@ class PhasmatysListener : InteractionListener {
          */
 
         on(GHOST, IntType.NPC, "collect") { player, node ->
-            openDialogue(player, NPCs.GHOST_DISCIPLE_1686, node.asNpc(), true)
+            openDialogue(player, NPCs.AHOY_DISCIPLE_1686, node.asNpc(), true)
             return@on true
         }
 
@@ -70,7 +70,7 @@ class PhasmatysListener : InteractionListener {
         onEquip(BEDSHEET_GREEN) { player, _ ->
             if (inEquipment(player, BEDSHEET_BROWN)) return@onEquip false
             if (inBorders(player, 3673, 9955, 3685, 9964) || inBorders(player, 3650, 3456, 3737, 3508)) {
-                player.appearance.transformNPC(NPCs.GHOST_COSTUME_2_1708)
+                player.appearance.transformNPC(NPCs.AHOY_GHOST_DISGUISE_GREEN_1708)
                 return@onEquip true
             } else {
                 sendDialogue(player, "You can only wear the bedsheet inside Port Phasmatys.")
@@ -193,7 +193,7 @@ class PhasmatysListener : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, EMPTY_BUCKET, *ECTO) { player, used, _ ->
-            val fillAnimation = Animation.create(Animations.FILL_BUCKET_4471)
+            val fillAnimation = Animation.create(Animations.QUEST_AHOY_HUMAN_FILLING_BUCKET_4471)
             val fillSound = Sounds.FILL_ECTOPLASM_1132
 
             animate(player, fillAnimation)
@@ -239,13 +239,13 @@ class PhasmatysListener : InteractionListener {
     companion object {
         private val BOTH_BEDSHEET = intArrayOf(Items.BEDSHEET_4284, Items.BEDSHEET_4285)
         private const val CAPTAIN = Scenery.PIRATE_CAPTAIN_5287
-        private const val GHOST = NPCs.GHOST_DISCIPLE_1686
+        private const val GHOST = NPCs.AHOY_DISCIPLE_1686
         private const val SLIME_BUCKET = Items.BUCKET_OF_SLIME_4286
         private const val BEDSHEET_BROWN = Items.BEDSHEET_4284
         private const val BEDSHEET_GREEN = Items.BEDSHEET_4285
         private const val EMPTY_BUCKET = Items.BUCKET_1925
         private const val ENERGY_BARRIER = Scenery.ENERGY_BARRIER_5259
-        private const val GHOST_GUARD = NPCs.GHOST_GUARD_1706
+        private const val GHOST_GUARD = NPCs.AHOY_GHOST_GUARD_1706
         private val ECTO = intArrayOf(5461, 17116, 17117, 17118, 17119)
     }
 }

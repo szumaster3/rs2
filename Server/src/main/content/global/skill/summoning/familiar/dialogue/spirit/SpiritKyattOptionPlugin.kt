@@ -28,16 +28,16 @@ import shared.consts.Scenery as Objects
 class SpiritKyattOptionPlugin : OptionHandler() {
 
     companion object {
-        private const val BRONZE_AXE_ITEM = Items.BRONZE_AXE_1351
+        private const val BRONZE_AXE_ITEM = Items.BRONZE_HATCHET_1351
         private const val BRONZE_PICKAXE_ITEM = Items.BRONZE_PICKAXE_1265
-        private const val BRONZE_AXE_SCENERY = Objects.BRONZE_AXE_14912
+        private const val BRONZE_AXE_SCENERY = Objects.BRONZE_HATCHET_14912
         private const val BRONZE_PICKAXE_SCENERY = Objects.BRONZE_PICKAXE_14910
         private const val AXE_TRANSFORM = 14908
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        NPCs.SPIRIT_KYATT_7365.let { NpcType.forId(it).handlers["option:interact"] = this }
-        NPCs.SPIRIT_KYATT_7366.let { NpcType.forId(it).handlers["option:interact"] = this }
+        NPCs.LORE_KYATT_7365.let { NpcType.forId(it).handlers["option:interact"] = this }
+        NPCs.LORE_KYATT_COMBAT_7366.let { NpcType.forId(it).handlers["option:interact"] = this }
         Objects.TRAPDOOR_28741.let { LocType.forId(it).handlers["option:open"] = this }
         Objects.LADDER_28743.let { LocType.forId(it).handlers["option:climb-up"] = this }
         BRONZE_AXE_SCENERY.let { LocType.forId(it).handlers["option:take"] = this }
@@ -47,7 +47,7 @@ class SpiritKyattOptionPlugin : OptionHandler() {
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
         when (node.id) {
-            NPCs.SPIRIT_KYATT_7365, NPCs.SPIRIT_KYATT_7366 -> {
+            NPCs.LORE_KYATT_7365, NPCs.LORE_KYATT_COMBAT_7366 -> {
                 val f = node as Familiar
                 if (f.owner != player) {
                     sendMessage(player, "This is not your follower.")
@@ -78,12 +78,12 @@ class SpiritKyattOptionPlugin : OptionHandler() {
             }
 
             Objects.TRAPDOOR_28741 -> {
-                player.animate(Animation(Animations.HUMAN_BURYING_BONES_827))
+                player.animate(Animation(Animations.HUMAN_PICKUPFLOOR_827))
                 teleport(player, Location(2333, 10015), TeleportManager.TeleportType.INSTANT, 1)
             }
 
             Objects.LADDER_28743 -> {
-                player.animate(Animation(Animations.HUMAN_CLIMB_STAIRS_828))
+                player.animate(Animation(Animations.HUMAN_REACHFORLADDER_828))
                 teleport(player, Location(2328, 3646), TeleportManager.TeleportType.INSTANT, 1)
             }
 

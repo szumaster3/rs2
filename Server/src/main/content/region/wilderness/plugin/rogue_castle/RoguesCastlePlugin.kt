@@ -107,7 +107,7 @@ class RoguesCastlePlugin : InteractionListener {
     }
 
     companion object {
-        private val CHEST_ANIM = getAnimation(Animations.HUMAN_OPEN_CHEST_536)
+        private val CHEST_ANIM = getAnimation(Animations.HUMAN_OPENCHEST_536)
         private val FLOOR_1_CHESTS = intArrayOf(14773, 14774)
         private val FLOOR_2_CHESTS = intArrayOf(38834, 38835)
         private const val JAIL_DOORS = 38837

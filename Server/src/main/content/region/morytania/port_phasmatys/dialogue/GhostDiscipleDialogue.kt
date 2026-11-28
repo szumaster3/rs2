@@ -103,5 +103,5 @@ class GhostDiscipleDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_DISCIPLE_1686)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_DISCIPLE_1686)
 }

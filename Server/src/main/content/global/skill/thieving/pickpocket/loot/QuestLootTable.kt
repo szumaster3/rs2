@@ -7,7 +7,7 @@ import shared.consts.NPCs
 
 // Shield of Arrav.
 object CuratorHaigHelenLootTable {
-    val NPC_ID = intArrayOf(NPCs.CURATOR_HAIG_HALEN_646)
+    val NPC_ID = intArrayOf(NPCs.CURATOR_646)
     val LOOT = WeightBasedTable.create(
         WeightedItem(Items.DISPLAY_CABINET_KEY_4617, 1, 1, 1.0, true)
     )
@@ -15,7 +15,7 @@ object CuratorHaigHelenLootTable {
 
 // Perils of Ice Mountain.
 object DrorkarLootTable {
-    val NPC_ID = intArrayOf(NPCs.CURATOR_HAIG_HALEN_646)
+    val NPC_ID = intArrayOf(NPCs.CURATOR_646)
     val LOOT = WeightBasedTable.create(
         WeightedItem(Items.DWARVEN_KEY_13234, 1, 1, 1.0, true)
     )
@@ -23,7 +23,7 @@ object DrorkarLootTable {
 
 // Fairytale II - Cure a Queen.
 object FairyGodFatherLootTable {
-    val NPC_ID = intArrayOf(NPCs.FAIRY_GODFATHER_4433)
+    val NPC_ID = intArrayOf(NPCs.FAIRY_GODFATHER2_4433)
     val LOOT = WeightBasedTable.create(
         WeightedItem(Items.QUEENS_SECATEURS_9020, 1, 1, 1.0, true)
     )
@@ -40,22 +40,22 @@ object MovarioLootTable {
 // Land of the Goblin.
 enum class Priest(val npcId: Int, val loot: WeightBasedTable) {
     PRIEST_0(
-        NPCs.PRIEST_6482,
+        NPCs.LOTG_GOBLIN_PRIEST_BLUE_6482,
         WeightBasedTable.create(WeightedItem(Items.EKELESHUUN_KEY_11795, 1, 1, 1.0, true))),
     PRIEST_1(
-        NPCs.PRIEST_6483,
+        NPCs.LOTG_GOBLIN_PRIEST_ORANGE_6483,
         WeightBasedTable.create(WeightedItem(Items.NAROGOSHUUN_KEY_11796, 1, 1, 1.0, true))),
     PRIEST_2(
-        NPCs.PRIEST_6484,
+        NPCs.LOTG_GOBLIN_PRIEST_BLACK_6484,
         WeightBasedTable.create(WeightedItem(Items.HUZAMOGAARB_KEY_11797, 1, 1, 1.0, true))),
     PRIEST_3(
-        NPCs.PRIEST_6485,
+        NPCs.LOTG_GOBLIN_PRIEST_WHITE_6485,
         WeightBasedTable.create(WeightedItem(Items.SARAGORGAK_KEY_11798, 1, 1, 1.0, true))),
     PRIEST_4(
-        NPCs.PRIEST_6486,
+        NPCs.LOTG_GOBLIN_PRIEST_PURPLE_6486,
         WeightBasedTable.create(WeightedItem(Items.HOROGOTHGAR_KEY_11799, 1, 1, 1.0, true))),
     PRIEST_5(
-        NPCs.PRIEST_6487,
+        NPCs.LOTG_GOBLIN_PRIEST_YELLOW_6487,
         WeightBasedTable.create(WeightedItem(Items.YURKOLGOKH_KEY_11800, 1, 1, 1.0, true)));
 }
 

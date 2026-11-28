@@ -148,5 +148,5 @@ class CalebDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CALEB_666)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CALEB_FITZHARMON_666)
 }

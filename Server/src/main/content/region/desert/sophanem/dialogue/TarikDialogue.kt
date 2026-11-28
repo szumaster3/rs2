@@ -75,5 +75,5 @@ class TarikDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TARIK_4478)
+    override fun getIds(): IntArray = intArrayOf(NPCs.NTK_TARIK_4478)
 }

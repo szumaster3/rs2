@@ -51,7 +51,7 @@ class IsidorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = IsidorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ISIDOR_8544)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MOTWL_ISIDOR_8544)
 
 
     companion object {

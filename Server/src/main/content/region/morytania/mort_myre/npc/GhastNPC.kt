@@ -23,7 +23,7 @@ import shared.consts.Sounds
 
 @Initializable
 class GhastNPC : AbstractNPC {
-    constructor() : super(NPCs.GHAST_1052, null, true) {}
+    constructor() : super(NPCs.GHAST_INVIS_1052, null, true) {}
     private constructor(id: Int, location: Location) : super(id, location) {}
 
     private val supportRange = 10
@@ -58,7 +58,7 @@ class GhastNPC : AbstractNPC {
         val currentTick = getWorldTicks()
         for (player in playersInRange) {
             val hasSickle =
-                inInventory(player, Items.SILVER_SICKLEB_2963) || inEquipment(player, Items.SILVER_SICKLEB_2963)
+                inInventory(player, Items.SILVER_SICKLE_B_2963) || inEquipment(player, Items.SILVER_SICKLE_B_2963)
             if (!hasSickle) continue
 
             val lastRepel = getAttribute(player, "lastRepelTick", 0)
@@ -67,13 +67,13 @@ class GhastNPC : AbstractNPC {
             setAttribute(player, "lastRepelTick", currentTick)
 
             player.face(this)
-            animate(player, Animations.DEFEND_MACE_SHIELD_404)
+            animate(player, Animations.HUMAN_BLUNT_DEF_404)
             sendChat(this.asNpc(), "OOooooohhh")
             sendMessage(player, "The power of the blessed silver sickle prevents the swamp from decaying you.")
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHAST_1052, NPCs.GHAST_1053)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHAST_INVIS_1052, NPCs.GHAST_VIS_1053)
 
     fun attemptLifeSiphon(player: Player) {
         // Pouch effect takes priority.

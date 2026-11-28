@@ -16,7 +16,7 @@ import shared.consts.*
 
 class EctophialOptionPlugin : InteractionListener {
 
-    private val fillAnimation = Animation(Animations.HUMAN_MULTI_USE_832)
+    private val fillAnimation = Animation(Animations.HUMAN_PICKUPTABLE_832)
     private val emptyAnimation = Animation(9609)
     private val emptyGraphics = Graphics(1688)
 

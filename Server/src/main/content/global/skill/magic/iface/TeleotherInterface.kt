@@ -16,7 +16,7 @@ class TeleotherInterface : InterfaceListener {
             if(buttonID == 5) {
                 lock(player, 2)
                 if (teleport(player, getAttribute(player, "t-o_location", player.location), TeleportType.TELE_OTHER)) {
-                    visualize(player, Animations.OLD_SHRINK_AND_RISE_UP_TP_1816, Graphics.TELEOTHER_ACCEPT_342)
+                    visualize(player, Animations.HUMAN_TELEPORT_OTHER_IMPACT_1816, Graphics.TELEPORT_OTHER_IMPACT_342)
                 }
             }
             player.interfaceManager.close()

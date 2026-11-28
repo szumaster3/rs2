@@ -5,9 +5,9 @@ import shared.consts.NPCs
 enum class GnomeCookingJob(val level: GnomeTipper.LEVEL, val npc_id: Int, val tip: String) {
     ERRDO(GnomeTipper.LEVEL.EASY, NPCs.CAPTAIN_ERRDO_3811, "at the top level of the Grand Tree."),
     DALILAH(GnomeTipper.LEVEL.EASY, NPCs.DALILA_4588, "sitting in the Gnome Restaurant."),
-    GULLUCK(GnomeTipper.LEVEL.EASY, NPCs.GULLUCK_602, "on the third level of the Grand Tree."),
-    ROMETTI(GnomeTipper.LEVEL.EASY, NPCs.ROMETTI_601, "on the second level of the Grand Tree."),
-    NARNODE(GnomeTipper.LEVEL.EASY, NPCs.KING_NARNODE_SHAREEN_670, "at the base of the Grand Tree."),
+    GULLUCK(GnomeTipper.LEVEL.EASY, NPCs.GNOME_GULLUCK_602, "on the third level of the Grand Tree."),
+    ROMETTI(GnomeTipper.LEVEL.EASY, NPCs.GNOME_ROMETTI_601, "on the second level of the Grand Tree."),
+    NARNODE(GnomeTipper.LEVEL.EASY, NPCs.GRANDTREE_NARNODE_670, "at the base of the Grand Tree."),
     MEEGLE(GnomeTipper.LEVEL.EASY, NPCs.MEEGLE_4597, "in the terrorbird enclosure."),
     PERRDUR(GnomeTipper.LEVEL.EASY, NPCs.PERRDUR_4587, "sitting in the Gnome Restaurant."),
     SARBLE(GnomeTipper.LEVEL.EASY, NPCs.SARBLE_4599, "in the swamp west of the Grand Tree."),

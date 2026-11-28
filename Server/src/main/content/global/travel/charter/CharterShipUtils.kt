@@ -58,8 +58,8 @@ object CharterShipUtils {
         val cost = getCost(player, destination)
         closeInterface(player)
 
-        findNPC(NPCs.TRADER_CREWMEMBER_4651)?.let {
-            openDialogue(player, NPCs.TRADER_CREWMEMBER_4651, it, destination, cost)
+        findNPC(NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_MAN1_4651)?.let {
+            openDialogue(player, NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_MAN1_4651, it, destination, cost)
         }
     }
 
@@ -68,7 +68,7 @@ object CharterShipUtils {
      */
     private fun getCost(player: Player, destination: Destination): Int {
         val baseCost = destination.getCost(player, destination)
-        return if (inEquipment(player, Items.RING_OF_CHAROSA_6465)) (baseCost * 0.5).toInt() else baseCost
+        return if (inEquipment(player, Items.RING_OF_CHAROS_A_6465)) (baseCost * 0.5).toInt() else baseCost
     }
 
     /**

@@ -92,5 +92,5 @@ class SpiritSpiderDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_SPIDER_6841, NPCs.SPIRIT_SPIDER_6842)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_SPIDER_6841, NPCs.LORE_SPIDER_COMBAT_6842)
 }

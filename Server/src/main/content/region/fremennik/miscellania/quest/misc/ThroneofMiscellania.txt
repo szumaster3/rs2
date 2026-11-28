@@ -10,7 +10,7 @@ import core.plugin.Initializable
 
 @Initializable
 class ThroneofMiscellania :
-    Quest("Throne of Miscellania", 122, 121, 1, Vars.VARP_QUEST_THRONE_OF_MISCELLANIA_359, 0, 1, 100) {
+    Quest("Throne of Miscellania", 122, 121, 1, Vars.VARP_359, 0, 1, 100) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

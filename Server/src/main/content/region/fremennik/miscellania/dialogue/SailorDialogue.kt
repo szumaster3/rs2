@@ -40,5 +40,5 @@ class SailorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SailorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SAILOR_1304)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_SAILOR_1304)
 }

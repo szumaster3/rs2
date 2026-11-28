@@ -19,7 +19,7 @@ import shared.consts.NPCs
 @Initializable
 class GertrudesCatDialogue(player: Player? = null) : Dialogue(player) {
 
-    private val BEND_DOWN = Animation.create(Animations.HUMAN_BURYING_BONES_827)
+    private val BEND_DOWN = Animation.create(Animations.HUMAN_PICKUPFLOOR_827)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -126,5 +126,5 @@ class GertrudesCatDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GertrudesCatDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GERTRUDES_CAT_2997)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VC_GERTRUDESCAT_2997)
 }

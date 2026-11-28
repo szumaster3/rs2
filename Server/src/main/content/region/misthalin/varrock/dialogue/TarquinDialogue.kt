@@ -127,5 +127,5 @@ class TarquinDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TARQUIN_3328)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CANOEING_TARQUIN_3328)
 }

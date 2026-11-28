@@ -27,7 +27,7 @@ class HorvikDialogue(player: Player? = null) : Dialogue(player) {
             1 -> when (buttonId) {
                 1 -> {
                     end()
-                    openNpcShop(player, NPCs.HORVIK_549)
+                    openNpcShop(player, NPCs.HORVIK_THE_ARMOURER_549)
                 }
                 2 -> player(FaceAnim.FRIENDLY, "No, thanks. I'm just looking around.").also { stage++ }
             }
@@ -38,5 +38,5 @@ class HorvikDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = HorvikDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HORVIK_549)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HORVIK_THE_ARMOURER_549)
 }

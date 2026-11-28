@@ -16,6 +16,6 @@ object RogueLootTable {
         WeightedItem(Items.AIR_RUNE_556, 8, 8, 16.0),
         WeightedItem(Items.JUG_OF_WINE_1993, 1, 1, 24.0),
         WeightedItem(Items.LOCKPICK_1523, 1, 1, 28.8),
-        WeightedItem(Items.IRON_DAGGERP_1219, 1, 1, 144.0)
+        WeightedItem(Items.IRON_DAGGER_P_1219, 1, 1, 144.0)
     )
 }

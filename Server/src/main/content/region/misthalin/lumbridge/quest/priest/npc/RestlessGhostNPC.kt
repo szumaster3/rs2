@@ -25,7 +25,7 @@ class RestlessGhostNPC(
 
     override fun init() {
         super.init()
-        if (this.asNpc().id == NPCs.RESTLESS_GHOST_457) {
+        if (this.asNpc().id == NPCs.GHOSTX_457) {
             this.isWalks = false
             this.isNeverWalks = true
         }
@@ -65,5 +65,5 @@ class RestlessGhostNPC(
         return isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName) || (pl != null && player !== pl)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SKELETON_459, NPCs.RESTLESS_GHOST_457)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SKULL_SKELETON_459, NPCs.GHOSTX_457)
 }

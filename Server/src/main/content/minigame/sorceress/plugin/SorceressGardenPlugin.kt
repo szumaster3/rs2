@@ -26,11 +26,11 @@ import shared.consts.*
 
 class SorceressGardenPlugin : InteractionListener {
     private val GATES = intArrayOf(shared.consts.Scenery.GATE_21709, shared.consts.Scenery.GATE_21753, shared.consts.Scenery.GATE_21731, shared.consts.Scenery.GATE_21687)
-    private val SQIRK_TREES = intArrayOf(shared.consts.Scenery.SQ_IRK_TREE_21767, shared.consts.Scenery.SQ_IRK_TREE_21768, shared.consts.Scenery.SQ_IRK_TREE_21769, shared.consts.Scenery.SQ_IRK_TREE_21766)
+    private val SQIRK_TREES = intArrayOf(shared.consts.Scenery.SQIRK_TREE_21767, shared.consts.Scenery.SQIRK_TREE_21768, shared.consts.Scenery.SQIRK_TREE_21769, shared.consts.Scenery.SQIRK_TREE_21766)
     private val HERBS_ITEMS = intArrayOf(Items.GRIMY_GUAM_199, Items.GRIMY_MARRENTILL_201, Items.GRIMY_TARROMIN_203, Items.GRIMY_HARRALANDER_205, Items.GRIMY_RANARR_207, Items.GRIMY_IRIT_209, Items.GRIMY_AVANTOE_211, Items.GRIMY_KWUARM_213, Items.GRIMY_CADANTINE_215, Items.GRIMY_DWARF_WEED_217, Items.GRIMY_TORSTOL_219, Items.GRIMY_LANTADYME_2485, Items.GRIMY_TOADFLAX_3049, Items.GRIMY_SNAPDRAGON_3051)
     private val HERB_DEFINITIONS = HashMap<Int, HerbDefinition>()
     private val SEASON_DEFINITIONS = HashMap<Int, SeasonDefinitions>()
-    private val APPRENTICE = NPCs.APPRENTICE_5532
+    private val APPRENTICE = NPCs.ARABIAN_SORCERESS_APPRENTICE_5532
     private val FOUNTAIN = shared.consts.Scenery.FOUNTAIN_21764
     private val SHELVES = shared.consts.Scenery.SHELVES_21794
 
@@ -365,15 +365,15 @@ class SorceressGardenPlugin : InteractionListener {
         }
 
         companion object {
-            private val CRUSH_ITEM = Animation(Animations.HUMAN_USE_PESTLE_AND_MORTAR_364)
+            private val CRUSH_ITEM = Animation(Animations.HUMAN_HERBING_GRIND_364)
         }
     }
 
     companion object {
-        private val ANIMATION = Animation(Animations.HUMAN_BURYING_BONES_827)
-        private val DRINK_ANIM = Animation(Animations.SORCERESS_GARDEN_DRINK_WATER_5796)
+        private val ANIMATION = Animation(Animations.HUMAN_PICKUPFLOOR_827)
+        private val DRINK_ANIM = Animation(Animations.SEQ_100_OSMAN_FOUNTAIN_DRINK_5796)
         private val TELE = Animation(714)
-        private val PICK_FRUIT = Animation(Animations.PICK_FROM_FRUIT_TREE_2280)
+        private val PICK_FRUIT = Animation(Animations.PICKING_HIGH_2280)
     }
 }
 

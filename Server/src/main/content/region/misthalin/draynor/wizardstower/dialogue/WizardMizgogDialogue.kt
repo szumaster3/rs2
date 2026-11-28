@@ -109,7 +109,7 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
                                     face(findLocalNPC(player!!, NPCs.WIZARD_MIZGOG_706)!!, location(3102, 3163, 2))
                                 }
                                 2 -> {
-                                    animate(findLocalNPC(player!!, NPCs.WIZARD_MIZGOG_706)!!, Animations.WIZARD_MIZGOG_COLLECTS_BEADS_IMP_CATCHER_4285)
+                                    animate(findLocalNPC(player!!, NPCs.WIZARD_MIZGOG_706)!!, Animations.QIP_IMP_CATCHER_WIZARD_4285)
                                     playAudio(player!!, Sounds.MIZGOG_PLACEBEADS_1632, 0, 0, player.location)
                                 }
                                 6 -> {
@@ -120,7 +120,7 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
                                         forTicks = 80
                                     )
                                 }
-                                7 -> sendGraphics(Graphics(shared.consts.Graphics.MONK_CAST_HEAL_84, 92), Location(3102, 3163, 2))
+                                7 -> sendGraphics(Graphics(shared.consts.Graphics.HEAL_CASTING_84, 92), Location(3102, 3163, 2))
                                 12 -> {
                                     PlayerCamera(player).reset()
                                     sendMessage(player!!, "The Wizard hands you an amulet.")

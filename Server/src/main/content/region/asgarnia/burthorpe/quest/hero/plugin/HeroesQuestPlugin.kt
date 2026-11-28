@@ -116,7 +116,7 @@ class HeroesQuestPlugin : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.SCENERY, Items.GRIPS_KEY_RING_1588, Scenery.DOOR_2621) { player, _, with ->
+        onUseWith(IntType.SCENERY, Items.GRIPS_KEY_1588, Scenery.DOOR_2621) { player, _, with ->
             setAttribute(player, HeroesQuest.attributeHasOpenedChestDoor, true)
             DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
             return@onUseWith true

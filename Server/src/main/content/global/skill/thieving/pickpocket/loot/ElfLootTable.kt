@@ -9,15 +9,15 @@ object ElfLootTable {
 
     val NPC_ID = intArrayOf(
         NPCs.ARVEL_2365,
-        NPCs.ARVEL_7433,
+        NPCs.EASTER_BUNNY_JR_7433,
         NPCs.GOREU_2363,
-        NPCs.GOREU_7431,
+        NPCs.EASTER_BUNNY_JR_7431,
         NPCs.KELYN_2367,
-        NPCs.KELYN_7435,
+        NPCs.EASTER_BIRD_7435,
         NPCs.MAWRTH_2366,
-        NPCs.MAWRTH_7434,
+        NPCs.EASTER_BUNNY_JR_7434,
         NPCs.YSGAWYN_2364,
-        NPCs.YSGAWYN_7432
+        NPCs.EASTER_BUNNY_JR_7432
     )
 
     val LOOT = WeightBasedTable.create(

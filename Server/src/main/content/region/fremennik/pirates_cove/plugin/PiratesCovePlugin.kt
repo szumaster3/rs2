@@ -28,7 +28,7 @@ class PiratesCovePlugin : InteractionListener {
 
             val scenery = node.asScenery()
             if (scenery.charge >= 0) {
-                player.animate(Animation(Animations.HUMAN_MULTI_USE_832))
+                player.animate(Animation(Animations.HUMAN_PICKUPTABLE_832))
 
                 when (node.id) {
                     Scenery.BARREL_16884 -> addItem(player, Items.ROTTEN_APPLE_1984)

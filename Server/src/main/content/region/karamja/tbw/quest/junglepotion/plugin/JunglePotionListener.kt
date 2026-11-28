@@ -30,12 +30,12 @@ class JunglePotionListener : InteractionListener {
         val productId: Int,
         val stage: Int,
         val clue: String,
-        val animationId: Int = Animations.HUMAN_SEARCH_BUSHES_800,
+        val animationId: Int = Animations.CAGED_800,
     ) {
         JUNGLE_VINE(
             Scenery.MARSHY_JUNGLE_VINE_2575, Items.GRIMY_SNAKE_WEED_1525, Items.CLEAN_SNAKE_WEED_1526, 10,
             "It grows near vines in an area to the south west where the ground turns soft and the water kisses your feet.",
-            Animations.SEARCH_FOR_SNAKEWEED_JUNGLE_POTION_2094
+            Animations.HUMAN_OPENINGCHEST_MID_2094
         ),
         PALM_TREE(
             Scenery.PALM_TREE_2577, Items.GRIMY_ARDRIGAL_1527, Items.CLEAN_ARDRIGAL_1528, 20,
@@ -52,7 +52,7 @@ class JunglePotionListener : InteractionListener {
         ROGUES_PURSE(
             Scenery.FUNGUS_COVERED_CAVERN_WALL_32106, Items.GRIMY_ROGUES_PURSE_1533, Items.CLEAN_ROGUES_PURSE_1534, 50,
             "It inhabits the darkness of the underground, and grows in the caverns to the north. A secret entrance to the caverns is set into the northern cliffs, be careful Bwana.",
-            Animations.SEARCH_WALL_JUNGLE_POTION_2097
+            Animations.HUMAN_PICK_WALL_MIDDLE_2097
         );
 
         /**

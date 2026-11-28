@@ -167,14 +167,14 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
             107 -> npc("Legendary birds, which the ignorant call eagles.", "They prey upon fish. Do as they do to gain", "inspiration.").also { stage = END_DIALOGUE }
 
             // Herblore
-            110 -> if (!inInventory(player, Items.ATTACK_MIX2_11429)) {
+            110 -> if (!inInventory(player, Items.ATTACK_MIX_2_11429)) {
                 npc("Do you have my potion?")
                 stage = 111
             } else if (player.savedData.activityData.barbarianHerblore && !getAttribute(player, BarbarianTraining.HERBLORE_FULL, false)) {
                 player("I feel I am missing some vital information about your", "need for this potion, though I often have this suspicion.")
                 stage = 114
             } else {
-                removeItem(player, Item(Items.ATTACK_MIX2_11429, 1))
+                removeItem(player, Item(Items.ATTACK_MIX_2_11429, 1))
                 setAttribute(player, BarbarianTraining.HERBLORE_START, true)
                 npc(FaceAnim.HAPPY, "I see you have my potion. I will say no more than that", "I am eternally grateful.")
                 stage = 113
@@ -318,5 +318,5 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OTTO_GODBLESSED_2725)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BRUT_OTTO_2725)
 }

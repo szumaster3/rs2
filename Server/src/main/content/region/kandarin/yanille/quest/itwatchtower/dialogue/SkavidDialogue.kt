@@ -26,9 +26,9 @@ class SkavidDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val line = when (npc.id) {
-            NPCs.SKAVID_865 -> "Cur bidith..."
-            NPCs.SKAVID_867 -> "Bidith tanath..."
-            NPCs.SKAVID_868 -> "Tanath gor..."
+            NPCs.SKAVIDTALKER1_865 -> "Cur bidith..."
+            NPCs.SKAVIDTALKER3_867 -> "Bidith tanath..."
+            NPCs.SKAVIDTALKER4_868 -> "Tanath gor..."
             NPCs.MAD_SKAVID_864 -> "Gor nod..."
             else -> "Gor cur..."
         }
@@ -48,10 +48,10 @@ class SkavidDialogue(player: Player? = null) : Dialogue(player) {
                     return true
                 } else {
                     showTopics(
-                        Topic("Cur.", if(questStage == 30 && npc.id == NPCs.SKAVID_867) 2 else 1),
-                        Topic("Ar.",  if(questStage == 25 && npc.id == NPCs.SKAVID_866) 3 else 1),
-                        Topic("Ig.",  if(questStage == 35 && npc.id == NPCs.SKAVID_865) 4 else 1),
-                        Topic("Nod.", if(questStage == 40 && npc.id == NPCs.SKAVID_868) 5 else 1),
+                        Topic("Cur.", if(questStage == 30 && npc.id == NPCs.SKAVIDTALKER3_867) 2 else 1),
+                        Topic("Ar.",  if(questStage == 25 && npc.id == NPCs.SKAVIDTALKER2_866) 3 else 1),
+                        Topic("Ig.",  if(questStage == 35 && npc.id == NPCs.SKAVIDTALKER1_865) 4 else 1),
+                        Topic("Nod.", if(questStage == 40 && npc.id == NPCs.SKAVIDTALKER4_868) 5 else 1),
                         Topic("Gor.", if(questStage == 45 && npc.id == NPCs.MAD_SKAVID_864) 6 else 1)
                     )
                 }
@@ -110,5 +110,5 @@ class SkavidDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAD_SKAVID_864, NPCs.SKAVID_865, NPCs.SKAVID_866, NPCs.SKAVID_867)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAD_SKAVID_864, NPCs.SKAVIDTALKER1_865, NPCs.SKAVIDTALKER2_866, NPCs.SKAVIDTALKER3_867)
 }

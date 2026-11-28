@@ -26,7 +26,7 @@ class WineldaDialogue(player: Player? = null) : Dialogue(player) {
         return false
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WINELDA_276)
+    override fun getIds(): IntArray = intArrayOf(NPCs.IKOV_WINELDA_276)
 }
 
 class WineldaDialogueFile : DialogueFile() {

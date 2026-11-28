@@ -131,7 +131,7 @@ class AvasDevice : InteractionListener, EventHook<TickEvent> {
             Items.STEEL_ARROWTIPS_41,
             Items.STEEL_ARROW_886,
             Items.STEEL_BOLTS_9141,
-            Items.STEEL_AXE_1353,
+            Items.STEEL_HATCHET_1353,
             Items.STEEL_2H_SWORD_1311,
             Items.TOY_MOUSE_7767,
         )

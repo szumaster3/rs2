@@ -37,5 +37,5 @@ class BonesDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BonesDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BONES_2945)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VC_BONES_2945)
 }

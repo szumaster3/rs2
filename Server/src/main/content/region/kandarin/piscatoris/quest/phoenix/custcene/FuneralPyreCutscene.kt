@@ -46,13 +46,13 @@ class FuneralPyreCutscene(player: Player) : Cutscene(player) {
             }
 
             4 -> {
-                getNPC(PHOENIX)!!.transform(NPCs.PHOENIX_8548)
+                getNPC(PHOENIX)!!.transform(NPCs.PHOENIX_QUESTPHOENIX_REBORN_8548)
                 // Inside
                 teleport(getNPC(PHOENIX)!!, 15, 14)
                 visualize(getNPC(PHOENIX)!!, 11072, 1983)
 
                 // Outside
-                InPyreNeed.WOUNDED_PHOENIX_ID.transform(NPCs.PHOENIX_8548)
+                InPyreNeed.WOUNDED_PHOENIX_ID.transform(NPCs.PHOENIX_QUESTPHOENIX_REBORN_8548)
                 InPyreNeed.WOUNDED_PHOENIX_ID.teleporter.send(
                     Location.create(3535, 5198, 0), TeleportManager.TeleportType.INSTANT
                 )
@@ -70,7 +70,7 @@ class FuneralPyreCutscene(player: Player) : Cutscene(player) {
     }
 
     companion object {
-        private const val PHOENIX = NPCs.WOUNDED_PHOENIX_8547
+        private const val PHOENIX = NPCs.PHOENIX_QUESTPHOENIX_8547
         private const val REGION = 14161 // PHOENIX_LAIR
     }
 }

@@ -64,5 +64,5 @@ class BattleMageNPC : AbstractNPC {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BATTLE_MAGE_913, NPCs.BATTLE_MAGE_912, NPCs.BATTLE_MAGE_914)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SARADOMIN_MAGE_913, NPCs.ZAMORAK_MAGE_912, NPCs.GUTHIX_MAGE_914)
 }

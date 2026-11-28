@@ -18,9 +18,9 @@ class HouseServantPlugin : UseWithHandler(*IDS) {
     override fun newInstance(arg: Any?): Plugin<Any> {
         addHandler(NPCs.RICK_4236, NPC_TYPE, this)
         addHandler(NPCs.MAID_4237, NPC_TYPE, this)
-        addHandler(NPCs.COOK_4239, NPC_TYPE, this)
+        addHandler(NPCs.POH_SERVANT_COOK_WOMAN_4239, NPC_TYPE, this)
         addHandler(NPCs.BUTLER_4241, NPC_TYPE, this)
-        addHandler(NPCs.DEMON_BUTLER_4243, NPC_TYPE, this)
+        addHandler(NPCs.POH_SERVANT_DEMON_4243, NPC_TYPE, this)
         definePlugin(HouseServantDialogue())
         return this
     }

@@ -25,7 +25,7 @@ class EnlightenedJourney : Quest(Quests.ENLIGHTENED_JOURNEY) {
             line(player, "I need to gather the materials Auguste required:", line++, true)
             line(player, "three sheets of papyrus", line++, amountInInventory(player, Items.PAPYRUS_970) >= 3)
             line(player, "a ball of wool", line++, inInventory(player, Items.BALL_OF_WOOL_1759))
-            line(player, "a full sack of potatoes", line++, inInventory(player, Items.POTATOES10_5438))
+            line(player, "a full sack of potatoes", line++, inInventory(player, Items.POTATOES_10_5438))
             line(player, "one unlit candle.", line++, inInventory(player, Items.CANDLE_36))
             line++
         }
@@ -33,7 +33,7 @@ class EnlightenedJourney : Quest(Quests.ENLIGHTENED_JOURNEY) {
         fun hasAllMaterials(): Boolean {
             return amountInInventory(player, Items.PAPYRUS_970) >= 3 &&
                     inInventory(player, Items.BALL_OF_WOOL_1759) &&
-                    inInventory(player, Items.POTATOES10_5438) &&
+                    inInventory(player, Items.POTATOES_10_5438) &&
                     inInventory(player, Items.CANDLE_36)
         }
 

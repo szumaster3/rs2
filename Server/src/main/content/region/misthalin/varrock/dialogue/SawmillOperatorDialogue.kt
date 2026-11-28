@@ -18,7 +18,7 @@ import shared.consts.NPCs
  */
 class SawmillOperatorDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SAWMILL_OPERATOR_4250)
+        npc = NPC(NPCs.POH_SAWMILL_OPP_4250)
         when (stage) {
             0 -> npc(FaceAnim.NEUTRAL, "Do you want me to make some planks for you? Or", "would you be interested in some other housing supplies?").also { stage++ }
             1 -> showTopics(
@@ -40,7 +40,7 @@ class SawmillOperatorDialogue : DialogueFile() {
                     openInterface(p, Components.POH_SAWMILL_403)
                 }
             }
-            12 -> end().also { openNpcShop(player!!, NPCs.SAWMILL_OPERATOR_4250) }
+            12 -> end().also { openNpcShop(player!!, NPCs.POH_SAWMILL_OPP_4250) }
 
             20 -> npc(FaceAnim.NEUTRAL, "I can make planks from wood, oak, teak and mahogany.", "I don't make planks from other woods as they're no", "good for making furniture.").also { stage++ }
             21 -> npc(FaceAnim.NEUTRAL, "Wood and oak are all over the place, but teak and", "mahogany can only be found in a few places like", "Karamja and Etceteria.").also { stage = END_DIALOGUE }

@@ -18,7 +18,7 @@ import shared.consts.NPCs
 class LucienEndingNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = LucienEndingNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LUCIEN_272)
+    override fun getIds(): IntArray = intArrayOf(NPCs.IKOV_LUCIEN2_272)
 
     override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
         val attackable = super.isAttackable(entity, style, message)
@@ -44,7 +44,7 @@ class LucienEndingNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
                             }
                         }
                     }
-                }, NPC(NPCs.LUCIEN_272)
+                }, NPC(NPCs.IKOV_LUCIEN2_272)
             )
             super.finalizeDeath(player)
         }

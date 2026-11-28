@@ -8,7 +8,7 @@ import core.tools.RandomFunction
 import core.tools.minutesToTicks
 import shared.consts.NPCs
 
-class CookHolidayRandomNPC : HolidayRandomEventNPC(NPCs.COOK_4239) {
+class CookHolidayRandomNPC : HolidayRandomEventNPC(NPCs.POH_SERVANT_COOK_WOMAN_4239) {
     private val cookLines =
         listOf("@name, are you there?", "Would you like a fresh baked cake, @name?", "Happy Holidays, @name!")
     private var hasTalkedWith = false

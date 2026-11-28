@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable
 
 @Initializable
-class MeetingHistory : Quest("Meeting History", 156, 155, 1,Vars.VARBIT_QUEST_MEETING_HISTORY_5075,0,1,20) {
+class MeetingHistory : Quest("Meeting History", 156, 155, 1,Vars.VARBIT_5075,0,1,20) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -29,7 +29,7 @@ class MeetingHistory : Quest("Meeting History", 156, 155, 1,Vars.VARBIT_QUEST_ME
         player.packetDispatch.sendItemZoomOnInterface(Items.OLD_TOME_13593, 230, 277, 5)
         drawReward(player, "1 Quest Point", ln++)
         addItemOrDrop(player, Items.OLD_TOME_13593)
-        setVarbit(player, Vars.VARBIT_QUEST_MEETING_HISTORY_5075, 20, true)
+        setVarbit(player, Vars.VARBIT_5075, 20, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

@@ -39,10 +39,10 @@ class ThievingGuideListener : InteractionListener {
         private const val CRACKED_SAFE = 7238
 
         private val ANIMATIONS = arrayOf(
-            Animation(Animations.SAFE_CRACK_2247),
-            Animation(Animations.SAFE_CRACK_2248),
-            Animation(Animations.ANIMATION_1113),
-            Animation(Animations.DISARM_TRAP_2244)
+            Animation(Animations.ROGUE_PLAYER_CRACK_SAFE_START_2247),
+            Animation(Animations.ROGUE_PLAYER_CRACK_SAFE_MID_2248),
+            Animation(Animations.AGILITYARENA_PLAYER_SPIKED_1113),
+            Animation(Animations.ROGUESDEN_PLAYER_DISARM_FLOOR_2244)
         )
     }
 

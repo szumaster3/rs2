@@ -509,16 +509,16 @@ class CraftingItemPlugin : InteractionListener {
 
         val animation = when (maskId) {
             Items.TRIBAL_MASK_6335 ->
-                Animations.CRAFT_SHIELD_GREEN_2410
+                Animations.HUMAN_SHIELD_CRAFTING_POISON_2410
 
             Items.TRIBAL_MASK_6337 ->
-                Animations.CRAFT_SHIELD_ORANGE_2411
+                Animations.HUMAN_SHIELD_CRAFTING_DISEASE_2411
 
             Items.TRIBAL_MASK_6339 ->
-                Animations.CRAFT_SHIELD_WHITE_2409
+                Animations.HUMAN_SHIELD_CRAFTING_COMBAT_2409
 
             else ->
-                Animations.CRAFT_SHIELD_GREEN_2410
+                Animations.HUMAN_SHIELD_CRAFTING_POISON_2410
         }
 
         animate(player, animation)

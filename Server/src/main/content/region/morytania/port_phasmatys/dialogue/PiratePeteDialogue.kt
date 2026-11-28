@@ -31,7 +31,7 @@ class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
             // Quest dialogue:
             // openDialogue(player, PiratePeteDialogueFile())
             // After questComplete / hasRequirement dialogue:
-            if(npc.id == NPCs.PIRATE_PETE_2826) {
+            if(npc.id == NPCs.DEAL_ISLAND_PETE_2826) {
                 player(FaceAnim.HALF_ASKING, "Do I know you?")
                 stage = 47
             } else {
@@ -126,17 +126,17 @@ class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
     private fun travel(player : Player, npc : NPC) {
 
         player.lock()
-        findNPC(NPCs.PIRATE_PETE_2825)?.let { animate(it, Animations.HUMAN_THROW_DART_806) }
+        findNPC(NPCs.DEAL_PETE_2825)?.let { animate(it, Animations.FREMSAGA_SKALDRUN_READY_806) }
 
         faceLocation(player, Location(3680, 3533, 0))
-        sendGraphics(Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player.location)
+        sendGraphics(Graphics(shared.consts.Graphics.STUNNED_1_80, 96), player.location)
         playAudio(player, Sounds.STUNNED_2727, 1)
         sendChat(player, "Ow!")
 
         queueScript(player,1,QueueStrength.SOFT) { stage ->
             when (stage) {
                 0 -> {
-                    sendGraphics(Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player.location)
+                    sendGraphics(Graphics(shared.consts.Graphics.STUNNED_1_80, 96), player.location)
                     playAudio(player, Sounds.STUNNED_2727, 1)
                     return@queueScript delayScript(player, 1)
                 }
@@ -146,7 +146,7 @@ class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 2 -> {
                     val destination =
-                        if (npc.id == NPCs.PIRATE_PETE_2826)
+                        if (npc.id == NPCs.DEAL_ISLAND_PETE_2826)
                             Location(3680, 3536, 0)
                         else
                             Location(2162, 5114, 1)
@@ -166,7 +166,7 @@ class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PIRATE_PETE_2825,NPCs.PIRATE_PETE_2826)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DEAL_PETE_2825,NPCs.DEAL_ISLAND_PETE_2826)
 }
 
 private class PiratePeteTravelDialogue : DialogueFile() {
@@ -183,7 +183,7 @@ private class PiratePeteTravelDialogue : DialogueFile() {
     private var chosenLine: String? = null
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.PIRATE_PETE_2825)
+        npc = NPC(NPCs.DEAL_PETE_2825)
         when (stage) {
             0 -> {
                 player("Ooooh... my head...")

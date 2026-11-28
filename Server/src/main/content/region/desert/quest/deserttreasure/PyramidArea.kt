@@ -204,7 +204,7 @@ class PyramidArea {
                 getNewFacing(sarcophagusScenery.direction),
                 locationInFront
             )
-            val mummyNpc = NPC(NPCs.MUMMY_1958)
+            val mummyNpc = NPC(NPCs.DESERTTREASURE_MUMMY_1_1958)
             mummyNpc.isRespawn = false
             mummyNpc.isWalks = false
             mummyNpc.isAggressive = true
@@ -231,7 +231,7 @@ class PyramidArea {
             lock(player, 3)
             val scarabsLocation = Location.getRandomLocation(player.location, 3, true)
             sendGraphics(356, scarabsLocation) // Gfx - Cracks before scarab appears.
-            val scarabNpc = NPC(NPCs.SCARABS_1969)
+            val scarabNpc = NPC(NPCs.SCARAB_SWARM_1969)
             stopWalk(player)
             queueScript(player, 2, QueueStrength.STRONG) { stage ->
                 stopWalk(player)

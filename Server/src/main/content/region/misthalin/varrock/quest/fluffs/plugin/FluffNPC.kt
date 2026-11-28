@@ -24,6 +24,6 @@ class FluffNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id, loca
     override fun getIds(): IntArray = ID
 
     companion object {
-        private val ID = intArrayOf(NPCs.GERTRUDES_CAT_2997)
+        private val ID = intArrayOf(NPCs.VC_GERTRUDESCAT_2997)
     }
 }

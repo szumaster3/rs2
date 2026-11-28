@@ -11,10 +11,10 @@ import shared.consts.NPCs
 /**
  * Handles the TownCrierNPC.
  */
-class TownCrierNPC : NPCBehavior(NPCs.TOWN_CRIER_6135, NPCs.TOWN_CRIER_6136, NPCs.TOWN_CRIER_6137, NPCs.TOWN_CRIER_6138, NPCs.TOWN_CRIER_6139) {
+class TownCrierNPC : NPCBehavior(NPCs.PMOD_TOWN_CRIER_VARROCK_6135, NPCs.PMOD_TOWN_CRIER_DRAYNOR_6136, NPCs.PMOD_TOWN_CRIER_FALADOR_6137, NPCs.PMOD_TOWN_CRIER_EAST_ARDOYNE_6138, NPCs.PMOD_TOWN_CRIER_SEERS_6139) {
     private val forceChatAnimation = mapOf(
-        "The Duke of Lumbridge needs a hand." to Animations.TOWN_CRIER_RING_BELL_6865,
-        "The squirrels! The squirrels are coming! Noooo, get them out of my head!" to Animations.TOWN_CRIER_SCRATCHES_HEAD_6863
+        "The Duke of Lumbridge needs a hand." to Animations.TOWN_CRIER_BELL_RING_6865,
+        "The squirrels! The squirrels are coming! Noooo, get them out of my head!" to Animations.TOWN_CRIER_SCRATCH_HEAD_6863
     )
     private val forceChat = forceChatAnimation.entries.toList()
 

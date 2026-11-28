@@ -131,12 +131,12 @@ class DragonForgePlugin : InteractionListener {
         private val RUINED_PIECES = intArrayOf(Items.RUINED_DRAGON_ARMOUR_LUMP_14472, Items.RUINED_DRAGON_ARMOUR_SLICE_14474, Items.RUINED_DRAGON_ARMOUR_SHARD_14476)
         private val DRAGON_PLATEBODY = Item(Items.DRAGON_PLATEBODY_14479, 1)
         private val REQUIRED_SHIELD = intArrayOf(Items.ANTI_DRAGON_SHIELD_1540, Items.DRAGONFIRE_SHIELD_11283, Items.DRAGONFIRE_SHIELD_11285)
-        private val SMITHING_ANIMATION = Animation(Animations.HIT_WITH_BLAST_FUSION_HAMMER_10758, Animator.Priority.HIGH)
+        private val SMITHING_ANIMATION = Animation(Animations.LUC2_PLAYER_SMITHING_DRAGON_PLATE_10758, Animator.Priority.HIGH)
         private val MITHRIL_DOOR = intArrayOf(Scenery.MITHRIL_DOOR_25341, Scenery.MITHRIL_DOOR_40208)
-        private val MITHRIL_DRAGON_NPC = intArrayOf(NPCs.MITHRIL_DRAGON_5363, NPCs.MITHRIL_DRAGON_8424)
+        private val MITHRIL_DRAGON_NPC = intArrayOf(NPCs.BRUT_MITHRIL_DRAGON_5363, NPCs.LUC2_MITHRIL_DRAGON_8424)
         private val STRANGE_KEYS = intArrayOf(Items.STRANGE_KEY_LOOP_14469, Items.STRANGE_KEY_TEETH_14470)
         private val DRAGONKIN_KEY = Item(Items.DRAGONKIN_KEY_14471, 1)
         private val DRAGON_BREATH_ANIMATION = Animation(81, Animator.Priority.HIGH)
-        private val DRAGON_BREATH_GFX = Graphics(shared.consts.Graphics.DRAGON_FIRE_BREATH_DARKER_COLOR_953)
+        private val DRAGON_BREATH_GFX = Graphics(shared.consts.Graphics.FIREBREATH_2_953)
     }
 }

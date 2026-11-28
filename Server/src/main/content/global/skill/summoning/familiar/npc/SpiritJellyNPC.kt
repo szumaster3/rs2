@@ -13,7 +13,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritJellyNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_JELLY_6992) :
+class SpiritJellyNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_JELLY_6992) :
     Familiar(owner, id, 4300, Items.SPIRIT_JELLY_POUCH_12027, 6, WeaponInterface.STYLE_AGGRESSIVE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return SpiritJellyNPC(owner, id)
@@ -33,6 +33,6 @@ class SpiritJellyNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_JELLY_6992, NPCs.SPIRIT_JELLY_6993)
+        return intArrayOf(NPCs.LORE_JELLY_6992, NPCs.LORE_JELLY_COMBAT_6993)
     }
 }

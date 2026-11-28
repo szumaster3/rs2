@@ -124,7 +124,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
             65 -> npcl(FaceAnim.HAPPY, "Not a problem, outerlander. It's always nice to see a new face in the long hall; it happens so rarely.").also { stage = 1000 }
             66 -> {
                 end()
-                openNpcShop(player, NPCs.THORA_THE_BARKEEP_1300)
+                openNpcShop(player, NPCs.VIKING_LONGHALL_BARKEEP_1300)
             }
 
             1000 -> end()
@@ -132,5 +132,5 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.THORA_THE_BARKEEP_1300)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_LONGHALL_BARKEEP_1300)
 }

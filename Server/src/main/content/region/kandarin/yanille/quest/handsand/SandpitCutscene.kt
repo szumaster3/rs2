@@ -26,7 +26,7 @@ class SandpitCutscene(player: Player) : Cutscene(player) {
             }
             1 -> {
                 teleport(player, 43, 35)
-                addNPC(NPCs.BERT_3108, 50, 27, Direction.SOUTH,0)
+                addNPC(NPCs.HANDSAND_BERT_3108, 50, 27, Direction.SOUTH,0)
                 moveCamera(43,34, 500)
                 rotateCamera(46,31, 300)
                 fadeFromBlack()
@@ -34,19 +34,19 @@ class SandpitCutscene(player: Player) : Cutscene(player) {
             }
             2 -> dialogueUpdate(true,"The Wizard chants and your attention to the sandpit where Bert is found.")
             3 -> {
-                move(getNPC(NPCs.BERT_3108)!!, 47, 28)
+                move(getNPC(NPCs.HANDSAND_BERT_3108)!!, 47, 28)
                 timedUpdate(5)
             }
             4 -> {
-                move(getNPC(NPCs.BERT_3108)!!, 46, 29)
-                getNPC(NPCs.BERT_3108)!!.face(player)
+                move(getNPC(NPCs.HANDSAND_BERT_3108)!!, 46, 29)
+                getNPC(NPCs.HANDSAND_BERT_3108)!!.face(player)
                 timedUpdate(1)
             }
             5 -> {
-                sendChat(getNPC(NPCs.BERT_3108)!!, "My sand! My lovely sand!")
+                sendChat(getNPC(NPCs.HANDSAND_BERT_3108)!!, "My sand! My lovely sand!")
                 playAudio(player, Sounds.HANDSAND_SANDSWIRL_1591)
                 animateScenery(getObject(46,31)!!, 3038)
-                getNPC(NPCs.BERT_3108)!!.animate(Animation(Animations.CRY_860))
+                getNPC(NPCs.HANDSAND_BERT_3108)!!.animate(Animation(Animations.EMOTE_CRY_860))
                 sendDialogue(player, "Something very strange happens to the Sandpit, it looks like it has filled itself up!")
                 timedUpdate(12)
             }

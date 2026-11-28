@@ -11,7 +11,7 @@ import core.tools.RandomFunction
 import shared.consts.NPCs
 import shared.consts.Sounds
 
-private val certersNPC = listOf(NPCs.NILES_2536, NPCs.MILES_2537, NPCs.GILES_2538).random()
+private val certersNPC = listOf(NPCs.MACRO_NILES_2536, NPCs.MACRO_MILES_2537, NPCs.MACRO_GILES_2538).random()
 // If in region 11924 = npc + 820
 
 /**

@@ -12,8 +12,8 @@ import shared.consts.NPCs
 class RaccoonDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
-        private val babyRaccoon = intArrayOf(NPCs.BABY_RACCOON_6913, NPCs.BABY_RACCOON_7271, NPCs.BABY_RACCOON_7273)
-        private val adultRaccoon = intArrayOf(NPCs.RACCOON_6914, NPCs.RACCOON_7272, NPCs.RACCOON_7274)
+        private val babyRaccoon = intArrayOf(NPCs.LORE_BABY_RACCOON_1_6913, NPCs.LORE_BABY_RACCOON_2_7271, NPCs.LORE_BABY_RACCOON_3_7273)
+        private val adultRaccoon = intArrayOf(NPCs.LORE_RACCOON_1_6914, NPCs.LORE_RACCOON_2_7272, NPCs.LORE_RACCOON_3_7274)
     }
 
     private var branch = 0

@@ -42,7 +42,7 @@ class ThessaliaDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (inInventory(player, Items.FROG_TOKEN_6183)) {
+                if (inInventory(player, Items.RANDOM_EVENT_GIFT_6183)) {
                     options("What do you have?", "No, thank you.", "I have a frog token...").also { stage++ }
                 } else {
                     options("What do you have?", "No, thank you.").also { stage++ }
@@ -52,7 +52,7 @@ class ThessaliaDialogue(player: Player? = null) : Dialogue(player) {
             1 -> when (buttonId) {
                 1 -> player(FaceAnim.ASKING, "What do you have?").also { stage = 10 }
                 2 -> player(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
-                3 -> if (inInventory(player, Items.FROG_TOKEN_6183)) {
+                3 -> if (inInventory(player, Items.RANDOM_EVENT_GIFT_6183)) {
                     npc(FaceAnim.FRIENDLY, "That entitles you to a free costume!", "Do you want a frog mask or a " + (if (player.isMale) "prince" else "princess") + " outfit?").also { stage = 52 }
                 }
             }
@@ -103,7 +103,7 @@ class ThessaliaDialogue(player: Player? = null) : Dialogue(player) {
             52 -> options("Frog mask, please!", "" + (if (player.isMale) "Prince" else "Princess") + " outfit, please!").also { stage++ }
             53 -> when (buttonId) {
                 1 -> {
-                    if (removeItem(player, Items.FROG_TOKEN_6183)) {
+                    if (removeItem(player, Items.RANDOM_EVENT_GIFT_6183)) {
                         end()
                         npc(FaceAnim.FRIENDLY, "There you go.")
                         addItemOrDrop(player, Items.FROG_MASK_6188, 1)
@@ -111,10 +111,10 @@ class ThessaliaDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 2 -> {
                     npc(FaceAnim.FRIENDLY, "There you go.")
-                    if (player.isMale && removeItem(player, Items.FROG_TOKEN_6183)) {
+                    if (player.isMale && removeItem(player, Items.RANDOM_EVENT_GIFT_6183)) {
                         addItemOrDrop(player, Items.PRINCE_TUNIC_6184, 1)
                         addItemOrDrop(player, Items.PRINCE_LEGGINGS_6185, 1)
-                    } else if (removeItem(player, Items.FROG_TOKEN_6183)) {
+                    } else if (removeItem(player, Items.RANDOM_EVENT_GIFT_6183)) {
                         addItemOrDrop(player, Items.PRINCESS_BLOUSE_6186, 1)
                         addItemOrDrop(player, Items.PRINCESS_SKIRT_6187, 1)
                     }

@@ -44,7 +44,7 @@ class SinclairFlourBarrelPlugin : InteractionListener {
             return
         }
         lock(player, 3)
-        animate(player, Animations.HUMAN_MULTI_USE_832)
+        animate(player, Animations.HUMAN_PICKUPTABLE_832)
         addItem(player, Items.POT_OF_FLOUR_1933, 1)
         sendMessage(player, "You take some flour from the barrel. There's still plenty of flour left.")
         updateDiaryProgress(player)

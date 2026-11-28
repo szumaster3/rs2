@@ -124,7 +124,7 @@ class SandyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SandyDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SANDY_3112)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HANDSAND_SANDY0_3112)
 
     private fun hasAsked(player: Player, index: Int): Boolean {
         val mask = player.getAttribute<Int>(GameAttributes.HAND_SAND_SANDY_ANSWERS) ?: 0

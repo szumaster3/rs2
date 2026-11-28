@@ -92,5 +92,5 @@ class SwampTitanDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SWAMP_TITAN_7329, NPCs.SWAMP_TITAN_7330)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_SWAMP_TITAN_7329, NPCs.LORE_SWAMP_TITAN_COMBAT_7330)
 }

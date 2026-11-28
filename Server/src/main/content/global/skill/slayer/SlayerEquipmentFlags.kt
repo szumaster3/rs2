@@ -25,7 +25,7 @@ object SlayerEquipmentFlags {
         Items.FACE_MASK_4164,
         *blackMasks,
         Items.SPINY_HELMET_4551,
-        Items.SLAYER_CAPET_9787,
+        Items.SLAYER_CAPE_T_9787,
         Items.SLAYER_CAPE_9786,
         Items.SLAYER_HELMET_13263,
         Items.WITCHWOOD_ICON_8923,

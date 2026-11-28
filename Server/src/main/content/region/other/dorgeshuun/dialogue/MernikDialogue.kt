@@ -18,11 +18,11 @@ class MernikDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when ((1..5).random()) {
-            1 -> sendNPCDialogue(player, NPCs.CAVE_GOBLIN_CHILD_5816, "Haha! You look funny!", FaceAnim.OLD_NORMAL).also { stage = 1 }
-            2 -> sendNPCDialogue(player, NPCs.CAVE_GOBLIN_CHILD_5816, "You smell!", FaceAnim.OLD_NORMAL).also { stage = 3 }
-            3 -> sendNPCDialogue(player, NPCs.CAVE_GOBLIN_CHILD_5816, "Are you really from the surface?", FaceAnim.OLD_NORMAL).also { stage = 4 }
-            4 -> sendNPCDialogue(player, NPCs.CAVE_GOBLIN_CHILD_5816, "Are you ${player.username}? Did you help Zanik save the city?", FaceAnim.OLD_NORMAL).also { stage = 5 }
-            5 -> sendNPCDialogue(player, NPCs.CAVE_GOBLIN_CHILD_5816, "Shan't!", FaceAnim.OLD_NORMAL).also { stage++ }
+            1 -> sendNPCDialogue(player, NPCs.CALDI_5816, "Haha! You look funny!", FaceAnim.OLD_NORMAL).also { stage = 1 }
+            2 -> sendNPCDialogue(player, NPCs.CALDI_5816, "You smell!", FaceAnim.OLD_NORMAL).also { stage = 3 }
+            3 -> sendNPCDialogue(player, NPCs.CALDI_5816, "Are you really from the surface?", FaceAnim.OLD_NORMAL).also { stage = 4 }
+            4 -> sendNPCDialogue(player, NPCs.CALDI_5816, "Are you ${player.username}? Did you help Zanik save the city?", FaceAnim.OLD_NORMAL).also { stage = 5 }
+            5 -> sendNPCDialogue(player, NPCs.CALDI_5816, "Shan't!", FaceAnim.OLD_NORMAL).also { stage++ }
         }
         return true
     }

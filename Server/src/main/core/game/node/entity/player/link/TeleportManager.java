@@ -198,10 +198,10 @@ public class TeleportManager {
      */
     public enum TeleportType {
         NORMAL(new TeleportSettings(
-                Animations.MODERN_TELEPORT_START_8939,
-                Animations.MODERN_TELEPORT_END_8941,
-                shared.consts.Graphics.NORMAL_TP_UPWARDS_1576,
-                shared.consts.Graphics.NORMAL_TP_DOWNWARDS_1577
+                Animations.DEFAULT_TELEPORT_REWORK_8939,
+                Animations.DEFAULT_TELEPORT_REWORK_ARRIVE_8941,
+                shared.consts.Graphics.DEFAULT_TELEPORT_REWORK_SPOTANIM_1_1576,
+                shared.consts.Graphics.DEFAULT_TELEPORT_REWORK_SPOTANIM_ARRIVE_1_1577
         )) {
             @Override
             public void queue(Entity entity, Location location) {
@@ -231,9 +231,9 @@ public class TeleportManager {
         },
 
         ANCIENT(new TeleportSettings(
-                Animations.CAST_SPELL_1979,
+                Animations.ZAROS_VERTICAL_CASTING_1979,
                 -1,
-                shared.consts.Graphics.ANCIENTS_TP_392,
+                shared.consts.Graphics.HUMAN_UPDATE_RUN_CYCLE_MUD_PIE_392,
                 -1
         )) {
             @Override
@@ -263,9 +263,9 @@ public class TeleportManager {
         },
 
         LUNAR(new TeleportSettings(
-                Animations.OLD_SHRINK_AND_RISE_UP_TP_1816,
+                Animations.HUMAN_TELEPORT_OTHER_IMPACT_1816,
                 -1,
-                shared.consts.Graphics.LUNARS_TP_747,
+                shared.consts.Graphics.LUNAR_TELEPORT_747,
                 -1
         )) {
             @Override
@@ -292,14 +292,14 @@ public class TeleportManager {
         },
 
         TELETABS(new TeleportSettings(
-                Animations.TELEPORT_TABLET_4731, -1,
-                shared.consts.Graphics.BLUE_GLOW_678, -1)) {
+                Animations.MYQ3_PLAYER_TELEPORT_SPELL_4731, -1,
+                shared.consts.Graphics.POH_ABSORB_MAGIC_SPELL_678, -1)) {
             @Override
             public void queue(Entity entity, Location location) {
                 queueScript(entity, 0, QueueStrength.NORMAL, false, stage -> {
                     switch (stage) {
                         case 0:
-                            entity.getAnimator().forceAnimation(new Animation(Animations.BREAK_SPELL_TABLET_A_4069));
+                            entity.getAnimator().forceAnimation(new Animation(Animations.POH_SMASH_MAGIC_TABLET_4069));
                             return false;
                         case 2:
                             entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote(), Priority.HIGH));
@@ -324,10 +324,10 @@ public class TeleportManager {
          * TODO: Complete this teleport with delay 30 min.
          */
         HOME(new TeleportSettings(
-                Animations.HOME_TP_ANIMATION_4847,
-                Animations.IDLE_4857,
-                shared.consts.Graphics.HOME_TP_DRAW_800,
-                shared.consts.Graphics.HOME_TP_RING_804
+                Animations.AIDE_PLAYER_TELEPORT_SECTION_12_4847,
+                Animations.FAI_LUMBRIDGE_GUIDE_READY_4857,
+                shared.consts.Graphics.AIDE_SPOT_TELEPORT_SECTION_2_800,
+                shared.consts.Graphics.AIDE_SPOT_TELEPORT_SECTION_6_804
         )) {
             @Override
             public void queue(Entity entity, Location location) {
@@ -349,16 +349,16 @@ public class TeleportManager {
         },
 
         OBELISK(new TeleportSettings(
-                Animations.MODERN_TELEPORT_START_8939,
-                Animations.MODERN_TELEPORT_END_8941,
-                shared.consts.Graphics.WILDERNESS_OBELISK_TP_661, -1)) {
+                Animations.DEFAULT_TELEPORT_REWORK_8939,
+                Animations.DEFAULT_TELEPORT_REWORK_ARRIVE_8941,
+                shared.consts.Graphics.WILDERNESS_PORTAL_ANIM_661, -1)) {
             @Override
             public void queue(Entity entity, Location location) {
                 queueScript(entity, 0, QueueStrength.STRONG, false, stage -> {
                     switch (stage) {
                         case 0:
                             entity.lock();
-                            entity.getAnimator().forceAnimation(new Animation(Animations.OLD_SHRINK_AND_RISE_UP_TP_1816));
+                            entity.getAnimator().forceAnimation(new Animation(Animations.HUMAN_TELEPORT_OTHER_IMPACT_1816));
                             return false;
                         case 3:
                             entity.getProperties().setTeleportLocation(Location.create(location));
@@ -373,7 +373,7 @@ public class TeleportManager {
             }
         },
 
-        TELE_OTHER(new TeleportSettings(Animations.OLD_SHRINK_AND_RISE_UP_TP_1816, -1, shared.consts.Graphics.TELEOTHER_ACCEPT_342, -1)) {
+        TELE_OTHER(new TeleportSettings(Animations.HUMAN_TELEPORT_OTHER_IMPACT_1816, -1, shared.consts.Graphics.TELEPORT_OTHER_IMPACT_342, -1)) {
             @Override
             public void queue(Entity entity, Location location) {
                 queueScript(entity, 0, QueueStrength.STRONG, false, stage -> {
@@ -399,17 +399,17 @@ public class TeleportManager {
         FAIRY_RING(new TeleportSettings(-1, -1, -1, -1)) {
             @Override
             public void queue(Entity entity, Location location) {
-                entity.graphics(Graphics.create(shared.consts.Graphics.FLOWERS_AROUND_PLAYER_569));
+                entity.graphics(Graphics.create(shared.consts.Graphics.FAIRY_FLOWER_ENCHANT_2_569));
                 queueScript(entity, 0, QueueStrength.STRONG, false, stage -> {
                     switch (stage) {
                         case 2:
-                            entity.animate(Animation.create(Animations.FADE_B_3265));
+                            entity.animate(Animation.create(Animations.HUMAN_FAIRY_VANISH_3265));
                             if (entity instanceof Player) {
                                 playAudio(entity.asPlayer(), Sounds.FT_FAIRY_TP_1098);
                             }
                             return false;
                         case 4:
-                            entity.animate(Animation.create(Animations.FADE_A_3266));
+                            entity.animate(Animation.create(Animations.HUMAN_FAIRY_APPEAR_3266));
                             entity.getProperties().setTeleportLocation(location);
                             entity.unlock();
                             entity.lock(2);
@@ -420,14 +420,14 @@ public class TeleportManager {
             }
         },
 
-        PURO_PURO(new TeleportSettings(Animations.ANIMATION_6601, Animations.HANDHOLDS_1118, -1, -1)) {
+        PURO_PURO(new TeleportSettings(Animations.II_HUMAN_TELEPORT_6601, Animations.AGILITYARENA_HANDHOLDS_MIDDLE_1118, -1, -1)) {
             @Override
             public void queue(Entity entity, Location location) {
                 queueScript(entity, 0, QueueStrength.STRONG, false, stage -> {
                     switch (stage) {
                         case 0:
                             entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
-                            entity.graphics(new Graphics(shared.consts.Graphics.TP_TO_PURO_PURO_WHEAT_FIELD_BEAM_1118));
+                            entity.graphics(new Graphics(shared.consts.Graphics.II_PORTAL_SPOTANIM_1118));
                             return false;
                         case 9:
                             entity.getProperties().setTeleportLocation(Location.create(location));
@@ -441,8 +441,8 @@ public class TeleportManager {
         },
 
         ECTOPHIAL(new TeleportSettings(
-                Animations.MODERN_TELEPORT_START_8939,
-                Animations.MODERN_TELEPORT_END_8941,
+                Animations.DEFAULT_TELEPORT_REWORK_8939,
+                Animations.DEFAULT_TELEPORT_REWORK_ARRIVE_8941,
                 1587,
                 1588
         )) {
@@ -470,7 +470,7 @@ public class TeleportManager {
             }
         },
 
-        CHRISTMAS(new TeleportSettings(7534, -1, shared.consts.Graphics.SNOW_GOING_UPWARDS_1292, -1)) {
+        CHRISTMAS(new TeleportSettings(7534, -1, shared.consts.Graphics.XMAS_07_PLAYER_TELE_TO_SNOWSCAPE_SPOT_1292, -1)) {
             @Override
             public void queue(Entity entity, Location location) {
                 queueScript(entity, 0, QueueStrength.NORMAL, false, stage -> {
@@ -555,7 +555,7 @@ public class TeleportManager {
                     switch (stage) {
                         case 0:
                             entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
-                            entity.graphics(new Graphics(shared.consts.Graphics.OLD_RANDOM_EVENT_TP_308, 100, 50));
+                            entity.graphics(new Graphics(shared.consts.Graphics.PICKAXE_PROJECTILE_SUMMON_SPOTANIM_308, 100, 50));
 
                             if (entity instanceof Player) {
                                 playAudio(entity.asPlayer(), Sounds.TP_ALL_200);
@@ -580,7 +580,7 @@ public class TeleportManager {
                     switch (stage) {
                         case 0:
                             entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
-                            entity.graphics(new Graphics(shared.consts.Graphics.TP_TO_PURO_PURO_WHEAT_FIELD_BEAM_1118));
+                            entity.graphics(new Graphics(shared.consts.Graphics.II_PORTAL_SPOTANIM_1118));
                             return false;
                         case 9:
                             entity.getProperties().setTeleportLocation(Location.create(location));
@@ -600,7 +600,7 @@ public class TeleportManager {
                     switch (stage) {
                         case 0:
                             entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
-                            entity.graphics(new Graphics(shared.consts.Graphics.PHARAOH_SCEPTRE_TP_715));
+                            entity.graphics(new Graphics(shared.consts.Graphics.NTK_TELE_SPOTANIM_715));
                             return false;
                         case 4:
                             entity.getProperties().setTeleportLocation(Location.create(location));

@@ -168,5 +168,5 @@ class ClivetDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CLIVET_893)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CLIVET_HAZEEL_CULTIST_893)
 }

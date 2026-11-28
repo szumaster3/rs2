@@ -45,17 +45,17 @@ class ShotPutRoomPlugin(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (buttonId) {
             1 -> {
-                animate(player, Animation.create(Animations.HIT_WITH_DRAGON_PICKAXE_4181))
+                animate(player, Animation.create(Animations.WC_UPDATE09_PLAYER_SPLITTING_LOGS_ANMA_AXE_4181))
                 throwShotPut(player, 5, lowWeight, "You throw the shot as hard as you can.")
             }
 
             2 -> {
-                animate(player, Animation.create(Animations.HIT_WITH_RUNE_PICKAXE_4182))
+                animate(player, Animation.create(Animations.BRUT_HUMAN_CANOEING_CARVE_ANMA_AXE_4182))
                 throwShotPut(player, 2, lowWeight, "You take a step and throw the shot as hard as you can.")
             }
 
             3 -> {
-                animate(player, Animation.create(Animations.HIT_WITH_ADAMANT_PICKAXE_4183))
+                animate(player, Animation.create(Animations.MAH1_PLAYER_MAKE_CANOE_ANMA_AXE_4183))
                 throwShotPut(player, 5, lowWeight, "You spin around and release the shot.")
             }
 
@@ -75,7 +75,7 @@ class ShotPutRoomPlugin(player: Player? = null) : Dialogue(player) {
                         val lowWeight = node.id == 15664
                         if (node is GroundItem) {
                             player.dialogueInterpreter.sendDialogues(
-                                NPCs.REF_4300,
+                                NPCs.STRENGTH_REFERREE2_4300,
                                 FaceAnim.FURIOUS,
                                 "Hey! You can't take that, it's guild property. Take one",
                                 "from the pile.",
@@ -96,7 +96,7 @@ class ShotPutRoomPlugin(player: Player? = null) : Dialogue(player) {
                             return true
                         }
                         player.lock(4)
-                        player.animate(Animation.create(Animations.HUMAN_BURYING_BONES_827))
+                        player.animate(Animation.create(Animations.HUMAN_PICKUPFLOOR_827))
                         Pulser.submit(
                             object : Pulse(2) {
                                 override fun pulse(): Boolean {
@@ -122,8 +122,8 @@ class ShotPutRoomPlugin(player: Player? = null) : Dialogue(player) {
                     override fun newInstance(arg: Any?): Plugin<Any> {
                         LocType.forId(shared.consts.Scenery.SHOT_15664).handlers["option:throw"] = this
                         LocType.forId(shared.consts.Scenery.SHOT_15665).handlers["option:throw"] = this
-                        ObjType.forId(Items.EIGHTEEN_LB_SHOT_8858).handlers["option:take"] = this
-                        ObjType.forId(Items.TWENTY_TWO_LB_SHOT_8859).handlers["option:take"] = this
+                        ObjType.forId(Items.OBJ_18LB_SHOT_8858).handlers["option:take"] = this
+                        ObjType.forId(Items.OBJ_22LB_SHOT_8859).handlers["option:take"] = this
                         return this
                     }
                 },
@@ -186,14 +186,14 @@ class ShotPutRoomPlugin(player: Player? = null) : Dialogue(player) {
                             player.getSavedData().activityData.updateWarriorTokens(tiles + (if (!lowWeight) 2 else 0))
                             player.getSkills().addExperience(Skills.STRENGTH, tiles.toDouble())
                             player.dialogueInterpreter.sendDialogues(
-                                if (lowWeight) NPCs.REF_4299 else NPCs.REF_4300,
+                                if (lowWeight) NPCs.STRENGTH_REFERREE1_4299 else NPCs.STRENGTH_REFERREE2_4300,
                                 FaceAnim.HALF_GUILTY,
                                 "Well done. You threw the shot " + (tiles - 1) + " yard" +
                                     (if (tiles > 2) "s!" else "!"),
                             )
                         }
                         GroundItemManager.create(
-                            GroundItem(Item(if (lowWeight) Items.EIGHTEEN_LB_SHOT_8858 else Items.TWENTY_TWO_LB_SHOT_8859), loc, 20, player),
+                            GroundItem(Item(if (lowWeight) Items.OBJ_18LB_SHOT_8858 else Items.OBJ_22LB_SHOT_8859), loc, 20, player),
                         )
                         return true
                     }

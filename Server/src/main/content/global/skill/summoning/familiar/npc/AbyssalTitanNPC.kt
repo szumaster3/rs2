@@ -17,7 +17,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class AbyssalTitanNPC(owner: Player? = null, id: Int = NPCs.ABYSSAL_TITAN_7349) :
+class AbyssalTitanNPC(owner: Player? = null, id: Int = NPCs.LORE_ABYSSAL_TITAN_7349) :
     BurdenBeast(owner, id, 3200, Items.ABYSSAL_TITAN_POUCH_12796, 6, 7, WeaponInterface.STYLE_ACCURATE) {
 
     override fun construct(owner: Player, id: Int): Familiar = AbyssalTitanNPC(owner, id)
@@ -83,5 +83,5 @@ class AbyssalTitanNPC(owner: Player? = null, id: Int = NPCs.ABYSSAL_TITAN_7349) 
         visualize(Animation.create(7694), Graphics.create(1457))
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ABYSSAL_TITAN_7349, NPCs.ABYSSAL_TITAN_7350)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_ABYSSAL_TITAN_7349, NPCs.LORE_ABYSSAL_TITAN_COMBAT_7350)
 }

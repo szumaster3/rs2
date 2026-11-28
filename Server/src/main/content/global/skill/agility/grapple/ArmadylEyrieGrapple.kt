@@ -29,9 +29,9 @@ class ArmadylEyrieGrapple : InteractionListener {
                     sendMessage(player, "You need to wield a crossbow to fire a mithril grapple.")
                 else -> {
                     val destination = Location.create(2872, if (player.location.y <= 5269) 5279 else 5269, 2)
-                    val delay = animationCycles(Animations.SWING_WITH_CROSSBOW_BANDOS_THRONE_ROOM_6067)
+                    val delay = animationCycles(Animations.DORGESH_XBOW_SWING_6067)
                     lock(player, 3)
-                    sendGraphics(Graphics(Gfx.MITHRIL_GRAPPLE_ABOUT_TO_SHOOT_1036, 96), player.location)
+                    sendGraphics(Graphics(Gfx.DORGESH_GRAPPLE_SPOT_1036, 96), player.location)
                     forceMove(
                         player = player,
                         start = player.location,
@@ -39,7 +39,7 @@ class ArmadylEyrieGrapple : InteractionListener {
                         startArrive = 0,
                         destArrive = 90,
                         dir = null,
-                        anim = Animations.SWING_WITH_CROSSBOW_BANDOS_THRONE_ROOM_6067
+                        anim = Animations.DORGESH_XBOW_SWING_6067
                     )
                 }
             }

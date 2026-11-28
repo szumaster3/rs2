@@ -84,7 +84,7 @@ class BiohazardPlugin : InteractionListener {
         }
 
         on(Scenery.CUPBOARD_2056, IntType.SCENERY, "open") { player, node ->
-            animate(player, Animations.HUMAN_OPEN_WARDROBE_542)
+            animate(player, Animations.HUMAN_OPENHIGHCUPBOARD_542)
             playAudio(player, Sounds.CUPBOARD_OPEN_58)
             replaceScenery(node.asScenery(), Scenery.CUPBOARD_2057, -1)
             sendMessage(player, "You open the cupboard.")
@@ -98,7 +98,7 @@ class BiohazardPlugin : InteractionListener {
         }
 
         on(Scenery.CUPBOARD_2057, IntType.SCENERY, "close") { player, node ->
-            animate(player, Animations.CLOSE_CUPBOARD_543)
+            animate(player, Animations.V02_YAK_UPDATE_WALK_543)
             playAudio(player, Sounds.CUPBOARD_CLOSE_57)
             replaceScenery(node.asScenery(), Scenery.CUPBOARD_2056, -1)
             return@on true
@@ -130,7 +130,7 @@ class BiohazardPlugin : InteractionListener {
                     -1,
                     player.location,
                     player.location.transform(newDirection, 1),
-                    Animation(Animations.SIDE_STEP_TO_CRAWL_THROUGH_MCGRUBOR_S_WOODS_FENCE_3844),
+                    Animation(Animations.RAILING_SQUEEZE_3844),
                     5,
                     0.0,
                     "You squeeze through the loose railing.",
@@ -171,13 +171,13 @@ class BiohazardPlugin : InteractionListener {
                 }
 
                 if (questStage == 6 && inEquipment(player, Items.DOCTORS_GOWN_430)) {
-                    sendNPCDialogue(player, NPCs.MOURNER_347, "In you go doc.")
+                    sendNPCDialogue(player, NPCs.MOURNER2_347, "In you go doc.")
                     setQuestStage(player, Quests.BIOHAZARD.questName, 7)
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     return@on true
                 }
 
-                openDialogue(player, MournerDialogue(), NPCs.MOURNER_347)
+                openDialogue(player, MournerDialogue(), NPCs.MOURNER2_347)
             } else {
                 DoorActionHandler.handleDoor(player, node.asScenery())
             }

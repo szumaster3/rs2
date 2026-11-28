@@ -122,5 +122,5 @@ class DimintheisDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DIMINTHEIS_8171)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZEMO_DIMINTHEIS_8171)
 }

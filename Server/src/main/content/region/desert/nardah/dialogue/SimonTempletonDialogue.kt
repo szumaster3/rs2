@@ -58,7 +58,7 @@ class SimonTempletonDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        if (args.size == 4 && (args[3] as Int) in arrayOf(Items.PHARAOHS_SCEPTRE_9044, Items.PHARAOHS_SCEPTRE_9046, Items.PHARAOHS_SCEPTRE_9048, Items.PHARAOHS_SCEPTRE_9050)) {
+        if (args.size == 4 && (args[3] as Int) in arrayOf(Items.PHARAOHS_SCEPTRE_3_9044, Items.PHARAOHS_SCEPTRE_2_9046, Items.PHARAOHS_SCEPTRE_1_9048, Items.PHARAOHS_SCEPTRE_9050)) {
             npc(FaceAnim.FRIENDLY, "You sellin' me this gold colored", "stick thing. Looks fake to me.", "I'll give you 100 gold for it.")
             stage = 30
             return true
@@ -132,6 +132,6 @@ class SimonTempletonDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SIMON_TEMPLETON_3123)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AGILITY_PYRAMID_SIMON_3123)
 }
 

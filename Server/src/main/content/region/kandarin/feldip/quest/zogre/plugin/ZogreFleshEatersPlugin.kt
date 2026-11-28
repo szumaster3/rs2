@@ -41,13 +41,13 @@ class ZogreFleshEatersPlugin : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, ZogreUtils.QUEST_ITEMS, NPCs.BARTENDER_739) { player, _, with ->
-            openDialogue(player, NPCs.BARTENDER_739, with.id)
+        onUseWith(IntType.NPC, ZogreUtils.QUEST_ITEMS, NPCs.DRAGON_BARTENDER_739) { player, _, with ->
+            openDialogue(player, NPCs.DRAGON_BARTENDER_739, with.id)
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, ZogreUtils.QUEST_ITEMS, NPCs.ZAVISTIC_RARVE_2059) { player, _, with ->
-            openDialogue(player, NPCs.ZAVISTIC_RARVE_2059, with.id)
+        onUseWith(IntType.NPC, ZogreUtils.QUEST_ITEMS, NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059) { player, _, with ->
+            openDialogue(player, NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059, with.id)
             return@onUseWith true
         }
 
@@ -83,7 +83,7 @@ class ZogreFleshEatersPlugin : InteractionListener {
                 if (!inInventory(player, Items.CHARCOAL_973)) {
                     sendDialogue(player, "You have no charcoal with which to sketch this subject.")
                 } else {
-                    animate(player, Animations.HUMAN_PAINT_ON_ITEM_909)
+                    animate(player, Animations.HUMAN_MAPPING_909)
                     openDialogue(player, SithikIntsPortraitDialogueFile())
                 }
                 return@onUseWith true
@@ -128,18 +128,18 @@ class ZogreFleshEatersPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.UGLUG_NAR_2039, IntType.NPC, "trade") { player, _ ->
+        on(NPCs.ZOGRE_UGLUG_NAR_2039, IntType.NPC, "trade") { player, _ ->
             if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) < 7) {
-                sendNPCDialogue(player, NPCs.UGLUG_NAR_2039, "Me's not got no glug-glugs to sell, yous bring me da sickies glug-glug den me's open da stufsies for ya.", FaceAnim.OLD_DEFAULT)
+                sendNPCDialogue(player, NPCs.ZOGRE_UGLUG_NAR_2039, "Me's not got no glug-glugs to sell, yous bring me da sickies glug-glug den me's open da stufsies for ya.", FaceAnim.OLD_DEFAULT)
             } else {
-                openNpcShop(player, NPCs.UGLUG_NAR_2039)
+                openNpcShop(player, NPCs.ZOGRE_UGLUG_NAR_2039)
             }
             return@on true
         }
 
-        onUseWith(IntType.NPC, Items.RELICYMS_BALM3_4844, NPCs.UGLUG_NAR_2039) { player, _, _ ->
+        onUseWith(IntType.NPC, Items.RELICYMS_BALM_3_4844, NPCs.ZOGRE_UGLUG_NAR_2039) { player, _, _ ->
             if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) < 7) {
-                sendNPCDialogue(player, NPCs.UGLUG_NAR_2039, "Me's not got no glug-glugs to sell, yous bring me da sickies glug-glug den me's open da stufsies for ya.", FaceAnim.OLD_DEFAULT)
+                sendNPCDialogue(player, NPCs.ZOGRE_UGLUG_NAR_2039, "Me's not got no glug-glugs to sell, yous bring me da sickies glug-glug den me's open da stufsies for ya.", FaceAnim.OLD_DEFAULT)
             } else {
                 openDialogue(player, UglugNarDialogue())
             }
@@ -223,7 +223,7 @@ class ZogreFleshEatersPlugin : InteractionListener {
         on(Items.CUP_OF_TEA_4838, IntType.GROUND_ITEM, "take") { player, node ->
             val cup = node as GroundItem
             if (cup.location == Location(2593, 3103, 1)) {
-                sendNPCDialogue(player, NPCs.SITHIK_INTS_2061, "Hey! What do you think you're doing? Leave my tea alone!", FaceAnim.ANNOYED)
+                sendNPCDialogue(player, NPCs.ZOGRE_SITHIK_MAN_2061, "Hey! What do you think you're doing? Leave my tea alone!", FaceAnim.ANNOYED)
             } else if (freeSlots(player) < 1) {
                 sendMessage(player, "You don't have enough inventory space.")
             } else {
@@ -236,7 +236,7 @@ class ZogreFleshEatersPlugin : InteractionListener {
         onUseWith(IntType.GROUND_ITEM, ZogreUtils.STRANGE_POTION, Items.CUP_OF_TEA_4838) { player, used, _ ->
             val slot = used.asItem().slot
             lock(player, 2)
-            animate(player, Animations.PUT_OBJECT_ON_TABLE_537)
+            animate(player, Animations.HUMAN_LOCKEDCHEST_537)
             replaceSlot(player, slot, Item(Items.SAMPLE_BOTTLE_3377))
             setAttribute(player, ZogreUtils.SITHIK_TURN_INTO_OGRE, true)
             sendItemDialogue(player, ZogreUtils.STRANGE_POTION, "You pour some of the potion into the cup.")

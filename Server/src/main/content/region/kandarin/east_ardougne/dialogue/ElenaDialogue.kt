@@ -42,5 +42,5 @@ class ElenaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ElenaDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ELENA_3209)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELENA2_VIS_3209)
 }

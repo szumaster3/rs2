@@ -43,5 +43,5 @@ class LumberKittenNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
     override fun isHidden(player: Player): Boolean =
         hidden || getQuestStage(player, Quests.GERTRUDES_CAT.questName) !in 20..50
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CRATE_767)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GLOPHREN_767)
 }

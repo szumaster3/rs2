@@ -8,7 +8,7 @@ import shared.consts.NPCs
 object WatchmanLootTable {
 
     val NPC_ID = intArrayOf(
-        NPCs.WATCHMAN_34
+        NPCs.YANILLE_WATCHMAN_34
     )
 
     val LOOT = WeightBasedTable.create(

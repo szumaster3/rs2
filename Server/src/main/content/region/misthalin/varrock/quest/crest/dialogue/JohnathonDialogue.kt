@@ -88,5 +88,5 @@ class JohnathonDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JOHNATHON_668)
+    override fun getIds(): IntArray = intArrayOf(NPCs.JOHNATHON_FITZHARMON_668)
 }

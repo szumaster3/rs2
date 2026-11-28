@@ -129,5 +129,5 @@ class FelkrashDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FELKRASH_2951)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VC_FELKRASH_THE_BARD_2951)
 }

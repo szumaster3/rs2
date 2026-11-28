@@ -21,7 +21,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class PackYakNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.PACK_YAK_6873) :
+class PackYakNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_PACK_YAK_6873) :
     BurdenBeast(owner, id, 5800, Items.PACK_YAK_POUCH_12093, 12, 30, WeaponInterface.STYLE_AGGRESSIVE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return PackYakNPC(owner, id)
@@ -87,7 +87,7 @@ class PackYakNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PACK_YAK_6873, NPCs.PACK_YAK_6874)
+        return intArrayOf(NPCs.LORE_PACK_YAK_6873, NPCs.LORE_PACK_YAK_COMBAT_6874)
     }
 
     override fun getText(): String {

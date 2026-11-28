@@ -58,7 +58,7 @@ class CharleyDialogue(player: Player? = null) : Dialogue(player) {
             41 -> npcl(FaceAnim.FRIENDLY, "I knew ye couldn't handle the truth!").also { stage = END_DIALOGUE }
             80 -> {
                 end()
-                openNpcShop(player, NPCs.CHARLEY_3161)
+                openNpcShop(player, NPCs.FEVER_PIRATE_TWO_FEET_CHARLEY_3161)
             }
         }
         return true
@@ -66,5 +66,5 @@ class CharleyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CharleyDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHARLEY_3161)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEVER_PIRATE_TWO_FEET_CHARLEY_3161)
 }

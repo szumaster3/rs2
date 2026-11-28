@@ -27,7 +27,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray {
         /* This is wrong SCARABS_1970 should be AZZANADRA_1970 */
-        return intArrayOf(NPCs.SCARABS_1970, NPCs.AZZANADRA_1971)
+        return intArrayOf(NPCs.AZZANADRA_1970, NPCs.AZZANADRA_REAL_1971)
     }
 }
 

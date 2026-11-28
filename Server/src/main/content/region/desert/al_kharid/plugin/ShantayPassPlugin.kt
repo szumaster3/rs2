@@ -74,7 +74,7 @@ class ShantayPassPlugin : InteractionListener {
                 if (!removeItem(player, Items.SHANTAY_PASS_1854)) {
                     sendNPCDialogue(
                         player,
-                        NPCs.SHANTAY_GUARD_838,
+                        NPCs.SHANTAY_GUARD_STILL_838,
                         "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.",
                         FaceAnim.NEUTRAL
                     )
@@ -97,7 +97,7 @@ class ShantayPassPlugin : InteractionListener {
 
             if (goingSouth) {
                 if (!inInventory(player, Items.SHANTAY_PASS_1854, 1)) {
-                    sendNPCDialogue(player, NPCs.SHANTAY_GUARD_838, "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.", FaceAnim.NEUTRAL)
+                    sendNPCDialogue(player, NPCs.SHANTAY_GUARD_STILL_838, "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.", FaceAnim.NEUTRAL)
                     return@on true
                 }
 
@@ -136,8 +136,8 @@ class ShantayPassPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.SHANTAY_GUARD_838, IntType.NPC, "bribe") { player, node ->
-            player.dialogueInterpreter.open(NPCs.SHANTAY_GUARD_838, node)
+        on(NPCs.SHANTAY_GUARD_STILL_838, IntType.NPC, "bribe") { player, node ->
+            player.dialogueInterpreter.open(NPCs.SHANTAY_GUARD_STILL_838, node)
             return@on true
         }
     }

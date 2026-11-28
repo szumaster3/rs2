@@ -19,7 +19,7 @@ class PiscatorisPlugin : InteractionListener {
         private const val NET_SCENERY = Scenery.NET_14973
         private const val EMPTY_NET_SCENERY = Scenery.NET_14972
         private const val KATHY_CORKAT = NPCs.KATHY_CORKAT_3831
-        private const val HERMANS_DESK = Scenery.HERMAN_S_DESK_14971
+        private const val HERMANS_DESK = Scenery.HERMANS_DESK_14971
     }
 
     override fun defineListeners() {
@@ -69,7 +69,7 @@ class PiscatorisPlugin : InteractionListener {
             queueScript(player,1,QueueStrength.NORMAL) { stage ->
                 when (stage) {
                     0 -> {
-                        animate(player, Animations.HUMAN_BURYING_BONES_827)
+                        animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                         return@queueScript delayScript(player, 1)
                     }
                     1 -> {
@@ -116,7 +116,7 @@ class PiscatorisPlugin : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, NPCs.HERMAN_CARANOS_3822) { _, _ ->
+        setDest(IntType.NPC, NPCs.SWAN_HERMAN_3822) { _, _ ->
             return@setDest Location.create(2354, 3681, 0)
         }
     }

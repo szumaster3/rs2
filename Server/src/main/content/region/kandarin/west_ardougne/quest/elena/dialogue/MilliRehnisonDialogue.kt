@@ -55,5 +55,5 @@ class MilliRehnisonDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MILLI_REHNISON_724)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MILLI_724)
 }

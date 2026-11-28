@@ -51,9 +51,9 @@ class TzHaarDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray {
         return intArrayOf(
-            NPCs.TZHAAR_HUR_TEL_2620,
-            NPCs.TZHAAR_HUR_LEK_2622,
-            NPCs.TZHAAR_MEJ_ROH_2623
+            NPCs.TZHAAR_MERCHANT_EQUIPMENT_2620,
+            NPCs.TZHAAR_MERCHANT_OREANDGEM_2622,
+            NPCs.TZHAAR_MERCHANT_RUNE_2623
         )
     }
 }

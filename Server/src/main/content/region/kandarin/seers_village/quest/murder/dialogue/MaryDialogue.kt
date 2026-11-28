@@ -25,7 +25,7 @@ class MaryDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MARY_810)
+        return intArrayOf(NPCs.MARY_THE_MAID_810)
     }
 }
 

@@ -37,7 +37,7 @@ class SeersVillagePlugin : InteractionListener {
          * Handles trade interaction with the Ranging Guild Ticket Merchant.
          */
 
-        on(NPCs.TICKET_MERCHANT_694, IntType.NPC, "trade") { player: Player, _: Node ->
+        on(NPCs.RANGING_GUILD_TICKET_EXCHANGE_694, IntType.NPC, "trade") { player: Player, _: Node ->
             openInterface(player, Components.RANGING_GUILD_TICKET_EXCHANGE_278)
             return@on true
         }
@@ -46,7 +46,7 @@ class SeersVillagePlugin : InteractionListener {
          * Handles player interaction with the Forester NPC.
          */
 
-        on(NPCs.FORESTER_231, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.MCGRUBORFORESTER_231, IntType.NPC, "talk-to") { player, _ ->
             sendMessage(player,"He doesn't seem interested in talking to you.")
             return@on true
         }

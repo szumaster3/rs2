@@ -202,7 +202,7 @@ class ClockTowerListener : InteractionListener {
                 sendMessage(player, "They seem to be dying.")
                 setAttribute(player, ClockTower.RATS_POISONED_ATTR, true)
                 runTask(player, 1) {
-                    val rats = findLocalNPCs(player, intArrayOf(NPCs.DUNGEON_RAT_224))
+                    val rats = findLocalNPCs(player, intArrayOf(NPCs.CLOCKTOWER_RAT_224))
                     rats.forEach { rat ->
                         if (rat.location.withinDistance(loc, 20)) {
                             var xDeath = 0

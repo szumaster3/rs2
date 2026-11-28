@@ -16,9 +16,9 @@ class MonkOfZamorakNPC : NPCBehavior(*MONK_NPCS) {
 
     companion object {
         private val MONK_NPCS = intArrayOf(
-            NPCs.MONK_OF_ZAMORAK_1044,
-            NPCs.MONK_OF_ZAMORAK_1045,
-            NPCs.MONK_OF_ZAMORAK_1046
+            NPCs.PRIESTPERILEVILMONK1_1044,
+            NPCs.PRIESTPERILEVILMONK2_1045,
+            NPCs.PRIESTPERILEVILMONK3_1046
         )
     }
 

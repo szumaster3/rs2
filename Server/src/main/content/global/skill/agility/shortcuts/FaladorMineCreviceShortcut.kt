@@ -28,7 +28,7 @@ class FaladorMineCreviceShortcut : AgilityShortcut(intArrayOf(30868), 42, 0.0, "
         player.lock(9)
         playAudio(player, Sounds.SQUEEZE_THROUGH_ROCKS_1310)
         player.animate(Animation(2594))
-        forceMove(player, player.location, destination, 30, 240, null, Animations.CRAWL_UNDER_WALL_B_2590) {
+        forceMove(player, player.location, destination, 30, 240, null, Animations.AGILTY_SHORTCUT_TUNNEL_WALK_2590) {
             animate(player, 2595)
             sendMessage(player, "You climb your way through the narrow crevice.")
         }

@@ -24,7 +24,7 @@ class PupilDialogue(player: Player? = null) : Dialogue(player) {
             0 -> {
                 sendNPCDialogue(
                     player,
-                    NPCs.TEACHER_AND_PUPIL_5948,
+                    NPCs.VM_MALE_SCHOOL_TEACHER_CHATHEAD_DUMMY_5948,
                     "I told you to go before we got here.",
                     FaceAnim.HALF_GUILTY
                 )
@@ -44,7 +44,7 @@ class PupilDialogue(player: Player? = null) : Dialogue(player) {
             2 -> {
                 sendNPCDialogue(
                     player,
-                    NPCs.TEACHER_AND_PUPIL_5948,
+                    NPCs.VM_MALE_SCHOOL_TEACHER_CHATHEAD_DUMMY_5948,
                     "Alright, come on then.",
                     FaceAnim.HALF_GUILTY
                 )
@@ -56,5 +56,5 @@ class PupilDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = PupilDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TEACHER_AND_PUPIL_5944)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VM_SCHOOL_TEACHER_MALE_AND_BOY_5944)
 }

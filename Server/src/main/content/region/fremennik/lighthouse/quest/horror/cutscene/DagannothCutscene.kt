@@ -54,7 +54,7 @@ class DagannothCutscene(
 
     companion object {
         private const val SMALL_DAGANNOTH = NPCs.DAGANNOTH_1338
-        private const val LARGE_DAGANNOTH = NPCs.DAGANNOTH_1342
+        private const val LARGE_DAGANNOTH = NPCs.HORROR_DAGANNOTH_MEDIUM_DARKER_1342
         private const val JOSSIK = NPCs.JOSSIK_1335
     }
 }

@@ -11,7 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class DreamMentor : Quest("Dream Mentor", 139, 138, 2, Vars.VARBIT_QUEST_DREAM_MENTOR_3618, 0, 1, 28) {
+class DreamMentor : Quest("Dream Mentor", 139, 138, 2, Vars.VARBIT_3618, 0, 1, 28) {
     // NPC 2347,10362 | 435 -> 5893
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -46,7 +46,7 @@ class DreamMentor : Quest("Dream Mentor", 139, 138, 2, Vars.VARBIT_QUEST_DREAM_M
         rewardXP(player, Skills.HITPOINTS, 15000.0)
         rewardXP(player, Skills.MAGIC, 10000.0)
         addItemOrDrop(player, Items.DREAMY_LAMP_11157)
-        setVarbit(player, Vars.VARBIT_QUEST_DREAM_MENTOR_3618, 28, true)
+        setVarbit(player, Vars.VARBIT_3618, 28, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

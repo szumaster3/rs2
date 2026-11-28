@@ -16,7 +16,7 @@ import shared.consts.Items
 private val gnomeItems = arrayOf(
     Items.FRUIT_BATTA_2277,
     Items.TOAD_BATTA_2255,
-    Items.CHEESE_PLUSTOM_BATTA_2259,
+    Items.CHEESE_PLUS_TOM_BATTA_2259,
     Items.WORM_BATTA_2253,
     Items.VEGETABLE_BATTA_2281,
     Items.CHOCOLATE_BOMB_2185,

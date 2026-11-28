@@ -66,7 +66,7 @@ class TolnaRiftPlugin : InteractionListener {
         }
 
         on(Scenery.ROPE_13999, IntType.SCENERY, "climb-up") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location(3309, 3452, 0))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location(3309, 3452, 0))
             return@on true
         }
     }

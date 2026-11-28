@@ -26,7 +26,7 @@ class McGruborShortcut : AgilityShortcut(intArrayOf(51), 1, 0.0, "squeeze-throug
                     -1,
                     player.location,
                     player.location.transform(if (player.location.x < 2662) Direction.EAST else Direction.WEST, 1),
-                    Animation(Animations.SIDE_STEP_TO_CRAWL_THROUGH_MCGRUBOR_S_WOODS_FENCE_3844),
+                    Animation(Animations.RAILING_SQUEEZE_3844),
                     5,
                     0.0,
                     "You squeeze through the loose railing.",

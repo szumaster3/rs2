@@ -75,5 +75,5 @@ class VampireBatDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VAMPIRE_BAT_6835, NPCs.VAMPIRE_BAT_6836)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_VAMPIRE_BAT_6835, NPCs.LORE_VAMPIRE_BAT_COMBAT_6836)
 }

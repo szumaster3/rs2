@@ -39,7 +39,7 @@ class BarSqueezeShortcut : AgilityShortcut(intArrayOf(9334, 9337, 2186), 66, 1.0
         player.lock(3)
         GameWorld.Pulser.submit(object : Pulse(1, player) {
             override fun pulse(): Boolean {
-                AgilityHandler.forceWalk(player, -1, start, end, Animation(Animations.DUCK_UNDER_2240), 10, 0.0, null)
+                AgilityHandler.forceWalk(player, -1, start, end, Animation(Animations.ROGUESDEN_CONTORTION_2240), 10, 0.0, null)
                 return true
             }
         })

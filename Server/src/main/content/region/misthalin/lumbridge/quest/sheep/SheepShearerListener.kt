@@ -19,11 +19,11 @@ class SheepShearerListener: InteractionListener {
     override fun defineListeners() {
         on(IntType.NPC, "shear") { player, node ->
             val sheep = node as NPC
-            if (sheep.id == NPCs.SHEEP_3579) {
+            if (sheep.id == NPCs.SHEEP_SHEARER_THE_THING_3579) {
                 if (getQuestStage(player, Quests.SHEEP_SHEARER.questName) > 0) {
                     setAttribute(player, SheepShearer.ATTR_IS_PENGUIN_SHEEP_SHEARED, true)
                 }
-                animate(player, Animation(Animations.SHEAR_SHEEP_893))
+                animate(player, Animation(Animations.HUMAN_SHEARING_893))
                 playAudio(player, Sounds.PENGUINSHEEP_ESCAPE_686)
                 animate(sheep, Animation(3570))
                 sheepBackAway(player, sheep, "The... whatever it is... manages to get away from you!")
@@ -43,7 +43,7 @@ class SheepShearerListener: InteractionListener {
             }
             sheep.faceTemporary(player, 1)
             lock(sheep, 3)
-            animate(player, Animation(Animations.SHEAR_SHEEP_893))
+            animate(player, Animation(Animations.HUMAN_SHEARING_893))
             val random = RandomFunction.random(1, 5)
             if (random != 4) {
                 sheep.locks.lockMovement(2)

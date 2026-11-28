@@ -189,7 +189,7 @@ class MinecartDriverDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MINE_CART_DRIVER_841)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MINING_CART_DRIVER_841)
 
     companion object {
         private val COINS = Item(Items.COINS_995, 100)

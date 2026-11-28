@@ -46,7 +46,7 @@ class DigUpPatchDialogue(player: Player? = null) : Dialogue(player) {
             0 -> when (buttonId) {
                 1 -> {
                     end()
-                    val anim = getAnimation(Animations.DIG_SPADE_830)
+                    val anim = getAnimation(Animations.HUMAN_DIG_830)
                     sendMessage(player, "You start digging the farming patch...")
                     queueScript(player, 0, QueueStrength.WEAK) { stage: Int ->
                         when (stage) {

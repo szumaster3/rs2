@@ -23,7 +23,7 @@ object DigSpadeHandler {
     /**
      * The animation used for the digging action when the player uses a spade.
      */
-    val ANIMATION: Animation = Animation.create(Animations.DIG_SPADE_830)
+    val ANIMATION: Animation = Animation.create(Animations.HUMAN_DIG_830)
 
     /**
      * Handles the digging action for a player.

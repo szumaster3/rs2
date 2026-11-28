@@ -19,7 +19,7 @@ class CavernCutscene(player: Player) : Cutscene(player) {
             player.settings.toggleRun()
         }
         loadRegion(6985)
-        addNPC(NPCs.BOUNCER_5564, 31, 30, Direction.NORTH_EAST)
+        addNPC(NPCs.SHADOW_MAJ_BOUNCER_CUTSCENE_5564, 31, 30, Direction.NORTH_EAST)
     }
 
     override fun onLogout(p: Player) {

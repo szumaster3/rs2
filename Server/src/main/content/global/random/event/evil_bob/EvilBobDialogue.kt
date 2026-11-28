@@ -19,7 +19,7 @@ class EvilBobDialogue(val rewardDialogue: Boolean = false, val rewardXpSkill: In
 
     // TODO: Well, those white knights are far more complicated than you might imagine. Not the 'goodie goodies' they claim to be. Just watch your back.
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.EVIL_BOB_2479)
+        npc = NPC(NPCs.MACRO_EVIL_BOB_ISLAND_2479)
         if (getAttribute(player!!, GameAttributes.RE_BOB_ZONE, "none") == "none") giveEventFishingSpot(player!!)
         when (stage) {
             0 -> when {
@@ -31,19 +31,19 @@ class EvilBobDialogue(val rewardDialogue: Boolean = false, val rewardXpSkill: In
                     sendDialogue(player!!, "Evil Bob appears to be sleeping, best not to wake him up.")
                     stage = END_DIALOGUE
                 }
-                removeItem(player!!, Items.RAW_FISHLIKE_THING_6200) -> {
+                removeItem(player!!, Items.RAW_FISH_LIKE_THING_6200) -> {
                     setAttribute(player!!, GameAttributes.RE_BOB_SCORE, false)
                     playerl(FaceAnim.NEUTRAL, "Here, I've brought you some fish.")
                     stage = 500
                 }
-                removeItem(player!!, Items.RAW_FISHLIKE_THING_6204) -> {
+                removeItem(player!!, Items.RAW_FISH_LIKE_THING_6204) -> {
                     setAttribute(player!!, GameAttributes.RE_BOB_SCORE, false)
                     setAttribute(player!!, GameAttributes.RE_BOB_ALERT, true)
                     setAttribute(player!!, GameAttributes.RE_BOB_DIAL_INDEX, true)
                     playerl(FaceAnim.NEUTRAL, "Here, I've brought you some fish.")
                     stage = 600
                 }
-                inInventory(player!!, Items.FISHLIKE_THING_6202) || inInventory(player!!, Items.FISHLIKE_THING_6206) -> {
+                inInventory(player!!, Items.FISH_LIKE_THING_6202) || inInventory(player!!, Items.FISH_LIKE_THING_6206) -> {
                     npcl(FaceAnim.CHILD_NORMAL, "What, are you giving me cooked fish? What am I going to do with that? Uncook it first!")
                     stage = 700
                 }
@@ -99,7 +99,7 @@ class EvilBobDialogue(val rewardDialogue: Boolean = false, val rewardXpSkill: In
             502 -> {
                 end()
                 setAttribute(player!!, GameAttributes.RE_BOB_COMPLETE, true)
-                findNPC(NPCs.EVIL_BOB_2479)!!.sendChat("ZZZzzz")
+                findNPC(NPCs.MACRO_EVIL_BOB_ISLAND_2479)!!.sendChat("ZZZzzz")
             }
             505 -> {
                 setAttribute(player!!, GameAttributes.RE_BOB_ALERT, false)

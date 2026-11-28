@@ -8,13 +8,13 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class FireTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.FIRE_TITAN_7355) :
+class FireTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_FIRE_TITAN_7355) :
     ElementalTitanNPC(owner, id, 6200, Items.FIRE_TITAN_POUCH_12802, 20, WeaponInterface.STYLE_CAST) {
     override fun construct(owner: Player, id: Int): Familiar {
         return FireTitanNPC(owner, id)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIRE_TITAN_7355, NPCs.FIRE_TITAN_7356)
+        return intArrayOf(NPCs.LORE_FIRE_TITAN_7355, NPCs.LORE_FIRE_TITAN_COMBAT_7356)
     }
 }

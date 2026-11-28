@@ -39,7 +39,7 @@ class EzekialLovecraftDialogue(player: Player? = null) : Dialogue(player) {
             20 -> npc(FaceAnim.FRIENDLY, "Oh right, goodbye.").also { stage = END_DIALOGUE }
             25 -> {
                 end()
-                openNpcShop(player, NPCs.EZEKIAL_LOVECRAFT_4856)
+                openNpcShop(player, NPCs.SLUG2_LOVECRAFT_4856)
             }
 
             30 -> npc(FaceAnim.FRIENDLY, "Sniff. Yes, everyone says that.").also { stage = END_DIALOGUE }
@@ -49,5 +49,5 @@ class EzekialLovecraftDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = EzekialLovecraftDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.EZEKIAL_LOVECRAFT_4856)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLUG2_LOVECRAFT_4856)
 }

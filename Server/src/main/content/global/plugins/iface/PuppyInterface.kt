@@ -27,7 +27,7 @@ class PuppyInterface : InterfaceListener {
             val itemId = PUPPIES[index][RandomFunction.random(PUPPIES[index].size)]
             openDialogue(
                 player,
-                NPCs.PET_SHOP_OWNER_6893,
+                NPCs.LORE_PETSHOP_OWNER_TAVERLY_6893,
                 NAMES[index],
                 itemId
             )

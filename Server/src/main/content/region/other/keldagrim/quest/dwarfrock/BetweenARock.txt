@@ -8,7 +8,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class BetweenARock : Quest("Between a Rock...", 34, 33, 2, Vars.VARBIT_QUEST_BETWEEN_A_ROCK_299, 0, 1, 110) {
+class BetweenARock : Quest("Between a Rock...", 34, 33, 2, Vars.VARBIT_299, 0, 1, 110) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -103,7 +103,7 @@ class BetweenARock : Quest("Between a Rock...", 34, 33, 2, Vars.VARBIT_QUEST_BET
         rewardXP(player, Skills.MINING, 5000.0)
         rewardXP(player, Skills.SMITHING, 5000.0)
         addItemOrDrop(player, Items.ADAMANT_PICKAXE_1271)
-        setVarbit(player, Vars.VARBIT_QUEST_BETWEEN_A_ROCK_299, 110, true)
+        setVarbit(player, Vars.VARBIT_299, 110, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

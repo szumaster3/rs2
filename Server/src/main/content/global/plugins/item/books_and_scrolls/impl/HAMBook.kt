@@ -67,7 +67,7 @@ class HAMBook : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.BOOK_OF_HAM_4829, IntType.ITEM, "read") { player, _ ->
+        on(Items.BOOK_OF_H_A_M_4829, IntType.ITEM, "read") { player, _ ->
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
             if (player.interfaceManager.close()) {
                 openDialogue(

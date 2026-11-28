@@ -12,9 +12,9 @@ import shared.consts.NPCs
  */
 class GateGuardDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.MUSEUM_GUARD_5941)
+        npc = NPC(NPCs.VM_MUSEUM_GUARD_5941)
         when (stage) {
-            0 -> if (npc!!.id == NPCs.MUSEUM_GUARD_5942) {
+            0 -> if (npc!!.id == NPCs.VM_MUSEUM_GUARD2_5942) {
                 npc(FaceAnim.FRIENDLY, "Hello there! Sorry, I can't stop to talk. I'm guarding this", "workman's gate. I'm afraid you can't come through here -", "you'll need to find another way around.").also { stage = END_DIALOGUE }
             } else {
                 npc(FaceAnim.HALF_GUILTY, "Welcome! Would you like to go into the Dig Site", "archaeology cleaning area?").also { stage++ }

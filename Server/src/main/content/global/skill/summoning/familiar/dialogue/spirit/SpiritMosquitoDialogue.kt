@@ -73,5 +73,5 @@ class SpiritMosquitoDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_MOSQUITO_7331, NPCs.SPIRIT_MOSQUITO_7332)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_MOSQUITO_7331, NPCs.LORE_MOSQUITO_COMBAT_7332)
 }

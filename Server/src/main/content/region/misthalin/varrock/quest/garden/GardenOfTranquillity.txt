@@ -11,7 +11,7 @@ import core.plugin.Initializable
 
 @Initializable
 class GardenOfTranquillity :
-    Quest("Garden of Tranquility", 66, 65, 2, Vars.VARBIT_QUEST_GARDEN_OF_TRANQUILLITY_961, 0, 1, 60) {
+    Quest("Garden of Tranquility", 66, 65, 2, Vars.VARBIT_961, 0, 1, 60) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -36,7 +36,7 @@ class GardenOfTranquillity :
         addItemOrDrop(player, Items.ACORN_5312)
         addItemOrDrop(player, Items.GUAM_SEED_5291, 5)
         addItemOrDrop(player, Items.SUPERCOMPOST_6034)
-        setVarbit(player, Vars.VARBIT_QUEST_GARDEN_OF_TRANQUILLITY_961, 60, true)
+        setVarbit(player, Vars.VARBIT_961, 60, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

@@ -20,7 +20,7 @@ class DungeonPlanCutscene(
             player.settings.toggleRun()
         }
         loadRegion(10895)
-        addNPC(NPCs.GLO_CARANOCK_1427, 48, 15, Direction.WEST)
+        addNPC(NPCs.MM_CARANOCK_1427, 48, 15, Direction.WEST)
         addNPC(NPCs.WAYDAR_1408, 46, 15, Direction.EAST)
     }
 
@@ -66,7 +66,7 @@ class DungeonPlanCutscene(
             }
 
             1 -> {
-                dialogueUpdate(NPCs.GLO_CARANOCK_1427, FaceAnim.NEUTRAL, "It is good of you to meet me, Waydar.")
+                dialogueUpdate(NPCs.MM_CARANOCK_1427, FaceAnim.NEUTRAL, "It is good of you to meet me, Waydar.")
                 timedUpdate(6)
             }
 
@@ -81,7 +81,7 @@ class DungeonPlanCutscene(
 
             3 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "Well observed. How have you been keeping yourself occupied?",
                 )
@@ -99,7 +99,7 @@ class DungeonPlanCutscene(
 
             5 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "My my. How things have changed somewhat since Glough's time... Now, what of the human?",
                 )
@@ -117,7 +117,7 @@ class DungeonPlanCutscene(
 
             7 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "You may be right. Never mind - There are greater matters afoot. With Glough's gone, it falls to us to continue with his plans.",
                 )
@@ -126,7 +126,7 @@ class DungeonPlanCutscene(
 
             8 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "Also, the shipyard workers are becoming restless.",
                 )
@@ -140,7 +140,7 @@ class DungeonPlanCutscene(
 
             10 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "Money for me, Waydar, and promotion for you. As you know, the 10th squad of the Royal Guard are slightly worse for wear on this island.",
                 )
@@ -158,7 +158,7 @@ class DungeonPlanCutscene(
 
             12 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "What if they were to die? An entire squad of the Royal Guard goes missing in the jungle of Karamja ... We could blame it on the humans.",
                 )
@@ -172,7 +172,7 @@ class DungeonPlanCutscene(
 
             14 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "Precisely. He might even order an invasion. at the very last he'll step up the defence. More order for me, promotion for you.",
                 )
@@ -190,7 +190,7 @@ class DungeonPlanCutscene(
 
             16 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "Ah yes - All that trouble with the Khazard. Last I heard, Bolren had retrieved the orbs of protection. Apparently some human lent their assistance.",
                 )
@@ -208,7 +208,7 @@ class DungeonPlanCutscene(
 
             18 -> {
                 dialogueUpdate(
-                    NPCs.GLO_CARANOCK_1427,
+                    NPCs.MM_CARANOCK_1427,
                     FaceAnim.NEUTRAL,
                     "I agree. Anyhow, we don't want your human wondering as to your whereabouts. When the time is right, don't hesitate to ... dispose of it.",
                 )

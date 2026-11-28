@@ -54,7 +54,7 @@ class AbbotLangleyDialogue(player: Player? = null) : Dialogue(player) {
             10 -> npc("Ok.").also { stage++ }
             11 -> {
                 end()
-                visualize(npc!!, Animations.CAST_SPELL_717, Graphics.MONK_CAST_HEAL_84)
+                visualize(npc!!, Animations.HUMAN_CASTWEAKEN_717, Graphics.HEAL_CASTING_84)
                 heal(player, (getStatLevel(player, Skills.HITPOINTS) * 0.20).toInt())
                 sendDialogue(player, "Abbot Langley places his hands on your head. You feel a little better.")
             }

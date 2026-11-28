@@ -195,8 +195,8 @@ class LordRologarthDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = LordRologarthDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.DR_FENKENSTRAIN_1671,
-        NPCs.DR_FENKENSTRAIN_1672,
+        NPCs.FENKENSTRAINS_MONSTER_1671,
+        NPCs.LORD_ROLOGARTH_1672,
         NPCs.FENKENSTRAINS_MONSTER_1673,
     )
 }

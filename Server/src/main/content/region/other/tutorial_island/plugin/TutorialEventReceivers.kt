@@ -145,7 +145,7 @@ object TutorialInteractionReceiver : EventHook<InteractionEvent> {
                 }
             }
 
-            51 -> if (event.target.id == NPCs.GIANT_RAT_950 && event.option == "attack") {
+            51 -> if (event.target.id == NPCs.NEWBIEGIANTRAT_950 && event.option == "attack") {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 52)
                 TutorialStage.load(player, 52)
             }
@@ -247,12 +247,12 @@ object TutorialKillReceiver : EventHook<NPCKillEvent> {
         if (entity !is Player) return
         val player = entity.asPlayer()
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
-            52 -> if (event.npc.id == NPCs.GIANT_RAT_950) {
+            52 -> if (event.npc.id == NPCs.NEWBIEGIANTRAT_950) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 53)
                 TutorialStage.load(player, 53)
             }
 
-            54 -> if (event.npc.id == NPCs.GIANT_RAT_950) {
+            54 -> if (event.npc.id == NPCs.NEWBIEGIANTRAT_950) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 55)
                 TutorialStage.load(player, 55)
             }
@@ -265,7 +265,7 @@ object TutorialCastReceiver : EventHook<SpellCastEvent> {
         if (entity !is Player) return
         val player = entity.asPlayer()
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
-            70 -> if (event.spellId == 1 && event.spellBook == SpellBookManager.SpellBook.MODERN && event.target?.id == NPCs.CHICKEN_951) {
+            70 -> if (event.spellId == 1 && event.spellBook == SpellBookManager.SpellBook.MODERN && event.target?.id == NPCs.NEWBIECHICKEN_951) {
                 setAttribute(player, GameAttributes.TUTORIAL_STAGE, 71)
                 TutorialStage.load(player, 71)
             }

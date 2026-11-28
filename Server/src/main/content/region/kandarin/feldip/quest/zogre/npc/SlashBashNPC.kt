@@ -24,7 +24,7 @@ class SlashBashNPC(id: Int = 0, location: Location? = null, private val owner: P
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
         SlashBashNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SLASH_BASH_2060)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOGRE_SLASH_BASH_2060)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -69,7 +69,7 @@ class SlashBashNPC(id: Int = 0, location: Location? = null, private val owner: P
 
         @JvmStatic
         fun spawnSlashBash(player: Player) {
-            val boss = SlashBashNPC(NPCs.SLASH_BASH_2060, null, player).apply {
+            val boss = SlashBashNPC(NPCs.ZOGRE_SLASH_BASH_2060, null, player).apply {
                 location = Location.getRandomLocation(Location.create(2480, 9445, 0), 2, true)
                 isWalks = true
                 isNeverWalks = false
@@ -79,7 +79,7 @@ class SlashBashNPC(id: Int = 0, location: Location? = null, private val owner: P
             registerLogoutListener(player, "slash-bash") { boss.clear() }
             setAttribute(player, ZogreUtils.SLASH_BASH_ACTIVE, true)
 
-            val spawnGraphics = core.game.world.update.flag.context.Graphics(Graphics.RE_PUFF_86)
+            val spawnGraphics = core.game.world.update.flag.context.Graphics(Graphics.SMOKEPUFF_2_86)
             GameWorld.Pulser.submit(object : Pulse(2, boss) {
                 override fun pulse(): Boolean {
                     visualize(boss, -1, spawnGraphics)

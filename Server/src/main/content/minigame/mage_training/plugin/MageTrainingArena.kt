@@ -28,7 +28,7 @@ class MageTrainingArena : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         LocType.forId(Scenery.DOORWAY_10721).handlers["option:enter"] = this
-        NpcType.forId(NPCs.REWARDS_GUARDIAN_3103).handlers["option:trade-with"] = this
+        NpcType.forId(NPCs.MAGICTRAINING_GUARD_REWARDS_3103).handlers["option:trade-with"] = this
         for (type in MTARoomType.values()) {
             if (type.mtaZone != null) {
                 ZoneBuilder.configure(type.mtaZone)
@@ -37,7 +37,7 @@ class MageTrainingArena : OptionHandler() {
         }
         ObjType.forId(TelekineticTheatrePlugin.STATUE).handlers["option:observe"] = this
         ObjType.forId(TelekineticTheatrePlugin.STATUE).handlers["option:reset"] = this
-        NpcType.forId(NPCs.MAZE_GUARDIAN_3102).handlers["option:talk-to"] = this
+        NpcType.forId(NPCs.MAGICTRAINING_GUARD_MAZE_3102).handlers["option:talk-to"] = this
         definePlugins(EnchantSpell(), TelekineticGrabSpell())
         return this
     }
@@ -51,20 +51,20 @@ class MageTrainingArena : OptionHandler() {
                 }
                 playAudio(player, Sounds.MAGICAL_BARRIER_1657)
                 val destination = if (player.location.y < 3300) Direction.NORTH else Direction.SOUTH
-                forceMove(player, player.location, player.location.transform(destination, 2), 30, 90, dir = destination, Animations.WALK_THROUGH_BARRIER_10584)
+                forceMove(player, player.location, player.location.transform(destination, 2), 30, 90, dir = destination, Animations.SC_WALKING_THROUGH_FORCEFIELD_10584)
                 return true
             }
 
-            NPCs.REWARDS_GUARDIAN_3103 -> {
+            NPCs.MAGICTRAINING_GUARD_REWARDS_3103 -> {
                 if (!player.getSavedData().activityData.startMageTrainingArena) {
-                    openDialogue(player, NPCs.REWARDS_GUARDIAN_3103, this, true, true)
+                    openDialogue(player, NPCs.MAGICTRAINING_GUARD_REWARDS_3103, this, true, true)
                 } else {
                     openInterface(player, Components.MAGICTRAINING_SHOP_197)
                 }
                 return true
             }
 
-            NPCs.MAZE_GUARDIAN_3102 -> {
+            NPCs.MAGICTRAINING_GUARD_MAZE_3102 -> {
                 openDialogue(player, node.id, node)
                 return true
             }
@@ -103,7 +103,7 @@ class MageTrainingArena : OptionHandler() {
     }
 
     override fun getDestination(node: Node, n: Node): Location? =
-        if (n.id == NPCs.MAZE_GUARDIAN_3102) {
+        if (n.id == NPCs.MAGICTRAINING_GUARD_MAZE_3102) {
             n.location.transform(Direction.getDirection(node.location, n.location), -1)
         } else {
             null

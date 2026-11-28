@@ -113,5 +113,5 @@ class BarbarianGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BarbarianGuardDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARBARIAN_GUARD_384)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARBGUARD1_384)
 }

@@ -68,7 +68,7 @@ private class SeaBootsDialogue : DialogueFile() {
                         }
                         2, 3 -> {
                             player!!.dialogueInterpreter.sendItemMessage(
-                                Items.ENCHANTED_LYRE1_3691,
+                                Items.ENCHANTED_LYRE_1_3691,
                                 "You may use lyre once per day without draining",
                                 "any of its enchantment."
                             )
@@ -128,7 +128,7 @@ private class SeaBootsDialogue : DialogueFile() {
             6 -> when (buttonID) {
                 1 -> {
                     if (inInventory(player!!, Items.RAW_BASS_363) &&
-                        (inEquipmentOrInventory(player!!, Items.RING_OF_CHAROSA_6465) || inEquipmentOrInventory(player!!, Items.RING_OF_CHAROS_4202))) {
+                        (inEquipmentOrInventory(player!!, Items.RING_OF_CHAROS_A_6465) || inEquipmentOrInventory(player!!, Items.RING_OF_CHAROS_4202))) {
                         npcl(FaceAnim.HALF_GUILTY, "A raw bass? You should know that is not a worthy offering, outlander.")
                         stage = 0
                     } else if (hasAnItem(player!!, *enchantedLyre).container == player!!.inventory) {
@@ -143,7 +143,7 @@ private class SeaBootsDialogue : DialogueFile() {
                         removeItem(player!!, Items.RAW_SHARK_383, Container.INVENTORY)
                     ) {
                         npc(FaceAnim.FRIENDLY, "I offer you this enchantment for your worthy offering.")
-                        addItemOrDrop(player!!, Items.ENCHANTED_LYRE1_3691, 1)
+                        addItemOrDrop(player!!, Items.ENCHANTED_LYRE_1_3691, 1)
                         stage = 0
                     } else {
                         sendDialogue(player!!, "You don't have required items in your inventory.")
@@ -262,12 +262,12 @@ private class SeaBootsDialogue : DialogueFile() {
 
     companion object {
         private val enchantedLyre = intArrayOf(
-            Items.ENCHANTED_LYRE1_3691,
-            Items.ENCHANTED_LYRE2_6125,
-            Items.ENCHANTED_LYRE3_6126,
-            Items.ENCHANTED_LYRE4_6127,
-            Items.ENCHANTED_LYRE5_14590,
-            Items.ENCHANTED_LYRE6_14591,
+            Items.ENCHANTED_LYRE_1_3691,
+            Items.ENCHANTED_LYRE_2_6125,
+            Items.ENCHANTED_LYRE_3_6126,
+            Items.ENCHANTED_LYRE_4_6127,
+            Items.ENCHANTED_LYRE_5_14590,
+            Items.ENCHANTED_LYRE_6_14591,
         )
     }
 }

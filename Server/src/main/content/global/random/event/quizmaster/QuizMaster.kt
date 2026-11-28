@@ -16,7 +16,7 @@ import shared.consts.Items
 object QuizMaster {
     const val COINS = Items.COINS_995
     val MYSTERY_BOX = Item(Items.MYSTERY_BOX_6199, 1, 6199)
-    const val SIT_ANIMATION = Animations.QUIZMASTER_CHAIR_2378
+    const val SIT_ANIMATION = Animations.QUIZ_SIT_2378
     private val EVENT_LOCATION: Location = Location.create(1952, 4764, 1)
     val CORRECT =
         arrayOf(

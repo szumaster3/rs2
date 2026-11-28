@@ -21,21 +21,21 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
         val player = player ?: return true
         val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
         if (tutStage in 5..15) {
-            val hasAxe = inInventory(player, Items.BRONZE_AXE_1351)
+            val hasAxe = inInventory(player, Items.BRONZE_HATCHET_1351)
             val hasTinderbox = inInventory(player, Items.TINDERBOX_590)
 
             when {
                 !hasAxe && !hasTinderbox -> {
-                    addItem(player, Items.BRONZE_AXE_1351)
+                    addItem(player, Items.BRONZE_HATCHET_1351)
                     addItem(player, Items.TINDERBOX_590)
-                    sendDoubleItemDialogue(player, Items.TINDERBOX_590, Items.BRONZE_AXE_1351, "The Survival Expert gives you a spare <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!")
+                    sendDoubleItemDialogue(player, Items.TINDERBOX_590, Items.BRONZE_HATCHET_1351, "The Survival Expert gives you a spare <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!")
                     stage = END_DIALOGUE
                     return true
                 }
 
                 !hasAxe -> {
-                    addItem(player, Items.BRONZE_AXE_1351)
-                    sendItemDialogue(player, Items.BRONZE_AXE_1351, "The Survival Expert gives you a spare <col=08088A>bronze axe</col>.")
+                    addItem(player, Items.BRONZE_HATCHET_1351)
+                    sendItemDialogue(player, Items.BRONZE_HATCHET_1351, "The Survival Expert gives you a spare <col=08088A>bronze axe</col>.")
                     stage = END_DIALOGUE
                     return true
                 }
@@ -75,9 +75,9 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
         when (tutStage) {
             4 -> when (stage) {
                 0 -> {
-                    sendDoubleItemDialogue(player, Items.TINDERBOX_590, Items.BRONZE_AXE_1351, "The Survival Guide gives you a <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!")
+                    sendDoubleItemDialogue(player, Items.TINDERBOX_590, Items.BRONZE_HATCHET_1351, "The Survival Guide gives you a <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!")
                     addItem(player, Items.TINDERBOX_590)
-                    addItem(player, Items.BRONZE_AXE_1351)
+                    addItem(player, Items.BRONZE_HATCHET_1351)
                     stage++
                 }
 

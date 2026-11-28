@@ -82,12 +82,12 @@ class WarriorsGuildPlugin : InteractionListener {
                 return@on true
             }
 
-            sendNPCDialogue(player, NPCs.GHOMMAL_4285, "You not pass. You too weedy.")
+            sendNPCDialogue(player, NPCs.WARGUILD_GHOMMAL_4285, "You not pass. You too weedy.")
             return@on false
         }
 
-        on(NPCs.GAMFRED_4287, IntType.NPC, "claim-shield") { player, node ->
-            player.dialogueInterpreter.open(NPCs.GAMFRED_4287, node, true)
+        on(NPCs.WARGUILD_GAMFRED_4287, IntType.NPC, "claim-shield") { player, node ->
+            player.dialogueInterpreter.open(NPCs.WARGUILD_GAMFRED_4287, node, true)
             return@on true
         }
 

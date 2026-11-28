@@ -212,7 +212,7 @@ class WizardKorvakDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_KORVAK_8029)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RCGUILD_WIZARD_KORVAC_8029)
 
     /**
      * Handles repairing a pouch: needs the worn out pouch first, then the coins.

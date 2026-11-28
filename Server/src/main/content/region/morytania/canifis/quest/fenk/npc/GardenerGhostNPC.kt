@@ -17,7 +17,7 @@ class GardenerGhostNPC : AbstractNPC {
     var ticksLeft = secondsToTicks(0)
     val graveLocation = Location(3608, 3490)
 
-    constructor() : super(NPCs.GARDENER_GHOST_1675, null, true)
+    constructor() : super(NPCs.FENK_GARDENER_1675, null, true)
     private constructor(id: Int, location: Location) : super(id, location)
 
     override fun construct(
@@ -26,7 +26,7 @@ class GardenerGhostNPC : AbstractNPC {
         vararg objects: Any?,
     ): AbstractNPC = GardenerGhostNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GARDENER_GHOST_1675)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FENK_GARDENER_1675)
 
     override fun handleTickActions() {
         if (target == null) {

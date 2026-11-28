@@ -44,6 +44,6 @@ class DraynorSewerPlugin: InteractionListener {
     }
 
     companion object {
-        val climbAnimation = Animation(Animations.CLIMB_OUT_OF_LADDER_IN_DRAYNOR_SEWER_2413)
+        val climbAnimation = Animation(Animations.HUMAN_REACH_FOR_LADDER_IN_SQUARE_2413)
     }
 }

@@ -11,9 +11,9 @@ import shared.consts.Items
 class UseWithBinHandler : InteractionListener {
     @JvmField
     val allowedNodes = ArrayList<Int>(100)
-    val fillAnim = Animation(Animations.HUMAN_MULTI_USE_832)
-    val compostPotionAnimation = Animation(Animations.POUR_VIAL_2259)
-    val scoopAnimation = Animation(Animations.BUCKET_8905)
+    val fillAnim = Animation(Animations.HUMAN_PICKUPTABLE_832)
+    val compostPotionAnimation = Animation(Animations.RD_POUR_VIAL_2259)
+    val scoopAnimation = Animation(Animations.EASTER_08_EMPTYING_BUCKET_8905)
 
     val bins = 7836..7840
 
@@ -23,7 +23,7 @@ class UseWithBinHandler : InteractionListener {
             val cBin = CompostBins.forObject(with.asScenery()) ?: return@onUseWith true
             val bin = cBin.getBinForPlayer(player)
             when (val used = usedNode.id) {
-                Items.COMPOST_POTION1_6476, Items.COMPOST_POTION2_6474, Items.COMPOST_POTION3_6472, Items.COMPOST_POTION4_6470 -> {
+                Items.COMPOST_POTION_1_6476, Items.COMPOST_POTION_2_6474, Items.COMPOST_POTION_3_6472, Items.COMPOST_POTION_4_6470 -> {
                     if (!bin.isSuperCompost && bin.isFinished && !bin.isClosed) {
                         animate(player, compostPotionAnimation)
                         submitIndividualPulse(
@@ -99,10 +99,10 @@ class UseWithBinHandler : InteractionListener {
         }
         allowedNodes.add(Items.COCONUT_SHELL_5978)
         allowedNodes.add(Items.WEEDS_6055)
-        allowedNodes.add(Items.COMPOST_POTION4_6470)
-        allowedNodes.add(Items.COMPOST_POTION3_6472)
-        allowedNodes.add(Items.COMPOST_POTION2_6474)
-        allowedNodes.add(Items.COMPOST_POTION1_6476)
+        allowedNodes.add(Items.COMPOST_POTION_4_6470)
+        allowedNodes.add(Items.COMPOST_POTION_3_6472)
+        allowedNodes.add(Items.COMPOST_POTION_2_6474)
+        allowedNodes.add(Items.COMPOST_POTION_1_6476)
         allowedNodes.add(Items.BUCKET_1925)
     }
 

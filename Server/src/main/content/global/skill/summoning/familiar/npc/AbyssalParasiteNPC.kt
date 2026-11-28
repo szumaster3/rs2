@@ -15,7 +15,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class AbyssalParasiteNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.ABYSSAL_PARASITE_6818) :
+class AbyssalParasiteNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_ABYSSAL_LEECH_6818) :
     BurdenBeast(owner, id, 3000, Items.ABYSSAL_PARASITE_POUCH_12035, 1, 7) {
 
     @Suppress("unused")
@@ -47,6 +47,6 @@ class AbyssalParasiteNPC @JvmOverloads constructor(owner: Player? = null, id: In
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ABYSSAL_PARASITE_6818, NPCs.ABYSSAL_PARASITE_6819)
+        return intArrayOf(NPCs.LORE_ABYSSAL_LEECH_6818, NPCs.LORE_ABYSSAL_LEECH_COMBAT_6819)
     }
 }

@@ -34,5 +34,5 @@ class LeatherWorkerDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LEATHERWORKER_680)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANGING_GUILD_LEATHERWORKER_680)
 }

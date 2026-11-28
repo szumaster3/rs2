@@ -28,5 +28,5 @@ class CaranockDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GLO_CARANOCK_1427)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MM_CARANOCK_1427)
 }

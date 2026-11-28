@@ -18,7 +18,7 @@ class GamblerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(npc.id == NPCs.GAMBLER_3006) {
+        if(npc.id == NPCs.VC_GAMBLER_POOR2_3006) {
             playerl(FaceAnim.HAPPY, "Good day.").also { stage = 39 }
         } else {
             playerl(FaceAnim.FRIENDLY, "Hello!")
@@ -89,13 +89,13 @@ class GamblerDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = GamblerDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.GAMBLER_2998,
+        NPCs.VC_GAMBLER_RICH1_2998,
         NPCs.GAMBLER_2999,
-        NPCs.GAMBLER_3001,
-        NPCs.GAMBLER_3002,
-        NPCs.GAMBLER_3003,
-        NPCs.GAMBLER_3004,
-        NPCs.GAMBLER_3005,
-        NPCs.GAMBLER_3006
+        NPCs.VC_GAMBLER_RICH4_3001,
+        NPCs.VC_GAMBLER_WOMAN1_3002,
+        NPCs.VC_GAMBLER_WOMAN2_3003,
+        NPCs.VC_GAMBLER_WOMAN3_3004,
+        NPCs.VC_GAMBLER_POOR1_3005,
+        NPCs.VC_GAMBLER_POOR2_3006
     )
 }

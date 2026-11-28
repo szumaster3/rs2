@@ -17,7 +17,7 @@ class PortSarimPlugin : InteractionListener {
 
     companion object {
         private val DOORS = intArrayOf(Scenery.CELL_DOOR_9563, Scenery.DOOR_9565)
-        private val MONKS_OF_ENTRANA = intArrayOf(NPCs.MONK_OF_ENTRANA_2728, NPCs.MONK_OF_ENTRANA_657, NPCs.MONK_OF_ENTRANA_2729, 2730, NPCs.MONK_OF_ENTRANA_2731, NPCs.MONK_OF_ENTRANA_658)
+        private val MONKS_OF_ENTRANA = intArrayOf(NPCs.SHIPMONK1_B_2728, NPCs.SHIPMONK_657, NPCs.SHIPMONK1_C_2729, 2730, NPCs.SHIPMONK2_C_2731, NPCs.SHIPMONK2_658)
         private val SEAMAN = intArrayOf(NPCs.CAPTAIN_TOBIAS_376, NPCs.SEAMAN_LORRIS_377, NPCs.SEAMAN_THRESNOR_378)
         private val GUARD_FORCE_CHAT =
             arrayOf(
@@ -36,7 +36,7 @@ class PortSarimPlugin : InteractionListener {
 
         on(Items.AHABS_BEER_6561, IntType.GROUND_ITEM, "take") { player, node ->
             face(player, node)
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             player.dialogueInterpreter.open(NPCs.AHAB_2692, findNPC(NPCs.AHAB_2692), false)
             return@on true
         }
@@ -87,7 +87,7 @@ class PortSarimPlugin : InteractionListener {
                             return@addDialogueAction
                         }
                         lock(player, 2)
-                        animate(player, Animations.HUMAN_MULTI_USE_832)
+                        animate(player, Animations.HUMAN_PICKUPTABLE_832)
                         sendMessage(player, "You take a banana.")
                         addItem(player, Items.BANANA_1963)
                     }
@@ -98,7 +98,7 @@ class PortSarimPlugin : InteractionListener {
                     return@on true
                 }
                 lock(player, 2)
-                animate(player, Animations.HUMAN_MULTI_USE_832)
+                animate(player, Animations.HUMAN_PICKUPTABLE_832)
                 sendMessage(player, "You find your bottle of rum in amongst the bananas.")
                 addItem(player, Items.KARAMJAN_RUM_431)
                 removeAttributes(player, "wydin-rum", "stashed-rum")
@@ -138,7 +138,7 @@ class PortSarimPlugin : InteractionListener {
          * Handles talking to the sleeping guard NPC.
          */
 
-        on(NPCs.GUARD_2704, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.JAIL_GUARD_SLEEPING_2704, IntType.NPC, "talk-to") { player, node ->
             sendChat((node as NPC), GUARD_FORCE_CHAT[RandomFunction.random(GUARD_FORCE_CHAT.size)])
             runTask(player, 1) {
                 sendPlayerDialogue(player, "Maybe I should let him sleep.")
@@ -182,7 +182,7 @@ class PortSarimPlugin : InteractionListener {
          * Handles talking to the npc around port.
          */
 
-        on(NPCs.BELLEMORDE_2942, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.VC_BELLEMORDE_2942, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, CatBellemordeDialogue(), node.asNpc())
             return@on true
         }
@@ -212,12 +212,12 @@ class PortSarimPlugin : InteractionListener {
             return@on true
         }
 
-        on(intArrayOf(NPCs.MONK_OF_ENTRANA_657, NPCs.MONK_OF_ENTRANA_658, NPCs.MONK_OF_ENTRANA_2728, NPCs.MONK_OF_ENTRANA_2729, NPCs.MONK_OF_ENTRANA_2730, NPCs.MONK_OF_ENTRANA_2731), IntType.NPC, "talk-to") { player, node ->
+        on(intArrayOf(NPCs.SHIPMONK_657, NPCs.SHIPMONK2_658, NPCs.SHIPMONK1_B_2728, NPCs.SHIPMONK1_C_2729, NPCs.SHIPMONK2_B_2730, NPCs.SHIPMONK2_C_2731), IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, MonkOfEntranaDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.THAKI_THE_DELIVERY_DWARF_7115, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.CATCON_NPC_DELIVERY_DWARF_7115, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, ThakiTheDeliveryDwarfDialogue(), node.asNpc())
             return@on true
         }

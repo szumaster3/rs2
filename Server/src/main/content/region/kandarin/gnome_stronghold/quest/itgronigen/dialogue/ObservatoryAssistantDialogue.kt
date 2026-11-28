@@ -20,7 +20,7 @@ import shared.consts.NPCs
 class ObservatoryAssistantDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.OBSERVATORY_ASSISTANT_6118)
+        npc = NPC(NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118)
         val questStage = getQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName)
         val amountOfPlanks = amountInInventory(player!!, Items.PLANK_960)
         when (questStage) {

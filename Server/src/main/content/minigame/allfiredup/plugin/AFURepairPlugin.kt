@@ -175,8 +175,8 @@ class AFURepairPlugin : InteractionListener {
 
         fun getAnimation(player: Player): Animation =
             if (getOtherLocation(player) == destinationDown) {
-                Animation(Animations.WALK_BACKWARDS_CLIMB_1148)
-            } else Animation(Animations.CLIMB_DOWN_B_740)
+                Animation(Animations.DEATH_HUMAN_CLIMBING_DOWN_1148)
+            } else Animation(Animations.HUMAN_CLIMBING_DOWN_740)
 
         fun getDirection(player: Player): Direction =
             if (this == BURTHORPE) Direction.EAST else Direction.WEST

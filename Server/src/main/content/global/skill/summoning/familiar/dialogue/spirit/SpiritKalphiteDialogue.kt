@@ -79,14 +79,14 @@ class SpiritKalphiteDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_KALPHITE_6994, NPCs.SPIRIT_KALPHITE_6995)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_KALPHITE_6994, NPCs.LORE_KALPHITE_COMBAT_6995)
 
     companion object {
         private val kerisIDs = intArrayOf(
             Items.KERIS_10581,
-            Items.KERISP_10582,
-            Items.KERISP_PLUS_10583,
-            Items.KERISP_PLUS_PLUS_10584,
+            Items.KERIS_P_10582,
+            Items.KERIS_P_PLUS_10583,
+            Items.KERIS_P_PLUS_PLUS_10584,
         )
     }
 }

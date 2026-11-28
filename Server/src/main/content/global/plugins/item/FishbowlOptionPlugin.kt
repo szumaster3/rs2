@@ -269,8 +269,8 @@ class FishbowlOptionPlugin : OptionHandler() {
         private const val FISHBOWL_GREEN = Items.FISHBOWL_6671
         private const val FISHBOWL_SPINE = Items.FISHBOWL_6672
         private const val TINY_NET = Items.TINY_NET_6674
-        private val ANIM_TALK = Animation(Animations.HUMAN_TALK_WITH_FISHBOWL_2782)
-        private val ANIM_PLAY = Animation(Animations.HUMAN_PLAY_WITH_FISHBOWL_2780)
-        private val ANIM_FEED = Animation(Animations.FEED_BOWL_2781)
+        private val ANIM_TALK = Animation(Animations.HUMAN_TALK_TO_PET_FISH_BLUE_2782)
+        private val ANIM_PLAY = Animation(Animations.HUMAN_PLAY_WITH_PET_FISH_BLUE_2780)
+        private val ANIM_FEED = Animation(Animations.HUMAN_FEED_PET_FISH_BLUE_2781)
     }
 }

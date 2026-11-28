@@ -17,7 +17,7 @@ import shared.consts.NPCs
 class RobinDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY.questName)
-        npc = NPC(NPCs.ROBIN_1694)
+        npc = NPC(NPCs.AHOY_ROBIN_1694)
         if (questStage !in 1..79) {
             end()
             return

@@ -27,17 +27,17 @@ class TaverleyStrangeFloorShortcut : AgilityShortcut(intArrayOf(9294), 80, 12.5,
         val start = Location.create(if (fromLeft) 2877 else 2881, 9813, 0)
         val end = Location.create(if (fromLeft) 2881 else 2877, 9813, 0)
 
-        AgilityHandler.forceWalk(player, -1, start, end, Animation(Animations.RUNNING_OSRS_STYLE_1995), 13, 0.0, null)
+        AgilityHandler.forceWalk(player, -1, start, end, Animation(Animations.IC_RUNNING_1995), 13, 0.0, null)
 
         GameWorld.Pulser.submit(object : Pulse(1, player) {
             var counter = 0
             var fail = AgilityHandler.hasFailed(player, 1, 0.1)
             override fun pulse(): Boolean {
                 when (counter++) {
-                    0 -> animate(player, Animations.RUNNING_OSRS_STYLE_1995)
+                    0 -> animate(player, Animations.IC_RUNNING_1995)
                     1 -> {
                         playAudio(player, Sounds.JUMP_2461)
-                        animate(player, Animations.JUMP_WEREWOLF_1603, true)
+                        animate(player, Animations.HUMAN_JUMP_HURDLE_1603, true)
                         if (fail) {
                             playAudio(player, Sounds.FLOOR_SPIKES_1383)
                             playAudio(player, Sounds.JUMP_BLADES_2464)

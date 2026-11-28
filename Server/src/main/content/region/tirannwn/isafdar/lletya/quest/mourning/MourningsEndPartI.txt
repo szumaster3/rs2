@@ -8,7 +8,7 @@ import core.plugin.Initializable
 
 @Initializable
 class MourningsEndPartI :
-    Quest("Mourning's End Part I", 91, 90, 2, Vars.VARP_QUEST_MOURNINGS_ENDS_PART_I_517, 0, 1, 8) {
+    Quest("Mourning's End Part I", 91, 90, 2, Vars.VARP_517, 0, 1, 8) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

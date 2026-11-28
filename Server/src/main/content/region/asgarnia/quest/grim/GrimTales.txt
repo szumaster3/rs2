@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class GrimTales : Quest("Grim Tales", 140, 139, 1,Vars.VARBIT_QUEST_GRIM_TALES_2783,0,1,60) {
+class GrimTales : Quest("Grim Tales", 140, 139, 1,Vars.VARBIT_2783,0,1,60) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -44,7 +44,7 @@ class GrimTales : Quest("Grim Tales", 140, 139, 1,Vars.VARBIT_QUEST_GRIM_TALES_2
         rewardXP(player, Skills.AGILITY, 6000.0)
         rewardXP(player, Skills.THIEVING, 6000.0)
         addItemOrDrop(player, Items.DWARVEN_HELMET_11200)
-        setVarbit(player, Vars.VARBIT_QUEST_GRIM_TALES_2783, 60, true)
+        setVarbit(player, Vars.VARBIT_2783, 60, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

@@ -11,8 +11,8 @@ import shared.consts.Scenery
 
 class WaterfallListeners : InteractionListener {
     companion object {
-        const val HUDON = NPCs.HUDON_305
-        const val TOMBSTONE = Scenery.GLARIAL_S_TOMBSTONE_1992
+        const val HUDON = NPCs.HUDON_WATERFALL_QUEST_305
+        const val TOMBSTONE = Scenery.GLARIALS_TOMBSTONE_1992
         const val TOMBSTONE_INTERFACE = Components.GLARIALS_TOMBSTONE_221
         val TOMBSTONE_INTERFACE_CONTENT =
             arrayOf(

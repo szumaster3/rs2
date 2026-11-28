@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class TaiBwoWannaiTrio : Quest("Tai Bwo Wannai Trio", 118, 117, 2, Vars.VARP_QUEST_TAI_BWO_WANNAI_TRIO_320, 0, 1, 6) {
+class TaiBwoWannaiTrio : Quest("Tai Bwo Wannai Trio", 118, 117, 2, Vars.VARP_320, 0, 1, 6) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

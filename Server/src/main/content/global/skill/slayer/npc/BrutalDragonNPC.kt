@@ -60,7 +60,7 @@ class BrutalDragonNPC : AbstractNPC {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BRUTAL_GREEN_DRAGON_5362)
+        return intArrayOf(NPCs.BRUT_GREEN_DRAGON_5362)
     }
 
     companion object {

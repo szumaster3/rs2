@@ -164,7 +164,7 @@ class FruitBatFamiliar(owner: Player? = null, id: Int = FRUIT_BAT) :
     }
 
     companion object {
-        private const val FRUIT_BAT = NPCs.FRUIT_BAT_6817
+        private const val FRUIT_BAT = NPCs.LORE_FRUIT_BAT_6817
 
         private val FLY_UP_ANIMATION = Animation(8320)
         private val FLY_DOWN_ANIMATION = Animation(8321)

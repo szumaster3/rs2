@@ -35,13 +35,13 @@ class RimmingtonPlugin : InteractionListener {
          */
 
         on(Scenery.WARDROBE_33963, IntType.SCENERY, "open") { player, node ->
-            animate(player, Animations.OPEN_WARDROBE_545)
+            animate(player, Animations.HUMAN_OPENBIGCUPBOARD_545)
             replaceScenery(node.asScenery(), Scenery.WARDROBE_35133, -1)
             return@on true
         }
 
         on(Scenery.WARDROBE_35133, IntType.SCENERY, "close") { player, node ->
-            animate(player, Animations.CLOSE_WARDROBE_541)
+            animate(player, Animations.HUMAN_CLOSEHIGHCUPBOARD_541)
             replaceScenery(node.asScenery(), Scenery.WARDROBE_33963, -1)
             return@on true
         }
@@ -50,7 +50,7 @@ class RimmingtonPlugin : InteractionListener {
          * Handles talking to NPCs around village.
          */
 
-        on(NPCs.ANJA_2684, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.RIMMINGTON_ANJA_2684, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, AnjaDialogue(), node.asNpc())
             return@on true
         }
@@ -60,7 +60,7 @@ class RimmingtonPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.HENGEL_2683, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.RIMMINGTON_HENGEL_2683, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, HengelDialogue(), node.asNpc())
             return@on true
         }

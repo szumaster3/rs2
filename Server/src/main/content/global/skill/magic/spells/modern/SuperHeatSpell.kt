@@ -19,7 +19,7 @@ import shared.consts.Sounds
 class SuperHeatSpell : SpellListener("modern") {
 
     val SOUND_EFFECT = Sounds.SUPERHEAT_FAIL_191
-    val GRAPHICS = Graphics.SPLASH_629
+    val GRAPHICS = Graphics.TREK_SNAIL_ACID_HIT_629
 
     override fun defineListeners() {
         onCast(ModernSpells.SUPERHEAT, ITEM) { player, node ->

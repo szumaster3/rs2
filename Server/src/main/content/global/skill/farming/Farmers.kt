@@ -28,7 +28,7 @@ enum class Farmers(val id: Int, val patches: Array<FarmingPatch>){
     FRIZZY(NPCs.FRIZZY_SKERNIP_4560, arrayOf(FarmingPatch.PORT_SARIM_SPIRIT_TREE)),
     YULF_SQUECKS(NPCs.YULF_SQUECKS_4561, arrayOf(FarmingPatch.ETCETERIA_SPIRIT_TREE)),
     PRAISTAN(NPCs.PRAISTAN_EBOLA_4562, arrayOf(FarmingPatch.KARAMJA_SPIRIT_TREE)),
-    IMIAGO(NPCs.IMIAGO_8041, arrayOf(FarmingPatch.CALQUAT_TREE)), ;
+    IMIAGO(NPCs.TBW_IMIAGO_8041, arrayOf(FarmingPatch.CALQUAT_TREE)), ;
 
     companion object {
         val farmers = values().associateBy { it.id }

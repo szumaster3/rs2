@@ -65,5 +65,5 @@ class AbyssalParasiteDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ABYSSAL_PARASITE_6818, NPCs.ABYSSAL_PARASITE_6819)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_ABYSSAL_LEECH_6818, NPCs.LORE_ABYSSAL_LEECH_COMBAT_6819)
 }

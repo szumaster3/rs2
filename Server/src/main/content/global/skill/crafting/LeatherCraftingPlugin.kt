@@ -143,7 +143,7 @@ class LeatherCraftingPlugin : InteractionListener, InterfaceListener {
                 return@queueScript stopExecuting(player)
             }
 
-            animate(player, Animations.CRAFT_LEATHER_1249)
+            animate(player, Animations.HUMAN_LEATHER_CRAFTING_1249)
 
             var removed = removeItem(player, Item(craft.input, craft.amount))
 

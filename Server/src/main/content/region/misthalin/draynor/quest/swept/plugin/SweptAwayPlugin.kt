@@ -68,7 +68,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
             addDialogueAction(player) { p, _ ->
                 sendNPCDialogue(
                     p,
-                    NPCs.MAGGIE_8078,
+                    NPCs.SWEPT_MAGGIE_8078,
                     "I wouldn't pester Norman at the mo - he's a bit on edge, what with Babe being poorly. The sneezing really gets to him!",
                     FaceAnim.NEUTRAL
                 )
@@ -85,7 +85,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
             addDialogueAction(player) { p, _ ->
                 sendNPCDialogue(
                     p,
-                    NPCs.MAGGIE_8078,
+                    NPCs.SWEPT_MAGGIE_8078,
                     "I wouldn't get too close to her if I were you. I gave her a portion of that goulash, so she's on the mend, but she still might be a bit contagious.",
                     FaceAnim.NEUTRAL
                 )
@@ -97,7 +97,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
          * Handles stirring the cauldron at Maggie's camp.
          */
 
-        on(Scenery.MAGGIE_S_CAULDRON_39230, IntType.SCENERY, "stir") { player, _ ->
+        on(Scenery.MAGGIES_CAULDRON_39230, IntType.SCENERY, "stir") { player, _ ->
             lock(player, 1)
             val questStage = getQuestStage(player, Quests.SWEPT_AWAY.questName)
             if (questStage >= 4) {
@@ -169,7 +169,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
         on(SweptUtils.GUS_CRATES_LABELLED, IntType.SCENERY, "extract-creature") { player, node ->
             if (!getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)) {
                 sendNPCDialogueLines(
-                    player, NPCs.GUS_8205,
+                    player, NPCs.SWEPT_GUS_8205,
                     FaceAnim.HALF_THINKING,false, "No! remember what I said: we can't waste the stock.",
                     "One look should be enough. We wouldn't want to get",
                     "Ms. Hetty Annoyed."
@@ -336,7 +336,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
     class LottieSupportDialogue : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
-            npc = NPC(NPCs.LOTTIE_8206)
+            npc = NPC(NPCs.SWEPT_LOTTIE_8206)
             when (stage) {
                 0 -> npc(FaceAnim.SAD, "Eh? Something looks very wrong. Not all the creatures", "are there!").also { stage++ }
                 1 -> npc(FaceAnim.SAD, "I'll just put things back to how they were and have a", "look for the missing critters.").also { stage++ }
@@ -361,7 +361,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
     class GusSupportDialogue : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
-            npc = NPC(NPCs.GUS_8205)
+            npc = NPC(NPCs.SWEPT_GUS_8205)
             when (stage) {
                 0 -> npc(
                     "I see you've put new labels on all the crates. Oh, newts!",

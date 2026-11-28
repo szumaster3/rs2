@@ -97,7 +97,7 @@ class CandlelightInterface : InterfaceListener, InteractionListener, MapArea {
     }
 
     override fun defineListeners() {
-        on((Scenery.DECORATIVE_PILLAR_11364..Scenery.DECORATIVE_PILLAR_11394).toIntArray(), IntType.SCENERY, "light") { player, node ->
+        on((Scenery.ROCKS_11364..Scenery.YOUNG_TREE_11394).toIntArray(), IntType.SCENERY, "light") { player, node ->
             setAttribute(player, GameAttributes.RE_CANDLELIGHT_CAMERA, Location(node.location.x, node.location.y))
             moveCamera(player, Direction.NORTH_WEST, true)
             openInterface(player, CANDLELIGHT_INTERFACE)
@@ -106,7 +106,7 @@ class CandlelightInterface : InterfaceListener, InteractionListener, MapArea {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.SCENERY, (Scenery.DECORATIVE_PILLAR_11364..Scenery.DECORATIVE_PILLAR_11394).toIntArray(), "light") { _, node ->
+        setDest(IntType.SCENERY, (Scenery.ROCKS_11364..Scenery.YOUNG_TREE_11394).toIntArray(), "light") { _, node ->
             return@setDest Location(1970, node.location.y)
         }
     }

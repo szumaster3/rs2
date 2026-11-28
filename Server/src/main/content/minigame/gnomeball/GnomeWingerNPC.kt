@@ -1,7 +1,7 @@
 package content.minigame.gnomeball
 
 /*
-private class GnomeWingerNPC : NPCBehavior(NPCs.GNOME_WINGER_633) {
+private class GnomeWingerNPC : NPCBehavior(NPCs.GNOMEBALLER_GREEN_633) {
 
     lateinit var player: Player
 
@@ -23,7 +23,7 @@ private class GnomeWingerNPC : NPCBehavior(NPCs.GNOME_WINGER_633) {
 
     fun pass(player: Player, self: NPC) {
         self.face(player)
-        animate(self, Animations.BALLER_THROW_201)
+        animate(self, Animations.GNOME_THROW_201)
         spawnProjectile(self.location, player.location, 55, 43, 40, 0, 70, 10)
         EquipHandler.handleEquip(player, Item(Items.GNOMEBALL_751))
     }

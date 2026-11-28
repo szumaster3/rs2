@@ -81,30 +81,30 @@ class KhazardBattlefield(id: Int = 0, location: Location? = null) : AbstractNPC(
     companion object {
         private val ID =
             intArrayOf(
-                NPCs.KHAZARD_TROOPER_2245,
-                NPCs.KHAZARD_TROOPER_2246,
-                NPCs.GNOME_67,
-                NPCs.MOUNTED_TERRORBIRD_GNOME_1752,
-                NPCs.GNOME_TROOP_2247,
-                NPCs.GNOME_2249,
-                NPCs.GNOME_2250,
-                NPCs.GNOME_2251,
-                NPCs.MOUNTED_TERRORBIRD_GNOME_6109,
-                NPCs.MOUNTED_TERRORBIRD_GNOME_6110,
-                NPCs.MOUNTED_TERRORBIRD_GNOME_6111
+                NPCs.BATTLEFIELD_KHAZARD_TROOP_2245,
+                NPCs.BATTLEFIELD_KHAZARD_TROOP_SPEARMEN_2246,
+                NPCs.BROWCLOTHEDGNOME_67,
+                NPCs.TERRORBIRD_MOUNTED_1752,
+                NPCs.BATTLEFIELD_GNOMEKNIGHT_2247,
+                NPCs.BATTLEFIELD_GNOME_TROOP_2249,
+                NPCs.BATTLEFIELD_DARKSKINNED_GNOME_ARCHER_2250,
+                NPCs.BATTLEFIELD_GNOME_ARCHER_2251,
+                NPCs.BATTLEFIELD_TERRORBIRD_MOUNTEDSPEAR_6109,
+                NPCs.BATTLEFIELD_TERRORBIRD_MOUNTEDSPEAR2_6110,
+                NPCs.BATTLEFIELD_TERRORBIRD_MOUNTEDSPEAR3_6111
             )
         private val GNOMES =
             intArrayOf(
-                NPCs.GNOME_67,
-                NPCs.MOUNTED_TERRORBIRD_GNOME_1752,
-                NPCs.GNOME_TROOP_2247,
-                NPCs.GNOME_2249,
-                NPCs.GNOME_2250,
-                NPCs.GNOME_2251,
-                NPCs.TORTOISE_3808,
-                NPCs.MOUNTED_TERRORBIRD_GNOME_6109
+                NPCs.BROWCLOTHEDGNOME_67,
+                NPCs.TERRORBIRD_MOUNTED_1752,
+                NPCs.BATTLEFIELD_GNOMEKNIGHT_2247,
+                NPCs.BATTLEFIELD_GNOME_TROOP_2249,
+                NPCs.BATTLEFIELD_DARKSKINNED_GNOME_ARCHER_2250,
+                NPCs.BATTLEFIELD_GNOME_ARCHER_2251,
+                NPCs.BATTLE_TORTOISE_WAR2_3808,
+                NPCs.BATTLEFIELD_TERRORBIRD_MOUNTEDSPEAR_6109
             )
-        private val TROOPERS = intArrayOf(NPCs.KHAZARD_TROOPER_2245, NPCs.KHAZARD_TROOPER_2246)
+        private val TROOPERS = intArrayOf(NPCs.BATTLEFIELD_KHAZARD_TROOP_2245, NPCs.BATTLEFIELD_KHAZARD_TROOP_SPEARMEN_2246)
         private val TROOPERS_FORCE_CHAT =
             arrayOf(
                 "Get off of me, ya little pest!",

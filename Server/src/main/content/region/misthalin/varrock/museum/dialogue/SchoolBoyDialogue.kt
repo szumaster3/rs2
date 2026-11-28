@@ -41,7 +41,7 @@ class SchoolBoyDialogue(player: Player? = null) : Dialogue(player) {
     )
 
     private fun randomForceChat(npcId: Int): String {
-        val chatArray = if (npcId == NPCs.SCHOOLBOY_5945) forceChat else groundForceTalk
+        val chatArray = if (npcId == NPCs.VM_SCHOOL_BOY_BRUNNETE_5945) forceChat else groundForceTalk
         val randomIndex = (Math.random() * chatArray.size).toInt()
         return chatArray[randomIndex]
     }
@@ -49,9 +49,9 @@ class SchoolBoyDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = SchoolBoyDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.SCHOOLGIRL_10,
-        NPCs.SCHOOLBOY_5945,
-        NPCs.SCHOOLBOY_5946,
-        NPCs.SCHOOLGIRL_5984
+        NPCs.VM_SCHOOL_GIRL_BRUNETTE_10,
+        NPCs.VM_SCHOOL_BOY_BRUNNETE_5945,
+        NPCs.VM_SCHOOL_BOY_BLONDE_5946,
+        NPCs.VM_SCHOOL_GIRL_BLONDE_5984
     )
 }

@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable
 
 @Initializable
-class ASoulsBane : Quest("A Soul's Bane", 115, 114, 1,Vars.VARBIT_QUEST_A_SOULS_BANE_2011,0,1,13) {
+class ASoulsBane : Quest("A Soul's Bane", 115, 114, 1,Vars.VARBIT_2011,0,1,13) {
 
     /*
      * Description:
@@ -65,7 +65,7 @@ class ASoulsBane : Quest("A Soul's Bane", 115, 114, 1,Vars.VARBIT_QUEST_A_SOULS_
         //500 Defence experience lamp
         //500 Constitution experience lamp
         addItemOrDrop(player, Items.COINS_995, 500)
-        setVarbit(player, Vars.VARBIT_QUEST_A_SOULS_BANE_2011, 13, true)
+        setVarbit(player, Vars.VARBIT_2011, 13, true)
         setVarbit(player ,VARBIT_TOLNA_RIFT_WARNING_SIGN, 0)
     }
 

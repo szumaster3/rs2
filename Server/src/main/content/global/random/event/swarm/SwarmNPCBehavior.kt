@@ -11,7 +11,7 @@ import shared.consts.NPCs
  * Handles the swarm npc behavior.
  * @author Zerken
  */
-class SwarmNPCBehavior : NPCBehavior(NPCs.SWARM_411) {
+class SwarmNPCBehavior : NPCBehavior(NPCs.MACRO_SWARM_411) {
     override fun beforeAttackFinalized(
         self: NPC,
         victim: Entity,

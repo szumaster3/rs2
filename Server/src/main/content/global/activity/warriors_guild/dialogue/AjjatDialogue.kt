@@ -67,5 +67,5 @@ class AjjatDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.AJJAT_4288)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WARGUILD_AJJAT_4288)
 }

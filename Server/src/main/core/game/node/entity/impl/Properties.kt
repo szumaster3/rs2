@@ -89,14 +89,14 @@ class Properties(val entity: Entity) {
      *
      * @return The attack animation for the entity.
      */
-    var attackAnimation: Animation = Animation(Animations.PUNCH_422, Animator.Priority.HIGH)
+    var attackAnimation: Animation = Animation(Animations.HUMAN_UNARMEDPUNCH_422, Animator.Priority.HIGH)
 
     /**
      * Gets the defence animation for the entity.
      *
      * @return The defence animation for the entity.
      */
-    var defenceAnimation: Animation = Animation(Animations.DEFEND_MACE_SHIELD_404)
+    var defenceAnimation: Animation = Animation(Animations.HUMAN_BLUNT_DEF_404)
 
     /**
      * Gets the death animation for the entity.
@@ -211,14 +211,14 @@ class Properties(val entity: Entity) {
         var item = c[EquipmentContainer.SLOT_SHIELD]
         if (item != null) {
             defenceAnimation = item.definition.getConfiguration<Animation>(
-                ItemConfigParser.DEFENCE_ANIMATION, Animation.create(Animations.DEFEND_1156)
+                ItemConfigParser.DEFENCE_ANIMATION, Animation.create(Animations.HUMAN_SHIELD_DEFENCE_1156)
             )
         } else if ((c[EquipmentContainer.SLOT_WEAPON].also { item = it }) != null) {
             defenceAnimation = item!!.definition.getConfiguration<Animation>(
-                ItemConfigParser.DEFENCE_ANIMATION, Animation.create(Animations.DEFEND_UNARMED_424)
+                ItemConfigParser.DEFENCE_ANIMATION, Animation.create(Animations.HUMAN_UNARMEDBLOCK_424)
             )
         } else {
-            defenceAnimation = Animation.create(Animations.CLAW_DEFENCE_397)
+            defenceAnimation = Animation.create(Animations.HUMAN_AXE_BLOCK_397)
         }
     }
 

@@ -21,7 +21,7 @@ class SilkMerchantDialogue(player: Player? = null) : Dialogue(player) {
             player = player,
             stallName = "SILK_STALL",
             shopNpc = npc,
-            guardNpcIds = listOf(NPCs.GUARD_32)
+            guardNpcIds = listOf(NPCs.ARDOUGNE_GUARD_32)
         )
         if (!canTrade) return false
         npc(FaceAnim.HAPPY, "I buy silk. If you ever want to", "sell any silk, bring it here.").also { stage = 0 }

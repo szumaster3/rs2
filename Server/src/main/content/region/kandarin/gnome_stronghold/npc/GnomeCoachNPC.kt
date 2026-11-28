@@ -11,7 +11,7 @@ import shared.consts.NPCs
 /**
  * Handles the Gnome Coach NPC.
  */
-class GnomeCoachNPC : NPCBehavior(NPCs.GNOME_COACH_2802) {
+class GnomeCoachNPC : NPCBehavior(NPCs.GNOME_BALL_COACH_2802) {
 
     override fun onCreation(self: NPC) {
         if (inBorders(self, 2386, 3496, 2410, 3499)) {

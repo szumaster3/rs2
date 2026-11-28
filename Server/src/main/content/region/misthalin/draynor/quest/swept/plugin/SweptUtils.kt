@@ -18,7 +18,7 @@ internal object SweptUtils {
 
     const val PEN_TABLE_INTERFACE = Components.MAGICAL_SLOPE_799
     const val BROOM_MODEL = 42783
-    const val SWEEP_ANIMATION = Animations.SWEEP_BROOM_10532
+    const val SWEEP_ANIMATION = Animations.SWEPT_PLAYER_SWEEP_10532
     const val BROOM_ENCHANTMENT_GFX = 1865
     const val VARBIT_NEWT_CRATE_LABEL = 5460
     const val VARBIT_TOAD_CRATE_LABEL = 5461
@@ -47,12 +47,12 @@ internal object SweptUtils {
     val CREATURES = mutableMapOf<Pen, Pair<NPC, Int>>()
 
     enum class Pen(val penId: Int, val npcId: Int, val itemId: Int, val location: Location, val modelId: Int) {
-        BAT(Objects.BAT_PEN_39287, NPCs.BAT_8208, Items.BAT_14072, Location(3222, 4513, 0), 42750),
-        RAT(Objects.RAT_PEN_39309, NPCs.RAT_8209, Items.RAT_14074, Location(3240, 4513, 0), 42747),
-        REPTILE(Objects.REPTILE_PEN_39303, NPCs.LIZARD_8210, Items.REPTILE_14070, Location(3240, 4504, 0), 42748),
-        BLACKBIRD(Objects.BLACKBIRD_PEN_39281, NPCs.BLACKBIRD_8211, Items.BLACKBIRD_14071, Location(3231, 4513, 0), 42746),
-        SPIDER(Objects.SPIDER_PEN_39297, NPCs.SPIDER_8212, Items.SPIDER_14073, Location(3231, 4504, 0), 42751),
-        SNAIL(Objects.SNAIL_PEN_39292, NPCs.SNAIL_8213, Items.SNAIL_14075, Location(3222, 4504, 0), 42749),
+        BAT(Objects.BAT_PEN_39287, NPCs.SWEPT_BAT_8208, Items.BAT_14072, Location(3222, 4513, 0), 42750),
+        RAT(Objects.RAT_PEN_39309, NPCs.SWEPT_RAT_8209, Items.RAT_14074, Location(3240, 4513, 0), 42747),
+        REPTILE(Objects.REPTILE_PEN_39303, NPCs.SWEPT_LIZARD_8210, Items.REPTILE_14070, Location(3240, 4504, 0), 42748),
+        BLACKBIRD(Objects.BLACKBIRD_PEN_39281, NPCs.SWEPT_BLACK_BIRD_8211, Items.BLACKBIRD_14071, Location(3231, 4513, 0), 42746),
+        SPIDER(Objects.SPIDER_PEN_39297, NPCs.SWEPT_SPIDER_8212, Items.SPIDER_14073, Location(3231, 4504, 0), 42751),
+        SNAIL(Objects.SNAIL_PEN_39292, NPCs.SWEPT_SNAIL_8213, Items.SNAIL_14075, Location(3222, 4504, 0), 42749),
         HOLDING(Objects.HOLDING_PEN_39314, -1, -1, Location(3231, 4523, 0), -1);
 
         companion object {
@@ -364,7 +364,7 @@ internal object SweptUtils {
         }
 
         row.forEach { removeScenery(Scenery(it.sceneryId, it.location)) }
-        visualize(player, SWEEP_ANIMATION, Graphics.DUST_BROOM_EMOTE_1866)
+        visualize(player, SWEEP_ANIMATION, Graphics.SWEPT_PLAYER_SWEEP_SPOT_1866)
         player.setAttribute("swept_lines", sweptRows)
 
         checkPattern(player)
@@ -390,7 +390,7 @@ internal object SweptUtils {
                 player.removeAttribute("swept_lines")
             }
             sweptRows.size >= 4 -> {
-                sendNPCDialogue(player, NPCs.AGGIE_8207, "You've already swept away four lines. Come talk to me and I'll set the sand pattern up for you again.")
+                sendNPCDialogue(player, NPCs.SWEPT_AGGIE_8207, "You've already swept away four lines. Come talk to me and I'll set the sand pattern up for you again.")
                 player.removeAttribute("swept_lines")
             }
         }
@@ -476,7 +476,7 @@ internal object SweptUtils {
         if (correct) {
             sendNPCDialogue(
                 player,
-                NPCs.GUS_8205,
+                NPCs.SWEPT_GUS_8205,
                 "Hurray! I do believe that you've labelled the crates correctly! Ms Hetty will be so pleased."
             )
             removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS)

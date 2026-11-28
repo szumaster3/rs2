@@ -28,7 +28,7 @@ import shared.consts.Scenery
 class TreeGnomeVillagePlugin : InteractionListener {
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, intArrayOf(NPCs.TRACKER_GNOME_2_482), "talk-to") { _, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.TRACKER2_482), "talk-to") { _, _ ->
             return@setDest Location.create(2524, 3256, 0)
         }
 
@@ -46,17 +46,17 @@ class TreeGnomeVillagePlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.ELKOY_5179, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.ELKOY_1OP_5179, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, ElkoyDialogue(), npc)
             return@on true
         }
 
-        on(NPCs.ELKOY_5182, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.ELKOY_2OPS_5182, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, ElkoyDialogue(), npc)
             return@on true
         }
 
-        on(NPCs.ELKOY_5182, IntType.NPC, "follow") { player, _ ->
+        on(NPCs.ELKOY_2OPS_5182, IntType.NPC, "follow") { player, _ ->
             ElkoyDialogue().travelCutscene(player, if (player.location.y > 3161) mazeVillage else mazeEntrance)
             return@on true
         }

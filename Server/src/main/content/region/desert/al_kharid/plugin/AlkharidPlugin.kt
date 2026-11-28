@@ -46,7 +46,7 @@ class AlkharidPlugin : InteractionListener {
          */
 
         on(FADLI_NPC, IntType.NPC, "buy") { player, _ ->
-            openNpcShop(player, NPCs.FADLI_958)
+            openNpcShop(player, NPCs.DUEL_FADLI_958)
             return@on true
         }
 
@@ -99,7 +99,7 @@ class AlkharidPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.ALI_MORRISANE_1862, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.FEUD_ALI_M_1862, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, AliMorrisaneDialogue(), node.asNpc())
             return@on true
         }
@@ -129,12 +129,12 @@ class AlkharidPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.CAPTAIN_NINTO_4594, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.ALUFT_PILOT_NINTO_4594, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, CaptainNintoDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.CAPTAIN_DAERKIN_4595, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.ALUFT_PILOT_DAERKIN_4595, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, CaptainDaerkinDialogue(), node.asNpc())
             return@on true
         }
@@ -144,12 +144,12 @@ class AlkharidPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.FADLI_958, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.DUEL_FADLI_958, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, FadliDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.JARAAH_962, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.DUEL_JARAAH_962, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, JaraahDialogue(), node.asNpc())
             return@on true
         }
@@ -187,13 +187,13 @@ class AlkharidPlugin : InteractionListener {
     }
 
     companion object {
-        private const val FADLI_NPC = NPCs.FADLI_958
+        private const val FADLI_NPC = NPCs.DUEL_FADLI_958
         private const val LEAFLET_DROPPER = NPCs.ALI_THE_LEAFLET_DROPPER_3680
-        private val HEALERS_NPC = intArrayOf(NPCs.AABLA_959, NPCs.SABREEN_960, NPCs.SURGEON_GENERAL_TAFANI_961, NPCs.JARAAH_962)
+        private val HEALERS_NPC = intArrayOf(NPCs.AABLA_959, NPCs.SABREEN_960, NPCs.SURGEON_GENERAL_TAFANI_961, NPCs.DUEL_JARAAH_962)
         private val TOLL_GATES = intArrayOf(Scenery.GATE_35551, Scenery.GATE_35549)
         private const val BORDER_GUARD = NPCs.BORDER_GUARD_7912
         val LEAFLET_INTERACTION_NPC = intArrayOf(
-            NPCs.ALI_MORRISANE_1862,NPCs.ALI_MORRISANE_2961,
+            NPCs.FEUD_ALI_M_1862,NPCs.VC_PARTYGUESTS_ALI_M_2961,
             NPCs.DOMMIK_545,NPCs.LOUIE_LEGS_542,NPCs.RANAEL_544,
             NPCs.ZEKE_541
         )

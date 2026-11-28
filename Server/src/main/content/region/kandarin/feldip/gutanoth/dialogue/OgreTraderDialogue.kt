@@ -30,7 +30,7 @@ class OgreTraderDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npc(FaceAnim.OLD_CALM_TALK2, "I suppose so.").also { stage++ }
             4 -> {
                 end()
-                openNpcShop(player, NPCs.OGRE_TRADER_873)
+                openNpcShop(player, NPCs.OGRE_TRADER1_873)
             }
         }
         return true
@@ -38,5 +38,5 @@ class OgreTraderDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = OgreTraderDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_TRADER_873)
+    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_TRADER1_873)
 }

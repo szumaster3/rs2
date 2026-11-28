@@ -55,15 +55,15 @@ class CrystalBallPlugin : InteractionListener {
         val end: Animation,
         val baseCost: Item? = null,
     ) {
-        STAFF_OF_AIR(Items.STAFF_OF_AIR_1381, Element.AIR, StaffType.REGULAR, Animation(Animations.STAFF_OF_AIR_4043), Animation(Animations.STAFF_OF_AIR_4044)),
-        STAFF_OF_WATER(Items.STAFF_OF_WATER_1383, Element.WATER, StaffType.REGULAR, Animation(Animations.STAFF_OF_WATER_4047), Animation(Animations.STAFF_OF_WATER_4048)),
-        STAFF_OF_EARTH(Items.STAFF_OF_EARTH_1385, Element.EARTH, StaffType.REGULAR, Animation(Animations.STAFF_OF_EARTH_4045), Animation(Animations.STAFF_OF_EARTH_4046)),
-        STAFF_OF_FIRE(Items.STAFF_OF_FIRE_1387, Element.FIRE, StaffType.REGULAR, Animation(Animations.STAFF_OF_FIRE_4049), Animation(Animations.STAFF_OF_FIRE_4050)),
+        STAFF_OF_AIR(Items.STAFF_OF_AIR_1381, Element.AIR, StaffType.REGULAR, Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL1_AIR_4043), Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL2_AIR_4044)),
+        STAFF_OF_WATER(Items.STAFF_OF_WATER_1383, Element.WATER, StaffType.REGULAR, Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL1_WATER_4047), Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL2_WATER_4048)),
+        STAFF_OF_EARTH(Items.STAFF_OF_EARTH_1385, Element.EARTH, StaffType.REGULAR, Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL1_EARTH_4045), Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL2_EARTH_4046)),
+        STAFF_OF_FIRE(Items.STAFF_OF_FIRE_1387, Element.FIRE, StaffType.REGULAR, Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL1_FIRE_4049), Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL2_FIRE_4050)),
 
-        AIR_BATTLESTAFF(Items.AIR_BATTLESTAFF_1397, Element.AIR, StaffType.BATTLE, Animation(Animations.AIR_BATTLESTAFF_4051), Animation(Animations.AIR_BATTLESTAFF_4052), Item(Items.AIR_RUNE_556, 100)),
+        AIR_BATTLESTAFF(Items.AIR_BATTLESTAFF_1397, Element.AIR, StaffType.BATTLE, Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL1_AIR_BATTLESTAFF_4051), Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL2_AIR_BATTLESTAFF_4052), Item(Items.AIR_RUNE_556, 100)),
         WATER_BATTLESTAFF(Items.WATER_BATTLESTAFF_1395, Element.WATER, StaffType.BATTLE, Animation(4059), Animation(4060), Item(Items.WATER_RUNE_555, 100)),
         EARTH_BATTLESTAFF(Items.EARTH_BATTLESTAFF_1399, Element.EARTH, StaffType.BATTLE, Animation(4055), Animation(4056), Item(Items.EARTH_RUNE_557, 100)),
-        FIRE_BATTLESTAFF(Items.FIRE_BATTLESTAFF_1393, Element.FIRE, StaffType.BATTLE, Animation(Animations.FIRE_BATTLESTAFF_4057), Animation(Animations.FIRE_BATTLESTAFF_4058), Item(Items.FIRE_RUNE_554, 100)),
+        FIRE_BATTLESTAFF(Items.FIRE_BATTLESTAFF_1393, Element.FIRE, StaffType.BATTLE, Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL1_FIRE_BATTLESTAFF_4057), Animation(Animations.HUMAN_USE_STAFF_WITH_CRYSTALBALL2_FIRE_BATTLESTAFF_4058), Item(Items.FIRE_RUNE_554, 100)),
 
         MYSTIC_AIR_STAFF(Items.MYSTIC_AIR_STAFF_1405, Element.AIR, StaffType.MYSTIC, Animation(4061), Animation(4062), Item(Items.AIR_RUNE_556, 1000)),
         MYSTIC_WATER_STAFF(Items.MYSTIC_WATER_STAFF_1403, Element.WATER, StaffType.MYSTIC, Animation(4069), Animation(4070), Item(Items.WATER_RUNE_555, 1000)),

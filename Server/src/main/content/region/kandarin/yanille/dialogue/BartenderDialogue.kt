@@ -18,5 +18,5 @@ class BartenderDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun newInstance(player: Player?): Dialogue = BartenderDialogue(player)
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARTENDER_739)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DRAGON_BARTENDER_739)
 }

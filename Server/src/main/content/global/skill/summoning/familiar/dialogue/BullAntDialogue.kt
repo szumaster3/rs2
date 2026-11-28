@@ -74,5 +74,5 @@ class BullAntDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BULL_ANT_6867, NPCs.BULL_ANT_6868)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_GIANT_ANT_6867, NPCs.LORE_GIANT_ANT_COMBAT_6868)
 }

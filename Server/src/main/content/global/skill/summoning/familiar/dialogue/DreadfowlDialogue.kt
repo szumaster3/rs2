@@ -43,5 +43,5 @@ class DreadfowlDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DREADFOWL_6825, NPCs.DREADFOWL_6826)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_DREADFOWL_6825, NPCs.LORE_DREADFOWL_COMBAT_6826)
 }

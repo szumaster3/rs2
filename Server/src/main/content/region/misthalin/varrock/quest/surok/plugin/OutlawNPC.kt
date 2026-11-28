@@ -38,14 +38,14 @@ class OutlawNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.OUTLAW_5842,
-        NPCs.OUTLAW_5843,
-        NPCs.OUTLAW_5844,
-        NPCs.OUTLAW_5845,
-        NPCs.OUTLAW_5846,
-        NPCs.OUTLAW_5847,
-        NPCs.OUTLAW_5848,
-        NPCs.OUTLAW_5849,
-        NPCs.OUTLAW_5850,
+        NPCs.SUROK_OUTLAW1_5842,
+        NPCs.SUROK_OUTLAW2_5843,
+        NPCs.SUROK_OUTLAW3_5844,
+        NPCs.SUROK_OUTLAW4_5845,
+        NPCs.SUROK_OUTLAW5_5846,
+        NPCs.SUROK_OUTLAW6_5847,
+        NPCs.SUROK_OUTLAW7_5848,
+        NPCs.SUROK_OUTLAW8_5849,
+        NPCs.SUROK_OUTLAW9_5850,
     )
 }

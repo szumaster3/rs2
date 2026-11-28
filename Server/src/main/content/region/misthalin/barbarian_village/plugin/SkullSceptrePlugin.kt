@@ -48,8 +48,8 @@ class SkullSceptrePlugin : InteractionListener {
                             when (tick++) {
                                 0 -> visualize(
                                     player,
-                                    Animations.HUMAN_USE_SCEPTRE_9601,
-                                    core.game.world.update.flag.context.Graphics(Graphics.USE_SCEPTRE_1683, 100)
+                                    Animations.SKULL_SCEPTER_TELEPORT_REWORK_9601,
+                                    core.game.world.update.flag.context.Graphics(Graphics.SKULL_SCEPTER_TELEPORT_REWORK_SPOTANIM_1683, 100)
                                 )
 
                                 6 -> {

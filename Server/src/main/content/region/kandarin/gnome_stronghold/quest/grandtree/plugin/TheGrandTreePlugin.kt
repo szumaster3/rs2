@@ -35,14 +35,14 @@ class TheGrandTreePlugin : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, intArrayOf(NPCs.CHARLIE_673), "talk-to") { player, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.GRANDTREE_CHARLIE_673), "talk-to") { player, _ ->
             return@setDest player.location
         }
     }
 
     override fun defineListeners() {
 
-        on(NPCs.FOREMAN_674, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.GRANDTREE_FOREMAN_674, IntType.NPC, "talk-to") { player, npc ->
             if (!isQuestComplete(player, Quests.THE_GRAND_TREE.questName)) {
                 openDialogue(player, ForemanDialogue(), npc)
             } else {
@@ -51,7 +51,7 @@ class TheGrandTreePlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.KING_NARNODE_SHAREEN_670, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.GRANDTREE_NARNODE_670, IntType.NPC, "talk-to") { player, npc ->
             val aboveground = 9782
             when {
                 getQuestStage(player, Quests.THE_GRAND_TREE.questName) == 100 ->
@@ -123,7 +123,7 @@ class TheGrandTreePlugin : InteractionListener {
                     Scenery(2437, Location(2482, 3462, 1)),
                     2,
                 )
-                player.animator.animate(Animation(Animations.HUMAN_CLOSE_CHEST_538))
+                player.animator.animate(Animation(Animations.HUMAN_OPENCUPBOARD_538))
                 sendItemDialogue(player, Items.INVASION_PLANS_794, "You found a scroll!")
                 addItemOrDrop(player, Items.INVASION_PLANS_794)
                 if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) < 60) {
@@ -227,7 +227,7 @@ class TheGrandTreePlugin : InteractionListener {
             if (player.location.x > 2944 || isQuestComplete(player, Quests.THE_GRAND_TREE.questName)) {
                 DoorActionHandler.autowalkFence(player, node.asScenery(), gatePair.first, gatePair.second)
             } else {
-                openDialogue(player, ShipyardWorkerDialogueFile(), NPC(NPCs.SHIPYARD_WORKER_675))
+                openDialogue(player, ShipyardWorkerDialogueFile(), NPC(NPCs.GRANDTREE_SHIPYARDGUARD_675))
             }
 
             return@on true
@@ -249,7 +249,7 @@ class TheGrandTreePlugin : InteractionListener {
                     forceMove(player, player.location, player.location.transform(0, -2, 0), 25, 60, null, 819)
                 }
                 animateScenery(roots.asScenery(), 452)
-                player.animator.animate(Animation(Animations.PUSH_2572))
+                player.animator.animate(Animation(Animations.GARDEN_STATUE_PUSH_2572))
                 playGlobalAudio(player.location, Sounds.TANGLEVINE_APPEAR_2316)
             }
             return@on true

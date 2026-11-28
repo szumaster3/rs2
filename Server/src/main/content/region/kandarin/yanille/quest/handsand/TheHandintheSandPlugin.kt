@@ -21,7 +21,7 @@ class TheHandintheSandPlugin : InteractionListener {
 
     companion object {
         val BEER_IDS = intArrayOf(Items.GREENMANS_ALE_1909, Items.DRAGON_BITTER_1911)
-        private val SANDY = intArrayOf(3110, 3111, NPCs.SANDY_3112, NPCs.SANDY_3113)
+        private val SANDY = intArrayOf(3110, 3111, NPCs.HANDSAND_SANDY0_3112, NPCs.HANDSAND_SANDY1_3113)
 
         val bertRotaCopy = arrayOf(
             "Sandy's Sand Corp - Brimhaven",
@@ -66,7 +66,7 @@ class TheHandintheSandPlugin : InteractionListener {
          * Handles using dif beers on guard captain.
          */
 
-        onUseWith(IntType.NPC, BEER_IDS, NPCs.GUARD_CAPTAIN_3109) { player, _, with ->
+        onUseWith(IntType.NPC, BEER_IDS, NPCs.HANDSAND_GUARD_CAPTAIN_3109) { player, _, with ->
             sendNPCDialogue(player, with.id, "Yeeeuuuch! I hatesh that shtuff, jusht bring ush a beer! Mmmmm beer!", FaceAnim.OLD_DRUNK_LEFT)
             return@onUseWith true
         }
@@ -96,7 +96,7 @@ class TheHandintheSandPlugin : InteractionListener {
          */
 
         on(SANDY, IntType.NPC, "Pickpocket") { player, _ ->
-            player.animate(Animation(Animations.HUMAN_PICKPOCKETING_881))
+            player.animate(Animation(Animations.HUMAN_PICKPOCKET_881))
             if(freeSlots(player) == 0) {
                 sendDialogue(player, "I'd better make room in my inventory first!")
                 return@on false
@@ -181,7 +181,7 @@ class TheHandintheSandPlugin : InteractionListener {
          * Handles put truth serum to sandy coffee.
          */
 
-        onUseWith(IntType.SCENERY, Items.TRUTH_SERUM_6952, Scenery.SANDY_S_COFFEE_MUG_10807) { player, used, _ ->
+        onUseWith(IntType.SCENERY, Items.TRUTH_SERUM_6952, Scenery.SANDYS_COFFEE_MUG_10807) { player, used, _ ->
             if(removeItem(player, used.asItem())) {
                 setVarbit(player, 1535, 0, true)
                 sendDialogue(player, "You pour the serum into Sandy's coffee, then a little while later watch him drink it.")

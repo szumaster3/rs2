@@ -35,7 +35,7 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
             } else {
                 openDialogue(player, object : DialogueFile() {
                     override fun handle(componentID: Int, buttonID: Int) {
-                        npc = NPC(NPCs.GHOST_DISCIPLE_1686)
+                        npc = NPC(NPCs.AHOY_DISCIPLE_1686)
                         when (stage) {
                             0 -> if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
                                 npc("Woooo wooooo woooo").also { stage = 3 }
@@ -202,14 +202,14 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
         }
 
         on(Objects.CLOSED_CHEST_5272, IntType.SCENERY, "open") { player, node ->
-            animate(player, Animations.HUMAN_OPEN_CHEST_536)
+            animate(player, Animations.HUMAN_OPENCHEST_536)
             replaceScenery(node.asScenery(), node.id + 1, -1)
             return@on true
         }
 
         onUseWith(IntType.SCENERY, Items.CHEST_KEY_2404, Objects.CLOSED_CHEST_5270) { player, _, with ->
             if (removeItem(player, Items.CHEST_KEY_2404)) {
-                animate(player, Animations.HUMAN_OPEN_CHEST_536)
+                animate(player, Animations.HUMAN_OPENCHEST_536)
                 sendItemDialogue(player, Items.CHEST_KEY_2404, "You unlock the chest.")
                 replaceScenery(with.asScenery(), with.id + 3, -1)
             }

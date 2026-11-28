@@ -74,5 +74,5 @@ class VoidRavagerDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VOID_RAVAGER_7370, NPCs.VOID_RAVAGER_7371)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_RAVAGER_7370, NPCs.LORE_RAVAGER_COMBAT_7371)
 }

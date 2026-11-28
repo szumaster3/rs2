@@ -56,7 +56,7 @@ class PlagueCityPlugin : InteractionListener {
          * Handles talk with mourner near south-eastern house with black crosses on the doors.
          */
 
-        on(NPCs.MOURNER_3216, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.MOURNER_ELENA_GUARD_3216, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, PlagueCityDoorDialogue())
             return@on true
         }
@@ -121,7 +121,7 @@ class PlagueCityPlugin : InteractionListener {
             if (isQuestInProgress(player, Quests.BIOHAZARD.questName, 1, 100)) {
                 sendMessage(player, "The trapdoor is bolted on the other side.")
             } else {
-                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                 queueScript(player, 2, QueueStrength.SOFT) {
                     teleport(player, Location(2514, 9739, 0))
                     sendMessage(player, "You climb down through the manhole.")
@@ -150,7 +150,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.MUD_PILE_2533, IntType.SCENERY, "climb") { player, _ ->
-            animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
+            animate(player, Animations.HUMAN_REACHFORLADDER_828)
             queueScript(player, 2, QueueStrength.SOFT) {
                 teleport(player, Location(2566, 3333, 0))
                 sendDialogue(player, "You climb up the mud pile.")
@@ -168,7 +168,7 @@ class PlagueCityPlugin : InteractionListener {
             sendMessage(player, "The scroll crumbles to dust.")
 
             if (getAttribute(player, GameAttributes.ARDOUGNE_TELEPORT, false)) {
-                visualize(player, -1, core.game.world.update.flag.context.Graphics(Graphics.FIRE_WAVE_IMPACT_157, 50))
+                visualize(player, -1, core.game.world.update.flag.context.Graphics(Graphics.WAVE_IMPACT_2_157, 50))
                 player.impactHandler.manualHit(player, 0, ImpactHandler.HitsplatType.MISS)
             } else {
                 sendItemDialogue(player, Items.A_MAGIC_SCROLL_1505, "You memorise what is written on the scroll.")
@@ -218,7 +218,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.WARDROBE_2524, IntType.SCENERY, "open") { player, node ->
-            animate(player, Animations.OPEN_WARDROBE_545)
+            animate(player, Animations.HUMAN_OPENBIGCUPBOARD_545)
             replaceScenery(node.asScenery(), node.id + 1, -1)
             return@on true
         }
@@ -228,7 +228,7 @@ class PlagueCityPlugin : InteractionListener {
          */
 
         on(Scenery.WARDROBE_2525, IntType.SCENERY, "close") { player, node ->
-            animate(player, Animations.CLOSE_WARDROBE_544)
+            animate(player, Animations.V02_YAK_UPDATE_READY_544)
             replaceScenery(node.asScenery(), node.id - 1, -1)
             return@on true
         }
@@ -270,7 +270,7 @@ class PlagueCityPlugin : InteractionListener {
                 return@onUseWith true
             }
 
-            animate(player, Animations.POUR_BUCKET_OVER_GROUND_2283)
+            animate(player, Animations.FARMING_POUR_WATER_2283)
             playAudio(player, Sounds.WATER_BEING_POURED_2982)
             addItem(player, Items.BUCKET_1925)
 
@@ -325,7 +325,7 @@ class PlagueCityPlugin : InteractionListener {
         on(Scenery.GRILL_11423, IntType.SCENERY, "open") { player, _ ->
             if (getQuestStage(player, Quests.PLAGUE_CITY.questName) == 4) {
                 sendDialogue(player, "The grill is too secure. You can't pull it off alone.")
-                animate(player, Animations.PC_SEWERS_REMOVE_GRILL_3192)
+                animate(player, Animations.PULL_ON_PIPE_3192)
                 playAudio(player, Sounds.PLAGUE_PULL_GRILL_1730)
                 setQuestStage(player, Quests.PLAGUE_CITY.questName, 5)
             } else {
@@ -390,7 +390,7 @@ class PlagueCityPlugin : InteractionListener {
                         return@queueScript delayScript(player, 1)
                     }
                     2 -> {
-                        animate(player, Animations.PC_SEWERS_TIE_ROPE_3191)
+                        animate(player, Animations.ROPE_TIE_3191)
                         playAudio(player, Sounds.PLAGUE_ATTACH_1731)
                         setVarbit(player, TIED_ROPE_VARBIT, 5, true)
                         return@queueScript delayScript(player, 1)
@@ -434,7 +434,7 @@ class PlagueCityPlugin : InteractionListener {
                 sendMessage(player, "You don't find anything interesting.")
                 return@on true
             }
-            animate(player, Animations.HUMAN_SEARCH_CRATE_6840)
+            animate(player, Animations.GENERIC_LOOK_AND_SEARCH_6840)
             sendItemDialogue(player, Items.KEY_423, "You find a small key in the barrel.")
             addItem(player, Items.KEY_423)
             return@on true
@@ -483,7 +483,7 @@ class PlagueCityPlugin : InteractionListener {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 return@on true
             }
-            val npc = NPC(NPCs.ELENA_3215)
+            val npc = NPC(NPCs.ELENAP_VIS_3215)
             sendMessage(player, "The door is locked.")
             openDialogue(player, ElenaDialogue(), npc)
             return@on true
@@ -536,7 +536,7 @@ class PlagueCityPlugin : InteractionListener {
 
                 1 -> {
                     npc = RegionManager.getLocalNpcs(Location.create(2539, 3273, 0), 3)
-                        .firstOrNull { it.id == NPCs.MOURNER_717 }
+                        .firstOrNull { it.id == NPCs.MOURNER1_717 }
 
                     if (npc != null) {
                         face(player!!, npc!!.location)
@@ -632,7 +632,7 @@ class PlagueCityPlugin : InteractionListener {
                     queueScript(player!!, delay = 3, strength = QueueStrength.WEAK) { _ ->
 
                         val secondMourner = RegionManager.getLocalNpcs(Location.create(2534, 3273, 0), 6)
-                            .firstOrNull { it.id == NPCs.MOURNER_3216 }
+                            .firstOrNull { it.id == NPCs.MOURNER_ELENA_GUARD_3216 }
 
                         if (secondMourner == null) {
                             return@queueScript stopExecuting(player!!)

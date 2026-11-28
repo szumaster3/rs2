@@ -77,5 +77,5 @@ class GiantChinchompaDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.GIANT_CHINCHOMPA_7353, NPCs.GIANT_CHINCHOMPA_7354)
+        intArrayOf(NPCs.LORE_CHINCHOMPA_7353, NPCs.LORE_CHINCHOMPA_COMBAT_7354)
 }

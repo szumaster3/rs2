@@ -19,7 +19,7 @@ class MageNPC(
         vararg objects: Any,
     ): AbstractNPC = MageNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAGE_1513)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RAMBLE_EASY_MAGE_1513)
 
     companion object;
 

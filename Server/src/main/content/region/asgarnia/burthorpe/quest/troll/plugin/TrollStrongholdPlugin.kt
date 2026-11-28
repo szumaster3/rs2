@@ -104,21 +104,21 @@ class TrollStrongholdPlugin : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, Items.CELL_KEY_1_3136, Scenery.CELL_DOOR_3765) { player, _, with ->
-            unlockCellDoor(player, with, Items.CELL_KEY_1_3136, NPCs.EADGAR_1113, mapOf(8 to 9, 10 to 11), "Thanks! I'm off back home!")
+            unlockCellDoor(player, with, Items.CELL_KEY_1_3136, NPCs.TROLL_EADGAR_1113, mapOf(8 to 9, 10 to 11), "Thanks! I'm off back home!")
             return@onUseWith true
         }
 
         on(Scenery.CELL_DOOR_3765, IntType.SCENERY, "unlock") { player, node ->
-            unlockCellDoor(player, node, Items.CELL_KEY_1_3136, NPCs.EADGAR_1113, mapOf(8 to 9, 10 to 11), "Thanks! I'm off back home!")
+            unlockCellDoor(player, node, Items.CELL_KEY_1_3136, NPCs.TROLL_EADGAR_1113, mapOf(8 to 9, 10 to 11), "Thanks! I'm off back home!")
             return@on true
         }
 
         onUseWith(IntType.SCENERY, Items.CELL_KEY_2_3137, Scenery.CELL_DOOR_3767) { player, _, with ->
-            unlockCellDoor(player, with, Items.CELL_KEY_2_3137, NPCs.GODRIC_1114, mapOf(8 to 10, 9 to 11), "Thank you, my friend.")
+            unlockCellDoor(player, with, Items.CELL_KEY_2_3137, NPCs.TROLL_GODRIC_1114, mapOf(8 to 10, 9 to 11), "Thank you, my friend.")
             return@onUseWith true
         }
         on(Scenery.CELL_DOOR_3767, IntType.SCENERY, "unlock") { player, node ->
-            unlockCellDoor(player, node, Items.CELL_KEY_2_3137, NPCs.GODRIC_1114, mapOf(8 to 10, 9 to 11), "Thank you, my friend.")
+            unlockCellDoor(player, node, Items.CELL_KEY_2_3137, NPCs.TROLL_GODRIC_1114, mapOf(8 to 10, 9 to 11), "Thank you, my friend.")
             return@on true
         }
 
@@ -168,18 +168,18 @@ class TrollStrongholdPlugin : InteractionListener {
                     trigger = false
                     when (stage) {
                         0 -> {
-                            forceWalk(npc, Location(2831, if (npcId == NPCs.EADGAR_1113) 10082 else 10078, 0), "DUMB")
+                            forceWalk(npc, Location(2831, if (npcId == NPCs.TROLL_EADGAR_1113) 10082 else 10078, 0), "DUMB")
                             npc.walkRadius = 11
                             npc.isWalks = false
-                            targetLocation = Location(2831, if (npcId == NPCs.EADGAR_1113) 10082 else 10078, 0)
+                            targetLocation = Location(2831, if (npcId == NPCs.TROLL_EADGAR_1113) 10082 else 10078, 0)
                         }
                         1 -> {
                             DoorActionHandler.handleAutowalkDoor(npc, node.asScenery())
-                            targetLocation = Location(2832, if (npcId == NPCs.EADGAR_1113) 10082 else 10078, 0)
+                            targetLocation = Location(2832, if (npcId == NPCs.TROLL_EADGAR_1113) 10082 else 10078, 0)
                         }
                         4 -> {
-                            forceWalk(npc, Location(2836, if (npcId == NPCs.EADGAR_1113) 10082 else 10078, 0), "DUMB")
-                            targetLocation = Location(2836, if (npcId == NPCs.EADGAR_1113) 10082 else 10078, 0)
+                            forceWalk(npc, Location(2836, if (npcId == NPCs.TROLL_EADGAR_1113) 10082 else 10078, 0), "DUMB")
+                            targetLocation = Location(2836, if (npcId == NPCs.TROLL_EADGAR_1113) 10082 else 10078, 0)
                         }
                         5 -> {
                             forceWalk(npc, Location(2836, 10061, 0), "")

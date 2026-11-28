@@ -24,7 +24,7 @@ class BartenderDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARTENDER_1921)
+        return intArrayOf(NPCs.FOURDIAMONDS_BARTENDER_1921)
     }
 }
 

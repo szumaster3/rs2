@@ -95,10 +95,10 @@ object DrillDemonUtils {
     @JvmStatic
     fun animationForTask(task: Int): Animation =
         when (task) {
-            DD_SIGN_SITUP -> Animation(Animations.SIT_UPS_FROM_DRILL_DEMON_EVENT_2763)
-            DD_SIGN_PUSHUP -> Animation(Animations.PUSH_UPS_DRILL_DEMON_EVENT_2762)
-            DD_SIGN_JUMP -> Animation(Animations.JUMPS_FROM_DRILL_DEMON_EVENT_2761)
-            DD_SIGN_RUN -> Animation(Animations.RUNNING_IN_PLACE_FROM_DRILL_DEMON_EVENT_2764)
+            DD_SIGN_SITUP -> Animation(Animations.SITUPS_5_2763)
+            DD_SIGN_PUSHUP -> Animation(Animations.PUSHUPS_5_2762)
+            DD_SIGN_JUMP -> Animation(Animations.STARJUMP_5_2761)
+            DD_SIGN_RUN -> Animation(Animations.RUN_ON_SPOT_2764)
             else -> Animation(-1)
         }
 

@@ -92,8 +92,8 @@ class FishingExplosiveHandler : UseWithHandler(Items.FISHING_EXPLOSIVE_6664, Ite
     override fun getDestination(player: Player, with: Node): Location = player.location
 
     companion object {
-        private val ANIMATION = Animation(Animations.THROW_385)
-        private val SPLASH_GRAPHICS = Graphics(shared.consts.Graphics.WATER_SPLASH_68)
+        private val ANIMATION = Animation(Animations.HUMAN_THROW_385)
+        private val SPLASH_GRAPHICS = Graphics(shared.consts.Graphics.WATERSPLASH_1_68)
         private const val MOGRE_ID = NPCs.MOGRE_114
         private val MESSAGES = arrayOf("Da boom-boom kill all da fishies!", "I smack you good!", "Smash stupid human!", "Tasty human!", "Human hit me on the head!", "I get you!", "Human scare all da fishies!")
     }

@@ -73,5 +73,5 @@ class AliTheHagDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AliTheHagDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_HAG_1871)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEUD_HAG_1871)
 }

@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class MountainDaughter : Quest("Mountain Daughter", 90, 89, 2, Vars.VARBIT_QUEST_MOUNTAIN_DAUGHTER_260, 0, 1, 70) {
+class MountainDaughter : Quest("Mountain Daughter", 90, 89, 2, Vars.VARBIT_260, 0, 1, 70) {
     companion scenery {
         const val MountainDaughter = "Mountain Daughter"
     }
@@ -39,7 +39,7 @@ class MountainDaughter : Quest("Mountain Daughter", 90, 89, 2, Vars.VARBIT_QUEST
         rewardXP(player, Skills.PRAYER, 2000.0)
         rewardXP(player, Skills.ATTACK, 1000.0)
         addItemOrDrop(player, Items.BEARHEAD_4502)
-        setVarbit(player, Vars.VARBIT_QUEST_MOUNTAIN_DAUGHTER_260, 70, true)
+        setVarbit(player, Vars.VARBIT_260, 70, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

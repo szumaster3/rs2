@@ -13,7 +13,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritTzKihNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_TZ_KIH_7361) :
+class SpiritTzKihNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_TZ_KIH_7361) :
     Familiar(owner, id, 1800, Items.SPIRIT_TZ_KIH_POUCH_12808, 6, WeaponInterface.STYLE_CAST) {
     override fun construct(owner: Player, id: Int): Familiar {
         return SpiritTzKihNPC(owner, id)
@@ -47,6 +47,6 @@ class SpiritTzKihNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_TZ_KIH_7361, NPCs.SPIRIT_TZ_KIH_7362)
+        return intArrayOf(NPCs.LORE_TZ_KIH_7361, NPCs.LORE_TZ_KIH_COMBAT_7362)
     }
 }

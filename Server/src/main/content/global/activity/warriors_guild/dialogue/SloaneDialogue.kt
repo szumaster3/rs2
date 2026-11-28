@@ -71,5 +71,5 @@ class SloaneDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SLOANE_4297)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WARGUILD_SLOANE_4297)
 }

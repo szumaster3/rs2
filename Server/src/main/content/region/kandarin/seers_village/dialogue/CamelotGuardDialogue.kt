@@ -25,5 +25,5 @@ class CamelotGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CamelotGuardDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_6183, NPCs.GUARD_6184)
+    override fun getIds(): IntArray = intArrayOf(NPCs.KR_COURT_HOUSE_GUARD_01_6183, NPCs.KR_COURT_HOUSE_GUARD_02_6184)
 }

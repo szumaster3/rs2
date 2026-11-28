@@ -45,7 +45,7 @@ class DragonSlayerListener : InteractionListener {
          */
 
         on(Scenery.CLIMBING_ROPE_25213, IntType.SCENERY, "climb") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location(2834, 3258, 0))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location(2834, 3258, 0))
             finishDiaryTask(player, DiaryType.KARAMJA, 1, 2)
             setVarbit(player, 3580,1, true)
             return@on true
@@ -97,7 +97,7 @@ class DragonSlayerListener : InteractionListener {
                         }
                     }
                 }
-                forceMove(player, player.location, player.location.transform(if (player.location.x == 2845) 2 else -2, 0, 0), 30, 90, null, Animations.CLIMB_OVER_ROCK_10573)
+                forceMove(player, player.location, player.location.transform(if (player.location.x == 2845) 2 else -2, 0, 0), 30, 90, null, Animations.MDAUGHTER_CLIMB_OVER_ROCKS_10573)
                 return@on true
             }
             if (inInventory(player, DragonSlayer.ELVARG_HEAD.id)) {
@@ -189,7 +189,7 @@ class DragonSlayerListener : InteractionListener {
                 else -> {
                     player.inventory.remove(DragonSlayer.NAILS)
                     player.inventory.remove(DragonSlayer.PLANK)
-                    player.animate(Animation(Animations.BUILD_WITH_HAMMER_3676))
+                    player.animate(Animation(Animations.HUMAN_POH_BUILD_3676))
                     player.getSavedData().questData.dragonSlayerPlanks++
 
                     if (player.getSavedData().questData.dragonSlayerPlanks < 3) {

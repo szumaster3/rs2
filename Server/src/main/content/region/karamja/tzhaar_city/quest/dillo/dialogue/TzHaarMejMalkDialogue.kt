@@ -26,5 +26,5 @@ class TzHaarMejMalkDialogue(player: Player? = null) : Dialogue(player) {
 
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TZHAAR_MEJ_MALK_7746)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DILLO_TZHAAR_MEJ_MALK_7746)
 }

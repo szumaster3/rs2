@@ -31,7 +31,7 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
         100 to ShopData(Items.PLANT_CURE_6036, 25, "Plant cure, eh? I might have some put aside for myself."),
         200 to ShopData(Items.COMPOST_6032, 35, "A bucket of compost, eh? I might have one spare..."),
         300 to ShopData(Items.RAKE_5341, 15, "A rake, eh? I might have one spare..."),
-        400 to ShopData(Items.WATERING_CAN8_5340, 25, "A watering can, eh? I might have one spare..."),
+        400 to ShopData(Items.WATERING_CAN_8_5340, 25, "A watering can, eh? I might have one spare..."),
         500 to ShopData(Items.GARDENING_TROWEL_5325, 15, "A gardening trowel, eh? I might have one spare..."),
         600 to ShopData(Items.SEED_DIBBER_5343, 15, "A seed dibber, eh? I might have one spare...")
     )

@@ -51,7 +51,7 @@ class TheFeud : Quest(Quests.THE_FEUD) {
 
         rewardXP(player, Skills.THIEVING, 15000.0)
 
-        addItemOrDrop(player, Items.MAPLE_BLACKJACKD_6421)
+        addItemOrDrop(player, Items.MAPLE_BLACKJACK_D_6421)
         addItemOrDrop(player, Items.DESERT_DISGUISE_4611)
         addItemOrDrop(player, Items.COINS_995, 500)
 

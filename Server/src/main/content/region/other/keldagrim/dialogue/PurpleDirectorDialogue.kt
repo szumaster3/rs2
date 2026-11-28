@@ -43,5 +43,5 @@ class PurpleDirectorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = PurpleDirectorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PURPLE_PEWTER_DIRECTOR_2100)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_DIRECTOR_PURPLE_PEWTER_2100)
 }

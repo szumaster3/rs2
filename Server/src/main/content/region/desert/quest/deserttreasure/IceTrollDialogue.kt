@@ -25,7 +25,7 @@ class IceTrollDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ICE_TROLL_1935)
+        return intArrayOf(NPCs.I_TROLL_GUARD_1935)
     }
 
 }

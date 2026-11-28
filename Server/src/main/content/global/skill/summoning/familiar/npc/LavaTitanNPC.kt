@@ -11,7 +11,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class LavaTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LAVA_TITAN_7341) :
+class LavaTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_LAVA_TITAN_7341) :
     Familiar(owner, id, 6100, Items.LAVA_TITAN_POUCH_12788, 4, WeaponInterface.STYLE_AGGRESSIVE) {
 
     init {
@@ -28,6 +28,6 @@ class LavaTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NP
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LAVA_TITAN_7341, NPCs.LAVA_TITAN_7342)
+        return intArrayOf(NPCs.LORE_LAVA_TITAN_7341, NPCs.LORE_LAVA_TITAN_COMBAT_7342)
     }
 }

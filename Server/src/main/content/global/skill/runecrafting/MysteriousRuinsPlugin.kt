@@ -124,7 +124,7 @@ class MysteriousRuinsPlugin : InteractionListener {
      */
     private fun teleportToRuinTalisman(player: Player, talisman: Item, ruin: MysteriousRuins) {
         lock(player, 4)
-        animate(player, Animations.HUMAN_BURYING_BONES_827)
+        animate(player, Animations.HUMAN_PICKUPFLOOR_827)
         sendMessage(player, "You hold the ${talisman.name} towards the mysterious ruins.")
         submitTeleport(player, ruin, 3)
     }

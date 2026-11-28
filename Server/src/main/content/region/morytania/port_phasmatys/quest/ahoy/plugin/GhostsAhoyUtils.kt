@@ -70,11 +70,11 @@ object GhostsAhoyUtils {
     fun jumpRockPath(player: Player) {
         queueScript(player, 0, QueueStrength.SOFT) {
             if (RandomFunction.getRandom(3) == 2) {
-                animate(player, Animations.HUMAN_JUMP_FAIL_767)
+                animate(player, Animations.HUMAN_FALLING_END_767)
                 playGlobalAudio(player.location, Sounds.JUMP_AND_FALL_2463)
                 player.impactHandler.manualHit(player, 1, ImpactHandler.HitsplatType.NORMAL, 1)
             } else {
-                animate(player, Animations.HUMAN_JUMP_SHORT_GAP_741)
+                animate(player, Animations.HUMAN_SPOT_JUMP_741)
                 playGlobalAudio(player.location, Sounds.JUMP2_2462)
             }
             return@queueScript stopExecuting(player)

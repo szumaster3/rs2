@@ -121,14 +121,14 @@ object EW2Utils {
     const val PullLever = 4909
     const val SearchCrate = 6840
 
-    val JigCartNPC = NPC(NPCs.JIG_CART_4913, Location.create(1954, 5147, 2))
+    val JigCartNPC = NPC(NPCs.ELEM2_CART_NPC_EMPTY_4913, Location.create(1954, 5147, 2))
 
-    const val EmptyJigCart = NPCs.JIG_CART_4913
-    const val JigCartWithElementalBar = NPCs.JIG_CART_4914
-    const val JigCartWithElementalMindBar = NPCs.JIG_CART_4915
-    const val JigCartWithPrimedElementalMindBar = NPCs.JIG_CART_4916
-    const val JigCartWithPrimedElementalBar = NPCs.JIG_CART_4917
-    const val JigCartWithPrimedBar = NPCs.JIG_CART_4918
+    const val EmptyJigCart = NPCs.ELEM2_CART_NPC_EMPTY_4913
+    const val JigCartWithElementalBar = NPCs.ELEM2_CART_NPC_BAR_4914
+    const val JigCartWithElementalMindBar = NPCs.ELEM2_CART_NPC_BAR_HOT_4915
+    const val JigCartWithPrimedElementalMindBar = NPCs.ELEM2_CART_NPC_FLAT_HOT_BAR_4916
+    const val JigCartWithPrimedElementalBar = NPCs.ELEM2_CART_NPC_FLAT_BAR_4917
+    const val JigCartWithPrimedBar = NPCs.ELEM2_CART_NPC_FLAT_BAR_DRY_4918
 
     const val JigCartUnderPressMachine = 18784
 

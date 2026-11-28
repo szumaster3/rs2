@@ -147,7 +147,7 @@ class FightTwoCutscene(
     }
 
     companion object {
-        private const val GUARD = NPCs.KHAZARD_GUARD_257
-        private const val SCORPION = NPCs.KHAZARD_SCORPION_271
+        private const val GUARD = NPCs.ARENA_LEADGUARD_257
+        private const val SCORPION = NPCs.ARENA_SCORPION_271
     }
 }

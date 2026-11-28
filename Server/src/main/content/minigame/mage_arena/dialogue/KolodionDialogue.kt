@@ -112,7 +112,7 @@ class KolodionDialogue(player: Player? = null) : Dialogue(player) {
         player.getSavedData().activityData.mageArenaStage = 1
         runTask(player, 1) {
             npc.face(player)
-            animate(npc, Animation.create(Animations.HUMAN_CAST_SPELL_LONG_811))
+            animate(npc, Animation.create(Animations.HUMAN_CASTING_811))
             teleport(player, Location.create(3105, 3934, 0), TeleportManager.TeleportType.NORMAL)
             KolodionSession.create(player).start()
         }

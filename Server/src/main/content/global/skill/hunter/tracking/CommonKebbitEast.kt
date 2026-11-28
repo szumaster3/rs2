@@ -25,7 +25,7 @@ class CommonKebbitEast : HunterTracking() {
             Item(Items.BONES_526),
             Item(Items.RAW_BEAST_MEAT_9986)
         )
-        catchingKebbitAnimation = Animation(Animations.CATCH_KEBBIT_NOOSE_WAND_5259)
+        catchingKebbitAnimation = Animation(Animations.HUNTING_NOOSE_WOOD_5259)
         experience = 36.0
         varp = 919
 

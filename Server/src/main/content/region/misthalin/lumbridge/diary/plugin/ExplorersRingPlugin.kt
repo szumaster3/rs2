@@ -95,7 +95,7 @@ class ExplorersRingPlugin : InteractionListener {
 
         getStoreFile().addProperty(key, charges + 1)
         sendMessage(player, "You feel refreshed as the ring revitalises you and a charge is used up.")
-        visualize(player, 9988, Graphics.RECHARGE_RUN_1733)
+        visualize(player, 9988, Graphics.ATLUM_RING_CHARGE_SPOT_1733)
 
         return true
     }

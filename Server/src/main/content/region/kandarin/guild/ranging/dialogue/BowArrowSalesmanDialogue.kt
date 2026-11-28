@@ -32,5 +32,5 @@ class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BOW_AND_ARROW_SALESMAN_683)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANGING_GUILD_BOW_SALESMAN_683)
 }

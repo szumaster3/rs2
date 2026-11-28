@@ -67,12 +67,12 @@ class MerlinCrystalPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.BEGGAR_252, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.LAKE_BEGGAR_252, IntType.NPC, "talk-to") { player, _ ->
             if (getQuestStage(player, Quests.MERLINS_CRYSTAL.questName) == 40 &&
                 player.getAttribute(GameAttributes.ATTR_STATE_TALK_LADY, false) == true &&
                 player.getAttribute(GameAttributes.TEMP_ATTR_BEGGAR, null) != null
             ) {
-                openDialogue(player, BeggarDialogueFile(null), NPCs.BEGGAR_252)
+                openDialogue(player, BeggarDialogueFile(null), NPCs.LAKE_BEGGAR_252)
                 return@on true
             }
             sendDialogue(player, "This beggar isn't interested in talking.")
@@ -108,7 +108,7 @@ class MerlinCrystalPlugin : InteractionListener {
                             Location.create(if (player.location.x < 3016) 3016 else 3015, door.location.y, 0),
                         )
                     } else {
-                        openDialogue(player, dialogueFile, NPCs.BEGGAR_252)
+                        openDialogue(player, dialogueFile, NPCs.LAKE_BEGGAR_252)
                     }
 
                     dialogueFile.initBeggar(player)
@@ -251,7 +251,7 @@ class MerlinCrystalPlugin : InteractionListener {
                 2 -> {
                     when(buttonID) {
                         1 -> {
-                            player!!.animate(Animation.create(Animations.HUMAN_BURYING_BONES_827))
+                            player!!.animate(Animation.create(Animations.HUMAN_PICKUPFLOOR_827))
                             sendDialogue(player!!, "You climb inside the crate and wait.")
                             stage = 3
                         }

@@ -107,7 +107,7 @@ class GemCutPlugin : InteractionListener {
                     player = player,
                     amount = amount,
                     requiredItem = gemId,
-                    animation = Animations.USE_HAMMER_CHISEL_11041,
+                    animation = Animations.MOTWL_PLAYER_CLEARING_WALL_11041,
                     sound = null,
                     missingMessage = "You have run out of gems."
                 ) {

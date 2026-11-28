@@ -10,13 +10,13 @@ import shared.consts.NPCs
 class IceTrollBehavior : NPCBehavior(*iceTrollIds) {
     companion object {
         private val iceTrollIds = intArrayOf(
-            NPCs.ICE_TROLL_1936,
-            NPCs.ICE_TROLL_1937,
-            NPCs.ICE_TROLL_1938,
-            NPCs.ICE_TROLL_1939,
-            NPCs.ICE_TROLL_1940,
-            NPCs.ICE_TROLL_1941,
-            NPCs.ICE_TROLL_1942,
+            NPCs.TROLLRESCUE_ICETROLL_MELEE1_1936,
+            NPCs.TROLLRESCUE_ICETROLL_MELEE2_1937,
+            NPCs.TROLLRESCUE_ICETROLL_MELEE3_1938,
+            NPCs.TROLLRESCUE_ICETROLL_MELEE4_1939,
+            NPCs.TROLLRESCUE_ICETROLL_MELEE5_1940,
+            NPCs.TROLLRESCUE_ICETROLL_MELEE6_1941,
+            NPCs.TROLLRESCUE_ICETROLL_MELEE7_1942,
         )
     }
 

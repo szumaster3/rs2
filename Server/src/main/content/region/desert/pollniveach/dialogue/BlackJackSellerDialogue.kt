@@ -30,5 +30,5 @@ class BlackJackSellerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BlackJackSellerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLACKJACK_SELLER_2548)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEUD_BJSELLER_2548)
 }

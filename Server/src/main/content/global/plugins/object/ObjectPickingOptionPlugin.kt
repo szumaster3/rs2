@@ -13,8 +13,8 @@ class ObjectPickingOptionPlugin : InteractionListener {
 
     override fun defineListeners() {
         registerSceneryPickup(BANDIT_CAMP_QUARRY, "take-axe", Items.BRONZE_PICKAXE_1265)
-        registerSceneryPickup(LUMBRIDGE_CHICKEN_FARM, "take-axe", Items.BRONZE_AXE_1351)
-        registerSceneryPickup(VARROCK_UNKNOWN, "take-axe", Items.BRONZE_AXE_1351)
+        registerSceneryPickup(LUMBRIDGE_CHICKEN_FARM, "take-axe", Items.BRONZE_HATCHET_1351)
+        registerSceneryPickup(VARROCK_UNKNOWN, "take-axe", Items.BRONZE_HATCHET_1351)
         registerSceneryPickup(RIMMINGTON_MINING_SITE, "take", Items.SPADE_952, newId = 0)
     }
 

@@ -37,7 +37,7 @@ class ChamberGuardianDialogue(player: Player? = null) : Dialogue(player) {
                 0 -> npc(FaceAnim.FRIENDLY, "Hello adventurer, are you looking for another staff?").also { stage++ }
                 1 -> options("What do you have to offer?", "No thanks.").also { stage++ }
                 2 -> when (buttonId) {
-                    1 -> end().also { openNpcShop(player, NPCs.CHAMBER_GUARDIAN_904) }
+                    1 -> end().also { openNpcShop(player, NPCs.MAGEARENA_GUARDIAN_904) }
                     2 -> player(FaceAnim.NEUTRAL, "No thanks.").also { stage++ }
                 }
                 3 -> npc(FaceAnim.FRIENDLY, "Well let me know if you need one.").also { stage = END_DIALOGUE }
@@ -76,5 +76,5 @@ class ChamberGuardianDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHAMBER_GUARDIAN_904)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGEARENA_GUARDIAN_904)
 }

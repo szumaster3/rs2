@@ -92,7 +92,7 @@ class DesertWyrmDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DESERT_WYRM_6831, NPCs.DESERT_WYRM_6832)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_DESERT_WORM_6831, NPCs.LORE_DESERT_WORM_COMBAT_6832)
 
     companion object {
         private val PICKAXE: IntArray = intArrayOf(

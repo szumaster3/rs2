@@ -67,7 +67,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
                 }
 
             if (teleportLocation != null) {
-                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                 queueScript(player, 1, QueueStrength.SOFT) {
                     teleport(player, teleportLocation)
                     return@queueScript stopExecuting(player)
@@ -268,9 +268,9 @@ class HorrorFromTheDeepPlugin : InteractionListener {
 
             if (removeItem(player, Item(Items.STEEL_NAILS_1539, 30)) && removeItem(player, Item(Items.PLANK_960, 1))) {
                 lock(player, 1)
-                animate(player, Animations.SMITH_HAMMER_898)
+                animate(player, Animations.HUMAN_SMITHING_898)
                 queueScript(player, 3, QueueStrength.SOFT) {
-                    animate(player, Animations.SMITH_HAMMER_898)
+                    animate(player, Animations.HUMAN_SMITHING_898)
                     setAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, newUnlockValue)
                     setQuestStage(player, Quests.HORROR_FROM_THE_DEEP.questName, newQuestStage)
                     sendDialogue(player, message)
@@ -290,7 +290,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
 
         on(Scenery.BROKEN_BRIDGE_4615, IntType.SCENERY, "cross") { player, _ ->
             val bridgeUnlock = getAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, 0)
-            val cycle = animationCycles(Animations.AGILITY_START_3276)
+            val cycle = animationCycles(Animations.HUMAN_SPEARTRAP_WALK_SIDESTEP_LONG_L_3276)
             val destination = Location(2598, 3608, 0)
             if (getAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, 0) == 0) {
                 sendMessage(player, "I might be able to make it to the other side.")
@@ -298,13 +298,13 @@ class HorrorFromTheDeepPlugin : InteractionListener {
             }
             when (bridgeUnlock) {
                 1 -> {
-                    player.animate(Animation(Animations.HUMAN_JUMP_BRIDGE_769), 1)
+                    player.animate(Animation(Animations.HUMAN_STEPPINGSTONEJUMP_769), 1)
                     forceWalk(player, destination.transform(1, 0, 0), "")
                     teleport(player, destination, TeleportManager.TeleportType.INSTANT, 2)
                     runTask(player, 3) { forceWalk(player, destination.transform(1, 0, 0), "") }
                 }
                 2 -> {
-                    forceMove(player, player.location, destination, 0, cycle, Direction.EAST, Animations.AGILITY_START_3276)
+                    forceMove(player, player.location, destination, 0, cycle, Direction.EAST, Animations.HUMAN_SPEARTRAP_WALK_SIDESTEP_LONG_L_3276)
                     runTask(player, 6) { forceWalk(player, destination.transform(1, 0, 0), "") }
                 }
                 else -> return@on false
@@ -322,7 +322,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
                 sendMessage(player, "I might be able to make it to the other side.")
                 return@on true
             }
-            forceMove(player, player.location, Location(2596, 3608, 0), 0, 120, Direction.WEST, Animations.AGILITY_START_ALT_3277)
+            forceMove(player, player.location, Location(2596, 3608, 0), 0, 120, Direction.WEST, Animations.HUMAN_SPEARTRAP_WALK_SIDESTEP_LONG_3277)
             runTask(player, 6) { forceWalk(player, Location.create(2595, 3608, 0), "") }
             return@on true
         }

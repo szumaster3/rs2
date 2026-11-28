@@ -29,17 +29,17 @@ class WerewolfCourseListener : InteractionListener {
         }
 
         on(OPEN_TRAPDOOR, IntType.SCENERY, "climb-down") { player, node ->
-            val werewolf = findLocalNPC(player, NPCs.WEREWOLF_1665)
+            val werewolf = findLocalNPC(player, NPCs.WAA_WEREWOLF_GUARD_1665)
             werewolf?.let {
                 face(player, it)
                 face(it, player, 1)
             }
 
-            if (!anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465)
+            if (!anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROS_A_6465)
                 || getStatLevel(player, Skills.AGILITY) < 60) {
                 sendNPCDialogueLines(
                     player,
-                    NPCs.WEREWOLF_1665,
+                    NPCs.WAA_WEREWOLF_GUARD_1665,
                     FaceAnim.FAMILIAR_NEUTRAL,
                     false,
                     "You can't go down there human. If it wasn't my duty",
@@ -49,7 +49,7 @@ class WerewolfCourseListener : InteractionListener {
             } else {
                 sendNPCDialogueLines(
                     player,
-                    NPCs.WEREWOLF_1665,
+                    NPCs.WAA_WEREWOLF_GUARD_1665,
                     FaceAnim.FAMILIAR_NEUTRAL,
                     false,
                     "Good luck down there, my friend. Remember, to the",
@@ -62,7 +62,7 @@ class WerewolfCourseListener : InteractionListener {
                     sendMessage(player, "You climb down through the trapdoor.")
                     ClimbActionHandler.climb(
                         player,
-                        Animation(Animations.HUMAN_BURYING_BONES_827),
+                        Animation(Animations.HUMAN_PICKUPFLOOR_827),
                         Location(3549, 9865, 0)
                     )
                 }
@@ -104,7 +104,7 @@ class WerewolfCourseListener : InteractionListener {
     companion object {
         private const val TRAPDOOR = Scenery.TRAPDOOR_5131
         private const val OPEN_TRAPDOOR = Scenery.TRAPDOOR_5132
-        private const val AGILITY_TRAINER = NPCs.AGILITY_TRAINER_1664
+        private const val AGILITY_TRAINER = NPCs.WEREWOLF_TRAINER_STICK_1664
         private val ZIP_LINE = intArrayOf(Scenery.ZIP_LINE_5139, Scenery.ZIP_LINE_5140, Scenery.ZIP_LINE_5141)
     }
 

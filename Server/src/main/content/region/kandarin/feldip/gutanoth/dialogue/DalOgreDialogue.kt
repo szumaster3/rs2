@@ -24,5 +24,5 @@ class DalOgreDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = DalOgreDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_TRADER_876)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FALSEOGRETRADER_876)
 }

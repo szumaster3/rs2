@@ -28,11 +28,11 @@ class ForinthryBraceletPlugin : InteractionListener
     companion object {
         private const val ABYSS_PROTECTION = "forinthry-abyss-protection"
         private val BRACELET_IDS = intArrayOf(
-            Items.FORINTHRY_BRACE5_11095,
-            Items.FORINTHRY_BRACE4_11097,
-            Items.FORINTHRY_BRACE3_11099,
-            Items.FORINTHRY_BRACE2_11101,
-            Items.FORINTHRY_BRACE1_11103
+            Items.FORINTHRY_BRACE_5_11095,
+            Items.FORINTHRY_BRACE_4_11097,
+            Items.FORINTHRY_BRACE_3_11099,
+            Items.FORINTHRY_BRACE_2_11101,
+            Items.FORINTHRY_BRACE_1_11103
         )
 
         /**
@@ -81,11 +81,11 @@ class ForinthryBraceletPlugin : InteractionListener
         {
             when (item.id)
             {
-                Items.FORINTHRY_BRACE5_11095 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE4_11097),item,Container.EQUIPMENT)
-                Items.FORINTHRY_BRACE4_11097 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE3_11099),item,Container.EQUIPMENT)
-                Items.FORINTHRY_BRACE3_11099 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE2_11101),item,Container.EQUIPMENT)
-                Items.FORINTHRY_BRACE2_11101 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE1_11103),item,Container.EQUIPMENT)
-                Items.FORINTHRY_BRACE1_11103 -> {removeItem(player, item, Container.EQUIPMENT);sendMessage(player,"Your Forinthry bracelet crumbles to dust.")}
+                Items.FORINTHRY_BRACE_5_11095 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE_4_11097),item,Container.EQUIPMENT)
+                Items.FORINTHRY_BRACE_4_11097 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE_3_11099),item,Container.EQUIPMENT)
+                Items.FORINTHRY_BRACE_3_11099 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE_2_11101),item,Container.EQUIPMENT)
+                Items.FORINTHRY_BRACE_2_11101 -> replaceSlot(player, item.slot, Item(Items.FORINTHRY_BRACE_1_11103),item,Container.EQUIPMENT)
+                Items.FORINTHRY_BRACE_1_11103 -> {removeItem(player, item, Container.EQUIPMENT);sendMessage(player,"Your Forinthry bracelet crumbles to dust.")}
             }
         }
 
@@ -93,11 +93,11 @@ class ForinthryBraceletPlugin : InteractionListener
         {
             return when (item.id)
             {
-                Items.FORINTHRY_BRACE5_11095 -> 5
-                Items.FORINTHRY_BRACE4_11097 -> 4
-                Items.FORINTHRY_BRACE3_11099 -> 3
-                Items.FORINTHRY_BRACE2_11101 -> 2
-                Items.FORINTHRY_BRACE1_11103 -> 1
+                Items.FORINTHRY_BRACE_5_11095 -> 5
+                Items.FORINTHRY_BRACE_4_11097 -> 4
+                Items.FORINTHRY_BRACE_3_11099 -> 3
+                Items.FORINTHRY_BRACE_2_11101 -> 2
+                Items.FORINTHRY_BRACE_1_11103 -> 1
                 else -> 0
             }
         }

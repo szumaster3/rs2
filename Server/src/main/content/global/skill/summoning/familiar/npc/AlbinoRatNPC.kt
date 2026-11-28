@@ -13,7 +13,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class AlbinoRatNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.ALBINO_RAT_6847) :
+class AlbinoRatNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_GIANT_RAT_6847) :
     Forager(owner, id, 2200, Items.ALBINO_RAT_POUCH_12067, 6, WeaponInterface.STYLE_ACCURATE, CHEESE) {
 
     override fun construct(owner: Player, id: Int): Familiar {
@@ -30,7 +30,7 @@ class AlbinoRatNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NP
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALBINO_RAT_6847, NPCs.ALBINO_RAT_6848)
+        return intArrayOf(NPCs.LORE_GIANT_RAT_6847, NPCs.LORE_GIANT_RAT_COMBAT_6848)
     }
 
     companion object {

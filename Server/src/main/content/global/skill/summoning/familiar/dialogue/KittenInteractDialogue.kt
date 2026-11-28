@@ -84,7 +84,7 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
                             val pets = Pets.forId(pet.itemId) ?: return true
                             val hellcatID = when (pet.itemId) {
                                 pets.babyItemId -> Items.HELL_KITTEN_7583
-                                pets.grownItemId -> Items.HELL_CAT_7582
+                                pets.grownItemId -> Items.HELLCAT_7582
                                 pets.overgrownItemId -> Items.OVERGROWN_HELLCAT_7581
                                 else -> return true
                             }
@@ -127,7 +127,7 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(343823)
 
     companion object {
-        private val PLAYER_STROKE_ANIMATION = Animation(Animations.KITTEN_STROKE_9224)
-        private val KITTEN_STROKE_ANIMATION = Animation(Animations.KITTEN_STROKE_ANIMATION_9173)
+        private val PLAYER_STROKE_ANIMATION = Animation(Animations.NPC_REWORK_CAT_PLAYER_STROKING_CAT_9224)
+        private val KITTEN_STROKE_ANIMATION = Animation(Animations.CAT_REWORK_BEING_STROKED_9173)
     }
 }

@@ -11,7 +11,7 @@ import core.tools.minutesToTicks
 import shared.consts.NPCs
 import shared.consts.Sounds
 
-class JackFrostHolidayRandomNPC : HolidayRandomEventNPC(NPCs.JACK_FROST_8517) {
+class JackFrostHolidayRandomNPC : HolidayRandomEventNPC(NPCs.XMAS08_JACK_VISIBLE_8517) {
     override fun init() {
         ticksLeft = minutesToTicks(1)
         spawnLocation = getPathableRandomLocalCoordinate(this, 3, player.location)

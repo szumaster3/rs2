@@ -13,14 +13,14 @@ import shared.consts.Animations
 import shared.consts.NPCs
 import shared.consts.Sounds
 
-class ZombieHolidayRandomNPC : HolidayRandomEventNPC(NPCs.ZOMBIE_2714) {
+class ZombieHolidayRandomNPC : HolidayRandomEventNPC(NPCs.UNATTACKABLE_ZOMBIE_2714) {
     override fun init() {
         super.init()
         this.isAggressive = false
         playGlobalAudio(this.location, Sounds.ZOMBIE_DEATH_922)
         playJingle(player, 314)
         sendMessage(player, "A zombie crawls out of the ground beneath you...")
-        animate(player, Animations.HUMAN_ZOMBIE_HAND_7272)
+        animate(player, Animations.HW07_ARM_FROM_THE_GROUND_EMOTE_7272)
         queueScript(this, 2, QueueStrength.SOFT) { stage: Int ->
             when (stage) {
                 0 -> {
@@ -34,7 +34,7 @@ class ZombieHolidayRandomNPC : HolidayRandomEventNPC(NPCs.ZOMBIE_2714) {
 
                 1 -> {
                     this.face(player)
-                    visualize(this, Animations.ZOMBIE_GRAB_5568, -1)
+                    visualize(this, Animations.ZOMBIE_UPDATE_ATTACK_NORMAL_5568, -1)
                     playGlobalAudio(this.location, Sounds.ZOMBIE_ATTACK_918)
                     if (RandomFunction.roll(2)) {
                         player.timers.registerTimer(ResetHolidayAppearance())
@@ -50,7 +50,7 @@ class ZombieHolidayRandomNPC : HolidayRandomEventNPC(NPCs.ZOMBIE_2714) {
                 }
 
                 2 -> {
-                    animate(this, Animations.ZOMBIE_DEAD_5575)
+                    animate(this, Animations.ZOMBIE_UPDATE_DEATH_WEAPON_5575)
                     HolidayRandoms.terminateEventNpc(player)
                     return@queueScript stopExecuting(this)
                 }

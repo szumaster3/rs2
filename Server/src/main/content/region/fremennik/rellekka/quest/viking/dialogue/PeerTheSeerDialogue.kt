@@ -270,7 +270,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PEER_THE_SEER_1288)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_PEER_1288)
 }
 
 private enum class BoneArmour(val product: Int, val hideAmount: Int, val boneItem: Int, val price: Int) {

@@ -136,7 +136,7 @@ object BlackjackUtils {
     private fun fail(player: Player, npc: NPC, npcData: BlackjackNPC) {
         npc.faceLocation(player.location)
         npc.sendChat("I'll kill you for that!")
-        npc.animator.animate(Animation(Animations.ATTACK_395))
+        npc.animator.animate(Animation(Animations.HUMAN_AXE_HACK_395))
         impact(player, npcData.damage)
         stun(player, FAIL_STUN_TICKS, false)
         sendMessage(player, "You blow only glances off the ${shownName(player, npc)}'s head.")

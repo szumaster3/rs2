@@ -9,7 +9,7 @@ class FollowerInventoryListener {
             intArrayOf(
                 NPCs.FYIONA_FRAY_3634,
                 NPCs.DALCIAN_FANG_3632,
-                NPCs.MAGE_1513,
+                NPCs.RAMBLE_EASY_MAGE_1513,
                 NPCs.ADVENTURER_1512,
             )
 

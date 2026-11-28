@@ -32,5 +32,5 @@ class FranklinCaranosDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FranklinCaranosDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FRANKLIN_CARANOS_3823)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SWAN_FRANKLIN_3823)
 }

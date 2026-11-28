@@ -19,7 +19,7 @@ class KingLathasBiohazardQuestDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.BIOHAZARD.questName)
-        npc = NPC(NPCs.KING_LATHAS_364)
+        npc = NPC(NPCs.KINGLATHAS_364)
         when {
             (questStage >= 16) -> {
                 when (stage) {

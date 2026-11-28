@@ -22,7 +22,7 @@ class HayBaleOptionPlugin : InteractionListener {
         on(HAY, IntType.SCENERY, "search") { player, node ->
             val rand = RandomFunction.random(50)
             lock(player, 2)
-            animate(player, Animations.HUMAN_BURYING_BONES_827)
+            animate(player, Animations.HUMAN_PICKUPFLOOR_827)
             sendMessage(player, "You search the " + node.name.lowercase() + "...")
             if (freeSlots(player) == 0) {
                 sendDialogue(player, "You don't have enough inventory space.")

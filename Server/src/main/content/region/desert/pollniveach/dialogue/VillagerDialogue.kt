@@ -77,18 +77,18 @@ class VillagerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(
         1887, // Wrapper
-        NPCs.VILLAGER_1888, // Male
-        NPCs.VILLAGER_1889,
-        NPCs.VILLAGER_1890,
+        NPCs.FEUD_VILLAGER_1_1_1888, // Male
+        NPCs.FEUD_VILLAGER_1_2_1889,
+        NPCs.FEUD_VILLAGER_1_3_1890,
         NPCs.VILLAGER_1891,
-        NPCs.VILLAGER_1892,
-        NPCs.VILLAGER_1893,
-        NPCs.VILLAGER_1894,
+        NPCs.FEUD_VILLAGER_2_1_1892,
+        NPCs.FEUD_VILLAGER_2_2_1893,
+        NPCs.FEUD_VILLAGER_2_3_1894,
         NPCs.VILLAGER_1895,
-        NPCs.VILLAGER_1896, // Female
-        NPCs.VILLAGER_1897,
-        NPCs.VILLAGER_1898,
-        NPCs.VILLAGER_1899,
-        NPCs.VILLAGER_1900,
+        NPCs.FEUD_VILLAGER_3_1_1896, // Female
+        NPCs.FEUD_VILLAGER_3_2_1897,
+        NPCs.FEUD_VILLAGER_3_3_1898,
+        NPCs.MENAPHITE_LEADER_1899,
+        NPCs.MENAPHITE_LEADER_1900,
     )
 }

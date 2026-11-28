@@ -126,11 +126,11 @@ class BurthorpePlugin : InteractionListener {
          * Handles dialogue when talking to Sergeants.
          */
 
-        on(NPCs.SERGEANT_1061, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.DEATH_IG_SERGEANT_DRILLING_1061, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "The Sergeant is busy training the soldiers.")
             return@on true
         }
-        on(NPCs.SERGEANT_1062, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.DEATH_IG_SERGEANT_TRAINING_1062, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "The Sergeant is busy training the soldiers.")
             return@on true
         }
@@ -164,11 +164,11 @@ class BurthorpePlugin : InteractionListener {
          * Handles dialogue when talking to archers.
          */
 
-        on(NPCs.ARCHER_1073, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.DEATH_ARCHER1_1073, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "The archer won't talk whilst on duty.")
             return@on true
         }
-        on(NPCs.ARCHER_1074, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.DEATH_ARCHER2_1074, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "The archer won't talk whilst on duty.")
             return@on true
         }
@@ -177,11 +177,11 @@ class BurthorpePlugin : InteractionListener {
          * Handles talking to guards.
          */
 
-        on(NPCs.GUARD_1076, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.DEATH_GUARD1_1076, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "The guard won't talk whilst on duty.")
             return@on true
         }
-        on(NPCs.GUARD_1077, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.DEATH_GUARD2_1077, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "The guard won't talk whilst on duty.")
             return@on true
         }
@@ -220,7 +220,7 @@ class BurthorpePlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.SERVANT_1081, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.DEATH_SERVANT1_1081, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, ServantDialogue(), node)
             return@on true
         }
@@ -235,7 +235,7 @@ class BurthorpePlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.UNFERTH_2655, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.TWOCATS_UNFERTH_BALD_2655, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, UnferthDialogue(), node)
             return@on true
         }

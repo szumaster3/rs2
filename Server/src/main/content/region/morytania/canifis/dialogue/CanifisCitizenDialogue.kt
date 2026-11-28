@@ -19,7 +19,7 @@ class CanifisCitizenDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val randomWithRing = RandomFunction.random(0, 9)
         val randomWithoutRing = RandomFunction.random(10, 17)
-        if (inEquipment(player, Items.RING_OF_CHAROS_4202) || inEquipment(player, Items.RING_OF_CHAROSA_6465)) {
+        if (inEquipment(player, Items.RING_OF_CHAROS_4202) || inEquipment(player, Items.RING_OF_CHAROS_A_6465)) {
             when (randomWithRing) {
                 0 -> npc(FaceAnim.HALF_GUILTY, "I haven't smelt you around here before...").also { stage = END_DIALOGUE }
                 1 -> npc(FaceAnim.HALF_GUILTY, "If you catch anyone promise me you'll share.").also { stage = END_DIALOGUE }

@@ -94,7 +94,7 @@ class MartinThwaitDialogue(player: Player? = null) : Dialogue(player) {
     companion object {
         private val ITEMS = arrayOf(
             Item(Items.THIEVING_CAPE_9777),
-            Item(Items.THIEVING_CAPET_9778),
+            Item(Items.THIEVING_CAPE_T_9778),
             Item(Items.THIEVING_HOOD_9779)
         )
         private val COINS = Item(Items.COINS_995, 99000)

@@ -55,5 +55,5 @@ class AliTheSnakeCharmerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AliTheSnakeCharmerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_SNAKE_CHARMER_1872)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEUD_SNAKECHARMER_1872)
 }

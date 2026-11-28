@@ -33,7 +33,7 @@ class PinballPlugin : InteractionListener, MapArea {
             if(points >= 10) return@on false
 
             lock(player, 2)
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
 
 
             sendString(player, "Score: $points", Components.PINBALL_INTERFACE_263, 1)
@@ -64,7 +64,7 @@ class PinballPlugin : InteractionListener, MapArea {
             } else {
                 val lastIndex = getAttribute(player, GameAttributes.RE_PINBALL_INTER, -1)
                 PinballUtils.PINBALL_PILLARS.getOrNull(lastIndex)?.let {
-                    animateScenery(it, Animations.RESET_PILLAR_ANIMATION_4006)
+                    animateScenery(it, Animations.PINBALL_POST_INACTIVE_4006)
                 }
                 PlayerCamera(player).reset()
                 sendPlainDialogue(player, true, "", "Congratulations - you can now leave the arena.")

@@ -57,5 +57,5 @@ class ArdougneMonkeyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ArdougneMonkeyDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MONKEY_4363)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BREW_MONKEY_4363)
 }

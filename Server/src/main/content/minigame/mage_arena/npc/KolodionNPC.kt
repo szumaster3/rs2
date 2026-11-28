@@ -114,12 +114,12 @@ class KolodionNPC(id: Int = 0, location: Location? = null, session: KolodionSess
         )
 
     enum class KolodionType(val npcId: Int, private val appearAnimation: Int?, private val graphicId: Int, private val appearMessage: String?) {
-        HUMAN(NPCs.KOLODION_907, Animations.APPEAR_6941, -1, "You must prove yourself... now!"),
-        OGRE(NPCs.KOLODION_908, Animations.APPEAR_6941, Graphics.BIG_PUFF_OF_SMOKE_188, "This is only the beginning; you can't beat me!"),
-        SPIDER(NPCs.KOLODION_909, Animations.MAGE_ARENA_SPIDER_SPAWN_5324, Graphics.BLUES_SPLASHES_OF_SOMETHING_190, "Foolish mortal; I am unstoppable."),
-        GHOST(NPCs.KOLODION_910, Animations.TELEPORT_B_715, Graphics.BIG_PUFF_OF_SMOKE_188, "Now you feel it.. The dark energy."),
-        DEMON(NPCs.KOLODION_911, Animations.MAGE_ARENA_DEMON_SPAWN_4623, Graphics.BLUES_SPLASHES_OF_SOMETHING_190, "Aaaaaaaarrgghhhh! The power!"),
-        END(NPCs.KOLODION_906, Animations.APPEAR_6941, Graphics.BIG_PUFF_OF_SMOKE_188, null);
+        HUMAN(NPCs.KOLODION_907, Animations.PLAYER_REAPPEARS_6941, -1, "You must prove yourself... now!"),
+        OGRE(NPCs.KOLODION_908, Animations.PLAYER_REAPPEARS_6941, Graphics.SMOKEPUFF_4_188, "This is only the beginning; you can't beat me!"),
+        SPIDER(NPCs.KOLODION_909, Animations.CLAN_SKILL_CRAFTING_TIER_7_SPOOL_TOWER_1B_NULL_5324, Graphics.PLAYER_PULL_RAF_CRACKER_190, "Foolish mortal; I am unstoppable."),
+        GHOST(NPCs.KOLODION_910, Animations.ECO_VINE_CREATURE_BURROW_DOWN_715, Graphics.SMOKEPUFF_4_188, "Now you feel it.. The dark energy."),
+        DEMON(NPCs.KOLODION_911, Animations.QIP_DS_DELRITH_SUMMONED_4623, Graphics.PLAYER_PULL_RAF_CRACKER_190, "Aaaaaaaarrgghhhh! The power!"),
+        END(NPCs.KOLODION_906, Animations.PLAYER_REAPPEARS_6941, Graphics.SMOKEPUFF_4_188, null);
 
         fun transform(npc: KolodionNPC, player: Player) {
             val newType = next()

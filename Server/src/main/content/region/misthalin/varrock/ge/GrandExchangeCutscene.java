@@ -472,7 +472,7 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
                             } else if (player.getAttribute("ge-stage", 0) == 4) {
                                 setAttribute(player, "ge-stage", 5);
                                 player.getInterfaceManager().close();
-                                player.getDialogueInterpreter().sendDialogues(NPCs.BRUGSEN_BURSEN_6522, null, "Selling items is a very much similar process, just that", "you are picking an item you already have.");
+                                player.getDialogueInterpreter().sendDialogues(NPCs.EXCHANGE_BRUGSEN_6522, null, "Selling items is a very much similar process, just that", "you are picking an item you already have.");
                             } else {
                                 player.getPacketDispatch().sendString("If you selected the buy option you would the see this screen. Here you define what you buy by clicking on the box with the magnifying glass and choosing an item.", 110, 89);
                                 setAttribute(player, "ge-stage", 2);
@@ -507,7 +507,7 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
                         case 13:
                             player.getInterfaceManager().close();
                             setAttribute(player, "ge-stage", 5);
-                            player.getDialogueInterpreter().sendDialogues(NPCs.BRUGSEN_BURSEN_6522, null, "<col=8A0808>Step 5</col>: When the trade is complete, we will let you", "know with a message and you can pick up your", "winnings by talking to the clerks or by visiting any", "banker in " + GameWorld.getSettings().getName() + ".");
+                            player.getDialogueInterpreter().sendDialogues(NPCs.EXCHANGE_BRUGSEN_6522, null, "<col=8A0808>Step 5</col>: When the trade is complete, we will let you", "know with a message and you can pick up your", "winnings by talking to the clerks or by visiting any", "banker in " + GameWorld.getSettings().getName() + ".");
                             break;
                     }
                     break;

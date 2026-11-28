@@ -29,24 +29,24 @@ public final class ZoneMonitor {
      */
     static final Set<Integer> WILDERNESS_LEVEL_30_TELEPORT_ITEMS = Set.of(
             Items.AMULET_OF_GLORY_1704,
-            Items.AMULET_OF_GLORY1_1706,
-            Items.AMULET_OF_GLORY2_1708,
-            Items.AMULET_OF_GLORY3_1710,
-            Items.AMULET_OF_GLORYT_10362,
-            Items.AMULET_OF_GLORYT1_10360,
-            Items.AMULET_OF_GLORYT2_10358,
-            Items.AMULET_OF_GLORYT3_10356,
+            Items.AMULET_OF_GLORY_1_1706,
+            Items.AMULET_OF_GLORY_2_1708,
+            Items.AMULET_OF_GLORY_3_1710,
+            Items.AMULET_OF_GLORY_T_10362,
+            Items.AMULET_OF_GLORY_T1_10360,
+            Items.AMULET_OF_GLORY_T2_10358,
+            Items.AMULET_OF_GLORY_T3_10356,
             Items.SKILLS_NECKLACE_11113,
-            Items.SKILLS_NECKLACE1_11111,
-            Items.SKILLS_NECKLACE2_11109,
-            Items.SKILLS_NECKLACE3_11107,
+            Items.SKILLS_NECKLACE_1_11111,
+            Items.SKILLS_NECKLACE_2_11109,
+            Items.SKILLS_NECKLACE_3_11107,
             Items.COMBAT_BRACELET_11126,
-            Items.COMBAT_BRACELET1_11124,
-            Items.COMBAT_BRACELET2_11122,
-            Items.COMBAT_BRACELET3_11120,
-            Items.PHARAOHS_SCEPTRE_9044,
-            Items.PHARAOHS_SCEPTRE_9046,
-            Items.PHARAOHS_SCEPTRE_9048);
+            Items.COMBAT_BRACELET_1_11124,
+            Items.COMBAT_BRACELET_2_11122,
+            Items.COMBAT_BRACELET_3_11120,
+            Items.PHARAOHS_SCEPTRE_3_9044,
+            Items.PHARAOHS_SCEPTRE_2_9046,
+            Items.PHARAOHS_SCEPTRE_1_9048);
 
     private final Entity entity;
 

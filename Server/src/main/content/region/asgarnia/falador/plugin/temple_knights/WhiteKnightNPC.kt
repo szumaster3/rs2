@@ -34,7 +34,7 @@ class WhiteKnightNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
     companion object {
         private val ID = intArrayOf(
             NPCs.WHITE_KNIGHT_19,
-            NPCs.WHITE_KNIGHT_1092,
+            NPCs.DEATH_WHITE_KNIGHT_1092,
             NPCs.WHITE_KNIGHT_3348,
             NPCs.WHITE_KNIGHT_3349,
             NPCs.WHITE_KNIGHT_3350,

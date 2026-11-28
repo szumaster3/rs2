@@ -154,5 +154,5 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SIGLI_THE_HUNTSMAN_1281)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_SIGLI_1281)
 }

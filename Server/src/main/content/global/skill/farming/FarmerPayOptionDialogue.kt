@@ -69,14 +69,14 @@ class FarmerPayOptionDialogue(val patch: Patch, private val quickPay: Boolean = 
                     itemTertiary = patch.plantable?.protectionItemTertiary
                     val protectionText: String? = when (item?.id) {
                         Items.COMPOST_6032        -> pluralize("bucket of compost", item)
-                        Items.POTATOES10_5438     -> pluralize("sack of potatoes", item)
-                        Items.ONIONS10_5458       -> pluralize("sack of onions", item)
-                        Items.CABBAGES10_5478     -> pluralize("sack of cabbages", item)
-                        Items.APPLES5_5386        -> pluralize("basket of apples", item)
-                        Items.TOMATOES5_5968      -> pluralize("basket of tomatoes", item)
-                        Items.ORANGES5_5396       -> pluralize("basket of oranges", item)
-                        Items.STRAWBERRIES5_5406  -> pluralize("basket of strawberries", item)
-                        Items.BANANAS5_5416       -> pluralize("basket of bananas", item)
+                        Items.POTATOES_10_5438     -> pluralize("sack of potatoes", item)
+                        Items.ONIONS_10_5458       -> pluralize("sack of onions", item)
+                        Items.CABBAGES_10_5478     -> pluralize("sack of cabbages", item)
+                        Items.APPLES_5_5386        -> pluralize("basket of apples", item)
+                        Items.TOMATOES_5_5968      -> pluralize("basket of tomatoes", item)
+                        Items.ORANGES_5_5396       -> pluralize("basket of oranges", item)
+                        Items.STRAWBERRIES_5_5406  -> pluralize("basket of strawberries", item)
+                        Items.BANANAS_5_5416       -> pluralize("basket of bananas", item)
 
                         Items.JUTE_FIBRE_5931     -> "jute fibres"
                         Items.MARIGOLDS_6010      -> "harvest of marigold"

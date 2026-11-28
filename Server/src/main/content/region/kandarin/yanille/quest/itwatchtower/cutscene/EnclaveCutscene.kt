@@ -19,8 +19,8 @@ class EnclaveCutscene(player: Player) : Cutscene(player) {
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        addNPC(NPCs.BLUE_DRAGON_5178, 31,26, Direction.SOUTH)
-        addNPC(NPCs.OGRE_SHAMAN_5187, 31,25, Direction.SOUTH_WEST)
+        addNPC(NPCs.WATCHTOWER_CUTSCENE_BLUE_DRAGON_5178, 31,26, Direction.SOUTH)
+        addNPC(NPCs.QIP_WATCHTOWER_OGRE_SHAMAN_04_NORMAL_5187, 31,25, Direction.SOUTH_WEST)
         loadRegion(10289)
     }
 
@@ -44,29 +44,29 @@ class EnclaveCutscene(player: Player) : Cutscene(player) {
             3 -> dialogueUpdate(true, "Meanwhile, in the Shaman's enclave...")
             4 -> {
                 playAudio(player, Sounds.WATCHTOWER_DRAGON_ATTACK_3266)
-                visualize(getNPC(NPCs.BLUE_DRAGON_5178)!!, Animation(81, Priority.HIGH), Graphics(shared.consts.Graphics.DRAGON_BREATH_1, 64))
-                impact(getNPC(NPCs.BLUE_DRAGON_5178)!!, 30, ImpactHandler.HitsplatType.NORMAL)
-                face(getNPC(NPCs.OGRE_SHAMAN_5187)!!, getNPC(NPCs.BLUE_DRAGON_5178)!!)
+                visualize(getNPC(NPCs.WATCHTOWER_CUTSCENE_BLUE_DRAGON_5178)!!, Animation(81, Priority.HIGH), Graphics(shared.consts.Graphics.DRAGON_FIREBREATH_ATTACK_1, 64))
+                impact(getNPC(NPCs.WATCHTOWER_CUTSCENE_BLUE_DRAGON_5178)!!, 30, ImpactHandler.HitsplatType.NORMAL)
+                face(getNPC(NPCs.QIP_WATCHTOWER_OGRE_SHAMAN_04_NORMAL_5187)!!, getNPC(NPCs.WATCHTOWER_CUTSCENE_BLUE_DRAGON_5178)!!)
                 timedUpdate(3)
             }
             5 -> {
                 playAudio(player, Sounds.WATCHTOWER_SHAMAN_CRY_3268)
-                sendChat(getNPC(NPCs.OGRE_SHAMAN_5187)!!, "Hur, hut, hur. Stoopid dragon!")
+                sendChat(getNPC(NPCs.QIP_WATCHTOWER_OGRE_SHAMAN_04_NORMAL_5187)!!, "Hur, hut, hur. Stoopid dragon!")
                 timedUpdate(1)
             }
             6 -> {
                 playAudio(player, Sounds.WATCHTOWER_SPELL_CAST_3270)
-                sendChat(getNPC(NPCs.OGRE_SHAMAN_5187)!!, "Take dis!")
-                animate(getNPC(NPCs.OGRE_SHAMAN_5187)!!, CAST_SPELL_ANIMATION)
+                sendChat(getNPC(NPCs.QIP_WATCHTOWER_OGRE_SHAMAN_04_NORMAL_5187)!!, "Take dis!")
+                animate(getNPC(NPCs.QIP_WATCHTOWER_OGRE_SHAMAN_04_NORMAL_5187)!!, CAST_SPELL_ANIMATION)
                 timedUpdate(3)
             }
             7 -> {
                 playAudio(player, Sounds.WATCHTOWER_SPELL_HIT_3271)
-                impact(getNPC(NPCs.BLUE_DRAGON_5178)!!, 75, ImpactHandler.HitsplatType.NORMAL)
+                impact(getNPC(NPCs.WATCHTOWER_CUTSCENE_BLUE_DRAGON_5178)!!, 75, ImpactHandler.HitsplatType.NORMAL)
                 timedUpdate(1)
             }
             8 -> {
-                animate(getNPC(NPCs.BLUE_DRAGON_5178)!!, 92)
+                animate(getNPC(NPCs.WATCHTOWER_CUTSCENE_BLUE_DRAGON_5178)!!, 92)
                 timedUpdate(1)
             }
             9 -> end{}

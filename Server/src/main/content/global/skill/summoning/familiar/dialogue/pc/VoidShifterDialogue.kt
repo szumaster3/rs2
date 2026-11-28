@@ -74,5 +74,5 @@ class VoidShifterDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VOID_SHIFTER_7367, NPCs.VOID_SHIFTER_7368, NPCs.VOID_SHIFTER_7369)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_SHIFTER_7367, NPCs.LORE_SHIFTER_COMBAT_7368, NPCs.VOID_SHIFTER_7369)
 }

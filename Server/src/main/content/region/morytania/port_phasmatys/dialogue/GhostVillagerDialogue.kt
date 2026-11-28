@@ -59,5 +59,5 @@ class GhostVillagerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GhostVillagerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_VILLAGER_1697)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_GHOST_VILLAGER_1697)
 }

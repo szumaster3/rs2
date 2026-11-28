@@ -18,20 +18,20 @@ import shared.consts.Scenery
 class DorgeshuunPlugin : InteractionListener {
 
     companion object {
-        val BONE_DOORS = intArrayOf(Scenery.BONE_DOOR_32952, Scenery.BONE_DOOR_32953, Scenery.BONE_DOOR_22945)
+        val BONE_DOORS = intArrayOf(Scenery.DOOR_32952, Scenery.DOOR_32953, Scenery.BONE_DOOR_22945)
         val DOORS = intArrayOf(Scenery.DOOR_22913, Scenery.DOOR_22914)
         val CAVE_GOBLINS = intArrayOf(
             NPCs.CAVE_GOBLIN_MINER_2069,
-            NPCs.CAVE_GOBLIN_MINER_2070,
-            NPCs.CAVE_GOBLIN_MINER_2071,
-            NPCs.CAVE_GOBLIN_MINER_2072,
-            NPCs.CAVE_GOBLIN_MINER_2075,
-            NPCs.CAVE_GOBLIN_MINER_2076,
-            NPCs.CAVE_GOBLIN_MINER_2077,
-            NPCs.CAVE_GOBLIN_MINER_2078,
-            NPCs.CAVE_GOBLIN_MINER_2079,
-            NPCs.CAVE_GOBLIN_MINER_2080,
-            NPCs.CAVE_GOBLIN_MINER_2081
+            NPCs.CAVE_GOBLIN_MINER2_2070,
+            NPCs.CAVE_GOBLIN_MINER3_2071,
+            NPCs.CAVE_GOBLIN_MINER4_2072,
+            NPCs.CAVE_GOBLIN_MINER_MINING_2075,
+            NPCs.CAVE_GOBLIN_MINER2_MINING_2076,
+            NPCs.CAVE_GOBLIN_MINER3_MINING_2077,
+            NPCs.CAVE_GOBLIN_MINER4_MINING_2078,
+            NPCs.SIGMUND_2079,
+            NPCs.SIGMUND_2080,
+            NPCs.SIGMUND_2081
         )
     }
 
@@ -40,7 +40,7 @@ class DorgeshuunPlugin : InteractionListener {
          * Handles talk to spit goblin NPC.
          */
 
-        on(NPCs.SPIT_GOBLIN_5823, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.DORGESH_GOBLIN_FROGSPIT_5823, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, SpitgoblinDialogue())
             return@on true
         }
@@ -58,7 +58,7 @@ class DorgeshuunPlugin : InteractionListener {
          * Handles talk to Ambassador Alvijar NPC.
          */
 
-        on(NPCs.AMBASSADOR_ALVIJAR_5863, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.SLICE_DWARF_ALVIJAR_THERE_5863, IntType.NPC, "talk-to") { player, _ ->
             player.dialogueInterpreter.open(5887)
             return@on true
         }
@@ -67,7 +67,7 @@ class DorgeshuunPlugin : InteractionListener {
          * Handles exchange brooch for mining helmet.
          */
 
-        onUseWith(IntType.NPC, Items.BROOCH_5008, NPCs.MISTAG_2084) { player, used, npc ->
+        onUseWith(IntType.NPC, Items.BROOCH_5008, NPCs.LOST_TRIBE_MISTAG_2084) { player, used, npc ->
             val randomReward = arrayOf(Items.MINING_HELMET_5013, Items.MINING_HELMET_5014).random()
 
             if (!isQuestComplete(player, Quests.THE_LOST_TRIBE.questName) || !removeItem(
@@ -89,16 +89,16 @@ class DorgeshuunPlugin : InteractionListener {
 
         on(BONE_DOORS, IntType.SCENERY, "open") { player, node ->
             when (node.id) {
-                Scenery.BONE_DOOR_32952, Scenery.BONE_DOOR_32953 -> {
+                Scenery.DOOR_32952, Scenery.DOOR_32953 -> {
                     if (!isQuestComplete(player, Quests.THE_LOST_TRIBE.questName)) {
                         sendNPCDialogue(
                             player,
-                            NPCs.CAVE_GOBLIN_GUARD_2073,
+                            NPCs.CAVE_GOBLIN_GUARD1_2073,
                             "Surface-dweller! You may not pass through that door!",
                             FaceAnim.OLD_NORMAL,
                         ).also { player.faceLocation(Location(3318, 9604, 0)) }
                     } else {
-                        teleport(player, Location(if (node.id == Scenery.BONE_DOOR_32952) 2747 else 2748, 5374, 0))
+                        teleport(player, Location(if (node.id == Scenery.DOOR_32952) 2747 else 2748, 5374, 0))
                     }
                 }
 

@@ -37,12 +37,12 @@ class InPyreNeedPlugin : InteractionListener {
 
             if (player.familiarManager.hasFamiliar() && familiar != null) {
                 when (familiar.id) {
-                    NPCs.PHOENIX_8575, NPCs.PHOENIX_8576 -> {
+                    NPCs.LORE_PHOENIX_8575, NPCs.LORE_PHOENIX_COMBAT_8576 -> {
                         sendNPCDialogue(player, familiar.id, "${player.username}, this is my lair. You must dismiss my summoned form if you wish to enter; I will only duel you when I am at full strength.", FaceAnim.FAMILIAR_NEUTRAL)
                         return@on true
                     }
 
-                    NPCs.PHOENIX_EGGLING_8577, NPCs.PHOENIX_EGGLING_8578 -> {
+                    NPCs.LORE_PHOENIX_EVIL_EGGLING_8577, NPCs.LORE_PHOENIX_EGGLING_8578 -> {
                         sendNPCDialogue(player, familiar.id, "Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.", FaceAnim.FAMILIAR_NEUTRAL)
                         return@on true
                     }
@@ -50,7 +50,7 @@ class InPyreNeedPlugin : InteractionListener {
             }
 
             if (getQuestStage(player, Quests.IN_PYRE_NEED.questName) < 1) {
-                sendNPCDialogue(player, NPCs.PRIEST_OF_GUTHIX_8555, "Hey, wait! I have something to ask you before going down there.", FaceAnim.FRIENDLY)
+                sendNPCDialogue(player, NPCs.PHOENIX_GUTHIX_PRIEST_NONAME_8555, "Hey, wait! I have something to ask you before going down there.", FaceAnim.FRIENDLY)
                 addDialogueAction(player) { p, _ ->
                     sendPlayerDialogue(p, "Maybe I should see what he has to say before entering this dark, scary, and unreasonably warm cave.", FaceAnim.THINKING)
                 }
@@ -76,7 +76,7 @@ class InPyreNeedPlugin : InteractionListener {
             fun crawlIntoCave(targetLocation: Location) {
                 lock(player, 3)
                 openInterface(player, Components.FADE_TO_BLACK_120)
-                player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
+                player.animate(Animation.create(Animations.MOTWL_PLAYER_CRAWL_INTO_CREVICE_11042), 1)
                 queueScript(player, 3, QueueStrength.SOFT) {
                     teleport(player, targetLocation)
                     resetAnimator(player)
@@ -110,7 +110,7 @@ class InPyreNeedPlugin : InteractionListener {
             }
 
             if (InPyreNeed.CHANCE_TO_RECEIVE_PET == 0) {
-                val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567, 5230, 0))
+                val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_UNHATCHED_EGGLING_8552, Location.create(3567, 5230, 0))
                 registerLogoutListener(player, "large-egg") {
                     largeEgg.clear()
                 }
@@ -145,7 +145,7 @@ class InPyreNeedPlugin : InteractionListener {
         on(intArrayOf(Scenery.CAVE_ENTRANCE_41901, Scenery.CAVE_ENTRANCE_41902), IntType.SCENERY, "escape") { player, _ ->
             lock(player, 3)
             openInterface(player, Components.FADE_TO_BLACK_120)
-            animate(player, Animations.HUMAN_CRAWL_INTO_CAVE_11042)
+            animate(player, Animations.MOTWL_PLAYER_CRAWL_INTO_CREVICE_11042)
             runTask(player, 3) {
                 resetAnimator(player)
                 openInterface(player, Components.FADE_FROM_BLACK_170)
@@ -163,8 +163,8 @@ class InPyreNeedPlugin : InteractionListener {
 
         on(InPyreNeed.itemMap.keys.toIntArray(), IntType.SCENERY, "harvest-twigs") { player, node ->
             val item = InPyreNeed.itemMap[node.id] ?: Items.MASTIC_TWIGS_14610
-            val itemAnimation = if (inInventory(player, Items.MAGIC_SECATEURS_7409)) Animation(Animations.PRUNE_WITH_MAGIC_SECATEURS_11089)
-            else Animation(Animations.PRUNE_WITH_SECATEURS_11088)
+            val itemAnimation = if (inInventory(player, Items.MAGIC_SECATEURS_7409)) Animation(Animations.PHOENIX_PLAYER_FAIRY_SECATEURS_11089)
+            else Animation(Animations.PHOENIX_PLAYER_SECATEURS_11088)
 
             if (!player.inventory.contains(item, 1)) {
                 lock(player, 3)
@@ -204,9 +204,9 @@ class InPyreNeedPlugin : InteractionListener {
             }
 
             val anim = if (inInventory(player, Items.MAGIC_SECATEURS_7409))
-                Animations.PRUNE_WITH_MAGIC_SECATEURS_11089
+                Animations.PHOENIX_PLAYER_FAIRY_SECATEURS_11089
             else
-                Animations.PRUNE_WITH_SECATEURS_11088
+                Animations.PHOENIX_PLAYER_SECATEURS_11088
 
             lock(player, 3)
             animate(player, anim)
@@ -243,7 +243,7 @@ class InPyreNeedPlugin : InteractionListener {
             }
 
             lock(player, 3)
-            animate(player, Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733)
+            animate(player, Animations.HUMAN_CREATEFIRE_733)
             FuneralPyreCutscene(player).start()
             return@onUseWith true
         }
@@ -252,8 +252,8 @@ class InPyreNeedPlugin : InteractionListener {
          * Prevents players from lighting the wounded Phoenix.
          */
 
-        onUseWith(IntType.NPC, Items.TINDERBOX_590, NPCs.WOUNDED_PHOENIX_8547) { player, _, _ ->
-            sendNPCDialogue(player, NPCs.WOUNDED_PHOENIX_8547, "Light the pyre, not me!", FaceAnim.FAMILIAR_NEUTRAL)
+        onUseWith(IntType.NPC, Items.TINDERBOX_590, NPCs.PHOENIX_QUESTPHOENIX_8547) { player, _, _ ->
+            sendNPCDialogue(player, NPCs.PHOENIX_QUESTPHOENIX_8547, "Light the pyre, not me!", FaceAnim.FAMILIAR_NEUTRAL)
             return@onUseWith true
         }
 
@@ -269,7 +269,7 @@ class InPyreNeedPlugin : InteractionListener {
 
             if (hasAnItem(player, with.id).container == player.inventory) {
                 lock(player, 3)
-                animate(player, Animations.FLETCH_LOGS_4433)
+                animate(player, Animations.HUMAN_OGRE_FLETCHING_4433)
                 queueScript(player, 1, QueueStrength.SOFT) {
                     val index = InPyreNeed.TWIG_ID.indexOf(with.id)
                     if (index != -1) {
@@ -294,8 +294,8 @@ class InPyreNeedPlugin : InteractionListener {
 
         on(InPyreNeed.PHOENIX_EGGLING_ID, IntType.NPC, "Investigate", "Interact") { player, node ->
             val phoenixEggling =
-                core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_EGGLING_8550, Location.create(3567, 5230, 0))
-            if (node.id == NPCs.LARGE_EGG_8552) {
+                core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_EGGLING_CUTSCENE_8550, Location.create(3567, 5230, 0))
+            if (node.id == NPCs.PHOENIX_UNHATCHED_EGGLING_8552) {
                 sendOptions(
                     player,
                     "What would you like to do?",
@@ -307,7 +307,7 @@ class InPyreNeedPlugin : InteractionListener {
                     queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
                         when (stage) {
                             0 -> {
-                                animate(player, if (button == 2) Animations.CLAP_11091 else Animations.KICK_423)
+                                animate(player, if (button == 2) Animations.PHOENIX_PLAYER_BASKET_11091 else Animations.HUMAN_UNARMEDKICK_423)
                                 sendChat(player, "*Gasp!* It's...it's hatching!", 2)
                                 return@queueScript delayScript(player, 3)
                             }
@@ -320,7 +320,7 @@ class InPyreNeedPlugin : InteractionListener {
                             }
 
                             2 -> {
-                                visualize(findNPC(NPCs.LARGE_EGG_8552)!!, -1,1974)
+                                visualize(findNPC(NPCs.PHOENIX_UNHATCHED_EGGLING_8552)!!, -1,1974)
                                 return@queueScript delayScript(player, 3)
                             }
 

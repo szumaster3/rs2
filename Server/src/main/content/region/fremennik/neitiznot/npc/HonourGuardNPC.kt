@@ -19,13 +19,13 @@ class HonourGuardNPC : AbstractNPC {
         HonourGuardNPC(id, location)
 
     private val targetTrolls = setOf(
-        NPCs.ICE_TROLL_FEMALE_5523,
-        NPCs.ICE_TROLL_MALE_5522,
-        NPCs.ICE_TROLL_RUNT_5521,
+        NPCs.FRIS_TROLLF_5523,
+        NPCs.FRIS_TROLLM_5522,
+        NPCs.FRIS_BABY_TROLL_5521,
         NPCs.ICE_TROLL_GRUNT_5524,
-        NPCs.ICE_TROLL_RUNT_5473,
-        NPCs.ICE_TROLL_FEMALE_5475,
-        NPCs.ICE_TROLL_GRUNT_5476,
+        NPCs.FRIS_BABY_TROLL_LOWXP_5473,
+        NPCs.FRIS_TROLLF_LOWXP_5475,
+        NPCs.FRIS_TROLL_BODYGUARD_LOWXP_5476,
     )
 
     override fun tick() {

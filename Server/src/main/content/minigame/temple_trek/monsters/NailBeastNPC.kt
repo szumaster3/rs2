@@ -17,7 +17,7 @@ class NailBeastNPC(
         vararg objects: Any,
     ): AbstractNPC = NailBeastNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.NAIL_BEAST_1521, NPCs.NAIL_BEAST_1522, NPCs.NAIL_BEAST_1523)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TTREK2_NAIL_BEAST_1_1521, NPCs.TTREK2_NAIL_BEAST_2_1522, NPCs.TTREK2_NAIL_BEAST_3_1523)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

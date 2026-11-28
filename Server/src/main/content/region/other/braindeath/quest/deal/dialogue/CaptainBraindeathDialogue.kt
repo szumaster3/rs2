@@ -16,7 +16,7 @@ class CaptainBraindeathDialogue(private var qs: Int) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val check = if (!player!!.isMale) "lass" else "lad"
         qs = getQuestStage(player!!, Quests.RUM_DEAL.questName)
-        npc = NPC(NPCs.CAPTAIN_BRAINDEATH_2827)
+        npc = NPC(NPCs.DEAL_CAPTIAN_BRAINDEATH_2827)
         when (qs) {
             1 -> when (stage) {
                 0 -> npc(FaceAnim.HALF_ASKING, "Are ye alright, $check?").also { stage++ }

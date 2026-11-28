@@ -35,8 +35,8 @@ class PrisonPetePlugin : InteractionListener, MapArea {
          * Handles basic dialogues.
          */
 
-        on(NPCs.PRISON_PETE_3118, IntType.NPC, "talk-to") { player, _ ->
-            findNPC(NPCs.PRISON_PETE_3118)?.location?.let { face(player, it) }
+        on(NPCs.PRISONPETE_BALLOON_L_3118, IntType.NPC, "talk-to") { player, _ ->
+            findNPC(NPCs.PRISONPETE_BALLOON_L_3118)?.location?.let { face(player, it) }
             openDialogue(player, PrisonPeteDialogue(0))
             return@on true
         }
@@ -63,8 +63,8 @@ class PrisonPetePlugin : InteractionListener, MapArea {
          * Opens balloon interface.
          */
 
-        on(Scenery.LEVER_26191, IntType.SCENERY, "pull") { player, _ ->
-            animate(player, Animations.PULL_LEVER_798)
+        on(Scenery.CAVE_GOBLIN_26191, IntType.SCENERY, "pull") { player, _ ->
+            animate(player, Animations.HUMAN_BOXLEVER_798)
             openInterface(player, Components.MACRO_PRISON_PETE_273)
             return@on true
         }
@@ -108,11 +108,11 @@ class PrisonPetePlugin : InteractionListener, MapArea {
                 when (tick) {
                     0 -> {
                         playAudio(player, Sounds.POP3_3252)
-                        visualize(player, Animations.STOMP_BALLOON_794, Graphics.WHITE_SPIKE_BALL_POPS_524)
+                        visualize(player, Animations.HUMAN_STAMP_794, Graphics.BALLOON_POP_524)
                         return@queueScript delayScript(player, 1)
                     }
                     1 -> {
-                        animate(player, Animations.HUMAN_BURYING_BONES_827)
+                        animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                         if (freeSlots(player) >= 1) {
                             node.asNpc().clear()
                             addItem(player, Items.PRISON_KEY_6966)
@@ -170,13 +170,13 @@ class PrisonPetePlugin : InteractionListener, MapArea {
 //
 //    private fun init2010() {
 //        core.game.node.entity.npc.NPC.create(
-//            NPCs.PRISON_PETE_3118,
+//            NPCs.PRISONPETE_BALLOON_L_3118,
 //            Location.create(2084, 4460)
 //        )
 //
 //        val sceneryData = listOf(
 //            ScenerySpawn(Scenery.GUTHIX_PORTAL_4408, Location(2085, 4457, 0), rotation = 10),
-//            ScenerySpawn(Scenery.LEVER_26191, Location(2083, 4460, 0), rotation = 10),
+//            ScenerySpawn(Scenery.CAVE_GOBLIN_26191, Location(2083, 4460, 0), rotation = 10),
 //
 //            ScenerySpawn(26184, Location(2084, 4459, 0)),
 //            ScenerySpawn(26186, Location(2085, 4459, 0)),

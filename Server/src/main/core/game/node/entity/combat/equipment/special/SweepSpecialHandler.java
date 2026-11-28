@@ -35,9 +35,9 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 
     private static final int SPECIAL_ENERGY = 30;
 
-    private static final Animation ANIMATION = new Animation(Animations.ATTACK_WEAPON_1203, Priority.HIGH);
+    private static final Animation ANIMATION = new Animation(Animations.DRAGON_HALBERD_SPECIAL_ATTACK_1203, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_HALBERD_SPECIAL_282, 96);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.SP_D_HALBERD_GLOW_1_282, 96);
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {

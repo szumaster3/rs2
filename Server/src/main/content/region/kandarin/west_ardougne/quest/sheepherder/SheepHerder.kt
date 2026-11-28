@@ -39,10 +39,10 @@ class SheepHerder : Quest(Quests.SHEEP_HERDER) {
         @JvmField
         val YELLOW_SHEEP_BONES = Item(Items.SHEEP_BONES_4_283)
 
-        const val RED_SHEEP = NPCs.SICK_LOOKING_SHEEP_1_2345
-        const val GREEN_SHEEP = NPCs.SICK_LOOKING_SHEEP_2_2346
-        const val BLUE_SHEEP = NPCs.SICK_LOOKING_SHEEP_3_2347
-        const val YELLOW_SHEEP = NPCs.SICK_LOOKING_SHEEP_4_2348
+        const val RED_SHEEP = NPCs.HERDER_PLAGUESHEEP_1_2345
+        const val GREEN_SHEEP = NPCs.HERDER_PLAGUESHEEP_2_2346
+        const val BLUE_SHEEP = NPCs.HERDER_PLAGUESHEEP_3_2347
+        const val YELLOW_SHEEP = NPCs.HERDER_PLAGUESHEEP_4_2348
 
         @JvmField
         val boneMap = hashMapOf(

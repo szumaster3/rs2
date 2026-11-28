@@ -22,7 +22,7 @@ class DwarvenBoatmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(npc.id) {
-            NPCs.DWARVEN_BOATMAN_2206 -> when (stage) {
+            NPCs.DWARF_CITY_BOATMAN_CITY_2206 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_HAPPY, "Want me to take you back to the mines?").also { stage++ }
                 1 -> showTopics(
                     Topic(FaceAnim.FRIENDLY, "Yes, please take me.", 2),
@@ -58,7 +58,7 @@ class DwarvenBoatmanDialogue(player: Player? = null) : Dialogue(player) {
                 5 -> npcl(FaceAnim.OLD_NORMAL, "Calm down, calm down! You got what you paid for the trip, didn't you?").also { stage = END_DIALOGUE }
             }
 
-            NPCs.DWARVEN_BOATMAN_2205 -> if (
+            NPCs.DWARF_CITY_BOATMAN_MINES_2205 -> if (
                 !getAttribute(player, GameAttributes.MINECART_TRAVEL_UNLOCK, false))
             {
                 when (stage) {
@@ -154,5 +154,5 @@ class DwarvenBoatmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = DwarvenBoatmanDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DWARVEN_BOATMAN_2205, NPCs.DWARVEN_BOATMAN_2206)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_BOATMAN_MINES_2205, NPCs.DWARF_CITY_BOATMAN_CITY_2206)
 }

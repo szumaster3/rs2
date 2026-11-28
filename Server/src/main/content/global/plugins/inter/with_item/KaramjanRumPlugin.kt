@@ -19,7 +19,7 @@ class KaramjanRumPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.SLICED_BANANA_3162, Items.KARAMJAN_RUM_431) { player, used, with ->
             if (removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
-                animate(player, Animations.BANANA_RUM_1195)
+                animate(player, Animations.RUM_STUFFING_1195)
                 sendMessage(player, "You add the banana slices to the Karamjan rum.")
                 addItemOrDrop(player, Items.KARAMJAN_RUM_3164, 1)
                 return@onUseWith true
@@ -33,7 +33,7 @@ class KaramjanRumPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.BANANA_1963, Items.KARAMJAN_RUM_431) { player, used, with ->
             if (removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
-                animate(player, Animations.BANANA_RUM_1195)
+                animate(player, Animations.RUM_STUFFING_1195)
                 sendMessage(player, "You stuff the banana into the neck of the bottle. You begin to wonder why.")
                 addItemOrDrop(player, Items.KARAMJAN_RUM_3165, 1)
                 return@onUseWith true

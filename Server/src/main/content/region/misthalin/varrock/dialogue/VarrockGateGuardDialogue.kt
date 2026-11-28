@@ -24,5 +24,5 @@ class VarrockGateGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = VarrockGateGuardDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_368)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BIOGUARD1_368)
 }

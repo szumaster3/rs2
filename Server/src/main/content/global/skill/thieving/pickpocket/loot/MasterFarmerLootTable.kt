@@ -8,9 +8,9 @@ import shared.consts.NPCs
 object MasterFarmerLootTable {
 
     val NPC_ID = intArrayOf(
-        NPCs.MASTER_FARMER_2234,
-        NPCs.MASTER_FARMER_2235,
-        NPCs.MARTIN_THE_MASTER_GARDENER_3299
+        NPCs.MASTER_FARMER_1_2234,
+        NPCs.MASTER_FARMER_2_2235,
+        NPCs.MARTIN_THE_MASTER_FARMER_3299
     )
 
     val LOOT = WeightBasedTable.create(

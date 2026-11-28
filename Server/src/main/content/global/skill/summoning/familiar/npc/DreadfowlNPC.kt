@@ -29,7 +29,7 @@ import kotlin.math.floor
 @Initializable
 class DreadfowlNPC @JvmOverloads constructor(
     owner: Player? = null,
-    id: Int = NPCs.DREADFOWL_6825
+    id: Int = NPCs.LORE_DREADFOWL_6825
 ) : Familiar(owner, id, 400, Items.DREADFOWL_POUCH_12043, 3, WeaponInterface.STYLE_CAST) {
 
     init {
@@ -86,7 +86,7 @@ class DreadfowlNPC @JvmOverloads constructor(
         })
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DREADFOWL_6825, NPCs.DREADFOWL_6826)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_DREADFOWL_6825, NPCs.LORE_DREADFOWL_COMBAT_6826)
 
     companion object {
         private object DreadfowlCombatHandler : MeleeSwingHandler() {

@@ -15,7 +15,7 @@ class WardrobePlugin : InteractionListener {
         on(WARDROBE_FURNITURE_IDS, IntType.SCENERY, "change-clothes") { player, node ->
             val scenery = node as Scenery
             lock(player, 3)
-            animate(player, Animations.OPEN_POH_WARDROBE_535)
+            animate(player, Animations.HUMAN_CLOSECHEST_535)
             openWardrobe(player, scenery)
             playAudio(player, 942)
             return@on true

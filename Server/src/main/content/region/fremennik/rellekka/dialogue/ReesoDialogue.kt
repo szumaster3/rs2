@@ -32,5 +32,5 @@ class ReesoDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ReesoDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.REESO_3116)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HANDSAND_REESO_3116)
 }

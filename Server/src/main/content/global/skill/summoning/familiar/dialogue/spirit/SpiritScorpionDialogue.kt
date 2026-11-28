@@ -81,5 +81,5 @@ class SpiritScorpionDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_SCORPION_6837, NPCs.SPIRIT_SCORPION_6838)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_SCORPION_6837, NPCs.LORE_SCORPION_COMBAT_6838)
 }

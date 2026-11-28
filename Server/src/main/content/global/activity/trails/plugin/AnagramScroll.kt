@@ -84,7 +84,7 @@ abstract class AnagramScroll(
         }
 
         private fun faceAnim(npcId: Int) = when (npcId) {
-            NPCs.UGLUG_NAR_2039, NPCs.GNOME_COACH_2802, NPCs.GNOME_BALL_REFEREE_635 -> FaceAnim.OLD_DEFAULT
+            NPCs.ZOGRE_UGLUG_NAR_2039, NPCs.GNOME_BALL_COACH_2802, NPCs.GNOMEREFEREE_635 -> FaceAnim.OLD_DEFAULT
             else -> FaceAnim.HALF_ASKING
         }
 
@@ -163,8 +163,8 @@ abstract class AnagramScroll(
          */
         private fun getPuzzleDialogue(npcId: Int) = when (npcId) {
             NPCs.RAMARA_DU_CROISSANT_3827 -> "I've ze puzzle for you to solve."
-            NPCs.UGLUG_NAR_2039 -> "You want puzzle?"
-            NPCs.GENERAL_BENTNOZE_4493 -> "Human do puzzle for me!"
+            NPCs.ZOGRE_UGLUG_NAR_2039 -> "You want puzzle?"
+            NPCs.GENERAL_BENTNOZE_RED_4493 -> "Human do puzzle for me!"
             else -> listOf("Oh, I have a puzzle for you to solve.", "Oh, I've been expecting you.", "The solving of this puzzle could be the key to your treasure.").random()
         }
 
@@ -173,8 +173,8 @@ abstract class AnagramScroll(
          */
         private fun getPuzzleCompleteDialogue(npcId: Int) = when (npcId) {
             NPCs.RAMARA_DU_CROISSANT_3827 -> "Zat's wonderful!"
-            NPCs.UGLUG_NAR_2039 -> "Dere you go!"
-            NPCs.GENERAL_BENTNOZE_4493 -> "Thank you human!"
+            NPCs.ZOGRE_UGLUG_NAR_2039 -> "Dere you go!"
+            NPCs.GENERAL_BENTNOZE_RED_4493 -> "Thank you human!"
             else -> listOf("Here is your reward!", "Well done, traveller.").random()
         }
     }

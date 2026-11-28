@@ -23,7 +23,7 @@ class DavidDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAVID_817, 6195)
+        return intArrayOf(NPCs.DAVID_SINCLAIR_817, 6195)
     }
 }
 

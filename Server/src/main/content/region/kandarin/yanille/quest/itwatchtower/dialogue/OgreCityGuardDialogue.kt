@@ -37,7 +37,7 @@ class OgreCityGuardDialogue(player: Player? = null) : Dialogue(player) {
             openDialogue(
                 player,
                 when (npc.id) {
-                    NPCs.OGRE_GUARD_859 -> OgreGuardNorthWestGateDialogue()
+                    NPCs.OGRE_GUARD2_859 -> OgreGuardNorthWestGateDialogue()
                     else -> OgreGuardSouthEastGateDialogue()
                 }
             )
@@ -51,7 +51,7 @@ class OgreCityGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = OgreCityGuardDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_GUARD_859, NPCs.OGRE_GUARD_858)
+    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_GUARD2_859, NPCs.OGRE_GUARD1_858)
 }
 
 /**
@@ -60,7 +60,7 @@ class OgreCityGuardDialogue(player: Player? = null) : Dialogue(player) {
 class BattlementDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.OGRE_GUARD_860)
+        npc = NPC(NPCs.OGRE_GUARD3_860)
         when(stage) {
             0 -> {
                 face(player!!, npc!!)
@@ -96,7 +96,7 @@ class BattlementDialogue : DialogueFile() {
             11 -> {
                 endFile()
                 val destination = player!!.location.transform(2,0,0)
-                forceMove(player!!, player!!.location, destination, 0, 90, null, Animations.CLIMB_OVER_THING_5038)
+                forceMove(player!!, player!!.location, destination, 0, 90, null, Animations.TOURTRAP_QIP_ESCAPE_THROUGH_BARS_5038)
                 sendMessage(player!!, "You climb over the low wall.")
             }
             12 -> {
@@ -122,7 +122,7 @@ class BattlementDialogue : DialogueFile() {
  */
 class OgreGuardNorthWestGateDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.OGRE_GUARD_859)
+        npc = NPC(NPCs.OGRE_GUARD2_859)
         when(stage) {
             0 -> npc(FaceAnim.OLD_DEFAULT, "Well, what proof of friendship did you bring?").also { stage++ }
             1 -> if(inInventory(player!!, Items.OGRE_RELIC_2372)) {
@@ -155,7 +155,7 @@ class OgreGuardNorthWestGateDialogue : DialogueFile() {
 class OgreGuardSouthEastGateDialogue : DialogueFile() {
     //https://classic.runescape.wiki/w/Transcript:Ogre_guard#Ogre_guarding_the_south-eastern_gate
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.OGRE_GUARD_858)
+        npc = NPC(NPCs.OGRE_GUARD1_858)
         when(stage) {
             0 -> {
                 if (getAttribute(player!!, GameAttributes.WATCHTOWER_GOLD_GATE_UNLOCK, false)) {
@@ -223,7 +223,7 @@ private fun handleGatePassage(player: Player, loc: Location, openGate: Boolean) 
                     val max = player.skills.maximumLifepoints
                     val damage = (max * 0.05).toInt().coerceAtLeast(1)
                     impact(player, damage, ImpactHandler.HitsplatType.NORMAL)
-                    visualize(player, -1, Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96))
+                    visualize(player, -1, Graphics(shared.consts.Graphics.STUNNED_1_80, 96))
                     return@queueScript delayScript(player, 3)
                 }
                 2 -> {

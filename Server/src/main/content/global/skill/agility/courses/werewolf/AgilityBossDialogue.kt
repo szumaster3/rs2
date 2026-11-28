@@ -18,7 +18,7 @@ class AgilityBossDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val charmDialogue = anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465)
+        val charmDialogue = anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROS_A_6465)
         if (!charmDialogue) {
             npc(FaceAnim.CHILD_NORMAL, "Grrr - you don't belong in here, human!")
             stage = END_DIALOGUE

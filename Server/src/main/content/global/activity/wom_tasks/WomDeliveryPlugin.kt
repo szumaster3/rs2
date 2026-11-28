@@ -23,20 +23,20 @@ import shared.consts.NPCs
 // 13 November 2009
 
 enum class WomDeliveryTasks(val npcId: Int, val itemId: Int?, val minAmount: Int = 1, val maxAmount: Int = minAmount, val description: String) {
-    HIGH_PRIEST_MESSAGE(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.OLD_MANS_MESSAGE_5506, description = "Deliver Old man's message to the High Priest of Entrana."),
-    HIGH_PRIEST_LOGS(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.LOGS_1511, minAmount = 5, maxAmount = 5, description = "Bring him 5 normal logs."),
-    HIGH_PRIEST_BONES(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.BONES_526, minAmount = 3, maxAmount = 7, description = "Bring him 3 to 7 normal bones."),
-    HIGH_PRIEST_MEAT(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.COOKED_MEAT_2142, minAmount = 13, description = "Bring him 13 cooked meat."),
-    HIGH_PRIEST_BRONZE_ARROWTIPS(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.BRONZE_ARROWTIPS_39, minAmount = 15, description = "Bring him 15 bronze arrowtips."),
-    HIGH_PRIEST_POTATO(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.POTATO_1942, minAmount = 10, description = "Bring him 10 potatoes."),
-    HIGH_PRIEST_BRONZE_WIRE(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.BRONZE_WIRE_1794, minAmount = 13, description = "Bring him 13 bronze wire."),
-    HIGH_PRIEST_BRONZE_ARROW(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.BRONZE_ARROW_882, minAmount = 4, description = "Bring him 4 bronze arrows."),
-    HIGH_PRIEST_BRONZE_SHORTSWORD(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.BRONZE_SWORD_1277, minAmount = 15, description = "Bring him 15 bronze shortswords."),
-    HIGH_PRIEST_BRONZE_WARHAMMER(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.BRONZE_WARHAMMER_1337, minAmount = 6, description = "Bring him 6 bronze warhammers."),
-    HIGH_PRIEST_GRAIN(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.GRAIN_1947, minAmount = 3, description = "Bring him 3 grain."),
-    HIGH_PRIEST_SOFT_LEATHER(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.LEATHER_1741, minAmount = 6, description = "Bring him 6 soft leather."),
-    HIGH_PRIEST_BOW_STRING(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.BOW_STRING_1777, minAmount = 5, description = "Bring him 5 bow strings."),
-    HIGH_PRIEST_IRON_ORE(npcId = NPCs.HIGH_PRIEST_216, itemId = Items.IRON_ORE_440, minAmount = 5, description = "Bring him 5 iron ores."),
+    HIGH_PRIEST_MESSAGE(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.OLD_MANS_MESSAGE_5506, description = "Deliver Old man's message to the High Priest of Entrana."),
+    HIGH_PRIEST_LOGS(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.LOGS_1511, minAmount = 5, maxAmount = 5, description = "Bring him 5 normal logs."),
+    HIGH_PRIEST_BONES(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.BONES_526, minAmount = 3, maxAmount = 7, description = "Bring him 3 to 7 normal bones."),
+    HIGH_PRIEST_MEAT(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.COOKED_MEAT_2142, minAmount = 13, description = "Bring him 13 cooked meat."),
+    HIGH_PRIEST_BRONZE_ARROWTIPS(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.BRONZE_ARROWTIPS_39, minAmount = 15, description = "Bring him 15 bronze arrowtips."),
+    HIGH_PRIEST_POTATO(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.POTATO_1942, minAmount = 10, description = "Bring him 10 potatoes."),
+    HIGH_PRIEST_BRONZE_WIRE(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.BRONZE_WIRE_1794, minAmount = 13, description = "Bring him 13 bronze wire."),
+    HIGH_PRIEST_BRONZE_ARROW(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.BRONZE_ARROW_882, minAmount = 4, description = "Bring him 4 bronze arrows."),
+    HIGH_PRIEST_BRONZE_SHORTSWORD(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.BRONZE_SWORD_1277, minAmount = 15, description = "Bring him 15 bronze shortswords."),
+    HIGH_PRIEST_BRONZE_WARHAMMER(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.BRONZE_WARHAMMER_1337, minAmount = 6, description = "Bring him 6 bronze warhammers."),
+    HIGH_PRIEST_GRAIN(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.GRAIN_1947, minAmount = 3, description = "Bring him 3 grain."),
+    HIGH_PRIEST_SOFT_LEATHER(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.LEATHER_1741, minAmount = 6, description = "Bring him 6 soft leather."),
+    HIGH_PRIEST_BOW_STRING(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.BOW_STRING_1777, minAmount = 5, description = "Bring him 5 bow strings."),
+    HIGH_PRIEST_IRON_ORE(npcId = NPCs.HIGH_PRIEST_OF_ENTRANA_216, itemId = Items.IRON_ORE_440, minAmount = 5, description = "Bring him 5 iron ores."),
     ORACLE_MESSAGE(npcId = NPCs.ORACLE_746, itemId = Items.OLD_MANS_MESSAGE_5506, description = "Deliver Old man's message to the Oracle on Ice Mountain."),
     ORACLE_BEER(npcId = NPCs.ORACLE_746, itemId = Items.BEER_1917, minAmount = 5, description = "Bring her 5 beers."),
     ORACLE_BRONZE_DAGGER(npcId = NPCs.ORACLE_746, itemId = Items.BRONZE_DAGGER_1205, minAmount = 11, description = "Bring her 11 bronze daggers."),
@@ -156,10 +156,10 @@ object WomDeliveryLetters {
     private val letterMap =
         mapOf(
             NPCs.ORACLE_746 to THE_ORACLE_LETTER_CONTENT,
-            NPCs.RELDO_2660 to RELDO_LETTER_CONTENT,
+            NPCs.RELDO_WITHBOOK_2660 to RELDO_LETTER_CONTENT,
             NPCs.ABBOT_LANGLEY_801 to ABBOT_LANGLEY_LETTER_CONTENT,
             NPCs.THURGO_604 to THURGO_LETTER_CONTENT,
-            NPCs.HIGH_PRIEST_216 to HIGH_PRIEST_LETTER_CONTENT,
+            NPCs.HIGH_PRIEST_OF_ENTRANA_216 to HIGH_PRIEST_LETTER_CONTENT,
             NPCs.FATHER_LAWRENCE_640 to FR_LAWRENCE_LETTER_CONTENT,
             NPCs.FATHER_AERECK_456 to FR_AERECK_LETTER_CONTENT,
         )
@@ -192,7 +192,7 @@ enum class WomTaskReward(val npc: IntArray, val table: WeightBasedTable) {
         )
     ),
     HIGH_PRIEST_REWARD(
-        intArrayOf(NPCs.HIGH_PRIEST_1986),
+        intArrayOf(NPCs.ICS_LITTLE_HIPRIEST_VIS_1986),
         WeightBasedTable.create(
             WeightedItem(Items.BONES_526, 1, 3, 15.0),
             WeightedItem(Items.COINS_995, 50, 250, 30.0),
@@ -222,7 +222,7 @@ enum class WomTaskReward(val npc: IntArray, val table: WeightBasedTable) {
         intArrayOf(NPCs.ABBOT_LANGLEY_801),
         WeightBasedTable.create(
             WeightedItem(Items.GRIMY_RANARR_208, 1, 3, 10.0),
-            WeightedItem(Items.PRAYER_POTION3_139, 1, 2, 10.0),
+            WeightedItem(Items.PRAYER_POTION_3_139, 1, 2, 10.0),
             WeightedItem(Items.COINS_995, 100, 300, 25.0)
         )
     );
@@ -322,7 +322,7 @@ class WomDeliveryListener : InteractionListener {
 
         WomDeliveryTasks.values()
             .distinctBy { it.npcId }
-            .filterNot { it.npcId == NPCs.HIGH_PRIEST_216 }
+            .filterNot { it.npcId == NPCs.HIGH_PRIEST_OF_ENTRANA_216 }
             .forEach { task ->
                 on(task.npcId, IntType.NPC, "talk-to") { player, npc ->
                     handleNpcDelivery(player, npc.asNpc())

@@ -77,7 +77,7 @@ class BarbarianFishingListener : InteractionListener {
     }
 
     private fun playAnimation(player: Player) {
-        player.animate(Animation(Animations.ROD_FISHING_622))
+        player.animate(Animation(Animations.HUMAN_FISHING_CASTING_622))
     }
 
     private fun giveReward(player: Player, fish: Item) {

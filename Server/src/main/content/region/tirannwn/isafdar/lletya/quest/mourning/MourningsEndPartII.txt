@@ -11,7 +11,7 @@ import core.plugin.Initializable
 
 @Initializable
 class MourningsEndPartII :
-    Quest("Mourning's End Part II", 92, 91, 2, Vars.VARBIT_QUEST_MOURNINGS_END_PART_II_1103, 0, 1, 60) {
+    Quest("Mourning's End Part II", 92, 91, 2, Vars.VARBIT_1103, 0, 1, 60) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -35,7 +35,7 @@ class MourningsEndPartII :
         drawReward(player, "20,000 Agility XP", ln++)
         rewardXP(player, Skills.AGILITY, 20000.0)
         addItemOrDrop(player, Items.CRYSTAL_TRINKET_6653, 1)
-        setVarbit(player, Vars.VARBIT_QUEST_MOURNINGS_END_PART_II_1103, 60, true)
+        setVarbit(player, Vars.VARBIT_1103, 60, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

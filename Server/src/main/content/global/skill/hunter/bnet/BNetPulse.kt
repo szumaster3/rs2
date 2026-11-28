@@ -35,7 +35,7 @@ class BNetPulse(player: Player?, node: NPC?, private val type: BNetNode) : Skill
             return false
         }
         if (!hasRequirement(player, Quests.ROCKING_OUT.questName, false) &&
-            (node!!.asNpc().id == NPCs.PIRATE_IMPLING_7845 || node!!.asNpc().id == NPCs.PIRATE_IMPLING_7846)
+            (node!!.asNpc().id == NPCs.II_IMPLING_TYPE_11_7845 || node!!.asNpc().id == NPCs.II_IMPLING_TYPE_11_MAZE_7846)
         ) {
             sendMessage(player, "You can't catch pirate implings until you have completed Rocking Out.")
             return false

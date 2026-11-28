@@ -7,27 +7,27 @@ import shared.consts.NPCs
 
 object HamMemberLootTable {
 
-    val NPC_ID_MALE = intArrayOf(NPCs.HAM_MEMBER_1714)
-    val NPC_ID_FEMALE = intArrayOf(NPCs.HAM_MEMBER_1715)
+    val NPC_ID_MALE = intArrayOf(NPCs.H_A_M_MEMBER_1714)
+    val NPC_ID_FEMALE = intArrayOf(NPCs.H_A_M_MEMBER_1715)
 
     val LOOT = WeightBasedTable.create(
-        WeightedItem(Items.BOOTS_4310, 1, 1, 102.0),
-        WeightedItem(Items.HAM_CLOAK_4304, 1, 1, 102.0),
-        WeightedItem(Items.GLOVES_4308, 1, 1, 102.0),
-        WeightedItem(Items.HAM_HOOD_4302, 1, 1, 102.0),
-        WeightedItem(Items.HAM_LOGO_4306, 1, 1, 102.0),
-        WeightedItem(Items.HAM_ROBE_4300, 1, 1, 102.0),
-        WeightedItem(Items.HAM_SHIRT_4298, 1, 1, 102.0),
+        WeightedItem(Items.H_A_M_BOOTS_4310, 1, 1, 102.0),
+        WeightedItem(Items.H_A_M_CLOAK_4304, 1, 1, 102.0),
+        WeightedItem(Items.H_A_M_GLOVES_4308, 1, 1, 102.0),
+        WeightedItem(Items.H_A_M_HOOD_4302, 1, 1, 102.0),
+        WeightedItem(Items.H_A_M_LOGO_4306, 1, 1, 102.0),
+        WeightedItem(Items.H_A_M_ROBE_4300, 1, 1, 102.0),
+        WeightedItem(Items.H_A_M_SHIRT_4298, 1, 1, 102.0),
         WeightedItem(Items.BRONZE_ARROW_882, 1, 13, 34.0),
-        WeightedItem(Items.BRONZE_AXE_1351, 1, 1, 34.0),
+        WeightedItem(Items.BRONZE_HATCHET_1351, 1, 1, 34.0),
         WeightedItem(Items.BRONZE_DAGGER_1205, 1, 1, 34.0),
         WeightedItem(Items.BRONZE_PICKAXE_1265, 1, 1, 34.0),
-        WeightedItem(Items.IRON_AXE_1349, 1, 1, 34.0),
-        WeightedItem(Items.IRON_DAGGERP_1219, 1, 1, 34.0),
+        WeightedItem(Items.IRON_HATCHET_1349, 1, 1, 34.0),
+        WeightedItem(Items.IRON_DAGGER_P_1219, 1, 1, 34.0),
         WeightedItem(Items.IRON_PICKAXE_1267, 1, 1, 34.0),
         WeightedItem(Items.LEATHER_BODY_1129, 1, 1, 34.0),
         WeightedItem(Items.STEEL_ARROW_886, 1, 13, 51.0),
-        WeightedItem(Items.STEEL_AXE_1353, 1, 1, 51.0),
+        WeightedItem(Items.STEEL_HATCHET_1353, 1, 1, 51.0),
         WeightedItem(Items.STEEL_DAGGER_1207, 1, 1, 51.0),
         WeightedItem(Items.STEEL_PICKAXE_1269, 1, 1, 51.0),
         WeightedItem(Items.COINS_995, 1, 21, 6.0),

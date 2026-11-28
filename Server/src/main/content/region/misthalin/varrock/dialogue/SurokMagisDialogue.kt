@@ -35,5 +35,5 @@ class SurokMagisDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SurokMagisDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SUROK_MAGIS_7002)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DSD_SUROK_TYPE2_7002)
 }

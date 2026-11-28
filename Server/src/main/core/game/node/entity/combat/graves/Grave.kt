@@ -27,7 +27,7 @@ class Grave : AbstractNPC {
     var ownerUid: Int = -1
     var ticksRemaining = -1
 
-    constructor() : super(NPCs.GRAVESTONE_6571, Location.create(0, 0, 0), false)
+    constructor() : super(NPCs.GRAVESTONE_PLAINSTONE_1_6571, Location.create(0, 0, 0), false)
     private constructor(id: Int, location: Location) : super(id, location)
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = Grave(id, location)

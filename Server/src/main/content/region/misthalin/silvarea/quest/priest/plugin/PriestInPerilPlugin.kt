@@ -156,7 +156,7 @@ class PriestInPerilPlugin: InteractionListener {
          */
 
         on(intArrayOf(Scenery.TRAPDOOR_30571, Scenery.TRAPDOOR_30573), IntType.SCENERY, "open") { player, node ->
-            replaceScenery(node.asScenery(), Scenery.LADDER_30572, 80)
+            replaceScenery(node.asScenery(), Scenery.TRAPDOOR_30572, 80)
             sendMessage(player, "The trapdoor opens...")
             return@on true
         }
@@ -165,13 +165,13 @@ class PriestInPerilPlugin: InteractionListener {
          * Handles entrance to dungeon.
          */
 
-        on(Scenery.LADDER_30572, IntType.SCENERY, "climb-down", "close") { player, _ ->
+        on(Scenery.TRAPDOOR_30572, IntType.SCENERY, "climb-down", "close") { player, _ ->
             val isLowerFloor = player.location.y < 3506
 
             when (getUsedOption(player)) {
                 "climb-down" -> {
                     lock(player, 3)
-                    animate(player, Animations.HUMAN_BURYING_BONES_827)
+                    animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                     sendMessage(player, "You climb down through the trapdoor...")
 
                     val targetLocation = if (isLowerFloor) {
@@ -184,7 +184,7 @@ class PriestInPerilPlugin: InteractionListener {
 
                 "close" -> {
                     val ladderLocation = if (isLowerFloor) Location.create(3422, 3484, 0) else Location.create(3405, 3507, 0)
-                    removeScenery(core.game.node.scenery.Scenery(Scenery.LADDER_30572, ladderLocation))
+                    removeScenery(core.game.node.scenery.Scenery(Scenery.TRAPDOOR_30572, ladderLocation))
                     val trapdoorRotation = if (isLowerFloor) 3 else 0
                     addScenery(Scenery.TRAPDOOR_30573, ladderLocation, rotation = trapdoorRotation)
                 }
@@ -198,7 +198,7 @@ class PriestInPerilPlugin: InteractionListener {
          */
 
         on(Scenery.LADDER_30575, IntType.SCENERY, "climb-up") { player, _ ->
-            animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
+            animate(player, Animations.HUMAN_REACHFORLADDER_828)
             teleport(player, Location(3405, 3506, 0), TeleportManager.TeleportType.INSTANT, 1)
             return@on true
         }
@@ -247,7 +247,7 @@ class PriestInPerilPlugin: InteractionListener {
                 return@onUseWith false
             }
             setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 15)
-            sendNPCDialogue(player, NPCs.DREZEL_7690, "Oh! Thank you! You have found the key!", FaceAnim.HALF_GUILTY)
+            sendNPCDialogue(player, NPCs.MYQ4_CUTSCENE_DREZEL_7690, "Oh! Thank you! You have found the key!", FaceAnim.HALF_GUILTY)
             sendMessage(player, "You unlock the cell door.")
             return@onUseWith true
         }
@@ -261,7 +261,7 @@ class PriestInPerilPlugin: InteractionListener {
                 return@onUseWith false
             }
             replaceSlot(player, used.asItem().slot, Item(Items.BUCKET_1925))
-            animate(player, Animations.PRIEST_BUCKET_1077)
+            animate(player, Animations.THROW_BUCKETOFWATER_1077)
             playAudio(player, Sounds.HOLY_WATER_POUR_1733)
             setQuestStage(player, Quests.PRIEST_IN_PERIL.questName, 16)
             sendMessage(player, "You pour the blessed water over the coffin...")
@@ -313,7 +313,7 @@ class PriestInPerilPlugin: InteractionListener {
          */
 
         on(Scenery.CELL_DOOR_3463, IntType.SCENERY, "talk-through") { player, _ ->
-            player.dialogueInterpreter.open(NPCs.DREZEL_7690, NPC(NPCs.DREZEL_7690, player.location))
+            player.dialogueInterpreter.open(NPCs.MYQ4_CUTSCENE_DREZEL_7690, NPC(NPCs.MYQ4_CUTSCENE_DREZEL_7690, player.location))
             return@on true
         }
 

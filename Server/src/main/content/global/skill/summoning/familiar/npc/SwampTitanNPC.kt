@@ -9,7 +9,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SwampTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SWAMP_TITAN_7329) :
+class SwampTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_SWAMP_TITAN_7329) :
     Familiar(owner, id, 5600, Items.SWAMP_TITAN_POUCH_12776, 6, WeaponInterface.STYLE_ACCURATE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return SwampTitanNPC(owner, id)
@@ -20,6 +20,6 @@ class SwampTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SWAMP_TITAN_7329, NPCs.SWAMP_TITAN_7330)
+        return intArrayOf(NPCs.LORE_SWAMP_TITAN_7329, NPCs.LORE_SWAMP_TITAN_COMBAT_7330)
     }
 }

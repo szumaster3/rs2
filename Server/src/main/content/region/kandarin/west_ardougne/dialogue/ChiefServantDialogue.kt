@@ -44,5 +44,5 @@ class ChiefServantDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ChiefServantDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHIEF_SERVANT_4245)
+    override fun getIds(): IntArray = intArrayOf(NPCs.POH_CHIEF_SERVANT_4245)
 }

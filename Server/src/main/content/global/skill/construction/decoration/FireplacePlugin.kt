@@ -74,6 +74,6 @@ class FireplacePlugin : OptionHandler() {
     }
 
     companion object {
-        private val ANIMATION: Animation = Animation.create(Animations.TINDERBOX_3658)
+        private val ANIMATION: Animation = Animation.create(Animations.POH_FIREPLACE_LIGHT_3658)
     }
 }

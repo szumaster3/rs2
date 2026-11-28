@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class SmokingKills : Quest("Smoking Kills", 153, 152, 1, Vars.VARBIT_QUEST_SMOKING_KILLS_4764, 0, 1, 250) {
+class SmokingKills : Quest("Smoking Kills", 153, 152, 1, Vars.VARBIT_4764, 0, 1, 250) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -104,7 +104,7 @@ class SmokingKills : Quest("Smoking Kills", 153, 152, 1, Vars.VARBIT_QUEST_SMOKI
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "5,000 Slayer XP", ln++)
         rewardXP(player, Skills.SLAYER, 5000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_SMOKING_KILLS_4764, 250, true)
+        setVarbit(player, Vars.VARBIT_4764, 250, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

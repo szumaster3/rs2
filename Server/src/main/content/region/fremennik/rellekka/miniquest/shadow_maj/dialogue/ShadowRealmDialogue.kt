@@ -65,5 +65,5 @@ class ShadowRealmDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_5572)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHADOW_MAJ_GHOST_5572)
 }

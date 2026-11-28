@@ -25,8 +25,8 @@ class BlastFurnacePlugin : InteractionListener {
         val PEDAL_LOC = Location.create(1947, 4966, 0)
         val PEDAL_DISMOUNT = Location.create(1947, 4967, 0)
         val PEDAL_FACELOC = Location.create(1946, 4966, 0)
-        val PUMP_ANIM = Animations.PULLING_MACHINE_BLAST_FURNACE_2432
-        val PEDAL_ANIM = Animations.USE_BIKE_MACHINE_2433
+        val PUMP_ANIM = Animations.BLAST_FURNACE_HUMAN_AIR_PUMP_2432
+        val PEDAL_ANIM = Animations.BLAST_FURNACE_HUMAN_CONVEYER_CYCLE_2433
         val PEDAL_SCENERY = getScenery(PEDAL_LOC)!!
         val PUMP_SCENERY = getScenery(PUMP_LOC)!!
         val validOreIds =
@@ -48,7 +48,7 @@ class BlastFurnacePlugin : InteractionListener {
         initialized = true
 
         on(BlastUtils.STAIR_ENTRANCE_ID, IntType.SCENERY, "climb-down") { p, _ ->
-            val hasCharos = inEquipment(p, Items.RING_OF_CHAROS_4202) || inEquipment(p, Items.RING_OF_CHAROSA_6465)
+            val hasCharos = inEquipment(p, Items.RING_OF_CHAROS_4202) || inEquipment(p, Items.RING_OF_CHAROS_A_6465)
             val fee = BlastFurnace.getEntranceFee(hasCharos, getStatLevel(p, Skills.SMITHING))
             if (fee > 0 && !hasTimerActive<BFTempEntranceTimer>(p)) {
                 openDialogue(p, BlastFurnaceDoorDialogue(fee))
@@ -155,12 +155,12 @@ class BlastFurnacePlugin : InteractionListener {
         }
 
         on(Items.SPADEFUL_OF_COKE_6448, ITEM, "empty") { p, n ->
-            val animDuration = Animation(Animations.USE_COKE_SPADEFUL_2442).duration
+            val animDuration = Animation(Animations.HUMAN_SHOVEL_COKE_DOWN_2442).duration
             if (removeItem(p, n)) {
                 queueScript(p, 0, QueueStrength.SOFT) { stage: Int ->
                     when (stage) {
                         0 -> {
-                            animate(p, Animations.USE_COKE_SPADEFUL_2442)
+                            animate(p, Animations.HUMAN_SHOVEL_COKE_DOWN_2442)
                             return@queueScript delayScript(p, animDuration)
                         }
 
@@ -361,7 +361,7 @@ class BlastFurnacePlugin : InteractionListener {
         on(BlastUtils.SINK, SCENERY, "fill-bucket") { player, _ ->
             if (removeItem(player, Items.BUCKET_1925)) {
                 queueScript(player, 1, QueueStrength.SOFT) {
-                    animate(player, Animations.HUMAN_MULTI_USE_832)
+                    animate(player, Animations.HUMAN_PICKUPTABLE_832)
                     sendMessage(player, "You fill the bucket from the sink.")
                     addItemOrDrop(player, Items.BUCKET_OF_WATER_1929)
                     return@queueScript stopExecuting(player)

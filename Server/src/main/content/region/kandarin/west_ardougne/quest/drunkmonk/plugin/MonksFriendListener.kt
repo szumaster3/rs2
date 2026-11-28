@@ -21,8 +21,8 @@ class MonksFriendListener : InteractionListener {
             return@on true
         }
 
-        on(NPCs.MONK_281, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, MonasteryMonkDialogueFile(), NPC(NPCs.MONK_281))
+        on(NPCs.MONK_ARDOUGNE_281, IntType.NPC, "talk-to") { player, _ ->
+            openDialogue(player, MonasteryMonkDialogueFile(), NPC(NPCs.MONK_ARDOUGNE_281))
             return@on true
         }
     }

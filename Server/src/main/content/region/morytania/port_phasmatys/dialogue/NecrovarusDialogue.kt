@@ -61,5 +61,5 @@ class NecrovarusDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = NecrovarusDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.NECROVARUS_1684)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_NECROVARUS_1684)
 }

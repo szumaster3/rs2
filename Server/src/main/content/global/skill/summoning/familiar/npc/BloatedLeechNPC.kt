@@ -16,7 +16,7 @@ import shared.consts.NPCs
 import kotlin.math.ceil
 
 @Initializable
-class BloatedLeechNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.BLOATED_LEECH_6843) :
+class BloatedLeechNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_LEECH_6843) :
     Familiar(owner, id, 3400, Items.BLOATED_LEECH_POUCH_12061, 6, WeaponInterface.STYLE_ACCURATE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return BloatedLeechNPC(owner, id)
@@ -43,6 +43,6 @@ class BloatedLeechNPC @JvmOverloads constructor(owner: Player? = null, id: Int =
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLOATED_LEECH_6843, NPCs.BLOATED_LEECH_6844)
+        return intArrayOf(NPCs.LORE_LEECH_6843, NPCs.LORE_LEECH_COMBAT_6844)
     }
 }

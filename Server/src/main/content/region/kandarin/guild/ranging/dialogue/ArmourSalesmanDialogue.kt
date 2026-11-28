@@ -97,5 +97,5 @@ class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ARMOUR_SALESMAN_682)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANGING_GUILD_ARMOUR_SALESMAN_682)
 }

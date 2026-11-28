@@ -11,7 +11,7 @@ class CockatriceHeadDialogue : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        npc = NPC(NPCs.COCKATRICE_4227)
+        npc = NPC(NPCs.POH_MOUNTED_COCKATRICE_4227)
         when (stage) {
             0 -> {
                 if (!player!!.houseManager.isInHouse(player!!)) {

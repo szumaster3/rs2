@@ -95,17 +95,17 @@ class MinotaurDialogue : Dialogue {
 
     override fun getIds(): IntArray =
         intArrayOf(
-            NPCs.BRONZE_MINOTAUR_6853,
-            NPCs.BRONZE_MINOTAUR_6854,
-            NPCs.IRON_MINOTAUR_6855,
-            NPCs.IRON_MINOTAUR_6856,
-            NPCs.STEEL_MINOTAUR_6857,
-            NPCs.STEEL_MINOTAUR_6858,
-            NPCs.MITHRIL_MINOTAUR_6859,
-            NPCs.MITHRIL_MINOTAUR_6860,
-            NPCs.ADAMANT_MINOTAUR_6861,
-            NPCs.ADAMANT_MINOTAUR_6862,
-            NPCs.RUNE_MINOTAUR_6863,
-            NPCs.RUNE_MINOTAUR_6864
+            NPCs.LORE_MINOTAUR_6853,
+            NPCs.LORE_MINOTAUR_COMBAT_6854,
+            NPCs.LORE_MINOTAUR_2_6855,
+            NPCs.LORE_MINOTAUR_COMBAT_2_6856,
+            NPCs.LORE_MINOTAUR_3_6857,
+            NPCs.LORE_MINOTAUR_COMBAT_3_6858,
+            NPCs.LORE_MINOTAUR_4_6859,
+            NPCs.LORE_MINOTAUR_COMBAT_4_6860,
+            NPCs.LORE_MINOTAUR_5_6861,
+            NPCs.LORE_MINOTAUR_COMBAT_5_6862,
+            NPCs.LORE_MINOTAUR_6_6863,
+            NPCs.LORE_MINOTAUR_COMBAT_6_6864
         )
 }

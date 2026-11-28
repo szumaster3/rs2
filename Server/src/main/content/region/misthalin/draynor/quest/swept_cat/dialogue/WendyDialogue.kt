@@ -127,5 +127,5 @@ class WendyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player): Dialogue = WendyDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WENDY_8201)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SWEPT_WENDY_8201)
 }

@@ -60,6 +60,6 @@ class FightTreeCutscene(
     }
 
     companion object {
-        private const val BOUNCER = NPCs.BOUNCER_269
+        private const val BOUNCER = NPCs.ARENA_BOUNCER_269
     }
 }

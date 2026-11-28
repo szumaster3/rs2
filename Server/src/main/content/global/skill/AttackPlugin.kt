@@ -12,7 +12,7 @@ class AttackPlugin : InteractionListener {
     override fun defineListeners() {
         flagInstant()
         on(IntType.NPC, "attack") { player, npc ->
-            if (npc.id == NPCs.MAGIC_DUMMY_4474 && player.getSwingHandler(false).type != CombatStyle.MAGIC) {
+            if (npc.id == NPCs.TUTORIAL2_MAGIC_DUMMY_4474 && player.getSwingHandler(false).type != CombatStyle.MAGIC) {
                 sendMessage(player, "You can only attack this with magic.")
                 return@on true
             }

@@ -5,7 +5,7 @@ import core.game.node.entity.npc.NPCBehavior
 import core.game.world.map.path.ClipMaskSupplier
 import shared.consts.NPCs
 
-class WoundedPhoenixNPC : NPCBehavior(NPCs.WOUNDED_PHOENIX_8547) {
+class WoundedPhoenixNPC : NPCBehavior(NPCs.PHOENIX_QUESTPHOENIX_8547) {
 
     override fun getClippingSupplier(self: NPC): ClipMaskSupplier? {
         return ClipMaskSupplier { z, x, y -> 0 }

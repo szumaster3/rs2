@@ -283,6 +283,6 @@ class SurokMagisDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SUROK_MAGIS_5834, NPCs.SUROK_MAGIS_5835)
+        return intArrayOf(NPCs.SUROK_SUROK_TYPE1_5834, NPCs.SUROK_SUROK_TYPE2_5835)
     }
 }

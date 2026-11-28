@@ -297,16 +297,16 @@ class BlastFurnace : MapArea, PersistPlayer, TickListener {
          * Gets the NPC representing an ore rock on the belt.
          */
         fun getNpcForOre(id: Int): Int = when (id) {
-            Items.TIN_ORE_438 -> NPCs.TIN_ORE_2554
-            Items.COPPER_ORE_436 -> NPCs.COPPER_ORE_2555
-            Items.IRON_ORE_440 -> NPCs.IRON_ORE_2556
-            Items.MITHRIL_ORE_447 -> NPCs.MITHRIL_ORE_2557
-            Items.ADAMANTITE_ORE_449 -> NPCs.ADAMANTITE_ORE_2558
-            Items.RUNITE_ORE_451 -> NPCs.RUNITE_ORE_2559
-            Items.SILVER_ORE_442 -> NPCs.SILVER_ORE_2560
-            Items.GOLD_ORE_444 -> NPCs.GOLD_ORE_2561
-            Items.COAL_453 -> NPCs.COAL_2562
-            Items.PERFECT_GOLD_ORE_446 -> NPCs.PERFECT_GOLD_ORE_2563
+            Items.TIN_ORE_438 -> NPCs.BLAST_FURNACE_TIN_ORE_2554
+            Items.COPPER_ORE_436 -> NPCs.BLAST_FURNACE_COPPER_ORE_2555
+            Items.IRON_ORE_440 -> NPCs.BLAST_FURNACE_IRON_ORE_2556
+            Items.MITHRIL_ORE_447 -> NPCs.BLAST_FURNACE_MITHRIL_ORE_2557
+            Items.ADAMANTITE_ORE_449 -> NPCs.BLAST_FURNACE_ADAMANTITE_ORE_2558
+            Items.RUNITE_ORE_451 -> NPCs.BLAST_FURNACE_RUNITE_ORE_2559
+            Items.SILVER_ORE_442 -> NPCs.BLAST_FURNACE_SILVER_ORE_2560
+            Items.GOLD_ORE_444 -> NPCs.BLAST_FURNACE_GOLD_ORE_2561
+            Items.COAL_453 -> NPCs.BLAST_FURNACE_COAL_2562
+            Items.PERFECT_GOLD_ORE_446 -> NPCs.BLAST_FURNACE_PERFECT_GOLD_ORE_2563
             else -> -1
         }
 

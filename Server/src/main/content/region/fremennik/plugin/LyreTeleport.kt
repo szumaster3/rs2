@@ -43,8 +43,8 @@ class LyreTeleport(val player: Player) : Pulse() {
             0 -> {
                 lock(player, 1000)
                 player.animator.animate(
-                    Animation(Animations.HUMAN_USE_LYRE_9600, Animator.Priority.VERY_HIGH),
-                    Graphics(shared.consts.Graphics.USE_LYRE_1682),
+                    Animation(Animations.MAGIC_LYRE_TELEPORT_REWORK_9600, Animator.Priority.VERY_HIGH),
+                    Graphics(shared.consts.Graphics.MAGIC_LYRE_TELEPORT_REWORK_SPOTANIM_1682),
                 )
             }
 

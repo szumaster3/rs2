@@ -9,7 +9,7 @@ object KnightLootTable {
 
     val NPC_ID = intArrayOf(
         NPCs.KNIGHT_OF_ARDOUGNE_23,
-        NPCs.KNIGHT_OF_ARDOUGNE_26
+        NPCs.KNIGHT_OF_ARDOUGNE2_26
     )
 
     val LOOT = WeightBasedTable.create(

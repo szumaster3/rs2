@@ -20,16 +20,16 @@ class BankerDialogue(player: Player? = null) : Dialogue(player) {
 
     private val OLD_MODELS = setOf(
         NPCs.GNOME_BANKER_166,
-        NPCs.BANKER_498,
-        NPCs.BANKER_2163,
-        NPCs.BANKER_2164,
-        NPCs.BANKER_5776
+        NPCs.FAIRY_BANKER_498,
+        NPCs.DWARF_CITY_BANKER1_2163,
+        NPCs.DWARF_CITY_BANKER2_2164,
+        NPCs.DORGESH_FEMALE_BANKER_5776
     )
 
     private val INCOMPATIBLE_MODELS = setOf(
-        NPCs.TZHAAR_KET_ZUH_2619,
-        NPCs.OGRESS_BANKER_7049,
-        NPCs.OGRESS_BANKER_7050
+        NPCs.TZHAAR_BANKER_2619,
+        NPCs.AFR_OGRESS_BANKER1_7049,
+        NPCs.AFR_OGRESS_BANKER2_7050
     )
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {

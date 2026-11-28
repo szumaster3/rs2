@@ -33,10 +33,10 @@ class EmbalmerDialogue(player: Player? = null) : Dialogue(player) {
             8  -> npcl(FaceAnim.HALF_THINKING, "That's him. How do you know him?").also { stage++ }
             9  -> playerl(FaceAnim.NOD_YES, "I've bought things from him in the past, some more useful than others.").also { stage++ }
             10 -> npcl(FaceAnim.FRIENDLY, "Anyway, I'm rambling. You're here to buy something, not to chat.").also { stage++ }
-            11 -> end().also { openNpcShop(player, NPCs.EMBALMER_1980) }
+            11 -> end().also { openNpcShop(player, NPCs.ICS_LITTLE_EMBALMER_1980) }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.EMBALMER_1980)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ICS_LITTLE_EMBALMER_1980)
 }

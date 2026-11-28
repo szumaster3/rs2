@@ -22,7 +22,7 @@ class GardenSupplierDialogue : DialogueFile() {
             )
             2 -> {
                 end()
-                openNpcShop(player!!, NPCs.GARDEN_SUPPLIER_4251)
+                openNpcShop(player!!, NPCs.POH_GARDEN_SUPPLIER_4251)
             }
         }
     }

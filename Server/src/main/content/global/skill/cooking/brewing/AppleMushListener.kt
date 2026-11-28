@@ -58,7 +58,7 @@ class AppleMushListener : InteractionListener {
         Objects.BARREL_TAP_8737
     )
 
-    private val MUSH_ANIM = Animation(Animations.JUMPING_ON_APPLE_MUSH_2306)
+    private val MUSH_ANIM = Animation(Animations.HUMAN_APPLECRUSH_2306)
 
     override fun defineListeners() {
 
@@ -126,7 +126,7 @@ class AppleMushListener : InteractionListener {
                 2 -> {
                     forceMove(player, startLoc!!, barrelLoc, 0, ticksToCycles(1), anim = MUSH_ANIM.id)
                     if (barrel.id == Objects.APPLE_BARREL_7403) sendGraphics(414, barrelLoc)
-                        else sendGraphics(Graphics.BIG_ROTTEN_APPLE_BARREL_413, barrelLoc)
+                        else sendGraphics(Graphics.APPLEBARREL_FORCRUSH_2_413, barrelLoc)
                     swapBarrel(barrel)
                     return@queueScript delayScript(player, MUSH_ANIM.duration - 1)
                 }

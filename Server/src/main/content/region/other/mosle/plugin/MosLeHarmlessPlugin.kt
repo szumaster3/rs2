@@ -26,7 +26,7 @@ class MosLeHarmlessPlugin : InteractionListener {
          * Handles patchy sewing interaction.
          */
 
-        on(NPCs.PATCHY_4359, IntType.NPC, "sew") { player, _ ->
+        on(NPCs.PATCHY_THE_PIRATE_4359, IntType.NPC, "sew") { player, _ ->
             openInterface(player, Components.SEW_INTERFACE_419)
             return@on true
         }
@@ -35,14 +35,14 @@ class MosLeHarmlessPlugin : InteractionListener {
          * Handles split beret and mask.
          */
 
-        onUseWith(IntType.NPC, BERET_AND_MASK, NPCs.PATCHY_4359) { player, used, _ ->
+        onUseWith(IntType.NPC, BERET_AND_MASK, NPCs.PATCHY_THE_PIRATE_4359) { player, used, _ ->
             if (!inInventory(player, used.id)) {
-                sendNPCDialogue(player, NPCs.PATCHY_4359, "Sorry, I can't do anythin' with that.", FaceAnim.SAD)
+                sendNPCDialogue(player, NPCs.PATCHY_THE_PIRATE_4359, "Sorry, I can't do anythin' with that.", FaceAnim.SAD)
                 return@onUseWith false
             }
 
             if (freeSlots(player) < 2) {
-                sendNPCDialogueLines(player, NPCs.PATCHY_4359, FaceAnim.STRUGGLE, false, "Ye don't seem te have enough free space few the two items.", "Ye might want te visit the bank.")
+                sendNPCDialogueLines(player, NPCs.PATCHY_THE_PIRATE_4359, FaceAnim.STRUGGLE, false, "Ye don't seem te have enough free space few the two items.", "Ye might want te visit the bank.")
                 return@onUseWith false
             }
 
@@ -72,15 +72,15 @@ class MosLeHarmlessPlugin : InteractionListener {
          * Handles destination to shop NPCs.
          */
 
-        setDest(IntType.NPC, intArrayOf(NPCs.MIKE_3166), "talk-to", "trade") { _, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.FEVER_DODGY_MIKE_3166), "talk-to", "trade") { _, _ ->
             return@setDest Location.create(3693, 2975, 0)
         }
 
-        setDest(IntType.NPC, intArrayOf(NPCs.CHARLEY_3161), "talk-to", "trade") { _, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.FEVER_PIRATE_TWO_FEET_CHARLEY_3161), "talk-to", "trade") { _, _ ->
             return@setDest Location.create(3674, 2968, 0)
         }
 
-        setDest(IntType.NPC, intArrayOf(NPCs.MAMA_3164), "talk-to", "trade") { player, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.FEVER_MAMA_LA_FIETTE_3164), "talk-to", "trade") { player, _ ->
             if (player.location.y < 76) {
                 return@setDest Location.create(3665, 2980, 0).transform(0, -2, 0)
             } else {
@@ -88,7 +88,7 @@ class MosLeHarmlessPlugin : InteractionListener {
             }
         }
 
-        setDest(IntType.NPC, intArrayOf(NPCs.JOE_3163), "talk-to", "trade") { player, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.FEVER_HARPOON_JOE_3163), "talk-to", "trade") { player, _ ->
             if (inBorders(player, 3666, 2990, 3670, 2997)) {
                 return@setDest Location.create(3667, 2992, 0)
             } else {
@@ -99,10 +99,10 @@ class MosLeHarmlessPlugin : InteractionListener {
 
     companion object {
         private val SHOP_OWNERS = intArrayOf(
-            NPCs.MIKE_3166,
-            NPCs.CHARLEY_3161,
-            NPCs.MAMA_3164,
-            NPCs.JOE_3163,
+            NPCs.FEVER_DODGY_MIKE_3166,
+            NPCs.FEVER_PIRATE_TWO_FEET_CHARLEY_3161,
+            NPCs.FEVER_MAMA_LA_FIETTE_3164,
+            NPCs.FEVER_HARPOON_JOE_3163,
             NPCs.HONEST_JIMMY_4362
         )
         private const val BERET_AND_MASK = Items.BERET_AND_MASK_11282

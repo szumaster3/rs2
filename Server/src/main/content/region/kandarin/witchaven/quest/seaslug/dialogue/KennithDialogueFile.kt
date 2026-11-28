@@ -22,7 +22,7 @@ class KennithDialogueFile : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        npc = NPC(NPCs.KENNITH_4863)
+        npc = NPC(NPCs.KENNITH_CUTSCENE_4863)
         when (stage) {
             0 -> {
                 // Post-Quest Dialogue.

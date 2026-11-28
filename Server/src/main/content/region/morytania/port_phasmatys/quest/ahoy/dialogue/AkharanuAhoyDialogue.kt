@@ -16,7 +16,7 @@ import shared.consts.NPCs
 class AkharanuAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY.questName)
-        npc = NPC(NPCs.AK_HARANU_1688)
+        npc = NPC(NPCs.AHOY_AKHARANU_1688)
         if (questStage < 4 || questStage > 99) {
             end()
             return

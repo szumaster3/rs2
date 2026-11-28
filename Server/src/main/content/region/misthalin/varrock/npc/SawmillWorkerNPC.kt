@@ -51,12 +51,12 @@ class SawmillWorkerNPC : NPCBehavior(NPCs.WILL_7737, NPCs.WILL_7738) {
         when (idx) {
             0 -> {
                 self.transform(NPCs.WILL_7737)
-                self.animate(Animation(Animations.HUMAN_BURYING_BONES_827))
+                self.animate(Animation(Animations.HUMAN_PICKUPFLOOR_827))
                 self.sendChat("Erf!", 1)
             }
             1 -> {
                 self.reTransform()
-                self.animate(Animation(Animations.LUMBER_YARD_EMPLOYEE_9218))
+                self.animate(Animation(Animations.LUMBERJACK_PICK_UP_LOG_9218))
                 self.sendChat("Oof!", 2)
             }
         }

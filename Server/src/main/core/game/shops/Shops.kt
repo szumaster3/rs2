@@ -175,7 +175,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
     override fun defineListeners() {
         on(IntType.NPC, "trade", "shop") { player, node ->
             val npc = node as NPC
-            if (npc.id == NPCs.ELLIS_2824 || npc.id == NPCs.SBOTT_1041 || npc.id == NPCs.TANNER_804) {
+            if (npc.id == NPCs.ELLIS_TANNER_2824 || npc.id == NPCs.SBOTT_1041 || npc.id == NPCs.TANNER_804) {
                 CraftingDefinition.Tan.open(player, npc.id)
                 return@on true
             }
@@ -216,7 +216,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             return@on true
         }
 
-        on(NPCs.FUR_TRADER_1316, IntType.NPC, "trade") { player, node ->
+        on(NPCs.VIKING_FUR_MONGER_1316, IntType.NPC, "trade") { player, node ->
             if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 sendMessage(player, "Only Fremenniks may purchase furs here.")
                 return@on true

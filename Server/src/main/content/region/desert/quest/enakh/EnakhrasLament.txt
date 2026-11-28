@@ -11,7 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class EnakhrasLament : Quest("Enakhra's Lament", 54, 53, 2, Vars.VARBIT_QUEST_ENAKHRAS_LAMENT_1560, 0, 1, 70) {
+class EnakhrasLament : Quest("Enakhra's Lament", 54, 53, 2, Vars.VARBIT_1560, 0, 1, 70) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -73,7 +73,7 @@ class EnakhrasLament : Quest("Enakhra's Lament", 54, 53, 2, Vars.VARBIT_QUEST_EN
         rewardXP(player, Skills.MAGIC, 7000.0)
         addItemOrDrop(player, Items.CAMULET_6707)
         addItemOrDrop(player, Items.CAMEL_MASK_7003)
-        setVarbit(player, Vars.VARBIT_QUEST_ENAKHRAS_LAMENT_1560, 70, true)
+        setVarbit(player, Vars.VARBIT_1560, 70, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

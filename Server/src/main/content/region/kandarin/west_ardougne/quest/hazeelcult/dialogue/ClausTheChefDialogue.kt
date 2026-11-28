@@ -58,5 +58,5 @@ class ClausTheChefDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CLAUS_THE_CHEF_886)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CLAUS_CARNILLEAN_886)
 }

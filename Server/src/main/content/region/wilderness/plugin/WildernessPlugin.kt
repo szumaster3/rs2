@@ -40,7 +40,7 @@ class WildernessPlugin : InteractionListener {
             if (!removeItem(player, key)) {
                 sendMessage(player, "This chest is locked and needs some sort of key.")
             } else {
-                animate(player, Animations.HUMAN_OPEN_CHEST_536)
+                animate(player, Animations.HUMAN_OPENCHEST_536)
                 replaceScenery(node.asScenery(), Scenery.OPEN_CHEST_171, 3, node.direction, node.location)
                 for (item in MUDDY_CHEST_LOOT) {
                     addItemOrDrop(player, item.id, item.amount)
@@ -108,7 +108,7 @@ class WildernessPlugin : InteractionListener {
                         Scenery.LEVER_9707 to "into the arena."
                     )
 
-                    animate(player, Animations.PULL_DOWN_LEVER_2140)
+                    animate(player, Animations.MACRO_LEVER_SWITCH_DOWN_2140)
                     playAudio(player, Sounds.PULL_LEVER_GENERAL_2400)
                     sendMessage(player, "You pull the lever...")
 
@@ -137,7 +137,7 @@ class WildernessPlugin : InteractionListener {
             if (!finishedMoving(player)) return@on false
 
             sendMessage(player, "You pull the lever...")
-            animate(player, Animations.PULL_DOWN_LEVER_2140, false)
+            animate(player, Animations.MACRO_LEVER_SWITCH_DOWN_2140, false)
             playAudio(player, Sounds.PULL_LEVER_GENERAL_2400)
 
             when (node.id) {
@@ -255,7 +255,7 @@ class WildernessPlugin : InteractionListener {
                 2 -> when (buttonID) {
                     1 -> {
                         end()
-                        animate(player!!, Animations.PULL_DOWN_LEVER_2140)
+                        animate(player!!, Animations.MACRO_LEVER_SWITCH_DOWN_2140)
                         playAudio(player!!, Sounds.PULL_LEVER_GENERAL_2400)
                         sendMessage(player!!, "You pull the lever...")
                         queueScript(player!!, 1, QueueStrength.NORMAL) {

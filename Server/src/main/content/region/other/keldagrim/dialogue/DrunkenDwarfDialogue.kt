@@ -37,5 +37,5 @@ class DrunkenDwarfDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = DrunkenDwarfDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DRUNKEN_DWARF_2203)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_DRUNKEN_DWARF_2203)
 }

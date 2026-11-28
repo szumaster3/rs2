@@ -57,7 +57,7 @@ class WaterSourcePlugin : InteractionListener {
                 object : Pulse(1) {
                     override fun pulse(): Boolean {
                         if (removeItem(player, used.id)) {
-                            animate(player, Animations.HUMAN_MULTI_USE_832)
+                            animate(player, Animations.HUMAN_PICKUPTABLE_832)
                             addItemOrDrop(player, vessel.output)
                         }
                         return !vessel.autofill || amountInInventory(player, used.id) == 0
@@ -108,8 +108,8 @@ class WaterSourcePlugin : InteractionListener {
         VIAL(intArrayOf(Items.VIAL_229), Items.VIAL_OF_WATER_227),
         JUG(intArrayOf(Items.JUG_1935), Items.JUG_OF_WATER_1937),
         BOWL(intArrayOf(Items.BOWL_1923), Items.BOWL_OF_WATER_1921),
-        WATERING_CAN(intArrayOf(Items.WATERING_CAN_5331, Items.WATERING_CAN1_5333, Items.WATERING_CAN2_5334, Items.WATERING_CAN3_5335, Items.WATERING_CAN4_5336, Items.WATERING_CAN5_5337, Items.WATERING_CAN6_5338, Items.WATERING_CAN7_5339), Items.WATERING_CAN8_5340),
-        WATER_SKIN(intArrayOf(Items.WATERSKIN0_1831, Items.WATERSKIN1_1829, Items.WATERSKIN2_1827, Items.WATERSKIN3_1825), Items.WATERSKIN4_1823),
+        WATERING_CAN(intArrayOf(Items.WATERING_CAN_5331, Items.WATERING_CAN_1_5333, Items.WATERING_CAN_2_5334, Items.WATERING_CAN_3_5335, Items.WATERING_CAN_4_5336, Items.WATERING_CAN_5_5337, Items.WATERING_CAN_6_5338, Items.WATERING_CAN_7_5339), Items.WATERING_CAN_8_5340),
+        WATER_SKIN(intArrayOf(Items.WATERSKIN_0_1831, Items.WATERSKIN_1_1829, Items.WATERSKIN_2_1827, Items.WATERSKIN_3_1825), Items.WATERSKIN_4_1823),
         FISHBOWL(intArrayOf(Items.FISHBOWL_6667), Items.FISHBOWL_6668),
         CUP(intArrayOf(Items.EMPTY_CUP_1980), Items.CUP_OF_WATER_4458),
         KETTLE(intArrayOf(Items.KETTLE_7688), Items.FULL_KETTLE_7690),

@@ -28,7 +28,7 @@ class FiftyPercentLukeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val ladLass = if (player!!.isMale) "lad" else "lass"
-        val isCharos = player!!.equipment.containsAtLeastOneItem(Items.RING_OF_CHAROSA_6465)
+        val isCharos = player!!.equipment.containsAtLeastOneItem(Items.RING_OF_CHAROS_A_6465)
         when(stage) {
             0 -> npc(FaceAnim.OLD_DEFAULT, "Who goes there?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_DEFAULT, "Arr! A landlubber!").also { stage++ }
@@ -90,7 +90,7 @@ class FiftyPercentLukeDialogue(player: Player? = null) : Dialogue(player) {
             // How flammable are you?
             51 -> npcl(FaceAnim.HALF_ASKING, "What kind of question is that?").also { stage++ }
             52 -> playerl(FaceAnim.FRIENDLY,"I'll soon have you out of the way! Burn!").also {
-                player.animate(Animation(Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733))
+                player.animate(Animation(Animations.HUMAN_CREATEFIRE_733))
                 stage++
             }
             53 -> npcl(FaceAnim.OLD_DEFAULT, "Don't make me angry! Ye'll not like me when I'm angry!").also {
@@ -124,5 +124,5 @@ class FiftyPercentLukeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FiftyPercentLukeDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LUKE_50PERCENT_2828)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DEAL_50LUKE_2828)
 }

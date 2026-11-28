@@ -31,5 +31,5 @@ class BlaecDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BlaecDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLAEC_3115)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HANDSAND_BLAEC_3115)
 }

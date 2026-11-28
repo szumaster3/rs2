@@ -47,7 +47,7 @@ class OldCroneAhoyDialogue : DialogueFile() {
         addItemOrDrop(p, Items.GHOSTSPEAK_AMULET_4250, 1)
         GhostsAhoyUtils.advanceQuest(p, 80)
 
-        findNPC(NPCs.OLD_CRONE_1695)?.let { animate(it, Animation(Animations.HUMAN_OLD_DANCE_818)) }
+        findNPC(NPCs.AHOY_CRONE_1695)?.let { animate(it, Animation(Animations.HUMAN_DANCING_818)) }
         queueScript(p, 3, QueueStrength.SOFT) {
             sendItemDialogue(p, Items.GHOSTSPEAK_AMULET_4250, "The ghostspeak amulet emits a green glow from its gem.")
             sendMessage(p, "The amulet of ghostspeak glows green from the crone's enchantment.")
@@ -60,7 +60,7 @@ class OldCroneAhoyDialogue : DialogueFile() {
         val p = player!!
         val questStage = getQuestStage(p, Quests.GHOSTS_AHOY.questName)
         val enlightened = getAttribute(p, GhostsAhoyUtils.croneEnlightened, false)
-        npc = NPC(NPCs.OLD_CRONE_1695)
+        npc = NPC(NPCs.AHOY_CRONE_1695)
 
         if (questStage < 3 || questStage > 99) {
             end()

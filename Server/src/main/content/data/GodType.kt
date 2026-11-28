@@ -20,21 +20,21 @@ enum class GodType(val capeId: Int, val staffId: Int, val statueId: Int, val npc
         Items.SARADOMIN_CAPE_2412,
         Items.SARADOMIN_STAFF_2415,
         shared.consts.Scenery.STATUE_OF_SARADOMIN_2873,
-        NPCs.BATTLE_MAGE_913,
+        NPCs.SARADOMIN_MAGE_913,
         "The cape disappears in a flash of light as it touches the ground."
     ),
     GUTHIX(
         Items.GUTHIX_CAPE_2413,
         Items.GUTHIX_STAFF_2416,
         shared.consts.Scenery.STATUE_OF_GUTHIX_2875,
-        NPCs.BATTLE_MAGE_914,
+        NPCs.GUTHIX_MAGE_914,
         "The cape disintegrates as it touches the earth."
     ),
     ZAMORAK(
         Items.ZAMORAK_CAPE_2414,
         Items.ZAMORAK_STAFF_2417,
         shared.consts.Scenery.STATUE_OF_ZAMORAK_2874,
-        NPCs.BATTLE_MAGE_912,
+        NPCs.ZAMORAK_MAGE_912,
         "The cape ignites and burns up as it touches the ground."
     );
 
@@ -63,7 +63,7 @@ enum class GodType(val capeId: Int, val staffId: Int, val statueId: Int, val npc
                     if (g == null && !hasCape(player)) {
                         sendDialogueLines(player, "You feel a rush of energy charge through your veins. Suddenly a", "cape appears before you.")
                         GroundItemManager.create(capeId.asItem(), dropLocation, player)
-                        sendGraphics(Graphics(shared.consts.Graphics.BIG_PUFF_OF_SMOKE_188, 100), dropLocation)
+                        sendGraphics(Graphics(shared.consts.Graphics.SMOKEPUFF_4_188, 100), dropLocation)
                     } else {
                         sendMessage(player, "...but there is no response.")
                     }

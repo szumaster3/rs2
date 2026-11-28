@@ -24,5 +24,5 @@ class FairyChefDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FairyChefDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_CHEF_3322, NPCs.FAIRY_CHEF_3323)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_CHEF_3322, NPCs.JULIET_3323)
 }

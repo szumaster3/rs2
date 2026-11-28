@@ -30,7 +30,7 @@ class RestlessGhostPlugin : InteractionListener {
             val obj = node.asScenery()
 
             if (GHOST == null) {
-                GHOST = RestlessGhostNPC(NPCs.RESTLESS_GHOST_457, Location.create(3250, 3195, 0))
+                GHOST = RestlessGhostNPC(NPCs.GHOSTX_457, Location.create(3250, 3195, 0))
                 GHOST!!.init()
                 GHOST!!.isInvisible = true
             }
@@ -50,11 +50,11 @@ class RestlessGhostPlugin : InteractionListener {
                         Scenery.ALTAR_15050 -> searchAltar(player, obj)
                         Scenery.ALTAR_15051 -> {
                             if (!isQuestComplete(player, Quests.THE_RESTLESS_GHOST.questName) &&
-                                !inBank(player, Items.GHOSTS_SKULL_553) &&
-                                !inInventory(player, Items.GHOSTS_SKULL_553)
+                                !inBank(player, Items.MUDDY_SKULL_553) &&
+                                !inInventory(player, Items.MUDDY_SKULL_553)
                             ) {
                                 sendMessage(player, "You find another skull.")
-                                addItem(player, Items.GHOSTS_SKULL_553)
+                                addItem(player, Items.MUDDY_SKULL_553)
                             }
                             setQuestStageNonmonotonic(player, 27, 40)
                         }
@@ -67,7 +67,7 @@ class RestlessGhostPlugin : InteractionListener {
          * Handles using skull on restless ghost.
          */
 
-        onUseWith(IntType.NPC, Items.GHOSTS_SKULL_553, NPCs.RESTLESS_GHOST_457) { player, _, _ ->
+        onUseWith(IntType.NPC, Items.MUDDY_SKULL_553, NPCs.GHOSTX_457) { player, _, _ ->
             sendDialogue(player, "I can't give it to him. It goes right through him.")
             return@onUseWith true
         }
@@ -76,7 +76,7 @@ class RestlessGhostPlugin : InteractionListener {
          * Handles using skull on coffin.
          */
 
-        onUseWith(IntType.SCENERY, Items.GHOSTS_SKULL_553, *COFFIN_IDS) { player, _, with ->
+        onUseWith(IntType.SCENERY, Items.MUDDY_SKULL_553, *COFFIN_IDS) { player, _, with ->
             val coffin = with.asScenery().id
             if (coffin == Scenery.COFFIN_2145) {
                 sendDialogue(player, "Maybe I should open it first.")
@@ -88,9 +88,9 @@ class RestlessGhostPlugin : InteractionListener {
                 return@onUseWith true
             }
 
-            if (removeItem(player, Item(Items.GHOSTS_SKULL_553, 1))) {
+            if (removeItem(player, Item(Items.MUDDY_SKULL_553, 1))) {
                 setVarbit(player, Vars.VARBIT_RESTLESS_GHOST_PUT_SKULL_2129, 1, true)
-                animate(player, Animations.PUT_OBJECT_ON_TABLE_537)
+                animate(player, Animations.HUMAN_LOCKEDCHEST_537)
                 playAudio(player, Sounds.RG_PLACE_SKULL_1744)
                 sendMessage(player, "You put the skull in the coffin.")
                 RestlessGhostCutscene(player).start(true)
@@ -112,9 +112,9 @@ class RestlessGhostPlugin : InteractionListener {
             entity = player,
             anim =
                 if (closedCoffin) {
-                    Animation(Animations.HUMAN_OPEN_CHEST_536)
+                    Animation(Animations.HUMAN_OPENCHEST_536)
                 } else {
-                    Animation(Animations.OPEN_POH_WARDROBE_535)
+                    Animation(Animations.HUMAN_CLOSECHEST_535)
                 },
         )
 
@@ -142,7 +142,7 @@ class RestlessGhostPlugin : InteractionListener {
                 spawnProjectile(
                     source = destination,
                     dest = destination.transform(0, 3, 0),
-                    projectile = Graphics.SWIRLEY_GREY_SMOKE_668,
+                    projectile = Graphics.RESTLESS_GHOST_TRAVEL_668,
                     startHeight = 30,
                     endHeight = 42,
                     delay = 0,
@@ -164,7 +164,7 @@ class RestlessGhostPlugin : InteractionListener {
             return
         }
         if (n.asScenery().id != Scenery.ALTAR_15051) {
-            addItemOrDrop(player, Items.GHOSTS_SKULL_553)
+            addItemOrDrop(player, Items.MUDDY_SKULL_553)
             setVarp(player, Vars.VARP_RESTLESS_GHOST_728, 5, true)
             queueScript(player, 1, QueueStrength.NORMAL) {
                 setQuestStage(player, Quests.THE_RESTLESS_GHOST.questName, 40)
@@ -199,7 +199,7 @@ class RestlessGhostPlugin : InteractionListener {
      * Spawns a skeleton NPC.
      */
     private fun spawnSkeleton(player: Player) {
-        val skeleton = core.game.node.entity.npc.NPC.create(NPCs.SKELETON_459, Location.create(3120, 9568, 0))
+        val skeleton = core.game.node.entity.npc.NPC.create(NPCs.SKULL_SKELETON_459, Location.create(3120, 9568, 0))
         skeleton.isWalks = false
         skeleton.isRespawn = false
         skeleton.setAttribute("player", player)

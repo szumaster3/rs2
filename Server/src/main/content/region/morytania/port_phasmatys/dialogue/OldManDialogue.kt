@@ -44,5 +44,5 @@ class OldManDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = OldManDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OLD_MAN_1696)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_OLDMAN_1696)
 }

@@ -46,5 +46,5 @@ class FlowerGirlDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FlowerGirlDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FLOWER_GIRL_1378)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISC_FLOWERGIRL_1378)
 }

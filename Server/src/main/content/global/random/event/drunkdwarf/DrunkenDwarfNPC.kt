@@ -16,7 +16,7 @@ import shared.consts.Sounds
  * Represents the Drunken Dwarf NPC.
  * @author Zerken (October 13, 2023)
  */
-class DrunkenDwarfNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.DRUNKEN_DWARF_956) {
+class DrunkenDwarfNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.MACRO_DWARF_956) {
 
     private val phrases = arrayOf(
         "'Ere, matey, 'ave some 'o the good stuff.",

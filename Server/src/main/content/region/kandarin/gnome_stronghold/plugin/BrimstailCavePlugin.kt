@@ -21,7 +21,7 @@ class BrimstailCavePlugin : InteractionListener {
     companion object {
         private val CAVE_EXIT = intArrayOf(Scenery.TUNNEL_17222, Scenery.TUNNEL_17223)
         private const val CAVE_ENTER = Scenery.CAVE_ENTRANCE_17209
-        private const val BRIMSTAIL = NPCs.BRIMSTAIL_171
+        private const val BRIMSTAIL = NPCs.GNOME_BRIMSTAIL_171
         private const val TABLE = Scenery.TABLE_17235
         private const val ASPIDISTRA_PLANT = Scenery.ASPIDISTRA_PLANT_17238
     }

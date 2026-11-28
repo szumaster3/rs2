@@ -31,5 +31,5 @@ class CraftingTutorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CraftingTutorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CRAFTING_TUTOR_4900)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CADMUS_4900)
 }

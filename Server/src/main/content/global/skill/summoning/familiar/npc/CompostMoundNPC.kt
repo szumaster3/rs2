@@ -22,7 +22,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class CompostMoundNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.COMPOST_MOUND_6871) :
+class CompostMoundNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_COMPOST_MOUND_6871) :
     Forager(owner, id, 2400, Items.COMPOST_MOUND_POUCH_12091, 12, WeaponInterface.STYLE_AGGRESSIVE, *ITEMS) {
     override fun construct(owner: Player, id: Int): Familiar {
         return CompostMoundNPC(owner, id)
@@ -59,15 +59,15 @@ class CompostMoundNPC @JvmOverloads constructor(owner: Player? = null, id: Int =
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COMPOST_MOUND_6871, NPCs.COMPOST_MOUND_6872)
+        return intArrayOf(NPCs.LORE_COMPOST_MOUND_6871, NPCs.LORE_COMPOST_MOUND_COMBAT_6872)
     }
 
     inner class CompostBucketPlugin : UseWithHandler(Items.BUCKET_1925) {
 
         @Throws(Throwable::class)
         override fun newInstance(arg: Any?): Plugin<Any> {
-            addHandler(NPCs.COMPOST_MOUND_6871, NPC_TYPE, this)
-            addHandler(NPCs.COMPOST_MOUND_6872, NPC_TYPE, this)
+            addHandler(NPCs.LORE_COMPOST_MOUND_6871, NPC_TYPE, this)
+            addHandler(NPCs.LORE_COMPOST_MOUND_COMBAT_6872, NPC_TYPE, this)
             return this
         }
 

@@ -23,7 +23,7 @@ class KaramjaPlugin : InteractionListener {
 
     companion object {
         private val PINEAPPLE_PLANT = intArrayOf(Scenery.PINEAPPLE_PLANT_1408, Scenery.PINEAPPLE_PLANT_1409, Scenery.PINEAPPLE_PLANT_1410, Scenery.PINEAPPLE_PLANT_1411, Scenery.PINEAPPLE_PLANT_1412, Scenery.PINEAPPLE_PLANT_1413)
-        private val CUSTOM_OFFICERS = intArrayOf(NPCs.CUSTOMS_OFFICER_380, NPCs.CUSTOMS_OFFICER_381)
+        private val CUSTOM_OFFICERS = intArrayOf(NPCs.CUSTOMS_OFFICER_380, NPCs.CAPTAIN_BARNABY_381)
         private val JUNGLE_BUSH = intArrayOf(Scenery.JUNGLE_BUSH_2892, Scenery.JUNGLE_BUSH_2893)
     }
 
@@ -93,7 +93,7 @@ class KaramjaPlugin : InteractionListener {
             }
             val last: Boolean = node.id == Scenery.PINEAPPLE_PLANT_1412
             if (addItem(player, Items.PINEAPPLE_2114)) {
-                animate(player, Animations.PICK_SOMETHING_UP_FROM_GROUND_2282)
+                animate(player, Animations.PICKING_LOW_2282)
                 playAudio(player, Sounds.PICK_2581, 30)
                 replaceScenery(node.asScenery(), node.id + 1, if (last) 270 else 40)
                 sendMessage(player, "You pick a pineapple.")
@@ -120,7 +120,7 @@ class KaramjaPlugin : InteractionListener {
                     0 -> {
                         lock(player, 2)
                         face(player, node)
-                        animate(player, Animations.PUSH_2572)
+                        animate(player, Animations.GARDEN_STATUE_PUSH_2572)
                         sendMessage(player, "You give the tree a good shake.")
                         replaceScenery(node.asScenery(), Scenery.LEAFY_PALM_TREE_2976, 60)
                         return@queueScript delayScript(player, 2)
@@ -181,9 +181,9 @@ class KaramjaPlugin : InteractionListener {
          * (available after Tai Bwo Wannai Trio quest).
          */
 
-        on(NPCs.TIADECHE_1164, IntType.NPC, "trade") { player, _ ->
+        on(NPCs.TBWT_TIADECHE_FINAL_1164, IntType.NPC, "trade") { player, _ ->
             if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO.questName)) return@on false
-            openNpcShop(player, NPCs.TIADECHE_1164)
+            openNpcShop(player, NPCs.TBWT_TIADECHE_FINAL_1164)
             return@on true
         }
     }
@@ -232,7 +232,7 @@ class KaramjaPlugin : InteractionListener {
             0,
             60,
             null,
-            Animations.HUMAN_WALK_SHORT_819
+            Animations.HUMAN_WALK_F_819
         ) {
             sendMessage(player, "You hack your way through the jungle bush.")
             delayClock(player, Clocks.SKILLING, 3)

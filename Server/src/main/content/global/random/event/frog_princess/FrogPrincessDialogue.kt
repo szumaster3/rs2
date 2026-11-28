@@ -51,5 +51,5 @@ class FrogPrincessDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FROG_2469)
+    override fun getIds(): IntArray = intArrayOf(NPCs.H_A_M_AGENT_WALTON_2469)
 }

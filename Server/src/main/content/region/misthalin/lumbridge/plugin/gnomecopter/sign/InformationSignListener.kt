@@ -6,7 +6,7 @@ import shared.consts.Scenery
 
 class InformationSignListener : InteractionListener {
     companion object{
-        private val SIGN_POST_IDS = intArrayOf(Scenery.SIGNPOST_30040,Scenery.SIGNPOST_30039,Scenery.ENTRANCE_SIGN_30036)
+        private val SIGN_POST_IDS = intArrayOf(Scenery.TRACKS_30040,Scenery.ROCKS_30039,Scenery.ENTRANCE_SIGN_30036)
     }
     override fun defineListeners() {
         on(SIGN_POST_IDS, IntType.SCENERY, "read") { player, node ->

@@ -37,7 +37,7 @@ class DalldavArcheryShopDialogue(player: Player? = null) : Dialogue(player) {
             }
             2 -> {
                 end()
-                openNpcShop(player, NPCs.DALLDAV_7447)
+                openNpcShop(player, NPCs.MAH1_ALI_THE_WISE_7447)
             }
             3 -> npcl(FaceAnim.FRIENDLY, "We keep all these old toys to train our children with, but if people will part with coins for them, then they are theirs!").also { stage = END_DIALOGUE }
         }
@@ -45,6 +45,6 @@ class DalldavArcheryShopDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DALLDAV_7447) // NPCs.DALLDAV_2356
+        return intArrayOf(NPCs.MAH1_ALI_THE_WISE_7447) // NPCs.DALLDAV_2356
     }
 }

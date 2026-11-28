@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class SpiritOfSummer : Quest("Spirit of Summer", 155, 154, 1, Vars.VARBIT_QUEST_SPIRIT_OF_SUMMER_5032, 0, 1, 81) {
+class SpiritOfSummer : Quest("Spirit of Summer", 155, 154, 1, Vars.VARBIT_5032, 0, 1, 81) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -40,7 +40,7 @@ class SpiritOfSummer : Quest("Spirit of Summer", 155, 154, 1, Vars.VARBIT_QUEST_
         rewardXP(player, Skills.FARMING, 2000.0)
         rewardXP(player, Skills.SUMMONING, 1000.0)
         addItemOrDrop(player, Items.JENNICAS_RING_13566)
-        setVarbit(player, Vars.VARBIT_QUEST_SPIRIT_OF_SUMMER_5032, 81, true)
+        setVarbit(player, Vars.VARBIT_5032, 81, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

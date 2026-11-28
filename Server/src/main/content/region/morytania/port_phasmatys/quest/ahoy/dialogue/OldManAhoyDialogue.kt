@@ -17,7 +17,7 @@ class OldManAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val p = player!!
         val questStage = getQuestStage(p, Quests.GHOSTS_AHOY.questName)
-        npc = NPC(NPCs.OLD_MAN_1696)
+        npc = NPC(NPCs.AHOY_OLDMAN_1696)
         if (questStage < 4 || questStage > 99) {
             end()
             return

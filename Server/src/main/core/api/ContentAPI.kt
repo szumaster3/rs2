@@ -4546,8 +4546,8 @@ fun getSlayerMaster(player: Player): NPC = findNPC(SlayerManager.getInstance(pla
 fun getSlayerMasterLocation(player: Player): String =
     when (getSlayerMaster(player).id) {
         NPCs.CHAELDAR_1598 -> "Zanaris"
-        NPCs.DURADEL_8275 -> "Shilo Village"
-        NPCs.MAZCHNA_8274 -> "Canifis"
+        NPCs.SLAYER_MASTER_5_DURADEL_LUC_8275 -> "Shilo Village"
+        NPCs.SLAYER_MASTER_2_MAZCHNA_LUC_8274 -> "Canifis"
         NPCs.TURAEL_8273 -> "Taverley"
         NPCs.VANNAKA_1597 -> "Edgeville Dungeon"
         else -> "The Backrooms"

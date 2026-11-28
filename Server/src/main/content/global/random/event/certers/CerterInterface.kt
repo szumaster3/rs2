@@ -23,16 +23,16 @@ class CerterInterface : InterfaceListener {
     val items =
         mapOf(
             Items.BOWL_1923 to "A bowl.",
-            Items.NULL_6189 to "A fish.",
-            Items.NULL_6190 to "A bass.",
-            Items.NULL_6191 to "A sword.",
-            Items.NULL_6192 to "A battleaxe.",
-            Items.NULL_6193 to "A helmet.",
-            Items.NULL_6194 to "A kiteshield.",
-            Items.NULL_6195 to "A pair of shears.",
-            Items.NULL_6196 to "A shovel.",
-            Items.NULL_6197 to "A ring.",
-            Items.NULL_6198 to "A necklace.",
+            Items.OBJ_6189 to "A fish.",
+            Items.OBJ_6190 to "A bass.",
+            Items.OBJ_6191 to "A sword.",
+            Items.OBJ_6192 to "A battleaxe.",
+            Items.OBJ_6193 to "A helmet.",
+            Items.OBJ_6194 to "A kiteshield.",
+            Items.OBJ_6195 to "A pair of shears.",
+            Items.OBJ_6196 to "A shovel.",
+            Items.OBJ_6197 to "A ring.",
+            Items.OBJ_6198 to "A necklace.",
         )
     val falseOptions =
         arrayOf(

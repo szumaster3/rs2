@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class ColdWar : Quest("Cold War", 132, 131, 1, Vars.VARBIT_QUEST_COLD_WAR_3293, 0, 1, 135) {
+class ColdWar : Quest("Cold War", 132, 131, 1, Vars.VARBIT_3293, 0, 1, 135) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -147,7 +147,7 @@ class ColdWar : Quest("Cold War", 132, 131, 1, Vars.VARBIT_QUEST_COLD_WAR_3293, 
         rewardXP(player, Skills.CRAFTING, 2000.0)
         rewardXP(player, Skills.AGILITY, 5000.0)
         rewardXP(player, Skills.CONSTRUCTION, 1500.0)
-        setVarbit(player, Vars.VARBIT_QUEST_COLD_WAR_3293, 135, true)
+        setVarbit(player, Vars.VARBIT_3293, 135, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

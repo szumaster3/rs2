@@ -51,10 +51,10 @@ class TeleportCrystalPlugin : InteractionListener {
     companion object {
         val crystalIDs =
             intArrayOf(
-                Items.TP_CRYSTAL_4_6099,
-                Items.TP_CRYSTAL_3_6100,
-                Items.TP_CRYSTAL_2_6101,
-                Items.TP_CRYSTAL_1_6102,
+                Items.TELEPORT_CRYSTAL_4_6099,
+                Items.TELEPORT_CRYSTAL_3_6100,
+                Items.TELEPORT_CRYSTAL_2_6101,
+                Items.TELEPORT_CRYSTAL_1_6102,
             )
 
         /**
@@ -69,7 +69,7 @@ class TeleportCrystalPlugin : InteractionListener {
         ) {
             val id = item.id
             val newItem = item.id + 1
-            if (id < Items.TP_CRYSTAL_1_6102) {
+            if (id < Items.TELEPORT_CRYSTAL_1_6102) {
                 removeItem(player, Item(id, 1))
                 addItem(player, newItem, 1)
                 sendMessage(player, "Your teleportation crystal has degraded from use.")

@@ -23,8 +23,8 @@ import shared.consts.NPCs
 class GeneralKhazardDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.GENERAL_KHAZARD_258)
-        val general = findNPC(NPCs.GENERAL_KHAZARD_258)!!
+        npc = NPC(NPCs.LADY_SERVIL_258)
+        val general = findNPC(NPCs.LADY_SERVIL_258)!!
         when (getQuestStage(player!!, Quests.FIGHT_ARENA.questName)) {
             in 68..70 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_DEFAULT, "Out of the way, guard! I don't tolerate disruption when I'm watching slaves being slaughtered.").also { stage = END_DIALOGUE }
@@ -37,7 +37,7 @@ class GeneralKhazardDialogue : DialogueFile() {
                     } else {
                         face(player!!, general, 1)
                         face(general, player!!, 1)
-                        sendNPCDialogue(player!!, NPCs.GENERAL_KHAZARD_258, "Who dares enter my home? You? A feeble traveller?", FaceAnim.OLD_DEFAULT).also { stage = 6 }
+                        sendNPCDialogue(player!!, NPCs.LADY_SERVIL_258, "Who dares enter my home? You? A feeble traveller?", FaceAnim.OLD_DEFAULT).also { stage = 6 }
                     }
                 }
 
@@ -120,7 +120,7 @@ class GeneralKhazardDialogue : DialogueFile() {
                 5 -> {
                     end()
                     setQuestStage(player!!, Quests.FIGHT_ARENA.questName, 97)
-                    RegionManager.getNpc(player!!.location, NPCs.GENERAL_KHAZARD_258, 15)
+                    RegionManager.getNpc(player!!.location, NPCs.LADY_SERVIL_258, 15)
                     sendChat(findNPC(General.id)!!, "You shall die for your insolence.")
                     General.attack(player!!)
                 }

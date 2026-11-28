@@ -23,7 +23,7 @@ class GrindItemTask(
 
     override fun playAnimation() {
         playAudio(player, Sounds.GRIND_2608)
-        animate(player, Animations.HUMAN_USE_PESTLE_AND_MORTAR_364)
+        animate(player, Animations.HUMAN_HERBING_GRIND_364)
     }
 
     override fun process(): Boolean {

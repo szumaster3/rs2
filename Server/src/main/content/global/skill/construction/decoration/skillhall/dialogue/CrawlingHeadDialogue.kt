@@ -9,7 +9,7 @@ import shared.consts.NPCs
 
 class CrawlingHeadDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.CRAWLING_HAND_4226)
+        npc = NPC(NPCs.POH_MOUNTED_CRAWLING_HAND_4226)
         if (!player!!.houseManager.isInHouse(player!!)) {
             when (stage) {
                 0 -> playerl(FaceAnim.LAUGH, "Hey, a crawling hand!").also { stage = 10 }

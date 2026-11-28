@@ -17,9 +17,9 @@ enum class OgreCoffin(
         WeightBasedTable
             .create(
                 WeightedItem(Items.COINS_995, 6, 20, 15.0),
-                WeightedItem(Items.BRONZE_AXE_1351, 1, 1, 3.0),
-                WeightedItem(Items.IRON_AXE_1349, 1, 1, 3.0),
-                WeightedItem(Items.STEEL_AXE_1353, 1, 1, 3.0),
+                WeightedItem(Items.BRONZE_HATCHET_1351, 1, 1, 3.0),
+                WeightedItem(Items.IRON_HATCHET_1349, 1, 1, 3.0),
+                WeightedItem(Items.STEEL_HATCHET_1353, 1, 1, 3.0),
                 WeightedItem(Items.BRONZE_PICKAXE_1265, 1, 1, 3.0),
                 WeightedItem(Items.IRON_PICKAXE_1267, 1, 1, 3.0),
                 WeightedItem(Items.STEEL_PICKAXE_1269, 1, 1, 3.0),

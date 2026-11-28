@@ -66,7 +66,7 @@ class SunderSpecialHandler :
     ) {
         entity.visualize(
             Animation(5870),
-            Graphics(shared.consts.Graphics.BARRELCHEST_ANCHOR_SPECIAL_M_1027),
+            Graphics(shared.consts.Graphics.BRAIN_SPOT_ANCHOR_SPECIAL_ATTACK_1027),
             )
     }
 

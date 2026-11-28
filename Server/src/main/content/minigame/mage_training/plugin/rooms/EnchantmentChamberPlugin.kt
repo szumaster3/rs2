@@ -137,7 +137,7 @@ class EnchantmentChamberPlugin :
             return
         }
         val amount = amountInInventory(player, ORB.id)
-        animate(player, Animations.HUMAN_MULTI_USE_832)
+        animate(player, Animations.HUMAN_PICKUPTABLE_832)
         removeItem(player, Item(ORB.id, amount))
         playAudio(player, Sounds.MTA_DEPOSIT_ORB_1664)
 
@@ -181,7 +181,7 @@ class EnchantmentChamberPlugin :
             }
             lock(player, 1)
             addItem(player, item.id)
-            animate(player, Animations.HUMAN_BURYING_BONES_827)
+            animate(player, Animations.HUMAN_PICKUPFLOOR_827)
         }
 
         /**

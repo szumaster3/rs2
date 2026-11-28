@@ -72,5 +72,5 @@ class RewardsGuardianDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.REWARDS_GUARDIAN_3103)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGICTRAINING_GUARD_REWARDS_3103)
 }

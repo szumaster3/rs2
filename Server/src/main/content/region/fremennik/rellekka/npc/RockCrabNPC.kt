@@ -78,7 +78,7 @@ class RockCrabNPC(id: Int = -1, location: Location? = null) : AbstractNPC(id, lo
         NPCs.ROCKS_1266,
         NPCs.ROCKS_1268,
         NPCs.BOULDER_2453,
-        NPCs.ROCK_2890
+        NPCs.DAGANNOTH_ROCK_LOBSTER_2X2_LOC_2890
     )
 
     companion object {

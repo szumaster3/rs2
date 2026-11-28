@@ -16,9 +16,9 @@ class SkippyPlugin : InteractionListener {
     private val SKIPPY_NPC = intArrayOf(
         NPCs.SKIPPY_2795,
         NPCs.SKIPPY_2796,
-        NPCs.SKIPPY_2797,
-        NPCs.SKIPPY_2798,
-        NPCs.SKIPPY_2799
+        NPCs.DAMP_SKIPPY_2797,
+        NPCs.HUNGOVER_SKIPPY_2798,
+        NPCs.SOBER_SKIPPY_2799
     )
 
     override fun defineListeners() {

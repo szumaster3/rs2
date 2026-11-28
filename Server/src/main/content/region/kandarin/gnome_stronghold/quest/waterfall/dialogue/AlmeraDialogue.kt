@@ -164,5 +164,5 @@ class AlmeraDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALMERA_304)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALMERA_WATERFALL_QUEST_304)
 }

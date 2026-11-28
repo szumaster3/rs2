@@ -154,5 +154,5 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
         MiningInstructorDialogue(player)
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.MINING_INSTRUCTOR_948)
+        intArrayOf(NPCs.NEWBIE_MINING_INSTRUCTOR_948)
 }

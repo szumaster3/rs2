@@ -41,5 +41,5 @@ class GnomeTrainerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GnomeTrainerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_TRAINER_162)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOMETRAINER_162)
 }

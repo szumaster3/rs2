@@ -11,7 +11,7 @@ import shared.consts.NPCs
 /**
  * Represents the Draugen NPC.
  */
-class DraugenNPC(val player: Player) : NPC(NPCs.THE_DRAUGEN_1279, player.location?.transform(1, 0, 0)) {
+class DraugenNPC(val player: Player) : NPC(NPCs.VIKING_DRAUGEN_1279, player.location?.transform(1, 0, 0)) {
 
     override fun init() {
         super.init()

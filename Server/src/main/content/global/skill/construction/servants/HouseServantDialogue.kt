@@ -660,11 +660,11 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
             NPCs.RICK_4236,
             NPCs.MAID_4237,
             NPCs.MAID_4238,
-            NPCs.COOK_4239,
+            NPCs.POH_SERVANT_COOK_WOMAN_4239,
             NPCs.COOK_4240,
             NPCs.BUTLER_4241,
             NPCs.BUTLER_4242,
-            NPCs.DEMON_BUTLER_4243,
+            NPCs.POH_SERVANT_DEMON_4243,
             NPCs.DEMON_BUTLER_4244
         )
 

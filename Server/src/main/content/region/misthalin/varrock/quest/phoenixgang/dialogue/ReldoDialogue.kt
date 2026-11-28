@@ -660,5 +660,5 @@ class ReldoDialogue(player: Player? = null) : Dialogue(player) {
         stage = 0
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.RELDO_2660, NPCs.RELDO_2661)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RELDO_WITHBOOK_2660, NPCs.RELDO_NORMAL_2661)
 }

@@ -172,5 +172,5 @@ class LarryDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = LarryDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LARRY_5424)
+    override fun getIds(): IntArray = intArrayOf(NPCs.PENG_LARRY_ZOO_5424)
 }

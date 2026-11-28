@@ -254,5 +254,5 @@ class ChiefTessDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ChiefTessDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHIEF_TESS_7051)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AFR_OGRESS_CHIEF_7051)
 }

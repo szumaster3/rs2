@@ -84,7 +84,7 @@ public final class ChainHitSpecialHandler extends RangeSwingHandler implements P
         state.setStyle(CombatStyle.RANGE);
         if (victim instanceof NPC) {
             NPC npc = victim.asNpc();
-            if (npc.getId() == NPCs.DOOR_SUPPORT_2440) {
+            if (npc.getId() == NPCs.DAGANNOTH_WEAK_DOOR_SOUTH_2440) {
                 for (Location l : DOOR_SUPPORTS) {
                     final NPC n = Repository.findNPC(l);
                     if (n == null) {
@@ -145,7 +145,7 @@ public final class ChainHitSpecialHandler extends RangeSwingHandler implements P
                 return true;
             }
         });
-        if (victim.getId() == NPCs.DOOR_SUPPORT_2440 || victim.getId() == NPCs.DOOR_SUPPORT_2446 || victim.getId() == NPCs.DOOR_SUPPORT_2443) {
+        if (victim.getId() == NPCs.DAGANNOTH_WEAK_DOOR_SOUTH_2440 || victim.getId() == NPCs.DAGANNOTH_WEAK_DOOR_NORTH_2446 || victim.getId() == NPCs.DAGANNOTH_WEAK_DOOR_WEST_2443) {
             return;
         }
         if (victim.getProperties().isMultiZone() && player.getSettings().getSpecialEnergy() >= SPECIAL_ENERGY) {
@@ -157,7 +157,7 @@ public final class ChainHitSpecialHandler extends RangeSwingHandler implements P
                     continue;
                 }
                 double distance = victim.getLocation().getDistance(e.getLocation());
-                Projectile.ranged(victim, e, shared.consts.Graphics.THROWING_AXE_SPECIAL_258, 40, 36, 32, 11).send();
+                Projectile.ranged(victim, e, shared.consts.Graphics.SP_ATTACK_CHAINHIT_TRAVEL_SPOTANIM_258, 40, 36, 32, 11).send();
                 GameWorld.getPulser().submit(new Pulse((int) (distance / 3), entity, victim, e) {
                     @Override
                     public boolean pulse() {

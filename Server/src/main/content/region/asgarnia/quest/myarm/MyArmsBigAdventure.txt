@@ -11,7 +11,7 @@ import core.plugin.Initializable
 
 @Initializable
 class MyArmsBigAdventure :
-    Quest("My Arm's Big Adventure", 94, 93, 1, Vars.VARBIT_QUEST_MY_ARMS_BIG_ADVENTURE_2790, 0, 1, 311) {
+    Quest("My Arm's Big Adventure", 94, 93, 1, Vars.VARBIT_2790, 0, 1, 311) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -37,7 +37,7 @@ class MyArmsBigAdventure :
         rewardXP(player, Skills.HERBLORE, 10000.0)
         rewardXP(player, Skills.FARMING, 5000.0)
         addItemOrDrop(player, Items.BURNT_MEAT_2146, 1)
-        setVarbit(player, Vars.VARBIT_QUEST_MY_ARMS_BIG_ADVENTURE_2790, 311, true)
+        setVarbit(player, Vars.VARBIT_2790, 311, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

@@ -28,9 +28,9 @@ public final class ExcaliburSpecialHandler extends MeleeSwingHandler implements 
 
     private static final int SPECIAL_ENERGY = 100;
 
-    private static final Animation ANIMATION = new Animation(Animations.OLD_EXCALIBUR_1057, Priority.HIGH);
+    private static final Animation ANIMATION = new Animation(Animations.SANCTUARY_1057, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.EXCALIBUR_SPECIAL_247);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.SP_ATTACKGLOW_2_247);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

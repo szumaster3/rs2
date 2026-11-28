@@ -139,7 +139,7 @@ class CharlieDialogue(player: Player? = null) : Dialogue(player) {
                                 object : Pulse(0) {
                                     var count = 0
                                     val npc =
-                                        NPC.create(NPCs.KING_NARNODE_SHAREEN_670, Location.create(2467, 3496, 3), null)
+                                        NPC.create(NPCs.GRANDTREE_NARNODE_670, Location.create(2467, 3496, 3), null)
 
                                     override fun pulse(): Boolean {
                                         when (count) {
@@ -243,5 +243,5 @@ class CharlieDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHARLIE_673)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDTREE_CHARLIE_673)
 }

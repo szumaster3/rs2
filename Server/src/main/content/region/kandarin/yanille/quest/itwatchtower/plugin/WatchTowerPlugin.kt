@@ -43,7 +43,7 @@ class WatchTowerPlugin : InteractionListener {
             if (getQuestStage(player, Quests.WATCHTOWER.questName) >= 1) {
                 sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "It is the wizards' helping hand - let 'em up.", FaceAnim.FRIENDLY)
                 addDialogueAction(player) { _, _ ->
-                    ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2544, 3112, 1))
+                    ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(2544, 3112, 1))
                 }
             } else {
                 sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "You can't go up there. That's private, that is.", FaceAnim.ANNOYED)
@@ -244,7 +244,7 @@ class WatchTowerPlugin : InteractionListener {
         on(OGRE_CITY_NW_GATE, IntType.SCENERY, "open") { player, node ->
             if(isQuestComplete(player, Quests.WATCHTOWER.questName) || getAttribute(player, GameAttributes.WATCHTOWER_GATE_UNLOCK, false)) {
                 if (player.location.x < 2504) {
-                    sendNPCDialogue(player, NPCs.OGRE_GUARD_859, "It's the small creature; you may pass.", FaceAnim.OLD_DEFAULT)
+                    sendNPCDialogue(player, NPCs.OGRE_GUARD2_859, "It's the small creature; you may pass.", FaceAnim.OLD_DEFAULT)
                 }
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
@@ -270,7 +270,7 @@ class WatchTowerPlugin : InteractionListener {
          * Handles use the relic on ogre guards.
          */
 
-        onUseWith(IntType.NPC, Items.OGRE_RELIC_2372, NPCs.OGRE_GUARD_859) { player, _, _ ->
+        onUseWith(IntType.NPC, Items.OGRE_RELIC_2372, NPCs.OGRE_GUARD2_859) { player, _, _ ->
             openDialogue(player, OgreGuardNorthWestGateDialogue())
             return@onUseWith true
         }
@@ -279,7 +279,7 @@ class WatchTowerPlugin : InteractionListener {
          * Handles use the gold bar on ogre city guards.
          */
 
-        onUseWith(IntType.NPC, Items.GOLD_BAR_2357, NPCs.OGRE_GUARD_858) { player, _, _ ->
+        onUseWith(IntType.NPC, Items.GOLD_BAR_2357, NPCs.OGRE_GUARD1_858) { player, _, _ ->
             openDialogue(player, OgreGuardSouthEastGateDialogue())
             return@onUseWith true
         }
@@ -293,7 +293,7 @@ class WatchTowerPlugin : InteractionListener {
                 openDialogue(player, BattlementDialogue())
             } else {
                 val destination = if(player.location.x > 2506) player.location.transform(-2,0,0) else player.location.transform(2,0,0)
-                forceMove(player, player.location, destination, 0, 90, null, Animations.CLIMB_OVER_THING_5038)
+                forceMove(player, player.location, destination, 0, 90, null, Animations.TOURTRAP_QIP_ESCAPE_THROUGH_BARS_5038)
                 sendMessage(player, "You climb over the low wall.")
             }
             return@on true
@@ -303,7 +303,7 @@ class WatchTowerPlugin : InteractionListener {
          * Handles talking to ogres near battlement.
          */
 
-        on(NPCs.OGRE_GUARD_860, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.OGRE_GUARD3_860, IntType.NPC, "talk-to") { player, node ->
             if(isQuestComplete(player, Quests.WATCHTOWER.questName)) {
                 sendNPCDialogue(player, node.id, "It's that creature again. This time we will let it go.", FaceAnim.OLD_DEFAULT)
             } else {
@@ -316,7 +316,7 @@ class WatchTowerPlugin : InteractionListener {
          * Handles give the rock cake to ogre guards near battlement.
          */
 
-        onUseWith(IntType.NPC, Items.ROCK_CAKE_2379, NPCs.OGRE_GUARD_860) { player, _, with ->
+        onUseWith(IntType.NPC, Items.ROCK_CAKE_2379, NPCs.OGRE_GUARD3_860) { player, _, with ->
             if (!inInventory(player, Items.ROCK_CAKE_2379)) return@onUseWith true
 
             if(isQuestComplete(player, Quests.WATCHTOWER.questName)) {
@@ -337,7 +337,7 @@ class WatchTowerPlugin : InteractionListener {
          * Handles talking to ogre guards near bridge.
          */
 
-        on(NPCs.OGRE_GUARD_861, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.OGRE_GUARD4_861, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "What do you want, small thing? Leave us alone!", FaceAnim.OLD_DEFAULT)
             return@on true
         }
@@ -347,7 +347,7 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         on(Scenery.GAP_2830, IntType.SCENERY, "jump-over") { player, _ ->
-            val npc = NPC(NPCs.OGRE_GUARD_861)
+            val npc = NPC(NPCs.OGRE_GUARD4_861)
             openDialogue(player, GapDialogue(), npc)
             return@on true
         }
@@ -358,7 +358,7 @@ class WatchTowerPlugin : InteractionListener {
 
         on(Scenery.GAP_2831, IntType.SCENERY, "jump-over") { player, _ ->
             val dx = if (player.location.x >= 2531) -1 else 1
-            forceMove(player, player.location, player.location.transform(dx, -3, 0), 0, 90, null, Animations.JUMP_OBSTACLE_5355) {
+            forceMove(player, player.location, player.location.transform(dx, -3, 0), 0, 90, null, Animations.QIP_WATCHTOWER_DOUBLE_SQUARE_JUMP_5355) {
                 sendPlayerDialogue(player, "I'm glad that was easier on the way back!")
                 sendMessage(player, "You daringly jump across the chasm.")
             }
@@ -369,7 +369,7 @@ class WatchTowerPlugin : InteractionListener {
          * Handles talking to ogre trader near rock cake stall.
          */
 
-        on(NPCs.OGRE_TRADER_875, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.OGRE_TRADER2_875, IntType.NPC, "talk-to") { player, node ->
             // sendNPCDialogue(player, node.id, "Grr! get your hands off those cakes!", FaceAnim.OLD_DEFAULT)
             sendNPCDialogue(player, node.id, "Arr, small thing wants my food, does it?", FaceAnim.OLD_DEFAULT)
             return@on true
@@ -380,7 +380,7 @@ class WatchTowerPlugin : InteractionListener {
          * Handles talking to ogre chieftain.
          */
 
-        on(NPCs.OGRE_CHIEFTAIN_852, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.OGRE_CHIEFTAN_852, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Arr, small thing wants my food, does it?", FaceAnim.OLD_DEFAULT)
             runTask(player, 3) {
                 sendNPCDialogue(player, node.id, "I'll teach you to deal with ogres!", FaceAnim.OLD_DEFAULT)
@@ -414,7 +414,7 @@ class WatchTowerPlugin : InteractionListener {
 
         on(Items.SPELL_SCROLL_2396, IntType.ITEM, "read") { player, node ->
             if(!inInventory(player, Items.SPELL_SCROLL_2396)) return@on true
-            animate(player, Animations.READING_SCROLL_DISPLACED_WATCH_TOWER_5354)
+            animate(player, Animations.QIP_WATCHTOWER_READ_SCROLL_5354)
             sendDialogue(player, "You memorise what is written on the scroll.")
             runTask(player, 3) {
                 removeItem(player, node.asItem(), Container.INVENTORY)
@@ -469,7 +469,7 @@ class WatchTowerPlugin : InteractionListener {
         onUseWith(IntType.ITEM, Items.CLEAN_GUAM_249, Items.VIAL_2389) { player, used, with ->
             if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
                 impact(player, 5, ImpactHandler.HitsplatType.NORMAL)
-                sendGraphics(Graphics.FIRE_WAVE_IMPACT_157, player.location)
+                sendGraphics(Graphics.WAVE_IMPACT_2_157, player.location)
                 addItem(player, Items.VIAL_229)
             }
             return@onUseWith true
@@ -517,7 +517,7 @@ class WatchTowerPlugin : InteractionListener {
 
         onUseWith(IntType.NPC, Items.MAGIC_OGRE_POTION_2395, *OGRE_SHAMAN) { player, _, npc ->
             stopWalk(player)
-            val anim = Animation(Animations.POURING_MAGIC_OGRE_POTION_WATCH_TOWER_5361)
+            val anim = Animation(Animations.QIP_WATCHTOWER_POUR_VIAL_5361)
 
             animate(player, anim)
 
@@ -703,7 +703,7 @@ class WatchTowerPlugin : InteractionListener {
                     end ()
                     val startLocation = Location.create(2506, 3012, 0)
                     val endLocation = Location.create(2508, 3012, 0)
-                    forceMove(player!!, startLocation, endLocation, 60, 150, null, Animations.CLIMB_OVER_THING_5038)
+                    forceMove(player!!, startLocation, endLocation, 60, 150, null, Animations.TOURTRAP_QIP_ESCAPE_THROUGH_BARS_5038)
                     sendMessage(player!!, "You climb over the low wall.")
                 }
             }
@@ -761,7 +761,7 @@ class WatchTowerPlugin : InteractionListener {
                 6 -> {
                     end ()
                     val dx = if (player!!.location.x >= 2531) -1 else 1
-                    forceMove(player!!, player!!.location, player!!.location.transform(dx, 3, 0), 0, 90, null, Animations.JUMP_OBSTACLE_5355) {
+                    forceMove(player!!, player!!.location, player!!.location.transform(dx, 3, 0), 0, 90, null, Animations.QIP_WATCHTOWER_DOUBLE_SQUARE_JUMP_5355) {
                         sendMessage(player!!, "You daringly jump across the chasm.")
                         sendPlayerDialogue(player!!, "Phew! I just made it.")
                     }

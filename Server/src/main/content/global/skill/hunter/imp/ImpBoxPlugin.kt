@@ -18,18 +18,18 @@ class ImpBoxPlugin : InteractionListener, InterfaceListener {
         private const val SESSION_KEY = "imp_session"
 
         private val IMP_BOXES = intArrayOf(
-            Items.IMP_IN_A_BOX1_10028,
-            Items.IMP_IN_A_BOX2_10027
+            Items.IMP_IN_A_BOX_1_10028,
+            Items.IMP_IN_A_BOX_2_10027
         )
 
         private fun isImpBox(id: Int): Boolean =
-            id == Items.IMP_IN_A_BOX1_10028 ||
-                    id == Items.IMP_IN_A_BOX2_10027 ||
+            id == Items.IMP_IN_A_BOX_1_10028 ||
+                    id == Items.IMP_IN_A_BOX_2_10027 ||
                     id == Items.MAGIC_BOX_10025
 
         private fun downgrade(box: Item): Item = when (box.id) {
-            Items.IMP_IN_A_BOX2_10027 -> Item(Items.IMP_IN_A_BOX1_10028)
-            Items.IMP_IN_A_BOX1_10028 -> Item(Items.MAGIC_BOX_10025)
+            Items.IMP_IN_A_BOX_2_10027 -> Item(Items.IMP_IN_A_BOX_1_10028)
+            Items.IMP_IN_A_BOX_1_10028 -> Item(Items.MAGIC_BOX_10025)
             else -> box
         }
 

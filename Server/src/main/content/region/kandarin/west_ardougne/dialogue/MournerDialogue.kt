@@ -21,15 +21,15 @@ class MournerDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (npc.id) {
-            NPCs.MOURNER_347,
-            NPCs.MOURNER_348,
-            NPCs.MOURNER_357,
-            NPCs.MOURNER_369,
-            NPCs.MOURNER_371,
-            NPCs.MOURNER_370 -> openDialogue(player, MournerHeadquartersDialogue())
-            NPCs.HEAD_MOURNER_716 -> openDialogue(player, HeadMournerDialogue())
-            NPCs.MOURNER_717, NPCs.MOURNER_718 -> openDialogue(player, MournerArdougneDialogue())
-            NPCs.MOURNER_719 -> playerl(FaceAnim.FRIENDLY, "Hello.")
+            NPCs.MOURNER2_347,
+            NPCs.MOURNER3_348,
+            NPCs.MOURNER_ARMED_357,
+            NPCs.MOURNERSTEW3_369,
+            NPCs.MOURNERSTEW1_371,
+            NPCs.MOURNERSTEW2_370 -> openDialogue(player, MournerHeadquartersDialogue())
+            NPCs.HEADMOURNER_716 -> openDialogue(player, HeadMournerDialogue())
+            NPCs.MOURNER1_717, NPCs.MOURNERTWA_718 -> openDialogue(player, MournerArdougneDialogue())
+            NPCs.MOURNERTWB_719 -> playerl(FaceAnim.FRIENDLY, "Hello.")
             else -> playerl(FaceAnim.FRIENDLY, "Hello.").also { stage = 5 }
         }
         return true
@@ -52,15 +52,15 @@ class MournerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray =
         intArrayOf(
-            NPCs.MOURNER_347,
-            NPCs.MOURNER_348,
-            NPCs.MOURNER_357,
-            NPCs.MOURNER_369,
-            NPCs.MOURNER_371,
-            NPCs.MOURNER_370,
-            NPCs.HEAD_MOURNER_716,
-            NPCs.MOURNER_717,
-            NPCs.MOURNER_718,
-            NPCs.MOURNER_719
+            NPCs.MOURNER2_347,
+            NPCs.MOURNER3_348,
+            NPCs.MOURNER_ARMED_357,
+            NPCs.MOURNERSTEW3_369,
+            NPCs.MOURNERSTEW1_371,
+            NPCs.MOURNERSTEW2_370,
+            NPCs.HEADMOURNER_716,
+            NPCs.MOURNER1_717,
+            NPCs.MOURNERTWA_718,
+            NPCs.MOURNERTWB_719
         )
 }

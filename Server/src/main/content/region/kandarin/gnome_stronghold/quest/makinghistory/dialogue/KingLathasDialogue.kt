@@ -57,7 +57,7 @@ class KingLathasDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        npc = NPC(NPCs.KING_LATHAS_364)
+        npc = NPC(NPCs.KINGLATHAS_364)
         when (stage) {
             0 -> options("Jorral and the outpost", "West Ardougne").also { stage++ }
             1 -> when (buttonId) {
@@ -88,5 +88,5 @@ class KingLathasDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.KING_LATHAS_364)
+    override fun getIds(): IntArray = intArrayOf(NPCs.KINGLATHAS_364)
 }

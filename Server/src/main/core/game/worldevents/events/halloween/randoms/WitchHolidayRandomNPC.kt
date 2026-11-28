@@ -24,13 +24,13 @@ class WitchHolidayRandomNPC : HolidayRandomEventNPC(NPCs.WITCH_611) {
                             sendChat(this, "Brackium Emendo!")
                             this.face(player)
                             playGlobalAudio(this.location, Sounds.CONFUSE_CAST_AND_FIRE_119)
-                            animate(this, Animations.CAST_SPELL_1978)
-                            spawnProjectile(this, player, Graphics.CURSE_PROJECTILE_109)
+                            animate(this, Animations.ZAROS_CASTING_1978)
+                            spawnProjectile(this, player, Graphics.CURSE_TRAVEL_1_109)
                             return@queueScript delayScript(this, 2)
                         }
 
                         1 -> {
-                            player.appearance.transformNPC(NPCs.ENAKHRA_3138)
+                            player.appearance.transformNPC(NPCs.ENAKH_ENAKHRA_MAHJARRAT_3138)
                             playAudio(player, Sounds.SKELETON_RESURRECT_1687)
                             registerTimer(player, ResetHolidayAppearance())
                             return@queueScript delayScript(this, 4)
@@ -38,7 +38,7 @@ class WitchHolidayRandomNPC : HolidayRandomEventNPC(NPCs.WITCH_611) {
 
                         2 -> {
                             sendChat(this, "That was not right...")
-                            visualize(this, Animations.HUMAN_THINK_857, -1)
+                            visualize(this, Animations.EMOTE_THINK_857, -1)
                             HolidayRandoms.terminateEventNpc(player)
                             return@queueScript stopExecuting(this)
                         }
@@ -55,14 +55,14 @@ class WitchHolidayRandomNPC : HolidayRandomEventNPC(NPCs.WITCH_611) {
                             sendChat(this, "Bombarda!")
                             this.face(player)
                             playGlobalAudio(this.location, Sounds.CURSE_CAST_AND_FIRE_127)
-                            animate(this, Animations.CAST_SPELL_1978)
+                            animate(this, Animations.ZAROS_CASTING_1978)
                             spawnProjectile(this, player, 109)
                             return@queueScript delayScript(this, 2)
                         }
 
                         1 -> {
                             playGlobalAudio(player.location, Sounds.EXPLOSION_1487)
-                            visualize(player, -1, Graphics.EXPLOSION_659)
+                            visualize(player, -1, Graphics.WILD_FALLOFF_METEOR_BLAST_1_659)
                             val hit = if (player.skills.lifepoints < 5) 0 else 2
                             impact(player, hit, ImpactHandler.HitsplatType.NORMAL)
                             return@queueScript delayScript(this, 2)
@@ -85,19 +85,19 @@ class WitchHolidayRandomNPC : HolidayRandomEventNPC(NPCs.WITCH_611) {
                             sendChat(this, "Tarantallegra!")
                             this.face(player)
                             playGlobalAudio(this.location, Sounds.WEAKEN_CAST_AND_FIRE_3011)
-                            animate(this, Animations.CAST_SPELL_1978)
+                            animate(this, Animations.ZAROS_CASTING_1978)
                             spawnProjectile(this, player, 109)
                             return@queueScript delayScript(this, 2)
                         }
 
                         1 -> {
-                            animate(player, Animations.HUMAN_ZOMBIE_DANCE_3543, true)
+                            animate(player, Animations.ZOMBIE_DANCE_3543, true)
                             sendMessage(player, "You suddenly burst into dance.")
                             return@queueScript delayScript(this, 2)
                         }
 
                         2 -> {
-                            visualize(this, Animations.HUMAN_LAUGH_861, -1)
+                            visualize(this, Animations.EMOTE_LAUGH_861, -1)
                             playGlobalAudio(this.location, Sounds.HUMAN_LAUGH_1_3071)
                             HolidayRandoms.terminateEventNpc(player)
                             return@queueScript stopExecuting(this)
@@ -115,19 +115,19 @@ class WitchHolidayRandomNPC : HolidayRandomEventNPC(NPCs.WITCH_611) {
                             sendChat(this, "Vespertilio!")
                             this.face(player)
                             playGlobalAudio(this.location, Sounds.WEAKEN_CAST_AND_FIRE_3011)
-                            animate(this, Animations.CAST_SPELL_1978)
+                            animate(this, Animations.ZAROS_CASTING_1978)
                             spawnProjectile(this, player, 109)
                             return@queueScript delayScript(this, 2)
                         }
 
                         1 -> {
-                            visualize(player, Animations.HUMAN_TRICK_10530, Graphics.TRICK_1863)
+                            visualize(player, Animations.SWEPT_PLAYER_SCARE_EMOTE_10530, Graphics.SPELLS_UPDATE_PLAYER_WATER_LAUNCH_1863)
                             playGlobalAudio(player.location, Sounds.VAMPIRE_SUMMON_1899)
                             return@queueScript delayScript(this, 4)
                         }
 
                         2 -> {
-                            player.appearance.transformNPC(NPCs.VAMPIRE_BAT_6835)
+                            player.appearance.transformNPC(NPCs.LORE_VAMPIRE_BAT_6835)
                             HolidayRandoms.terminateEventNpc(player)
                             registerTimer(player, ResetHolidayAppearance())
                             return@queueScript stopExecuting(this)
@@ -145,7 +145,7 @@ class WitchHolidayRandomNPC : HolidayRandomEventNPC(NPCs.WITCH_611) {
                             sendChat(this, "Sella!")
                             this.face(player)
                             playGlobalAudio(this.location, Sounds.WEAKEN_CAST_AND_FIRE_3011)
-                            animate(this, Animations.CAST_SPELL_1978)
+                            animate(this, Animations.ZAROS_CASTING_1978)
                             spawnProjectile(this, player, 109)
                             return@queueScript delayScript(this, 2)
                         }

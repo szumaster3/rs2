@@ -95,8 +95,8 @@ class SalamanderSwingHandler(private var style: CombatStyle) : CombatSwingHandle
         state: BattleState?,
     ) {
         entity.visualize(
-            Animation.create(Animations.SALAMANDER_WEAPON_ATTACK_5247),
-            Graphics(shared.consts.Graphics.DRAGON_FIRE_BREATH_REGULAR_952, 100),
+            Animation.create(Animations.HUMAN_ATTACK_SALAMANDER_5247),
+            Graphics(shared.consts.Graphics.FIREBREATH_1_952, 100),
         )
     }
 

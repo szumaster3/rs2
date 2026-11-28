@@ -813,18 +813,18 @@ class SlayerMasterDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(
         NPCs.CHAELDAR_1598,
-        NPCs.SANIBOCH_1596,
+        NPCs.IDRIA_1596,
         NPCs.VANNAKA_1597,
-        NPCs.CHAELDAR_1599,
-        NPCs.SUMONA_7780,
-        NPCs.DURADEL_8275,
+        NPCs.IDRIA_1599,
+        NPCs.SMKI_SUMONA_MULTI_7780,
+        NPCs.SLAYER_MASTER_5_DURADEL_LUC_8275,
         NPCs.TURAEL_8273,
-        NPCs.MAZCHNA_8274,
+        NPCs.SLAYER_MASTER_2_MAZCHNA_LUC_8274,
     )
 
     companion object {
         private val GEM = Item(Items.ENCHANTED_GEM_4155, 1)
-        private val MITHRIL_AXE = Item(Items.MITHRIL_AXE_1355)
+        private val MITHRIL_AXE = Item(Items.MITHRIL_HATCHET_1355)
         private val HOLY_SYMBOL = Item(Items.HOLY_SYMBOL_1718)
         private val ITEMS = arrayOf(Item(Items.QUEST_POINT_CAPE_9813), Item(Items.QUEST_POINT_HOOD_9814))
         private val COINS = Item(Items.COINS_995, 99000)

@@ -71,5 +71,5 @@ class ArcticBearDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.ARCTIC_BEAR_6839, NPCs.ARCTIC_BEAR_6840)
+        intArrayOf(NPCs.LORE_POLAR_BEAR_6839, NPCs.LORE_POLAR_BEAR_COMBAT_6840)
 }

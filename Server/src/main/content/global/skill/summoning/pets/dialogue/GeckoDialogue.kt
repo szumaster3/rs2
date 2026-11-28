@@ -15,19 +15,19 @@ import shared.consts.NPCs
 class GeckoDialogue(player: Player? = null) : Dialogue(player) {
 
     private val babyGecko = intArrayOf(
-        NPCs.BABY_GECKO_6915,
-        NPCs.BABY_GECKO_7277,
-        NPCs.BABY_GECKO_7278,
-        NPCs.BABY_GECKO_7279,
-        NPCs.BABY_GECKO_7280
+        NPCs.LORE_BABY_GECKO_1_6915,
+        NPCs.LORE_BABY_GECKO_2_7277,
+        NPCs.LORE_BABY_GECKO_3_7278,
+        NPCs.LORE_BABY_GECKO_4_7279,
+        NPCs.LORE_BABY_GECKO_5_7280
     )
 
     private val adultGecko = intArrayOf(
-        NPCs.GECKO_6916,
-        NPCs.GECKO_7281,
-        NPCs.GECKO_7282,
-        NPCs.GECKO_7283,
-        NPCs.GECKO_7284
+        NPCs.LORE_GECKO_1_6916,
+        NPCs.LORE_GECKO_2_7281,
+        NPCs.LORE_GECKO_3_7282,
+        NPCs.LORE_GECKO_4_7283,
+        NPCs.LORE_GECKO_5_7284
     )
 
     private var branch = 0

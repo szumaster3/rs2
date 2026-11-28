@@ -49,7 +49,7 @@ class AkharanuDialogue(player: Player? = null) : Dialogue(player) {
             5 -> npc(FaceAnim.FRIENDLY, "Why, yes I do!").also { stage++ }
             6 -> {
                 end()
-                openNpcShop(player, NPCs.AK_HARANU_1688)
+                openNpcShop(player, NPCs.AHOY_AKHARANU_1688)
             }
         }
         return true
@@ -57,5 +57,5 @@ class AkharanuDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AkharanuDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.AK_HARANU_1688, NPCs.AK_HARANU_1689)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_AKHARANU_1688, NPCs.AK_HARANU_1689)
 }

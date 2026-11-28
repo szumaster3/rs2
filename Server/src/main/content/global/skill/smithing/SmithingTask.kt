@@ -89,7 +89,7 @@ class SmithingTask(
     }
 
     override fun playAnimation() {
-        animate(player, Animations.SMITH_HAMMER_898)
+        animate(player, Animations.HUMAN_SMITHING_898)
     }
 
     override fun canContinue(): Boolean {

@@ -79,5 +79,5 @@ class HenryetaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HENRYETA_CARNILLEAN_889)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CARNILLEAN_WIFE_889)
 }

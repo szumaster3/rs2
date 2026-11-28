@@ -74,7 +74,7 @@ public class IronTitanNPC extends Familiar {
 
     @Override
     public int[] getIds() {
-        return new int[]{NPCs.IRON_TITAN_7375, NPCs.IRON_TITAN_7376};
+        return new int[]{NPCs.LORE_IRON_TITAN_7375, NPCs.LORE_IRON_TITAN_COMBAT_7376};
     }
 
 }

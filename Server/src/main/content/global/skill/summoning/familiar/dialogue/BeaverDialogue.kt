@@ -93,5 +93,5 @@ class BeaverDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BEAVER_6808)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_BEAVER_6808)
 }

@@ -109,7 +109,7 @@ public final class RugMerchantDialogue extends Dialogue {
      * @param buttonId the buttonId.
      */
     private final void handleDefault(final int buttonId) {
-        int actualPrice = (inEquipment(player, Items.RING_OF_CHAROS_4202, 1) || inEquipment(player, Items.RING_OF_CHAROSA_6465, 1)) ? 100 : 200;
+        int actualPrice = (inEquipment(player, Items.RING_OF_CHAROS_4202, 1) || inEquipment(player, Items.RING_OF_CHAROS_A_6465, 1)) ? 100 : 200;
         switch (stage) {
             case 0:
                 npc("Greetings, desert traveller. Do you require the services", "of Ali Morrisane's flying carpet fleet?");
@@ -353,7 +353,7 @@ public final class RugMerchantDialogue extends Dialogue {
                             player.animate(new Animation(-1));
                             setVarp(player, 499, 0);
                             playAudio(player, Sounds.CARPET_DESCEND_1195);
-                            animate(player, Animations.MAGIC_CARPET_LANDING_331, true);
+                            animate(player, Animations.MAGIC_CARPET_DISMOUNT_331, true);
                             clearLogoutListener(player, "magic-carpet");
                             player.getInterfaceManager().openDefaultTabs();
                             break;

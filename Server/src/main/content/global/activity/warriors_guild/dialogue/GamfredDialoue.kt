@@ -94,5 +94,5 @@ class GamfredDialoue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GAMFRED_4287)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WARGUILD_GAMFRED_4287)
 }

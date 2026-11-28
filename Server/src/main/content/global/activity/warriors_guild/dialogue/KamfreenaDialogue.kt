@@ -51,5 +51,5 @@ class KamfreenaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.KAMFREENA_4289)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WARGUILD_KAMFREENA_4289)
 }

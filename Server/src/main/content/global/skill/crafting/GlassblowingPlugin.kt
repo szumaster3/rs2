@@ -86,7 +86,7 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
                 }
 
                 playAudio(player, Sounds.GLASSBLOWING_2724)
-                animate(player, Animations.GLASS_BLOW_884)
+                animate(player, Animations.HUMAN_GLASSBLOWING_884)
 
                 if (!removeItem(player, MOLTEN_GLASS)) return@queueScript stopExecuting(player)
                 addItem(player, product.productId, product.amount)

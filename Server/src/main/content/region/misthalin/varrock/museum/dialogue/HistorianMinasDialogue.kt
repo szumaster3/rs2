@@ -28,5 +28,5 @@ class HistorianMinasDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HISTORIAN_MINAS_5931)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VM_TIMELINE_HISTORIAN_5931)
 }

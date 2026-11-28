@@ -17,7 +17,7 @@ class WolfWhistlePlugin : InteractionListener {
             if (!getAttribute(player, GameAttributes.WOLF_WHISTLE_STIKKLEBRIX, false) && !isQuestComplete(player, Quests.WOLF_WHISTLE.questName)) {
                 openDialogue(player, StikkletrixDialogue())
             } else {
-                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                 sendDialogue(player, "You rifle the pockets of the dead druid and find nothing.")
             }
             return@on true

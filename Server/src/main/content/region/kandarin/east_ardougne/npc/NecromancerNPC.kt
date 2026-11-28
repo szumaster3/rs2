@@ -84,7 +84,7 @@ class NecromancerNPC : NPCBehavior(NPCs.INVRIGAR_THE_NECROMANCER_173, NPCs.NECRO
             return
         }
         val location = RegionManager.getTeleportLocation(victim.location, 3)
-        npc.summonedZombie = NPC.create(NPCs.SUMMONED_ZOMBIE_77, location, entity)
+        npc.summonedZombie = NPC.create(NPCs.SUMMONEDZOMBIE_77, location, entity)
         npc.summonedZombie!!.isActive = true
         npc.summonedZombie!!.isWalks = true
         npc.summonedZombie!!.isNeverWalks = false

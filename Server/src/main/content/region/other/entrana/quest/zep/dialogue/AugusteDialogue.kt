@@ -21,7 +21,7 @@ class AugusteDialogue : DialogueFile() {
         val hasPapyrus = inInventory(player, Items.PAPYRUS_970, 3)
         val hasCandle = inInventory(player, Items.CANDLE_36, 1)
         val hasWool = inInventory(player, Items.BALL_OF_WOOL_1759, 1)
-        val hasPotatoes = inInventory(player, Items.POTATOES10_5438, 1)
+        val hasPotatoes = inInventory(player, Items.POTATOES_10_5438, 1)
 
         val hasDyedBalloon = DyeItem.values().map { it.origamiBalloonId }.toIntArray()
         val hasPlain = inInventory(player, Items.ORIGAMI_BALLOON_9934)
@@ -184,7 +184,7 @@ class AugusteDialogue : DialogueFile() {
                 3 -> npc(FaceAnim.HAPPY, "Commendable. If I may have those, I will construct this", "experiment.").also { stage++ }
                 4 -> {
                     end()
-                    if(removeItem(player, Item(Items.PAPYRUS_970, 2)) && removeItem(player, Item(Items.POTATOES10_5438, 1))) {
+                    if(removeItem(player, Item(Items.PAPYRUS_970, 2)) && removeItem(player, Item(Items.POTATOES_10_5438, 1))) {
                         ExperimentCutscene(player).start(true)
                         setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 5)
                     }
@@ -222,7 +222,7 @@ class AugusteDialogue : DialogueFile() {
                     }
                     setQuestStage(player, Quests.ENLIGHTENED_JOURNEY.questName, 6)
                     addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932, 1)
-                    addItemOrDrop(player, Items.APPLES5_5386, 1)
+                    addItemOrDrop(player, Items.APPLES_5_5386, 1)
                 }
             }
 
@@ -410,7 +410,7 @@ class AugusteDialogue : DialogueFile() {
                     end()
                     npcl(FaceAnim.FRIENDLY, "Here you go. Now be very careful not to lose it again!")
                     addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932, 1)
-                    addItemOrDrop(player, Items.APPLES5_5386, 1)
+                    addItemOrDrop(player, Items.APPLES_5_5386, 1)
                 } else {
                     npcl(FaceAnim.FRIENDLY, "You already have one! Don't be greedy.").also { stage = END_DIALOGUE }
                 }

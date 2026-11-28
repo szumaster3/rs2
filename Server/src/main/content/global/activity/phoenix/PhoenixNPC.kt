@@ -117,7 +117,7 @@ class PhoenixNPC (id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
         if (!store.getBoolean(username))
         {
             store.addProperty(username, true)
-            val npc = NPC.create(NPCs.PHOENIX_8548, Location.create(3536, 5197, 0))
+            val npc = NPC.create(NPCs.PHOENIX_QUESTPHOENIX_REBORN_8548, Location.create(3536, 5197, 0))
             setAttribute(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD, true)
             npc.init()
         }
@@ -139,7 +139,7 @@ class PhoenixNPC (id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
         return PhoenixNPC(id, location)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PHOENIX_8549)
+    override fun getIds(): IntArray = intArrayOf(NPCs.PHOENIX_BOSSPHOENIX_8549)
 
     private fun getStoreFile(): JsonObject = ServerStore.getArchive("daily-phoenix-lair-activity")
 }

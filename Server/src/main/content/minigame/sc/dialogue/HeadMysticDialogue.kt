@@ -28,5 +28,5 @@ class HeadMysticDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HEAD_MYSTIC_8227)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SC_HEAD_MYSTIC_8227)
 }

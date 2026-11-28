@@ -20,7 +20,7 @@ class MonasteryPlugin : InteractionListener {
             val option = "climb-up"
             val abbot = node.location.equals(Location(3057, 3483, 0))
             if (!player.getSavedData().globalData.isJoinedMonastery()) {
-                player.dialogueInterpreter.open(if (abbot) NPCs.ABBOT_LANGLEY_801 else NPCs.MONK_7727, true)
+                player.dialogueInterpreter.open(if (abbot) NPCs.ABBOT_LANGLEY_801 else NPCs.ICEMT_MONK_7727, true)
             } else {
                 ClimbActionHandler.climbLadder(player, node.asScenery(), option)
                 sendMessage(player, "You climb up the ladder.")

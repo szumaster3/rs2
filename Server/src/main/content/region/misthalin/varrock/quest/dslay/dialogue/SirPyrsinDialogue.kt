@@ -562,5 +562,5 @@ class SirPyrsinDialogue(player: Player? = null) : Dialogue(player) {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_PRYSIN_883, NPCs.SIR_PRYSIN_4657)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_PRYSIN_883, NPCs.SIR_PRYSIN_SILVERLIGHT_4657)
 }

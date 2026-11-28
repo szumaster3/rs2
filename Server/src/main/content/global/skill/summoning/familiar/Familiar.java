@@ -46,19 +46,19 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
     /**
      * The constant small summon graphics.
      */
-    protected static final Graphics SMALL_SUMMON_GRAPHICS = Graphics.create(shared.consts.Graphics.SUMMON_FAMILIAR_SMALL_1314);
+    protected static final Graphics SMALL_SUMMON_GRAPHICS = Graphics.create(shared.consts.Graphics.LORE_SUMMON_SPOT_1_1314);
     /**
      * The constant large summon graphics.
      */
-    protected static final Graphics LARGE_SUMMON_GRAPHICS = Graphics.create(shared.consts.Graphics.SUMMON_FAMILIAR_LARGE_1315);
+    protected static final Graphics LARGE_SUMMON_GRAPHICS = Graphics.create(shared.consts.Graphics.LORE_SUMMON_SPOT_2_1315);
     /**
      * The constant special animation.
      */
-    protected static final Animation SPECIAL_ANIMATION = Animation.create(Animations.CAST_FAMILIAR_SCROLL_7660);
+    protected static final Animation SPECIAL_ANIMATION = Animation.create(Animations.LORE_HUMAN_ANIMAL_SPECIAL_7660);
     /**
      * The constant special graphics.
      */
-    protected static final Graphics SPECIAL_GRAPHICS = Graphics.create(shared.consts.Graphics.ABYSSAL_TITAN_GFX_1_1316);
+    protected static final Graphics SPECIAL_GRAPHICS = Graphics.create(shared.consts.Graphics.LORE_HUMAN_ANIMAL_SPECIAL_SPOT_1316);
 
     /**
      * The Owner.

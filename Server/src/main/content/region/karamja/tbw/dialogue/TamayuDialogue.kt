@@ -17,7 +17,7 @@ class TamayuDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (npc.id == NPCs.TAMAYU_1167) {
+        if (npc.id == NPCs.TBWT_TAMAYU_1167) {
             npc(FaceAnim.ANNOYED, randomConversation.random()).also { stage = END_DIALOGUE }
         } else {
             player("Hello, Tamayu, first son of Timfraku.")
@@ -32,14 +32,14 @@ class TamayuDialogue(player: Player? = null) : Dialogue(player) {
             2 -> npcl(FaceAnim.HALF_GUILTY, "Using your new karambwan poison I have been creating spears. Would you like to buy some?").also { stage++ }
             3 -> options("Yes.", "No.").also { stage++ }
             4 -> when (buttonId) {
-                1 -> end().also { openNpcShop(player, NPCs.TAMAYU_1167) }
+                1 -> end().also { openNpcShop(player, NPCs.TBWT_TAMAYU_1167) }
                 2 -> npc(FaceAnim.FRIENDLY, "As you wish, stranger.").also { stage = END_DIALOGUE }
             }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(2487, NPCs.TAMAYU_1167, NPCs.TAMAYU_1168, NPCs.TAMAYU_1169, NPCs.TAMAYU_1170)
+    override fun getIds(): IntArray = intArrayOf(2487, NPCs.TBWT_TAMAYU_1167, NPCs.TAMAYU_1168, NPCs.TBWT_TAMAYU_HUNTER_1169, NPCs.TBWT_TAMAYU_FINAL_HUNTER_1170)
 
     companion object {
         private val randomConversation = arrayOf("Get out of my way! Argh! I'm hunting!", "Move, lest I slay not the beast but you!", "Die! Die!!")

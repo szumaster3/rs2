@@ -65,9 +65,9 @@ class FishingPlatform : InteractionListener, MapArea {
 
     override fun defineListeners() {
         val npcDialogues = mapOf(
-            NPCs.KIMBERLY_7168 to Pair("Hello there.", FaceAnim.CHILD_SAD),
-            NPCs.MAYOR_HOBB_4874 to Pair("Well hello there; welcome to our little village. Pray, stay awhile.", null),
-            NPCs.BROTHER_MALEDICT_4878 to Pair("The blessings of Saradomin be with you child.", null)
+            NPCs.KEN_KIMBERLY_7168 to Pair("Hello there.", FaceAnim.CHILD_SAD),
+            NPCs.SLUG2_HOBB_STAGE2_4874 to Pair("Well hello there; welcome to our little village. Pray, stay awhile.", null),
+            NPCs.SLUG2_MALEDICT_STAGE1_4878 to Pair("The blessings of Saradomin be with you child.", null)
         )
 
         for ((npcId, dialogue) in npcDialogues) {

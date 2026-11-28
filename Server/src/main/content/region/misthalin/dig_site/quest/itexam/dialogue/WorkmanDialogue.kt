@@ -40,7 +40,7 @@ class WorkmanDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = WorkmanDialogue(player)
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565)
+        intArrayOf(NPCs.DIGWORKMAN1_613, NPCs.QIP_DIGSITE_DIGWORKMAN_03_4564, NPCs.QIP_DIGSITE_DIGWORKMAN_04_4565)
 }
 
 class DigsiteWorkmanDialogueFile : DialogueFile() {

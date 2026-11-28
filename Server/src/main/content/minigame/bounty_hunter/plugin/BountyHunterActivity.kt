@@ -350,7 +350,7 @@ class BountyHunterActivity
             val offset = RandomFunction.getRandomElement(EXIT_OFFSETS)
             val destination = Location.create(type.zone.southWestX + offset.x, type.zone.southWestY + offset.y, 0)
             player.properties.teleportLocation = destination
-            player.animate(Animation.create(Animations.WALK_AND_APPEAR_7377))
+            player.animate(Animation.create(Animations.BOUNTYHUNTER_CAVE_EXIT_7377))
         }
 
         fun leaveCrater(

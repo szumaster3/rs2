@@ -16,7 +16,7 @@ class AlKharidHealDialogue(val skipFirst: Boolean) : DialogueFile() {
             0 -> playerl(FaceAnim.ASKING, "Can you heal me?").also { stage++ }
             1 -> npcl(FaceAnim.FRIENDLY, "Of course!").also { stage++ }
             2 -> {
-                animate(npc!!, Animations.HUMAN_PICKPOCKETING_881)
+                animate(npc!!, Animations.HUMAN_PICKPOCKET_881)
                 if (player!!.skills.lifepoints < getStatLevel(player!!, Skills.HITPOINTS)) {
                     player!!.skills.heal(21)
                     npcl(FaceAnim.FRIENDLY, "There you go!")

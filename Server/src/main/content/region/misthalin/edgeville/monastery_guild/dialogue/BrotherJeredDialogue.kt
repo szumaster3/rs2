@@ -228,7 +228,7 @@ class BrotherJeredDialogue(player: Player? = null) : Dialogue(player) {
                 sendDoubleItemDialogue(
                     player,
                     Items.PRAYER_CAPE_9759,
-                    Items.PRAYER_CAPET_9760,
+                    Items.PRAYER_CAPE_T_9760,
                     "${player.username} receives prayer cape and prayer hood. Player has 99,000 coins removed from them.",
                 ).also { stage++ }
 

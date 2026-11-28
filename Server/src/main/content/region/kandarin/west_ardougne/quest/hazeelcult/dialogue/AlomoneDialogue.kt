@@ -57,5 +57,5 @@ class AlomoneDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALOMONE_891)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALOMONE_HAZEEL_CULTIST_891)
 }

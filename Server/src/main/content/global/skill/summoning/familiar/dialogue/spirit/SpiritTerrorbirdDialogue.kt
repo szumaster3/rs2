@@ -77,5 +77,5 @@ class SpiritTerrorbirdDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_TERRORBIRD_6794, NPCs.SPIRIT_TERRORBIRD_6795)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_TERRORBIRD_6794, NPCs.LORE_TERRORBIRD_COMBAT_6795)
 }

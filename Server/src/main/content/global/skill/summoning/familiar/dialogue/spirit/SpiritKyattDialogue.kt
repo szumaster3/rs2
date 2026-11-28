@@ -18,7 +18,7 @@ class SpiritKyattDialogue : DialogueFile() {
     private var randomDialogue = (0..3).random()
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SPIRIT_KYATT_7365)
+        npc = NPC(NPCs.LORE_KYATT_7365)
         if (randomDialogue == 0) {
             when (stage) {
                 START_DIALOGUE -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Guess who wants a belly rub, human.").also { stage++ }

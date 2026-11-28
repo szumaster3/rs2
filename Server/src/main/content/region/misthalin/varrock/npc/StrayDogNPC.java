@@ -25,7 +25,7 @@ public class StrayDogNPC extends AbstractNPC {
     /**
      * The stray dog npc ids.
      */
-    private static final int[] ID = {NPCs.STRAY_DOG_5918, NPCs.STRAY_DOG_5917};
+    private static final int[] ID = {NPCs.DOG_STRAY2_5918, NPCs.DOG_STRAY_5917};
 
     /**
      * The player currently being followed by the dog.

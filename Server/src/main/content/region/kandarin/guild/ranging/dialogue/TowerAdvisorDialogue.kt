@@ -44,9 +44,9 @@ class TowerAdvisorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.TOWER_ADVISOR_684,
-        NPCs.TOWER_ADVISOR_685,
-        NPCs.TOWER_ADVISOR_686,
-        NPCs.TOWER_ADVISOR_687,
+        NPCs.RANGING_ADVISOR1_684,
+        NPCs.RANGING_ADVISOR2_685,
+        NPCs.RANGING_ADVISOR3_686,
+        NPCs.RANGING_ADVISOR4_687,
     )
 }

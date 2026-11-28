@@ -143,8 +143,8 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
         player.teleport(playerLocation)
 
         val bonzo    = NPC.create(NPCs.BONZO_225, base.transform(17, 45, 0))
-        val sinister = NPC.create(NPCs.SINISTER_STRANGER_3677, base.transform(15, 50, 0))
-        val bigDave  = NPC.create(NPCs.BIG_DAVE_228, base.transform(10, 39, 0))
+        val sinister = NPC.create(NPCs.SINISTER_STRANGER0_3677, base.transform(15, 50, 0))
+        val bigDave  = NPC.create(NPCs.BIGDAVE_228, base.transform(10, 39, 0))
         val morris   = NPC.create(NPCs.MORRIS_227, base.transform(19, 48, 0))
         val joshua   = NPC.create(NPCs.JOSHUA_229, base.transform(4, 23, 0))
 
@@ -175,13 +175,13 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
 
                 when (counter++) {
                     0 -> {
-                        firstFishingSpot.transform(NPCs.FISHING_SPOT_234)
+                        firstFishingSpot.transform(NPCs.NPC_0_41_53_SINISTERFISHSPOT_234)
                     }
 
                     7 -> {
                         if (getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_STASH_GARLIC, false)) {
                             sendNPCDialogue(
-                                player, NPCs.SINISTER_STRANGER_3677,
+                                player, NPCs.SINISTER_STRANGER0_3677,
                                 "Arrgh! WHAT is THAT GHASTLY smell??? I think I will move over here instead...",
                                 FaceAnim.DISGUSTED
                             )
@@ -192,8 +192,8 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
                         if (getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_STASH_GARLIC, false)) {
                             npc("Hmm. You'd better go and take the area by the pipes", "then.")
                             newSpot = listOf(firstFishingSpot, secondFishingSpot, thirdFishingSpot)
-                                .firstOrNull { it.id == NPCs.FISHING_SPOT_309 || it.id == NPCs.FISHING_SPOT_233 }
-                            newSpot?.transform(NPCs.FISHING_SPOT_233)
+                                .firstOrNull { it.id == NPCs.FISHING_SPOT_309 || it.id == NPCs.NPC_0_41_53_COMPOFISHSPOT_233 }
+                            newSpot?.transform(NPCs.NPC_0_41_53_COMPOFISHSPOT_233)
                             firstFishingSpot.reTransform()
                             registerLogoutListener(player, "fishing-contest:fishing_spot:2") {
                                 newSpot?.reTransform()
@@ -233,7 +233,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
                                 setAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_WON, true)
                             }
                             face(player, bonzo)
-                            animate(player, Animations.HUMAN_WITHDRAW_833, true)
+                            animate(player, Animations.HUMAN_REACHFORLADDERTOP_833, true)
                             sendDialogue(player, "You hand over your catch.")
                         } else {
                             sendDialogue(player, "You haven't caught anything worth handing in.")

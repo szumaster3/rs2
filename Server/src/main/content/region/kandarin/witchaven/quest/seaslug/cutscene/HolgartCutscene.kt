@@ -25,7 +25,7 @@ class HolgartCutscene(
             player.settings.toggleRun()
         }
         loadRegion(10803)// WITCHAVEN
-        addNPC(NPCs.HOLGART_698, 29, 36, Direction.EAST)
+        addNPC(NPCs.HOLGARTSUNKBOAT_698, 29, 36, Direction.EAST)
     }
 
     override fun runStage(stage: Int) {
@@ -43,21 +43,21 @@ class HolgartCutscene(
             }
 
             2 -> {
-                sendChat(getNPC(NPCs.HOLGART_698)!!, "Right me hearty. Let's get this boat fixed.")
-                move(getNPC(NPCs.HOLGART_698)!!, 30, 36)
+                sendChat(getNPC(NPCs.HOLGARTSUNKBOAT_698)!!, "Right me hearty. Let's get this boat fixed.")
+                move(getNPC(NPCs.HOLGARTSUNKBOAT_698)!!, 30, 36)
                 timedUpdate(3)
             }
 
             3 -> {
-                teleport(getNPC(NPCs.HOLGART_698)!!, 30, 36, 1)
-                addNPC(NPCs.HOLGART_4866, 30, 36, Direction.EAST)
+                teleport(getNPC(NPCs.HOLGARTSUNKBOAT_698)!!, 30, 36, 1)
+                addNPC(NPCs.HOLGARTNOLEGS_4866, 30, 36, Direction.EAST)
                 playAudio(player, 3026)
-                animate(getNPC(NPCs.HOLGART_4866)!!, Animations.SEA_SLUG_HOGART_FIX_BOAT_4786)
+                animate(getNPC(NPCs.HOLGARTNOLEGS_4866)!!, Animations.SEASLUG_BOAT_REPAIR_4786)
                 timedUpdate(8)
             }
 
             4 -> {
-                sendChat(getNPC(NPCs.HOLGART_4866)!!, "Huzzah! We've fixed the leaky old tub.")
+                sendChat(getNPC(NPCs.HOLGARTNOLEGS_4866)!!, "Huzzah! We've fixed the leaky old tub.")
                 timedUpdate(3)
             }
 

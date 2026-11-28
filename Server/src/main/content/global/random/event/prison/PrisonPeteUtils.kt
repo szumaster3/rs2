@@ -48,7 +48,7 @@ object PrisonPeteUtils {
                     return@queueScript keepRunning(player)
                 }
                 1 -> {
-                    face(player, findNPC(NPCs.PRISON_PETE_3118)!!.location)
+                    face(player, findNPC(NPCs.PRISONPETE_BALLOON_L_3118)!!.location)
                     openDialogue(player, PrisonPeteDialogue(dialOpt = 2))
                     return@queueScript delayScript(player,3)
                 }

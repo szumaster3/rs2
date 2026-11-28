@@ -90,13 +90,13 @@ class CharterOptionPlugin : InteractionListener, InterfaceListener {
          * Represents the sailor NPC.
          */
         private val SAILORS = intArrayOf(
-            NPCs.TRADER_STAN_4650,
-            NPCs.TRADER_CREWMEMBER_4651,
-            NPCs.TRADER_CREWMEMBER_4652,
-            NPCs.TRADER_CREWMEMBER_4653,
-            NPCs.TRADER_CREWMEMBER_4654,
-            NPCs.TRADER_CREWMEMBER_4655,
-            NPCs.TRADER_CREWMEMBER_4656
+            NPCs.SAILING_TRANSPORT_TRADER_STAN_4650,
+            NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_MAN1_4651,
+            NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_MAN2_4652,
+            NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_MAN3_4653,
+            NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_WOMAN1_4654,
+            NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_WOMAN2_4655,
+            NPCs.SAILING_TRANSPORT_TRADER_STAN_CREW_WOMAN3_4656
         )
 
         /**

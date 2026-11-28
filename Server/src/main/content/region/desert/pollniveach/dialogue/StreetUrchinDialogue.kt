@@ -109,5 +109,5 @@ class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = StreetUrchinDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STREET_URCHIN_1868)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEUD_STREET_URCHIN_1868)
 }

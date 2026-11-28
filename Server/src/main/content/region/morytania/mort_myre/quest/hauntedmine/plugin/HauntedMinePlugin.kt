@@ -14,11 +14,11 @@ import shared.consts.Scenery
 
 class HauntedMinePlugin : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.ZEALOT_1528, IntType.NPC, "pickpocket") { player, _ ->
+        on(NPCs.SARADOMINIST_ZEALOT_1528, IntType.NPC, "pickpocket") { player, _ ->
             /*
             if (isQuestInProgress(player, Quests.HAUNTED_MINE.questName, 1, 2)) {
                 lock(player, 1)
-                animate(player, Animations.HUMAN_PICKPOCKETING_881)
+                animate(player, Animations.HUMAN_PICKPOCKET_881)
                 if (freeSlots(player) == 0) {
                     sendMessage(player, "You need a space in your inventory in order to attempt this.")
                     return@on true

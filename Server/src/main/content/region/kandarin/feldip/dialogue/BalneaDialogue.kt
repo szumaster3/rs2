@@ -26,5 +26,5 @@ class BalneaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BALNEA_7047)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AFR_BALNEA_FINAL_GRAPHICS_7047)
 }

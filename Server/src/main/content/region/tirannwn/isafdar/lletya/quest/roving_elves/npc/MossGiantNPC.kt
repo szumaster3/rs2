@@ -62,5 +62,5 @@ class MossGiantNPC : AbstractNPC {
         return super.newInstance(arg)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MOSS_GIANT_1681)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROVING_MOSSGIANT_1681)
 }

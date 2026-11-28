@@ -37,27 +37,27 @@ class NaturalHistorianDialogue(player: Player? = null) : Dialogue(player) {
             3 -> player(FaceAnim.ASKING, "I was hoping you could tell me about something.").also { stage++ }
             4 -> npcl(FaceAnim.FRIENDLY, "Ask me a question and I'll give you an insight into the exciting world of animals.").also { stage++ }
             5 -> when(npc.id) {
-                NPCs.NATURAL_HISTORIAN_5967 -> showTopics(
+                NPCs.VM_NATURAL_HISTORIAN_SOUTH_5967 -> showTopics(
                     Topic("Tell me about natural history.", 6, true),
                     Topic("Tell me about the terrorbirds.", 10, true),
                     Topic("Tell me about the Kalphite Queen.", 24, true),
                     Topic("That's enough education for one day.", 1000)
                 )
-                NPCs.NATURAL_HISTORIAN_5966 -> showTopics(
+                NPCs.VM_NATURAL_HISTORIAN_NORTH_5966 -> showTopics(
                     Topic("Tell me about lizards.", 39, true),
                     Topic("Tell me about tortoises", 50, true),
                     Topic("Tell me about dragons.", 61, true),
                     Topic("Tell me about wyverns.", 76, true),
                     Topic("That's enough education for one day.", 1000)
                 )
-                NPCs.NATURAL_HISTORIAN_5968 -> showTopics(
+                NPCs.VM_NATURAL_HISTORIAN_EAST_5968 -> showTopics(
                     Topic("Tell me about snails.", 89, true),
                     Topic("Tell me about monkeys.", 102, true),
                     Topic("Tell me about sea slugs.", 113, true),
                     Topic("Tell me about snakes.", 126, true),
                     Topic("That's enough education for one day.", 1000)
                 )
-                NPCs.NATURAL_HISTORIAN_5969 -> showTopics(
+                NPCs.VM_NATURAL_HISTORIAN_WEST_5969 -> showTopics(
                     Topic("Tell me about camels",138, true),
                     Topic("Tell me about leeches.",150, true),
                     Topic("Tell me about moles.",165, true),
@@ -270,9 +270,9 @@ class NaturalHistorianDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = NaturalHistorianDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.NATURAL_HISTORIAN_5966,
-        NPCs.NATURAL_HISTORIAN_5967,
-        NPCs.NATURAL_HISTORIAN_5968,
-        NPCs.NATURAL_HISTORIAN_5969,
+        NPCs.VM_NATURAL_HISTORIAN_NORTH_5966,
+        NPCs.VM_NATURAL_HISTORIAN_SOUTH_5967,
+        NPCs.VM_NATURAL_HISTORIAN_EAST_5968,
+        NPCs.VM_NATURAL_HISTORIAN_WEST_5969,
     )
 }

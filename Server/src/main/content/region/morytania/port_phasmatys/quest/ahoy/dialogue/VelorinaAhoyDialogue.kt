@@ -18,7 +18,7 @@ import shared.consts.Vars
 class VelorinaAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY.questName)
-        npc = NPC(NPCs.VELORINA_1683)
+        npc = NPC(NPCs.AHOY_VELORINA_1683)
         when (questStage) {
             0 -> when (stage) {
                 0 -> npc("Take pity on me, please - eternity stretches out", "before me and I am helpless in its grasp.").also { stage++ }

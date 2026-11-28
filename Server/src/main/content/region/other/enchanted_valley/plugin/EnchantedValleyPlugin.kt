@@ -138,24 +138,24 @@ class EnchantedValleyPlugin : InteractionListener {
          * The river troll npc ids.
          */
         val RIVER_TROLL_IDS = intArrayOf(
-            NPCs.RIVER_TROLL_391, NPCs.RIVER_TROLL_392, NPCs.RIVER_TROLL_393,
-            NPCs.RIVER_TROLL_394, NPCs.RIVER_TROLL_395, NPCs.RIVER_TROLL_396
+            NPCs.FROG_391, NPCs.FROG_392, NPCs.FROG_393,
+            NPCs.FROG_394, NPCs.FROG_395, NPCs.FROG_396
         )
 
         /**
          * The rock golem npc ids.
          */
         val ROCK_GOLEM_IDS = intArrayOf(
-            NPCs.ROCK_GOLEM_413, NPCs.ROCK_GOLEM_414, NPCs.ROCK_GOLEM_415,
-            NPCs.ROCK_GOLEM_416, NPCs.ROCK_GOLEM_417, NPCs.ROCK_GOLEM_418
+            NPCs.LOKAR_SEARUNNER_413, NPCs.CAPTAIN_BENTLEY_414, NPCs.ROCK_GOLEM_415,
+            NPCs.ROCK_GOLEM_416, NPCs.ROCK_GOLEM_417, NPCs.EVILTREE_LEPRECHAUN_418
         )
 
         /**
          * The tree spirit npc ids.
          */
         val TREE_SPIRIT_IDS = intArrayOf(
-            NPCs.TREE_SPIRIT_438, NPCs.TREE_SPIRIT_439, NPCs.TREE_SPIRIT_440,
-            NPCs.TREE_SPIRIT_441, NPCs.TREE_SPIRIT_442, NPCs.TREE_SPIRIT_443
+            NPCs.CHOSEN_TORZEK_APPEARANCE_438, NPCs.TORZEK_439, NPCs.ANDIL_440,
+            NPCs.ANDIL_441, NPCs.DELGON_442, NPCs.DELGON_443
         )
     }
 
@@ -185,7 +185,7 @@ class EnchantedValleyPlugin : InteractionListener {
         private fun initSpawn() {
             when (id) {
                 in RIVER_TROLL_IDS -> {
-                    visualize(this, -1, shared.consts.Graphics.WATER_SPLASH_68)
+                    visualize(this, -1, shared.consts.Graphics.WATERSPLASH_1_68)
                     p.animate(Animation(1441, Animator.Priority.HIGH))
                     forceMove(p, p.location, p.location.transform(0, -1, 0), 0, 60, Direction.NORTH)
                     sendChat(this, if (hasRequirement(p, Quests.SWAN_SONG.questName, false))
@@ -194,12 +194,12 @@ class EnchantedValleyPlugin : InteractionListener {
                 }
 
                 in ROCK_GOLEM_IDS -> {
-                    visualize(this, -1, shared.consts.Graphics.RE_PUFF_86)
+                    visualize(this, -1, shared.consts.Graphics.SMOKEPUFF_2_86)
                     sendChat(this, "Gerroff da rock!")
                 }
 
                 in TREE_SPIRIT_IDS -> {
-                    visualize(this, -1, Graphics(shared.consts.Graphics.BIND_IMPACT_179, 100))
+                    visualize(this, -1, Graphics(shared.consts.Graphics.ENTANGLE_IMPACT_1_179, 100))
                     sendChat(this, "Leave these woods and never return!")
                 }
             }

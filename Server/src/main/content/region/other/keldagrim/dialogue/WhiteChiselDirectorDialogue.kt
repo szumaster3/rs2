@@ -23,5 +23,5 @@ class WhiteChiselDirectorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = WhiteChiselDirectorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WHITE_CHISEL_DIRECTOR_2104)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_DIRECTOR_WHITE_CHISEL_2104)
 }

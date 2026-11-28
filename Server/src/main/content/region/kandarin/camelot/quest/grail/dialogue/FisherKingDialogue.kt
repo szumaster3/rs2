@@ -24,7 +24,7 @@ class FisherKingDialogue : DialogueFile() {
     var STAGE_LOOK_AROUND = 5
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.THE_FISHER_KING_220)
+        npc = NPC(NPCs.FISHER_KING_220)
 
         when (stage) {
             0 -> {

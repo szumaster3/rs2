@@ -13,6 +13,6 @@ class BrotherBordissNPC(id: Int = 0, location: Location? = null) : AbstractNPC(i
     override fun getIds(): IntArray = ID
 
     companion object {
-        private val ID = intArrayOf(NPCs.BROTHER_BORDISS_7724)
+        private val ID = intArrayOf(NPCs.ICEMT_BORDISS_7724)
     }
 }

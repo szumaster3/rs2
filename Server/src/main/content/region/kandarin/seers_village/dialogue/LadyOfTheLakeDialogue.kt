@@ -111,5 +111,5 @@ class LadyOfTheLakeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = LadyOfTheLakeDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.THE_LADY_OF_THE_LAKE_250)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LADYOFTHELAKE_250)
 }

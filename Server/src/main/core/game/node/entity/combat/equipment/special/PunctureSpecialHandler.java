@@ -28,7 +28,7 @@ public final class PunctureSpecialHandler extends MeleeSwingHandler implements P
 
     private static final Animation ANIMATION = new Animation(1062, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_DAGGER_SPECIAL_252, 96);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.SP_ATTACK_PUNCTURE_SPOTANIM_1_252, 96);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

@@ -202,7 +202,7 @@ class CookingRecipeHandler : InteractionListener {
         onUseWith(IntType.ITEM, Items.KNIFE_946, Items.CALQUAT_FRUIT_5980) { player, _, with ->
             val usedItem = with.asItem()
             if (removeItem(player, usedItem, Container.INVENTORY)) {
-                animate(player, Animations.CARVE_CALQUAT_KEG_2290)
+                animate(player, Animations.FARMING_KEG_SCOOP_2290)
                 addItem(player, Items.CALQUAT_KEG_5769, 1, Container.INVENTORY)
                 sendMessage(player, "You carve the calquat fruit into a keg.")
             }
@@ -216,7 +216,7 @@ class CookingRecipeHandler : InteractionListener {
         onUseWith(IntType.ITEM, Items.KNIFE_946, Items.CHOCOLATE_BAR_1973) { player, _, with ->
             val usedItem = with.asItem()
             if (removeItem(player, usedItem, Container.INVENTORY)) {
-                animate(player, Animations.CUTTING_CHOCOLATE_BAR_1989)
+                animate(player, Animations.HUMAN_CHOCOLATE_FLETCHING_1989)
                 addItem(player, Items.CHOCOLATE_DUST_1975, 1, Container.INVENTORY)
                 sendMessage(player, "You cut the chocolate bar into chocolate dust.")
             }

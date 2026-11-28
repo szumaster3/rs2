@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class RatCatchers : Quest("Ratcatchers", 101, 100, 2,Vars.VARBIT_QUEST_RATCATCHERS_1404,0,1,127) {
+class RatCatchers : Quest("Ratcatchers", 101, 100, 2,Vars.VARBIT_1404,0,1,127) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -34,7 +34,7 @@ class RatCatchers : Quest("Ratcatchers", 101, 100, 2,Vars.VARBIT_QUEST_RATCATCHE
         drawReward(player, "4,500 Thieving XP", ln++)
         rewardXP(player, Skills.THIEVING, 4500.0)
         addItemOrDrop(player, Items.RAT_POLE_6773)
-        setVarbit(player, Vars.VARBIT_QUEST_RATCATCHERS_1404, 127, true)
+        setVarbit(player, Vars.VARBIT_1404, 127, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

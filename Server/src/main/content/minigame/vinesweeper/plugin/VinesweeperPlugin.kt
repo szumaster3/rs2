@@ -100,8 +100,8 @@ class VinesweeperPlugin :
                 sendMessage(player, "You need a spade to dig here.")
             } else {
                 player.visualize(
-                    Animation(Animations.HUMAN_VINESWEEPER_DIG_8709),
-                    Graphics(shared.consts.Graphics.VINESWEEPER_DIRT_DIG_1543),
+                    Animation(Animations.RABBIT_PLAYER_DIG_8709),
+                    Graphics(shared.consts.Graphics.GNOME_PLAYER_DIG_SOIL_SPOT_1543),
                 )
                 dig(player, node.location)
             }
@@ -109,8 +109,8 @@ class VinesweeperPlugin :
         }
         onUseWith(IntType.SCENERY, Items.SPADE_952, *HOLES) { player, _, with ->
             player.visualize(
-                Animation(Animations.HUMAN_VINESWEEPER_DIG_8709),
-                Graphics(shared.consts.Graphics.VINESWEEPER_DIRT_DIG_1543),
+                Animation(Animations.RABBIT_PLAYER_DIG_8709),
+                Graphics(shared.consts.Graphics.GNOME_PLAYER_DIG_SOIL_SPOT_1543),
             )
             dig(player, with.location)
             return@onUseWith true
@@ -148,7 +148,7 @@ class VinesweeperPlugin :
             return@onUseWith true
         }
         on(HOLES, IntType.SCENERY, "inspect") { player, node ->
-            player.animate(Animation(Animations.HUMAN_INSPECT_HOLE_8710))
+            player.animate(Animation(Animations.RABBIT_PLAYER_INSPECT_8710))
             player.lock(5)
             GameWorld.Pulser.submit(
                 object : Pulse(5) {
@@ -173,15 +173,15 @@ class VinesweeperPlugin :
             )
             return@on true
         }
-        on(NPCs.MRS_WINKIN_7132, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.RABBIT_MRS_WINKIN_7132, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, MrsWinkinDialogueFile(), npc)
             return@on true
         }
-        on(NPCs.MRS_WINKIN_7132, IntType.NPC, "trade") { player, _ ->
+        on(NPCs.RABBIT_MRS_WINKIN_7132, IntType.NPC, "trade") { player, _ ->
             player.interfaceManager.open(Component(Components.RABBIT_SHOP_686))
             return@on true
         }
-        on(NPCs.MRS_WINKIN_7132, IntType.NPC, "buy flags") { player, npc ->
+        on(NPCs.RABBIT_MRS_WINKIN_7132, IntType.NPC, "buy flags") { player, npc ->
             val dialogue = MrsWinkinDialogueFile()
             dialogue.stage = 20
             openDialogue(player, dialogue, npc)
@@ -197,18 +197,18 @@ class VinesweeperPlugin :
             feedRabbit(player, rabbit)
             return@onUseWith true
         }
-        on(NPCs.FARMER_BLINKIN_7131, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.RABBIT_BLINKIN_7131, IntType.NPC, "talk-to") { player, npc ->
 
             openDialogue(player, BlinkinDialogueFile(), npc)
             return@on true
         }
-        on(NPCs.FARMER_BLINKIN_7131, IntType.NPC, "buy-flags") { player, npc ->
+        on(NPCs.RABBIT_BLINKIN_7131, IntType.NPC, "buy-flags") { player, npc ->
             val dialogue = BlinkinDialogueFile()
             dialogue.stage = 21
             openDialogue(player, dialogue, npc)
             return@on true
         }
-        on(NPCs.FARMER_BLINKIN_7131, IntType.NPC, "buy-roots") { player, npc ->
+        on(NPCs.RABBIT_BLINKIN_7131, IntType.NPC, "buy-roots") { player, npc ->
             val dialogue = BlinkinDialogueFile()
             dialogue.stage = 40
             openDialogue(player, dialogue, npc)
@@ -366,7 +366,7 @@ class VinesweeperPlugin :
                 42 to Reward(Items.YEW_SEED_5315, 29000),
                 43 to Reward(Items.PALM_TREE_SEED_5289, 35000),
                 44 to Reward(Items.SPIRIT_SEED_5317, 55000),
-                45 to Reward(Items.COMPOST_POTION4_6470, 5000),
+                45 to Reward(Items.COMPOST_POTION_4_6470, 5000),
                 46 to Reward(Items.FLAG_12625, 50),
             )
 
@@ -400,9 +400,9 @@ class VinesweeperPlugin :
                 29461 to 690,
             )
 
-        val RABBITS = intArrayOf(NPCs.RABBIT_7125, NPCs.RABBIT_7126, NPCs.RABBIT_7127)
+        val RABBITS = intArrayOf(NPCs.RABBIT_RABBIT_TAN_7125, NPCs.RABBIT_RABBIT_GREY_7126, NPCs.RABBIT_RABBIT_LIGHT_7127)
 
-        val FARMERS = intArrayOf(NPCs.FARMER_7128, NPCs.FARMER_7129, NPCs.FARMER_7130)
+        val FARMERS = intArrayOf(NPCs.RABBIT_NPC_FARMER01_7128, NPCs.RABBIT_NPC_FARMER02_7129, NPCs.RABBIT_NPC_FARMER03_7130)
 
         val MAX_SEEDS = 300
 
@@ -459,8 +459,8 @@ class VinesweeperPlugin :
             if (player.inventory.remove(Item(Items.FLAG_12625, 1))) {
                 player.lock()
                 player.visualize(
-                    Animation(Animations.HUMAN_PLANT_FLAG_8711),
-                    Graphics(shared.consts.Graphics.VINESWEEPER_PLANT_FLAG_1541),
+                    Animation(Animations.RABBIT_PLAYER_PLANT_FLAG_8711),
+                    Graphics(shared.consts.Graphics.GAME_RABBIT_PLANT_FLAG_SPOT_1541),
                 )
                 sendMessage(player, "You add a flag to the patch.")
                 GameWorld.Pulser.submit(
@@ -493,7 +493,7 @@ class VinesweeperPlugin :
                 rabbit.setAttribute("dead", ticks + respawnDelay)
                 player.skills.addExperience(Skills.HUNTER, 30.0)
                 rabbit.sendChat("Squeak!")
-                rabbit.animate(Animation(Animations.RABBIT_EAT_OGLEROOT_8734))
+                rabbit.animate(Animation(Animations.GNOME_RABBIT_VANISH_8734))
                 rabbit.lock(4)
                 GameWorld.Pulser.submit(
                     object : Pulse(3, player) {
@@ -603,14 +603,14 @@ class VinesweeperPlugin :
                     return
                 }
                 when (npc.id) {
-                    NPCs.TECLYN_2861 -> visualize(npc, Animations.ATTACK_437, shared.consts.Graphics.CURSE_CAST_108)
-                    else -> visualize(npc, Animations.BALLER_THROW_201, shared.consts.Graphics.CURSE_CAST_108)
+                    NPCs.TECLYN_2861 -> visualize(npc, Animations.HUMAN_SCYTHE_SLASH_437, shared.consts.Graphics.CURSE_CASTING_108)
+                    else -> visualize(npc, Animations.GNOME_THROW_201, shared.consts.Graphics.CURSE_CASTING_108)
                 }
                 stopWalk(npc)
                 npc.faceTemporary(player, 1)
                 lock(player, 3)
                 playAudio(player, Sounds.CURSE_ALL_125, 0, 1)
-                spawnProjectile(npc, player, shared.consts.Graphics.CURSE_PROJECTILE_109)
+                spawnProjectile(npc, player, shared.consts.Graphics.CURSE_TRAVEL_1_109)
                 sendChat(npc, "Avach nimporto!")
                 GameWorld.Pulser.submit(
                     object : Pulse(1, player) {
@@ -701,7 +701,7 @@ class VinesweeperNPC : AbstractNPC {
         if (SEED_LOCS.contains(dest.loc)) {
             val replacement = shared.consts.Scenery.DEAD_PLANT_29456
             lock(4)
-            animate(Animation(Animations.RABBIT_EAT_SEED_8718))
+            animate(Animation(Animations.GNOME_RABBIT_EATING_SEED_8718))
             SceneryBuilder.replace(scenery, scenery.transform(replacement))
             scheduleNPCs(dest.player, dest.loc, alive = false, rabbit = false)
         } else {
@@ -715,7 +715,7 @@ class VinesweeperNPC : AbstractNPC {
     ) {
         lock()
         var i = 0
-        animate(Animation(Animations.GNOME_FARMER_DIG_SEED_8730))
+        animate(Animation(Animations.HUMAN_URN_TELEPORT_WOODCUTTING_04_8730))
         GameWorld.Pulser.submit(
             object : Pulse(3) {
                 override fun pulse(): Boolean {
@@ -725,13 +725,13 @@ class VinesweeperNPC : AbstractNPC {
                         }
 
                         1 -> {
-                            animate(Animation(Animations.GNOME_FARMER_SPADE_SMACK_8732))
+                            animate(Animation(Animations.RABBIT_GNOME_ANGRY_8732))
                             sendChat(FARMER_FLAG_LINES.DEAD_PLANT.line)
                             SceneryBuilder.replace(scenery, scenery.transform(HOLES[0]))
                         }
 
                         2 -> {
-                            animate(Animation(Animations.GNOME_FARMER_CLEAR_HOLES_8724))
+                            animate(Animation(Animations.RABBIT_GNOME_SOW_SEEDS_8724))
                             farmerClear(dest)
                         }
 
@@ -753,7 +753,7 @@ class VinesweeperNPC : AbstractNPC {
         val npc = this
         lock()
         var i = 0
-        animate(Animation(Animations.GNOME_FARMER_DIG_FLAG_8725))
+        animate(Animation(Animations.RABBIT_GNOME_DIG_8725))
         GameWorld.Pulser.submit(
             object : Pulse(3) {
                 override fun pulse(): Boolean {
@@ -766,7 +766,7 @@ class VinesweeperNPC : AbstractNPC {
                             SceneryBuilder.replace(scenery, scenery.transform(HOLES[0]))
                             if (SEED_LOCS.contains(dest.loc)) {
                                 sendChat(FARMER_FLAG_LINES.FIND_SEED.line)
-                                animate(Animation(Animations.GNOME_FARMER_HOORAY_8731))
+                                animate(Animation(Animations.RABBIT_GNOME_CELEBRATE_8731))
                                 sendPoints(npc, dest)
                                 i++
                             } else {
@@ -780,7 +780,7 @@ class VinesweeperNPC : AbstractNPC {
                         }
 
                         3 -> {
-                            animate(Animation(Animations.GNOME_FARMER_CLEAR_HOLES_8724))
+                            animate(Animation(Animations.RABBIT_GNOME_SOW_SEEDS_8724))
                             farmerClear(dest)
                         }
 

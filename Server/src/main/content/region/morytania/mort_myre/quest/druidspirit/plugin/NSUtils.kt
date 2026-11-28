@@ -51,7 +51,7 @@ object NSUtils {
                 when (stage) {
                     0 -> {
                         playAudio(player, 1495)
-                        visualize(attacker, -1, Graphics(shared.consts.Graphics.FIRST_CONTACT_GOES_WITH_ABOVE_269, 125))
+                        visualize(attacker, -1, Graphics(shared.consts.Graphics.STRIKE_IMPACT_6_269, 125))
                         return@queueScript delayScript(player, 1)
                     }
                     1 -> {
@@ -124,7 +124,7 @@ object NSUtils {
         val aroundPlayer = player.location.getSurroundingTiles()
         for (location in aroundPlayer) {
             player.packetDispatch.sendGlobalPositionGraphic(
-                shared.consts.Graphics.SMALLS_STARS_SILVER_SICKLEB_263,
+                shared.consts.Graphics.DRUIDICSPIRIT_BLOOM_SPOTANIM_263,
                 location,
             )
         }

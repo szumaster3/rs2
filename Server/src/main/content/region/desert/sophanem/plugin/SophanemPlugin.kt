@@ -17,13 +17,13 @@ class SophanemPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(LADDER_UP, IntType.SCENERY, "climb-up") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location(3315, 2796, 0))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location(3315, 2796, 0))
             return@on true
         }
 
         on(LADDER_DOWN, IntType.SCENERY, "climb-down") { player, _ ->
             if (!hasRequirement(player, Quests.CONTACT.questName)) return@on false
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_BURYING_BONES_827), Location(2799, 5160, 0))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_PICKUPFLOOR_827), Location(2799, 5160, 0))
             return@on true
         }
 
@@ -40,7 +40,7 @@ class SophanemPlugin : InteractionListener {
          * Handles using Acne potion on Embalmer.
          */
 
-        onUseWith(IntType.NPC, Items.POTION_195, NPCs.EMBALMER_1980) { player, _, with ->
+        onUseWith(IntType.NPC, Items.POTION_195, NPCs.ICS_LITTLE_EMBALMER_1980) { player, _, with ->
             val npc  = with.asNpc()
             openDialogue(player, EmbalmerDialogue(), npc)
             return@onUseWith true

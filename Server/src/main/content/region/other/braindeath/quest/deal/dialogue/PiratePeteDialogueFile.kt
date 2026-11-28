@@ -16,7 +16,7 @@ import shared.consts.Sounds
 class PiratePeteDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.PIRATE_PETE_2825)
+        npc = NPC(NPCs.DEAL_PETE_2825)
         when (stage) {
             0 -> player(FaceAnim.FRIENDLY, "Hello there!").also { stage++ }
             1 -> npc(FaceAnim.NEUTRAL, "Mornin'.").also { stage++ }
@@ -72,10 +72,10 @@ class PiratePeteDialogueFile : DialogueFile() {
             35 -> {
                 end()
                 lock(player!!, 3)
-                findNPC(NPCs.PIRATE_PETE_2825)?.let { animate(it, Animations.HUMAN_THROW_DART_806) }
+                findNPC(NPCs.DEAL_PETE_2825)?.let { animate(it, Animations.FREMSAGA_SKALDRUN_READY_806) }
                 sendChat(player!!, "Ow!")
                 queueScript(player!!,3,QueueStrength.SOFT){
-                    sendGraphics(Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player!!.location)
+                    sendGraphics(Graphics(shared.consts.Graphics.STUNNED_1_80, 96), player!!.location)
                     playAudio(player!!, Sounds.STUNNED_2727)
                     TeleportCutscene(player!!).start()
                     return@queueScript stopExecuting(player!!)

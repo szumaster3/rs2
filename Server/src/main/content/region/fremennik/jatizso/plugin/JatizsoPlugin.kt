@@ -21,7 +21,7 @@ class JatizsoPlugin : InteractionListener {
         )
         val GATES_CLOSED = intArrayOf(Scenery.GATE_21403, Scenery.GATE_21405)
         val TOWER_GUARDS = intArrayOf(NPCs.GUARD_5490, NPCs.GUARD_5489)
-        val GUARDS       = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
+        val GUARDS       = intArrayOf(NPCs.FRIS_R_GUARDIZSO_5491, NPCs.FRIS_R_GUARDIZSO2_5492)
         val KING_CHEST   = intArrayOf(Scenery.CHEST_21299, Scenery.CHEST_21300)
     }
 
@@ -112,16 +112,16 @@ class JatizsoPlugin : InteractionListener {
     inner class JatizsoGuardDialogue : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
             when(stage) {
-                0  -> sendNPCDialogue(player!!, NPCs.GUARD_5491, "Are you all right? Leftie?").also { stage++ }
-                1  -> sendNPCDialogue(player!!, NPCs.GUARD_5492, "No, I'm on the left.").also { stage++ }
-                2  -> sendNPCDialogue(player!!, NPCs.GUARD_5491, "Only from your perspective. Someone entering the gate should call you Rightie, right Leftie?").also { stage++ }
-                3  -> sendNPCDialogue(player!!, NPCs.GUARD_5492, "Right, Rightie. So you'd be Leftie not Rightie, right?").also { stage++ }
-                4  -> sendNPCDialogue(player!!, NPCs.GUARD_5491, "That's right Leftie, that's right.").also { stage++ }
-                5  -> sendNPCDialogue(player!!, NPCs.GUARD_5492, "Rightie-oh Rightie, or should I call you Leftie?").also { stage++ }
-                6  -> sendNPCDialogue(player!!, NPCs.GUARD_5491, "No, Rightie's fine Leftie.").also { stage++ }
+                0  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO_5491, "Are you all right? Leftie?").also { stage++ }
+                1  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO2_5492, "No, I'm on the left.").also { stage++ }
+                2  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO_5491, "Only from your perspective. Someone entering the gate should call you Rightie, right Leftie?").also { stage++ }
+                3  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO2_5492, "Right, Rightie. So you'd be Leftie not Rightie, right?").also { stage++ }
+                4  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO_5491, "That's right Leftie, that's right.").also { stage++ }
+                5  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO2_5492, "Rightie-oh Rightie, or should I call you Leftie?").also { stage++ }
+                6  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO_5491, "No, Rightie's fine Leftie.").also { stage++ }
                 7  -> playerl(FaceAnim.ANGRY, "Aaagh! Enough! If either of you mention left or right in my presence I'll have to scream! Can I come through the gate?").also { stage++ }
-                8  -> sendNPCDialogue(player!!, NPCs.GUARD_5492, "Don't let us stop you.").also { stage++ }
-                9  -> sendNPCDialogue(player!!, NPCs.GUARD_5491, "Yes, head right on in, sir.").also { stage++ }
+                8  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO2_5492, "Don't let us stop you.").also { stage++ }
+                9  -> sendNPCDialogue(player!!, NPCs.FRIS_R_GUARDIZSO_5491, "Yes, head right on in, sir.").also { stage++ }
                 10 -> playerl(FaceAnim.ANGRY, "You said it! You said it! ARRRRRRRRGH!").also { stage++ }
                 11 -> end()
             }

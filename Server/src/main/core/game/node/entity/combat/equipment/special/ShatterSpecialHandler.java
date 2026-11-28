@@ -26,7 +26,7 @@ public final class ShatterSpecialHandler extends MeleeSwingHandler implements Pl
 
     private static final int SPECIAL_ENERGY = 25;
     private static final Animation ANIMATION = new Animation(1060, Priority.HIGH);
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_MACE_SPECIAL_251, 96);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.SP_ATTACK_SHATTER_SPOTANIM_251, 96);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

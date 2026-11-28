@@ -107,5 +107,5 @@ class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_SIAD_831)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPT_SIAD_831)
 }

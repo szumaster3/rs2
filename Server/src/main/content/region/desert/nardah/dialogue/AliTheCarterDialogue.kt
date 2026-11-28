@@ -44,7 +44,7 @@ class AliTheCarterDialogue(player: Player? = null) : Dialogue(player) {
                     player("Err, I seem to not have enough gold.").also { stage++ }
                 } else {
                     end()
-                    addItemOrDrop(player, Items.WATERSKIN4_1823, 1)
+                    addItemOrDrop(player, Items.WATERSKIN_4_1823, 1)
                     stage = END_DIALOGUE
                 }
             }

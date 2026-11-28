@@ -82,5 +82,5 @@ class ObsidianGolemDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OBSIDIAN_GOLEM_7345, NPCs.OBSIDIAN_GOLEM_7346)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_OBSIDIAN_GOLEM_7345, NPCs.LORE_OBSIDIAN_GOLEM_COMBAT_7346)
 }

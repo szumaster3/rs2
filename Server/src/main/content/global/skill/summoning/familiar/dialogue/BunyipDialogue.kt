@@ -78,7 +78,7 @@ class BunyipDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BUNYIP_6813, NPCs.BUNYIP_6814)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_BUNYIP_6813, NPCs.LORE_BUNYIP_COMBAT_6814)
 
     companion object {
         private val fishes: IntArray =

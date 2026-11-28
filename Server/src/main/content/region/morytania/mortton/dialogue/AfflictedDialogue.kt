@@ -47,5 +47,5 @@ class AfflictedDialogue(player: Player? = null) : Dialogue(player) {
     ): Boolean = true
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.AFFLICTED_1257, NPCs.AFFLICTED_1258, NPCs.AFFLICTED_1261, NPCs.AFFLICTED_1262)
+        intArrayOf(NPCs.MORT_AFFLICTED_MAN_1257, NPCs.MORT_AFFLICTED_WOMAN_1258, NPCs.MORT_AFFLICTED_MAN2_1261, NPCs.MORT_AFFLICTED_WOMAN2_1262)
 }

@@ -76,11 +76,11 @@ class SmeltingPulse : SkillPulse<Item?> {
             if (superHeat) {
                 visualize(
                     player,
-                    Animations.HUMAN_CAST_SUPERHEAT_SPELL_725,
-                    Graphics(shared.consts.Graphics.SUPERHEAT_ITEM_148, 96),
+                    Animations.HUMAN_CASTSUPERHEATITEM_725,
+                    Graphics(shared.consts.Graphics.SUPERHEAT_REWORK_SPOTANIM_1_148, 96),
                 )
             } else {
-                animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
                 playAudio(player, Sounds.FURNACE_2725)
             }
         }

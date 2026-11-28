@@ -32,7 +32,7 @@ class ThrantaxDialogue : DialogueFile() {
     private var incantation = ""
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.THRANTAX_THE_MIGHTY_238)
+        npc = NPC(NPCs.THRANTAX_238)
 
         when (stage) {
             0 -> {
@@ -141,10 +141,10 @@ class ThrantaxDialogue : DialogueFile() {
     }
 
     private fun spawn(player: Player) {
-        var thrantax = ThrantaxTheMightyNPC(NPCs.THRANTAX_THE_MIGHTY_238, Location(2780, 3515, 0))
+        var thrantax = ThrantaxTheMightyNPC(NPCs.THRANTAX_238, Location(2780, 3515, 0))
         thrantax.player = player
         thrantax.locks.lockMovement(10000)
-        thrantax.graphics(Graphics.create(shared.consts.Graphics.RE_PUFF_86))
+        thrantax.graphics(Graphics.create(shared.consts.Graphics.SMOKEPUFF_2_86))
         thrantax.init()
         thrantax.isRespawn = false
         setAttribute(player, GameAttributes.TEMP_ATTR_THRANTAX, thrantax)

@@ -276,7 +276,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         val SLOT_CLUE_EASY = Items.TOOLKIT_1
         val SLOT_CLUE_MEDIUM = Items.ROTTEN_POTATO_5733
         val SLOT_CLUE_HARD = Items.GRANITE_LOBSTER_POUCH_12070
-        val SLOT_CELEDT = Items.NULL_799
+        val SLOT_CELEDT = Items.OBJ_799
         val SLOT_USDT = Items.SACRED_CLAY_POUCH_CLASS_1_14422
         val SLOT_HDT = Items.SACRED_CLAY_POUCH_CLASS_2_14424
         val SLOT_GDT = Items.SACRED_CLAY_POUCH_CLASS_3_14426

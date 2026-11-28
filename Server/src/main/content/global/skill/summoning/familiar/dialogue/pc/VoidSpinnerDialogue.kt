@@ -91,5 +91,5 @@ class VoidSpinnerDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VOID_SPINNER_7333, NPCs.VOID_SPINNER_7334)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_SPINNER_7333, NPCs.LORE_SPINNER_COMBAT_7334)
 }

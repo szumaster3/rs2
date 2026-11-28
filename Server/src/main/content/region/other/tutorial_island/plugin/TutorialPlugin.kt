@@ -144,7 +144,7 @@ class TutorialPlugin : InteractionListener {
 
         on(QUEST_LADDER_DOWN, IntType.SCENERY, "climb-down") { player, node ->
             if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) < 29) {
-                sendNPCDialogue(player, NPCs.QUEST_GUIDE_949, "I don't think you're ready to go down there yet.", FaceAnim.HALF_GUILTY)
+                sendNPCDialogue(player, NPCs.NEWBIE_QUEST_INSTRUCTOR_949, "I don't think you're ready to go down there yet.", FaceAnim.HALF_GUILTY)
                 return@on false
             }
 
@@ -163,7 +163,7 @@ class TutorialPlugin : InteractionListener {
         on(QUEST_LADDER_UP, IntType.SCENERY, "climb-up") { player, node ->
             ClimbActionHandler.climbLadder(player, node.asScenery(), "climb-up")
             queueScript(player, delay = 2, strength = QueueStrength.WEAK) { _ ->
-                val questTutor = Repository.findNPC(NPCs.QUEST_GUIDE_949) ?: return@queueScript stopExecuting(player)
+                val questTutor = Repository.findNPC(NPCs.NEWBIE_QUEST_INSTRUCTOR_949) ?: return@queueScript stopExecuting(player)
                 sendChat(questTutor, "What are you doing, ${player.username}? Get back down the ladder.")
                 return@queueScript stopExecuting(player)
             }
@@ -197,11 +197,11 @@ class TutorialPlugin : InteractionListener {
         on(GIANT_RAT_GATE, IntType.SCENERY, "open") { player, node ->
             val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
             if(stage == 54) {
-                sendNPCDialogueLines(player, NPCs.COMBAT_INSTRUCTOR_944, FaceAnim.ANNOYED, false, "No, don't enter the pit. Range the rats from outside the cage.")
+                sendNPCDialogueLines(player, NPCs.NEWBIE_COMBAT_INSTRUCTOR_944, FaceAnim.ANNOYED, false, "No, don't enter the pit. Range the rats from outside the cage.")
                 return@on false
             }
             if (stage !in 50..53) {
-                sendNPCDialogueLines(player, NPCs.COMBAT_INSTRUCTOR_944, FaceAnim.ANNOYED, false, "Oi, get away from there!", "Don't enter my rat pen unless I say so!")
+                sendNPCDialogueLines(player, NPCs.NEWBIE_COMBAT_INSTRUCTOR_944, FaceAnim.ANNOYED, false, "Oi, get away from there!", "Don't enter my rat pen unless I say so!")
                 return@on false
             }
             if (stage == 50) {
@@ -227,7 +227,7 @@ class TutorialPlugin : InteractionListener {
 
             setAttribute(player, GameAttributes.TUTORIAL_STAGE, 56)
             TutorialStage.load(player, 56)
-            animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
+            animate(player, Animations.HUMAN_REACHFORLADDER_828)
             teleport(player, Location.create(3111, 3127, 0), TeleportManager.TeleportType.INSTANT, 2)
             return@on true
         }
@@ -245,7 +245,7 @@ class TutorialPlugin : InteractionListener {
          * Handles bank guide dialogue.
          */
 
-        on(NPCs.BANKER_953, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.NOOBBANKER_953, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, BankerGuideDialogue())
             return@on true
         }
@@ -357,7 +357,7 @@ class TutorialPlugin : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, intArrayOf(NPCs.BANKER_953), "talk-to") { _, npc ->
+        setDest(IntType.NPC, intArrayOf(NPCs.NOOBBANKER_953), "talk-to") { _, npc ->
             return@setDest npc.location.transform(npc.direction, 2)
         }
     }
@@ -373,7 +373,7 @@ class TutorialPlugin : InteractionListener {
         private const val BANK_GUIDE_DOOR = Scenery.DOOR_3024
         private const val FINANCE_GUIDE_DOOR = Scenery.DOOR_3025
         private const val CHURCH_DOOR_EXIT = Scenery.DOOR_3026
-        private const val BRONZE_AXE = Items.BRONZE_AXE_1351
+        private const val BRONZE_AXE = Items.BRONZE_HATCHET_1351
         private const val BRONZE_PICKAXE = Items.BRONZE_PICKAXE_1265
         private const val BRONZE_DAGGER = Items.BRONZE_DAGGER_1205
         private val WOODEN_GATE = intArrayOf(Scenery.GATE_3015, Scenery.GATE_3016)

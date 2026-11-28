@@ -21,7 +21,7 @@ class RoguesJewelleryPlugin : InteractionListener {
          * Handles jewellery selling interaction with Rogue NPC.
          */
 
-        onUseWith(IntType.NPC, JEWELLERY, NPCs.ROGUE_8122) { player, used, _ ->
+        onUseWith(IntType.NPC, JEWELLERY, NPCs.SUM2_ROGUE_PRISONER_8122) { player, used, _ ->
             if (!hasRequirement(player, Quests.SUMMERS_END.questName)) return@onUseWith false
 
             val amount = amountInInventory(player, used.id)

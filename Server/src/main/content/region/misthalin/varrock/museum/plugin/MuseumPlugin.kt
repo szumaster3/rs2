@@ -113,7 +113,7 @@ class MuseumPlugin : InteractionListener{
             if (player.viewport.region!!.id == 6483) return@on true
             if (!isQuestComplete(player, Quests.THE_DIG_SITE.questName)) {
                 sendMessage(player, "You can't go through there, it's for Dig Site workmen only.")
-                sendChat(findLocalNPC(player, NPCs.MUSEUM_GUARD_5942)!!, "Sorry - workman's gate only.")
+                sendChat(findLocalNPC(player, NPCs.VM_MUSEUM_GUARD2_5942)!!, "Sorry - workman's gate only.")
             } else {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             }
@@ -157,7 +157,7 @@ class MuseumPlugin : InteractionListener{
         val nLoc = node.location
         player.faceLocation(nLoc)
         playGlobalAudio(player.location, Sounds.VM_PUSH_BUTTON_3664)
-        player.animate(Animation(Animations.PUSH_BUTTON_VARROCK_MUSEUM_6462))
+        player.animate(Animation(Animations.VM_PLAYER_BUTTON_PUSH_6462))
 
         val camera = PlayerCamera(player)
         camera.setPosition(pLoc.x, pLoc.y, pLoc.z)
@@ -209,14 +209,14 @@ class MuseumPlugin : InteractionListener{
         private const val MUSEUM_GATE = Scenery.GATE_24536
         private const val TOOL_RACK   = Scenery.TOOLS_24535
         private val DISPLAY_ANIMATION = intArrayOf(6436, 6448, 6446, 6444, 6440, 6428, 6450, 6438, 6430, 6452, 6434, 6432, 6442, 6240)
-        private val NPC_IDS           = intArrayOf(NPCs.LIZARD_DISPLAY_5975, NPCs.BATTLE_TORTOISE_DISPLAY_5981, NPCs.DRAGON_DISPLAY_5979, NPCs.WYVERN_DISPLAY_5980, NPCs.CAMEL_DISPLAY_5977, NPCs.LEECH_DISPLAY_5971, NPCs.MOLE_DISPLAY_5982, NPCs.PENGUIN_DISPLAY_5976, NPCs.SNAIL_DISPLAY_5973, -1, NPCs.MONKEY_DISPLAY_5974, NPCs.SEA_SLUGS_DISPLAY_5972, NPCs.TERRORBIRD_DISPLAY_5978, -2)
+        private val NPC_IDS           = intArrayOf(NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_LIZARD_5975, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_BATTLE_TORTOISE_5981, NPCs.VM_NATURAL_HISTORY_DISPLAY_DRAGON_5979, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_WYVERN_5980, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_CAMEL_5977, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_LEECH_5971, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_MOLE_5982, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_PENGUIN_5976, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_SNAIL_5973, -1, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_MONKEY_5974, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_SEASLUGS_5972, NPCs.VM_NATURAL_HISTORY_DISPLAY_CASE_TERROR_BIRD_5978, -2)
 
         fun openMuseumGate(player: Player) {
             val gate = getScenery(Location(3261, 3446, 0)) ?: return
             val fromNorth = player.location.y > 3446
             val direction = if (fromNorth) Direction.SOUTH else Direction.NORTH
             val target = player.location.transform(direction, 1)
-            val guard = findNPC(NPCs.MUSEUM_GUARD_5941)
+            val guard = findNPC(NPCs.VM_MUSEUM_GUARD_5941)
 
             replaceScenery(gate, gate.id, 3, Direction.NORTH_WEST, gate.location)
 

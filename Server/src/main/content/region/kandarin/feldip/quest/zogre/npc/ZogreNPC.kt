@@ -50,17 +50,17 @@ class ZogreNPC : NPCBehavior(*IDS) {
         @JvmField
         val IDS =
             intArrayOf(
-                NPCs.ZOGRE_2044,
-                NPCs.ZOGRE_2045,
-                NPCs.ZOGRE_2046,
-                NPCs.ZOGRE_2047,
-                NPCs.ZOGRE_2048,
-                NPCs.ZOGRE_2049,
-                NPCs.ZOGRE_2051,
-                NPCs.ZOGRE_2052,
-                NPCs.ZOGRE_2053,
-                NPCs.ZOGRE_2054,
-                NPCs.ZOGRE_2055,
+                NPCs.ZOGRE_1_2044,
+                NPCs.ZOGRE_2_2045,
+                NPCs.ZOGRE_3_2046,
+                NPCs.ZOGRE_4_2047,
+                NPCs.ZOGRE_5_2048,
+                NPCs.ZOGRE_6_2049,
+                NPCs.ZOGRE_DANCE_1_2051,
+                NPCs.ZOGRE_DANCE_2_2052,
+                NPCs.ZOGRE_DANCE_3_2053,
+                NPCs.ZOGRE_DANCE_4_2054,
+                NPCs.ZOGRE_DRUMMER1_2055,
 
                 NPCs.SKOGRE_2050,
                 NPCs.SKOGRE_2056,

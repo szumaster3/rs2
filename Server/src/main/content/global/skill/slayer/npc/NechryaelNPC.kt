@@ -34,7 +34,7 @@ class NechryaelNPC : NPCBehavior(*Tasks.NECHRYAELS.npcs) {
         self: NPC,
         player: Player,
     ) {
-        val npc = NPC.create(NPCs.DEATH_SPAWN_1614, self.location.transform(self.direction, 1))
+        val npc = NPC.create(NPCs.SLAYER_NECHRYAEL_SPAWN_1614, self.location.transform(self.direction, 1))
         setAttribute(npc, "parent", self)
         setAttribute(npc, "target", player)
         npc.isRespawn = false
@@ -88,7 +88,7 @@ class NechryaelNPC : NPCBehavior(*Tasks.NECHRYAELS.npcs) {
     }
 }
 
-class DeathSpawnBehavior : NPCBehavior(NPCs.DEATH_SPAWN_1614) {
+class DeathSpawnBehavior : NPCBehavior(NPCs.SLAYER_NECHRYAEL_SPAWN_1614) {
     override fun onCreation(self: NPC) {
         setAttribute(self, "despawn-time", GameWorld.ticks + 100)
         val target = getAttribute<Player?>(self, "target", null) ?: return

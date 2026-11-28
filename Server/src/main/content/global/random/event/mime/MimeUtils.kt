@@ -76,7 +76,7 @@ object MimeUtils {
     }
 
     fun getEmote(player: Player) {
-        val npc = findNPC(NPCs.MIME_1056) ?: return
+        val npc = findNPC(NPCs.MACRO_MIME_1056) ?: return
         val emoteId = getAttribute(player, GameAttributes.RE_MIME_EMOTE, -1)
 
         sendUnclosablePlainDialogue(player, true, "", "Watch the Mime.", "See what emote he performs.")

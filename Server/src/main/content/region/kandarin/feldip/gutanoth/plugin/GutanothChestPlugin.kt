@@ -41,7 +41,7 @@ private class ChestPulse(val player: Player, val isLooted: Boolean, val chest: S
         when (ticks++) {
             0 -> {
                 lock(player, 3)
-                animate(player, Animations.HUMAN_OPEN_CHEST_536)
+                animate(player, Animations.HUMAN_OPENCHEST_536)
                 SceneryBuilder.replace(chest, Scenery(2828, chest.location, chest.rotation), 5)
             }
             3 -> {
@@ -96,10 +96,10 @@ private enum class Rewards(val id: Int, val type: RewardType, val message: Strin
     BONES(Items.BONES_2530, RewardType.ITEM, "Oh! Some bones. Delightful."),
     EMERALD(Items.EMERALD_1605, RewardType.ITEM, "Ooh! A lovely emerald!"),
     ROTTEN_APPLE(Items.ROTTEN_APPLE_1984, RewardType.ITEM, "Oh, joy, spoiled fruit! My favorite!"),
-    CHAOS_DWARF(NPCs.CHAOS_DWARF_119, RewardType.NPC, "You've gotta be kidding me, a dwarf?!"),
+    CHAOS_DWARF(NPCs.DWARF_CHAOS_119, RewardType.NPC, "You've gotta be kidding me, a dwarf?!"),
     RAT(NPCs.RAT_47, RewardType.NPC, "Eek!"),
-    SCORPION(NPCs.SCORPION_1477, RewardType.NPC, "Zoinks!"),
-    SPIDER(NPCs.SPIDER_1004, RewardType.NPC, "Awh, a cute lil spidey!")
+    SCORPION(NPCs.MM_JUNGLE_SCORPION_1477, RewardType.NPC, "Zoinks!"),
+    SPIDER(NPCs.UPASS_LITTLE_SPIDER_1004, RewardType.NPC, "Awh, a cute lil spidey!")
 }
 
 /**

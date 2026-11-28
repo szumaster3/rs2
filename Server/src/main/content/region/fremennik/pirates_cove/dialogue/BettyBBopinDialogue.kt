@@ -23,5 +23,5 @@ class BettyBBopinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BettyBBopinDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BETTY_BBOPPIN_4553)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BETTY_B_BOPPIN_4553)
 }

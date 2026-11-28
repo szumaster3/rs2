@@ -20,7 +20,7 @@ import shared.consts.NPCs
 class FishermanDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.FISHERMAN_219)
+        npc = NPC(NPCs.GRAIL_FISHERMAN_219)
 
         when (stage) {
             0 -> npcl(FaceAnim.NEUTRAL, "Hi! I don't get many visitors here!").also { stage++ }

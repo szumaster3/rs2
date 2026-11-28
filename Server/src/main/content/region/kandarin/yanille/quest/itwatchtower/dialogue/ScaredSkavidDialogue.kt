@@ -67,7 +67,7 @@ class ScaredSkavidDialogue(player: Player? = null) : Dialogue(player) {
             13 -> npc(FaceAnim.OLD_NEUTRAL, "You will have to learn skavid, otherwise they will not", "talks to you. Here, I'll tell you what you need to", "know...").also { stage++ }
             14 -> {
                 lock(player, 5)
-                val ogreChieftain = NPC.create(NPCs.OGRE_CHIEFTAIN_5174, Location.create(2500, 9434, 0), Direction.SOUTH_WEST)
+                val ogreChieftain = NPC.create(NPCs.OGRE_CHIEFTAN_CAVES_5174, Location.create(2500, 9434, 0), Direction.SOUTH_WEST)
                 submitIndividualPulse(
                     player,
                     object : Pulse() {

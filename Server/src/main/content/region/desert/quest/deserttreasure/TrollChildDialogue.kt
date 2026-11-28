@@ -26,9 +26,9 @@ class TrollChildDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        // NPCs.BANDIT_1932 is wrong, should be NPCs.TROLL_CHILD_1932
-        // NPCs.TROLL_CHILD_1933, NPCs.TROLL_CHILD_1934 are varbit controlled 1932 instances.
-        return intArrayOf(NPCs.BANDIT_1932)
+        // NPCs.TROLL_CHILD_1932 is the varbit-controlled base NPC.
+        // NPCs.FOURDIAMONDS_TROLL_CHILD_OKAY_1933, NPCs.FOURDIAMONDS_TROLL_CHILD_CRYING_1934 are varbit controlled 1932 instances.
+        return intArrayOf(NPCs.TROLL_CHILD_1932)
     }
 }
 

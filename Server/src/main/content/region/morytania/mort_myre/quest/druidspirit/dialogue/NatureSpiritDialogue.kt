@@ -148,7 +148,7 @@ class NatureSpiritDialogue(player: Player? = null) : Dialogue(player) {
 
                 4 -> {
                     if (removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)) {
-                        addItem(player, Items.SILVER_SICKLEB_2963)
+                        addItem(player, Items.SILVER_SICKLE_B_2963)
                         unlock(player)
                         setQuestStage(player, Quests.NATURE_SPIRIT.questName, 70)
                         openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
@@ -157,7 +157,7 @@ class NatureSpiritDialogue(player: Player? = null) : Dialogue(player) {
 
                 6 -> {
                     player.dialogueInterpreter.sendItemMessage(
-                        Items.SILVER_SICKLEB_2963,
+                        Items.SILVER_SICKLE_B_2963,
                         "Your sickle has been blessed!",
                         "You can bless a new sickle by dipping it into the",
                         "grotto waters.",

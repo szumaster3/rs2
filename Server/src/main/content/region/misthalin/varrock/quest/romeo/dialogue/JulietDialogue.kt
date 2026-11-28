@@ -278,6 +278,6 @@ class JulietDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
         private val POTION = Item(Items.CADAVA_POTION_756)
-        private val DRINK_ANIM = Animation(Animations.DRINK_BEER_1327)
+        private val DRINK_ANIM = Animation(Animations.VIKING_TANKARD_DRINK_1327)
     }
 }

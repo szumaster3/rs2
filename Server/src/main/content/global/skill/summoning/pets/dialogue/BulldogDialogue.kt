@@ -61,12 +61,12 @@ class BulldogDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.BULLDOG_PUPPY_6969,
-        NPCs.BULLDOG_PUPPY_7259,
-        NPCs.BULLDOG_PUPPY_7260,
-        NPCs.BULLDOG_6968,
-        NPCs.BULLDOG_7257,
-        NPCs.BULLDOG_7258
+        NPCs.LORE_DOG_BULLDOG_PUPPY_1_6969,
+        NPCs.LORE_DOG_BULLDOG_PUPPY_2_7259,
+        NPCs.LORE_DOG_BULLDOG_PUPPY_3_7260,
+        NPCs.LORE_DOG_BULLDOG_1_6968,
+        NPCs.LORE_DOG_BULLDOG_2_7257,
+        NPCs.LORE_DOG_BULLDOG_3_7258
     )
 
 

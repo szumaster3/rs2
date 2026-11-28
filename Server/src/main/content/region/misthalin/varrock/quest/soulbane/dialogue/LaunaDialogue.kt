@@ -47,5 +47,5 @@ class LaunaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LAUNA_3640, NPCs.LAUNA_3639, 3638)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SOULBANE_LAUNA_YOUNG_3640, NPCs.SOULBANE_LAUNA_3639, 3638)
 }

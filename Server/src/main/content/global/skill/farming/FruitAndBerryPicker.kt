@@ -45,7 +45,7 @@ class FruitAndBerryPicker : OptionHandler() {
         val plantable = patch.plantable
         plantable ?: return false
 
-        val animation = Animation(Animations.PICK_FROM_FRUIT_TREE_2281)
+        val animation = Animation(Animations.PICKING_MID_2281)
 
         if (patch.getFruitOrBerryCount() <= 0) {
             sendMessage(player, "This shouldn't be happening. Please report this.")

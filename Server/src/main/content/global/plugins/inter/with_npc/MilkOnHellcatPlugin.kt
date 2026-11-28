@@ -15,14 +15,14 @@ import shared.consts.NPCs
 class MilkOnHellcatPlugin : InteractionListener {
 
     private val HELL_CATS = intArrayOf(
-        NPCs.HELL_KITTEN_3505,
+        NPCs.KITTENPET_HELL_3505,
         NPCs.HELLCAT_3504,
-        NPCs.OVERGROWN_HELLCAT_3503,
-        NPCs.LAZY_HELLCAT_3506,
+        NPCs.OVERGROWNCAT_HELL_3503,
+        NPCs.LAZYCAT_HELL_3506,
         NPCs.WILY_HELLCAT_3507
     )
     private val MILK = Items.BUCKET_OF_MILK_1927
-    private val FEED_ANIMATION = Animations.HUMAN_BURYING_BONES_827
+    private val FEED_ANIMATION = Animations.HUMAN_PICKUPFLOOR_827
 
     override fun defineListeners() {
 

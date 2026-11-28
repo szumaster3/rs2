@@ -31,20 +31,20 @@ class PostiePeteDialogue(player: Player? = null) : Dialogue(player) {
         when (player.viewport.region!!.id) {
             11679 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_NORMAL, "4 pints of your finest please.").also { stage++ }
-                1 -> sendNPCDialogue(player, NPCs.BARMAID_2178, "4 pints coming right up. Are you expecting guests?", FaceAnim.OLD_NORMAL).also { stage++ }
+                1 -> sendNPCDialogue(player, NPCs.DWARF_CITY_BARMAID_POOR_2178, "4 pints coming right up. Are you expecting guests?", FaceAnim.OLD_NORMAL).also { stage++ }
                 2 -> npcl(FaceAnim.OLD_NORMAL, "Just a few old friends.").also { stage++ }
-                3 -> sendNPCDialogue(player, NPCs.BARMAID_2178, "You want me to put it on your tab?", FaceAnim.OLD_NORMAL).also { stage++ }
+                3 -> sendNPCDialogue(player, NPCs.DWARF_CITY_BARMAID_POOR_2178, "You want me to put it on your tab?", FaceAnim.OLD_NORMAL).also { stage++ }
                 4 -> npcl(FaceAnim.OLD_NORMAL, "That would be great, thanks. Oh, cripes! I've left a fire burning! I've got to go!").also { stage = END_DIALOGUE }
             }
 
             14647 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_NORMAL, "Hey Pete. Any news from the fleet?").also { stage++ }
-                1 -> sendNPCDialogue(player, NPCs.PIRATE_PETE_2825, "No yo ho bruv.").also { stage++ }
-                2 -> sendNPCDialogue(player, NPCs.PIRATE_PETE_2825, "Tis all quiet on the eastern front.").also { stage++ }
+                1 -> sendNPCDialogue(player, NPCs.DEAL_PETE_2825, "No yo ho bruv.").also { stage++ }
+                2 -> sendNPCDialogue(player, NPCs.DEAL_PETE_2825, "Tis all quiet on the eastern front.").also { stage++ }
                 3 -> npcl(FaceAnim.OLD_NORMAL, "Good good.").also { stage++ }
                 4 -> npcl(FaceAnim.OLD_NORMAL, "Well you know what to do if something goes wrong.").also { stage++ }
-                5 -> sendNPCDialogue(player, NPCs.PIRATE_PETE_2825, "Aye, that I do, bruv.").also { stage++ }
-                6 -> sendNPCDialogue(player, NPCs.PIRATE_PETE_2825, "Holler like a bosun without a bottle.").also { stage++ }
+                5 -> sendNPCDialogue(player, NPCs.DEAL_PETE_2825, "Aye, that I do, bruv.").also { stage++ }
+                6 -> sendNPCDialogue(player, NPCs.DEAL_PETE_2825, "Holler like a bosun without a bottle.").also { stage++ }
                 7 -> npcl(FaceAnim.OLD_NORMAL, "That's it brother, and we'll come a running!").also { stage = END_DIALOGUE }
             }
 
@@ -85,11 +85,11 @@ class PostiePeteDialogue(player: Player? = null) : Dialogue(player) {
 
             12084 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_NORMAL, "Hey Bro, how's the party business?").also { stage++ }
-                1 -> sendNPCDialogue(player, NPCs.PARTY_PETE_659, "Great! Thanks!").also { stage++ }
-                2 -> sendNPCDialogue(player, NPCs.PARTY_PETE_659, "Celebrating weddings and drop parties...").also { stage++ }
-                3 -> sendNPCDialogue(player, NPCs.PARTY_PETE_659, "...and getting paid for it!").also { stage++ }
+                1 -> sendNPCDialogue(player, NPCs.PARTYROOM_PETE_659, "Great! Thanks!").also { stage++ }
+                2 -> sendNPCDialogue(player, NPCs.PARTYROOM_PETE_659, "Celebrating weddings and drop parties...").also { stage++ }
+                3 -> sendNPCDialogue(player, NPCs.PARTYROOM_PETE_659, "...and getting paid for it!").also { stage++ }
                 4 -> npcl(FaceAnim.OLD_NORMAL, "Nice. Well I'm here to talk to some white knights.").also { stage++ }
-                5 -> sendNPCDialogue(player, NPCs.PARTY_PETE_659, "Want to take some cake with you?").also { stage++ }
+                5 -> sendNPCDialogue(player, NPCs.PARTYROOM_PETE_659, "Want to take some cake with you?").also { stage++ }
                 6 -> npcl(FaceAnim.OLD_NORMAL, "No thanks, I'm still dieting.").also { stage++ }
                 7 -> npcl(FaceAnim.OLD_NORMAL, "Just seafood for me.").also { stage = END_DIALOGUE }
             }

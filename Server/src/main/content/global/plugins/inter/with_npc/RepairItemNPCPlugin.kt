@@ -12,7 +12,7 @@ import core.plugin.ClassScanner
 import shared.consts.NPCs
 
 private val REPAIRABLE_ITEM_IDS = (RepairItem.repairableItemIds + BarrowsEquipment.getAllRepairableBarrowsIds()).toIntArray()
-private val NPC_IDS = intArrayOf(NPCs.BOB_519, NPCs.SQUIRE_3797, NPCs.TINDEL_MARCHANT_1799, NPCs.DUNSTAN_1082)
+private val NPC_IDS = intArrayOf(NPCs.BOB_519, NPCs.PEST_SQUIRE_BLACKSMITH_3797, NPCs.TINDEL_MARCHANT_1799, NPCs.DUNSTAN_1082)
 
 class RepairItemNPCPlugin : InteractionListener {
 

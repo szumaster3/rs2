@@ -73,5 +73,5 @@ class TalonBeastDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TALON_BEAST_7347, NPCs.TALON_BEAST_7348)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_NAIL_BEAST_7347, NPCs.LORE_NAIL_BEAST_COMBAT_7348)
 }

@@ -18,8 +18,8 @@ import shared.consts.Items
 
 class AFUBeaconPlugin : InteractionListener {
     private val VALID_LOGS = intArrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521, Items.WILLOW_LOGS_1519, Items.MAPLE_LOGS_1517, Items.YEW_LOGS_1515, Items.MAGIC_LOGS_1513)
-    private val FILL_ANIM = Animation(Animations.MOVE_FORWARD_TO_CLIMB_UP_LADDER_9136)
-    private val LIGHT_ANIM = Animation(Animations.TWIST_7307)
+    private val FILL_ANIM = Animation(Animations.HUMAN_REACHFORLADDER_LOOPED_LAST_FRAME_9136)
+    private val LIGHT_ANIM = Animation(Animations.LOTG_PLAYER_INVOKES_HIGH_PRIEST_7307)
     override fun defineListeners() {
         on(IntType.SCENERY, "add-logs", "light") { player, node ->
             val beacon = AFUBeacon.forLocation(node.location)

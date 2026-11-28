@@ -34,18 +34,18 @@ class ChildDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.CHILD_6345,
-        NPCs.CHILD_355,
-        NPCs.CHILD_356,
-        NPCs.CHILD_6334,
-        NPCs.CHILD_6335,
-        NPCs.CHILD_6336,
-        NPCs.CHILD_6337,
-        NPCs.CHILD_6338,
-        NPCs.CHILD_6339,
-        NPCs.CHILD_6340,
-        NPCs.CHILD_6341,
-        NPCs.CHILD_6342,
-        NPCs.CHILD_6343,
+        NPCs.DSKIN_W_ARDOUNGECHILD7_6345,
+        NPCs.W_ARDOUNGECHILD1_355,
+        NPCs.DSKIN_W_ARDOUNGECHILD1_356,
+        NPCs.W_ARDOUNGECHILD2_6334,
+        NPCs.W_ARDOUNGECHILD3_6335,
+        NPCs.W_ARDOUNGECHILD4_6336,
+        NPCs.W_ARDOUNGECHILD5_6337,
+        NPCs.W_ARDOUNGECHILD6_6338,
+        NPCs.W_ARDOUNGECHILD7_6339,
+        NPCs.DSKIN_W_ARDOUNGECHILD2_6340,
+        NPCs.DSKIN_W_ARDOUNGECHILD3_6341,
+        NPCs.DSKIN_W_ARDOUNGECHILD4_6342,
+        NPCs.DSKIN_W_ARDOUNGECHILD5_6343,
     )
 }

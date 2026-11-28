@@ -40,5 +40,5 @@ class HoneyBadgerDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HONEY_BADGER_6845, NPCs.HONEY_BADGER_6846)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_HONEY_BADGER_6845, NPCs.LORE_HONEY_BADGER_COMBAT_6846)
 }

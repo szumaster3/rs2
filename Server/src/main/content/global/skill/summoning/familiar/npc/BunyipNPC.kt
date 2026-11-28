@@ -32,7 +32,7 @@ class BunyipNPC : Familiar {
 
     private var lastHeal: Int = 0
 
-    constructor() : this(null, NPCs.BUNYIP_6813)
+    constructor() : this(null, NPCs.LORE_BUNYIP_6813)
 
     constructor(owner: Player?, id: Int) : super(owner, id, 4400, Items.BUNYIP_POUCH_12029, 3, WeaponInterface.STYLE_ACCURATE) {
         setLastHeal()
@@ -97,9 +97,9 @@ class BunyipNPC : Familiar {
     }
 
     override fun configureFamiliar() {
-        UseWithHandler.addHandler(NPCs.BUNYIP_6813, UseWithHandler.NPC_TYPE, object : UseWithHandler(*FISH) {
+        UseWithHandler.addHandler(NPCs.LORE_BUNYIP_6813, UseWithHandler.NPC_TYPE, object : UseWithHandler(*FISH) {
             override fun newInstance(arg: Any?): Plugin<Any> {
-                addHandler(NPCs.BUNYIP_6814, UseWithHandler.NPC_TYPE, this)
+                addHandler(NPCs.LORE_BUNYIP_COMBAT_6814, UseWithHandler.NPC_TYPE, this)
                 return this
             }
 
@@ -122,5 +122,5 @@ class BunyipNPC : Familiar {
         })
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BUNYIP_6813, NPCs.BUNYIP_6814)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_BUNYIP_6813, NPCs.LORE_BUNYIP_COMBAT_6814)
 }

@@ -16,12 +16,12 @@ import shared.consts.NPCs
 class PyramidPlunderPlugin : InteractionListener {
 
     companion object {
-        val SIMON_TEMPLETON = NPCs.SIMON_TEMPLETON_3123
-        val GUARDIAN_MUMMY = NPCs.GUARDIAN_MUMMY_4476
+        val SIMON_TEMPLETON = NPCs.AGILITY_PYRAMID_SIMON_3123
+        val GUARDIAN_MUMMY = NPCs.NTK_MUMMY_GUARDIAN_4476
         val SCEPTRE = intArrayOf(
-            Items.PHARAOHS_SCEPTRE_9044,
-            Items.PHARAOHS_SCEPTRE_9046,
-            Items.PHARAOHS_SCEPTRE_9048,
+            Items.PHARAOHS_SCEPTRE_3_9044,
+            Items.PHARAOHS_SCEPTRE_2_9046,
+            Items.PHARAOHS_SCEPTRE_1_9048,
             Items.PHARAOHS_SCEPTRE_9050
         )
     }
@@ -33,7 +33,7 @@ class PyramidPlunderPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, SCEPTRE, SIMON_TEMPLETON) { player, used, with ->
-            openDialogue(player, NPCs.SIMON_TEMPLETON_3123, with as NPC, true, false, used.id)
+            openDialogue(player, NPCs.AGILITY_PYRAMID_SIMON_3123, with as NPC, true, false, used.id)
             return@onUseWith true
         }
 
@@ -82,9 +82,9 @@ class PyramidPlunderPlugin : InteractionListener {
                 }
 
                 val sceptreStates = mapOf(
-                    Items.PHARAOHS_SCEPTRE_9044 to Items.PHARAOHS_SCEPTRE_9046,
-                    Items.PHARAOHS_SCEPTRE_9046 to Items.PHARAOHS_SCEPTRE_9048,
-                    Items.PHARAOHS_SCEPTRE_9048 to Items.PHARAOHS_SCEPTRE_9050
+                    Items.PHARAOHS_SCEPTRE_3_9044 to Items.PHARAOHS_SCEPTRE_2_9046,
+                    Items.PHARAOHS_SCEPTRE_2_9046 to Items.PHARAOHS_SCEPTRE_1_9048,
+                    Items.PHARAOHS_SCEPTRE_1_9048 to Items.PHARAOHS_SCEPTRE_9050
                 )
 
                 for ((current, next) in sceptreStates) {
@@ -98,8 +98,8 @@ class PyramidPlunderPlugin : InteractionListener {
                         }
 
                         val chargesLeft = when (next) {
-                            Items.PHARAOHS_SCEPTRE_9046 -> 2
-                            Items.PHARAOHS_SCEPTRE_9048 -> 1
+                            Items.PHARAOHS_SCEPTRE_2_9046 -> 2
+                            Items.PHARAOHS_SCEPTRE_1_9048 -> 1
                             Items.PHARAOHS_SCEPTRE_9050 -> 0
                             else -> 0
                         }

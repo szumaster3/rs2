@@ -61,10 +61,10 @@ class DragonFireShieldOptionPlugin : InteractionListener {
             val attack = SwitchAttack(
                 null,
                 Animation.create(6696),
-                Graphics.create(shared.consts.Graphics.DFS_HIT_PROJECTILE_1165),
-                Graphics(shared.consts.Graphics.DRAGONFIRE_SHIELD_BURST_1167, 96),
+                Graphics.create(shared.consts.Graphics.QIP_DRAGON_SLAYER_SHIELD_ATTACK_SPOTANIM_1165),
+                Graphics(shared.consts.Graphics.QIP_DRAGON_SLAYER_PLAYER_IMPACT_1167, 96),
                 Projectile.create(
-                    player, null, shared.consts.Graphics.DRAGONFIRE_SHIELD_PROJECTILE_1166,
+                    player, null, shared.consts.Graphics.QIP_DRAGON_SLAYER_PLAYER_PROJANIM_1166,
                     36, 36, 80, 70, 0, 11
                 ),
             )
@@ -181,8 +181,8 @@ class DragonFireShieldOptionPlugin : InteractionListener {
 
     companion object {
         private val dragonFireShields = intArrayOf(Items.DRAGONFIRE_SHIELD_11283, Items.DRAGONFIRE_SHIELD_11284)
-        private const val dfsEmptyAnim = Animations.SHIELD_DRAGONFIRE_6700
-        private const val dfsEmptyGfx = shared.consts.Graphics.DFS_FUSE_DRAGONKIN_KEY_CHARGE_1160
+        private const val dfsEmptyAnim = Animations.QIP_DRAGON_SLAYER_PLAYER_RELEASING_CHARGE_6700
+        private const val dfsEmptyGfx = shared.consts.Graphics.QIP_DRAGON_SLAYER_SHIELD_CHARGE_ONE_1160
         val dfsRecharge = if (ServerConstants.BETTER_DFS) secondsToTicks(30) else minutesToTicks(2)
     }
 }

@@ -15,7 +15,7 @@ import shared.consts.NPCs
 class BankerGuideDialogue: DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.BANKER_953)
+        npc = NPC(NPCs.NOOBBANKER_953)
         when (stage) {
             START_DIALOGUE -> npc(FaceAnim.HALF_ASKING,"Good day, would you like to access your bank account?").also { stage++ }
             1 -> options("Yes.", "No, thanks.").also { stage++ }

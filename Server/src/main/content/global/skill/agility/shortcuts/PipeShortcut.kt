@@ -133,8 +133,8 @@ class PipeShortcut : AgilityShortcut {
         private const val BARBARIAN_OUTPOST = 20210
         private const val EDGEVILLE_DUNGEON = 29370
 
-        private val CRAWL = Animation(Animations.CRAWL_844, Animator.Priority.HIGH)
-        private val CLIMB_THROUGH = Animation(Animations.CLIMB_THROUGH_OBSTACLE_10580)
-        private val CLIMB_OUT = Animation(Animations.CLIMB_OUT_OF_OBSTACLE_10579)
+        private val CRAWL = Animation(Animations.HUMAN_CRAWLING_844, Animator.Priority.HIGH)
+        private val CLIMB_THROUGH = Animation(Animations.HUMAN_DOUBLEPIPESQUEEZE_10580)
+        private val CLIMB_OUT = Animation(Animations.HUMAN_PIPEUNSQUEEZE_10579)
     }
 }

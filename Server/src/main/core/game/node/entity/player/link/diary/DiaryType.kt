@@ -73,7 +73,7 @@ enum class DiaryType(
             arrayOf(Item(Items.KARAMJA_GLOVES_3_11140), Item(LampItem.KARAMJA_ACHIEVEMENT_HARD.item))
         ),
         "To start marking off tasks in your journal, speak to Pirate<br><br>Jackie the Fruit in Brimhaven, Kaleb Paramay in Shilo<br><br>Village or one of the Jungle Foresters north of the<br><br>Kharazi Jungle.",
-        intArrayOf(NPCs.PIRATE_JACKIE_THE_FRUIT_1055, NPCs.KALEB_PARAMAYA_512, NPCs.JUNGLE_FORESTER_401)
+        intArrayOf(NPCs.PIRATE_JACKIE_THE_FRUIT_1055, NPCs.KALEB_PARAMAYA_512, NPCs.JUNGLEFORESTER_M_401)
 
     ),
     VARROCK(
@@ -147,7 +147,7 @@ enum class DiaryType(
             arrayOf(Item(Items.VARROCK_ARMOUR_3_11758), Item(LampItem.VARROCK_ACHIEVEMENT_HARD.item))
         ),
         "To start marking off tasks in your journal, speak to<br><br>Rat Burgiss south of the city, Reldo in the palace<br><br>library, or Vannaka in the sewers.",
-        intArrayOf(NPCs.RAT_BURGISS_5833, NPCs.RELDO_2660, NPCs.VANNAKA_1597)
+        intArrayOf(NPCs.SUROK_RAT_5833, NPCs.RELDO_WITHBOOK_2660, NPCs.VANNAKA_1597)
 
     ),
     LUMBRIDGE(
@@ -222,7 +222,7 @@ enum class DiaryType(
             arrayOf(Item(Items.EXPLORERS_RING_3_13562), Item(LampItem.LUMBRIDGE_ACHIEVEMENT_MEDIUM.item))
         ),
         "To start marking off tasks in your journal, speak to<br><br>Explorer Jack near the Lumbridge General Store, Bob<br><br>in his axe store or Ned in his house in Draynor Village.",
-        intArrayOf(NPCs.EXPLORER_JACK_7969, NPCs.BOB_519, NPCs.NED_743)
+        intArrayOf(NPCs.ATLUM_EXPLORER_JACK_7969, NPCs.BOB_519, NPCs.NED_743)
 
     ),
     FALADOR(
@@ -331,7 +331,7 @@ enum class DiaryType(
             arrayOf(Item(Items.FREMENNIK_SEA_BOOTS_3_14573), Item(LampItem.FREMENNIK_ACHIEVEMENT_HARD.item))
         ),
         "To start marking off tasks in your journal, speak to<br><br>Council Workman on the bridge between the Seers' Village<br><br>and Rellekka, Yrsa in Rellekka or Advisor Ghrim on the<br><br>Miscellania.",
-        intArrayOf(NPCs.COUNCIL_WORKMAN_1287, NPCs.YRSA_1301, NPCs.ADVISOR_GHRIM_1375)
+        intArrayOf(NPCs.VT_COUNCIL_WORKMEN_1287, NPCs.YRSA_1301, NPCs.MISC_ADVISOR_GHRIM_1375)
     ),
     SEERS_VILLAGE(
         "Seers' Village",
@@ -382,8 +382,8 @@ enum class DiaryType(
         ),
         arrayOf(
             arrayOf(Item(Items.SEERS_HEADBAND_1_14631), Item(LampItem.SEERS_ACHIEVEMENT_EASY.item)),
-            arrayOf(Item(Items.SEERS_HEADBAND_2_14638), Item(LampItem.SEERS_ACHIEVEMENT_MEDIUM.item)),
-            arrayOf(Item(Items.SEERS_HEADBAND_3_14639), Item(LampItem.SEERS_ACHIEVEMENT_HARD.item))
+            arrayOf(Item(Items.SEERS_HEADBAND_2_14662), Item(LampItem.SEERS_ACHIEVEMENT_MEDIUM.item)),
+            arrayOf(Item(Items.SEERS_HEADBAND_3_14663), Item(LampItem.SEERS_ACHIEVEMENT_HARD.item))
         ),
         "To start marking off tasks in your journal, speak to<br><br>any seer in Seers' Village, Stankers by the coal<br><br>trucks or Sir Kay in Camelot.",
         intArrayOf(NPCs.SEER_388, NPCs.STANKERS_383, NPCs.SIR_KAY_241)
@@ -441,7 +441,7 @@ enum class DiaryType(
         ),
         arrayOf(arrayOf(Item(Items.ARDOUGNE_CLOAK_1_15345), Item(Items.ANTIQUE_LAMP_15346)), arrayOf(Item(Items.ARDOUGNE_CLOAK_2_15347), Item(Items.ANTIQUE_LAMP_15348)), arrayOf(Item(Items.ARDOUGNE_CLOAK_3_15349), Item(Items.ANTIQUE_LAMP_15350)), arrayOf(Item(Items.ANTIQUE_LAMP_15351, 4))),
         "Speak to Doctor Orbon, the Ardougne town crier or Aleck to claim your rewards.",
-        intArrayOf(NPCs.DOCTOR_ORBON_290, NPCs.TOWN_CRIER_6138, NPCs.ALECK_5110)
+        intArrayOf(NPCs.DOCTOR_ORBON_290, NPCs.PMOD_TOWN_CRIER_EAST_ARDOYNE_6138, NPCs.ALECK_5110)
     );
 
     /**

@@ -78,7 +78,7 @@ object PlunderUtils {
             if (left <= 0) timesUp.add(player).also {
                 sendNPCDialogueLines(
                     player,
-                    NPCs.GUARDIAN_MUMMY_4476,
+                    NPCs.NTK_MUMMY_GUARDIAN_4476,
                     FaceAnim.OLD_NOT_INTERESTED,
                     false,
                     "You've had your five minutes of plundering. Now be",

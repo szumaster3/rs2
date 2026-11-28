@@ -90,7 +90,7 @@ class FishfoodOptionPlugin : UseWithHandler(*FishFood.usables) {
                 object : Pulse(1, player) {
                     override fun pulse(): Boolean {
                         if (player.inventory.remove(Item(with), Item(used))) {
-                            animate(player, Animation(Animations.CRAFT_ITEM_1309))
+                            animate(player, Animation(Animations.HUMAN_LIMESTONECUTTING_1309))
                             sendMessage(player, FishFood.message(used, with)!!)
                             addItem(player, product.id)
                             lock(player, 2)

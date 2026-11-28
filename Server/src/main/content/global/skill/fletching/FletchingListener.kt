@@ -123,9 +123,9 @@ class FletchingListener : InteractionListener {
 
                             val anim =
                                 if (with.id == Items.MAGIC_LOGS_1513) {
-                                    Animation(Animations.CUT_MAGIC_LOGS_7211)
+                                    Animation(Animations.HUMAN_MAGIC_FLETCHING_7211)
                                 } else {
-                                    Animation(Animations.FLETCH_LOGS_1248)
+                                    Animation(Animations.HUMAN_FLETCHING_1248)
                                 }
 
                             player.animate(anim)
@@ -833,7 +833,7 @@ class FletchingListener : InteractionListener {
 
                         val batch = 1
 
-                        player.animate(Animation(Animations.FLETCH_LOGS_4433))
+                        player.animate(Animation(Animations.HUMAN_OGRE_FLETCHING_4433))
 
                         if (!removeItem(player, Item(kebbit.base, batch))) {
                             return@queueScript stopExecuting(player)
@@ -1444,7 +1444,7 @@ class FletchingListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
 
-                            if (bolt.unfinished == Items.BROAD_BOLTS_UNF_13279 && !getInstance(player).flags.isBroadsUnlocked()) {
+                            if (bolt.unfinished == Items.UNFINISHED_BROAD_BOLTS_13279 && !getInstance(player).flags.isBroadsUnlocked()) {
                                 sendDialogue(player, "You need to unlock the ability to create broad bolts.")
                                 return@queueScript stopExecuting(player)
                             }

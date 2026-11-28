@@ -24,7 +24,7 @@ class SpiceSellerDialogue(player: Player? = null) : Dialogue(player) {
             1 -> when (buttonId) {
                 1 -> {
                     end()
-                    openNpcShop(player, NPCs.SPICE_SELLER_572)
+                    openNpcShop(player, NPCs.SPICE_MERCHANT_572)
                 }
 
                 2 -> player(FaceAnim.HALF_GUILTY, "No, thanks.").also { stage = END_DIALOGUE }
@@ -35,5 +35,5 @@ class SpiceSellerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SpiceSellerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPICE_SELLER_572)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SPICE_MERCHANT_572)
 }

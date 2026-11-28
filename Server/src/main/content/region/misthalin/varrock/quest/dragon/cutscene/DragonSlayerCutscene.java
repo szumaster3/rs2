@@ -35,7 +35,7 @@ import static core.api.ContentAPIKt.setVarp;
  */
 public final class DragonSlayerCutscene extends CutscenePlugin {
 
-    private static final Animation ANIMATION = new Animation(Animations.GET_UP_FROM_BEING_FACE_DOWN_ON_FLOOR_DRAGON_SLAYER_4191);
+    private static final Animation ANIMATION = new Animation(Animations.QUEST_LUNAR_STAND_FROM_FACE_DOWN_4191);
 
     private final BobingPulse bobinPulse = new BobingPulse();
 

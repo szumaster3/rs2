@@ -125,6 +125,6 @@ class UndergroundCutscene(player: Player) : Cutscene(player) {
 
     companion object {
         private const val EDMOND = NPCs.EDMOND_714
-        private const val ROPE_PULL = Animations.PC_SEWERS_ROPE_PULL_3187
+        private const val ROPE_PULL = Animations.LIFT_AND_PULL_3187
     }
 }

@@ -27,5 +27,5 @@ class WolpertingerDialogue : Dialogue {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WOLPERTINGER_6869, NPCs.WOLPERTINGER_6870)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_WOLPERTINGER_6869, NPCs.LORE_WOLPERTINGER_COMBAT_6870)
 }

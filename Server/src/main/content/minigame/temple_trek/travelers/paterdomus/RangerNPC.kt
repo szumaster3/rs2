@@ -19,7 +19,7 @@ class RangerNPC(
         vararg objects: Any,
     ): AbstractNPC = RangerNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.RANGER_1511)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RAMBLE_MED_RANGER_1511)
 
     companion object;
 

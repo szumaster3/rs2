@@ -132,15 +132,15 @@ class BeaconKeeperDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.NANUQ_8067,
-        NPCs.NANUQ_8068,
-        NPCs.NANUQ_8069,
-        NPCs.NANUQ_8070,
-        NPCs.NANUQ_8071,
-        NPCs.NANUQ_8072,
-        NPCs.NANUQ_8073,
-        NPCs.NANUQ_8074,
-        NPCs.NANUQ_8075,
+        NPCs.ORRY_8067,
+        NPCs.UBE_8068,
+        NPCs.WALDO_8069,
+        NPCs.GJALP_8070,
+        NPCs.BROTHER_FINTAN_8071,
+        NPCs.STUBTHUMB_8072,
+        NPCs.DORONBOL_8073,
+        NPCs.CRATE_8074,
+        NPCs.EGG_8075,
         NPCs.NANUQ_8076
     )
 }

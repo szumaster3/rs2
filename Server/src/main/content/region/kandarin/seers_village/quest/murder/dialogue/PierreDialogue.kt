@@ -24,7 +24,7 @@ class PierreDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PIERRE_807)
+        return intArrayOf(NPCs.PIERRE_THE_FAMILY_DOG_HANDLER_807)
     }
 }
 

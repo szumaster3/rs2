@@ -33,7 +33,7 @@ class KaramjaBananaCratePlugin : InteractionListener {
                 return@onUseWith false
             }
             lock(player, 2)
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             sendDialogue(player, "You stash the rum in the crate.")
             setAttribute(player, "/save:stashed-rum", true)
             return@onUseWith true
@@ -57,7 +57,7 @@ class KaramjaBananaCratePlugin : InteractionListener {
                 return@onUseWith false
             }
             lock(player, 2)
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             sendDialogue(player, "You pack a banana into the crate.")
             player.savedData.globalData.setKaramjaBannanas(currNumBananasInCrate + 1)
             return@onUseWith true
@@ -112,7 +112,7 @@ class KaramjaBananaCratePlugin : InteractionListener {
                 return@on false
             }
             lock(player, 2)
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             sendMessage(player, "You pack all your bananas into the crate.")
             player.savedData.globalData.setKaramjaBannanas(
                 player.savedData.globalData.karamjaBananas + bananasToBeAdded,

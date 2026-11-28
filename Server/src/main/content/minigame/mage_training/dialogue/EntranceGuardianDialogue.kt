@@ -140,5 +140,5 @@ class EntranceGuardianDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ENTRANCE_GUARDIAN_3097)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGICTRAINING_GUARD_ENTRANCE_3097)
 }

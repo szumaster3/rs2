@@ -140,6 +140,6 @@ class SnertDialogue(player: Player? = null) : Dialogue(player) {
         NPCs.SNARRK_7070,
         NPCs.GRUBB_7075,
         NPCs.GRUNTHER_7076,
-        NPCs.IRK_7071,
+        NPCs.AFR_OGRESS_CHILD5_7071,
     )
 }

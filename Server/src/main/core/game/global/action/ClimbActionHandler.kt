@@ -15,8 +15,8 @@ import shared.consts.Animations
 
 object ClimbActionHandler {
 
-    val CLIMB_UP = Animation(Animations.HUMAN_CLIMB_STAIRS_828)
-    val CLIMB_DOWN = Animation(Animations.HUMAN_BURYING_BONES_827)
+    val CLIMB_UP = Animation(Animations.HUMAN_REACHFORLADDER_828)
+    val CLIMB_DOWN = Animation(Animations.HUMAN_PICKUPFLOOR_827)
     var CLIMB_DIALOGUE: Dialogue = ClimbDialogue()
 
     /**

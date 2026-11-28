@@ -37,8 +37,8 @@ class MiscellaniaShortcut : OptionHandler() {
             return true
         }
 
-        forceMove(player, player.location, Location.create(2573, 3862, 0), 0, 60, null, Animations.HUMAN_JUMP_BRIDGE_769)
-        forceMove(player, Location.create(2573, 3862, 0), Location.create(2576, 3862, 0), 90, animationCycles(Animations.HUMAN_JUMP_FENCE_6132), null, Animations.HUMAN_JUMP_FENCE_6132)
+        forceMove(player, player.location, Location.create(2573, 3862, 0), 0, 60, null, Animations.HUMAN_STEPPINGSTONEJUMP_769)
+        forceMove(player, Location.create(2573, 3862, 0), Location.create(2576, 3862, 0), 90, animationCycles(Animations.WILD_DITCH_JUMP_6132), null, Animations.WILD_DITCH_JUMP_6132)
         return true
     }
 

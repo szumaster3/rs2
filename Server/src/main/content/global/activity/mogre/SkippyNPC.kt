@@ -68,14 +68,14 @@ class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
         self.locks.lockMovement(3)
         queueScript(self, 1, QueueStrength.SOFT) {
             sendChat(self, "Take this")
-            animate(self, Animations.THROW_385)
+            animate(self, Animations.HUMAN_THROW_385)
             faceLocation(self, self.location.transform(Direction.SOUTH))
             playGlobalAudio(self.location, Sounds.SKIPPY_THROWGLASS_THROW_1401, 1)
             playGlobalAudio(self.location, Sounds.SKIPPY_THROWGLASS_IMPACT_1400, 15)
             spawnProjectile(
                 self.location,
                 self.location.transform(Direction.SOUTH, 8),
-                Graphics.THROWING_VIAL_49,
+                Graphics.VIAL_TRAVEL_2_49,
                 42,
                 32,
                 15,

@@ -23,12 +23,12 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
             player = player,
             stallName = "FISH_STALL",
             shopNpc = npc,
-            guardNpcIds = listOf(NPCs.MARKET_GUARD_1317, NPCs.WARRIOR_1318)
+            guardNpcIds = listOf(NPCs.VIKING_GUARD_1317, NPCs.WARRIOR_1318)
         )
 
         when (stage) {
             0 -> when (npc.id) {
-                NPCs.FISHMONGER_1393 -> {
+                NPCs.MISC_FISH_MONGER_1393 -> {
                     if (player.getSavedData().globalData.getStallSteal("FISH_STALL")  > System.currentTimeMillis()) {
                         npc.sendChat("Get away from me!")
                         npc.sendChat("Guards, guards!", 2)
@@ -42,7 +42,7 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
                     npcl(FaceAnim.FRIENDLY, dialogue)
                     stage = 1
                 }
-                NPCs.FISH_MONGER_1315 -> {
+                NPCs.VIKING_FISH_MONGER_1315 -> {
                     if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                         npc(FaceAnim.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
                     } else {
@@ -51,7 +51,7 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
                         stage = 3
                     }
                 }
-                NPCs.FISHMONGER_1369 -> {
+                NPCs.ETC_FISH_MONGER_1369 -> {
                     npcl(FaceAnim.FRIENDLY, "Welcome, ${FremennikTrials.getFremennikName(player)}. My fish is fresher than any in Miscellania.")
                     stage = 4
                 }
@@ -63,17 +63,17 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 2
             }
 
-            2 -> { end(); openNpcShop(player, NPCs.FISHMONGER_1393) }
-            3 -> { end(); openNpcShop(player, NPCs.FISH_MONGER_1315) }
-            4 -> { end(); openNpcShop(player, NPCs.FISHMONGER_1369) }
+            2 -> { end(); openNpcShop(player, NPCs.MISC_FISH_MONGER_1393) }
+            3 -> { end(); openNpcShop(player, NPCs.VIKING_FISH_MONGER_1315) }
+            4 -> { end(); openNpcShop(player, NPCs.ETC_FISH_MONGER_1369) }
         }
 
         return true
     }
 
     override fun getIds() = intArrayOf(
-        NPCs.FISHMONGER_1369,
-        NPCs.FISHMONGER_1393,
-        NPCs.FISH_MONGER_1315
+        NPCs.ETC_FISH_MONGER_1369,
+        NPCs.MISC_FISH_MONGER_1393,
+        NPCs.VIKING_FISH_MONGER_1315
     )
 }

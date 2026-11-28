@@ -15,7 +15,7 @@ class CatBellemordeDialogue : DialogueFile() {
         when (stage) {
             0 -> player("Hello puss.").also { stage++ }
             1 -> {
-                val hasCatSpeakAmulet = anyInEquipment(player!!, Items.CATSPEAK_AMULET_4677, Items.CATSPEAK_AMULETE_6544)
+                val hasCatSpeakAmulet = anyInEquipment(player!!, Items.CATSPEAK_AMULET_4677, Items.CATSPEAK_AMULET_E_6544)
                 if (!hasCatSpeakAmulet) {
                     npc(FaceAnim.CHILD_FRIENDLY, "Hiss!").also { stage = END_DIALOGUE }
                 } else {

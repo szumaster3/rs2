@@ -22,7 +22,7 @@ class ErnestChickenNPC(
         /**
          * The NPC ids of NPCs using this plugin.
          */
-        private val ID = intArrayOf(NPCs.CHICKEN_288)
+        private val ID = intArrayOf(NPCs.QUESTCHICKEN_288)
     }
 
     override fun construct(id: Int, location: Location?, vararg objects: Any?): AbstractNPC {

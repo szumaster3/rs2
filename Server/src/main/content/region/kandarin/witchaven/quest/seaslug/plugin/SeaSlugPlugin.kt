@@ -92,7 +92,7 @@ class SeaSlugPlugin : InteractionListener {
 
         onUseWith(IntType.NPC, LIT_TORCH, SEA_SLUG) { player, _, _ ->
             playAudio(player, 3027)
-            animate(player, Animations.SEA_SLUG_POKE_GROUND_WITH_TORCH_4793)
+            animate(player, Animations.SEASLUG_TORCH_SLUG_4793)
             sendMessage(player, "The sea slug curls up into its shell.")
             return@onUseWith true
         }
@@ -184,7 +184,7 @@ class SeaSlugPlugin : InteractionListener {
         on(SEA_SLUG, IntType.NPC, "take") { player, _ ->
             if (inInventory(player, Items.LIT_TORCH_594)) {
                 playAudio(player, 3027)
-                animate(player, Animations.SEA_SLUG_POKE_GROUND_WITH_TORCH_4793)
+                animate(player, Animations.SEASLUG_TORCH_SLUG_4793)
             } else {
                 runTask(player, 1) {
                     animate(player, 1114)
@@ -238,7 +238,7 @@ class SeaSlugPlugin : InteractionListener {
     }
 
     companion object {
-        const val KENNITH = NPCs.KENNITH_4863
+        const val KENNITH = NPCs.KENNITH_CUTSCENE_4863
         const val LADDER = Scenery.LADDER_18324
         const val CRANE = Scenery.CRANE_18327
         const val WALL = Scenery.BADLY_REPAIRED_WALL_18381
@@ -248,9 +248,9 @@ class SeaSlugPlugin : InteractionListener {
         const val BROKEN_GLASS = Items.BROKEN_GLASS_1469
         const val UNLIT_TORCH = Items.UNLIT_TORCH_596
         const val LIT_TORCH = Items.LIT_TORCH_594
-        const val SEA_SLUG = NPCs.SEA_SLUG_1006
-        const val KICK_ANIM = Animations.SEA_SLUG_KICK_WALL_4804
-        const val LADDER_FAIL = Animations.SEA_SLUG_PLATFORM_LADDER_4785
+        const val SEA_SLUG = NPCs.SEASLUG_1006
+        const val KICK_ANIM = Animations.SEASLUG_HUMAN_KICK_4804
+        const val LADDER_FAIL = Animations.SEASLUG_FALLING_4785
         private const val EMPTY_POT = Items.EMPTY_POT_1931
         private const val POT_OF_FLOUR = Items.POT_OF_FLOUR_1933
         private const val SWAMP_TAR = Items.SWAMP_TAR_1939

@@ -22,7 +22,7 @@ class TearsOfGuthixListener : InteractionListener {
          */
 
         on(Scenery.JUNA_31302, IntType.SCENERY, "talk-to") { player, node ->
-            openDialogue(player, NPCs.JUNA_2023, node.location)
+            openDialogue(player, NPCs.TOG_JUNA_DUMMY_2023, node.location)
             return@on true
         }
 
@@ -31,7 +31,7 @@ class TearsOfGuthixListener : InteractionListener {
          */
 
         on(Scenery.JUNA_31303, IntType.SCENERY, "talk-to", "tell-story") { player, node ->
-            openDialogue(player, NPCs.JUNA_2023, node.location)
+            openDialogue(player, NPCs.TOG_JUNA_DUMMY_2023, node.location)
             return@on true
         }
 
@@ -40,14 +40,14 @@ class TearsOfGuthixListener : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY,  Items.MAGIC_STONE_4703, Scenery.JUNA_31303, Scenery.JUNA_31302) { player, _, _ ->
-            sendNPCDialogue(player, NPCs.JUNA_2023, "Perhaps you should use it with a chisel, rather than with my face.", FaceAnim.OLD_NORMAL)
+            sendNPCDialogue(player, NPCs.TOG_JUNA_DUMMY_2023, "Perhaps you should use it with a chisel, rather than with my face.", FaceAnim.OLD_NORMAL)
             return@onUseWith true
         }
 
         on(Scenery.ROCKS_6673, IntType.SCENERY, "climb") { player, _ ->
             val dx = if (player.location.x > 3240) -2 else 2
             val destination = Location.create(player.location).transform(dx, 0, 0)
-            forceMove(player, player.location, destination, 30, 90, Direction.WEST, Animations.WALK_BACKWARDS_CLIMB_1148) {
+            forceMove(player, player.location, destination, 30, 90, Direction.WEST, Animations.DEATH_HUMAN_CLIMBING_DOWN_1148) {
                 resetAnimator(player)
                 sendMessage(player, "You leap across with a mighty leap!")
             }
@@ -59,7 +59,7 @@ class TearsOfGuthixListener : InteractionListener {
                 sendMessage(player, "You could climb down here, but it is too uneven to climb up.")
             } else {
                 val destination = Location.create(player.location).transform(2, 0, 0)
-                forceMove(player, player.location, destination, 30, 90, Direction.WEST, Animations.WALK_BACKWARDS_CLIMB_1148) {
+                forceMove(player, player.location, destination, 30, 90, Direction.WEST, Animations.DEATH_HUMAN_CLIMBING_DOWN_1148) {
                     resetAnimator(player)
                     sendMessage(player, "You leap across with a mighty leap!")
                 }
@@ -75,7 +75,7 @@ class TearsOfGuthixListener : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, Items.SAPPHIRE_LANTERN_4702, NPCs.LIGHT_CREATURE_2021) { player, _, npc ->
+        onUseWith(IntType.NPC, Items.SAPPHIRE_LANTERN_4702, NPCs.TOG_LIGHT_CREATURE_2021) { player, _, npc ->
             val target = npc as NPC
 
             if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS.questName, false)) {
@@ -93,7 +93,7 @@ class TearsOfGuthixListener : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, intArrayOf(NPCs.LIGHT_CREATURE_2021), "use") { player, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.TOG_LIGHT_CREATURE_2021), "use") { player, _ ->
             return@setDest player.location
         }
     }

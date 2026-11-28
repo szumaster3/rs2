@@ -9,7 +9,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class PrayingMantisNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.PRAYING_MANTIS_6798) :
+class PrayingMantisNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_PRAYING_MANTIS_6798) :
     Familiar(owner, id, 6900, Items.PRAYING_MANTIS_POUCH_12011, 6, WeaponInterface.STYLE_ACCURATE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return PrayingMantisNPC(owner, id)
@@ -20,6 +20,6 @@ class PrayingMantisNPC @JvmOverloads constructor(owner: Player? = null, id: Int 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PRAYING_MANTIS_6798, NPCs.PRAYING_MANTIS_6799)
+        return intArrayOf(NPCs.LORE_PRAYING_MANTIS_6798, NPCs.LORE_PRAYING_MANTIS_COMBAT_6799)
     }
 }

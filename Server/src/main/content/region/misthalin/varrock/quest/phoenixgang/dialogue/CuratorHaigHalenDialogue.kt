@@ -114,5 +114,5 @@ class CuratorHaigHalenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CuratorHaigHalenDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CURATOR_HAIG_HALEN_646)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CURATOR_646)
 }

@@ -18,9 +18,9 @@ import shared.consts.*
  */
 private enum class Churnable(val product: Item, val xp: Double, val animation: Animation?) {
     BUCKET_OF_MILK(Item(Items.BUCKET_OF_MILK_1927), 0.0, null),
-    CREAM(Item(Items.POT_OF_CREAM_2130), 18.0, Animation(Animations.CHURN_CREAM_2793)),
-    BUTTER(Item(Items.PAT_OF_BUTTER_6697), 41.0, Animation(Animations.CHURN_BUTTER_2794)),
-    CHEESE(Item(Items.CHEESE_1985), 64.0, Animation(Animations.CHURN_CHEESE_2795));
+    CREAM(Item(Items.POT_OF_CREAM_2130), 18.0, Animation(Animations.PLAYER_CHURNS_MILK_SHORT_2793)),
+    BUTTER(Item(Items.PAT_OF_BUTTER_6697), 41.0, Animation(Animations.HOOKS1_DWARVEN_AXE_WOODCUTTING_2794)),
+    CHEESE(Item(Items.CHEESE_1985), 64.0, Animation(Animations.POSSESSED_SWORD_EMOTE_SPOTANIM_2795));
     override fun toString(): String = name.lowercase().replace("_", " ").replace("bucket of ", "")
 
 

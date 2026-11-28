@@ -8,7 +8,7 @@ import core.tools.RandomFunction
 import core.tools.minutesToTicks
 import shared.consts.NPCs
 
-class SnowmanHolidayRandomNPC : HolidayRandomEventNPC(NPCs.SNOWMAN_6746) {
+class SnowmanHolidayRandomNPC : HolidayRandomEventNPC(NPCs.XMAS07_SNOWMAN_TRADITIONAL_6746) {
     private val snowmanLines =
         listOf("@name, are you there?", "Excuse me, @name?", "@name, could I please speak with you?")
     private var hasTalkedWith = false

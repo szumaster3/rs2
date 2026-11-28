@@ -41,8 +41,8 @@ class VarrockFenceJumpShortcut : AgilityShortcut(intArrayOf(9300), 13, 0.0, "jum
     }
 
     companion object {
-        private val runningAnim = Animation(Animations.RUNNING_OSRS_STYLE_1995)
-        private val jumpAnim = Animation(Animations.JUMP_WEREWOLF_1603)
+        private val runningAnim = Animation(Animations.IC_RUNNING_1995)
+        private val jumpAnim = Animation(Animations.HUMAN_JUMP_HURDLE_1603)
         private val locations =
             arrayOf(Location(3240, 3331, 0), Location(3240, 3338, 0), Location(3240, 3334, 0), Location(3240, 3335, 0))
     }

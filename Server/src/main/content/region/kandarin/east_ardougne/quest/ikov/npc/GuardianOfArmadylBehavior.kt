@@ -12,7 +12,7 @@ import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
 
-class GuardianOfArmadylBehavior : NPCBehavior(NPCs.GUARDIAN_OF_ARMADYL_274, NPCs.GUARDIAN_OF_ARMADYL_275) {
+class GuardianOfArmadylBehavior : NPCBehavior(NPCs.IKOV_GUARDIANMALE_274, NPCs.IKOV_GUARDIANFEMALE_275) {
     override fun onDropTableRolled(self: NPC, killer: Entity, drops: ArrayList<Item>) {
         super.onDropTableRolled(self, killer, drops)
         if (killer is Player && isQuestComplete(killer, Quests.TEMPLE_OF_IKOV.questName)) {

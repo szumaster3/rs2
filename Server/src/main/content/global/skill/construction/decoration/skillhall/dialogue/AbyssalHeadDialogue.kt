@@ -9,7 +9,7 @@ import shared.consts.NPCs
 
 class AbyssalHeadDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.ABYSSAL_DEMON_4230)
+        npc = NPC(NPCs.POH_MOUNTED_ABYSSAL_4230)
         when (stage) {
             0 -> {
                 if (!player!!.houseManager.isInHouse(player!!)) {

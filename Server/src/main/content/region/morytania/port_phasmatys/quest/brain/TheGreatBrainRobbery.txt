@@ -11,7 +11,7 @@ import core.plugin.Initializable
 
 @Initializable
 class TheGreatBrainRobbery :
-    Quest("The Great Brain Robbery", 135, 134, 2, Vars.VARBIT_QUEST_THE_GREAT_BRAIN_ROBBERY_980, 0, 1, 130) {
+    Quest("The Great Brain Robbery", 135, 134, 2, Vars.VARBIT_980, 0, 1, 130) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -37,7 +37,7 @@ class TheGreatBrainRobbery :
         rewardXP(player, Skills.CRAFTING, 3000.0)
         rewardXP(player, Skills.CONSTRUCTION, 2000.0)
         addItemOrDrop(player, Items.BLESSED_LAMP_10889)
-        setVarbit(player, Vars.VARBIT_QUEST_THE_GREAT_BRAIN_ROBBERY_980, 130, true)
+        setVarbit(player, Vars.VARBIT_980, 130, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

@@ -257,5 +257,5 @@ class FillimanTarlockDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FILLIMAN_TARLOCK_1050)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FILLIMAN_TARLOCK_SPIRIT_1050)
 }

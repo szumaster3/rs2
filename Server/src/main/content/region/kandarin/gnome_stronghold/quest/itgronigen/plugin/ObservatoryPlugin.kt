@@ -21,13 +21,13 @@ import shared.consts.*
 
 class ObservatoryPlugin : InteractionListener {
     companion object {
-        private const val OBSERVATORY_ASSISTANT = NPCs.OBSERVATORY_ASSISTANT_6118
+        private const val OBSERVATORY_ASSISTANT = NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118
         private const val TELESCOPE_SCENERY = Scenery.TELESCOPE_25439
         private const val MOLTEN_GLASS = Items.MOLTEN_GLASS_1775
         private const val LENS_MOULD = Items.LENS_MOULD_602
         private const val OBSERVATORY_LENS = Items.OBSERVATORY_LENS_603
         private const val DUNGEON_STAIRS_UP = Scenery.STAIRS_25429
-        private const val SLEEPING_GUARD = NPCs.SLEEPING_GUARD_6122
+        private const val SLEEPING_GUARD = NPCs.QIP_OBS_GOBLIN_GUARD_6122
         private val KITCHEN_GATES = intArrayOf(Scenery.KITCHEN_GATE_2199, Scenery.KITCHEN_GATE_2200)
         private val KEY_CHEST = intArrayOf(Scenery.CHEST_25391, Scenery.CHEST_25389, Scenery.CHEST_25385, Scenery.CHEST_25387)
         private val KEY_CHEST_OPEN = intArrayOf(Scenery.CHEST_25392, Scenery.CHEST_25390, Scenery.CHEST_25386, Scenery.CHEST_25388)
@@ -78,7 +78,7 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(SLEEPING_GUARD, IntType.NPC, "Prod") { player, _ ->
-            val animation = Animation(Animations.HUMAN_GUARD_PROD_6839)
+            val animation = Animation(Animations.QIP_OBSERVATORY_HUMAN_WAKES_UP_GOBLIN_6839)
             if (!getAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_SPAWN, false)) {
                 animate(player, animation)
                 runTask(player, animation.duration) {
@@ -122,7 +122,7 @@ class ObservatoryPlugin : InteractionListener {
 
             setAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY, result)
 
-            animate(player, Animations.CLOSE_CHEST_539)
+            animate(player, Animations.HUMAN_CLOSECUPBOARD_539)
             replaceScenery(node.asScenery(), node.id + 1, 80)
             sendMessage(player, "You open the chest.")
 
@@ -130,7 +130,7 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(KEY_CHEST_OPEN, IntType.SCENERY, "search") { player, _ ->
-            animate(player, Animations.CLOSE_CHEST_539)
+            animate(player, Animations.HUMAN_CLOSECUPBOARD_539)
             sendMessage(player, "You search the chest.")
             when (getAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY, -1)) {
                 0 -> {
@@ -140,7 +140,7 @@ class ObservatoryPlugin : InteractionListener {
 
                 1 -> {
                     sendMessage(player, "You find a dose of antipoison.")
-                    addItem(player, Items.ANTIPOISON1_179)
+                    addItem(player, Items.ANTIPOISON_1_179)
                     removeAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY)
                 }
 
@@ -159,7 +159,7 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(KEY_CHEST_OPEN, IntType.SCENERY, "close") { player, node ->
-            animate(player, Animations.HUMAN_CLOSE_CHEST_538)
+            animate(player, Animations.HUMAN_OPENCUPBOARD_538)
             replaceScenery(node.asScenery(), node.id - 1, -1)
             sendMessage(player, "You close the chest.")
             return@on true
@@ -196,7 +196,7 @@ class ObservatoryPlugin : InteractionListener {
         on(GOBLIN_STOVE, IntType.SCENERY, "inspect") { player, _ ->
             sendDialogueLines(player, "The goblins appear to have been using the lens mould to cook their", "stew!")
             addDialogueAction(player) { _, _ ->
-                animate(player, Animations.CLOSE_CHEST_539)
+                animate(player, Animations.HUMAN_CLOSECUPBOARD_539)
                 setVarbit(player, Vars.VARBIT_QUEST_OBSERVATORY_GOBLIN_STOVE_LENS_MOULD_TAKEN_3837, 1, true)
                 sendDialogue(player, "You shake out its contents and take it with you.")
                 sendChat(player, "Euuuw, that smells awful!", 3)
@@ -259,7 +259,7 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(TELESCOPE_SCENERY, IntType.SCENERY, "view") { player, _ ->
-            val telescopeAnim = Animation(Animations.HUMAN_LOOK_TELESCOPE_6849)
+            val telescopeAnim = Animation(Animations.LOOK_THROUGH_SCOPE_6849)
             animate(player, telescopeAnim)
             sendMessage(player, "You look through the telescope.")
             playAudio(player, 3804)

@@ -46,8 +46,8 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
         private val MAP_SCENERY = intArrayOf(Scenery.MAP_TABLE_38315, Scenery.MAP_38422, Scenery.MAP_38421)
 
         private val WIZARD_NPCs = intArrayOf(
-            NPCs.WIZARD_8033, NPCs.WIZARD_8034, NPCs.WIZARD_8035, NPCs.WIZARD_8036,
-            NPCs.WIZARD_8037, NPCs.WIZARD_8038, NPCs.WIZARD_8039, NPCs.WIZARD_8040,
+            NPCs.RCGUILD_WIZARD_MALE1_8033, NPCs.RCGUILD_WIZARD_MALE2_8034, NPCs.RCGUILD_WIZARD_MALE3_8035, NPCs.RCGUILD_WIZARD_MALE4_8036,
+            NPCs.RCGUILD_WIZARD_FEMALE1_8037, NPCs.RCGUILD_WIZARD_FEMALE2_8038, NPCs.RCGUILD_WIZARD_FEMALE3_8039, NPCs.RCGUILD_WIZARD_FEMALE4_8040,
         )
 
         // Item IDs of all talismans. In-game command [::talismankit] adds all talisman items to inventory.
@@ -162,10 +162,10 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
             val destination = if (isInTower(player)) GUILD_DESTINATION else TOWER_DESTINATION
 
             player.lock(4)
-            visualize(player, Animations.RC_TP_A_10180, Graphics.RC_GUILD_TP)
+            visualize(player, Animations.PLAYER_PORTAL_ENTRY_10180, Graphics.PORTAL_ENTRY_SPOT_1771)
             queueScript(player, 3, QueueStrength.SOFT) {
                 teleport(player, destination)
-                visualize(player, Animations.RC_TP_B_10182, Graphics.RC_GUILD_TP)
+                visualize(player, Animations.RCGUILD_PLAYER_APPEAR_10182, Graphics.PORTAL_ENTRY_SPOT_1771)
                 face(player, destination)
                 return@queueScript stopExecuting(player)
             }
@@ -186,7 +186,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
          * Handles the rewards interface.
          */
 
-        on(NPCs.WIZARD_ELRISS_8032, IntType.NPC, "Exchange") { player, _ ->
+        on(NPCs.RCGUILD_WIZARD_ELRISS_8032, IntType.NPC, "Exchange") { player, _ ->
             openInterface(player, Components.RCGUILD_REWARDS_779)
             return@on true
         }
@@ -214,7 +214,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
          * Handles dialogue interaction with Wizard Vief.
          */
 
-        on(NPCs.WIZARD_VIEF_8030, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.RCGUILD_WIZARD_VIEF_8030, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Ah! You'll help me, won't you?", FaceAnim.HAPPY)
             return@on true
         }

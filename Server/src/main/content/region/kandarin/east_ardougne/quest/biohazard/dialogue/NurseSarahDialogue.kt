@@ -16,7 +16,7 @@ import shared.consts.NPCs
 class NurseSarahDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.NURSE_SARAH_373)
+        npc = NPC(NPCs.BIONURSE_373)
         when (stage) {
             0 -> player("Hello nurse.").also { stage++ }
             1 -> if (getQuestStage(player!!, Quests.BIOHAZARD.questName) <= 6) {

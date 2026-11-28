@@ -76,7 +76,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
     override fun defineListeners() {
         addClimbDest(Location.create(3504, 9970, 0), Location.create(3504, 3571, 0))
 
-        on(Items.NULL_5164, SCENERY, "read") { player, _ ->
+        on(Items.OBJ_5164, SCENERY, "read") { player, _ ->
             if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) < 7) {
                 sendDialogueLines(
                     player,
@@ -160,7 +160,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, Items.STAR_AMULET_4183, Items.NULL_5167) { player, _, _ ->
+        onUseWith(SCENERY, Items.STAR_AMULET_4183, Items.OBJ_5167) { player, _, _ ->
             if (removeItem(player, Items.STAR_AMULET_4183)) {
                 sendItemDialogue(
                     player,
@@ -215,7 +215,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             return@onUseWith true
         }
 
-        on(Items.NULL_5167, SCENERY, "search") { player, node ->
+        on(Items.OBJ_5167, SCENERY, "search") { player, node ->
             val scenery = node.asScenery()
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedMemorial, false) ||
                 getQuestStage(
@@ -254,7 +254,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             return@on true
         }
 
-        on(Items.NULL_5167, SCENERY, "push") { player, node ->
+        on(Items.OBJ_5167, SCENERY, "push") { player, node ->
             val scenery = node.asScenery()
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedMemorial, false) ||
                 getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) > 2
@@ -317,13 +317,13 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             return@onUseWith true
         }
 
-        on(Items.NULL_5158, SCENERY, "take-from") { player, _ ->
+        on(Items.OBJ_5158, SCENERY, "take-from") { player, _ ->
             sendMessage(player, "You take a garden cane from the pile.")
             addItemOrDrop(player, Items.GARDEN_CANE_4189)
             return@on true
         }
 
-        on(Items.NULL_5157, SCENERY, "search") { player, _ ->
+        on(Items.OBJ_5157, SCENERY, "search") { player, _ ->
             sendItemDialogue(player, Items.GARDEN_BRUSH_4190, "You find a garden brush in the cupboard.")
 
             addItemOrDrop(player, Items.GARDEN_BRUSH_4190)
@@ -398,7 +398,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
                     "You repair the lightning conductor not one moment too soon - a tremendous bold of lightning melts the new lightning conductor, and power blazes throughout the castle, if only briefly.",
                 )
                 val scenery = node.asScenery()
-                replaceScenery(scenery, Items.NULL_5177, 3, node.location)
+                replaceScenery(scenery, Items.OBJ_5177, 3, node.location)
                 animateScenery(player, scenery, 1632)
             }
             return@on true
@@ -421,7 +421,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             return@onUseWith true
         }
 
-        on(NPCs.DR_FENKENSTRAIN_1670, NPC, "pickpocket") { player, _ ->
+        on(NPCs.FENK_FENKENSTRAIN_MODEL_1670, NPC, "pickpocket") { player, _ ->
             if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN.questName) == 7) {
                 sendMessage(player, "You steal the Ring of Charos from Fenkenstrain.")
                 finishQuest(player, Quests.CREATURE_OF_FENKENSTRAIN.questName)
@@ -433,7 +433,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             } else {
                 sendNPCDialogue(
                     player,
-                    NPCs.DR_FENKENSTRAIN_1670,
+                    NPCs.FENK_FENKENSTRAIN_MODEL_1670,
                     "What do you think you're doing???",
                     FaceAnim.NEUTRAL,
                 )

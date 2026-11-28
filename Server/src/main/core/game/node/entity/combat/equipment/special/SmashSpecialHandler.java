@@ -29,7 +29,7 @@ public final class SmashSpecialHandler extends MeleeSwingHandler implements Plug
 
     private static final Animation ANIMATION = new Animation(10501, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.STATIUSS_WARHAMMER_1840, 0, 16);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.PVPW_WARHAMMER_ATTACK_SPOT_1840, 0, 16);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {
@@ -38,7 +38,7 @@ public final class SmashSpecialHandler extends MeleeSwingHandler implements Plug
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        if (CombatStyle.MELEE.getSwingHandler().register(Items.STATIUS_WARHAMMER_13902, this) && CombatStyle.MELEE.getSwingHandler().register(Items.STATIUS_WARHAMMER_DEG_13904, this))
+        if (CombatStyle.MELEE.getSwingHandler().register(Items.STATIUSS_WARHAMMER_13902, this) && CombatStyle.MELEE.getSwingHandler().register(Items.STATIUS_WARHAMMER_DEG_13904, this))
             ;
         return this;
     }

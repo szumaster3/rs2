@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class UndergroundPass : Quest("Underground Pass", 129, 128, 5, Vars.VARP_QUEST_UDERGROUND_PASS_161, 0, 1, 10) {
+class UndergroundPass : Quest("Underground Pass", 129, 128, 5, Vars.VARP_161, 0, 1, 10) {
 
     //(isBitFlagged(VARP[162], 11)
 

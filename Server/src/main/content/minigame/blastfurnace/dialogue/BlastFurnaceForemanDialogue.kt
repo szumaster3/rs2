@@ -358,5 +358,5 @@ class BlastFurnaceForemanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BlastFurnaceForemanDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLAST_FURNACE_FOREMAN_2553)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLAST_FURNACE_INSTRUCTOR_2553)
 }

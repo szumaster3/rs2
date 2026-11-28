@@ -27,7 +27,7 @@ class FrogDialogue(player: Player? = null) : Dialogue(player) {
             stage = END_DIALOGUE
         } else {
             when (stage) {
-                0 -> sendNPCDialogue(p, NPCs.FROG_2471, "Well, we'll see how you like being a frog!", FaceAnim.OLD_NORMAL).also { stage++ }
+                0 -> sendNPCDialogue(p, NPCs.H_A_M_AGENT_WALTON_2471, "Well, we'll see how you like being a frog!", FaceAnim.OLD_NORMAL).also { stage++ }
                 1 -> transformPlayerIntoFrog(p)
             }
         }
@@ -44,5 +44,5 @@ class FrogDialogue(player: Player? = null) : Dialogue(player) {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FROG_2472)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FROG_HERALD_2472)
 }

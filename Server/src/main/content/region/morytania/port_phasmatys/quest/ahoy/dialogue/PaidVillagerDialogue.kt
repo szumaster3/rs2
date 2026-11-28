@@ -16,7 +16,7 @@ import shared.consts.NPCs
 class PaidVillagerDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val tokens = amountInInventory(player!!, Items.ECTO_TOKEN_4278)
-        npc = NPC(NPCs.GHOST_VILLAGER_1697)
+        npc = NPC(NPCs.AHOY_GHOST_VILLAGER_1697)
         when (stage) {
             0 -> player("How much?").also { stage++ }
             1 -> npc("Oh, it'll cost you 1 ecto-token.").also { stage++ }

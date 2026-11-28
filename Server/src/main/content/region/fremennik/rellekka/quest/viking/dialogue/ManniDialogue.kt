@@ -186,7 +186,7 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
                 mapOf(
                     0  to { lock() },
                     1  to { face() },
-                    3  to { npc?.animator?.animate(Animation(Animations.DRINK_BEER_1327, Animator.Priority.HIGH)); player?.sendMessages("The Fremennik drinks his tankard first. He staggers a little bit.")},
+                    3  to { npc?.animator?.animate(Animation(Animations.VIKING_TANKARD_DRINK_1327, Animator.Priority.HIGH)); player?.sendMessages("The Fremennik drinks his tankard first. He staggers a little bit.")},
                     5  to { drinkAnimation() },
                     7  to { player?.sendMessages("You drink from your keg. You feel extremely drunk..."); player?.dialogueInterpreter?.sendDialogues(player, FaceAnim.DRUNK, "Ish no fair!! I canna drink another drop! I alsho", "feel veddy, veddy ill...") },
                     15 to { player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "I guessh I win then ouddaladder! (hic) Niche try,", "anyway!") },
@@ -196,7 +196,7 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
                 mapOf(
                     0  to { lock() },
                     1  to { face() },
-                    3  to { npc?.animator?.animate(Animation(Animations.DRINK_BEER_1327, Animator.Priority.HIGH)) },
+                    3  to { npc?.animator?.animate(Animation(Animations.VIKING_TANKARD_DRINK_1327, Animator.Priority.HIGH)) },
                     5  to { drinkAnimation() },
                     7  to { player?.sendMessages("You drink from your keg. You don't feel at all drunk."); player?.dialogueInterpreter?.sendDialogues(player, FaceAnim.HAPPY, "Aaaah, lovely stuff. So you want to get the next round", "in, or shall I? You don't look so good there!") },
                     15 to { player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "Wassha? Guh? You drank that whole keg! But it dinnna", "affect you at all! I conshede! You can probably", "outdrink me!") },
@@ -223,7 +223,7 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
         }
 
         private fun drinkAnimation() {
-            player?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
+            player?.animator?.animate(Animation(Animations.VIKING_KEG_DRINK_FULL_1330, Animator.Priority.HIGH))
             player?.inventory?.remove(Item(Items.KEG_OF_BEER_3711))
         }
 
@@ -253,5 +253,5 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ManniDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MANNI_THE_REVELLER_1286)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_REVELLER_3_1286)
 }

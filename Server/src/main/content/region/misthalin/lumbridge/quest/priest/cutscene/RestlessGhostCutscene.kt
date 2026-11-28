@@ -21,7 +21,7 @@ class RestlessGhostCutscene(
     }
 
     override fun runStage(stage: Int) {
-        val npc = getNPC(NPCs.RESTLESS_GHOST_457)!!.location
+        val npc = getNPC(NPCs.GHOSTX_457)!!.location
         when (stage) {
             0 -> {
                 fadeToBlack()
@@ -41,7 +41,7 @@ class RestlessGhostCutscene(
                 sendChat(getNPC(GHOST)!!, "Release! Thank you")
                 sendNPCDialogueLines(
                     player,
-                    NPCs.RESTLESS_GHOST_457,
+                    NPCs.GHOSTX_457,
                     FaceAnim.HAPPY,
                     true,
                     "Release! Thank you stranger..",
@@ -56,9 +56,9 @@ class RestlessGhostCutscene(
 
             4 -> {
                 visualize(
-                    getNPC(NPCs.RESTLESS_GHOST_457)!!,
-                    Animations.RESTLESS_GHOST_ASCENDS_4018,
-                    Graphics(shared.consts.Graphics.GREY_SWIVELS_604, 30),
+                    getNPC(NPCs.GHOSTX_457)!!,
+                    Animations.RESTLESS_GHOST_VANISH_4018,
+                    Graphics(shared.consts.Graphics.BURGH_HOLDING_CAST_SPOT_604, 30),
                 )
                 timedUpdate(2)
             }
@@ -73,7 +73,7 @@ class RestlessGhostCutscene(
                 spawnProjectile(
                     source = npc.transform(-4, 1, 0),
                     dest = npc.transform(-4, -4, 0),
-                    projectile = shared.consts.Graphics.SWIRLEY_GREY_SMOKE_668,
+                    projectile = shared.consts.Graphics.RESTLESS_GHOST_TRAVEL_668,
                     startHeight = 42,
                     endHeight = 30,
                     delay = 0,
@@ -88,7 +88,7 @@ class RestlessGhostCutscene(
                 spawnProjectile(
                     source = npc.transform(-4, -3, 0),
                     dest = npc.transform(0, -7, 0),
-                    projectile = shared.consts.Graphics.SWIRLEY_GREY_SMOKE_668,
+                    projectile = shared.consts.Graphics.RESTLESS_GHOST_TRAVEL_668,
                     startHeight = 30,
                     endHeight = 100,
                     delay = 0,
@@ -109,6 +109,6 @@ class RestlessGhostCutscene(
     }
 
     companion object {
-        private const val GHOST = NPCs.RESTLESS_GHOST_457
+        private const val GHOST = NPCs.GHOSTX_457
     }
 }

@@ -138,7 +138,7 @@ enum class BoltEffect(
         override fun impact(state: BattleState) {
             var victimPoints = (state.victim.getSkills().lifepoints * 0.20).toInt()
             val playerPoints = (state.attacker.getSkills().lifepoints * 0.10).toInt()
-            if (victimPoints >= 100 && state.victim.id == NPCs.CORPOREAL_BEAST_8133) {
+            if (victimPoints >= 100 && state.victim.id == NPCs.SUM2_SPIRIT_BEAST_CORPOREAL_8133) {
                 victimPoints = 100
             }
             state.estimatedHit = victimPoints

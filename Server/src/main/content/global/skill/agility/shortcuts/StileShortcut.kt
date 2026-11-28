@@ -17,7 +17,7 @@ import shared.consts.Scenery
  * @author Ceikry
  */
 class StileShortcut : InteractionListener {
-    val ids = intArrayOf(Scenery.STILE_993, Scenery.STILE_3730, Scenery.STILE_7527, Scenery.STILE_12982, Scenery.STILE_19222, Scenery.STILE_22302, Scenery.STILE_29460, Scenery.STILE_33842, Scenery.STILE_34776, Scenery.STILE_39508, Scenery.STILE_39509, Scenery.STILE_39510)
+    val ids = intArrayOf(Scenery.STILE_993, Scenery.STILE_3730, Scenery.STILE_7527, Scenery.SWORD_CASE_12982, Scenery.STILE_19222, Scenery.STILE_22302, Scenery.STILE_29460, Scenery.STILE_33842, Scenery.STILE_34776, Scenery.STILE_39508, Scenery.STILE_39509, Scenery.STILE_39510)
     private val FALCONRY_STILE = Scenery.STILE_19222
 
     override fun defineListeners() {

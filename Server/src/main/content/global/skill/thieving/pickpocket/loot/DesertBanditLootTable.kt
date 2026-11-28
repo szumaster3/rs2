@@ -8,13 +8,13 @@ import shared.consts.NPCs
 object DesertBanditLootTable {
 
     val NPC_ID = intArrayOf(
-        NPCs.BANDIT_1926,
-        NPCs.BANDIT_1931
+        NPCs.FOURDIAMONDS_SWORD_BANDIT_1_1926,
+        NPCs.FOURDIAMONDS_SWORD_BANDIT_FREE_1931
     )
 
     val LOOT = WeightBasedTable.create(
         WeightedItem(Items.COINS_995, 30, 30, 5.0),
-        WeightedItem(Items.ANTIPOISON1_179, 1, 1, 1.0),
+        WeightedItem(Items.ANTIPOISON_1_179, 1, 1, 1.0),
         WeightedItem(Items.LOCKPICK_1523, 1, 1, 1.0)
     )
 }

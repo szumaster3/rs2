@@ -24,8 +24,8 @@ import shared.consts.NPCs
 class EdgevilleMonkDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
-        private val ANIMATION = Animation(Animations.CAST_SPELL_WISE_OLD_710)
-        private val GRAPHIC = Graphics(shared.consts.Graphics.MONK_CAST_HEAL_84, 46)
+        private val ANIMATION = Animation(Animations.HUMAN_CASTENTANGLE_710)
+        private val GRAPHIC = Graphics(shared.consts.Graphics.HEAL_CASTING_84, 46)
     }
 
     override fun newInstance(player: Player?): Dialogue = EdgevilleMonkDialogue(player)
@@ -36,7 +36,7 @@ class EdgevilleMonkDialogue(player: Player? = null) : Dialogue(player) {
                 npc = args[0] as NPC
             } else {
                 interpreter.sendDialogues(
-                    NPCs.MONK_7727,
+                    NPCs.ICEMT_MONK_7727,
                     null,
                     "Only members of our order can go up there. You'll",
                     "need to talk to Abbot Langley if you want to explore",
@@ -100,5 +100,5 @@ class EdgevilleMonkDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_7727)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ICEMT_MONK_7727)
 }

@@ -102,5 +102,5 @@ class AnnaJonesDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AnnaJonesDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ANNA_JONES_5837)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SUROK_ANNAJONES_5837)
 }

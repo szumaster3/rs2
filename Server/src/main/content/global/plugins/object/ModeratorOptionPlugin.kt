@@ -24,7 +24,7 @@ class ModeratorOptionPlugin : OptionHandler() {
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
         when (option) {
-            "climb-up" -> climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(3222, 3218, 0))
+            "climb-up" -> climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(3222, 3218, 0))
             "j-mod options" -> {
                 if (player.details.rights == Rights.REGULAR_PLAYER) {
                     return true

@@ -162,8 +162,8 @@ class ClayGolemDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(
         NPCs.CLAY_GOLEM_1907,
-        NPCs.BROKEN_CLAY_GOLEM_1908,
-        NPCs.DAMAGED_CLAY_GOLEM_1909,
-        NPCs.CLAY_GOLEM_1910
+        NPCs.GOLEM_BROKEN_GOLEM_1908,
+        NPCs.GOLEM_PARTIALLY_BROKEN_GOLEM_1909,
+        NPCs.GOLEM_FIXED_GOLEM_1910
     )
 }

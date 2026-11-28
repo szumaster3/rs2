@@ -73,5 +73,5 @@ class UnicornStallionDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.UNICORN_STALLION_6822, NPCs.UNICORN_STALLION_6823)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_UNICORN_6822, NPCs.LORE_UNICORN_COMBAT_6823)
 }

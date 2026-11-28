@@ -39,7 +39,7 @@ class ExperimentCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(6)
             }
             2 -> {
-                visualize(player, Animations.BALLOON_FLY_5142, 877)
+                visualize(player, Animations.ZEP_SET_OFF_BALLOON_5142, 877)
                 timedUpdate(2)
             }
             3 -> {
@@ -92,7 +92,7 @@ class ExperimentCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(1)
             }
             16 -> {
-                animate(player, Animations.HUMAN_SHRUG_2113)
+                animate(player, Animations.EMOTE_SHRUG_2113)
                 playerDialogueUpdate(FaceAnim.FRIENDLY, "Well, that went down like a lead balloon.")
             }
             17 -> end {

@@ -32,15 +32,15 @@ class BlackKnightNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
     companion object {
         private val ID = intArrayOf(
             NPCs.BLACK_KNIGHT_178,
-            NPCs.BLACK_KNIGHT_179,
-            NPCs.BLACK_KNIGHT_2698,
-            NPCs.BLACK_KNIGHT_2777,
-            NPCs.BLACK_KNIGHT_6189,
-            NPCs.ELITE_BLACK_KNIGHT_8324,
-            NPCs.ELITE_BLACK_KNIGHT_8325,
-            NPCs.ELITE_BLACK_KNIGHT_8326,
-            NPCs.ELITE_BLACK_KNIGHT_8327,
-            NPCs.ELITE_BLACK_KNIGHT_8330,
+            NPCs.AGGRESSIVE_BLACK_KNIGHT_179,
+            NPCs.JAIL_BLACK_KNIGHT_2698,
+            NPCs.WANTED_SUMMONED_BLACK_KNIGHT_2777,
+            NPCs.KR_AGGRESSIVE_BLACK_KNIGHT_6189,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_NONE_8324,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_MELEE_8325,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_RANGE_8326,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_MAGIC_8327,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_NOATTACK_STOP_8330,
         )
     }
 }

@@ -42,5 +42,5 @@ class AliTheMayorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AliTheMayorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_MAYOR_1870)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEUD_MAYOR_GEOM_1870)
 }

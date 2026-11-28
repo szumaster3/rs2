@@ -63,5 +63,5 @@ class GraniteLobsterDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.GRANITE_LOBSTER_6849, NPCs.GRANITE_LOBSTER_6850)
+        intArrayOf(NPCs.LORE_ROCK_LOBSTER_6849, NPCs.LORE_ROCK_LOBSTER_COMBAT_6850)
 }

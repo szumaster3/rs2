@@ -6,7 +6,7 @@ object ZogreUtils {
     const val UNREALIST_PORTRAIT = Items.SITHIK_PORTRAIT_4814
     const val REALIST_PORTRAIT = Items.SITHIK_PORTRAIT_4815
     const val SIGNED_PORTRAIT = Items.SIGNED_PORTRAIT_4816
-    const val HAM_BOOK = Items.BOOK_OF_HAM_4829
+    const val HAM_BOOK = Items.BOOK_OF_H_A_M_4829
     const val NECROMANCY_BOOK = Items.NECROMANCY_BOOK_4837
     const val PORTRAI_BOOK = Items.BOOK_OF_PORTRAITURE_4817
     const val STRANGE_POTION = Items.STRANGE_POTION_4836

@@ -73,7 +73,7 @@ class BansheeNPC : AbstractNPC {
                             player.walkingQueue.reset()
                             player.locks.lockMovement(3)
                             player.properties.combatPulse.setNextAttack(3)
-                            player.animate(Animation(Animations.BEND_EARS_1572, Priority.HIGH))
+                            player.animate(Animation(Animations.EARS_BLEED_1572, Priority.HIGH))
                         }
                         for (skill in SKILLS) {
                             val drain = (player.getSkills().getStaticLevel(skill) * 0.5).toInt()

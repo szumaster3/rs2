@@ -112,5 +112,5 @@ class SinSeerDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SIN_SEER_5571)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHADOW_MAJ_SEER_5571)
 }

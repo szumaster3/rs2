@@ -55,7 +55,7 @@ class TowerOfLifePlugin : InteractionListener {
             }
 
             lock(player, 2)
-            animate(player, Animations.HUMAN_PICKPOCKETING_881)
+            animate(player, Animations.HUMAN_PICKPOCKET_881)
             sendMessage(player, "You attempt to pick the man's pocket.")
             if (lootTable != null) {
                 lootTable.forEach {
@@ -70,7 +70,7 @@ class TowerOfLifePlugin : InteractionListener {
                     sendMessage(player, "You pick the man's pocket.")
                 }
             } else {
-                animate(node.asNpc(), Animations.PUNCH_422, true)
+                animate(node.asNpc(), Animations.HUMAN_UNARMEDPUNCH_422, true)
                 stun(player, 5)
                 sendChat(node.asNpc(), "What do you think you're doing?")
                 sendMessage(player, "You fail to pick the man's pocket.")
@@ -83,6 +83,6 @@ class TowerOfLifePlugin : InteractionListener {
         const val TOWER_DOORS = Scenery.TOWER_DOOR_21814
         const val PLANTS = Scenery.PLANT_21924
         val npcIDs = intArrayOf(NPCs.BLACK_EYE_5589, NPCs.NO_FINGERS_5590, NPCs.GUMMY_5591, NPCs.THE_GUNS_5592)
-        val plantSearch: Animation = Animation.create(Animations.HUMAN_SEARCH_BUSHES_800)
+        val plantSearch: Animation = Animation.create(Animations.CAGED_800)
     }
 }

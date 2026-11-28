@@ -70,5 +70,5 @@ class ToolLeprechaunDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TOOL_LEPRECHAUN_3021, NPCs.TECLYN_2861)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FARMING_TOOLS_LEPRECHAUN_3021, NPCs.TECLYN_2861)
 }

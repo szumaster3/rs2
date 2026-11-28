@@ -16,7 +16,7 @@ import shared.consts.Animations;
 @Initializable
 public final class ShooAwayStrayDogPlugin extends OptionHandler {
 
-    private static final Animation ANIMATION = new Animation(Animations.HUMAN_BLOW_RASPBERRY_2110);
+    private static final Animation ANIMATION = new Animation(Animations.EMOTE_YA_BOO_SUCKS_2110);
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {

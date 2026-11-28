@@ -43,7 +43,7 @@ class KingBlackDragonNPC : AbstractNPC {
 
     override fun getDragonfireProtection(fire: Boolean): Int = 0x2 or 0x4 or 0x8
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.KING_BLACK_DRAGON_50)
+    override fun getIds(): IntArray = intArrayOf(NPCs.KING_DRAGON_50)
 
     override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatHandler
 

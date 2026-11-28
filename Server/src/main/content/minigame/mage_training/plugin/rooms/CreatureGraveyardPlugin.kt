@@ -143,7 +143,7 @@ class CreatureGraveyardPlugin :
             }
             lock(player, 1)
             addItem(player, item.id)
-            animate(player, Animations.HUMAN_BURYING_BONES_827)
+            animate(player, Animations.HUMAN_PICKUPFLOOR_827)
             playAudio(player, Sounds.MTA_DEPOSIT_BONE_1660) // ?
             var life = scenery.attributes.getAttribute("life", 4) - 1
             if (life < 1) {

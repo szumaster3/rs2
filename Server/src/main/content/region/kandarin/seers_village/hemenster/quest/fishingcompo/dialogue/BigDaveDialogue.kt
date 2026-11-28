@@ -39,5 +39,5 @@ class BigDaveDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BIG_DAVE_228)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BIGDAVE_228)
 }

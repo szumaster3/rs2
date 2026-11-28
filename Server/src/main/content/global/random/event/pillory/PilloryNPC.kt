@@ -15,7 +15,7 @@ import shared.consts.NPCs
  * Represents the Pillory random event NPC.
  * @author szu
  */
-class PilloryNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.PILLORY_GUARD_2791) {
+class PilloryNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.MACRO_PILLORY_GUARD_2791) {
 
     override fun init() {
         super.init()

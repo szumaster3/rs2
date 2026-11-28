@@ -12,7 +12,7 @@ import core.plugin.Initializable
 
 @Initializable
 class DealingWithScarabas :
-    Quest("Dealing with Scabaras", 145, 144, 1, Vars.VARBIT_QUEST_DEALING_WITH_SCARABAS_4230, 0, 1, 700) {
+    Quest("Dealing with Scabaras", 145, 144, 1, Vars.VARBIT_4230, 0, 1, 700) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -79,7 +79,7 @@ class DealingWithScarabas :
         rewardXP(player, Skills.THIEVING, 7000.0)
         rewardXP(player, Skills.AGILITY, 7000.0)
         rewardXP(player, Skills.PRAYER, 7000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_DEALING_WITH_SCARABAS_4230, 700, true)
+        setVarbit(player, Vars.VARBIT_4230, 700, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

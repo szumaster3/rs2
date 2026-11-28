@@ -214,6 +214,6 @@ class VoidKnightDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
         val IDS: IntArray =
-            intArrayOf(NPCs.VOID_KNIGHT_3786, NPCs.VOID_KNIGHT_3788, NPCs.VOID_KNIGHT_3789, NPCs.VOID_KNIGHT_5956)
+            intArrayOf(NPCs.PEST_VOIDKNIGHT_1_3786, NPCs.PEST_VOIDKNIGHT_3_3788, NPCs.PEST_VOIDKNIGHT_4_3789, NPCs.PEST_VOIDKNIGHT_2_5956)
     }
 }

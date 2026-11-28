@@ -38,7 +38,7 @@ class SolihibDialogue(player: Player? = null) : Dialogue(player) {
             )
             2 -> {
                 end()
-                openNpcShop(player!!, NPCs.SOLIHIB_1433)
+                openNpcShop(player!!, NPCs.MM_SOLIHIB_1433)
             }
         }
         return true
@@ -46,5 +46,5 @@ class SolihibDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = DagaDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SOLIHIB_1433)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MM_SOLIHIB_1433)
 }

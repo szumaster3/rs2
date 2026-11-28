@@ -8,7 +8,7 @@ import shared.consts.NPCs
 
 class KuraskHeadDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.KURASK_4229)
+        npc = NPC(NPCs.POH_MOUNTED_KURASK_4229)
         when (stage) {
             0 -> npcl(FaceAnim.CHILD_FRIENDLY, "I KILL YOU!!!").also { stage++ }
             1 -> if (!player!!.houseManager.isInHouse(player!!)) {

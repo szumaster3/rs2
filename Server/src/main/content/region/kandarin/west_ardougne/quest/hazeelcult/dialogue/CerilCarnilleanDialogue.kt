@@ -115,7 +115,7 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             5 -> when (stage) {
-                0 -> sendNPCDialogue(player, NPCs.BUTLER_JONES_890, "It wasn't me, m'lud. I am, as you know, a loyal servant.").also { stage++ }
+                0 -> sendNPCDialogue(player, NPCs.BUTLER_JONES_HAZEEL_CULTIST_890, "It wasn't me, m'lud. I am, as you know, a loyal servant.").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Hmph. Quite right too. I cannot fathom why this scoundrel would accuse you of such a crime without evidence to back it up.").also { stage++ }
                 2 -> npcl(FaceAnim.FRIENDLY, "Right, I have decided. I have given my word as a nobleman to reward you for your efforts in retrieving my armour,").also { stage++ }
                 3 -> npcl(FaceAnim.FRIENDLY, "but I must also compensate Jones for this terrible slander you have made against him.").also { stage++ }
@@ -125,7 +125,7 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
                     stage++
                 }
                 5 -> npcl(FaceAnim.FRIENDLY, "Now, take it and leave, you scoundrel! Don't darken my doorstep again!").also { stage++ }
-                6 -> sendNPCDialogue(player, NPCs.BUTLER_JONES_890, "Don't worry, m'lud, this fool won't be bothering us any more.").also { stage++ }
+                6 -> sendNPCDialogue(player, NPCs.BUTLER_JONES_HAZEEL_CULTIST_890, "Don't worry, m'lud, this fool won't be bothering us any more.").also { stage++ }
                 7 -> sendDialogue(player, "Jones smirks at you. You are going to need more than words to prove his treachery.").also { stage++ }
                 8 -> {
                     end()
@@ -148,5 +148,5 @@ class CerilCarnilleanDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CERIL_CARNILLEAN_885)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_CERIL_CARNILLEAN_885)
 }

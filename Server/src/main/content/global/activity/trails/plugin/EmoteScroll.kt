@@ -78,14 +78,14 @@ abstract class EmoteScroll(
     private fun spawnUri(player: Player) {
         var doubleAgent = level == ClueLevel.HARD && player.getAttribute("killed-agent", 0) != clueId
 
-        var id = NPCs.URI_5141
+        var id = NPCs.TRAIL_EASY_URI_5141
         if (doubleAgent) {
             val wilderness = player.skullManager.isWilderness
             if (wilderness) {
-                id = NPCs.URI_5141
+                id = NPCs.TRAIL_EASY_URI_5141
                 doubleAgent = false
             } else {
-                id = NPCs.DOUBLE_AGENT_5145
+                id = NPCs.DOUBLE_AGENT_2_5145
             }
         }
         val uri = NPC.create(id, player.location.transform(1, 0, 0))
@@ -98,13 +98,13 @@ abstract class EmoteScroll(
         uri.graphics(Graphics.create(86))
         uri.faceTemporary(player, 1)
         uri.animator.animate(
-            Animation.create(Animations.HUMAN_WAVE_863))
+            Animation.create(Animations.EMOTE_WAVE_863))
         if (doubleAgent) {
             uri.sendChat("I expect you to die!")
             uri.properties.combatPulse.attack(player)
         } else {
             uri.animator.animate(
-            Animation.create(Animations.HUMAN_WAVE_863))
+            Animation.create(Animations.EMOTE_WAVE_863))
         }
     }
 

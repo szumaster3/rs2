@@ -178,9 +178,9 @@ class ScorpionCatcherPlugin : Quest(Quests.SCORPION_CATCHER), InteractionListene
         val baseCageId = Items.SCORPION_CAGE_456
 
         fun scorpionBit(scorpionId: Int): Int = when (scorpionId) {
-            NPCs.KHARID_SCORPION_385 -> 1 shl 0 // Taverley
-            NPCs.KHARID_SCORPION_386 -> 1 shl 1 // Outpost
-            NPCs.KHARID_SCORPION_387 -> 1 shl 2 // Monastery
+            NPCs.QUESTSCORPIONA_385 -> 1 shl 0 // Taverley
+            NPCs.QUESTSCORPIONB_386 -> 1 shl 1 // Outpost
+            NPCs.QUESTSCORPIONC_387 -> 1 shl 2 // Monastery
             else -> 0
         }
 
@@ -189,9 +189,9 @@ class ScorpionCatcherPlugin : Quest(Quests.SCORPION_CATCHER), InteractionListene
         fun cageFromMask(mask: Int): Int = baseCageId + mask
 
         fun scorpionAttribute(scorpionId: Int): String? = when (scorpionId) {
-            NPCs.KHARID_SCORPION_385 -> GameAttributes.LABEL_SCORPION_TAVERLEY
-            NPCs.KHARID_SCORPION_386 -> GameAttributes.LABEL_SCORPION_OUTPOST
-            NPCs.KHARID_SCORPION_387 -> GameAttributes.LABEL_SCORPION_MONASTERY
+            NPCs.QUESTSCORPIONA_385 -> GameAttributes.LABEL_SCORPION_TAVERLEY
+            NPCs.QUESTSCORPIONB_386 -> GameAttributes.LABEL_SCORPION_OUTPOST
+            NPCs.QUESTSCORPIONC_387 -> GameAttributes.LABEL_SCORPION_MONASTERY
             else -> null
         }
 
@@ -226,7 +226,7 @@ class ScorpionCatcherPlugin : Quest(Quests.SCORPION_CATCHER), InteractionListene
         }
 
 
-        val scorpionIds = listOf(NPCs.KHARID_SCORPION_385, NPCs.KHARID_SCORPION_386, NPCs.KHARID_SCORPION_387)
+        val scorpionIds = listOf(NPCs.QUESTSCORPIONA_385, NPCs.QUESTSCORPIONB_386, NPCs.QUESTSCORPIONC_387)
         val cageIds = (Items.SCORPION_CAGE_456..Items.SCORPION_CAGE_463)
 
         for (cageId in cageIds) {

@@ -70,7 +70,7 @@ class FalconryPlugin : ActivityPlugin(FALCONRY_ZONE, false, false, false), MapAr
     class FalconryPlugin : OptionHandler() {
         override fun newInstance(arg: Any?): Plugin<Any> {
             NpcType.forId(NPCs.MATTHIAS_5093).handlers["option:quick-falconry"] = this
-            NpcType.forId(NPCs.GYR_FALCON_5094).handlers["option:retrieve"] = this
+            NpcType.forId(NPCs.HUNTING_FALCON_ONSPEEDY_5094).handlers["option:retrieve"] = this
             for (falconCatch in FalconCatch.values()) {
                 NpcType.forId(falconCatch.npc).handlers["option:catch"] = this
             }
@@ -138,7 +138,7 @@ class FalconryPlugin : ActivityPlugin(FALCONRY_ZONE, false, false, false), MapAr
         override fun isWalk(): Boolean = false
 
         override fun isWalk(player: Player, node: Node): Boolean {
-            if (node.asNpc() is NPC) return node.id == NPCs.MATTHIAS_5093 || node.id == NPCs.GYR_FALCON_5094
+            if (node.asNpc() is NPC) return node.id == NPCs.MATTHIAS_5093 || node.id == NPCs.HUNTING_FALCON_ONSPEEDY_5094
             return false
         }
 
@@ -253,7 +253,7 @@ private class FalconryCatchPulse(player: Player?, node: NPC, private val falconC
 
         if (success) {
             node!!.asNpc().finalizeDeath(player)
-            val falcon = NPC.create(NPCs.GYR_FALCON_5094, node!!.asNpc().location)
+            val falcon = NPC.create(NPCs.HUNTING_FALCON_ONSPEEDY_5094, node!!.asNpc().location)
             setAttribute(falcon, "falcon:owner", player.username)
             setAttribute(falcon, "falcon:catch", this.falconCatch)
             falcon.init()
@@ -287,7 +287,7 @@ private class FalconryCatchPulse(player: Player?, node: NPC, private val falconC
     }
 
     private fun sendProjectile() {
-        val projectile = Projectile.create(player, node!!.asNpc(), Graphics.FALCONRY_BIRD_FLOAT_918)
+        val projectile = Projectile.create(player, node!!.asNpc(), Graphics.FALCON_LAUNCH_1_918)
         projectile.speed = 80
         projectile.startHeight = 26
         projectile.endHeight = 1

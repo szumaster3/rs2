@@ -33,5 +33,5 @@ class CouncilWorkmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CouncilWorkmanDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.COUNCIL_WORKMAN_1287)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VT_COUNCIL_WORKMEN_1287)
 }

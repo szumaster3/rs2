@@ -56,7 +56,7 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> npcl(FaceAnim.FRIENDLY, "Within your quest list, you'll unsurprisingly find a list of quests. Clicking one of these quests will display some more information on it.").also { stage++ }
                 3 -> npcl(FaceAnim.FRIENDLY, "If you haven't started the quest, it will tell you where to begin and what requirements you need. If the quest is in progress, it will remind you what to do next.").also { stage++ }
                 4 -> npcl(FaceAnim.FRIENDLY, " It's very easy to find quest start points. Just look out for the quest icon on your minimap. You should see one marking this house.").also { stage++ }
-                5 -> sendItemDialogue(player, Items.NULL_5092, "The minimap in the top right corner of the screen has various icons to show different points of interest. Look for the icon to the left to find quest start points.").also { stage++ }
+                5 -> sendItemDialogue(player, Items.OBJ_5092, "The minimap in the top right corner of the screen has various icons to show different points of interest. Look for the icon to the left to find quest start points.").also { stage++ }
                 6 -> npcl(FaceAnim.FRIENDLY, "The quests themselves can vary greatly from collecting beads to hunting down dragons. Completing quests will reward you with all sorts of things, such as new areas and better weapons!").also { stage++ }
                 7 -> npcl(FaceAnim.FRIENDLY, "There's not a lot more I can tell you about questing. You have to experience the thrill of it yourself to fully understand.").also { stage = END_DIALOGUE }
                 8 -> npcl(FaceAnim.FRIENDLY, "Okay then.").also { stage++ }
@@ -68,5 +68,5 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = QuestGuideDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.QUEST_GUIDE_949)
+    override fun getIds(): IntArray = intArrayOf(NPCs.NEWBIE_QUEST_INSTRUCTOR_949)
 }

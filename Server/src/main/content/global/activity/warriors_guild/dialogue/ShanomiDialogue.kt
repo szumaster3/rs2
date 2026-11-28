@@ -53,5 +53,5 @@ class ShanomiDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SHANOMI_4290)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WARGUILD_SHANOMI_4290)
 }

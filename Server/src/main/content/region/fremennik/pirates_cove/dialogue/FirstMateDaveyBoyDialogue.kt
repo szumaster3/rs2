@@ -39,5 +39,5 @@ class FirstMateDaveyBoyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FirstMateDaveyBoyDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FIRST_MATE_DAVEY_BOY_4543)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUNAR_PIRATE_FIRST_MATE_4543)
 }

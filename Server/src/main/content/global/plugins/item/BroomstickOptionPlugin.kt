@@ -25,7 +25,7 @@ class BroomstickOptionPlugin : InteractionListener {
 
         on(Items.BROOMSTICK_14057, IntType.ITEM, "sweep") { player, _ ->
             lock(player, 3)
-            visualize(player, Animations.SWEEP_BROOM_10532, Graphics.DUST_BROOM_EMOTE_1866)
+            visualize(player, Animations.SWEPT_PLAYER_SWEEP_10532, Graphics.SWEPT_PLAYER_SWEEP_SPOT_1866)
             return@on true
         }
 
@@ -50,11 +50,11 @@ class BroomstickOptionPlugin : InteractionListener {
                     2 -> {
                         closeInterface(player)
                         lock(player, 3)
-                        visualize(player, Animations.BROOMSTICK_TP_T_B_10538, Graphics.BROOMSTICK_TP_1867)
-                        val animDuration = animationDuration(Animation(Animations.BROOMSTICK_TP_T_B_10538))
+                        visualize(player, Animations.SWEPT_TELEPORT_TAKEOFF_10538, Graphics.SWEPT_TELEPORT_TAKEOFF_SPARKLES_1867)
+                        val animDuration = animationDuration(Animation(Animations.SWEPT_TELEPORT_TAKEOFF_10538))
                         queueScript(player, animDuration, QueueStrength.SOFT) {
                             teleport(player, Location.create(2912, 5474, 0))
-                            visualize(player, Animations.BROOMSTICK_TP_T_A_10537, Graphics.BROOMSTICK_TP_1867)
+                            visualize(player, Animations.SWEPT_TELEPORT_LANDING_10537, Graphics.SWEPT_TELEPORT_TAKEOFF_SPARKLES_1867)
                             return@queueScript stopExecuting(player)
                         }
                     }

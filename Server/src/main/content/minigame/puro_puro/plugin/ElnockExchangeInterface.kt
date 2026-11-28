@@ -77,7 +77,7 @@ class ElnockExchangeInterface : InterfaceListener {
                     sendItemDialogue(player, exchange.reward, message)
 
                     addDialogueAction(player) { _, _ ->
-                        sendNPCDialogue(player, NPCs.ELNOCK_INQUISITOR_6070, "Pleasure doing business with you!")
+                        sendNPCDialogue(player, NPCs.II_ELNOCK_6070, "Pleasure doing business with you!")
                     }
                 }
                 return@on true

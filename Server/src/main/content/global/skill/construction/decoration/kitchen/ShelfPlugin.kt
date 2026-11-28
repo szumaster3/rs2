@@ -54,7 +54,7 @@ class ShelfPlugin : InteractionListener {
                     end()
                     player?.lock(3)
                     val item = itemMap[buttonID]!!
-                    animate(player!!, Animations.TAKE_FROM_SHELF_8904)
+                    animate(player!!, Animations.EASTER08_PUTTING_CHOCOLATE_IN_MIXER_8904)
                     addItem(player!!, item, 1, Container.INVENTORY)
                     sendMessage(player!!, "You take a ${getItemName(item).lowercase()}.")
                 }

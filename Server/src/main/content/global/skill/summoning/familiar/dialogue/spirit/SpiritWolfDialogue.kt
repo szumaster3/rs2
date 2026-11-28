@@ -78,7 +78,7 @@ class SpiritWolfDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_WOLF_6829, NPCs.SPIRIT_WOLF_6830)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_WOLF_6829, NPCs.LORE_WOLF_COMBAT_6830)
 
     companion object {
         private val bones: MutableList<Int> = Bones.values().map { it.itemId }.toMutableList()

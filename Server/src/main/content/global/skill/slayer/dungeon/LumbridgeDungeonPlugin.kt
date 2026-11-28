@@ -54,7 +54,7 @@ class LumbridgeDungeonPlugin : MapZone("lumbridge swamp dungeon", true), Plugin<
 
     inner class WallBeastNPC : AbstractNPC {
         constructor(id: Int, location: Location) : super(id, location, false)
-        constructor() : super(NPCs.WALL_BEAST_7823, null, false)
+        constructor() : super(NPCs.SWAMP_WALLBEAST_COMBAT_7823, null, false)
 
         override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC = WallBeastNPC(id, location)
 
@@ -68,7 +68,7 @@ class LumbridgeDungeonPlugin : MapZone("lumbridge swamp dungeon", true), Plugin<
             val isProtected = hasHelmet(player)
             player.face(this)
             if (!isProtected) {
-                animate(NpcType.forId(NPCs.WALL_BEAST_7823).getCombatAnimation(3))
+                animate(NpcType.forId(NPCs.SWAMP_WALLBEAST_COMBAT_7823).getCombatAnimation(3))
                 player.animate(Animation.create(1810))
                 GameWorld.Pulser.submit(
                     object : Pulse(8, player) {
@@ -86,7 +86,7 @@ class LumbridgeDungeonPlugin : MapZone("lumbridge swamp dungeon", true), Plugin<
                 )
             } else {
                 sendMessage(player, "Your spiny helmet repels the wall beast!")
-                transform(NPCs.WALL_BEAST_7823)
+                transform(NPCs.SWAMP_WALLBEAST_COMBAT_7823)
                 attack(player)
             }
         }

@@ -46,8 +46,8 @@ class WerewolfCourse : AgilityCourse {
             sendMessage(p, "You need an Agility level of $level to do this.")
             return false
         }
-        if (!anyInEquipment(p, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465)) {
-            sendNPCDialogue(p, NPCs.AGILITY_TRAINER_1663, "Grrr - you don't belong in here, human!", FaceAnim.CHILD_NORMAL)
+        if (!anyInEquipment(p, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROS_A_6465)) {
+            sendNPCDialogue(p, NPCs.WEREWOLF_TRAINER_2_1663, "Grrr - you don't belong in here, human!", FaceAnim.CHILD_NORMAL)
             return false
         }
         return true
@@ -76,7 +76,7 @@ class WerewolfCourse : AgilityCourse {
         if (loc == Location(3538, 9873, 0)) {
             findLocalNPC(p, NPCs.AGILITY_BOSS_1661)?.let { face(it, p, 3) }
             findLocalNPC(p, NPCs.AGILITY_BOSS_1661)?.sendChat("FETCH!!!!!")
-            findLocalNPC(p, NPCs.AGILITY_BOSS_1661)?.let { animate(it, Animations.WEREWOLF_FETCH_6536) }
+            findLocalNPC(p, NPCs.AGILITY_BOSS_1661)?.let { animate(it, Animations.WEREWOLF_UPDATE_ATTACK_6536) }
         }
         lock(p, 3)
         GameWorld.Pulser.submit(object : Pulse() {
@@ -116,10 +116,10 @@ class WerewolfCourse : AgilityCourse {
             override fun pulse(): Boolean {
                 AgilityHandler.forceWalk(
                     p, -1, loc, loc.transform(Direction.NORTH, 5),
-                    Animation.create(Animations.CLIMB_THROUGH_OBSTACLE_10580), 10, 20.0, null
+                    Animation.create(Animations.HUMAN_DOUBLEPIPESQUEEZE_10580), 10, 20.0, null
                 )
-                p.animate(Animation(Animations.CRAWL_844), 3)
-                p.animate(Animation(Animations.CLIMB_OUT_OF_OBSTACLE_10579), 4)
+                p.animate(Animation(Animations.HUMAN_CRAWLING_844), 3)
+                p.animate(Animation(Animations.HUMAN_PIPEUNSQUEEZE_10579), 4)
                 return true
             }
         })
@@ -138,7 +138,7 @@ class WerewolfCourse : AgilityCourse {
         lock(p, 3)
         GameWorld.Pulser.submit(object : Pulse() {
             override fun pulse(): Boolean {
-                AgilityHandler.forceWalk(p, -1, loc, loc.transform(Direction.WEST, 3), Animation.create(Animations.CLIMB_DOWN_B_740), 15, 25.0, null)
+                AgilityHandler.forceWalk(p, -1, loc, loc.transform(Direction.WEST, 3), Animation.create(Animations.HUMAN_CLIMBING_DOWN_740), 15, 25.0, null)
                 p.animate(Animation(-1), 2)
                 return true
             }
@@ -155,7 +155,7 @@ class WerewolfCourse : AgilityCourse {
 
         val randomMessage = messages.random()
         if (helmet != null) {
-            sendNPCDialogue(p, NPCs.AGILITY_TRAINER_1664, randomMessage)
+            sendNPCDialogue(p, NPCs.WEREWOLF_TRAINER_STICK_1664, randomMessage)
             return true
         }
 
@@ -164,7 +164,7 @@ class WerewolfCourse : AgilityCourse {
 
         lock(p, 16)
         face(p, loc.transform(Direction.SOUTH))
-        animate(p, Animations.WEREWOLF_ZIPLINE_1601)
+        animate(p, Animations.ZIPLINE_BITE_1601)
         replaceScenery(scenery, shared.consts.Scenery.ZIP_LINE_5142, 6)
         sendMessage(p, "You bravely cling on to the death slide by your teeth.")
 

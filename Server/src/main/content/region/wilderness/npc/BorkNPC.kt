@@ -230,7 +230,7 @@ class BorkNPC : AbstractNPC {
         return super.newInstance(arg)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BORK_7133)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DSD_BORK_CUTSCENE_ONLY_7133)
 
     /**
      * Represents the Ork Legion NPC.
@@ -271,7 +271,7 @@ class BorkNPC : AbstractNPC {
             return legion
         }
 
-        override fun getIds(): IntArray = intArrayOf(NPCs.ORK_LEGION_7135)
+        override fun getIds(): IntArray = intArrayOf(NPCs.DSD_MINI_ORKS_7135)
     }
 
     /**

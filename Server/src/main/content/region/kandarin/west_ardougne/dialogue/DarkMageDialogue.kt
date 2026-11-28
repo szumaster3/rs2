@@ -99,5 +99,5 @@ class DarkMageDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.DARK_MAGE_1001)
+        intArrayOf(NPCs.UPASSMAGE_1001)
 }

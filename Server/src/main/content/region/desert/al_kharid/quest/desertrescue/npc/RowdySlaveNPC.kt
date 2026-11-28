@@ -62,7 +62,7 @@ class RowdySlaveNPC : AbstractNPC {
         return super.newInstance(arg)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ROWDY_SLAVE_827)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLAVE_ROWDY_827)
 
     companion object {
         private val CHATS = arrayOf(

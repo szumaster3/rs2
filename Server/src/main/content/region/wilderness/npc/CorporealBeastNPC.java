@@ -45,7 +45,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
      * Instantiates a new Corporeal beast npc.
      */
     public CorporealBeastNPC() {
-        super(new int[]{NPCs.CORPOREAL_BEAST_8133});
+        super(new int[]{NPCs.SUM2_SPIRIT_BEAST_CORPOREAL_8133});
     }
 
     @Override

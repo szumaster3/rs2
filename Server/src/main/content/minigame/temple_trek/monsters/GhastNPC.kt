@@ -17,7 +17,7 @@ class GhastNPC(
         vararg objects: Any,
     ): AbstractNPC = GhastNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JUVINATE_3576, NPCs.JUVINATE_3577, NPCs.JUVINATE_3578, NPCs.JUVINATE_7418)
+    override fun getIds(): IntArray = intArrayOf(NPCs.JUVINATE_3576, NPCs.JUVINATE_3577, NPCs.JUVINATE_3578, NPCs.EASTER09_BIRD_DROWSY_7418)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

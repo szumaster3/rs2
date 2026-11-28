@@ -17,7 +17,7 @@ import shared.consts.NPCs
 class CouncilWorkmanDiaryDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.COUNCIL_WORKMAN_1287)
+        npc = NPC(NPCs.VT_COUNCIL_WORKMEN_1287)
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello").also { stage = 1 }
             1 -> options("So you fixed the bridge?", "About the Achievement Diary...").also { stage = 2 }

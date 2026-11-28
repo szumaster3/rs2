@@ -16,7 +16,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class GraniteCrabNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.GRANITE_CRAB_6796) :
+class GraniteCrabNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_ROCK_CRAB_6796) :
     Forager(owner, id, 1800, Items.GRANITE_CRAB_POUCH_12009, 12, WeaponInterface.STYLE_DEFENSIVE) {
 
     init {
@@ -49,7 +49,7 @@ class GraniteCrabNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRANITE_CRAB_6796, NPCs.GRANITE_CRAB_6797)
+        return intArrayOf(NPCs.LORE_ROCK_CRAB_6796, NPCs.LORE_ROCK_CRAB_COMBAT_6797)
     }
 
     companion object {

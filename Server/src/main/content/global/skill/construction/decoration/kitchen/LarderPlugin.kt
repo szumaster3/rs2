@@ -29,9 +29,9 @@ class LarderPlugin : InteractionListener {
                 0 -> showTopics(
                     Topic("Tea", 1, true),
                     Topic("Milk", 2, true),
-                    IfTopic("Egg", 3, larderId != Scenery.WOODEN_LARDER_13565, true),
-                    IfTopic("Flour", 4, larderId != Scenery.WOODEN_LARDER_13565, true),
-                    IfTopic("More...", 5, larderId == Scenery.TEAK_LARDER_13567, true)
+                    IfTopic("Egg", 3, larderId != Scenery.LARDER_13565, true),
+                    IfTopic("Flour", 4, larderId != Scenery.LARDER_13565, true),
+                    IfTopic("More...", 5, larderId == Scenery.LARDER_13567, true)
                 )
 
                 in items.keys -> {
@@ -69,7 +69,7 @@ class LarderPlugin : InteractionListener {
 
 
     companion object {
-        private val LARDERS = intArrayOf(Scenery.WOODEN_LARDER_13565, Scenery.OAK_LARDER_13566, Scenery.TEAK_LARDER_13567)
-        private const val SEARCH_ANIM = Animations.HUMAN_SEARCH_LARDER_3659
+        private val LARDERS = intArrayOf(Scenery.LARDER_13565, Scenery.LARDER_13566, Scenery.LARDER_13567)
+        private const val SEARCH_ANIM = Animations.POH_LARDER_EXAMINE_3659
     }
 }

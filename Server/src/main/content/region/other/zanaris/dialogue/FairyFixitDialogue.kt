@@ -49,7 +49,7 @@ class FairyFixitDialogue(player: Player? = null) : Dialogue(player) {
             30 -> npcl(FaceAnim.OLD_CALM_TALK1, "They said you'd helped cure our Queen. I haven't got a lot of rewards to offer, but my enchantment scrolls might help if you're working with fairy rings in your home.").also { stage++ }
             31 -> {
                 end()
-                openNpcShop(player, NPCs.FAIRY_FIXIT_4455)
+                openNpcShop(player, NPCs.FAIRY2_REPAIR_4455)
             }
         }
         return true
@@ -57,5 +57,5 @@ class FairyFixitDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FairyFixitDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_FIXIT_4455)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY2_REPAIR_4455)
 }

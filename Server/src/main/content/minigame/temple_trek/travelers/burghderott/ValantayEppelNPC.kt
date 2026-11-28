@@ -19,7 +19,7 @@ class ValantayEppelNPC(
         vararg objects: Any,
     ): AbstractNPC = ValantayEppelNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VALANTAY_EPPEL_3631)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DALCIAN_FANG_3631)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

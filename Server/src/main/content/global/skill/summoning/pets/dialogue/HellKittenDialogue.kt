@@ -48,6 +48,6 @@ class HellKittenDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.HELL_KITTEN_3505
+        NPCs.KITTENPET_HELL_3505
     )
 }

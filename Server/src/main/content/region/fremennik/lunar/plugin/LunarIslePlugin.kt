@@ -16,8 +16,8 @@ class LunarIslePlugin : InteractionListener {
 
     companion object {
         private const val INSIDE_BABA_YAGA_SHOP = Scenery.DOOR_16774
-        private const val BABA_YAGA_SHOP = NPCs.HOUSE_4512
-        private val CYRISUS = intArrayOf(NPCs.CYRISUS_5893, NPCs.CYRISUS_5894, NPCs.CYRISUS_5895, NPCs.CYRISUS_5896, NPCs.CYRISUS_5897)
+        private const val BABA_YAGA_SHOP = NPCs.LUNAR_BABA_YAGA_HOUSE_4512
+        private val CYRISUS = intArrayOf(NPCs.DREAM_CYRISUS_SITTING_5893, NPCs.DREAM_CYRISUS_5894, NPCs.DREAM_CYRISUS_RANGER_5895, NPCs.DREAM_CYRISUS_MELEE_5896, NPCs.DREAM_CYRISUS_CASTER_5897)
     }
 
     override fun defineListeners() {

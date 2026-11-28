@@ -105,8 +105,8 @@ class CropCircleController : TickListener, InteractionListener {
     }
 
     private fun hasImpBox(player: Player): Boolean =
-        inInventory(player, Items.MAGIC_BOX_10025) || inInventory(player, Items.IMP_IN_A_BOX2_10027) || inInventory(
-            player, Items.IMP_IN_A_BOX1_10028
+        inInventory(player, Items.MAGIC_BOX_10025) || inInventory(player, Items.IMP_IN_A_BOX_2_10027) || inInventory(
+            player, Items.IMP_IN_A_BOX_1_10028
         )
 
     companion object {

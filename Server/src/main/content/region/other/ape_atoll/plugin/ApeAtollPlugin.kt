@@ -12,7 +12,7 @@ import shared.consts.NPCs
 class ApeAtollPlugin : InteractionListener {
 
     companion object {
-        private val ELDER_GUARDS = intArrayOf(NPCs.ELDER_GUARD_1461, NPCs.ELDER_GUARD_1462)
+        private val ELDER_GUARDS = intArrayOf(NPCs.MM_ELDER_GUARD_1_1461, NPCs.MM_ELDER_GUARD_2_1462)
     }
 
     override fun defineListeners() {
@@ -21,7 +21,7 @@ class ApeAtollPlugin : InteractionListener {
          * Handles talking to NPC.
          */
 
-        on(NPCs.ABERAB_1432, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.MM_ABERAB_1432, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Grr ... Get out of my way...", FaceAnim.OLD_ANGRY1)
             return@on true
         }

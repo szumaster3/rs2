@@ -10,7 +10,7 @@ import core.tools.RandomFunction
 import core.tools.minutesToTicks
 import shared.consts.NPCs
 
-class FeverSpiderNPC : NPCBehavior(NPCs.FEVER_SPIDER_2850) {
+class FeverSpiderNPC : NPCBehavior(NPCs.DEAL_FEVER_SPIDERS1_2850) {
     override fun beforeAttackFinalized(
         self: NPC,
         victim: Entity,

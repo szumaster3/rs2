@@ -15,7 +15,7 @@ class PoisonSpiderNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
         PoisonSpiderNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.POISON_SPIDER_1009)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DUNGEONSPIDER_1009)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -23,7 +23,7 @@ class PoisonSpiderNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
 
     companion object {
         fun spawnPoisonSpider(player: Player) {
-            val spider = PoisonSpiderNPC(NPCs.POISON_SPIDER_1009)
+            val spider = PoisonSpiderNPC(NPCs.DUNGEONSPIDER_1009)
             spider.location = player.location
             spider.isWalks = false
             spider.isRespawn = false

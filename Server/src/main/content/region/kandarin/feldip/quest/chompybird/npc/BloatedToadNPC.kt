@@ -53,13 +53,13 @@ class BloatedToadNPC : AbstractNPC {
                 impact(entity, RandomFunction.random(1, 3))
             }
 
-            sendGraphics(Graphics.TOAD_DETONATION_240, this.location)
+            sendGraphics(Graphics.CHOMPY_TOAD_EXPLODE_240, this.location)
 
             clear()
         }
 
         if (!chompySpawned && RandomFunction.random(20) == 5) {
-            val chompy = NPC.create(NPCs.CHOMPY_BIRD_1550, this.location)
+            val chompy = NPC.create(NPCs.CHOMPYBIRD_1550, this.location)
             val spawn = getPathableRandomLocalCoordinate(chompy, 4, this.location, 3)
             if (spawn == null || spawn == this.location) return
 
@@ -102,7 +102,7 @@ class BloatedToadListeners :
             val newBorders = ZoneBorders(swloc.x, swloc.y, neloc.x, neloc.y)
             extraBorders.add(newBorders)
             for (i in 0 until 10) {
-                val npc = NPC(NPCs.SWAMP_TOAD_1013, newBorders.randomLoc)
+                val npc = NPC(NPCs.TOAD_1013, newBorders.randomLoc)
                 npc.isRespawn = true
                 npc.isWalks = true
                 npc.isNeverWalks = false

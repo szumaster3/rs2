@@ -34,6 +34,6 @@ class PyramidPlunderSwarmNPC(
     override fun getIds(): IntArray = IDS
 
     companion object {
-        private val IDS = intArrayOf(NPCs.SCARAB_SWARM_2001)
+        private val IDS = intArrayOf(NPCs.ICS_SCARAB_SWARM_2001)
     }
 }

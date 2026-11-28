@@ -54,13 +54,13 @@ class MazeKeyNPC : AbstractNPC {
                 Location.create(2926, 3253, 1)
             ),
 
-            NPCs.SKELETON_90 to DropConfig(
+            NPCs.SKELETON_UNARMED_90 to DropConfig(
                 Items.KEY_1545,
                 6,
                 Location.create(2927, 3253, 2)
             ),
 
-            NPCs.ZOMBIE_75 to DropConfig(
+            NPCs.ZOMBIE_ARMED_75 to DropConfig(
                 Items.KEY_1546,
                 4,
                 Location.create(2933, 9641, 0)

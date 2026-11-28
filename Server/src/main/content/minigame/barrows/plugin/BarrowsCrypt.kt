@@ -58,12 +58,12 @@ open class BarrowsCrypt(val index: Int, val npcId: Int, val enterLocation: Locat
 
         private val CRYPTS =
             arrayOf(
-                BarrowsCrypt(AHRIM,  NPCs.AHRIM_THE_BLIGHTED_2025,  Location.create(3557, 9703, 3), Location.create(3565, 3289, 0)),
-                BarrowsCrypt(DHAROK, NPCs.DHAROK_THE_WRETCHED_2026, Location.create(3556, 9718, 3), Location.create(3575, 3298, 0)),
-                BarrowsCrypt(GUTHAN, NPCs.GUTHAN_THE_INFESTED_2027, Location.create(3534, 9704, 3), Location.create(3577, 3283, 0)),
-                BarrowsCrypt(KARIL,  NPCs.KARIL_THE_TAINTED_2028,   Location.create(3546, 9684, 3), Location.create(3565, 3276, 0)),
-                BarrowsCrypt(TORAG,  NPCs.TORAG_THE_CORRUPTED_2029, Location.create(3568, 9683, 3), Location.create(3553, 3283, 0)),
-                BarrowsCrypt(VERAC,  NPCs.VERAC_THE_DEFILED_2030,   Location.create(3578, 9706, 3), Location.create(3557, 3298, 0)),
+                BarrowsCrypt(AHRIM,  NPCs.BARROWS_AHRIM_2025,  Location.create(3557, 9703, 3), Location.create(3565, 3289, 0)),
+                BarrowsCrypt(DHAROK, NPCs.BARROWS_DHAROK_2026, Location.create(3556, 9718, 3), Location.create(3575, 3298, 0)),
+                BarrowsCrypt(GUTHAN, NPCs.BARROWS_GUTHAN_2027, Location.create(3534, 9704, 3), Location.create(3577, 3283, 0)),
+                BarrowsCrypt(KARIL,  NPCs.BARROWS_KARIL_2028,   Location.create(3546, 9684, 3), Location.create(3565, 3276, 0)),
+                BarrowsCrypt(TORAG,  NPCs.BARROWS_TORAG_2029, Location.create(3568, 9683, 3), Location.create(3553, 3283, 0)),
+                BarrowsCrypt(VERAC,  NPCs.BARROWS_VERAC_2030,   Location.create(3578, 9706, 3), Location.create(3557, 3298, 0)),
             )
 
         fun init() {

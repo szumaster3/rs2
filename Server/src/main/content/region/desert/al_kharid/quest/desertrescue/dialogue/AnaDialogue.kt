@@ -66,11 +66,11 @@ class AnaDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> {
                     player.inventory.add(TouristTrap.WROUGHT_IRON_KEY, player)
                     sendMessage(player,"Ana spots Irena and waves...")
-                    val irena = getNpc(player, NPCs.MERCENARY_4986)
+                    val irena = getNpc(player, NPCs.IRENA_4986)
                     irena!!.sendChat("Hi Ana!")
                     setQuestStage(player, Quests.THE_TOURIST_TRAP.questName, 98)
                     end()
-                    player.dialogueInterpreter.open(NPCs.MERCENARY_4986, irena)
+                    player.dialogueInterpreter.open(NPCs.IRENA_4986, irena)
                 }
             }
 

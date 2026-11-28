@@ -50,5 +50,5 @@ class TzHaarMejKahDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TZHAAR_MEJ_KAH_2618)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TZHAAR_FIGHTPIT_MASTER_2618)
 }

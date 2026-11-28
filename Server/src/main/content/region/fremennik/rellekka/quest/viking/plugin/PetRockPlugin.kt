@@ -118,10 +118,10 @@ private class PetRockDialogue : DialogueFile() {
 
     private fun handleStroke() {
         end()
-        val animDuration = animationDuration(Animation(Animations.HUMAN_STROKE_PET_ROCK_1333))
+        val animDuration = animationDuration(Animation(Animations.VIKING_PET_ROCK_STROKE_1333))
         lock(player!!, animDuration)
         sendMessage(player!!, "You stroke your pet rock.")
-        animate(player!!, Animations.HUMAN_STROKE_PET_ROCK_1333, false)
+        animate(player!!, Animations.VIKING_PET_ROCK_STROKE_1333, false)
         queueScript(player!!, animDuration, QueueStrength.SOFT) {
             sendMessage(player!!, "Your rock seems much happier.")
             return@queueScript stopExecuting(player!!)
@@ -142,17 +142,17 @@ private class PetRockDialogue : DialogueFile() {
     private fun handleStay() {
         playerl(FaceAnim.FRIENDLY, "Be a good rock...")
         sendMessage(player!!, "You wait a few seconds and pick your rock back up and pet it.", 6)
-        visualize(player!!, Animations.PET_ROCK_FETCH_6664, Graphics.PET_ROCK_1156)
+        visualize(player!!, Animations.PETROCK_HUMAN_STAY_6664, Graphics.PETROCK_SPOTANIM_STAY_1156)
         end()
     }
 
     private fun handleThrow() {
         end()
-        val animDuration = animationDuration(Animation(Animations.HUMAN_THROW_STICK_6665))
+        val animDuration = animationDuration(Animation(Animations.PETROCK_HUMAN_STICK_6665))
         lock(player!!, duration = animDuration)
         lockInteractions(player!!, duration = animDuration)
         playAudio(player!!, Sounds.THROW_STICK_1942)
-        visualize(player!!, Animations.HUMAN_THROW_STICK_6665, Graphics.PET_ROCK_THROW_STICK_1157)
-        spawnProjectile(getLocation(player), Location.getRandomLocation(getLocation(player), 5, true), Graphics.THROWING_THE_STICK_PROJECTILE_1158, 40, 0, 150, 250, 25)
+        visualize(player!!, Animations.PETROCK_HUMAN_STICK_6665, Graphics.PETROCK_SPOTANIM_STICK_1157)
+        spawnProjectile(getLocation(player), Location.getRandomLocation(getLocation(player), 5, true), Graphics.PETROCK_PROJANIM_STICK_1158, 40, 0, 150, 250, 25)
     }
 }

@@ -35,5 +35,5 @@ class WanderingImplingDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WANDERING_IMPLING_6073)
+    override fun getIds(): IntArray = intArrayOf(NPCs.II_LOST_IMPLING_6073)
 }

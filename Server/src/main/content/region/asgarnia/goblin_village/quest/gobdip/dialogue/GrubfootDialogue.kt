@@ -38,7 +38,7 @@ class GrubfootDialogue(player: Player? = null) : Dialogue(player) {
             100 -> when (stage) {
                 0 -> player("Why?").also { stage++ }
                 1 -> npc(FaceAnim.OLD_NORMAL, "Other goblins in village follow either General Wartface", "or General Bentnoze. Me try to follow both but then", "me get left out of both groups.").also { stage++ }
-                2 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
+                2 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_RED_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
             }
 
             30 -> when (stage) {
@@ -46,7 +46,7 @@ class GrubfootDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> npc(FaceAnim.OLD_NORMAL, "Me not know. It just make me feel...").also { stage++ }
                 2 -> player("Makes you feel blue?").also { stage++ }
                 3 -> npc(FaceAnim.OLD_NORMAL, "Makes me feel kinda of sad.").also { stage++ }
-                4 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
+                4 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_RED_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
             }
 
             20 -> when (stage) {
@@ -54,12 +54,12 @@ class GrubfootDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> npc(FaceAnim.OLD_NORMAL, "That fruit thing. The one that orange. What it called?").also { stage++ }
                 2 -> player("An orange?").also { stage++ }
                 3 -> npc(FaceAnim.OLD_NORMAL, "That right. This armour make me look same colour as", "orange-fruit.").also { stage++ }
-                4 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
+                4 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_RED_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
             }
 
             else -> when (stage) {
                 0 -> npc(FaceAnim.OLD_NORMAL, "Why they not make up their minds?").also { stage++ }
-                1 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
+                1 -> sendNPCDialogue(player, NPCs.GENERAL_BENTNOZE_RED_4493, "Shut up Grubfoot!", FaceAnim.OLD_NORMAL).also { stage = END_DIALOGUE }
             }
         }
         return true
@@ -67,7 +67,7 @@ class GrubfootDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray =
         intArrayOf(
-            NPCs.GENERAL_WARTFACE_4495,
+            NPCs.GRUBFOOT_4495,
             NPCs.GRUBFOOT_4497,
             NPCs.GRUBFOOT_4498,
             NPCs.GRUBFOOT_4496

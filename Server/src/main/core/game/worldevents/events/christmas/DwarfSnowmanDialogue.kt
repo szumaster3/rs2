@@ -71,7 +71,7 @@ class DwarfSnowmanDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DWARF_SNOWMAN_6744)
+        return intArrayOf(NPCs.XMAS07_SNOWMAN_DWARF_6744)
     }
 
 

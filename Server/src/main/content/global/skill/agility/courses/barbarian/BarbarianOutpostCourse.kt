@@ -36,9 +36,9 @@ class BarbarianOutpostCourse(player: Player? = null) : AgilityCourse(player, 6, 
          * Represents the scorpions that damage the player.
          */
         private val SCORPIONS = listOf(
-            NPCs.KHARID_SCORPION_385,
-            NPCs.KHARID_SCORPION_386,
-            NPCs.KHARID_SCORPION_387
+            NPCs.QUESTSCORPIONA_385,
+            NPCs.QUESTSCORPIONB_386,
+            NPCs.QUESTSCORPIONC_387
         )
     }
 
@@ -80,7 +80,7 @@ class BarbarianOutpostCourse(player: Player? = null) : AgilityCourse(player, 6, 
     private fun handleGate(player: Player, gate: Scenery) {
         val barCrawl = BarcrawlManager.getInstance(player)
         if (!barCrawl.isFinished || barCrawl.isStarted()) {
-            player.dialogueInterpreter.open(NPCs.BARBARIAN_GUARD_384)
+            player.dialogueInterpreter.open(NPCs.BARBGUARD1_384)
         } else {
             DoorActionHandler.handleAutowalkDoor(player, gate)
         }
@@ -102,7 +102,7 @@ class BarbarianOutpostCourse(player: Player? = null) : AgilityCourse(player, 6, 
             else -> 6
         }
         sendMessage(player, "You climb the low wall...")
-        AgilityHandler.forceWalk(player, flag, wall.location.transform(-2, 0, 0), wall.location.transform(2, 0, 0), Animation.create(Animations.CLIMB_OBJECT_839), 10, 13.5, null)
+        AgilityHandler.forceWalk(player, flag, wall.location.transform(-2, 0, 0), wall.location.transform(2, 0, 0), Animation.create(Animations.HUMAN_WALK_STYLE_839), 10, 13.5, null)
     }
 
     private fun impactScorpion(player: Player) {
@@ -127,7 +127,7 @@ class BarbarianOutpostCourse(player: Player? = null) : AgilityCourse(player, 6, 
         if (player.location.y < 3554) { sendMessage(player, "You cannot do that from here."); return }
         if (AgilityHandler.delay > GameWorld.ticks) { sendMessage(player, "The rope is being used."); return }
         animateScenery(player, scenery, 497, true)
-        handleObstacle(player, scenery, failChance = 0.1, start = player.location, endSuccess = Location.create(2551, 3549, 0), animation = Animations.ROPE_SWING_751, walkSpeed = 22.0, successMessage = "You skillfully swing across.", failMessage = "You slip and fall to the pit below.", extraFailAction = { p -> AgilityHandler.fail(p, 0, Location.create(2549, 9951, 0), null, getHitAmount(p), "") })
+        handleObstacle(player, scenery, failChance = 0.1, start = player.location, endSuccess = Location.create(2551, 3549, 0), animation = Animations.HUMAN_ROPESWING_LONG_751, walkSpeed = 22.0, successMessage = "You skillfully swing across.", failMessage = "You slip and fall to the pit below.", extraFailAction = { p -> AgilityHandler.fail(p, 0, Location.create(2549, 9951, 0), null, getHitAmount(p), "") })
         AgilityHandler.delay = GameWorld.ticks + 2
         playAudio(player, Sounds.SWING_ACROSS_2494, 1)
     }
@@ -140,7 +140,7 @@ class BarbarianOutpostCourse(player: Player? = null) : AgilityCourse(player, 6, 
 
     private fun handleLedgeBalance(player: Player, scenery: Scenery) {
         sendMessage(player, "You put your foot on the ledge and try to edge across...")
-        handleObstacle(player, scenery, failChance = 0.3, start = Location.create(2536, 3547, 1), endSuccess = Location.create(2532, 3547, 1), endFail = Location.create(2534, 3545, 0), animation = 157, walkSpeed = 22.0, successMessage = "You skillfully edge across the gap.", failMessage = "You slip and fall to the pit below.", failAnimation = Animations.FALL_FACE_DOWN_A_760)
+        handleObstacle(player, scenery, failChance = 0.3, start = Location.create(2536, 3547, 1), endSuccess = Location.create(2532, 3547, 1), endFail = Location.create(2534, 3545, 0), animation = 157, walkSpeed = 22.0, successMessage = "You skillfully edge across the gap.", failMessage = "You slip and fall to the pit below.", failAnimation = Animations.HUMAN_SIDESTEP_FALL_760)
     }
 
     private fun getSwimPulse(player: Player) = object : Pulse(1, player) {
@@ -153,7 +153,7 @@ class BarbarianOutpostCourse(player: Player? = null) : AgilityCourse(player, 6, 
                     sendMessage(player, "...You lose your footing and fall into the water. Something in the water bites you.")
                 }
                 7 -> {
-                    player.graphics(Graphics.create(shared.consts.Graphics.WATER_SPLASH_68))
+                    player.graphics(Graphics.create(shared.consts.Graphics.WATERSPLASH_1_68))
                     player.properties.teleportLocation = Location.create(2545, 3545, 0)
                     impact(player, getHitAmount(player), HitsplatType.NORMAL)
                     AgilityHandler.walk(player, -1, Location.create(2545, 3545, 0), Location.create(2545, 3543, 0), Animation.create(152), 0.0, null)

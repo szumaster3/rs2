@@ -59,7 +59,7 @@ class FireplacePlugin : InteractionListener {
     }
 
     companion object {
-        private val ANIMATION: Animation = Animation.create(Animations.TINDERBOX_3658)
+        private val ANIMATION: Animation = Animation.create(Animations.POH_FIREPLACE_LIGHT_3658)
         private val FIREPLACE_IDS = intArrayOf(Scenery.CLAY_FIREPLACE_13609, Scenery.LIMESTONE_FIREPLACE_13611, Scenery.MARBLE_FIREPLACE_13613)
     }
 }

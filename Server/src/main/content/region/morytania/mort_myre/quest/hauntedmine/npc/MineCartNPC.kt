@@ -7,7 +7,7 @@ import core.game.node.entity.npc.NPCBehavior
 import core.game.world.map.Location
 import shared.consts.NPCs
 
-class MineCartNPC : NPCBehavior(NPCs.MINE_CART_4980) {
+class MineCartNPC : NPCBehavior(NPCs.TOURTRAP_QIP_MINECART_ANAINABARREL_4980) {
     override fun onCreation(self: NPC) {
         if (inBorders(self, getRegionBorders(10822))) {
             val cartRoute =

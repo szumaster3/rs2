@@ -33,5 +33,5 @@ class HighwayManNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
         sendChat("Stand and deliver!")
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HIGHWAYMAN_180, NPCs.HIGHWAYMAN_2677)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HIGHWAYMAN_180, NPCs.HIGHWAYMAN2_2677)
 }

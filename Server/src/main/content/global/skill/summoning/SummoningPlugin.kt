@@ -73,7 +73,7 @@ class SummoningPlugin : InteractionListener {
                         sendMessage(player, "You already have full summoning points.")
                         return@on true
                     }
-                    visualize(player, Animations.USE_OBELISK_8502, Graphics.INTERACT_SUMMONING_OBELISK_1308)
+                    visualize(player, Animations.WOLF_PLAYER_RECHARGE_8502, Graphics.LORE_BOOST_RECEIVE_14_1308)
                     playAudio(player, Sounds.DREADFOWL_BOOST_4214)
                     player.skills.setLevel(Skills.SUMMONING, getStatLevel(player, Skills.SUMMONING))
                     player.dispatch(SummoningPointsRechargeEvent(node))

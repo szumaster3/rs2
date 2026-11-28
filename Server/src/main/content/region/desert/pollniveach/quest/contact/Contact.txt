@@ -11,7 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class Contact : Quest("Contact!", 39, 38, 1, Vars.VARBIT_QUEST_CONTACT_3274, 0, 1, 130) {
+class Contact : Quest("Contact!", 39, 38, 1, Vars.VARBIT_3274, 0, 1, 130) {
 
     companion scenery {
         const val Contact = "Contact!"
@@ -51,7 +51,7 @@ class Contact : Quest("Contact!", 39, 38, 1, Vars.VARBIT_QUEST_CONTACT_3274, 0, 
         drawReward(player, "7,000 Thieving XP", ln++)
         rewardXP(player, Skills.THIEVING, 7000.0)
         addItemOrDrop(player, Items.KERIS_10581)
-        setVarbit(player, Vars.VARBIT_QUEST_CONTACT_3274, 130, true)
+        setVarbit(player, Vars.VARBIT_3274, 130, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

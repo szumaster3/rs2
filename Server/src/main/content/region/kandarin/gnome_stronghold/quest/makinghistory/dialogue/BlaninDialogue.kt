@@ -79,5 +79,5 @@ class BlaninDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLANIN_2940)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAKINGHISTORY_BLANIN_2940)
 }

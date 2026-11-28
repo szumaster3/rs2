@@ -142,7 +142,7 @@ class EnchantedHeadgearPlugin : InteractionListener {
             if (option == 1) {
                 val npc = findLocalNPC(player, NPCs.PIKKUPSTIX_6970) ?: return false
                 lock(player, 1)
-                animate(npc, Animations.CAST_SPELL_711)
+                animate(npc, Animations.HUMAN_CASTSTRIKE_711)
                 sendGraphics(Graphics(434, 100), player.location)
 
                 when (type) {

@@ -155,10 +155,10 @@ class TownCrierDialogue(player: Player? = null) : Dialogue(player) {
     )
 
     override fun getIds() = intArrayOf(
-        NPCs.TOWN_CRIER_6135,
-        NPCs.TOWN_CRIER_6136,
-        NPCs.TOWN_CRIER_6137,
-        NPCs.TOWN_CRIER_6138,
-        NPCs.TOWN_CRIER_6139
+        NPCs.PMOD_TOWN_CRIER_VARROCK_6135,
+        NPCs.PMOD_TOWN_CRIER_DRAYNOR_6136,
+        NPCs.PMOD_TOWN_CRIER_FALADOR_6137,
+        NPCs.PMOD_TOWN_CRIER_EAST_ARDOYNE_6138,
+        NPCs.PMOD_TOWN_CRIER_SEERS_6139
     )
 }

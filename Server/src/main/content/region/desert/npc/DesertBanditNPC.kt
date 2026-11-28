@@ -14,7 +14,7 @@ import shared.consts.NPCs
 
 @Initializable
 class DesertBanditNPC(
-    id: Int = NPCs.BANDIT_1926,
+    id: Int = NPCs.FOURDIAMONDS_SWORD_BANDIT_1_1926,
     location: Location? = null,
 ) : AbstractNPC(id, location) {
 
@@ -96,7 +96,7 @@ class DesertBanditNPC(
     override fun onImpact(entity: Entity?, state: BattleState?) {
         if (entity is Player) {
             RegionManager.getLocalNpcs(this, supportRange).forEach { npc ->
-                if (npc.id == NPCs.BANDIT_1926 && !npc.properties.combatPulse.isAttacking && npc != this) {
+                if (npc.id == NPCs.FOURDIAMONDS_SWORD_BANDIT_1_1926 && !npc.properties.combatPulse.isAttacking && npc != this) {
                     npc.sendChat(ALLY_ATTACKED_CHAT)
                     npc.attack(entity)
                 }
@@ -133,5 +133,5 @@ class DesertBanditNPC(
         return baseAggressive
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BANDIT_1926)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FOURDIAMONDS_SWORD_BANDIT_1_1926)
 }

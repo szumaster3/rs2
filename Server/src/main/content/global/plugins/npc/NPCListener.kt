@@ -26,8 +26,8 @@ import shared.consts.NPCs
 
 class NPCListener : InteractionListener {
 
-    private val PEER_THE_SEER = NPCs.PEER_THE_SEER_1288
-    private val BARCRAWL_NPC = intArrayOf(NPCs.BARTENDER_733, NPCs.BLURBERRY_848, NPCs.BARTENDER_735, NPCs.BARTENDER_739, NPCs.BARTENDER_737, NPCs.BARTENDER_738, NPCs.BARTENDER_731, NPCs.ZAMBO_568, NPCs.KAYLEE_3217, NPCs.EMILY_736, NPCs.BARTENDER_734)
+    private val PEER_THE_SEER = NPCs.VIKING_PEER_1288
+    private val BARCRAWL_NPC = intArrayOf(NPCs.BLUEMOON_BARTENDER_733, NPCs.BLURBERRY_848, NPCs.DEADMANS_BARTENDER_735, NPCs.DRAGON_BARTENDER_739, NPCs.FORESTERS_BARTENDER_737, NPCs.FLYINGHORSE_BARTENDER_738, NPCs.JOLLYBOAR_BARTENDER_731, NPCs.ZAMBO_568, NPCs.KAYLEE_3217, NPCs.EMILY_736, NPCs.RUSTYANCHOR_BARTENDER_734)
 
     override fun defineListeners() {
 
@@ -46,7 +46,7 @@ class NPCListener : InteractionListener {
 
         on(PEER_THE_SEER, IntType.NPC, "deposit") { player, _ ->
             if (!isDiaryComplete(player, DiaryType.FREMENNIK, 0)) {
-                sendNPCDialogue(player, NPCs.PEER_THE_SEER_1288, "Do not pester me, Outlander! I will only deposit items into the banks of those who have earned Fremennik sea boots!", FaceAnim.ANNOYED)
+                sendNPCDialogue(player, NPCs.VIKING_PEER_1288, "Do not pester me, Outlander! I will only deposit items into the banks of those who have earned Fremennik sea boots!", FaceAnim.ANNOYED)
                 return@on true
             }
 

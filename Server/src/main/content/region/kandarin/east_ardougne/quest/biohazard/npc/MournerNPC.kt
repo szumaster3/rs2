@@ -15,7 +15,7 @@ class MournerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = MournerNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MOURNER_370)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MOURNERSTEW2_370)
 
     override fun finalizeDeath(killer: Entity?) {
         val player = killer?.asPlayer() ?: return super.finalizeDeath(killer)

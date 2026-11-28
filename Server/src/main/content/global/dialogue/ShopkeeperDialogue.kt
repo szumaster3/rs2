@@ -37,13 +37,13 @@ class ShopkeeperDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = ShopkeeperDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.SHOPKEEPER_520, NPCs.SHOP_ASSISTANT_521, // Lumbridge
-        NPCs.SHOPKEEPER_522, NPCs.SHOP_ASSISTANT_523, // Varrock
-        NPCs.SHOPKEEPER_524, NPCs.SHOP_ASSISTANT_525, // Al Kharid
-        NPCs.SHOPKEEPER_526, NPCs.SHOP_ASSISTANT_527, // Falador
-        NPCs.SHOPKEEPER_528, NPCs.SHOP_ASSISTANT_529, // Edgeville
-        NPCs.SHOPKEEPER_530, NPCs.SHOP_ASSISTANT_531, // Rimmington
+        NPCs.GENERALSHOPKEEPER1_520, NPCs.GENERALASSISTANT1_521, // Lumbridge
+        NPCs.GENERALSHOPKEEPER2_522, NPCs.GENERALASSISTANT2_523, // Varrock
+        NPCs.GENERALSHOPKEEPER3_524, NPCs.GENERALASSISTANT3_525, // Al Kharid
+        NPCs.GENERALSHOPKEEPER4_526, NPCs.GENERALASSISTANT4_527, // Falador
+        NPCs.GENERALSHOPKEEPER5_528, NPCs.GENERALASSISTANT5_529, // Edgeville
+        NPCs.GENERALSHOPKEEPER6_530, NPCs.GENERALASSISTANT6_531, // Rimmington
         NPCs.SHOPKEEPER_532, NPCs.SHOP_ASSISTANT_533, // Karamja
-        NPCs.SHOPKEEPER_555 // Port Khazard
+        NPCs.KHAZARD_SHOPKEEPER_555 // Port Khazard
     )
 }

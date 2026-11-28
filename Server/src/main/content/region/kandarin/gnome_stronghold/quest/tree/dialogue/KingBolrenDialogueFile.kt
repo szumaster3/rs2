@@ -53,7 +53,7 @@ class KingBolrenDialogueFile : DialogueFile() {
                     20 -> npcl(FaceAnim.OLD_NORMAL, "My assistant shall guide you out. Good luck friend, try your best to return the orb.").also { stage++ }
                     21 -> {
                         teleport(player!!, TreeGnomeVillage.mazeEntrance)
-                        sendNPCDialogue(player!!, NPCs.ELKOY_5179, "We're out of the maze now. Please hurry, we must have the orb if we are to survive.", FaceAnim.OLD_NORMAL)
+                        sendNPCDialogue(player!!, NPCs.ELKOY_1OP_5179, "We're out of the maze now. Please hurry, we must have the orb if we are to survive.", FaceAnim.OLD_NORMAL)
                         setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 10)
                         stage = END_DIALOGUE
                     }
@@ -94,7 +94,7 @@ class KingBolrenDialogueFile : DialogueFile() {
                             if (removeItem(player!!, Items.ORB_OF_PROTECTION_587)) {
                                 teleport(player!!, TreeGnomeVillage.mazeEntrance)
                                 setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE.questName, 40)
-                                sendNPCDialogue(player!!, NPCs.ELKOY_5179, "Good luck friend.")
+                                sendNPCDialogue(player!!, NPCs.ELKOY_1OP_5179, "Good luck friend.")
                             }
                             stage = END_DIALOGUE
                         }
@@ -143,7 +143,7 @@ class KingBolrenDialogueFile : DialogueFile() {
                                             2 -> {
                                                 player!!.faceLocation(Location(2543, 3170, 0))
                                                 for ((i, spot) in gnomeSpots.withIndex()) {
-                                                    val gnome = RegionManager.getNpc(spot, NPCs.LOCAL_GNOME_484, 1)
+                                                    val gnome = RegionManager.getNpc(spot, NPCs.LOCALGNOME_484, 1)
                                                     gnome!!.faceLocation(Location(2543, 3169, 0))
                                                     gnome.animate(Animation(197))
                                                     if (i < 2) {

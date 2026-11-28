@@ -58,14 +58,14 @@ class MacawDialogue(player: Player? = null) : Dialogue(player) {
 
     fun getRandom(): Int = 40
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MACAW_6851, NPCs.MACAW_6852)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_MACAW_6851, NPCs.LORE_MACAW_RANGED_VIEW_6852)
 }
 
 private class MacawDialogueFile : DialogueFile() {
     private var branch: Int? = null
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.MACAW_6851)
+        npc = NPC(NPCs.LORE_MACAW_6851)
         branch = (0..2).random()
         when (branch) {
             0 -> when (stage) {

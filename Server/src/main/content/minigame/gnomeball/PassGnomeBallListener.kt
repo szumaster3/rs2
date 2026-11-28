@@ -26,7 +26,7 @@ class PassGnomeBallListener : InteractionListener {
             return@on true
         }
 
-        on(NPCs.GNOME_WINGER_634, IntType.NPC, "pass") { player, node ->
+        on(NPCs.GNOMEBALLER_GREEN_WITHBALL_634, IntType.NPC, "pass") { player, node ->
             val catcher = node.asNpc()
             setAttribute(catcher, "gnomeball:in-pass", true)
             setAttribute(catcher, "gnomeball:pass-player", player)
@@ -62,9 +62,9 @@ class PassGnomeBallListener : InteractionListener {
             if (removeItem(player, Item(Items.GNOMEBALL_751))) {
                 animate(npc, 3353)
                 spawnProjectile(player.location, npc.location, 55, 43, 40, 0, 70, 10)
-                transformNpc(npc, NPCs.GNOME_WINGER_633, 10)
+                transformNpc(npc, NPCs.GNOMEBALLER_GREEN_633, 10)
                 face(npc, player)
-                animate(npc, Animations.BALLER_THROW_201)
+                animate(npc, Animations.GNOME_THROW_201)
                 spawnProjectile(npc.location, player.location, 55, 43, 40, 0, 70, 10)
             }
             return true

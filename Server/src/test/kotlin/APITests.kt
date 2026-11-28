@@ -221,7 +221,7 @@ class APITests {
         val consumables: Array<Item?> =
             arrayOf(
                 Item(Items.CAKE_1891, 8),
-                Item(Items.TWO_THIRDS_CAKE_1893, 8),
+                Item(Items.OBJ_2_3_CAKE_1893, 8),
                 Item(Items.SLICE_OF_CAKE_1895, 8),
             )
 
@@ -239,7 +239,7 @@ class APITests {
 
             // Cake amounts are correct
             val wholeCakeAmount = player.inventory.getAmount(Items.CAKE_1891)
-            val twoThirdsCakeAmount = player.inventory.getAmount(Items.TWO_THIRDS_CAKE_1893)
+            val twoThirdsCakeAmount = player.inventory.getAmount(Items.OBJ_2_3_CAKE_1893)
             Assertions.assertEquals(7, wholeCakeAmount)
             Assertions.assertEquals(9, twoThirdsCakeAmount)
 
@@ -247,7 +247,7 @@ class APITests {
             val inventorySlot0 = player.inventory.get(0)
             val inventorySlot7 = player.inventory.get(7)
             Assertions.assertEquals(Items.CAKE_1891, inventorySlot0.id)
-            Assertions.assertEquals(Items.TWO_THIRDS_CAKE_1893, inventorySlot7.id)
+            Assertions.assertEquals(Items.OBJ_2_3_CAKE_1893, inventorySlot7.id)
         }
     }
 

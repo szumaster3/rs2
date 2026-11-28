@@ -23,7 +23,7 @@ import shared.consts.NPCs
 import shared.consts.Sounds
 
 @Initializable
-class SpiritWolfNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_WOLF_6829) :
+class SpiritWolfNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_WOLF_6829) :
     Familiar(owner, id, 600, Items.SPIRIT_WOLF_POUCH_12047, 3, WeaponInterface.STYLE_ACCURATE) {
     private var cutscene: CutscenePlugin? = null
 
@@ -106,6 +106,6 @@ class SpiritWolfNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_WOLF_6829, NPCs.SPIRIT_WOLF_6830)
+        return intArrayOf(NPCs.LORE_WOLF_6829, NPCs.LORE_WOLF_COMBAT_6830)
     }
 }

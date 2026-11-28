@@ -184,7 +184,7 @@ class BigChompyBirdHunting : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING),
                 lock(player, 5)
                 playAudio(player, Sounds.SPIT_ROAST_1456)
                 setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST_1770, 1)
-                animate(player, Animations.OLD_COOK_RANGE_896)
+                animate(player, Animations.HUMAN_COOKING_896)
                 sendMessage(player, "You carefully place the chompy bird on the spit-roast.")
                 sendMessage(player, "You add the other ingredients and cook the food.")
                 runTask(player, 4) {
@@ -207,14 +207,14 @@ class BigChompyBirdHunting : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING),
         onUseWith(IntType.SCENERY, Items.OGRE_BELLOWS_2871, Scenery.SWAMP_BUBBLES_684) { player, used, _ ->
             if (removeItem(player, used.asItem())) {
                 lock(player, 2)
-                visualize(player, Animations.HUMAN_USING_BELLOWS_1026, Graphics(shared.consts.Graphics.USING_BELLOWS, 80))
+                visualize(player, Animations.OMGE_SKILL_COMBAT_DUMMY_SPAWN_1026, Graphics(shared.consts.Graphics.HUMAN_OGRE_BELLOW_241, 80))
                 addItem(player, Items.OGRE_BELLOWS_3_2872)
                 sendMessage(player, "You fill the bellows with swamp gas.")
             }
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, filledBellows, NPCs.SWAMP_TOAD_1013) { player, used, with ->
+        onUseWith(IntType.NPC, filledBellows, NPCs.TOAD_1013) { player, used, with ->
             val hasTooManyToads = amountInInventory(player, Items.BLOATED_TOAD_2875) >= 3
 
             if (hasTooManyToads) {
@@ -224,8 +224,8 @@ class BigChompyBirdHunting : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING),
 
             sendChat(player, "Come here toady!")
             sendMessage(player, "You manage to catch the toad and inflate it with swamp gas.")
-            visualize(player, Animations.HUMAN_USING_BELLOWS_1026, Graphics(shared.consts.Graphics.USING_BELLOWS, 80))
-            animate(with.asNpc(), Animations.TOAD_INFLATION_1019)
+            visualize(player, Animations.OMGE_SKILL_COMBAT_DUMMY_SPAWN_1026, Graphics(shared.consts.Graphics.HUMAN_OGRE_BELLOW_241, 80))
+            animate(with.asNpc(), Animations.CHOMPY_TOAD_INFLATE_1019)
             runTask(player, 2) {
                 if (removeItem(player, used.asItem())) {
                     if (filledBellows.isLast(used.id)) {

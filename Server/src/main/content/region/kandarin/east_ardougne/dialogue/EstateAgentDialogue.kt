@@ -222,7 +222,7 @@ class EstateAgentDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = EstateAgentDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ESTATE_AGENT_4247)
+    override fun getIds(): IntArray = intArrayOf(NPCs.POH_ESTATE_AGENT_4247)
 
     private val CONSTRUCTION_GUIDE_8463 = Item(Items.CONSTRUCTION_GUIDE_8463, 1)
     private val REGION_VARROCK_NE = 12854

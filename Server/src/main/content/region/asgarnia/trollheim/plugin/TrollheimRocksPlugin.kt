@@ -195,9 +195,9 @@ class TrollheimRocksPlugin : OptionHandler() {
 
     companion object {
         private const val CLIMBING_BOOTS = Items.CLIMBING_BOOTS_3105
-        private const val CLIMB_DOWN = Animations.WALK_BACKWARDS_CLIMB_1148
-        private const val CLIMB_UP = Animations.CLIMB_DOWN_B_740
-        private const val JUMP_ANIMATION = Animations.CLIMB_OBJECT_839
+        private const val CLIMB_DOWN = Animations.DEATH_HUMAN_CLIMBING_DOWN_1148
+        private const val CLIMB_UP = Animations.HUMAN_CLIMBING_DOWN_740
+        private const val JUMP_ANIMATION = Animations.HUMAN_WALK_STYLE_839
     }
 
     private fun runClimb(player: Player, to: Location, anim: Int) {
@@ -308,7 +308,7 @@ class TrollheimRocksPlugin : OptionHandler() {
         }
 
         companion object {
-            private val THROW = Animation(Animations.IDLE_1142)
+            private val THROW = Animation(Animations.FREMSAGA_ARIANE_READY_1142)
             private val TROLL_LOCATION = Location(2851, 3598, 0)
         }
     }

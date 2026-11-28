@@ -46,12 +46,12 @@ class BarrowBrotherNPC(
     override fun sendImpact(state: BattleState) {
         var maxHit = 0
         when (id) {
-            NPCs.AHRIM_THE_BLIGHTED_2025 -> maxHit = 25
-            NPCs.DHAROK_THE_WRETCHED_2026 -> maxHit = 60
-            NPCs.GUTHAN_THE_INFESTED_2027 -> maxHit = 24
-            NPCs.KARIL_THE_TAINTED_2028 -> maxHit = 20
-            NPCs.TORAG_THE_CORRUPTED_2029 -> maxHit = 23
-            NPCs.VERAC_THE_DEFILED_2030 -> maxHit = 25
+            NPCs.BARROWS_AHRIM_2025 -> maxHit = 25
+            NPCs.BARROWS_DHAROK_2026 -> maxHit = 60
+            NPCs.BARROWS_GUTHAN_2027 -> maxHit = 24
+            NPCs.BARROWS_KARIL_2028 -> maxHit = 20
+            NPCs.BARROWS_TORAG_2029 -> maxHit = 23
+            NPCs.BARROWS_VERAC_2030 -> maxHit = 25
         }
         if (state.estimatedHit > maxHit) {
             state.estimatedHit = RandomFunction.random(maxHit - 10, maxHit)

@@ -16,7 +16,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritKalphiteNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_KALPHITE_6994) :
+class SpiritKalphiteNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_KALPHITE_6994) :
     BurdenBeast(owner, id, 2200, Items.SPIRIT_KALPHITE_POUCH_12063, 6, 6, WeaponInterface.STYLE_DEFENSIVE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return SpiritKalphiteNPC(owner, id)
@@ -53,6 +53,6 @@ class SpiritKalphiteNPC @JvmOverloads constructor(owner: Player? = null, id: Int
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_KALPHITE_6994, NPCs.SPIRIT_KALPHITE_6995)
+        return intArrayOf(NPCs.LORE_KALPHITE_6994, NPCs.LORE_KALPHITE_COMBAT_6995)
     }
 }

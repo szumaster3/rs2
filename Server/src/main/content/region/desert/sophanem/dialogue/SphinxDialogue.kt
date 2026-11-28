@@ -47,5 +47,5 @@ class SphinxDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPHINX_1990)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ICS_LITTLE_SPHINX_1990)
 }

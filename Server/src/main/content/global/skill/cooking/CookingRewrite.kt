@@ -112,7 +112,7 @@ class CookingRewrite : InteractionListener {
             Objects.FIRE_25465,
             Objects.FIRE_27297,
             Objects.FIRE_29139,
-            Objects.FIRE_30017,
+            Objects.DISPLAY_CASE_30017,
             Objects.FIRE_32099,
             Objects.FIRE_37597,
             Objects.FIRE_37726,

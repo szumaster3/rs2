@@ -83,5 +83,5 @@ class FruitBatDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.FRUIT_BAT_6817)
+        intArrayOf(NPCs.LORE_FRUIT_BAT_6817)
 }

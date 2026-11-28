@@ -52,12 +52,12 @@ class GiantRatNPC : AbstractNPC {
         if (getAttribute(killer, GameAttributes.TUTORIAL_STAGE, -1) < 50) {
             sendNPCDialogue(
                 killer,
-                NPCs.COMBAT_INSTRUCTOR_944,
+                NPCs.NEWBIE_COMBAT_INSTRUCTOR_944,
                 "I admire your thirst for violence! Let's have a chat before you kill another one, though, eh?",
                 FaceAnim.ANNOYED,
             )
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GIANT_RAT_86, NPCs.GIANT_RAT_950)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GIANTRAT_86, NPCs.NEWBIEGIANTRAT_950)
 }

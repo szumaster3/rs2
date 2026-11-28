@@ -35,5 +35,5 @@ class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TRIBAL_WEAPON_SALESMAN_692)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANGING_GUILD_TRIBAL_SALESMAN_692)
 }

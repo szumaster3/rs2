@@ -54,5 +54,5 @@ class PenguinKeeperDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = PenguinKeeperDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PENGUIN_KEEPER_6891)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_PENGUIN_KEEPER_6891)
 }

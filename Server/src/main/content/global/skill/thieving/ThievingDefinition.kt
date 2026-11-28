@@ -31,19 +31,19 @@ object ThievingDefinition {
     /**
      * The base pickpocket animation.
      */
-    val PICKPOCKET_ANIM = Animation(Animations.HUMAN_PICKPOCKETING_881, Animator.Priority.HIGH)
+    val PICKPOCKET_ANIM = Animation(Animations.HUMAN_PICKPOCKET_881, Animator.Priority.HIGH)
 
     /**
      * The base punch animation for NPCs.
      */
-    val NPC_ANIM = Animation(Animations.PUNCH_422)
+    val NPC_ANIM = Animation(Animations.HUMAN_UNARMEDPUNCH_422)
 
     /**
      * Represents stall data.
      */
     enum class Stall(full: Array<Int>, empty: Array<Int>, var level: Int, var rewards: Array<Item>, var experience: Double, var delay: Int, var message: String) {
         VEGETABLE_STALL(arrayOf(Objects.VEG_STALL_4706, Objects.VEG_STALL_4708), arrayOf(Objects.MARKET_STALL_634, Objects.MARKET_STALL_634), 2, arrayOf(Item(Items.ONION_1957, 1), Item(Items.CABBAGE_1965, 1), Item(Items.POTATO_1942, 1), Item(Items.TOMATO_1982, 1), Item(Items.GARLIC_1550, 1)), 10.0, 4, "vegetables"),
-        BAKER_STALL(arrayOf(Objects.BAKER_S_STALL_2561, Objects.BAKERY_STALL_6163, Objects.BAKER_S_STALL_34384), arrayOf(Objects.MARKET_STALL_634, Objects.MARKET_STALL_6984, Objects.MARKET_STALL_34381), 5, arrayOf(Item(Items.CAKE_1891, 1), Item(Items.BREAD_2309, 1), Item(Items.CHOCOLATE_SLICE_1901, 1)), 16.0, 4, "bread"),
+        BAKER_STALL(arrayOf(Objects.BAKERS_STALL_2561, Objects.BAKERY_STALL_6163, Objects.BAKERS_STALL_34384), arrayOf(Objects.MARKET_STALL_634, Objects.MARKET_STALL_6984, Objects.MARKET_STALL_34381), 5, arrayOf(Item(Items.CAKE_1891, 1), Item(Items.BREAD_2309, 1), Item(Items.CHOCOLATE_SLICE_1901, 1)), 16.0, 4, "bread"),
         CRAFTING_STALL(arrayOf(Objects.CRAFTING_STALL_4874, Objects.CRAFTING_STALL_6166), arrayOf(Objects.BAMBOO_DESK_4797, Objects.MARKET_STALL_6984), 5, arrayOf(Item(Items.RING_MOULD_1592, 1), Item(Items.NECKLACE_MOULD_1597, 1), Item(Items.CHISEL_1755, 1)), 16.0, 12, "tool"),
         TEA_STALL(arrayOf(Objects.TEA_STALL_635, Objects.TEA_STALL_6574), arrayOf(Objects.MARKET_STALL_634, Objects.MARKET_STALL_6573), 5, arrayOf(Item(Items.CUP_OF_TEA_712, 1)), 16.0, 12, "tea"),
         SILK_STALL(arrayOf(Objects.SILK_STALL_34383, Objects.SILK_STALL_2560), arrayOf(Objects.MARKET_STALL_34381, Objects.MARKET_STALL_634), 20, arrayOf(Item(Items.SILK_950, 1)), 24.0, 13, "silk"),
@@ -111,7 +111,7 @@ object ThievingDefinition {
                 }
 
                 if (node.location.isInRegion(10547)) finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 1)
-                player.animate(Animation(Animations.HUMAN_MULTI_USE_832))
+                player.animate(Animation(Animations.HUMAN_PICKUPTABLE_832))
                 player.locks.lockInteractions(2)
 
                 queueScript(player, 1, QueueStrength.WEAK) {
@@ -121,7 +121,7 @@ object ThievingDefinition {
                     if (!success) {
                         val guard = RegionManager.getLocalNpcs(player.location, 16)
                             .firstOrNull {
-                                it.id == NPCs.GUARD_32 || it.id == NPCs.MARKET_GUARD_2236
+                                it.id == NPCs.ARDOUGNE_GUARD_32 || it.id == NPCs.FARMING_MARKET_GUARD_2236
                             }
 
                         if (guard != null) {
@@ -385,7 +385,7 @@ object ThievingDefinition {
             }
 
             if (getStatLevel(player, Skills.THIEVING) < level) {
-                animate(player, Animations.HUMAN_OPEN_CHEST_536, false)
+                animate(player, Animations.HUMAN_OPENCHEST_536, false)
                 lock(player, 2)
                 sendMessage(player, "You search the chest for traps.")
                 sendMessage(player, "You find nothing.", 1)
@@ -398,7 +398,7 @@ object ThievingDefinition {
             }
 
             lock(player, 6)
-            animate(player, Animations.HUMAN_OPEN_CHEST_536, false)
+            animate(player, Animations.HUMAN_OPENCHEST_536, false)
             sendMessage(player, "You find a trap on the chest...")
             player.impactHandler.disabledTicks = 6
             delayClock(player, Clocks.SKILLING, 6)
@@ -411,7 +411,7 @@ object ThievingDefinition {
                     }
 
                     1 -> {
-                        animate(player, Animation.create(Animations.HUMAN_OPEN_CHEST_536))
+                        animate(player, Animation.create(Animations.HUMAN_OPENCHEST_536))
                         player.faceLocation(scenery.location)
                         sendMessage(player, "You open the chest.")
                         return@queueScript delayScript(player, 2)

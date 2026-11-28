@@ -76,5 +76,5 @@ class GuardDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_7142)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SOPS_GUARDIAN_7142)
 }

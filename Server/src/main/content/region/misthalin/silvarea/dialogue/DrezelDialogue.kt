@@ -143,5 +143,5 @@ class DrezelDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DREZEL_7690)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYQ4_CUTSCENE_DREZEL_7690)
 }

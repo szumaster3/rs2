@@ -254,7 +254,7 @@ class MiningPulse(private val player: Player, private val node: Node) : Pulse(1,
                     altered = true
                 }
                 val necklace = getItemFromEquipment(player, EquipmentSlot.NECK)
-                if (necklace != null && necklace.id in Items.AMULET_OF_GLORY_1705..Items.AMULET_OF_GLORY4_1713) {
+                if (necklace != null && necklace.id in Items.AMULET_OF_GLORY_1705..Items.AMULET_OF_GLORY_4_1713) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }

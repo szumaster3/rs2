@@ -8,7 +8,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class LunarDiplomacy : Quest("Lunar Diplomacy", 85, 84, 2, Vars.VARBIT_QUEST_LUNAR_DIPLOMACY_2448, 0, 1, 190) {
+class LunarDiplomacy : Quest("Lunar Diplomacy", 85, 84, 2, Vars.VARBIT_2448, 0, 1, 190) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -192,7 +192,7 @@ class LunarDiplomacy : Quest("Lunar Diplomacy", 85, 84, 2, Vars.VARBIT_QUEST_LUN
         addItemOrDrop(player, Items.LUNAR_LEGS_9098)
         addItemOrDrop(player, Items.LUNAR_BOOTS_9100)
         addItemOrDrop(player, Items.LUNAR_RING_9104)
-        setVarbit(player, Vars.VARBIT_QUEST_LUNAR_DIPLOMACY_2448, 190, true)
+        setVarbit(player, Vars.VARBIT_2448, 190, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

@@ -59,5 +59,5 @@ class HadleyDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("hadley_dialogue"), NPCs.HADLEY_302)
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("hadley_dialogue"), NPCs.HADLEY_WATERFALL_QUEST_302)
 }

@@ -34,7 +34,7 @@ class RegicidePlugin : InteractionListener {
             if (!hasGloves) return@onUseWith true
 
             if (removeItem(player, used.asItem())) {
-                animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
                 submitIndividualPulse(
                     player,
                     object : Pulse(1) {

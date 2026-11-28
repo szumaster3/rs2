@@ -98,7 +98,7 @@ class WitchDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WITCH_5200)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANMA_WITCH_5200)
 
     companion object {
         private val IRON_BARS = Item(Items.IRON_BAR_2351, 5)

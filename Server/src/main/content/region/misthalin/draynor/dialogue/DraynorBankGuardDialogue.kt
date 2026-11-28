@@ -152,5 +152,5 @@ class DraynorBankGuardDialogue(player: Player? = null) : Dialogue(player) {
         ActivityManager.start(player, "dbr cutscene", false)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BANK_GUARD_2574)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WOM_BANKGUARD_2574)
 }

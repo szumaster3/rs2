@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class Regicide : Quest("Regicide", 104, 103, 3, Vars.VARP_QUEST_REGICIDE_328, 0, 1, 15) {
+class Regicide : Quest("Regicide", 104, 103, 3, Vars.VARP_328, 0, 1, 15) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

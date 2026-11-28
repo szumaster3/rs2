@@ -627,7 +627,7 @@ class LockedDiary : InteractionListener {
          * Handles retrieve locked diary.
          */
 
-        on(Scenery.SANDY_S_DESK_10805, IntType.SCENERY, "search") { player, _ ->
+        on(Scenery.SANDYS_DESK_10805, IntType.SCENERY, "search") { player, _ ->
             val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND.questName)
             val varbitProgress = getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
 
@@ -658,7 +658,7 @@ class LockedDiary : InteractionListener {
                     false
                 )
             ) {
-                player.animate(Animation(Animations.HUMAN_MULTI_USE_832))
+                player.animate(Animation(Animations.HUMAN_PICKUPTABLE_832))
                 sendMessage(player, "You search through the papers on the table and find a locked diary.")
                 addItemOrDrop(player, Items.LOCKED_DIARY_11761, 1)
             } else {

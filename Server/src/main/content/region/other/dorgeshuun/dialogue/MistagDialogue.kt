@@ -112,5 +112,5 @@ class MistagDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = MistagDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MISTAG_2084)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LOST_TRIBE_MISTAG_2084)
 }

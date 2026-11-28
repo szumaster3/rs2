@@ -120,7 +120,7 @@ class SeamanDialogue(player: Player? = null) : Dialogue(player) {
         CharterShip.PORT_SARIM_TO_KARAMJA.sail(player)
     }
 
-    private fun hasCharosRing(): Boolean = player.equipment[EquipmentContainer.SLOT_RING]?.id == Items.RING_OF_CHAROSA_6465
+    private fun hasCharosRing(): Boolean = player.equipment[EquipmentContainer.SLOT_RING]?.id == Items.RING_OF_CHAROS_A_6465
 
     private fun hasKaramjaDiscount(): Boolean = isDiaryComplete(player, DiaryType.KARAMJA, 0) || player!!.achievementDiaryManager.hasGlove()
 

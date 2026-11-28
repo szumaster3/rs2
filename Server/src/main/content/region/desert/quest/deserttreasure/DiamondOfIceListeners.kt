@@ -21,7 +21,7 @@ class DiamondOfIceListeners : InteractionListener {
         onUseWith(
             IntType.NPC,
             Items.CHOCOLATE_CAKE_1897,
-            NPCs.BANDIT_1932 /* should be NPCs.TROLL_CHILD_1932 */
+            NPCs.TROLL_CHILD_1932
         ) { player, used, with ->
             if (removeItem(player, used)) {
                 if (DesertTreasure.getSubStage(player, DesertTreasure.attributeIceStage) == 0) {
@@ -121,7 +121,7 @@ class DiamondOfIceListeners : InteractionListener {
         }
 
         // This is 1943 as base
-        on(NPCs.ICE_BLOCK_1944, NPC, "talk-to") { player, node ->
+        on(NPCs.FD_TROLLBLOCK1_1944, NPC, "talk-to") { player, node ->
             sendDialogueLines(
                 player,
                 "There is a thick layer of ice covering this troll.",
@@ -129,13 +129,13 @@ class DiamondOfIceListeners : InteractionListener {
             )
             return@on true
         }
-        on(NPCs.ICE_BLOCK_1944, NPC, "smash-ice") { player, node ->
+        on(NPCs.FD_TROLLBLOCK1_1944, NPC, "smash-ice") { player, node ->
             player.attack(node)
             return@on true
         }
 
         // This is 1945 as base
-        on(NPCs.ICE_BLOCK_1946, NPC, "talk-to") { player, node ->
+        on(NPCs.FD_TROLLBLOCK2_1946, NPC, "talk-to") { player, node ->
             sendDialogueLines(
                 player,
                 "There is a thick layer of ice covering this troll.",
@@ -143,7 +143,7 @@ class DiamondOfIceListeners : InteractionListener {
             )
             return@on true
         }
-        on(NPCs.ICE_BLOCK_1946, NPC, "smash-ice") { player, node ->
+        on(NPCs.FD_TROLLBLOCK2_1946, NPC, "smash-ice") { player, node ->
             player.attack(node)
             return@on true
         }

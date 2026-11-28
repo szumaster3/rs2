@@ -199,7 +199,7 @@ class KoscheiNPC(id: Int = 0, location: Location? = null, session: KoscheiSessio
 
         override fun pulse(): Boolean {
             when (counter++) {
-                0 -> player?.lock().also { player?.animate(Animation(Animations.GET_OFF_KNEES_1332)).also { player?.sendMessage("Oh dear you are...") } }
+                0 -> player?.lock().also { player?.animate(Animation(Animations.VIKING_DROP_TO_KNEE_AND_BACKTOREADY_1332)).also { player?.sendMessage("Oh dear you are...") } }
                 1 -> player?.setAttribute(GameAttributes.QUEST_VIKING_THORVALD_VOTE, true).also {
                     player?.setAttribute(
                         GameAttributes.QUEST_VIKING_VOTES,
@@ -212,8 +212,8 @@ class KoscheiNPC(id: Int = 0, location: Location? = null, session: KoscheiSessio
                 4 -> player?.sendMessage("...still alive somehow?")
                 6 ->
                     player?.dialogueInterpreter?.open(
-                        NPCs.THORVALD_THE_WARRIOR_1289,
-                        Repository.findNPC(NPCs.THORVALD_THE_WARRIOR_1289),
+                        NPCs.VIKING_THORVALD_1289,
+                        Repository.findNPC(NPCs.VIKING_THORVALD_1289),
                         this,
                     )
 

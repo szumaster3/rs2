@@ -74,5 +74,5 @@ class MagpieDialogue : Dialogue {
     /**
      * Returns the familiar NPC IDs that this dialogue should be attached to.
      */
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAGPIE_6824)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_MAGPIE_6824)
 }

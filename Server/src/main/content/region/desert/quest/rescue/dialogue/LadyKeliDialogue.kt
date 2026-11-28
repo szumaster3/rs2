@@ -31,7 +31,7 @@ class LadyKeliDialogue(player: Player? = null) : Dialogue(player) {
                 sendChat(npc, "You tricked me, and tied me up, Guards kill this stranger!")
                 val npcc = RegionManager.getLocalNpcs(player)
                 for (n in npcc) {
-                    if (n.id == NPCs.JAIL_GUARD_917) {
+                    if (n.id == NPCs.JAILGUARD_917) {
                         n.sendChat("Yes M'lady")
                         n.properties.combatPulse.attack(player)
                     }

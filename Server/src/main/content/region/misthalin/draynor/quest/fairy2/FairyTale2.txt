@@ -10,7 +10,7 @@ import core.plugin.Initializable
 
 @Initializable
 class FairyTale2 :
-    Quest("Fairytale II - Cure a Queen", 58, 57, 2, Vars.VARBIT_QUEST_FAIRY_TALE_II_CURE_A_QUEEN_2326, 0, 1, 81) {
+    Quest("Fairytale II - Cure a Queen", 58, 57, 2, Vars.VARBIT_2326, 0, 1, 81) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -37,7 +37,7 @@ class FairyTale2 :
         drawReward(player, "2,500 Thieving XP", ln++)
         rewardXP(player, Skills.HERBLORE, 3500.0)
         rewardXP(player, Skills.THIEVING, 2500.0)
-        setVarbit(player, Vars.VARBIT_QUEST_FAIRY_TALE_II_CURE_A_QUEEN_2326, 81, true)
+        setVarbit(player, Vars.VARBIT_2326, 81, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

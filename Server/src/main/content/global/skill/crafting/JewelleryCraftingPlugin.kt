@@ -78,7 +78,7 @@ class JewelleryCraftingPlugin : InteractionListener, InterfaceListener {
 
         onUseWith(IntType.ITEM, Items.TARNS_DIARY_10587, Items.SALVE_AMULET_4081) { player, _, with ->
             if (removeItem(player, with.id)) {
-                addItem(player, Items.SALVE_AMULETE_10588, 1)
+                addItem(player, Items.SALVE_AMULET_E_10588, 1)
             }
             return@onUseWith true
         }

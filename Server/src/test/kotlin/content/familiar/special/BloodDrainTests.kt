@@ -27,7 +27,7 @@ class BloodDrainTests {
             p.skills.prayerPoints = 5.0
             addItem(p, Items.BLOOD_DRAIN_SCROLL_12444)
 
-            val npc = BloatedLeechNPC(p, NPCs.BLOATED_LEECH_6843)
+            val npc = BloatedLeechNPC(p, NPCs.LORE_LEECH_6843)
             npc.location = ServerConstants.HOME_LOCATION
             Assertions.assertEquals(true, npc.executeSpecialMove(FamiliarSpecial(p)))
             Assertions.assertEquals(5.0, p.skills.prayerPoints)
@@ -37,7 +37,7 @@ class BloodDrainTests {
     @Test fun bloodDrainShouldDamageOwner() {
         TestUtils.getMockPlayer("bloodDrainHealth").use { p ->
             addItem(p, Items.BLOOD_DRAIN_SCROLL_12444)
-            val npc = BloatedLeechNPC(p, NPCs.BLOATED_LEECH_6843)
+            val npc = BloatedLeechNPC(p, NPCs.LORE_LEECH_6843)
             npc.location = ServerConstants.HOME_LOCATION
 
             val npcBaseline = npc.skills.lifepoints
@@ -56,7 +56,7 @@ class BloodDrainTests {
             addItem(p, Items.BLOOD_DRAIN_SCROLL_12444)
             p.skills.lifepoints = 5
 
-            val npc = BloatedLeechNPC(p, NPCs.BLOATED_LEECH_6843)
+            val npc = BloatedLeechNPC(p, NPCs.LORE_LEECH_6843)
             npc.location = ServerConstants.HOME_LOCATION
 
             val ownerBaseline = p.skills.lifepoints
@@ -71,7 +71,7 @@ class BloodDrainTests {
     @Test fun bloodDrainShouldOnlyRestorePercentOfStats() {
         TestUtils.getMockPlayer("bloodDrainStats").use { p ->
             addItem(p, Items.BLOOD_DRAIN_SCROLL_12444)
-            val npc = BloatedLeechNPC(p, NPCs.BLOATED_LEECH_6843)
+            val npc = BloatedLeechNPC(p, NPCs.LORE_LEECH_6843)
             npc.location = ServerConstants.HOME_LOCATION
 
             p.skills.setStaticLevel(Skills.STRENGTH, 99)
@@ -88,7 +88,7 @@ class BloodDrainTests {
     @Test fun bloodDrainShouldNotBoostStats() {
         TestUtils.getMockPlayer("bloodDrainStats2").use { p ->
             addItem(p, Items.BLOOD_DRAIN_SCROLL_12444)
-            val npc = BloatedLeechNPC(p, NPCs.BLOATED_LEECH_6843)
+            val npc = BloatedLeechNPC(p, NPCs.LORE_LEECH_6843)
             npc.location = ServerConstants.HOME_LOCATION
 
             p.skills.setStaticLevel(Skills.STRENGTH, 99)
@@ -105,7 +105,7 @@ class BloodDrainTests {
     @Test fun bloodDrainCuresPoisonAndDisease() {
         TestUtils.getMockPlayer("bloodDrainAilments").use { p ->
             addItem(p, Items.BLOOD_DRAIN_SCROLL_12444)
-            val npc = BloatedLeechNPC(p, NPCs.BLOATED_LEECH_6843)
+            val npc = BloatedLeechNPC(p, NPCs.LORE_LEECH_6843)
             npc.location = ServerConstants.HOME_LOCATION
 
             applyPoison(p, p, 40)

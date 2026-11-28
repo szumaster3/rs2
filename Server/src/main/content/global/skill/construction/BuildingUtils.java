@@ -74,7 +74,7 @@ public final class BuildingUtils {
     /**
      * The watering can(8) item id.
      */
-    public static final int WATERING_CAN = Items.WATERING_CAN8_5340;
+    public static final int WATERING_CAN = Items.WATERING_CAN_8_5340;
 
     private static final int[] BUILD_INDEXES = {0, 2, 4, 6, 1, 3, 5};
 

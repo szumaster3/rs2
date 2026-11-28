@@ -10,7 +10,7 @@ import core.tools.RandomFunction
 import core.tools.minutesToTicks
 import shared.consts.NPCs
 
-class SlashBashBehavior : NPCBehavior(NPCs.SLASH_BASH_2060) {
+class SlashBashBehavior : NPCBehavior(NPCs.ZOGRE_SLASH_BASH_2060) {
 
     override fun onCreation(self: NPC) {
         self.task.undead = true

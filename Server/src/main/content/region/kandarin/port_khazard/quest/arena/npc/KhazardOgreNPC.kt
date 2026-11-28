@@ -21,12 +21,12 @@ class KhazardOgreNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
         vararg objects: Any,
     ): AbstractNPC = KhazardOgreNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_OGRE_270)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARENA_OGRE_270)
 
     companion object {
         @JvmStatic
         fun spawnOgre(player: Player) {
-            val ogre = KhazardOgreNPC(NPCs.KHAZARD_OGRE_270)
+            val ogre = KhazardOgreNPC(NPCs.ARENA_OGRE_270)
             ogre.location = location(2603, 3166, 0)
             ogre.isWalks = true
             ogre.isAggressive = true

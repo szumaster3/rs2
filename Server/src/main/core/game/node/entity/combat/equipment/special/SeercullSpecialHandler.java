@@ -27,7 +27,7 @@ public final class SeercullSpecialHandler extends RangeSwingHandler implements P
 
     private static final int SPECIAL_ENERGY = 100;
 
-    private static final Graphics DRAWBACK_GFX = new Graphics(shared.consts.Graphics.BOW_SPECIAL_WHITE_472, 96);
+    private static final Graphics DRAWBACK_GFX = new Graphics(shared.consts.Graphics.ARROW_LAUNCH_14_472, 96);
 
     /**
      * Instantiates a new Seercull special handler.

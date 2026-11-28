@@ -34,7 +34,7 @@ class PestControlListener : InteractionListener {
             }
 
             val item = node as Item
-            val isLastSeal = item.id == Items.VOID_SEAL1_11673
+            val isLastSeal = item.id == Items.VOID_SEAL_1_11673
 
             if (isLastSeal) {
                 sendMessage(player, "The seal dissolves as the least of its power is unleashed.")
@@ -46,8 +46,8 @@ class PestControlListener : InteractionListener {
                 container.replace(replacement, item.slot)
             }
 
-            visualize(player, Animations.HANDS_TOGETHER_709, Gfx.GREEN_CIRCLE_WAVES_1177)
-            animate(player, Animations.HANDS_TOGETHER_709)
+            visualize(player, Animations.HUMAN_CASTHEAL_709, Gfx.SPIRAL_ATTACK_HUMAN_1177)
+            animate(player, Animations.HUMAN_CASTHEAL_709)
 
             lock(player, 1)
             getLocalNpcs(player, 2)
@@ -67,7 +67,7 @@ class PestControlListener : InteractionListener {
                         HitsplatType.NORMAL,
                         1
                     )
-                    npc.graphics(Graphics.create(Gfx.RED_CIRCLE_WAVES_1176))
+                    npc.graphics(Graphics.create(Gfx.SPIRAL_ATTACK_1176))
                 }
 
             return@on true
@@ -116,25 +116,25 @@ class PestControlListener : InteractionListener {
     }
 
     companion object {
-        const val SQUIRE = NPCs.SQUIRE_3781
+        const val SQUIRE = NPCs.PEST_SQUIRE_INSTANCE_3781
 
         private val VOID_SEAL =
             intArrayOf(
-                Items.VOID_SEAL8_11666,
-                Items.VOID_SEAL7_11667,
-                Items.VOID_SEAL6_11668,
-                Items.VOID_SEAL5_11669,
-                Items.VOID_SEAL4_11670,
-                Items.VOID_SEAL3_11671,
-                Items.VOID_SEAL2_11672,
-                Items.VOID_SEAL1_11673
+                Items.VOID_SEAL_8_11666,
+                Items.VOID_SEAL_7_11667,
+                Items.VOID_SEAL_6_11668,
+                Items.VOID_SEAL_5_11669,
+                Items.VOID_SEAL_4_11670,
+                Items.VOID_SEAL_3_11671,
+                Items.VOID_SEAL_2_11672,
+                Items.VOID_SEAL_1_11673
             )
         private val VOID_KNIGHT =
             intArrayOf(
-                NPCs.VOID_KNIGHT_3786,
-                NPCs.VOID_KNIGHT_3788,
-                NPCs.VOID_KNIGHT_3789,
-                NPCs.VOID_KNIGHT_5956,
+                NPCs.PEST_VOIDKNIGHT_1_3786,
+                NPCs.PEST_VOIDKNIGHT_3_3788,
+                NPCs.PEST_VOIDKNIGHT_4_3789,
+                NPCs.PEST_VOIDKNIGHT_2_5956,
             )
     }
 }

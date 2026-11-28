@@ -47,5 +47,5 @@ class AbyssalLurkerDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ABYSSAL_LURKER_6820, NPCs.ABYSSAL_LURKER_6821)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_ABYSSAL_LURKER_6820, NPCs.LORE_ABYSSAL_LURKER_COMBAT_6821)
 }

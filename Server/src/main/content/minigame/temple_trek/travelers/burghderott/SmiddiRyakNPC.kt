@@ -19,7 +19,7 @@ class SmiddiRyakNPC(
         vararg objects: Any,
     ): AbstractNPC = SmiddiRyakNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SMIDDI_RYAK_3625)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROLAYNE_TWICKIT_3625)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

@@ -72,5 +72,5 @@ class VoidTorcherDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VOID_TORCHER_7351, NPCs.VOID_TORCHER_7352)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_TORCHER_7351, NPCs.LORE_TORCHER_COMBAT_7352)
 }

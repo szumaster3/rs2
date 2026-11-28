@@ -21,7 +21,7 @@ import java.util.List;
 @Initializable
 public class GiantChinchompaNPC extends Familiar {
     public GiantChinchompaNPC() {
-        this(null, NPCs.GIANT_CHINCHOMPA_7353);
+        this(null, NPCs.LORE_CHINCHOMPA_7353);
     }
 
     public GiantChinchompaNPC(Player owner, int id) {
@@ -69,7 +69,7 @@ public class GiantChinchompaNPC extends Familiar {
 
     @Override
     public int[] getIds() {
-        return new int[]{NPCs.GIANT_CHINCHOMPA_7353, NPCs.GIANT_CHINCHOMPA_7354};
+        return new int[]{NPCs.LORE_CHINCHOMPA_7353, NPCs.LORE_CHINCHOMPA_COMBAT_7354};
     }
 
 }

@@ -34,7 +34,7 @@ import shared.consts.Scenery as Objects
 class LumbridgePlugin : InteractionListener {
 
     companion object {
-        val COMBAT_TUTORS = intArrayOf(NPCs.MAGIC_TUTOR_4707, NPCs.RANGED_TUTOR_1861)
+        val COMBAT_TUTORS = intArrayOf(NPCs.AIDE_TUTOR_MAGIC_4707, NPCs.RANGED_INSTRUCTOR_1861)
         var flagInUse: Boolean = false
     }
 
@@ -52,7 +52,7 @@ class LumbridgePlugin : InteractionListener {
          * Handles warning toggles.
          */
 
-        on(NPCs.DOOMSAYER_3777, IntType.NPC, "toggle-warnings") { player, _ ->
+        on(NPCs.CWS_DOOMSAYER_3777, IntType.NPC, "toggle-warnings") { player, _ ->
             openInterface(player, Components.CWS_DOOMSAYER_583)
             return@on true
         }
@@ -81,7 +81,7 @@ class LumbridgePlugin : InteractionListener {
          * TODO: Mission report (Lumbridge)
          */
 
-        on(NPCs.SHEEP_3579, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.SHEEP_SHEARER_THE_THING_3579, IntType.NPC, "talk-to") { player, _ ->
             sendPlayerDialogue(player, "That's a sheep...I think. I can't talk to sheep.", FaceAnim.THINKING)
             setAttribute(player, GameAttributes.FRED_SEEN_THE_THING, true)
             return@on true
@@ -206,10 +206,10 @@ class LumbridgePlugin : InteractionListener {
                                     sendChat(player, "All Hail the Duke!", 9)
                                     sendMessage(player, "...and slowly descends.", 12)
                                     animateScenery(node.asScenery(), 9979)
-                                    animate(player, Animations.LUMBRIDG_FLAG_CRAKING_A_9977)
+                                    animate(player, Animations.FAI_LUMBRIDGE_PLAYER_HOIST_FLAG_9977)
                                 }
 
-                                8 -> animate(player, Animations.LUMBRIDG_FLAG_CRAKING_B_9978)
+                                8 -> animate(player, Animations.FAI_LUMBRIDGE_LEAVE_FLAG_9978)
                             }
                             return counter >= 20
                         }

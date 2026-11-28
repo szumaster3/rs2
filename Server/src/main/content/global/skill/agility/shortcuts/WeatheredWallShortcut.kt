@@ -48,8 +48,8 @@ class WeatheredWallShortcut : InteractionListener {
 
     companion object {
         val WEATHERED_WALL = intArrayOf(Scenery.WEATHERED_WALL_9307, Scenery.WEATHERED_WALL_9308)
-        val FIRST_ANIM: Animation = Animation(Animations.JUMP_OFF_LEDGE_BEGIN_2586)
-        val SECOND_ANIM: Animation = Animation(Animations.JUMP_OFF_LEDGE_END_2588)
-        val UP_ANIM: Animation = Animation(Animations.CLIMB_WALL_A_737)
+        val FIRST_ANIM: Animation = Animation(Animations.AGILITY_SHORTCUT_WALL_JUMPDOWN_2586)
+        val SECOND_ANIM: Animation = Animation(Animations.AGILITY_SHORTCUT_WALL_JUMPDOWN2_2588)
+        val UP_ANIM: Animation = Animation(Animations.HUMAN_CLIMBING_737)
     }
 }

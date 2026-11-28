@@ -17,7 +17,7 @@ import shared.consts.NPCs
  */
 class GhostVillagerDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.GHOST_VILLAGER_1697)
+        npc = NPC(NPCs.AHOY_GHOST_VILLAGER_1697)
         when (stage) {
             0 -> player("Would you sign this petition form, please?").also { stage++ }
             1 -> {

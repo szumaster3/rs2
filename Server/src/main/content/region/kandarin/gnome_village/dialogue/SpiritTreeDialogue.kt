@@ -31,7 +31,7 @@ class SpiritTreeDialogue(private val showIntro: Boolean) : DialogueFile() {
     )
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SPIRIT_TREE_3636)
+        npc = NPC(NPCs.TREEVILLAGE_SMALL_SPIRITTREE_3636)
         when (stage) {
             0 -> {
                 if (!showIntro) {
@@ -98,12 +98,12 @@ class SpiritTreeDialogue(private val showIntro: Boolean) : DialogueFile() {
                 var count = 0
                 override fun pulse(): Boolean {
                     when (count) {
-                        0 -> visualize(p, Animation(Animations.HUMAN_SPIRIT_TREE_TELEPORT_7082),
-                            Graphics(Gfx.GRAND_TREE_TP_A_1228))
+                        0 -> visualize(p, Animation(Animations.POG_PLAYER_ORGANIC_TELEPORT_7082),
+                            Graphics(Gfx.POG_ORGANIC_TELEPORT_SPOTANIM_1228))
                         3 -> teleport(p, location)
                         5 -> {
-                            visualize(p, Animation(Animations.HUMAN_SPIRIT_TREE_TELEPORT_FROM_7084),
-                                Graphics(Gfx.GRAND_TREE_TP_B_1229))
+                            visualize(p, Animation(Animations.POG_PLAYER_ORGANIC_TELEPORT_REVERSED_7084),
+                                Graphics(Gfx.POG_ORGANIC_TELEPORT_SPOTANIM_REVERSED_1229))
                             p.face(null)
                             if (withinDistance(p, location)) {
                                 finishDiaryTask(p, DiaryType.VARROCK, 1, 5)

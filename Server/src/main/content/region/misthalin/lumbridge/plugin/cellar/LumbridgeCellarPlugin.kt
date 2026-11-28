@@ -209,11 +209,11 @@ class LumbridgeCellarPlugin : OptionHandler() {
         }
 
         override fun getIds(): IntArray {
-            return intArrayOf(NPCs.LIGHT_CREATURE_2021)
+            return intArrayOf(NPCs.TOG_LIGHT_CREATURE_2021)
         }
     }
      */
     companion object {
-        private val JUMP_ANIMATION = Animation(Animations.HUMAN_JUMP_SHORT_GAP_741)
+        private val JUMP_ANIMATION = Animation(Animations.HUMAN_SPOT_JUMP_741)
     }
 }

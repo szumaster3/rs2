@@ -31,7 +31,7 @@ class MonkeyMadnessPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(intArrayOf(NPCs.ZOOKNOCK_1425, NPCs.ZOOKNOCK_1426), IntType.NPC, "talk-to") { player, npc ->
+        on(intArrayOf(NPCs.MM_ZOOKNOCK_1425, NPCs.MM_ZOOKNOCK_FINAL_BATTLE_1426), IntType.NPC, "talk-to") { player, npc ->
             if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 96) {
                 openDialogue(player, ZooknockAfterBattleDialogueFile(), npc)
             } else if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 30 ||
@@ -47,7 +47,7 @@ class MonkeyMadnessPlugin : InteractionListener {
             return@on true
         }
 
-        on(intArrayOf(NPCs.WAYDAR_1408, NPCs.WAYDAR_1409, NPCs.WAYDAR_1410), IntType.NPC, "talk-to") { player, npc ->
+        on(intArrayOf(NPCs.WAYDAR_1408, NPCs.MM_WAYDAR_CUTSCENE_1409, NPCs.MASTER_OF_RACES_1410), IntType.NPC, "talk-to") { player, npc ->
             when (player.location.getRegionId()) {
                 9626 -> openDialogue(player, WaydarDialogue(), npc)
                 11562 -> openDialogue(player, WaydarCrashIslandDialogue(), npc)
@@ -55,7 +55,7 @@ class MonkeyMadnessPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.MONKEY_1463, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.MM_ZOO_MONKEY_1463, IntType.NPC, "talk-to") { player, npc ->
             if (player.equipment.containsAtLeastOneItem(IntArray(4031 - 4024 + 1) { it + 4024 }) &&
                 player.equipment.containsAtLeastOneItem(IntArray(4022 - 4021 + 1) { it + 4021 }) &&
                 getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 33
@@ -65,7 +65,7 @@ class MonkeyMadnessPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.MONKEY_CHILD_1452, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.MM_MONKEY_CHILD_1452, IntType.NPC, "talk-to") { player, npc ->
             if (getAttribute(player, "mm:first-talk", false)) {
                 openDialogue(player, MonkeyChildSecondDialogue(), npc)
             }
@@ -91,7 +91,7 @@ class MonkeyMadnessPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.KRUK_1441, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.MM_KRUK_1441, IntType.NPC, "talk-to") { player, npc ->
             if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) >= 35) {
                 openDialogue(player, KrukDialogue(), npc)
             }
@@ -100,7 +100,7 @@ class MonkeyMadnessPlugin : InteractionListener {
 
         on(intArrayOf(4787, 4788), IntType.SCENERY, "Open") { player, _ ->
             if (player.equipment.containsItem(Item(Items.MONKEY_GREEGREE_4031))) {
-                sendNPCDialogue(player, NPCs.KRUK_1441, "Open the gate! A monkey wishes to pass!")
+                sendNPCDialogue(player, NPCs.MM_KRUK_1441, "Open the gate! A monkey wishes to pass!")
 
                 var walkToY = 0
                 if (player.location.y > 2766) {
@@ -139,14 +139,14 @@ class MonkeyMadnessPlugin : InteractionListener {
 
         on(Scenery.AWOWOGEI_4771, IntType.SCENERY, "talk-to") { player, _ ->
             if (getQuestStage(player, Quests.MONKEY_MADNESS.questName) == 32) {
-                openDialogue(player, AwowogeiDialogue(), NPC(NPCs.AWOWOGEI_1448))
+                openDialogue(player, AwowogeiDialogue(), NPC(NPCs.MM_AWOWOGEI_CUTSCENE_1448))
             } else {
-                openDialogue(player, AwowogeiChallengeDialogue(), NPC(NPCs.AWOWOGEI_1448))
+                openDialogue(player, AwowogeiChallengeDialogue(), NPC(NPCs.MM_AWOWOGEI_CUTSCENE_1448))
             }
             return@on true
         }
 
-        on(NPCs.MONKEY_MINDER_1469, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.MM_MONKEY_MINDER_1469, IntType.NPC, "talk-to") { player, npc ->
             if (!inEquipment(player, Items.MONKEY_GREEGREE_4031)) {
                 openDialogue(player, MonkeyMinderHumanDialogue(), npc)
             } else {
@@ -168,7 +168,7 @@ class MonkeyMadnessPlugin : InteractionListener {
                     "You need the M'amulet Mould in order to make a M'speak amulet",
                 )
             } else {
-                animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
                 removeItem(player, Items.ENCHANTED_BAR_4007)
                 addItem(player, mspeakAmuletUnstrung)
             }
@@ -190,7 +190,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         val itemIds = IntArray(4031 - 4024 + 1) { it + 4024 }
         onEquip(itemIds) { player, _ ->
             player.graphics(Graphics(134, 96))
-            player.appearance.transformNPC(NPCs.MONKEY_1463)
+            player.appearance.transformNPC(NPCs.MM_ZOO_MONKEY_1463)
             val localNpcs = getLocalNpcs(player, 20)
             localNpcs.forEach { npc: NPC ->
                 npc.isAggressive = false
@@ -208,7 +208,7 @@ class MonkeyMadnessPlugin : InteractionListener {
             return@onUnequip true
         }
 
-        onEquip(Items.TENTH_SQUAD_SIGIL_4035) { player, _ ->
+        onEquip(Items.OBJ_10TH_SQUAD_SIGIL_4035) { player, _ ->
             /*
             sendOptions(player, "Let the sigil teleport you when worn?", "Yes", "No")
             setQuestStage(player, Quests.MONKEY_MADNESS.questName, 94)
@@ -238,7 +238,7 @@ class MonkeyMadnessPlugin : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, NPCs.MONKEY_MINDER_1469) { player, node ->
+        setDest(IntType.NPC, NPCs.MM_MONKEY_MINDER_1469) { player, node ->
             val bottomMonkeyCage = ZoneBorders(2598, 3274, 2601, 3278)
             val centerMonkeyCage = ZoneBorders(2600, 3276, 2606, 3282)
             if (inBorders(player, bottomMonkeyCage) || inBorders(player, centerMonkeyCage)) {

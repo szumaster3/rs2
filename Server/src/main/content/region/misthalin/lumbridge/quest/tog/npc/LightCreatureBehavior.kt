@@ -8,7 +8,7 @@ import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import shared.consts.NPCs
 
-class LightCreatureBehavior : NPCBehavior(NPCs.LIGHT_CREATURE_2021) {
+class LightCreatureBehavior : NPCBehavior(NPCs.TOG_LIGHT_CREATURE_2021) {
     companion object {
         fun moveLightCreature(self: NPC, location: Location) {
             self.setNextWalk()

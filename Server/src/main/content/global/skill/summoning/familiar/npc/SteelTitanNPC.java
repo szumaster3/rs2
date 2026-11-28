@@ -25,7 +25,7 @@ public final class SteelTitanNPC extends Familiar {
     private boolean specialMove;
 
     public SteelTitanNPC() {
-        this(null, NPCs.STEEL_TITAN_7343);
+        this(null, NPCs.LORE_STEEL_TITAN_7343);
     }
 
 
@@ -64,7 +64,7 @@ public final class SteelTitanNPC extends Familiar {
 
     @Override
     public int[] getIds() {
-        return new int[]{NPCs.STEEL_TITAN_7343, NPCs.STEEL_TITAN_7344};
+        return new int[]{NPCs.LORE_STEEL_TITAN_7343, NPCs.LORE_STEEL_TITAN_COMBAT_7344};
     }
 
     @Override

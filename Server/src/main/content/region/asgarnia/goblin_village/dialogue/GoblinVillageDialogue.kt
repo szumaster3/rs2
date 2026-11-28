@@ -84,7 +84,7 @@ class GoblinVillageDialogue(player: Player? = null) : Dialogue(player) {
             18 -> npcl(FaceAnim.OLD_DEFAULT, "Slay enemies of Big High War God! Not show mercy! Not run from battle! Not doubt word of Big High War God!").also { stage++ }
             19 -> npc(FaceAnim.OLD_DEFAULT, "Without commandments we not know right from wrong. We be like other races who not know war is good!").also { stage = 17 }
             20 -> npcl(FaceAnim.OLD_DEFAULT, "That goblin secret! No human ever find Plain of Mud!").also { stage = 17 }
-            21 -> if (npc.id == NPCs.GOBLIN_4488 || npc.id == NPCs.GOBLIN_4489 || npc.id == NPCs.GOBLIN_4491 || npc.id == NPCs.GOBLIN_4492) {
+            21 -> if (npc.id == NPCs.GOBLIN_GREEN_SOLDIER_4_4488 || npc.id == NPCs.GOBLIN_GREEN_SOLDIER_5_4489 || npc.id == NPCs.GOBLIN_GREEN_SOLDIER_7_4491 || npc.id == NPCs.GOBLIN_GREEN_SOLDIER_8_4492) {
                 player(FaceAnim.THINKING, "But you're still wearing green armour!").also { stage++ }
             } else {
                 npcl(FaceAnim.OLD_DEFAULT, "But you're still wearing red armour!").also { stage += 2 }
@@ -96,18 +96,18 @@ class GoblinVillageDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.GOBLIN_4483,
-        NPCs.GOBLIN_4488,
-        NPCs.GOBLIN_4489,
-        NPCs.GOBLIN_4484,
-        NPCs.GOBLIN_4491,
-        NPCs.GOBLIN_4485,
-        NPCs.GOBLIN_4486,
-        NPCs.GOBLIN_4492,
-        NPCs.GOBLIN_4487,
-        NPCs.GOBLIN_4481,
-        NPCs.GOBLIN_4479,
-        NPCs.GOBLIN_4482,
-        NPCs.GOBLIN_4480,
+        NPCs.GOBLIN_RED_SOLDIER_6_4483,
+        NPCs.GOBLIN_GREEN_SOLDIER_4_4488,
+        NPCs.GOBLIN_GREEN_SOLDIER_5_4489,
+        NPCs.GOBLIN_RED_SOLDIER_7_4484,
+        NPCs.GOBLIN_GREEN_SOLDIER_7_4491,
+        NPCs.GOBLIN_RED_SOLDIER_8_4485,
+        NPCs.GOBLIN_GREEN_SOLDIER_2_4486,
+        NPCs.GOBLIN_GREEN_SOLDIER_8_4492,
+        NPCs.GOBLIN_GREEN_SOLDIER_3_4487,
+        NPCs.GOBLIN_RED_SOLDIER_4_4481,
+        NPCs.GOBLIN_RED_SOLDIER_2_4479,
+        NPCs.GOBLIN_RED_SOLDIER_5_4482,
+        NPCs.GOBLIN_RED_SOLDIER_3_4480,
     )
 }

@@ -72,5 +72,5 @@ class PhantuwtiFarsightDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = PhantuwtiFarsightDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PHANTUWTI_FANSTUWI_FARSIGHT_1798)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAVOUR_PHANTUWTI_FARSIGHT_1798)
 }

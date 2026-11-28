@@ -17,7 +17,7 @@ import shared.consts.Scenery
 class PolarKebbitHunting : HunterTracking() {
 
     init {
-        catchingKebbitAnimation = Animation(Animations.CATCH_POLAR_KEBBIT_NOOSE_WAND_5256)
+        catchingKebbitAnimation = Animation(Animations.HUNTING_NOOSE_POLAR_5256)
         trailLimit = 3
         attribute = "hunter:tracking:polartrail"
         indexAttribute = "hunter:tracking:polarindex"

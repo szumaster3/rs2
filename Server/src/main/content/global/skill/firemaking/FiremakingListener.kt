@@ -280,11 +280,11 @@ class FiremakingListener : InteractionListener {
             val animation = if (type == FiremakingType.BARBARIAN) {
                 SkillingTool.getFiremakingTool(player)?.let { Animation(it.animation) }
             } else {
-                Animation(Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733)
+                Animation(Animations.HUMAN_CREATEFIRE_733)
             }
 
             val graphics = if (type == FiremakingType.BARBARIAN) {
-                Graphics(shared.consts.Graphics.BARBARIAN_FIREMAKING_1169)
+                Graphics(shared.consts.Graphics.MYQ5_JUVENILE_READY_1169)
             } else {
                 null
             }

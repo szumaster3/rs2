@@ -13,7 +13,7 @@ import shared.consts.NPCs
 class FoodOnSheepDogPlugin : InteractionListener {
 
     private val SHEEP_DOG_NPC = NPCs.SHEEPDOG_2311
-    private val FEED_ANIMATION = Animations.HUMAN_BURYING_BONES_827
+    private val FEED_ANIMATION = Animations.HUMAN_PICKUPFLOOR_827
     private val CONSUMABLE_BONES = Bones.array.filter { it != Items.BURNT_BONES_528 }.toHashSet()
     private val CONSUMABLE_MEATS = Meat.values().filter { it.state == MeatState.INEDIBLE_RAW || it.state == MeatState.EDIBLE_COOKED }.map { it.id }.toHashSet()
 

@@ -9,7 +9,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class TalonBeastNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.TALON_BEAST_7347) :
+class TalonBeastNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_NAIL_BEAST_7347) :
     Familiar(owner, id, 4900, Items.TALON_BEAST_POUCH_12794, 6, WeaponInterface.STYLE_AGGRESSIVE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return TalonBeastNPC(owner, id)
@@ -20,6 +20,6 @@ class TalonBeastNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TALON_BEAST_7347, NPCs.TALON_BEAST_7348)
+        return intArrayOf(NPCs.LORE_NAIL_BEAST_7347, NPCs.LORE_NAIL_BEAST_COMBAT_7348)
     }
 }

@@ -12,7 +12,7 @@ import kotlin.random.Random
 class GnomeWomanDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.GNOME_WOMAN_168)
+        npc = NPC(NPCs.GNOMEFEMALE_168)
         when (stage) {
             0 -> {
                 playerl(FaceAnim.ASKING, "Hello.")

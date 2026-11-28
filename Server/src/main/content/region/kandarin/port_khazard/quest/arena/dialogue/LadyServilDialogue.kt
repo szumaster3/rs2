@@ -103,5 +103,5 @@ class LadyServilDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LADY_SERVIL_264)
+    override fun getIds(): IntArray = intArrayOf(NPCs.JEREMY_SERVIL_264)
 }

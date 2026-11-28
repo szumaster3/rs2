@@ -73,5 +73,5 @@ class SaniDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SaniDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SMITHING_TUTOR_4905)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SANI_4905)
 }

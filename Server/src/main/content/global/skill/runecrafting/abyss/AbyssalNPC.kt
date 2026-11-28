@@ -55,6 +55,6 @@ class AbyssalNPC : AbstractNPC {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ABYSSAL_LEECH_2263, NPCs.ABYSSAL_GUARDIAN_2264, NPCs.ABYSSAL_WALKER_2265)
+        return intArrayOf(NPCs.ABYSSAL_LEECH_2263, NPCs.ABYSSAL_PYRAMID_2264, NPCs.ABYSSAL_WALKER_2265)
     }
 }

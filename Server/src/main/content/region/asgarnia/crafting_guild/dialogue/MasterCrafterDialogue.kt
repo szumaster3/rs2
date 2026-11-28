@@ -112,14 +112,14 @@ class MasterCrafterDialogue : Dialogue {
     override fun getIds(): IntArray {
         return intArrayOf(
             NPCs.MASTER_CRAFTER_805,
-            NPCs.MASTER_CRAFTER_2732,
-            NPCs.MASTER_CRAFTER_2733
+            NPCs.MASTER_CRAFTER_2_2732,
+            NPCs.MASTER_CRAFTER_3_2733
         )
     }
 
     companion object {
         private const val CRAFTING_SKILL_CAPE: Int = Items.CRAFTING_CAPE_9780
-        private const val CRAFTING_SKILL_CAPE_TRIMMED: Int = Items.CRAFTING_CAPET_9781
+        private const val CRAFTING_SKILL_CAPE_TRIMMED: Int = Items.CRAFTING_CAPE_T_9781
         private const val SKILL_CAPE_HOOD: Int = Items.CRAFTING_HOOD_9782
         private const val COINS: Int = Items.COINS_995
     }

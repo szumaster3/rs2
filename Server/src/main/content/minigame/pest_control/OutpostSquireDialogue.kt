@@ -70,5 +70,5 @@ class OutpostSquireDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SQUIRE_3791, NPCs.SQUIRE_3792, NPCs.SQUIRE_3793, NPCs.SQUIRE_3801)
+    override fun getIds(): IntArray = intArrayOf(NPCs.PEST_SQUIRE_2_3791, NPCs.PEST_SQUIRE_3_3792, NPCs.PEST_SQUIRE_4_3793, NPCs.PEST_SQUIRE_SHIP_PORTSARIM_3801)
 }

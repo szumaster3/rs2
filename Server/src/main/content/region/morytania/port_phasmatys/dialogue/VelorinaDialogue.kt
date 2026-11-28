@@ -76,5 +76,5 @@ class VelorinaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VELORINA_1683)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_VELORINA_1683)
 }

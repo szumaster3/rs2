@@ -121,7 +121,7 @@ class BrimhavenPlugin : InteractionListener {
         private const val TICKET_EXCHANGE = Components.AGILITYARENA_TRADE_6
         private const val RESTAURANT_REAR_DOOR = Scenery.DOOR_1591
         private const val KARAMBWAN_FISHING_SPOT = NPCs.FISHING_SPOT_1178
-        private val PIRATE = intArrayOf(NPCs.PIRATE_183, NPCs.PIRATE_6349, NPCs.PIRATE_6350, NPCs.PIRATE_6346, NPCs.PIRATE_6347, NPCs.PIRATE_6348, NPCs.PIRATE_GUARD_799)
+        private val PIRATE = intArrayOf(NPCs.PIRATE2_183, NPCs.PIRATE6_6349, NPCs.PIRATE7_6350, NPCs.PIRATE3_6346, NPCs.PIRATE4_6347, NPCs.PIRATE5_6348, NPCs.PIRATE_GUARD_799)
 
         @JvmStatic
         fun success(player: Player, skill: Int): Boolean {

@@ -29,7 +29,7 @@ class HolgartPlatformDialogue(player: Player? = null) : Dialogue(player) {
         when {
             // Something's Strange - Get Me Off of This Thing (Small island).
             isQuestComplete(player, Quests.SEA_SLUG.questName) -> player("Hey, Holgart.").also { stage = 100 }
-            npc.id == NPCs.HOLGART_699 -> player("We'd better get back to the platform so we can see", "what's going on.").also { stage = 200 }
+            npc.id == NPCs.HOLGARTPLATFORM_699 -> player("We'd better get back to the platform so we can see", "what's going on.").also { stage = 200 }
             // Something's Strange - The Search is On (Fishing platform).
             getQuestStage(player, Quests.SEA_SLUG.questName) == 10 -> player(FaceAnim.HALF_THINKING, "Holgart, something strange is going on here.").also { stage = 0 }
             // Let's Go Home - End of the quest (Fishing platform).
@@ -79,5 +79,5 @@ class HolgartPlatformDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HOLGART_699, NPCs.HOLGART_700)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOLGARTPLATFORM_699, NPCs.HOLGARTLAND_700)
 }

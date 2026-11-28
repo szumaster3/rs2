@@ -34,9 +34,9 @@ class UllekPlugin : InteractionListener {
         }
 
         on(shared.consts.Scenery.REEDS_28474, IntType.SCENERY, "push through") { player, node ->
-            animate(player, Animations.UNKONWN_7633)
+            animate(player, Animations.SCAB_HUMAN_PUSH_REEDS_7633)
             animateScenery(node as Scenery, 7634)
-            queueScript(player, animationDuration(Animation(Animations.UNKONWN_7633)), QueueStrength.SOFT) {
+            queueScript(player, animationDuration(Animation(Animations.SCAB_HUMAN_PUSH_REEDS_7633)), QueueStrength.SOFT) {
                 val newLoc = node.location.transform(Location.getDelta(player.location, node.location))
                 player.walkingQueue.reset()
                 player.walkingQueue.addPath(newLoc.x, newLoc.y)

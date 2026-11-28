@@ -32,7 +32,7 @@ import shared.consts.NPCs
 class ChompyBirdNPC :
     AbstractNPC,
     InteractionListener {
-    constructor() : super(NPCs.CHOMPY_BIRD_1550, null, true)
+    constructor() : super(NPCs.CHOMPYBIRD_1550, null, true)
     private constructor(id: Int, location: Location) : super(id, location)
 
     var timeToLive = 100
@@ -40,7 +40,7 @@ class ChompyBirdNPC :
     override fun init() {
         super.init()
         val toad = getAttribute<NPC?>("toad", null)
-        animate(Animation(Animations.CHOMPY_SPAWN_6766))
+        animate(Animation(Animations.CHOMPY_UPDATE_FLY_DOWN_6766))
 
         if (toad != null) {
             submitIndividualPulse(
@@ -71,7 +71,7 @@ class ChompyBirdNPC :
         return npc
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHOMPY_BIRD_1550)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHOMPYBIRD_1550)
 
     override fun isAttackable(
         entity: Entity,
@@ -104,7 +104,7 @@ class ChompyBirdNPC :
 
                     override fun pulse(): Boolean {
                         when (counter++) {
-                            1 -> animate(Animation(Animations.CHOMPY_FLY_AWAY_6767))
+                            1 -> animate(Animation(Animations.CHOMPY_UPDATE_FLY_UP_6767))
                             2 -> clear()
                             3 -> return true
                         }
@@ -136,12 +136,12 @@ class ChompyBirdNPC :
     }
 
     override fun handleTickActions() {
-        if (id == NPCs.CHOMPY_BIRD_1550) {
+        if (id == NPCs.CHOMPYBIRD_1550) {
             if (getAttribute("toad_eaten", false)) {
                 super.handleTickActions()
             }
             if (timeToLive-- <= 0) {
-                animate(Animation(Animations.CHOMPY_FLY_AWAY_6767))
+                animate(Animation(Animations.CHOMPY_UPDATE_FLY_UP_6767))
                 runTask(this, 2) { clear() }
                 timeToLive = 100
             }
@@ -154,7 +154,7 @@ class ChompyBirdNPC :
 
     override fun finalizeDeath(killer: Entity) {
         properties.teleportLocation = null
-        val newSelf = transform(NPCs.CHOMPY_BIRD_1016)
+        val newSelf = transform(NPCs.CHOMPYBIRD_DEAD_1016)
         newSelf.isNeverWalks = true
         newSelf.isWalks = false
         newSelf.walkRadius = 0
@@ -172,7 +172,7 @@ class ChompyBirdNPC :
     }
 
     override fun defineListeners() {
-        on(NPCs.CHOMPY_BIRD_1016, IntType.NPC, "pluck") { player, node ->
+        on(NPCs.CHOMPYBIRD_DEAD_1016, IntType.NPC, "pluck") { player, node ->
             val bird = node.asNpc()
 
             if (!bird.getAttribute("plucked", false)) {

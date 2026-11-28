@@ -27,12 +27,12 @@ class LogBalanceEastArdougneShortcut : InteractionListener {
     companion object {
         private val OBJECTS = intArrayOf(Scenery.LOG_BALANCE_35997, Scenery.LOG_BALANCE_35999)
 
-        private const val BALANCE_ANIMATION = Animations.BALANCE_WALK_ACROSS_LOG_9908
-        private const val SWIMMING_ANIMATION = Animations.SWIMMING_LOOP_6989
-        private const val FAIL_WEST_ANIMATION = Animations.FALL_LOG_2582
-        private const val FAIL_EAST_ANIMATION = Animations.FALL_LOG_2581
+        private const val BALANCE_ANIMATION = Animations.HUMAN_WALK_LOGBALANCE_LOOP_9908
+        private const val SWIMMING_ANIMATION = Animations.ZAROS_BLAST_AWAY_DUST_SPOTANIM_6989
+        private const val FAIL_WEST_ANIMATION = Animations.HUMAN_WOBBLEANDFALL_SHORT_R_2582
+        private const val FAIL_EAST_ANIMATION = Animations.HUMAN_WOBBLEANDFALL_SHORT_L_2581
 
-        private const val SPLASH_GRAPHICS = Gfx.WATER_SPLASH_68
+        private const val SPLASH_GRAPHICS = Gfx.WATERSPLASH_1_68
 
         private const val LOG_BALANCE_SOUND = Sounds.LOG_BALANCE_2470
         private const val WATERSPLASH_SOUND = Sounds.WATERSPLASH_2496
@@ -102,7 +102,7 @@ class LogBalanceEastArdougneShortcut : InteractionListener {
                     0 -> {
                         playAudio(player, WATERSPLASH_SOUND)
                         teleport(player, FAIL_LOCATION)
-                        visualize(player, Animations.DROWN_765, SPLASH_GRAPHICS)
+                        visualize(player, Animations.HUMAN_DROWNING_765, SPLASH_GRAPHICS)
                         extinguishLightOnWater(player)
                         return@queueScript delayScript(player, 2)
                     }

@@ -28,7 +28,7 @@ import shared.consts.*
 class ZavisticRarveDialogues : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val p = player!!
-        npc = NPC(NPCs.ZAVISTIC_RARVE_2059)
+        npc = NPC(NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059)
         val questComplete = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS.questName) == 100
         val zogreProgress = isQuestInProgress(p, Quests.ZOGRE_FLESH_EATERS.questName, 1, 99)
         val canStartMiniQuest = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS.questName) == 100 && isQuestComplete(player!!, Quests.THE_HAND_IN_THE_SAND.questName)
@@ -294,9 +294,9 @@ class ZavisticRarveDialogues : DialogueFile() {
             53 -> npcl(FaceAnim.LAUGH, "Only joking, there was a girl last week who believed me, but she disappeared before I could teleport her!").also { stage++ }
             54 -> {
                 end()
-                val rarve = Repository.findNPC(NPCs.ZAVISTIC_RARVE_2059)
+                val rarve = Repository.findNPC(NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059)
                 rarve?.face(player)
-                rarve?.animate(Animation(Animations.CAST_SPELL_707))
+                rarve?.animate(Animation(Animations.HUMAN_CASTZAP_707))
                 teleport(player!!, Location.create(2789, 3175, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD, 2)
             }
 
@@ -362,8 +362,8 @@ class ZavisticRarveDialogues : DialogueFile() {
                 inInventory(player!!, Items.NECROMANCY_BOOK_4837) && !getAttribute(player!!, ZogreUtils.TALK_AGAIN_1, false) ->
                     sendItemDialogue(player!!, Items.NECROMANCY_BOOK_4837, "You show the Necromancy book to Zavistic.").also { stage++ }
 
-                inInventory(player!!, Items.BOOK_OF_HAM_4829) && !getAttribute(player!!, ZogreUtils.TALK_AGAIN_2, false) ->
-                    sendItemDialogue(player!!, Items.BOOK_OF_HAM_4829, "You show the HAM book to Zavistic.").also { stage = 80 }
+                inInventory(player!!, Items.BOOK_OF_H_A_M_4829) && !getAttribute(player!!, ZogreUtils.TALK_AGAIN_2, false) ->
+                    sendItemDialogue(player!!, Items.BOOK_OF_H_A_M_4829, "You show the HAM book to Zavistic.").also { stage = 80 }
 
                 inInventory(player!!, Items.DRAGON_INN_TANKARD_4811) && !getAttribute(player!!, ZogreUtils.TALK_AGAIN_3, false) ->
                     sendItemDialogue(player!!, Items.DRAGON_INN_TANKARD_4811, "You show the dragon Inn Tankard to Zavistic.").also { stage = 82 }
@@ -381,7 +381,7 @@ class ZavisticRarveDialogues : DialogueFile() {
                     end()
                     player!!.inventory.remove(
                         Item(Items.NECROMANCY_BOOK_4837),
-                        Item(Items.BOOK_OF_HAM_4829),
+                        Item(Items.BOOK_OF_H_A_M_4829),
                         Item(Items.DRAGON_INN_TANKARD_4811),
                         Item(ZogreUtils.SIGNED_PORTRAIT)
                     )
@@ -469,7 +469,7 @@ class ZavisticRarveDialogues : DialogueFile() {
             94 -> npc(FaceAnim.FRIENDLY, "Ok, so he's researching necromancy...it doesn't mean", "anything in itself.").also { stage = 78 }
             95 -> playerl(FaceAnim.FRIENDLY, "Please just look at it again...").also { stage++ }
             96 -> npcl(FaceAnim.FRIENDLY, "Ok, let me look then.").also { stage++ }
-            97 -> sendItemDialogue(player!!, Items.BOOK_OF_HAM_4829, "You show the HAM book to Zavistic, he looks through it again.").also { stage++ }
+            97 -> sendItemDialogue(player!!, Items.BOOK_OF_H_A_M_4829, "You show the HAM book to Zavistic, he looks through it again.").also { stage++ }
             98 -> npcl(FaceAnim.FRIENDLY, "So what, hating monsters isn't a crime in itself...although I suppose that it does give a motive if Sithik was involved. On its own, it's not enough evidence though.").also {
                 setAttribute(player!!, ZogreUtils.TALK_AGAIN_2, true)
                 stage = 75
@@ -655,7 +655,7 @@ class ZavisticRarveDialogues : DialogueFile() {
             171 -> npcl(FaceAnim.FRIENDLY, "Off you go then, break a leg!").also { stage++ }
             172 -> {
                 end()
-                npc!!.animate(Animation(Animations.CAST_SPELL_707))
+                npc!!.animate(Animation(Animations.HUMAN_CASTZAP_707))
                 teleport(player!!, Location.create(3014, 3259, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD)
                 stage = END_DIALOGUE
             }

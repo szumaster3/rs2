@@ -16,7 +16,7 @@ import shared.consts.NPCs
  * Represents the Evil Bob random event NPC.
  * @author szu, Zerken
  */
-class EvilBobNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.EVIL_BOB_2478) {
+class EvilBobNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.MACRO_EVIL_BOB_OUTSIDE_2478) {
 
     override fun init() {
         super.init()
@@ -34,7 +34,7 @@ class EvilBobNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(N
                 1 -> {
                     sendMessage(player, "Welcome to ScapeRune.")
                    playAudio(player, Music.EVIL_BOBS_ISLAND_411)
-                    openDialogue(player, EvilBobDialogue(), NPCs.EVIL_BOB_2479)
+                    openDialogue(player, EvilBobDialogue(), NPCs.MACRO_EVIL_BOB_ISLAND_2479)
                     AntiMacro.terminateEventNpc(player)
                     return@queueScript stopExecuting(player)
                 }

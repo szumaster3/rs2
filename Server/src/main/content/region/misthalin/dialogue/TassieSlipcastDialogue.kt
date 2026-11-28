@@ -25,5 +25,5 @@ class TassieSlipcastDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TASSIE_SLIPCAST_1793)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAVOUR_TASSIE_SLIPCAST_1793)
 }

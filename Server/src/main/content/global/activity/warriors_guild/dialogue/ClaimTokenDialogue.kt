@@ -13,7 +13,7 @@ class ClaimTokenDialogue(private val npcId: NPC) : DialogueFile() {
         npc = npcId
 
         val amount = player!!.getSavedData().activityData.warriorGuildTokens
-        val faceAnimation = if (npc!!.id == NPCs.GAMFRED_4287) FaceAnim.CHILD_NORMAL else FaceAnim.HALF_GUILTY
+        val faceAnimation = if (npc!!.id == NPCs.WARGUILD_GAMFRED_4287) FaceAnim.CHILD_NORMAL else FaceAnim.HALF_GUILTY
         when (stage) {
             0 -> player("May I claim my tokens please?").also { stage++ }
             1 -> if (amount < 1) {

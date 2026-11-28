@@ -40,7 +40,7 @@ class MamaDialogue(player: Player? = null) : Dialogue(player) {
             8 -> npcl(FaceAnim.HALF_ASKING, "You wanna buy something?").also { stage++ }
             9 -> options("Yes", "No").also { stage++ }
             10 -> when (buttonId) {
-                1 -> end().also { openNpcShop(player, NPCs.MAMA_3164) }
+                1 -> end().also { openNpcShop(player, NPCs.FEVER_MAMA_LA_FIETTE_3164) }
                 2 -> player("Nevermind.").also { stage = END_DIALOGUE }
             }
         }
@@ -49,5 +49,5 @@ class MamaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = MamaDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAMA_3164)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEVER_MAMA_LA_FIETTE_3164)
 }

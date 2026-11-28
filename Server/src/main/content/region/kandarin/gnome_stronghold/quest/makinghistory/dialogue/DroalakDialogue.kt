@@ -134,11 +134,11 @@ class DroalakDialogue(player: Player? = null) : Dialogue(player) {
             29 -> npcl(FaceAnim.FRIENDLY, "Bye!").also { stage++ }
             30 -> {
                 end()
-                transformNpc(NPC(NPCs.DROALAK_2938), NPCs.DROALAK_2937, 10)
+                transformNpc(NPC(NPCs.MAKINGHISTORY_DROALAK_2938), NPCs.MAKINGHISTORY_DROALAK_FADE_NPC_2937, 10)
             }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DROALAK_2938)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAKINGHISTORY_DROALAK_2938)
 }

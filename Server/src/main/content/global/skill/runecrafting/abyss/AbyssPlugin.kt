@@ -52,7 +52,7 @@ class AbyssPlugin : InteractionListener {
          * Opens the repair pouches dialogue with the Dark Mage NPC.
          */
 
-        on(NPCs.DARK_MAGE_2262, IntType.NPC, "repair-pouches") { player, node ->
+        on(NPCs.RCU_ZAMMY_MAGE2_2262, IntType.NPC, "repair-pouches") { player, node ->
             player.dialogueInterpreter.open(node.id, node, true)
             return@on true
         }
@@ -142,7 +142,7 @@ class AbyssPlugin : InteractionListener {
                 player,
                 Skills.FIREMAKING,
                 BURN_PROGRESS,
-                Animation(Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733),
+                Animation(Animations.HUMAN_CREATEFIRE_733),
                 arrayOf(
                     "You attempt to burn your way through...",
                     "...and manage to burn it down and get past.",
@@ -182,7 +182,7 @@ class AbyssPlugin : InteractionListener {
                 player,
                 Skills.AGILITY,
                 null,
-                Animation(Animations.HUMAN_SQUEEZE_INTO_GAP_1331),
+                Animation(Animations.VIKING_DROP_TO_KNEE_1331),
                 arrayOf(
                     "You attempt to squeeze through the narrow gap...",
                     "...and you manage to crawl through.",
@@ -193,37 +193,37 @@ class AbyssPlugin : InteractionListener {
     }
 
     private val distractEmotes = intArrayOf(
-        Animations.HUMAN_SHAKE_HEAD_YES_855,
-        Animations.HUMAN_SHAKE_HEAD_NO_856,
-        Animations.HUMAN_THINK_857,
-        Animations.BOW_858,
-        Animations.ANGRY_859,
-        Animations.CRY_860,
-        Animations.HUMAN_LAUGH_861,
-        Animations.CHEER_862,
-        Animations.HUMAN_WAVE_863,
-        Animations.BECKON_864,
-        Animations.CLAP_865,
-        Animations.DANCE_866,
-        Animations.HUMAN_SHRUG_2113,
-        Animations.HUMAN_JUMP_FOR_JOY_2109,
-        Animations.HUMAN_YAWN_2111,
-        Animations.HUMAN_JIG_2106,
-        Animations.HUMAN_TWIRL_2107,
-        Animations.HEADBANG_EMOTE_2108,
-        Animations.HUMAN_PANIC_2105,
-        Animations.HUMAN_BLOW_RASPBERRY_2110,
-        Animations.HUMAN_SALUTE_2112,
-        Animations.GOBLIN_BOW_EMOTE_E_2127,
-        Animations.GOBLIN_SALUTE_EMOTE_E_2128,
-        Animations.GLASS_BOX_EMOTE_1131,
-        Animations.CLIMB_ROPE_EMOTE_1130,
-        Animations.HUMAN_LEAN_1129,
-        Animations.GLASS_WALL_EMOTE_1128,
-        Animations.ANGRY_STOMPING_1745,
-        Animations.HUMAN_ZOMBIE_WALK_3544,
-        Animations.HUMAN_ZOMBIE_DANCE_3543,
-        Animations.HUMAN_SCARED_2836
+        Animations.EMOTE_YES_855,
+        Animations.EMOTE_NO_856,
+        Animations.EMOTE_THINK_857,
+        Animations.EMOTE_BOW_858,
+        Animations.EMOTE_ANGRY_859,
+        Animations.EMOTE_CRY_860,
+        Animations.EMOTE_LAUGH_861,
+        Animations.EMOTE_CHEER_862,
+        Animations.EMOTE_WAVE_863,
+        Animations.EMOTE_BECKON_864,
+        Animations.EMOTE_CLAP_865,
+        Animations.EMOTE_DANCE_866,
+        Animations.EMOTE_SHRUG_2113,
+        Animations.EMOTE_JUMP_WITH_JOY_2109,
+        Animations.EMOTE_YAWN_2111,
+        Animations.EMOTE_DANCE_SCOTTISH_2106,
+        Animations.EMOTE_DANCE_SPIN_2107,
+        Animations.EMOTE_DANCE_HEADBANG_2108,
+        Animations.EMOTE_PANIC_2105,
+        Animations.EMOTE_YA_BOO_SUCKS_2110,
+        Animations.EMOTE_FREMMENIK_SALUTE_2112,
+        Animations.HUMAN_CAVE_GOBLIN_BOW_2127,
+        Animations.HUMAN_CAVE_GOBLIN_DANCE_2128,
+        Animations.EMOTE_GLASS_BOX_1131,
+        Animations.EMOTE_CLIMBING_ROPE_1130,
+        Animations.EMOTE_MIME_LEAN_1129,
+        Animations.EMOTE_GLASS_WALL_1128,
+        Animations.ANGER3_1745,
+        Animations.ZOMBIE_WALK_EMOTE_3544,
+        Animations.ZOMBIE_DANCE_3543,
+        Animations.TERRIFIED_EMOTE_2836
     )
 
     companion object {
@@ -239,8 +239,8 @@ class AbyssPlugin : InteractionListener {
 
             player.lock(3)
             npc.visualize(
-                Animation(Animations.CAST_SPELL_1979),
-                Graphics(shared.consts.Graphics.DELRIGHT_DEFEATED_4),
+                Animation(Animations.ZAROS_VERTICAL_CASTING_1979),
+                Graphics(shared.consts.Graphics.XMAS_09_SNOWIMP_SUMMON_SPOTANIM_4),
             )
             npc.sendChat("Veniens! Sallakar! Rinnesset!")
             player.skills.decrementPrayerPoints(100.0)

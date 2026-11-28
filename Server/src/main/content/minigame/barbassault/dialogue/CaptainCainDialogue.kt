@@ -49,5 +49,5 @@ class CaptainCainDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_CAIN_5030)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARBASSAULT_BARBARIAN_CAPTAIN_5030)
 }

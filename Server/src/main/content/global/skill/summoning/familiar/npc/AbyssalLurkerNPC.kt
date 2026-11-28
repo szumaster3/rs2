@@ -15,7 +15,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class AbyssalLurkerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.ABYSSAL_LURKER_6820) :
+class AbyssalLurkerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_ABYSSAL_LURKER_6820) :
     BurdenBeast(owner, id, 4100, Items.ABYSSAL_LURKER_POUCH_12037, 3, 7, WeaponInterface.STYLE_CAST) {
     override fun construct(owner: Player, id: Int): Familiar {
         return AbyssalLurkerNPC(owner, id)
@@ -41,6 +41,6 @@ class AbyssalLurkerNPC @JvmOverloads constructor(owner: Player? = null, id: Int 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ABYSSAL_LURKER_6820, NPCs.ABYSSAL_LURKER_6821)
+        return intArrayOf(NPCs.LORE_ABYSSAL_LURKER_6820, NPCs.LORE_ABYSSAL_LURKER_COMBAT_6821)
     }
 }

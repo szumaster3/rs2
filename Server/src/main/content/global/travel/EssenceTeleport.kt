@@ -25,10 +25,10 @@ import shared.consts.*
 object EssenceTeleport {
 
     private val LOCATIONS = arrayOf(Location.create(2911, 4832, 0), Location.create(2913, 4837, 0), Location.create(2930, 4850, 0), Location.create(2894, 4811, 0), Location.create(2896, 4845, 0), Location.create(2922, 4820, 0), Location.create(2931, 4813, 0))
-    private const val CURSE_PROJECTILE = shared.consts.Graphics.CURSE_PROJECTILE_109
-    private val ANIMATION = Animation(Animations.ATTACK_437)
-    private val OLD_ANIMATION = Animation(Animations.GNOME_SPELL_198)
-    private val TP_CAST_GFX = Graphics(shared.consts.Graphics.CURSE_CAST_108)
+    private const val CURSE_PROJECTILE = shared.consts.Graphics.CURSE_TRAVEL_1_109
+    private val ANIMATION = Animation(Animations.HUMAN_SCYTHE_SLASH_437)
+    private val OLD_ANIMATION = Animation(Animations.GNOME_CAST_TELEPORT_198)
+    private val TP_CAST_GFX = Graphics(shared.consts.Graphics.CURSE_CASTING_108)
     private val TELEPORT_GFX = Graphics(shared.consts.Graphics.CURSE_IMPACT_110, 100)
 
     /**
@@ -40,7 +40,7 @@ object EssenceTeleport {
             return
         }
 
-        npc.animate(if (npc.id == NPCs.BRIMSTAIL_171) OLD_ANIMATION else ANIMATION)
+        npc.animate(if (npc.id == NPCs.GNOME_BRIMSTAIL_171) OLD_ANIMATION else ANIMATION)
         npc.faceTemporary(player, 1)
         npc.graphics(TP_CAST_GFX)
         player.lock(4)
@@ -133,11 +133,11 @@ object EssenceTeleport {
      * Represents a wizards available teleports.
      */
     private enum class Wizard(val npc: Int, val mask: Int, val location: Location) {
-        BRIMSTAIL(NPCs.BRIMSTAIL_171, 0, Location.create(2409, 9815, 0)),
+        BRIMSTAIL(NPCs.GNOME_BRIMSTAIL_171, 0, Location.create(2409, 9815, 0)),
         AUBURY(NPCs.AUBURY_553, 0x2, Location(3253, 3401, 0)),
         SEDRIDOR(NPCs.SEDRIDOR_300, 0x4, Location(3107, 9573, 0)),
-        DISTENTOR(NPCs.WIZARD_DISTENTOR_462, 0x8, Location(2591, 3085, 0)),
-        CROMPERTY(NPCs.WIZARD_CROMPERTY_2328, 0x12, Location.create(2682, 3323, 0));
+        DISTENTOR(NPCs.GUILD_WIZARD_462, 0x8, Location(2591, 3085, 0)),
+        CROMPERTY(NPCs.CROMPERTY_2328, 0x12, Location.create(2682, 3323, 0));
 
         companion object {
             /**

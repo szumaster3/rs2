@@ -23,7 +23,7 @@ class CarolDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAROL_816, 6194)
+        return intArrayOf(NPCs.CAROL_SINCLAIR_816, 6194)
     }
 }
 

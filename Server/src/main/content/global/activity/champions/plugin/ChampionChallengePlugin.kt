@@ -42,7 +42,7 @@ class ChampionChallengePlugin : InteractionListener, MapArea {
                 return@on true
             }
 
-            if (activeScroll == Items.CHAMPION_SCROLL_6805 && player.equipment.toArray().any { it != null }) {
+            if (activeScroll == Items.CHAMPIONS_SCROLL_6805 && player.equipment.toArray().any { it != null }) {
                 sendNPCDialogue(player, NPCs.LARXUS_3050, "For this fight you're not allowed to wear armour or weapons; only inventory items allowed.", FaceAnim.NEUTRAL)
                 return@on true
             }
@@ -188,16 +188,16 @@ class ChampionChallengePlugin : InteractionListener, MapArea {
          * Displays the champion scroll content.
          */
         private val championScrollsContent = mapOf(
-            Items.CHAMPION_SCROLL_6798 to arrayOf("I challenge you to a duel, come to the arena", "beneath the Champion's Guild and fight me if you", "dare.", "", "Champion of Earth Warriors"),
-            Items.CHAMPION_SCROLL_6799 to arrayOf("Come and duel me at the Champions' Guild, I'll", "make sure nothing goes to waste.", "", "Champion of Ghouls"),
-            Items.CHAMPION_SCROLL_6800 to arrayOf("Get yourself to the Champions' Guild, if you dare", "to face me puny human.", "", "Champion of Giants"),
-            Items.CHAMPION_SCROLL_6801 to arrayOf("Fight me if you think you can human, I'll wait", "for you in the Champion's Guild.", "", "Champion of Goblins"),
-            Items.CHAMPION_SCROLL_6802 to arrayOf("You won't defeat me, though you're welcome to", "try at the Champions' Guild.", "", "Champion of Hobgoblins"),
-            Items.CHAMPION_SCROLL_6803 to arrayOf("How about picking on someone your own size? I'll", "see you at the Champion's Guild.", "", "Champion of Imps"),
-            Items.CHAMPION_SCROLL_6804 to arrayOf("You think you can defeat me? Come to the", "Champion's Guild and prove it!", "", "Champion of Jogres"),
-            Items.CHAMPION_SCROLL_6805 to arrayOf("Come to the Champion's Guild so I can banish", "you mortal!", "", "Champion of Lesser Demons"),
-            Items.CHAMPION_SCROLL_6806 to arrayOf("I'll be waiting at the Champions' Guild to collect", "your bones.", "", "Champion of Skeletons"),
-            Items.CHAMPION_SCROLL_6807 to arrayOf("You come to Champions' Guild, you fight me, I", "squish you, I get brains!", "", "Champion of Zombies"),
+            Items.CHAMPIONS_SCROLL_6798 to arrayOf("I challenge you to a duel, come to the arena", "beneath the Champion's Guild and fight me if you", "dare.", "", "Champion of Earth Warriors"),
+            Items.CHAMPIONS_SCROLL_6799 to arrayOf("Come and duel me at the Champions' Guild, I'll", "make sure nothing goes to waste.", "", "Champion of Ghouls"),
+            Items.CHAMPIONS_SCROLL_6800 to arrayOf("Get yourself to the Champions' Guild, if you dare", "to face me puny human.", "", "Champion of Giants"),
+            Items.CHAMPIONS_SCROLL_6801 to arrayOf("Fight me if you think you can human, I'll wait", "for you in the Champion's Guild.", "", "Champion of Goblins"),
+            Items.CHAMPIONS_SCROLL_6802 to arrayOf("You won't defeat me, though you're welcome to", "try at the Champions' Guild.", "", "Champion of Hobgoblins"),
+            Items.CHAMPIONS_SCROLL_6803 to arrayOf("How about picking on someone your own size? I'll", "see you at the Champion's Guild.", "", "Champion of Imps"),
+            Items.CHAMPIONS_SCROLL_6804 to arrayOf("You think you can defeat me? Come to the", "Champion's Guild and prove it!", "", "Champion of Jogres"),
+            Items.CHAMPIONS_SCROLL_6805 to arrayOf("Come to the Champion's Guild so I can banish", "you mortal!", "", "Champion of Lesser Demons"),
+            Items.CHAMPIONS_SCROLL_6806 to arrayOf("I'll be waiting at the Champions' Guild to collect", "your bones.", "", "Champion of Skeletons"),
+            Items.CHAMPIONS_SCROLL_6807 to arrayOf("You come to Champions' Guild, you fight me, I", "squish you, I get brains!", "", "Champion of Zombies"),
         )
 
         /**

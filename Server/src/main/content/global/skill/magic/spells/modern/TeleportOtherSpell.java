@@ -50,7 +50,7 @@ public final class TeleportOtherSpell extends MagicSpell {
      * @param runes       the runes
      */
     public TeleportOtherSpell(int level, double experience, String destination, Location location, Item... runes) {
-        super(SpellBook.MODERN, level, experience, Animation.create(Animations.CLAP_AND_RAISE_FIST_IN_AIR_1818), Graphics.create(shared.consts.Graphics.TELEOTHER_CAST_343), new Audio(Sounds.TELE_OTHER_CAST_199, 1, 0), runes);
+        super(SpellBook.MODERN, level, experience, Animation.create(Animations.HUMAN_TELEPORT_OTHER_CASTING_1818), Graphics.create(shared.consts.Graphics.TELEPORT_OTHER_CASTING_343), new Audio(Sounds.TELE_OTHER_CAST_199, 1, 0), runes);
         this.destination = destination;
         this.location = location;
     }
@@ -98,7 +98,7 @@ public final class TeleportOtherSpell extends MagicSpell {
         }
 
         visualize(entity, target);
-        Graphics.send(new Graphics(shared.consts.Graphics.TELEOTHER_ACCEPT_342), o.getLocation());
+        Graphics.send(new Graphics(shared.consts.Graphics.TELEPORT_OTHER_IMPACT_342), o.getLocation());
         p.faceLocation(o.getLocation());
         o.setAttribute("t-o_location", location);
         o.getPacketDispatch().sendString(p.getUsername(), Components.TP_OTHER_326, 1);

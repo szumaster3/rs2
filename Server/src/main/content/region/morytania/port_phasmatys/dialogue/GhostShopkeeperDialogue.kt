@@ -33,7 +33,7 @@ class GhostShopkeeperDialogue(player: Player? = null) : Dialogue(player) {
             1 -> when (buttonId) {
                 1 -> {
                     end()
-                    openNpcShop(player, NPCs.GHOST_SHOPKEEPER_1699)
+                    openNpcShop(player, NPCs.AHOY_GHOST_SHOPKEEPER_1699)
                 }
                 2 -> npc(FaceAnim.HAPPY, "I'm glad you ask! You can buy as many of the items", "stocked as you wish. You can also sell most items to the", "shop.").also { stage = END_DIALOGUE }
                 3 -> end()
@@ -46,5 +46,5 @@ class GhostShopkeeperDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GhostShopkeeperDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_SHOPKEEPER_1699)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_GHOST_SHOPKEEPER_1699)
 }

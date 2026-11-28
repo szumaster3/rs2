@@ -40,14 +40,14 @@ class HieronymusAvlafrimDialogue(player: Player? = null) : Dialogue(player) {
                 when (buttonId) {
                     1 -> player("Remind me what it is you do here.").also { stage = 16 }
                     2 -> player("Tell me how you made the gnomecopters.").also { stage = 5 }
-                    3 -> end().also { openNpcShop(player, NPCs.HIERONYMUS_AVLAFRIM_7420) }
+                    3 -> end().also { openNpcShop(player, NPCs.EASTER09_IMPLING_7420) }
                     4 -> player("Can I buy a gnomecopter?").also { stage = 15 }
                     5 -> player("Oh, forget it.").also { stage = END_DIALOGUE }
                 }
             } else {
                 when (buttonId) {
                     1 -> player("What's Gnomecopter Tours?").also { stage++ }
-                    2 -> end().also { openNpcShop(player, NPCs.HIERONYMUS_AVLAFRIM_7420) }
+                    2 -> end().also { openNpcShop(player, NPCs.EASTER09_IMPLING_7420) }
                     3 -> player("Oh, forget it.").also { stage = END_DIALOGUE }
                 }
             }
@@ -82,5 +82,5 @@ class HieronymusAvlafrimDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HIERONYMUS_AVLAFRIM_7420)
+    override fun getIds(): IntArray = intArrayOf(NPCs.EASTER09_IMPLING_7420)
 }

@@ -39,7 +39,7 @@ class RobeStoreDialogue(player: Player? = null) : Dialogue(player) {
             1 -> when (buttonId) {
                 1 -> {
                     end()
-                    openNpcShop(player, NPCs.ROBE_STORE_OWNER_1658)
+                    openNpcShop(player, NPCs.MAGIC_STORE_OWNER2_1658)
                 }
                 2 -> player("No thank you.").also { stage = END_DIALOGUE }
             }
@@ -63,5 +63,5 @@ class RobeStoreDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ROBE_STORE_OWNER_1658)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGIC_STORE_OWNER2_1658)
 }

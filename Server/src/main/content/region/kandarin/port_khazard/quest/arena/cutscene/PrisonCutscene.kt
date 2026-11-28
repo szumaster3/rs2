@@ -70,6 +70,6 @@ class PrisonCutscene(
     }
 
     companion object {
-        private const val KHAZARD_GUARD = NPCs.KHAZARD_GUARD_257
+        private const val KHAZARD_GUARD = NPCs.ARENA_LEADGUARD_257
     }
 }

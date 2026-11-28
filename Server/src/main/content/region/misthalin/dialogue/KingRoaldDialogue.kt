@@ -61,7 +61,7 @@ class KingRoaldDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(
         NPCs.KING_ROALD_648,
-        NPCs.KING_ROALD_2590,
-        NPCs.KING_ROALD_5838,
+        NPCs.KING_ROALD_CUTSCENE_2590,
+        NPCs.SUROK_KING_5838,
     )
 }

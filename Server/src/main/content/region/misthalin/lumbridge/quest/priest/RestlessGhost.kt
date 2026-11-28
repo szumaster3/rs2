@@ -75,7 +75,7 @@ class RestlessGhost : Quest(Quests.THE_RESTLESS_GHOST) {
 
     override fun finish(player: Player) {
         super.finish(player)
-        drawReward(player, Items.GHOSTS_SKULL_553)
+        drawReward(player, Items.MUDDY_SKULL_553)
         drawReward(player, "1 Quest Point", 10)
         drawReward(player, "1125 Prayer XP", 11)
         sendString(player, "You have completed ${Quests.THE_RESTLESS_GHOST.questName}!", Components.QUEST_COMPLETE_SCROLL_277, 4)

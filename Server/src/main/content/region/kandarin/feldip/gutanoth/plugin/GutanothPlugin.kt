@@ -108,7 +108,7 @@ class GutanothPlugin : InteractionListener {
                 return@on true
             }
 
-            animate(player, Animation(Animations.HUMAN_BURYING_BONES_827))
+            animate(player, Animation(Animations.HUMAN_PICKUPFLOOR_827))
             sendMessage(player, "You search the broken down lecturn.")
             if (inInventory(player, TORN_PAGE) || getAttribute(player, ZogreUtils.TORN_PAGE_ACQUIRED, false)) {
                 sendMessage(player, "You find nothing here this time.")
@@ -162,7 +162,7 @@ class GutanothPlugin : InteractionListener {
             if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) < 13) {
                 sendNPCDialogue(
                     player,
-                    NPCs.OGRE_GUARD_2042,
+                    NPCs.ZOGRE_OGRE_GUARD_2042,
                     "Yous best not touch dem till yous chat wiv Grish - use look at dem again more when yous do stuff for Grish.",
                     FaceAnim.OLD_DEFAULT,
                 )
@@ -185,7 +185,7 @@ class GutanothPlugin : InteractionListener {
             }
 
             lock(player, 3)
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             sendMessage(player, "You attempt to pick the lock on the coffin.")
             queueScript(player,2,QueueStrength.NORMAL) { _ ->
                 val table = PickpocketListener.pickpocketRoll(player, 84.0, 240.0, OgreCoffin.OGRE_COFFIN.table)
@@ -238,7 +238,7 @@ class GutanothPlugin : InteractionListener {
             if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) < 13) {
                 sendNPCDialogue(
                     player,
-                    NPCs.OGRE_GUARD_2042,
+                    NPCs.ZOGRE_OGRE_GUARD_2042,
                     "Yous best not touch dem till yous chat wiv Grish - use look at dem again more when yous do stuff for Grish.",
                     FaceAnim.OLD_DEFAULT
                 )
@@ -258,7 +258,7 @@ class GutanothPlugin : InteractionListener {
                 sendMessage(player, "You need an ogre key to open the coffin.")
             } else {
                 lock(player, 3)
-                animate(player, Animations.HUMAN_MULTI_USE_832)
+                animate(player, Animations.HUMAN_PICKUPTABLE_832)
                 sendMessage(player, "You unlock the coffin with your zogre coffin key...")
                 queueScript(player, 2, QueueStrength.NORMAL) { _ ->
 

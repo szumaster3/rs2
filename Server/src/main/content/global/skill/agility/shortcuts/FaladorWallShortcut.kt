@@ -25,7 +25,7 @@ class FaladorWallShortcut : AgilityShortcut(intArrayOf(11844), 5, 0.0, "climb-ov
             0,
             60,
             null,
-            Animations.WALK_OVER_STILE_10980
+            Animations.LUC2_PLAYER_WALK_THROUGH_PAINTING_10980
         )
     }
 }

@@ -73,7 +73,7 @@ class WeavingPlugin : InteractionListener {
                             return@queueScript stopExecuting(player)
                         }
 
-                        animate(player, Animations.PULLING_ROPE_2270)
+                        animate(player, Animations.FARMING_USELOOM_2270)
                         playAudio(player, Sounds.LOOM_WEAVE_2587)
 
                         if (!removeItem(player, required)) {

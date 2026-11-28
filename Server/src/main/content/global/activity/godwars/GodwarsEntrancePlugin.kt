@@ -42,7 +42,7 @@ class GodwarsEntrancePlugin : InteractionListener {
             val endLoc = Location(2882, 5311, 2)
             lock(player, 2)
             sendMessage(player, "You climb down the rope.")
-            animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
+            animate(player, Animations.HUMAN_REACHFORLADDER_828)
             teleport(player, endLoc, TeleportManager.TeleportType.INSTANT)
             return@on true
         }

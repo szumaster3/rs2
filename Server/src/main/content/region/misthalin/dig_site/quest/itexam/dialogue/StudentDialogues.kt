@@ -19,7 +19,7 @@ class StudentGreenDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STUDENT_615)
+    override fun getIds(): IntArray = intArrayOf(NPCs.STUDENT1_615)
 }
 
 class StudentGreenDialogueFile : DialogueFile() {
@@ -300,7 +300,7 @@ class StudentPurpleDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STUDENT_617)
+    override fun getIds(): IntArray = intArrayOf(NPCs.STUDENT2_617)
 }
 
 class StudentPurpleDialogueFile : DialogueFile() {
@@ -459,7 +459,7 @@ class StudentBrownDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = StudentBrownDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STUDENT_616)
+    override fun getIds(): IntArray = intArrayOf(NPCs.STUDENT3_616)
 }
 
 @Initializable

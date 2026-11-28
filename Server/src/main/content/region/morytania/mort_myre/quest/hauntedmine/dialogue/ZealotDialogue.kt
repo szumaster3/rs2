@@ -23,5 +23,5 @@ class ZealotDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ZealotDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ZEALOT_1528)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SARADOMINIST_ZEALOT_1528)
 }

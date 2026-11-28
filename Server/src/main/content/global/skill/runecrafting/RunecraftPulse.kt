@@ -305,8 +305,8 @@ class RunecraftPulse(
         private const val RUNE_ESSENCE = Items.RUNE_ESSENCE_1436
         private const val PURE_ESSENCE = Items.PURE_ESSENCE_7936
         private const val BINDING_NECKLACE = Items.BINDING_NECKLACE_5521
-        private val ANIMATION = Animation(Animations.OLD_RUNECRAFT_791, Priority.HIGH)
-        private val Graphics = Graphics(shared.consts.Graphics.RUNECRAFTING_GRAPHIC_186, 100)
+        private val ANIMATION = Animation(Animations.HUMAN_RUNECRAFT_791, Priority.HIGH)
+        private val Graphics = Graphics(shared.consts.Graphics.RUNECRAFTING_186, 100)
 
         /**
          * Calculates the multiplier of runes created per essence,

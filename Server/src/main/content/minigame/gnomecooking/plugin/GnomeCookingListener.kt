@@ -58,7 +58,7 @@ class GnomeCookingListener : InteractionListener {
     private val equaBattasMap = mapOf(
         Items.UNFINISHED_BATTA_9486 to Items.WORM_BATTA_2253,
         Items.UNFINISHED_BATTA_9484 to Items.VEGETABLE_BATTA_2281,
-        Items.UNFINISHED_BATTA_9479 to Items.CHEESE_PLUSTOM_BATTA_2259
+        Items.UNFINISHED_BATTA_9479 to Items.CHEESE_PLUS_TOM_BATTA_2259
     )
 
     private val crunchyRecipeMap = mapOf(
@@ -294,7 +294,7 @@ class GnomeCookingListener : InteractionListener {
 
     private fun cookItem(player: Player, rawId: Int, productId: Int, xp: Double, addMould: Boolean = false, addForm: Boolean = false) {
         player.lock()
-        player.animate(Animation(Animations.HUMAN_MAKE_PIZZA_883))
+        player.animate(Animation(Animations.HUMAN_POTTERYWHEEL_883))
         if (removeItem(player, rawId)) {
             addItem(player, productId)
             if (addMould) addItem(player, Items.GNOMEBOWL_MOULD_2166)

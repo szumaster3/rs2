@@ -58,5 +58,5 @@ class AnitaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ANITA_672)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDTREE_ANITA_672)
 }

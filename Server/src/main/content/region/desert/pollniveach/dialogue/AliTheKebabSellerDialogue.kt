@@ -120,5 +120,5 @@ class AliTheKebabSellerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AliTheKebabSellerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_KEBAB_SELLER_1865)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEUD_KEBABMAN_1865)
 }

@@ -22,7 +22,7 @@ class SaveVersionHooks : LoginListener {
                     for (hood in container.getAll(Item(Items.CRAFTING_HOOD_9782))) {
                         hasHoods += hood.amount
                     }
-                    for (id in arrayOf(Items.CRAFTING_CAPE_9780, Items.CRAFTING_CAPET_9781)) {
+                    for (id in arrayOf(Items.CRAFTING_CAPE_9780, Items.CRAFTING_CAPE_T_9781)) {
                         for (cape in container.getAll(Item(id))) {
                             hasCapes += cape.amount
                         }

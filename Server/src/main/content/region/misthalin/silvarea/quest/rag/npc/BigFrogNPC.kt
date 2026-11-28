@@ -14,7 +14,7 @@ import shared.consts.NPCs
 
 class BigFrogNPC : NPCBehavior(*bigFrogIds) {
     companion object {
-        private val bigFrogIds = intArrayOf(NPCs.BIG_FROG_1829)
+        private val bigFrogIds = intArrayOf(NPCs.MEDIUM_FROG_1829)
     }
 
     override fun onDropTableRolled(

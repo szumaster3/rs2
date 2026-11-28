@@ -24,7 +24,7 @@ import shared.consts.NPCs
  * Represents the Phoenix NPC (09.01.2009).
  */
 @Initializable
-class PhoenixNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.PHOENIX_8575) :
+class PhoenixNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_PHOENIX_8575) :
     Familiar(owner, id, 3200, Items.PHOENIX_POUCH_14623, 5, WeaponInterface.STYLE_CAST) {
 
     override fun construct(owner: Player, id: Int): Familiar = PhoenixNPC(owner, id)
@@ -102,7 +102,7 @@ class PhoenixNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PHOENIX_8575, NPCs.PHOENIX_8576)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_PHOENIX_8575, NPCs.LORE_PHOENIX_COMBAT_8576)
 
     companion object {
         private val FAMILIAR_DIALOGUE = listOf("Skrooooooooou!", "Skreeeeeeeeeeee!")

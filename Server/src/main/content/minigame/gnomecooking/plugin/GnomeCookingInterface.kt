@@ -77,10 +77,10 @@ class GnomeCookingInterface : InterfaceListener {
                         25 -> Items.PICTURE_2251
                         34 -> Items.PICTURE_2179
                         47 -> Items.PICTURE_2257
-                        else -> Items.NULL_9526
+                        else -> Items.OBJ_9526
                     }
                 } else {
-                    Items.NULL_9526
+                    Items.OBJ_9526
                 }
                 sendItemOnInterface(player, component.id, buttonID, itemID)
             }
@@ -98,10 +98,10 @@ class GnomeCookingInterface : InterfaceListener {
                         12 -> Items.PICTURE_2193
                         21 -> Items.PICTURE_2193
                         34 -> Items.PICTURE_2181
-                        else -> Items.NULL_9546
+                        else -> Items.OBJ_9546
                     }
                 } else {
-                    Items.NULL_9546
+                    Items.OBJ_9546
                 }
                 sendItemOnInterface(player, component.id, buttonID, itemID)
             }
@@ -116,7 +116,7 @@ class GnomeCookingInterface : InterfaceListener {
                 {
                     productData.productId
                 } else {
-                    Items.NULL_9537
+                    Items.OBJ_9537
                 }
                 sendItemOnInterface(player, component.id, buttonID, itemID)
             }

@@ -18,7 +18,7 @@ import shared.consts.Items
  */
 class CaptainBarnabyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val hasCharosRing = inEquipment(player!!, Items.RING_OF_CHAROSA_6465)
+        val hasCharosRing = inEquipment(player!!, Items.RING_OF_CHAROS_A_6465)
         val amount = if (isDiaryComplete(player!!, DiaryType.KARAMJA, 0)) 15 else 30
         when (stage) {
             0 -> {

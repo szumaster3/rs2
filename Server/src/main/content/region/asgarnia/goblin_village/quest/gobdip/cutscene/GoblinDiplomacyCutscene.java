@@ -57,11 +57,11 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
     @Override
     public boolean start(final Player player, final boolean login, Object... args) {
         Quest quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY.getQuestName());
-        final NPC grubfoot = NPC.create(quest.getStage(player) == 10 ? NPCs.GENERAL_WARTFACE_4495 : quest.getStage(player) == 20 ? 4497 : quest.getStage(player) == 30 ? 4498 : 4496, getBase().transform(10, 55, 0));
+        final NPC grubfoot = NPC.create(quest.getStage(player) == 10 ? NPCs.GRUBFOOT_4495 : quest.getStage(player) == 20 ? 4497 : quest.getStage(player) == 30 ? 4498 : 4496, getBase().transform(10, 55, 0));
         grubfoot.setWalks(false);
         npcs.add(grubfoot);
-        npcs.add(NPC.create(NPCs.GENERAL_WARTFACE_4494, getBase().transform(14, 55, 0)));
-        npcs.add(NPC.create(NPCs.GENERAL_BENTNOZE_4493, getBase().transform(14, 56, 0)));
+        npcs.add(NPC.create(NPCs.GENERAL_WARTFACE_GREEN_4494, getBase().transform(14, 55, 0)));
+        npcs.add(NPC.create(NPCs.GENERAL_BENTNOZE_RED_4493, getBase().transform(14, 56, 0)));
         for (NPC npc : npcs) {
             npc.setDirection(Direction.WEST);
             npc.init();
@@ -71,7 +71,7 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
 
     @Override
     public void open() {
-        player.getDialogueInterpreter().open(NPCs.GENERAL_WARTFACE_4494, npcs.get(1), this);
+        player.getDialogueInterpreter().open(NPCs.GENERAL_WARTFACE_GREEN_4494, npcs.get(1), this);
         PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 4, player.getLocation().getY() + 1, 390, 1, 100));
         PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 2, player.getLocation().getY(), 390, 1, 100));
     }
@@ -181,7 +181,7 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
             npc = (NPC) args[0];
             type = GrubFoot.forConfig(player);
             dialIndex = RandomFunction.random(DIALOGUES.length);
-            other = Repository.findNPC(npc.getId() == NPCs.GENERAL_WARTFACE_4494 ? NPCs.GENERAL_BENTNOZE_4493 : NPCs.GENERAL_WARTFACE_4494);
+            other = Repository.findNPC(npc.getId() == NPCs.GENERAL_WARTFACE_GREEN_4494 ? NPCs.GENERAL_BENTNOZE_RED_4493 : NPCs.GENERAL_WARTFACE_GREEN_4494);
             quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY.getQuestName());
 
             if (player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE.getQuestName()).getStage(player) == 43) {
@@ -420,7 +420,7 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
 
         @Override
         public int[] getIds() {
-            return new int[]{NPCs.GENERAL_WARTFACE_4494, NPCs.GENERAL_BENTNOZE_4493};
+            return new int[]{NPCs.GENERAL_WARTFACE_GREEN_4494, NPCs.GENERAL_BENTNOZE_RED_4493};
         }
 
         /**
@@ -875,7 +875,7 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
          * @return the color.
          */
         public String getColor(final String line) {
-            return npc.getId() == NPCs.GENERAL_WARTFACE_4494 ? "green" : "red";
+            return npc.getId() == NPCs.GENERAL_WARTFACE_GREEN_4494 ? "green" : "red";
         }
 
         /**
@@ -885,7 +885,7 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
          * @return the other color.
          */
         public String getOtherColor(final String line) {
-            return other.getId() == NPCs.GENERAL_BENTNOZE_4493 ? "red" : "green";
+            return other.getId() == NPCs.GENERAL_BENTNOZE_RED_4493 ? "red" : "green";
         }
 
         /**

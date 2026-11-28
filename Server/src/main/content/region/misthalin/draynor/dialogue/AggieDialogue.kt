@@ -37,7 +37,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
             stage = 42
             return true
         }
-        if(npc.id == NPCs.AGGIE_8207) {
+        if(npc.id == NPCs.SWEPT_AGGIE_8207) {
             if (getQuestStage(player, Quests.SWEPT_AWAY.questName) == 3) {
                 player("Woah, I felt that down to my toes!")
                 stage = 911
@@ -629,10 +629,10 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
         return player.inventory.containsItem(BUCKET_OF_WATER) || player.inventory.containsItem(JUG_OF_WATER)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.AGGIE_922, NPCs.AGGIE_8207)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AGGIE_922, NPCs.SWEPT_AGGIE_8207)
 
     companion object {
-        private val ANIMATION = Animation(Animations.AGGIE_MIXING_DYE_4352)
+        private val ANIMATION = Animation(Animations.AGGIE_DYE_MAKING_4352)
         private val ASHES = Item(Items.ASHES_592)
         private val POT_OF_FLOUR = Item(Items.POT_OF_FLOUR_1933)
         private val REDBERRIES_SINGLE = Item(Items.REDBERRIES_1951)

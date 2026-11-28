@@ -31,11 +31,11 @@ class BlackDemonNPC(
         vararg objects: Any?,
     ): AbstractNPC = BlackDemonNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLACK_DEMON_4702)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLACK_DEMON2_4702)
 
     companion object {
         fun spawnBlackDemon(player: Player) {
-            val demon = BlackDemonNPC(NPCs.BLACK_DEMON_4702)
+            val demon = BlackDemonNPC(NPCs.BLACK_DEMON2_4702)
             demon.location = location(2476, 9864, 0).transform(Direction.EAST, 0)
             demon.isWalks = false
             demon.isAggressive = true

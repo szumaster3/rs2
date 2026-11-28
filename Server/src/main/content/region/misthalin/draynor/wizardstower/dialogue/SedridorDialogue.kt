@@ -756,7 +756,7 @@ class SedridorDialogue(player: Player? = null) : Dialogue(player) {
     companion object {
         private const val TALISMAN = Items.AIR_TALISMAN_1438
         private const val PACKAGE = Items.RESEARCH_PACKAGE_290
-        private const val NOTES = Items.NOTES_291
+        private const val NOTES = Items.RESEARCH_NOTES_291
         private val Graphics = Graphics(6)
     }
 }

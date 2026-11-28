@@ -80,5 +80,5 @@ class RavenousLocustDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.RAVENOUS_LOCUST_7372, NPCs.RAVENOUS_LOCUST_7373)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_LOCUST_7372, NPCs.LORE_LOCUST_COMBAT_7373)
 }

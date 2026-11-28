@@ -14,7 +14,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class ArcticBearNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.ARCTIC_BEAR_6839) :
+class ArcticBearNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_POLAR_BEAR_6839) :
     Familiar(owner, id, 2800, Items.ARCTIC_BEAR_POUCH_12057, 6, WeaponInterface.STYLE_CONTROLLED) {
 
     init {
@@ -40,6 +40,6 @@ class ArcticBearNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARCTIC_BEAR_6839, NPCs.ARCTIC_BEAR_6840)
+        return intArrayOf(NPCs.LORE_POLAR_BEAR_6839, NPCs.LORE_POLAR_BEAR_COMBAT_6840)
     }
 }

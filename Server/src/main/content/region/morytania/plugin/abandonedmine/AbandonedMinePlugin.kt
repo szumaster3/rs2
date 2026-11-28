@@ -26,8 +26,8 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
         val EXIT = intArrayOf(Scenery.CART_TUNNEL_4920, Scenery.CART_TUNNEL_4921, Scenery.CART_TUNNEL_20524)
         val FUNGUS = intArrayOf(Scenery.GLOWING_FUNGUS_4932, Scenery.GLOWING_FUNGUS_4933)
         val CRYSTALS = intArrayOf(Scenery.CRYSTAL_OUTCROP_4926, Scenery.CRYSTAL_OUTCROP_4927, Scenery.CRYSTAL_OUTCROP_4928)
-        const val CLIMB_OVER_ANIMATION = Animations.CLIMB_OBJECT_839
-        val CLIMB_OVER_DURATION = animationCycles(Animations.CLIMB_OBJECT_839)
+        const val CLIMB_OVER_ANIMATION = Animations.HUMAN_WALK_STYLE_839
+        val CLIMB_OVER_DURATION = animationCycles(Animations.HUMAN_WALK_STYLE_839)
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(
@@ -142,7 +142,7 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
 
                                 1 -> {
                                     teleport(player, Location(2725, 4456, 0))
-                                    animate(player, Animations.STAND_LOW_WATER_777)
+                                    animate(player, Animations.HUMAN_WADING_READY_777)
                                 }
 
                                 2 -> {
@@ -167,7 +167,7 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
                             when (count++) {
                                 0 -> forceWalk(player, player.location.transform(0, 4, 0), "DUMB")
                                 4 -> {
-                                    animate(player, Animations.CROSS_WATER_776)
+                                    animate(player, Animations.HUMAN_WADING_776)
                                     teleport(player, Location(2807, 4493, 0))
                                     faceLocation(player, Location(player.location.x, player.location.y - 4, -1))
                                     return true
@@ -190,7 +190,7 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
                 else -> null
             }
 
-            animate(player, Animations.CRAWLING_2796)
+            animate(player, Animations.HUMAN_LONGCRAWL_2796)
 
             if (node.id == 4915 && player.location != Location.create(
                     3428, 3225, 0
@@ -219,7 +219,7 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
                 else -> null
             }
             stopWalk(player)
-            animate(player, Animations.CRAWLING_2796)
+            animate(player, Animations.HUMAN_LONGCRAWL_2796)
             queueScript(player, 3, QueueStrength.SOFT) {
                 exit?.let {
                     teleport(player, it)

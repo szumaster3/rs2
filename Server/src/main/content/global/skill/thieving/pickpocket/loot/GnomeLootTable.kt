@@ -9,18 +9,18 @@ object GnomeLootTable {
 
     val NPC_ID = intArrayOf(
         NPCs.GNOME_66,
-        NPCs.GNOME_67,
-        NPCs.GNOME_68,
-        NPCs.GNOME_WOMAN_168,
-        NPCs.GNOME_WOMAN_169,
-        NPCs.GNOME_2249,
-        NPCs.GNOME_2250,
-        NPCs.GNOME_2251,
-        NPCs.GNOME_2371,
+        NPCs.BROWCLOTHEDGNOME_67,
+        NPCs.DARKSKINNED_GNOME_68,
+        NPCs.GNOMEFEMALE_168,
+        NPCs.GNOMEFEMALE_DSKINNED_169,
+        NPCs.BATTLEFIELD_GNOME_TROOP_2249,
+        NPCs.BATTLEFIELD_DARKSKINNED_GNOME_ARCHER_2250,
+        NPCs.BATTLEFIELD_GNOME_ARCHER_2251,
+        NPCs.MOURNER_HIDEOUT_GNOME_HEAD_2371,
         NPCs.GNOME_2649,
         NPCs.GNOME_2650,
-        NPCs.GNOME_6002,
-        NPCs.GNOME_6004
+        NPCs.GRIM_GNOME_INCAGE_1_6002,
+        NPCs.GRIM_GNOME_INCAGE_3_6004
     )
 
     val LOOT = WeightBasedTable.create(

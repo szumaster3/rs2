@@ -102,9 +102,9 @@ class YanilleGrapple : OptionHandler() {
                                     player.faceLocation(destination)
                                     visualize(
                                         player,
-                                        Animation(Animations.FIRE_CROSSBOW_TO_CLIMB_WALL_4455),
+                                        Animation(Animations.XBOWS_HUMAN_FIRE_AND_CLIMB_GRAPPLE_4455),
                                         Graphics(
-                                            shared.consts.Graphics.MITHRIL_GRAPPLE_760,
+                                            shared.consts.Graphics.XBOWS_FIRE_AND_CLIMBED_GRAPPLE_760,
                                             100,
                                         ),
                                     )

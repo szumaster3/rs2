@@ -25,7 +25,7 @@ class DagannothBabyNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
     companion object {
         @JvmStatic
         fun spawnDagannothBaby(player: Player) {
-            val dag = DagannothBabyNPC(NPCs.DAGANNOTH_1347)
+            val dag = DagannothBabyNPC(NPCs.HORROR_DAGANNOTH_JR4_1347)
             dag.location = location(2520, 4645, 0)
             dag.isWalks = true
             dag.isAggressive = true

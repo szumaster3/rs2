@@ -15,7 +15,7 @@ class DemonicSigilOptionPlugin : InteractionListener {
     override fun defineListeners() {
         on(Items.DEMONIC_SIGIL_6748, IntType.ITEM, "chant") { player, _ ->
             lock(player, 10)
-            animate(player, Animations.SOTS_DEMONIC_SIGIL_2879)
+            animate(player, Animations.SUMMON_SUMMON_START_2879)
             submitIndividualPulse(
                 player,
                 object : Pulse(1) {
@@ -28,7 +28,7 @@ class DemonicSigilOptionPlugin : InteractionListener {
                             6 -> sendChat(player, "Agrith Naar...")
                             9 -> sendChat(player, "Camerinthum...")
                             12 -> {
-                                animate(player, Animations.SOTS_DEMONIC_SIGIL_2880)
+                                animate(player, Animations.SUMMON_SUMMON_2880)
                                 sendChat(player, "Tarren!")
                                 return true
                             }

@@ -13,7 +13,7 @@ import shared.consts.NPCs
  */
 class PrisonPeteNPC(
     override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.EVIL_BOB_2478) {
+) : RandomEventNPC(NPCs.MACRO_EVIL_BOB_OUTSIDE_2478) {
     override fun init() {
         super.init()
         lock(player, 6)

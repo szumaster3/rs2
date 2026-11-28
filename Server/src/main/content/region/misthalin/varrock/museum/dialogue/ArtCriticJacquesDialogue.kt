@@ -40,5 +40,5 @@ class ArtCriticJacquesDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ArtCriticJacquesDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ART_CRITIC_JACQUES_5930)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VM_ART_CRITIC_5930)
 }

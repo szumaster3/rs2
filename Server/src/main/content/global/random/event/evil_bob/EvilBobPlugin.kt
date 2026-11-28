@@ -49,8 +49,8 @@ class EvilBobPlugin :
                     else -> EvilBobUtils.NORTH_FISHING_ZONE // fallback.
                 }
 
-                return if (inBorders(player, fishingZone)) Items.FISHLIKE_THING_6202
-                else Items.FISHLIKE_THING_6206
+                return if (inBorders(player, fishingZone)) Items.FISH_LIKE_THING_6202
+                else Items.FISH_LIKE_THING_6206
             }
 
             when {
@@ -59,7 +59,7 @@ class EvilBobPlugin :
                 }
 
                 !inInventory(player, Items.SMALL_FISHING_NET_303) -> {
-                    sendNPCDialogue(player, NPCs.SERVANT_2481, "You'll need a fishing net. There are plenty scattered around the beach.", FaceAnim.SAD)
+                    sendNPCDialogue(player, NPCs.MACRO_EVIL_BOB_FEMALE_SERVANT_2481, "You'll need a fishing net. There are plenty scattered around the beach.", FaceAnim.SAD)
                 }
 
                 freeSlots(player) == 0 -> {
@@ -67,7 +67,7 @@ class EvilBobPlugin :
                 }
 
                 getAttribute(player, GameAttributes.RE_BOB_SCORE, false) -> {
-                    sendNPCDialogue(player, NPCs.SERVANT_2481, "You've already got a fish. Come over here to uncook it, then serve it to Evil Bob.", FaceAnim.SAD)
+                    sendNPCDialogue(player, NPCs.MACRO_EVIL_BOB_FEMALE_SERVANT_2481, "You've already got a fish. Come over here to uncook it, then serve it to Evil Bob.", FaceAnim.SAD)
                 }
 
                 else -> {
@@ -91,18 +91,18 @@ class EvilBobPlugin :
             lock(player, 2)
             animate(player, EvilBobUtils.COOK_ANIMATION)
             playAudio(player, Sounds.UNCOOKING_2322)
-            if (removeItem(player, Items.FISHLIKE_THING_6202)) addItem(player, Items.RAW_FISHLIKE_THING_6200)
-            if (removeItem(player, Items.FISHLIKE_THING_6206)) addItem(player, Items.RAW_FISHLIKE_THING_6204)
+            if (removeItem(player, Items.FISH_LIKE_THING_6202)) addItem(player, Items.RAW_FISH_LIKE_THING_6200)
+            if (removeItem(player, Items.FISH_LIKE_THING_6206)) addItem(player, Items.RAW_FISH_LIKE_THING_6204)
             return@onUseWith true
         }
 
         onUseWith(IntType.NPC, EvilBobUtils.RAW_FISH_CORRECT_IDS, EvilBobUtils.EVIL_BOB_NPC_ID) { player, _, _ ->
-            openDialogue(player, EvilBobDialogue(), NPCs.EVIL_BOB_2479)
+            openDialogue(player, EvilBobDialogue(), NPCs.MACRO_EVIL_BOB_ISLAND_2479)
             return@onUseWith true
         }
 
         onUseWith(IntType.NPC, EvilBobUtils.RAW_FISh_INCORRECT_IDS, EvilBobUtils.EVIL_BOB_NPC_ID) { player, _, _ ->
-            openDialogue(player, EvilBobDialogue(), NPCs.EVIL_BOB_2479)
+            openDialogue(player, EvilBobDialogue(), NPCs.MACRO_EVIL_BOB_ISLAND_2479)
             return@onUseWith true
         }
 
@@ -124,7 +124,7 @@ class EvilBobPlugin :
                         1 -> {
                             player.faceLocation(Location.create(3421, 4777, 0))
                             sendChat(player, "Be seeing you!")
-                            player.animate(Animation(Animations.HUMAN_BLOW_RASPBERRY_2110))
+                            player.animate(Animation(Animations.EMOTE_YA_BOO_SUCKS_2110))
                             return@queueScript delayScript(player, 2)
                         }
 
@@ -140,7 +140,7 @@ class EvilBobPlugin :
                     }
                 }
             } else {
-                sendNPCDialogue(player, NPCs.EVIL_BOB_2479, "You're going nowhere, human!", FaceAnim.CHILD_NEUTRAL)
+                sendNPCDialogue(player, NPCs.MACRO_EVIL_BOB_ISLAND_2479, "You're going nowhere, human!", FaceAnim.CHILD_NEUTRAL)
             }
             return@on true
         }

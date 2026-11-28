@@ -635,5 +635,5 @@ class CaptainLawgofDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_LAWGOF_208)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LAWGOF2_208)
 }

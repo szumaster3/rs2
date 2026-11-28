@@ -67,14 +67,14 @@ class MonkeyGreeGreesPlugin :
             lock(player, 1)
             visualize(player, -1, AIR_BLAST_ANIMATION)
             when (used.asItem().id) {
-                4024 -> player.appearance.transformNPC(NPCs.SMALL_NINJA_MONKEY_1480)
-                4025 -> player.appearance.transformNPC(NPCs.MEDIUM_NINJA_MONKEY_1481)
-                4026 -> player.appearance.transformNPC(NPCs.GORILLA_1482)
-                4027 -> player.appearance.transformNPC(NPCs.BEARDED_GORILLA_1483)
-                4028 -> player.appearance.transformNPC(NPCs.ANCIENT_MONKEY_1484)
-                4029 -> player.appearance.transformNPC(NPCs.SMALL_ZOMBIE_MONKEY_1485)
-                4030 -> player.appearance.transformNPC(NPCs.LARGE_ZOMBIE_MONKEY_1486)
-                4031 -> player.appearance.transformNPC(NPCs.MONKEY_1487)
+                4024 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_SMALL_NINJA_MONKEY_1480)
+                4025 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_MEDIUM_NINJA_MONKEY_1481)
+                4026 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_NORMAL_GORILLA_1482)
+                4027 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_BEARDED_GORILLA_1483)
+                4028 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_ANCIENT_MONKEY_1484)
+                4029 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_SMALL_ZOMBIE_MONKEY_1485)
+                4030 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_LARGE_ZOMBIE_MONKEY_1486)
+                4031 -> player.appearance.transformNPC(NPCs.MM_TRANSMOGRIFICATION_NORMAL_MONKEY_1487)
             }
             return@onEquip true
         }

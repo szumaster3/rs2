@@ -13,7 +13,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class GeyserTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.GEYSER_TITAN_7339) :
+class GeyserTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_GEYSER_TITAN_7339) :
     Familiar(owner, id, 6900, Items.GEYSER_TITAN_POUCH_12786, 6, WeaponInterface.STYLE_RANGE_ACCURATE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return GeyserTitanNPC(owner, id)
@@ -43,6 +43,6 @@ class GeyserTitanNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GEYSER_TITAN_7339, NPCs.GEYSER_TITAN_7340)
+        return intArrayOf(NPCs.LORE_GEYSER_TITAN_7339, NPCs.LORE_GEYSER_TITAN_COMBAT_7340)
     }
 }

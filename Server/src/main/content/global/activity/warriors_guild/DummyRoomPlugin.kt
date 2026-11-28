@@ -95,7 +95,7 @@ class DummyRoomPlugin : OptionHandler() {
             }
             if (player.properties.attackStyle!!.style != dummy!!.attackStyle && player.properties.attackStyle!!.bonusType != dummy!!.bonusType) {
                 lock(player, 5)
-                visualize(player, player.properties.attackAnimation, Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96))
+                visualize(player, player.properties.attackAnimation, Graphics(shared.consts.Graphics.STUNNED_1_80, 96))
                 sendMessage(player, "You whack the dummy with the wrong attack style.")
             } else {
                 player.getSkills().addExperience(Skills.ATTACK, 15.0, true)

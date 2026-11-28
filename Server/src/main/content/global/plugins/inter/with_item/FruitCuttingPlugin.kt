@@ -41,7 +41,7 @@ class FruitCuttingPlugin : InteractionListener {
                         runTask(player, 1, amount) {
                             if (amount < 1) return@runTask
                             if (removeItem(player, Item(with.id))) {
-                                player.animate(Animation(Animations.CRAFT_KNIFE_5244))
+                                player.animate(Animation(Animations.HUMAN_FLETCHING_HUNTINGBOLTS_5244))
 
                                 if (!hasSpaceFor(player, product)) {
                                     sendMessage(player, "You don't have enough inventory space to do this.")
@@ -78,7 +78,7 @@ class FruitCuttingPlugin : InteractionListener {
                                 return@runTask
                             }
 
-                            player.animate(Animation(Animations.CUT_WATERMELON_2269))
+                            player.animate(Animation(Animations.FARMING_SLICE_WATERMELON_2269))
                             player.inventory.add(productID)
                             sendMessage(player, "You slice the watermelon into three slices.")
                         }

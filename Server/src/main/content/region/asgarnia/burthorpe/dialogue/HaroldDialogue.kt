@@ -44,7 +44,7 @@ class HaroldDialogue(player: Player? = null) : Dialogue(player) {
             }
             4 -> {
                 end()
-                animate(npc!!, Animation(Animations.EAT_OLD_829), true)
+                animate(npc!!, Animation(Animations.HUMAN_EAT_829), true)
                 runTask(npc!!, 3) {
                     npc(FaceAnim.FRIENDLY, "*burp*").also { stage = END_DIALOGUE }
                 }

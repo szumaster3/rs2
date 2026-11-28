@@ -49,7 +49,7 @@ class DarkWizardNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
     private fun setDefaultSpell() {
         val defaultSpellId =
             when (id) {
-                NPCs.DARK_WIZARD_172, NPCs.DARK_WIZARD_4659 -> 6
+                NPCs.BEARDED_DARK_WIZARD_172, NPCs.DARK_WIZARD_4659 -> 6
                 else -> 4
             }
         properties.autocastSpell = SpellBook.MODERN.getSpell(defaultSpellId) as CombatSpell?
@@ -72,7 +72,7 @@ class DarkWizardNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
     private val spells: IntArray
         get() =
             when (id) {
-                NPCs.DARK_WIZARD_172, NPCs.DARK_WIZARD_4659 -> intArrayOf(4, 2) // Water Bolt & Confuse
+                NPCs.BEARDED_DARK_WIZARD_172, NPCs.DARK_WIZARD_4659 -> intArrayOf(4, 2) // Water Bolt & Confuse
                 else -> intArrayOf(6, 7) // Earth Bolt & Weaken
             }
 
@@ -80,6 +80,6 @@ class DarkWizardNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
 
     companion object {
         private val ID =
-            intArrayOf(NPCs.DARK_WIZARD_172, NPCs.DARK_WIZARD_174, NPCs.DARK_WIZARD_4659, NPCs.DARK_WIZARD_4660)
+            intArrayOf(NPCs.BEARDED_DARK_WIZARD_172, NPCs.YOUNG_DARK_WIZARD_174, NPCs.DARK_WIZARD_4659, NPCs.DARK_WIZARD_4660)
     }
 }

@@ -59,7 +59,7 @@ class MillingOptionPlugin : InteractionListener {
 
         when (hopperContents) {
             GRAIN -> {
-                animate(player, Animations.HUMAN_OPERATE_CONTROLS_3571)
+                animate(player, Animations.JARO_JADINKO_ADULT_WALK_GUARD_3571)
                 setAttribute(
                     player,
                     "/save:milling:grain",
@@ -70,7 +70,7 @@ class MillingOptionPlugin : InteractionListener {
             }
 
             SWEETCORN -> {
-                animate(player, Animations.HUMAN_OPERATE_CONTROLS_3571)
+                animate(player, Animations.JARO_JADINKO_ADULT_WALK_GUARD_3571)
                 setAttribute(
                     player,
                     "/save:milling:sweetcorn",
@@ -91,7 +91,7 @@ class MillingOptionPlugin : InteractionListener {
      */
     private fun fillHopper(player: Player, used: Item) {
         playAudio(player, Sounds.FILL_GRAIN_2576)
-        animate(player, Animations.PUT_OBJECT_ON_TABLE_537)
+        animate(player, Animations.HUMAN_LOCKEDCHEST_537)
         if (getAttribute(player, "milling:hopper", 0) == 0 && removeItem(player, used)) {
             setAttribute(player, "/save:milling:hopper", used.id)
             sendMessage(player, "You put the " + used.name.lowercase() + " in the hopper.")

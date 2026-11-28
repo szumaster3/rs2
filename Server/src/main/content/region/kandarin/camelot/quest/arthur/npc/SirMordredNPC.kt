@@ -92,7 +92,7 @@ class SirMordredNPC(
         val morgan = MorganLeFayeNPC(NPCs.MORGAN_LE_FAYE_248, Location.create(2770, 3403, 2))
         player.setAttribute(GameAttributes.TEMP_ATTR_MORGAN, morgan)
         morgan.player = player
-        morgan.graphics(Graphics.create(shared.consts.Graphics.RE_PUFF_86))
+        morgan.graphics(Graphics.create(shared.consts.Graphics.SMOKEPUFF_2_86))
         morgan.init()
         morgan.moveStep()
     }

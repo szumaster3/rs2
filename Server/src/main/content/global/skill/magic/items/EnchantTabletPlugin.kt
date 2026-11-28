@@ -33,7 +33,7 @@ class EnchantTabletPlugin : InteractionListener {
                 } else {
                     removeItem(player, node.id)
                     playAudio(player, Sounds.POH_TABLET_BREAK_979)
-                    player.animator.forceAnimation(Animation(Animations.BREAK_SPELL_TABLET_A_4069))
+                    player.animator.forceAnimation(Animation(Animations.POH_SMASH_MAGIC_TABLET_4069))
                 }
 
                 return@on true
@@ -52,7 +52,7 @@ class EnchantTabletPlugin : InteractionListener {
         val effect = EnchantSpellEffect.fromItemId(targetId)
 
         playAudio(player, Sounds.POH_TABLET_BREAK_979)
-        player.animator.forceAnimation(Animation(Animations.BREAK_SPELL_TABLET_A_4069))
+        player.animator.forceAnimation(Animation(Animations.POH_SMASH_MAGIC_TABLET_4069))
         player.lock(5)
         setAttribute(player, "tablet-spell", true)
 

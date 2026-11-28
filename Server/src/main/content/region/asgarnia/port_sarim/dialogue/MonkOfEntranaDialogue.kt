@@ -17,7 +17,7 @@ class MonkOfEntranaDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         if (player == null || npc == null) return
 
-        val monkLeaveIds = intArrayOf(NPCs.MONK_OF_ENTRANA_2730, NPCs.MONK_OF_ENTRANA_658, NPCs.MONK_OF_ENTRANA_2731)
+        val monkLeaveIds = intArrayOf(NPCs.SHIPMONK2_B_2730, NPCs.SHIPMONK2_658, NPCs.SHIPMONK2_C_2731)
 
         when (stage) {
             0 -> if (npc!!.id in monkLeaveIds) {
@@ -60,7 +60,7 @@ class TakeBoatDialogue() : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         if (player == null || npc == null) return
 
-        val monkLeaveIds = intArrayOf(NPCs.MONK_OF_ENTRANA_2730, NPCs.MONK_OF_ENTRANA_658, NPCs.MONK_OF_ENTRANA_2731)
+        val monkLeaveIds = intArrayOf(NPCs.SHIPMONK2_B_2730, NPCs.SHIPMONK2_658, NPCs.SHIPMONK2_C_2731)
 
         when (stage) {
             0 -> if (npc!!.id in monkLeaveIds) {

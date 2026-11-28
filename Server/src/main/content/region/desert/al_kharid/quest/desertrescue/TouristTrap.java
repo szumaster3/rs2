@@ -183,7 +183,7 @@ public final class TouristTrap extends Quest {
      * @param dialogue the dialogue
      */
     public static void jail(final Player player, String dialogue) {
-        player.getDialogueInterpreter().sendDialogues(NPCs.GUARD_4999, null, dialogue);
+        player.getDialogueInterpreter().sendDialogues(NPCs.TOURTRAP_QIP_DESERT_MINING_GUARD_STILL_1_4999, null, dialogue);
         player.lock();
         GameWorld.getPulser().submit(new Pulse(1) {
             int counter;

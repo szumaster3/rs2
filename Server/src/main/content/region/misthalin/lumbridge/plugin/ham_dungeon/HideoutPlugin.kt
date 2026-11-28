@@ -21,7 +21,7 @@ class HideoutPlugin : InteractionListener {
                     if (withinDistance(player, Location.create(3149, 9652, 0))) {
                         ClimbActionHandler.climb(
                             player,
-                            Animation(Animations.HUMAN_CLIMB_STAIRS_828),
+                            Animation(Animations.HUMAN_REACHFORLADDER_828),
                             Location(3165, 3251, 0),
                         )
                         return@on true
@@ -40,7 +40,7 @@ class HideoutPlugin : InteractionListener {
                                 setVarp(player, 346, 272731282)
                                 ClimbActionHandler.climb(
                                     player,
-                                    Animation(Animations.HUMAN_BURYING_BONES_827),
+                                    Animation(Animations.HUMAN_PICKUPFLOOR_827),
                                     Location(3149, 9652, 0),
                                 )
                                 submitIndividualPulse(
@@ -70,13 +70,13 @@ class HideoutPlugin : InteractionListener {
 
                         "pick-lock" -> {
                             lock(player, 3)
-                            animate(player, Animations.HUMAN_BURYING_BONES_827)
+                            animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                             sendMessage(player, "You attempt to pick the lock on the trap door.")
                             submitIndividualPulse(
                                 player,
                                 object : Pulse(2) {
                                     override fun pulse(): Boolean {
-                                        animate(player, Animations.HUMAN_BURYING_BONES_827)
+                                        animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                                         sendMessage(player, "You attempt to pick the lock on the trap door.")
                                         val success = RandomFunction.random(3) == 1
                                         sendMessage(

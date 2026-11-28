@@ -68,5 +68,5 @@ class RewardsMysticDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.REWARDS_MYSTIC_8228)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SC_REWARDS_MYSTIC_8228)
 }

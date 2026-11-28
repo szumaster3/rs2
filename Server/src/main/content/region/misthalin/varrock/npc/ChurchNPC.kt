@@ -26,7 +26,7 @@ class ChurchNPC : NPCBehavior(NPCs.MARTINA_SCORSBY_3326, NPCs.JEREMY_CLERKSIN_33
         tickDelay = 0
 
         if (RandomFunction.random(300) < 3) {
-            visualize(self, -1, Graphics.SLEEPING_ZZZ_1056)
+            visualize(self, -1, Graphics.DREAM_ZEDS_1056)
         }
         return true
     }

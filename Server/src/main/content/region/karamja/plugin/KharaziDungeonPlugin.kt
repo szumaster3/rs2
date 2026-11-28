@@ -164,7 +164,7 @@ class KharaziDungeonPlugin : InteractionListener {
                 2 -> {
                     end()
                     if (buttonID == 1) {
-                        animate(player!!, Animations.CRAWL_844)
+                        animate(player!!, Animations.HUMAN_CRAWLING_844)
                         teleport(player!!, Location.create(2800, 9340, 0), TeleportManager.TeleportType.INSTANT, 1)
                         sendMessage(player!!, "You successfully squeeze through the crevice into a small tunnel.")
                     } else {
@@ -337,7 +337,7 @@ class KharaziDungeonPlugin : InteractionListener {
             0,
             90,
             null,
-            Animations.HUMAN_WALK_SHORT_819
+            Animations.HUMAN_WALK_F_819
         ) {
             sendMessage(player, "Another boulder drops down behind you.", 1)
             delayClock(player, Clocks.SKILLING, 3)

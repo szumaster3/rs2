@@ -24,7 +24,7 @@ class DrogoDwarfDialogue : DialogueFile() {
             3 -> npc(FaceAnim.OLD_ANGRY1, "I may be short, but at least I've got manners.").also { stage = END_DIALOGUE }
             4 -> {
                 end()
-                openNpcShop(player!!, NPCs.DROGO_DWARF_579)
+                openNpcShop(player!!, NPCs.DROGO_579)
             }
         }
     }

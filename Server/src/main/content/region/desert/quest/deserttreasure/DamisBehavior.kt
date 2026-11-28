@@ -13,7 +13,7 @@ import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
 
-class DamisBehavior : NPCBehavior(NPCs.DAMIS_1974, NPCs.DAMIS_1975) {
+class DamisBehavior : NPCBehavior(NPCs.FD_DAMIS_NORMAL_1974, NPCs.FD_DAMIS_TOUGHER_1975) {
     private var disappearing = false
 
     override fun tick(self: NPC): Boolean {
@@ -47,12 +47,12 @@ class DamisBehavior : NPCBehavior(NPCs.DAMIS_1974, NPCs.DAMIS_1975) {
             if (state.estimatedHit + Integer.max(
                     state.secondaryHit,
                     0
-                ) >= self.skills.lifepoints && self.id == NPCs.DAMIS_1974
+                ) >= self.skills.lifepoints && self.id == NPCs.FD_DAMIS_NORMAL_1974
             ) {
                 state.estimatedHit = self.skills.lifepoints + 1
                 state.secondaryHit = -1
 
-                transformNpc(self, NPCs.DAMIS_1975, 500)
+                transformNpc(self, NPCs.FD_DAMIS_TOUGHER_1975, 500)
                 self.skills.lifepoints = self.skills.maximumLifepoints
                 sendChat(self, "Armour... is for restraint, not... protection...")
                 queueScript(self, 2, QueueStrength.NORMAL) {
@@ -66,14 +66,14 @@ class DamisBehavior : NPCBehavior(NPCs.DAMIS_1974, NPCs.DAMIS_1975) {
 
     override fun beforeAttackFinalized(self: NPC, victim: Entity, state: BattleState) {
         // In second form, drain prayer by 5.
-        if (self.id == NPCs.DAMIS_1975) {
+        if (self.id == NPCs.FD_DAMIS_TOUGHER_1975) {
             victim.skills.decrementPrayerPoints(5.0)
         }
     }
 
     override fun onDeathFinished(self: NPC, killer: Entity) {
         if (killer is Player) {
-            if (self.id == NPCs.DAMIS_1975) {
+            if (self.id == NPCs.FD_DAMIS_TOUGHER_1975) {
                 if (DesertTreasure.getSubStage(killer, DesertTreasure.attributeShadowStage) == 3) {
                     GroundItemManager.create(Item(Items.SHADOW_DIAMOND_4673), self.location, killer)
                     DesertTreasure.setSubStage(killer, DesertTreasure.attributeShadowStage, 100)

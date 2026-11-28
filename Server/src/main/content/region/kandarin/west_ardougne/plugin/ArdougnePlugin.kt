@@ -23,7 +23,7 @@ class ArdougnePlugin : InteractionListener {
          * for the Holy Grail quest.
          */
 
-        on(NPCs.GALAHAD_218, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.BROTHER_GALAHAD_218, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, GalahadDialogue())
             return@on true
         }
@@ -33,7 +33,7 @@ class ArdougnePlugin : InteractionListener {
          * for ship travel dialogue.
          */
 
-        on(NPCs.CAPTAIN_BARNABY_4974, IntType.NPC, "talk-to") { player, npc ->
+        on(NPCs.CAPTAIN_BARNABY_MODEL_4974, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, CaptainBarnabyDialogue(), npc)
             return@on true
         }
@@ -43,8 +43,8 @@ class ArdougnePlugin : InteractionListener {
          * for ship travel to Brimhaven.
          */
 
-        on(NPCs.CAPTAIN_BARNABY_4974, IntType.NPC, "pay-fare") { player, _ ->
-            val hasCharosRing = inEquipment(player, Items.RING_OF_CHAROSA_6465)
+        on(NPCs.CAPTAIN_BARNABY_MODEL_4974, IntType.NPC, "pay-fare") { player, _ ->
+            val hasCharosRing = inEquipment(player, Items.RING_OF_CHAROS_A_6465)
             val fareAmount = if (isDiaryComplete(player, DiaryType.KARAMJA, 0)) 15 else 30
 
             if (hasCharosRing || removeItem(player, Item(Items.COINS_995, fareAmount))) {
@@ -66,7 +66,7 @@ class ArdougnePlugin : InteractionListener {
          * during the Eagles Peak quest.
          */
 
-        onUseWith(IntType.NPC, Items.FERRET_10092, NPCs.CHARLIE_5138) { player, _, npc ->
+        onUseWith(IntType.NPC, Items.FERRET_10092, NPCs.EAGLEPEAK_ZOOKEEPER_CHARLIE_5138) { player, _, npc ->
             if (!hasRequirement(player, Quests.EAGLES_PEAK.questName)) return@onUseWith false
             sendPlayerDialogue(player, "Hey, I've got another ferret if you're interested?")
             addDialogueAction(player) { _, _ ->

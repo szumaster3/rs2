@@ -62,7 +62,7 @@ object EvilTwinUtils {
         val region = getRegion(player)
         region.add(player)
         region.setMusicId(Music.HEAD_TO_HEAD_612)
-        cranes[player] = Scenery(shared.consts.Scenery.EVIL_CLAW_14976, region.baseLocation.transform(14, 12, 0), 10, 0)
+        cranes[player] = Scenery(shared.consts.Scenery.CLAW_14976, region.baseLocation.transform(14, 12, 0), 10, 0)
         val color: EvilTwinColors = RandomFunction.getRandomElement(EvilTwinColors.values())
         val model = RandomFunction.random(5)
         val hash = color.ordinal or (model shl 16)
@@ -295,7 +295,7 @@ object EvilTwinUtils {
         val hash: Int = player.getAttribute(RANDOM_EVENT, 0)
         for (npc in region.planes[0].npcs) {
             if (npc.id in NPCs.SUSPECT_3852..NPCs.SUSPECT_3891 && !isEvilTwin(npc, hash)) {
-                sendGraphics(shared.consts.Graphics.RE_PUFF_86, npc.location)
+                sendGraphics(shared.consts.Graphics.SMOKEPUFF_2_86, npc.location)
                 npc.clear()
             }
         }

@@ -159,5 +159,5 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OLAF_THE_BARD_1269)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_OLAF_1269)
 }

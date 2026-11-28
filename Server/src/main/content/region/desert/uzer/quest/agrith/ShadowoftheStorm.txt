@@ -11,7 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class ShadowoftheStorm : Quest("Shadow of the Storm", 112, 111, 1,Vars.VARBIT_QUEST_SHADOW_OF_THE_STORM_1372,0,1,125) {
+class ShadowoftheStorm : Quest("Shadow of the Storm", 112, 111, 1,Vars.VARBIT_1372,0,1,125) {
 
 class SkillRequirement(val skill: Int?, val level: Int?)
 
@@ -75,7 +75,7 @@ class SkillRequirement(val skill: Int?, val level: Int?)
         addItemOrDrop(player, Items.COMBAT_LAMP_10586)
         addItemOrDrop(player, Items.DEMONIC_SIGIL_6748)
         addItemOrDrop(player, Items.DEMONIC_TOME_6749)
-        setVarbit(player, Vars.VARBIT_QUEST_SHADOW_OF_THE_STORM_1372, 125, true)
+        setVarbit(player, Vars.VARBIT_1372, 125, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

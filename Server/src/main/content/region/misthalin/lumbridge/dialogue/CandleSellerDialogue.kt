@@ -86,5 +86,5 @@ class CandleSellerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CandleSellerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CANDLE_SELLER_1834)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SWAMP_CANDLE_GUY_1834)
 }

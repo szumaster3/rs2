@@ -17,7 +17,7 @@ import shared.consts.NPCs
 import kotlin.math.floor
 
 @Initializable
-class EvilTurnipNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.EVIL_TURNIP_6833) :
+class EvilTurnipNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_TURNIP_6833) :
     Forager(owner, id, 3000, Items.EVIL_TURNIP_POUCH_12051, 6, WeaponInterface.STYLE_RANGE_ACCURATE, EVIL_TURNIP) {
     override fun construct(owner: Player, id: Int): Familiar {
         return EvilTurnipNPC(owner, id)
@@ -44,10 +44,10 @@ class EvilTurnipNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EVIL_TURNIP_6833, NPCs.EVIL_TURNIP_6834)
+        return intArrayOf(NPCs.LORE_TURNIP_6833, NPCs.LORE_TURNIP_COMBAT_6834)
     }
 
     companion object {
-        private val EVIL_TURNIP = Item(Items.TWO_THIRDS_EVIL_TURNIP_12136)
+        private val EVIL_TURNIP = Item(Items.OBJ_2_3_EVIL_TURNIP_12136)
     }
 }

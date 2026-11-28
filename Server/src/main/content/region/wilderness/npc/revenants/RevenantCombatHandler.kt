@@ -75,8 +75,8 @@ class RevenantCombatHandler(meleeAnimation: Animation?, magicAnimation: Animatio
     }
 
     companion object {
-        private val MAGIC_Graphics: Graphics = Graphics.create(shared.consts.Graphics.PUFF_OF_GREY_1276)
-        private val RANGE_Graphics: Graphics = Graphics.create(shared.consts.Graphics.BIT_OF_WATER_1278)
+        private val MAGIC_Graphics: Graphics = Graphics.create(shared.consts.Graphics.WILDERNESS_MAGIC_ATTACK_PROJ_1276)
+        private val RANGE_Graphics: Graphics = Graphics.create(shared.consts.Graphics.WILDERNESS_REWORK_FROZEN_PROJECTILE_1278)
 
         fun createProjectile(graphics: Graphics): Projectile =
             Projectile.create(null, null, graphics.id, 48, 36, 34, 20)

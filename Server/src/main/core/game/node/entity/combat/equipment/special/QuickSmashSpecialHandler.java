@@ -28,9 +28,9 @@ public final class QuickSmashSpecialHandler extends MeleeSwingHandler implements
 
     private static final int SPECIAL_ENERGY = 50;
 
-    private static final Animation ANIMATION = new Animation(Animations.ATTACK_MAUL_1667, Priority.HIGH);
+    private static final Animation ANIMATION = new Animation(Animations.SLAYER_GRANITE_MAUL_SPECIAL_ATTACK_1667, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.GRANITE_MAUL_SPECIAL_340, 96);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.SLAYER_MAUL_SP_ATTACK_340, 96);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

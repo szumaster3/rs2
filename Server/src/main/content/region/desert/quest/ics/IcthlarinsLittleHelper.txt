@@ -11,7 +11,7 @@ import core.plugin.Initializable
 
 @Initializable
 class IcthlarinsLittleHelper :
-    Quest("Icthlarin's Little Helper", 78, 77, 2, Vars.VARBIT_QUEST_ICTHLARINS_LITTLE_HELPER_418, 0, 1, 26) {
+    Quest("Icthlarin's Little Helper", 78, 77, 2, Vars.VARBIT_418, 0, 1, 26) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -40,7 +40,7 @@ class IcthlarinsLittleHelper :
         rewardXP(player, Skills.AGILITY, 4000.0)
         rewardXP(player, Skills.WOODCUTTING, 4000.0)
         addItemOrDrop(player, Items.CATSPEAK_AMULET_4677, 1)
-        setVarbit(player, Vars.VARBIT_QUEST_ICTHLARINS_LITTLE_HELPER_418, 26, true)
+        setVarbit(player, Vars.VARBIT_418, 26, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

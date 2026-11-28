@@ -26,7 +26,7 @@ class BonesBuryPlugin : InteractionListener {
             lock(player, 2)
             delayClock(player, Clocks.SKILLING, 2)
             sendMessage(player, "You dig a hole in the ground.")
-            animate(player, Animations.HUMAN_BURYING_BONES_827)
+            animate(player, Animations.HUMAN_PICKUPFLOOR_827)
             playAudio(player, Sounds.BONES_DOWN_2738)
 
             queueScript(player, 1, QueueStrength.STRONG) {

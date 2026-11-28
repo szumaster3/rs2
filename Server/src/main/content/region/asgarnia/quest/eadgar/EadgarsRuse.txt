@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class EadgarsRuse : Quest("Eadgar's Ruse", 50, 49, 1, Vars.VARP_QUEST_EADGARS_RUSE_335, 0, 1, 110) {
+class EadgarsRuse : Quest("Eadgar's Ruse", 50, 49, 1, Vars.VARP_335, 0, 1, 110) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

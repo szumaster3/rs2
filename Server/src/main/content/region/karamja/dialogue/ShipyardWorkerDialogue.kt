@@ -20,8 +20,8 @@ class ShipyardWorkerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
         when (stage) {
-            0 -> if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) == 55 && npc.id == NPCs.SHIPYARD_WORKER_675) {
-                end().also { openDialogue(player, ShipyardWorkerDialogueFile(), NPC(NPCs.SHIPYARD_WORKER_675)) }
+            0 -> if (getQuestStage(player, Quests.THE_GRAND_TREE.questName) == 55 && npc.id == NPCs.GRANDTREE_SHIPYARDGUARD_675) {
+                end().also { openDialogue(player, ShipyardWorkerDialogueFile(), NPC(NPCs.GRANDTREE_SHIPYARDGUARD_675)) }
             } else {
                 playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
             }
@@ -34,5 +34,5 @@ class ShipyardWorkerDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SHIPYARD_WORKER_675, NPCs.SHIPYARD_WORKER_38, NPCs.SHIPYARD_WORKER_39)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDTREE_SHIPYARDGUARD_675, NPCs.SHIPYARDWORKER1_38, NPCs.SHIPYARDWORKER2_39)
 }

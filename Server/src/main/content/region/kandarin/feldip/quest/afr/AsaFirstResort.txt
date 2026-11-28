@@ -153,16 +153,16 @@ class AsaFirstResort : Quest("As a First Resort", 147, 146, 1) {
         rewardXP(player, Skills.FIREMAKING, 15000.0)
         rewardXP(player, Skills.HUNTER, 15000.0)
         rewardXP(player, Skills.WOODCUTTING, 15000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 200, true)
+        setVarbit(player, Vars.VARBIT_4321, 200, true)
 
         //addItemOrDrop(player,Items.ARDRIGAL_MIXTURE_738)
 
     }
 
     override fun getConfig(player: Player?, stage: Int): IntArray {
-        if (stage == 100) return intArrayOf(Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 200)
-        if (stage > 0) return intArrayOf(Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 1)
-        else return intArrayOf(Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 0)
+        if (stage == 100) return intArrayOf(Vars.VARBIT_4321, 200)
+        if (stage > 0) return intArrayOf(Vars.VARBIT_4321, 1)
+        else return intArrayOf(Vars.VARBIT_4321, 0)
     }
 
     override fun newInstance(`object`: Any?): Quest {

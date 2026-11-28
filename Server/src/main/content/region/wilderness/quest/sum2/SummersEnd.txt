@@ -8,7 +8,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class SummersEnd : Quest("Summer's End", 158, 157, 1, Vars.VARBIT_QUEST_SUMMERS_END_5331, 0, 1, 36) {
+class SummersEnd : Quest("Summer's End", 158, 157, 1, Vars.VARBIT_5331, 0, 1, 36) {
 
     /*
      * Quest description:
@@ -148,7 +148,7 @@ class SummersEnd : Quest("Summer's End", 158, 157, 1, Vars.VARBIT_QUEST_SUMMERS_
         rewardXP(player, Skills.WOODCUTTING, 5000.0)
         rewardXP(player, Skills.PRAYER, 10000.0)
         rewardXP(player, Skills.FIREMAKING, 15000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_SUMMERS_END_5331, 36, true)
+        setVarbit(player, Vars.VARBIT_5331, 36, true)
         val hasRing = hasAnItem(player, Items.JENNICAS_RING_13566).container != null
     }
 

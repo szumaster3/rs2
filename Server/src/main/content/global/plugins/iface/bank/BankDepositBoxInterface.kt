@@ -43,7 +43,7 @@ class BankDepositBoxInterface : InterfaceListener {
                 else -> player.debug("Unknown deposit box menu opcode $opcode")
             }
             player.bank.refreshDepositBoxInterface()
-            animate(player, Animations.HUMAN_BANK_DEPOSIT_BOX_834)
+            animate(player, Animations.HUMAN_LEVERDOWN_834)
         }
 
         return true

@@ -77,5 +77,5 @@ class AlbinoRatDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALBINO_RAT_6847, NPCs.ALBINO_RAT_6848)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_GIANT_RAT_6847, NPCs.LORE_GIANT_RAT_COMBAT_6848)
 }

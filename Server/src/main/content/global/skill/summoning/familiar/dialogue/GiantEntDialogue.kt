@@ -67,5 +67,5 @@ class GiantEntDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GIANT_ENT_6800, NPCs.GIANT_ENT_6801)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_ENT_6800, NPCs.LORE_ENT_COMBAT_6801)
 }

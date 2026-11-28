@@ -36,7 +36,7 @@ class WhatLiesBelowListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.NPC, Items.BEACON_RING_11014, NPCs.RAT_BURGISS_5833) { player, _, with ->
+        onUseWith(IntType.NPC, Items.BEACON_RING_11014, NPCs.SUROK_RAT_5833) { player, _, with ->
             sendNPCDialogue(player, with.id, "Ooh! Shiny! I would take it, but I'd probably have to sell it. I have a wife and 17 children to feed! Besides, you probably need it more than me right now!", FaceAnim.SCARED)
             return@onUseWith true
         }

@@ -15,7 +15,7 @@ import shared.consts.Sounds
  */
 class SwarmNPC(
     override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.SWARM_411) {
+) : RandomEventNPC(NPCs.MACRO_SWARM_411) {
     override fun init() {
         super.init()
         this.setAttribute("no-spawn-return", true)

@@ -34,7 +34,7 @@ import shared.consts.NPCs
 @Initializable
 class DesertWyrmNPC @JvmOverloads constructor(
     owner: Player? = null,
-    id: Int = NPCs.DESERT_WYRM_6831
+    id: Int = NPCs.LORE_DESERT_WORM_6831
 ) : Forager(owner, id, 1900, Items.DESERT_WYRM_POUCH_12049, 6, WeaponInterface.STYLE_AGGRESSIVE) {
 
     init {
@@ -43,7 +43,7 @@ class DesertWyrmNPC @JvmOverloads constructor(
 
     override fun construct(owner: Player, id: Int): Familiar = DesertWyrmNPC(owner, id)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DESERT_WYRM_6831, NPCs.DESERT_WYRM_6832)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_DESERT_WORM_6831, NPCs.LORE_DESERT_WORM_COMBAT_6832)
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
         val target = special.node as? Entity ?: return false

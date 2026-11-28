@@ -37,12 +37,12 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
     /**
      * Represents the pulling down animation.
      */
-    private static final Animation DOWN_ANIMATION = new Animation(Animations.PULL_DOWN_LEVER_2140);
+    private static final Animation DOWN_ANIMATION = new Animation(Animations.MACRO_LEVER_SWITCH_DOWN_2140);
 
     /**
      * Represents the pulling up animation.
      */
-    private static final Animation UP_ANIMATION = new Animation(Animations.PULL_UP_LEVER_2139);
+    private static final Animation UP_ANIMATION = new Animation(Animations.MACRO_LEVER_SWITCH_UP_2139);
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -488,9 +488,9 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
         LEVER_A(shared.consts.Scenery.LEVER_A_11451, shared.consts.Scenery.LEVER_A_11452),
         LEVER_B(shared.consts.Scenery.LEVER_B_11453, shared.consts.Scenery.LEVER_B_11454),
         LEVER_C(shared.consts.Scenery.LEVER_C_11455, shared.consts.Scenery.LEVER_C_11456),
-        LEVER_D(shared.consts.Scenery.LEVER_D_11457, shared.consts.Scenery.LEVER_D_11458),
+        LEVER_D(shared.consts.Scenery.LEVER_D_11457, shared.consts.Scenery.DOOR_11458),
         LEVER_E(shared.consts.Scenery.LEVER_E_11459, shared.consts.Scenery.LEVER_E_11460),
-        LEVER_F(shared.consts.Scenery.LEVER_F_11461, shared.consts.Scenery.LEVER_F_11462);
+        LEVER_F(shared.consts.Scenery.CRACKED_WALL_11461, shared.consts.Scenery.LEVER_F_11462);
 
         /**
          * Represents the object id.

@@ -46,11 +46,11 @@ class ElementalWorkshopPlugin : InteractionListener {
         )
     private val waterControls = intArrayOf(Scenery.WATER_CONTROLS_18509, Scenery.WATER_CONTROLS_18510)
 
-    private val turnWaterControlAnimation = Animation(Animations.HUMAN_TURN_LARGE_VALVE_4861)
-    private val fillStoneBowlAnimation = Animation(Animations.HUMAN_FILL_STONE_BOWL_4862)
-    private val fixBellowsAnimation = Animation(Animations.FIX_BELLOWS_4863)
-    private val smeltElementalBar = Animation(Animations.HUMAN_FURNACE_SMELT_3243)
-    private val smithElementalShield = Animation(Animations.OLD_COOK_RANGE_896)
+    private val turnWaterControlAnimation = Animation(Animations.ELEM1_QIP_TURN_VALVE_4861)
+    private val fillStoneBowlAnimation = Animation(Animations.ELEM1_QIP_FILL_BOWL_4862)
+    private val fixBellowsAnimation = Animation(Animations.ELEM1_QIP_BELLOW_REPAIR_4863)
+    private val smeltElementalBar = Animation(Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
+    private val smithElementalShield = Animation(Animations.HUMAN_COOKING_896)
 
     private val fillStoneBowlSFX = Sounds.FILL_STONE_BOWL_1537
     private val fillFurnaceWithLavaSFX = Sounds.FILL_FURNACE_WITH_LAVA_1538
@@ -368,7 +368,7 @@ class ElementalWorkshopPlugin : InteractionListener {
                             0 -> {
                                 removeItem(player, Item(Items.COAL_453, 4))
                                 removeItem(player, elementalOre)
-                                animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                                animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
                                 sendMessage(
                                     player,
                                     "You place the elemental ore and four heaps of coal into the furnace.",

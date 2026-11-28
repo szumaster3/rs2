@@ -38,7 +38,7 @@ class BeerBarrelPlugin : UseWithHandler(Items.BEER_GLASS_1919) {
         }
 
         playAudio(player, Sounds.FILL_GLASS_2395)
-        player.animate(Animation.create(Animations.HUMAN_WITHDRAW_833))
+        player.animate(Animation.create(Animations.HUMAN_REACHFORLADDERTOP_833))
         sendMessage(player, "You fill up your glass.")
         addItem(player, getReward(scenery.id))
         return true
@@ -51,9 +51,9 @@ class BeerBarrelPlugin : UseWithHandler(Items.BEER_GLASS_1919) {
             Obj.BEER_BARREL_13568    to Items.BEER_1917,
             Obj.CIDER_BARREL_13569   to Items.CIDER_5763,
             Obj.ASGARNIAN_ALE_13570  to Items.ASGARNIAN_ALE_1905,
-            Obj.GREENMAN_S_ALE_13571 to Items.GREENMANS_ALE_1909,
+            Obj.GREENMANS_ALE_13571 to Items.GREENMANS_ALE_1909,
             Obj.DRAGON_BITTER_13572  to Items.DRAGON_BITTER_1911,
-            Obj.CHEF_S_DELIGHT_13573 to Items.CHEFS_DELIGHT_5755
+            Obj.CHEFS_DELIGHT_13573 to Items.CHEFS_DELIGHT_5755
         )
     }
 }

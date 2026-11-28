@@ -12,7 +12,7 @@ import shared.consts.NPCs
 import shared.consts.Sounds
 
 @Initializable
-class BarkerToadNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.BARKER_TOAD_6889) :
+class BarkerToadNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_BARKER_TOAD_6889) :
     Familiar(owner, id, 800, Items.BARKER_TOAD_POUCH_12123, 6, WeaponInterface.STYLE_AGGRESSIVE) {
 
     override fun construct(owner: Player, id: Int): Familiar {
@@ -32,6 +32,6 @@ class BarkerToadNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARKER_TOAD_6889, NPCs.BARKER_TOAD_6890)
+        return intArrayOf(NPCs.LORE_BARKER_TOAD_6889, NPCs.LORE_BARKER_TOAD_COMBAT_6890)
     }
 }

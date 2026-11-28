@@ -13,7 +13,7 @@ class SpinolypBehavior : NPCBehavior(NPCs.SPINOLYP_2894, NPCs.SPINOLYP_2896) {
             val loc = self.location
             self.clear()
 
-            val water = NPC(NPCs.SUSPICIOUS_WATER_2895, loc)
+            val water = NPC(NPCs.DAGANNOTH_WATER_CREATURE_1X1_INVISIBLE3_2895, loc)
             water.init()
         }
     }

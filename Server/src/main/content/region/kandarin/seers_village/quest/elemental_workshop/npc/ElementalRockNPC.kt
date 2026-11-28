@@ -25,7 +25,7 @@ class ElementalRockNPC(
     override fun init() {
         isWalks = false
         isNeverWalks = true
-        transform(NPCs.ELEMENTAL_ROCK_4911)
+        transform(NPCs.ELEM1_QIP_EARTH_ELEMENTAL_ROCK_VERSION_ROCK_4911)
         super.init()
     }
 
@@ -35,7 +35,7 @@ class ElementalRockNPC(
         vararg objects: Any?,
     ): AbstractNPC = ElementalRockNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.EARTH_ELEMENTAL_4910, NPCs.ELEMENTAL_ROCK_4911)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELEM1_QIP_EARTH_ELEMENTAL_ROCK_VERSION_4910, NPCs.ELEM1_QIP_EARTH_ELEMENTAL_ROCK_VERSION_ROCK_4911)
 
     override fun defineListeners() {
         on(ids, IntType.NPC, "Mine") { player, node ->
@@ -60,7 +60,7 @@ class ElementalRockNPC(
                             0 -> node.asNpc().animate(ELEMENTAL_ROCK_TRANSFORMATION_4865)
                             1 -> {
                                 node.asNpc().sendChat("Grr... Ge'roff us!")
-                                node.asNpc().transform(NPCs.EARTH_ELEMENTAL_4910)
+                                node.asNpc().transform(NPCs.ELEM1_QIP_EARTH_ELEMENTAL_ROCK_VERSION_4910)
                             }
                             3 -> {
                                 node.asNpc().attack(player)
@@ -81,7 +81,7 @@ class ElementalRockNPC(
     override fun finalizeDeath(killer: Entity?) {
         isWalks = false
         isNeverWalks = true
-        transform(NPCs.ELEMENTAL_ROCK_4911)
+        transform(NPCs.ELEM1_QIP_EARTH_ELEMENTAL_ROCK_VERSION_ROCK_4911)
         super.finalizeDeath(killer)
     }
 }

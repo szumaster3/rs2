@@ -42,5 +42,5 @@ class TiadecheDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TIADECHE_1164)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TBWT_TIADECHE_FINAL_1164)
 }

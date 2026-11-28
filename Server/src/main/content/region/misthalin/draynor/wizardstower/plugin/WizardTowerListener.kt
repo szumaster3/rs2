@@ -22,7 +22,7 @@ import shared.consts.Scenery
 class WizardTowerListener : InteractionListener {
 
     private val WIZARD_BOOKCASE = intArrayOf(Scenery.BOOKCASE_12539, Scenery.BOOKCASE_12540)
-    private val RASPBERRY_EMOTE = Animation(Animations.HUMAN_BLOW_RASPBERRY_2110)
+    private val RASPBERRY_EMOTE = Animation(Animations.EMOTE_YA_BOO_SUCKS_2110)
     private val WIZARD_PORTAL = intArrayOf(
         Scenery.MAGIC_PORTAL_2156,
         Scenery.MAGIC_PORTAL_2157,

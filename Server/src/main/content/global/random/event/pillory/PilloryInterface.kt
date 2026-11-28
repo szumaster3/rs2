@@ -27,7 +27,7 @@ class PilloryInterface : InterfaceListener, InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Scenery.CAGE_6836, IntType.SCENERY, "unlock") { player, _ ->
+        on(Scenery.BANK_DEPOSIT_BOX_6836, IntType.SCENERY, "unlock") { player, _ ->
             if (player.location in PilloryUtils.LOCATIONS) {
                 PilloryUtils.randomPillory(player)
                 openInterface(player, PilloryUtils.INTERFACE)

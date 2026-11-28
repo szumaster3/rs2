@@ -57,7 +57,7 @@ class TeaflaskPlugin : InteractionListener {
             return
         }
         lock(player, 1)
-        animate(player, Animations.USE_TEA_FLASK_5827)
+        animate(player, Animations.TOL_PLAYER_DRINK_TEA01_5827)
         setCharge(flask, (charge - CHARGE_PER_CUP).coerceAtLeast(EMPTY_CHARGE))
         NettleTeaEffect().activate(player)
         sendMessage(player, "You take a drink from the flask...")

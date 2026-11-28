@@ -191,7 +191,7 @@ class RandomEventTests {
             AntiMacro.forceEvent(p, RandomEvents.TREE_SPIRIT)
             TestUtils.advanceTicks(1, false)
             Assertions.assertNotNull(AntiMacro.getEventNpc(p))
-            Assertions.assertEquals(NPCs.TREE_SPIRIT_438, AntiMacro.getEventNpc(p)?.originalId)
+            Assertions.assertEquals(NPCs.CHOSEN_TORZEK_APPEARANCE_438, AntiMacro.getEventNpc(p)?.originalId)
         }
     }
 

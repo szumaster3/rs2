@@ -25,12 +25,12 @@ class ThePathOfGlouphriePlugin : InteractionListener, InterfaceListener {
             return@on true
         }
 
-        on(Scenery.YEWNOCK_S_MACHINE_26791, IntType.SCENERY, "operate") { p,_ ->
+        on(Scenery.YEWNOCKS_MACHINE_26791, IntType.SCENERY, "operate") { p,_ ->
             openInterface(p,Components.YEWNOCK_MACHINE_613)
             return@on true
         }
 
-        on(Scenery.YEWNOCK_S_EXCHANGER_26792, IntType.SCENERY, "use") { p,_ ->
+        on(Scenery.YEWNOCKS_EXCHANGER_26792, IntType.SCENERY, "use") { p,_ ->
             return@on true
         }
     }

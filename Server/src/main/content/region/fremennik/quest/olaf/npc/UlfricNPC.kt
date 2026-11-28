@@ -18,7 +18,7 @@ class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = UlfricNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ULFRIC_3706, NPCs.ULFRIC_3710)
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLAF2_ULFRIC_3706, NPCs.OLAF2_ULFRIC_RISE_3710)
 
     companion object {
         /**
@@ -32,7 +32,7 @@ class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
                 return false
             }
 
-            val ulfric = UlfricNPC(NPCs.ULFRIC_3710)
+            val ulfric = UlfricNPC(NPCs.OLAF2_ULFRIC_RISE_3710)
             ulfric.location = Location.create(2744, 10161, 0)
             ulfric.isWalks = true
             ulfric.isAggressive = true
@@ -56,7 +56,7 @@ class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
                             }
                             2 -> {
                                 resetCamera(player)
-                                ulfric.asNpc().transform(NPCs.ULFRIC_3706)
+                                ulfric.asNpc().transform(NPCs.OLAF2_ULFRIC_3706)
                                 sendChat(ulfric, "Slay... Outlander... Intruder!")
                                 registerHintIcon(player, ulfric)
                                 ulfric.attack(player)
@@ -87,6 +87,6 @@ class UlfricNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locat
     }
 }
 
-class UlfricXPLock: NPCBehavior(NPCs.ULFRIC_3706) {
+class UlfricXPLock: NPCBehavior(NPCs.OLAF2_ULFRIC_3706) {
     override fun getXpMultiplier(self: NPC, attacker: Entity): Double = 0.0
 }

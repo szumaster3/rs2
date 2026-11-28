@@ -71,22 +71,22 @@ class CropHarvester : OptionHandler() {
                     val anim = when (requiredItem) {
                         Items.SPADE_952 -> {
                             when (fPatch.type) {
-                                PatchType.HERB_PATCH -> Animation(Animations.PICK_SOMETHING_UP_FROM_GROUND_2282)
-                                PatchType.FLOWER_PATCH -> Animation(Animations.BEND_AND_PICK_2292)
-                                else -> Animation(Animations.DIG_SPADE_830)
+                                PatchType.HERB_PATCH -> Animation(Animations.PICKING_LOW_2282)
+                                PatchType.FLOWER_PATCH -> Animation(Animations.FARMING_PICK_MUSHROOM_2292)
+                                else -> Animation(Animations.HUMAN_DIG_830)
                             }
                         }
 
                         Items.SECATEURS_5329 -> if (fPatch.type == PatchType.TREE_PATCH) {
-                            Animation(Animations.SECUTARS_2277)
+                            Animation(Animations.PRUNING_HIGH_2277)
                         } else {
-                            Animation(Animations.SECUTARS_7227)
+                            Animation(Animations.ROOTS_PLAYER_CUTTING_ROOTS_7227)
                         }
 
                         Items.MAGIC_SECATEURS_7409 -> if (fPatch.type == PatchType.TREE_PATCH) {
-                            Animation(Animations.PRUNING_WITH_MAGIC_SECATEURS_3340)
+                            Animation(Animations.PRUNING_HIGH_FAIRY_3340)
                         } else {
-                            Animation(Animations.MAGIC_SECATEURS_7228)
+                            Animation(Animations.ROOTS_PLAYER_MAGIC_CUTTING_ROOTS_7228)
                         }
 
                         else -> Animation(0)

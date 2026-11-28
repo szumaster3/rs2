@@ -137,7 +137,7 @@ class MagicTutorDialogue(player: Player? = null) : Dialogue(player) {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAGIC_TUTOR_4707)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AIDE_TUTOR_MAGIC_4707)
 
     companion object {
         private val MIND_RUNE = Item(558)

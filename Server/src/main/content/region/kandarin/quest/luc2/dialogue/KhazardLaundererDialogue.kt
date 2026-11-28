@@ -21,7 +21,7 @@ class KhazardLaundererDialogue : DialogueFile() {
         buttonID: Int,
     ) {
         val questStage = getQuestStage(player!!, Quests.WHILE_GUTHIX_SLEEPS.questName)
-        npc = NPC(NPCs.KHAZARD_LAUNDERER_8428)
+        npc = NPC(NPCs.LUC2_KHAZARDIAN_CIVILIAN_WASHING_8428)
         when (questStage) {
             0 -> npc(FaceAnim.NEUTRAL,"I just do the washing around here.").also { stage = END_DIALOGUE }
             1 -> {

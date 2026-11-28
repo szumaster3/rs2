@@ -38,5 +38,5 @@ class GhostSailorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GhostSailorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_SAILOR_1703)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_GHOST_SAILOR_1703)
 }

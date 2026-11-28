@@ -767,7 +767,7 @@ class OsmanDialogue(player: Player? = null) : Dialogue(player) {
 
     private fun hasSqirks(): Boolean = hasSqirkFruit() || hasSqirkJuice()
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OSMAN_924, NPCs.MAISA_5282)
+    override fun getIds(): IntArray = intArrayOf(NPCs.OSMAN_924, NPCs.OSMAN_5282)
 
     companion object {
         private const val KEY_PRINT = Items.KEY_PRINT_2423

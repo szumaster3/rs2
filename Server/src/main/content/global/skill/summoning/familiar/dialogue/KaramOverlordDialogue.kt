@@ -88,5 +88,5 @@ class KaramOverlordDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.KARAMTHULHU_OVERLORD_6809, NPCs.KARAMTHULHU_OVERLORD_6810)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_KARAMTHULHU_6809, NPCs.LORE_KARAMTHULHU_COMBAT_6810)
 }

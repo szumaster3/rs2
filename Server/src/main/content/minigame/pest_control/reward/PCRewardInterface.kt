@@ -398,7 +398,7 @@ class PCRewardInterface : InterfaceListener {
         VOID_MELEE_HELM(nameOverride = "Void Knight Melee Helm", points = 200, reward = arrayOf(Item(Items.VOID_MELEE_HELM_11665)), childs = intArrayOf(65, 69)) {
             override fun checkItemRequirement(player: Player, option: Int): Boolean = hasVoidSkills(player)
         },
-        VOID_KNIGHT_SEAL(nameOverride = "Void Knight Seal", points = 10, reward = arrayOf(Item(Items.VOID_SEAL8_11666)), childs = intArrayOf(66, 70)),
+        VOID_KNIGHT_SEAL(nameOverride = "Void Knight Seal", points = 10, reward = arrayOf(Item(Items.VOID_SEAL_8_11666)), childs = intArrayOf(66, 70)),
         SPINNER_CHARM(nameOverride = "Spinner Charm", reward = arrayOf(Item(Items.SPINNER_CHARM_12166)), childs = intArrayOf(71, 75, 76, 77), charm = true),
         RAVAGER_CHARM(nameOverride = "Ravager Charm", reward = arrayOf(Item(Items.RAVAGER_CHARM_12164)), childs = intArrayOf(72, 81, 82, 83), charm = true),
         TORCHER_CHARM(nameOverride = "Torcher Charm", reward = arrayOf(Item(Items.TORCHER_CHARM_12167)), childs = intArrayOf(74, 78, 79, 80), charm = true),

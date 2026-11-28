@@ -30,17 +30,17 @@ class UnderwallTunnelShortcut : InteractionListener {
 
         // LOW LEVEL TUNNEL
         private val LOW_OBJECTS = intArrayOf(
-            Scenery.HOLE_9302,
-            Scenery.CASTLE_WALL_9301
+            Scenery.UNDERWALL_TUNNEL_9302,
+            Scenery.UNDERWALL_TUNNEL_9301
         )
 
         // SWANSONG SPECIAL
         private const val SWAN_OBJECT = Scenery.HOLE_14922
 
         private val ANIMATIONS = intArrayOf(
-            Animations.CRAWL_UNDER_WALL_A_2589,
-            Animations.CRAWL_UNDER_WALL_B_2590,
-            Animations.CRAWL_UNDER_WALL_C_2591
+            Animations.AGILTY_SHORTCUT_ENTER_HOLE_2589,
+            Animations.AGILTY_SHORTCUT_TUNNEL_WALK_2590,
+            Animations.AGILTY_SHORTCUT_EXIT_HOLE_2591
         )
     }
 
@@ -52,7 +52,7 @@ class UnderwallTunnelShortcut : InteractionListener {
             }
 
             player.animate(Animation(ANIMATIONS[0]))
-            val (positions, direction) = if (node.id == Scenery.HOLE_9302) (LOW_WEST to LOW_EAST) to Direction.EAST else (LOW_EAST to LOW_WEST) to Direction.WEST
+            val (positions, direction) = if (node.id == Scenery.UNDERWALL_TUNNEL_9302) (LOW_WEST to LOW_EAST) to Direction.EAST else (LOW_EAST to LOW_WEST) to Direction.WEST
             val (startPos, endPos) = positions
 
             queueScript(player, 0, QueueStrength.NORMAL) {
@@ -120,7 +120,7 @@ class UnderwallTunnelShortcut : InteractionListener {
 
     override fun defineDestinationOverrides() {
         setDest(IntType.SCENERY, LOW_OBJECTS, "climb-under") { _, node ->
-            if (node.id == Scenery.HOLE_9302) LOW_EAST else LOW_WEST
+            if (node.id == Scenery.UNDERWALL_TUNNEL_9302) LOW_EAST else LOW_WEST
         }
 
         setDest(IntType.SCENERY, intArrayOf(SWAN_OBJECT), "enter") { _, node ->

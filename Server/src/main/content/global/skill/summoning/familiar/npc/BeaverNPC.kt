@@ -21,7 +21,7 @@ import shared.consts.NPCs
 import kotlin.math.floor
 
 @Initializable
-class BeaverNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.BEAVER_6808) :
+class BeaverNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_BEAVER_6808) :
     Forager(owner, id, 2700, Items.BEAVER_POUCH_12021, 6, *ITEMS) {
     private var multiChop = false
 
@@ -111,7 +111,7 @@ class BeaverNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BEAVER_6808)
+        return intArrayOf(NPCs.LORE_BEAVER_6808)
     }
 
     companion object {

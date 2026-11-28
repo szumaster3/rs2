@@ -41,7 +41,7 @@ class FightOneCutscene(player: Player) : Cutscene(player) {
             3 -> {
                 move(Jeremy, 56, 31)
                 face(player, location(2616, 3167, 0))
-                animate(player, Animations.HUMAN_OPEN_CELL_DOOR_2098)
+                animate(player, Animations.HUMAN_PICK_WALL_END_2098)
                 timedUpdate(3)
             }
 
@@ -161,10 +161,10 @@ class FightOneCutscene(player: Player) : Cutscene(player) {
     }
 
     companion object {
-        private const val GENERAL = NPCs.GENERAL_KHAZARD_258
+        private const val GENERAL = NPCs.LADY_SERVIL_258
         private const val JEREMY_RESCUE = NPCs.JEREMY_SERVIL_266
         private const val JUSTIN = NPCs.JUSTIN_SERVIL_267
-        private const val OGRE = NPCs.KHAZARD_OGRE_270
+        private const val OGRE = NPCs.ARENA_OGRE_270
         private val Jeremy = FightArenaPlugin.Jeremy
     }
 }

@@ -22,7 +22,7 @@ class KennithCutscene(
             player.settings.toggleRun()
         }
         loadRegion(11059)
-        addNPC(NPCs.KENNITH_4864, 16, 25, Direction.EAST, 1)
+        addNPC(NPCs.KENNITH_PLATFORM_4864, 16, 25, Direction.EAST, 1)
     }
 
     override fun runStage(stage: Int) {
@@ -39,24 +39,24 @@ class KennithCutscene(
                 rotateCamera(17, 24)
                 // playAudio(player, 3021)
                 val animDelay = animationDuration(Animation(4805))
-                animate(getNPC(NPCs.KENNITH_4864)!!, 4805)
-                animate(player, Animations.SEA_SLUG_USE_CRANE_4795)
+                animate(getNPC(NPCs.KENNITH_PLATFORM_4864)!!, 4805)
+                animate(player, Animations.SEASLUG_CONTROLS_RIGHT_4795)
                 timedUpdate(animDelay)
             }
             2 -> {
                 sendPlainDialogue(player, true, "Kennith scrambles through the broken wall...")
                 sendMessage(player, "You rotate the crane around.")
                 moveCamera(15, 25, 1100, 5)
-                move(getNPC(NPCs.KENNITH_4864)!!, 17, 25)
+                move(getNPC(NPCs.KENNITH_PLATFORM_4864)!!, 17, 25)
                 timedUpdate(2)
             }
             3 -> {
-                animate(getNPC(NPCs.KENNITH_4864)!!, 4789)
+                animate(getNPC(NPCs.KENNITH_PLATFORM_4864)!!, 4789)
                 sendMessage(player, "You rotate the crane around.")
                 timedUpdate(1)
             }
             4 -> {
-                getNPC(NPCs.KENNITH_4864)!!.clear()
+                getNPC(NPCs.KENNITH_PLATFORM_4864)!!.clear()
                 playAudio(player, 3020)
                 sendMessage(player, "You rotate the crane around.")
                 replaceScenery(getObject(18, 23, 1)!!.asScenery(), Scenery.CRANE_18326, -1)

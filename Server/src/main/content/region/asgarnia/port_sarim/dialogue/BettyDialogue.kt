@@ -164,7 +164,7 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                 runTask(player, 1) {
                     forceWalk(npc.asNpc(), Location(3012, 3258, 0), "")
                     npc.faceLocation(Location(3014, 3258, 0))
-                    npc.animate(Animation(Animations.HUMAN_MULTI_USE_832))
+                    npc.animate(Animation(Animations.HUMAN_PICKUPTABLE_832))
                     runTask(player, 2) {
                         setVarbit(player, Vars.VARBIT_BETTY_DESK_1537, 1)
                         sendItemDialogue(player, Items.VIAL_229, "Betty places a vial on her counter.")

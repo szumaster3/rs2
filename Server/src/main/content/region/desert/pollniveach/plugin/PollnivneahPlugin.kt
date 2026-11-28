@@ -26,7 +26,7 @@ class PollnivneahPlugin : InteractionListener {
             }
 
             lock(player, 1)
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             replaceScenery(node.asScenery(), 602, 80)
             addItem(player, Items.BEER_1917)
 
@@ -39,7 +39,7 @@ class PollnivneahPlugin : InteractionListener {
 
         onUseWith(IntType.SCENERY, Items.COINS_995, Scenery.MONEY_POT_6230) { player, _, _ ->
             if (removeItem(player, Item(Items.COINS_995, 3))) {
-                player.dialogueInterpreter.open(NPCs.ALI_THE_SNAKE_CHARMER_1872, true)
+                player.dialogueInterpreter.open(NPCs.FEUD_SNAKECHARMER_1872, true)
             }
             return@onUseWith true
         }

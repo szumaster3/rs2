@@ -13,7 +13,7 @@ object BeardedBanditLootTable {
     )
 
     val LOOT = WeightBasedTable.create(
-        WeightedItem(Items.ANTIPOISON1_179, 1, 1, 1.0),
+        WeightedItem(Items.ANTIPOISON_1_179, 1, 1, 1.0),
         WeightedItem(Items.LOCKPICK_1523, 1, 1, 2.0),
         WeightedItem(Items.COINS_995, 1, 1, 4.0)
     )

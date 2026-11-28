@@ -72,7 +72,7 @@ class HaroldDialogueFile : DialogueFile() {
                             playerl(FaceAnim.FRIENDLY, "I'll go and get you one.").also { stage = END_DIALOGUE }
                         } else {
                             end()
-                            animate(npc!!, Animations.EAT_OLD_829)
+                            animate(npc!!, Animations.HUMAN_EAT_829)
                             setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 13)
                             sendMessage(player!!, "You give Harold an Asgarnian Ale.")
                             setAttribute(player!!, ATTRIBUTE_HAROLD_MONEY, 200)
@@ -115,11 +115,11 @@ class HaroldDialogueFile : DialogueFile() {
                         end()
                         setQuestStage(player!!, Quests.DEATH_PLATEAU.questName, 14)
                         npc!!.isWalks = false
-                        animate(npc!!, Animations.EAT_OLD_829)
+                        animate(npc!!, Animations.HUMAN_EAT_829)
                         runTask(npc!!, 4) {
                             npc!!.sendChat("Wow!")
                             runTask(npc!!, 4) {
-                                visualize(npc!!, Animations.DIZZY_2770, Graphics(80, 96))
+                                visualize(npc!!, Animations.DRUNK_PLAYER_READY_2770, Graphics(80, 96))
                                 runTask(npc!!, 6) {
                                     npc(FaceAnim.DRUNK, "Now THAT hit the spot!").also {
                                         runTask(npc!!, 6) {
@@ -343,7 +343,7 @@ class HaroldDialogueFile : DialogueFile() {
                             end()
                             sendMessage(player!!, "You give Harold an Asgarnian Ale.")
                             sendItemDialogue(player!!, Items.ASGARNIAN_ALE_1905, "You give Harold an Asgarnian Ale.")
-                            animate(npc!!, Animations.EAT_OLD_829)
+                            animate(npc!!, Animations.HUMAN_EAT_829)
                             runTask(npc!!, 6) {
                                 npcl(FaceAnim.FRIENDLY, "Arrh. That hit the spot!").also {
                                     stage = END_DIALOGUE
@@ -390,7 +390,7 @@ class HaroldDialogueFile : DialogueFile() {
                             playerl(FaceAnim.FRIENDLY, "I'll go and get you one.").also { stage = END_DIALOGUE }
                         } else {
                             end()
-                            animate(npc!!, Animations.EAT_OLD_829)
+                            animate(npc!!, Animations.HUMAN_EAT_829)
                             sendMessage(player!!, "You give Harold an Asgarnian Ale.")
                             sendItemDialogue(player!!, Items.ASGARNIAN_ALE_1905, "You give Harold an Asgarnian Ale.")
                             runTask(npc!!, 6) {

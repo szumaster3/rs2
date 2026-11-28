@@ -26,7 +26,7 @@ class RantzNPC : AbstractNPC {
 
     override fun handleTickActions() {
         super.handleTickActions()
-        val chompy = findLocalNPC(this, NPCs.CHOMPY_BIRD_1550) as? ChompyBirdNPC ?: return
+        val chompy = findLocalNPC(this, NPCs.CHOMPYBIRD_1550) as? ChompyBirdNPC ?: return
 
         val owner = getAttribute<Player?>(chompy, "owner", null) ?: return
         if (getQuestStage(owner, Quests.BIG_CHOMPY_BIRD_HUNTING.questName) !in 40..50 || chompy.getAttribute("attacked", false)) return

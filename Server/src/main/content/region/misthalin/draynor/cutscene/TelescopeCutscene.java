@@ -28,7 +28,7 @@ import static core.api.ContentAPIKt.*;
 public final class TelescopeCutscene extends CutscenePlugin {
 
     private static final Component INTERFACE = new Component(Components.WOM_TELESCOPE_386);
-    private static final Animation TELESCOPE_ANIM = new Animation(Animations.LOOK_TELESCOPE_WOM);
+    private static final Animation TELESCOPE_ANIM = new Animation(Animations.HUMAN_USE_WOM_TELECOPE_2171);
 
     /**
      * Instantiates a new Telescope cutscene.

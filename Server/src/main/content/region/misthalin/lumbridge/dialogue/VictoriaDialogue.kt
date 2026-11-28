@@ -64,5 +64,5 @@ class VictoriaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.VICTORIA_7872)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAI_LUMBRIDGE_VICTORIA_7872)
 }

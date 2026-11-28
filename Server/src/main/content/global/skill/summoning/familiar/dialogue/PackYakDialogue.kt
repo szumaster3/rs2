@@ -66,5 +66,5 @@ class PackYakDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PACK_YAK_6873, NPCs.PACK_YAK_6874)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_PACK_YAK_6873, NPCs.LORE_PACK_YAK_COMBAT_6874)
 }

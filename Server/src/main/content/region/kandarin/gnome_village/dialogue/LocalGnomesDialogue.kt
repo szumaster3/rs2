@@ -29,5 +29,5 @@ class LocalGnomesDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = LocalGnomesDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LOCAL_GNOME_484)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LOCALGNOME_484)
 }

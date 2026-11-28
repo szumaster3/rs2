@@ -14,7 +14,7 @@ import shared.consts.NPCs
  */
 class SandwichLadyNPC(
     override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.SANDWICH_LADY_3117) {
+) : RandomEventNPC(NPCs.CHOSEN_ZANIK_CUTSCENE_PENDANT_3117) {
     val phrases =
         arrayOf(
             "Hello, @name, can you hear me?",

@@ -160,25 +160,25 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
         on(Scenery.VINE_27129, IntType.SCENERY, "climb-down") { player, node ->
             when (node.location.y) {
-                3004 -> forceMove(player, player.location, Location.create(2890, 3004, 1), 0, 30, null, Animations.JUMP_OVER_7268)
-                2998 -> forceMove(player, player.location, Location.create(2896, 2997, 1), 0, 30, null, Animations.JUMP_OVER_7268)
-                2990 -> forceMove(player, player.location, Location.create(2900, 2991, 1), 0, 30, null, Animations.JUMP_OVER_7268)
-                2987 -> forceMove(player, player.location, Location.create(2894, 2988, 1), 0, 30, null, Animations.JUMP_OVER_7268)
-                2985 -> forceMove(player, player.location, Location.create(2884, 2986, 1), 0, 30, null, Animations.JUMP_OVER_7268)
-                2983 -> forceMove(player, player.location, Location.create(2884, 2984, 2), 0, 30, null, Animations.JUMP_OVER_7268)
-                2982 -> forceMove(player, player.location, Location.create(2894, 2982, 2), 0, 30, null, Animations.JUMP_OVER_7268)
-                2980 -> forceMove(player, player.location, Location.create(2894, 2979, 1), 0, 30, null, Animations.JUMP_OVER_7268)
+                3004 -> forceMove(player, player.location, Location.create(2890, 3004, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2998 -> forceMove(player, player.location, Location.create(2896, 2997, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2990 -> forceMove(player, player.location, Location.create(2900, 2991, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2987 -> forceMove(player, player.location, Location.create(2894, 2988, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2985 -> forceMove(player, player.location, Location.create(2884, 2986, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2983 -> forceMove(player, player.location, Location.create(2884, 2984, 2), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2982 -> forceMove(player, player.location, Location.create(2894, 2982, 2), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2980 -> forceMove(player, player.location, Location.create(2894, 2979, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
                 2978 -> if(node.location.x == 2907) {
-                    forceMove(player, player.location, Location.create(2906, 2978, 1), 0, 30, null, Animations.JUMP_OVER_7268)
+                    forceMove(player, player.location, Location.create(2906, 2978, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
                 } else {
-                    forceMove(player, player.location, Location.create(2918, 2978, 0), 0, 30, null, Animations.JUMP_OVER_7268)
+                    forceMove(player, player.location, Location.create(2918, 2978, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
                 }
-                2975 -> forceMove(player, player.location, Location.create(2918, 2975, 1), 0, 30, null, Animations.JUMP_OVER_7268)
-                2973 -> forceMove(player, player.location, Location.create(2909, 2973, 1), 0, 30, null, Animations.JUMP_OVER_7268)
+                2975 -> forceMove(player, player.location, Location.create(2918, 2975, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2973 -> forceMove(player, player.location, Location.create(2909, 2973, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
                 2972 -> if(node.location.x == 2919) {
-                    forceMove(player, player.location, Location.create(2918, 2972, 1), 0, 30, null, Animations.JUMP_OVER_7268)
+                    forceMove(player, player.location, Location.create(2918, 2972, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
                 } else {
-                    forceMove(player, player.location, Location.create(2923, 2972, 1), 0, 30, null, Animations.JUMP_OVER_7268)
+                    forceMove(player, player.location, Location.create(2923, 2972, 1), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
                 }
             }
             return@on true
@@ -190,16 +190,16 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
         on(Scenery.VINE_27130, IntType.SCENERY, "climb-down") { player, node ->
             when (node.location.y) {
-                3006 -> forceMove(player, player.location, Location.create(2888, 3007, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                3000 -> forceMove(player, player.location, Location.create(2889, 3000, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2993 -> forceMove(player, player.location, Location.create(2898, 2992, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2990 -> forceMove(player, player.location, Location.create(2903, 2989, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2988 -> forceMove(player, player.location, Location.create(2897, 2988, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2987 -> forceMove(player, player.location, Location.create(2887, 2987, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2980 -> forceMove(player, player.location, Location.create(2921, 2979, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2978 -> forceMove(player, player.location, Location.create(2904, 2978, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2974 -> forceMove(player, player.location, Location.create(2924, 2974, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2971 -> forceMove(player, player.location, Location.create(2907, 2971, 0), 0, 30, null, Animations.JUMP_OVER_7268)
+                3006 -> forceMove(player, player.location, Location.create(2888, 3007, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                3000 -> forceMove(player, player.location, Location.create(2889, 3000, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2993 -> forceMove(player, player.location, Location.create(2898, 2992, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2990 -> forceMove(player, player.location, Location.create(2903, 2989, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2988 -> forceMove(player, player.location, Location.create(2897, 2988, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2987 -> forceMove(player, player.location, Location.create(2887, 2987, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2980 -> forceMove(player, player.location, Location.create(2921, 2979, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2978 -> forceMove(player, player.location, Location.create(2904, 2978, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2974 -> forceMove(player, player.location, Location.create(2924, 2974, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
+                2971 -> forceMove(player, player.location, Location.create(2907, 2971, 0), 0, 30, null, Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268)
             }
             return@on true
         }
@@ -271,7 +271,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         on(Scenery.CUT_VINES_27174, IntType.SCENERY, "crawl-through") { player, node ->
             val dir = Direction.getDirection(player.location, node.location)
             val destination = player.location.transform(dir, 2)
-            forceMove(player, player.location, destination, 0, 60, null, Animations.CRAWLING_2796)
+            forceMove(player, player.location, destination, 0, 60, null, Animations.HUMAN_LONGCRAWL_2796)
             return@on true
         }
 
@@ -293,7 +293,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         on(Scenery.VINE_27180, IntType.SCENERY, "swing-on") { player, _ ->
             lock(player, 3)
             playAudio(player, Sounds.SWING_ACROSS_2494)
-            forceMove(player, player.location, Location.create(2901, 2985, 2), 30, 90, null, Animations.SWING_ACROSS_OBSTACLE_3130) {
+            forceMove(player, player.location, Location.create(2901, 2985, 2), 30, 90, null, Animations.FEVER_PLAYER_ROPE_SWING_LAND_SUCCESS_3130) {
                 sendMessage(player, "You skillfully swing across.")
             }
             return@on true
@@ -321,7 +321,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
                 AgilityHandler.walk(player, -1, player.location, destination, Animation.create(155), 0.0, "You skillfully cross the vine.")
             } else {
                 AgilityHandler.walk(player, -1, player.location, destination, Animation.create(155), 0.0, null)
-                AgilityHandler.fail(player, 0, Location.create(2913, 2979, 0), Animation.create(Animations.FALL_BALANCE_764), 0, "You lose your footing and fall into the water.")
+                AgilityHandler.fail(player, 0, Location.create(2913, 2979, 0), Animation.create(Animations.HUMAN_WALK_LOGBALANCE_STUMBLE_764), 0, "You lose your footing and fall into the water.")
                 runTask(player, 4) {
                     player.animate(Animation.create(3641))
                     forceMove(player, player.location, Location.create(2912, 2980, 0), 0, 60, null, 7267) {
@@ -393,7 +393,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
                     lock(player, 2)
                     setVarbit(player, def.varbitID, 1)
-                    player.animate(Animation(Animations.DIG_SPADE_830))
+                    player.animate(Animation(Animations.HUMAN_DIG_830))
                     sendDialogue(player, "You dig at the soil and expose the vine's root.")
                 }
 
@@ -411,7 +411,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
                     lock(player, 2)
                     setVarbit(player, def.varbitID, 2)
-                    player.animate(Animation(Animations.GARDENING_TROWEL_2272))
+                    player.animate(Animation(Animations.FARMING_TROWEL_DIGGING_2272))
                     sendDialogue(player, "You carefully take a root cutting.")
 
                     addItem(player, ROOT_CUTTINGS.random())

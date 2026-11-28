@@ -61,7 +61,7 @@ class CockatriceFamiliarNPC : Plugin<Any?> {
 
 
     inner class SpiritCockatrice
-    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_COCKATRICE_6875) :
+    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_COCKATRICE_6875) :
         Forager(owner, id, 3600, Items.SP_COCKATRICE_POUCH_12095, 3, WeaponInterface.STYLE_CAST, COCKATRICE_EGG) {
         override fun construct(owner: Player, id: Int): Familiar {
             return SpiritCockatrice(owner, id)
@@ -72,7 +72,7 @@ class CockatriceFamiliarNPC : Plugin<Any?> {
         }
 
         override fun getIds(): IntArray {
-            return intArrayOf(NPCs.SPIRIT_COCKATRICE_6875, NPCs.SPIRIT_COCKATRICE_6876)
+            return intArrayOf(NPCs.LORE_COCKATRICE_6875, NPCs.LORE_COCKATRICE_COMBAT_6876)
         }
     }
 

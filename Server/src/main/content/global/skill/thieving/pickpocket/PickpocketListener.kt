@@ -46,10 +46,10 @@ class PickpocketListener : InteractionListener {
             val delay = if (knockedOut) 1 else 2
 
             delayClock(player, Clocks.SKILLING, delay)
-            animate(player, Animation(if (knockedOut) Animations.HUMAN_BURYING_BONES_827 else Animations.HUMAN_PICKPOCKETING_881))
+            animate(player, Animation(if (knockedOut) Animations.HUMAN_PICKUPFLOOR_827 else Animations.HUMAN_PICKPOCKET_881))
             sendMessage(player, "You attempt to pick the $npcName's pocket.")
 
-            if (npc.id == NPCs.GUARD_32 && npc.location.isInRegion(10547)) finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 1)
+            if (npc.id == NPCs.ARDOUGNE_GUARD_32 && npc.location.isInRegion(10547)) finishDiaryTask(player, DiaryType.ARDOUGNE, 0, 1)
             val loot = if (knockedOut) data.loot.roll() else pickpocketRoll(player, data.low, data.high, data.loot)
 
             if (loot == null) {
@@ -71,14 +71,14 @@ class PickpocketListener : InteractionListener {
         player.inCombat() -> "You can't do this while in combat."
         getStatLevel(player, Skills.THIEVING) < data.requiredLevel -> "You need a Thieving level of ${data.requiredLevel} to do that."
         DeathTask.isDead(npc) -> "Too late, $npcName is already dead."
-        npc.id == NPCs.CURATOR_HAIG_HALEN_646 && hasAnItem(player, Items.DISPLAY_CABINET_KEY_4617).container != null -> "You have no reason to do that."
+        npc.id == NPCs.CURATOR_646 && hasAnItem(player, Items.DISPLAY_CABINET_KEY_4617).container != null -> "You have no reason to do that."
         !data.loot.canRoll(player) -> "You don't have enough inventory space to do that."
         else -> null
     }
 
     private fun onFail(player: Player, npc: NPC, npcName: String, data: Pickpocket) {
         npc.faceLocation(player.location)
-        npc.animator.animate(Animation(Animations.PUNCH_422))
+        npc.animator.animate(Animation(Animations.HUMAN_UNARMEDPUNCH_422))
         data.message?.let { npc.sendChat(it) }
         sendMessage(player, "You fail to pick the $npcName's pocket.")
         playHurtAudio(player, 20)
@@ -94,17 +94,17 @@ class PickpocketListener : InteractionListener {
         playAudio(player, Sounds.PICK_2581)
         loot.forEach { player.inventory.add(it) }
 
-        sendMessage(player, if (npc.id == NPCs.CURATOR_HAIG_HALEN_646) "You steal a tiny key." else "You pick the $npcName's pocket.")
+        sendMessage(player, if (npc.id == NPCs.CURATOR_646) "You steal a tiny key." else "You pick the $npcName's pocket.")
         rewardXP(player, Skills.THIEVING, data.xp)
-        if (npc.id in intArrayOf(NPCs.MASTER_FARMER_2234, NPCs.MASTER_FARMER_2235) && npc.location.isInRegion(10548)) {
+        if (npc.id in intArrayOf(NPCs.MASTER_FARMER_1_2234, NPCs.MASTER_FARMER_2_2235) && npc.location.isInRegion(10548)) {
             finishDiaryTask(player, DiaryType.ARDOUGNE, 1, 12)
         }
-        if (npc.id == NPCs.WATCHMAN_34 && inEquipment(player, Items.GLOVES_OF_SILENCE_10075)) {
+        if (npc.id == NPCs.YANILLE_WATCHMAN_34 && inEquipment(player, Items.GLOVES_OF_SILENCE_10075)) {
             finishDiaryTask(player, DiaryType.ARDOUGNE, 2, 6)
         }
 
         when {
-            inBorders(player, VARROCK_PALACE) && npc.id == NPCs.GUARD_5920 -> {
+            inBorders(player, VARROCK_PALACE) && npc.id == NPCs.FAI_VARROCK_GUARD_CAPTAIN_5920 -> {
                 finishDiaryTask(player, DiaryType.VARROCK, 1, 12)
                 setVarbit(player, 4018, 1, true)
             }
@@ -129,7 +129,7 @@ class PickpocketListener : InteractionListener {
     companion object {
         private val VARROCK_PALACE = ZoneBorders(3201, 3456, 3227, 3468)
         private val FALADOR = ZoneBorders(2934, 3307, 3399, 3399)
-        private val FALADOR_GUARDS = intArrayOf(NPCs.GUARD_9, NPCs.GUARD_3230, NPCs.GUARD_3228, NPCs.GUARD_3229)
+        private val FALADOR_GUARDS = intArrayOf(NPCs.GUARD1_9, NPCs.FAI_FALADOR_GUARD3_3230, NPCs.FAI_FALADOR_GUARD1_3228, NPCs.FAI_FALADOR_GUARD2_3229)
 
         /**
          * Rolls for a pickpocket attempt.

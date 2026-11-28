@@ -28,7 +28,7 @@ class BlinkinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FARMER_BLINKIN_7131)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RABBIT_BLINKIN_7131)
 }
 
 class BlinkinDialogueFile : FlagsHandler() {

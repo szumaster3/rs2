@@ -55,7 +55,7 @@ class HolgartDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = HolgartDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HOLGART_698)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOLGARTSUNKBOAT_698)
 }
 
 /**
@@ -70,7 +70,7 @@ private class HolgartDialogueFile : DialogueFile() {
         buttonID: Int,
     ) {
         val questStage = getQuestStage(player!!, Quests.SEA_SLUG.questName)
-        npc = NPC(NPCs.HOLGART_4866)
+        npc = NPC(NPCs.HOLGARTNOLEGS_4866)
         when (questStage) {
             // Only a Few Holes.
             in 2..3 -> {

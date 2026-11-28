@@ -11,7 +11,7 @@ import core.game.world.GameWorld
 import shared.consts.Components
 import shared.consts.Scenery
 
-private val BANK_DEPOSIT_BOXES = intArrayOf(Scenery.BANK_DEPOSIT_BOX_9398, Scenery.BANK_DEPOSIT_BOX_20228, Scenery.BANK_DEPOSIT_BOX_25937, Scenery.BANK_DEPOSIT_BOX_26969, Scenery.BANK_DEPOSIT_BOX_34755, Scenery.BANK_DEPOSIT_BOX_36788, Scenery.BANK_DEPOSIT_BOX_39830, Scenery.DEPOSIT_TABLE_39533, Scenery.DEPOSIT_BOX_15985, Scenery.DEPOSIT_BOX_30044, Scenery.DEPOSIT_BOX_30045)
+private val BANK_DEPOSIT_BOXES = intArrayOf(Scenery.BANK_DEPOSIT_BOX_9398, Scenery.BANK_DEPOSIT_BOX_20228, Scenery.BANK_DEPOSIT_BOX_25937, Scenery.BANK_DEPOSIT_BOX_26969, Scenery.BANK_DEPOSIT_BOX_34755, Scenery.BANK_DEPOSIT_BOX_36788, Scenery.BANK_DEPOSIT_BOX_39830, Scenery.DEPOSIT_TABLE_39533, Scenery.DEPOSIT_BOX_15985, Scenery.ICE_MOUND_30044, Scenery.ICE_MOUND_30045)
 
 class DepositBoxOptionPlugin : InteractionListener {
 

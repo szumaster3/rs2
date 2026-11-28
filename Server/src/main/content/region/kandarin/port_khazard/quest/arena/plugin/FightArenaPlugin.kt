@@ -19,9 +19,9 @@ import shared.consts.*
  */
 class FightArenaPlugin : InteractionListener {
     companion object {
-        const val GENERAL = NPCs.GENERAL_KHAZARD_258
-        const val KELVIN = NPCs.KELVIN_260
-        const val JOE = NPCs.JOE_261
+        const val GENERAL = NPCs.LADY_SERVIL_258
+        const val KELVIN = NPCs.FIGHTSLAVE_KELVIN_260
+        const val JOE = NPCs.FIGHTSLAVE_JOE_261
         const val FIGHT_SLAVE = NPCs.FIGHTSLAVE_262
         const val HENGRAD = NPCs.HENGRAD_263
         const val JEREMY_A = NPCs.JEREMY_SERVIL_265
@@ -30,11 +30,11 @@ class FightArenaPlugin : InteractionListener {
         const val CELL_DOOR_2 = Scenery.PRISON_DOOR_80
         const val MAIN_DOOR = Scenery.DOOR_81
 
-        const val A_LAZY_GUARD_1 = Scenery.A_LAZY_KHAZARD_GUARD_41494
-        const val A_LAZY_GUARD_2 = Scenery.A_LAZY_KHAZARD_GUARD_41496
-        const val A_LAZY_GUARD_3 = Scenery.A_LAZY_KHAZARD_GUARD_41497
+        const val A_LAZY_GUARD_1 = Scenery.LAZY_KHAZARD_GUARD_41494
+        const val A_LAZY_GUARD_2 = Scenery.LAZY_KHAZARD_GUARD_41496
+        const val A_LAZY_GUARD_3 = Scenery.LAZY_KHAZARD_GUARD_41497
 
-        const val FULL_ARMOR_STAND = Scenery.A_SUIT_OF_ARMOUR_41490
+        const val FULL_ARMOR_STAND = Scenery.SUIT_OF_ARMOUR_41490
         val FULL_ARMOR_STAND_1 = getScenery(2619, 3196, 0)
 
         private const val HELMET = Items.KHAZARD_HELMET_74
@@ -42,7 +42,7 @@ class FightArenaPlugin : InteractionListener {
         private const val CELL_KEY = Items.KHAZARD_CELL_KEYS_76
 
         val Jeremy = NPC(NPCs.JEREMY_SERVIL_265, Location.create(2616, 3167, 0))
-        val General = GeneralKhazardNPC(NPCs.GENERAL_KHAZARD_258, Location.create(2605, 3156, 0))
+        val General = GeneralKhazardNPC(NPCs.LADY_SERVIL_258, Location.create(2605, 3156, 0))
     }
 
     init {
@@ -110,7 +110,7 @@ class FightArenaPlugin : InteractionListener {
 
             val scenery = FULL_ARMOR_STAND_1!!.asScenery()
 
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
 
             if (freeSlots(player) > 1 && !hasArmor && !hasHelmet) {
                 replaceScenery(scenery, node.id + 18, 10)
@@ -144,8 +144,8 @@ class FightArenaPlugin : InteractionListener {
         on(A_LAZY_GUARD_2, IntType.SCENERY, "steal-keys") { player, _ ->
             face(player, location(2618, 3144, 0))
             setVarbit(player, 5627, 3, true)
-            sendGraphics(Graphics.SLEEPING_ZZZ_1056, Location.create(2617, 3144, 0))
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            sendGraphics(Graphics.DREAM_ZEDS_1056, Location.create(2617, 3144, 0))
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             addItemOrDrop(player, CELL_KEY, 1)
             setQuestStage(player, Quests.FIGHT_ARENA.questName, 68)
             sendMessage(player, "You pick up the keys from the table.")

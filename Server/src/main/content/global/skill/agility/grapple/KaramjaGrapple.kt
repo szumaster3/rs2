@@ -113,13 +113,13 @@ class KaramjaGrapple : OptionHandler() {
             override fun pulse(): Boolean {
                 when (step++) {
                     1 -> player.faceLocation(player.location.transform(direction))
-                        .also { player.animate(Animation(Animations.FIRE_CROSSBOW_4230)) }
+                        .also { player.animate(Animation(Animations.XBOWS_HUMAN_FIRE_AND_RELOAD_4230)) }
                     3 -> player.packetDispatch.sendPositionedGraphic(67, 10, 0, player.location.transform(direction, 5))
                     4 -> {
                         startTree?.let { SceneryBuilder.replace(it, it.transform(it.id + 1), 10) }
                         islandTree?.let { SceneryBuilder.replace(it, it.transform(it.id + 2), 10) }
                     }
-                    5 -> visualize(player, Animations.PULL_SELF_THROUGH_WATER_4466, Graphics.create(shared.consts.Graphics.WATER_SPLASH_68))
+                    5 -> visualize(player, Animations.XBOWS_LUMBRIDGE_EAST_SWIMMING_ANIM_4466, Graphics.create(shared.consts.Graphics.WATERSPLASH_1_68))
                     6 -> handleWalk(player, if (goingNorth) Location.create(2874, 3133) else Location.create(2874, 3136))
                         .also { handleObjects(true, player) }
                     15 -> handleWalk(player, if (goingNorth) Location.create(2875, 3133) else Location.create(2875, 3136))
@@ -127,14 +127,14 @@ class KaramjaGrapple : OptionHandler() {
                     17 -> handleRun(player, if (goingNorth) Location.create(2875, 3136) else Location.create(2875, 3133))
                     18 -> handleWalk(player, if (goingNorth) Location.create(2874, 3136) else Location.create(2874, 3133))
                     22 -> player.faceLocation(player.location.transform(direction))
-                        .also { animate(player, Animation(Animations.FIRE_CROSSBOW_4230)) }
+                        .also { animate(player, Animation(Animations.XBOWS_HUMAN_FIRE_AND_RELOAD_4230)) }
                     23 -> player.packetDispatch.sendPositionedGraphic(67, 10, 0, player.location.transform(direction, 5))
                     24 -> {
                         islandTree?.let { SceneryBuilder.replace(it, it.transform(it.id + 1), 10) }
                         endTree?.let { SceneryBuilder.replace(it, it.transform(it.id + 1), 10) }
                         startTree?.let { SceneryBuilder.replace(it, it.transform(it.id + 2), 10) }
                     }
-                    25 -> visualize(player, Animations.PULL_SELF_THROUGH_WATER_4466, Graphics.create(68))
+                    25 -> visualize(player, Animations.XBOWS_LUMBRIDGE_EAST_SWIMMING_ANIM_4466, Graphics.create(68))
                     26 -> handleWalk(player, if (goingNorth) Location.create(2874, 3142) else Location.create(2874, 3127))
                         .also { handleObjects(true, player) }
                     34 -> {

@@ -29,7 +29,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
             } else {
                 options("Hi Lokar, can you take me back to your ship?", "It seems you've been charming Pauline Polaris.")
             }
-            NPCs.LOKAR_SEARUNNER_4536 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
+            NPCs.CHOSEN_GRUBFOOT_CUTSCENE_4536 -> if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 player("Hello there.")
             } else {
                 player("Hello again Lokar.")
@@ -40,7 +40,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
-            NPCs.LOKAR_SEARUNNER_4536 -> when (stage) {
+            NPCs.CHOSEN_GRUBFOOT_CUTSCENE_4536 -> when (stage) {
                 0 -> {
                     if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                         npcl(FaceAnim.ANNOYED, "Don't talk to me outerlander! I don't have time for the likes of you!")
@@ -220,5 +220,5 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = LokarSearunnerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LOKAR_SEARUNNER_4536, NPCs.LOKAR_SEARUNNER_4537)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHOSEN_GRUBFOOT_CUTSCENE_4536, NPCs.LOKAR_SEARUNNER_4537)
 }

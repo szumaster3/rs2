@@ -29,7 +29,7 @@ class MrsWinkinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MRS_WINKIN_7132)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RABBIT_MRS_WINKIN_7132)
 }
 
 class MrsWinkinDialogueFile : FlagsHandler() {

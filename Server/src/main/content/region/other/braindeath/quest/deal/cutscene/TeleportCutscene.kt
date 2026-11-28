@@ -86,7 +86,7 @@ class TeleportCutscene(player: Player) : Cutscene(player) {
                 endWithoutFade()
                 openDialogue(player, CaptainBraindeathDialogue(1))
                 sendGraphics(
-                    Graphics(shared.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96),
+                    Graphics(shared.consts.Graphics.STUNNED_1_80, 96),
                     player.location,
                 )
             }
@@ -94,7 +94,7 @@ class TeleportCutscene(player: Player) : Cutscene(player) {
     }
 
     companion object {
-        const val CAPTAIN = NPCs.CAPTAIN_BRAINDEATH_2827
-        const val PIRATE = NPCs.PIRATE_PETE_2826
+        const val CAPTAIN = NPCs.DEAL_CAPTIAN_BRAINDEATH_2827
+        const val PIRATE = NPCs.DEAL_ISLAND_PETE_2826
     }
 }

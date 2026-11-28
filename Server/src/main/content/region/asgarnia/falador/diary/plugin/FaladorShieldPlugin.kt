@@ -79,16 +79,16 @@ class FaladorShieldPlugin : InteractionListener {
     }
 
     companion object {
-        const val ANIM_EMOTE: Int = Animations.HUMAN_FALADOR_SHIELD_RESTORE_11012
+        const val ANIM_EMOTE: Int = Animations.FAIRYKIT_FAIRY_READY_OFFSET_11012
         val GFX_EMOTE: IntArray = intArrayOf(
-            shared.consts.Graphics.FALADOR_SHIELD_1_EMOTE_1966,
-            shared.consts.Graphics.FALADOR_SHIELD_3_EMOTE_1965,
-            shared.consts.Graphics.FALADOR_SHIELD_3_EMOTE_1965
+            shared.consts.Graphics.KNIGHTS_PLEDGE_SML_SPOT_1966,
+            shared.consts.Graphics.KNIGHTS_PLEDGE_LRG_SPOT_1965,
+            shared.consts.Graphics.KNIGHTS_PLEDGE_LRG_SPOT_1965
         )
         val GFX_PRAYER_RESTORE: IntArray = intArrayOf(
-            shared.consts.Graphics.FALADOR_SHIELD_PRAY_RESTORE_1962,
-            shared.consts.Graphics.FALADOR_SHIELD_PRAY_RESTORE_1963,
-            shared.consts.Graphics.FALADOR_SHIELD_PRAY_RESTORE_1964
+            shared.consts.Graphics.ATFAL_SHIELD_RECHARGE_SPOT_SMALL_2_1962,
+            shared.consts.Graphics.ATFAL_SHIELD_RECHARGE_SPOT_MEDIUM_2_1963,
+            shared.consts.Graphics.ATFAL_SHIELD_RECHARGE_SPOT_LARGE_2_1964
         )
         val FALADOR_SHIELD: IntArray = intArrayOf(
             Items.FALADOR_SHIELD_1_14577,

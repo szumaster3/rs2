@@ -16,7 +16,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritScorpionNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_SCORPION_6837) :
+class SpiritScorpionNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_SCORPION_6837) :
     Familiar(owner, id, 1700, Items.SPIRIT_SCORPION_POUCH_12055, 6, WeaponInterface.STYLE_CONTROLLED) {
     override fun construct(owner: Player, id: Int): Familiar {
         return SpiritScorpionNPC(owner, id)
@@ -45,6 +45,6 @@ class SpiritScorpionNPC @JvmOverloads constructor(owner: Player? = null, id: Int
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_SCORPION_6837, NPCs.SPIRIT_SCORPION_6838)
+        return intArrayOf(NPCs.LORE_SCORPION_6837, NPCs.LORE_SCORPION_COMBAT_6838)
     }
 }

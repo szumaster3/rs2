@@ -40,7 +40,7 @@ class FatherTrollBehavior : NPCBehavior(
                     queueScript(self, 1, QueueStrength.NORMAL) { stage: Int ->
                         sendNPCDialogue(
                             attacker,
-                            NPCs.TROLL_FATHER_1948,
+                            NPCs.FD_TROLL_DAD_1948,
                             "Oh thank you! It was really cold in there! But please, you must free my wife as well! Our son is depending on us!",
                             FaceAnim.OLD_CALM_TALK2
                         )
@@ -77,7 +77,7 @@ class MotherTrollBehavior : NPCBehavior(NPCs.ICE_BLOCK_1945) {
                     queueScript(self, 1, QueueStrength.NORMAL) { stage: Int ->
                         sendNPCDialogue(
                             attacker,
-                            NPCs.TROLL_MOTHER_1950,
+                            NPCs.FD_TROLL_MUM_1950,
                             "Wow, thanks for breaking me out of that ice! But please, my husband is still trapped in there!",
                             FaceAnim.OLD_CALM_TALK2
                         )

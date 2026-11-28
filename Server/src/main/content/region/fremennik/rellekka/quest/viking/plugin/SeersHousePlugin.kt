@@ -53,7 +53,7 @@ class SeersHousePlugin : InteractionListener {
                         DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                         if (insideHouse) player.inventory.clear()
                     } else {
-                        openDialogue(player, NPCs.PEER_THE_SEER_1288, findNPC(NPCs.PEER_THE_SEER_1288)!!)
+                        openDialogue(player, NPCs.VIKING_PEER_1288, findNPC(NPCs.VIKING_PEER_1288)!!)
                     }
                 }
             }
@@ -66,7 +66,7 @@ class SeersHousePlugin : InteractionListener {
          */
 
         on(WEST_LADDER, IntType.SCENERY, "Climb-up") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2631, 3664, 2))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(2631, 3664, 2))
             return@on true
         }
 
@@ -76,9 +76,9 @@ class SeersHousePlugin : InteractionListener {
 
         on(WEST_TRAP_DOOR.id, IntType.SCENERY, "Climb-down") { player, _ ->
             if (player.location.x < 2634) {
-                ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2631, 3664, 0))
+                ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(2631, 3664, 0))
             } else if (player.location.x > 2634) {
-                ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2636, 3664, 0))
+                ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(2636, 3664, 0))
             }
             return@on true
         }
@@ -127,7 +127,7 @@ class SeersHousePlugin : InteractionListener {
 
         on(EAST_TRAP_DOOR.id, IntType.SCENERY, "Climb-down") { player, _ ->
             if (player.location.x > 2634) {
-                ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2636, 3664, 0))
+                ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(2636, 3664, 0))
             }
             return@on true
         }
@@ -137,7 +137,7 @@ class SeersHousePlugin : InteractionListener {
          */
 
         on(EAST_LADDER, IntType.SCENERY, "Climb-Up") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2636, 3664, 2))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(2636, 3664, 2))
             return@on true
         }
 
@@ -229,7 +229,7 @@ class SeersHousePlugin : InteractionListener {
          */
 
         on(CHESTS, IntType.SCENERY, "Open") { player, node ->
-            animate(player, Animations.HUMAN_OPEN_CHEST_536)
+            animate(player, Animations.HUMAN_OPENCHEST_536)
             playAudio(player, Sounds.CHEST_OPEN_52)
             replaceScenery(node.asScenery(), Objects.CHEST_4168, -1)
             return@on true
@@ -240,7 +240,7 @@ class SeersHousePlugin : InteractionListener {
          */
 
         on(CHESTS, IntType.SCENERY, "Close") { player, node ->
-            animate(player, Animations.HUMAN_CLOSE_CHEST_538)
+            animate(player, Animations.HUMAN_OPENCUPBOARD_538)
             playAudio(player, Sounds.CHEST_CLOSE_51)
             replaceScenery(node.asScenery(), Objects.CHEST_4167, -1)
             return@on true
@@ -256,7 +256,7 @@ class SeersHousePlugin : InteractionListener {
                 sendMessage(player, "You find nothing of interest.")
             } else {
                 playAudio(player, Sounds.CHEST_CLOSE_51)
-                animate(player, Animations.CLOSE_CHEST_539)
+                animate(player, Animations.HUMAN_CLOSECUPBOARD_539)
                 sendMessage(player, "You find a jug with a number three painted on it")
                 addItem(player, EMPTY_JUG)
             }
@@ -1053,7 +1053,7 @@ class SeersHousePlugin : InteractionListener {
             player.inventory.clear()
             sendMessage(player, "You unlock the door with your key.")
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-            sendNPCDialogueLines(player, NPCs.PEER_THE_SEER_1288, FaceAnim.EXTREMELY_SHOCKED, false,"Incredible! To have solved my puzzle so quickly! I have", "no choice but to vote in your favour!")
+            sendNPCDialogueLines(player, NPCs.VIKING_PEER_1288, FaceAnim.EXTREMELY_SHOCKED, false,"Incredible! To have solved my puzzle so quickly! I have", "no choice but to vote in your favour!")
             addItem(player, Items.HERRING_347)
             setAttribute(player, GameAttributes.QUEST_VIKING_PEER_VOTE, true)
             val currentVotes = getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0)
@@ -1074,7 +1074,7 @@ class SeersHousePlugin : InteractionListener {
             player.inventory.clear()
             sendMessage(player, "You unlock the door with your key.")
             DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
-            sendNPCDialogueLines(player, NPCs.PEER_THE_SEER_1288, FaceAnim.EXTREMELY_SHOCKED, false, "Incredible! To have solved my puzzle so quickly! I have", "no choice but to vote in your favour!")
+            sendNPCDialogueLines(player, NPCs.VIKING_PEER_1288, FaceAnim.EXTREMELY_SHOCKED, false, "Incredible! To have solved my puzzle so quickly! I have", "no choice but to vote in your favour!")
             addItem(player, Items.HERRING_347)
             setAttribute(player, GameAttributes.QUEST_VIKING_PEER_VOTE, true)
             val currentVotes = getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0)
@@ -1099,14 +1099,14 @@ class SeersHousePlugin : InteractionListener {
         private const val CUPBOARD_CLOSED = Objects.CUPBOARD_4177
         private const val CUPBOARD_OPENED = Objects.CUPBOARD_4178
         private const val BALANCE_CHEST = Objects.CHEST_4170
-        private const val UNICORN_HEAD = Objects.UNICORN_S_HEAD_4181
+        private const val UNICORN_HEAD = Objects.UNICORNS_HEAD_4181
         private const val SOUTH_BOXES = Objects.BOXES_4183
         private val CHESTS = intArrayOf(Objects.CHEST_4167, Objects.CHEST_4168)
         private const val SOUTH_CRATES = Objects.CRATE_4186
         private const val EAST_CRATES = Objects.CRATE_4185
         private const val FROZEN_TABLE = Objects.FROZEN_TABLE_4169
         private const val BOOKCASE = Objects.BOOKCASE_4171
-        private const val BULLS_HEAD = Objects.BULL_S_HEAD_4182
+        private const val BULLS_HEAD = Objects.BULLS_HEAD_4182
         private const val MURAL = Objects.ABSTRACT_MURAL_4179
 
         // Items.
@@ -1115,7 +1115,7 @@ class SeersHousePlugin : InteractionListener {
         private const val RED_HERRING = Items.RED_HERRING_3742
         private const val BLUE_THREAD = Items.THREAD_3719
         private const val PICK = Items.PICK_3720
-        private const val SHIP_TOY = Items.TOY_BOAT_3721
+        private const val SHIP_TOY = Items.SHIP_TOY_3721
         private const val MAGNET = Items.MAGNET_3718
         private const val RED_GOOP = Items.STICKY_RED_GOOP_3746
         private const val RED_DISK = Items.RED_DISK_3743
@@ -1128,21 +1128,21 @@ class SeersHousePlugin : InteractionListener {
         private const val FROZEN_KEY = Items.FROZEN_KEY_3741
         private const val SEERS_KEY = Items.SEERS_KEY_3745
         private const val EMPTY_BUCKET = Items.EMPTY_BUCKET_3727
-        private const val ONE_FIFTH_BUCKET = Items.ONE_5THS_FULL_BUCKET_3726
-        private const val TWO_FIFTH_BUCKET = Items.TWO_5THS_FULL_BUCKET_3725
-        private const val THREE_FIFTH_BUCKET = Items.THREE_5THS_FULL_BUCKET_3724
-        private const val FOUR_FIFTH_BUCKET = Items.FOUR_5THS_FULL_BUCKET_3723
+        private const val ONE_FIFTH_BUCKET = Items.OBJ_1_5THS_FULL_BUCKET_3726
+        private const val TWO_FIFTH_BUCKET = Items.OBJ_2_5THS_FULL_BUCKET_3725
+        private const val THREE_FIFTH_BUCKET = Items.OBJ_3_5THS_FULL_BUCKET_3724
+        private const val FOUR_FIFTH_BUCKET = Items.OBJ_4_5THS_FULL_BUCKET_3723
         private const val FULL_BUCKET = Items.FULL_BUCKET_3722
         private const val FROZEN_BUCKET = Items.FROZEN_BUCKET_3728
         private const val EMPTY_JUG = Items.EMPTY_JUG_3732
-        private const val ONE_THIRD_JUG = Items.ONE_THIRDRDS_FULL_JUG_3731
-        private const val TWO_THIRD_JUG = Items.TWO_THIRDSRDS_FULL_JUG_3730
+        private const val ONE_THIRD_JUG = Items.OBJ_1_3RDS_FULL_JUG_3731
+        private const val TWO_THIRD_JUG = Items.OBJ_2_3RDS_FULL_JUG_3730
         private const val FULL_JUG = Items.FULL_JUG_3729
         private const val FROZEN_JUG = Items.FROZEN_JUG_3733
 
         // Arrays.
-        private val JUGS = intArrayOf(Items.EMPTY_JUG_3732, Items.ONE_THIRDRDS_FULL_JUG_3731, Items.TWO_THIRDSRDS_FULL_JUG_3730, Items.FULL_JUG_3729)
-        private val BUCKETS = intArrayOf(Items.EMPTY_BUCKET_3727, Items.ONE_5THS_FULL_BUCKET_3726, Items.TWO_5THS_FULL_BUCKET_3725, Items.THREE_5THS_FULL_BUCKET_3724, Items.FOUR_5THS_FULL_BUCKET_3723, Items.FULL_BUCKET_3722)
+        private val JUGS = intArrayOf(Items.EMPTY_JUG_3732, Items.OBJ_1_3RDS_FULL_JUG_3731, Items.OBJ_2_3RDS_FULL_JUG_3730, Items.FULL_JUG_3729)
+        private val BUCKETS = intArrayOf(Items.EMPTY_BUCKET_3727, Items.OBJ_1_5THS_FULL_BUCKET_3726, Items.OBJ_2_5THS_FULL_BUCKET_3725, Items.OBJ_3_5THS_FULL_BUCKET_3724, Items.OBJ_4_5THS_FULL_BUCKET_3723, Items.FULL_BUCKET_3722)
         private val DISKS = intArrayOf(Items.OLD_RED_DISK_9947, Items.RED_DISK_3743, WOODEN_DISK)
     }
 

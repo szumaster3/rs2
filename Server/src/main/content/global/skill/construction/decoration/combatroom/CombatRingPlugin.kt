@@ -34,9 +34,9 @@ class CombatRingPlugin : InteractionListener {
     }
 
     private fun getJumpAnimation(player: Player): Int = when {
-        inEquipment(player, Items.BOXING_GLOVES_7671) -> Animations.HUMAN_JUMP_RING_RED_GLOVES_3689
-        inEquipment(player, Items.BOXING_GLOVES_7673) -> Animations.HUMAN_JUMP_RING_BLUE_GLOVES_3690
-        else -> Animations.HUMAN_JUMP_BOXING_RING_3688
+        inEquipment(player, Items.BOXING_GLOVES_7671) -> Animations.HUMAN_GET_OVER_COMBATRING_REDGLOVES_3689
+        inEquipment(player, Items.BOXING_GLOVES_7673) -> Animations.HUMAN_GET_OVER_COMBATRING_BLUEGLOVES_3690
+        else -> Animations.HUMAN_GET_OVER_COMBATRING_NOGLOVES_3688
     }
 
     private fun getInteractLocation(pLoc: Location, sLoc: Location, orientation: Orientation): Location =

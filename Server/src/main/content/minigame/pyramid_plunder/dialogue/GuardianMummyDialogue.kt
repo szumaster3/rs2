@@ -63,5 +63,5 @@ class GuardianMummyDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GUARDIAN_MUMMY_4476)
+    override fun getIds(): IntArray = intArrayOf(NPCs.NTK_MUMMY_GUARDIAN_4476)
 }

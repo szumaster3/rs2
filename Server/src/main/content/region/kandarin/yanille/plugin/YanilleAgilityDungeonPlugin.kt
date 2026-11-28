@@ -105,7 +105,7 @@ class YanilleAgilityDungeonPlugin : MapZone("Yanille agility", true), Interactio
                     override fun pulse(): Boolean {
                         AgilityHandler.fail(player, 1, Location(2572, 9570, 0), Animation.create(761 - diff), RandomFunction.random(1, 3), "You lost your balance!")
                         runTask(player, 2) {
-                            animate(player, Animations.ON_BACK_GET_UP_BRUSH_SELF_5056, true)
+                            animate(player, Animations.TOURTRAP_QIP_GET_UP_DUST_OFF_5056, true)
                         }
                         return true
                     }

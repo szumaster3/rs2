@@ -171,10 +171,10 @@ class LostTribeCutscene(
     }
 
     companion object {
-        private const val DUKE = NPCs.DUKE_HORACIO_2088
-        private const val MISTAG = NPCs.MISTAG_2089
-        private const val SIGMUND = NPCs.SIGMUND_2090
-        private const val URTAG = NPCs.UR_TAG_5858
+        private const val DUKE = NPCs.LOST_TRIBE_CUTSCENE_DUKE_2088
+        private const val MISTAG = NPCs.LOST_TRIBE_CUTSCENE_MISTAG_2089
+        private const val SIGMUND = NPCs.LOST_TRIBE_CUTSCENE_SIGMUND_2090
+        private const val URTAG = NPCs.SLICE_URTAG_CUTSCENE_5858
         private const val URTAG_BOW_ANIM = 6000
     }
 }

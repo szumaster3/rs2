@@ -222,6 +222,6 @@ class RatBurgissDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RAT_BURGISS_5833)
+        return intArrayOf(NPCs.SUROK_RAT_5833)
     }
 }

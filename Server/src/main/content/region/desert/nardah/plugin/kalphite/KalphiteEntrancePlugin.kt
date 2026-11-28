@@ -50,7 +50,7 @@ class KalphiteEntrancePlugin : OptionHandler() {
         }
         val dest = destination
         lock(player, 2)
-        animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
+        animate(player, Animations.HUMAN_REACHFORLADDER_828)
         queueScript(player, 1, QueueStrength.WEAK) {
             player.properties.teleportLocation = dest
             return@queueScript stopExecuting(player)

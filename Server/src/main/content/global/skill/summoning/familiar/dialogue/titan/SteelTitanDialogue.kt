@@ -78,5 +78,5 @@ class SteelTitanDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STEEL_TITAN_7343, NPCs.STEEL_TITAN_7344)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_STEEL_TITAN_7343, NPCs.LORE_STEEL_TITAN_COMBAT_7344)
 }

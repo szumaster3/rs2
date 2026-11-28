@@ -34,5 +34,5 @@ class SquireMagicDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SQUIRE_3796, NPCs.SQUIRE_3798, NPCs.SQUIRE_3799)
+    override fun getIds(): IntArray = intArrayOf(NPCs.PEST_SQUIRE_RANGESHOP_3796, NPCs.PEST_SQUIRE_RUNESHOP_3798, NPCs.PEST_SQUIRE_STOREMASTER_3799)
 }

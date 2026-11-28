@@ -93,7 +93,7 @@ class KingNarnodeMMDialogue : DialogueFile() {
                 8 -> playerl("They all alive - we suffered no casualries.").also { stage++ }
                 9 -> npcl("'We', ${player!!.name}?").also { stage++ }
                 10 -> playerl("I, uh, I'm part of the 10th squad now. I even have the sigil.").also { stage++ }
-                11 -> sendItemDialogue(player!!, Items.TENTH_SQUAD_SIGIL_4035, "You show King Narnode your sigil.").also { stage++ }
+                11 -> sendItemDialogue(player!!, Items.OBJ_10TH_SQUAD_SIGIL_4035, "You show King Narnode your sigil.").also { stage++ }
                 12 -> npcl("Well, now. It appears I cannot argue with that. Garkor obviously thinks highly of you, as do I.").also { stage++ }
                 13 -> npcl("No service such as what you have done for me goes unrewarded in my kingdom. I personally made a visit to the Royal Treasury to withdraw your reward.").also { stage++ }
                 14 -> sendItemDialogue(player!!, arrayOf(Items.DIAMOND_1601, Items.COINS_617), "King Narnode hands you a huge stack of old coins and several diamonds!").also {

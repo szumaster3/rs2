@@ -12,7 +12,7 @@ import core.plugin.Initializable
 
 @Initializable
 class DefenderOfVarrock :
-    Quest("Defender of Varrock", 159, 158, 2, Vars.VARBIT_QUEST_DEFENDER_OF_VARROCK_5387, 0, 1, 250) {
+    Quest("Defender of Varrock", 159, 158, 2, Vars.VARBIT_5387, 0, 1, 250) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -83,7 +83,7 @@ class DefenderOfVarrock :
         rewardXP(player, Skills.MINING, 10000.0)
         rewardXP(player, Skills.DEFENCE, 10000.0)
         rewardXP(player, Skills.AGILITY, 2000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_DEFENDER_OF_VARROCK_5387, 250, true)
+        setVarbit(player, Vars.VARBIT_5387, 250, true)
     }
 
 

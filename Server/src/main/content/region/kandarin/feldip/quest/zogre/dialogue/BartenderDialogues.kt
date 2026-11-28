@@ -28,7 +28,7 @@ class BartenderDialogues : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         val p = player!!
-        npc = NPC(NPCs.BARTENDER_739)
+        npc = NPC(NPCs.DRAGON_BARTENDER_739)
 
         val hasTankard = inInventory(p, Items.DRAGON_INN_TANKARD_4811)
         val hasTornPage = inInventory(p, Items.TORN_PAGE_4809)

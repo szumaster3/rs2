@@ -14,7 +14,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class WolpertingerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.WOLPERTINGER_6869) :
+class WolpertingerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_WOLPERTINGER_6869) :
     Familiar(owner, id, 6200, Items.WOLPERTINGER_POUCH_12089, 1, WeaponInterface.STYLE_CAST) {
 
     init {
@@ -32,10 +32,10 @@ class WolpertingerNPC @JvmOverloads constructor(owner: Player? = null, id: Int =
     }
 
     override fun visualizeSpecialMove() {
-        owner.visualize(Animation.create(Animations.CAST_FAMILIAR_SCROLL_7660), Graphics.create(shared.consts.Graphics.WOLPERTINGER_SPECIAL_MOVE_1306))
+        owner.visualize(Animation.create(Animations.LORE_HUMAN_ANIMAL_SPECIAL_7660), Graphics.create(shared.consts.Graphics.LORE_BOOST_RECEIVE_12_1306))
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WOLPERTINGER_6869, NPCs.WOLPERTINGER_6870)
+        return intArrayOf(NPCs.LORE_WOLPERTINGER_6869, NPCs.LORE_WOLPERTINGER_COMBAT_6870)
     }
 }

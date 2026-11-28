@@ -31,7 +31,7 @@ class StonemasonDialogue(player: Player? = null) : Dialogue(player) {
             }
             3 -> {
                 end()
-                openNpcShop(player, NPCs.STONEMASON_4248)
+                openNpcShop(player, NPCs.POH_STONEMASON_4248)
             }
             4 -> npc(FaceAnim.OLD_NORMAL, "A few kinds. Limestone, of course. Here in Keldagrim we're", "surrounded by the stuff so I can practically give it away!", "You'll be able to build some kinds of furniture out of that.").also { stage++ }
             5 -> npc(FaceAnim.OLD_NORMAL, "Marble is much better, of course, but it costs a lot for me", "to get hold of it. You can make some beautiful", "pieces of furniture out of that.").also { stage++ }
@@ -44,5 +44,5 @@ class StonemasonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = StonemasonDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STONEMASON_4248)
+    override fun getIds(): IntArray = intArrayOf(NPCs.POH_STONEMASON_4248)
 }

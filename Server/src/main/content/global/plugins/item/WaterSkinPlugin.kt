@@ -9,9 +9,9 @@ import shared.consts.Items
 
 @Initializable
 class WaterSkinPlugin :
-    UseWithHandler(Items.WATERSKIN3_1825, Items.WATERSKIN2_1827, Items.WATERSKIN1_1829, Items.WATERSKIN0_1831) {
+    UseWithHandler(Items.WATERSKIN_3_1825, Items.WATERSKIN_2_1827, Items.WATERSKIN_1_1829, Items.WATERSKIN_0_1831) {
 
-    private val waterSkinId = Item(Items.WATERSKIN4_1823)
+    private val waterSkinId = Item(Items.WATERSKIN_4_1823)
     private val data = arrayOf(
         intArrayOf(Items.JUG_OF_WATER_1937, Items.JUG_1935),
         intArrayOf(Items.BUCKET_OF_WATER_1929, Items.BUCKET_1925),

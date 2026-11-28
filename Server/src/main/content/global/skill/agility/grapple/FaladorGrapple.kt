@@ -86,7 +86,7 @@ class FaladorGrapple : OptionHandler() {
                     } else {
                         Location.create(3032, 3388, 0)
                     },
-                    Animation(Animations.JUMP_OVER_7268),
+                    Animation(Animations.HW07_GETTING_FLUNG_IN_THE_AIR_7268),
                     10,
                 )
 
@@ -115,8 +115,8 @@ class FaladorGrapple : OptionHandler() {
                                     player.faceLocation(destination)
                                     playAudio(player, Sounds.CROSSBOW_GRAPPLING_2928)
                                     player.visualize(
-                                        Animation(Animations.FIRE_CROSSBOW_TO_CLIMB_WALL_4455),
-                                        Graphics(shared.consts.Graphics.MITHRIL_GRAPPLE_760),
+                                        Animation(Animations.XBOWS_HUMAN_FIRE_AND_CLIMB_GRAPPLE_4455),
+                                        Graphics(shared.consts.Graphics.XBOWS_FIRE_AND_CLIMBED_GRAPPLE_760),
                                     )
                                 }
 

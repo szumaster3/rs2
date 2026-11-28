@@ -26,5 +26,5 @@ class NickolausDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = NickolausDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(5125,NPCs.NICKOLAUS_5126,NPCs.NICKOLAUS_5127,NPCs.NICKOLAUS_5128,NPCs.NICKOLAUS_5129)
+    override fun getIds(): IntArray = intArrayOf(5125,NPCs.EAGLEPEAK_NICKOLAUS_CRAWL_5126,NPCs.EAGLEPEAK_NICKOLAUS_SHOUT_5127,NPCs.EAGLEPEAK_NICKOLAUS_NORMAL_5128,NPCs.EAGLEPEAK_NICKOLAUS_DISGUISE_5129)
 }

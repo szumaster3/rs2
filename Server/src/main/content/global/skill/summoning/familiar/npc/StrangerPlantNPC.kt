@@ -15,7 +15,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class StrangerPlantNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.STRANGER_PLANT_6827) :
+class StrangerPlantNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_STRANGER_PLANT_6827) :
     Forager(owner, id, 4900, Items.STRANGER_PLANT_POUCH_12045, 6, Item(Items.STRANGE_FRUIT_464)) {
     override fun construct(owner: Player, id: Int): Familiar {
         return StrangerPlantNPC(owner, id)
@@ -37,6 +37,6 @@ class StrangerPlantNPC @JvmOverloads constructor(owner: Player? = null, id: Int 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STRANGER_PLANT_6827, NPCs.STRANGER_PLANT_6828)
+        return intArrayOf(NPCs.LORE_STRANGER_PLANT_6827, NPCs.LORE_STRANGER_PLANT_COMBAT_6828)
     }
 }

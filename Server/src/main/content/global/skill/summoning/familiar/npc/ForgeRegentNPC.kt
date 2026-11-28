@@ -75,7 +75,7 @@ class ForgeRegentNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
             }
         }
         graphics(Graphics.create(1394))
-        target.graphics(Graphics.create(shared.consts.Graphics.RAINING_FIRE_ON_YOU_1393))
+        target.graphics(Graphics.create(shared.consts.Graphics.LORE_FLAMING_PRINCE_SPECIAL_IMPACT_1393))
         if (target.equipment.remove(remove)) {
             target.inventory.add(remove)
         }

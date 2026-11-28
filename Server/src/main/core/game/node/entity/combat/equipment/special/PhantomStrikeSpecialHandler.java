@@ -30,9 +30,9 @@ public final class PhantomStrikeSpecialHandler extends RangeSwingHandler impleme
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         CombatStyle.RANGE.getSwingHandler().register(Items.MORRIGANS_JAVELIN_13879, this);
-        CombatStyle.RANGE.getSwingHandler().register(Items.MORRIGANS_JAVELINP_13880, this);
-        CombatStyle.RANGE.getSwingHandler().register(Items.MORRIGANS_JAVELINP_PLUS_13881, this);
-        CombatStyle.RANGE.getSwingHandler().register(Items.MORRIGANS_JAVELINP_PLUS_PLUS_13882, this);
+        CombatStyle.RANGE.getSwingHandler().register(Items.MORRIGANS_JAVELIN_P_13880, this);
+        CombatStyle.RANGE.getSwingHandler().register(Items.MORRIGANS_JAVELIN_P_PLUS_13881, this);
+        CombatStyle.RANGE.getSwingHandler().register(Items.MORRIGANS_JAVELIN_P_PLUS_PLUS_13882, this);
         return this;
     }
 

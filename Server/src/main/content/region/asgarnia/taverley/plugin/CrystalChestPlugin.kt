@@ -38,7 +38,7 @@ class CrystalChestPlugin : InteractionListener {
                 return@onUseWith false
             }
 
-            animate(player, Animations.HUMAN_OPEN_CHEST_536)
+            animate(player, Animations.HUMAN_OPENCHEST_536)
             replaceScenery(with.asScenery(), with.id + 1, 3, with.location)
 
             val reward = Reward.getReward(player)

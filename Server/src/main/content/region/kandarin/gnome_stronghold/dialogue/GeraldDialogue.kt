@@ -42,7 +42,7 @@ class GeraldDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 stopWalk(player)
                 runTask(player, 1) {
-                    animate(npc, Animations.STEP_BACK_WAVE_1240)
+                    animate(npc, Animations.REGICIDE_CATAPAULT_TRIGGER_1240)
                 }
             }
             5 -> npcl(FaceAnim.NEUTRAL, "Hello traveller.").also { stage++ }
@@ -56,5 +56,5 @@ class GeraldDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GeraldDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GERALD_303)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GERALD_WATERFALL_QUEST_303)
 }

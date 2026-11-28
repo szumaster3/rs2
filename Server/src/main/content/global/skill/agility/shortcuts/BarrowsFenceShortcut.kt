@@ -36,7 +36,7 @@ class BarrowsFenceShortcut : AgilityShortcut(intArrayOf(18411), 1, 0.0, "climb-o
                     -1,
                     player.location,
                     destination,
-                    Animation(Animations.WALK_OVER_STILE_10980),
+                    Animation(Animations.LUC2_PLAYER_WALK_THROUGH_PAINTING_10980),
                     10,
                     0.0,
                     null

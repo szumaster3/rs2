@@ -23,14 +23,14 @@ class UseWithPatchHandler : InteractionListener {
     val SECATEURS = Items.SECATEURS_5329
     val MAGIC_SECATEURS = Items.MAGIC_SECATEURS_7409
     val TROWEL = Items.GARDENING_TROWEL_5325
-    val spadeDigAnim = getAnimation(Animations.DIG_SPADE_830)
-    val trowelDigAnim = getAnimation(Animations.GARDENING_TROWEL_2272)
-    val pourBucketAnim = getAnimation(Animations.POUR_BUCKET_OVER_GROUND_2283)
-    val seedDibberAnim = getAnimation(Animations.SEED_DIBBER_2291)
-    val wateringCanAnim = getAnimation(Animations.WATERING_CAN_2293)
-    val plantCureAnim = getAnimation(Animations.POUR_PLANT_CURE_2288)
-    val secateursTreeAnim = getAnimation(Animations.SECUTARS_2277)
-    val magicSecateursTreeAnim = getAnimation(Animations.PRUNING_WITH_MAGIC_SECATEURS_3340)
+    val spadeDigAnim = getAnimation(Animations.HUMAN_DIG_830)
+    val trowelDigAnim = getAnimation(Animations.FARMING_TROWEL_DIGGING_2272)
+    val pourBucketAnim = getAnimation(Animations.FARMING_POUR_WATER_2283)
+    val seedDibberAnim = getAnimation(Animations.FARMING_SEED_DIBBING_2291)
+    val wateringCanAnim = getAnimation(Animations.FARMING_WATERING_2293)
+    val plantCureAnim = getAnimation(Animations.FARMING_PLANT_CURE_2288)
+    val secateursTreeAnim = getAnimation(Animations.PRUNING_HIGH_2277)
+    val magicSecateursTreeAnim = getAnimation(Animations.PRUNING_HIGH_FAIRY_3340)
 
     @JvmField
     val allowedNodes = ArrayList<Int>()
@@ -186,7 +186,7 @@ class UseWithPatchHandler : InteractionListener {
                     }
                 }
 
-                Items.WATERING_CAN_5331, Items.WATERING_CAN1_5333, Items.WATERING_CAN2_5334, Items.WATERING_CAN3_5335, Items.WATERING_CAN4_5336, Items.WATERING_CAN5_5337, Items.WATERING_CAN6_5338, Items.WATERING_CAN7_5339, Items.WATERING_CAN8_5340 -> {
+                Items.WATERING_CAN_5331, Items.WATERING_CAN_1_5333, Items.WATERING_CAN_2_5334, Items.WATERING_CAN_3_5335, Items.WATERING_CAN_4_5336, Items.WATERING_CAN_5_5337, Items.WATERING_CAN_6_5338, Items.WATERING_CAN_7_5339, Items.WATERING_CAN_8_5340 -> {
                     val p = patch.getPatchFor(player)
                     val t = p.patch.type
                     if (t == PatchType.ALLOTMENT || t == PatchType.FLOWER_PATCH || t == PatchType.HOPS_PATCH) {
@@ -434,21 +434,21 @@ class UseWithPatchHandler : InteractionListener {
                 Items.COMPOST_6032,
                 Items.PLANT_CURE_6036,
                 Items.WATERING_CAN_5331,
-                Items.WATERING_CAN1_5333,
-                Items.WATERING_CAN2_5334,
-                Items.WATERING_CAN3_5335,
-                Items.WATERING_CAN4_5336,
-                Items.WATERING_CAN5_5337,
-                Items.WATERING_CAN6_5338,
-                Items.WATERING_CAN7_5339,
-                Items.WATERING_CAN8_5340,
+                Items.WATERING_CAN_1_5333,
+                Items.WATERING_CAN_2_5334,
+                Items.WATERING_CAN_3_5335,
+                Items.WATERING_CAN_4_5336,
+                Items.WATERING_CAN_5_5337,
+                Items.WATERING_CAN_6_5338,
+                Items.WATERING_CAN_7_5339,
+                Items.WATERING_CAN_8_5340,
                 Items.PLANT_POT_5350,
             ),
         )
     }
 
     private fun Int.getNext(): Int {
-        if (this == Items.WATERING_CAN1_5333) {
+        if (this == Items.WATERING_CAN_1_5333) {
             return Items.WATERING_CAN_5331
         } else {
             return this - 1

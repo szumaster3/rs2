@@ -51,5 +51,5 @@ class BrimstailDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BrimstailDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BRIMSTAIL_171)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_BRIMSTAIL_171)
 }

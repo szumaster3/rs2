@@ -12,7 +12,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritMosquitoNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_MOSQUITO_7331) :
+class SpiritMosquitoNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_MOSQUITO_7331) :
     Familiar(owner, id, 1200, Items.SPIRIT_MOSQUITO_POUCH_12778, 3, WeaponInterface.STYLE_ACCURATE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return SpiritMosquitoNPC(owner, id)
@@ -33,6 +33,6 @@ class SpiritMosquitoNPC @JvmOverloads constructor(owner: Player? = null, id: Int
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_MOSQUITO_7331, NPCs.SPIRIT_MOSQUITO_7332)
+        return intArrayOf(NPCs.LORE_MOSQUITO_7331, NPCs.LORE_MOSQUITO_COMBAT_7332)
     }
 }

@@ -21,7 +21,7 @@ import shared.consts.NPCs
 class FremennikFishermanDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.FISHERMAN_1302)
+        npc = NPC(NPCs.VIKING_FISHERMAN1_1302)
         when (stage) {
             0 -> when {
                 inInventory(player!!, Items.SEA_FISHING_MAP_3704, 1) -> {

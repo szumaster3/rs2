@@ -28,7 +28,7 @@ class GuardDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARD_812, NPCs.GUARD_6191)
+        return intArrayOf(NPCs.MURDERGUARD_812, NPCs.GUARD_6191)
     }
 }
 

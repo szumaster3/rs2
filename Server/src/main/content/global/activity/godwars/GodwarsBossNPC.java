@@ -53,9 +53,9 @@ public final class GodwarsBossNPC extends AbstractNPC {
         SPAWN_LOCATIONS.put(NPCs.GROWLER_6250, Location.create(2901, 5268, 0));
         SPAWN_LOCATIONS.put(NPCs.BREE_6252, Location.create(2895, 5260, 0));
 
-        SPAWN_LOCATIONS.put(NPCs.SERGEANT_GRIMSPIKE_6265, Location.create(2866, 5363, 2));
-        SPAWN_LOCATIONS.put(NPCs.SERGEANT_STRONGSTACK_6261, Location.create(2867, 5354, 2));
-        SPAWN_LOCATIONS.put(NPCs.SERGEANT_STEELWILL_6263, Location.create(2873, 5354, 2));
+        SPAWN_LOCATIONS.put(NPCs.GODWARS_SERGEANT_GOBLIN3_6265, Location.create(2866, 5363, 2));
+        SPAWN_LOCATIONS.put(NPCs.GODWARS_SERGEANT_GOBLIN1_6261, Location.create(2867, 5354, 2));
+        SPAWN_LOCATIONS.put(NPCs.GODWARS_SERGEANT_GOBLIN2_6263, Location.create(2873, 5354, 2));
     }
 
     private NPC[] minions;

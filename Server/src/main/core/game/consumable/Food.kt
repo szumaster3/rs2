@@ -21,7 +21,7 @@ open class Food : Consumable {
      * @param messages Optional custom messages.
      */
     constructor(ids: IntArray?, effect: ConsumableEffect?, vararg messages: String?) : super(ids, effect, *messages) {
-        animation = Animation(Animations.EAT_OLD_829)
+        animation = Animation(Animations.HUMAN_EAT_829)
     }
 
     /**

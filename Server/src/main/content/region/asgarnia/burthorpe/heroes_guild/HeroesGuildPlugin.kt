@@ -47,7 +47,7 @@ class HeroesGuildPlugin : InteractionListener {
          * Handles recharge jewellery by used it on familiar.
          */
 
-        onUseWith(IntType.NPC, SPECIAL, NPCs.GEYSER_TITAN_7339, NPCs.GEYSER_TITAN_7340) { player, used, with ->
+        onUseWith(IntType.NPC, SPECIAL, NPCs.LORE_GEYSER_TITAN_7339, NPCs.LORE_GEYSER_TITAN_COMBAT_7340) { player, used, with ->
             rechargeJewellery(player, used, with)
             return@onUseWith true
         }
@@ -57,7 +57,7 @@ class HeroesGuildPlugin : InteractionListener {
         private val GUILD_GATE = intArrayOf(shared.consts.Scenery.DOOR_2624, shared.consts.Scenery.DOOR_2625)
         private val FOUNTAIN = shared.consts.Scenery.FOUNTAIN_OF_HEROES_36695
         private val SPECIAL = intArrayOf(*EnchantedJewellery.AMULET_OF_GLORY.ids, *EnchantedJewellery.AMULET_OF_GLORY_T.ids)
-        private val JEWELLERY = intArrayOf(Items.RING_OF_SLAYING7_13282, Items.RING_OF_SLAYING6_13283, Items.RING_OF_SLAYING5_13284, Items.RING_OF_SLAYING4_13285, Items.RING_OF_SLAYING3_13286, Items.RING_OF_SLAYING2_13287, Items.RING_OF_SLAYING1_13288, Items.AMULET_OF_GLORY3_1710, Items.AMULET_OF_GLORY2_1708, Items.AMULET_OF_GLORY1_1706, Items.AMULET_OF_GLORY_1704, Items.AMULET_OF_GLORYT3_10356, Items.AMULET_OF_GLORYT2_10358, Items.AMULET_OF_GLORYT1_10360, Items.AMULET_OF_GLORYT_10362)
+        private val JEWELLERY = intArrayOf(Items.RING_OF_SLAYING_7_13282, Items.RING_OF_SLAYING_6_13283, Items.RING_OF_SLAYING_5_13284, Items.RING_OF_SLAYING_4_13285, Items.RING_OF_SLAYING_3_13286, Items.RING_OF_SLAYING_2_13287, Items.RING_OF_SLAYING_1_13288, Items.AMULET_OF_GLORY_3_1710, Items.AMULET_OF_GLORY_2_1708, Items.AMULET_OF_GLORY_1_1706, Items.AMULET_OF_GLORY_1704, Items.AMULET_OF_GLORY_T3_10356, Items.AMULET_OF_GLORY_T2_10358, Items.AMULET_OF_GLORY_T1_10360, Items.AMULET_OF_GLORY_T_10362)
     }
 
     /**
@@ -76,7 +76,7 @@ class HeroesGuildPlugin : InteractionListener {
         }
 
         lock(player, 1)
-        animate(player, Animations.HUMAN_BURYING_BONES_827)
+        animate(player, Animations.HUMAN_PICKUPFLOOR_827)
         val recharged = Item(jewellery.ids[0])
         replaceSlot(player, usedItem.slot, recharged)
 

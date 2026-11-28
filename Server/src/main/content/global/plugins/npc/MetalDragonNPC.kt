@@ -32,7 +32,7 @@ class MetalDragonNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
     ): AbstractNPC = MetalDragonNPC(id, location)
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.BRONZE_DRAGON_1590, NPCs.IRON_DRAGON_1591, NPCs.STEEL_DRAGON_1592, NPCs.STEEL_DRAGON_3590)
+        intArrayOf(NPCs.BRONZE_DRAGON_1590, NPCs.IRON_DRAGON_1591, NPCs.STEEL_DRAGON_1592, NPCs.POH_STEEL_DRAGON_3590)
 
     companion object {
         private val DRAGONFIRE: SwitchAttack = DragonfireSwingHandler.get(
@@ -41,7 +41,7 @@ class MetalDragonNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
             Animation(81, Priority.HIGH),
             null,
             null,
-            Projectile.create(null as Entity?, null, Graphics.GIANT_ORANGE_BLAST_54, 40, 36, 41, 46, 20, 255)
+            Projectile.create(null as Entity?, null, Graphics.FIREBREATH_TRAVEL_1_54, 40, 36, 41, 46, 20, 255)
         )
     }
 }

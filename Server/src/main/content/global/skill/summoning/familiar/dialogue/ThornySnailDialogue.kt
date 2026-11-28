@@ -85,7 +85,7 @@ class ThornySnailDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.THORNY_SNAIL_6806, NPCs.THORNY_SNAIL_6807)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_SNAIL_6806, NPCs.LORE_SNAIL_COMBAT_6807)
 
     companion object {
         private val snelmID = intArrayOf(

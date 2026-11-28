@@ -23,7 +23,7 @@ class AnnaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ANNA_814, 6192)
+        return intArrayOf(NPCs.ANNA_SINCLAIR_814, 6192)
     }
 }
 

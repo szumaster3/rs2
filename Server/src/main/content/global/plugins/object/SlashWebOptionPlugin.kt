@@ -123,8 +123,8 @@ class SlashWebOptionPlugin : OptionHandler() {
 
     companion object {
         private val sceneryIDs = intArrayOf(shared.consts.Scenery.WEB_733, shared.consts.Scenery.WEB_1810, shared.consts.Scenery.WEB_11400, shared.consts.Scenery.WEB_33237)
-        private val baseAnimation = Animation(Animations.PICK_OBJECT_GROUND_451)
-        private val cutSpiderWebAnimation = Animation(Animations.CUT_WITH_KNIFE_3747)
+        private val baseAnimation = Animation(Animations.PLAYER_TAKE_ROCK_GRAPPLE_451)
+        private val cutSpiderWebAnimation = Animation(Animations.HUMAN_KNIFE_SLASH_3747)
         private const val CUT_WEB_SFX = Sounds.STABSWORD_SLASH_2548
         private const val KNIFE_ITEM_ID = Items.KNIFE_946
     }

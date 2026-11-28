@@ -22,7 +22,7 @@ class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
             player.settings.toggleRun()
         }
         loadRegion(9780)
-        addNPC(NPCs.JORRAL_2932, 5, 19, Direction.WEST)
+        addNPC(NPCs.MAKINGHISTORY_JORRAL_2932, 5, 19, Direction.WEST)
         addNPC(NPCs.HOBGOBLIN_123, 12, 30, Direction.WEST)
         addNPC(NPCs.HOBGOBLIN_122, 13, 31, Direction.SOUTH)
         addNPC(NPCs.HOBGOBLIN_123, 15, 33, Direction.EAST)
@@ -37,7 +37,7 @@ class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
 
             1 -> {
                 teleport(player, 4, 19)
-                face(player, getNPC(NPCs.JORRAL_2932)!!)
+                face(player, getNPC(NPCs.MAKINGHISTORY_JORRAL_2932)!!)
                 sendDialogue(player, "With many occupants over the years,")
                 moveCamera(0, 28, 300, 1)
                 fadeFromBlack()
@@ -98,7 +98,7 @@ class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
 
 private class OutpostHistoryDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.JORRAL_2932)
+        npc = NPC(NPCs.MAKINGHISTORY_JORRAL_2932)
         when (stage) {
             0 -> npc(FaceAnim.NEUTRAL, "If all goes well, I hope to be able to turn it into a", "museum as a monument to the area's history. What do", "you think?").also { stage++ }
             1 -> options("Ok, I'll make a stand for history!", "I don't care about some dusty building").also { stage++ }

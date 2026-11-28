@@ -29,7 +29,7 @@ class CoordinatorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CoordinatorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CO_ORDINATOR_3302)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_COORDINATOR_3302)
 
     companion object {
         val randomDialogue =

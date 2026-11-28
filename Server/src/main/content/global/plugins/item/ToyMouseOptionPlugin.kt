@@ -39,7 +39,7 @@ class ToyMouseOptionPlugin : InteractionListener {
          * Handles picking up the toy mouse.
          */
 
-        on(NPCs.TOY_MOUSE_3597, IntType.NPC, "pick-up") { player, node ->
+        on(NPCs.POH_TOY_MOUSE_3597, IntType.NPC, "pick-up") { player, node ->
             val uid = player.details.uid
             val mouseOwnerUID = getAttribute(player, GameAttributes.ITEM_TOY_MOUSE_RELEASE, -1)
 

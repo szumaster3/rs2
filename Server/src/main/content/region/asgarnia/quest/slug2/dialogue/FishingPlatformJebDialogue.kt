@@ -39,5 +39,5 @@ class FishingPlatformJebDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JEB_4896)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLUG2_JEB_STAGE2_4896)
 }

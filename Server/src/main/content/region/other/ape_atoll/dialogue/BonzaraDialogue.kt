@@ -39,5 +39,5 @@ class BonzaraDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BonzaraDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BONZARA_1468)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MM_BONZARA_1468)
 }

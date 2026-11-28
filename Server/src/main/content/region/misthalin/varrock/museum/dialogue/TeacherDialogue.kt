@@ -17,7 +17,7 @@ class TeacherDialogue(player: Player? = null) : Dialogue(player) {
         if (npc.location.z == 0) {
             sendNPCDialogue(
                 player,
-                NPCs.TEACHER_5950,
+                NPCs.VM_FEMALE_SCHOOL_TEACHER_DUMMY_5950,
                 "Stop pulling, we've plenty of time to see everything.",
                 FaceAnim.ANGRY,
             )
@@ -49,7 +49,7 @@ class TeacherDialogue(player: Player? = null) : Dialogue(player) {
             1 -> {
                 sendNPCDialogue(
                     player,
-                    NPCs.TEACHER_5950,
+                    NPCs.VM_FEMALE_SCHOOL_TEACHER_DUMMY_5950,
                     "That's because he's an art critic, dear. They have some very funny ideas.",
                     FaceAnim.HALF_GUILTY,
                 )
@@ -61,5 +61,5 @@ class TeacherDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = TeacherDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TEACHER_AND_PUPIL_5947)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VM_TEACHER_GIRL_MULTI_5947)
 }

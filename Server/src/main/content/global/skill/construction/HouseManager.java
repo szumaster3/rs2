@@ -198,7 +198,7 @@ public final class HouseManager {
             public boolean pulse() {
                 spawnServant();
                 if (servant.isGreet()) {
-                    player.getDialogueInterpreter().sendDialogues(servant.getType().getId(), servant.getType().getId() == NPCs.DEMON_BUTLER_4243 ? FaceAnim.OLD_DEFAULT : FaceAnim.HALF_GUILTY, DARK_BLUE + "Welcome.");
+                    player.getDialogueInterpreter().sendDialogues(servant.getType().getId(), servant.getType().getId() == NPCs.POH_SERVANT_DEMON_4243 ? FaceAnim.OLD_DEFAULT : FaceAnim.HALF_GUILTY, DARK_BLUE + "Welcome.");
                 }
                 return true;
             }

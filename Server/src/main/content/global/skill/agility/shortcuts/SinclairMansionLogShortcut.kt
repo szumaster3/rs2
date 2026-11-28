@@ -78,10 +78,10 @@ class SinclairMansionLogShortcut :
     }
 
     companion object {
-        private val logBalanceAnimation = Animation(Animations.BALANCE_WALK_ACROSS_LOG_9908)
-        private val swimmingAnimation = Animation(Animations.SWIMMING_6988)
-        private val swimmingLoopAnimation = Animation(Animations.SWIMMING_LOOP_6989)
-        private val failAnimation = Animation(Animations.FALL_LOG_2582)
-        private val splashGraphics = Graphics(shared.consts.Graphics.WATER_SPLASH_68)
+        private val logBalanceAnimation = Animation(Animations.HUMAN_WALK_LOGBALANCE_LOOP_9908)
+        private val swimmingAnimation = Animation(Animations.GODWARS_HUMAN_SWIM_DOUBLE_6988)
+        private val swimmingLoopAnimation = Animation(Animations.ZAROS_BLAST_AWAY_DUST_SPOTANIM_6989)
+        private val failAnimation = Animation(Animations.HUMAN_WOBBLEANDFALL_SHORT_R_2582)
+        private val splashGraphics = Graphics(shared.consts.Graphics.WATERSPLASH_1_68)
     }
 }

@@ -38,5 +38,5 @@ class TaxidermistDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = TaxidermistDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TAXIDERMIST_4246)
+    override fun getIds(): IntArray = intArrayOf(NPCs.POH_TAXIDERMIST_4246)
 }

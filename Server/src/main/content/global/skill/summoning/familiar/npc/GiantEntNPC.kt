@@ -20,7 +20,7 @@ import shared.consts.NPCs
 import java.util.*
 
 @Initializable
-class GiantEntNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.GIANT_ENT_6800) :
+class GiantEntNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_ENT_6800) :
     Forager(owner, id, 4900, Items.GIANT_ENT_POUCH_12013, 6, WeaponInterface.STYLE_CONTROLLED, *ITEMS) {
     override fun construct(owner: Player, id: Int): Familiar {
         return GiantEntNPC(owner, id)
@@ -31,15 +31,15 @@ class GiantEntNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPC
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GIANT_ENT_6800, NPCs.GIANT_ENT_6801)
+        return intArrayOf(NPCs.LORE_ENT_6800, NPCs.LORE_ENT_COMBAT_6801)
     }
 
     override fun configureFamiliar() {
-        UseWithHandler.addHandler(NPCs.GIANT_ENT_6800, UseWithHandler.NPC_TYPE, object : UseWithHandler(Items.PURE_ESSENCE_7936) {
+        UseWithHandler.addHandler(NPCs.LORE_ENT_6800, UseWithHandler.NPC_TYPE, object : UseWithHandler(Items.PURE_ESSENCE_7936) {
 
             @Throws(Throwable::class)
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    addHandler(NPCs.GIANT_ENT_6800, NPC_TYPE, this)
+                    addHandler(NPCs.LORE_ENT_6800, NPC_TYPE, this)
                     return this
                 }
 

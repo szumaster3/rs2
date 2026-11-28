@@ -120,5 +120,5 @@ class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PIZZAZ_HAT_3096)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGICTRAINING_PIZZAZ_HAT_3096)
 }

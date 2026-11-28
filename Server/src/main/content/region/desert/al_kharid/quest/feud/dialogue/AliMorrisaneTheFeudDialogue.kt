@@ -17,7 +17,7 @@ import shared.consts.Vars
 class AliMorrisaneTheFeudDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.ALI_MORRISANE_1862)
+        npc = NPC(NPCs.FEUD_ALI_M_1862)
         when(stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Well one can only do and sell so much. If I had more", "staff I'd be able to sell more, rather than waste my", "time on menial things I could get on with selling sand", "to the Bedabin and useless tourist trinkets to everyone.").also { stage++ }
             1 -> options("I'm far too busy - adventuring is a full time job you know.", "I'd like to help you but.....").also { stage++ }

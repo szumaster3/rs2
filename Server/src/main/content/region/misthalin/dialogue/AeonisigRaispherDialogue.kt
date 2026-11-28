@@ -43,5 +43,5 @@ class AeonisigRaispherDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.AEONISIG_RAISPHER_4710)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYQ3_AEONISIG_ROALDS_ADVISOR_4710)
 }

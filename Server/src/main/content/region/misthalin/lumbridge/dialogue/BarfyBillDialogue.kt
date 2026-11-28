@@ -72,5 +72,5 @@ class BarfyBillDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BarfyBillDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARFY_BILL_3331)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CANOEING_BILL_3331)
 }

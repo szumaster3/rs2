@@ -164,20 +164,20 @@ class AnimalMagnetismPlugin : OptionHandler() {
         }
 
         companion object {
-            private val ANIMATION = Animation(Animations.ANMA_MAKE_IRON_MAGNET_5365)
+            private val ANIMATION = Animation(Animations.ANMA_HAMMER_IRON_5365)
         }
     }
 
     /**
      * The undead tree plugin.
      */
-    class UndeadTreePlugin : UseWithHandler(Items.MITHRIL_AXE_1355, Items.ADAMANT_AXE_1357, Items.RUNE_AXE_1359, Items.DRAGON_AXE_6739) {
+    class UndeadTreePlugin : UseWithHandler(Items.MITHRIL_HATCHET_1355, Items.ADAMANT_HATCHET_1357, Items.RUNE_HATCHET_1359, Items.DRAGON_HATCHET_6739) {
 
         override fun newInstance(arg: Any?): Plugin<Any> {
             definePlugin(
                 object : OptionHandler() {
                     override fun newInstance(arg: Any?): Plugin<Any> {
-                        NpcType.forId(NPCs.UNDEAD_TREE_5208).handlers["option:chop"] = this
+                        NpcType.forId(NPCs.NASTY_TREE_CHOPPABLE_5208).handlers["option:chop"] = this
                         return this
                     }
 
@@ -205,13 +205,13 @@ class AnimalMagnetismPlugin : OptionHandler() {
                             return true
                         }
                         if (
-                            !inInventory(player, Items.BLESSED_AXE_10491, 1) &&
-                            !inEquipment(player, Items.BLESSED_AXE_10491, 1)
+                            !inInventory(player, Items.BLESSED_HATCHET_10491, 1) &&
+                            !inEquipment(player, Items.BLESSED_HATCHET_10491, 1)
                         ) {
                             sendMessage(player, "You don't have an axe which could possibly affect this wood.")
                             return true
                         }
-                        val animation = getAnimation(Items.MITHRIL_AXE_1355)
+                        val animation = getAnimation(Items.MITHRIL_HATCHET_1355)
                         lock(player, animation!!.definition.durationTicks)
                         if (RandomFunction.random(10) < 3) {
                             sendMessage(player, "You almost remove a suitable twig, but you don't quite manage it.")
@@ -225,7 +225,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
                     }
                 }
             )
-            addHandler(NPCs.UNDEAD_TREE_5208, NPC_TYPE, this)
+            addHandler(NPCs.NASTY_TREE_CHOPPABLE_5208, NPC_TYPE, this)
             return this
         }
 
@@ -245,7 +245,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
         private fun getAnimation(itemId: Int): Animation? {
             for (i in IDS.indices) {
                 if (IDS[i] == itemId) {
-                    return Animation(Animations.ANMA_BLESSED_AXE_5366 + i, Priority.HIGH)
+                    return Animation(Animations.POSSESSED_SWORD_ATTACK_5366 + i, Priority.HIGH)
                 }
             }
             return null
@@ -254,10 +254,10 @@ class AnimalMagnetismPlugin : OptionHandler() {
         companion object {
             private val IDS =
                 intArrayOf(
-                    Items.MITHRIL_AXE_1355,
-                    Items.ADAMANT_AXE_1357,
-                    Items.RUNE_AXE_1359,
-                    Items.DRAGON_AXE_6739
+                    Items.MITHRIL_HATCHET_1355,
+                    Items.ADAMANT_HATCHET_1357,
+                    Items.RUNE_HATCHET_1359,
+                    Items.DRAGON_HATCHET_6739
                 )
         }
     }

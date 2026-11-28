@@ -80,5 +80,5 @@ class DagannothSpawnEggNPC : AbstractNPC {
 
     override fun canStartCombat(victim: Entity): Boolean = false
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.EGG_2449)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DUNGEON_DAGGANOTH_EGG1_2449)
 }

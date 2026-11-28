@@ -25,8 +25,8 @@ class ShipyardCutscene(
             player.settings.toggleRun()
         }
         loadRegion(11823)
-        addNPC(NPCs.FOREMAN_1470, 49, 49, Direction.WEST)
-        addNPC(NPCs.GLO_CARANOCK_1427, 47, 49, Direction.EAST)
+        addNPC(NPCs.MM_FOREMAN_CUTSCENE_1470, 49, 49, Direction.WEST)
+        addNPC(NPCs.MM_CARANOCK_1427, 47, 49, Direction.EAST)
     }
 
     override fun runStage(stage: Int) {
@@ -66,72 +66,72 @@ class ShipyardCutscene(
             }
 
             1 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "The workers are getting restless, Caranock.")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "The workers are getting restless, Caranock.")
                 timedUpdate(6)
             }
 
             2 -> {
-                dialogueUpdate(NPCs.GLO_CARANOCK_1427, FaceAnim.NEUTRAL, "I know...")
+                dialogueUpdate(NPCs.MM_CARANOCK_1427, FaceAnim.NEUTRAL, "I know...")
                 timedUpdate(4)
             }
 
             3 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "All this talk to Glough being replaced doesn't bode well for ... how shall i put this ... their morale.")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "All this talk to Glough being replaced doesn't bode well for ... how shall i put this ... their morale.")
                 timedUpdate(8)
             }
 
             4 -> {
-                dialogueUpdate(NPCs.GLO_CARANOCK_1427, FaceAnim.NEUTRAL, "Look, I know.")
+                dialogueUpdate(NPCs.MM_CARANOCK_1427, FaceAnim.NEUTRAL, "Look, I know.")
                 timedUpdate(4)
             }
 
             5 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "Those are all men with children to feed. Famished families. Worried wives. All of us relly on this shipyard.")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "Those are all men with children to feed. Famished families. Worried wives. All of us relly on this shipyard.")
                 timedUpdate(10)
             }
 
             6 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "If something isn't done soon, there will be revolt. And i won't be able to stop it.")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "If something isn't done soon, there will be revolt. And i won't be able to stop it.")
                 timedUpdate(8)
             }
 
             7 -> {
-                dialogueUpdate(NPCs.GLO_CARANOCK_1427, FaceAnim.NEUTRAL, "Stop worrying. I'm working on something -")
+                dialogueUpdate(NPCs.MM_CARANOCK_1427, FaceAnim.NEUTRAL, "Stop worrying. I'm working on something -")
                 timedUpdate(6)
             }
 
             8 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "What something? You're always working on something. All we ever hear is bad news.")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "What something? You're always working on something. All we ever hear is bad news.")
                 timedUpdate(10)
             }
 
             9 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "First Glough disappeared. Then news of a missing squad of the Royal Guard in our area. And what about that human sent by the King?")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "First Glough disappeared. Then news of a missing squad of the Royal Guard in our area. And what about that human sent by the King?")
                 timedUpdate(14)
             }
 
             10 -> {
-                dialogueUpdate(NPCs.GLO_CARANOCK_1427, FaceAnim.NEUTRAL, "The human means nothing. If it becomes too much trouble, I will simply have it ... removed. In the meantime, let it continue to search for what blasted 10th squad.")
+                dialogueUpdate(NPCs.MM_CARANOCK_1427, FaceAnim.NEUTRAL, "The human means nothing. If it becomes too much trouble, I will simply have it ... removed. In the meantime, let it continue to search for what blasted 10th squad.")
                 timedUpdate(14)
             }
 
             11 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "I am still worried. What am I meant to tell the men?")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "I am still worried. What am I meant to tell the men?")
                 timedUpdate(8)
             }
 
             12 -> {
-                dialogueUpdate(NPCs.GLO_CARANOCK_1427, FaceAnim.NEUTRAL, "Stop worrying. I'm working on something - Glough left a few of his agents in the Gnome airforce.")
+                dialogueUpdate(NPCs.MM_CARANOCK_1427, FaceAnim.NEUTRAL, "Stop worrying. I'm working on something - Glough left a few of his agents in the Gnome airforce.")
                 timedUpdate(12)
             }
 
             13 -> {
-                dialogueUpdate(NPCs.GLO_CARANOCK_1427, FaceAnim.NEUTRAL, "For now tell to you men to continue work on the battleships. Give me some time.")
+                dialogueUpdate(NPCs.MM_CARANOCK_1427, FaceAnim.NEUTRAL, "For now tell to you men to continue work on the battleships. Give me some time.")
                 timedUpdate(12)
             }
 
             14 -> {
-                dialogueUpdate(NPCs.FOREMAN_1470, FaceAnim.WORRIED, "I hope you're right, Caranock, for your sake. My sake. For all of our sakes...")
+                dialogueUpdate(NPCs.MM_FOREMAN_CUTSCENE_1470, FaceAnim.WORRIED, "I hope you're right, Caranock, for your sake. My sake. For all of our sakes...")
                 timedUpdate(12)
             }
 

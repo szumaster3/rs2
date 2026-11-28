@@ -277,7 +277,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
                 removeItem(player, Items.MITHRIL_BAR_2359)
             }
 
-            animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+            animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
             playAudio(player, Sounds.FURNACE_2725)
             rewardXP(player, Skills.CRAFTING, product.xp)
             addItem(player, product.product)

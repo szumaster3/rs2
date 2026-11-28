@@ -78,5 +78,5 @@ class TrainerNacklepenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = TrainerNacklepenDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TRAINER_NACKLEPEN_3818)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_TORTOISE_TRAINER_3818)
 }

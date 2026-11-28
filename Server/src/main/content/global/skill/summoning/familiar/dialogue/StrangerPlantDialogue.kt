@@ -86,5 +86,5 @@ class StrangerPlantDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STRANGER_PLANT_6827, NPCs.STRANGER_PLANT_6828)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_STRANGER_PLANT_6827, NPCs.LORE_STRANGER_PLANT_COMBAT_6828)
 }

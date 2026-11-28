@@ -188,7 +188,7 @@ class ShieldOfArravPlugin : OptionHandler() {
                         ShieldofArrav.BOOK.id,
                     )
                 ) {
-                    openDialogue(player, NPCs.RELDO_2660, Repository.findNPC(NPCs.RELDO_2660)!!, "book")
+                    openDialogue(player, NPCs.RELDO_WITHBOOK_2660, Repository.findNPC(NPCs.RELDO_WITHBOOK_2660)!!, "book")
                 } else {
                     sendMessage(player, "You already own 'The Shield of Arrav', the book that was kept here.")
                 }

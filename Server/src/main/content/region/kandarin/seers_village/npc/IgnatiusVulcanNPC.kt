@@ -45,7 +45,7 @@ class IgnatiusVulcanNPC(id: Int = 0, location: Location? = null) : AbstractNPC(i
          */
         private val ANIMATION =
             Animation(
-                Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733,
+                Animations.HUMAN_CREATEFIRE_733,
                 Priority.HIGH
             )
 

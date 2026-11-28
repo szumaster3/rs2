@@ -119,7 +119,7 @@ class SeerBartenderDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SeerBartenderDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARTENDER_737, NPCs.BARTENDER_738)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FORESTERS_BARTENDER_737, NPCs.FLYINGHORSE_BARTENDER_738)
 
 
     /**

@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class TheSlugMenace : Quest("The Slug Menace", 110, 109, 1, Vars.VARBIT_QUEST_THE_SLUG_MENACE_2610, 0, 1, 14) {
+class TheSlugMenace : Quest("The Slug Menace", 110, 109, 1, Vars.VARBIT_2610, 0, 1, 14) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -106,7 +106,7 @@ class TheSlugMenace : Quest("The Slug Menace", 110, 109, 1, Vars.VARBIT_QUEST_TH
         rewardXP(player, Skills.CRAFTING, 3500.0)
         rewardXP(player, Skills.RUNECRAFTING, 3500.0)
         rewardXP(player, Skills.THIEVING, 3500.0)
-        setVarbit(player, Vars.VARBIT_QUEST_THE_SLUG_MENACE_2610, 14, true)
+        setVarbit(player, Vars.VARBIT_2610, 14, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

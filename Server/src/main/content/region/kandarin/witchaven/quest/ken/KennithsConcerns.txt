@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class KennithsConcerns : Quest("Kennith's Concerns", 149, 148, 1, Vars.VARBIT_QUEST_KENNITHS_CONCERNS_4505, 0, 1, 100) {
+class KennithsConcerns : Quest("Kennith's Concerns", 149, 148, 1, Vars.VARBIT_4505, 0, 1, 100) {
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11
@@ -34,7 +34,7 @@ class KennithsConcerns : Quest("Kennith's Concerns", 149, 148, 1, Vars.VARBIT_QU
 
         rewardXP(player, Skills.MINING, 12000.0)
         rewardXP(player, Skills.AGILITY, 5000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_KENNITHS_CONCERNS_4505, 100, true)
+        setVarbit(player, Vars.VARBIT_4505, 100, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

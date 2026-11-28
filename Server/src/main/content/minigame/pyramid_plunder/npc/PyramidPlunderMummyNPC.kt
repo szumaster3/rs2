@@ -32,6 +32,6 @@ class PyramidPlunderMummyNPC(location: Location?, player: Player?) : PyramidPlun
     override fun getIds(): IntArray = IDS
 
     companion object {
-        private val IDS = intArrayOf(NPCs.MUMMY_1958)
+        private val IDS = intArrayOf(NPCs.DESERTTREASURE_MUMMY_1_1958)
     }
 }

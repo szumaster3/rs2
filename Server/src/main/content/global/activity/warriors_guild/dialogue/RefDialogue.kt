@@ -54,5 +54,5 @@ class RefDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.REF_4299, NPCs.REF_4300)
+    override fun getIds(): IntArray = intArrayOf(NPCs.STRENGTH_REFERREE1_4299, NPCs.STRENGTH_REFERREE2_4300)
 }

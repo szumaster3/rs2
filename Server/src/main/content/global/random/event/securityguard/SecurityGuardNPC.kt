@@ -15,7 +15,7 @@ import shared.consts.NPCs
  */
 class SecurityGuardNPC(
     override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.SECURITY_GUARD_4375) {
+) : RandomEventNPC(NPCs.SOS_GUARD_4375) {
     private var timeLeft = 0
     val randomChat = arrayOf("Ah, time I was off now, bye!", "Well, I best be off!")
 

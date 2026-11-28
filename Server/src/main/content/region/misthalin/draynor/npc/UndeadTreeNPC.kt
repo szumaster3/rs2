@@ -43,7 +43,7 @@ class UndeadTreeNPC : AbstractNPC {
         super.tick()
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.UNDEAD_TREE_5208, NPCs.TREE_5207)
+    override fun getIds(): IntArray = intArrayOf(NPCs.NASTY_TREE_CHOPPABLE_5208, NPCs.NASTY_TREE_UNCHOPPABLE_5207)
 
     companion object {
         private val ANIMATION = Animation(73, Priority.HIGH)

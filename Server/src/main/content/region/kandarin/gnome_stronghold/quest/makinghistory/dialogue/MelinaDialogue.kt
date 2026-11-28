@@ -67,12 +67,12 @@ class MelinaDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 if (removeItem(player, Items.SAPPHIRE_AMULET_1694)) {
                     setVarbit(player, MHUtils.DROALAK_PROGRESS, 4, true)
-                    transformNpc(NPC(NPCs.MELINA_2935), NPCs.MELINA_2934, 10)
+                    transformNpc(NPC(NPCs.MAKINGHISTORY_MELINA_2935), NPCs.MAKINGHISTORY_MELINA_FADE_NPC_2934, 10)
                 }
             }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MELINA_2935)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAKINGHISTORY_MELINA_2935)
 }

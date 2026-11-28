@@ -52,5 +52,5 @@ class BootDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BOOT_665)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BOOT_THE_DWARF_665)
 }

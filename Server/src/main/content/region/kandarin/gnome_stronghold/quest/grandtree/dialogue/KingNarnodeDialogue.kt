@@ -34,7 +34,7 @@ class KingNarnodeDialogue : DialogueFile() {
     val closedTrapDoor = Scenery(2446, Location(2463, 3497, 0), 22, 0)
     val openedTrapDoor = Scenery(2445, Location(2463, 3497, 0), 22, 0)
     val tunnels = Location(2464, 9897, 0)
-    val ladderClimbAnimation = Animation(Animations.HUMAN_CLIMB_STAIRS_828)
+    val ladderClimbAnimation = Animation(Animations.HUMAN_REACHFORLADDER_828)
 
     fun leadDownLadder() {
         /*
@@ -68,7 +68,7 @@ class KingNarnodeDialogue : DialogueFile() {
 
                     7 -> {
                         // We are now underground.
-                        val undergroundNarnode = RegionManager.getNpc(player!!.location, NPCs.KING_NARNODE_SHAREEN_670, 16)
+                        val undergroundNarnode = RegionManager.getNpc(player!!.location, NPCs.GRANDTREE_NARNODE_670, 16)
                         forceWalk(undergroundNarnode!!, player!!.location.transform(Direction.EAST, 1), "SMART")
                         unlock(player!!)
                         openDialogue(player!!, KingNarnodeUnderGroundDialogue(), undergroundNarnode)
@@ -430,12 +430,12 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                 2 -> npcl(FaceAnim.OLD_DEFAULT, "What?! Glough?! With a demon?!").also { stage++ }
                 3 -> playerl("Glough has a store of Daconia rocks further up the passage! He's been accessing the roots from a secret passage at his home.").also { stage++ }
                 4 -> npcl(FaceAnim.OLD_DEFAULT, "Never! Not Glough! He's a good gnome at heart! Guard!").also { stage++ }
-                5 -> sendNPCDialogue(player!!, NPCs.GNOME_GUARD_163, "Sire!", FaceAnim.OLD_DEFAULT).also { stage++ }
+                5 -> sendNPCDialogue(player!!, NPCs.GNOMEKINGSGUARD_163, "Sire!", FaceAnim.OLD_DEFAULT).also { stage++ }
                 6 -> npcl(FaceAnim.OLD_DEFAULT, "Go and check out that passage!").also { stage++ }
-                7 -> sendNPCDialogue(player!!, NPCs.GNOME_GUARD_163, "We found Glough hiding under a horde of Daconia rocks!", FaceAnim.OLD_DEFAULT).also { stage++ }
+                7 -> sendNPCDialogue(player!!, NPCs.GNOMEKINGSGUARD_163, "We found Glough hiding under a horde of Daconia rocks!", FaceAnim.OLD_DEFAULT).also { stage++ }
                 8 -> playerl("That's what I've been trying to tell you! Glough's been fooling you!").also { stage++ }
                 9 -> npcl(FaceAnim.OLD_DEFAULT, "I... I don't know what to say! How could I have been so blind?! Guard! Call off the military training! The humans are not attacking!").also { stage++ }
-                10 -> sendNPCDialogue(player!!, NPCs.GNOME_GUARD_163, "Yes sir!", FaceAnim.OLD_DEFAULT).also { stage++ }
+                10 -> sendNPCDialogue(player!!, NPCs.GNOMEKINGSGUARD_163, "Yes sir!", FaceAnim.OLD_DEFAULT).also { stage++ }
                 11 -> npcl(FaceAnim.OLD_DEFAULT, "You have my full apologies Traveller! And my gratitude! A reward will have to wait though, the tree is still dying!").also { stage++ }
                 12 -> npcl(FaceAnim.OLD_DEFAULT, "The guards are clearing Glough's rock supply now but there must be more Daconia hidden somewhere in the roots! Help us search, we have little time!").also {
                     setQuestStage(player!!, Quests.THE_GRAND_TREE.questName, 99)

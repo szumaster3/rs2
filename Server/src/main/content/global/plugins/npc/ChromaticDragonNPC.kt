@@ -45,28 +45,28 @@ class ChromaticDragonNPC(id: Int = 0, location: Location? = null) : AbstractNPC(
         intArrayOf(
             // Green dragons.
             NPCs.GREEN_DRAGON_941,
-            NPCs.GREEN_DRAGON_4677,
-            NPCs.GREEN_DRAGON_4678,
-            NPCs.GREEN_DRAGON_4679,
-            NPCs.GREEN_DRAGON_4680,
+            NPCs.GREEN_DRAGON2_4677,
+            NPCs.GREEN_DRAGON3_4678,
+            NPCs.GREEN_DRAGON4_4679,
+            NPCs.GREEN_DRAGON5_4680,
             // Red dragons.
             NPCs.RED_DRAGON_53,
-            NPCs.RED_DRAGON_4669,
-            NPCs.RED_DRAGON_4670,
-            NPCs.RED_DRAGON_4671,
-            NPCs.RED_DRAGON_4672,
+            NPCs.RED_DRAGON2_4669,
+            NPCs.RED_DRAGON3_4670,
+            NPCs.RED_DRAGON4_4671,
+            NPCs.RED_DRAGON5_4672,
             // Black dragons.
             NPCs.BLACK_DRAGON_54,
-            NPCs.BLACK_DRAGON_4673,
-            NPCs.BLACK_DRAGON_4674,
-            NPCs.BLACK_DRAGON_4675,
-            NPCs.BLACK_DRAGON_4676,
+            NPCs.BLACK_DRAGON2_4673,
+            NPCs.BLACK_DRAGON3_4674,
+            NPCs.BLACK_DRAGON4_4675,
+            NPCs.BLACK_DRAGON5_4676,
             // Blue dragons.
             NPCs.BLUE_DRAGON_55,
-            NPCs.BLUE_DRAGON_4681,
-            NPCs.BLUE_DRAGON_4682,
-            NPCs.BLUE_DRAGON_4683,
-            NPCs.BLUE_DRAGON_4684,
+            NPCs.BLUE_DRAGON2_4681,
+            NPCs.BLUE_DRAGON3_4682,
+            NPCs.BLUE_DRAGON4_4683,
+            NPCs.BLUE_DRAGON5_4684,
         )
 
     class ChromaticDragonBehavior : NPCBehavior(*greenDragons, *blueDragons, *redDragons, *blackDragons) {
@@ -100,31 +100,31 @@ class ChromaticDragonNPC(id: Int = 0, location: Location? = null) : AbstractNPC(
         companion object {
             val greenDragons = intArrayOf(
                 NPCs.GREEN_DRAGON_941,
-                NPCs.GREEN_DRAGON_4677,
-                NPCs.GREEN_DRAGON_4678,
-                NPCs.GREEN_DRAGON_4679,
-                NPCs.GREEN_DRAGON_4680,
+                NPCs.GREEN_DRAGON2_4677,
+                NPCs.GREEN_DRAGON3_4678,
+                NPCs.GREEN_DRAGON4_4679,
+                NPCs.GREEN_DRAGON5_4680,
             )
             val blueDragons = intArrayOf(
                 NPCs.BLUE_DRAGON_55,
-                NPCs.BLUE_DRAGON_4681,
-                NPCs.BLUE_DRAGON_4682,
-                NPCs.BLUE_DRAGON_4683,
-                NPCs.BLUE_DRAGON_4684,
+                NPCs.BLUE_DRAGON2_4681,
+                NPCs.BLUE_DRAGON3_4682,
+                NPCs.BLUE_DRAGON4_4683,
+                NPCs.BLUE_DRAGON5_4684,
             )
             val redDragons = intArrayOf(
                 NPCs.RED_DRAGON_53,
-                NPCs.RED_DRAGON_4669,
-                NPCs.RED_DRAGON_4670,
-                NPCs.RED_DRAGON_4671,
-                NPCs.RED_DRAGON_4672,
+                NPCs.RED_DRAGON2_4669,
+                NPCs.RED_DRAGON3_4670,
+                NPCs.RED_DRAGON4_4671,
+                NPCs.RED_DRAGON5_4672,
             )
             val blackDragons = intArrayOf(
                 NPCs.BLACK_DRAGON_54,
-                NPCs.BLACK_DRAGON_4673,
-                NPCs.BLACK_DRAGON_4674,
-                NPCs.BLACK_DRAGON_4675,
-                NPCs.BLACK_DRAGON_4676,
+                NPCs.BLACK_DRAGON2_4673,
+                NPCs.BLACK_DRAGON3_4674,
+                NPCs.BLACK_DRAGON4_4675,
+                NPCs.BLACK_DRAGON5_4676,
             )
             var EGG_RATE = 1000
         }

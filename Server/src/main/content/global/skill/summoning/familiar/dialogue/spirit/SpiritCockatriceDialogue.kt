@@ -89,5 +89,5 @@ class SpiritCockatriceDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_COCKATRICE_6875, NPCs.SPIRIT_COCKATRICE_6876)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_COCKATRICE_6875, NPCs.LORE_COCKATRICE_COMBAT_6876)
 }

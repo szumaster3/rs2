@@ -27,7 +27,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val questStage = getQuestStage(player, Quests.WATCHTOWER.questName)
-        if (npc.id == NPCs.WIZARD_5195) {
+        if (npc.id == NPCs.QIP_WATCHTOWER_WIZARD_02_5195) {
             if (questStage == 75) {
                 player(FaceAnim.HALF_ASKING, "Any chance of advice about this potion?")
                 stage = 905
@@ -287,7 +287,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
 
             600 -> npc(FaceAnim.HAPPY, "Excellent! That seems to be all the pieces. Now I can", "assemble it...").also {
                 playAudio(player, Sounds.WATCHTOWER_MAKE_RELIC_3267, 1)
-                animate(findLocalNPC(player, npc.id)!!, Animations.CLIMB_JUMP_UP_5352)
+                animate(findLocalNPC(player, npc.id)!!, Animations.QIP_WATCHTOWER_WIZARD_RELIC_5352)
                 stage++
             }
             601 -> {
@@ -471,7 +471,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WATCHTOWER_WIZARD_872, NPCs.WIZARD_5195)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WATCHTOWER_WIZARD_872, NPCs.QIP_WATCHTOWER_WIZARD_02_5195)
 
     companion object {
         private val EVIDENCE_IDS = intArrayOf(

@@ -25,7 +25,7 @@ class PetshopOwnerDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         if (args.size > 1) {
             val npcs: List<NPC> = RegionManager.getLocalNpcs(player)
-            for (n in npcs) if (n.id == NPCs.PET_SHOP_OWNER_6893) npc = n
+            for (n in npcs) if (n.id == NPCs.LORE_PETSHOP_OWNER_TAVERLY_6893) npc = n
             dogName = args[0].toString()
             puppy = Item(args[1] as Int)
             player("No, the $dogName.")
@@ -109,8 +109,8 @@ class PetshopOwnerDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(
         NPCs.PET_SHOP_OWNER_6750,
         NPCs.PET_SHOP_OWNER_6751,
-        NPCs.PET_SHOP_OWNER_6892,
-        NPCs.PET_SHOP_OWNER_6893,
+        NPCs.LORE_PETSHOP_OWNER_YANILLE_6892,
+        NPCs.LORE_PETSHOP_OWNER_TAVERLY_6893,
         NPCs.PET_SHOP_OWNER_6898,
     )
 }

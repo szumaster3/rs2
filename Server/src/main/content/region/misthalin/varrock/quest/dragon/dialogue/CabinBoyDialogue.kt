@@ -92,5 +92,5 @@ class CabinBoyDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CABIN_BOY_JENKINS_6085)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DRAGONSLAYER_JENKINS_THERE_6085)
 }

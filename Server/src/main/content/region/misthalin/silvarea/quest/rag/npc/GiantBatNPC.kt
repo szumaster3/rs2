@@ -16,16 +16,16 @@ class GiantBatNPC : NPCBehavior(*giantBatIds) {
     companion object {
         private val giantBatIds =
             intArrayOf(
-                NPCs.GIANT_BAT_78,
-                NPCs.GIANT_BAT_1005,
-                NPCs.GIANT_BAT_2482,
-                NPCs.GIANT_BAT_2483,
-                NPCs.GIANT_BAT_2484,
-                NPCs.GIANT_BAT_2485,
-                NPCs.GIANT_BAT_2486,
-                NPCs.GIANT_BAT_2487,
-                NPCs.GIANT_BAT_2488,
-                NPCs.GIANT_BAT_3711,
+                NPCs.BAT_78,
+                NPCs.NON_COMBAT_BAT_1005,
+                NPCs.AGILITYARENA_NON_COMBAT_BAT_2482,
+                NPCs.TIADECHE_2483,
+                NPCs.TIADECHE_2484,
+                NPCs.TINSAY_2485,
+                NPCs.TINSAY_2486,
+                NPCs.TAMAYU_2487,
+                NPCs.TAMAYU_2488,
+                NPCs.OLAF2_GIANT_BAT_3711,
             )
     }
 

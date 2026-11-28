@@ -76,7 +76,7 @@ class GravediggerPlugin : InteractionListener, MapArea {
         private const val COFFIN_INTERFACE = Components.GRAVEDIGGER_COFFIN_141
         private const val GRAVESTONE_INTERFACE = Components.GRAVEDIGGER_GRAVE_143
         private const val MAUSOLEUM = Scenery.MAUSOLEUM_12731
-        private val ANIMATION = Animation(Animations.HUMAN_BURYING_BONES_827)
+        private val ANIMATION = Animation(Animations.HUMAN_PICKUPFLOOR_827)
         private val COFFIN_SETS = CoffinSet.values().toList()
         val COFFIN_IDS = COFFIN_SETS.map(CoffinSet::coffinId).toIntArray()
 
@@ -84,7 +84,7 @@ class GravediggerPlugin : InteractionListener, MapArea {
         private val GRAVE_IDS = COFFIN_SETS.map(CoffinSet::graveId).toIntArray()
         private val EMPTY_GRAVE_IDS = COFFIN_SETS.map(CoffinSet::emptyGraveId).toIntArray()
 
-        private val WOODCUTTING_TOOLS = intArrayOf(Items.INFERNO_ADZE_13661, Items.DRAGON_AXE_6739, Items.RUNE_AXE_1359, Items.ADAMANT_AXE_1357, Items.MITHRIL_AXE_1355, Items.BLACK_AXE_1361, Items.STEEL_AXE_1353, Items.IRON_AXE_1349, Items.BRONZE_AXE_1351)
+        private val WOODCUTTING_TOOLS = intArrayOf(Items.INFERNO_ADZE_13661, Items.DRAGON_HATCHET_6739, Items.RUNE_HATCHET_1359, Items.ADAMANT_HATCHET_1357, Items.MITHRIL_HATCHET_1355, Items.BLACK_HATCHET_1361, Items.STEEL_HATCHET_1353, Items.IRON_HATCHET_1349, Items.BRONZE_HATCHET_1351)
         private val regions = mutableMapOf<Player, DynamicRegion>()
         private fun generateCoffinShuffle(player: Player) {
             val shuffledCoffins = COFFIN_SETS.shuffled()

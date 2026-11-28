@@ -29,5 +29,5 @@ class FactoryManagerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FactoryManagerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FACTORY_MANAGER_2171)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_FACTORY_GUARD_2171)
 }

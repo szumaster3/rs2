@@ -50,8 +50,8 @@ class CaveZone :
     fun trigger(player: Player) {
         if (RandomFunction.random(1, 6) <= 2) {
             player.animator.animate(
-                Animation(Animations.FALL_TRAPDOOR_1950),
-                Graphics(shared.consts.Graphics.HOLE_OPENS_IN_GROUND_572, 1, 3),
+                Animation(Animations.DESERT_COMEDY_FALL_1950),
+                Graphics(shared.consts.Graphics.STALKER_2022_EMOTE_572, 1, 3),
             )
             GameWorld.Pulser.submit(
                 object : Pulse(5) {
@@ -67,7 +67,7 @@ class CaveZone :
             player.unlock()
             player.animator.animate(
                 Animation.RESET,
-                Graphics(shared.consts.Graphics.ROCKS_FALLING_ON_HEAD_302),
+                Graphics(shared.consts.Graphics.ROCKFALL_3_302),
             )
             player.impactHandler.manualHit(player, RandomFunction.random(1, 7), ImpactHandler.HitsplatType.NORMAL)
         }

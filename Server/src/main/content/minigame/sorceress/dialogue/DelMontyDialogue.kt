@@ -38,7 +38,7 @@ class DelMontyDialogue(player: Player? = null) : Dialogue(player) {
     companion object {
         fun hasCatAmulet(player: Player): Boolean {
             val item = player.equipment[EquipmentContainer.SLOT_AMULET] ?: return false
-            return item.id == Items.CATSPEAK_AMULET_4677 || item.id == Items.CATSPEAK_AMULETE_6544
+            return item.id == Items.CATSPEAK_AMULET_4677 || item.id == Items.CATSPEAK_AMULET_E_6544
         }
     }
 }

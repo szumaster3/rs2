@@ -193,7 +193,7 @@ open class MeleeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
 
                 // attack bonus for specialized equipments (salve amulets, slayer equips)
                 val amuletId = getItemFromEquipment(entity, EquipmentSlot.NECK)?.id ?: 0
-                if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULETE_10588) && checkUndead(victimName)) {
+                if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULET_E_10588) && checkUndead(victimName)) {
                     effectiveAttackLevel *= if (amuletId == Items.SALVE_AMULET_4081) 1.15 else 1.2
                 } else if (
                     getSlayerTask(entity)?.let { task ->

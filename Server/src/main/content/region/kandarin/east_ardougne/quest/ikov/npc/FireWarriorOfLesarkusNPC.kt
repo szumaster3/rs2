@@ -18,7 +18,7 @@ class FireWarriorOfLesarkusNPC(id: Int = 0, val player: Player?, location: Locat
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = FireWarriorOfLesarkusNPC(id, null, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FIRE_WARRIOR_OF_LESARKUS_277)
+    override fun getIds(): IntArray = intArrayOf(NPCs.IKOV_FIREWARRIOR_277)
 
     override fun handleTickActions() {
         super.handleTickActions()

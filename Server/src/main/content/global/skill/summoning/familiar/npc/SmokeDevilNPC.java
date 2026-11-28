@@ -24,7 +24,7 @@ import java.util.List;
 public class SmokeDevilNPC extends Familiar {
 
     public SmokeDevilNPC() {
-        this(null, NPCs.SMOKE_DEVIL_6865);
+        this(null, NPCs.LORE_DUST_DEVIL_6865);
     }
 
     public SmokeDevilNPC(Player owner, int id) {
@@ -75,7 +75,7 @@ public class SmokeDevilNPC extends Familiar {
 
     @Override
     public int[] getIds() {
-        return new int[]{NPCs.SMOKE_DEVIL_6865, NPCs.SMOKE_DEVIL_6866};
+        return new int[]{NPCs.LORE_DUST_DEVIL_6865, NPCs.LORE_DUST_DEVIL_COMBAT_6866};
     }
 
 }

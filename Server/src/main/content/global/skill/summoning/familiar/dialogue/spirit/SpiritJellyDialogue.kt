@@ -85,5 +85,5 @@ class SpiritJellyDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_JELLY_6992, NPCs.SPIRIT_JELLY_6993)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_JELLY_6992, NPCs.LORE_JELLY_COMBAT_6993)
 }

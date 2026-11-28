@@ -22,5 +22,5 @@ class JimmyTheChiselDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JIMMY_THE_CHISEL_1718)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAVOUR_JIMMY_1718)
 }

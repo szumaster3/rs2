@@ -41,5 +41,5 @@ class GhommalDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOMMAL_4285)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WARGUILD_GHOMMAL_4285)
 }

@@ -64,13 +64,13 @@ class GodWarsBoulderShortcut : AgilityShortcut(intArrayOf(26338), 0, 0.0, "move"
                 when (counter++) {
                     0 -> {
                         openOverlay(player, Components.SNOW_OVERLAY_370)
-                        animateScenery(boulderInstance, Animations.MOVE_BOULDER_6980)
+                        animateScenery(boulderInstance, Animations.GODWARS_EA_BOULDER_MOVE_UP_6980)
                         AgilityHandler.forceWalk(
                             player,
                             -1,
                             player.location,
                             player.location.transform(0, moveOffsetY, 0),
-                            Animation(if (isMovingNorth) Animations.LIFT_REALLY_HEAVY_ROCK_6978 else Animations.LIFT_REALLY_HEAVY_ROCK_6979),
+                            Animation(if (isMovingNorth) Animations.GODWARS_EA_PLAYER_MOVE_BOULDER_6978 else Animations.GODWARS_EA_PLAYER_MOVE_BOULDER_SOUTH_6979),
                             3,
                             0.0,
                             null
@@ -78,7 +78,7 @@ class GodWarsBoulderShortcut : AgilityShortcut(intArrayOf(26338), 0, 0.0, "move"
                     }
 
                     12 -> {
-                        animateScenery(boulderInstance, Animations.MOVE_BOULDER_6981)
+                        animateScenery(boulderInstance, Animations.GODWARS_EA_BOULDER_MOVE_DOWN_6981)
                     }
 
                     14 -> {

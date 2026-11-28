@@ -64,8 +64,8 @@ class JungleForesterDiaryDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.JUNGLE_FORESTER_401,
-        NPCs.JUNGLE_FORESTER_402
+        NPCs.JUNGLEFORESTER_M_401,
+        NPCs.JUNGLEFORESTER_F_402
     )
 
 }

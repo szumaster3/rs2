@@ -34,7 +34,7 @@ class MonkNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locatio
                 RandomFunction.randomize(10) < 2
             ) {
                 stopWalk(entity)
-                animate(entity, Animations.HANDS_TOGETHER_709)
+                animate(entity, Animations.HUMAN_CASTHEAL_709)
                 entity.getSkills().heal(2)
                 entity.properties.combatPulse.setNextAttack(4)
                 return -1
@@ -43,5 +43,5 @@ class MonkNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locatio
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_7727)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ICEMT_MONK_7727)
 }

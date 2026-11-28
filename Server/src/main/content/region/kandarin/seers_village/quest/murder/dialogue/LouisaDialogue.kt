@@ -24,7 +24,7 @@ class LouisaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LOUISA_809)
+        return intArrayOf(NPCs.LOUISA_THE_COOK_809)
     }
 }
 

@@ -11,7 +11,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritKyattNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_KYATT_7366) :
+class SpiritKyattNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_KYATT_COMBAT_7366) :
     Familiar(owner, id, 4900, Items.SPIRIT_KYATT_POUCH_12812, 3, WeaponInterface.STYLE_ACCURATE) {
 
     init {
@@ -31,6 +31,6 @@ class SpiritKyattNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_KYATT_7365, NPCs.SPIRIT_KYATT_7366)
+        return intArrayOf(NPCs.LORE_KYATT_7365, NPCs.LORE_KYATT_COMBAT_7366)
     }
 }

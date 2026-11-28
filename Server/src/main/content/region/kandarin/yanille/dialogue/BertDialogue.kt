@@ -270,7 +270,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BertDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BERT_3108)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HANDSAND_BERT_3108)
 
 
     companion object {

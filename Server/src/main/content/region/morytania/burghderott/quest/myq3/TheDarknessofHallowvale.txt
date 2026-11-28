@@ -11,7 +11,7 @@ import core.plugin.Initializable
 
 @Initializable
 class TheDarknessofHallowvale :
-    Quest("Darkness of Hallowvale", 42, 41, 2, Vars.VARBIT_QUEST_THE_DARKNESS_OF_HALLOWVALE_2573, 0, 1, 320) {
+    Quest("Darkness of Hallowvale", 42, 41, 2, Vars.VARBIT_2573, 0, 1, 320) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -42,7 +42,7 @@ class TheDarknessofHallowvale :
         rewardXP(player, Skills.CONSTRUCTION, 2000.0)
         rewardXP(player, Skills.FIREMAKING, 1500.0)
         addItemOrDrop(player, Items.TOME_OF_XP_1_9658)
-        setVarbit(player, Vars.VARBIT_QUEST_THE_DARKNESS_OF_HALLOWVALE_2573, 320, true)
+        setVarbit(player, Vars.VARBIT_2573, 320, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

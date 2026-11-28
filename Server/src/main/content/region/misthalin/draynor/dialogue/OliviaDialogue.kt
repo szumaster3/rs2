@@ -49,5 +49,5 @@ class OliviaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = OliviaDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OLIVIA_2233, NPCs.OLIVIA_2572)
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLIVIA_2233, NPCs.WOM_OLIVIA_2572)
 }

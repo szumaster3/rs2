@@ -24,11 +24,11 @@ class TentacleNPC(
         vararg objects: Any,
     ): AbstractNPC = TentacleNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TENTACLE_3580)
+    override fun getIds(): IntArray = intArrayOf(NPCs.POH_TENTACLE_MONSTER_3580)
 
     companion object {
         fun spawnTentacleNPC(player: Player) {
-            val tentacle = TentacleNPC(NPCs.TENTACLE_3580)
+            val tentacle = TentacleNPC(NPCs.POH_TENTACLE_MONSTER_3580)
             tentacle.isWalks = false
             tentacle.isAggressive = true
             tentacle.isActive = false
@@ -42,7 +42,7 @@ class TentacleNPC(
                 object : Pulse(0, tentacle) {
                     override fun pulse(): Boolean {
                         tentacle.init()
-                        tentacle.transform(NPCs.TENTACLE_3621)
+                        tentacle.transform(NPCs.TEMPLETREK_TENTACLE_ARM_SPAWNING_3621)
                         tentacle.attack(player)
                         return true
                     }

@@ -16,7 +16,7 @@ class VanstromKlauseQuestDialogue : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        npc = NPC(NPCs.VANSTROM_KLAUSE_1577)
+        npc = NPC(NPCs.ROUTE_VANSTROM_KLAUSE_SITTING_1577)
         when (getQuestStage(player!!, "In Search of the Myreque")) {
             0 ->
                 when (stage) {

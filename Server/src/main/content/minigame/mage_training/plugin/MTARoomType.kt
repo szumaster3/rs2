@@ -20,7 +20,7 @@ import shared.consts.Vars
  */
 enum class MTARoomType(val sceneryId: Int, val overlay: Component, val varbit: Int, private val startLocation: Location? = null, private val endLocation: Location, val mtaZone: MTAZone)
 {
-    TELEKINETIC(Scenery.TELEKINETIC_TP_10778, Component(Components.MAGICTRAINING_TELE_198), Vars.VARBIT_MTA_TELEKINETIC_POINTS_1485, null, Location.create(3363, 3316, 0), TelekineticTheatrePlugin()) {
+    TELEKINETIC(Scenery.TELEKINETIC_TELEPORT_10778, Component(Components.MAGICTRAINING_TELE_198), Vars.VARBIT_MTA_TELEKINETIC_POINTS_1485, null, Location.create(3363, 3316, 0), TelekineticTheatrePlugin()) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
             if (magicLevel < 33) {
@@ -31,7 +31,7 @@ enum class MTARoomType(val sceneryId: Int, val overlay: Component, val varbit: I
         }
     },
 
-    ALCHEMISTS(Scenery.ALCHEMISTS_TP_10780, Component(Components.MAGICTRAINING_ALCH_STATS_194), Vars.VARBIT_MTA_ALCHEMIST_POINTS_1489, Location(3366, 9623, 2), Location(3363, 3320, 0), AlchemistPlaygroundPlugin.ZONE) {
+    ALCHEMISTS(Scenery.ALCHEMISTS_TELEPORT_10780, Component(Components.MAGICTRAINING_ALCH_STATS_194), Vars.VARBIT_MTA_ALCHEMIST_POINTS_1489, Location(3366, 9623, 2), Location(3363, 3320, 0), AlchemistPlaygroundPlugin.ZONE) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
             if (magicLevel < 21) {
@@ -58,7 +58,7 @@ enum class MTARoomType(val sceneryId: Int, val overlay: Component, val varbit: I
         }
     },
 
-    ENCHANTERS(Scenery.ENCHANTERS_TP_10779, Component(Components.MAGICTRAINING_ENCHANT_195), Vars.VARBIT_MTA_ENCHANTMENT_POINTS_1488, Location(3363, 9649, 0), Location(3361, 3318, 0), EnchantmentChamberPlugin.ZONE) {
+    ENCHANTERS(Scenery.ENCHANTERS_TELEPORT_10779, Component(Components.MAGICTRAINING_ENCHANT_195), Vars.VARBIT_MTA_ENCHANTMENT_POINTS_1488, Location(3363, 9649, 0), Location(3361, 3318, 0), EnchantmentChamberPlugin.ZONE) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
             if (magicLevel < 7) {
@@ -69,7 +69,7 @@ enum class MTARoomType(val sceneryId: Int, val overlay: Component, val varbit: I
         }
     },
 
-    GRAVEYARD(Scenery.GRAVEYARD_TP_10781, Component(Components.MAGICTRAINING_GRAVE_196), Vars.VARBIT_MTA_GRAVEYARD_POINTS_1486, Location(3363, 9639, 1), Location(3365, 3318, 0), CreatureGraveyardPlugin.ZONE) {
+    GRAVEYARD(Scenery.GRAVEYARD_TELEPORT_10781, Component(Components.MAGICTRAINING_GRAVE_196), Vars.VARBIT_MTA_GRAVEYARD_POINTS_1486, Location(3363, 9639, 1), Location(3365, 3318, 0), CreatureGraveyardPlugin.ZONE) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
             if (magicLevel < 15) {

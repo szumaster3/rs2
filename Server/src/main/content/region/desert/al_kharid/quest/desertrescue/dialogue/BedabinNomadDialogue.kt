@@ -18,7 +18,7 @@ class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (npc.id) {
-            NPCs.BEDABIN_NOMAD_GUARD_834 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
+            NPCs.BEDABIN_GUARD_834 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 54 -> if (player.inventory.containsItem(TouristTrap.TECHNICAL_PLANS)) {
                     player("Al Shabim said I could enter, here are the plans!")
                     stage++
@@ -40,7 +40,7 @@ class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
                 )
             }
 
-            NPCs.BEDABIN_NOMAD_833, NPCs.BEDABIN_NOMAD_FIGHTER_1239 -> npc(
+            NPCs.BEDABIN_833, NPCs.BEDABIN_FIGHTER_1239 -> npc(
                 FaceAnim.FRIENDLY, "Hello Effendi! How can I help you?"
             )
         }
@@ -49,7 +49,7 @@ class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
-            NPCs.BEDABIN_NOMAD_GUARD_834 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
+            NPCs.BEDABIN_GUARD_834 -> when (getQuestStage(player, Quests.THE_TOURIST_TRAP.questName)) {
                 54 -> when (stage) {
                     0 -> end()
                     1 -> {
@@ -71,7 +71,7 @@ class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
                 else -> end()
             }
 
-            NPCs.BEDABIN_NOMAD_833 -> when (stage) {
+            NPCs.BEDABIN_833 -> when (stage) {
                 0 -> {
                     options(
                         "What is this place?",
@@ -127,7 +127,7 @@ class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
                 40 -> end()
             }
 
-            NPCs.BEDABIN_NOMAD_FIGHTER_1239 -> when (stage) {
+            NPCs.BEDABIN_FIGHTER_1239 -> when (stage) {
                 0 -> {
                     options("What is this place?", "Where is Shantay Pass?", "Okay, thanks.")
                     stage++
@@ -171,8 +171,8 @@ class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.BEDABIN_NOMAD_GUARD_834,
-        NPCs.BEDABIN_NOMAD_833,
-        NPCs.BEDABIN_NOMAD_FIGHTER_1239,
+        NPCs.BEDABIN_GUARD_834,
+        NPCs.BEDABIN_833,
+        NPCs.BEDABIN_FIGHTER_1239,
     )
 }

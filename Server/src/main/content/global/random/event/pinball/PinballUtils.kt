@@ -77,10 +77,10 @@ object PinballUtils {
         val newIndex = PINBALL_PILLARS.indices.random()
 
         if (oldIndex in PINBALL_PILLARS.indices) {
-            animateScenery(PINBALL_PILLARS[oldIndex], Animations.RESET_PILLAR_ANIMATION_4006)
+            animateScenery(PINBALL_PILLARS[oldIndex], Animations.PINBALL_POST_INACTIVE_4006)
         }
 
-        animateScenery(PINBALL_PILLARS[newIndex], Animations.ANIMATE_PILLAR_4005)
+        animateScenery(PINBALL_PILLARS[newIndex], Animations.PINBALL_POST_4005)
         setAttribute(player, GameAttributes.RE_PINBALL_INTER, newIndex)
         setAttribute(player, GameAttributes.RE_PINBALL_OBJ, newIndex)
 

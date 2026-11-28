@@ -300,5 +300,5 @@ class GardenerGhostDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GardenerGhostDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GARDENER_GHOST_1675)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FENK_GARDENER_1675)
 }

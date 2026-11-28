@@ -11,7 +11,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class HydraNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.HYDRA_6811) :
+class HydraNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_HYDRA_6811) :
     Familiar(owner, id, 4900, Items.HYDRA_POUCH_12025, 6, WeaponInterface.STYLE_RANGE_ACCURATE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return HydraNPC(owner, id)
@@ -32,6 +32,6 @@ class HydraNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.H
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HYDRA_6811, NPCs.HYDRA_6812)
+        return intArrayOf(NPCs.LORE_HYDRA_6811, NPCs.LORE_HYDRA_COMBAT_6812)
     }
 }

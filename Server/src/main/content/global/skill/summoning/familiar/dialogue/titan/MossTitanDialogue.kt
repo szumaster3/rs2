@@ -95,5 +95,5 @@ class MossTitanDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MOSS_TITAN_7357, NPCs.MOSS_TITAN_7358)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_MOSS_TITAN_7357, NPCs.LORE_MOSS_TITAN_COMBAT_7358)
 }

@@ -8,7 +8,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class SwanSong : Quest("Swan Song", 117, 116, 2, Vars.VARBIT_QUEST_SWAN_SONG_2098, 0, 1, 200) {
+class SwanSong : Quest("Swan Song", 117, 116, 2, Vars.VARBIT_2098, 0, 1, 200) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -106,7 +106,7 @@ class SwanSong : Quest("Swan Song", 117, 116, 2, Vars.VARBIT_QUEST_SWAN_SONG_209
         rewardXP(player, Skills.FISHING, 10000.0)
         addItemOrDrop(player, Items.COINS_995, 25000)
         addItemOrDrop(player, Items.BROWN_APRON_1757, 1)
-        setVarbit(player, Vars.VARBIT_QUEST_SWAN_SONG_2098, 200, true)
+        setVarbit(player, Vars.VARBIT_2098, 200, true)
         setVarbit(player, 2098, 1, true)  /*                                                   */
     }
 

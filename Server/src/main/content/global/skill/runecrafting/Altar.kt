@@ -23,20 +23,20 @@ enum class Altar(
     val ruin: MysteriousRuins?,
     val rune: Rune?
 ) {
-    AIR(Objects.AIR_ALTAR_2478, Objects.AIR_ALTAR_EXIT_2465, Objects.AIR_RIFT_7139, MysteriousRuins.AIR, Rune.AIR),
-    MIND(Objects.MIND_ALTAR_2479, Objects.MIND_ALTAR_EXIT_2466, Objects.MIND_RIFT_7140, MysteriousRuins.MIND, Rune.MIND),
-    WATER(Objects.WATER_ALTAR_2480, Objects.WATER_ALTAR_EXIT_2467, Objects.WATER_RIFT_7137, MysteriousRuins.WATER, Rune.WATER),
-    EARTH(Objects.EARTH_ALTAR_2481, Objects.EARTH_ALTAR_EXIT_2468, Objects.EARTH_RIFT_7130, MysteriousRuins.EARTH, Rune.EARTH),
-    FIRE(Objects.FIRE_ALTAR_2482, Objects.FIRE_ALTAR_EXIT_2469, Objects.FIRE_RIFT_7129, MysteriousRuins.FIRE, Rune.FIRE),
-    BODY(Objects.BODY_ALTAR_2483, Objects.BODY_ALTAR_EXIT_2470, Objects.BODY_RIFT_7131, MysteriousRuins.BODY, Rune.BODY),
-    COSMIC(Objects.COSMIC_ALTAR_2484, Objects.COSMIC_ALTAR_EXIT_2471, Objects.COSMIC_RIFT_7132, MysteriousRuins.COSMIC, Rune.COSMIC),
-    CHAOS(Objects.CHAOS_ALTAR_2487, Objects.CHAOS_ALTAR_EXIT_2474, Objects.CHAOS_RIFT_7134, MysteriousRuins.CHAOS, Rune.CHAOS),
+    AIR(Objects.ALTAR_2478, Objects.PORTAL_2465, Objects.AIR_RIFT_7139, MysteriousRuins.AIR, Rune.AIR),
+    MIND(Objects.ALTAR_2479, Objects.PORTAL_2466, Objects.MIND_RIFT_7140, MysteriousRuins.MIND, Rune.MIND),
+    WATER(Objects.ALTAR_2480, Objects.PORTAL_2467, Objects.WATER_RIFT_7137, MysteriousRuins.WATER, Rune.WATER),
+    EARTH(Objects.ALTAR_2481, Objects.PORTAL_2468, Objects.EARTH_RIFT_7130, MysteriousRuins.EARTH, Rune.EARTH),
+    FIRE(Objects.ALTAR_2482, Objects.PORTAL_2469, Objects.FIRE_RIFT_7129, MysteriousRuins.FIRE, Rune.FIRE),
+    BODY(Objects.ALTAR_2483, Objects.PORTAL_2470, Objects.BODY_RIFT_7131, MysteriousRuins.BODY, Rune.BODY),
+    COSMIC(Objects.ALTAR_2484, Objects.PORTAL_2471, Objects.COSMIC_RIFT_7132, MysteriousRuins.COSMIC, Rune.COSMIC),
+    CHAOS(Objects.ALTAR_2487, Objects.PORTAL_2474, Objects.CHAOS_RIFT_7134, MysteriousRuins.CHAOS, Rune.CHAOS),
     ASTRAL(Objects.ALTAR_17010, 0, 0, null, Rune.ASTRAL),
-    NATURE(Objects.NATURE_ALTAR_2486, Objects.NATURE_ALTAR_EXIT_2473, Objects.NATURE_RIFT_7133, MysteriousRuins.NATURE, Rune.NATURE),
-    LAW(Objects.LAW_ALTAR_2485, Objects.LAW_PORTAL_EXIT_2472, Objects.LAW_RIFT_7135, MysteriousRuins.LAW, Rune.LAW),
-    DEATH(Objects.DEATH_ALTAR_2488, Objects.DEATH_ALTAR_EXIT_2475, Objects.DEATH_RIFT_7136, MysteriousRuins.DEATH, Rune.DEATH),
-    BLOOD(Objects.BLOOD_ALTAR_30624, Objects.BLOOD_ALTAR_EXIT_2477, Objects.BLOOD_RIFT_7141, MysteriousRuins.BLOOD, Rune.BLOOD),
-    OURANIA(Objects.OURANIA_ALTAR_26847, 0, 0, null, null);
+    NATURE(Objects.ALTAR_2486, Objects.PORTAL_2473, Objects.NATURE_RIFT_7133, MysteriousRuins.NATURE, Rune.NATURE),
+    LAW(Objects.ALTAR_2485, Objects.PORTAL_2472, Objects.LAW_RIFT_7135, MysteriousRuins.LAW, Rune.LAW),
+    DEATH(Objects.ALTAR_2488, Objects.PORTAL_2475, Objects.DEATH_RIFT_7136, MysteriousRuins.DEATH, Rune.DEATH),
+    BLOOD(Objects.ALTAR_30624, Objects.PORTAL_2477, Objects.BLOOD_RIFT_7141, MysteriousRuins.BLOOD, Rune.BLOOD),
+    OURANIA(Objects.RUNECRAFTING_ALTAR_26847, 0, 0, null, null);
 
     companion object {
         private val altarByScenery = values().associateBy { it.scenery }

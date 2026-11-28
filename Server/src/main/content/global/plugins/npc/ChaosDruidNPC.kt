@@ -34,7 +34,7 @@ class ChaosDruidNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
     override fun getIds(): IntArray = ID
 
     private val SWING_HANDLER = object : MultiSwingHandler(
-        SwitchAttack(CombatStyle.MELEE.swingHandler, Animation(Animations.PUNCH_422)),
+        SwitchAttack(CombatStyle.MELEE.swingHandler, Animation(Animations.HUMAN_UNARMEDPUNCH_422)),
         SwitchAttack(CombatStyle.MAGIC.swingHandler, null)
     ) {
 
@@ -71,7 +71,7 @@ class ChaosDruidNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
 
                     when (spellId) {
                         ModernSpells.BIND -> {
-                            entity.animator.forceAnimation(Animation(Animations.CAST_SPELL_707))
+                            entity.animator.forceAnimation(Animation(Animations.HUMAN_CASTZAP_707))
                             entity.graphics(BindSpellDefinition.BIND.start)
                             SpellProjectile.create(BindSpellDefinition.BIND.projectile.projectileId,)
                         }
@@ -94,9 +94,9 @@ class ChaosDruidNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
     companion object {
         private val ID = intArrayOf(
             NPCs.CHAOS_DRUID_181,
-            NPCs.CHAOS_DRUID_2547,
-            NPCs.CHAOS_DRUID_7105,
-            NPCs.CHAOS_DRUID_7966
+            NPCs.CHAOS_DRUID_2_2547,
+            NPCs.CHAOS_DRUID_3_7105,
+            NPCs.TUTORIAL2_CHAOS_DRUID_7966
         )
     }
 }

@@ -17,7 +17,7 @@ import shared.consts.NPCs
 class NecrovarusAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.GHOSTS_AHOY.questName)
-        npc = NPC(NPCs.NECROVARUS_1684)
+        npc = NPC(NPCs.AHOY_NECROVARUS_1684)
         when (questStage) {
             1 -> when (stage) {
                 0 -> player("I must speak with you on behalf of Velorina.").also { stage++ }

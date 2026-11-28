@@ -40,5 +40,5 @@ class MazeGuardianDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAZE_GUARDIAN_3102)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGICTRAINING_GUARD_MAZE_3102)
 }

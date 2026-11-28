@@ -18,7 +18,7 @@ class TrollGeneralsNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
 
     override fun construct(id: Int, location: Location?, vararg objects: Any?): AbstractNPC = TrollGeneralsNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TROLL_GENERAL_1115, NPCs.TROLL_GENERAL_1116, NPCs.TROLL_GENERAL_1117)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TROLL_GENERAL_1115, NPCs.TROLL_GENERAL2_1116, NPCs.TROLL_GENERAL3_1117)
 
     override fun finalizeDeath(killer: Entity?) {
         if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD.questName, 1, 7) && !inInventory(killer, Items.PRISON_KEY_3135)) {

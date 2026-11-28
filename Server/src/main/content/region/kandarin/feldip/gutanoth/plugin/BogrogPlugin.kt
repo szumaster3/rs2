@@ -20,7 +20,7 @@ class BogrogPlugin : InteractionListener {
          * Handles the "swap" interaction on the Bogrog NPC.
          */
 
-        on(NPCs.BOGROG_4472, IntType.NPC, "swap") { player, _ ->
+        on(NPCs.WOLF_BOGROG_OGRE_4472, IntType.NPC, "swap") { player, _ ->
             openSwap(player)
             return@on true
         }

@@ -171,7 +171,7 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
             2 -> {
                 lock(player, 1)
                 sendDialogue(player, "Olaf carves furiously.")
-                animate(npc, Animations.FLETCH_LOGS_1248)
+                animate(npc, Animations.HUMAN_FLETCHING_1248)
                 stage++
             }
             3 -> {
@@ -327,5 +327,5 @@ class OlafHradsonDialogue(player: Player? = null) : Dialogue(player) {
     
     override fun newInstance(player: Player?): Dialogue = OlafHradsonDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OLAF_HRADSON_2621)
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLAF_2621)
 }

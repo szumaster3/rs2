@@ -32,5 +32,5 @@ class GourmetDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.GOURMET_5788, NPCs.GOURMET_5789, NPCs.GOURMET_5790, NPCs.GOURMET_5791)
+        intArrayOf(NPCs.DORGESH_GOURMET_MALE1_5788, NPCs.DORGESH_GOURMET_MALE2_5789, NPCs.DORGESH_GOURMET_FEMALE1_5790, NPCs.DORGESH_GOURMET_FEMALE2_5791)
 }

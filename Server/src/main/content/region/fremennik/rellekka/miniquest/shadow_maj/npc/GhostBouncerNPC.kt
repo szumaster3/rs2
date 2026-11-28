@@ -36,7 +36,7 @@ class GhostBouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
                 0 -> {
                     sendMessage(player, "You grab the severed leg and throw it to distract the hound.")
                     playAudio(player, Sounds.SEVERED_LEG_ATTACK_3415)
-                    spawnProjectile(start, target, Graphics.FLYING_HUMAN_LEG_SPINNING_SOULS_BANE_1024, 40, 30, 1, 250, 0)
+                    spawnProjectile(start, target, Graphics.SHADOW_MAJ_SEVERED_LEG_SPOT_1024, 40, 30, 1, 250, 0)
                     return@queueScript delayScript(player, 1)
                 }
                 1 -> {
@@ -44,7 +44,7 @@ class GhostBouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
                     return@queueScript delayScript(player, 1)
                 }
                 2 -> {
-                    animate(player, Animation(Animations.SEVERED_LEG_ATTACK_5812))
+                    animate(player, Animation(Animations.SHADOW_MAJ_SEVERED_LEG_HUMAN_THROW_5812))
                     return@queueScript delayScript(player, 6)
                 }
                 3 -> {
@@ -62,12 +62,12 @@ class GhostBouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
         super.finalizeDeath(killer)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BOUNCER_5564)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHADOW_MAJ_BOUNCER_CUTSCENE_5564)
 
     companion object {
         @JvmStatic
         fun spawnGhostBouncer(player: Player) {
-            val ghostBouncer = GhostBouncerNPC(NPCs.BOUNCER_5564).apply {
+            val ghostBouncer = GhostBouncerNPC(NPCs.SHADOW_MAJ_BOUNCER_CUTSCENE_5564).apply {
                 location = Location(1761, 4705, 0)
                 isWalks = true
                 isAggressive = true

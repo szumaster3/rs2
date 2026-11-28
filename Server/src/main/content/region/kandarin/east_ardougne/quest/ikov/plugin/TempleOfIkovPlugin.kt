@@ -181,7 +181,7 @@ class TempleOfIkovPlugin : InteractionListener {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 if (getAttribute(player, GameAttributes.QUEST_IKOV_WARRIOR_INST, null) == null) {
-                    val npc = FireWarriorOfLesarkusNPC(NPCs.FIRE_WARRIOR_OF_LESARKUS_277, player, Location(2646, 9866, 0))
+                    val npc = FireWarriorOfLesarkusNPC(NPCs.IKOV_FIREWARRIOR_277, player, Location(2646, 9866, 0))
                     npc.init()
                     npc.isRespawn = false
                     npc.isWalks = false
@@ -224,7 +224,7 @@ class TempleOfIkovPlugin : InteractionListener {
             if (getQuestStage(player, Quests.TEMPLE_OF_IKOV.questName) >= 6 && getAttribute(player, GameAttributes.QUEST_IKOV_SELECTED_END, 0) == 1) {
                 sendMessage(player, "You decide not to steal the staff as you have agreed to help the Guardians")
             }
-            val npcID = findLocalNPCs(player, intArrayOf(NPCs.GUARDIAN_OF_ARMADYL_274, NPCs.GUARDIAN_OF_ARMADYL_275), 4)
+            val npcID = findLocalNPCs(player, intArrayOf(NPCs.IKOV_GUARDIANMALE_274, NPCs.IKOV_GUARDIANFEMALE_275), 4)
             if (npcID.isNotEmpty()) {
                 sendChat(npcID[0], "That is not thine to take!")
                 npcID[0].attack(player)

@@ -59,12 +59,12 @@ class MiscellaniaPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.FISHERMAN_FRODI_1397, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.MISC_FISHERMAN_1397, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Hello!")
             return@on true
         }
 
-        on(NPCs.FARMER_FROMUND_3917, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.MISC_ETC_FARMER_3917, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Hey! This is the Queen's farm. You'll need her approval to make use of it.")
             return@on true
         }

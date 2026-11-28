@@ -42,7 +42,7 @@ class PhasmatysPlugin : MapZone("Port phasmatys", true), Plugin<Any?> {
             val usedOption = getUsedOption(player)
 
             if (target is NPC) {
-                if (target.id == NPCs.GHOST_BANKER_1702) return false
+                if (target.id == NPCs.AHOY_GHOST_BANKER_1702) return false
 
                 val nameLower = target.name.lowercase()
                 if ((nameLower.contains("ghost") || target.name.equals("velorina", ignoreCase = true) || target.name.contains("husband")) &&
@@ -56,7 +56,7 @@ class PhasmatysPlugin : MapZone("Port phasmatys", true), Plugin<Any?> {
             when (target.id) {
                 5267 -> {
                     val scenery = target as Scenery
-                    animate(player, Animations.HUMAN_OPEN_CHEST_536)
+                    animate(player, Animations.HUMAN_OPENCHEST_536)
                     sendMessage(player, "The trapdoor opens...")
                     SceneryBuilder.replace(scenery, scenery.transform(5268))
                     return true
@@ -65,7 +65,7 @@ class PhasmatysPlugin : MapZone("Port phasmatys", true), Plugin<Any?> {
                 5268 -> {
                     val scenery = target as Scenery
                     if (usedOption == "close") {
-                        animate(player, Animations.OPEN_POH_WARDROBE_535)
+                        animate(player, Animations.HUMAN_CLOSECHEST_535)
                         sendMessage(player, "You close the trapdoor.")
                         SceneryBuilder.replace(scenery, scenery.transform(5267))
                     } else {
@@ -148,7 +148,7 @@ class PhasmatysPlugin : MapZone("Port phasmatys", true), Plugin<Any?> {
 
         if (removeItem(player, Item(bone.bonemealId!!)) && removeItem(player, Item(Items.BUCKET_OF_SLIME_4286, 1))) {
             lock(player, 1)
-            animate(player, Animations.PRAY_ECTOFUNTUS_1651)
+            animate(player, Animations.AHOY_PRAYER_1651)
             playAudio(player, Sounds.PRAYER_BOOST_2671)
             addItem(player, Items.BUCKET_1925)
             addItem(player, Items.EMPTY_POT_1931)

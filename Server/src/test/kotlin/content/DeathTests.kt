@@ -134,7 +134,7 @@ class DeathTests {
         val inventory =
             arrayOf(
                 Items.BRONZE_2H_SWORD_1307.asItem(),
-                Items.BRONZE_AXE_1351.asItem(),
+                Items.BRONZE_HATCHET_1351.asItem(),
             )
 
         val startTime = GameWorld.ticks
@@ -166,7 +166,7 @@ class DeathTests {
             val inventory =
                 arrayOf(
                     Items.BRONZE_2H_SWORD_1307.asItem(),
-                    Items.BRONZE_AXE_1351.asItem(),
+                    Items.BRONZE_HATCHET_1351.asItem(),
                 )
             val startTime = GameWorld.ticks
             val grave = GraveController.produceGrave(GraveType.DEFAULT)

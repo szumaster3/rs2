@@ -178,12 +178,12 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
      */
     private fun questTeleport(player: Player, npc: NPC) {
         val LOCATIONS = arrayOf(Location.create(2649, 3272, 0), Location.create(2638, 3321, 0))
-        npc.animate(Animation(Animations.ATTACK_437))
+        npc.animate(Animation(Animations.HUMAN_SCYTHE_SLASH_437))
         npc.faceTemporary(player, 2)
-        npc.graphics(Graphics(shared.consts.Graphics.CURSE_CAST_108))
+        npc.graphics(Graphics(shared.consts.Graphics.CURSE_CASTING_108))
         player.lock()
         playAudio(player, Sounds.CURSE_ALL_125, 0, 1)
-        Projectile.create(npc, player, shared.consts.Graphics.CURSE_PROJECTILE_109).send()
+        Projectile.create(npc, player, shared.consts.Graphics.CURSE_TRAVEL_1_109).send()
         npc.sendChat("Dipsolum sententa sententi!")
         GameWorld.Pulser.submit(
             object : Pulse(1) {

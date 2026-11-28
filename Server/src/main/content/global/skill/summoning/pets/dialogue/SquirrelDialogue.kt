@@ -12,19 +12,19 @@ import shared.consts.NPCs
 class SquirrelDialogue(player: Player? = null) : Dialogue(player) {
 
     private val babySquirrel = intArrayOf(
-        NPCs.BABY_SQUIRREL_6919,
-        NPCs.BABY_SQUIRREL_7301,
-        NPCs.BABY_SQUIRREL_7303,
-        NPCs.BABY_SQUIRREL_7305,
-        NPCs.BABY_SQUIRREL_7307
+        NPCs.LORE_BABY_SQUIRREL_1_6919,
+        NPCs.LORE_BABY_SQUIRREL_2_7301,
+        NPCs.LORE_BABY_SQUIRREL_3_7303,
+        NPCs.LORE_BABY_SQUIRREL_4_7305,
+        NPCs.LORE_BABY_SQUIRREL_5_7307
     )
 
     private val adultSquirrel = intArrayOf(
-        NPCs.SQUIRREL_6920,
-        NPCs.SQUIRREL_7302,
-        NPCs.SQUIRREL_7304,
-        NPCs.SQUIRREL_7306,
-        NPCs.SQUIRREL_7308
+        NPCs.LORE_SQUIRREL_1_6920,
+        NPCs.LORE_SQUIRREL_2_7302,
+        NPCs.LORE_SQUIRREL_3_7304,
+        NPCs.LORE_SQUIRREL_4_7306,
+        NPCs.LORE_SQUIRREL_5_7308
     )
 
     private var branch = 0

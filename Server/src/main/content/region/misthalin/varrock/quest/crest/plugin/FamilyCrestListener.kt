@@ -17,7 +17,7 @@ import shared.consts.NPCs
 class FamilyCrestListener : InteractionListener {
 
     override fun defineListeners() {
-        onUseWith(IntType.NPC, POISON_ITEM_IDS, NPCs.JOHNATHON_668) { player, used, with ->
+        onUseWith(IntType.NPC, POISON_ITEM_IDS, NPCs.JOHNATHON_FITZHARMON_668) { player, used, with ->
             val npc = with.asNpc()
             val poisonPotionItem = used.asItem()
             val stage = getQuestStage(player, Quests.FAMILY_CREST.questName)
@@ -28,7 +28,7 @@ class FamilyCrestListener : InteractionListener {
             if (stage == 17 && removeItem(player, poisonPotionItem)) {
                 addItem(player, returnItem)
                 setQuestStage(player, Quests.FAMILY_CREST.questName, 18)
-                openDialogue(player, NPCs.JOHNATHON_668, npc)
+                openDialogue(player, NPCs.JOHNATHON_FITZHARMON_668, npc)
             }
             return@onUseWith true
         }
@@ -118,9 +118,9 @@ class FamilyCrestListener : InteractionListener {
     }
 
     companion object {
-        private val POISON_ITEM_IDS = intArrayOf(Items.ANTIPOISON4_2446, Items.ANTIPOISON3_175, Items.ANTIPOISON2_177, Items.ANTIPOISON1_179)
-        private val PULL_DOWN_LEVER_ANIM = Animation(Animations.PULL_DOWN_LEVER_2140)
-        private val PULL_UP_LEVER_ANIM = Animation(Animations.PULL_UP_LEVER_2139)
+        private val POISON_ITEM_IDS = intArrayOf(Items.ANTIPOISON_4_2446, Items.ANTIPOISON_3_175, Items.ANTIPOISON_2_177, Items.ANTIPOISON_1_179)
+        private val PULL_DOWN_LEVER_ANIM = Animation(Animations.MACRO_LEVER_SWITCH_DOWN_2140)
+        private val PULL_UP_LEVER_ANIM = Animation(Animations.MACRO_LEVER_SWITCH_UP_2139)
         private const val NORTH_LEVER_A = shared.consts.Scenery.LEVER_2421
         private const val NORTH_LEVER_B = shared.consts.Scenery.LEVER_2425
         private const val SOUTH_LEVER = shared.consts.Scenery.LEVER_2423

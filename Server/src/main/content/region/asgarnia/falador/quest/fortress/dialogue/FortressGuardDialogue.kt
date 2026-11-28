@@ -83,7 +83,7 @@ class FortressGuardDialogue(player: Player? = null) : Dialogue(player) {
                 DoorActionHandler.handleAutowalkDoor(player, getObject(0, 3020, 3515)!!)
                 val npcs = getLocalNpcs(player)
                 for (npc in npcs) {
-                    if (npc.id == NPCs.BLACK_KNIGHT_179) {
+                    if (npc.id == NPCs.AGGRESSIVE_BLACK_KNIGHT_179) {
                         npc.attack(player)
                         sendChat(npc, "Die, intruder!")
                         return true

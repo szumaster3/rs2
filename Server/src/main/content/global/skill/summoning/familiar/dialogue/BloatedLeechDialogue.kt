@@ -64,5 +64,5 @@ class BloatedLeechDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLOATED_LEECH_6843, NPCs.BLOATED_LEECH_6844)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_LEECH_6843, NPCs.LORE_LEECH_COMBAT_6844)
 }

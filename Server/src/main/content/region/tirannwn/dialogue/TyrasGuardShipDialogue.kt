@@ -25,6 +25,6 @@ class TyrasGuardShipDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TYRAS_GUARD_4649)
+        return intArrayOf(NPCs.SAILING_TRANSPORT_TYRAS_GUARD_4649)
     }
 }

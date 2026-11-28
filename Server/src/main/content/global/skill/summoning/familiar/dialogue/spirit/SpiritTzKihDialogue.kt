@@ -86,5 +86,5 @@ class SpiritTzKihDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SPIRIT_TZ_KIH_7361, NPCs.SPIRIT_TZ_KIH_7362)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_TZ_KIH_7361, NPCs.LORE_TZ_KIH_COMBAT_7362)
 }

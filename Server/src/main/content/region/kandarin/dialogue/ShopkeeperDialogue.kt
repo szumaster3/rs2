@@ -32,7 +32,7 @@ class ShopkeeperDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npc(FaceAnim.NEUTRAL, "Take a look.").also { stage++ }
             4 -> {
                 end()
-                openNpcShop(player, NPCs.SHOPKEEPER_561)
+                openNpcShop(player, NPCs.LATHAS_SHOPKEEPER_561)
             }
         }
         return true
@@ -40,5 +40,5 @@ class ShopkeeperDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ShopkeeperDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SHOPKEEPER_561)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LATHAS_SHOPKEEPER_561)
 }

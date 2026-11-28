@@ -23,7 +23,7 @@ class CratePlugin : InteractionListener {
 
     override fun defineListeners() {
         on(monkeyAmuletMouldCrate, IntType.SCENERY, "search") { player, _ ->
-            animate(player, Animations.HUMAN_OPEN_CHEST_536)
+            animate(player, Animations.HUMAN_OPENCHEST_536)
             sendMessage(player, "You search the crate.")
             openDialogue(player, CrateMMDialogue(0))
             return@on true

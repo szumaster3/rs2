@@ -50,7 +50,7 @@ class JeremyServilDialogueFile : DialogueFile() {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hiya kiddo! You're looking a lot happier now.").also { stage++ }
                 1 -> npcl(FaceAnim.CHILD_NORMAL, "Thank you " + (if (player!!.isMale) "Sir" else "Madam") + " I saw you fighting in the arena. You were brilliant! You were like POW! and then you got hit, but you were like too hard and didn't care and then you like hit him again and KERPLOW! Then the big scary dog came out, but you weren't scared and you like smacked him as well, and then you...").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "Jeremy, calm down. Player doesn't need to hear everything " + (if (player!!.isMale) "He" else "She") + " did. " + (if (player!!.isMale) "He" else "She") + " was there when it happened, remember.").also { stage++ }
-                3 -> sendNPCDialogue(player!!, NPCs.LADY_SERVIL_264, "I was rather enjoying it, actually.").also { stage++ }
+                3 -> sendNPCDialogue(player!!, NPCs.JEREMY_SERVIL_264, "I was rather enjoying it, actually.").also { stage++ }
                 4 -> npcl(FaceAnim.CHILD_NORMAL, "Yeah, but mum... ${player!!.username} was so cool. " + (if (player!!.isMale) "He" else "She") + " was like BAM! BASH! SPLAT! When I grow up, I wanna be a hero as well.").also { stage++ }
                 5 -> playerl(FaceAnim.FRIENDLY, "I'm sure you will be. You showed a lot of bravery in the arena, young lad. If you work hard to complete your squire training, you'll be a worthy knight. Trust me, I can tell these things.").also { stage++ }
                 6 -> npcl(FaceAnim.CHILD_NORMAL, "Yeah! I'm gonna be the bravest knight in the world! After you, of course.").also { stage++ }

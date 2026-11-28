@@ -25,7 +25,7 @@ public final class PowershotSpecialHandler extends RangeSwingHandler implements 
 
     private static final int SPECIAL_ENERGY = 35;
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.MAGIC_LONGBOW_SPECIAL_250, 96);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.ARROW_LAUNCH_11_250, 96);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

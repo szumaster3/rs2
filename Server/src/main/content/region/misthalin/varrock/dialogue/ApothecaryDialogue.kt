@@ -257,7 +257,7 @@ class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
         private val POTION_ITEMS = arrayOf(Item(Items.RED_SPIDERS_EGGS_223), Item(Items.LIMPWURT_ROOT_225), Item(Items.COINS_995, 5))
-        private val POTION = Item(Items.STRENGTH_POTION3_115)
+        private val POTION = Item(Items.STRENGTH_POTION_3_115)
         private val NULL_POTION = Item(Items.POTION_195, 1)
         private val CADAVA_BERRIES = Item(Items.CADAVA_BERRIES_753)
         private val CADAVA_POTION = Item(Items.CADAVA_POTION_756)

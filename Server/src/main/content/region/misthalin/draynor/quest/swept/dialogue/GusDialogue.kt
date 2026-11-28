@@ -282,6 +282,6 @@ class GusDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUS_8205)
+        return intArrayOf(NPCs.SWEPT_GUS_8205)
     }
 }

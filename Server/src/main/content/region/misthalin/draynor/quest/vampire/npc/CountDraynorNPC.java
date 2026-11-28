@@ -151,6 +151,6 @@ public class CountDraynorNPC extends AbstractNPC {
 
     @Override
     public int[] getIds() {
-        return new int[]{NPCs.COUNT_DRAYNOR_757};
+        return new int[]{NPCs.MISC_PRINCE_BRAND_MULTICHILD_757};
     }
 }

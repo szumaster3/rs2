@@ -12,12 +12,12 @@ class NardahPlugin: InteractionListener {
 
     override fun defineListeners() {
 
-        on(NPCs.AWUSAH_THE_MAYOR_3040, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.ELID_MAYOR_3040, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "The mayor doesn't seem interested in talking to you right now.")
             return@on true
         }
 
-        on(NPCs.GHASLOR_THE_ELDER_3029, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.ELID_GHASLOR_3029, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Good day young ${if (player.isMale) "gentleman" else "lady"}.")
             return@on true
         }
@@ -42,7 +42,7 @@ class NardahPlugin: InteractionListener {
             return@on true
         }
 
-        on(NPCs.SHIRATTI_THE_CUSTODIAN_3044, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.ELID_SHIRATTI_3044, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, ShirattiTheCustodianDialogue(), node.asNpc())
             return@on true
         }

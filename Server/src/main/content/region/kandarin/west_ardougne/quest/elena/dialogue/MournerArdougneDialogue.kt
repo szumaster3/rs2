@@ -18,7 +18,7 @@ import shared.consts.NPCs
 class MournerArdougneDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.MOURNER_718)
+        npc = NPC(NPCs.MOURNERTWA_718)
         when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             in 0..5 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }

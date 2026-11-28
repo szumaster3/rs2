@@ -14,7 +14,7 @@ import shared.consts.NPCs
 class PhoenixEgglingDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.PHOENIX_EGGLING_8550)
+        npc = NPC(NPCs.PHOENIX_EGGLING_CUTSCENE_8550)
 
         //TODO 5766
         val hasCutePet = getAttribute(player!!, GameAttributes.PHOENIX_LAIR_EGGLING_CUTE, false)

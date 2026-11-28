@@ -14,23 +14,23 @@ import shared.consts.*
 class PiousPeteDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.PIOUS_PETE_3207)
+        npc = NPC(NPCs.CHOSEN_ZANIK_FOLLOWER_3207)
         when (stage) {
             0 -> if (CandlelightInterface.areCandlesLit(player!!)) {
                 queueScript(player!!, 0, QueueStrength.NORMAL) { stage: Int ->
                     when (stage) {
                         0 -> {
-                            sendNPCDialogueLines(player!!, NPCs.PIOUS_PETE_3207,FaceAnim.FRIENDLY,true, "Wonderful! All the candles are lit.")
+                            sendNPCDialogueLines(player!!, NPCs.CHOSEN_ZANIK_FOLLOWER_3207,FaceAnim.FRIENDLY,true, "Wonderful! All the candles are lit.")
                             return@queueScript delayScript(player!!, 4)
                         }
 
                         1 -> {
-                            sendNPCDialogueLines(player!!, NPCs.PIOUS_PETE_3207,FaceAnim.FRIENDLY,true, "Here, I'll take you back.")
+                            sendNPCDialogueLines(player!!, NPCs.CHOSEN_ZANIK_FOLLOWER_3207,FaceAnim.FRIENDLY,true, "Here, I'll take you back.")
                             return@queueScript delayScript(player!!, 4)
                         }
 
                         2 -> {
-                            sendNPCDialogueLines(player!!, NPCs.PIOUS_PETE_3207,FaceAnim.FRIENDLY,true, "Have a good day!")
+                            sendNPCDialogueLines(player!!, NPCs.CHOSEN_ZANIK_FOLLOWER_3207,FaceAnim.FRIENDLY,true, "Have a good day!")
                             return@queueScript delayScript(player!!, 3)
                         }
                         3 -> {

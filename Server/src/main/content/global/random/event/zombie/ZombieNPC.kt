@@ -15,8 +15,8 @@ import kotlin.math.min
  */
 class ZombieNPC(
     override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.ZOMBIE_419) {
-    val ids = (NPCs.ZOMBIE_419..NPCs.ZOMBIE_424).toList()
+) : RandomEventNPC(NPCs.EVILTREE_LEPRECHAUN_RUN_419) {
+    val ids = (NPCs.EVILTREE_LEPRECHAUN_RUN_419..NPCs.CAPTAIN_UNDAK_424).toList()
 
     override fun init() {
         super.init()

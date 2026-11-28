@@ -25,7 +25,7 @@ import shared.consts.NPCs
 class BeggarDialogueFile(val door: Scenery?) : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.BEGGAR_252)
+        npc = NPC(NPCs.LAKE_BEGGAR_252)
 
         when (stage) {
             0 -> {
@@ -66,13 +66,13 @@ class BeggarDialogueFile(val door: Scenery?) : DialogueFile() {
             }
 
             6 -> {
-                npc = NPC(NPCs.THE_LADY_OF_THE_LAKE_250)
+                npc = NPC(NPCs.LADYOFTHELAKE_250)
                 npcl(FaceAnim.NEUTRAL, "Well done. You have passed my test.")
                 stage++
             }
 
             7 -> {
-                npc = NPC(NPCs.THE_LADY_OF_THE_LAKE_250)
+                npc = NPC(NPCs.LADYOFTHELAKE_250)
                 npcl(FaceAnim.NEUTRAL, "Here is Excalibur, guard it well.")
                 stage++
             }
@@ -113,7 +113,7 @@ class BeggarDialogueFile(val door: Scenery?) : DialogueFile() {
 
     private fun transformToLady(player: Player) {
         val beggar = player.getAttribute<NPC>(GameAttributes.TEMP_ATTR_BEGGAR, null)
-        beggar.transform(NPCs.THE_LADY_OF_THE_LAKE_250)
+        beggar.transform(NPCs.LADYOFTHELAKE_250)
         beggar.face(player)
 
         player.removeAttribute(GameAttributes.TEMP_ATTR_BEGGAR)
@@ -121,7 +121,7 @@ class BeggarDialogueFile(val door: Scenery?) : DialogueFile() {
     }
 
     fun initBeggar(player: Player) {
-        val beggar = BeggarNPC(NPCs.BEGGAR_252, Location.create(3016, 3247, 0))
+        val beggar = BeggarNPC(NPCs.LAKE_BEGGAR_252, Location.create(3016, 3247, 0))
         player.setAttribute(GameAttributes.TEMP_ATTR_BEGGAR, beggar)
         beggar.player = player
         beggar.lock()

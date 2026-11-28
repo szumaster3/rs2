@@ -6,7 +6,7 @@ import core.game.node.entity.npc.NPCBehavior
 import core.tools.RandomFunction
 import shared.consts.NPCs
 
-class GuardCaptainNPC : NPCBehavior(NPCs.GUARD_CAPTAIN_3109) {
+class GuardCaptainNPC : NPCBehavior(NPCs.HANDSAND_GUARD_CAPTAIN_3109) {
     private var ticks = 0
     override fun tick(self: NPC): Boolean {
         ticks++

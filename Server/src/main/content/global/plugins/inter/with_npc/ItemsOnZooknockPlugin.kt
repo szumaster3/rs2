@@ -13,7 +13,7 @@ open class ItemsOnZooknockPlugin: InteractionListener {
     private val monkeyDentures = Items.MONKEY_DENTURES_4006
     val items = intArrayOf(goldBar, monkeyDentures, monkeyAmuletMould)
 
-    val zooknockNPC = NPCs.ZOOKNOCK_1425
+    val zooknockNPC = NPCs.MM_ZOOKNOCK_1425
 
     override fun defineListeners() {
         onUseWith(IntType.NPC, items, zooknockNPC) { player, used, _ ->

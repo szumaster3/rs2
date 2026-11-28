@@ -66,5 +66,5 @@ class GolrieDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("golrie_dialogue"), NPCs.GOLRIE_306)
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("golrie_dialogue"), NPCs.GOLRIE_WATERFALL_QUEST_306)
 }

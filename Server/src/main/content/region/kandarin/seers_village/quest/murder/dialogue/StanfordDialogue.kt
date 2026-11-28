@@ -24,7 +24,7 @@ class StanfordDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STANFORD_811)
+        return intArrayOf(NPCs.STANFORD_THE_GARDENER_811)
     }
 }
 

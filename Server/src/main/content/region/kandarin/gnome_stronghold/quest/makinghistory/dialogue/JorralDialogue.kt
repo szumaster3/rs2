@@ -255,6 +255,6 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JORRAL_2932)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAKINGHISTORY_JORRAL_2932)
 
 }

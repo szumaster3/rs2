@@ -167,7 +167,7 @@ class SlayerRewardInterface : InterfaceListener {
                         return@on true
                     }
                     if (purchase(player, 75)) {
-                        player.inventory.add(Item(Items.RING_OF_SLAYING8_13281))
+                        player.inventory.add(Item(Items.RING_OF_SLAYING_8_13281))
                     }
                 }
                 // Runes pack (35).

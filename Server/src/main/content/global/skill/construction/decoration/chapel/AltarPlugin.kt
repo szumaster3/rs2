@@ -133,8 +133,8 @@ class AltarPlugin : InteractionListener {
     }
 
     companion object {
-        private val GFX = Graphics(shared.consts.Graphics.BONE_ON_ALTAR_624)
-        private val ANIM = Animation(Animations.OLD_COOK_RANGE_896)
+        private val GFX = Graphics(shared.consts.Graphics.BONE_SACRIFICE_MAGIC_624)
+        private val ANIM = Animation(Animations.HUMAN_COOKING_896)
         private val BONES = Bones.array
         private val ALTAR = intArrayOf(
             shared.consts.Scenery.ALTAR_13185,

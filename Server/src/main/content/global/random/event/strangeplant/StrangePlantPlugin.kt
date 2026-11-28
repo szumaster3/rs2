@@ -17,7 +17,7 @@ import shared.consts.NPCs
  */
 class StrangePlantPlugin : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.STRANGE_PLANT_407, IntType.NPC, "pick") { player, node ->
+        on(NPCs.LUNAR_PIRATE_CAPTAIN_1OP_407, IntType.NPC, "pick") { player, node ->
             if (AntiMacro.getEventNpc(player) != node) {
                 sendMessage(player, "This isn't your strange plant.")
                 return@on true

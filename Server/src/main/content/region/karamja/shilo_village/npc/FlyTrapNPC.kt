@@ -36,7 +36,7 @@ class FlyTrapNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
         super.tick()
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FLY_TRAP_151)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FLYTRAP_151)
 
     companion object {
         private val ANIMATION = Animation(1247, Animator.Priority.HIGH)

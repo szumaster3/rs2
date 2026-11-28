@@ -14,7 +14,7 @@ import shared.consts.NPCs
 
 class BatNPC : NPCBehavior(*BAT_NPC) {
     companion object {
-        private val BAT_NPC = intArrayOf(NPCs.BAT_412)
+        private val BAT_NPC = intArrayOf(NPCs.SMALL_BAT_412)
     }
 
     override fun onDropTableRolled(

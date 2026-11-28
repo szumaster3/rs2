@@ -19,12 +19,12 @@ class AlkharidRocksShortcut : InteractionListener {
         /**
          * Animation used when climbing down.
          */
-        private const val CLIMB_DOWN_ANIMATION = Animations.WALK_BACKWARDS_CLIMB_1148
+        private const val CLIMB_DOWN_ANIMATION = Animations.DEATH_HUMAN_CLIMBING_DOWN_1148
 
         /**
          * Animation used when climbing up.
          */
-        private const val CLIMB_UP_ANIMATION = Animations.CLIMB_DOWN_B_740
+        private const val CLIMB_UP_ANIMATION = Animations.HUMAN_CLIMBING_DOWN_740
 
         /**
          * Start location of the shortcut.

@@ -20,7 +20,7 @@ import shared.consts.Scenery
 class MiningGuildPlugin : InteractionListener {
 
     private val REQUIRED_MINING_LEVEL = 60
-    private val animation = Animation(Animations.HUMAN_CLIMB_STAIRS_828)
+    private val animation = Animation(Animations.HUMAN_REACHFORLADDER_828)
 
     private val ladderMap = mapOf(
         Location.create(3019, 3340, 0) to Location.create(3019, 9741, 0),
@@ -41,7 +41,7 @@ class MiningGuildPlugin : InteractionListener {
             val destination = ladderMap[location] ?: return@on false
 
             if (getDynLevel(player, Skills.MINING) < REQUIRED_MINING_LEVEL) {
-                sendNPCDialogue(player, NPCs.DWARF_382, "Sorry, but you need level 60 Mining to go in there.", FaceAnim.OLD_NORMAL)
+                sendNPCDialogue(player, NPCs.GUILDDWARF_382, "Sorry, but you need level 60 Mining to go in there.", FaceAnim.OLD_NORMAL)
                 return@on false
             }
 
@@ -55,7 +55,7 @@ class MiningGuildPlugin : InteractionListener {
 
         on(Scenery.DOOR_2112, IntType.SCENERY, "open") { player, node ->
             if (getDynLevel(player, Skills.MINING) < REQUIRED_MINING_LEVEL) {
-                sendNPCDialogue(player, NPCs.DWARF_382, "Sorry, but you need level 60 Mining to go in there.", FaceAnim.OLD_NORMAL)
+                sendNPCDialogue(player, NPCs.GUILDDWARF_382, "Sorry, but you need level 60 Mining to go in there.", FaceAnim.OLD_NORMAL)
                 return@on false
             }
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
@@ -63,7 +63,7 @@ class MiningGuildPlugin : InteractionListener {
         }
 
 
-        on(NPCs.GUARD_206, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.MCANNONGUARD_206, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, DwarvenMineGuardDialogue(), node.asNpc())
             return@on true
         }

@@ -78,5 +78,5 @@ class HazelmereDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HAZELMERE_669)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDTREE_HAZELMERE_669)
 }

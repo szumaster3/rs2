@@ -53,7 +53,7 @@ class CyclopesRoomPlugin :
     }
 
     override fun death(e: Entity, killer: Entity): Boolean {
-        if (killer is Player && e is NPC && (e.getId() == NPCs.CYCLOPS_4292 || e.getId() == NPCs.CYCLOPS_4291)) {
+        if (killer is Player && e is NPC && (e.getId() == NPCs.WARGUILD_CYCLOPS2_4292 || e.getId() == NPCs.WARGUILD_CYCLOPS1_4291)) {
             var defenderId = getDefenderIndex(killer)
             if (RandomFunction.randomize(50) == 10) {
                 if (++defenderId == DEFENDERS.size) {
@@ -134,9 +134,9 @@ class CyclopesRoomPlugin :
         override fun open(vararg args: Any?): Boolean {
             defenderId = args[0] as Int
             if (defenderId == -1) {
-                npc(NPCs.KAMFREENA_4289, "Well, since you haven't shown me a defender to prove", "your prowess as a warrior,")
+                npc(NPCs.WARGUILD_KAMFREENA_4289, "Well, since you haven't shown me a defender to prove", "your prowess as a warrior,")
             } else {
-                npc(NPCs.KAMFREENA_4289, "Ahh I see that you have one of the defenders already!", "Well done.")
+                npc(NPCs.WARGUILD_KAMFREENA_4289, "Ahh I see that you have one of the defenders already!", "Well done.")
             }
             return true
         }
@@ -147,21 +147,21 @@ class CyclopesRoomPlugin :
                     setAttribute(player, "sent_dialogue", true)
                     if (defenderId == DEFENDERS.size - 1) {
                         npc(
-                            NPCs.KAMFREENA_4289,
+                            NPCs.WARGUILD_KAMFREENA_4289,
                             "I'll release some cyclopes which might drop the same",
                             "rune defender for you as there isn't any higher! Have",
                             "fun in there.",
                         )
                     } else if (defenderId == -1) {
                         npc(
-                            NPCs.KAMFREENA_4289,
+                            NPCs.WARGUILD_KAMFREENA_4289,
                             "I'll release some cyclopes which might drop bronze",
                             "defenders for you to start off with, unless you show me",
                             "another. Have fun in there.",
                         )
                     } else {
                         npc(
-                            NPCs.KAMFREENA_4289,
+                            NPCs.WARGUILD_KAMFREENA_4289,
                             "I'll release some cyclopes which might drop the next",
                             "defender for you. Have fun in there.",
                         )

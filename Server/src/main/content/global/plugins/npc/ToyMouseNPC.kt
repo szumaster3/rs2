@@ -34,7 +34,7 @@ class ToyMouseNPC(
         vararg objects: Any,
     ): AbstractNPC = ToyMouseNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TOY_MOUSE_3597)
+    override fun getIds(): IntArray = intArrayOf(NPCs.POH_TOY_MOUSE_3597)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -45,7 +45,7 @@ class ToyMouseNPC(
         val mouseMap = mutableMapOf<Int, ToyMouseNPC>()
 
         fun spawnToyMouse(player: Player) {
-            val mouse = ToyMouseNPC(NPCs.TOY_MOUSE_3597)
+            val mouse = ToyMouseNPC(NPCs.POH_TOY_MOUSE_3597)
             mouse.location = Location.getRandomLocation(player.location, 1, true)
             mouse.isRespawn = false
             mouse.isWalks = true

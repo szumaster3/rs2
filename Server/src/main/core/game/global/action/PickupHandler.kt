@@ -84,7 +84,7 @@ object PickupHandler {
 
             // Check if the item location permits teleportation.
             if (!RegionManager.isTeleportPermitted(item.location)) {
-                player.animate(Animation.create(Animations.OPEN_POH_WARDROBE_535))
+                player.animate(Animation.create(Animations.HUMAN_CLOSECHEST_535))
             }
 
             // Destroy the ground item after being picked up.
@@ -115,10 +115,10 @@ object PickupHandler {
         }
 
         // Check if the item is a special guild item (e.g., shot).
-        if (item.id == Items.EIGHTEEN_LB_SHOT_8858 || item.id == Items.TWENTY_TWO_LB_SHOT_8859) {
+        if (item.id == Items.OBJ_18LB_SHOT_8858 || item.id == Items.OBJ_22LB_SHOT_8859) {
             sendNPCDialogue(
                 player,
-                NPCs.REF_4300,
+                NPCs.STRENGTH_REFERREE2_4300,
                 "Hey! You can't take that, it's guild property. Take one from the pile.",
                 FaceAnim.FURIOUS,
             )

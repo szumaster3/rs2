@@ -19,7 +19,7 @@ import shared.consts.NPCs
  * only before and during the returning clarence mini-quest
  * each part has a 1/16 drop chance, and they drop in a set order.
  */
-class GiantAntWorkerNPC : NPCBehavior(NPCs.GIANT_ANT_WORKER_6379, NPCs.GIANT_ANT_SOLDIER_6380) {
+class GiantAntWorkerNPC : NPCBehavior(NPCs.ROOTS_GIANT_ANT_WORKER_6379, NPCs.ROOTS_GIANT_ANT_SOLDIER_6380) {
 
     companion object {
         private val BODY_PARTS = listOf(

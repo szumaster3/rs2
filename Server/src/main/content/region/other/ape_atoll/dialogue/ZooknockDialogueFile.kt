@@ -78,7 +78,7 @@ class ZooknockDialogueFile(val it: Int) : DialogueFile() {
             5 -> npcl("Bear with me human: I must now cast an extremely powerful spell. It is not often we are successful in investing shapeshifting powers within objects.").also { stage++ }
             6 -> sendItemDialogue(player!!, Items.MONKEY_GREEGREE_4024, "Zooknock hands you back the talisman. It seems to glow slightly.").also {
                 addItemOrDrop(player!!, Items.MONKEY_GREEGREE_4024, 1)
-                npc!!.graphics(Graphics(shared.consts.Graphics.WIND_BLAST_IMPACT_134, 96))
+                npc!!.graphics(Graphics(shared.consts.Graphics.NECKLACE_TELEPORT_REWORK_SPOTANIM_NPC_2_134, 96))
                 stage = 8
             }
             8 -> npcl("I am afraid I have not been able to fully invest my powers in that talisman. You may use it, but it will continue to draw its energy directly from me.").also { stage++ }
@@ -135,7 +135,7 @@ class ZooknockDialogueFile(val it: Int) : DialogueFile() {
             41 -> npcl(FaceAnim.OLD_CALM_TALK2, "contained within will likely depart.").also { stage++ }
             42 -> playerl(FaceAnim.FRIENDLY, "Where do I find a place of religious significance to monkeys?").also { stage++ }
             43 -> npcl(FaceAnim.OLD_CALM_TALK1, "Somewhere in the village. It out to be obvious. Now give me a moment.").also {
-                npc!!.graphics(Graphics(shared.consts.Graphics.WIND_BLAST_IMPACT_134, 96))
+                npc!!.graphics(Graphics(shared.consts.Graphics.NECKLACE_TELEPORT_REWORK_SPOTANIM_NPC_2_134, 96))
                 stage++
             }
 

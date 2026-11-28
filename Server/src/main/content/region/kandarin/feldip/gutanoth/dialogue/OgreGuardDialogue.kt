@@ -55,7 +55,7 @@ class OgreGuardDialogue(player: Player? = null) : Dialogue(player) {
                         }
                         3 -> {
                             face(npc.asNpc(), player, 2)
-                            sendNPCDialogue(player, NPCs.OGRE_GUARD_2042, "Ok der' yous goes!", FaceAnim.OLD_DEFAULT)
+                            sendNPCDialogue(player, NPCs.ZOGRE_OGRE_GUARD_2042, "Ok der' yous goes!", FaceAnim.OLD_DEFAULT)
                             return@queueScript stopExecuting(player)
                         }
                         else -> return@queueScript stopExecuting(player)
@@ -70,5 +70,5 @@ class OgreGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = OgreGuardDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_GUARD_2042)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOGRE_OGRE_GUARD_2042)
 }

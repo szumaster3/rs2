@@ -86,6 +86,6 @@ class SteppingStoneShortcut : OptionHandler() {
         /**
          * Represents the animation to use.
          */
-        private val ANIMATION = Animation(Animations.HUMAN_JUMP_SHORT_GAP_741)
+        private val ANIMATION = Animation(Animations.HUMAN_SPOT_JUMP_741)
     }
 }

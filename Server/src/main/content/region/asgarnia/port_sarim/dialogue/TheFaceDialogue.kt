@@ -44,5 +44,5 @@ class TheFaceDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.THE_FACE_2950)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VC_FACE_2950)
 }

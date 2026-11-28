@@ -31,7 +31,7 @@ class BlamishSnailSlimePlugin : InteractionListener {
             }
 
             removeItem(player, Item(Items.SAMPLE_BOTTLE_3377, 1))
-            animate(player, Animations.HUMAN_USE_PESTLE_AND_MORTAR_364)
+            animate(player, Animations.HUMAN_HERBING_GRIND_364)
             sendMessage(player, "You grind the blamish snail up into slimy pulp.")
             addItem(player, Items.BLAMISH_SNAIL_SLIME_1581, 1)
             return@onUseWith true

@@ -54,5 +54,5 @@ class LazyHellcatDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LAZY_HELLCAT_3506)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LAZYCAT_HELL_3506)
 }

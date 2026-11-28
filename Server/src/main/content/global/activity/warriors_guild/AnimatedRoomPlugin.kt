@@ -27,13 +27,13 @@ class AnimatedRoomPlugin : MapZone("wg animation", true), Plugin<Any> {
      * Represents types of armour sets available to spawn.
      */
     enum class ArmourSet(val npcId: Int, val tokenAmount: Int, val pieces: IntArray) {
-        BRONZE(NPCs.ANIMATED_BRONZE_ARMOUR_4278, 5, intArrayOf(Items.BRONZE_FULL_HELM_1155, Items.BRONZE_PLATEBODY_1117, Items.BRONZE_PLATELEGS_1075)),
-        IRON(NPCs.ANIMATED_IRON_ARMOUR_4279, 10, intArrayOf(Items.IRON_FULL_HELM_1153, Items.IRON_PLATEBODY_1115, Items.IRON_PLATELEGS_1067)),
-        STEEL(NPCs.ANIMATED_STEEL_ARMOUR_4280, 15, intArrayOf(Items.STEEL_FULL_HELM_1157, Items.STEEL_PLATEBODY_1119, Items.STEEL_PLATELEGS_1069)),
-        BLACK(NPCs.ANIMATED_BLACK_ARMOUR_4281, 20, intArrayOf(Items.BLACK_FULL_HELM_1165, Items.BLACK_PLATEBODY_1125, Items.BLACK_PLATELEGS_1077)),
-        MITHRIL(NPCs.ANIMATED_MITHRIL_ARMOUR_4282, 25, intArrayOf(Items.MITHRIL_FULL_HELM_1159, Items.MITHRIL_PLATEBODY_1121, Items.MITHRIL_PLATELEGS_1071)),
-        ADAMANT(NPCs.ANIMATED_ADAMANT_ARMOUR_4283, 30, intArrayOf(Items.ADAMANT_FULL_HELM_1161, Items.ADAMANT_PLATEBODY_1123, Items.ADAMANT_PLATELEGS_1073)),
-        RUNE(NPCs.ANIMATED_RUNE_ARMOUR_4284, 40, intArrayOf(Items.RUNE_FULL_HELM_1163, Items.RUNE_PLATEBODY_1127, Items.RUNE_PLATELEGS_1079));
+        BRONZE(NPCs.WARGUILD_BRONZE_ARMOUR_4278, 5, intArrayOf(Items.BRONZE_FULL_HELM_1155, Items.BRONZE_PLATEBODY_1117, Items.BRONZE_PLATELEGS_1075)),
+        IRON(NPCs.WARGUILD_IRON_ARMOUR_4279, 10, intArrayOf(Items.IRON_FULL_HELM_1153, Items.IRON_PLATEBODY_1115, Items.IRON_PLATELEGS_1067)),
+        STEEL(NPCs.WARGUILD_STEEL_ARMOUR_4280, 15, intArrayOf(Items.STEEL_FULL_HELM_1157, Items.STEEL_PLATEBODY_1119, Items.STEEL_PLATELEGS_1069)),
+        BLACK(NPCs.WARGUILD_BLACK_ARMOUR_4281, 20, intArrayOf(Items.BLACK_FULL_HELM_1165, Items.BLACK_PLATEBODY_1125, Items.BLACK_PLATELEGS_1077)),
+        MITHRIL(NPCs.WARGUILD_MITHRIL_ARMOUR_4282, 25, intArrayOf(Items.MITHRIL_FULL_HELM_1159, Items.MITHRIL_PLATEBODY_1121, Items.MITHRIL_PLATELEGS_1071)),
+        ADAMANT(NPCs.WARGUILD_ADAMANT_ARMOUR_4283, 30, intArrayOf(Items.ADAMANT_FULL_HELM_1161, Items.ADAMANT_PLATEBODY_1123, Items.ADAMANT_PLATELEGS_1073)),
+        RUNE(NPCs.WARGUILD_RUNE_ARMOUR_4284, 40, intArrayOf(Items.RUNE_FULL_HELM_1163, Items.RUNE_PLATEBODY_1127, Items.RUNE_PLATELEGS_1079));
     }
 
     override fun leave(e: Entity, logout: Boolean): Boolean {
@@ -62,7 +62,7 @@ class AnimatedRoomPlugin : MapZone("wg animation", true), Plugin<Any> {
         }
 
         player.lock(10)
-        player.animate(Animation.create(Animations.HUMAN_BURYING_BONES_827))
+        player.animate(Animation.create(Animations.HUMAN_PICKUPFLOOR_827))
         sendPlainDialogue(player, true, "You place your armour on the platform where it", "disappears...")
 
         queueScript(player, 0, QueueStrength.SOFT) { stage: Int ->

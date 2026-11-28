@@ -16,13 +16,13 @@ class BearNPC : NPCBehavior(*bearIds) {
     companion object {
         private val bearIds =
             intArrayOf(
-                NPCs.GRIZZLY_BEAR_105,
-                NPCs.BLACK_BEAR_106,
-                NPCs.GRIZZLY_BEAR_1195,
-                NPCs.GRIZZLY_BEAR_CUB_1196,
-                NPCs.GRIZZLY_BEAR_CUB_1197,
-                NPCs.BEAR_CUB_1326,
-                NPCs.BEAR_CUB_1327,
+                NPCs.BROWNBEAR_105,
+                NPCs.DARKBEAR_106,
+                NPCs.REGICIDE_DARKBEAR_1195,
+                NPCs.REGICIDE_DARKBEAR_CUB1_1196,
+                NPCs.REGICIDE_DARKBEAR_CUB2_1197,
+                NPCs.BROWNBEAR_CUB_1_1326,
+                NPCs.BROWNBEAR_CUB_2_1327,
             )
     }
 

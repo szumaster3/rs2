@@ -27,5 +27,5 @@ class CommanderConnadDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.COMMANDER_CONNAD_5029)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARBASSAULT_BARBARIAN_COMMANDER_5029)
 }

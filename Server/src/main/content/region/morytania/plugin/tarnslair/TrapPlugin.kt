@@ -31,7 +31,7 @@ class TrapPlugin : OptionHandler() {
 
         lock(player, 1)
         faceLocation(player, target.location)
-        animate(player, Animations.ARMS_OUT_TOGETHER_3071)
+        animate(player, Animations.HUMAN_DWARF_RECIEVE_3071)
 
         queueScript(player, 1, QueueStrength.SOFT) {
             if (roll < chance) {

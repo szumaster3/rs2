@@ -104,7 +104,7 @@ class UriNPC : AbstractNPC {
      * Returns the NPC ids associated with Uri and the Double Agent variants.
      */
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.URI_5141, NPCs.URI_5142, NPCs.URI_5143, NPCs.DOUBLE_AGENT_5144, NPCs.DOUBLE_AGENT_5145)
+        intArrayOf(NPCs.TRAIL_EASY_URI_5141, NPCs.TRAIL_MEDIUM_URI_5142, NPCs.TRAIL_HARD_URI_5143, NPCs.DOUBLE_AGENT_1_5144, NPCs.DOUBLE_AGENT_2_5145)
 
     /**
      * Returns true if this NPC is a double agent and should attack the player.
@@ -189,11 +189,11 @@ class UriNPC : AbstractNPC {
          */
         override fun getIds(): IntArray =
             intArrayOf(
-                NPCs.URI_5141,
-                NPCs.URI_5142,
-                NPCs.URI_5143,
-                NPCs.DOUBLE_AGENT_5144,
-                NPCs.DOUBLE_AGENT_5145,
+                NPCs.TRAIL_EASY_URI_5141,
+                NPCs.TRAIL_MEDIUM_URI_5142,
+                NPCs.TRAIL_HARD_URI_5143,
+                NPCs.DOUBLE_AGENT_1_5144,
+                NPCs.DOUBLE_AGENT_2_5145,
             )
 
         companion object {

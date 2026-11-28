@@ -107,8 +107,8 @@ class TrickOrTreatHandler : InteractionListener {
                                             when (counter++) {
                                                 0 -> visualize(
                                                     npc!!,
-                                                    Animations.CAST_SPELL_1979,
-                                                    Graphics.DEATH_BLACK_SKULL_SWIRL_1898,
+                                                    Animations.ZAROS_VERTICAL_CASTING_1979,
+                                                    Graphics.LUC2_LUCIEN_RAISE_UNDEAD_SPOT_1898,
                                                 ).also {
                                                     faceLocation(npc!!, player.location)
                                                 }

@@ -66,7 +66,7 @@ class AlchemySpell : SpellListener("modern") {
             player.pulseManager.clear()
         }
 
-        val explorersRingGraphics = Graphics(Graphic.EXPLORERS_RING_ALCH_1698)
+        val explorersRingGraphics = Graphics(Graphic.LOW_LVL_ALCHEMY_SPOT_2_1698)
 
         val weapon = getItemFromEquipment(player, EquipmentSlot.WEAPON)
         val staff = weapon?.let { w -> MagicStaff.values().find { it.staves.contains(w.id) } }
@@ -101,13 +101,13 @@ class AlchemySpell : SpellListener("modern") {
 
     companion object {
         private val lowAlchemyAnimation = Animation(9623, Animator.Priority.HIGH)
-        private val lowAlchemyGraphics = Graphics(Graphic.LOW_ALCHEMY_BY_HAND_763)
-        private val lowAlchemyStaffAnimation = Animation(Animations.HUMAN_CAST_LOW_ALCH_SPELL_9625, Animator.Priority.HIGH)
-        private val lowAlchemyStaffGraphics = Graphics(Graphic.LOW_ALCH_WITH_STAFF_1692)
+        private val lowAlchemyGraphics = Graphics(Graphic.LOW_LVL_ALCHEMYSPELL_SITTING_1_763)
+        private val lowAlchemyStaffAnimation = Animation(Animations.LOW_LVL_ALCHEMY_PLAYER_STAFF_9625, Animator.Priority.HIGH)
+        private val lowAlchemyStaffGraphics = Graphics(Graphic.LOW_LVL_ALCHEMY_STAFF_1692)
 
         private val highAlchemyAnimation = Animation(9631, Animator.Priority.HIGH)
-        private val highAlchemyGraphics = Graphics(Graphic.ALCH_1691)
-        private val highAlchemyStaffAnimation = Animation(Animations.ALCH_WITH_STAFF_9633, Animator.Priority.HIGH)
-        private val highAlchemyStaffGraphics = Graphics(Graphic.HIGH_ALCH_WITH_STAFF_1693)
+        private val highAlchemyGraphics = Graphics(Graphic.BRAIN_SAWBONES_SYRINGE_ATTACK_1_1691)
+        private val highAlchemyStaffAnimation = Animation(Animations.HIGH_LVL_ALCHEMY_PLAYER_STAFF_9633, Animator.Priority.HIGH)
+        private val highAlchemyStaffGraphics = Graphics(Graphic.HIGH_LVL_ALCHEMY_STAFF_1693)
     }
 }

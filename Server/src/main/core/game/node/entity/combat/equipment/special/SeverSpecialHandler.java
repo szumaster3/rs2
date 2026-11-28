@@ -27,7 +27,7 @@ public final class SeverSpecialHandler extends MeleeSwingHandler implements Plug
 
     private static final int SPECIAL_ENERGY = 55;
     private static final Animation ANIMATION = new Animation(1872, Priority.HIGH);
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_SCIMITAR_SPECIAL_347, 96);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.SIGHERO_LINZA_CASUAL_READY_347, 96);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

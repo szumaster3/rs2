@@ -88,5 +88,5 @@ class GhostInkeeperDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GhostInkeeperDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_INNKEEPER_1700)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_GHOST_INNKEEPER_1700)
 }

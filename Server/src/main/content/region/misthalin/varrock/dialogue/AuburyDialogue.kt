@@ -309,6 +309,6 @@ class AuburyDialogue(player: Player? = null) : Dialogue(player) {
 
     companion object {
         private val PACKAGE = Item(Items.RESEARCH_PACKAGE_290)
-        private val NOTES = Item(Items.NOTES_291)
+        private val NOTES = Item(Items.RESEARCH_NOTES_291)
     }
 }

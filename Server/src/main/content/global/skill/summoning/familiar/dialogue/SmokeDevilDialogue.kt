@@ -85,5 +85,5 @@ class SmokeDevilDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SMOKE_DEVIL_6865, NPCs.SMOKE_DEVIL_6866)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_DUST_DEVIL_6865, NPCs.LORE_DUST_DEVIL_COMBAT_6866)
 }

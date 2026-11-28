@@ -206,7 +206,7 @@ class HunterPlugin : OptionHandler() {
                 override fun release(player: Player, item: Item) {
                     val node = BNetTypes.forItem(item)
                     if (removeItem(player, item)) {
-                        visualize(player, Animations.RELEASE_BUTTERFLY_FROM_JAR_5213, node!!.graphics[1])
+                        visualize(player, Animations.HUNTING_OPENING_BUTTERFLY_JAR_5213, node!!.graphics[1])
                         addItem(player, Items.BUTTERFLY_JAR_10012)
                     }
                 }

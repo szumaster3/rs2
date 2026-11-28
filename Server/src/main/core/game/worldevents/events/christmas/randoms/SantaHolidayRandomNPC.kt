@@ -10,7 +10,7 @@ import core.tools.RandomFunction
 import core.tools.minutesToTicks
 import shared.consts.NPCs
 
-class SantaHolidayRandomNPC : HolidayRandomEventNPC(NPCs.SANTA_CLAUS_8540) {
+class SantaHolidayRandomNPC : HolidayRandomEventNPC(NPCs.XMAS08_SANTA_8540) {
     override fun init() {
         spawnLocation = getPathableRandomLocalCoordinate(this, 1, player.location)
         super.init()

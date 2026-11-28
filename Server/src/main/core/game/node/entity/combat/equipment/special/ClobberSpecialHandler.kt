@@ -62,7 +62,7 @@ class ClobberSpecialHandler : MeleeSwingHandler(), Plugin<Any> {
     companion object {
         private const val SPECIAL_ENERGY = 100
         private val ANIMATION = Animation(2876, Priority.HIGH)
-        private val Graphics = Graphics(shared.consts.Graphics.DRAGON_AXE_SPECIAL_479, 96)
-        private val ITEM = Item(Items.DRAGON_AXE_6739)
+        private val Graphics = Graphics(shared.consts.Graphics.DRAGON_SMALLAXE_SWOOSH_479, 96)
+        private val ITEM = Item(Items.DRAGON_HATCHET_6739)
     }
 }

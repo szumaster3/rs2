@@ -75,10 +75,10 @@ class GrishDialogue(player: Player? = null) : Dialogue(player) {
             20 -> npc(FaceAnim.OLD_DEFAULT, "Dats da good fing yous creature...yous does Grish a", "good fing. But yous know dat yous get sickies and", "mebe get dead!").also { stage++ }
             21 -> player("If that's your idea of a pep talk, I have to say that it", "leaves a lot to be desired.").also { stage++ }
             22 -> npc(FaceAnim.OLD_DEFAULT, "Yous creatures is alus says funny stuff...speaks proper", "like Grish!").also {
-                sendDoubleItemDialogue(player, Items.COOKED_CHOMPY_7228, Items.SUPER_RESTORE3_3026, "Grish hands you some food and two potions.")
+                sendDoubleItemDialogue(player, Items.COOKED_CHOMPY_7228, Items.SUPER_RESTORE_3_3026, "Grish hands you some food and two potions.")
                 if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 0) {
                     setVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487, 1, true)
-                    addItemOrDrop(player, Items.SUPER_RESTORE3_3026, 2)
+                    addItemOrDrop(player, Items.SUPER_RESTORE_3_3026, 2)
                     addItemOrDrop(player, Items.COOKED_CHOMPY_2878, 3)
                 }
                 stage++

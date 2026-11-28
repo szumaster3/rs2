@@ -45,5 +45,5 @@ class NurseSarahDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.NURSE_SARAH_373)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BIONURSE_373)
 }

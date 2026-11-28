@@ -22,7 +22,7 @@ class ThrantaxTheMightyNPC(
         vararg objects: Any?,
     ): AbstractNPC = ThrantaxTheMightyNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.THRANTAX_THE_MIGHTY_238)
+    override fun getIds(): IntArray = intArrayOf(NPCs.THRANTAX_238)
 
     override fun tick() {
         if (spawnedTicks++ == 100 || player == null) {

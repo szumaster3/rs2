@@ -79,5 +79,5 @@ class SasquineHuburnsDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SASQUINE_HUBURNS_7421)
+    override fun getIds(): IntArray = intArrayOf(NPCs.EASTER09_IMPLING_EGGPAINT_TRAINED_7421)
 }

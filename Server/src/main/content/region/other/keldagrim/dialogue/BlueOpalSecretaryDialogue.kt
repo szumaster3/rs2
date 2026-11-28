@@ -63,5 +63,5 @@ class BlueOpalSecretaryDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BlueOpalSecretaryDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLUE_OPAL_SECRETARY_2094)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_SECRETARY_BLUE_OPAL_2094)
 }

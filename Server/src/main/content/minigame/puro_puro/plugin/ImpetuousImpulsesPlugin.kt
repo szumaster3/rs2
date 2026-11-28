@@ -18,7 +18,7 @@ class ImpetuousImpulsesPlugin : InteractionListener {
                 sendMessage(player, "You need a Hunting level of at least 17 to enter the maze.")
                 return@on true
             }
-            if (anyInInventory(player, Items.MAGIC_BOX_10025, Items.IMP_IN_A_BOX2_10027, Items.IMP_IN_A_BOX1_10028)) {
+            if (anyInInventory(player, Items.MAGIC_BOX_10025, Items.IMP_IN_A_BOX_2_10027, Items.IMP_IN_A_BOX_1_10028)) {
                 sendDialogue(
                     player,
                     "Something prevents you from entering. You think the portal is offended by your imp boxes. They are not popular on imp and impling planes.",
@@ -72,7 +72,7 @@ class ImpetuousImpulsesPlugin : InteractionListener {
             }
 
             lock(player, 5)
-            visualize(player, 6592, Graphics.SACHEL_EMOTE_1117)
+            visualize(player, 6592, Graphics.II_JAR_MAKER_SPOTANIM_1117)
             addItem(player, jar.id)
             item.charge -= percent
             sendMessage(player, "Your jar generator generates a butterfly jar.")
@@ -101,7 +101,7 @@ class ImpetuousImpulsesPlugin : InteractionListener {
 
             lock(player, 5)
             playAudio(player, Sounds.II_JAR_GENERATOR_3726)
-            visualize(player, 6592, Graphics.SACHEL_EMOTE_1117)
+            visualize(player, 6592, Graphics.II_JAR_MAKER_SPOTANIM_1117)
             addItem(player, jar.id)
             item.charge -= percent
             sendMessage(player, "Your jar generator generates an impling jar.")

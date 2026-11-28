@@ -29,7 +29,7 @@ class DragonHeadNPC : NPCBehavior(*DRAGON_HEAD) {
     }
 
     override fun afterDamageReceived(self: NPC, attacker: Entity, state: BattleState) {
-        transformNpc(self, NPCs.DRAGON_HEAD_8426, 100)
+        transformNpc(self, NPCs.LUC2_DRAGONKIN_DRAGON_FIRE_LOW_8426, 100)
     }
 
     override fun onDeathStarted(self: NPC, killer: Entity) {
@@ -37,6 +37,6 @@ class DragonHeadNPC : NPCBehavior(*DRAGON_HEAD) {
     }
 
     companion object {
-        private val DRAGON_HEAD = intArrayOf(NPCs.DRAGON_HEAD_8425, NPCs.DRAGON_HEAD_8426, NPCs.DRAGON_HEAD_8427)
+        private val DRAGON_HEAD = intArrayOf(NPCs.LUC2_DRAGONKIN_DRAGON_8425, NPCs.LUC2_DRAGONKIN_DRAGON_FIRE_LOW_8426, NPCs.LUC2_DRAGONKIN_DRAGON_FIRE_HIGH_8427)
     }
 }

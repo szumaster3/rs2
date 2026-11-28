@@ -20,7 +20,7 @@ import shared.consts.NPCs
  */
 class FemiDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.FEMI_676)
+        npc = NPC(NPCs.GRANDTREE_FEMI_676)
         when (stage) {
             0 -> player("I can't believe they won't let me in!").also { stage++ }
             1 -> npc(FaceAnim.OLD_DEFAULT, "I don't believe all this rubbish about an invasion. If", "mankind wanted to, they could have invaded before", "now.").also { stage++ }
@@ -65,7 +65,7 @@ class FemiDialogueFile : DialogueFile() {
 
 class FemiCartDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int, ) {
-        npc = NPC(NPCs.FEMI_676)
+        npc = NPC(NPCs.GRANDTREE_FEMI_676)
         when (stage) {
             0 -> {
                 if (getQuestStage(player!!, Quests.THE_GRAND_TREE.questName) == 55) {

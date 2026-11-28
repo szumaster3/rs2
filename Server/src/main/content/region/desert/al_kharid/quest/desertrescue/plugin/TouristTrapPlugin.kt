@@ -189,7 +189,7 @@ class TouristTrapPlugin : OptionHandler() {
 
                 2686, 2685 -> sendNPCDialogue(
                     player,
-                    NPCs.GUARD_4999,
+                    NPCs.TOURTRAP_QIP_DESERT_MINING_GUARD_STILL_1_4999,
                     "Hey, move away from the gate. There's nothing interesting for you here.",
                 )
 
@@ -1146,7 +1146,7 @@ class TouristTrapPlugin : OptionHandler() {
             player.faceLocation(base.transform(15, 9, 0))
             player.animate(Animation.create(5054))
             Pulser.submit(
-                object : Pulse(SeqType.forId(Animations.UNTYING_5054)!!.durationTicks, player) {
+                object : Pulse(SeqType.forId(Animations.TOURTRAP_QIP_HUMAN_WINCHING_5054)!!.durationTicks, player) {
                     override fun pulse(): Boolean {
                         TouristTrap.addConfig(player, 2048 + (1 shl 4))
                         this@WinchCutscene.stop(true)

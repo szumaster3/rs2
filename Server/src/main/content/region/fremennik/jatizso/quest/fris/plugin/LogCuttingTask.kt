@@ -22,7 +22,7 @@ class LogCuttingTask(
     }
 
     override fun playAnimation() {
-        animate(player, Animations.HUMAN_SPLIT_LOGS_5755)
+        animate(player, Animations.TT2_SNAKE_WALK_RIGHT_TURN_5755)
     }
 
     override fun process(): Boolean {

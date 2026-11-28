@@ -25,7 +25,7 @@ class OoglogRockPassageShortcut : AgilityShortcut(intArrayOf(29099), 29, 0.0, "s
                     -1,
                     player.location,
                     player.location.transform(0, if (player.location.y == 2871) -2 else 2, 0),
-                    Animation(Animations.DUCK_UNDER_2240),
+                    Animation(Animations.ROGUESDEN_CONTORTION_2240),
                     5,
                     0.0,
                     null

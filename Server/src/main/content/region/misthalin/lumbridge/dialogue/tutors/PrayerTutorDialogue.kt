@@ -46,5 +46,5 @@ class PrayerTutorDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PRAYER_TUTOR_4903)
+    override fun getIds(): IntArray = intArrayOf(NPCs.PRIEST_YAUCHOMI_4903)
 }

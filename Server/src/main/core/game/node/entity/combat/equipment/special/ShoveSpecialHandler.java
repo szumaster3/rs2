@@ -30,9 +30,9 @@ import static core.api.ContentAPIKt.stun;
 public final class ShoveSpecialHandler extends MeleeSwingHandler implements Plugin<Object> {
 
     private static final int SPECIAL_ENERGY = 25;
-    private static final Animation ANIMATION = new Animation(Animations.TIPTOE_A_1064, Priority.HIGH);
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_SPEAR_SPECIAL_253, 96);
-    private static Animation STUN_ANIM = new Animation(Animations.DEFEND_UNARMED_424);
+    private static final Animation ANIMATION = new Animation(Animations.FREMSAGA_EWAIN_SNEAK_1064, Priority.HIGH);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.HUMAN_WALK_F_WITH_ARMOUR_SOUND_253, 96);
+    private static Animation STUN_ANIM = new Animation(Animations.HUMAN_UNARMEDBLOCK_424);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {
@@ -42,10 +42,10 @@ public final class ShoveSpecialHandler extends MeleeSwingHandler implements Plug
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEAR_1249, this);
-        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEARP_1263, this);
-        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEARKP_3176, this);
-        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEARP_PLUS_5716, this);
-        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEARP_PLUS_PLUS_5730, this);
+        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEAR_P_1263, this);
+        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEAR_KP_3176, this);
+        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEAR_P_PLUS_5716, this);
+        CombatStyle.MELEE.getSwingHandler().register(Items.DRAGON_SPEAR_P_PLUS_PLUS_5730, this);
         CombatStyle.MELEE.getSwingHandler().register(Items.ZAMORAKIAN_SPEAR_11716, this);
         return this;
     }

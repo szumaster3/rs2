@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class DeviousMinds : Quest("Devious Minds", 46, 45, 1, Vars.VARBIT_QUEST_DEVIOUS_MINDS_PROGRESS, 0, 1, 80) {
+class DeviousMinds : Quest("Devious Minds", 46, 45, 1, Vars.VARBIT_QUEST_DEVIOUS_MINDS_PROGRESS_1465, 0, 1, 80) {
 
      /*
       *  Speak to Monk.
@@ -79,7 +79,7 @@ class DeviousMinds : Quest("Devious Minds", 46, 45, 1, Vars.VARBIT_QUEST_DEVIOUS
         rewardXP(player, Skills.FLETCHING, 5000.0)
         rewardXP(player, Skills.RUNECRAFTING, 5000.0)
         rewardXP(player, Skills.SMITHING, 6500.0)
-        setVarbit(player, Vars.VARBIT_QUEST_DEVIOUS_MINDS_PROGRESS, 80, true)
+        setVarbit(player, Vars.VARBIT_QUEST_DEVIOUS_MINDS_PROGRESS_1465, 80, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

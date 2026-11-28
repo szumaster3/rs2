@@ -9,7 +9,7 @@ import core.plugin.Initializable
 
 @Initializable
 class MythsoftheWhiteLands :
-    Quest("Myths of the White Lands", 163, 162, 2, Vars.VARBIT_QUEST_MYTHS_OF_THE_WHITE_LANDS_5733, 0, 1, 60) {
+    Quest("Myths of the White Lands", 163, 162, 2, Vars.VARBIT_5733, 0, 1, 60) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -38,7 +38,7 @@ class MythsoftheWhiteLands :
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "500 xp reward lamp", ln++)
         addItemOrDrop(player, Items.ANTIQUE_LAMP_4447, 1)
-        setVarbit(player, Vars.VARBIT_QUEST_MYTHS_OF_THE_WHITE_LANDS_5733, 60, true)
+        setVarbit(player, Vars.VARBIT_5733, 60, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

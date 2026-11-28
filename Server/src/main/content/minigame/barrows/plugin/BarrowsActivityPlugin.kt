@@ -158,7 +158,7 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                 )
                 return true
             }
-            if (`object`.id in Objects.LADDER_6708..6712) { // Varbit 465
+            if (`object`.id in Objects.ROPE_6708..6712) { // Varbit 465
                 ClimbActionHandler.climb(
                     e,
                     ClimbActionHandler.CLIMB_UP,

@@ -14,7 +14,7 @@ import shared.consts.NPCs
 class GnomeGateGuardDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.GNOME_GUARD_163)
+        npc = NPC(NPCs.GNOMEKINGSGUARD_163)
         when (stage) {
             0 -> npcl(FaceAnim.OLD_DEFAULT, "I'm afraid that we have orders not to let you in.").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Orders from who?").also { stage++ }
@@ -23,7 +23,7 @@ class GnomeGateGuardDialogue : DialogueFile() {
             4 -> npc(FaceAnim.OLD_DEFAULT, "I'm sorry but you'll have to leave.").also { stage++ }
             5 -> {
                 end()
-                findLocalNPC(player!!, NPCs.FEMI_676)?.let {
+                findLocalNPC(player!!, NPCs.GRANDTREE_FEMI_676)?.let {
                     face(player!!, it, 2)
                     openDialogue(player!!, FemiDialogue())
                 }

@@ -30,7 +30,7 @@ class ForemanNPC(
         vararg objects: Any?,
     ): AbstractNPC = ForemanNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FOREMAN_674)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDTREE_FOREMAN_674)
 
     override fun finalizeDeath(killer: Entity?) {
         if (getQuestStage(killer as Player, Quests.THE_GRAND_TREE.questName) == 55) {

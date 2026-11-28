@@ -55,7 +55,7 @@ class FishingOffcutsPlugin : InteractionListener {
                     return@queueScript clearScripts(player)
                 }
 
-                animate(player, Animations.OFFCUTS_6702)
+                animate(player, Animations.BRUT_HUMAN_KNIFEUSE_6702)
                 removeItem(player, fish.fishId)
 
                 val successChance = (level.coerceAtMost(99) / fish.successDivider)

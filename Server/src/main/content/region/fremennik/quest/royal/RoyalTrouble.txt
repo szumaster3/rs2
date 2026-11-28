@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class RoyalTrouble : Quest("Royal Trouble", 106, 105, 1, Vars.VARBIT_QUEST_ROYAL_TROUBLE_2140, 0, 1, 21) {
+class RoyalTrouble : Quest("Royal Trouble", 106, 105, 1, Vars.VARBIT_2140, 0, 1, 21) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -39,7 +39,7 @@ class RoyalTrouble : Quest("Royal Trouble", 106, 105, 1, Vars.VARBIT_QUEST_ROYAL
         rewardXP(player, Skills.SLAYER, 5000.0)
         rewardXP(player, Skills.CONSTRUCTION, 5000.0)
         addItemOrDrop(player, Items.COINS_995, 20000)
-        setVarbit(player, Vars.VARBIT_QUEST_ROYAL_TROUBLE_2140, 21, true)
+        setVarbit(player, Vars.VARBIT_2140, 21, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

@@ -88,5 +88,5 @@ class BrotherBraceDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_BRACE_954)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_NOOB_954)
 }

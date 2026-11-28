@@ -122,5 +122,5 @@ class MercenaryCaptainDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MERCENARY_CAPTAIN_830)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DESERTMININGCAPTAIN_830)
 }

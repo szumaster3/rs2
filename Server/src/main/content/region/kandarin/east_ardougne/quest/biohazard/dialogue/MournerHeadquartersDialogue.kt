@@ -23,8 +23,8 @@ class MournerHeadquartersDialogue : DialogueFile() {
         if (source == null) {
             source = npc
         }
-        val sourceId = source?.id ?: NPCs.MOURNER_348
-        npc = NPC(if (sourceId == NPCs.MOURNER_370) NPCs.MOURNER_370 else NPCs.MOURNER_348)
+        val sourceId = source?.id ?: NPCs.MOURNER3_348
+        npc = NPC(if (sourceId == NPCs.MOURNERSTEW2_370) NPCs.MOURNERSTEW2_370 else NPCs.MOURNER3_348)
         when (stage) {
             0 -> {
                 if (inBorders(player!!, 2547, 3321, 2555, 3327)) {
@@ -41,7 +41,7 @@ class MournerHeadquartersDialogue : DialogueFile() {
             5 -> npcl(FaceAnim.FRIENDLY, "Then I suggest you leave as soon as you can.").also { stage++ }
             6 -> playerl(FaceAnim.FRIENDLY, "Thanks for the advice.").also { stage = END_DIALOGUE }
 
-            100 -> if (sourceId == NPCs.MOURNER_370) {
+            100 -> if (sourceId == NPCs.MOURNERSTEW2_370) {
                 npc("You're here at last! I don't know what I've", "eaten but I feel like I'm on death's door.").also { stage = 104 }
             } else {
                 npc("Oh dear oh dear. I feel terrible, I", "think it was the stew.").also { stage++ }

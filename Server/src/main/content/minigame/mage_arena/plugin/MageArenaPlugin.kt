@@ -74,13 +74,13 @@ class MageArenaPlugin: InteractionListener {
                         1 -> {
                             faceLocation(player, node.asScenery().location)
                             playAudio(player, 2467, 1)
-                            forceMove(player, startDestination, jumpDestination, 0, 30, null, Animations.HUMAN_JUMP_SHORT_GAP_741)
+                            forceMove(player, startDestination, jumpDestination, 0, 30, null, Animations.HUMAN_SPOT_JUMP_741)
                             return@queueScript delayScript(player, 1)
                         }
                         2 -> {
                             playAudio(player, 2496)
-                            animate(player, Animations.HUMAN_SHRINK_804)
-                            sendGraphics(player, Graphics(shared.consts.Graphics.WATER_SPLASH_68, 100))
+                            animate(player, Animations.HUMAN_SMOKEPUFF_TELE_DISAPPEAR_804)
+                            sendGraphics(player, Graphics(shared.consts.Graphics.WATERSPLASH_1_68, 100))
                             teleport(player, teleportDestination, TeleportManager.TeleportType.INSTANT, 1)
                             return@queueScript delayScript(player, 1)
                         }

@@ -45,5 +45,5 @@ class ColONiallDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ColONiallDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.COL_ONIALL_4872)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLUG2_ONIALL_STAGE1_4872)
 }

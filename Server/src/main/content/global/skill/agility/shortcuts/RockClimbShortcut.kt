@@ -28,7 +28,7 @@ class RockClimbShortcut :
     AgilityShortcut(intArrayOf(9335, 9336, 2231, 26327, 26328, 26324, 26323, 19849, 9296, 9297), 1, 0.0, "climb") {
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
-        val scalingAnim = Animation(Animations.CLIMB_DOWN_B_740)
+        val scalingAnim = Animation(Animations.HUMAN_CLIMBING_DOWN_740)
         val req = determineRequirement(player.location)
 
         when (scenery.id) {

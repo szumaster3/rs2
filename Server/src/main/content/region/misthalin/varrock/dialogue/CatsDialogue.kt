@@ -78,11 +78,11 @@ class CatsDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = CatsDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.KITTEN_761,
-        NPCs.KITTEN_762,
-        NPCs.KITTEN_763,
-        NPCs.KITTEN_764,
-        NPCs.KITTEN_765,
-        NPCs.KITTEN_766,
+        NPCs.KITTENPET1_761,
+        NPCs.KITTENPET_LIGHT_762,
+        NPCs.KITTENPET_BROWN_763,
+        NPCs.KITTENPET_BLACK_764,
+        NPCs.KITTENPET_BROWNGREY_765,
+        NPCs.KITTENPET_BLUEGREY_766,
     )
 }

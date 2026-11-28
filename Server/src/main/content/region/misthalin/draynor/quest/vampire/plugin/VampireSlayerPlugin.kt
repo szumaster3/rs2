@@ -12,7 +12,7 @@ import shared.consts.*
 class VampireSlayerPlugin: InteractionListener {
     override fun defineListeners() {
         on(Scenery.CUPBOARD_33502, IntType.SCENERY, "open") { player, node ->
-            animate(player, Animations.HUMAN_OPEN_WARDROBE_542)
+            animate(player, Animations.HUMAN_OPENHIGHCUPBOARD_542)
             playAudio(player, Sounds.CUPBOARD_OPEN_58)
             sendMessage(player, "You open the cupboard.")
             replaceScenery(node.asScenery(),  Scenery.CUPBOARD_33503, -1)
@@ -44,7 +44,7 @@ class VampireSlayerPlugin: InteractionListener {
                 sendMessage(player, "The coffin is sealed shut.")
                 return@on true
             }
-            animate(player, Animations.HUMAN_MULTI_USE_832)
+            animate(player, Animations.HUMAN_PICKUPTABLE_832)
             playAudio(player, Sounds.OPEN_HEAVY_54)
             if (getQuestStage(player, Quests.VAMPIRE_SLAYER.questName) == 30) {
                 replaceScenery(node.asScenery(), Scenery.COFFIN_11208, 6)
@@ -53,7 +53,7 @@ class VampireSlayerPlugin: InteractionListener {
                     if (o == null || !o.isActive) {
                         val vampire =
                             core.game.node.entity.npc.NPC
-                                .create(NPCs.COUNT_DRAYNOR_757, Location.create(3078, 9775))
+                                .create(NPCs.MISC_PRINCE_BRAND_MULTICHILD_757, Location.create(3078, 9775))
                         vampire.isRespawn = false
                         vampire.setAttribute("player", player)
                         vampire.init()

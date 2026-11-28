@@ -46,7 +46,7 @@ class ItemColoringPlugin : InteractionListener {
             val article = if (mix.name.first().lowercaseChar() in "aeiou") "an" else "a"
 
             if (removeItem(player, Item(first.dyeId)) && removeItem(player, Item(second.dyeId))) {
-                animate(player, Animations.DYE_COMBINE_4348)
+                animate(player, Animations.MIXING_DYES_REDPLUSBLUE_4348)
                 sendMessage(player, "You mix the two dyes and make $article ${mix.name.lowercase()} dye.")
                 addItemOrDrop(player, mix.dyeId, 1)
             }

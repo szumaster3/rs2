@@ -24,7 +24,7 @@ class ArdougneAchievementDiary : DiaryEventHookBase(DiaryType.ARDOUGNE) {
     private val COMBAT_TRAINING_CAMP_AREA = ZoneBorders(2516, 3357, 2519, 3360)
     private val ARDOUGNE_NATURE_RUNE_CHEST_AREA = ZoneBorders(2670, 3298, 2678, 3304, 1, true)
 
-    private val RING_OF_DUELING = arrayOf(Items.RING_OF_DUELLING8_2552, Items.RING_OF_DUELLING7_2554, Items.RING_OF_DUELLING6_2556, Items.RING_OF_DUELLING5_2558, Items.RING_OF_DUELLING4_2560, Items.RING_OF_DUELLING3_2562, Items.RING_OF_DUELLING2_2564, Items.RING_OF_DUELLING1_2566)
+    private val RING_OF_DUELING = arrayOf(Items.RING_OF_DUELLING_8_2552, Items.RING_OF_DUELLING_7_2554, Items.RING_OF_DUELLING_6_2556, Items.RING_OF_DUELLING_5_2558, Items.RING_OF_DUELLING_4_2560, Items.RING_OF_DUELLING_3_2562, Items.RING_OF_DUELLING_2_2564, Items.RING_OF_DUELLING_1_2566)
     private val WIZARD_PORTAL = intArrayOf(Scenery.MAGIC_PORTAL_2156, Scenery.MAGIC_PORTAL_2157, Scenery.MAGIC_PORTAL_2158)
 
     private val CASTLE_WARS_LOCATION = Location(2442, 3089)
@@ -202,21 +202,21 @@ class ArdougneAchievementDiary : DiaryEventHookBase(DiaryType.ARDOUGNE) {
 
         when (player.viewport.region?.id) {
             CREATURE_CREATION_UNDERGROUND_REGION -> {
-                if (event.npc.id == NPCs.UNICOW_5603) {
+                if (event.npc.id == NPCs.TOL_UNICOW_5603) {
                     finishTask(
                         player,
                         DiaryLevel.EASY,
                         EasyTasks.KILL_UNICOW_IN_TOWER_OF_LIFE,
                     )
                 }
-                if (event.npc.id == NPCs.SWORDCHICK_5595) {
+                if (event.npc.id == NPCs.TOL_SWORDCHICK_5595) {
                     finishTask(
                         player,
                         DiaryLevel.MEDIUM,
                         MediumTasks.KILL_SWORDCHICK_IN_TOWER_OF_LIFE,
                     )
                 }
-                if (event.npc.id == NPCs.FROGEEL_5593) {
+                if (event.npc.id == NPCs.TOL_FROGEEL_5593) {
                     finishTask(
                         player,
                         DiaryLevel.HARD,
@@ -269,7 +269,7 @@ class ArdougneAchievementDiary : DiaryEventHookBase(DiaryType.ARDOUGNE) {
             }
 
             is NPC ->
-                if (event.method == TeleportMethod.NPC && event.source.id == NPCs.WIZARD_CROMPERTY_2328) {
+                if (event.method == TeleportMethod.NPC && event.source.id == NPCs.CROMPERTY_2328) {
                     finishTask(
                         player,
                         DiaryLevel.EASY,

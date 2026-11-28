@@ -155,5 +155,5 @@ class FatherBaddenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FatherBaddenDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FATHER_BADDEN_2902)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AGRITH_BADDEN_2902)
 }

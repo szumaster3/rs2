@@ -33,11 +33,11 @@ class DwarfsDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = DwarfsDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.DWARF_5880,
-        NPCs.DWARF_5881,
-        NPCs.DWARF_5882,
-        NPCs.DWARF_5883,
-        NPCs.DWARF_5884,
-        NPCs.DWARF_5885,
+        NPCs.SLICE_DWARF1_5880,
+        NPCs.SLICE_DWARF2_5881,
+        NPCs.SLICE_DWARF3_5882,
+        NPCs.SLICE_DWARF4_5883,
+        NPCs.SLICE_DWARF5_5884,
+        NPCs.SLICE_DWARF6_5885,
     )
 }

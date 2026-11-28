@@ -50,13 +50,13 @@ class HamMemberDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.HAM_GUARD_1710,
-        NPCs.HAM_GUARD_1711,
-        NPCs.HAM_GUARD_1712,
-        NPCs.HAM_DEACON_1713,
-        NPCs.HAM_MEMBER_1714,
-        NPCs.HAM_MEMBER_1715,
-        NPCs.HAM_MEMBER_1716,
-        NPCs.HAM_MEMBER_1717,
+        NPCs.FAVOUR_GUARD_MALE_NO_BEARD_1710,
+        NPCs.FAVOUR_GUARD_MALE_BEARDED_1711,
+        NPCs.FAVOUR_GUARD_LONG_BEARD_1712,
+        NPCs.FAVOUR_DEACON_1713,
+        NPCs.H_A_M_MEMBER_1714,
+        NPCs.H_A_M_MEMBER_1715,
+        NPCs.H_A_M_MEMBER_1716,
+        NPCs.H_A_M_MEMBER_1717,
     )
 }

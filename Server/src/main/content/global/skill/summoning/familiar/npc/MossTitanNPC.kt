@@ -9,13 +9,13 @@ import shared.consts.NPCs
 
 @Initializable
 class MossTitanNPC
-@JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.MOSS_TITAN_7357) :
+@JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_MOSS_TITAN_7357) :
     ElementalTitanNPC(owner, id, 5800, Items.MOSS_TITAN_POUCH_12804, 20, WeaponInterface.STYLE_AGGRESSIVE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return MossTitanNPC(owner, id)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MOSS_TITAN_7357, NPCs.MOSS_TITAN_7358)
+        return intArrayOf(NPCs.LORE_MOSS_TITAN_7357, NPCs.LORE_MOSS_TITAN_COMBAT_7358)
     }
 }

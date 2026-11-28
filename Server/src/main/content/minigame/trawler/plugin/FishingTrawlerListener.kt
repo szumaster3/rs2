@@ -84,7 +84,7 @@ class FishingTrawlerInteractionHandler : InteractionListener {
                 sendPlayerDialogue(player, "I'd better not go stealing other people's fish.", FaceAnim.HALF_GUILTY)
                 return@on true
             }
-            animate(player, Animations.HUMAN_BURYING_BONES_827)
+            animate(player, Animations.HUMAN_PICKUPFLOOR_827)
             FishingTrawlerContainer(player).open()
             return@on true
         }

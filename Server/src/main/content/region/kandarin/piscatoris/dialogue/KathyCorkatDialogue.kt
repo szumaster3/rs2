@@ -62,7 +62,7 @@ class KathyCorkatDialogue(player: Player? = null) : Dialogue(player) {
             7 -> playerl(FaceAnim.FRIENDLY, "Huh? Oh, forget it!").also { stage = END_DIALOGUE }
             8 -> npcl(FaceAnim.FRIENDLY, "Ooh, it's dangerous up there at the moment!").also { stage++ }
             9 -> {
-                if (!inEquipment(player, Items.RING_OF_CHAROSA_6465)) {
+                if (!inEquipment(player, Items.RING_OF_CHAROS_A_6465)) {
                     setTitle(player, 2)
                     sendOptions(player!!, "What would you like to say?", "I'm not afraid - let's go!", "Dangerous? Nah, forget it!")
                 } else {

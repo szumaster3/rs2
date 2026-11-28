@@ -17,55 +17,55 @@ enum class BNetTypes(
 ) {
     RUBY_HARVEST(
         BNetNode(
-            intArrayOf(NPCs.RUBY_HARVEST_5085),
+            intArrayOf(NPCs.BUTTERFLY_RUBY_5085),
             intArrayOf(15, 80, 75),
             doubleArrayOf(24.0, 300.0, 50.0),
             arrayOf(
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_RED_913),
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_RED_917),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_4_913),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_8_917),
             ),
             ChanceItem(Items.RUBY_HARVEST_10020),
         ),
     ),
     SAPPHIRE_GLACIALIS(
         BNetNode(
-            intArrayOf(NPCs.SAPPHIRE_GLACIALIS_5084, NPCs.SAPPHIRE_GLACIALIS_7499),
+            intArrayOf(NPCs.BUTTERFLY_GLACIALIS_5084, NPCs.PHARAOH_QUEEN_7499),
             intArrayOf(25, 85, 80),
             doubleArrayOf(34.0, 400.0, 70.0),
             arrayOf(
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_BLUE_912),
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_BLUE_916),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_3_912),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_7_916),
             ),
             ChanceItem(Items.SAPPHIRE_GLACIALIS_10018),
         ),
     ),
     SNOWY_KNIGHT(
         BNetNode(
-            intArrayOf(NPCs.SNOWY_KNIGHT_5083, NPCs.SNOWY_KNIGHT_7498),
+            intArrayOf(NPCs.BUTTERFLY_SNOWY_5083, NPCs.MOM2_GOLEM_HEAD_7498),
             intArrayOf(35, 90, 85),
             doubleArrayOf(44.0, 500.0, 100.0),
             arrayOf(
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_WHITE_911),
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_WHITE_915),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_2_911),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_6_915),
             ),
             ChanceItem(Items.SNOWY_KNIGHT_10016),
         ),
     ),
     BLACK_WARLOCK(
         BNetNode(
-            intArrayOf(NPCs.BLACK_WARLOCK_5082),
+            intArrayOf(NPCs.BUTTERFLY_WARLOCK_5082),
             intArrayOf(45, 95, 90),
             doubleArrayOf(54.0, 650.0, 125.0),
             arrayOf(
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_BLACK_910),
-                Graphics(shared.consts.Graphics.RELEASE_A_BUTTERFLY_BLACK_914),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_1_910),
+                Graphics(shared.consts.Graphics.HUNTING_BUTTERFLY_OUT_JAR_5_914),
             ),
             ChanceItem(Items.BLACK_WARLOCK_10014),
         ),
     ),
     BABY_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.BABY_IMPLING_1028, NPCs.BABY_IMPLING_6055),
+            intArrayOf(NPCs.II_IMPLING_TYPE_1_1028, NPCs.II_IMPLING_TYPE_1_MAZE_6055),
             17,
             20.0,
             18.0,
@@ -94,7 +94,7 @@ enum class BNetTypes(
     ),
     YOUNG_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.YOUNG_IMPLING_1029, NPCs.YOUNG_IMPLING_6056),
+            intArrayOf(NPCs.II_IMPLING_TYPE_2_1029, NPCs.II_IMPLING_TYPE_2_MAZE_6056),
             22,
             22.0,
             20.0,
@@ -107,13 +107,13 @@ enum class BNetTypes(
             ChanceItem(Items.MEAT_PIZZA_2293, 1, 1, DropFrequency.COMMON),
             ChanceItem(Items.COAL_453, 1, 1, DropFrequency.COMMON),
             ChanceItem(Items.BOW_STRING_1777, 1, 1, DropFrequency.COMMON),
-            ChanceItem(Items.STEEL_AXE_1353, 1, 1, DropFrequency.COMMON),
+            ChanceItem(Items.STEEL_HATCHET_1353, 1, 1, DropFrequency.COMMON),
             ChanceItem(Items.STEEL_FULL_HELM_1157, 1, 1, DropFrequency.COMMON),
             ChanceItem(Items.SNAPE_GRASS_231, 1, 1, DropFrequency.UNCOMMON),
             ChanceItem(Items.SOFT_CLAY_1761, 1, 1, DropFrequency.UNCOMMON),
             ChanceItem(Items.STUDDED_CHAPS_1097, 1, 1, DropFrequency.RARE),
             ChanceItem(Items.OAK_PLANK_8778, 1, 1, DropFrequency.UNCOMMON),
-            ChanceItem(Items.DEFENCE_POTION3_133, 1, 1, DropFrequency.RARE),
+            ChanceItem(Items.DEFENCE_POTION_3_133, 1, 1, DropFrequency.RARE),
             ChanceItem(Items.YEW_LONGBOW_855, 1, 1, DropFrequency.UNCOMMON),
             ChanceItem(Items.GARDEN_PIE_7178, 1, 1, DropFrequency.UNCOMMON),
             ChanceItem(Items.JANGERBERRIES_247, 1, 1, DropFrequency.UNCOMMON),
@@ -124,7 +124,7 @@ enum class BNetTypes(
     ),
     GOURMET_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.GOURMET_IMPLING_1030, NPCs.GOURMET_IMPLING_6057),
+            intArrayOf(NPCs.II_IMPLING_TYPE_3_1030, NPCs.II_IMPLING_TYPE_3_MAZE_6057),
             28,
             24.0,
             22.0,
@@ -145,13 +145,13 @@ enum class BNetTypes(
             ChanceItem(Items.RAINBOW_FISH_10137, 5, 5, DropFrequency.RARE),
             ChanceItem(Items.GARDEN_PIE_7179, 6, 6, DropFrequency.RARE),
             ChanceItem(Items.SWORDFISH_374, 3, 3, DropFrequency.RARE),
-            ChanceItem(Items.STRAWBERRIES5_5406, 1, 1, DropFrequency.RARE),
+            ChanceItem(Items.STRAWBERRIES_5_5406, 1, 1, DropFrequency.RARE),
             ChanceItem(Items.COOKED_KARAMBWAN_3145, 2, 2, DropFrequency.RARE),
         ),
     ),
     EARTH_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.EARTH_IMPLING_1031, NPCs.EARTH_IMPLING_6058),
+            intArrayOf(NPCs.II_IMPLING_TYPE_4_1031, NPCs.II_IMPLING_TYPE_4_MAZE_6058),
             36,
             27.0,
             25.0,
@@ -175,7 +175,7 @@ enum class BNetTypes(
     ),
     ESSENCE_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.ESSENCE_IMPLING_1032, NPCs.ESSENCE_IMPLING_6059),
+            intArrayOf(NPCs.II_IMPLING_TYPE_5_1032, NPCs.II_IMPLING_TYPE_5_MAZE_6059),
             42,
             29.0,
             27.0,
@@ -203,7 +203,7 @@ enum class BNetTypes(
     ),
     ECLECTIC_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.ECLECTIC_IMPLING_1033, NPCs.ECLECTIC_IMPLING_6060),
+            intArrayOf(NPCs.II_IMPLING_TYPE_6_1033, NPCs.II_IMPLING_TYPE_6_MAZE_6060),
             50,
             32.0,
             30.0,
@@ -211,7 +211,7 @@ enum class BNetTypes(
             ChanceItem(Items.MITHRIL_PICKAXE_1273, 1, 1, DropFrequency.COMMON),
             ChanceItem(Items.ADAMANT_KITESHIELD_1199, 1, 1, DropFrequency.UNCOMMON),
             ChanceItem(Items.BLUE_DHIDE_CHAPS_2493, 1, 1, DropFrequency.RARE),
-            ChanceItem(Items.RED_SPIKY_VAMBS_10083, 1, 1, DropFrequency.RARE),
+            ChanceItem(Items.RED_SPIKY_VAMBRACES_10083, 1, 1, DropFrequency.RARE),
             ChanceItem(Items.RUNE_DAGGER_1213, 1, 1, DropFrequency.RARE),
             ChanceItem(Items.BATTLESTAFF_1391, 1, 1, DropFrequency.VERY_RARE),
             ChanceItem(Items.CURRY_LEAF_5970, 1, 1, DropFrequency.COMMON),
@@ -232,7 +232,7 @@ enum class BNetTypes(
     ),
     NATURE_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.NATURE_IMPLING_1034, NPCs.NATURE_IMPLING_6061),
+            intArrayOf(NPCs.II_IMPLING_TYPE_7_1034, NPCs.II_IMPLING_TYPE_7_MAZE_6061),
             58,
             36.0,
             34.0,
@@ -260,7 +260,7 @@ enum class BNetTypes(
     ),
     MAGPIE_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.MAGPIE_IMPLING_1035, NPCs.MAGPIE_IMPLING_6062),
+            intArrayOf(NPCs.II_IMPLING_TYPE_8_1035, NPCs.II_IMPLING_TYPE_8_MAZE_6062),
             65,
             216.0,
             44.0,
@@ -289,7 +289,7 @@ enum class BNetTypes(
     ),
     NINJA_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.NINJA_IMPLING_6053, NPCs.NINJA_IMPLING_6063),
+            intArrayOf(NPCs.II_IMPLING_TYPE_9_6053, NPCs.II_IMPLING_TYPE_9_MAZE_6063),
             74,
             240.0,
             50.0,
@@ -304,14 +304,14 @@ enum class BNetTypes(
             ChanceItem(Items.RUNE_WARHAMMER_1347, 1, 1, DropFrequency.UNCOMMON),
             ChanceItem(Items.ONYX_BOLTS_9342, 2, 2, DropFrequency.UNCOMMON),
             ChanceItem(Items.ONYX_BOLT_TIPS_9194, 4, 4, DropFrequency.RARE),
-            ChanceItem(Items.PRAYER_POTION3_140, 4, 4, DropFrequency.COMMON),
+            ChanceItem(Items.PRAYER_POTION_3_140, 4, 4, DropFrequency.COMMON),
             ChanceItem(Items.DAGANNOTH_HIDE_6155, 3, 3, DropFrequency.UNCOMMON),
             ChanceItem(Items.BLACK_DRAGONHIDE_1748, 10, 16, DropFrequency.COMMON),
         ),
     ),
     PIRATE_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.PIRATE_IMPLING_7845, NPCs.PIRATE_IMPLING_7846),
+            intArrayOf(NPCs.II_IMPLING_TYPE_11_7845, NPCs.II_IMPLING_TYPE_11_MAZE_7846),
             76,
             270.0,
             57.0,
@@ -360,7 +360,7 @@ enum class BNetTypes(
     ),
     DRAGON_IMPLING(
         ImplingNode(
-            intArrayOf(NPCs.DRAGON_IMPLING_6054, NPCs.DRAGON_IMPLING_6064),
+            intArrayOf(NPCs.II_IMPLING_TYPE_10_6054, NPCs.II_IMPLING_TYPE_10_MAZE_6064),
             83,
             300.0,
             65.0,
@@ -372,7 +372,7 @@ enum class BNetTypes(
             ChanceItem(Items.DRAGON_ARROW_11212, 100, 500, DropFrequency.COMMON),
             ChanceItem(Items.DRAGON_BOLTS_9341, 3, 40, DropFrequency.COMMON),
             ChanceItem(Items.DRAGON_LONGSWORD_1305, 1, 1, DropFrequency.COMMON),
-            ChanceItem(Items.DRAGON_DAGGERP_PLUS_PLUS_5699, 3, 3, DropFrequency.UNCOMMON),
+            ChanceItem(Items.DRAGON_DAGGER_P_PLUS_PLUS_5699, 3, 3, DropFrequency.UNCOMMON),
             ChanceItem(Items.DRAGON_DART_11230, 105, 350, DropFrequency.UNCOMMON),
             ChanceItem(Items.DRAGON_DART_TIP_11232, 105, 350, DropFrequency.COMMON),
             ChanceItem(Items.DRAGON_ARROWTIPS_11237, 100, 500, DropFrequency.COMMON),

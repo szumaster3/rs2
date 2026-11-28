@@ -56,5 +56,5 @@ class EvilTurnipDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.EVIL_TURNIP_6833, NPCs.EVIL_TURNIP_6834)
+        intArrayOf(NPCs.LORE_TURNIP_6833, NPCs.LORE_TURNIP_COMBAT_6834)
 }

@@ -66,7 +66,7 @@ class GraniteCrabDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray =
-        intArrayOf(NPCs.GRANITE_CRAB_6796, NPCs.GRANITE_CRAB_6797)
+        intArrayOf(NPCs.LORE_ROCK_CRAB_6796, NPCs.LORE_ROCK_CRAB_COMBAT_6797)
 
     companion object {
         private val fishes: IntArray =

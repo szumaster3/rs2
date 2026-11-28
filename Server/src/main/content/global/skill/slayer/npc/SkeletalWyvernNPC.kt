@@ -16,7 +16,7 @@ import shared.consts.Items
 
 class SkeletalWyvernNPC : NPCBehavior(*Tasks.SKELETAL_WYVERN.npcs) {
 
-    private val COMBAT_HANDLER = MultiSwingHandler(SwitchAttack(CombatStyle.MELEE.swingHandler, Animation(Animations.STAND_2985)),
+    private val COMBAT_HANDLER = MultiSwingHandler(SwitchAttack(CombatStyle.MELEE.swingHandler, Animation(Animations.HUMAN_FUNGICIDE_PUMP_READY_2985)),
         SwitchAttack(CombatStyle.RANGE.swingHandler, Animation(2989), Graphics(499)),
         DragonfireSwingHandler.get(false, 54, Animation(2988), Graphics(501), null, null, false)
     )

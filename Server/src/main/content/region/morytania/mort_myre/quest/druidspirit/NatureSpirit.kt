@@ -111,7 +111,7 @@ class NatureSpirit : Quest(Quests.NATURE_SPIRIT) {
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.SILVER_SICKLEB_2963, 230)
+        sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.SILVER_SICKLE_B_2963, 230)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "3,000 Crafting XP", ln++)
         drawReward(player, "2,000 Hitpoints XP", ln++)

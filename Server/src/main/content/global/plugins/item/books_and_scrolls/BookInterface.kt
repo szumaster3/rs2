@@ -126,7 +126,7 @@ class BookInterface : InterfaceListener {
             setAttribute(player, CURRENT_PAGE_ATTRIBUTE, 0)
             setAttribute(player, CALLBACK_ATTRIBUTE, displayCallback)
 
-            animate(player, Animations.READ_BOOK_1350)
+            animate(player, Animations.HUMAN_READBOOK_1350)
 
             when (bookComponent) {
                 FANCY_BOOK_26 -> openInterface(player, FANCY_BOOK_26)

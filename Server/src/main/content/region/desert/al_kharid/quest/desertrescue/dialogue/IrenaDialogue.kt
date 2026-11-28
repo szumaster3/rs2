@@ -40,7 +40,7 @@ class IrenaDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             900 -> {
-                sendNPCDialogueLines(player, NPCs.ANA_823, FaceAnim.HALF_GUILTY, false, "<col=08088A>-- You show Irena the barrel with Ana in it. --", "Hey great, there's my Mum!")
+                sendNPCDialogueLines(player, NPCs.ANABARREL_823, FaceAnim.HALF_GUILTY, false, "<col=08088A>-- You show Irena the barrel with Ana in it. --", "Hey great, there's my Mum!")
                 stage++
                 return true
             }
@@ -241,7 +241,7 @@ class IrenaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MERCENARY_4986)
+    override fun getIds(): IntArray = intArrayOf(NPCs.IRENA_4986)
 
     companion object {
         private val SKILLS = intArrayOf(Skills.FLETCHING, Skills.AGILITY, Skills.SMITHING, Skills.THIEVING)

@@ -97,7 +97,7 @@ class AncientSpell private constructor(
     override fun getTargets(entity: Entity, target: Entity): Array<BattleState> {
         val singleTarget = when (definition.type) {
             SpellType.RUSH, SpellType.BLITZ -> true
-            else -> animation?.id == Animations.CAST_SPELL_1978
+            else -> animation?.id == Animations.ZAROS_CASTING_1978
         }
 
         if (!shouldUseMultiHit(entity, target, singleTarget)) return super.getTargets(entity, target)

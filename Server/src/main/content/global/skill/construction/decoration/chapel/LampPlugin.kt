@@ -23,7 +23,7 @@ class LampPlugin : InteractionListener {
 
             removeItem(player, Item(Items.CLEAN_MARRENTILL_251))?.also {
                 lock(player, 1)
-                animate(player, Animations.USE_TINDERBOX_3687)
+                animate(player, Animations.HUMAN_LIGHT_TORCH_3687)
                 sendMessage(player, "You burn some marrentill in the incense burner.")
                 replaceScenery(
                     node.asScenery(),

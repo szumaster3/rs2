@@ -75,5 +75,5 @@ class WarTortoiseDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WAR_TORTOISE_6815, NPCs.WAR_TORTOISE_6816)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_WAR_TURTLE_6815, NPCs.LORE_WAR_TURTLE_COMBAT_6816)
 }

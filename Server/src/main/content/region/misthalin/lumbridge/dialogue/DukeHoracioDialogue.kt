@@ -95,5 +95,5 @@ class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = DukeHoracioDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DUKE_HORACIO_741)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DUKE_OF_LUMBRIDGE_741)
 }

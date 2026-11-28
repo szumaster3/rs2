@@ -90,5 +90,5 @@ class HariDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = HariDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HARI_3330)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CANOEING_HARI_3330)
 }

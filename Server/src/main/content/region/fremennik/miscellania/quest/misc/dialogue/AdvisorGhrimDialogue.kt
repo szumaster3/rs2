@@ -35,5 +35,5 @@ class AdvisorGhrimDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ADVISOR_GHRIM_1375)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISC_ADVISOR_GHRIM_1375)
 }

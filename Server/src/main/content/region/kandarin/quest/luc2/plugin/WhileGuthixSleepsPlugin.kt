@@ -13,7 +13,7 @@ import shared.consts.*
 class WhileGuthixSleepsPlugin : InteractionListener {
 
     override fun defineListeners() {
-        on(NPCs.KHAZARD_LAUNDERER_8428, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.LUC2_KHAZARDIAN_CIVILIAN_WASHING_8428, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, KhazardLaundererDialogue())
             return@on true
         }
@@ -96,7 +96,7 @@ class WhileGuthixSleepsPlugin : InteractionListener {
          */
 
         on(Scenery.TRAPDOOR_40995, IntType.SCENERY, "climb-down") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_BURYING_BONES_827), Location(3017, 9923, 1))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_PICKUPFLOOR_827), Location(3017, 9923, 1))
             return@on true
         }
     }

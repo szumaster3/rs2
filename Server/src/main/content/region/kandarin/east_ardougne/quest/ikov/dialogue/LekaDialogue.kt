@@ -32,5 +32,5 @@ class LekaDialogue(player: Player? = null) : Dialogue(player) {
         return false
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FIRE_WARRIOR_OF_LESARKUS_277)
+    override fun getIds(): IntArray = intArrayOf(NPCs.IKOV_FIREWARRIOR_277)
 }

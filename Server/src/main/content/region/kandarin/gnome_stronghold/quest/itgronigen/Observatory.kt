@@ -100,7 +100,7 @@ class Observatory : Quest(Quests.OBSERVATORY_QUEST)
     {
         super.finish(player)
         var ln = 10
-        drawReward(player, Items.NULL_4557)
+        drawReward(player, Items.OBJ_4557)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "2,250 Crafting XP", ln++)
         drawReward(player, "A payment depending on", ln++)

@@ -136,8 +136,8 @@ class PortalChamberPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         LocType.forId(Objects.SCRYING_POOL_13639).handlers["option:direct-portal"] = this
-        LocType.forId(Objects.TPATION_FOCUS_13640).handlers["option:direct-portal"] = this
-        LocType.forId(Objects.GREATER_TP_FOCUS_13641).handlers["option:direct-portal"] = this
+        LocType.forId(Objects.TELEPORTATION_FOCUS_13640).handlers["option:direct-portal"] = this
+        LocType.forId(Objects.GREATER_TELEPORT_FOCUS_13641).handlers["option:direct-portal"] = this
         LocType.forId(Objects.SCRYING_POOL_13639).handlers["option:scry"] = this
         for (i in Objects.VARROCK_PORTAL_13615..Objects.KHARYRLL_PORTAL_13635) {
             LocType.forId(i).handlers["option:enter"] = this

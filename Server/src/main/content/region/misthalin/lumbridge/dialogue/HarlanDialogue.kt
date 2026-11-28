@@ -104,5 +104,5 @@ class HarlanDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MELEE_TUTOR_705)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AIDE_TUTOR_MELEE_705)
 }

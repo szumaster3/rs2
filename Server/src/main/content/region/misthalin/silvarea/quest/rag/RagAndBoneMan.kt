@@ -24,14 +24,14 @@ class RagAndBoneMan : Quest(Quests.RAG_AND_BONE_MAN, 714, 0, 1, 4) {
 
         val requiredBonesMap =
             mapOf(
-                Items.GOBLIN_SKULL_7814 to attributeGoblinBone,
-                Items.BEAR_RIBS_7817 to attributeBearBone,
-                Items.BIG_FROG_LEG_7910 to attributeBigFrogBone,
-                Items.RAM_SKULL_7820 to attributeRamBone,
-                Items.UNICORN_BONE_7823 to attributeUnicornBone,
-                Items.MONKEY_PAW_7856 to attributeMonkeyBone,
-                Items.GIANT_RAT_BONE_7826 to attributeGiantRatBone,
-                Items.GIANT_BAT_WING_7829 to attributeGiantBatBone,
+                Items.POLISHED_GOBLIN_SKULL_7814 to attributeGoblinBone,
+                Items.POLISHED_BEAR_RIBS_7817 to attributeBearBone,
+                Items.POLISHED_BIG_FROG_LEG_7910 to attributeBigFrogBone,
+                Items.POLISHED_RAM_SKULL_7820 to attributeRamBone,
+                Items.POLISHED_UNICORN_BONE_7823 to attributeUnicornBone,
+                Items.POLISHED_MONKEY_PAW_7856 to attributeMonkeyBone,
+                Items.POLISHED_GIANT_RAT_BONE_7826 to attributeGiantRatBone,
+                Items.POLISHED_GIANT_BAT_WING_7829 to attributeGiantBatBone,
             )
     }
 

@@ -14,7 +14,7 @@ class ResetHolidayAppearance : RSTimer(minutesToTicks(1), "reset-holiday-appeara
         if (entity is Player) {
             entity.asPlayer().appearance.transformNPC(-1)
             playAudio(entity.asPlayer(), Sounds.WEAKEN_HIT_3010)
-            visualize(entity, -1, Graphics.RE_PUFF_86)
+            visualize(entity, -1, Graphics.SMOKEPUFF_2_86)
         }
         entity.timers.removeTimer(this)
         return true

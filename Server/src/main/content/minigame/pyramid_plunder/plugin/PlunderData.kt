@@ -55,7 +55,7 @@ object PlunderData {
     /**
      * The NPC representing the guardian mummy.
      */
-    val mummy = NPC(NPCs.GUARDIAN_MUMMY_4476, Location.create(1968, 4427, 2)).also {
+    val mummy = NPC(NPCs.NTK_MUMMY_GUARDIAN_4476, Location.create(1968, 4427, 2)).also {
         it.isNeverWalks = true
         it.init()
     }

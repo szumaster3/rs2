@@ -13,10 +13,10 @@ class ClockmakersPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(CLOCKMAKER_FURNITURE_IDS, IntType.SCENERY, "craft") { player, node ->
-            val unlockLevel = node.id - Scenery.CLOCKMAKER_S_BENCH_13709
+            val unlockLevel = node.id - Scenery.CLOCKMAKERS_BENCH_13709
             val productList =
                 when (node.id) {
-                    Scenery.CLOCKMAKER_S_BENCH_13712 ->
+                    Scenery.CLOCKMAKERS_BENCH_13712 ->
                         listOf(
                             Products.CLOCKWORK,
                             Products.TOY_DOLL,
@@ -104,10 +104,10 @@ class ClockmakersPlugin : InteractionListener {
             Items.TOY_HORSEY_2526,
         )
         private val CLOCKMAKER_FURNITURE_IDS = intArrayOf(
-            Scenery.CLOCKMAKER_S_BENCH_13709,
-            Scenery.CLOCKMAKER_S_BENCH_13710,
-            Scenery.CLOCKMAKER_S_BENCH_13711,
-            Scenery.CLOCKMAKER_S_BENCH_13712,
+            Scenery.CLOCKMAKERS_BENCH_13709,
+            Scenery.CLOCKMAKERS_BENCH_13710,
+            Scenery.CLOCKMAKERS_BENCH_13711,
+            Scenery.CLOCKMAKERS_BENCH_13712,
         )
         private val WOODEN_CAT_SPECIAL_IDS = intArrayOf(
             Items.BEAR_FUR_949,

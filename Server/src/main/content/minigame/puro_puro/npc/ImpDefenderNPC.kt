@@ -15,7 +15,7 @@ import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
 
-class ImpDefenderNPC : NPCBehavior(NPCs.IMP_DEFENDER_6074) {
+class ImpDefenderNPC : NPCBehavior(NPCs.IMP_DEFENDER_NO_PATROL_6074) {
 
     override fun onCreation(self: NPC) {
         self.isWalks = true

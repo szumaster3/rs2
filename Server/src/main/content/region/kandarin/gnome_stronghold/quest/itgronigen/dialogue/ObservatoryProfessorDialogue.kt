@@ -137,18 +137,18 @@ private class ProfessorDialogueFile : DialogueFile() {
             10 -> npcl(FaceAnim.HAPPY, "No problem at all. Come and visit again!").also { stage = 7 }
             11 -> npcl(FaceAnim.HALF_GUILTY, "Of course. We have a superb telescope up in the Observatory, on the hill.").also { stage++ }
             12 -> npcl(FaceAnim.HALF_GUILTY, "A truly marvellous invention, the likes of which you'll never behold again.").also { stage++ }
-            13 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Well, it would be if it worked.").also { stage++ }
+            13 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "Well, it would be if it worked.").also { stage++ }
             14 -> npcl(FaceAnim.HALF_GUILTY, "Don't interrupt!").also { stage++ }
             15 -> playerl(FaceAnim.HALF_GUILTY, "What? It doesn't work?").also { stage++ }
             16 -> npcl(FaceAnim.HALF_GUILTY, "Oh, no, no, no. Don't listen to him, he's joking. Aren't you, my FAITHFUL assistant?").also { stage++ }
-            17 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Nope, dead serious. Hasn't been working for a long time.").also { stage++ }
+            17 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "Nope, dead serious. Hasn't been working for a long time.").also { stage++ }
             18 -> npcl(FaceAnim.HALF_GUILTY, "Arghhh! Get back to work and stop sticking your nose in!").also { stage++ }
             19 -> playerl(FaceAnim.HALF_GUILTY, "So, it's broken. How come?").also { stage++ }
             20 -> npcl(FaceAnim.HALF_GUILTY, "Oh, I suppose there's no use keeping it secret. Did you see those houses outside?").also { stage++ }
             21 -> playerl(FaceAnim.HALF_GUILTY, "Up on the hill? Yes, I've seen them.").also { stage++ }
             22 -> npcl(FaceAnim.HALF_GUILTY, "It's a horde of goblins. Since they moved here they have caused nothing but trouble. Last week, my telescope was tampered with.").also { stage++ }
             23 -> npcl(FaceAnim.HALF_GUILTY, "Now, parts need replacing before it can be used again. They've even been messing around in the dungeons under this area. Something needs to be done.").also { stage++ }
-            24 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Strikes me that this visitor could help us.").also { stage++ }
+            24 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "Strikes me that this visitor could help us.").also { stage++ }
             25 -> npcl(FaceAnim.HALF_GUILTY, "Stop being so rude. ... Although, he has a point. What do you say?").also { stage++ }
             26 -> playerl(FaceAnim.HALF_GUILTY, "What, me?").also { stage++ }
             27 -> options("Not right now", "Sounds interesting").also { stage++ }
@@ -159,7 +159,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             29 -> npcl(FaceAnim.HALF_GUILTY, "Oh dear. I really do need some help. If you see anyone who can help then please send them my way.").also { stage = END_DIALOGUE }
             30 -> npcl(FaceAnim.HALF_GUILTY, "Oh, thanks so much. I shall need some materials for the telescope, so it can be used again. Let's start with three planks of wood for the telescope base.").also { stage++ }
             31 -> npcl(FaceAnim.HALF_GUILTY, "My assistant will help with obtaining these, won't you?").also { stage++ }
-            32 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "As if I don't have enough to do. Seems I don't have a choice.").also { stage++ }
+            32 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "As if I don't have enough to do. Seems I don't have a choice.").also { stage++ }
             33 -> npcl(FaceAnim.HALF_GUILTY, "Go talk to him if you need some advice.").also { stage++ }
             34 -> playerl(FaceAnim.HALF_GUILTY, "Okay, I'll be right back.").also { stage++ }
             35 -> {
@@ -189,7 +189,7 @@ private class ProfessorDialogueFile : DialogueFile() {
                 setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 4)
             }
             48 -> player("Still working hard?").also { stage++ }
-            49 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Some of us are.").also { stage++ }
+            49 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "Some of us are.").also { stage++ }
             50 -> npcl(FaceAnim.ANNOYED, "What did I tell you about speaking when spoken to?").also { stage++ }
             51 -> npcl(FaceAnim.HAPPY, "So, ${player!!.username}, you have the bronze bar?").also { stage++ }
             52 -> if (!inInventory(player!!, Items.BRONZE_BAR_2349)) {
@@ -210,7 +210,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             56 -> npcl(FaceAnim.NEUTRAL, "Oi! Lazy bones!").also { stage++ }
             57 -> player(FaceAnim.SCARED, "What? I'm not lazy.").also { stage++ }
             58 -> npcl(FaceAnim.NEUTRAL, "Not you! I'm talking to my assistant.").also { stage++ }
-            59 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Calm down old man, I heard. ${player!!.username}, I'm here if you need any help.").also { stage++ }
+            59 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "Calm down old man, I heard. ${player!!.username}, I'm here if you need any help.").also { stage++ }
             60 -> npcl(FaceAnim.NEUTRAL, "Thank you. Wait a minute, who are you calling 'old'?").also {
                 end()
                 setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 6)
@@ -229,13 +229,13 @@ private class ProfessorDialogueFile : DialogueFile() {
             }
             62 -> npcl("I really need it. Please hurry.").also { stage = END_DIALOGUE }
             63 -> npcl("Excellent work, let's make the lens.").also { stage++ }
-            64 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "It'll need to be made to an exact shape and size.").also { stage++ }
+            64 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "It'll need to be made to an exact shape and size.").also { stage++ }
             65 -> npcl("Well, obviously, hence why we have a lens mould.").also { stage++ }
-            66 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Not any more. One of those goblins took it.").also { stage++ }
+            66 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "Not any more. One of those goblins took it.").also { stage++ }
             67 -> npcl(FaceAnim.SAD, "Great, just what I need. ${player!!.username}, I don't suppose you could find it?").also { stage++ }
             68 -> playerl("I'll have a look - where should I start?").also { stage++ }
             69 -> npcl(FaceAnim.HAPPY, "No idea. You could ask my USELESS assistant if you want.").also { stage++ }
-            70 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "What have I done to deserve this?").also { stage++ }
+            70 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "What have I done to deserve this?").also { stage++ }
             71 -> {
                 end()
                 setQuestStage(player!!, Quests.OBSERVATORY_QUEST.questName, 8)
@@ -248,7 +248,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             73 -> npcl("Please try and find it; my assistant may be able to help.").also { stage = END_DIALOGUE }
             74 -> npc(FaceAnim.HALF_THINKING, "Well, from the smell I'd guess cooking some vile", "concoction.").also { stage++ }
             75 -> player("Wow, good guess. Well, here you go.").also { stage++ }
-            76 -> sendNPCDialogue(player!!, NPCs.OBSERVATORY_ASSISTANT_6118, "Please don't give that to him. Last time he tried any Crafting, I had to spend a week cleaning up after the explosion.").also { stage++ }
+            76 -> sendNPCDialogue(player!!, NPCs.QIP_OBS_PROFFESORS_ASSISTANT_6118, "Please don't give that to him. Last time he tried any Crafting, I had to spend a week cleaning up after the explosion.").also { stage++ }
             77 -> player(FaceAnim.SCARED, "Explosion?").also { stage++ }
             78 -> npc("Erm, yes. I think in this instance you had probably", "better do it.").also { stage++ }
             79 -> player("I suppose it's better I don't ask.").also { stage++ }
@@ -256,7 +256,7 @@ private class ProfessorDialogueFile : DialogueFile() {
             81 -> {
                 end()
                 runTask(player!!, 0) {
-                    animate(player!!, Animations.TAKE_THING_OUT_OF_POCKET_AND_GIVE_IT_4540)
+                    animate(player!!, Animations.ALUFT_PLAYER_HANDING_OVER_4540)
                     findLocalNPC(player!!, NPCs.OBSERVATORY_PROFESSOR_488)?.let { animate(it, 4540) }
                 }.also {
                     sendItemDialogue(
@@ -279,9 +279,9 @@ private class ProfessorDialogueFile : DialogueFile() {
             86 -> {
                 val npcId = findLocalNPC(player!!, NPCs.OBSERVATORY_PROFESSOR_488)
                 runTask(player!!, 1) {
-                    animate(player!!, Animations.TAKE_THING_OUT_OF_POCKET_AND_GIVE_IT_4540)
+                    animate(player!!, Animations.ALUFT_PLAYER_HANDING_OVER_4540)
                     if (npcId != null) {
-                        animate(npcId, Animations.TAKE_THING_OUT_OF_POCKET_AND_GIVE_IT_4540)
+                        animate(npcId, Animations.ALUFT_PLAYER_HANDING_OVER_4540)
                     }
                 }
                 npcl("Wonderful, at last I can fix the telescope.").also { stage++ }
@@ -382,7 +382,7 @@ private class ProfessorConstellationsDialogue : DialogueFile() {
 
             16 -> npc("That's exactly it!").also { stage++ }
             17 -> {
-                animate(player!!, Animations.CHEER_862)
+                animate(player!!, Animations.EMOTE_CHEER_862)
                 player("Yes! Woo hoo!").also { stage++ }
             }
 
@@ -448,7 +448,7 @@ private class ProfessorConstellationsDialogue : DialogueFile() {
                      8 -> rewardXP(player!!, Skills.HITPOINTS, xpReward)
                     10 -> addItemOrDrop(player!!, Items.AMULET_OF_DEFENCE_1729)
                     11 -> addItemOrDrop(player!!, Items.BLACK_2H_SWORD_1313)
-                    12 -> addItemOrDrop(player!!, Items.SUPER_STRENGTH1_161)
+                    12 -> addItemOrDrop(player!!, Items.SUPER_STRENGTH_1_161)
                     14 -> rewardXP(player!!, Skills.ATTACK, xpReward)
                     15 -> addItemOrDrop(player!!, Items.TUNA_362, 3)
                 }

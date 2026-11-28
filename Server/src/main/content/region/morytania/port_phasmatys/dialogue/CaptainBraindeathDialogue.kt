@@ -25,5 +25,5 @@ class CaptainBraindeathDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_BRAINDEATH_2827)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DEAL_CAPTIAN_BRAINDEATH_2827)
 }

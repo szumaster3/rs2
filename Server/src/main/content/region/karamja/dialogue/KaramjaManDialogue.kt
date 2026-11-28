@@ -25,5 +25,5 @@ class KaramjaManDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAN_3915)
+    override fun getIds(): IntArray = intArrayOf(NPCs.KARAMJA_MAN_3915)
 }

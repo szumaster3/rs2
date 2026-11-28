@@ -92,5 +92,5 @@ class ElnockInquisitorDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ELNOCK_INQUISITOR_6070)
+    override fun getIds(): IntArray = intArrayOf(NPCs.II_ELNOCK_6070)
 }

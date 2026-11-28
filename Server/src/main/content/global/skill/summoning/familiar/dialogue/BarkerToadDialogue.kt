@@ -94,5 +94,5 @@ class BarkerToadDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARKER_TOAD_6889, NPCs.BARKER_TOAD_6890)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_BARKER_TOAD_6889, NPCs.LORE_BARKER_TOAD_COMBAT_6890)
 }

@@ -53,9 +53,9 @@ class SergeantDamienDialogue(var isCorrect: Boolean = false, var eventStart: Boo
                 val prefix = "Go to$DARK_RED this mat</col>"
                 when (getAttribute(player!!, GameAttributes.DRILL_TASK, -1)) {
                     DrillDemonUtils.DD_SIGN_RUN -> sendItemDialogue(player!!, Items.RUN_10947, "$prefix and jog on the spot!")
-                    DrillDemonUtils.DD_SIGN_JUMP -> sendItemDialogue(player!!, Items.STARJUMP_10949, "$prefix and do some starjumps!")
-                    DrillDemonUtils.DD_SIGN_PUSHUP -> sendItemDialogue(player!!, Items.PUSHUP_10946, "$prefix and do some pushups!")
-                    DrillDemonUtils.DD_SIGN_SITUP -> sendItemDialogue(player!!, Items.SITUP_10948, "$prefix and do some sit ups!")
+                    DrillDemonUtils.DD_SIGN_JUMP -> sendItemDialogue(player!!, Items.STAR_JUMP_10949, "$prefix and do some starjumps!")
+                    DrillDemonUtils.DD_SIGN_PUSHUP -> sendItemDialogue(player!!, Items.PUSH_UP_10946, "$prefix and do some pushups!")
+                    DrillDemonUtils.DD_SIGN_SITUP -> sendItemDialogue(player!!, Items.SIT_UP_10948, "$prefix and do some sit ups!")
                 }
             }
 

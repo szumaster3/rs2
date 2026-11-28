@@ -59,7 +59,7 @@ class MoltenGlassMakePlugin : InteractionListener {
                         }
 
                         playAudio(player, Sounds.FURNACE_2725)
-                        animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                        animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
                         sendMessage(player, "You heat the sand and soda ash in the furnace to make glass.")
 
                         val removedSoda = removeItem(player, SODA_ASH)

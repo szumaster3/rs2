@@ -28,5 +28,5 @@ class YellowFortuneDirectorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = YellowFortuneDirectorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.YELLOW_FORTUNE_DIRECTOR_2102)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_DIRECTOR_YELLOW_FORTUNE_2102)
 }

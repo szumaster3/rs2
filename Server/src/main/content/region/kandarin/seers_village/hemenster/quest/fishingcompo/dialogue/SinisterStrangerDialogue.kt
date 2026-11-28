@@ -69,5 +69,5 @@ class SinisterStrangerDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(226)
-    // NPCs.SINISTER_STRANGER_3677, NPCs.SINISTER_STRANGER_3678
+    // NPCs.SINISTER_STRANGER0_3677, NPCs.SINISTER_STRANGER1_3678
 }

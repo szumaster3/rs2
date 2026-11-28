@@ -15,7 +15,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class MagpieNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.MAGPIE_6824) :
+class MagpieNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_MAGPIE_6824) :
     Forager(owner, id, 3400, Items.MAGPIE_POUCH_12041, 3, *ITEMS) {
 
     init {
@@ -41,7 +41,7 @@ class MagpieNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAGPIE_6824)
+        return intArrayOf(NPCs.LORE_MAGPIE_6824)
     }
 
     companion object {

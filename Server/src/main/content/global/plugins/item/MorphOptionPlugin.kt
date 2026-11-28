@@ -25,7 +25,7 @@ class MorphOptionPlugin : Plugin<Any> {
     /**
      * List of NPC ids the player can morph into when using the easter ring.
      */
-    private val easterEggIds = (NPCs.EGG_3689..NPCs.EGG_3694).toIntArray()
+    private val easterEggIds = (NPCs.EASTER_EGG_ROLLING_GREEN_3689..NPCs.EASTER_EGG_ROLLING_YELLOW_3694).toIntArray()
 
     /**
      * The interface component used for the unmorph option.

@@ -151,5 +151,5 @@ class OldCroneDialogue(player: Player? = null) : Dialogue(player) {
         private const val MIN_MAGIC_LEVEL_FOR_BROOM = 53
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.OLD_CRONE_1695)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_CRONE_1695)
 }

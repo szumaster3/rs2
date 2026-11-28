@@ -36,7 +36,7 @@ class HeckelFunchDialogue(player: Player? = null) : Dialogue(player) {
             4 -> npcl(FaceAnim.OLD_NORMAL, "There's a good human.").also { stage++ }
             5 -> {
                 end()
-                openNpcShop(player, NPCs.HECKEL_FUNCH_603)
+                openNpcShop(player, NPCs.GNOME_HECKELFUNCH_603)
             }
         }
         return true
@@ -44,5 +44,5 @@ class HeckelFunchDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = HeckelFunchDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HECKEL_FUNCH_603)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_HECKELFUNCH_603)
 }

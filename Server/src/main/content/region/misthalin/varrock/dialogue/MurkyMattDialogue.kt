@@ -52,5 +52,5 @@ class MurkyMattDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = MurkyMattDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MURKY_MATT_RUNES_6525)
+    override fun getIds(): IntArray = intArrayOf(NPCs.EXCHANGE_MURKY_MATT_6525)
 }

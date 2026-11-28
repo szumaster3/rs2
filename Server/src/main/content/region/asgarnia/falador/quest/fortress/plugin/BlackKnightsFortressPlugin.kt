@@ -84,10 +84,10 @@ class BlackKnightsFortressPlugin : InteractionListener {
             }
 
             lock(player, 10)
-            animate(player, Animations.ON_GROUND_LISTENING_TO_DOOR_4195)
+            animate(player, Animations.DTTD_BEND_TO_LISTEN_AT_DOOR_4195)
 
             queueScript(player, 1, QueueStrength.SOFT) {
-                animate(player, Animations.CROUCH_HIDE_4552)
+                animate(player, Animations.BKF_BENT_TO_LISTEN_AT_DOOR_IDLE_4552)
                 if (getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS.questName) >= 30) {
                     openDialogue(player, AfterSabotageDialogue())
                 } else {
@@ -104,10 +104,10 @@ class BlackKnightsFortressPlugin : InteractionListener {
                 queueScript(player, 1, QueueStrength.NORMAL) { stage: Int ->
                     when (stage) {
                         0 -> {
-                            visualize(player, Animations.BURN_NOTE_4551, 770)
+                            visualize(player, Animations.EXPLODING_DOSSIER_4551, 770)
                             sendDialogueLines(player, "Infiltrate fortress... sabotage secret weapon... self", "destruct in 3...2...ARG!")
                             setAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, true)
-                            return@queueScript delayScript(player, animationCycles(Animations.BURN_NOTE_4551))
+                            return@queueScript delayScript(player, animationCycles(Animations.EXPLODING_DOSSIER_4551))
                         }
 
                         1 -> {
@@ -143,7 +143,7 @@ private class AfterSabotageDialogue : DialogueFile() {
             6 -> sendNPCDialogue(player!!, NPCs.BLACK_CAT_4607, "Purrr....", FaceAnim.CHILD_FRIENDLY).also { stage++ }
             7 -> {
                 end()
-                animate(player!!, Animations.GET_UP_FROM_LISTENING_TO_DOOR_4197)
+                animate(player!!, Animations.DTTD_STANDING_AFTER_LISTEN_AT_DOOR_4197)
             }
         }
     }

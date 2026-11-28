@@ -21,7 +21,7 @@ class GeneralKhazardNPC(id: Int = 0, location: Location? = null) : AbstractNPC(i
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = GeneralKhazardNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GENERAL_KHAZARD_258)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LADY_SERVIL_258)
 
     override fun handleTickActions() {
         super.handleTickActions()

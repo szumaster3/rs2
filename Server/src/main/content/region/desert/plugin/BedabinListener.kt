@@ -23,8 +23,8 @@ class BedabinListener : InteractionListener {
                 player.walkingQueue.addPath(3169, 3045)
                 sendMessage(player, "You walk back out the tent.")
             } else {
-                val npc = findNPC(NPCs.BEDABIN_NOMAD_GUARD_834)
-                player.dialogueInterpreter.open(NPCs.BEDABIN_NOMAD_GUARD_834, npc)
+                val npc = findNPC(NPCs.BEDABIN_GUARD_834)
+                player.dialogueInterpreter.open(NPCs.BEDABIN_GUARD_834, npc)
             }
 
             return@on true
@@ -42,7 +42,7 @@ class BedabinListener : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, intArrayOf(NPCs.BEDABIN_NOMAD_GUARD_834), "talk-to") { _, _ ->
+        setDest(IntType.NPC, intArrayOf(NPCs.BEDABIN_GUARD_834), "talk-to") { _, _ ->
             return@setDest Location(3169, 3045, 0)
         }
     }
@@ -50,6 +50,6 @@ class BedabinListener : InteractionListener {
     companion object {
         private const val TENT = Scenery.TENT_DOOR_2700
         private const val EXPERIMENTAL_ANVIL = Scenery.AN_EXPERIMENTAL_ANVIL_2672
-        private const val NOMAD_GUARD = NPCs.BEDABIN_NOMAD_GUARD_834
+        private const val NOMAD_GUARD = NPCs.BEDABIN_GUARD_834
     }
 }

@@ -15,8 +15,8 @@ class CoalTruckPlugin : InteractionListener {
     }
 
     private fun maxCoalCapacity(player: Player) = when {
-        inEquipment(player, Items.SEERS_HEADBAND_3_14639) -> 196
-        inEquipment(player, Items.SEERS_HEADBAND_2_14638) -> 168
+        inEquipment(player, Items.SEERS_HEADBAND_3_14663) -> 196
+        inEquipment(player, Items.SEERS_HEADBAND_2_14662) -> 168
         inEquipment(player, Items.SEERS_HEADBAND_1_14631) -> 140
         else -> 120
     }

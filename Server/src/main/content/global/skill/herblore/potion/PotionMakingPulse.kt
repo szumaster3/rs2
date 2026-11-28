@@ -99,6 +99,6 @@ class PotionMakingPulse(player: Player?, node: Item?, private var amount: Int, p
     companion object {
         const val VIAL_OF_WATER = Items.VIAL_OF_WATER_227
         const val COCONUT_MILK = Items.COCONUT_MILK_5935
-        private const val ANIMATION = Animations.MIX_POTION_363
+        private const val ANIMATION = Animations.HUMAN_HERBING_VIAL_363
     }
 }

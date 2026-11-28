@@ -11,12 +11,12 @@ import shared.consts.Animations
 import shared.consts.NPCs
 import shared.consts.Sounds
 
-class GhostHolidayRandomNPC : HolidayRandomEventNPC(NPCs.GHOST_2716) {
+class GhostHolidayRandomNPC : HolidayRandomEventNPC(NPCs.UNATTACKABLE_GHOST_2716) {
     override fun init() {
         super.init()
         this.isAggressive = false
         playGlobalAudio(this.location, Sounds.BIGGHOST_APPEAR_1595)
-        animate(player, Animations.HUMAN_SCARED_2836)
+        animate(player, Animations.TERRIFIED_EMOTE_2836)
         sendChat(this, "WooooOOOooOOo")
         sendMessage(player, "The air suddenly gets colder...")
     }

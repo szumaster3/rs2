@@ -42,5 +42,5 @@ class KazgarDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MISTAG_2085)
+    override fun getIds(): IntArray = intArrayOf(NPCs.KAZGAR_2085)
 }

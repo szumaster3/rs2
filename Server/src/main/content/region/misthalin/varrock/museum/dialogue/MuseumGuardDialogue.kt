@@ -27,5 +27,5 @@ class MuseumGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = MuseumGuardDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MUSEUM_GUARD_5943, NPCs.MUSEUM_GUARD_5941)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VM_MUSEUM_GUARD3_5943, NPCs.VM_MUSEUM_GUARD_5941)
 }

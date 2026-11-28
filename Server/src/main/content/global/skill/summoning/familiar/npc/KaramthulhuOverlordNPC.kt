@@ -9,7 +9,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class KaramthulhuOverlordNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.KARAMTHULHU_OVERLORD_6809) :
+class KaramthulhuOverlordNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_KARAMTHULHU_6809) :
     Familiar(owner, id, 4400, Items.KARAM_OVERLORD_POUCH_12023, 3, WeaponInterface.STYLE_RANGE_ACCURATE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return KaramthulhuOverlordNPC(owner, id)
@@ -22,6 +22,6 @@ class KaramthulhuOverlordNPC @JvmOverloads constructor(owner: Player? = null, id
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KARAMTHULHU_OVERLORD_6809, NPCs.KARAMTHULHU_OVERLORD_6810)
+        return intArrayOf(NPCs.LORE_KARAMTHULHU_6809, NPCs.LORE_KARAMTHULHU_COMBAT_6810)
     }
 }

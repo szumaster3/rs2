@@ -11,7 +11,7 @@ import shared.consts.NPCs
 class SpitgoblinDialogue: DialogueFile(){
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SPIT_GOBLIN_5823)
+        npc = NPC(NPCs.DORGESH_GOBLIN_FROGSPIT_5823)
         when (stage) {
             0 -> player(FaceAnim.HAPPY, "That smells nice!")
             1 -> npcl(FaceAnim.OLD_DEFAULT, "Mmm, yes. Some hunters caught it earlier today.").also { stage++ }

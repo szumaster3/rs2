@@ -26,5 +26,5 @@ class AbyssalTitanDialogue : Dialogue {
 
     override fun newInstance(player: Player?): Dialogue = AbyssalTitanDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ABYSSAL_TITAN_7349, NPCs.ABYSSAL_TITAN_7350)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_ABYSSAL_TITAN_7349, NPCs.LORE_ABYSSAL_TITAN_COMBAT_7350)
 }

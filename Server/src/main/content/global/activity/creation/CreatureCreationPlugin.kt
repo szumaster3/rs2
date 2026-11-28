@@ -103,7 +103,7 @@ class CreatureCreationPlugin : InteractionListener {
             } else {
                 player.lock(1)
                 removeItem(player, item.id)
-                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                 sendDialogueLines(player, "You place the $itemName on the altar.")
                 setCharge(altar, currentCharge or materialBit)
             }
@@ -195,12 +195,12 @@ private enum class CreatureCreation(
     val materials: Set<Int>,
     val description: String
 ) {
-    NEWROOST(   NPCs.NEWTROOST_5597,  Location(3058, 4410, 0), setOf(Items.FEATHER_314, Items.EYE_OF_NEWT_221), "Feather of chicken and eye of newt"),
-    UNICOW(     NPCs.UNICOW_5603,     Location(3018, 4410, 0), setOf(Items.COWHIDE_1739, Items.UNICORN_HORN_237), "Horn of unicorn and hide of cow"),
-    SPIDINE(    NPCs.SPIDINE_5594,    Location(3043, 4361, 0), setOf(Items.RED_SPIDERS_EGGS_223, Items.RAW_SARDINE_327), "Red spiders' eggs and a sardine raw"),
-    SWORDCHICK( NPCs.SWORDCHICK_5595, Location(3034, 4361, 0), setOf(Items.RAW_SWORDFISH_371, Items.RAW_CHICKEN_2138), "Swordfish raw and chicken uncooked"),
-    JUBSTER(    NPCs.JUBSTER_5596,    Location(3066, 4380, 0), setOf(Items.RAW_JUBBLY_7566, Items.RAW_LOBSTER_377), "Raw meat of jubbly bird and a lobster raw"),
-    FROGEEL(    NPCs.FROGEEL_5593,    Location(3012, 4380, 0), setOf(Items.GIANT_FROG_LEGS_4517, Items.RAW_CAVE_EEL_5001), "Legs of giant frog and a cave eel uncooked");
+    NEWROOST(   NPCs.TOL_NEWTROOST_5597,  Location(3058, 4410, 0), setOf(Items.FEATHER_314, Items.EYE_OF_NEWT_221), "Feather of chicken and eye of newt"),
+    UNICOW(     NPCs.TOL_UNICOW_5603,     Location(3018, 4410, 0), setOf(Items.COWHIDE_1739, Items.UNICORN_HORN_237), "Horn of unicorn and hide of cow"),
+    SPIDINE(    NPCs.TOL_SPIDINE_5594,    Location(3043, 4361, 0), setOf(Items.RED_SPIDERS_EGGS_223, Items.RAW_SARDINE_327), "Red spiders' eggs and a sardine raw"),
+    SWORDCHICK( NPCs.TOL_SWORDCHICK_5595, Location(3034, 4361, 0), setOf(Items.RAW_SWORDFISH_371, Items.RAW_CHICKEN_2138), "Swordfish raw and chicken uncooked"),
+    JUBSTER(    NPCs.TOL_JUBSTER_5596,    Location(3066, 4380, 0), setOf(Items.RAW_JUBBLY_7566, Items.RAW_LOBSTER_377), "Raw meat of jubbly bird and a lobster raw"),
+    FROGEEL(    NPCs.TOL_FROGEEL_5593,    Location(3012, 4380, 0), setOf(Items.GIANT_FROG_LEGS_4517, Items.RAW_CAVE_EEL_5001), "Legs of giant frog and a cave eel uncooked");
 
     companion object {
         fun forItemId(itemId: Int): CreatureCreation? {

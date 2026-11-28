@@ -49,16 +49,16 @@ class ThrowerTrollNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
 
     companion object {
         val ID = intArrayOf(
-            NPCs.THROWER_TROLL_1101,
-            NPCs.THROWER_TROLL_1102,
-            NPCs.THROWER_TROLL_1103,
-            NPCs.THROWER_TROLL_1104,
-            NPCs.THROWER_TROLL_1105,
-            NPCs.THROWER_TROLL_1130,
-            NPCs.THROWER_TROLL_1131,
-            NPCs.THROWER_TROLL_1132,
-            NPCs.THROWER_TROLL_1133,
-            NPCs.THROWER_TROLL_1134,
+            NPCs.DEATH_TROLL_THROWER1_1101,
+            NPCs.DEATH_TROLL_THROWER2_1102,
+            NPCs.DEATH_TROLL_THROWER3_1103,
+            NPCs.DEATH_TROLL_THROWER4_1104,
+            NPCs.DEATH_TROLL_THROWER5_1105,
+            NPCs.TROLL_THROWER1_1130,
+            NPCs.TROLL_THROWER2_1131,
+            NPCs.TROLL_THROWER3_1132,
+            NPCs.TROLL_THROWER4_1133,
+            NPCs.TROLL_THROWER5_1134,
         )
     }
 }

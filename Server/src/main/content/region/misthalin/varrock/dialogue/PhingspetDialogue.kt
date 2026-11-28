@@ -18,10 +18,10 @@ class PhingspetDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
 
         npcId =
-            if (npc.id == NPCs.PHINGSPET_2947)
-                NPCs.GRIMESQUIT_2946
+            if (npc.id == NPCs.VC_PHINGSPET_2947)
+                NPCs.VC_GRIMESQUIT_2946
             else
-                NPCs.PHINGSPET_2947
+                NPCs.VC_PHINGSPET_2947
 
         npc(FaceAnim.ASKING, "What's you want?")
         stage = 0
@@ -41,5 +41,5 @@ class PhingspetDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = PhingspetDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PHINGSPET_2947, NPCs.GRIMESQUIT_2946)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VC_PHINGSPET_2947, NPCs.VC_GRIMESQUIT_2946)
 }

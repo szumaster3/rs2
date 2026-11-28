@@ -159,7 +159,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
             return true
         }
 
-        // g.animate(Animation.create(Animations.GRAVE_BROKEN_7396))
+        // g.animate(Animation.create(Animations.GRAVESTONE_FLAG_SPAWNING_7396))
         g.demolish()
 
         return true

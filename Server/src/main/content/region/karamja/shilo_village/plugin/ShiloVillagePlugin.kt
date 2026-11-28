@@ -138,7 +138,7 @@ class ShiloVillagePlugin : InteractionListener {
 
     companion object {
         private const val NOTES = Items.BERVIRIUS_NOTES_624
-        private const val BLACKSMITH_DOOR = Scenery.BLACKSMITH_S_DOOR_2266
+        private const val BLACKSMITH_DOOR = Scenery.BLACKSMITHS_DOOR_2266
         private val WOODEN_GATE = intArrayOf(Scenery.WOODEN_GATE_2261, Scenery.WOODEN_GATE_2262)
         private val METAL_GATE = intArrayOf(Scenery.METAL_GATE_2259, Scenery.METAL_GATE_2260)
 

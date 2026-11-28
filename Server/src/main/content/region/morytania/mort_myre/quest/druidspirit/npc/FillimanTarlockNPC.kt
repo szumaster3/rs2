@@ -10,7 +10,7 @@ import shared.consts.NPCs
 class FillimanTarlockNPC : AbstractNPC {
     var spawnedTicks = 0
 
-    constructor() : super(NPCs.FILLIMAN_TARLOCK_1050, null, true)
+    constructor() : super(NPCs.FILLIMAN_TARLOCK_SPIRIT_1050, null, true)
     private constructor(id: Int, location: Location) : super(id, location)
 
     override fun construct(
@@ -29,5 +29,5 @@ class FillimanTarlockNPC : AbstractNPC {
         if (spawnedTicks++ > 100) poofClear(this)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FILLIMAN_TARLOCK_1050)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FILLIMAN_TARLOCK_SPIRIT_1050)
 }

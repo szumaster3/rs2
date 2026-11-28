@@ -10,7 +10,7 @@ import shared.consts.NPCs
 class LeprechaunNote : InteractionListener {
     private val cropId = Plantable.values().map { it.harvestItem }.toIntArray()
     private val tooLeprechaun = intArrayOf(
-        NPCs.TOOL_LEPRECHAUN_3021, NPCs.GOTH_LEPRECHAUN_8000, NPCs.TOOL_LEPRECHAUN_4965, NPCs.TECLYN_2861
+        NPCs.FARMING_TOOLS_LEPRECHAUN_3021, NPCs.SUM1_GOTH_LEPRECHAUN_8000, NPCs.MYARM_LEPRECHAUN_4965, NPCs.TECLYN_2861
     )
 
     override fun defineListeners() {
@@ -18,7 +18,7 @@ class LeprechaunNote : InteractionListener {
             val usedItem = used.asItem()
             val npc = with.asNpc()
             val facialExpression = when (npc.id) {
-                NPCs.TOOL_LEPRECHAUN_3021 -> FaceAnim.OLD_NORMAL
+                NPCs.FARMING_TOOLS_LEPRECHAUN_3021 -> FaceAnim.OLD_NORMAL
                 else -> FaceAnim.FRIENDLY
             }
 

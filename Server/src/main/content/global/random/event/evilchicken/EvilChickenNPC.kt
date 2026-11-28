@@ -12,13 +12,13 @@ import shared.consts.Items
 import shared.consts.NPCs
 import java.lang.Integer.max
 
-private val ids = NPCs.EVIL_CHICKEN_2463..NPCs.EVIL_CHICKEN_2468
+private val ids = NPCs.CHOSEN_MERCHANT_2_2463..NPCs.H_A_M_AGENT_WALTON_2468
 
 /**
  * Represents The Evil Chicken NPC.
  * @author Emperor.
  */
-class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.EVIL_CHICKEN_2463) {
+class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.CHOSEN_MERCHANT_2_2463) {
 
     val phrases =
         arrayOf(

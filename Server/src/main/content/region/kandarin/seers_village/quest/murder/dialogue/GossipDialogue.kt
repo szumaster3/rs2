@@ -26,7 +26,7 @@ class GossipDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GOSSIP_813)
+        return intArrayOf(NPCs.GOSSIPY_MAN_813)
     }
 }
 

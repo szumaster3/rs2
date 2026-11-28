@@ -11,7 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class CabinFever : Quest("Cabin Fever", 37, 36, 2, Vars.VARP_QUEST_CABIN_FEVER_655, 0, 1, 131) {
+class CabinFever : Quest("Cabin Fever", 37, 36, 2, Vars.VARP_655, 0, 1, 131) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

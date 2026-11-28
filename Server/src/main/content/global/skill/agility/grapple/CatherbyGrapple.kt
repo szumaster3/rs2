@@ -68,7 +68,7 @@ class CatherbyGrapple : InteractionListener {
                 when (stage) {
                     0 -> {
                         face(player, END_LOCATION)
-                        animate(player, Animation(Animations.FIRE_CROSSBOW_TO_CLIMB_WALL_4455))
+                        animate(player, Animation(Animations.XBOWS_HUMAN_FIRE_AND_CLIMB_GRAPPLE_4455))
                         return@queueScript delayScript(player, 4)
                     }
                     1 -> {

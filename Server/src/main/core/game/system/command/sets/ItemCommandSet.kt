@@ -13,7 +13,7 @@ import shared.consts.Items
 
 @Initializable
 class ItemCommandSet : CommandSet(Privilege.ADMIN) {
-    private val farmKit = arrayListOf(Items.RAKE_5341, Items.SPADE_952, Items.SEED_DIBBER_5343, Items.WATERING_CAN8_5340, Items.SECATEURS_5329, Items.GARDENING_TROWEL_5325)
+    private val farmKit = arrayListOf(Items.RAKE_5341, Items.SPADE_952, Items.SEED_DIBBER_5343, Items.WATERING_CAN_8_5340, Items.SECATEURS_5329, Items.GARDENING_TROWEL_5325)
     private val runeKit = Runes.values()
         .filter { "STAFF" !in it.name }
         .map { it.id }

@@ -111,5 +111,5 @@ class IceTitanDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ICE_TITAN_7359, NPCs.ICE_TITAN_7360)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_ICE_TITAN_7359, NPCs.LORE_ICE_TITAN_COMBAT_7360)
 }

@@ -69,7 +69,7 @@ class PenguinHNSPlugin : InteractionListener {
     /**
      * The NPC IDs of scenery penguins that can be spied on in the Penguin Hunter activity.
      */
-    private val sceneryPenguinIDs = intArrayOf(NPCs.BARREL_8104, NPCs.BUSH_8105, NPCs.CACTUS_8107, NPCs.CRATE_8108, NPCs.ROCK_8109, NPCs.TOADSTOOL_8110)
+    private val sceneryPenguinIDs = intArrayOf(NPCs.PENG_SPY_BARREL_8104, NPCs.PENG_SPY_BUSH_8105, NPCs.PENG_SPY_CACTUS_8107, NPCs.PENG_SPY_CRATE_8108, NPCs.PENG_SPY_ROCK_8109, NPCs.PENG_SPY_TOADSTOOL_8110)
 
     /**
      * Represents the pulse of spying on a penguin.

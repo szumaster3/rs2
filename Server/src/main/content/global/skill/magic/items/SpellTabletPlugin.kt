@@ -33,7 +33,7 @@ class SpellTabletPlugin : InteractionListener {
 
     private fun breakTablet(player: Player) {
         playAudio(player, Sounds.POH_TABLET_BREAK_979)
-        player.animator.forceAnimation(Animation(Animations.BREAK_SPELL_TABLET_A_4069))
+        player.animator.forceAnimation(Animation(Animations.POH_SMASH_MAGIC_TABLET_4069))
         player.lock(5)
         setAttribute(player, "tablet-spell", true)
     }

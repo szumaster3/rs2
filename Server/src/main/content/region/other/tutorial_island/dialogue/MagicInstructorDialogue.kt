@@ -102,8 +102,8 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> npcl(FaceAnim.HAPPY, "Good good. I've deactivated the protective spells around the island so now you can teleport yourself out of here").also { stage++ }
                 3 -> sendNPCDialogue(player, npc.id, "When you get to the mainland you will find yourself in the town of Lumbridge. If you want some ideas on where to go next, talk to my friend Phileas, also known as the Lumbridge Guide.").also { stage++ }
                 4 -> npcl(FaceAnim.HAPPY, "He is holding a big staff with a question mark on the end. He also has a white beard and carries a rucksack full of scrolls.").also { stage++ }
-                5 -> player.dialogueInterpreter.sendItemMessage(Items.NULL_5079, "When you get to Lumbridge, look for this icon on your minimap.").also { stage++ }
-                6 -> sendItemDialogue(player, Items.NULL_5079, "The Lumbridge Guide should be standing slightly to the north-east of the castle's courtyard.").also { stage++ }
+                5 -> player.dialogueInterpreter.sendItemMessage(Items.OBJ_5079, "When you get to Lumbridge, look for this icon on your minimap.").also { stage++ }
+                6 -> sendItemDialogue(player, Items.OBJ_5079, "The Lumbridge Guide should be standing slightly to the north-east of the castle's courtyard.").also { stage++ }
                 7 -> npcl(FaceAnim.HAPPY, "If all else fails visit the ${GameWorld.settings!!.name} website for information on quests, skills and minigames.").also { stage++ }
                 8 -> {
                     end()
@@ -118,5 +118,5 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = MagicInstructorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAGIC_INSTRUCTOR_946)
+    override fun getIds(): IntArray = intArrayOf(NPCs.NEWBIE_MAGIC_INSTRUCTOR_946)
 }

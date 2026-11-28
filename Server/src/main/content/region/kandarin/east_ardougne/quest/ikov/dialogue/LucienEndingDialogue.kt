@@ -23,7 +23,7 @@ class LucienEndingDialogue(player: Player? = null) : Dialogue(player) {
         return false
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LUCIEN_272)
+    override fun getIds(): IntArray = intArrayOf(NPCs.IKOV_LUCIEN2_272)
 }
 
 class LucienEndingDialogueFile : DialogueFile() {

@@ -767,7 +767,7 @@ class JunaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JUNA_2023)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TOG_JUNA_DUMMY_2023)
 
     enum class DialogueType { PLAYER, NPC }
 

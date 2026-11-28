@@ -75,7 +75,7 @@ object LevelUp {
     /**
      * Range of fireworks graphics used for milestone celebration visuals.
      */
-    private val GRAPHIC = Graphic.LEVEL_99_GFX_1630..Graphic.LEVEL_99_GFX_1637
+    private val GRAPHIC = Graphic.LEVEL_UP_FIREWORK_PROJ_1_1630..Graphic.UBER_FIREWORK_SPOTANIM_1637
 
     /**
      * Called when a player levels up a skill.
@@ -100,7 +100,7 @@ object LevelUp {
             return
         }
 
-        Graphics.send(Graphics(shared.consts.Graphics.FIREWORKS_WHEN_A_LVL_IS_GAINED_199, 100), player.location)
+        Graphics.send(Graphics(shared.consts.Graphics.LEVELUP_ANIM_199, 100), player.location)
         playJingle(player, getSkillJingle(player, slot))
 
         handleMilestones(player, slot, amount)

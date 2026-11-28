@@ -67,5 +67,5 @@ class FemiDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FemiDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FEMI_676)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDTREE_FEMI_676)
 }

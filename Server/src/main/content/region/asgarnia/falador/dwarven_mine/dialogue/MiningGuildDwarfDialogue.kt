@@ -46,5 +46,5 @@ class MiningGuildDwarfDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_382)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUILDDWARF_382)
 }

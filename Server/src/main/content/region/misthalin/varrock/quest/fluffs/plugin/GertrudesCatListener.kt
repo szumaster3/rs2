@@ -53,23 +53,23 @@ class GertrudesCatListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.NPC, Items.BUCKET_OF_MILK_1927, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
+        onUseWith(IntType.NPC, Items.BUCKET_OF_MILK_1927, NPCs.VC_GERTRUDESCAT_2997) { player, used, with ->
             if (getQuestStage(player, Quests.GERTRUDES_CAT.questName) == 20 && removeItem(player, used.asItem())) {
                 addItem(player, Items.BUCKET_1925)
-                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                 sendChat(with.asNpc(), "Mew!")
                 setQuestStage(player, Quests.GERTRUDES_CAT.questName, 30)
             }
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, Items.DOOGLE_SARDINE_1552, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
+        onUseWith(IntType.NPC, Items.DOOGLE_SARDINE_1552, NPCs.VC_GERTRUDESCAT_2997) { player, used, with ->
             if (getQuestStage(player, Quests.GERTRUDES_CAT.questName) < 30){
                 sendMessage(player, "Fluffs doesn't seem to be hungry right now.")
                         return@onUseWith true
             }
             if(removeItem(player, used.asItem())) {
-                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                 sendChat(with.asNpc(), "Mew!")
                 playAudio(player, Sounds.KITTENS_MEW_339)
                 setQuestStage(player, Quests.GERTRUDES_CAT.questName, 40)
@@ -77,12 +77,12 @@ class GertrudesCatListener : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, Items.RAW_SARDINE_327, NPCs.GERTRUDES_CAT_2997) { player, _, _ ->
+        onUseWith(IntType.NPC, Items.RAW_SARDINE_327, NPCs.VC_GERTRUDESCAT_2997) { player, _, _ ->
             sendMessage(player, "The cat doesn't seem interested in that.")
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, Items.THREE_LITTLE_KITTENS_13236, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
+        onUseWith(IntType.NPC, Items.THREE_LITTLE_KITTENS_13236, NPCs.VC_GERTRUDESCAT_2997) { player, used, with ->
             if (removeItem(player, used.asItem())) {
                 setQuestStage(player, Quests.GERTRUDES_CAT.questName, 60)
                 Pulser.submit(
@@ -90,7 +90,7 @@ class GertrudesCatListener : InteractionListener {
                         var count = 0
                         val kitten =
                             core.game.node.entity.npc.NPC
-                                .create(NPCs.KITTEN_761, player.location)
+                                .create(NPCs.KITTENPET1_761, player.location)
 
                         override fun pulse(): Boolean {
                             when (count) {

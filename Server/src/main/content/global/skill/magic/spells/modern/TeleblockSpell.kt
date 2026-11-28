@@ -42,7 +42,7 @@ class TeleblockSpell : CombatSpell {
             85,
             80.0,
             Sounds.TPBLOCK_IMPACT_203,
-            Animation(Animations.TELEBLOCK_CAST_10503, Priority.HIGH),
+            Animation(Animations.PVPW_TELEBLOCK_10503, Priority.HIGH),
             TELEBLOCK_START,
             TELEBLOCK_ORB,
             TELEBLOCK_SUCCESS,

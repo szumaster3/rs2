@@ -39,5 +39,5 @@ class MercenaryCaptainNPC : AbstractNPC {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MERCENARY_CAPTAIN_830)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DESERTMININGCAPTAIN_830)
 }

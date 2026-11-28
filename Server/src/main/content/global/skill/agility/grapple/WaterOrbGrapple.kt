@@ -95,7 +95,7 @@ class WaterOrbGrapple : OptionHandler() {
                             when (counter++) {
                                 1 -> {
                                     player.faceLocation(destination)
-                                    player.animate(Animation(Animations.FIRE_CROSSBOW_4230))
+                                    player.animate(Animation(Animations.XBOWS_HUMAN_FIRE_AND_RELOAD_4230))
                                 }
 
                                 3 ->

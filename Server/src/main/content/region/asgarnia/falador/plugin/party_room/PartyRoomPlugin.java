@@ -76,7 +76,7 @@ public final class PartyRoomPlugin extends OptionHandler {
     /**
      * Represents the animation to use.
      */
-    private static final Animation ANIMATION = new Animation(Animations.HUMAN_PARTY_ROOM_LEVER_6933);
+    private static final Animation ANIMATION = new Animation(Animations.FALADOR_PARTYROOM_WALL_LEVER_6933);
 
 
     @Override
@@ -155,7 +155,7 @@ public final class PartyRoomPlugin extends OptionHandler {
         dancing = true;
         final List<NPC> npcs = new ArrayList<NPC>();
         for (int i = 0; i < 6; i++) {
-            NPC npc = NPC.create(NPCs.KNIGHT_660, Location.create(3043 + i, 3378, 0));
+            NPC npc = NPC.create(NPCs.PARTYROOM_KNIGHT_660, Location.create(3043 + i, 3378, 0));
             npc.init();
             npcs.add(npc);
         }

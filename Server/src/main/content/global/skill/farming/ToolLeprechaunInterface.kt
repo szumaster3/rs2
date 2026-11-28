@@ -279,14 +279,14 @@ class ToolLeprechaunInterface : InterfaceListener {
     private fun setWateringCan(player: Player?, item: Item) {
         val can = when (item.id) {
             Items.WATERING_CAN_5331 -> 1
-            Items.WATERING_CAN1_5333 -> 2
-            Items.WATERING_CAN2_5334 -> 3
-            Items.WATERING_CAN3_5335 -> 4
-            Items.WATERING_CAN4_5336 -> 5
-            Items.WATERING_CAN5_5337 -> 6
-            Items.WATERING_CAN6_5338 -> 7
-            Items.WATERING_CAN7_5339 -> 8
-            Items.WATERING_CAN8_5340 -> 9
+            Items.WATERING_CAN_1_5333 -> 2
+            Items.WATERING_CAN_2_5334 -> 3
+            Items.WATERING_CAN_3_5335 -> 4
+            Items.WATERING_CAN_4_5336 -> 5
+            Items.WATERING_CAN_5_5337 -> 6
+            Items.WATERING_CAN_6_5338 -> 7
+            Items.WATERING_CAN_7_5339 -> 8
+            Items.WATERING_CAN_8_5340 -> 9
             else -> 0
         }
         setVarbit(player!!, 1439, can, true)

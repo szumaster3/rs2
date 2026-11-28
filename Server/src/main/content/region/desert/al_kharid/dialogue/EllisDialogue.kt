@@ -43,7 +43,7 @@ class EllisDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> playerl(FaceAnim.HAPPY, "Yes please.").also { stage = 12 }
                 2 -> playerl(FaceAnim.NEUTRAL, "No thanks.").also { stage = 13 }
             }
-            12 -> end().also { CraftingDefinition.Tan.open(player, NPCs.ELLIS_2824) }
+            12 -> end().also { CraftingDefinition.Tan.open(player, NPCs.ELLIS_TANNER_2824) }
             13 -> npcl(FaceAnim.FRIENDLY, "Very well, @g[sir,madam], as you wish.").also { stage = END_DIALOGUE }
             20 -> when (buttonId) {
                 1 -> playerl(FaceAnim.ASKING, "Can I buy some leather?").also { stage = 21 }
@@ -60,5 +60,5 @@ class EllisDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = EllisDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ELLIS_2824)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELLIS_TANNER_2824)
 }

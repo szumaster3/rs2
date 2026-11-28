@@ -110,6 +110,6 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 
     @Override
     public int[] getIds() {
-        return new int[]{NPCs.DARK_ENERGY_CORE_8127};
+        return new int[]{NPCs.SUM2_DARK_ENERGY_CORE_CORP_8127};
     }
 }

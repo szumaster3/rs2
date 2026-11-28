@@ -126,7 +126,7 @@ public final class GodWarsNPC extends AbstractNPC {
     public void checkImpact(BattleState state) {
         super.checkImpact(state);
 
-        if (getId() == NPCs.IMP_6211) {
+        if (getId() == NPCs.GODWARS_ANCIENT_IMP_6211) {
             if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_HIT)) {
                 getRandomLocAndTeleport();
             }
@@ -137,7 +137,7 @@ public final class GodWarsNPC extends AbstractNPC {
     public void tick() {
         super.tick();
 
-        if (getId() == NPCs.IMP_6211) {
+        if (getId() == NPCs.GODWARS_ANCIENT_IMP_6211) {
             if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_TICK)) {
                 getRandomLocAndTeleport();
             }

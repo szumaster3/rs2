@@ -9,7 +9,7 @@ import core.plugin.Initializable
 
 @Initializable
 class CatapultConstruction :
-    Quest("Catapult Construction", 148, 147, 2, Vars.VARBIT_QUEST_CATAPULT_CONSTRUCTION_4396, 0, 1, 60) {
+    Quest("Catapult Construction", 148, 147, 2, Vars.VARBIT_4396, 0, 1, 60) {
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11
@@ -130,7 +130,7 @@ class CatapultConstruction :
         addItemOrDrop(player, Items.COINS_995, 2000)
         addItemOrDrop(player, Items.ADAMANT_HALBERD_3200, 1)
         addItemOrDrop(player, Items.SAILORS_HAT_12595, 1)
-        setVarbit(player, Vars.VARBIT_QUEST_CATAPULT_CONSTRUCTION_4396, 60, true)
+        setVarbit(player, Vars.VARBIT_4396, 60, true)
     }
 
 

@@ -17,7 +17,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritSpiderNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_SPIDER_6841) :
+class SpiritSpiderNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_SPIDER_6841) :
     Familiar(owner, id, 1500, Items.SPIRIT_SPIDER_POUCH_12059, 6, WeaponInterface.STYLE_CONTROLLED) {
     private var eggDelay = GameWorld.ticks + 500
 
@@ -69,7 +69,7 @@ class SpiritSpiderNPC @JvmOverloads constructor(owner: Player? = null, id: Int =
         }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_SPIDER_6841, NPCs.SPIRIT_SPIDER_6842)
+        return intArrayOf(NPCs.LORE_SPIDER_6841, NPCs.LORE_SPIDER_COMBAT_6842)
     }
 
     companion object {

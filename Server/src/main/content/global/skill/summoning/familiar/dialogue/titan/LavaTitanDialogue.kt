@@ -50,7 +50,7 @@ class LavaTitanDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LAVA_TITAN_7341, NPCs.LAVA_TITAN_7342)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_LAVA_TITAN_7341, NPCs.LORE_LAVA_TITAN_COMBAT_7342)
 
     /**
      * Represents the Lava Titan familiar dialogue extension.
@@ -59,7 +59,7 @@ class LavaTitanDialogue : Dialogue {
         private var branch: Int = 0
 
         override fun handle(componentID: Int, buttonID: Int) {
-            npc = NPC(NPCs.LAVA_TITAN_7341)
+            npc = NPC(NPCs.LORE_LAVA_TITAN_7341)
             branch = Random.nextInt(4)
             when (branch) {
                 0 -> when (stage) {

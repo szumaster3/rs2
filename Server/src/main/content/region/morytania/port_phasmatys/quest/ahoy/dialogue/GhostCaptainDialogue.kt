@@ -77,5 +77,5 @@ class GhostCaptainDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_CAPTAIN_1704)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_GHOST_CAPTAIN_1_1704)
 }

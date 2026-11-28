@@ -22,7 +22,7 @@ class SabotageDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         if (args.size == 2) {
             sendNPCDialogueLines(player, NPCs.WITCH_611, FaceAnim.NEUTRAL, false, "Where has Greldo got to with that magic cabbage!")
-            player.animate(Animation(Animations.HUMAN_MULTI_USE_832))
+            player.animate(Animation(Animations.HUMAN_PICKUPTABLE_832))
             playAudio(player, Sounds.BK_THROW_CABBAGE_1420)
             stage = 10
             return true
@@ -44,7 +44,7 @@ class SabotageDialogue(player: Player? = null) : Dialogue(player) {
             7 -> sendNPCDialogue(player, NPCs.GRELDO_612, "Yeth, Mithreth.", FaceAnim.OLD_NORMAL).also { stage++ }
             8 -> {
                 end()
-                animate(player, Animations.GET_UP_FROM_LISTENING_TO_DOOR_4197)
+                animate(player, Animations.DTTD_STANDING_AFTER_LISTEN_AT_DOOR_4197)
                 setQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS.questName, 20)
             }
 

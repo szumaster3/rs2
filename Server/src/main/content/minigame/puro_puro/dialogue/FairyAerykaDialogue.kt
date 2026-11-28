@@ -48,5 +48,5 @@ class FairyAerykaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_AERYKA_6072)
+    override fun getIds(): IntArray = intArrayOf(NPCs.II_FAIRY_6072)
 }

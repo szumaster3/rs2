@@ -31,6 +31,6 @@ class GeneralHiningDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GENERAL_HINING_7121)
+        return intArrayOf(NPCs.REGICIDE_GENERAL_HINING_7121)
     }
 }

@@ -124,7 +124,7 @@ class PotteryPlugin : InteractionListener {
                     inputId = pottery.unfinished.id,
                     output = pottery.product.id,
                     exp = pottery.fireExp,
-                    animation = Animations.HUMAN_FURNACE_SMELT_3243,
+                    animation = Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243,
                     audio = Sounds.POTTERY_2588
                 ) {
                     sendMessage(player, "You put ${pottery.unfinished.name.lowercase(Locale.getDefault())} in the oven.")

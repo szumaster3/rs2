@@ -28,9 +28,9 @@ public final class ImpaleSpecialHandler extends MeleeSwingHandler implements Plu
 
     private static final int SPECIAL_ENERGY = 25;
 
-    private static final Animation ANIMATION = new Animation(Animations.BIG_ATTACK_923, Priority.HIGH);
+    private static final Animation ANIMATION = new Animation(Animations.IMPALE_923, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.RUNE_CLAW_SPECIAL_274, 96);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.SP_ATTACK_IMPALE_SPOTANIM_274, 96);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

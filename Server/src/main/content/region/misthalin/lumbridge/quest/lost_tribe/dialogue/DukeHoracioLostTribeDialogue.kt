@@ -15,7 +15,7 @@ import shared.consts.Vars
 class DukeHoracioLostTribeDialogue(
     val questStage: Int,
 ) : DialogueFile() {
-    private val sigmund = NPC(NPCs.SIGMUND_2082)
+    private val sigmund = NPC(NPCs.LOST_TRIBE_SIGMUND_THERE_2082)
 
     override fun handle(
         componentID: Int,

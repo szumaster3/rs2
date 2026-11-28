@@ -127,7 +127,7 @@ class HazeelCultPlugin : InteractionListener {
                 sendDialogueLines(player, "You pour the poison into the hot pot.", "The poison dissolves into the soup.")
                 setQuestStage(player, Quests.HAZEEL_CULT.questName, 3)
             } else {
-                sendNPCDialogue(player, NPCs.CLAUS_THE_CHEF_886, "Oi - I don't want people messing around with my range!")
+                sendNPCDialogue(player, NPCs.CLAUS_CARNILLEAN_886, "Oi - I don't want people messing around with my range!")
             }
             return@onUseWith true
         }
@@ -164,7 +164,7 @@ class HazeelCultPlugin : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, CHEST_KEY, Scenery.CHEST_2856) { player, _, _ ->
-            animate(player, Animations.HUMAN_OPEN_CHEST_536)
+            animate(player, Animations.HUMAN_OPENCHEST_536)
             addScenery(Scenery.CHEST_2857,CHEST_LOCATION, 2, 10)
             removeScenery(core.game.node.scenery.Scenery(Scenery.CHEST_2856, Location(2565, 3272, 2)))
             return@onUseWith true
@@ -245,7 +245,7 @@ class HazeelCultPlugin : InteractionListener {
 
         const val SCROLL_INTERFACE = Components.BLANK_SCROLL_222
 
-        const val CLIVET_NPC = NPCs.CLIVET_893
+        const val CLIVET_NPC = NPCs.CLIVET_HAZEEL_CULTIST_893
         const val CLIVET_RAFT = Scenery.RAFT_2849
 
         const val CAVE_ENTRANCE = Scenery.CAVE_ENTRANCE_2852
@@ -270,7 +270,7 @@ class HazeelCultPlugin : InteractionListener {
         const val POISON = Items.POISON_273
         const val COOKING_RANGE = Scenery.COOKING_RANGE_2859
 
-        val ALOMONE = AlomoneNPC(NPCs.ALOMONE_891, Location.create(2607, 9671, 0))
+        val ALOMONE = AlomoneNPC(NPCs.ALOMONE_HAZEEL_CULTIST_891, Location.create(2607, 9671, 0))
 
         const val SECRET_PASSAGE = Scenery.WALL_26940
 

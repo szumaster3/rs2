@@ -40,7 +40,7 @@ class FermentingPlugin : InteractionListener {
             setAttribute(player, addWaterAttribute, baseValue)
             if (removeItem(player, used.asItem())) {
                 face(player, with.asScenery())
-                animate(player, Animations.POUR_BUCKET_OVER_GROUND_2283)
+                animate(player, Animations.FARMING_POUR_WATER_2283)
                 replaceSlot(player, used.asItem().slot, Item(Items.BUCKET_1925, 1))
                 player.incrementAttribute(addWaterAttribute)
             }

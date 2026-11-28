@@ -185,7 +185,7 @@ class AnimalMagnetismCutscene(player: Player) : Cutscene(player) {
             }
 
             25 -> {
-                animate(getNPC(COWKILLER)!!, Animations.HUMAN_BURYING_BONES_827)
+                animate(getNPC(COWKILLER)!!, Animations.HUMAN_PICKUPFLOOR_827)
                 timedUpdate(1)
             }
 
@@ -234,10 +234,10 @@ class AnimalMagnetismCutscene(player: Player) : Cutscene(player) {
 
     companion object {
         val FARMER = NPCs.ALICES_HUSBAND_5205
-        val ALICE = NPCs.ALICE_5212
-        val CHICKEN = NPCs.UNDEAD_CHICKEN_1692
+        val ALICE = NPCs.ANMA_ALICE_CUTSCENE_5212
+        val CHICKEN = NPCs.AHOY_UNDEAD_CHICKEN_1692
         val COWKILLER = NPCs.COW1337KILLR_5210
-        val COW = NPCs.UNDEAD_COW_5211
+        val COW = NPCs.ANMA_COW_CUTSCENE_5211
         val ATTEMPT_CATCH = 5377
         val ATTACK_ANIM = 2066
         val GRAB_CHICKEN_ANIM = 5376

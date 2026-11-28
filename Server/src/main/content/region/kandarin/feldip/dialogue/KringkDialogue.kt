@@ -20,7 +20,7 @@ import shared.consts.NPCs
 class KringkDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        npc = NPC(NPCs.KRINGK_7058)
+        npc = NPC(NPCs.AFR_OGRESS_KRINGK_7058)
         when (stage) {
             START_DIALOGUE -> if (!hasRequirement(player, Quests.AS_A_FIRST_RESORT.questName)) {
                 playerl(FaceAnim.ASKING, "What's going on here?").also { stage++ }

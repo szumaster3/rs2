@@ -38,12 +38,12 @@ class BlackGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray =
         intArrayOf(
-            NPCs.BLACK_GUARD_2130,
-            NPCs.BLACK_GUARD_2131,
-            NPCs.BLACK_GUARD_2132,
-            NPCs.BLACK_GUARD_2133,
-            NPCs.BLACK_GUARD_BERSERKER_2134,
-            NPCs.BLACK_GUARD_BERSERKER_2135,
-            NPCs.BLACK_GUARD_BERSERKER_2136,
+            NPCs.DWARF_CITY_BLACK_GUARD1_2130,
+            NPCs.DWARF_CITY_BLACK_GUARD2_2131,
+            NPCs.DWARF_CITY_BLACK_GUARD3_2132,
+            NPCs.DWARF_CITY_BLACK_GUARD4_2133,
+            NPCs.DWARF_CITY_BERSERKER1_2134,
+            NPCs.DWARF_CITY_BERSERKER2_2135,
+            NPCs.DWARF_CITY_BERSERKER3_2136,
         )
 }

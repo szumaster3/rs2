@@ -430,5 +430,5 @@ class CyregPaddlehornDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CYREG_PADDLEHORN_1567)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROUTE_CYREG_PADDLEHORN_1567)
 }

@@ -212,6 +212,6 @@ class FieldPickingOptionPlugin : OptionHandler() {
     }
 
     companion object {
-        private val ANIMATION = Animation(Animations.HUMAN_BURYING_BONES_827)
+        private val ANIMATION = Animation(Animations.HUMAN_PICKUPFLOOR_827)
     }
 }

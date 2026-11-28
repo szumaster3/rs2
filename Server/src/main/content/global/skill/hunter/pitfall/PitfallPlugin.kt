@@ -78,7 +78,7 @@ class PitfallPlugin : InteractionListener {
             val dir = PitfallDefinition.pitJumpSpots(pit.location)?.get(src) ?: return@on true
             val dst = src.transform(dir, 3)
 
-            ForceMovement.run(player, src, dst, ForceMovement.WALK_ANIMATION, Animation(Animations.JUMP_WEREWOLF_1603), dir, 16)
+            ForceMovement.run(player, src, dst, ForceMovement.WALK_ANIMATION, Animation(Animations.HUMAN_JUMP_HURDLE_1603), dir, 16)
             playAudio(player, Sounds.HUNTING_JUMP_2635)
 
             synchronized(pitNpcList) {

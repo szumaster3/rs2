@@ -12,7 +12,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class ObsidianGolemNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.OBSIDIAN_GOLEM_7345) :
+class ObsidianGolemNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_OBSIDIAN_GOLEM_7345) :
     Familiar(owner, id, 5500, Items.OBSIDIAN_GOLEM_POUCH_12792, 12, WeaponInterface.STYLE_AGGRESSIVE) {
 
     init {
@@ -34,6 +34,6 @@ class ObsidianGolemNPC @JvmOverloads constructor(owner: Player? = null, id: Int 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OBSIDIAN_GOLEM_7345, NPCs.OBSIDIAN_GOLEM_7346)
+        return intArrayOf(NPCs.LORE_OBSIDIAN_GOLEM_7345, NPCs.LORE_OBSIDIAN_GOLEM_COMBAT_7346)
     }
 }

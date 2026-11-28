@@ -125,7 +125,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
         PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX(), player.getLocation().getY(), 450, 1, 100));
         PacketRepository.send(Encoders578.CAMERA_VIEW_PACKET, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() - 15, player.getLocation().getY() + -55, 450, 1, 100));
         player.lock();
-        player.getDialogueInterpreter().open(NPCs.DENATH_4662, npcs.get(3), this);
+        player.getDialogueInterpreter().open(NPCs.SNOWMAN_4662, npcs.get(3), this);
     }
 
     @Override
@@ -489,7 +489,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
                         public boolean pulse() {
                             switch (counter++) {
                                 case 5:
-                                    playJingle(player, Music.DELRITH_SUMMON_195);
+                                    playJingle(player, Music.MIDI_195);
                                     cutscene.delrith = NPC.create(DemonSlayerCutscenePlugin.DELRITH, cutscene.getBase().transform(27, 40, 0));
                                     cutscene.delrith.init();
                                     cutscene.delrith.animate(ANIMATION);

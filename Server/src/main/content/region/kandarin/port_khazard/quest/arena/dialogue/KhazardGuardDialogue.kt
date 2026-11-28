@@ -34,8 +34,8 @@ class KhazardGuardDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> when(npc.id){
-                NPCs.KHAZARD_GUARD_253 -> npcl(FaceAnim.ASKING, "Can I help you stranger?").also { stage = 14 }
-                NPCs.KHAZARD_GUARD_256 -> npcl(FaceAnim.ASKING, "Despicable thieving scum, that was good armour. Did you see anyone around here soldier?").also { stage = 15 }
+                NPCs.ARENA_GUARD1_253 -> npcl(FaceAnim.ASKING, "Can I help you stranger?").also { stage = 14 }
+                NPCs.ARENA_GUARD4_256 -> npcl(FaceAnim.ASKING, "Despicable thieving scum, that was good armour. Did you see anyone around here soldier?").also { stage = 15 }
                 else -> npcl(FaceAnim.FRIENDLY, "I've never seen you around here before!").also { stage++ }
             }
             1 -> playerl(FaceAnim.FRIENDLY, "Long live General Khazard!").also { stage++ }
@@ -46,9 +46,9 @@ class KhazardGuardDialogue(player: Player? = null) : Dialogue(player) {
             6 -> playerl(FaceAnim.FRIENDLY, "Undead, maniac, master. Got it, loud and clear.").also { stage = END_DIALOGUE }
 
             7 -> when(npc.id){
-                NPCs.KHAZARD_GUARD_253 -> npcl(FaceAnim.ANNOYED, "I don't know you stranger. Get off our land.").also { stage = END_DIALOGUE }
-                NPCs.KHAZARD_GUARD_255 -> npcl(FaceAnim.ANNOYED, "This area is restricted, leave now!").also { stage = 13 }
-                NPCs.KHAZARD_GUARD_256 -> npcl(FaceAnim.ANNOYED, "I don't know who you are. Get out of my house stranger.").also { stage = END_DIALOGUE }
+                NPCs.ARENA_GUARD1_253 -> npcl(FaceAnim.ANNOYED, "I don't know you stranger. Get off our land.").also { stage = END_DIALOGUE }
+                NPCs.ARENA_GUARD3_255 -> npcl(FaceAnim.ANNOYED, "This area is restricted, leave now!").also { stage = 13 }
+                NPCs.ARENA_GUARD4_256 -> npcl(FaceAnim.ANNOYED, "I don't know who you are. Get out of my house stranger.").also { stage = END_DIALOGUE }
                 else -> npcl(FaceAnim.ANNOYED, "This area is restricted. Leave now! OUT! And don't come back.").also { stage++ }
             }
             8 -> options("I apologise, I stumbled in here by mistake.", "You have no right to tell me where I can and cannot go.").also { stage++ }
@@ -71,9 +71,9 @@ class KhazardGuardDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.KHAZARD_GUARD_253,
-        NPCs.KHAZARD_GUARD_254,
-        NPCs.KHAZARD_GUARD_255,
-        NPCs.KHAZARD_GUARD_256
+        NPCs.ARENA_GUARD1_253,
+        NPCs.ARENA_GUARD2_254,
+        NPCs.ARENA_GUARD3_255,
+        NPCs.ARENA_GUARD4_256
     )
 }

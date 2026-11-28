@@ -140,7 +140,7 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
             53 -> npcl(FaceAnim.HAPPY, "Certainly, ${FremennikTrials.getFremennikName(player!!)}.").also { stage = 54 }
             54 -> {
                 end()
-                openNpcShop(player, NPCs.SIGMUND_THE_MERCHANT_1282)
+                openNpcShop(player, NPCs.VIKING_SIGMUND_1282)
             }
             55 -> npcl(FaceAnim.HAPPY, "Well, feel free to stop by anytime you wish ${FremennikTrials.getFremennikName(player!!)}. You are always welcome here!").also { stage = 1000 }
             60 -> npcl(FaceAnim.HAPPY, "Hello outerlander. By the laws of our tribe, I am afraid I may not speak to you without the express permission of the chieftain.").also { stage++ }
@@ -151,5 +151,5 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SIGMUND_THE_MERCHANT_1282)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_SIGMUND_1282)
 }

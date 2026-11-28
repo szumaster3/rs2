@@ -42,7 +42,7 @@ class GripNPC : NPCBehavior(NPCs.GRIP_792) {
         if (killer is Player) {
             if (getQuestStage(killer, Quests.HEROES_QUEST.questName) == 4) {
                 setQuestStage(killer, Quests.HEROES_QUEST.questName, 5)
-                val gi = GroundItemManager.create(GroundItem(Item(Items.GRIPS_KEY_RING_1588), self.location, killer),)
+                val gi = GroundItemManager.create(GroundItem(Item(Items.GRIPS_KEY_1588), self.location, killer),)
                 gi!!.forceVisible = true
                 gi.isRemainPrivate = false
             }

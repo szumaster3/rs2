@@ -21,8 +21,8 @@ class AbidorCrankDialogue : DialogueFile() {
 
             1 -> {
                 end()
-                visualize(npc!!, Animations.CLAP_AND_RAISE_FIST_IN_AIR_1818, Graphics.TELEOTHER_CAST_343)
-                sendGraphics(Graphics.TELEOTHER_ACCEPT_342, player!!.location)
+                visualize(npc!!, Animations.HUMAN_TELEPORT_OTHER_CASTING_1818, Graphics.TELEPORT_OTHER_CASTING_343)
+                sendGraphics(Graphics.TELEPORT_OTHER_IMPACT_342, player!!.location)
                 setAttribute(player!!, "teleporting-away", true)
                 queueScript(player!!, 3, QueueStrength.SOFT) {
                     poofClear(npc!!)

@@ -30,7 +30,7 @@ class StoneSplittingPlugin : InteractionListener {
             runTask(player, 2) {
                 delayClock(player, Clocks.SKILLING, 2)
                 playAudio(player, Sounds.HAMMER_STONE_2100)
-                animate(player, Animations.USE_HAMMER_CHISEL_11041)
+                animate(player, Animations.MOTWL_PLAYER_CLEARING_WALL_11041)
                 if (removeItem(player, used.id)) {
                     rewardXP(player, Skills.CRAFTING, 20.0)
                     addItem(player, Items.PILLAR_13246)
@@ -69,7 +69,7 @@ class StoneSplittingPlugin : InteractionListener {
                             amount = amount,
                             requiredItem = graniteId,
                             requiredSlots = 4,
-                            animation = Animations.HUMAN_CHISEL_GRANITE_11146,
+                            animation = Animations.ENAKHRA_CHISEL_CUT_STONE_11146,
                             sound = Sounds.CHISEL_2586,
                             missingMessage = "You have run out of granite."
                         ) {
@@ -108,7 +108,7 @@ class StoneSplittingPlugin : InteractionListener {
                         amount = amount,
                         requiredItem = with.id,
                         requiredSlots = 1,
-                        animation = Animations.CHISEL_OYSTER_PEARL_4470,
+                        animation = Animations.XBOWS_FLETCHING_PEARL_4470,
                         sound = Sounds.SPLIT_ROCK_1708,
                         missingMessage = "You have run out of limestone."
                     ) {

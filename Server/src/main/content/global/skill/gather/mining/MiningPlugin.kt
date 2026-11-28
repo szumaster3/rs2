@@ -98,12 +98,12 @@ class MiningPlugin : InteractionListener {
         val headSpawn = Location(destination.x, destination.y, player.location.z)
 
         val pickHead = when (PickaxeHead.getProduct()) {
-            Items.BRONZE_PICKAXE_1265.asItem() -> Items.BRONZE_PICK_HEAD_480
-            Items.IRON_PICKAXE_1267.asItem() -> Items.IRON_PICK_HEAD_482
-            Items.STEEL_PICKAXE_1269.asItem() -> Items.STEEL_PICK_HEAD_484
-            Items.MITHRIL_PICKAXE_1273.asItem() -> Items.MITHRIL_PICK_HEAD_486
-            Items.ADAMANT_PICKAXE_1271.asItem() -> Items.ADAMANT_PICK_HEAD_488
-            Items.RUNE_PICKAXE_1275.asItem() -> Items.RUNE_PICK_HEAD_490
+            Items.BRONZE_PICKAXE_1265.asItem() -> Items.PICKAXE_HEAD_480
+            Items.IRON_PICKAXE_1267.asItem() -> Items.PICKAXE_HEAD_482
+            Items.STEEL_PICKAXE_1269.asItem() -> Items.PICKAXE_HEAD_484
+            Items.MITHRIL_PICKAXE_1273.asItem() -> Items.PICKAXE_HEAD_486
+            Items.ADAMANT_PICKAXE_1271.asItem() -> Items.PICKAXE_HEAD_488
+            Items.RUNE_PICKAXE_1275.asItem() -> Items.PICKAXE_HEAD_490
             else -> {
                 log(this.javaClass, Log.ERR, "Unrecognized pickaxe for id: ${PickaxeHead.getProduct()}")
                 return
@@ -245,7 +245,7 @@ class MiningPlugin : InteractionListener {
                     chance = (chance / 1.5).toInt()
                 }
                 val necklace = getItemFromEquipment(player, EquipmentSlot.NECK)
-                if (necklace != null && necklace.id in Items.AMULET_OF_GLORY_1705..Items.AMULET_OF_GLORY4_1713) {
+                if (necklace != null && necklace.id in Items.AMULET_OF_GLORY_1705..Items.AMULET_OF_GLORY_4_1713) {
                     chance = (chance / 1.5).toInt()
                 }
 
@@ -466,20 +466,20 @@ class MiningPlugin : InteractionListener {
 /*
 
  Essence
- * Animations.BRONZE_PICKAXE_6753
- * Animations.IRON_PICKAXE_6754
- * Animations.STEEL_PICKAXE_ALT3_6755
- * Animations.ADAMANT_PICKAXE_6756
- * Animations.MITHRIL_PICKAXE_6757
- * Animations.DRAGON_PICKAXE_6758
- * Animations.INFERNO_ADZE_10223
+ * Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_DESPAWN_REVERSED_6753
+ * Animations.DUNGEON_ED3_GHOST_MASUTA_COMBAT_2012_ABILITY_STRENGTH_ULTIMATE_PULVERISE_TWO_HANDED_MAUL_6754
+ * Animations.ED3_OREB_MAGIC_ATTACK_6755
+ * Animations.ED3_OREB_POWER_BLAST_ATTACK_6756
+ * Animations.ED3_BOGGOTH_DEATH_6757
+ * Animations.ED3_ULTHVEN_KEITH_DEATH_WATER_6758
+ * Animations.HUMAN_MINING_FIREDUP_ADZE_WALL_10223
 
  Obsidian
- * Animations.BRONZE_PICKAXE_10343
- * Animations.IRON_PICKAXE_10344
- * Animations.STEEL_PICKAXE_ALT_10345
- * Animations.MITHRIL_PICKAXE_10346
- * Animations.ADAMANT_PICKAXE_10347
- * Animations.RUNE_PICKAXE_10342
+ * Animations.STAR_PLAYER_MINING_HIGH_BRONZE_10343
+ * Animations.STAR_PLAYER_MINING_HIGH_IRON_10344
+ * Animations.STAR_PLAYER_MINING_HIGH_STEEL_10345
+ * Animations.STAR_PLAYER_MINING_HIGH_MITHRIL_10346
+ * Animations.STAR_PLAYER_MINING_HIGH_ADAMANT_10347
+ * Animations.STAR_PLAYER_MINING_HIGH_RUNE_10342
 
 */

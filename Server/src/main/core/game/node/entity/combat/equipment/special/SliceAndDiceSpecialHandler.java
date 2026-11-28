@@ -28,7 +28,7 @@ public final class SliceAndDiceSpecialHandler extends MeleeSwingHandler implemen
 
     private static final Animation ANIMATION = new Animation(10961, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_CLAW_SPECIAL_1950);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_CLAWS_SPECIAL_ATTACK_SPOT_1950);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

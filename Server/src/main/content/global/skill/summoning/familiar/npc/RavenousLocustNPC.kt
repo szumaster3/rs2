@@ -11,7 +11,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class RavenousLocustNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.RAVENOUS_LOCUST_7372) :
+class RavenousLocustNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_LOCUST_7372) :
     Familiar(owner, id, 2400, Items.RAVENOUS_LOCUST_POUCH_12820, 12, WeaponInterface.STYLE_ACCURATE) {
 
     override fun construct(owner: Player, id: Int): Familiar {
@@ -43,6 +43,6 @@ class RavenousLocustNPC @JvmOverloads constructor(owner: Player? = null, id: Int
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RAVENOUS_LOCUST_7372, NPCs.RAVENOUS_LOCUST_7373)
+        return intArrayOf(NPCs.LORE_LOCUST_7372, NPCs.LORE_LOCUST_COMBAT_7373)
     }
 }

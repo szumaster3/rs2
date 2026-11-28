@@ -70,5 +70,5 @@ class GuardHCDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_887)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_CARNILLEAN_887)
 }

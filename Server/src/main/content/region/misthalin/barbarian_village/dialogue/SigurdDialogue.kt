@@ -73,5 +73,5 @@ class SigurdDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SigurdDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SIGURD_3329)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CANOEING_SIGURD_3329)
 }

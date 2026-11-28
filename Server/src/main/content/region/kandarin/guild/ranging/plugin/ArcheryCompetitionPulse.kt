@@ -52,7 +52,7 @@ class ArcheryCompetitionPulse(
             p?.endLocation = sceneryId.location
             p?.endHeight = 25
             p?.send()
-            player.animate(Animation(Animations.FIRE_BOW_426))
+            player.animate(Animation(Animations.HUMAN_BOW_426))
             player.lock(delay)
 
             val level = player.getSkills().getLevel(Skills.RANGE)

@@ -67,5 +67,5 @@ class CaptainDonnieDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CaptainDonnieDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_DONNIE_2830)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DEAL_CAPTIAN_DONNIE_2830)
 }

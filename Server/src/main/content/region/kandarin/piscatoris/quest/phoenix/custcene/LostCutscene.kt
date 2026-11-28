@@ -33,6 +33,6 @@ class LostCutscene(player: Player) : Cutscene(player) {
     }
 
     companion object {
-        private const val LARGE_EGG = NPCs.LARGE_EGG_8552
+        private const val LARGE_EGG = NPCs.PHOENIX_UNHATCHED_EGGLING_8552
     }
 }

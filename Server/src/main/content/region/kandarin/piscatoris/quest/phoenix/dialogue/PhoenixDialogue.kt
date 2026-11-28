@@ -680,6 +680,6 @@ class PhoenixDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PHOENIX_8548)
+        return intArrayOf(NPCs.PHOENIX_QUESTPHOENIX_REBORN_8548)
     }
 }

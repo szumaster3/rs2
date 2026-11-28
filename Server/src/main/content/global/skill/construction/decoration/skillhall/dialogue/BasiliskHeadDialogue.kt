@@ -14,7 +14,7 @@ class BasiliskHeadDialogue : DialogueFile() {
     private val randomWordD = arrayOf("basilisk", "idiot", "lizard", "mudworm", "slimeball", "weakling").random()
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.BASILISK_4228)
+        npc = NPC(NPCs.POH_MOUNTED_BASILISK_4228)
         when (stage) {
             0 -> npcl(FaceAnim.CHILD_FRIENDLY, "What do you want?").also { stage++ }
             1 -> if (!player!!.houseManager.isInHouse(player!!)) {

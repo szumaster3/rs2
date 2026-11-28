@@ -87,13 +87,13 @@ object CastleWars {
     const val cwManualBook: Int = Items.CASTLEWARS_MANUAL_4055
     const val cwTicketRewardCurrency: Int = Items.CASTLE_WARS_TICKET_4067
 
-    const val sheep = NPCs.SHEEP_1529
-    const val imp = NPCs.IMP_1531
-    const val rabbit = NPCs.RABBIT_1530
-    const val unknownCwarsBarricade1 = NPCs.BARRICADE_1532
-    const val unknownCwarsBarricadeOnFire = NPCs.BARRICADE_1533
-    const val unknownCwarsBarricade2 = NPCs.BARRICADE_1534
-    const val unknownCwarsBarricade3 = NPCs.BARRICADE_1535
+    const val sheep = NPCs.CASTLEWARS_SHEEP_1529
+    const val imp = NPCs.CASTLEWARS_IMP_1531
+    const val rabbit = NPCs.CASTLEWARS_RABBIT_1530
+    const val unknownCwarsBarricade1 = NPCs.CASTLEWARS_BARRICADE_SARADOMIN_1532
+    const val unknownCwarsBarricadeOnFire = NPCs.CASTLEWARS_BARRICADE_BURNING_SARADOMIN_1533
+    const val unknownCwarsBarricade2 = NPCs.CASTLEWARS_BARRICADE_ZAMORAK_1534
+    const val unknownCwarsBarricade3 = NPCs.CASTLEWARS_BARRICADE_BURNING_ZAMORAK_1535
 
     val lobbyBankArea: ZoneBorders = ZoneBorders(2440, 3092, 2444, 3086, 0)
 

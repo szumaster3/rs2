@@ -19,7 +19,7 @@ import shared.consts.NPCs
  */
 class FrogHeraldDialogue(val isStarted: Boolean = false) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.FROG_2471)
+        npc = NPC(NPCs.H_A_M_AGENT_WALTON_2471)
         if (isStarted) {
             when (stage) {
                 0 -> npcl(FaceAnim.OLD_NORMAL, "Welcome to the Land of the Frogs.").also { stage++ }
@@ -41,7 +41,7 @@ class FrogHeraldDialogue(val isStarted: Boolean = false) : DialogueFile() {
                     removeTabs(player!!, 0, 1, 2, 3, 4, 5, 6, 7, 14)
                     queueScript(player!!, 6, QueueStrength.SOFT) {
                         openDialogue(player!!, FrogHeraldDialogue(true))
-                        face(player!!, findNPC(NPCs.FROG_2471)!!, 3)
+                        face(player!!, findNPC(NPCs.H_A_M_AGENT_WALTON_2471)!!, 3)
                         AntiMacro.terminateEventNpc(player!!)
                         return@queueScript stopExecuting(player!!)
                     }

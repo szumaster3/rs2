@@ -43,14 +43,14 @@ enum class EnchantedJewellery(
             Location.create(3424, 9660, 0)
         ),
         crumbled = true,
-        Items.RING_OF_SLAYING8_13281,
-        Items.RING_OF_SLAYING7_13282,
-        Items.RING_OF_SLAYING6_13283,
-        Items.RING_OF_SLAYING5_13284,
-        Items.RING_OF_SLAYING4_13285,
-        Items.RING_OF_SLAYING3_13286,
-        Items.RING_OF_SLAYING2_13287,
-        Items.RING_OF_SLAYING1_13288
+        Items.RING_OF_SLAYING_8_13281,
+        Items.RING_OF_SLAYING_7_13282,
+        Items.RING_OF_SLAYING_6_13283,
+        Items.RING_OF_SLAYING_5_13284,
+        Items.RING_OF_SLAYING_4_13285,
+        Items.RING_OF_SLAYING_3_13286,
+        Items.RING_OF_SLAYING_2_13287,
+        Items.RING_OF_SLAYING_1_13288
     ),
 
     RING_OF_DUELING(
@@ -64,14 +64,14 @@ enum class EnchantedJewellery(
             Location.create(2442, 3089, 0)
         ),
         crumbled = true,
-        Items.RING_OF_DUELLING8_2552,
-        Items.RING_OF_DUELLING7_2554,
-        Items.RING_OF_DUELLING6_2556,
-        Items.RING_OF_DUELLING5_2558,
-        Items.RING_OF_DUELLING4_2560,
-        Items.RING_OF_DUELLING3_2562,
-        Items.RING_OF_DUELLING2_2564,
-        Items.RING_OF_DUELLING1_2566
+        Items.RING_OF_DUELLING_8_2552,
+        Items.RING_OF_DUELLING_7_2554,
+        Items.RING_OF_DUELLING_6_2556,
+        Items.RING_OF_DUELLING_5_2558,
+        Items.RING_OF_DUELLING_4_2560,
+        Items.RING_OF_DUELLING_3_2562,
+        Items.RING_OF_DUELLING_2_2564,
+        Items.RING_OF_DUELLING_1_2566
     ),
 
     AMULET_OF_GLORY(
@@ -89,10 +89,10 @@ enum class EnchantedJewellery(
             Location.create(3304, 3124, 0)
         ),
         crumbled = false,
-        Items.AMULET_OF_GLORY4_1712,
-        Items.AMULET_OF_GLORY3_1710,
-        Items.AMULET_OF_GLORY2_1708,
-        Items.AMULET_OF_GLORY1_1706,
+        Items.AMULET_OF_GLORY_4_1712,
+        Items.AMULET_OF_GLORY_3_1710,
+        Items.AMULET_OF_GLORY_2_1708,
+        Items.AMULET_OF_GLORY_1_1706,
         Items.AMULET_OF_GLORY_1704
     ),
 
@@ -100,11 +100,11 @@ enum class EnchantedJewellery(
         options = AMULET_OF_GLORY.options,
         locations = AMULET_OF_GLORY.locations,
         crumbled = true,
-        Items.AMULET_OF_GLORYT4_10354,
-        Items.AMULET_OF_GLORYT3_10356,
-        Items.AMULET_OF_GLORYT2_10358,
-        Items.AMULET_OF_GLORYT1_10360,
-        Items.AMULET_OF_GLORYT_10362
+        Items.AMULET_OF_GLORY_T4_10354,
+        Items.AMULET_OF_GLORY_T3_10356,
+        Items.AMULET_OF_GLORY_T2_10358,
+        Items.AMULET_OF_GLORY_T1_10360,
+        Items.AMULET_OF_GLORY_T_10362
     ),
 
     GAMES_NECKLACE(
@@ -122,14 +122,14 @@ enum class EnchantedJewellery(
             Location.create(3179, 3685, 0)
         ),
         crumbled = true,
-        Items.GAMES_NECKLACE8_3853,
-        Items.GAMES_NECKLACE7_3855,
-        Items.GAMES_NECKLACE6_3857,
-        Items.GAMES_NECKLACE5_3859,
-        Items.GAMES_NECKLACE4_3861,
-        Items.GAMES_NECKLACE3_3863,
-        Items.GAMES_NECKLACE2_3865,
-        Items.GAMES_NECKLACE1_3867
+        Items.GAMES_NECKLACE_8_3853,
+        Items.GAMES_NECKLACE_7_3855,
+        Items.GAMES_NECKLACE_6_3857,
+        Items.GAMES_NECKLACE_5_3859,
+        Items.GAMES_NECKLACE_4_3861,
+        Items.GAMES_NECKLACE_3_3863,
+        Items.GAMES_NECKLACE_2_3865,
+        Items.GAMES_NECKLACE_1_3867
     ),
 
     DIGSITE_PENDANT(
@@ -160,10 +160,10 @@ enum class EnchantedJewellery(
             Location.create(2657, 3439, 0)
         ),
         crumbled = false,
-        Items.COMBAT_BRACELET4_11118,
-        Items.COMBAT_BRACELET3_11120,
-        Items.COMBAT_BRACELET2_11122,
-        Items.COMBAT_BRACELET1_11124,
+        Items.COMBAT_BRACELET_4_11118,
+        Items.COMBAT_BRACELET_3_11120,
+        Items.COMBAT_BRACELET_2_11122,
+        Items.COMBAT_BRACELET_1_11124,
         Items.COMBAT_BRACELET_11126
     ),
 
@@ -182,10 +182,10 @@ enum class EnchantedJewellery(
             Location.create(3143, 3442, 0)
         ),
         crumbled = false,
-        Items.SKILLS_NECKLACE4_11105,
-        Items.SKILLS_NECKLACE3_11107,
-        Items.SKILLS_NECKLACE2_11109,
-        Items.SKILLS_NECKLACE1_11111,
+        Items.SKILLS_NECKLACE_4_11105,
+        Items.SKILLS_NECKLACE_3_11107,
+        Items.SKILLS_NECKLACE_2_11109,
+        Items.SKILLS_NECKLACE_1_11111,
         Items.SKILLS_NECKLACE_11113
     ),
 
@@ -475,10 +475,10 @@ enum class EnchantedJewellery(
         ids.indexOf(item.id)
 
     companion object {
-        private val ANIMATION = Animation(Animations.ANIMATION_9603)
+        private val ANIMATION = Animation(Animations.NECKLACE_TELEPORT_REWORK_9603)
 
         private val TELEPORT_GRAPHICS =
-            Graphics(shared.consts.Graphics.TP_RING_OF_DUELING_1684)
+            Graphics(shared.consts.Graphics.NECKLACE_TELEPORT_REWORK_SPOTANIM_1684)
 
         private val CHARGE_SUFFIX_REGEX =
             """ ?\(t?[0-9]?\)""".toRegex()

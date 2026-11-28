@@ -91,5 +91,5 @@ class FireTitanDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FIRE_TITAN_7355, NPCs.FIRE_TITAN_7356)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_FIRE_TITAN_7355, NPCs.LORE_FIRE_TITAN_COMBAT_7356)
 }

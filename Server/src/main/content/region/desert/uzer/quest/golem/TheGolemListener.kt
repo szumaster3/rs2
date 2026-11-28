@@ -393,14 +393,14 @@ class TheGolemListener : InteractionListener, InterfaceListener {
          * Handles grabbing a feather from the Desert Phoenix.
          */
 
-        on(NPCs.DESERT_PHOENIX_1911, IntType.NPC, "grab-feather") { player, node ->
+        on(NPCs.GOLEM_PHOENIX_1911, IntType.NPC, "grab-feather") { player, node ->
             if (getAttribute(player, "the-golem:varmen-notes-read", false)) {
                 lock(player, 1000)
                 val lootTable =
                     PickpocketListener.pickpocketRoll(player = player, low = 90.0, high = 240.0, table = WeightBasedTable.create(WeightedItem(Items.PHOENIX_FEATHER_4621, 1, 1, 1.0, true)))
                 if (lootTable != null) {
                     sendMessage(player, "You attempt to grab the pheonix's tail-feather.")
-                    animate(player, Animations.HUMAN_PICKPOCKETING_881)
+                    animate(player, Animations.HUMAN_PICKPOCKET_881)
                     runTask(player, 3) {
                         lootTable.forEach {
                             player.inventory.add(it)
@@ -411,7 +411,7 @@ class TheGolemListener : InteractionListener, InterfaceListener {
                     }
                 } else {
                     node.asNpc().face(player)
-                    animate(node.asNpc(), Animations.PHOENIX_ATK_6811)
+                    animate(node.asNpc(), Animations.FIREBIRD_UPDATE_ATTACK_6811)
                     node.asNpc().sendChat("Squawk!")
                     sendMessage(player, "You fail to take the Desert Phoenix tail-feather.")
                     node.asNpc().face(null)

@@ -29,7 +29,7 @@ class ElenaBiohazardQuestDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.BIOHAZARD.questName)
-        npc = NPC(NPCs.ELENA_3209)
+        npc = NPC(NPCs.ELENA2_VIS_3209)
         when {
             (questStage == 0) -> {
                 when (stage) {

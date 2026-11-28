@@ -49,7 +49,7 @@ class PhoenixSpawnCutscene (player: Player) : Cutscene(player) {
     }
 
     companion object {
-        private const val PHOENIX = NPCs.PHOENIX_8549
+        private const val PHOENIX = NPCs.PHOENIX_BOSSPHOENIX_8549
         private const val REGION = 14161
     }
 }

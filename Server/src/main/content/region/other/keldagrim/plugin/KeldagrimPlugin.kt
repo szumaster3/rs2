@@ -19,7 +19,7 @@ class KeldagrimPlugin : InteractionListener {
         private const val DOORWAY_2 = Scenery.DOORWAY_23287
         private const val REINALD = NPCs.REINALD_2194
         private const val FUSION_HAMMER = Items.BLAST_FUSION_HAMMER_14478
-        private const val FOREMAN = NPCs.BLAST_FURNACE_FOREMAN_2553
+        private const val FOREMAN = NPCs.BLAST_FURNACE_INSTRUCTOR_2553
         private const val TUNNEL = Scenery.TUNNEL_5014
         private const val INN_KEEPER = NPCs.INN_KEEPER_2176
     }

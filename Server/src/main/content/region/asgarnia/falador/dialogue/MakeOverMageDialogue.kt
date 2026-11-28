@@ -102,5 +102,5 @@ class MakeOverMageDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MAKE_OVER_MAGE_2676, NPCs.MAKE_OVER_MAGE_599)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAKEOVER_MAGE_FEMALE_2676, NPCs.MAKEOVER_MAGE_599)
 }

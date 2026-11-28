@@ -59,7 +59,7 @@ class FaladorPlugin : InteractionListener {
 
         on(CUPBOARD_CLOSED, IntType.SCENERY, "open") { player, node ->
             face(player, node)
-            animate(player, Animations.HUMAN_OPEN_WARDROBE_542)
+            animate(player, Animations.HUMAN_OPENHIGHCUPBOARD_542)
             playAudio(player, Sounds.CUPBOARD_OPEN_58)
             replaceScenery(node.asScenery(), CUPBOARD_OPEN, -1)
             return@on true
@@ -83,7 +83,7 @@ class FaladorPlugin : InteractionListener {
             when (getUsedOption(player)) {
                 "shut" -> {
                     face(player, node)
-                    animate(player, Animations.CLOSE_CUPBOARD_543)
+                    animate(player, Animations.V02_YAK_UPDATE_WALK_543)
                     playAudio(player, Sounds.CUPBOARD_CLOSE_57)
                     replaceScenery(node.asScenery(), CUPBOARD_CLOSED, -1)
                     return@on true
@@ -141,7 +141,7 @@ class FaladorPlugin : InteractionListener {
          * Handles talking to NPCs around city.
          */
 
-        on(NPCs.KNIGHT_660, IntType.NPC, "talk-to") { player, _ ->
+        on(NPCs.PARTYROOM_KNIGHT_660, IntType.NPC, "talk-to") { player, _ ->
             sendDialogue(player, "He is too busy dancing to talk!")
             return@on true
         }
@@ -151,7 +151,7 @@ class FaladorPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.APPRENTICE_WORKMAN_3235, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.FALADOR_WORKMAN_YOUNG_3235, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, ApprenticeWorkmanDialogue(), node.asNpc())
             return@on true
         }
@@ -161,32 +161,32 @@ class FaladorPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.DROGO_DWARF_579, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.DROGO_579, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, DrogoDwarfDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.DRORKAR_7723, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.ICEMT_DRORKAR_7723, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, DrorkarDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.DRUNKEN_MAN_3222, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.FALADOR_MAN1_3222, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, FaladorDrunkenManDialogue(), node.asNpc())
             return@on true
         }
 
-        on(intArrayOf(NPCs.GARDENER_1217, NPCs.GARDENER_3234), IntType.NPC, "talk-to") { player, node ->
+        on(intArrayOf(NPCs.FALADOR_GARDENER_1217, NPCs.FALADOR_GARDENER2_3234), IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, FaladorGardenerDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.MAN_3223, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.FALADOR_MAN2_3223, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, FaladorManDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.WOMAN_3226, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.FALADOR_WOMAN_3226, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, FaladorParkWomanDialogue(), node.asNpc())
             return@on true
         }
@@ -196,7 +196,7 @@ class FaladorPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.GARDEN_SUPPLIER_4251, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.POH_GARDEN_SUPPLIER_4251, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, GardenSupplierDialogue(), node.asNpc())
             return@on true
         }
@@ -216,7 +216,7 @@ class FaladorPlugin : InteractionListener {
             return@on true
         }
 
-        on(intArrayOf(NPCs.LAKKI_THE_DELIVERY_DWARF_7722, 7728), IntType.NPC, "talk-to") { player, node ->
+        on(intArrayOf(NPCs.ICEMT_DELIVERY_GUY_THERE_7722, 7728), IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, LakkiTheDeliveryDwarfDialogue(), node.asNpc())
             return@on true
         }
@@ -231,7 +231,7 @@ class FaladorPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.ROLAD_1841, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.DWARFROCK_ROLAD_1841, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, RoladDialogue(), node.asNpc())
             return@on true
         }
@@ -251,7 +251,7 @@ class FaladorPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.WORKMAN_3236, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.FALADOR_WORKMAN_FAT_3236, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, FaladorWorkmanDialogue(), node.asNpc())
             return@on true
         }

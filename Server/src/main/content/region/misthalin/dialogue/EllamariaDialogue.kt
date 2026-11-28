@@ -29,5 +29,5 @@ class EllamariaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ELLAMARIA_2581)
+    override fun getIds(): IntArray = intArrayOf(NPCs.QUEEN_ELLAMARIA_2581)
 }

@@ -17,7 +17,7 @@ import shared.consts.NPCs
  */
 class MistagDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.MISTAG_2084)
+        npc = NPC(NPCs.LOST_TRIBE_MISTAG_2084)
         val questStage = getQuestStage(player!!, Quests.DEATH_TO_THE_DORGESHUUN.questName)
         when {
             (questStage == 0) -> {

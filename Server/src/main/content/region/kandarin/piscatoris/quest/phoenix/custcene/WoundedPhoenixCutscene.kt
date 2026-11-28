@@ -16,7 +16,7 @@ class WoundedPhoenixCutscene(player: Player) : Cutscene(player) {
     override fun setup() {
         setExit(Location.create(3533, 5204, 0))
         loadRegion(REGION)
-        addNPC(NPCs.WOUNDED_PHOENIX_8547, 14, 12, Direction.NORTH)
+        addNPC(NPCs.PHOENIX_QUESTPHOENIX_8547, 14, 12, Direction.NORTH)
     }
 
     override fun runStage(stage: Int) {
@@ -67,7 +67,7 @@ class WoundedPhoenixCutscene(player: Player) : Cutscene(player) {
     }
 
     companion object {
-        private const val PHOENIX = NPCs.WOUNDED_PHOENIX_8547
+        private const val PHOENIX = NPCs.PHOENIX_QUESTPHOENIX_8547
         private const val REGION = 14161 // PHOENIX_LAIR
     }
 }

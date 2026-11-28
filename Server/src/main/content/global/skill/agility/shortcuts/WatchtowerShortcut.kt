@@ -17,7 +17,7 @@ import shared.consts.Animations
 class WatchtowerShortcut : AgilityShortcut(intArrayOf(20056), 18, 31.0, "climb-up") {
 
     private val end = Location.create(2548, 3117, 1)
-    private val animation = Animation.create(Animations.HUMAN_CLIMB_STAIRS_828)
+    private val animation = Animation.create(Animations.HUMAN_REACHFORLADDER_828)
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         animate(player, animation)

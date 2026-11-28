@@ -35,7 +35,7 @@ class CamelotTrainingRoomPlugin : InteractionListener {
             }
 
             if (kwComplete || !kwBegin) {
-                openDialogue(player, NPCs.SQUIRE_6169)
+                openDialogue(player, NPCs.KR_SQUIRE_6169)
                 return@on false
             }
 

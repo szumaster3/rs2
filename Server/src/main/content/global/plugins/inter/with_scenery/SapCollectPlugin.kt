@@ -13,8 +13,8 @@ import shared.consts.Scenery
 class SapCollectPlugin : InteractionListener {
 
     companion object {
-        private val treeIDs = intArrayOf(Scenery.TREE_1276, Scenery.TREE_1277, Scenery.TREE_1278, Scenery.TREE_1280, Scenery.EVERGREEN_1315, Scenery.EVERGREEN_1316, Scenery.EVERGREEN_1318, Scenery.EVERGREEN_1319, Scenery.TREE_1330, Scenery.TREE_1331, Scenery.TREE_1332, Scenery.TREE_3034, Scenery.TREE_3035, Scenery.TREE_3036, Scenery.TREE_3879, Scenery.TREE_3881, Scenery.TREE_3882, Scenery.TREE_3883, Scenery.TREE_10041, Scenery.TREE_14308, Scenery.TREE_14309, Scenery.TREE_30132, Scenery.TREE_30133, Scenery.TREE_37477, Scenery.TREE_37478, Scenery.TREE_37652)
-        private val ANIMATION = Animation(Animations.BUCKET_AND_KNIFE_TREE_WAX_2009)
+        private val treeIDs = intArrayOf(Scenery.TREE_1276, Scenery.TREE_1277, Scenery.TREE_1278, Scenery.TREE_1280, Scenery.EVERGREEN_1315, Scenery.EVERGREEN_1316, Scenery.EVERGREEN_1318, Scenery.EVERGREEN_1319, Scenery.TREE_1330, Scenery.TREE_1331, Scenery.TREE_1332, Scenery.TREE_3034, Scenery.TREE_3035, Scenery.TREE_3036, Scenery.TREE_3879, Scenery.TREE_3881, Scenery.TREE_3882, Scenery.TREE_3883, Scenery.TREE_10041, Scenery.TREE_14308, Scenery.TREE_14309, Scenery.NUT_CRATE_30132, Scenery.NUT_CRATE_30133, Scenery.TREE_37477, Scenery.TREE_37478, Scenery.TREE_37652)
+        private val ANIMATION = Animation(Animations.HUMAN_COLLECT_SAP_2009)
 
     }
 

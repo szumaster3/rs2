@@ -73,5 +73,5 @@ class ExplorerJackDiaryDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = ExplorerJackDiaryDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.EXPLORER_JACK_7969)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ATLUM_EXPLORER_JACK_7969)
 }

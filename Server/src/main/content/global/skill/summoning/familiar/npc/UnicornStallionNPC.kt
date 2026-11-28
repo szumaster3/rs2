@@ -20,14 +20,14 @@ import shared.consts.NPCs
 import shared.consts.Sounds
 
 @Initializable
-class UnicornStallionNPC(owner: Player? = null, id: Int = NPCs.UNICORN_STALLION_6822) :
+class UnicornStallionNPC(owner: Player? = null, id: Int = NPCs.LORE_UNICORN_6822) :
     Familiar(owner, id, 5400, Items.UNICORN_STALLION_POUCH_12039, 20, WeaponInterface.STYLE_CONTROLLED) {
     override fun construct(owner: Player, id: Int): Familiar = UnicornStallionNPC(owner, id)
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
         val player = special.node as Player
         playAudio(player, Sounds.HEALING_AURA_4372)
-        visualize(Animation.create(8267), Graphics.create(shared.consts.Graphics.ELECTRIC_BALL_OVER_HEAD_1356))
+        visualize(Animation.create(8267), Graphics.create(shared.consts.Graphics.LORE_HEALING_AURA_SPOT_1356))
         player.getSkills().heal((player.getSkills().maximumLifepoints * 0.15).toInt())
         return true
     }
@@ -36,8 +36,8 @@ class UnicornStallionNPC(owner: Player? = null, id: Int = NPCs.UNICORN_STALLION_
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    NpcType.forId(NPCs.UNICORN_STALLION_6822).handlers["option:cure"] = this
-                    NpcType.forId(NPCs.UNICORN_STALLION_6823).handlers["option:cure"] = this
+                    NpcType.forId(NPCs.LORE_UNICORN_6822).handlers["option:cure"] = this
+                    NpcType.forId(NPCs.LORE_UNICORN_COMBAT_6823).handlers["option:cure"] = this
                     return this
                 }
 
@@ -66,7 +66,7 @@ class UnicornStallionNPC(owner: Player? = null, id: Int = NPCs.UNICORN_STALLION_
                     playAudio(player, Sounds.HEALING_AURA_4372)
                     familiar.visualize(
                         Animation.create(8267),
-                        Graphics.create(shared.consts.Graphics.ELECTRIC_BALL_OVER_HEAD_1356),
+                        Graphics.create(shared.consts.Graphics.LORE_HEALING_AURA_SPOT_1356),
                     )
                     curePoison(player)
                     cureDisease(player)
@@ -80,10 +80,10 @@ class UnicornStallionNPC(owner: Player? = null, id: Int = NPCs.UNICORN_STALLION_
     override fun visualizeSpecialMove() {
         visualize(
             owner,
-            Animation.create(Animations.CAST_FAMILIAR_SCROLL_7660),
-            Graphics.create(shared.consts.Graphics.UNICORN_STALLION_SPECIAL_MOVE_1298),
+            Animation.create(Animations.LORE_HUMAN_ANIMAL_SPECIAL_7660),
+            Graphics.create(shared.consts.Graphics.LORE_BOOST_RECEIVE_4_1298),
         )
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.UNICORN_STALLION_6822, NPCs.UNICORN_STALLION_6823)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_UNICORN_6822, NPCs.LORE_UNICORN_COMBAT_6823)
 }

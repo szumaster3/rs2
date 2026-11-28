@@ -88,7 +88,7 @@ class FremennikDungeonPlugin : MapZone("fremennik", true, ZoneRestriction.CANNON
 
                         4 -> {
                             handleAgilityFailure(player)
-                            player.animate(Animation.create(Animations.JUMP_WEREWOLF_1603))
+                            player.animate(Animation.create(Animations.HUMAN_JUMP_HURDLE_1603))
                             player.unlock()
                             true
                         }

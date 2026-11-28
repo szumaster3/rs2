@@ -124,7 +124,7 @@ class PotionMakePlugin : InteractionListener {
             return false
         }
 
-        animate(player, Animations.HUMAN_USE_PESTLE_AND_MORTAR_364)
+        animate(player, Animations.HUMAN_HERBING_GRIND_364)
         addItem(player, potion.product)
         rewardXP(player, Skills.HERBLORE, potion.xp)
         sendMessage(player, "You combine your potion with the ${getItemName(egg.id).lowercase()}.")

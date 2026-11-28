@@ -18,7 +18,7 @@ import shared.consts.NPCs
 @Initializable
 class SigmundDialogue : Dialogue {
     var TLTNPCS: IntArray =
-        intArrayOf(NPCs.COOK_278, NPCs.HANS_0, NPCs.BOB_519, NPCs.LUMBRIDGE_GUIDE_2244, NPCs.DOOMSAYER_3777)
+        intArrayOf(NPCs.COOK_278, NPCs.HANS_0, NPCs.BOB_519, NPCs.LUMBRIDGE_GUIDE_2244, NPCs.CWS_DOOMSAYER_3777)
 
     constructor()
 
@@ -136,20 +136,20 @@ class SigmundDialogue : Dialogue {
 
     override fun getIds(): IntArray =
         intArrayOf(
-            NPCs.SIGMUND_2082,
-            NPCs.SIGMUND_2083,
-            NPCs.SIGMUND_2090,
-            NPCs.SIGMUND_3713,
-            NPCs.SIGMUND_3716,
-            NPCs.SIGMUND_3717,
-            NPCs.SIGMUND_3718,
-            NPCs.SIGMUND_3719,
-            NPCs.SIGMUND_3720,
-            NPCs.SIGMUND_4328,
-            NPCs.SIGMUND_4331,
-            NPCs.SIGMUND_4332,
-            NPCs.SIGMUND_4333,
-            NPCs.SIGMUND_4334,
-            NPCs.SIGMUND_4335,
+            NPCs.LOST_TRIBE_SIGMUND_THERE_2082,
+            NPCs.LOST_TRIBE_SIGMUND_HAM_THERE_2083,
+            NPCs.LOST_TRIBE_CUTSCENE_SIGMUND_2090,
+            NPCs.SLICE_SIGMUND_VILLAGE_3713,
+            NPCs.SLICE_SIGMUND_SHOWDOWN_3716,
+            NPCs.SLICE_SIGMUND_MELEE_3717,
+            NPCs.SLICE_SIGMUND_RANGED_3718,
+            NPCs.SLICE_SIGMUND_MAGIC_3719,
+            NPCs.SLICE_SIGMUND_NOPRAYER_3720,
+            NPCs.DTTD_CUTSCENE_SIGMUND_4328,
+            NPCs.DTTD_SIGMUND_MILL_4331,
+            NPCs.DTTD_SIGMUND_MELEE_4332,
+            NPCs.DTTD_SIGMUND_RANGED_4333,
+            NPCs.DTTD_SIGMUND_MAGIC_4334,
+            NPCs.DTTD_SIGMUND_RANGED_VS_ZANIK_4335,
         )
 }

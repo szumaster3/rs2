@@ -18,7 +18,7 @@ class DeathHolidayRandomNPC : HolidayRandomEventNPC(NPCs.DEATH_2862) {
             when (stage) {
                 0 -> {
                     this.face(player)
-                    visualize(this, Animations.BECKON_864, -1)
+                    visualize(this, Animations.EMOTE_BECKON_864, -1)
                     playGlobalAudio(this.location, Sounds.ZOMBIE_MOAN_2324)
                     return@queueScript delayScript(this, 1)
                 }

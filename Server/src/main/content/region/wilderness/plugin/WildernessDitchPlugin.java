@@ -52,7 +52,7 @@ public final class WildernessDitchPlugin extends OptionHandler {
                 return true;
             }
 
-            forceMove(player, start, end, 0, 60, null, Animations.HUMAN_JUMP_FENCE_6132, () -> {
+            forceMove(player, start, end, 0, 60, null, Animations.WILD_DITCH_JUMP_6132, () -> {
                 return kotlin.Unit.INSTANCE;
             });
 
@@ -118,12 +118,12 @@ public final class WildernessDitchPlugin extends OptionHandler {
         Location end = locs[1];
 
         if (player.getLocation().getDistance(ditch.getLocation()) < 3) {
-            forceMove(player, start, end, 0, 60, null, Animations.HUMAN_JUMP_FENCE_6132, () -> {
+            forceMove(player, start, end, 0, 60, null, Animations.WILD_DITCH_JUMP_6132, () -> {
                 return kotlin.Unit.INSTANCE;
             });
             playAudio(player, Sounds.JUMP2_2462);
         } else {
-            forceMove(player, start, end, 0, 60, null, Animations.HUMAN_JUMP_FENCE_6132, () -> {
+            forceMove(player, start, end, 0, 60, null, Animations.WILD_DITCH_JUMP_6132, () -> {
                 return kotlin.Unit.INSTANCE;
             });
             playAudio(player, Sounds.JUMP2_2462);

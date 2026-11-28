@@ -134,7 +134,7 @@ public abstract class CombatSpell extends MagicSpell {
                 continue;
             }
 
-            if ((e instanceof Player && ((Player) e).isArtificial()) || (e instanceof NPC && ((NPC) e).getId() == NPCs.VOID_KNIGHT_3785)) {
+            if ((e instanceof Player && ((Player) e).isArtificial()) || (e instanceof NPC && ((NPC) e).getId() == NPCs.PEST_VOIDKNIGHT_CONTROL4_3785)) {
                 continue;
             }
 

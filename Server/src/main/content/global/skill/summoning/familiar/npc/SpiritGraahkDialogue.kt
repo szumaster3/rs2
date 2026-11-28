@@ -178,6 +178,6 @@ class SpiritGraahkDialogue : Dialogue {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_GRAAHK_7363, NPCs.SPIRIT_GRAAHK_7364)
+        return intArrayOf(NPCs.LORE_GRAAHK_7363, NPCs.LORE_GRAAHK_COMBAT_7364)
     }
 }

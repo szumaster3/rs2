@@ -45,40 +45,40 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
             Scenery.PARTY_BALLOON_121,
             Scenery.PARTY_BALLOON_122
         )
-        private val PARK_DUCKS = intArrayOf(NPCs.DUCK_46, NPCs.DUCK_2693)
+        private val PARK_DUCKS = intArrayOf(NPCs.DUCK_46, NPCs.DUCK_FEMALE_2693)
         private val BLACK_KNIGHTS = intArrayOf(
             NPCs.BLACK_KNIGHT_178,
-            NPCs.BLACK_KNIGHT_179,
-            NPCs.BLACK_KNIGHT_2698,
-            NPCs.BLACK_KNIGHT_2777,
-            NPCs.BLACK_KNIGHT_6189,
-            NPCs.ELITE_BLACK_KNIGHT_8324,
-            NPCs.ELITE_BLACK_KNIGHT_8325,
-            NPCs.ELITE_BLACK_KNIGHT_8326,
-            NPCs.ELITE_BLACK_KNIGHT_8327,
-            NPCs.ELITE_BLACK_KNIGHT_8330
+            NPCs.AGGRESSIVE_BLACK_KNIGHT_179,
+            NPCs.JAIL_BLACK_KNIGHT_2698,
+            NPCs.WANTED_SUMMONED_BLACK_KNIGHT_2777,
+            NPCs.KR_AGGRESSIVE_BLACK_KNIGHT_6189,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_NONE_8324,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_MELEE_8325,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_RANGE_8326,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_PRAY_MAGIC_8327,
+            NPCs.LUC2_ELITE_BLACK_KNIGHT_NOATTACK_STOP_8330
         )
         private val SKELETAL_WYVERNS = intArrayOf(
-            NPCs.SKELETAL_WYVERN_3068,
-            NPCs.SKELETAL_WYVERN_3069,
-            NPCs.SKELETAL_WYVERN_3070,
-            NPCs.SKELETAL_WYVERN_3071
+            NPCs.SKELETAL_WYVERN1_3068,
+            NPCs.SKELETAL_WYVERN2_3069,
+            NPCs.SKELETAL_WYVERN3_3070,
+            NPCs.SKELETAL_WYVERN4_3071
         )
         private val ICE_GIANTS = intArrayOf(
-            NPCs.ICE_GIANT_111,
-            NPCs.ICE_GIANT_3072,
-            NPCs.ICE_GIANT_4685,
-            NPCs.ICE_GIANT_4686,
-            NPCs.ICE_GIANT_4687
+            NPCs.ICEGIANT_111,
+            NPCs.ICEGIANT_LOW_WANDERRANGE_3072,
+            NPCs.ICEGIANT2_4685,
+            NPCs.ICEGIANT3_4686,
+            NPCs.ICEGIANT_LOW_WANDERRANGE2_4687
         )
         private val CAPES = intArrayOf(
-            Items.BLACK_CAPE_1019,
-            Items.RED_CAPE_1007,
-            Items.BLUE_CAPE_1021,
-            Items.YELLOW_CAPE_1023,
-            Items.GREEN_CAPE_1027,
-            Items.PURPLE_CAPE_1029,
-            Items.ORANGE_CAPE_1031
+            Items.CAPE_1019,
+            Items.CAPE_1007,
+            Items.CAPE_1021,
+            Items.CAPE_1023,
+            Items.CAPE_1027,
+            Items.CAPE_1029,
+            Items.CAPE_1031
         )
 
         object EasyTasks {
@@ -294,7 +294,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                 )//Todo
             }
 
-            inBorders(player, SARAHS_FARMING_SHOP_AREA) && (event.itemId == Items.AMULET_OF_FARMING8_12622) -> {
+            inBorders(player, SARAHS_FARMING_SHOP_AREA) && (event.itemId == Items.AMULET_OF_FARMING_8_12622) -> {
                 finishTask(
                     player,
                     DiaryLevel.EASY,

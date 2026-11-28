@@ -43,5 +43,5 @@ class BlueOpalDirectorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BlueOpalDirectorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BLUE_OPAL_DIRECTOR_2101)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_DIRECTOR_BLUE_OPAL_2101)
 }

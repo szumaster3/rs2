@@ -18,7 +18,7 @@ class RechargeDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         usedSceptre = args[0] as Item
         sendMessage(player, "" + args[0])
-        sendNPCDialogueLines(player, NPCs.GUARDIAN_MUMMY_4476, FaceAnim.OLD_NOT_INTERESTED, false, "Mrrrh, how do you have this? You shouldn't.", "Nevertheless, I can recharge this for you.")
+        sendNPCDialogueLines(player, NPCs.NTK_MUMMY_GUARDIAN_4476, FaceAnim.OLD_NOT_INTERESTED, false, "Mrrrh, how do you have this? You shouldn't.", "Nevertheless, I can recharge this for you.")
         return true
     }
 
@@ -96,7 +96,7 @@ class RechargeDialogue(player: Player? = null) : Dialogue(player) {
                         i++
                     }
                     removeItem(player, usedSceptre)
-                    addItem(player, Items.PHARAOHS_SCEPTRE_9044)
+                    addItem(player, Items.PHARAOHS_SCEPTRE_3_9044)
                     sendMessage(player, "<col=7f03ff>Your Pharoah's Sceptre has been fully recharged!")
                     clayRecharge[23] = 0
                     end()
@@ -160,7 +160,7 @@ class RechargeDialogue(player: Player? = null) : Dialogue(player) {
                         i++
                     }
                     removeItem(player, usedSceptre)
-                    addItem(player, Items.PHARAOHS_SCEPTRE_9044)
+                    addItem(player, Items.PHARAOHS_SCEPTRE_3_9044)
                     sendMessage(player, "<col=7f03ff>Your Pharoah's Sceptre has been fully recharged!")
                     stoneRecharge[11] = 0
                     end()
@@ -224,7 +224,7 @@ class RechargeDialogue(player: Player? = null) : Dialogue(player) {
                         i++
                     }
                     player.inventory.remove(usedSceptre)
-                    addItem(player, Items.PHARAOHS_SCEPTRE_9044)
+                    addItem(player, Items.PHARAOHS_SCEPTRE_3_9044)
                     sendMessage(player, "<col=7f03ff>Your Pharoah's Sceptre has been fully recharged!")
                     goldRecharge[5] = 0
                     end()

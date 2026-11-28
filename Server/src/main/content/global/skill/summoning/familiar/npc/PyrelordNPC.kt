@@ -59,7 +59,7 @@ class PyrelordNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPC
         lock(owner, 1)
         visualize(
             Animation.create(8081),
-            Graphics.create(shared.consts.Graphics.RAINING_FLAMES_1463)
+            Graphics.create(shared.consts.Graphics.LORE_PLAYER_SUPERHEAT_SPOT_1463)
         )
         CraftingDefinition.openGoldJewelleryInterface(owner)
         return true

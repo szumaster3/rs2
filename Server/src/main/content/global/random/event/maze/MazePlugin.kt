@@ -43,9 +43,9 @@ class MazePlugin : InteractionListener {
         WeightedItem(Items.BRONZE_ARROW_882, 20, 20, 1.0),
         WeightedItem(Items.BRONZE_BOLTS_877, 10, 10, 1.0),
         WeightedItem(Items.IRON_ARROW_884, 15, 15, 1.0),
-        WeightedItem(Items.ATTACK_POTION2_123, 1, 1, 1.0),
-        WeightedItem(Items.STRENGTH_POTION2_117, 1, 1, 1.0),
-        WeightedItem(Items.DEFENCE_POTION2_135, 1, 1, 1.0),
+        WeightedItem(Items.ATTACK_POTION_2_123, 1, 1, 1.0),
+        WeightedItem(Items.STRENGTH_POTION_2_117, 1, 1, 1.0),
+        WeightedItem(Items.DEFENCE_POTION_2_135, 1, 1, 1.0),
     )
 
     override fun defineListeners() {
@@ -97,9 +97,9 @@ class MazePlugin : InteractionListener {
                     Items.BRONZE_ARROW_882 -> sendItemDialogue(player, Items.BRONZE_ARROW_882, "You've found some bronze arrows!")
                     Items.BRONZE_BOLTS_877 -> sendItemDialogue(player, Items.BRONZE_BOLTS_877, "You've found some bronze bolts!")
                     Items.IRON_ARROW_884 -> sendItemDialogue(player, Items.IRON_ARROW_884, "You've found some iron arrows!")
-                    Items.ATTACK_POTION2_123 -> sendItemDialogue(player, Items.ATTACK_POTION2_123, "You've found an attack potion!")
-                    Items.STRENGTH_POTION2_117 -> sendItemDialogue(player, Items.STRENGTH_POTION2_117, "You've found a strength potion!")
-                    Items.DEFENCE_POTION2_135 -> sendItemDialogue(player, Items.DEFENCE_POTION2_135, "You've found a defence potion!")
+                    Items.ATTACK_POTION_2_123 -> sendItemDialogue(player, Items.ATTACK_POTION_2_123, "You've found an attack potion!")
+                    Items.STRENGTH_POTION_2_117 -> sendItemDialogue(player, Items.STRENGTH_POTION_2_117, "You've found a strength potion!")
+                    Items.DEFENCE_POTION_2_135 -> sendItemDialogue(player, Items.DEFENCE_POTION_2_135, "You've found a defence potion!")
                 }
                 setAttribute(player, GameAttributes.MAZE_ATTRIBUTE_CHESTS_OPEN, getAttribute(player, GameAttributes.MAZE_ATTRIBUTE_CHESTS_OPEN, 0))
             } else {
@@ -122,7 +122,7 @@ class MazePlugin : InteractionListener {
         on(Scenery.STRANGE_SHRINE_3634, IntType.SCENERY, "touch") { player, _ ->
             lock(player, 6)
             faceLocation(player, Location.create(2912, 4576, 0))
-            animate(player, Animations.CHEER_862)
+            animate(player, Animations.EMOTE_CHEER_862)
             playJingle(player, 117)
             queueScript(player, 6, QueueStrength.SOFT) {
                 calculateLoot(player)

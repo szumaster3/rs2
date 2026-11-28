@@ -45,7 +45,7 @@ class CatableponNPC : AbstractNPC {
 
     override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatHandler
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CATABLEPON_4397, NPCs.CATABLEPON_4398, NPCs.CATABLEPON_4399)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SOS_PEST_CATABLEPON_4397, NPCs.SOS_PEST_CATABLEPON2_4398, NPCs.SOS_PEST_CATABLEPON3_4399)
 
     companion object {
         private val ANIMATION = Animation(4272)

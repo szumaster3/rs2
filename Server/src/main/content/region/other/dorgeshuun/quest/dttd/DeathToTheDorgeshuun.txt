@@ -9,7 +9,7 @@ import core.plugin.Initializable
 
 @Initializable
 class DeathToTheDorgeshuun :
-    Quest("Death to the Dorgeshuun", 43, 42, 1, Vars.VARBIT_QUEST_DEATH_TO_DORGESHUUN_2258, 0, 1, 13) {
+    Quest("Death to the Dorgeshuun", 43, 42, 1, Vars.VARBIT_2258, 0, 1, 13) {
 
     /*
      * Quest description:
@@ -125,7 +125,7 @@ class DeathToTheDorgeshuun :
         drawReward(player, "Entry to Dorgesh-Kaan", ln)
         rewardXP(player, Skills.THIEVING, 2000.0)
         addItemOrDrop(player, Items.COMBAT_LAMP_10586)
-        setVarbit(player, Vars.VARBIT_QUEST_DEATH_TO_DORGESHUUN_2258, 13, true)
+        setVarbit(player, Vars.VARBIT_2258, 13, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

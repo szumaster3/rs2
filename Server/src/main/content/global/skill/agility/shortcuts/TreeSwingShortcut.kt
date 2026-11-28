@@ -60,7 +60,7 @@ class TreeSwingShortcut : OptionHandler() {
 
                     removeItem(player, event.usedItem)
                     playGlobalAudio(player.location, Sounds.TIGHTROPE_2495)
-                    animate(player, Animations.SUMMON_ROPE_SWING_775, true)
+                    animate(player, Animations.HUMAN_THROWROPE_UP_775, true)
                     sendMessage(player, "You tie the rope to the tree...")
                     return true
                 }
@@ -101,7 +101,7 @@ class TreeSwingShortcut : OptionHandler() {
                     0,
                     player.location,
                     end,
-                    Animation.create(Animations.SWING_ACROSS_OBSTACLE_3130),
+                    Animation.create(Animations.FEVER_PLAYER_ROPE_SWING_LAND_SUCCESS_3130),
                     50,
                     experience,
                     "You skillfully swing across."

@@ -6,7 +6,7 @@ import core.game.node.entity.npc.NPCBehavior
 import core.tools.RandomFunction
 import shared.consts.NPCs
 
-class LostGoblinNPC : NPCBehavior(NPCs.GOBLIN_6125,NPCs.GOBLIN_6126){
+class LostGoblinNPC : NPCBehavior(NPCs.OBSERVATORY_GOBLIN_PATROL1_6125,NPCs.OBSERVATORY_GOBLIN_PATROL2_6126){
 
     private val randomDialogue = arrayOf(
     "Which way should I go?",

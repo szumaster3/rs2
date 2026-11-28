@@ -113,13 +113,13 @@ class ZanarisPlugin : InteractionListener {
                 return@onUseWith false
             }
 
-            val animDuration = animationDuration(Animation(Animations.DISAPPEAR_2755))
+            val animDuration = animationDuration(Animation(Animations.CONTACT_FADE_OUT_2755))
 
             lock(player, 3)
-            player.animate(Animation(Animations.DISAPPEAR_2755))
+            player.animate(Animation(Animations.CONTACT_FADE_OUT_2755))
             queueScript(player, animDuration, QueueStrength.SOFT) {
                 teleport(player, Location(2461, 4356, 0))
-                player.animate(Animation(Animations.APPEAR_2757))
+                player.animate(Animation(Animations.CONTACT_SPAWN_FADE_2757))
                 return@queueScript stopExecuting(player)
             }
 
@@ -131,13 +131,13 @@ class ZanarisPlugin : InteractionListener {
          */
 
         on(Scenery.PORTAL_12260, IntType.SCENERY, "use") { player, _ ->
-            val animDuration = animationDuration(Animation(Animations.DISAPPEAR_2755))
+            val animDuration = animationDuration(Animation(Animations.CONTACT_FADE_OUT_2755))
 
             lock(player, 3)
-            player.animate(Animation(Animations.DISAPPEAR_2755))
+            player.animate(Animation(Animations.CONTACT_FADE_OUT_2755))
             queueScript(player, animDuration, QueueStrength.SOFT) {
                 teleport(player, Location(2453, 4476, 0))
-                player.animate(Animation(Animations.APPEAR_2757))
+                player.animate(Animation(Animations.CONTACT_SPAWN_FADE_2757))
                 return@queueScript stopExecuting(player)
             }
             return@on true
@@ -154,12 +154,12 @@ class ZanarisPlugin : InteractionListener {
         }
 
         on(Scenery.TUNNEL_ENTRANCE_12254, IntType.SCENERY, "climb-down") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_BURYING_BONES_827), Location(2441, 4381, 0))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_PICKUPFLOOR_827), Location(2441, 4381, 0))
             return@on true
         }
 
         on(Scenery.ROPE_12255, IntType.SCENERY, "climb-up") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_BURYING_BONES_827), Location(2457, 4380, 0))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_PICKUPFLOOR_827), Location(2457, 4380, 0))
             return@on true
         }
 
@@ -167,7 +167,7 @@ class ZanarisPlugin : InteractionListener {
          * Handles talking to shopkeeper around Zanaris.
          */
 
-        on(intArrayOf(NPCs.FAIRY_SHOPKEEPER_534, NPCs.FAIRY_SHOP_ASSISTANT_535), IntType.NPC, "talk-to") { player, node ->
+        on(intArrayOf(NPCs.GENERALSHOPKEEPER8_534, NPCs.GENERALASSISTANT8_535), IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, FairyShopkeeperDialogue(), node.asNpc())
             return@on true
         }

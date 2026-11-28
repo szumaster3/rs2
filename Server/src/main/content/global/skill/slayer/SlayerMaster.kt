@@ -57,7 +57,7 @@ enum class SlayerMaster(
      * Mazchna - requires 20 Combat.
      */
     MAZCHNA(
-        NPCs.MAZCHNA_8274,
+        NPCs.SLAYER_MASTER_2_MAZCHNA_LUC_8274,
         20,
         0,
         intArrayOf(30, 70),
@@ -212,7 +212,7 @@ enum class SlayerMaster(
      * Sumona - requires 90 Combat and 35 Slayer.
      */
     SUMONA(
-        NPCs.SUMONA_7780,
+        NPCs.SMKI_SUMONA_MULTI_7780,
         90,
         35,
         intArrayOf(50, 185),
@@ -253,7 +253,7 @@ enum class SlayerMaster(
      * Duradel - high-level Slayer Master requiring 100 Combat and 50 Slayer.
      */
     DURADEL(
-        NPCs.DURADEL_8275,
+        NPCs.SLAYER_MASTER_5_DURADEL_LUC_8275,
         100,
         50,
         intArrayOf(50, 199),

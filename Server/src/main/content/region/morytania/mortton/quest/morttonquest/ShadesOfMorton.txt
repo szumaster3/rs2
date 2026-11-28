@@ -8,7 +8,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class ShadesOfMorton : Quest("Shades of Mort'ton", 111, 110, 3, Vars.VARP_QUEST_SHADES_OF_MORTON_339, 0, 1, 85) {
+class ShadesOfMorton : Quest("Shades of Mort'ton", 111, 110, 3, Vars.VARP_339, 0, 1, 85) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

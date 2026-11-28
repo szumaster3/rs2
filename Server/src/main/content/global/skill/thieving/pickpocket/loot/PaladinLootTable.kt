@@ -9,7 +9,7 @@ object PaladinLootTable {
 
     val NPC_ID = intArrayOf(
         NPCs.PALADIN_20,
-        NPCs.PALADIN_2256
+        NPCs.PALADIN2_2256
     )
 
     val LOOT = WeightBasedTable.create(

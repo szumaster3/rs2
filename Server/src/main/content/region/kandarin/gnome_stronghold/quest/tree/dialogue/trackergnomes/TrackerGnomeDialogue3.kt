@@ -84,5 +84,5 @@ class TrackerGnomeDialogue3(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TRACKER_GNOME_3_483)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRACKER3_483)
 }

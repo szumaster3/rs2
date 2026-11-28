@@ -19,14 +19,14 @@ class TrollNPC : AbstractNPC {
 
     companion object {
         val ID = intArrayOf(
-            NPCs.MOUNTAIN_TROLL_1106,
-            NPCs.MOUNTAIN_TROLL_1107,
-            NPCs.MOUNTAIN_TROLL_1108,
-            NPCs.MOUNTAIN_TROLL_1109,
-            NPCs.MOUNTAIN_TROLL_1110,
-            NPCs.MOUNTAIN_TROLL_1111,
-            NPCs.MOUNTAIN_TROLL_1112,
-            NPCs.MOUNTAIN_TROLL_1138,
+            NPCs.DEATH_TROLL_MELEE1_1106,
+            NPCs.DEATH_TROLL_MELEE2_1107,
+            NPCs.DEATH_TROLL_MELEE3_1108,
+            NPCs.DEATH_TROLL_MELEE4_1109,
+            NPCs.DEATH_TROLL_MELEE5_1110,
+            NPCs.DEATH_TROLL_MELEE6_1111,
+            NPCs.DEATH_TROLL_MELEE7_1112,
+            NPCs.TROLL_MELEE1_1138,
         )
     }
 }

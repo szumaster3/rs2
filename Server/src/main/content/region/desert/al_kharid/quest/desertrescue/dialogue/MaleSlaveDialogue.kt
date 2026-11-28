@@ -386,5 +386,5 @@ class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MALE_SLAVE_825, NPCs.ESCAPING_SLAVE_826, NPCs.MERCENARY_4985)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MINING_SLAVE_MALE_825, NPCs.ESCAPED_SLAVE_826, NPCs.MERCENARY_4985)
 }

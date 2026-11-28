@@ -37,7 +37,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         private val FARMING_PATCH_AREA = ZoneBorders(3180, 3356, 3183, 3359)
         private val EARTH_ALTAR_AREA = getRegionBorders(10571)
 
-        private val STRAY_DOGS = arrayOf(NPCs.STRAY_DOG_4766, NPCs.STRAY_DOG_4767, NPCs.STRAY_DOG_5917, NPCs.STRAY_DOG_5918)
+        private val STRAY_DOGS = arrayOf(NPCs.MYQ3_DOG_STRAY_01_4766, NPCs.MYQ3_DOG_STRAY_02_4767, NPCs.DOG_STRAY_5917, NPCs.DOG_STRAY2_5918)
 
         object EasyTasks {
             const val THESSALIA_BROWSE_CLOTHES = 0

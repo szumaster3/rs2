@@ -55,27 +55,27 @@ class GrandExchangePlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.FARID_MORRISANE_ORES_6523, IntType.NPC, "info-ores") { player, _ ->
+        on(NPCs.EXCHANGE_FARID_M_6523, IntType.NPC, "info-ores") { player, _ ->
             GuidePrices.open(player, GuidePrices.GuideType.ORES)
             return@on true
         }
 
-        on(NPCs.BOB_BARTER_HERBS_6524, IntType.NPC, "info-herbs") { player, _ ->
+        on(NPCs.EXCHANGE_BOB_BARTER_6524, IntType.NPC, "info-herbs") { player, _ ->
             GuidePrices.open(player, GuidePrices.GuideType.HERBS)
             return@on true
         }
 
-        on(NPCs.MURKY_MATT_RUNES_6525, IntType.NPC, "info-runes") { player, _ ->
+        on(NPCs.EXCHANGE_MURKY_MATT_6525, IntType.NPC, "info-runes") { player, _ ->
             GuidePrices.open(player, GuidePrices.GuideType.RUNES)
             return@on true
         }
 
-        on(NPCs.RELOBO_BLINYO_LOGS_6526, IntType.NPC, "info-logs") { player, _ ->
+        on(NPCs.EXCHANGE_RELOBO_6526, IntType.NPC, "info-logs") { player, _ ->
             GuidePrices.open(player, GuidePrices.GuideType.LOGS)
             return@on true
         }
 
-        on(NPCs.HOFUTHAND_ARMOUR_AND_WEAPONS_6527, IntType.NPC, "info-combat") { player, _ ->
+        on(NPCs.EXCHANGE_HOFUTHAND_6527, IntType.NPC, "info-combat") { player, _ ->
             GuidePrices.open(player, GuidePrices.GuideType.WEAPONS_AND_ARMOUR)
             return@on true
         }

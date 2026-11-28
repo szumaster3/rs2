@@ -45,7 +45,7 @@ class ChaosElementalNPC @JvmOverloads constructor(id: Int = -1, location: Locati
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = ChaosElementalNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHAOS_ELEMENTAL_3200)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHAOSELEMENTAL_3200)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -57,13 +57,13 @@ class ChaosElementalNPC @JvmOverloads constructor(id: Int = -1, location: Locati
             val attack = super.current
             if (victim is Player) {
                 val player = victim.asPlayer() ?: return
-                if (attack.projectile!!.projectileId == shared.consts.Graphics.MULTICOLORS_2_557) {
+                if (attack.projectile!!.projectileId == shared.consts.Graphics.SIGHERO_LINZA_FAI_FURNACE_2_557) {
                     playGlobalAudio(location = player.location, id = Sounds.CHAOS_ELEMENTAL_DISCORD_IMPACT_350)
                 } else if (attack.projectile.projectileId == 554) {
                     playAudio(player, Sounds.CHAOS_ELEMENTAL_CONFUSION_IMPACT_346)
                     val loc = getPathableRandomLocalCoordinate(player, 10, entity!!.location, 3)
                     player.teleport(loc)
-                } else if (attack.projectile.projectileId == shared.consts.Graphics.GREEN_BALLS_SPIN_551) {
+                } else if (attack.projectile.projectileId == shared.consts.Graphics.SIGHERO_LINZA_FAI_FURNACE_1_551) {
                     playGlobalAudio(location = player.location, id = Sounds.CHAOS_ELEMENTAL_MADNESS_IMPACT_353)
                     if (player.inventory.freeSlots() < 1 || player.equipment.itemCount() < 1) {
                         return
@@ -103,16 +103,16 @@ class ChaosElementalNPC @JvmOverloads constructor(id: Int = -1, location: Locati
         }
 
         companion object {
-            private val PROJECTILE_ANIM = Animation(Animations.CHAOS_ELEMENTAL_PROJECTILE_3148)
-            private val PRIMARY_PROJECTILE: Projectile = Projectile.create(null as Entity?, null, shared.consts.Graphics.MULTICOLORS_2_557, 60, 55, 41, 46, 20, 255)
+            private val PROJECTILE_ANIM = Animation(Animations.GLO3_GULRANA_SPYING_3148)
+            private val PRIMARY_PROJECTILE: Projectile = Projectile.create(null as Entity?, null, shared.consts.Graphics.SIGHERO_LINZA_FAI_FURNACE_2_557, 60, 55, 41, 46, 20, 255)
             private val ATTACKS = arrayOf(
-                SwitchAttack(CombatStyle.MELEE.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.MULTICOLORS_556), null, PRIMARY_PROJECTILE),
-                SwitchAttack(CombatStyle.RANGE.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.MULTICOLORS_556), null, PRIMARY_PROJECTILE),
-                SwitchAttack(CombatStyle.MAGIC.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.MULTICOLORS_556), null, PRIMARY_PROJECTILE),
-                object : SwitchAttack(CombatStyle.MAGIC.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.RED_550_553), null, Projectile.create(null as Entity?, null, shared.consts.Graphics.RED_FLYING_554, 60, 55, 41, 46, 20, 255)) {
+                SwitchAttack(CombatStyle.MELEE.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.SIGHERO_RAPTOR_WEAPON_TO_READY_3_556), null, PRIMARY_PROJECTILE),
+                SwitchAttack(CombatStyle.RANGE.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.SIGHERO_RAPTOR_WEAPON_TO_READY_3_556), null, PRIMARY_PROJECTILE),
+                SwitchAttack(CombatStyle.MAGIC.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.SIGHERO_RAPTOR_WEAPON_TO_READY_3_556), null, PRIMARY_PROJECTILE),
+                object : SwitchAttack(CombatStyle.MAGIC.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.SIGHERO_RAPTOR_WEAPON_TO_READY_2_553), null, Projectile.create(null as Entity?, null, shared.consts.Graphics.SIGHERO_LINZA_HAMMERING_DORGESH_554, 60, 55, 41, 46, 20, 255)) {
                     override fun canSelect(entity: Entity?, victim: Entity?, state: BattleState?): Boolean = true
                 },
-                object : SwitchAttack(CombatStyle.MAGIC.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.GREEN_BALLS_550), null, Projectile.create(null as Entity?, null, shared.consts.Graphics.GREEN_BALLS_SPIN_551, 60, 55, 41, 46, 20, 255),) {
+                object : SwitchAttack(CombatStyle.MAGIC.swingHandler, PROJECTILE_ANIM, Graphics(shared.consts.Graphics.SIGHERO_RAPTOR_WEAPON_TO_READY_1_550), null, Projectile.create(null as Entity?, null, shared.consts.Graphics.SIGHERO_LINZA_FAI_FURNACE_1_551, 60, 55, 41, 46, 20, 255),) {
                     override fun canSelect(entity: Entity?, victim: Entity?, state: BattleState?): Boolean = true
                 },)
         }

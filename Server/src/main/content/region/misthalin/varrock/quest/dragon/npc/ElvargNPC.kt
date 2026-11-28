@@ -242,6 +242,6 @@ class ElvargNPC : AbstractNPC {
 
     companion object {
         private val ANIMATIONS =
-            arrayOf(Animation(Animations.TAKING_OFF_ELVARG_S_HEAD_6654), Animation(Animations.ELVARG_HEAD_6655))
+            arrayOf(Animation(Animations.DRAGON_SLAYER_QIP_REMOVE_HEAD_PART1_6654), Animation(Animations.DRAGON_SLAYER_QIP_REMOVE_HEAD_PART2_6655))
     }
 }

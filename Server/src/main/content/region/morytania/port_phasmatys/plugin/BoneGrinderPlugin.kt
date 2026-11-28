@@ -23,19 +23,19 @@ class BoneGrinderPlugin : InteractionListener {
         private const val BONE_HOPPER_KEY = "/save:bonegrinder-hopper"
         private const val BONE_BIN_KEY = "/save:bonegrinder-bin"
 
-        private val WIND_ANIM = Animation(Animations.TURN_WHEEL_1648)
-        private val FILL_ANIM = Animation(Animations.FILL_HOPPER_1649)
-        private val SCOOP_ANIM = Animation(Animations.FILL_POT_1650)
+        private val WIND_ANIM = Animation(Animations.AHOY_BONE_GRIND_1648)
+        private val FILL_ANIM = Animation(Animations.AHOY_BONE_DUMP_1649)
+        private val SCOOP_ANIM = Animation(Animations.AHOY_FILLBUCKET_BONEDUST_1650)
 
         private val boneIDs = Bones.values().map { it.itemId }.toIntArray()
     }
 
     override fun defineListeners() {
-        on(Scenery.LOADER_11162, IntType.SCENERY, "fill") { player, _ -> handleFill(player) }
+        on(Scenery.HOPPER_11162, IntType.SCENERY, "fill") { player, _ -> handleFill(player) }
         on(Scenery.BONE_GRINDER_11163, IntType.SCENERY, "wind") { player, _ -> handleWind(player) }
         on(Scenery.BONE_GRINDER_11163, IntType.SCENERY, "status") { player, _ -> handleStatus(player) }
         on(Scenery.BIN_11164, IntType.SCENERY, "empty") { player, _ -> handleEmpty(player) }
-        onUseWith(IntType.SCENERY, Scenery.LOADER_11162, *boneIDs) { player, _, _ -> handleFill(player)
+        onUseWith(IntType.SCENERY, Scenery.HOPPER_11162, *boneIDs) { player, _, _ -> handleFill(player)
             return@onUseWith true
         }
     }

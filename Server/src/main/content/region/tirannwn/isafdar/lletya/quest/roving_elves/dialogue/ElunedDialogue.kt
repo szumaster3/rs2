@@ -109,7 +109,7 @@ class ElunedDialogue(player: Player? = null) : Dialogue(player) {
                             if (removeItem(player, Items.TINY_ELF_CRYSTAL_6103) &&
                                 removeItem(player, Item(995, price))
                             ) {
-                                player.inventory.add(Item(Items.TP_CRYSTAL_4_6099, 1))
+                                player.inventory.add(Item(Items.TELEPORT_CRYSTAL_4_6099, 1))
                                 player.incrementAttribute("/save:rovingelves:crystal-teleport-recharges", 1)
                             }
                         }

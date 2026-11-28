@@ -51,9 +51,9 @@ class BrewingListener : InteractionListener {
         Scenery.WIZARDS_MIND_BOMB_7417,
         Scenery.DRAGON_BITTER_7419,
         Scenery.MOONLIGHT_MEAD_7421,
-        Scenery.AXEMAN_S_FOLLY_7423,
-        Scenery.CHEF_S_DELIGHT_7425,
-        Scenery.SLAYER_S_RESPITE_7427,
+        Scenery.AXEMANS_FOLLY_7423,
+        Scenery.CHEFS_DELIGHT_7425,
+        Scenery.SLAYERS_RESPITE_7427,
         Scenery.CIDER_7429,
         Scenery.MATURE_DWARVEN_STOUT_7412,
         Scenery.MATURE_ASGARNIAN_ALE_7414,
@@ -61,9 +61,9 @@ class BrewingListener : InteractionListener {
         Scenery.MATURE_WIZARDS_MIND_BOMB_7418,
         Scenery.MATURE_DRAGON_BITTER_7420,
         Scenery.MATURE_MOONLIGHT_MEAD_7422,
-        Scenery.MATURE_AXEMAN_S_FOLLY_7424,
-        Scenery.MATURE_CHEF_S_DELIGHT_7426,
-        Scenery.MATURE_SLAYER_S_RESPITE_7428,
+        Scenery.MATURE_AXEMANS_FOLLY_7424,
+        Scenery.MATURE_CHEFS_DELIGHT_7426,
+        Scenery.MATURE_SLAYERS_RESPITE_7428,
         Scenery.MATURE_CIDER_7430
     )
 
@@ -78,8 +78,8 @@ class BrewingListener : InteractionListener {
                 queueScript(player, 0) {
                     addItem(player, Items.BUCKET_1925, 2)
 
-                    lock(player, Animation(Animations.POUR_BUCKET_OVER_GROUND_2283).duration)
-                    animate(player, Animation(Animations.POUR_BUCKET_OVER_GROUND_2283))
+                    lock(player, Animation(Animations.FARMING_POUR_WATER_2283).duration)
+                    animate(player, Animation(Animations.FARMING_POUR_WATER_2283))
 
                     sendMessage(player, "You add some water to the vat.")
 

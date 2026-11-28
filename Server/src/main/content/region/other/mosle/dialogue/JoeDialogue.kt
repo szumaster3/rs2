@@ -51,7 +51,7 @@ class JoeDialogue(player: Player? = null) : Dialogue(player) {
 
             16 -> {
                 end()
-                openNpcShop(player, NPCs.JOE_3163)
+                openNpcShop(player, NPCs.FEVER_HARPOON_JOE_3163)
             }
             17 -> npc("Then stop takin' up me floor space!").also { stage = END_DIALOGUE }
         }
@@ -60,5 +60,5 @@ class JoeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = JoeDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JOE_3163)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEVER_HARPOON_JOE_3163)
 }

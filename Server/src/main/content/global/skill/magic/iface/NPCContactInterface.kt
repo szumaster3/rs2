@@ -24,18 +24,18 @@ import shared.consts.NPCs
 class NPCContactInterface : InterfaceListener {
     private val contactNPCs = arrayOf(
         NPCs.HONEST_JIMMY_4362,
-        NPCs.BERT_3108,
-        NPCs.ADVISOR_GHRIM_1375,
+        NPCs.HANDSAND_BERT_3108,
+        NPCs.MISC_ADVISOR_GHRIM_1375,
         NPCs.TURAEL_8273,
         NPCs.LANTHUS_1526,
-        NPCs.SUMONA_7780,
-        NPCs.MAZCHNA_8274,
-        NPCs.DURADEL_8275,
+        NPCs.SMKI_SUMONA_MULTI_7780,
+        NPCs.SLAYER_MASTER_2_MAZCHNA_LUC_8274,
+        NPCs.SLAYER_MASTER_5_DURADEL_LUC_8275,
         NPCs.VANNAKA_1597,
-        NPCs.MURPHY_464,
+        NPCs.MURPHY_NORMAL_464,
         NPCs.CHAELDAR_1598,
-        NPCs.CYRISUS_432,
-        NPCs.LARRY_5424
+        NPCs.DREAM_CYRISUS_BATTLE_RANGER_432,
+        NPCs.PENG_LARRY_ZOO_5424
     )
 
     private val randomDialogue = arrayOf(
@@ -73,7 +73,7 @@ class NPCContactInterface : InterfaceListener {
                     closeInterface(player)
 
                     val dialogue = randomDialogue.filter { dialogue ->
-                        dialogue.npc?.id != NPCs.BERT_3108 || hasRequirement(player, Quests.THE_HAND_IN_THE_SAND.questName)
+                        dialogue.npc?.id != NPCs.HANDSAND_BERT_3108 || hasRequirement(player, Quests.THE_HAND_IN_THE_SAND.questName)
                     }
 
                     val random = dialogue.randomOrNull()
@@ -106,8 +106,8 @@ class NPCContactInterface : InterfaceListener {
             player.interfaceManager.close()
             var npcId = contactNPCs[index]
 
-            if (npcId == NPCs.BERT_3108 && !hasRequirement(player, Quests.THE_HAND_IN_THE_SAND.questName)) {
-                npcId = contactNPCs.filter { it != NPCs.BERT_3108 }.random()
+            if (npcId == NPCs.HANDSAND_BERT_3108 && !hasRequirement(player, Quests.THE_HAND_IN_THE_SAND.questName)) {
+                npcId = contactNPCs.filter { it != NPCs.HANDSAND_BERT_3108 }.random()
             }
 
             player.dialogueInterpreter.open(npcId, NPC(npcId, Location(0, 0)))
@@ -161,7 +161,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.CAPTAIN_CAIN_5030)
+            npc = NPC(NPCs.BARBASSAULT_BARBARIAN_CAPTAIN_5030)
             when (stage) {
                 0 -> player(FaceAnim.HALF_ASKING, "Who's that?").also { stage++ }
                 1 -> npcl(FaceAnim.ASKING, "What? Such insolence! How dare you speak like that, you poor excuse for goblin-dribble!").also { stage++ }
@@ -185,7 +185,7 @@ class NPCContactInterface : InterfaceListener {
             val store = getStoreFile()
             val username = player?.username?.lowercase() ?: ""
             val alreadyClaimed = store[username]?.asBoolean ?: false
-            npc = NPC(NPCs.BERT_3108)
+            npc = NPC(NPCs.HANDSAND_BERT_3108)
             when ((0..1).random()) {
                 0 -> when (stage) {
                     0 -> playerl(FaceAnim.FRIENDLY, "Hi there, Bert.").also { stage++ }
@@ -224,7 +224,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.CYRISUS_8279)
+            npc = NPC(NPCs.LUC2_CYRISUS_MELEE_8279)
             when ((0..5).random()) {
                 0 -> when (stage) {
                     0 -> playerl(FaceAnim.FRIENDLY, "Hi, Cyrisus. I'm contacting you using magic.").also { stage++ }
@@ -290,7 +290,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.DRUNKEN_DWARF_956)
+            npc = NPC(NPCs.MACRO_DWARF_956)
             when (stage) {
                 0 -> player(FaceAnim.FRIENDLY, "Howdy.").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_DRUNK_LEFT, "Waaahaaay! It's ${player!!.username}! *hic* Maate!").also { stage++ }
@@ -312,7 +312,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.EVIL_BOB_2478)
+            npc = NPC(NPCs.MACRO_EVIL_BOB_OUTSIDE_2478)
             when (stage) {
                 0 -> player(FaceAnim.HALF_ASKING, "Hello?").also { stage++ }
                 1 -> npcl(FaceAnim.CHILD_NORMAL, "Hello.").also { stage++ }
@@ -341,7 +341,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.EVIL_DAVE_2909)
+            npc = NPC(NPCs.AGRITH_DAVE_SIGIL_2909)
             when (stage) {
                 0 -> player(FaceAnim.FRIENDLY,"Hallo!").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "Whoa! A voice in my head! What do you want?").also { stage++ }
@@ -377,7 +377,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.GENERAL_WARTFACE_3391)
+            npc = NPC(NPCs.NPC_100_GENERAL_WARTFACE_3391)
             when (stage) {
                 0 -> player(FaceAnim.FRIENDLY,"Hello!").also { stage++ }
                 1 -> npcl(FaceAnim.CHILD_NORMAL, "What you want Bentnoze?").also { stage++ }
@@ -457,7 +457,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.KGP_AGENT_5441)
+            npc = NPC(NPCs.PENG_KGP_5441)
             when ((0..1).random()) {
                 0 -> when (stage) {
                     0 -> playerl(FaceAnim.FRIENDLY, "Anyone there?").also { stage++ }
@@ -484,7 +484,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.COW_3309)
+            npc = NPC(NPCs.FAIRY_COW_3309)
             when (stage) {
                 0 -> player(FaceAnim.ASKING,"Hello?").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_DEFAULT, "Moooooo.").also { stage++ }
@@ -523,7 +523,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.SHEEP_1529)
+            npc = NPC(NPCs.CASTLEWARS_SHEEP_1529)
             when (stage) {
                 0 -> player(FaceAnim.HALF_ASKING, "Hello?").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_DEFAULT, "Baaaa.").also { stage++ }
@@ -558,7 +558,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.MY_ARM_4947)
+            npc = NPC(NPCs.MYARM_4947)
             when (stage) {
                 0 -> player("Hi there.").also { stage++ }
                 1 -> {
@@ -596,7 +596,7 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
-            npc = NPC(NPCs.PARTY_PETE_659)
+            npc = NPC(NPCs.PARTYROOM_PETE_659)
             when (stage) {
                 0 -> player(FaceAnim.HALF_ASKING,"Hello?").also { stage++ }
                 1 -> npcl(FaceAnim.HAPPY, "Yo! Party, party, party!").also { stage++ }
@@ -637,7 +637,7 @@ class NPCContactInterface : InterfaceListener {
             when (stage) {
                 0 -> {
                     player("Hello!")
-                    visualize(player!!, -1, Graphics(shared.consts.Graphics.FIRE_WAVE_IMPACT_157, 50))
+                    visualize(player!!, -1, Graphics(shared.consts.Graphics.WAVE_IMPACT_2_157, 50))
                     stage++
                 }
 

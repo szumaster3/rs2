@@ -23,7 +23,7 @@ class SpikeWallPlugin: OptionHandler() {
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         if (player == null || node !is Scenery || option != "search") return false
 
-        val anim = Animation(Animations.HUMAN_PICKPOCKETING_881)
+        val anim = Animation(Animations.HUMAN_PICKPOCKET_881)
         val animDuration = animationDuration(anim)
         val floorTrap = FloorTrap.getFromCoords(player.location.x, player.location.y)
 
@@ -47,7 +47,7 @@ class SpikeWallPlugin: OptionHandler() {
                     chance < 25 -> {
                         player.moveStep()
                         animateScenery(node, 5631)
-                        animate(player, Animations.STARTLED_BACK_1441)
+                        animate(player, Animations.HUMAN_STUMBLE_BACK_CONTINUOUS_1441)
                         impact(player, Random.nextInt(1, 5))
                         sendMessage(player, "...but unfortunately you fail.")
                         sendChat(player, "Ouch!")

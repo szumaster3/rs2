@@ -216,7 +216,7 @@ class TzhaarFightPitPlugin : ActivityPlugin("fight pits", false, true, true, Zon
 
         private fun sendDialogue(string: String) {
             for (p in WAR_PLAYERS) {
-                p.dialogueInterpreter.sendDialogues(NPCs.TZHAAR_MEJ_KAH_2618, FaceAnim.HALF_GUILTY, string)
+                p.dialogueInterpreter.sendDialogues(NPCs.TZHAAR_FIGHTPIT_MASTER_2618, FaceAnim.HALF_GUILTY, string)
             }
         }
 

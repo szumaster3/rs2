@@ -112,7 +112,7 @@ object PilloryUtils {
             playAudio(player, Sounds.INTERFACE_WRONG_2268)
             sendNPCDialogueLines(
                 player,
-                NPCs.TRAMP_2794,
+                NPCs.PILLORY_TRAMP_THROWER_YANILLE_2794,
                 FaceAnim.OLD_ANGRY1,
                 false,
                 "Bah, that's not right.",

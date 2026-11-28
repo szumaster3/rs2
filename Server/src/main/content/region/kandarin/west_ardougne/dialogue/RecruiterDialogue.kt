@@ -23,8 +23,8 @@ class RecruiterDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendNPCDialogue(player, NPCs.MAN_726, "Plague bringer!").also { stage++ }
-            1 -> sendNPCDialogue(player, NPCs.MAN_726, "King Tyras is scum!").also { stage++ }
+            0 -> sendNPCDialogue(player, NPCs.REGISTRAR_1_726, "Plague bringer!").also { stage++ }
+            1 -> sendNPCDialogue(player, NPCs.REGISTRAR_1_726, "King Tyras is scum!").also { stage++ }
             2 -> npcl(FaceAnim.FRIENDLY, "Tyras will be informed of these words of treason!").also { stage = END_DIALOGUE }
         }
         return true

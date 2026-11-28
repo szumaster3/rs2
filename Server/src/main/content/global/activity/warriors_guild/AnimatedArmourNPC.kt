@@ -23,7 +23,7 @@ class AnimatedArmourNPC internal constructor(private val player: Player, locatio
 
     override fun init() {
         super.init()
-        animate(Animation.create(Animations.DEAD_FACE_DOWN_THEN_GETTING_UP_4166))
+        animate(Animation.create(Animations.WARGUILD_ANIMATE_4166))
         sendChat("I'M ALIVE!")
         properties.combatPulse.attack(player)
         HintIconManager.registerHintIcon(player, this)

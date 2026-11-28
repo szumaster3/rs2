@@ -214,7 +214,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
             Encoders578.CAMERA_VIEW_PACKET,
             CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
         )
-        val mazeGuard = NPC.create(NPCs.MAZE_GUARDIAN_3102, base!!.transform(maze!!.endLocation))
+        val mazeGuard = NPC.create(NPCs.MAGICTRAINING_GUARD_MAZE_3102, base!!.transform(maze!!.endLocation))
         mazeGuard.init()
     }
 

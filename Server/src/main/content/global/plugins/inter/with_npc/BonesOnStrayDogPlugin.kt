@@ -14,7 +14,7 @@ import shared.consts.NPCs
 
 class BonesOnStrayDogPlugin : InteractionListener {
     val bones = Bones.array
-    val dogs = intArrayOf(NPCs.STRAY_DOG_4766, NPCs.STRAY_DOG_4767, NPCs.STRAY_DOG_5917, NPCs.STRAY_DOG_5918)
+    val dogs = intArrayOf(NPCs.MYQ3_DOG_STRAY_01_4766, NPCs.MYQ3_DOG_STRAY_02_4767, NPCs.DOG_STRAY_5917, NPCs.DOG_STRAY2_5918)
 
     override fun defineListeners() {
         /*

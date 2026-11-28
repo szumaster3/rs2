@@ -38,7 +38,7 @@ class KolodionSession(val player: Player) {
                     when (++count) {
                         3 -> resetAnimator(player)
                         5 -> kolodion.init().also {
-                            visualize(this@KolodionSession.kolodion, -1, Graphics.RE_PUFF_86)
+                            visualize(this@KolodionSession.kolodion, -1, Graphics.SMOKEPUFF_2_86)
                             face(kolodion, player, 1)
                         }
                         7 -> sendChat(kolodion, "You must prove yourself... now!")

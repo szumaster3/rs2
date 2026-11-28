@@ -18,7 +18,7 @@ import shared.consts.NPCs
 import shared.consts.Sounds
 import kotlin.math.max
 
-class ZygomiteNPC : NPCBehavior(NPCs.FUNGI_3344, NPCs.FUNGI_3345, NPCs.ZYGOMITE_3346, NPCs.ZYGOMITE_3347),
+class ZygomiteNPC : NPCBehavior(NPCs.FUNGI_3344, NPCs.FUNGI_3345, NPCs.SLAYER_MUTATED_ZYGOMITE_ADOLESCENT_3346, NPCs.SLAYER_MUTATED_ZYGOMITE_ADULT_3347),
     InteractionListener {
     override fun defineListeners() {
         on(intArrayOf(NPCs.FUNGI_3344, NPCs.FUNGI_3345), IntType.NPC, "pick") { player, node ->
@@ -95,7 +95,7 @@ class ZygomiteNPC : NPCBehavior(NPCs.FUNGI_3344, NPCs.FUNGI_3345, NPCs.ZYGOMITE_
     }
 
     companion object {
-        private const val FIRST_ANIMATION = Animations.CLOSING_CHEST_3335
+        private const val FIRST_ANIMATION = Animations.PLAYER_CLOSING_CHEST_3335
         private const val SECOND_ANIMATION = 3322
     }
 }

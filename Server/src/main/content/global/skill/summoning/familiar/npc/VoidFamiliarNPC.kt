@@ -62,7 +62,7 @@ class VoidFamiliarNPC : Plugin<Any?> {
     }
 
 
-    inner class VoidRavagerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.VOID_RAVAGER_7370) :
+    inner class VoidRavagerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_RAVAGER_7370) :
         Forager(owner, id, 2700, Items.VOID_RAVAGER_POUCH_12818, 3, WeaponInterface.STYLE_AGGRESSIVE, *ITEMS) {
 
 
@@ -79,13 +79,13 @@ class VoidFamiliarNPC : Plugin<Any?> {
         }
 
         override fun getIds(): IntArray {
-            return intArrayOf(NPCs.VOID_RAVAGER_7370, NPCs.VOID_RAVAGER_7371)
+            return intArrayOf(NPCs.LORE_RAVAGER_7370, NPCs.LORE_RAVAGER_COMBAT_7371)
         }
     }
 
 
     inner class VoidShifterNPC
-    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.VOID_SHIFTER_7367) :
+    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_SHIFTER_7367) :
         Familiar(owner, id, 9400, Items.VOID_SHIFTER_POUCH_12814, 3, WeaponInterface.STYLE_ACCURATE) {
         override fun construct(owner: Player, id: Int): Familiar {
             return VoidShifterNPC(owner, id)
@@ -104,13 +104,13 @@ class VoidFamiliarNPC : Plugin<Any?> {
         }
 
         override fun getIds(): IntArray {
-            return intArrayOf(NPCs.VOID_SHIFTER_7367, NPCs.VOID_SHIFTER_7368)
+            return intArrayOf(NPCs.LORE_SHIFTER_7367, NPCs.LORE_SHIFTER_COMBAT_7368)
         }
     }
 
 
     inner class VoidSpinnerNPC
-    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.VOID_SPINNER_7333) :
+    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_SPINNER_7333) :
         Familiar(owner, id, 2700, Items.VOID_SPINNER_POUCH_12780, 3, WeaponInterface.STYLE_DEFENSIVE) {
         private var healDelay = 0
 
@@ -131,13 +131,13 @@ class VoidFamiliarNPC : Plugin<Any?> {
         }
 
         override fun getIds(): IntArray {
-            return intArrayOf(NPCs.VOID_SPINNER_7333, NPCs.VOID_SPINNER_7334)
+            return intArrayOf(NPCs.LORE_SPINNER_7333, NPCs.LORE_SPINNER_COMBAT_7334)
         }
     }
 
 
     inner class VoidTorcherNPC
-    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.VOID_TORCHER_7351) :
+    @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_TORCHER_7351) :
         Familiar(owner, id, 9400, Items.VOID_TORCHER_POUCH_12798, 3, WeaponInterface.STYLE_CAST) {
         override fun construct(owner: Player, id: Int): Familiar {
             return VoidTorcherNPC(owner, id)
@@ -168,7 +168,7 @@ class VoidFamiliarNPC : Plugin<Any?> {
         }
 
         override fun getIds(): IntArray {
-            return intArrayOf(NPCs.VOID_TORCHER_7351, NPCs.VOID_TORCHER_7352)
+            return intArrayOf(NPCs.LORE_TORCHER_7351, NPCs.LORE_TORCHER_COMBAT_7352)
         }
     }
 

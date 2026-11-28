@@ -41,5 +41,5 @@ class JebDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = JebDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JEB_4895)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLUG2_JEB_STAGE1_4895)
 }

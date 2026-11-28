@@ -17,7 +17,7 @@ import kotlin.random.Random
  */
 class SithikDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> npc("What do you want now?").also { stage++ }
             1 -> player("Hey there's no need to be rude!").also { stage++ }
@@ -40,7 +40,7 @@ class SithikDialogue : DialogueFile() {
 
 class SithikPermissionDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> npc(FaceAnim.NEUTRAL, "Hey...who gave you permission to come in here!").also { stage++ }
             1 -> npc(FaceAnim.ANNOYED, "Get out, get out I say.").also { stage++ }
@@ -51,7 +51,7 @@ class SithikPermissionDialogueFile : DialogueFile() {
 
 class SithikQuestDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> npc(FaceAnim.CALM, "Hey...who gave you permission to come in here!").also { stage++ }
             1 -> player("Zavistic Rarve said that I could come and talk to you", "and ask you a few questions.").also { stage++ }
@@ -115,7 +115,7 @@ class SithikQuestDialogueFile : DialogueFile() {
 
 class SithikIntsPortraitureBookDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl("Oh, so explain this then?").also { stage++ }
             1 -> sendItemDialogue(player!!, Items.BOOK_OF_PORTRAITURE_4817, "You show the book on portraiture to Sithik.").also { stage++ }
@@ -128,10 +128,10 @@ class SithikIntsPortraitureBookDialogueFile : DialogueFile() {
 
 class SithikIntsHamBookDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl("What's this then?").also { stage++ }
-            1 -> sendItemDialogue(player!!, Items.BOOK_OF_HAM_4829, "You show the HAM book to Sithik.").also { stage++ }
+            1 -> sendItemDialogue(player!!, Items.BOOK_OF_H_A_M_4829, "You show the HAM book to Sithik.").also { stage++ }
             2 -> npcl("What do you mean? It's a book by the respected HAM leader Johanhus Ulsbrecht, that man speaks for a lot of people who are unhappy with the current state of affairs.").also { stage++ }
             3 -> npcl("Can you honestly tell me that you've not had to fight for your life against the odd monster or two?").also { stage++ }
             4 -> playerl("Hmm, that may be true, but I don't universally hate all monsters, whereas I have a sneaking suspicion that you do...and ogres in particular!").also { stage++ }
@@ -142,7 +142,7 @@ class SithikIntsHamBookDialogueFile : DialogueFile() {
 
 class SithikIntsNecromancyBookDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl("Aha! A necromantic book! What's this doing here then?").also { stage++ }
             1 -> sendItemDialogue(player!!, Items.NECROMANCY_BOOK_4837, "You show the Necromantic book to Sithik.").also { stage++ }
@@ -156,7 +156,7 @@ class SithikIntsNecromancyBookDialogueFile : DialogueFile() {
 
 class SithikIntsTornPageDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl("Have you ever seen anything like this before?").also { stage++ }
             1 -> sendItemDialogue(player!!, Items.TORN_PAGE_4809, "You show the torn page to Sithik.").also { stage++ }
@@ -169,7 +169,7 @@ class SithikIntsTornPageDialogueFile : DialogueFile() {
 
 class SithikIntsBlackPrismDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl("Hey, what's this then, can you explain it?!").also { stage++ }
             1 -> sendItemDialogue(player!!, Items.BLACK_PRISM_4808, "You show the black prism to Sithik.").also { stage++ }
@@ -182,7 +182,7 @@ class SithikIntsBlackPrismDialogueFile : DialogueFile() {
 
 class SithikIntsDragonTankardDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl("What about this then? Guess where I found this?").also { stage++ }
             1 -> sendItemDialogue(player!!, Items.DRAGON_INN_TANKARD_4811, "You show the tankard to Sithik.").also { stage++ }
@@ -199,7 +199,7 @@ class SithikIntsPortraitDialogueFile : DialogueFile() {
         val papyrus = Item(Items.PAPYRUS_970)
         val correctPortrait = ZogreUtils.REALIST_PORTRAIT
         val incorrectPortrait = ZogreUtils.UNREALIST_PORTRAIT
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> npcl("Oh lovely! You're making my portrait! Let me see it afterwards!").also { stage++ }
             1 -> sendDialogue(player!!, "You begin sketching the irritable Sithik.").also { stage++ }
@@ -230,7 +230,7 @@ class SithikIntsPortraitDialogueFile : DialogueFile() {
 
 class SithikIntsUsedPortraitDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl(FaceAnim.HAPPY, "Here you go, what do you think?").also { stage++ }
             1 -> if (inInventory(player!!, ZogreUtils.REALIST_PORTRAIT)) {
@@ -246,7 +246,7 @@ class SithikIntsUsedPortraitDialogueFile : DialogueFile() {
 
 class SithikIntsSignedPortraitDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl("Hey, what do you think of this? I'm going to show it to Zavistic and you're going to be in trouble!").also { stage++ }
             1 -> sendItemDialogue(player!!, ZogreUtils.SIGNED_PORTRAIT, "You show the portrait to Sithik.").also { stage++ }
@@ -280,7 +280,7 @@ class SithikIntsSignedPortraitDialogueFile : DialogueFile() {
 
 class SithikIntsStrangePotionDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2061)
+        npc = NPC(NPCs.ZOGRE_SITHIK_MAN_2061)
         when (stage) {
             0 -> playerl(FaceAnim.HAPPY, "Here, try some of this potion, it'll make you feel better!").also { stage++ }
             1 -> npc(FaceAnim.SCARED, "Err, yuck....no way am I taking any potions or", "medication off you...I don't trust you!").also { stage = END_DIALOGUE }
@@ -290,7 +290,7 @@ class SithikIntsStrangePotionDialogueFile : DialogueFile() {
 
 class SithikIntsAfterTransformDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2062)
+        npc = NPC(NPCs.ZOGRE_SITHIK_OGRE_2062)
         when (stage) {
             0 -> npcl(FaceAnim.OLD_ANGRY1, "Arghhhh..what's happened to me...you beast!").also { stage++ }
             1 -> player("It's your own fault, you shouldn't have lied about your", "involvement with the undead Ogres at Jiggig. The", "potion will wear off once you've told the truth!").also {
@@ -325,7 +325,7 @@ class SithikIntsAfterTransformDialogueFile : DialogueFile() {
 
 class SithikTalkAgainAfterTransformDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SITHIK_INTS_2062)
+        npc = NPC(NPCs.ZOGRE_SITHIK_OGRE_2062)
         when (stage) {
             0 -> npc(FaceAnim.OLD_DEFAULT, "Arghhhh..what do you want now...you've turned me into", "a beast!").also { stage++ }
             1 -> player("I've got some questions for you...and you'd", "better answer them well or else!").also { stage++ }

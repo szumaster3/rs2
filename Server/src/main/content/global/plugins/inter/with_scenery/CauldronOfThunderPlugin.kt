@@ -32,7 +32,7 @@ class CauldronOfThunderPlugin : InteractionListener {
             }
 
             player.lock(1)
-            animate(player, Animations.HUMAN_WITHDRAW_833)
+            animate(player, Animations.HUMAN_REACHFORLADDERTOP_833)
 
             val resultItem = ITEM_MAP[used.id]
                 ?: return@onUseWith false

@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 private val gnomeItems = arrayOf(
     Items.FRUIT_BATTA_2277,
     Items.TOAD_BATTA_2255,
-    Items.CHEESE_PLUSTOM_BATTA_2259,
+    Items.CHEESE_PLUS_TOM_BATTA_2259,
     Items.WORM_BATTA_2253,
     Items.VEGETABLE_BATTA_2281,
     Items.CHOCOLATE_BOMB_2185,
@@ -145,7 +145,7 @@ class AluftGianneSnrDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AluftGianneSnrDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ALUFT_GIANNE_SNR_850)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALUFT_GIANNE_850)
 
     private fun getJob(level: GnomeTipper.LEVEL) {
         if (!player.inventory.containsItem(ALUFT_ALOFT_BOX) && !player.bank.containsItem(ALUFT_ALOFT_BOX)) {

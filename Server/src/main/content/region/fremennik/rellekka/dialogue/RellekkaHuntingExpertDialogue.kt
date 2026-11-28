@@ -39,5 +39,5 @@ class RellekkaHuntingExpertDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HUNTING_EXPERT_5112)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HUNTING_POLAR_INFORMATION_5112)
 }

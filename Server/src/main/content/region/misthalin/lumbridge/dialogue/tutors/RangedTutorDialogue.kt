@@ -250,5 +250,5 @@ class RangedTutorDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.RANGED_TUTOR_1861)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANGED_INSTRUCTOR_1861)
 }

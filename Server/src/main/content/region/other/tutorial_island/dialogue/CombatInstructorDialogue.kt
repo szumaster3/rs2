@@ -191,5 +191,5 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CombatInstructorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.COMBAT_INSTRUCTOR_944)
+    override fun getIds(): IntArray = intArrayOf(NPCs.NEWBIE_COMBAT_INSTRUCTOR_944)
 }

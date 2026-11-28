@@ -23,7 +23,7 @@ class EagleTransportPlugin : InteractionListener {
                 return@onUseWith true
             }
             lock(player, 10)
-            player.animate(Animation(Animations.WRANGLING_EAGLE_WITH_ROPE_5210))
+            player.animate(Animation(Animations.SWING_LASSO_5210))
             playGlobalAudio(player.location, 2622)
             eagleTransport(player, npc, npc.location.regionId)
             return@onUseWith true
@@ -38,10 +38,10 @@ class EagleTransportPlugin : InteractionListener {
 
         val TRANSPORT_EAGLES =
             intArrayOf(
-                NPCs.KARAMJAN_JUNGLE_EAGLE_6385,
-                NPCs.DESERT_EAGLE_5130,
-                NPCs.JUNGLE_EAGLE_5131,
-                NPCs.POLAR_EAGLE_5132
+                NPCs.ROOTS_EAGLE_TOKARAMJA_6385,
+                NPCs.EAGLEPEAK_EAGLE_TODESERT_5130,
+                NPCs.EAGLEPEAK_EAGLE_TOJUNGLE_5131,
+                NPCs.EAGLEPEAK_EAGLE_TOPOLAR_5132
             )
 
         private fun eagleTransport(player: Player, npc: NPC, region: Int) {
@@ -82,7 +82,7 @@ private class DesertEagleCutscene(player: Player) : Cutscene(player) {
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        addNPC(NPCs.DESERT_EAGLE_5130, 12, 20, Direction.SOUTH)
+        addNPC(NPCs.EAGLEPEAK_EAGLE_TODESERT_5130, 12, 20, Direction.SOUTH)
         loadRegion(13617)
     }
 
@@ -100,16 +100,16 @@ private class DesertEagleCutscene(player: Player) : Cutscene(player) {
             }
             2 -> {
                 //move(player, 14, 15)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
-                //move(getNPC(NPCs.DESERT_EAGLE_5130)!!, 14, 15)
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
+                //move(getNPC(NPCs.EAGLEPEAK_EAGLE_TODESERT_5130)!!, 14, 15)
                 rotateCamera(14, 15, 500, 1)
                 moveCamera(14, 15, 500, 1)
                 timedUpdate(6)
             }
             3 -> {
-                //move(getNPC(NPCs.DESERT_EAGLE_5130)!!, 14, 15)
+                //move(getNPC(NPCs.EAGLEPEAK_EAGLE_TODESERT_5130)!!, 14, 15)
                 rotateCamera(12, 18, 500, 1)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 timedUpdate(3)
             }
             4 -> end {}
@@ -124,7 +124,7 @@ private class JungleEagleCutscene(player: Player) : Cutscene(player) {
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        addNPC(NPCs.JUNGLE_EAGLE_5131, 14, 42, Direction.EAST)
+        addNPC(NPCs.EAGLEPEAK_EAGLE_TOJUNGLE_5131, 14, 42, Direction.EAST)
         loadRegion(10029)// FELDIP_HILLS_EYRIE_ENTRANCE
     }
 
@@ -138,21 +138,21 @@ private class JungleEagleCutscene(player: Player) : Cutscene(player) {
                 fadeFromBlack()
                 teleport(player, 18, 44)
                 moveCamera(12, 44, 500)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 timedUpdate(1)
             }
             2 -> {
                 //move(player, 13, 43)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
-                //move(getNPC(NPCs.JUNGLE_EAGLE_5131)!!, 14, 43)
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
+                //move(getNPC(NPCs.EAGLEPEAK_EAGLE_TOJUNGLE_5131)!!, 14, 43)
                 rotateCamera(14, 15, 500, 1)
                 moveCamera(14, 15, 500, 1)
                 timedUpdate(6)
             }
             3 -> {
-                //move(getNPC(NPCs.JUNGLE_EAGLE_5131)!!, 14, 15)
+                //move(getNPC(NPCs.EAGLEPEAK_EAGLE_TOJUNGLE_5131)!!, 14, 15)
                 rotateCamera(17, 44, 500, 1)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 timedUpdate(3)
             }
             4 -> end {}
@@ -181,18 +181,18 @@ private class EaglePeakCutscene(player: Player) : Cutscene(player) {
                 fadeFromBlack()
                 teleport(player, 27, 33)
                 moveCamera(23, 33, 500)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 timedUpdate(1)
             }
             2 -> {
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 rotateCamera(14, 15, 500, 1)
                 moveCamera(14, 15, 500, 1)
                 timedUpdate(6)
             }
             3 -> {
                 rotateCamera(17, 44, 500, 1)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 timedUpdate(3)
             }
             4 -> end {}
@@ -221,18 +221,18 @@ private class PolarEagleCutscene(player: Player) : Cutscene(player) {
                 fadeFromBlack()
                 teleport(player, 53, 58)
                 moveCamera(51, 58, 500)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 timedUpdate(1)
             }
             2 -> {
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 rotateCamera(54, 58, 500, 1)
                 moveCamera(54, 58, 500, 1)
                 timedUpdate(6)
             }
             3 -> {
                 rotateCamera(57, 58, 500, 1)
-                player.animate(Animation(Animations.FLYING_BEHIND_EAGLE_CUTSCENE_5211))
+                player.animate(Animation(Animations.HANG_ON_LASSO_5211))
                 timedUpdate(3)
             }
             4 -> end {}

@@ -52,7 +52,7 @@ class OlafsQuestPlugin : InteractionListener {
 
             if(removeItem(player, Items.DAMP_PLANKS_11031)) {
                 faceLocation(player, node.asScenery().location)
-                animate(player, Animations.TINDERBOX_3658)
+                animate(player, Animations.POH_FIREPLACE_LIGHT_3658)
                 sendDialogue(player, "You managed to get fire going!")
                 setQuestStage(player, Quests.OLAFS_QUEST.questName, 3)
                 setVarbit(player, 3537, 0)

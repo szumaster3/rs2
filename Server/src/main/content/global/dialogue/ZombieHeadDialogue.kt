@@ -12,7 +12,7 @@ import shared.consts.NPCs
 class ZombieHeadDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.ZOMBIE_HEAD_2868)
+        npc = NPC(NPCs.BREAK_ZOMB_HEAD_2868)
         when (stage) {
             0 -> options(
                 "How did you die?",

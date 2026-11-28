@@ -68,8 +68,8 @@ class FishingContestPlugin : InteractionListener {
                 Scenery.GATE_53 -> {
                     if (inBorders(player, 2647, 3468, 2652, 3469)) {
                         lock(player, 1)
-                        face(findNPC(NPCs.FORESTER_231)!!, player, 3)
-                        sendNPCDialogue(player, NPCs.FORESTER_231, "Hey! You can't come through here! This is private land!", FaceAnim.ANGRY)
+                        face(findNPC(NPCs.MCGRUBORFORESTER_231)!!, player, 3)
+                        sendNPCDialogue(player, NPCs.MCGRUBORFORESTER_231, "Hey! You can't come through here! This is private land!", FaceAnim.ANGRY)
                         sendMessage(player, "There might be a gap in the fence somewhere where he wouldn't see you sneak in.")
                         sendMessage(player, "You should look around.")
                     } else {
@@ -94,7 +94,7 @@ class FishingContestPlugin : InteractionListener {
 
             queueScript(player, 1, QueueStrength.WEAK) {
                 sendMessage(player, "You dig in amongst the vines.")
-                animate(player, Animation(Animations.DIG_SPADE_830))
+                animate(player, Animation(Animations.HUMAN_DIG_830))
                 sendMessage(player, "You find a red vine worm.")
                 addItem(player, Items.RED_VINE_WORM_25, 1, Container.INVENTORY)
                 return@queueScript stopExecuting(player)

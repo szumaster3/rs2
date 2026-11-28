@@ -20,15 +20,15 @@ object PitfallDefinition {
      */
     val GRAAHK_IDS = intArrayOf(
         NPCs.HORNED_GRAAHK_5105,
-        NPCs.HORNED_GRAAHK_5106,
-        NPCs.HORNED_GRAAHK_5107,
-        NPCs.HORNED_GRAAHK_5108
+        NPCs.MAN_5106,
+        NPCs.MAN_5107,
+        NPCs.MAN_5108
     )
 
     /**
      * NPC IDs for Sabre-Toothed Kyatt.
      */
-    val KYATT_IDS = intArrayOf(NPCs.SABRE_TOOTHED_KYATT_5103, NPCs.SABRE_TOOTHED_KYATT_7497)
+    val KYATT_IDS = intArrayOf(NPCs.SABRE_TOOTHED_KYATT_5103, NPCs.MOM2_STONE_GOLEM_7497)
 
     /**
      * Represents all beasts caught in pitfalls.

@@ -22,19 +22,19 @@ class RovingElvesListeners : InteractionListener {
             node.location.transform(0, 1, 0)
 
     companion object {
-        val ANIMATION_DIG: Animation  = Animation.create(Animations.DIG_SPADE_830)
-        val ANIMATION_DROP: Animation = Animation.create(Animations.HUMAN_BURYING_BONES_827)
+        val ANIMATION_DIG: Animation  = Animation.create(Animations.HUMAN_DIG_830)
+        val ANIMATION_DROP: Animation = Animation.create(Animations.HUMAN_PICKUPFLOOR_827)
 
         private val LEAF_SUCCESS_MSG  = "You safely jump across."
         private val LEAF_LADDER_MSG   = "You climb out of the pit."
         private val STICK_SUCCESS_MSG = "You manage to skillfully pass the trap."
         private val WIRE_SUCCESS_MSG  = "You successfully step over the tripwire."
 
-        private val OVER       = Animation(Animations.CLIMB_OBJECT_839)
-        private val THROUGH    = Animation(Animations.DEFEND_WALK_1237)
-        private val STICK_TRAP = Animation(Animations.HUMAN_WALK_SHORT_819)
-        private val LEAF_TRAP  = Animation(Animations.BA_PRESSURE_1115)
-        private val WIRE_TRAP  = Animation(Animations.CROSS_TRIPWIRE_1236)
+        private val OVER       = Animation(Animations.HUMAN_WALK_STYLE_839)
+        private val THROUGH    = Animation(Animations.REGICIDE_TIGHTFIT_1237)
+        private val STICK_TRAP = Animation(Animations.HUMAN_WALK_F_819)
+        private val LEAF_TRAP  = Animation(Animations.AGILITYARENA_DIVE_PLAYER_1115)
+        private val WIRE_TRAP  = Animation(Animations.REGICIDE_STEPOVER_1236)
 
         private val LEAF_TRAP_CLIMB = Location(2274, 3172, 0)
         private val illegalJump = listOf(3174)
@@ -175,7 +175,7 @@ class RovingElvesListeners : InteractionListener {
                         6 -> {
                             removeItem(player, RovingElves.CONSECRATION_SEED_CHARGED)
                             setQuestStage(player, Quests.ROVING_ELVES.questName, 20)
-                            sendGraphics(Graphics.GRAPHIC_719, Location(2604, 9907, 0))
+                            sendGraphics(Graphics.SPOTANIM_100_PIRATE_UNDERWATER_BUBBLES_719, Location(2604, 9907, 0))
                             sendMessage(player, "The seed vanishes in a puff of smoke.")
                             return true
                         }

@@ -32,5 +32,5 @@ class CustomerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CustomerDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CUSTOMER_2168)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_LIBRARY_CUSTOMER_HUMAN_2168)
 }

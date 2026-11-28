@@ -32,10 +32,10 @@ class CookingTutorDialogue(player: Player? = null) : Dialogue(player) {
             }
             10 -> npc(FaceAnim.HALF_GUILTY, "The simplest thing to cook is raw meat or fish.").also { stage = 11 }
             11 -> npc(FaceAnim.HALF_GUILTY, "Fish can be caught, speak to the fishing tutor south of", "here in the swamp. Killing cows or chickens will yield", "raw meat to cook too.").also { stage++ }
-            12 -> sendItemDialogue(player, Items.NULL_5090, "When you have a full inventory of meat or fish, find a range. Look for this icon on your minimap.").also { stage++ }
+            12 -> sendItemDialogue(player, Items.OBJ_5090, "When you have a full inventory of meat or fish, find a range. Look for this icon on your minimap.").also { stage++ }
             13 -> npc(FaceAnim.HALF_GUILTY, "You can use your own fire... but it's not as effective", "and you'll burn more. To build a fire use a tinderbox", "on logs.").also { stage++ }
             14 -> npc(FaceAnim.HALF_GUILTY, "Once you've found your range, click on your raw", "meat or fish in your inventory, then click on the", "cooking range. This will bring up an interface which", "you can right-click on to select the number to cook.").also { stage++ }
-            15 -> sendItemDialogue(player, Items.NULL_5080, "When you have a full inventory of cooked food, drop the useless burnt food and find a bank. Look for this symbol on your minimap after climbing the stairs of the Lumbridge Castle to the top. There are numerous banks around the world, all marked with that symbol.").also { stage++ }
+            15 -> sendItemDialogue(player, Items.OBJ_5080, "When you have a full inventory of cooked food, drop the useless burnt food and find a bank. Look for this symbol on your minimap after climbing the stairs of the Lumbridge Castle to the top. There are numerous banks around the world, all marked with that symbol.").also { stage++ }
             16 -> npcl(FaceAnim.FRIENDLY, "If you're interested in quests, I heard my friend the cook in Lumbridge Castle is in need of a hand. Just talk to him and he'll set you off.").also { stage++ }
             17 -> options("Can you teach me the basics of cooking please?", "Tell me about different food I can make.", "Goodbye.").also { stage = 0 }
             20 -> options("Fish and Meat", "Brewing", "Vegetables", "Pie", "Go back to teaching").also { stage = 21 }
@@ -56,5 +56,5 @@ class CookingTutorDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.COOKING_TUTOR_4899)
+    override fun getIds(): IntArray = intArrayOf(NPCs.CORDERO_4899)
 }

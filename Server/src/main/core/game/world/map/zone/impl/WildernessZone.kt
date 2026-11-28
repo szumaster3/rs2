@@ -61,7 +61,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
      */
     private fun rollWildernessExclusiveLoot(e: Entity, killer: Entity) {
         if (killer !is Player || e !is NPC) return
-        if (e.id != NPCs.CHAOS_ELEMENTAL_3200 && !e.name.contains("Revenant", ignoreCase = true)) return
+        if (e.id != NPCs.CHAOSELEMENTAL_3200 && !e.name.contains("Revenant", ignoreCase = true)) return
 
         var pvpGearRate = getNewDropRate(e.definition.combatLevel)
         val higherRate = killer.skullManager.isDeepWilderness && killer.getAttribute(
@@ -71,7 +71,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
         if (higherRate) pvpGearRate /= 2
 
         val gloveRate =
-            if (e.id == NPCs.CHAOS_ELEMENTAL_3200) 50 else if (higherRate) 100 else ((1.0 / (1.0 - (1.0 - (1.0 / pvpGearRate)).pow(
+            if (e.id == NPCs.CHAOSELEMENTAL_3200) 50 else if (higherRate) 100 else ((1.0 / (1.0 - (1.0 - (1.0 / pvpGearRate)).pow(
                 16.0
             ))) * 5.0 / 6.0).toInt()
 
@@ -203,10 +203,10 @@ class WildernessZone(vararg val borders: ZoneBorders) :
             Items.MORRIGANS_COIF_13876,
             Items.MORRIGANS_JAVELIN_13879,
             Items.MORRIGANS_THROWING_AXE_13883,
-            Items.STATIUS_PLATEBODY_13884,
+            Items.STATIUSS_PLATEBODY_13884,
             Items.STATIUS_FULL_HELM_DEG_13898,
-            Items.STATIUS_FULL_HELM_13896,
-            Items.STATIUS_WARHAMMER_13902,
+            Items.STATIUSS_FULL_HELM_13896,
+            Items.STATIUSS_WARHAMMER_13902,
             Items.ZURIELS_ROBE_TOP_13858,
             Items.ZURIELS_ROBE_BOTTOM_13861,
             Items.ZURIELS_HOOD_13864,

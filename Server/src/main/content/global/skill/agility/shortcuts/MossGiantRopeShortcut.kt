@@ -52,7 +52,7 @@ class MossGiantRopeShortcut : AgilityShortcut(intArrayOf(2322, 2323), 10, 0.0, "
                     0,
                     player.location,
                     end,
-                    Animation(Animations.SWING_ACROSS_OBSTACLE_3130),
+                    Animation(Animations.FEVER_PLAYER_ROPE_SWING_LAND_SUCCESS_3130),
                     50,
                     30.0,
                     "You skillfully swing across.",

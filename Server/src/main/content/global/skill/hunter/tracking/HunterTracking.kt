@@ -26,10 +26,10 @@ import shared.consts.Sounds
 abstract class HunterTracking : OptionHandler() {
 
     /** Successful catch animation using the noose wand. */
-    var catchingKebbitAnimation = Animation(Animations.CATCH_KEBBIT_NOOSE_WAND_5257)
+    var catchingKebbitAnimation = Animation(Animations.HUNTING_NOOSE_DESERT_5257)
 
     /** Failed catch animation. */
-    private val catchingFailAnimation = Animation(Animations.USE_NOOSE_WAND_5255)
+    private val catchingFailAnimation = Animation(Animations.HUNTING_NOOSE_CATCH_5255)
 
     /** Maximum number of possible trail spots to generate. */
     var trailLimit = 0

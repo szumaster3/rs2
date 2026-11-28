@@ -86,8 +86,8 @@ class GarkorDialogue(player: Player? = null) : Dialogue(player) {
             37 -> playerl(FaceAnim.NEUTRAL, "What?").also { stage++ }
             38 -> npcl(FaceAnim.OLD_DEFAULT, "Zooknock knows Glough's grasp of magic well. He believes that spell is linked to the sigils that all of us our squad carry").also { stage++ }
             39 -> npcl(FaceAnim.OLD_DEFAULT, "It is these sigils that identify us as a member of the squad.").also { stage++ }
-            40 -> sendItemDialogue(player!!, Items.TENTH_SQUAD_SIGIL_4035, "Garkor hands you some kind of medallion.").also {
-                addItem(player!!, Items.TENTH_SQUAD_SIGIL_4035, 1)
+            40 -> sendItemDialogue(player!!, Items.OBJ_10TH_SQUAD_SIGIL_4035, "Garkor hands you some kind of medallion.").also {
+                addItem(player!!, Items.OBJ_10TH_SQUAD_SIGIL_4035, 1)
                 stage++
             }
             41 -> npcl(FaceAnim.OLD_DEFAULT, "Welcome to the 10th squad, ${player!!.name}.").also { stage++ }
@@ -109,7 +109,7 @@ class GarkorDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GARKOR_1411)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MM_GARKOR_1411)
 
     companion object {
         val FIRST_TALK = 25

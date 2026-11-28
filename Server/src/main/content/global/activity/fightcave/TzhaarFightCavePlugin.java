@@ -109,7 +109,7 @@ public final class TzhaarFightCavePlugin extends ActivityPlugin {
                         player.getWalkingQueue().reset();
                         player.getWalkingQueue().addPath(getBase().getX() + 44, getBase().getY() + 49, true);
                         player.getWalkingQueue().addPath(getBase().getX() + 32, getBase().getY() + 32, true);
-                        player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "You're on your own now, JalYt.", "Prepare to fight for your life!");
+                        player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "You're on your own now, JalYt.", "Prepare to fight for your life!");
                     } else if (count == 16) {
                         spawnWave(wave);
                         return true;
@@ -122,7 +122,7 @@ public final class TzhaarFightCavePlugin extends ActivityPlugin {
                 setAttribute(player, "fc_wave", 62);
             }
             if (player.getAttribute("fc_wave", 0) == 62) {
-                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "Look out, here comes TzTok-Jad!");
+                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "Look out, here comes TzTok-Jad!");
             }
             pulse = new Pulse(16, player) {
                 @Override
@@ -168,18 +168,18 @@ public final class TzhaarFightCavePlugin extends ActivityPlugin {
                     player.sendMessage("You receive 25,000 slayer experience for defeating TzTok-Jad.");
                 }
                 playJingle(player, 76);
-                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "You even defeated TzTok-Jad, I am most impressed!", "Please accept this gift as a reward.");
+                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "You even defeated TzTok-Jad, I am most impressed!", "Please accept this gift as a reward.");
                 sendNews(player.getUsername() + " has been victorious in defeating TzTok-Jad for a firecape!");
             } else {
-                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "You defeated TzTok-Jad. I am most impressed!", "Here is you TokKul back.", "Maybe next time you do all training, and get real reward...");
+                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "You defeated TzTok-Jad. I am most impressed!", "Here is you TokKul back.", "Maybe next time you do all training, and get real reward...");
             }
         } else if (wave <= 1) {
-            player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "Well I suppose you tried... better luck next time.");
+            player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "Well I suppose you tried... better luck next time.");
         } else {
             if (!practice) {
-                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "Well done in the cave, here, take TokKul as reward.");
+                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "Well done in the cave, here, take TokKul as reward.");
             } else {
-                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "You both impatient and also failure.", "Better luck next time.");
+                player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "You both impatient and also failure.", "Better luck next time.");
             }
         }
 
@@ -239,7 +239,7 @@ public final class TzhaarFightCavePlugin extends ActivityPlugin {
                         player.getPacketDispatch().sendLogout();
                     } else {
                         if (wave == 62) {
-                            player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "Look out, here comes TzTok-Jad!");
+                            player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_FIGHTCAVE_MASTER_2617, FaceAnim.CHILD_GUILTY, "Look out, here comes TzTok-Jad!");
                         }
                         Pulse pulse = new Pulse(9, player) {
                             @Override

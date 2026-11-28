@@ -149,7 +149,7 @@ object SummoningCreator {
 
         override fun animate() {
             playAudio(player, Sounds.CRAFT_POUCH_4164)
-            animate(player, Animations.INFUSE_SUMMONING_POUCH_8500)
+            animate(player, Animations.WOLF_PLAYER_OBELISK_POUCH_CHARGE_8500)
         }
 
         override fun stop() {

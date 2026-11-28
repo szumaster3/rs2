@@ -17,5 +17,5 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
         return false
     }
     override fun newInstance(player: Player?): Dialogue = ZavisticRarveDialogue(player)
-    override fun getIds(): IntArray = intArrayOf(NPCs.ZAVISTIC_RARVE_2059)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059)
 }

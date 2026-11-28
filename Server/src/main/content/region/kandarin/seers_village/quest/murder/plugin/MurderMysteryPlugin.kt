@@ -36,12 +36,12 @@ class MurderMysteryPlugin : InteractionListener {
             Items.SILVER_POT_1807
         )
         val MURDER_MYSTERY_SCENERY_IDS = intArrayOf(
-            Scenery.ANNA_S_BARREL_2656,
-            Scenery.BOB_S_BARREL_2657,
-            Scenery.CAROL_S_BARREL_2658,
-            Scenery.DAVID_S_BARREL_2659,
-            Scenery.ELIZABETH_S_BARREL_2660,
-            Scenery.FRANK_S_BARREL_2661
+            Scenery.ANNAS_BARREL_2656,
+            Scenery.BOBS_BARREL_2657,
+            Scenery.CAROLS_BARREL_2658,
+            Scenery.DAVIDS_BARREL_2659,
+            Scenery.ELIZABETHS_BARREL_2660,
+            Scenery.FRANKS_BARREL_2661
         )
         val SCENERY_IDS = intArrayOf(
             Scenery.SINCLAIR_FAMILY_COMPOST_HEAP_26120,
@@ -122,7 +122,7 @@ class MurderMysteryPlugin : InteractionListener {
                 1 -> {
                     sendDialogue(player, "As you approach the gate the guard dog starts barking loudly at you. There is no way an intruder could have committed the murder. It must have been someone the dog knew to get past it quietly.")
                     setAttribute(player, MurderMystery.attributeNoiseClue, true)
-                    sendChat(findNPC(NPCs.SINCLAIR_GUARD_DOG_821)!!, "BARK")
+                    sendChat(findNPC(NPCs.MURDER_MYSTERY_GUARDDOG_821)!!, "BARK")
                     return@on true
                 }
 
@@ -211,7 +211,7 @@ class MurderMysteryPlugin : InteractionListener {
             when (getQuestStage(player, Quests.MURDER_MYSTERY.questName)) {
                 1 -> {
                     when (node.id) {
-                        Scenery.ANNA_S_BARREL_2656 -> {
+                        Scenery.ANNAS_BARREL_2656 -> {
                             if (inInventory(player, Items.SILVER_NECKLACE_1796) || inInventory(player, Items.SILVER_NECKLACE_1797)) {
                                 sendDialogue(player, "I already have Anna's Necklace.")
                             } else if (addItem(player, Items.SILVER_NECKLACE_1796)) {
@@ -222,7 +222,7 @@ class MurderMysteryPlugin : InteractionListener {
                             }
                         }
 
-                        Scenery.BOB_S_BARREL_2657 -> {
+                        Scenery.BOBS_BARREL_2657 -> {
                             if (inInventory(player, Items.SILVER_CUP_1798) || inInventory(player, Items.SILVER_CUP_1799)) {
                                 sendDialogue(player, "I already have Bob's cup.")
                             } else if (addItem(player, Items.SILVER_CUP_1798)) {
@@ -233,7 +233,7 @@ class MurderMysteryPlugin : InteractionListener {
                             }
                         }
 
-                        Scenery.CAROL_S_BARREL_2658 -> {
+                        Scenery.CAROLS_BARREL_2658 -> {
                             if (inInventory(player, Items.SILVER_BOTTLE_1800) || inInventory(player, Items.SILVER_BOTTLE_1801)) {
                                 sendDialogue(player, "I already have Carol's bottle.")
                             } else if (addItem(player, Items.SILVER_BOTTLE_1800)) {
@@ -244,7 +244,7 @@ class MurderMysteryPlugin : InteractionListener {
                             }
                         }
 
-                        Scenery.DAVID_S_BARREL_2659 -> {
+                        Scenery.DAVIDS_BARREL_2659 -> {
                             if (inInventory(player, Items.SILVER_BOOK_1802) || inInventory(player, Items.SILVER_BOOK_1803)) {
                                 sendDialogue(player, "I already have David's book.")
                             } else if (addItem(player, Items.SILVER_BOOK_1802)) {
@@ -255,7 +255,7 @@ class MurderMysteryPlugin : InteractionListener {
                             }
                         }
 
-                        Scenery.ELIZABETH_S_BARREL_2660 -> {
+                        Scenery.ELIZABETHS_BARREL_2660 -> {
                             if (inInventory(player, Items.SILVER_NEEDLE_1804) || inInventory(player, Items.SILVER_NEEDLE_1805)) {
                                 sendDialogue(player, "I already have Elizabeth's Needle.")
                             } else if (addItem(player, Items.SILVER_NEEDLE_1804)) {
@@ -266,7 +266,7 @@ class MurderMysteryPlugin : InteractionListener {
                             }
                         }
 
-                        Scenery.FRANK_S_BARREL_2661 -> {
+                        Scenery.FRANKS_BARREL_2661 -> {
                             if (inInventory(player, Items.SILVER_POT_1806) || inInventory(player, Items.SILVER_POT_1807)) {
                                 sendDialogue(player, "I already have Frank's pot.")
                             } else if (addItem(player, Items.SILVER_POT_1806)) {

@@ -116,7 +116,7 @@ class GargoyleNPC : AbstractNPC {
             } else {
                 val hp = npc.skills.lifepoints
 
-                npc.transform(NPCs.GARGOYLE_1827)
+                npc.transform(NPCs.SLAYER_GARGOYLE_DEAD_1827)
                 npc.skills.lifepoints = hp
 
                 npc.animator.animate(SMASH_ANIMATION)

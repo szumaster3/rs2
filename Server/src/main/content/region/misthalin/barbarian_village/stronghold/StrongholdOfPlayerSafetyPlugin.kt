@@ -85,7 +85,7 @@ class StrongholdOfPlayerSafetyPlugin :
             return@on true
         }
 
-        on((NPCs.STUDENT_7151..NPCs.STUDENT_7157).toIntArray(), IntType.NPC, "Talk-to") { player, _ ->
+        on((NPCs.SOPS_STUDENT1_7151..NPCs.SOPS_STUDENT7_7157).toIntArray(), IntType.NPC, "Talk-to") { player, _ ->
             sendDialogue(player, "This student is trying to focus on their work.")
             return@on true
         }
@@ -174,7 +174,7 @@ class StrongholdOfPlayerSafetyPlugin :
          */
 
         on(shared.consts.Scenery.AN_OLD_LEVER_29730, IntType.SCENERY, "pull") { player, _ ->
-            animate(player, Animations.PULL_LEVER_798)
+            animate(player, Animations.HUMAN_BOXLEVER_798)
             playAudio(player, Sounds.PULL_LEVER_ENABLED_1547)
             sendMessage(player, "You hear the cogs and gears moving and a distant unlocking sound.")
             setVarp(player, 1203, (1 shl 29) or (1 shl 26), true)
@@ -182,7 +182,7 @@ class StrongholdOfPlayerSafetyPlugin :
         }
 
         on(shared.consts.Scenery.AN_OLD_LEVER_29731, IntType.SCENERY, "pull") { player, _ ->
-            animate(player, Animations.PULL_LEVER_798)
+            animate(player, Animations.HUMAN_BOXLEVER_798)
             playAudio(player, Sounds.PULL_LEVER_ENABLED_1547)
             sendMessage(player, "You hear cogs and gears moving and the sound of heavy locks falling into place.")
             setVarp(player, 1203, 1 shl 29, true)

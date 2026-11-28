@@ -10,7 +10,7 @@ import shared.consts.Scenery
 class DresserPlugin : InteractionListener {
     override fun defineListeners() {
         on(DRESSER_FURNITURE_IDS, IntType.SCENERY, "preen") { player, node ->
-            animate(player, Animations.PREEN_OPTION_TO_CHECK_SELF_IN_MIRROR_POH_3670)
+            animate(player, Animations.POH_POSE_AT_DRESSER_3670)
 
             val isMale = player.appearance.isMale
             val interfaceId = if (isMale) Components.HAIRDRESSER_MALE_596 else Components.HAIRDRESSER_FEMALE_592

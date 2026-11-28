@@ -28,7 +28,7 @@ class BackToMyRootsPlugin : InteractionListener {
          */
 
         on(Scenery.SMELLY_PACKAGE_27055, IntType.SCENERY, "open") { player, _ ->
-            player.animate(Animation(Animations.HUMAN_WITHDRAW_833))
+            player.animate(Animation(Animations.HUMAN_REACHFORLADDERTOP_833))
             val npc = Repository.findNPC(NPCs.RPDT_EMPLOYEE_843)
             npc?.sendChat("Oh great, back to work.")
             setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 20, true)
@@ -41,7 +41,7 @@ class BackToMyRootsPlugin : InteractionListener {
          * Handle planting the sealed pot.
          */
 
-        onUseWith(IntType.SCENERY, Items.SEALED_POT_11777, Scenery.HORACIO_S_JADE_VINE_PATCH_27061) { player, used, _ ->
+        onUseWith(IntType.SCENERY, Items.SEALED_POT_11777, Scenery.HORACIOS_JADE_VINE_PATCH_27061) { player, used, _ ->
             if (removeItem(player, used.asItem())) {
                 lock(player, 7)
                 openInterface(player, 795)
@@ -91,7 +91,7 @@ class BackToMyRootsPlugin : InteractionListener {
         val playerLocation = base.transform(14, 49, 0)
 
         val horacio = HoracioNPC(NPCs.HORACIO_845, horacioLocation)
-        val wildJade = WildJadeVineNPC(NPCs.WILD_JADE_VINE_3409, vineLocation).apply {
+        val wildJade = WildJadeVineNPC(NPCs.ROOTS_GIANT_VINE_3409, vineLocation).apply {
             target = player
         }
 

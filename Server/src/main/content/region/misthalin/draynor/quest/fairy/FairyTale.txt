@@ -12,7 +12,7 @@ import core.plugin.Initializable
 
 @Initializable
 class FairyTale :
-    Quest("Fairytale I - Growing Pains", 57, 56, 2, Vars.VARBIT_QUEST_FAIRY_TALE_I_GROWING_PAINS_1803, 0, 1, 90) {
+    Quest("Fairytale I - Growing Pains", 57, 56, 2, Vars.VARBIT_1803, 0, 1, 90) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -51,7 +51,7 @@ class FairyTale :
         rewardXP(player, Skills.ATTACK, 2000.0)
         rewardXP(player, Skills.MAGIC, 1000.0)
         addItemOrDrop(player, Items.MAGIC_SECATEURS_7409)
-        setVarbit(player, Vars.VARBIT_QUEST_FAIRY_TALE_I_GROWING_PAINS_1803, 90, true)
+        setVarbit(player, Vars.VARBIT_1803, 90, true)
     }
 
 

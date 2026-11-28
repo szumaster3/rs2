@@ -151,8 +151,8 @@ class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.BROTHER_BORDISS_7724,
-        /*NPCs.BROTHER_BORDISS_*/ 7730
+        NPCs.ICEMT_BORDISS_7724,
+        /*NPCs.BROTHER_BORDISS_7730*/ 7730
     )
 
     /**

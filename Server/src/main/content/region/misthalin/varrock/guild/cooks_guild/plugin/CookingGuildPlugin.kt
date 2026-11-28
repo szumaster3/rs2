@@ -24,7 +24,7 @@ class CookingGuildPlugin : InteractionListener {
                 player,
                 Items.CHEFS_HAT_1949,
                 Items.COOKING_CAPE_9801,
-                Items.COOKING_CAPET_9802,
+                Items.COOKING_CAPE_T_9802,
                 Items.VARROCK_ARMOUR_3_11758,
             )
 

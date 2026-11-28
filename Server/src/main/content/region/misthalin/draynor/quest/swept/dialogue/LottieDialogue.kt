@@ -287,6 +287,6 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LOTTIE_8206)
+        return intArrayOf(NPCs.SWEPT_LOTTIE_8206)
     }
 }

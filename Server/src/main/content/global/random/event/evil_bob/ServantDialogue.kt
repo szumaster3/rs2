@@ -17,7 +17,7 @@ import shared.consts.NPCs
 class ServantDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.SERVANT_2481)
+        npc = NPC(NPCs.MACRO_EVIL_BOB_FEMALE_SERVANT_2481)
         when (stage) {
             0 -> when {
                 getAttribute(player!!, GameAttributes.RE_BOB_COMPLETE, false) -> {

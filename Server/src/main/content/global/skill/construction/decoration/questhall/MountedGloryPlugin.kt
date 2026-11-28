@@ -79,7 +79,7 @@ class MountedGloryPlugin : InteractionListener {
         }
 
         player.lock(5)
-        player.animate(Animation(Animations.PULL_LEVER_POH_3611))
+        player.animate(Animation(Animations.HUMAN_PULL_LEVER_3611))
 
         queueScript(player, 4, QueueStrength.SOFT) { _ ->
             teleport(player, TELEPORTS[index], TeleportManager.TeleportType.RANDOM_EVENT_OLD)

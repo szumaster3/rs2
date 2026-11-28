@@ -60,7 +60,7 @@ class FremennikPlugin : InteractionListener {
          * Handles travel between Rellekka and Miscellania.
          */
 
-        on(NPCs.SAILOR_1385, IntType.NPC, "travel") { player, _ ->
+        on(NPCs.MISC_SAILOR_1385, IntType.NPC, "travel") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "")) return@on true
             FremennikBoat.sail(player, Travel.RELLEKKA_TO_MISC)
             return@on true
@@ -70,7 +70,7 @@ class FremennikPlugin : InteractionListener {
          * Handles travel between Miscellania and Rellekka.
          */
 
-        on(NPCs.SAILOR_1304, IntType.NPC, "travel") { player, _ ->
+        on(NPCs.VIKING_SAILOR_1304, IntType.NPC, "travel") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS.questName, "")) return@on true
             FremennikBoat.sail(player, Travel.MISC_TO_RELLEKKA)
             return@on true
@@ -112,7 +112,7 @@ class FremennikPlugin : InteractionListener {
          * Handles travel between Waterbirth Island and Rellekka.
          */
 
-        on(intArrayOf(NPCs.NULL_2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438), IntType.NPC, "travel") { player, node ->
+        on(intArrayOf(NPCs.JARVALD_2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438), IntType.NPC, "travel") { player, node ->
             openDialogue(player, JarvaldTravelDialogue(), node.id)
             return@on true
         }

@@ -181,5 +181,5 @@ class DronDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DRON_2939)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAKINGHISTORY_DRON_2939)
 }

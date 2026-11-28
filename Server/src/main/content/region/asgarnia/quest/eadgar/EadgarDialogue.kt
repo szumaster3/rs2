@@ -33,5 +33,5 @@ class EadgarDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.EADGAR_1113)
+    override fun getIds(): IntArray = intArrayOf(NPCs.TROLL_EADGAR_1113)
 }

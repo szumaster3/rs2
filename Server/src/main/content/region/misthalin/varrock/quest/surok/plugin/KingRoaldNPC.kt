@@ -46,5 +46,5 @@ class KingRoaldNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, lo
         this.cutscene = cutscene
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.KING_ROALD_5838)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SUROK_KING_5838)
 }

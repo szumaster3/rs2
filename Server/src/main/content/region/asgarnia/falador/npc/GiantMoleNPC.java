@@ -43,10 +43,10 @@ import static core.api.ContentAPIKt.setVarbit;
 public final class GiantMoleNPC extends AbstractNPC {
     private static final Location[] DIG_LOCATIONS = new Location[]{Location.create(1760, 5183, 0), Location.create(1736, 5223, 0), Location.create(1777, 5235, 0), Location.create(1739, 5150, 0), Location.create(1769, 5148, 0), Location.create(1750, 5195, 0), Location.create(1778, 5207, 0), Location.create(1772, 5199, 0), Location.create(1774, 5173, 0), Location.create(1760, 5162, 0), Location.create(1753, 5151, 0), Location.create(1739, 5152, 0)};
     private static final Animation DIG_ANIMATION = new Animation(3314, Priority.VERY_HIGH);
-    private static final Graphics DIG_GRAPHIC = new Graphics(shared.consts.Graphics.HOLE_OPENS_IN_GROUND_572);
+    private static final Graphics DIG_GRAPHIC = new Graphics(shared.consts.Graphics.STALKER_2022_EMOTE_572);
     private static final Animation DIG_UP_ANIMATION = new Animation(3315, Priority.VERY_HIGH);
-    private static final Graphics DIG_UP_GRAPHIC = new Graphics(shared.consts.Graphics.HOLE_OPENS_IN_GROUND_SHORTER_573);
-    private static final Graphics DUST_GRAPHIC = new Graphics(shared.consts.Graphics.BUNCHA_SMOKE_BROWN_COLORED_571);
+    private static final Graphics DIG_UP_GRAPHIC = new Graphics(shared.consts.Graphics.STALKER_2022_FLINCH_573);
+    private static final Graphics DUST_GRAPHIC = new Graphics(shared.consts.Graphics.MOLE_MUD_CLOUD_571);
 
     private boolean digging;
 
@@ -225,7 +225,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 
             @Override
             public boolean handle(final Player player, Node node, String option) {
-                player.animate(Animation.create(Animations.HUMAN_CLIMB_STAIRS_828));
+                player.animate(Animation.create(Animations.HUMAN_REACHFORLADDER_828));
                 player.lock(2);
                 GameWorld.getPulser().submit(new Pulse(1, player) {
                     @Override

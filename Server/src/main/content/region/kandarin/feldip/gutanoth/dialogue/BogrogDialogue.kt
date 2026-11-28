@@ -87,7 +87,7 @@ class BogrogDialogue(player: Player? = null) : Dialogue(player) {
 
             // Supplies shop.
             59 -> npcl(FaceAnim.CHILD_NORMAL, "Hur, hur, hur! Yooman's gotta buy lotsa stuff if yooman wants ta train good!").also { stage++ }
-            60 -> end().also { openNpcShop(player!!, NPCs.BOGROG_4472) }
+            60 -> end().also { openNpcShop(player!!, NPCs.WOLF_BOGROG_OGRE_4472) }
 
             // Swap.
             61 -> npcl(FaceAnim.CHILD_NORMAL, "Des other ogres's stealin' Bogrog's stock. Gimmie pouches and scrolls and yooman gets da shardies.").also { stage++ }
@@ -99,6 +99,6 @@ class BogrogDialogue(player: Player? = null) : Dialogue(player) {
 
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BOGROG_4472)
+        return intArrayOf(NPCs.WOLF_BOGROG_OGRE_4472)
     }
 }

@@ -58,5 +58,5 @@ class FishingTutorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FishingTutorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FISHING_TUTOR_4901)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FINLAY_4901)
 }

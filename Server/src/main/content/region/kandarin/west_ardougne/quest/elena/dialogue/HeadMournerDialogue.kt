@@ -19,7 +19,7 @@ import shared.consts.NPCs
 class HeadMournerDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.HEAD_MOURNER_716)
+        npc = NPC(NPCs.HEADMOURNER_716)
         when (getQuestStage(player!!, Quests.PLAGUE_CITY.questName)) {
             in 8..10 -> when (stage) {
                 0 -> npcl(FaceAnim.FRIENDLY, "Hmmm, how did you get over here? You're not one of this rabble. Ah well, you'll have to stay. Can't risk you going back now.").also { stage++ }

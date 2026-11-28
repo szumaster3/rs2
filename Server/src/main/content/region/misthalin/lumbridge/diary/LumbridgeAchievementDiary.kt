@@ -36,7 +36,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         private val FRED_HOUSE_AREA = ZoneBorders(3184, 3270, 3192, 3275, 0)
 
         private val DEAD_TREES = arrayOf(Scenery.DEAD_TREE_1282, Scenery.DEAD_TREE_1286, Scenery.DEAD_TREE_1365)
-        private val ZOMBIES = arrayOf(NPCs.ZOMBIE_73, NPCs.ZOMBIE_74)
+        private val ZOMBIES = arrayOf(NPCs.ZOMBIE_UNARMED_73, NPCs.ZOMBIE2_74)
         private val WATER_SOURCE = arrayOf(Items.BUCKET_OF_WATER_1929, Items.JUG_OF_WATER_1937, Items.BOWL_OF_WATER_1921)
 
         object BeginnerTasks {
@@ -326,7 +326,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
         when (player.viewport.region!!.id) {
             12593, 12849 -> {
-                if (event.npc.id == NPCs.GIANT_RAT_86) {
+                if (event.npc.id == NPCs.GIANTRAT_86) {
                     finishTask(
                         player,
                         DiaryLevel.EASY,
@@ -457,7 +457,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
             }
 
             13899 -> {
-                if (event.target.id == Scenery.WATER_ALTAR_2480 && event.option == "craft-rune") {
+                if (event.target.id == Scenery.ALTAR_2480 && event.option == "craft-rune") {
                     if (inInventory(player, Items.PURE_ESSENCE_7937) || inInventory(player, Items.RUNE_ESSENCE_1436)) {
                         finishTask(
                             player,
@@ -628,7 +628,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     override fun onJobAssigned(player: Player, event: JobAssignmentEvent) {
         when (player.viewport.region!!.id) {
             12849 -> {
-                if (event.employerNpc.id == NPCs.FISHING_TUTOR_4901) {
+                if (event.employerNpc.id == NPCs.FINLAY_4901) {
                     finishTask(
                         player,
                         DiaryLevel.BEGINNER,

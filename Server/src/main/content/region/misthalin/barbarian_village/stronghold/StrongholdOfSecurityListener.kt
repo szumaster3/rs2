@@ -97,7 +97,7 @@ class StrongholdOfSecurityListener : InteractionListener {
         on(DEAD_EXPLORER, IntType.SCENERY, "search") { player, _ ->
             val hasNotes = hasAnItem(player, STRONGHOLD_NOTES).container != null
 
-            animate(player, Animations.HUMAN_PICKPOCKETING_881)
+            animate(player, Animations.HUMAN_PICKPOCKET_881)
 
             if (hasNotes) {
                 sendMessage(player, "You don't find anything.")

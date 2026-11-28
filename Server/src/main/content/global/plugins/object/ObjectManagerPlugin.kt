@@ -56,7 +56,7 @@ class ObjectManagerPlugin : OptionHandler() {
                             player.packetDispatch.sendMessage("You open the drawers.")
                         }
                         name.contains("wardrobe") -> {
-                            player.animate(Animation(Animations.OPEN_WARDROBE_545))
+                            player.animate(Animation(Animations.HUMAN_OPENBIGCUPBOARD_545))
                             playAudio(player, Sounds.WARDROBE_OPEN_96)
                             player.packetDispatch.sendMessage("You open the wardrobe.")
                         }

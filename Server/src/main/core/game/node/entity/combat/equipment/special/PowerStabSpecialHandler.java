@@ -33,7 +33,7 @@ public final class PowerStabSpecialHandler extends MeleeSwingHandler implements 
 
     private static final Animation ANIMATION = new Animation(3157, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DRAGON_2H_SPECIAL_1225);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.DH_SWORD_UPDATE_DRAGON_SPOTANIM_1225);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

@@ -36,7 +36,7 @@ class DagaDialogue(player: Player? = null) : Dialogue(player) {
 
             10 -> {
                 end()
-                openNpcShop(player, NPCs.DAGA_1434)
+                openNpcShop(player, NPCs.MM_DAGA_1434)
             }
             30 -> npcl(FaceAnim.OLD_DEFAULT, "It just so happens I recently got a fresh delivery, do you want to buy one?").also { stage++ }
             31 -> options("Yes, please.", "No, thanks.").also { stage++ }
@@ -58,5 +58,5 @@ class DagaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = DagaDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DAGA_1434)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MM_DAGA_1434)
 }

@@ -53,7 +53,7 @@ class FishingListener : InteractionListener {
 
         if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
             if (!inInventory(player, Items.SMALL_FISHING_NET_303) &&
-                npc.id == NPCs.TUTORIAL_FISHING_SPOT_952
+                npc.id == NPCs.NPC_0_48_48_NEWBIEFISHING_952
             ) {
                 sendNPCDialogue(
                     player,
@@ -131,7 +131,7 @@ class FishingListener : InteractionListener {
     private fun playFishingAnimation(player: Player, option: FishingOption) {
         val animationId =
             if (isBarehandEnabled(player) && option.isHarpoonType())
-                Animations.BAREHAND_FISHING_6709
+                Animations.ROMCOM_PLAYER_LISTENING_EXTRA_6709
             else
                 option.animationId
 

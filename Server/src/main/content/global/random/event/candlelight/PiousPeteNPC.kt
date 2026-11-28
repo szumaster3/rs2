@@ -14,7 +14,7 @@ import shared.consts.NPCs
 /**
  * Represents the Pious Pete random event npc.
  */
-class PiousPeteNPC(override var loot: WeightBasedTable? = null): RandomEventNPC(NPCs.PRIEST_3206) {
+class PiousPeteNPC(override var loot: WeightBasedTable? = null): RandomEventNPC(NPCs.CHOSEN_ZANIK_CUTSCENE_CROSSBOW_3206) {
 
     override fun init() {
         super.init()
@@ -27,7 +27,7 @@ class PiousPeteNPC(override var loot: WeightBasedTable? = null): RandomEventNPC(
                     return@queueScript delayScript(player, 3)
                 }
                 1 -> {
-                    openDialogue(player, PiousPeteDialogue(), NPCs.PIOUS_PETE_3207)
+                    openDialogue(player, PiousPeteDialogue(), NPCs.CHOSEN_ZANIK_FOLLOWER_3207)
                     return@queueScript stopExecuting(player)
                 }
                 else -> return@queueScript stopExecuting(player)

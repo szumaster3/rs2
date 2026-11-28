@@ -55,5 +55,5 @@ class SnowQueenDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun newInstance(player: Player?): Dialogue = SnowQueenDialogue(player)
-    override fun getIds(): IntArray = intArrayOf(NPCs.QUEEN_OF_SNOW_6731)
+    override fun getIds(): IntArray = intArrayOf(NPCs.XMAS07_SNOWQUEEN_6731)
 }

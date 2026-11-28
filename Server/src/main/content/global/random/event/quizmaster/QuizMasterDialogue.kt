@@ -38,11 +38,11 @@ class QuizMasterDialogue : DialogueFile() {
          */
         val sets =
             arrayOf(
-                intArrayOf(Items.NULL_6192, Items.NULL_6189, Items.NULL_6189),
-                intArrayOf(Items.NULL_6198, Items.NULL_6196, Items.NULL_6195),
-                intArrayOf(Items.NULL_6190, Items.NULL_6194, Items.NULL_6193),
-                intArrayOf(Items.NULL_6195, Items.NULL_6197, Items.NULL_6198),
-                intArrayOf(Items.NULL_6196, Items.NULL_6191, Items.NULL_6192),
+                intArrayOf(Items.OBJ_6192, Items.OBJ_6189, Items.OBJ_6189),
+                intArrayOf(Items.OBJ_6198, Items.OBJ_6196, Items.OBJ_6195),
+                intArrayOf(Items.OBJ_6190, Items.OBJ_6194, Items.OBJ_6193),
+                intArrayOf(Items.OBJ_6195, Items.OBJ_6197, Items.OBJ_6198),
+                intArrayOf(Items.OBJ_6196, Items.OBJ_6191, Items.OBJ_6192),
             )
 
         fun randomQuestion(player: Player): Int {

@@ -182,9 +182,9 @@ class GodBookOptionPlugin : InteractionListener {
      * Book types and dialogues.
      */
     enum class BookType(val anim: Int, val text: String) {
-        SARADOMIN(Animations.PREACH_WHITE_1335, "This is Saradomin's wisdom."),
-        GUTHIX(Animations.PREACH_GREEN_1337, "May Guthix bring you balance."),
-        ZAMORAK(Animations.PREACH_RED_1336, "Zamorak give me strength!")
+        SARADOMIN(Animations.HORROR_PREACH_SARADOMIN_1335, "This is Saradomin's wisdom."),
+        GUTHIX(Animations.HORROR_PREACH_GUTHIX_1337, "May Guthix bring you balance."),
+        ZAMORAK(Animations.HORROR_PREACH_ZAMORAK_1336, "Zamorak give me strength!")
     }
 
     /**

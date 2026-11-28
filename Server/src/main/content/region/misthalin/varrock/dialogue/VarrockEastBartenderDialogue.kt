@@ -64,5 +64,5 @@ class VarrockEastBartenderDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = VarrockEastBartenderDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARTENDER_733)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLUEMOON_BARTENDER_733)
 }

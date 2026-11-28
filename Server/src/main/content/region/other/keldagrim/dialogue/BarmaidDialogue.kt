@@ -82,5 +82,5 @@ class BarmaidDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BarmaidDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARMAID_2178)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_BARMAID_POOR_2178)
 }

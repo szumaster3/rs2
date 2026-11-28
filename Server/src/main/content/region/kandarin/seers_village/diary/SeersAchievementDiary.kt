@@ -25,9 +25,9 @@ class SeersAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
         private val SEERS_COURTHOUSE_AREA = ZoneBorders(2732, 3467, 2739, 3471)
         private val RANGING_GUILD_LOCATION = Location(2657, 3439)
 
-        private val COMBAT_BRACELETS = arrayOf(Items.COMBAT_BRACELET_11126, Items.COMBAT_BRACELET4_11118, Items.COMBAT_BRACELET3_11120, Items.COMBAT_BRACELET2_11122, Items.COMBAT_BRACELET1_11124)
-        private val RANGING_GUILD_ARCHERS = arrayOf(NPCs.TOWER_ARCHER_688, NPCs.TOWER_ARCHER_689, NPCs.TOWER_ARCHER_690, NPCs.TOWER_ARCHER_691)
-        private val WORKSHOP_ELEMENTALS = arrayOf(NPCs.FIRE_ELEMENTAL_1019, NPCs.EARTH_ELEMENTAL_1020, NPCs.AIR_ELEMENTAL_1021, NPCs.WATER_ELEMENTAL_1022)
+        private val COMBAT_BRACELETS = arrayOf(Items.COMBAT_BRACELET_11126, Items.COMBAT_BRACELET_4_11118, Items.COMBAT_BRACELET_3_11120, Items.COMBAT_BRACELET_2_11122, Items.COMBAT_BRACELET_1_11124)
+        private val RANGING_GUILD_ARCHERS = arrayOf(NPCs.GUILD_TOWERARCHER1_688, NPCs.GUILD_TOWERARCHER2_689, NPCs.GUILD_TOWERARCHER3_690, NPCs.GUILD_TOWERARCHER4_691)
+        private val WORKSHOP_ELEMENTALS = arrayOf(NPCs.ELEMENTAL_FIRE_1019, NPCs.ELEMENTAL_EARTH_1020, NPCs.ELEMENTAL_AIR_1021, NPCs.ELEMENTAL_WATER_1022)
         private val CHURN_PRODUCT = arrayOf(Items.CHEESE_1985, Items.POT_OF_CREAM_2130, Items.PAT_OF_BUTTER_6697)
         private val RANGING_GUILD_STOCK = arrayOf(Items.BARB_BOLTTIPS_47, Items.RUNE_ARROW_892, Items.GREEN_DHIDE_BODY_1135, Items.ADAMANT_JAVELIN_829, Items.STUDDED_BODY_1133, Items.COIF_1169)
 
@@ -196,7 +196,7 @@ class SeersAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
                         DiaryLevel.MEDIUM,
                         MediumTasks.DEFEAT_EACH_ELEMENTAL_TYPE,
                         5795,
-                        1 shl (event.npc.id - NPCs.FIRE_ELEMENTAL_1019),
+                        1 shl (event.npc.id - NPCs.ELEMENTAL_FIRE_1019),
                         0xF,
                     )
                 }
@@ -209,7 +209,7 @@ class SeersAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
                         DiaryLevel.MEDIUM,
                         MediumTasks.RANGING_GUILD_KILL_EACH_TOWER_GUARD,
                         5796,
-                        1 shl (event.npc.id - NPCs.TOWER_ARCHER_688),
+                        1 shl (event.npc.id - NPCs.GUILD_TOWERARCHER1_688),
                         0xF,
                     )
                 }

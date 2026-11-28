@@ -48,5 +48,5 @@ class FinanceAdvisorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FinanceAdvisorDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FINANCIAL_ADVISOR_947)
+    override fun getIds(): IntArray = intArrayOf(NPCs.NEWBIE_FINANCIAL_ADVISOR_947)
 }

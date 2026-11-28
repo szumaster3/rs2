@@ -168,8 +168,8 @@ public final class HunterNPC extends AbstractNPC {
     private boolean isImp() {
         int id = getId();
         return id == NPCs.IMP_708
-                || id == NPCs.IMP_709
-                || id == NPCs.IMP_1531;
+                || id == NPCs.SUMMONEDIMP_709
+                || id == NPCs.CASTLEWARS_IMP_1531;
     }
 
     public TrapNode getType() {

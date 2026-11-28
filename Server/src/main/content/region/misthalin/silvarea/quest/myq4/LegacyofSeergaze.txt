@@ -11,7 +11,7 @@ import core.plugin.Initializable
 
 @Initializable
 class LegacyofSeergaze :
-    Quest("Legacy of Seergaze", 150, 149, 2, Vars.VARBIT_QUEST_LEGACY_OF_SEERGAZE_4569, 0, 1, 500) {
+    Quest("Legacy of Seergaze", 150, 149, 2, Vars.VARBIT_4569, 0, 1, 500) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -43,9 +43,9 @@ class LegacyofSeergaze :
         rewardXP(player, Skills.CRAFTING, 4000.0)
         rewardXP(player, Skills.CONSTRUCTION, 1000.0)
         rewardXP(player, Skills.MINING, 2000.0)
-        addItemOrDrop(player, Items.IVANDIS_FLAIL28_13119)
+        addItemOrDrop(player, Items.IVANDIS_FLAIL_28_13119)
         addItemOrDrop(player, Items.TOME_OF_XP_3_9656)
-        setVarbit(player, Vars.VARBIT_QUEST_LEGACY_OF_SEERGAZE_4569, 500, true)
+        setVarbit(player, Vars.VARBIT_4569, 500, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

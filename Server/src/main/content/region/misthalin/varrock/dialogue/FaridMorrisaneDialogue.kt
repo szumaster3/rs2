@@ -48,5 +48,5 @@ class FaridMorrisaneDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = FaridMorrisaneDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FARID_MORRISANE_ORES_6523)
+    override fun getIds(): IntArray = intArrayOf(NPCs.EXCHANGE_FARID_M_6523)
 }

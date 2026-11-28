@@ -84,9 +84,9 @@ class PhoenixLair : MapArea {
         }
 
         if (getAttribute(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD, false)) {
-            if (!spawnedNPC.any { it.id == NPCs.PHOENIX_8548 }) {
+            if (!spawnedNPC.any { it.id == NPCs.PHOENIX_QUESTPHOENIX_REBORN_8548 }) {
 
-                val rewardNPC = NPC.create(NPCs.PHOENIX_8548, Location.create(3536, 5197, 0))
+                val rewardNPC = NPC.create(NPCs.PHOENIX_QUESTPHOENIX_REBORN_8548, Location.create(3536, 5197, 0))
 
                 rewardNPC.init()
                 spawnedNPC.add(rewardNPC)
@@ -96,9 +96,9 @@ class PhoenixLair : MapArea {
 
         val npcIdsToSpawn = if (!isQuestComplete(player, Quests.IN_PYRE_NEED.questName)) {
             listOf(
-                NPCs.LESSER_REBORN_MAGE_8573,
-                NPCs.LESSER_REBORN_RANGER_8571,
-                NPCs.LESSER_REBORN_WARRIOR_8569,
+                NPCs.PHOENIX_LESSER_REBORN_MAGE_QUEST_8573,
+                NPCs.PHOENIX_LESSER_REBORN_RANGER_QUEST_8571,
+                NPCs.PHOENIX_LESSER_REBORN_WARRIOR_QUEST_8569,
             )
         } else {
             InPyreNeed.REBORN_WARRIOR_ID.toList()

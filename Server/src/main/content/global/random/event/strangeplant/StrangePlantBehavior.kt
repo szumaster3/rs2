@@ -15,7 +15,7 @@ import shared.consts.NPCs
  * Represents the Strange plant NPC behavior.
  * @author Zerken
  */
-class StrangePlantBehavior : NPCBehavior(NPCs.STRANGE_PLANT_408) {
+class StrangePlantBehavior : NPCBehavior(NPCs.LUNAR_PIRATE_CAPTAIN_2OPS_408) {
     override fun canBeAttackedBy(
         self: NPC,
         attacker: Entity,

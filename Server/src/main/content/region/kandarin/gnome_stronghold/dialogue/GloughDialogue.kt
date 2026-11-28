@@ -41,5 +41,5 @@ class GloughDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GloughDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GLOUGH_671)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDTREE_GLOUGH_671)
 }

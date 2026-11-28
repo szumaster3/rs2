@@ -28,5 +28,5 @@ class MonkeyDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MONKEY_2301)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGIC_CARPET_MONKEY_2301)
 }

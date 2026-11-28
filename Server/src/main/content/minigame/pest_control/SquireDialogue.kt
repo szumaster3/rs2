@@ -25,18 +25,18 @@ class SquireDialogue(player: Player? = null) : Dialogue(player) {
             when (type) {
                 0 -> {
                     playJingle(player, 144)
-                    sendNPCDialogueLines(player, NPCs.SQUIRE_3781, FaceAnim.HALF_GUILTY, false, "The Void Knight was killed, another of our Order has", "fallen and that Island is lost.").also { stage = END_DIALOGUE }
+                    sendNPCDialogueLines(player, NPCs.PEST_SQUIRE_INSTANCE_3781, FaceAnim.HALF_GUILTY, false, "The Void Knight was killed, another of our Order has", "fallen and that Island is lost.").also { stage = END_DIALOGUE }
                 }
 
                 1 -> {
                     val points = args[2] as String
                     playJingle(player, 145)
-                    sendNPCDialogueLines(player, NPCs.SQUIRE_3781, FaceAnim.HAPPY, false, "Congratulations! You managed to destroy all the portals!", "We've awarded you $points Void Knight Commendation", "points. Please also accept these coins as a reward.").also { stage = 17 }
+                    sendNPCDialogueLines(player, NPCs.PEST_SQUIRE_INSTANCE_3781, FaceAnim.HAPPY, false, "Congratulations! You managed to destroy all the portals!", "We've awarded you $points Void Knight Commendation", "points. Please also accept these coins as a reward.").also { stage = 17 }
                 }
 
                 else -> {
                     playJingle(player, 145)
-                    sendNPCDialogueLines(player, NPCs.SQUIRE_3781, FaceAnim.HALF_GUILTY, false, "Congratulations! You managed to destroy all the portals!", "However, you did not succeed in reaching the required", "amount of damage dealt we cannot grant you a reward.").also { stage = END_DIALOGUE }
+                    sendNPCDialogueLines(player, NPCs.PEST_SQUIRE_INSTANCE_3781, FaceAnim.HALF_GUILTY, false, "Congratulations! You managed to destroy all the portals!", "However, you did not succeed in reaching the required", "amount of damage dealt we cannot grant you a reward.").also { stage = END_DIALOGUE }
                 }
             }
             return true
@@ -55,7 +55,7 @@ class SquireDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (npc.id == NPCs.SQUIRE_3781) {
+                if (npc.id == NPCs.PEST_SQUIRE_INSTANCE_3781) {
                     options("I'd like to go back to Port Sarim please.", "I'm fine thanks.").also { stage++ }
                 } else {
                     options("Who are you?", "Where does this ship go?", "I'd like to go to your outpost.", "I'm fine thanks.").also { stage = 2 }
@@ -111,5 +111,5 @@ class SquireDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SQUIRE_3781, NPCs.SQUIRE_3790)
+    override fun getIds(): IntArray = intArrayOf(NPCs.PEST_SQUIRE_INSTANCE_3781, NPCs.PEST_SQUIRE_1_3790)
 }

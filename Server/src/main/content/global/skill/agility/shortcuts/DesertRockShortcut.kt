@@ -15,7 +15,7 @@ import shared.consts.Scenery
 class DesertRockShortcut : InteractionListener {
     private val ROCK = Scenery.ROCK_28487
     private val ROPE = Scenery.ROPE_28490
-    private val TIE_ROPE = Animations.HUMAN_TIE_ROPE_9086
+    private val TIE_ROPE = Animations.MYQ4_FIGHTERS_SEARCHING_COFFIN_9086
 
     override fun defineListeners() {
         onUseWith(IntType.SCENERY, Items.ROPE_954, ROCK) { player, _, _ ->

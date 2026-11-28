@@ -6,9 +6,9 @@ import core.game.worldevents.events.HolidayRandomEventNPC
 import core.tools.minutesToTicks
 import shared.consts.NPCs
 
-class SnowmanFightHolidayRandom : HolidayRandomEventNPC(NPCs.BARBARIAN_SNOWMAN_6742) {
+class SnowmanFightHolidayRandom : HolidayRandomEventNPC(NPCs.XMAS07_SNOWMAN_BARBARIAN_6742) {
     private lateinit var otherSnowman: NPC
-    private val snowmen = listOf(NPCs.DRAGON_SNOWMAN_6743, NPCs.PIRATE_SNOWMAN_6745, NPCs.DWARF_SNOWMAN_6744)
+    private val snowmen = listOf(NPCs.XMAS07_SNOWMAN_DRAGON_6743, NPCs.XMAS07_SNOWMAN_PIRATE_6745, NPCs.XMAS07_SNOWMAN_DWARF_6744)
     private var snowmenFinalized = false
 
     override fun init() {

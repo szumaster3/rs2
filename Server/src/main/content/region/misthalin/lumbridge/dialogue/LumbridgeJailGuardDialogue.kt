@@ -28,5 +28,5 @@ class LumbridgeJailGuardDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.JAIL_GUARD_917, NPCs.JAIL_GUARD_447, NPCs.JAIL_GUARD_448, NPCs.JAIL_GUARD_449)
+    override fun getIds(): IntArray = intArrayOf(NPCs.JAILGUARD_917, NPCs.JAILGUARD_TWO_PATROL_447, NPCs.JAILGUARD_THREE_PATROL_448, NPCs.JAILGUARD_FOUR_PATROL_449)
 }

@@ -18,12 +18,12 @@ class BouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = BouncerNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BOUNCER_269)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARENA_BOUNCER_269)
 
     companion object {
         @JvmStatic
         fun spawnBouncer(player: Player) {
-            val bouncer = BouncerNPC(NPCs.BOUNCER_269)
+            val bouncer = BouncerNPC(NPCs.ARENA_BOUNCER_269)
             bouncer.location = location(2604, 3160, 0)
             bouncer.isWalks = true
             bouncer.isAggressive = true

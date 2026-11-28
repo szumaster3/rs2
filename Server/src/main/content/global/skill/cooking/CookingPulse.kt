@@ -268,8 +268,8 @@ open class CookingPulse(
         if (!scenery.name.equals("fire", ignoreCase = true)) RANGE_ANIMATION else FIRE_ANIMATION
 
     companion object {
-        private val RANGE_ANIMATION = Animation(Animations.HUMAN_MAKE_PIZZA_883, Animator.Priority.HIGH)
-        private val FIRE_ANIMATION = Animation(Animations.OLD_COOK_FIRE_897, Animator.Priority.HIGH)
+        private val RANGE_ANIMATION = Animation(Animations.HUMAN_POTTERYWHEEL_883, Animator.Priority.HIGH)
+        private val FIRE_ANIMATION = Animation(Animations.HUMAN_FIRECOOKING_897, Animator.Priority.HIGH)
         private const val LUMBRIDGE_RANGE = 114
     }
 }

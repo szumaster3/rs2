@@ -15,7 +15,7 @@ class IceTrollNPC : AbstractNPC {
 
     private var tickDelay = RandomFunction.random(30)
 
-    constructor() : super(NPCs.ICE_TROLL_MALE_5474, null, true)
+    constructor() : super(NPCs.FRIS_TROLLM_LOWXP_5474, null, true)
     private constructor(id: Int, location: Location) : super(id, location)
 
     override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC = IceTrollNPC(id, location)
@@ -29,7 +29,7 @@ class IceTrollNPC : AbstractNPC {
         tickDelay = 0
 
         if (!inCombat()) {
-            val nearbyMiners = RegionManager.getLocalNpcs(this, 8).filter { it.id == NPCs.MINER_5497 }
+            val nearbyMiners = RegionManager.getLocalNpcs(this, 8).filter { it.id == NPCs.FRISD_VILLAGE_MINER2_5497 }
             val nearbyMiner = nearbyMiners.firstOrNull() ?: return super.tick()
 
             attack(nearbyMiner)
@@ -38,8 +38,8 @@ class IceTrollNPC : AbstractNPC {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.ICE_TROLL_MALE_5474,
-        NPCs.ICE_TROLL_RUNT_5473,
-        NPCs.ICE_TROLL_FEMALE_5475
+        NPCs.FRIS_TROLLM_LOWXP_5474,
+        NPCs.FRIS_BABY_TROLL_LOWXP_5473,
+        NPCs.FRIS_TROLLF_LOWXP_5475
     )
 }

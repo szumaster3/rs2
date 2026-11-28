@@ -32,7 +32,7 @@ class CraftingGuildPlugin : InteractionListener {
             }
 
             val hasApron = inEquipment(player, BROWN_APRON)
-            val hasCape = anyInEquipment(player, Items.CRAFTING_CAPE_9780, Items.CRAFTING_CAPET_9781)
+            val hasCape = anyInEquipment(player, Items.CRAFTING_CAPE_9780, Items.CRAFTING_CAPE_T_9781)
 
             if (hasApron || hasCape) {
                 DoorActionHandler.handleAutowalkDoor(player, doorScenery)

@@ -29,7 +29,7 @@ class RellekkaPlugin : InteractionListener, MapArea {
         private val DOWN2B: Location? = Location.create(2727, 3805, 1)
 
         private val STAIRS = intArrayOf(Scenery.STEPS_19690, Scenery.STEPS_19691)
-        private val JARVALD_NPC = intArrayOf(NPCs.NULL_2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437,NPCs.JARVALD_2438)
+        private val JARVALD_NPC = intArrayOf(NPCs.JARVALD_2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437,NPCs.JARVALD_2438)
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2602, 3639, 2739, 3741))
@@ -77,12 +77,12 @@ class RellekkaPlugin : InteractionListener, MapArea {
          * Handles the dialogue interaction with the Fish Monger NPC in Rellekka.
          */
 
-        on(NPCs.FISH_MONGER_1315, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.VIKING_FISH_MONGER_1315, IntType.NPC, "talk-to") { player, node ->
             if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS.questName)) {
                 sendNPCDialogue(player, node.id, "I don't sell to outerlanders.", FaceAnim.ANNOYED)
             } else {
                 sendNPCDialogue(player, node.id, "Hello there, ${FremennikTrials.getFremennikName(player)}. Looking for fresh fish?")
-                openNpcShop(player, NPCs.FISH_MONGER_1315)
+                openNpcShop(player, NPCs.VIKING_FISH_MONGER_1315)
             }
             return@on true
         }

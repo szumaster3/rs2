@@ -173,5 +173,5 @@ class LalliDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LALLI_1270)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_LALLI_TROLL_1270)
 }

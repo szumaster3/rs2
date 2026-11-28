@@ -91,7 +91,7 @@ class KeldagrimCartPlugin : InteractionListener {
 
         private class TravelToKeldagrimPulse(val player: Player) : Pulse() {
             private var counter = 0
-            private val cartNPC = NPC(NPCs.MINE_CART_1544)
+            private val cartNPC = NPC(NPCs.HAUNTEDMINE_BOSS_CART_1544)
 
             override fun pulse(): Boolean {
                 when (counter++) {

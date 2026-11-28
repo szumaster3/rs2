@@ -24,7 +24,7 @@ class HobbesDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOBBES_808)
+        return intArrayOf(NPCs.HOBBES_THE_BUTLER_808)
     }
 }
 

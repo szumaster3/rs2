@@ -142,5 +142,5 @@ class BoyDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BOY_895)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BALLBOY_895)
 }

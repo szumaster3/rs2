@@ -30,7 +30,7 @@ class TelescopePlugin : InteractionListener {
                 }
             val time = RandomFunction.random(-window, window + 1) + TimeUnit.MILLISECONDS.toMinutes(timeLeft * 600L)
             lock(player, 3)
-            animate(player, Animations.TELESCOPE_POH_3649)
+            animate(player, Animations.HUMAN_USE_TELESCOPE_3649)
             openInterface(player, Components.TELESCOPE_782).also {
                 unlock(player)
                 Pulser.submit(

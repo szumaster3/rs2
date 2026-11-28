@@ -23,8 +23,8 @@ class TotemPoleOptionPlugin : InteractionListener {
             if (!hasRequirement(player, Quests.LEGENDS_QUEST.questName)) return@onUseWith false
 
             val baseItem = when (used.id) {
-                in skillsNecklaces -> Items.SKILLS_NECKLACE4_11105
-                in combatBracelets -> Items.COMBAT_BRACELET4_11118
+                in skillsNecklaces -> Items.SKILLS_NECKLACE_4_11105
+                in combatBracelets -> Items.COMBAT_BRACELET_4_11118
                 else -> return@onUseWith false
             }
 
@@ -114,9 +114,9 @@ class TotemPoleOptionPlugin : InteractionListener {
          */
         private val skillsNecklaces: IntArray = intArrayOf(
             Items.SKILLS_NECKLACE_11113,
-            Items.SKILLS_NECKLACE1_11111,
-            Items.SKILLS_NECKLACE2_11109,
-            Items.SKILLS_NECKLACE3_11107,
+            Items.SKILLS_NECKLACE_1_11111,
+            Items.SKILLS_NECKLACE_2_11109,
+            Items.SKILLS_NECKLACE_3_11107,
         )
 
         /**
@@ -124,9 +124,9 @@ class TotemPoleOptionPlugin : InteractionListener {
          */
         private val combatBracelets: IntArray = intArrayOf(
             Items.COMBAT_BRACELET_11126,
-            Items.COMBAT_BRACELET1_11124,
-            Items.COMBAT_BRACELET2_11122,
-            Items.COMBAT_BRACELET3_11120,
+            Items.COMBAT_BRACELET_1_11124,
+            Items.COMBAT_BRACELET_2_11122,
+            Items.COMBAT_BRACELET_3_11120,
         )
     }
 }

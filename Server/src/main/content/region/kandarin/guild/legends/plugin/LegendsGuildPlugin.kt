@@ -23,7 +23,7 @@ class LegendsGuildPlugin : InteractionListener {
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             sendMessage(player, "The guards salute you as you walk past.")
             val nearbyNPCs = RegionManager.getLocalNpcs(player, 8)
-            val guards = nearbyNPCs.filter { it.id == NPCs.LEGENDS_GUARD_398 || it.id == NPCs.LEGENDS_GUARD_399 }
+            val guards = nearbyNPCs.filter { it.id == NPCs.LEGENDS_GUILD_GUARD1_398 || it.id == NPCs.LEGENDS_GUILD_GUARD2_399 }
             guards.forEach { guard ->
                 guard.faceTemporary(player, 1)
                 guard.sendChat("Legends' Guild member approaching!", 1)

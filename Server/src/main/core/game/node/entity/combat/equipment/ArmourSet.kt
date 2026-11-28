@@ -22,7 +22,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
      * Ahrim the blighted barrows set.
      */
     AHRIM(
-        endGraphics = Graphics(shared.consts.Graphics.KARILS_SPECIAL_401, 96),
+        endGraphics = Graphics(shared.consts.Graphics.BARROWS_KARIL_TAINTED_SHOT_401, 96),
         set = arrayOf(
             intArrayOf(
                 Items.AHRIMS_HOOD_4708,
@@ -63,7 +63,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
         }
 
         override fun isUsing(e: Entity?): Boolean {
-            if (e is NPC && e.id == NPCs.AHRIM_THE_BLIGHTED_2025) {
+            if (e is NPC && e.id == NPCs.BARROWS_AHRIM_2025) {
                 return true
             }
             return super.isUsing(e)
@@ -107,7 +107,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
         ),
     ) {
         override fun isUsing(e: Entity?): Boolean {
-            if (e is NPC && e.id == NPCs.DHAROK_THE_WRETCHED_2026) {
+            if (e is NPC && e.id == NPCs.BARROWS_DHAROK_2026) {
                 return true
             }
             return super.isUsing(e)
@@ -118,7 +118,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
      * Guthan the infested barrows set.
      */
     GUTHAN(
-        endGraphics = Graphics(shared.consts.Graphics.GUTHAN_SPECIAL_398, 96),
+        endGraphics = Graphics(shared.consts.Graphics.BARROWS_GUTHAN_INFESTATION_398, 96),
         set = arrayOf(
             intArrayOf(
                 Items.GUTHANS_HELM_4724,
@@ -163,7 +163,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
         }
 
         override fun isUsing(e: Entity?): Boolean {
-            if (e is NPC && e.id == NPCs.GUTHAN_THE_INFESTED_2027) {
+            if (e is NPC && e.id == NPCs.BARROWS_GUTHAN_2027) {
                 return true
             }
             return super.isUsing(e)
@@ -174,7 +174,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
      * Karil the tainted barrows set.
      */
     KARIL(
-        endGraphics = Graphics(shared.consts.Graphics.AHRIMS_SPECIAL_400, 96),
+        endGraphics = Graphics(shared.consts.Graphics.BARROWS_AHRIM_BLIGHTED_AURA_400, 96),
         set = arrayOf(
             intArrayOf(
                 Items.KARILS_COIF_4732,
@@ -219,7 +219,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
         }
 
         override fun isUsing(e: Entity?): Boolean {
-            if (e is NPC && e.id == NPCs.KARIL_THE_TAINTED_2028) {
+            if (e is NPC && e.id == NPCs.BARROWS_KARIL_2028) {
                 return true
             }
             return super.isUsing(e)
@@ -230,7 +230,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
      * Torag the corrupted barrows set.
      */
     TORAG(
-        endGraphics = Graphics(shared.consts.Graphics.TORAGS_SPECIAL_399, 96),
+        endGraphics = Graphics(shared.consts.Graphics.BARROWS_TORAG_CORRUPTION_399, 96),
         set = arrayOf(
             intArrayOf(
                 Items.TORAGS_HELM_4745,
@@ -277,7 +277,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
         }
 
         override fun isUsing(e: Entity?): Boolean {
-            if (e is NPC && e.id == NPCs.TORAG_THE_CORRUPTED_2029) {
+            if (e is NPC && e.id == NPCs.BARROWS_TORAG_2029) {
                 return true
             }
             return super.isUsing(e)
@@ -306,10 +306,10 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
             ),
             intArrayOf(
                 Items.VERACS_BRASSARD_4757,
-                Items.VERACS_TOP_100_4988,
-                Items.VERACS_TOP_75_4989,
-                Items.VERACS_TOP_50_4990,
-                Items.VERACS_TOP_25_4991,
+                Items.VERACS_BRASSARD_100_4988,
+                Items.VERACS_BRASSARD_75_4989,
+                Items.VERACS_BRASSARD_50_4990,
+                Items.VERACS_BRASSARD_25_4991,
             ),
             intArrayOf(
                 Items.VERACS_PLATESKIRT_4759,
@@ -321,7 +321,7 @@ enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
         ),
     ) {
         override fun isUsing(e: Entity?): Boolean {
-            if (e is NPC && e.id == NPCs.VERAC_THE_DEFILED_2030) {
+            if (e is NPC && e.id == NPCs.BARROWS_VERAC_2030) {
                 return true
             }
             return super.isUsing(e)

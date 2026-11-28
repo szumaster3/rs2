@@ -118,7 +118,7 @@ class SorceressApprenticeDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.APPRENTICE_5532)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARABIAN_SORCERESS_APPRENTICE_5532)
 
     companion object {
         fun teleport(npc: NPC, player: Player) {

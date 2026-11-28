@@ -21,7 +21,7 @@ class CrateCutscene(player: Player) : Cutscene(player) {
         loadRegion(11161)
         teleport(player, base.transform(26, 47, 0))
         player.setDirection(Direction.WEST)
-        player.animate(Animation(Animations.CROUCH_HIDE_4552))
+        player.animate(Animation(Animations.BKF_BENT_TO_LISTEN_AT_DOOR_IDLE_4552))
         player.lock()
     }
 

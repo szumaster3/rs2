@@ -30,7 +30,7 @@ class SpiritCobraDialogue : Dialogue {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        if (inInventory(player, Items.RING_OF_CHAROSA_6465, 1) || inEquipment(player, Items.RING_OF_CHAROSA_6465, 1)) {
+        if (inInventory(player, Items.RING_OF_CHAROS_A_6465, 1) || inEquipment(player, Items.RING_OF_CHAROS_A_6465, 1)) {
             npcl(FaceAnim.FAMILIAR_NEUTRAL, "You are under my power!")
             stage = 20
             branch = 4
@@ -81,7 +81,7 @@ class SpiritCobraDialogue : Dialogue {
                     0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'm bored, do ssssomething to entertain me..."); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "I'll dance for you!");
                         end()
-                        animate(player, Animations.DANCE_866, true)
+                        animate(player, Animations.EMOTE_DANCE_866, true)
                         stage = END_DIALOGUE
                     }
                 }

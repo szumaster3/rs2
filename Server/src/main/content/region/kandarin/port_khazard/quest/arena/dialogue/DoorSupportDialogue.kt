@@ -18,7 +18,7 @@ class DoorSupportDialogue(
 ) : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.KHAZARD_GUARD_257)
+        npc = NPC(NPCs.ARENA_LEADGUARD_257)
         val completeOptionalTask = getAttribute(player!!, GameAttributes.FIGHT_ARENA_OPTIONAL_KILL, false)
 
         val firstFaceLoc = if (isWest) location(2585, 3141, 0) else location(2585, 3141, 0)

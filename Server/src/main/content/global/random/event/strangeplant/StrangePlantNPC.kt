@@ -18,7 +18,7 @@ import shared.consts.NPCs
  */
 class StrangePlantNPC(
     override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.STRANGE_PLANT_407) {
+) : RandomEventNPC(NPCs.LUNAR_PIRATE_CAPTAIN_1OP_407) {
     private val strangePlantGrowAnim = Animation(348)
     private val strangePlantTransformAnim = Animation(351)
     private val strangePlantPickedAnim = Animation(350)
@@ -70,7 +70,7 @@ class StrangePlantNPC(
                             return@queueScript delayScript(this, strangePlantTransformAnim.duration)
                         }
                         1 -> {
-                            this.transform(NPCs.STRANGE_PLANT_408)
+                            this.transform(NPCs.LUNAR_PIRATE_CAPTAIN_2OPS_408)
                             this.behavior = StrangePlantBehavior()
                             this.attack(player)
                             transformed = true

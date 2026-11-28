@@ -23,8 +23,8 @@ class FermentingVat(var player: Player, private val brewingVat: BrewingVat, var 
     fun addTheStuff() {
         if (!theStuff && removeItem(player, Item(Items.THE_STUFF_8988, 1))) {
             theStuff = true
-            lock(player, Animation(Animations.POUR_BUCKET_OVER_GROUND_2283).duration)
-            animate(player, Animation(Animations.POUR_BUCKET_OVER_GROUND_2283))
+            lock(player, Animation(Animations.FARMING_POUR_WATER_2283).duration)
+            animate(player, Animation(Animations.FARMING_POUR_WATER_2283))
             sendMessage(player, "You add The Stuff to the mixture in the vat.")
         }
     }
@@ -55,12 +55,12 @@ class FermentingVat(var player: Player, private val brewingVat: BrewingVat, var 
 
                     stopWalk(player)
                     playAudio(player, Sounds.FILL_VAT_2447)
-                    animate(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295))
+                    animate(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295))
                     val ingredientWord = if (item.id == Items.MUSHROOM_6004) item.name + "s" else item.name
                     sendMessage(player, "You add some $ingredientWord to the vat.")
 
                     if (ingredient.ingredientAmount == 1) {
-                        lock(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295).duration)
+                        lock(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295).duration)
 
                         brewingItem = ingredient
                         stage = BrewingStage.MIXED
@@ -69,8 +69,8 @@ class FermentingVat(var player: Player, private val brewingVat: BrewingVat, var 
                         return@queueScript stopExecuting(player)
                     }
 
-                    lock(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295).duration * 4 + 3)
-                    return@queueScript delayScript(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295).duration + 1)
+                    lock(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295).duration * 4 + 3)
+                    return@queueScript delayScript(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295).duration + 1)
                 }
 
                 1, 2 -> {
@@ -82,9 +82,9 @@ class FermentingVat(var player: Player, private val brewingVat: BrewingVat, var 
                     }
 
                     stopWalk(player)
-                    animate(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295))
+                    animate(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295))
 
-                    return@queueScript delayScript(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295).duration + 1)
+                    return@queueScript delayScript(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295).duration + 1)
                 }
 
                 3 -> {
@@ -96,13 +96,13 @@ class FermentingVat(var player: Player, private val brewingVat: BrewingVat, var 
                     }
 
                     stopWalk(player)
-                    animate(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295))
+                    animate(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295))
 
                     brewingItem = ingredient
                     stage = BrewingStage.MIXED
                     updateVat()
 
-                    return@queueScript delayScript(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295).duration)
+                    return@queueScript delayScript(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295).duration)
                 }
 
                 4 -> {
@@ -120,8 +120,8 @@ class FermentingVat(var player: Player, private val brewingVat: BrewingVat, var 
         if (removeItem(player, Item(Items.ALE_YEAST_5767, 1))) {
             addItem(player, Items.EMPTY_POT_1931)
 
-            lock(player, Animation(Animations.POUR_BUCKET_OVER_GROUND_2283).duration)
-            animate(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295))
+            lock(player, Animation(Animations.FARMING_POUR_WATER_2283).duration)
+            animate(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295))
 
             sendMessage(player, "You add a pot of ale yeast to the vat.")
             sendMessage(player, "The contents of the vat have begun to ferment.")
@@ -213,8 +213,8 @@ class FermentingVat(var player: Player, private val brewingVat: BrewingVat, var 
             }
             return
         }
-        lock(player, Animation(Animations.BEND_FORWARD_780).duration)
-        animate(player, Animation(Animations.BEND_FORWARD_780))
+        lock(player, Animation(Animations.HUMAN_GNOME_TACKLE_FAIL_780).duration)
+        animate(player, Animation(Animations.HUMAN_GNOME_TACKLE_FAIL_780))
 
         sendMessage(player, "You turn the valve.")
 

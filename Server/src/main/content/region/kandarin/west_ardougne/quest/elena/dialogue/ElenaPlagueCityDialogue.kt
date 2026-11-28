@@ -45,5 +45,5 @@ class ElenaPlagueCityDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ELENA_3215)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELENAP_VIS_3215)
 }

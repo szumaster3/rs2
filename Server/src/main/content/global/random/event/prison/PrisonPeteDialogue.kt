@@ -22,7 +22,7 @@ class PrisonPeteDialogue(val dialOpt: Int) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int)
     {
         val energyBarrier = getVarbit(player!!, 1547)
-        npc = NPC(NPCs.PRISON_PETE_3118)
+        npc = NPC(NPCs.PRISONPETE_BALLOON_L_3118)
 
         val ticks = PrisonTimer.getTicksLeft(player!!)
         val hours = ticks / 6000
@@ -50,7 +50,7 @@ class PrisonPeteDialogue(val dialOpt: Int) : DialogueFile() {
                                     stage = 1
                                 } else if (energyBarrier in 1..2) {
                                     npc?.faceLocation(Location.create(2095, 4466, 0))
-                                    animate(npc!!, Animations.TAKE_THING_OUT_OF_POCKET_AND_GIVE_IT_4540)
+                                    animate(npc!!, Animations.ALUFT_PLAYER_HANDING_OVER_4540)
                                     npc(FaceAnim.HAPPY, "Hooray, you got the right one! Now pull the lever again", "and let's get the next lock unlocked.")
                                     stage = 2
                                 } else if (getAttribute(player!!, PrisonPeteUtils.POP_KEY_FALSE, false)) {

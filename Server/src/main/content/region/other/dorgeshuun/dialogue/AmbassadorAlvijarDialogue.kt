@@ -29,5 +29,5 @@ class AmbassadorAlvijarDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = AmbassadorAlvijarDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.AMBASSADOR_ALVIJAR_5863)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLICE_DWARF_ALVIJAR_THERE_5863)
 }

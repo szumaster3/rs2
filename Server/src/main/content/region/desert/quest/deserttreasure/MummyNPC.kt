@@ -5,7 +5,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
 import shared.consts.NPCs
 
-class MummyNPC : NPCBehavior(NPCs.MUMMY_1958) {
+class MummyNPC : NPCBehavior(NPCs.DESERTTREASURE_MUMMY_1_1958) {
     var clearTime = 0
 
     override fun tick(self: NPC): Boolean {

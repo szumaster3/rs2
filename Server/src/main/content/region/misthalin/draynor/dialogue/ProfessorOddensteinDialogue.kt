@@ -328,9 +328,9 @@ class ProfessorOddensteinDialogue(player: Player? = null) : Dialogue(player) {
         private val OIL_CAN = Item(Items.OIL_CAN_277)
         private val PRESSURE_GAUGE = Item(Items.PRESSURE_GAUGE_271)
         private val RUBBER_TUBE = Item(Items.RUBBER_TUBE_276)
-        private val ANIMATION = Animation(Animations.HUMAN_MULTI_USE_832)
+        private val ANIMATION = Animation(Animations.HUMAN_PICKUPTABLE_832)
         private val FACE_LOCATION = Location.create(3112, 3367, 2)
-        private val WEAKEN_START = Graphics(shared.consts.Graphics.WEAKEN_CAST_105, 96)
-        private val WEAKEN_END = Graphics(shared.consts.Graphics.WEAKEN_IMPACT_107, 96)
+        private val WEAKEN_START = Graphics(shared.consts.Graphics.WEAKEN_CASTING_105, 96)
+        private val WEAKEN_END = Graphics(shared.consts.Graphics.WEAKEN_IMPACT_1_107, 96)
     }
 }

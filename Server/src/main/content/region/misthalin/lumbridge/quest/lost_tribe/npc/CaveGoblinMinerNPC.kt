@@ -16,7 +16,7 @@ class CaveGoblinMinerNPC(
     val forceChat = arrayOf("Nooo!", "Eeek!")
 
     init {
-        originallyMiner = id > NPCs.CAVE_GOBLIN_GUARD_2073
+        originallyMiner = id > NPCs.CAVE_GOBLIN_GUARD1_2073
     }
 
     override fun construct(
@@ -27,13 +27,13 @@ class CaveGoblinMinerNPC(
 
     override fun getIds(): IntArray =
         intArrayOf(
-            NPCs.CAVE_GOBLIN_MINER_2078,
-            NPCs.CAVE_GOBLIN_MINER_2077,
-            NPCs.CAVE_GOBLIN_MINER_2076,
-            NPCs.CAVE_GOBLIN_MINER_2075,
-            NPCs.CAVE_GOBLIN_MINER_2072,
-            NPCs.CAVE_GOBLIN_MINER_2071,
-            NPCs.CAVE_GOBLIN_MINER_2070,
+            NPCs.CAVE_GOBLIN_MINER4_MINING_2078,
+            NPCs.CAVE_GOBLIN_MINER3_MINING_2077,
+            NPCs.CAVE_GOBLIN_MINER2_MINING_2076,
+            NPCs.CAVE_GOBLIN_MINER_MINING_2075,
+            NPCs.CAVE_GOBLIN_MINER4_2072,
+            NPCs.CAVE_GOBLIN_MINER3_2071,
+            NPCs.CAVE_GOBLIN_MINER2_2070,
             NPCs.CAVE_GOBLIN_MINER_2069,
         )
 

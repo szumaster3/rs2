@@ -61,12 +61,12 @@ class WitchavenVillagerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray =
         intArrayOf(
-            NPCs.WITCHAVEN_VILLAGER_4883,
-            NPCs.WITCHAVEN_VILLAGER_4884,
-            NPCs.WITCHAVEN_VILLAGER_4885,
-            NPCs.WITCHAVEN_VILLAGER_4886,
-            NPCs.WITCHAVEN_VILLAGER_4887,
-            NPCs.WITCHAVEN_VILLAGER_4888,
+            NPCs.SLUG2_VILLAGER1_STAGE1_4883,
+            NPCs.SLUG2_VILLAGER1_STAGE2_4884,
+            NPCs.SLUG2_VILLAGER2_STAGE1_4885,
+            NPCs.SLUG2_VILLAGER2_STAGE2_4886,
+            NPCs.SLUG2_VILLAGER3_STAGE1_4887,
+            NPCs.SLUG2_VILLAGER3_STAGE2_4888,
         )
 
     companion object {

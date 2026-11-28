@@ -170,7 +170,7 @@ class FremennikTrialsPlugin : InteractionListener {
             }
 
             queueScript(player, 1, QueueStrength.WEAK) {
-                animate(player, Animation(Animations.FLETCH_LOGS_1248))
+                animate(player, Animation(Animations.HUMAN_FLETCHING_1248))
                 removeItem(player, TREE_BRANCH)
                 addItem(player, UNSTRUNG_LYRE)
                 delayClock(player, Clocks.SKILLING, 3)
@@ -228,7 +228,7 @@ class FremennikTrialsPlugin : InteractionListener {
             val hasItems = removeItem(player, used) && removeItem(player, with)
             if (!hasItems) return@onUseWith false
 
-            animate(player, Animations.FLETCH_LOGS_1248)
+            animate(player, Animations.HUMAN_FLETCHING_1248)
             addItem(player, Items.LYRE_3689)
             sendDialogue(player, "You string the Lyre with the Golden Wool.")
             return@onUseWith true
@@ -254,7 +254,7 @@ class FremennikTrialsPlugin : InteractionListener {
 
             when {
                 getAttribute(player, GameAttributes.QUEST_VIKING_LYRE, false) -> {
-                    sendNPCDialogue(player, NPCs.LONGHALL_BOUNCER_1278, "Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.")
+                    sendNPCDialogue(player, NPCs.VIKING_LONGHALL_BOUNCER_1278, "Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.")
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 }
 
@@ -263,7 +263,7 @@ class FremennikTrialsPlugin : InteractionListener {
                 }
 
                 else -> {
-                    sendNPCDialogue(player, NPCs.LONGHALL_BOUNCER_1278, "I didn't give you permission to go backstage!")
+                    sendNPCDialogue(player, NPCs.VIKING_LONGHALL_BOUNCER_1278, "I didn't give you permission to go backstage!")
                 }
             }
             return@on true
@@ -380,14 +380,14 @@ class FremennikTrialsPlugin : InteractionListener {
             }
 
             if (!getAttribute(player, GameAttributes.QUEST_VIKING_THORVALD_START, false)) {
-                sendNPCDialogueLines(player, NPCs.THORVALD_THE_WARRIOR_1289, FaceAnim.THINKING, false, "Outerlander... do not test my patience. I do not take", "kindly to people wandering in here and acting as though", "they own the place.")
+                sendNPCDialogueLines(player, NPCs.VIKING_THORVALD_1289, FaceAnim.THINKING, false, "Outerlander... do not test my patience. I do not take", "kindly to people wandering in here and acting as though", "they own the place.")
                 return@on true
             }
 
             if (hasEquippableItems(player)) {
-                sendNPCDialogueLines(player, NPCs.THORVALD_THE_WARRIOR_1289, FaceAnim.THINKING, false, "You may not enter the battleground with any armour", "or weaponry of any kind.")
+                sendNPCDialogueLines(player, NPCs.VIKING_THORVALD_1289, FaceAnim.THINKING, false, "You may not enter the battleground with any armour", "or weaponry of any kind.")
                 addDialogueAction(player) { _, _ ->
-                    sendNPCDialogueLines(player, NPCs.THORVALD_THE_WARRIOR_1289, FaceAnim.THINKING, false, "If you need to place your equipment into your bank", "account, I recommend that you speak to the seer. He", "knows a spell that will do that for you.")
+                    sendNPCDialogueLines(player, NPCs.VIKING_THORVALD_1289, FaceAnim.THINKING, false, "If you need to place your equipment into your bank", "account, I recommend that you speak to the seer. He", "knows a spell that will do that for you.")
                 }
                 return@on true
             }
@@ -398,7 +398,7 @@ class FremennikTrialsPlugin : InteractionListener {
 
             ClimbActionHandler.climb(
                 player,
-                Animation(Animations.HUMAN_CLIMB_STAIRS_828),
+                Animation(Animations.HUMAN_REACHFORLADDER_828),
                 Location.create(2671, 10099, 2)
             )
 
@@ -414,7 +414,7 @@ class FremennikTrialsPlugin : InteractionListener {
             if (player.getExtension<Any?>(KoscheiSession::class.java) != null) {
                 KoscheiSession.getSession(player).close()
             }
-            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_CLIMB_STAIRS_828), Location.create(2666, 3694, 0))
+            ClimbActionHandler.climb(player, Animation(Animations.HUMAN_REACHFORLADDER_828), Location.create(2666, 3694, 0))
             return@on true
         }
 
@@ -438,11 +438,11 @@ class FremennikTrialsPlugin : InteractionListener {
             }
 
             val restrictedMessages = mapOf(
-                NPCs.THORA_THE_BARKEEP_1300 to "Only Fremenniks may buy drinks here.",
+                NPCs.VIKING_LONGHALL_BARKEEP_1300 to "Only Fremenniks may buy drinks here.",
                 NPCs.SKULGRIMEN_1303 to "Only Fremenniks may purchase weapons and armour here.",
-                NPCs.SIGMUND_THE_MERCHANT_1282 to "Only Fremenniks may trade with this merchant.",
+                NPCs.VIKING_SIGMUND_1282 to "Only Fremenniks may trade with this merchant.",
                 NPCs.YRSA_1301 to "Only Fremenniks may buy clothes here.",
-                NPCs.FISH_MONGER_1315 to "Only Fremenniks may purchase fish here."
+                NPCs.VIKING_FISH_MONGER_1315 to "Only Fremenniks may purchase fish here."
             )
 
             restrictedMessages[npc.id]?.let { msg ->
@@ -473,7 +473,7 @@ class FremennikTrialsPlugin : InteractionListener {
     }
 
     companion object {
-        private const val WORKER = NPCs.COUNCIL_WORKMAN_1287
+        private const val WORKER = NPCs.VT_COUNCIL_WORKMEN_1287
         private const val FISH_ALTAR = Objects.STRANGE_ALTAR_4141
         private const val LOW_ALC_KEG = Items.LOW_ALCOHOL_KEG_3712
         private const val KEG = Items.KEG_OF_BEER_3711
@@ -487,17 +487,17 @@ class FremennikTrialsPlugin : InteractionListener {
         private const val TREE_BRANCH = Items.BRANCH_3692
         private const val THORVALD_LADDER = Objects.LADDER_34286
         private const val THORVALD_LADDER_LOWER = Objects.LADDER_4188
-        private const val LALLIS_STEW = Objects.LALLI_S_STEW_4149
+        private const val LALLIS_STEW = Objects.LALLIS_STEW_4149
         private const val UNSTRUNG_LYRE = Items.UNSTRUNG_LYRE_3688
         private const val GOLDEN_WOOL = Items.GOLDEN_WOOL_3694
         private const val LONGHALL_BACKDOOR = Objects.DOOR_4148
-        private const val FISHERMAN = NPCs.FISHERMAN_1302
-        private val LYRE_IDs = intArrayOf(Items.ENCHANTED_LYRE6_14591, Items.ENCHANTED_LYRE5_14590, Items.ENCHANTED_LYRE4_6127, Items.ENCHANTED_LYRE3_6126, Items.ENCHANTED_LYRE2_6125, Items.ENCHANTED_LYRE1_3691, Items.ENCHANTED_LYRE_3690)
+        private const val FISHERMAN = NPCs.VIKING_FISHERMAN1_1302
+        private val LYRE_IDs = intArrayOf(Items.ENCHANTED_LYRE_6_14591, Items.ENCHANTED_LYRE_5_14590, Items.ENCHANTED_LYRE_4_6127, Items.ENCHANTED_LYRE_3_6126, Items.ENCHANTED_LYRE_2_6125, Items.ENCHANTED_LYRE_1_3691, Items.ENCHANTED_LYRE_3690)
         private val PORTALIDs = intArrayOf(Objects.PORTAL_2273, Objects.PORTAL_2274, Objects.PORTAL_2506, Objects.PORTAL_2507, Objects.PORTAL_2505, Objects.PORTAL_2503, Objects.PORTAL_2504, Objects.PORTAL_5138)
         private val BEER = intArrayOf(Items.BEER_3803, Items.BEER_1917)
         private val FISH = intArrayOf(Items.RAW_BASS_363, Items.RAW_SHARK_383, Items.RAW_SEA_TURTLE_395, Items.RAW_MANTA_RAY_389)
         private val STEW_INGREDIENT_IDS = intArrayOf(Items.POTATO_1942, Items.ONION_1957, Items.CABBAGE_1965, Items.PET_ROCK_3695)
-        private val SHOPNPCS = intArrayOf(NPCs.YRSA_1301, NPCs.SKULGRIMEN_1303, NPCs.THORA_THE_BARKEEP_1300, NPCs.SIGMUND_THE_MERCHANT_1282, NPCs.FISH_MONGER_1315)
+        private val SHOPNPCS = intArrayOf(NPCs.YRSA_1301, NPCs.SKULGRIMEN_1303, NPCs.VIKING_LONGHALL_BARKEEP_1300, NPCs.VIKING_SIGMUND_1282, NPCs.VIKING_FISH_MONGER_1315)
     }
 
     /**
@@ -546,14 +546,14 @@ class FremennikTrialsPlugin : InteractionListener {
             when (counter++) {
                 0 -> {
                     player.lock()
-                    animate(player, Animations.HOLD_LYRE_1318, true)
+                    animate(player, Animations.VIKING_LYRE_READY_1318, true)
                 }
 
-                2 -> playLyreWithMusic(Animations.PLAY_LYRE_1320, 165)
+                2 -> playLyreWithMusic(Animations.VIKING_LYRE_PLAY_ONCE_1320, 165)
 
                 4, 6, 8, 10 -> {
                     val lineIndex = (counter - 4) / 2
-                    playLyreWithMusic(Animations.PLAY_LYRE_1320, 164)
+                    playLyreWithMusic(Animations.VIKING_LYRE_PLAY_ONCE_1320, 164)
                     sendChat(player, lyrics[lineIndex])
                 }
 
@@ -619,20 +619,20 @@ class FremennikTrialsPlugin : InteractionListener {
                 hasRing && fish == Items.RAW_BASS_363 -> {
                     finishDiaryTask(player, DiaryType.FREMENNIK, 1, 4)
                     setVarbit(player, 5662,1, true)
-                    if (hasBoots) Items.ENCHANTED_LYRE3_6126 else Items.ENCHANTED_LYRE2_6125
+                    if (hasBoots) Items.ENCHANTED_LYRE_3_6126 else Items.ENCHANTED_LYRE_2_6125
                 }
 
                 hasBoots -> when (fish) {
-                    Items.RAW_SHARK_383 -> Items.ENCHANTED_LYRE3_6126
-                    Items.RAW_MANTA_RAY_389 -> Items.ENCHANTED_LYRE5_14590
-                    Items.RAW_SEA_TURTLE_395 -> Items.ENCHANTED_LYRE6_14591
+                    Items.RAW_SHARK_383 -> Items.ENCHANTED_LYRE_3_6126
+                    Items.RAW_MANTA_RAY_389 -> Items.ENCHANTED_LYRE_5_14590
+                    Items.RAW_SEA_TURTLE_395 -> Items.ENCHANTED_LYRE_6_14591
                     else -> null
                 }
 
                 else -> when (fish) {
-                    Items.RAW_SHARK_383 -> Items.ENCHANTED_LYRE2_6125
-                    Items.RAW_MANTA_RAY_389 -> Items.ENCHANTED_LYRE3_6126
-                    Items.RAW_SEA_TURTLE_395 -> Items.ENCHANTED_LYRE4_6127
+                    Items.RAW_SHARK_383 -> Items.ENCHANTED_LYRE_2_6125
+                    Items.RAW_MANTA_RAY_389 -> Items.ENCHANTED_LYRE_3_6126
+                    Items.RAW_SEA_TURTLE_395 -> Items.ENCHANTED_LYRE_4_6127
                     else -> null
                 }
             }

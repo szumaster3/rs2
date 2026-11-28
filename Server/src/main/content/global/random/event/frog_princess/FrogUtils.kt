@@ -15,14 +15,14 @@ import shared.consts.*
  * Utils for Frog random event.
  */
 object FrogUtils {
-    const val FROG_APPEARANCE_NPC = NPCs.FROG_2473
+    const val FROG_APPEARANCE_NPC = NPCs.H_A_M_AGENT_WALTON_2473
     private const val FROG_PRINCE_NPC = NPCs.FROG_PRINCE_2474
     private const val FROG_PRINCESS_NPC = NPCs.FROG_PRINCESS_2475
-    const val TRANSFORM_INTO_FROG = Animations.MORPH_TO_FROG_2377
-    const val TRANSFORM_INTO_HUMAN = Animations.MORPH_FROM_FROG_2375
-    const val FROG_KISS_ANIM = Animations.FROG_KISS_2374
-    private const val HUMAN_KISS_ANIM = Animations.HUMAN_BLOW_KISS_1374
-    private const val HUMAN_KISS_GFX = Graphics.KISS_EMOTE_ORIGINAL_1702
+    const val TRANSFORM_INTO_FROG = Animations.HUMAN_CHANGE_INTO_FROG_2377
+    const val TRANSFORM_INTO_HUMAN = Animations.FROG_CHANGE_INTO_HUMAN_2375
+    const val FROG_KISS_ANIM = Animations.GIANT_FROG_KISS_2374
+    private const val HUMAN_KISS_ANIM = Animations.EMOTE_BLOW_KISS_1374
+    private const val HUMAN_KISS_GFX = Graphics.EMOTE_UPDATE_BLOW_KISS_SPOT_1702
 
     /**
      * Cleans up the event.
@@ -54,11 +54,11 @@ object FrogUtils {
                     face(player, npc, 3)
                     face(npc, player, 3)
                     npc.animate(Animation(FROG_KISS_ANIM))
-                    player.animate(Animation(Animations.HUMAN_KISS_THE_FROG_2376))
+                    player.animate(Animation(Animations.HUMAN_FROG_KISS_2376))
                     return@queueScript delayScript(player, 3)
                 }
                 1 -> {
-                    visualize(npc, TRANSFORM_INTO_HUMAN, Graphics.SPELL_SPLASH_85)
+                    visualize(npc, TRANSFORM_INTO_HUMAN, Graphics.FAILEDSPELL_1_85)
                     return@queueScript delayScript(player, 2)
                 }
                 2 -> {
@@ -81,7 +81,7 @@ object FrogUtils {
                     npc.reTransform()
                     cleanup(player)
                     openInterface(player, Components.FADE_FROM_BLACK_170)
-                    addItemOrDrop(player, Items.FROG_TOKEN_6183)
+                    addItemOrDrop(player, Items.RANDOM_EVENT_GIFT_6183)
                     sendMessage(player, "You've received a frog token!")
                     return@queueScript stopExecuting(player)
                 }

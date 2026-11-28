@@ -38,6 +38,6 @@ class ZombieRatNPC : AbstractNPC {
     override fun getIds(): IntArray = ID
 
     companion object {
-        private val ID = intArrayOf(NPCs.ZOMBIE_RAT_6088, NPCs.ZOMBIE_RAT_6089, NPCs.ZOMBIE_RAT_6090)
+        private val ID = intArrayOf(NPCs.DRAGONSLAYER_GIANTRAT_1_KEY_6088, NPCs.DRAGONSLAYER_GIANTRAT_2_6089, NPCs.DRAGONSLAYER_GIANTRAT_3_6090)
     }
 }

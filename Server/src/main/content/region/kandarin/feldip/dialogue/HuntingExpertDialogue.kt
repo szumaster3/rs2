@@ -123,10 +123,10 @@ class HuntingExpertDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = HuntingExpertDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HUNTING_EXPERT_5113)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HUNTING_JUNGLE_INFORMATION_5113)
 
     companion object {
-        private val ITEMS = arrayOf(Item(Items.HUNTER_CAPE_9948), Item(Items.HUNTER_CAPET_9949), Item(Items.HUNTER_HOOD_9950))
+        private val ITEMS = arrayOf(Item(Items.HUNTER_CAPE_9948), Item(Items.HUNTER_CAPE_T_9949), Item(Items.HUNTER_HOOD_9950))
         private val COINS = Item(Items.COINS_995, 99000)
     }
 }

@@ -23,7 +23,7 @@ class CatBasketPlugin : InteractionListener {
                 return@onUseWith false
             }
             lock(player, 1)
-            animate(player, Animation(Animations.HUMAN_BURYING_BONES_827))
+            animate(player, Animation(Animations.HUMAN_PICKUPFLOOR_827))
             if (Pets.forId(item.id) != null) {
                 player.familiarManager.morphPet(item, !player.isAdmin, scenery.location)
             }
@@ -66,9 +66,9 @@ class CatBasketPlugin : InteractionListener {
 
         private val blanketIDs =
             intArrayOf(
-                Scenery.PET_BLANKET_13574,
-                Scenery.PET_BASKET_13575,
-                Scenery.PET_BASKET_13576,
+                Scenery.CAT_BLANKET_13574,
+                Scenery.CAT_BASKET_13575,
+                Scenery.CUSHIONED_BASKET_13576,
             )
     }
 }

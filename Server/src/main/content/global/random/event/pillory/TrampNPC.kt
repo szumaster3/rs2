@@ -22,7 +22,7 @@ class TrampNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locati
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
         TrampNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TRAMP_2794, NPCs.TRAMP_2793, NPCs.TRAMP_2792)
+    override fun getIds(): IntArray = intArrayOf(NPCs.PILLORY_TRAMP_THROWER_YANILLE_2794, NPCs.PILLORY_TRAMP_THROWER_SEERS_2793, NPCs.PILLORY_TRAMP_THROWER_VARROCK_2792)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -35,8 +35,8 @@ class TrampNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locati
                 faceLocation(this, player.location)
                 queueScript(this, 2, QueueStrength.SOFT) {
                     sendChat(this, "Take that, you thief!")
-                    this.animate(Animation(Animations.THROW_385))
-                    spawnProjectile(this, player, Graphics.ROTTEN_TOMATOE_PROJECTILE_29)
+                    this.animate(Animation(Animations.HUMAN_THROW_385))
+                    spawnProjectile(this, player, Graphics.VIAL_TRAVEL_1_29)
                     return@queueScript stopExecuting(this)
                 }
             }

@@ -68,5 +68,5 @@ class LibrarianDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = LibrarianDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LIBRARIAN_2165)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_LIBRARIAN_2165)
 }

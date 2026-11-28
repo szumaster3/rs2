@@ -65,5 +65,5 @@ class StrangeOldManDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STRANGE_OLD_MAN_2024)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARROWS_OLDMAN_2024)
 }

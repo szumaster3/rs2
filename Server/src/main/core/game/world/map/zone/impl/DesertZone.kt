@@ -90,9 +90,9 @@ class DesertZone : MapZone(DESERT_ZONE, true), Plugin<Any?> {
     }
 
     companion object {
-        private val WATER_SKINS = arrayOf(Item(Items.WATERSKIN4_1823), Item(Items.WATERSKIN3_1825), Item(Items.WATERSKIN2_1827), Item(Items.WATERSKIN1_1829))
+        private val WATER_SKINS = arrayOf(Item(Items.WATERSKIN_4_1823), Item(Items.WATERSKIN_3_1825), Item(Items.WATERSKIN_2_1827), Item(Items.WATERSKIN_1_1829))
         private val VESSILS = arrayOf(intArrayOf(Items.JUG_OF_WATER_1937, Items.JUG_1935), intArrayOf(Items.BUCKET_OF_WATER_1929, Items.BUCKET_1925), intArrayOf(Items.BOWL_OF_WATER_1921, Items.BOWL_1923), intArrayOf(Items.VIAL_OF_WATER_227, Items.VIAL_229), intArrayOf(Items.CUP_OF_WATER_4458, Items.EMPTY_CUP_1980))
-        private val ANIMATION = Animation(Animations.EAT_OLD_829)
+        private val ANIMATION = Animation(Animations.HUMAN_EAT_829)
         private val PLAYERS: MutableList<Player> = ArrayList(20)
         private val DESERT_DELAY = "desert-delay"
         private val TUTORIAL_COMPLETE = GameAttributes.TUTORIAL_COMPLETE
@@ -141,7 +141,7 @@ class DesertZone : MapZone(DESERT_ZONE, true), Plugin<Any?> {
                     return true
                 }
             }
-            if (inInventory(player, Items.WATERSKIN0_1831, 1)) {
+            if (inInventory(player, Items.WATERSKIN_0_1831, 1)) {
                 sendMessage(player, "Perhaps you should fill up one of your empty waterskins.")
             } else {
                 sendMessage(player, "You should get a waterskin for any travelling in the desert.")

@@ -60,5 +60,5 @@ class WizardAcanthaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_ACANTHA_8031)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RCGUILD_WIZARD_ACANTHA_8031)
 }

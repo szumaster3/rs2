@@ -68,5 +68,5 @@ class ElissaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ELISSA_1912)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GOLEM_ELISSA_1912)
 }

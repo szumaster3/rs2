@@ -96,7 +96,7 @@ class RestlessGhostDialogue(player: Player? = null) : Dialogue(player) {
             30 -> npc(FaceAnim.HAPPY, "Ooh, thank you. That would be such a great relief!").also { stage++ }
             31 -> npc(FaceAnim.HALF_GUILTY, "It is so dull being a ghost...").also { stage = END_DIALOGUE }
             32 -> {
-                if (inInventory(player, Items.GHOSTS_SKULL_553, 1)) {
+                if (inInventory(player, Items.MUDDY_SKULL_553, 1)) {
                     player(FaceAnim.HALF_GUILTY, "I have found it!").also { stage = 36 }
                 } else {
                     player(FaceAnim.HALF_GUILTY, "Sorry, I can't find it at the moment.").also { stage++ }
@@ -110,5 +110,5 @@ class RestlessGhostDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.RESTLESS_GHOST_457)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOSTX_457)
 }

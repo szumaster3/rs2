@@ -28,7 +28,7 @@ class CroneDialogue(val forced: Boolean) : DialogueFile() {
         componentID: Int,
         buttonID: Int,
     ) {
-        npc = NPC(NPCs.CRONE_217)
+        npc = NPC(NPCs.GRAIL_CRONE_217)
 
         if (forced) {
             when (stage) {

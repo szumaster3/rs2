@@ -16,7 +16,7 @@ class OldCroneAnimalDialogue : DialogueFile() {
     ) {
         val questStage = getQuestStage(player!!, Quests.ANIMAL_MAGNETISM.questName)
         val hasCroneAmulet = hasAnItem(player!!, Items.CRONE_MADE_AMULET_10500).container != null
-        npc = NPC(NPCs.OLD_CRONE_1695)
+        npc = NPC(NPCs.AHOY_CRONE_1695)
 
         when (questStage) {
             16 -> when (stage) {

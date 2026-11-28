@@ -94,7 +94,7 @@ class LunarSpell : SpellListener("lunar") {
         onCast(LunarSpells.CURE_GROUP, NONE) { player, _ ->
             requires(player, 74, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 2), Item(Items.COSMIC_RUNE_564, 2)))
             removeRunes(player, true)
-            visualizeSpell(player, Animations.HEAL_GROUP_4409, 744, 130, Sounds.LUNAR_CURE_GROUP_2882)
+            visualizeSpell(player, Animations.QUEST_LUNAR_SPELL_CAST_SPELL_ON_GROUP_4409, 744, 130, Sounds.LUNAR_CURE_GROUP_2882)
 
             curePoison(player)
 
@@ -128,7 +128,7 @@ class LunarSpell : SpellListener("lunar") {
 
             removeRunes(player, true)
             playAudio(player, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2900)
-            visualizeSpell(player, Animations.LUNAR_CURE_ME_4411, 742, 90, Sounds.LUNAR_CURE_2884)
+            visualizeSpell(player, Animations.QUEST_LUNAR_PUSHING_MAGIC_ANIMATION_4411, 742, 90, Sounds.LUNAR_CURE_2884)
             curePoison(player)
             addXP(player, 69.0)
             sendMessage(player, "You have been cured of poison.")
@@ -159,7 +159,7 @@ class LunarSpell : SpellListener("lunar") {
                     return@onCast
                 }
                 player.face(p)
-                visualizeSpell(player, Animations.LUNAR_CURE_ME_4411, 736, 130, Sounds.LUNAR_CURE_OTHER_2886)
+                visualizeSpell(player, Animations.QUEST_LUNAR_PUSHING_MAGIC_ANIMATION_4411, 736, 130, Sounds.LUNAR_CURE_OTHER_2886)
                 visualizeSpell(p, -1, 736, 130, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
                 removeRunes(player, true)
                 curePoison(p)
@@ -208,7 +208,7 @@ class LunarSpell : SpellListener("lunar") {
             patch.cureDisease()
             removeRunes(player)
             addXP(player, 60.0)
-            visualizeSpell(player, Animations.HEAL_GROUP_4409, 748, 100, Sounds.LUNAR_CURE_GROUP_2882)
+            visualizeSpell(player, Animations.QUEST_LUNAR_SPELL_CAST_SPELL_ON_GROUP_4409, 748, 100, Sounds.LUNAR_CURE_GROUP_2882)
             setDelay(player, false)
         }
 
@@ -223,23 +223,23 @@ class LunarSpell : SpellListener("lunar") {
             }
 
             val timer = getOrStartTimer<SkillRestore>(player)
-            animate(player, Animations.DREAM_SPELL_6295)
+            animate(player, Animations.DREAM_PLAYER_DREAM_SPELL_SIT_DOWN_6295)
             removeRunes(player, true)
             addXP(player, 82.0)
             delayEntity(player, 4)
             queueScript(player, 4, QueueStrength.WEAK) { stage: Int ->
                 if (stage == 0) {
-                    sendGraphics(Graphics.SLEEPING_ZZZ_1056, player.location)
+                    sendGraphics(Graphics.DREAM_ZEDS_1056, player.location)
                     playAudio(player, Sounds.LUNAR_SLEEP_3619)
                     return@queueScript delayScript(player, 5)
                 }
-                animate(player, Animations.LUNAR_DREAM_MID_6296)
-                sendGraphics(Graphics.SLEEPING_ZZZ_1056, player.location)
+                animate(player, Animations.DREAM_PLAYER_DREAM_SPELL_READY_6296)
+                sendGraphics(Graphics.DREAM_ZEDS_1056, player.location)
                 if (stage.mod(10) == 0) {
                     val amt = timer.getHealAmount(player)
                     heal(player, amt)
                     if (player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
-                        animate(player, Animations.GET_UP_FROM_SLEEPING_DREAM_SPELL_6297)
+                        animate(player, Animations.DREAM_PLAYER_DREAM_SPELL_GET_UP_6297)
                         return@queueScript stopExecuting(player)
                     }
                 }
@@ -274,7 +274,7 @@ class LunarSpell : SpellListener("lunar") {
 
                 player.face(p)
 
-                visualizeSpell(player, Animations.LUNAR_CURE_ME_4411, 738, 90, Sounds.LUNAR_ENERGY_TRANSFER_2885)
+                visualizeSpell(player, Animations.QUEST_LUNAR_PUSHING_MAGIC_ANIMATION_4411, 738, 90, Sounds.LUNAR_ENERGY_TRANSFER_2885)
                 visualize(p, -1, 738)
 
                 val hp = floor(player.skills.lifepoints * 0.10)
@@ -332,7 +332,7 @@ class LunarSpell : SpellListener("lunar") {
                 }
 
                 removeRunes(player, true)
-                animate(player, Animations.FERTILE_SPELL_4413)
+                animate(player, Animations.LUNAR_HUMAN_MAGIC_SUMMON2_4413)
                 sendGraphics(724, node.location)
                 playGlobalAudio(node.location, Sounds.LUNAR_FERTILIZE_2891)
                 patch.compost = CompostType.SUPER_COMPOST
@@ -385,8 +385,8 @@ class LunarSpell : SpellListener("lunar") {
             impact(player, transfer, ImpactHandler.HitsplatType.NORMAL)
             heal(other, transfer)
 
-            visualizeSpell(player, Animations.LUNAR_CURE_ME_4411, Graphics.VECNAS_SKULL_738, 92, Sounds.LUNAR_HEAL_OTHER_2895)
-            visualizeSpell(other, -1, Graphics.VECNAS_SKULL_738, 92, Sounds.LUNAR_HEAL_OTHER_INDIVIDUAL_2892)
+            visualizeSpell(player, Animations.QUEST_LUNAR_PUSHING_MAGIC_ANIMATION_4411, Graphics.QUEST_LUNAR_SPELL_ENERGY_EXCHANGE_3_738, 92, Sounds.LUNAR_HEAL_OTHER_2895)
+            visualizeSpell(other, -1, Graphics.QUEST_LUNAR_SPELL_ENERGY_EXCHANGE_3_738, 92, Sounds.LUNAR_HEAL_OTHER_INDIVIDUAL_2892)
 
             addXP(player, 101.0)
         }
@@ -412,8 +412,8 @@ class LunarSpell : SpellListener("lunar") {
             }
 
             removeRunes(player)
-            delayEntity(player, Animation(Animations.LUNAR_HUMIDIFY_6294).duration)
-            visualizeSpell(player, Animations.LUNAR_HUMIDIFY_6294, Graphics.HUMIDIFY_GFX_1061, 20, Sounds.LUNAR_HUMIDIFY_3614)
+            delayEntity(player, Animation(Animations.DREAM_PLAYER_HUMIDIFY_SPELL_6294).duration)
+            visualizeSpell(player, Animations.DREAM_PLAYER_HUMIDIFY_SPELL_6294, Graphics.DREAM_HUMIDIFY_SPELL_SPOTANIM_1061, 20, Sounds.LUNAR_HUMIDIFY_3614)
             for (item in playerEmpties) {
                 val filled = HumidifyItems.forId(item.id)
                 removeItem(player, item.id) && addItem(player, filled)
@@ -439,8 +439,8 @@ class LunarSpell : SpellListener("lunar") {
                 return@onCast
             }
             setDelay(player, 2)
-            animate(player, Animations.LUNAR_HUNTER_KIT_6303)
-            sendGraphics(core.game.world.update.flag.context.Graphics(Graphics.MAKE_HUNTER_KIT_1074), player.location)
+            animate(player, Animations.DREAM_PLAYER_HUNTER_BOX_SPELL_6303)
+            sendGraphics(core.game.world.update.flag.context.Graphics(Graphics.DREAM_HUNTER_SPELL_SPOTANIM_1074), player.location)
             playAudio(player, Sounds.LUNAR_HUNTER_KIT_3615)
             addXP(player, 70.0)
         }
@@ -510,7 +510,7 @@ class LunarSpell : SpellListener("lunar") {
 
             lock(player, 3)
             setDelay(player, false)
-            visualizeSpell(player, Animations.LUNAR_PLANK_MAKE_6298, Graphics.PLANK_MAKE_GFX_1063, 100, Sounds.LUNAR_MAKE_PLANK_3617)
+            visualizeSpell(player, Animations.DREAM_PLAYER_MAKE_PLANK_SPELL_6298, Graphics.DREAM_PLANK_MAKE_SPELL_SPOTANIM_1063, 100, Sounds.LUNAR_MAKE_PLANK_3617)
             removeRunes(player)
             replaceSlot(player, node.asItem().slot, Item(planks.plank))
             addXP(player, 90.0)
@@ -528,7 +528,7 @@ class LunarSpell : SpellListener("lunar") {
                 removeRunes(player)
                 addXP(player, 63.0)
                 setDelay(player, false)
-                visualizeSpell(player, Animations.FERTILE_SPELL_4413, 728, 130, 3618)
+                visualizeSpell(player, Animations.LUNAR_HUMAN_MAGIC_SUMMON2_4413, 728, 130, 3618)
             }
         }
 
@@ -546,7 +546,7 @@ class LunarSpell : SpellListener("lunar") {
 
             setDelay(player, false)
             faceLocation(player, npc.location)
-            visualizeSpell(player, Animations.HUMAN_SPY_STAT_6293, Graphics.STAT_SPY_GFX_1060, Sounds.LUNAR_STAT_SPY_3620)
+            visualizeSpell(player, Animations.DREAM_PLAYER_MONSTEREXAM_STATSPY_6293, Graphics.DREAM_SPELL_MONSTEREXAM_STATSPY_SPOTANIM_2_1060, Sounds.LUNAR_STAT_SPY_3620)
             removeRunes(player)
             addXP(player, 61.0)
             openSingleTab(player, Components.DREAM_MONSTER_STAT_522)
@@ -592,13 +592,13 @@ class LunarSpell : SpellListener("lunar") {
                     if (playerJewellery.isEmpty())
                         return true
                     requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
-                    if(counter == 0) delay = animationDuration(Animation(Animations.LUNAR_STRING_JEWELLERY_4412)) + 1
+                    if(counter == 0) delay = animationDuration(Animation(Animations.LUNAR_HUMAN_MAGIC_SUMMON1_4412)) + 1
                     val item = playerJewellery[0]
                     val strung = StringJewelleryItems.forId(item.id)
                     setDelay(player,false)
                     if(removeItem(player, item) && addItem(player, strung)) {
                         removeRunes(player, true)
-                        visualizeSpell(player, Animations.LUNAR_STRING_JEWELLERY_4412, 730, 100, Sounds.LUNAR_STRING_AMULET_2903)
+                        visualizeSpell(player, Animations.LUNAR_HUMAN_MAGIC_SUMMON1_4412, 730, 100, Sounds.LUNAR_STRING_AMULET_2903)
                         rewardXP(player, Skills.CRAFTING, 4.0)
                         addXP(player, 83.0)
                         playerJewellery.remove(item)
@@ -663,7 +663,7 @@ class LunarSpell : SpellListener("lunar") {
 
             removeRunes(player, true)
             potion.effect.activate(player)
-            visualizeSpell(player, Animations.FERTILE_SPELL_4413, 733, 130, Sounds.LUNAR_STRENGTH_SHARE_2901)
+            visualizeSpell(player, Animations.LUNAR_HUMAN_MAGIC_SUMMON2_4413, 733, 130, Sounds.LUNAR_STRENGTH_SHARE_2901)
             player.inventory.remove(item)
             val newIndex = (potion.ids.size - doses) + shared
 
@@ -723,7 +723,7 @@ class LunarSpell : SpellListener("lunar") {
 
             removeRunes(player, true)
             potion.effect.activate(player)
-            visualizeSpell(player, Animations.FERTILE_SPELL_4413, 733, 130, Sounds.LUNAR_STAT_SHARE_2899)
+            visualizeSpell(player, Animations.LUNAR_HUMAN_MAGIC_SUMMON2_4413, 733, 130, Sounds.LUNAR_STAT_SHARE_2899)
             player.inventory.remove(item)
             val newIndex = (potion.ids.size - doses) + shared
 
@@ -773,7 +773,7 @@ class LunarSpell : SpellListener("lunar") {
             lock(player, secondsToTicks(3))
             addItem(player, Items.MOLTEN_GLASS_1775, output)
             removeRunes(player, true)
-            visualizeSpell(player, Animations.FERTILE_SPELL_4413, 729, 120, Sounds.LUNAR_HEATGLASS_2896)
+            visualizeSpell(player, Animations.LUNAR_HUMAN_MAGIC_SUMMON2_4413, 729, 120, Sounds.LUNAR_HEATGLASS_2896)
             addXP(player, 78.0)
             rewardXP(player, Skills.CRAFTING, output * 10.0)
         }
@@ -787,8 +787,8 @@ class LunarSpell : SpellListener("lunar") {
             val other = target as? Player
                 ?: return@onCast sendMessage(player, "You can only cast this spell on players.")
 
-            visualizeSpell(player, Animations.HUMAN_SPY_STAT_6293, Graphics.STAT_SPY_GFX_1059, Sounds.LUNAR_STAT_SPY_3620)
-            other.graphics(core.game.world.update.flag.context.Graphics(Graphics.GRAPHIC_734, 120))
+            visualizeSpell(player, Animations.DREAM_PLAYER_MONSTEREXAM_STATSPY_6293, Graphics.DREAM_SPELL_MONSTEREXAM_STATSPY_SPOTANIM_1_1059, Sounds.LUNAR_STAT_SPY_3620)
+            other.graphics(core.game.world.update.flag.context.Graphics(Graphics.QUEST_LUNAR_SPELL_ENERGY_EXCHANGE_1_734, 120))
             playGlobalAudio(other.location, Sounds.LUNAR_STAT_SPY_IMPACT_3621)
 
             Component(Components.DREAM_PLAYER_STATS_523).closeEvent = CloseEvent { p, _ ->
@@ -897,7 +897,7 @@ class LunarSpell : SpellListener("lunar") {
             }
 
             removeRunes(player, true)
-            player.animate(Animation(Animations.HEAL_GROUP_4409))
+            player.animate(Animation(Animations.QUEST_LUNAR_SPELL_CAST_SPELL_ON_GROUP_4409))
             playGlobalAudio(player.location, Sounds.LUNAR_HEAL_GROUP_2894)
             impact(player, healAmount, ImpactHandler.HitsplatType.NORMAL)
             for (p in players) {
@@ -932,21 +932,21 @@ class LunarSpell : SpellListener("lunar") {
 
         private enum class HumidifyItems(val empty: Int, val full: Int) {
             VIAL(          empty = Items.VIAL_229,           full = Items.VIAL_OF_WATER_227),
-            WATERSKIN0(    empty = Items.WATERSKIN0_1831,    full = Items.WATERSKIN4_1823),
-            WATERSKIN1(    empty = Items.WATERSKIN1_1829,    full = Items.WATERSKIN4_1823),
-            WATERSKIN2(    empty = Items.WATERSKIN2_1827,    full = Items.WATERSKIN4_1823),
-            WATERSKIN3(    empty = Items.WATERSKIN3_1825,    full = Items.WATERSKIN4_1823),
+            WATERSKIN0(    empty = Items.WATERSKIN_0_1831,    full = Items.WATERSKIN_4_1823),
+            WATERSKIN1(    empty = Items.WATERSKIN_1_1829,    full = Items.WATERSKIN_4_1823),
+            WATERSKIN2(    empty = Items.WATERSKIN_2_1827,    full = Items.WATERSKIN_4_1823),
+            WATERSKIN3(    empty = Items.WATERSKIN_3_1825,    full = Items.WATERSKIN_4_1823),
             BUCKET(        empty = Items.BUCKET_1925,        full = Items.BUCKET_OF_WATER_1929),
             BOWL(          empty = Items.BOWL_1923,          full = Items.BOWL_OF_WATER_1921),
             JUG(           empty = Items.JUG_1935,           full = Items.JUG_OF_WATER_1937),
-            WATERING_CAN0( empty = Items.WATERING_CAN_5331,  full = Items.WATERING_CAN8_5340),
-            WATERING_CAN1( empty = Items.WATERING_CAN1_5333, full = Items.WATERING_CAN8_5340),
-            WATERING_CAN2( empty = Items.WATERING_CAN2_5334, full = Items.WATERING_CAN8_5340),
-            WATERING_CAN3( empty = Items.WATERING_CAN3_5335, full = Items.WATERING_CAN8_5340),
-            WATERING_CAN4( empty = Items.WATERING_CAN4_5336, full = Items.WATERING_CAN8_5340),
-            WATERING_CAN5( empty = Items.WATERING_CAN5_5337, full = Items.WATERING_CAN8_5340),
-            WATERING_CAN6( empty = Items.WATERING_CAN6_5338, full = Items.WATERING_CAN8_5340),
-            WATERING_CAN7( empty = Items.WATERING_CAN7_5339, full = Items.WATERING_CAN8_5340),
+            WATERING_CAN0( empty = Items.WATERING_CAN_5331,  full = Items.WATERING_CAN_8_5340),
+            WATERING_CAN1( empty = Items.WATERING_CAN_1_5333, full = Items.WATERING_CAN_8_5340),
+            WATERING_CAN2( empty = Items.WATERING_CAN_2_5334, full = Items.WATERING_CAN_8_5340),
+            WATERING_CAN3( empty = Items.WATERING_CAN_3_5335, full = Items.WATERING_CAN_8_5340),
+            WATERING_CAN4( empty = Items.WATERING_CAN_4_5336, full = Items.WATERING_CAN_8_5340),
+            WATERING_CAN5( empty = Items.WATERING_CAN_5_5337, full = Items.WATERING_CAN_8_5340),
+            WATERING_CAN6( empty = Items.WATERING_CAN_6_5338, full = Items.WATERING_CAN_8_5340),
+            WATERING_CAN7( empty = Items.WATERING_CAN_7_5339, full = Items.WATERING_CAN_8_5340),
             FISHBOWL(      empty = Items.FISHBOWL_6667,      full = Items.FISHBOWL_6668),
             KETTLE(        empty = Items.KETTLE_7688,        full = Items.FULL_KETTLE_7690),
             ENCHANTED_VIAL(empty = Items.ENCHANTED_VIAL_731, full = Items.HOLY_WATER_732),

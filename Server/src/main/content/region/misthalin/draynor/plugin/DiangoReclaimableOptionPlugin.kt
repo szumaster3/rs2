@@ -66,7 +66,7 @@ class DiangoReclaimableOptionPlugin : InteractionListener {
 
         on(Items.RUBBER_CHICKEN_4566, IntType.ITEM, "operate", "Dance") { player, _ ->
             lockInteractions(player, 2)
-            animate(player, Animations.CHICKEN_DANCE_1835)
+            animate(player, Animations.HUMAN_CHICKEN_DANCE_1835)
             playJingle(player, 99)
             playAudio(player, Sounds.CHICKEN_ATTACK_355, 100)
             return@on true
@@ -101,7 +101,7 @@ class DiangoReclaimableOptionPlugin : InteractionListener {
 
         on(Items.REINDEER_HAT_10507, IntType.ITEM, "operate") { player, _ ->
             lockInteractions(player, 2)
-            visualize(player, Animations.REINDEER_HAT_EMOTE_5059, Graphics.RHUDOLF_EMOTE_GFX_859)
+            visualize(player, Animations.GUB_REINDEER_EMOTE_5059, Graphics.GUB_NOSE_GLOW_ANIM_859)
             return@on true
         }
 
@@ -127,7 +127,7 @@ class DiangoReclaimableOptionPlugin : InteractionListener {
 
         on(Items.CHOCATRICE_CAPE_12645, IntType.ITEM, "operate") { player, _ ->
             lockInteractions(player, 2)
-            visualize(player, 8903, Graphics.CHOCATRICE_CAPE_EASTER_EGG_EMOTE_1566)
+            visualize(player, 8903, Graphics.EASTER08_EMOTE_SPOTANIM_1566)
             return@on true
         }
 
@@ -159,40 +159,40 @@ class DiangoReclaimableOptionPlugin : InteractionListener {
 
         private val horseyMap =
             mapOf(
-                Items.TOY_HORSEY_2520 to Animations.PLAY_WITH_BROWN_HORSE_918,
-                Items.TOY_HORSEY_2522 to Animations.PLAY_WITH_WHITE_HORSE_919,
-                Items.TOY_HORSEY_2524 to Animations.PLAY_WITH_BLACK_HORSE_920,
-                Items.TOY_HORSEY_2526 to Animations.PLAY_WITH_GRAY_HORSE_921,
+                Items.TOY_HORSEY_2520 to Animations.HUMAN_PLAYHORSEY_BROWN_918,
+                Items.TOY_HORSEY_2522 to Animations.HUMAN_PLAYHORSEY_WHITE_919,
+                Items.TOY_HORSEY_2524 to Animations.HUMAN_PLAYHORSEY_BLACK_920,
+                Items.TOY_HORSEY_2526 to Animations.HUMAN_PLAYHORSEY_GREY_921,
             )
 
-        private val SNOWGLOBE_SHAKE = Animation(Animations.SNOWGLOBE_SHAKE_7535)
-        private val SNOWGLOBE_HOLDFACE = Animation(Animations.SNOWGLOBE_HOLD_FACE_7536)
+        private val SNOWGLOBE_SHAKE = Animation(Animations.MAH4_DIGSITE_PORTAL_7535)
+        private val SNOWGLOBE_HOLDFACE = Animation(Animations.MAH4_ORB_ALTAR_BROKEN_7536)
         private val SNOWGLOBE_INTERFACE = Components.SNOWGLOBE_INTERFACE_659
 
-        private val SPINNING_PLATE_SPIN = Animation(Animations.HUMAN_SPINNING_PLATE_START_1902)
-        private val SPINNING_PLATE_PUT_DOWN = Animation(Animations.HUMAN_SPINNING_PLATE_SUCCESS_1904)
+        private val SPINNING_PLATE_SPIN = Animation(Animations.START_SPINNING_PLATE_1902)
+        private val SPINNING_PLATE_PUT_DOWN = Animation(Animations.STOP_SPINNING_PLATE_1904)
 
-        private val TOY_KITE_FLY = Animation(Animations.FLY_KITE_8990)
+        private val TOY_KITE_FLY = Animation(Animations.APRIL08_PLAYER_KITE_PLAY_8990)
 
-        private val YOYO_PLAY = Animation(Animations.YO_YO_1457)
-        private val YOYO_LOOP = Animation(Animations.YO_YO_1458)
-        private val YOYO_WALK = Animation(Animations.YO_YO_1459)
-        private val YOYO_CRAZY = Animation(Animations.YO_YO_1460)
+        private val YOYO_PLAY = Animation(Animations.YOYO_UPDOWN_1457)
+        private val YOYO_LOOP = Animation(Animations.YOYO_ROUNDWORLD_1458)
+        private val YOYO_WALK = Animation(Animations.YOYO_WALKDOG_1459)
+        private val YOYO_CRAZY = Animation(Animations.YOYO_ADVANCED_1460)
 
-        private val ZOMBIE_HEAD_TALK_AT = Animation(Animations.ZOMBIE_HEAD_ALAS_2840)
-        private val ZOMBIE_HEAD_DISPLAY = Animation(Animations.ZOMBIE_HEAD_2844)
+        private val ZOMBIE_HEAD_TALK_AT = Animation(Animations.HAMLET_HEAD_ALL_2840)
+        private val ZOMBIE_HEAD_DISPLAY = Animation(Animations.SCARE_KID_ZOMBIE_2844)
 
         private val MARIONETTES =
             intArrayOf(Items.RED_MARIONETTE_6867, Items.BLUE_MARIONETTE_6865, Items.GREEN_MARIONETTE_6866)
-        private val MARIONETTE_JUMP = Animation(Animations.MARIONETTE_JUMP_3003)
-        private val MARIONETTE_WALK = Animation(Animations.MARIONETTE_WALK_3004)
-        private val MARIONETTE_BOW = Animation(Animations.MARIONETTE_BOW_3005)
-        private val MARIONETTE_DANCE = Animation(Animations.MARIONETTE_DANCE_3006)
+        private val MARIONETTE_JUMP = Animation(Animations.HUMAN_MARIONETTE_JUMP_3003)
+        private val MARIONETTE_WALK = Animation(Animations.HUMAN_MARIONETTE_WALK_3004)
+        private val MARIONETTE_BOW = Animation(Animations.HUMAN_MARIONETTE_BOW_3005)
+        private val MARIONETTE_DANCE = Animation(Animations.HUMAN_MARIONETTE_DANCE_3006)
         private val MARIONETTE_GFX =
             arrayOf(
-                intArrayOf(Graphics.JUMP_MARIONETTE_RED_507, Graphics.WALK_MARIONETTE_RED_508, Graphics.BOW_MARIONETTE_RED_509, Graphics.DANCE_MARIONETTE_RED_510),
-                intArrayOf(Graphics.JUMP_MARIONETTE_BLUE_511, Graphics.WALK_MARIONETTE_BLUE_512, Graphics.BOW_MARIONETTE_BLUE_513, Graphics.DANCE_MARIONETTE_BLUE_514),
-                intArrayOf(Graphics.JUMP_MARIONETTE_GREEN_515, Graphics.WALK_MARIONETTE_GREEN_516, Graphics.BOW_MARIONETTE_GREEN_517, Graphics.DANCE_MARIONETTE_GREEN_518),
+                intArrayOf(Graphics.MARIONETTE_JUMP_1_507, Graphics.MARIONETTE_WALK_1_508, Graphics.MARIONETTE_BOW_1_509, Graphics.MARIONETTE_DANCE_1_510),
+                intArrayOf(Graphics.MARIONETTE_JUMP_2_511, Graphics.MARIONETTE_WALK_2_512, Graphics.MARIONETTE_BOW_2_513, Graphics.MARIONETTE_DANCE_2_514),
+                intArrayOf(Graphics.MARIONETTE_JUMP_3_515, Graphics.MARIONETTE_WALK_3_516, Graphics.MARIONETTE_BOW_3_517, Graphics.MARIONETTE_DANCE_3_518),
             )
     }
 }

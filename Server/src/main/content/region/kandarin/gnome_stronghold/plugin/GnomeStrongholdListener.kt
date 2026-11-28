@@ -14,7 +14,7 @@ import shared.consts.Scenery
 class GnomeStrongholdListener : InteractionListener {
 
     override fun defineListeners() {
-        on(intArrayOf(NPCs.GNOME_WOMAN_168,NPCs.GNOME_WOMAN_169), IntType.NPC, "Talk-to") { player, node ->
+        on(intArrayOf(NPCs.GNOMEFEMALE_168,NPCs.GNOMEFEMALE_DSKINNED_169), IntType.NPC, "Talk-to") { player, node ->
             openDialogue(player, GnomeWomanDialogue(), node.id)
             return@on true
         }

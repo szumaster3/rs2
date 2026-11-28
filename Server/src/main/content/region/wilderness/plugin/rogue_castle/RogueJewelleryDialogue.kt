@@ -22,7 +22,7 @@ class RogueJewelleryDialogue(
                 val total = amount * price
                 sendNPCDialogueLines(
                     player,
-                    NPCs.ROGUE_8122,
+                    NPCs.SUM2_ROGUE_PRISONER_8122,
                     FaceAnim.HAPPY,
                     false,
                     "That's a nice ${itemName.lowercase()} you've got there. I'll give you",
@@ -50,7 +50,7 @@ class RogueJewelleryDialogue(
                     if (!removed) {
                         sendNPCDialogue(
                             player,
-                            NPCs.ROGUE_8122,
+                            NPCs.SUM2_ROGUE_PRISONER_8122,
                             "Sorry, I can't seem to take those from you. Make sure it's unenchanted gold jewellery."
                         )
                         return
@@ -58,7 +58,7 @@ class RogueJewelleryDialogue(
                     addItem(player, Items.COINS_995, profit)
                     sendNPCDialogueLines(
                         player,
-                        NPCs.ROGUE_8122,
+                        NPCs.SUM2_ROGUE_PRISONER_8122,
                         FaceAnim.FRIENDLY,
                         false,
                         "It was a pleasure doing business with you. Come back if",
@@ -67,7 +67,7 @@ class RogueJewelleryDialogue(
                     if (invAmount > limitAmount) {
                         sendNPCDialogue(
                             player,
-                            NPCs.ROGUE_8122,
+                            NPCs.SUM2_ROGUE_PRISONER_8122,
                             "Whoa, that's quite a bit of jewellery! Selling only $limitAmount at a time."
                         )
                     }

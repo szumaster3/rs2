@@ -47,20 +47,20 @@ class ChampionChallengeNPC(id: Int = 0, location: Location? = null) : AbstractNP
         }
 
         when (id) {
-            NPCs.IMP_CHAMPION_3062 -> player.equipment[EquipmentContainer.SLOT_WEAPON]
+            NPCs.CHAMPIONS_IMP_3062 -> player.equipment[EquipmentContainer.SLOT_WEAPON]
                 ?.takeIf { it.definition.getConfiguration(ItemConfigParser.HAS_SPECIAL, false) }
                 ?.let { return block(rule.message) }
 
-            NPCs.GHOUL_CHAMPION_3059, NPCs.LEON_DCOUR_3067 -> {
+            NPCs.CHAMPIONS_GHOUL_3059, NPCs.LEON_DCOUR_3067 -> {
                 val used = getUsedOption(player)
                 if (freeSlots(player) != 28 || used in listOf("pick", "take")) return block(rule.message)
             }
 
-            NPCs.LESSER_DEMON_CHAMPION_3064 -> {
+            NPCs.CHAMPIONS_LESSERDEMON_3064 -> {
                 if (getUsedOption(player) in listOf("equip", "wield", "wear", "hold")) return block(rule.message)
             }
 
-            NPCs.EARTH_WARRIOR_CHAMPION_3057 -> {
+            NPCs.CHAMPIONS_EARTHWARRIOR_3057 -> {
                 player.prayer?.reset()
                 return sendMessage(player, rule.message, now)
             }
@@ -132,16 +132,16 @@ class ChampionChallengeNPC(id: Int = 0, location: Location? = null) : AbstractNP
          * The list of banned items for earth warrior champion.
          */
         private val prayerItems = intArrayOf(
-            Items.PRAYER_POTION1_143, Items.PRAYER_POTION1_144, Items.PRAYER_POTION2_141, Items.PRAYER_POTION2_142,
-            Items.PRAYER_POTION3_139, Items.PRAYER_POTION3_140, Items.PRAYER_POTION4_2434, Items.PRAYER_POTION4_2435,
-            Items.SUPER_RESTORE1_3030, Items.SUPER_RESTORE1_3031, Items.SUPER_RESTORE2_3028, Items.SUPER_RESTORE2_3029,
-            Items.SUPER_RESTORE3_3026, Items.SUPER_RESTORE3_3027, Items.SUPER_RESTORE4_3024, Items.SUPER_RESTORE4_3025,
-            Items.PRAYER_CAPE_9759, Items.PRAYER_CAPET_9760, Items.PRAYER_HOOD_9761, Items.PRAYER_CAPE_10643,
-            Items.PRAYER_POTION4_14209, Items.PRAYER_POTION4_14210, Items.PRAYER_POTION3_14211, Items.PRAYER_POTION3_14212,
-            Items.PRAYER_POTION2_14213, Items.PRAYER_POTION2_14214, Items.PRAYER_POTION1_14215, Items.PRAYER_POTION1_14216,
+            Items.PRAYER_POTION_1_143, Items.PRAYER_POTION_1_144, Items.PRAYER_POTION_2_141, Items.PRAYER_POTION_2_142,
+            Items.PRAYER_POTION_3_139, Items.PRAYER_POTION_3_140, Items.PRAYER_POTION_4_2434, Items.PRAYER_POTION_4_2435,
+            Items.SUPER_RESTORE_1_3030, Items.SUPER_RESTORE_1_3031, Items.SUPER_RESTORE_2_3028, Items.SUPER_RESTORE_2_3029,
+            Items.SUPER_RESTORE_3_3026, Items.SUPER_RESTORE_3_3027, Items.SUPER_RESTORE_4_3024, Items.SUPER_RESTORE_4_3025,
+            Items.PRAYER_CAPE_9759, Items.PRAYER_CAPE_T_9760, Items.PRAYER_HOOD_9761, Items.PRAYER_CAPE_10643,
+            Items.PRAYER_POTION_4_14209, Items.PRAYER_POTION_4_14210, Items.PRAYER_POTION_3_14211, Items.PRAYER_POTION_3_14212,
+            Items.PRAYER_POTION_2_14213, Items.PRAYER_POTION_2_14214, Items.PRAYER_POTION_1_14215, Items.PRAYER_POTION_1_14216,
             Items.FALADOR_SHIELD_1_14577, Items.FALADOR_SHIELD_2_14578, Items.FALADOR_SHIELD_3_14579,
-            Items.PRAYER_MIX1_11467, Items.PRAYER_MIX1_11468, Items.PRAYER_MIX2_11465, Items.PRAYER_MIX2_11466,
-            Items.SUP_RESTORE_MIX1_11495, Items.SUP_RESTORE_MIX1_11496, Items.SUP_RESTORE_MIX2_11493, Items.SUP_RESTORE_MIX2_11494
+            Items.PRAYER_MIX_1_11467, Items.PRAYER_MIX_1_11468, Items.PRAYER_MIX_2_11465, Items.PRAYER_MIX_2_11466,
+            Items.SUP_RESTORE_MIX_1_11495, Items.SUP_RESTORE_MIX_1_11496, Items.SUP_RESTORE_MIX_2_11493, Items.SUP_RESTORE_MIX_2_11494
         )
 
         /**
@@ -156,7 +156,7 @@ class ChampionChallengeNPC(id: Int = 0, location: Location? = null) : AbstractNP
                 return
             }
 
-            if (entry.npcId == NPCs.EARTH_WARRIOR_CHAMPION_3057 && player.hasPrayerItems()) {
+            if (entry.npcId == NPCs.CHAMPIONS_EARTHWARRIOR_3057 && player.hasPrayerItems()) {
                 sendNPCDialogue(player, NPCs.LARXUS_3050, "For this fight you're not allowed to use prayers!")
                 return
             }
@@ -193,17 +193,17 @@ class ChampionChallengeNPC(id: Int = 0, location: Location? = null) : AbstractNP
          * Configuration of combat rules for each Champion NPC.
          */
         private val styleRules = mapOf(
-            NPCs.GIANT_CHAMPION_3058 to StyleRule(setOf(CombatStyle.MELEE), setOf(CombatStyle.MAGIC, CombatStyle.RANGE), "Larxus said you could use only Melee in this duel."),
-            NPCs.GOBLIN_CHAMPION_3060 to StyleRule(setOf(CombatStyle.MAGIC), setOf(CombatStyle.MELEE, CombatStyle.RANGE), "Larxus said you could use only Spells in this duel."),
-            NPCs.HOBGOBLIN_CHAMPION_3061 to StyleRule(setOf(CombatStyle.MAGIC, CombatStyle.RANGE), setOf(CombatStyle.MELEE), "Larxus said you couldn't use Melee in this duel."),
-            NPCs.IMP_CHAMPION_3062 to StyleRule(null, null, "Larxus said you couldn't use Special Attacks in this duel."),
-            NPCs.JOGRE_CHAMPION_3063 to StyleRule(setOf(CombatStyle.MAGIC, CombatStyle.MELEE), setOf(CombatStyle.RANGE), "Larxus said you couldn't use Ranged Weapons."),
-            NPCs.ZOMBIES_CHAMPION_3066 to StyleRule(setOf(CombatStyle.MELEE, CombatStyle.RANGE), setOf(CombatStyle.MAGIC), "Larxus said you couldn't use Spells in this duel."),
-            NPCs.SKELETON_CHAMPION_3065 to StyleRule(setOf(CombatStyle.RANGE), setOf(CombatStyle.MELEE, CombatStyle.MAGIC), "Larxus said you could use only Ranged Weapons in this duel."),
-            NPCs.GHOUL_CHAMPION_3059 to StyleRule(null, null, "You can only fight with weapons, no inventory items."),
+            NPCs.CHAMPIONS_GIANT_3058 to StyleRule(setOf(CombatStyle.MELEE), setOf(CombatStyle.MAGIC, CombatStyle.RANGE), "Larxus said you could use only Melee in this duel."),
+            NPCs.CHAMPIONS_GOBLIN_3060 to StyleRule(setOf(CombatStyle.MAGIC), setOf(CombatStyle.MELEE, CombatStyle.RANGE), "Larxus said you could use only Spells in this duel."),
+            NPCs.CHAMPIONS_HOBGOBLIN_3061 to StyleRule(setOf(CombatStyle.MAGIC, CombatStyle.RANGE), setOf(CombatStyle.MELEE), "Larxus said you couldn't use Melee in this duel."),
+            NPCs.CHAMPIONS_IMP_3062 to StyleRule(null, null, "Larxus said you couldn't use Special Attacks in this duel."),
+            NPCs.CHAMPIONS_JOGRE_3063 to StyleRule(setOf(CombatStyle.MAGIC, CombatStyle.MELEE), setOf(CombatStyle.RANGE), "Larxus said you couldn't use Ranged Weapons."),
+            NPCs.CHAMPIONS_ZOMBIE_3066 to StyleRule(setOf(CombatStyle.MELEE, CombatStyle.RANGE), setOf(CombatStyle.MAGIC), "Larxus said you couldn't use Spells in this duel."),
+            NPCs.CHAMPIONS_SKELETON_3065 to StyleRule(setOf(CombatStyle.RANGE), setOf(CombatStyle.MELEE, CombatStyle.MAGIC), "Larxus said you could use only Ranged Weapons in this duel."),
+            NPCs.CHAMPIONS_GHOUL_3059 to StyleRule(null, null, "You can only fight with weapons, no inventory items."),
             NPCs.LEON_DCOUR_3067 to StyleRule(null, null, "You can only fight with weapons, no inventory items."),
-            NPCs.LESSER_DEMON_CHAMPION_3064 to StyleRule(null, null, "You cannot wear armour or weapons; only inventory items allowed."),
-            NPCs.EARTH_WARRIOR_CHAMPION_3057 to StyleRule(null, null, "For this fight you're not allowed to use prayers!")
+            NPCs.CHAMPIONS_LESSERDEMON_3064 to StyleRule(null, null, "You cannot wear armour or weapons; only inventory items allowed."),
+            NPCs.CHAMPIONS_EARTHWARRIOR_3057 to StyleRule(null, null, "For this fight you're not allowed to use prayers!")
         )
     }
 }

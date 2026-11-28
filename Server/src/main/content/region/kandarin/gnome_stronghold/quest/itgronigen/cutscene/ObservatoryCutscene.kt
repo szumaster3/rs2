@@ -53,7 +53,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
 
             4 -> {
                 face(getNPC(PROFESSOR)!!, player, 2)
-                animate(getNPC(PROFESSOR)!!, Animations.HUMAN_WAVE_863)
+                animate(getNPC(PROFESSOR)!!, Animations.EMOTE_WAVE_863)
                 dialogueUpdate(PROFESSOR, FaceAnim.HAPPY, "Oh, hi there.")
             }
 
@@ -62,7 +62,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
             7 -> dialogueUpdate(PROFESSOR, FaceAnim.FRIENDLY, "Thank you.")
             8 -> dialogueUpdate(PROFESSOR, FaceAnim.FRIENDLY, "Right, let's get this finished.")
             9 -> {
-                animate(getNPC(PROFESSOR)!!, Animations.HUMAN_THINK_857)
+                animate(getNPC(PROFESSOR)!!, Animations.EMOTE_THINK_857)
                 sendChat(getNPC(PROFESSOR)!!, "Hmmmm...")
                 timedUpdate(4)
             }
@@ -85,7 +85,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
             13 -> {
                 face(getNPC(PROFESSOR)!!, player, 3)
                 // has sound.
-                animate(getNPC(PROFESSOR)!!, Animations.OBSERVATORY_PROFESSOR_FIXES_TELESCOPE_6847)
+                animate(getNPC(PROFESSOR)!!, Animations.PROFESSOR_FIXING_SCOPE_HAMMER_TIME_6847)
                 sendChat(getNPC(PROFESSOR)!!, "Bit of a tap here...")
                 timedUpdate(8)
             }
@@ -121,7 +121,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
 
             19 -> {
                 // has sound.
-                animate(getNPC(PROFESSOR)!!, Animations.OBSERVATORY_PROFESSOR_FIXES_TELESCOPE_6848)
+                animate(getNPC(PROFESSOR)!!, Animations.PROFESSOR_FITTING_LENS_6848)
                 sendChat(getNPC(PROFESSOR)!!, "In here the lens.")
                 timedUpdate(6)
             }
@@ -140,7 +140,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
 
             23 -> {
                 playAudio(player, 3800)
-                animate(getNPC(PROFESSOR)!!, Animations.HUMAN_FIX_TELESCOPE_6845)
+                animate(getNPC(PROFESSOR)!!, Animations.PROFESSOR_FIXING_SCOPE_SCREW_DRIVER_6845)
                 timedUpdate(6)
             }
 
@@ -150,7 +150,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
             }
 
             25 -> {
-                animate(getNPC(PROFESSOR)!!, Animations.CHEER_862)
+                animate(getNPC(PROFESSOR)!!, Animations.EMOTE_CHEER_862)
                 timedUpdate(3)
             }
 
@@ -163,7 +163,7 @@ class ObservatoryCutscene(player: Player) : Cutscene(player) {
     }
 
     companion object {
-        val PROFESSOR = NPCs.OBSERVATORY_PROFESSOR_6121
+        val PROFESSOR = NPCs.OBSERVATORY_PROFESSOR_CUTSCENE_6121
         val OBSERVATORY = 9777
         val END_LOCATION = Location(2438, 3163, 0)
     }

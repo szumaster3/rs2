@@ -76,6 +76,6 @@ class IngridHradsonDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.INGRID_HRADSON_3696
+        NPCs.OLAF_INGRID_3696
     )
 }

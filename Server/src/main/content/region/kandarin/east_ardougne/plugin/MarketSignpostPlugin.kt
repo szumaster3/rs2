@@ -38,7 +38,7 @@ class MarketSignpostPlugin : OptionHandler() {
     private fun registerActivity() {
         val zone = object : MapZone("bustling area", true) {
             override fun interact(e: Entity, target: Node, option: Option): Boolean {
-                if (option.name.lowercase().contains("steal-from") && target.id == Scenery.BAKER_S_STALL_34384) {
+                if (option.name.lowercase().contains("steal-from") && target.id == Scenery.BAKERS_STALL_34384) {
                     GlobalStatistics.incrementStealCakes()
                 }
                 return false

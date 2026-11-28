@@ -15,8 +15,8 @@ import kotlin.math.min
  */
 class TreeSpiritNPC(
     override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.TREE_SPIRIT_438) {
-    val ids = (NPCs.TREE_SPIRIT_438..NPCs.TREE_SPIRIT_443).toList()
+) : RandomEventNPC(NPCs.CHOSEN_TORZEK_APPEARANCE_438) {
+    val ids = (NPCs.CHOSEN_TORZEK_APPEARANCE_438..NPCs.DELGON_443).toList()
 
     override fun init() {
         super.init()

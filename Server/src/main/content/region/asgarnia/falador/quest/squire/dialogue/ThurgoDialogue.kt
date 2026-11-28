@@ -246,7 +246,7 @@ class ThurgoDialogue(player: Player? = null) : Dialogue(player) {
         private var quest: Quest? = null
         private val ITEMS = arrayOf(
             Item(Items.SMITHING_CAPE_9795),
-            Item(Items.SMITHING_CAPET_9796),
+            Item(Items.SMITHING_CAPE_T_9796),
             Item(Items.SMITHING_HOOD_9797)
         )
         private val COINS = Item(Items.COINS_995, 99000)

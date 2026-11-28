@@ -14,7 +14,7 @@ object SpellProjectile {
     /**
      * Default spell animation.
      */
-    val ANIMATION = Animation(Animations.CAST_SPELL_711, Priority.HIGH)
+    val ANIMATION = Animation(Animations.HUMAN_CASTSTRIKE_711, Priority.HIGH)
 
     /**
      * Creates a new projectile.

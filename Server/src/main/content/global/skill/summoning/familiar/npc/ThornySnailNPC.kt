@@ -20,7 +20,7 @@ import shared.consts.NPCs
 import kotlin.math.floor
 
 @Initializable
-class ThornySnailNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.THORNY_SNAIL_6806) :
+class ThornySnailNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_SNAIL_6806) :
     BurdenBeast(owner, id, 1600, Items.THORNY_SNAIL_POUCH_12019, 3, 3) {
     override fun construct(owner: Player, id: Int): Familiar {
         return ThornySnailNPC(owner, id)
@@ -58,6 +58,6 @@ class ThornySnailNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THORNY_SNAIL_6806, NPCs.THORNY_SNAIL_6807)
+        return intArrayOf(NPCs.LORE_SNAIL_6806, NPCs.LORE_SNAIL_COMBAT_6807)
     }
 }

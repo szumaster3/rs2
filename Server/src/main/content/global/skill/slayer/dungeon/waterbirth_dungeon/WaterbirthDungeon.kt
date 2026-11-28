@@ -217,9 +217,9 @@ class WaterbirthDungeon : MapZone(
 
         companion object {
             val IDS = intArrayOf(
-                NPCs.DOOR_SUPPORT_2440,
-                NPCs.DOOR_SUPPORT_2443,
-                NPCs.DOOR_SUPPORT_2446
+                NPCs.DAGANNOTH_WEAK_DOOR_SOUTH_2440,
+                NPCs.DAGANNOTH_WEAK_DOOR_WEST_2443,
+                NPCs.DAGANNOTH_WEAK_DOOR_NORTH_2446
             )
         }
     }

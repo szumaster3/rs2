@@ -35,5 +35,5 @@ class PriestDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PRIEST_358)
+    override fun getIds(): IntArray = intArrayOf(NPCs.W_ARDOUNGEPRIEST_358)
 }

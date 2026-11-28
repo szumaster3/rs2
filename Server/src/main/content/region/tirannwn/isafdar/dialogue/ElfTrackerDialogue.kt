@@ -69,6 +69,6 @@ class ElfTrackerDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELF_TRACKER_1199)
+        return intArrayOf(NPCs.REGICIDE_OLD_CAMP_TRACKER_1199)
     }
 }

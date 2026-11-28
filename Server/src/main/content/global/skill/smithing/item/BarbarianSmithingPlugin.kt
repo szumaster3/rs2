@@ -82,7 +82,7 @@ class BarbarianSmithingPlugin : InteractionListener {
                 return@queueScript stopExecuting(player)
             }
 
-            animate(player, Animations.HAMMER_6712)
+            animate(player, Animations.BRUT_HUMAN_SMITHING_6712)
 
             if (removeItem(player, barsItem) && removeItem(player, woodItem)) {
                 addItem(player, productId, 1)

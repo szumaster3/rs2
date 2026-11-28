@@ -68,7 +68,7 @@ object BarrowsEquipment {
             // Verac
             BarrowsItemDefinition("verac", "helm", "Verac's helm", 60_000, listOf(Items.VERACS_HELM_4753, Items.VERACS_HELM_100_4976, Items.VERACS_HELM_75_4977, Items.VERACS_HELM_50_4978, Items.VERACS_HELM_25_4979, Items.VERACS_HELM_0_4980)),
             BarrowsItemDefinition("verac", "weapon", "Verac's flail", 100_000, listOf(Items.VERACS_FLAIL_4755, Items.VERACS_FLAIL_100_4982, Items.VERACS_FLAIL_75_4983, Items.VERACS_FLAIL_50_4984, Items.VERACS_FLAIL_25_4985, Items.VERACS_FLAIL_0_4986)),
-            BarrowsItemDefinition("verac", "body", "Verac's brassard", 90_000, listOf(Items.VERACS_BRASSARD_4757, Items.VERACS_TOP_100_4988, Items.VERACS_TOP_75_4989, Items.VERACS_TOP_50_4990, Items.VERACS_TOP_25_4991, Items.VERACS_TOP_0_4992)),
+            BarrowsItemDefinition("verac", "body", "Verac's brassard", 90_000, listOf(Items.VERACS_BRASSARD_4757, Items.VERACS_BRASSARD_100_4988, Items.VERACS_BRASSARD_75_4989, Items.VERACS_BRASSARD_50_4990, Items.VERACS_BRASSARD_25_4991, Items.VERACS_BRASSARD_0_4992)),
             BarrowsItemDefinition("verac", "legs", "Verac's plateskirt", 80_000, listOf(Items.VERACS_PLATESKIRT_4759, Items.VERACS_SKIRT_100_4994, Items.VERACS_SKIRT_75_4995, Items.VERACS_SKIRT_50_4996, Items.VERACS_SKIRT_25_4997, Items.VERACS_SKIRT_0_4998)),
             // Ahrim
             BarrowsItemDefinition("ahrim", "helm", "Ahrim's hood", 60_000, listOf(Items.AHRIMS_HOOD_4708, Items.AHRIMS_HOOD_100_4856, Items.AHRIMS_HOOD_75_4857, Items.AHRIMS_HOOD_50_4858, Items.AHRIMS_HOOD_25_4859, Items.AHRIMS_HOOD_0_4860)),

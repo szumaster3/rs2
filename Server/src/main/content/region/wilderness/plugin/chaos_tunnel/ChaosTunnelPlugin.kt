@@ -182,7 +182,7 @@ class ChaosTunnelPlugin : MapArea, InteractionListener {
             return@on true
         }
 
-        on(NPCs.SUROK_MAGIS_7136, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.DSD_SUROK_BOSS_FIGHT_7136, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, SurokMagisDialogue(), node)
             return@on true
         }

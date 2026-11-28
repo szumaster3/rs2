@@ -23,5 +23,5 @@ class ResearcherDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.RESEARCHER_4568)
+    override fun getIds(): IntArray = intArrayOf(NPCs.QIP_DIGSITE_RESEARCHER_4568)
 }

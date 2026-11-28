@@ -21,7 +21,7 @@ class LostTribePlugin : InteractionListener {
         on(CHEST, IntType.SCENERY, "open") { player, _ ->
             if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 47 && inInventory(player, Items.KEY_423, 1)) {
                 removeItem(player, Item(Items.KEY_423))
-                for (item in arrayOf(Items.HAM_ROBE_4300, Items.HAM_SHIRT_4298, Items.HAM_HOOD_4302).map { Item(it) }) {
+                for (item in arrayOf(Items.H_A_M_ROBE_4300, Items.H_A_M_SHIRT_4298, Items.H_A_M_HOOD_4302).map { Item(it) }) {
                     if (!player.inventory.add(item)) {
                         GroundItemManager.create(item, player)
                     }
@@ -41,7 +41,7 @@ class LostTribePlugin : InteractionListener {
 
                     override fun pulse(): Boolean {
                         when (counter++) {
-                            0 -> player.animator.animate(Animation(Animations.HUMAN_PICKPOCKETING_881))
+                            0 -> player.animator.animate(Animation(Animations.HUMAN_PICKPOCKET_881))
                             3 -> {
                                 if (getQuestStage(player, Quests.THE_LOST_TRIBE.questName) == 47 &&
                                     !inInventory(
@@ -100,7 +100,7 @@ class LostTribePlugin : InteractionListener {
         }
 
         on(GOBLIN_FOLLOWERS, IntType.NPC, "follow") { player, node ->
-            if (node.asNpc().id == NPCs.MISTAG_2084) {
+            if (node.asNpc().id == NPCs.LOST_TRIBE_MISTAG_2084) {
                 GoblinFollower.sendToLumbridge(player)
             } else {
                 GoblinFollower.sendToMines(player)
@@ -163,13 +163,13 @@ class LostTribePlugin : InteractionListener {
     }
 
     companion object {
-        val GOBLIN_FOLLOWERS = intArrayOf(NPCs.MISTAG_2084, NPCs.KAZGAR_2086)
+        val GOBLIN_FOLLOWERS = intArrayOf(NPCs.LOST_TRIBE_MISTAG_2084, NPCs.KAZGAR_2086)
         private const val GOBLIN_BOOK = Items.GOBLIN_SYMBOL_BOOK_5009
         private const val BROOCH = Items.BROOCH_5008
         private const val CRATE = Scenery.CRATE_6911
         private const val BOOKCASE = Scenery.BOOKCASE_6916
         private const val CHEST = Scenery.CHEST_6910
-        private const val SIGMUND = NPCs.SIGMUND_2082
+        private const val SIGMUND = NPCs.LOST_TRIBE_SIGMUND_THERE_2082
         private val pickaxeIDs =
             intArrayOf(
                 Items.BRONZE_PICKAXE_1265,

@@ -17,7 +17,7 @@ class ZavisticRarveNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = ZavisticRarveNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ZAVISTIC_RARVE_2059)
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -32,7 +32,7 @@ class ZavisticRarveNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
     companion object {
         @JvmStatic
         fun spawnWizard(player: Player) {
-            val wizard = ZavisticRarveNPC(NPCs.ZAVISTIC_RARVE_2059)
+            val wizard = ZavisticRarveNPC(NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059)
             wizard.location = Location.create(2598, 3087, 0)
             wizard.isWalks = false
             wizard.isAggressive = false
@@ -47,7 +47,7 @@ class ZavisticRarveNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
                     override fun pulse(): Boolean {
                         wizard.init()
                         setAttribute(player, ZogreUtils.NPC_ACTIVE, true)
-                        openDialogue(player, NPCs.ZAVISTIC_RARVE_2059, wizard.id)
+                        openDialogue(player, NPCs.ZOGRE_HUMAN_ZAVISTIC_RARVE_2059, wizard.id)
                         return true
                     }
                 },

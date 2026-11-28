@@ -12,10 +12,10 @@ import shared.consts.Items
 import shared.consts.Sounds
 
 class MTASpellPlugin : SpellListener("modern") {
-    private val lowAlchemyAnimation = Animations.HUMAN_CAST_LOW_ALCHEMY_SPELL_712
+    private val lowAlchemyAnimation = Animations.HUMAN_CASTLOWLVLALCHEMY_712
     private val lowAlchemyGraphics = Graphics(112, 5)
-    private val highAlchemyAnimation = Animations.HIGH_ALCHEMY_713
-    private val highAlchemyGraphics = Graphics(shared.consts.Graphics.HIGH_LEVEL_ALCHEMY_113, 5)
+    private val highAlchemyAnimation = Animations.HUMAN_CASTHIGHLVLALCHEMY_713
+    private val highAlchemyGraphics = Graphics(shared.consts.Graphics.HIGHLVLALCHEMY_113, 5)
     private val mtaAlchemyItems =
         AlchemistPlaygroundPlugin.AlchemistItem
             .values()

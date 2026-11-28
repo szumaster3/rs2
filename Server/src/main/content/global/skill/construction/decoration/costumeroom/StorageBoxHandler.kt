@@ -86,13 +86,13 @@ class StorageBoxHandler : InteractionListener {
 
     private fun openBox(player: Player, obj: Scenery) {
         playAudio(player, Sounds.CHEST_OPEN_52)
-        animate(player, Animations.HUMAN_OPEN_CHEST_536)
+        animate(player, Animations.HUMAN_OPENCHEST_536)
         replaceScenery(obj, obj.id + 1, -1)
     }
 
     private fun closeBox(player: Player, obj: Scenery) {
         playAudio(player, Sounds.CHEST_CLOSE_51)
-        animate(player, Animations.HUMAN_CLOSE_CHEST_538)
+        animate(player, Animations.HUMAN_OPENCUPBOARD_538)
         replaceScenery(obj, obj.id - 1, -1)
     }
 }

@@ -12,7 +12,7 @@ import core.plugin.Plugin
 import shared.consts.Components
 import shared.consts.NPCs
 
-val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021, NPCs.GOTH_LEPRECHAUN_8000, NPCs.TOOL_LEPRECHAUN_4965, NPCs.TECLYN_2861)
+val TL_IDS = arrayOf(NPCs.FARMING_TOOLS_LEPRECHAUN_3021, NPCs.SUM1_GOTH_LEPRECHAUN_8000, NPCs.MYARM_LEPRECHAUN_4965, NPCs.TECLYN_2861)
 
 @Initializable
 class ToolLeprechaunHandler : OptionHandler() {

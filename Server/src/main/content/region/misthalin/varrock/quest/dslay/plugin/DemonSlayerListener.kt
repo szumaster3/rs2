@@ -21,18 +21,18 @@ class DemonSlayerListener : InteractionListener {
          * Handles interaction with manhole.
          */
 
-        on(Objects.VARROCK_MANHOLE_CLOSED_881, IntType.SCENERY, "open") { _, node ->
+        on(Objects.MANHOLE_881, IntType.SCENERY, "open") { _, node ->
             val manhole = node.asScenery()
             replaceScenery(manhole, manhole.id + 1, -1)
             return@on true
         }
 
-        on(Objects.VARROCK_MANHOLE_OPEN_882, IntType.SCENERY, "climb-down", "close") { player, node
+        on(Objects.MANHOLE_882, IntType.SCENERY, "climb-down", "close") { player, node
             ->
             val manhole = node.asScenery()
             when (getUsedOption(player)) {
                 "climb-down" -> teleport(player, SEWER_LOCATION)
-                "close" -> replaceScenery(manhole, Objects.VARROCK_MANHOLE_CLOSED_881, -1)
+                "close" -> replaceScenery(manhole, Objects.MANHOLE_881, -1)
             }
             return@on true
         }
@@ -41,7 +41,7 @@ class DemonSlayerListener : InteractionListener {
          * Handles interaction with drain.
          */
 
-        on(Objects.VARROCK_PALACE_DRAIN_KEY_17424, IntType.SCENERY, "search") { player, _ ->
+        on(Objects.DRAIN_17424, IntType.SCENERY, "search") { player, _ ->
             val questStage = getQuestStage(player, Quests.DEMON_SLAYER.questName)
             if (questStage == 20) {
                 player.dialogueInterpreter.open(883, 883, "key")
@@ -51,12 +51,12 @@ class DemonSlayerListener : InteractionListener {
             return@on true
         }
 
-        on(Objects.VARROCK_PALACE_DRAIN_17423, IntType.SCENERY, "search") { player, _ ->
+        on(Objects.DRAIN_17423, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "Nothing interesting seems to have been dropped down here today.")
             return@on true
         }
 
-        on(Objects.VARROCK_SEWER_RUSTY_KEY_17429, IntType.SCENERY, "take") { player, _ ->
+        on(Objects.RUSTY_KEY_17429, IntType.SCENERY, "take") { player, _ ->
             val questStage = getQuestStage(player, Quests.DEMON_SLAYER.questName)
             if (questStage == 20) {
                 if (player.inventory.add(DemonSlayerUtils.FIRST_KEY)) {
@@ -100,7 +100,7 @@ class DemonSlayerListener : InteractionListener {
         onUseWith(
             IntType.SCENERY,
             Items.BUCKET_OF_WATER_1929,
-            Objects.VARROCK_PALACE_DRAIN_KEY_17424
+            Objects.DRAIN_17424
         ) { player, _, _ ->
             val quest = getQuestStage(player, Quests.DEMON_SLAYER.questName)
             val hasAnKey = hasAnItem(player, DemonSlayerUtils.FIRST_KEY.id).container != null
@@ -138,7 +138,7 @@ class DemonSlayerListener : InteractionListener {
 
     companion object {
         private val SEWER_LOCATION = Location(3237, 9858, 0)
-        private val ANIMATION = Animation(Animations.HUMAN_BURYING_BONES_827)
+        private val ANIMATION = Animation(Animations.HUMAN_PICKUPFLOOR_827)
         private val BUCKET_OF_WATER = Item(Items.BUCKET_OF_WATER_1929)
         private val BUCKET = Item(Items.BUCKET_1925)
     }

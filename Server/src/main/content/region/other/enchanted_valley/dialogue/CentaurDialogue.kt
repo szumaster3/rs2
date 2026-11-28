@@ -27,5 +27,5 @@ class CentaurDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CentaurDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CENTAUR_4438, NPCs.CENTAUR_4439)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY2_CENTAUR_MALE_4438, NPCs.FAIRY2_CENTAUR_FEMALE_4439)
 }

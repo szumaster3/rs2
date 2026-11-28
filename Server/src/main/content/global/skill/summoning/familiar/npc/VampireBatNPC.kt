@@ -14,7 +14,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class VampireBatNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.VAMPIRE_BAT_6835) :
+class VampireBatNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_VAMPIRE_BAT_6835) :
     Familiar(owner, id, 3300, Items.VAMPIRE_BAT_POUCH_12053, 4, WeaponInterface.STYLE_CONTROLLED) {
     override fun construct(owner: Player, id: Int): Familiar {
         return VampireBatNPC(owner, id)
@@ -35,7 +35,7 @@ class VampireBatNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VAMPIRE_BAT_6835, NPCs.VAMPIRE_BAT_6836)
+        return intArrayOf(NPCs.LORE_VAMPIRE_BAT_6835, NPCs.LORE_VAMPIRE_BAT_COMBAT_6836)
     }
 
 }

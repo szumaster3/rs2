@@ -11,7 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class TrollRomance : Quest("Troll Romance", 127, 126, 2, Vars.VARP_QUEST_TROLL_ROMANCE_385, 0, 1, 45) {
+class TrollRomance : Quest("Troll Romance", 127, 126, 2, Vars.VARP_385, 0, 1, 45) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)

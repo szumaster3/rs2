@@ -32,7 +32,7 @@ class SmeltingPlugin : InteractionListener {
                     0 -> {
                         if (removeItem(player, used.asItem())) {
                             sendMessage(player, "You place a lump of gold in the furnace.")
-                            animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                            animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
                         }
                         return@queueScript delayScript(player, 2)
                     }
@@ -93,12 +93,12 @@ class SmeltingPlugin : InteractionListener {
                             0 -> {
                                 sendMessage(player, "You heat the steel bar into a liquid state.")
                                 playAudio(player, Sounds.FURNACE_2725)
-                                animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                                animate(player, Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
                                 return@queueScript delayScript(player, 3)
                             }
                             1 -> {
                                 sendMessage(player, "You pour the molten metal into your cannonball mould.")
-                                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
                                 return@queueScript delayScript(player, 1)
                             }
                             2 -> {
@@ -110,7 +110,7 @@ class SmeltingPlugin : InteractionListener {
                                     addItem(player, Items.CANNONBALL_2, 4)
                                     rewardXP(player, Skills.SMITHING, 25.6)
                                 }
-                                animate(player, Animations.HUMAN_BURYING_BONES_827)
+                                animate(player, Animations.HUMAN_PICKUPFLOOR_827)
 
                                 remaining--
 
@@ -253,7 +253,7 @@ class SmeltingPlugin : InteractionListener {
     }
 
     companion object {
-        private val smeltAnimation = Animation(Animations.HUMAN_FURNACE_SMELT_3243)
+        private val smeltAnimation = Animation(Animations.DUNGEON_ULTHVEN_CRASSIAN_LEVIATHAN_BITE_ATTACK_LEFT_3243)
         private val tutorialOres = intArrayOf(Items.TIN_ORE_438, Items.COPPER_ORE_436)
 
         private const val TUTORIAL_REGION = 12436

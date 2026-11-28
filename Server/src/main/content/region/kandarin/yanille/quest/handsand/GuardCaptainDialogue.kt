@@ -76,5 +76,5 @@ class GuardCaptainDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GuardCaptainDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_CAPTAIN_3109)
+    override fun getIds(): IntArray = intArrayOf(NPCs.HANDSAND_GUARD_CAPTAIN_3109)
 }

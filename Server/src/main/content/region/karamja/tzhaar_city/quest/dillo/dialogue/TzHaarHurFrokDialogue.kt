@@ -58,5 +58,5 @@ class TzHaarHurFrokDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TZHAAR_HUR_FROK_7748)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DILLO_TZHAAR_HUR_FROK_7748)
 }

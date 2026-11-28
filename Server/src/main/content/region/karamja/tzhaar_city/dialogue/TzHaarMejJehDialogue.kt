@@ -99,6 +99,6 @@ class TzHaarMejJehDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.TZHAAR_MEJ_JAL_2617
+        NPCs.TZHAAR_FIGHTCAVE_MASTER_2617
     )
 }

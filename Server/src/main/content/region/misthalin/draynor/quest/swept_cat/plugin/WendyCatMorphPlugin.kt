@@ -39,7 +39,7 @@ class WendyCatMorphPlugin : InteractionListener {
          * Handles using cats on Wendy NPC (Purple cats mini-quest).
          */
 
-        onUseAnyWith(IntType.NPC, NPCs.WENDY_8201) { player, item, node ->
+        onUseAnyWith(IntType.NPC, NPCs.SWEPT_WENDY_8201) { player, item, node ->
             val petData = Pets.forId(item.id)
             if (petData == null) {
                 sendMessage(player, "I can't do anything with that.")
@@ -79,7 +79,7 @@ class WendyCatMorphPlugin : InteractionListener {
 
 private class WendyRegularCatDialogueExtension(private val usedItemId: Int) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.WENDY_8201)
+        npc = NPC(NPCs.SWEPT_WENDY_8201)
 
         when (stage) {
             0 -> player("Could you make this cat purple for me?").also { stage++ }
@@ -122,8 +122,8 @@ private class WendyRegularCatDialogueExtension(private val usedItemId: Int) : Di
                 if (newFamiliar != null) {
                     runTask(player!!, 1) {
                         player?.face(newFamiliar)
-                        player?.animate(Animation(Animations.HUMAN_BURYING_BONES_827))
-                        newFamiliar.graphics(core.game.world.update.flag.context.Graphics(Graphics.PUFF_OF_GREY_1276), 1)
+                        player?.animate(Animation(Animations.HUMAN_PICKUPFLOOR_827))
+                        newFamiliar.graphics(core.game.world.update.flag.context.Graphics(Graphics.WILDERNESS_MAGIC_ATTACK_PROJ_1276), 1)
                         newFamiliar.sendChat("Miaow!", 1)
                     }
                 }
@@ -141,7 +141,7 @@ private class WendyRegularCatDialogueExtension(private val usedItemId: Int) : Di
 
 private class WendyPurpleCatDialogueExtension : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.WENDY_8201)
+        npc = NPC(NPCs.SWEPT_WENDY_8201)
         when (stage) {
             0 -> sendDialogue(player!!, "You show your purple cat to Wendy.").also { stage++ }
             1 -> npc("Oh, what a lovely cat you have there. Hello, kitty!").also { stage++ }

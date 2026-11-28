@@ -52,5 +52,5 @@ class PortSarimBartenderDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BARTENDER_734)
+    override fun getIds(): IntArray = intArrayOf(NPCs.RUSTYANCHOR_BARTENDER_734)
 }

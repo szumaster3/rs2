@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class TheGiantDwarf : Quest("The Giant Dwarf", 69, 68, 2, Vars.VARBIT_QUEST_GIANT_DWARF_571, 0, 1, 50) {
+class TheGiantDwarf : Quest("The Giant Dwarf", 69, 68, 2, Vars.VARBIT_571, 0, 1, 50) {
     companion scenery {
         const val questName = "The Giant Dwarf"
     }
@@ -55,7 +55,7 @@ class TheGiantDwarf : Quest("The Giant Dwarf", 69, 68, 2, Vars.VARBIT_QUEST_GIAN
         rewardXP(player, Skills.MAGIC, 1500.0)
         rewardXP(player, Skills.THIEVING, 1500.0)
 
-        setVarbit(player, Vars.VARBIT_QUEST_GIANT_DWARF_571, 50, true)
+        setVarbit(player, Vars.VARBIT_571, 50, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

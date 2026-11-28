@@ -90,7 +90,7 @@ class BaraekDialogue(player: Player? = null) : Dialogue(player) {
             24 -> npc("Let's have a look at it.").also { stage++ }
             25 -> sendItemDialogue(player, Items.GREY_WOLF_FUR_958, "You hand Baraeck your grey wolf fur to look at.").also { stage++ }
 
-            26 -> if (!inEquipment(player, Items.RING_OF_CHAROSA_6465)) {
+            26 -> if (!inEquipment(player, Items.RING_OF_CHAROS_A_6465)) {
                 npc("It's not in the best condition. I guess I could give you", "120 coins for it.").also { stage++ }
             } else {
                 npc("It's not in the best condition. I guess I could give you", "150 coins for it.").also { stage++ }
@@ -107,7 +107,7 @@ class BaraekDialogue(player: Player? = null) : Dialogue(player) {
                 if (removeItem(player, Item(Items.GREY_WOLF_FUR_958, 1))) {
                     end()
                     player("Thanks!")
-                    if (!inEquipment(player, Items.RING_OF_CHAROSA_6465)) {
+                    if (!inEquipment(player, Items.RING_OF_CHAROS_A_6465)) {
                         addItemOrDrop(player, Items.COINS_995, 120)
                     } else {
                         addItemOrDrop(player, Items.COINS_995, 150)

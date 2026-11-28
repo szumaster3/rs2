@@ -49,5 +49,5 @@ class LachtopherDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LACHTOPHER_7870)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAI_LUMBRIDGE_LACHTOPHER_7870)
 }

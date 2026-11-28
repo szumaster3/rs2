@@ -12,7 +12,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class RockingOut : Quest("Rocking Out", 154, 153, 2, Vars.VARBIT_QUEST_ROCKING_OUT_PROGRESS, 0, 1, 100) {
+class RockingOut : Quest("Rocking Out", 154, 153, 2, Vars.VARBIT_QUEST_ROCKING_OUT_PROGRESS_4797, 0, 1, 100) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -94,7 +94,7 @@ class RockingOut : Quest("Rocking Out", 154, 153, 2, Vars.VARBIT_QUEST_ROCKING_O
         rewardXP(player, Skills.SMITHING, 25000.0)
         rewardXP(player, Skills.AGILITY, 25000.0)
         rewardXP(player, Skills.CRAFTING, 25000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_ROCKING_OUT_PROGRESS, 100, true)
+        setVarbit(player, Vars.VARBIT_QUEST_ROCKING_OUT_PROGRESS_4797, 100, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

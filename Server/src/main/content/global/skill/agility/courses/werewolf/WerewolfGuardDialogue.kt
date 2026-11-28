@@ -20,7 +20,7 @@ class WerewolfGuardDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val charmDialogue = anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465)
+        val charmDialogue = anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROS_A_6465)
         when (stage) {
             0 -> {
                 if (!charmDialogue) {
@@ -39,5 +39,5 @@ class WerewolfGuardDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WEREWOLF_1665)
+    override fun getIds(): IntArray = intArrayOf(NPCs.WAA_WEREWOLF_GUARD_1665)
 }

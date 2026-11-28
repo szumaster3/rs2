@@ -64,5 +64,5 @@ class RobinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = RobinDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ROBIN_1694)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_ROBIN_1694)
 }

@@ -52,8 +52,8 @@ object KeldaBypasses {
             stopWalk(player)
             if (!removeItem(player, Item(Items.KELDA_HOPS_6113, 1))) { return@queueScript stopExecuting(player) }
             sendMessage(player, "You add some Kelda hops to the vat.")
-            lock(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295).duration + 1)
-            animate(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295))
+            lock(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295).duration + 1)
+            animate(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295))
             setVarbit(player, 736, getVarbit(player, 736) + 66)
             return@queueScript stopExecuting(player)
         }
@@ -66,8 +66,8 @@ object KeldaBypasses {
             if (!removeItem(player, Item(Items.ALE_YEAST_5767, 1))) { return@queueScript stopExecuting(player) }
             addItem(player, Items.EMPTY_POT_1931)
 
-            lock(player, Animation(Animations.POUR_BUCKET_OVER_GROUND_2283).duration)
-            animate(player, Animation(Animations.PICK_SOMETHING_UP_HIGH_2295))
+            lock(player, Animation(Animations.FARMING_POUR_WATER_2283).duration)
+            animate(player, Animation(Animations.FARMING_INGREDIENT_SPRINKLE_2295))
 
             sendMessage(player, "You add a pot of ale yeast to the vat.")
             sendMessage(player, "The contents of the vat have begun to ferment.")
@@ -81,8 +81,8 @@ object KeldaBypasses {
     fun keldaTurnValve(player: Player) {
         queueScript(player, 0, QueueStrength.SOFT) {
 
-            lock(player, Animation(Animations.BEND_FORWARD_780).duration)
-            animate(player, Animation(Animations.BEND_FORWARD_780))
+            lock(player, Animation(Animations.HUMAN_GNOME_TACKLE_FAIL_780).duration)
+            animate(player, Animation(Animations.HUMAN_GNOME_TACKLE_FAIL_780))
 
             sendMessage(player, "You turn the valve.")
 

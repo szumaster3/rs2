@@ -33,7 +33,7 @@ public final class SpearWallSpecialHandler extends MeleeSwingHandler implements 
 
     private static final Animation ANIMATION = new Animation(10499, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.VESTAS_SPEAR_1835);
+    private static final Graphics GRAPHICS = new Graphics(shared.consts.Graphics.PVPW_SPEAR_ATTACK_SPOT_1835);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

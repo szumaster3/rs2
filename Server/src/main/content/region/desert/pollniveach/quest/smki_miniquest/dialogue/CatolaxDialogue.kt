@@ -90,10 +90,10 @@ class CatolaxDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray {
         return intArrayOf(
-            NPCs.CATOLAX_7782,
+            NPCs.SMKI_CATOLAX_7782,
             /*
             NPCs.CATOLAX_7783
-            NPCs.CATOLAX_7784
+            NPCs.ALI_CAT_7784
             */
         )
     }

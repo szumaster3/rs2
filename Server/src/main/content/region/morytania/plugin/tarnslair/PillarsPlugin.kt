@@ -171,7 +171,7 @@ class PillarsPlugin : InteractionListener {
             val chance = 50 + ((agilityLevel - 1) / 98.0) * 50
             val damage = (player.skills.lifepoints * 0.4).toInt()
             impact(player, damage)
-            visualize(player, Animations.JUMPING_OVER_SOMETHING_AND_FAILING_THEN_FALLING_3068, Graphics.NOTHING_61)
+            visualize(player, Animations.AGILITY_PYRAMID_GAP_JUMP_FALL_3068, Graphics.SWINGINGLOGTRAP_RELEASE_61)
             sendMessage(player, "The huge log knocks you off!")
             return@on true
         }

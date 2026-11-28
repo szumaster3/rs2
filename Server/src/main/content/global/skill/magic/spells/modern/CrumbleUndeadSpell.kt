@@ -34,10 +34,10 @@ class CrumbleUndeadSpell : CombatSpell(
     24.5,
     Sounds.CRUMBLE_CAST_AND_FIRE_122,
     Sounds.CRUMBLE_HIT_124,
-    Animation(Animations.CAST_SPELL_PUSH_724, Priority.HIGH),
-    Graphics(shared.consts.Graphics.CRUMBLE_UNDEAD_CAST_145, 92),
-    SpellProjectile.create(shared.consts.Graphics.CRUMBLE_UNDEAD_PROJECTILE_146),
-    Graphics(shared.consts.Graphics.CRUMBLE_UNDEAD_IMPACT_147, 92),
+    Animation(Animations.HUMAN_CASTCRUMBLEUNDEAD_724, Priority.HIGH),
+    Graphics(shared.consts.Graphics.CRUMBLEUNDEAD_CASTING_145, 92),
+    SpellProjectile.create(shared.consts.Graphics.CRUMBLEUNDEAD_TRAVEL_146),
+    Graphics(shared.consts.Graphics.CRUMBLEUNDEAD_IMPACT_147, 92),
     Runes.EARTH_RUNE.getItem(2),
     Runes.AIR_RUNE.getItem(2),
     Runes.CHAOS_RUNE.getItem(1)
@@ -49,7 +49,7 @@ class CrumbleUndeadSpell : CombatSpell(
             return false
         }
 
-        val ogres = npc.id in ZogreNPC.IDS || npc.id == NPCs.SLASH_BASH_2060
+        val ogres = npc.id in ZogreNPC.IDS || npc.id == NPCs.ZOGRE_SLASH_BASH_2060
 
         if (ogres) {
             return super.cast(entity, target)

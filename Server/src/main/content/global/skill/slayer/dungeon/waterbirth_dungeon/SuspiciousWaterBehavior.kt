@@ -10,7 +10,7 @@ import shared.consts.Graphics
 import shared.consts.NPCs
 import shared.consts.Sounds
 
-class SuspiciousWaterBehavior : NPCBehavior(NPCs.SUSPICIOUS_WATER_2895) {
+class SuspiciousWaterBehavior : NPCBehavior(NPCs.DAGANNOTH_WATER_CREATURE_1X1_INVISIBLE3_2895) {
 
     companion object {
         private const val ATTR_TRIGGERED = "suspicious_water:triggered"
@@ -39,7 +39,7 @@ class SuspiciousWaterBehavior : NPCBehavior(NPCs.SUSPICIOUS_WATER_2895) {
         self.attributes[ATTR_TRIGGERED] = true
 
         stopWalk(self)
-        sendGraphics(Graphics.WATER_SPLASH_68, self.location)
+        sendGraphics(Graphics.WATERSPLASH_1_68, self.location)
         playAudio(target, Sounds.WATERSPLASH_2496)
 
         val spinolypId = SPINOLYPS.random()

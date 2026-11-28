@@ -56,7 +56,7 @@ class GodswordDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds() = intArrayOf(62362)
 
     companion object {
-        private val ANIMATION = Animation(Animations.SMITH_HAMMER_898)
+        private val ANIMATION = Animation(Animations.HUMAN_SMITHING_898)
         private val COMBINATIONS = mapOf(
             // Blades.
             setOf(Items.GODSWORD_SHARDS_11692, Items.GODSWORD_SHARD_1_11710) to Items.GODSWORD_BLADE_11690,

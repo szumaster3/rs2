@@ -103,5 +103,5 @@ class SylasDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = SylasDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SYLAS_5987)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRIM_SYLAS_5987)
 }

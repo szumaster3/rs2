@@ -30,12 +30,12 @@ class HudoDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> playerl(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
             }
             3 -> npcl(FaceAnim.OLD_NORMAL, "Great stuff.").also { stage++ }
-            4 -> end().also { openNpcShop(player, NPCs.HUDO_600) }
+            4 -> end().also { openNpcShop(player, NPCs.GNOME_HUDO_600) }
         }
         return true
     }
 
     override fun newInstance(player: Player?): Dialogue = HudoDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HUDO_600)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_HUDO_600)
 }

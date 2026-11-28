@@ -81,5 +81,5 @@ class MartinTheMasterGardenerDialogue(player: Player? = null) : Dialogue(player)
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MARTIN_THE_MASTER_GARDENER_3299)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MARTIN_THE_MASTER_FARMER_3299)
 }

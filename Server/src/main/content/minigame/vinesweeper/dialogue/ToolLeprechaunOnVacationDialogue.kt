@@ -49,12 +49,12 @@ class ToolLeprechaunOnVacationDialogue(player: Player? = null) : Dialogue(player
             12 -> npcl(FaceAnim.OLD_HAPPY, "Sure, have a look.").also { stage++ }
             13 -> {
                 end()
-                openNpcShop(player, NPCs.TOOL_LEPRECHAUN_4965)
+                openNpcShop(player, NPCs.MYARM_LEPRECHAUN_4965)
             }
             20 -> npcl(FaceAnim.OLD_NORMAL, "Ye must be dafter than ye look if ye likes luggin' yer tools everywhere ye goes!").also { stage = END_DIALOGUE }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TOOL_LEPRECHAUN_4965)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYARM_LEPRECHAUN_4965)
 }

@@ -81,7 +81,7 @@ class GrandSeedPodOptionPlugin : InteractionListener {
         queueScript(player, 3, QueueStrength.SOFT) { stage ->
             when (stage) {
                 0 -> {
-                    animate(player, Animations.INVISIBLE_1241, true)
+                    animate(player, Animations.REGICIDE_PLAYER_VANISH_1241, true)
                     keepRunning(player)
                 }
                 1 -> {
@@ -89,7 +89,7 @@ class GrandSeedPodOptionPlugin : InteractionListener {
                     keepRunning(player)
                 }
                 2 -> {
-                    visualize(player, Animations.INVISIBLE_1241, SQUASH_GRAPHICS_END)
+                    visualize(player, Animations.REGICIDE_PLAYER_VANISH_1241, SQUASH_GRAPHICS_END)
                     delayScript(player, 2)
                 }
                 3 -> {

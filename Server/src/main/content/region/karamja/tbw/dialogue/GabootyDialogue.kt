@@ -76,5 +76,5 @@ class GabootyDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(2519, NPCs.GABOOTY_2520, NPCs.GABOOTY_2521, NPCs.GABOOTY_2522)
+    override fun getIds(): IntArray = intArrayOf(2519, NPCs.TBWCU_GABOOTY_2520, NPCs.TBWCU_GABOOTY_NOSTICKS_2521, NPCs.FANELLAMAN_2522)
 }

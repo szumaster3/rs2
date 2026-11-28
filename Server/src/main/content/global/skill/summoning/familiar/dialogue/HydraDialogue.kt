@@ -64,5 +64,5 @@ class HydraDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.HYDRA_6811, NPCs.HYDRA_6812)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_HYDRA_6811, NPCs.LORE_HYDRA_COMBAT_6812)
 }

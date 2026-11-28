@@ -21,7 +21,7 @@ class DeadfallSetting :
         /* option = */              "set-trap",
         /* level = */               23,
         /* failId = */              -1,
-        /* setupAnimation = */      Animation(Animations.SET_UP_HUNTER_TRAP_5208),
+        /* setupAnimation = */      Animation(Animations.HUMAN_LAYTRAP_5208),
         /* dismantleAnimation = */  Animation(9726),
         /* objectTrap = */          true
     )

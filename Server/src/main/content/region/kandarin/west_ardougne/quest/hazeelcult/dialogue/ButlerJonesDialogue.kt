@@ -65,5 +65,5 @@ class ButlerJonesDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BUTLER_JONES_890)
+    override fun getIds(): IntArray = intArrayOf(NPCs.BUTLER_JONES_HAZEEL_CULTIST_890)
 }

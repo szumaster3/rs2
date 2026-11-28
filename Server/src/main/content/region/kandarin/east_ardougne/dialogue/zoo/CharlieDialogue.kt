@@ -65,5 +65,5 @@ class CharlieDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = CharlieDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHARLIE_5138)
+    override fun getIds(): IntArray = intArrayOf(NPCs.EAGLEPEAK_ZOOKEEPER_CHARLIE_5138)
 }

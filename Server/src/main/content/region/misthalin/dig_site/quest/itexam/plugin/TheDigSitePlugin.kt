@@ -51,7 +51,7 @@ class TheDigSitePlugin : InteractionListener {
          * Handles stealing from Digsite Workmen NPCs.
          */
 
-        on(intArrayOf(NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565), IntType.NPC, "steal-from") { player, node ->
+        on(intArrayOf(NPCs.DIGWORKMAN1_613, NPCs.QIP_DIGSITE_DIGWORKMAN_03_4564, NPCs.QIP_DIGSITE_DIGWORKMAN_04_4565), IntType.NPC, "steal-from") { player, node ->
             if (getStatLevel(player, Skills.THIEVING) < 25) {
                 sendMessage(player, "You need a Thieving level of 25 to do that.")
                 return@on true
@@ -113,7 +113,7 @@ class TheDigSitePlugin : InteractionListener {
          * Handles trying to pickpocket a student at the Digsite.
          */
 
-        on(NPCs.STUDENT_617, NPC, "pickpocket") { player, _ ->
+        on(NPCs.STUDENT2_617, NPC, "pickpocket") { player, _ ->
             sendDialogue(player, "I don't think I should try to steal from this poor student.")
             return@on true
         }
@@ -351,11 +351,11 @@ class TheDigSitePlugin : InteractionListener {
                     else -> openDialogue(player, object : DialogueFile() {
                         override fun handle(componentID: Int, buttonID: Int) {
                             when (stage) {
-                                0 -> npc(NPCs.DIGSITE_WORKMAN_613,
+                                0 -> npc(NPCs.DIGWORKMAN1_613,
                                     "Sorry; this area is private. The only way you'll get to",
                                     "use these is by impressing the archaeological expert up",
                                     "at the center.").also { stage++ }
-                                1 -> npc(NPCs.DIGSITE_WORKMAN_613,
+                                1 -> npc(NPCs.DIGWORKMAN1_613,
                                     "Find something worthwhile and he might let you use the",
                                     "winches. Until then, get lost!").also { stage = END_DIALOGUE }
                             }
@@ -384,12 +384,12 @@ class TheDigSitePlugin : InteractionListener {
                     openDialogue(player, object : DialogueFile() {
                         override fun handle(componentID: Int, buttonID: Int) {
                             when (stage) {
-                                0 -> npc(NPCs.DIGSITE_WORKMAN_613,
+                                0 -> npc(NPCs.DIGWORKMAN1_613,
                                     "Sorry; this area is private. The only way you'll get to",
                                     "use these is by impressing the archaeological expert up",
                                     "at the center.").also { stage++ }
 
-                                1 -> npc(NPCs.DIGSITE_WORKMAN_613,
+                                1 -> npc(NPCs.DIGWORKMAN1_613,
                                     "Find something worthwhile and he might let you use the",
                                     "winches. Until then, get lost!").also { stage = END_DIALOGUE }
                             }
@@ -790,7 +790,7 @@ class TheDigSitePlugin : InteractionListener {
         /*
          * Handles interaction with workmans.
          */
-        onUseWith(IntType.NPC, Items.INVITATION_LETTER_696, NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565) { player, _, with ->
+        onUseWith(IntType.NPC, Items.INVITATION_LETTER_696, NPCs.DIGWORKMAN1_613, NPCs.QIP_DIGSITE_DIGWORKMAN_03_4564, NPCs.QIP_DIGSITE_DIGWORKMAN_04_4565) { player, _, with ->
             openDialogue(player, DigsiteWorkmanDialogueFile(), with.asNpc())
             return@onUseWith false
         }
@@ -798,9 +798,9 @@ class TheDigSitePlugin : InteractionListener {
     }
 
     companion object {
-        val BENDING_DOWN_ANIMATION = Animation(Animations.HUMAN_BURYING_BONES_827)
-        val TROWEL_ANIMATION = Animation(Animations.GARDENING_TROWEL_2272)
-        val PANNING_ANIMATION = Animation(Animations.PANNING_TRAY_4593)
+        val BENDING_DOWN_ANIMATION = Animation(Animations.HUMAN_PICKUPFLOOR_827)
+        val TROWEL_ANIMATION = Animation(Animations.FARMING_TROWEL_DIGGING_2272)
+        val PANNING_ANIMATION = Animation(Animations.QIP_DIGSITE_PANNING_01_4593)
 
         val trainingDigTable =
             WeightBasedTable.create(
@@ -940,7 +940,7 @@ class TheDigSitePlugin : InteractionListener {
         private fun warnWorkman(player: Player) {
             sendNPCDialogue(
                 player,
-                NPCs.DIGSITE_WORKMAN_613,
+                NPCs.DIGWORKMAN1_613,
                 "Oi! What do you think you're doing? There's fragile specimens around here!",
                 FaceAnim.ANGRY
             )

@@ -58,7 +58,7 @@ class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
 
             else -> {
                 end()
-                player.dialogueInterpreter.open(NPCs.SAILOR_1304)
+                player.dialogueInterpreter.open(NPCs.VIKING_SAILOR_1304)
             }
         }
         return true
@@ -91,5 +91,5 @@ class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SAILOR_1385)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISC_SAILOR_1385)
 }

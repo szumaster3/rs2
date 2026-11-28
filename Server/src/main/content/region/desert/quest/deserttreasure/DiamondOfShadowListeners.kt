@@ -252,7 +252,7 @@ class ShadowDungeonAttack : MapArea {
                 if (DesertTreasure.getSubStage(entity, DesertTreasure.attributeShadowStage) == 3 &&
                     getAttribute<NPC?>(entity, DesertTreasure.attributeDamisInstance, null) == null
                 ) {
-                    val npc = NPC.create(NPCs.DAMIS_1974, Location(2739, 5088, 0))
+                    val npc = NPC.create(NPCs.FD_DAMIS_NORMAL_1974, Location(2739, 5088, 0))
                     setAttribute(entity, DesertTreasure.attributeDamisInstance, npc)
                     setAttribute(npc, "target", entity)
                     npc.isRespawn = false

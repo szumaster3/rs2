@@ -56,7 +56,7 @@ class DwarfSkillcapeDialogue(player: Player? = null) : Dialogue(player) {
             44 -> {
                 end()
                 val coins = Item(Items.COINS_995, 99000)
-                val miningCapeId = arrayOf(Item(Items.MINING_CAPE_9792), Item(Items.MINING_CAPET_9793), Item(Items.MINING_HOOD_9794))
+                val miningCapeId = arrayOf(Item(Items.MINING_CAPE_9792), Item(Items.MINING_CAPE_T_9793), Item(Items.MINING_HOOD_9794))
                 when {
                     !inInventory(player, Items.COINS_995, 99000) ->
                         npc(FaceAnim.OLD_NORMAL, "You need 99,000 gold coins in order to buy a Skillcape of mining.")
@@ -77,6 +77,6 @@ class DwarfSkillcapeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = DwarfSkillcapeDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_3295)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUILDDWARF3_3295)
 
 }

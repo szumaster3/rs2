@@ -22,7 +22,7 @@ import shared.consts.NPCs
  */
 class ForemanDialogue : DialogueFile() {
     private fun attackPlayer() {
-        val foreman = RegionManager.getNpc(player!!.location, NPCs.FOREMAN_674, 6)
+        val foreman = RegionManager.getNpc(player!!.location, NPCs.GRANDTREE_FOREMAN_674, 6)
         foreman!!.attack(player!!)
     }
 

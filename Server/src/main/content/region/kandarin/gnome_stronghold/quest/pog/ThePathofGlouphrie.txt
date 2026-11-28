@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 
 @Initializable
-class ThePathofGlouphrie : Quest("The Path of Glouphrie", 142, 141, 1, Vars.VARBIT_QUEST_THE_PATH_OF_GLOUPHRIE_3954, 0, 1, 200) {
+class ThePathofGlouphrie : Quest("The Path of Glouphrie", 142, 141, 1, Vars.VARBIT_3954, 0, 1, 200) {
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
@@ -39,7 +39,7 @@ class ThePathofGlouphrie : Quest("The Path of Glouphrie", 142, 141, 1, Vars.VARB
         rewardXP(player, Skills.SLAYER, 20000.0)
         rewardXP(player, Skills.THIEVING, 5000.0)
         rewardXP(player, Skills.MAGIC, 5000.0)
-        setVarbit(player, Vars.VARBIT_QUEST_THE_PATH_OF_GLOUPHRIE_3954, 200, true)
+        setVarbit(player, Vars.VARBIT_3954, 200, true)
     }
 
     override fun newInstance(`object`: Any?): Quest {

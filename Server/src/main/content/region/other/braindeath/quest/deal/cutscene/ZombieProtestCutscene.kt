@@ -74,10 +74,10 @@ class ZombieProtestCutscene(
     }
 
     companion object {
-        const val ZOMBIE_0 = NPCs.ZOMBIE_PIRATE_2837
-        const val ZOMBIE_1 = NPCs.ZOMBIE_PIRATE_2838
-        const val ZOMBIE_2 = NPCs.ZOMBIE_PROTESTER_2831
-        const val ZOMBIE_3 = NPCs.ZOMBIE_PROTESTER_2832
-        const val ZOMBIE_4 = NPCs.ZOMBIE_PROTESTER_2833
+        const val ZOMBIE_0 = NPCs.DEAL_ZOMBIE_PIRATES_1_2837
+        const val ZOMBIE_1 = NPCs.DEAL_ZOMBIE_PIRATES_2_2838
+        const val ZOMBIE_2 = NPCs.DEAL_ZOMBIE_PROTESTER_1_2831
+        const val ZOMBIE_3 = NPCs.DEAL_ZOMBIE_PROTESTER_2_2832
+        const val ZOMBIE_4 = NPCs.DEAL_ZOMBIE_PROTESTER_3_2833
     }
 }

@@ -116,7 +116,7 @@ public final class StrongholdOfSecurityPlugin extends MapZone implements Plugin<
                     WarningManager.trigger(player, WarningType.STRONGHOLD_OF_SECURITY_LADDERS, () -> {
                         ClimbActionHandler.climb(
                                 player,
-                                new Animation(Animations.HUMAN_CLIMB_STAIRS_828),
+                                new Animation(Animations.HUMAN_REACHFORLADDER_828),
                                 Location.create(2042, 5245, 0)
                         );
                         return null;
@@ -126,7 +126,7 @@ public final class StrongholdOfSecurityPlugin extends MapZone implements Plugin<
                     WarningManager.trigger(player, WarningType.STRONGHOLD_OF_SECURITY_LADDERS, () -> {
                         ClimbActionHandler.climb(
                                 player,
-                                new Animation(Animations.HUMAN_CLIMB_STAIRS_828),
+                                new Animation(Animations.HUMAN_REACHFORLADDER_828),
                                 Location.create(2123, 5252, 0)
                         );
                         return null;
@@ -136,7 +136,7 @@ public final class StrongholdOfSecurityPlugin extends MapZone implements Plugin<
                     WarningManager.trigger(player, WarningType.STRONGHOLD_OF_SECURITY_LADDERS, () -> {
                         ClimbActionHandler.climb(
                                 player,
-                                new Animation(Animations.HUMAN_CLIMB_STAIRS_828),
+                                new Animation(Animations.HUMAN_REACHFORLADDER_828),
                                 Location.create(2358, 5215, 0)
                         );
                         return null;
@@ -177,7 +177,7 @@ public final class StrongholdOfSecurityPlugin extends MapZone implements Plugin<
      * @param destination the destination.
      */
     private void ladder(final Player player, final Location destination) {
-        ClimbActionHandler.climb(player, new Animation(Animations.HUMAN_CLIMB_STAIRS_828), destination);
+        ClimbActionHandler.climb(player, new Animation(Animations.HUMAN_REACHFORLADDER_828), destination);
     }
 
     /**

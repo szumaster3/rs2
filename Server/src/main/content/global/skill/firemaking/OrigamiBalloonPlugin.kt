@@ -33,7 +33,7 @@ class OrigamiBalloonPlugin : InteractionListener {
 
             if (removeItem(player, used.asItem()) && removeItem(player, wool.asItem())) {
                 sendMessage(player, "You create the origami balloon structure.")
-                animate(player, Animations.CRAFT_BONGOS_5140)
+                animate(player, Animations.ZEP_MAKING_BALLOON_5140)
                 addItemOrDrop(player, Items.BALLOON_STRUCTURE_9933)
             }
             return@onUseWith true
@@ -47,7 +47,7 @@ class OrigamiBalloonPlugin : InteractionListener {
             if (removeItem(player, Item(used.id)) && removeItem(player, Item(with.id))) {
                 sendMessage(player, "You create the origami balloon.")
                 rewardXP(player, Skills.CRAFTING, 35.0)
-                animate(player, Animations.CRAFT_BONGOS_5140)
+                animate(player, Animations.ZEP_MAKING_BALLOON_5140)
                 addItemOrDrop(player, Items.ORIGAMI_BALLOON_9934)
             }
             return@onUseWith true
@@ -73,7 +73,7 @@ class OrigamiBalloonPlugin : InteractionListener {
                             return@queueScript stopExecuting(player)
                         }
 
-                        animate(player, Animations.CRAFT_BONGOS_5140)
+                        animate(player, Animations.ZEP_MAKING_BALLOON_5140)
                         sendMessage(player, "You dye an origami balloon.")
 
                         removeItem(player, Item(dye.dyeId))
@@ -120,7 +120,7 @@ class OrigamiBalloonPlugin : InteractionListener {
             val projectileGfx = 880 + 2
 
             queueScript(player, 1, QueueStrength.WEAK) {
-                visualize(player, Animations.BALLOON_FLY_5142, flyUpwardsGfx)
+                visualize(player, Animations.ZEP_SET_OFF_BALLOON_5142, flyUpwardsGfx)
                 sendMessage(player, "You light the origami ${getItemName(with.id).lowercase(Locale.getDefault())}.")
                 delayClock(player, Clocks.SKILLING, 3)
                 rewardXP(player, Skills.FIREMAKING, 20.0)

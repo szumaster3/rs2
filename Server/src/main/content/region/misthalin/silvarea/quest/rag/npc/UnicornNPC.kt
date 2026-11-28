@@ -14,7 +14,7 @@ import shared.consts.NPCs
 
 class UnicornNPC : NPCBehavior(*unicornIds) {
     companion object {
-        private val unicornIds = intArrayOf(NPCs.UNICORN_89, NPCs.UNICORN_987, NPCs.BLACK_UNICORN_133)
+        private val unicornIds = intArrayOf(NPCs.UNICORN_89, NPCs.UNICORN_UPASS_987, NPCs.BLACK_UNICORN_133)
     }
 
     override fun onDropTableRolled(

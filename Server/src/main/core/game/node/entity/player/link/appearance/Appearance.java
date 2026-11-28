@@ -319,7 +319,7 @@ public final class Appearance {
         if (!ride) {
             setAnimations();
         } else {
-            player.getAppearance().setAnimations(Animation.create(211)); // Animations.RIDE_MINECART_2148
+            player.getAppearance().setAnimations(Animation.create(211)); // Animations.HUMAN_MINECART_ANIM_2148
         }
         player.getAppearance().setRidingMinecart(ride);
         player.getAppearance().sync();
@@ -565,7 +565,7 @@ public final class Appearance {
         for (int i = 0; i < animationCache.length; i++) {
             animationCache[i] = AppearanceCache.ANIMATIONS[i];
         }
-        renderAnimationId = Animations.WALK_1426;
+        renderAnimationId = Animations.HUMAN_BANNERTURNONSPOT_1426;
     }
 
     /**

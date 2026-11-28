@@ -16,7 +16,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 enum class BarcrawlType {
-    BLUE_MOON(NPCs.BARTENDER_733, 50, "Uncle Humphrey's Gutrot", arrayOf("Oh no not another of you guys. These barbarian", "barcrawls cause too much damage to my bar."), arrayOf("You're going to have to pay me 50 gold for the Uncle", "Humphrey's Gutrot.")) {
+    BLUE_MOON(NPCs.BLUEMOON_BARTENDER_733, 50, "Uncle Humphrey's Gutrot", arrayOf("Oh no not another of you guys. These barbarian", "barcrawls cause too much damage to my bar."), arrayOf("You're going to have to pay me 50 gold for the Uncle", "Humphrey's Gutrot.")) {
         override fun effect(player: Player) {
             sendChat(player, "Blearrgh!")
             impact(player, 1, ImpactHandler.HitsplatType.NORMAL)
@@ -47,7 +47,7 @@ enum class BarcrawlType {
         }
     },
 
-    DEADMAN_CHEST(NPCs.BARTENDER_735, 15, "Supergrog", arrayOf("Haha time to be breaking out the old Supergrog. That'll", "be 15 coins please.")) {
+    DEADMAN_CHEST(NPCs.DEADMANS_BARTENDER_735, 15, "Supergrog", arrayOf("Haha time to be breaking out the old Supergrog. That'll", "be 15 coins please.")) {
         override fun effect(player: Player) {
             addBonus(player, 1, Skills.ATTACK, Skills.DEFENCE, Skills.HERBLORE, Skills.CONSTRUCTION, Skills.PRAYER)
         }
@@ -64,7 +64,7 @@ enum class BarcrawlType {
         }
     },
 
-    DRAGON_INN(NPCs.BARTENDER_739, 12, "Fire Brandy", arrayOf("I suppose you'll be wanting some Fire Brandy. That'll", "cost you 12 coins.")) {
+    DRAGON_INN(NPCs.DRAGON_BARTENDER_739, 12, "Fire Brandy", arrayOf("I suppose you'll be wanting some Fire Brandy. That'll", "cost you 12 coins.")) {
         override fun effect(player: Player) {
             addBonus(player, 1, Skills.ATTACK, Skills.DEFENCE)
         }
@@ -82,7 +82,7 @@ enum class BarcrawlType {
         }
     },
 
-    FLYING_HORSE_INN(NPCs.BARTENDER_737, 8, "Heart Stopper", arrayOf("Fancy a bit of Heart Stopper then do you? It'll only be", "8 coins.")) {
+    FLYING_HORSE_INN(NPCs.FORESTERS_BARTENDER_737, 8, "Heart Stopper", arrayOf("Fancy a bit of Heart Stopper then do you? It'll only be", "8 coins.")) {
         override fun effect(player: Player) {
             impact(player, (getStatLevel(player, Skills.HITPOINTS) * 0.15).toInt(), ImpactHandler.HitsplatType.NORMAL)
         }
@@ -101,7 +101,7 @@ enum class BarcrawlType {
         }
     },
 
-    FORESTERS_ARMS(NPCs.BARTENDER_738, 18, "Liverbane Ale", arrayOf("Oh you're a barbarian then. Now which of these barrels", "contained the Liverbane Ale? That'll be 18 coins please."),) {
+    FORESTERS_ARMS(NPCs.FLYINGHORSE_BARTENDER_738, 18, "Liverbane Ale", arrayOf("Oh you're a barbarian then. Now which of these barrels", "contained the Liverbane Ale? That'll be 18 coins please."),) {
         override fun effect(player: Player) {
             addBonus(player, Skills.ATTACK, Skills.DEFENCE, Skills.FLETCHING, Skills.FIREMAKING, Skills.WOODCUTTING)
         }
@@ -115,7 +115,7 @@ enum class BarcrawlType {
         }
     },
 
-    JOLLY_BOAR(NPCs.BARTENDER_731, 10, "Olde Suspiciouse", arrayOf("Ah, there seems to be a fair few doing that one these", "days. My supply of Olde suspiciouse is starting to run", "low, it'll cost you 10 coins."),) {
+    JOLLY_BOAR(NPCs.JOLLYBOAR_BARTENDER_731, 10, "Olde Suspiciouse", arrayOf("Ah, there seems to be a fair few doing that one these", "days. My supply of Olde suspiciouse is starting to run", "low, it'll cost you 10 coins."),) {
         override fun effect(player: Player) {
             addBonus(player, 1, Skills.ATTACK, Skills.DEFENCE, Skills.STRENGTH, Skills.MINING, Skills.CRAFTING, Skills.MAGIC)
             impact(player, 1, ImpactHandler.HitsplatType.NORMAL)
@@ -173,7 +173,7 @@ enum class BarcrawlType {
         }
     },
 
-    RUSTY_ANCHOR_INN(NPCs.BARTENDER_734, 8, "Black Skull Ale", arrayOf("Okay, one Black Skull Ale coming up. Eight coins, please.")) {
+    RUSTY_ANCHOR_INN(NPCs.RUSTYANCHOR_BARTENDER_734, 8, "Black Skull Ale", arrayOf("Okay, one Black Skull Ale coming up. Eight coins, please.")) {
         override fun effect(player: Player) {
             sendChat(player, "Hiccup!")
         }

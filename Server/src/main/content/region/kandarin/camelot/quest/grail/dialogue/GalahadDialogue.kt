@@ -30,7 +30,7 @@ class GalahadDialogue : DialogueFile() {
     var STAGE_BETTER_GET_ON = 43
 
     override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.GALAHAD_218)
+        npc = NPC(NPCs.BROTHER_GALAHAD_218)
         when (stage) {
             0 -> npcl(FaceAnim.NEUTRAL, "Welcome to my home. It's rare for me to have guests! Would you like a cup of tea? I'll just put the kettle on.").also { stage++ }
             1 -> sendDialogue(player!!, "Brother Galahad hangs a kettle over the fire.").also { stage++ }

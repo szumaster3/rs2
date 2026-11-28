@@ -66,8 +66,8 @@ class KharidianDesertPlugin : InteractionListener {
     }
 
     companion object {
-        val WATER_SKINS: Array<Item> = arrayOf(Item(Items.WATERSKIN3_1825), Item(Items.WATERSKIN2_1827), Item(Items.WATERSKIN1_1829), Item(Items.WATERSKIN0_1831))
-        val ANIMATION: Animation = Animation(Animations.CUT_SPIDER_WEB_911)
+        val WATER_SKINS: Array<Item> = arrayOf(Item(Items.WATERSKIN_3_1825), Item(Items.WATERSKIN_2_1827), Item(Items.WATERSKIN_1_1829), Item(Items.WATERSKIN_0_1831))
+        val ANIMATION: Animation = Animation(Animations.HUMAN_KNIFE_CHOP_911)
         const val DRY_CACTUS: Int = 2671
         const val SPAWN_DELAY: Int = 45
         private const val CACTUS = Scenery.KHARIDIAN_CACTUS_HEALTHY_2670

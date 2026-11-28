@@ -83,6 +83,6 @@ class VolfOlafsonDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.VOLF_OLAFSON_3695
+        NPCs.OLAF_VOLF_3695
     )
 }

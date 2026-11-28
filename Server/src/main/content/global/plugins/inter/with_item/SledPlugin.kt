@@ -50,7 +50,7 @@ class SledPlugin : InteractionListener {
             val sledSlot = sledItem.slot
 
             if (removeItem(player, waxItem) && removeItem(player, sledItem)) {
-                animate(player, Animations.WAX_SLED_1470)
+                animate(player, Animations.TROLLROMANCE_TOBOGGAN_WAXING_1470)
                 playAudio(player, Sounds.WAX_SLED_1871)
 
                 replaceSlot(player, waxSlot, Item(Items.CAKE_TIN_1887))
@@ -68,7 +68,7 @@ class SledPlugin : InteractionListener {
 
         on(Items.SLED_4084, IntType.ITEM, "ride") { player, _ ->
             removeItem(player, Items.SLED_4084)
-            animate(player, Animations.SITTING_ON_SLED_1461)
+            animate(player, Animations.TROLLROMANCE_TOBOGGAN_READY_1461)
             player.equipment.replace(Item(Items.SLED_4084), 3)
             return@on true
         }
@@ -81,7 +81,7 @@ class SledPlugin : InteractionListener {
             lock(player, 2)
             lockInteractions(player, 2)
             playAudio(player, Sounds.EQUIP_SLED_1864)
-            animate(player, Animations.SITTING_ON_SLED_1461)
+            animate(player, Animations.TROLLROMANCE_TOBOGGAN_READY_1461)
             return@onEquip true
         }
 

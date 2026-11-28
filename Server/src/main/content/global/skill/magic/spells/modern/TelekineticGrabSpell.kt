@@ -153,10 +153,10 @@ class TelekineticGrabSpell :
 
     companion object {
         private val ANIMATION = Animation(727)
-        private val START_Graphics = Graphics(shared.consts.Graphics.BOUNTY_LOCATE_CAST_142, 88, 15)
-        private val END_Graphics = Graphics(shared.consts.Graphics.BOUNTY_LOCATE_IMPACT_144)
+        private val START_Graphics = Graphics(shared.consts.Graphics.TELEGRAB_CASTING_142, 88, 15)
+        private val END_Graphics = Graphics(shared.consts.Graphics.TELEGRAB_IMPACT_144)
         private val SOUND = Audio(Sounds.TELEGRAB_HIT_3007, 10, 1)
-        private const val PROJECTILE_ID = shared.consts.Graphics.BOUNTY_LOCATE_PROJECTILE_143
+        private const val PROJECTILE_ID = shared.consts.Graphics.TELEGRAB_TRAVEL_143
         private const val START_HEIGHT = 40
         private const val END_HEIGHT = 0
         private const val START_DELAY = 41

@@ -35,7 +35,7 @@ abstract class RandomEventNPC(
     lateinit var player: Player
     abstract var loot: WeightBasedTable?
     var spawnLocation: Location? = null
-    private val smokeGraphics = Graphics(shared.consts.Graphics.RE_PUFF_86)
+    private val smokeGraphics = Graphics(shared.consts.Graphics.SMOKEPUFF_2_86)
     var initialized = false
     var finalized = false
     var timerPaused = false

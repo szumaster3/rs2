@@ -13,7 +13,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class BullAntNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.BULL_ANT_6867) :
+class BullAntNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_GIANT_ANT_6867) :
     BurdenBeast(owner, id, 3000, Items.BULL_ANT_POUCH_12087, 12, 9, WeaponInterface.STYLE_CONTROLLED) {
     override fun construct(owner: Player, id: Int): Familiar {
         return BullAntNPC(owner, id)
@@ -35,6 +35,6 @@ class BullAntNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BULL_ANT_6867, NPCs.BULL_ANT_6868)
+        return intArrayOf(NPCs.LORE_GIANT_ANT_6867, NPCs.LORE_GIANT_ANT_COMBAT_6868)
     }
 }

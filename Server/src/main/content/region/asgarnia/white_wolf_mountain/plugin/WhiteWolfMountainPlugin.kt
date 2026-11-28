@@ -79,12 +79,12 @@ class WhiteWolfMountainPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.KHORVAK_A_DWARVEN_ENGINEER_1842, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.DWARFROCK_ENGINEER2_1842, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, KhorvakDialogue(), node.asNpc())
             return@on true
         }
 
-        on(NPCs.ROHAK_3403, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.HUNDRED_DWARF_DAD_ROHAK_3403, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, RohakDialogue(), node.asNpc())
             return@on true
         }

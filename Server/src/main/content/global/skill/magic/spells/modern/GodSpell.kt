@@ -51,7 +51,7 @@ class GodSpell private constructor(
         super.visualize(entity, target)
         if (entity is NPC) {
             val id = entity.id
-            if ((id in (NPCs.KOLODION_911 + 1) until NPCs.LEELA_915) || (id in (NPCs.KOLODION_906 + 1) until NPCs.BATTLE_MAGE_912)) {
+            if ((id in (NPCs.KOLODION_911 + 1) until NPCs.LEELA_915) || (id in (NPCs.KOLODION_906 + 1) until NPCs.ZAMORAK_MAGE_912)) {
                 entity.animator.forceAnimation(entity.properties.attackAnimation)
             }
         }
@@ -138,8 +138,8 @@ class GodSpell private constructor(
     }
 
     companion object {
-        private val ANIMATION = Animation(Animations.HUMAN_CAST_SPELL_LONG_811, Priority.HIGH)
-        private val SPLASH_GRAPHIC = Graphics(shared.consts.Graphics.SPELL_SPLASH_85, 0, 100)
+        private val ANIMATION = Animation(Animations.HUMAN_CASTING_811, Priority.HIGH)
+        private val SPLASH_GRAPHIC = Graphics(shared.consts.Graphics.FAILEDSPELL_1_85, 0, 100)
         private val GOD_SPELLS = enumValues<GodSpellDefinition>()
         private val INDEX_CACHE = mutableMapOf<GodSpellDefinition, Int>()
     }

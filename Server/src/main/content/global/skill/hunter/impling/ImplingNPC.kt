@@ -36,7 +36,7 @@ class ImplingNPC : NPCBehavior(*Implings.getIds()) {
             log(this::class.java, Log.ERR, "Non-puro impling has respawned!")
         }
         playGlobalAudio(self.location, Sounds.II_IMPLING_SPAWN_3722, 1, 0, Audio.defaultAudioRadius)
-        sendGraphics(Graphics.IMPLING_TP_WHITE_SMOKE_PUFF_1119, self.properties.teleportLocation!!)
+        sendGraphics(Graphics.II_SMOKEPUFF_ANIM_1119, self.properties.teleportLocation!!)
     }
 
     override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
@@ -86,14 +86,14 @@ class ImplingNPC : NPCBehavior(*Implings.getIds()) {
 
     private fun isPuroImpling(self: NPC): Boolean =
         self.id in intArrayOf(
-            NPCs.BABY_IMPLING_6055,
-            NPCs.GOURMET_IMPLING_6057,
-            NPCs.EARTH_IMPLING_6058,
-            NPCs.ESSENCE_IMPLING_6059,
-            NPCs.ECLECTIC_IMPLING_6060,
-            NPCs.NINJA_IMPLING_6063,
-            NPCs.DRAGON_IMPLING_6064,
-            NPCs.NATURE_IMPLING_6061,
-            NPCs.PIRATE_IMPLING_7846
+            NPCs.II_IMPLING_TYPE_1_MAZE_6055,
+            NPCs.II_IMPLING_TYPE_3_MAZE_6057,
+            NPCs.II_IMPLING_TYPE_4_MAZE_6058,
+            NPCs.II_IMPLING_TYPE_5_MAZE_6059,
+            NPCs.II_IMPLING_TYPE_6_MAZE_6060,
+            NPCs.II_IMPLING_TYPE_9_MAZE_6063,
+            NPCs.II_IMPLING_TYPE_10_MAZE_6064,
+            NPCs.II_IMPLING_TYPE_7_MAZE_6061,
+            NPCs.II_IMPLING_TYPE_11_MAZE_7846
         )
 }

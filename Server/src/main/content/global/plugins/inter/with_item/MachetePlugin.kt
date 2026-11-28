@@ -46,11 +46,11 @@ class MachetePlugin : InteractionListener {
 
     private fun getAnimation(machete: Node): Int {
         return when (machete.asItem().id) {
-            Items.MACHETE_975 -> Animations.MAKE_SKEWER_TAI_BWO_WANNAI_CLEANUP_2389
-            Items.OPAL_MACHETE_6313 -> Animations.OPAL_MACHETE_2429
+            Items.MACHETE_975 -> Animations.TBW_CLEANUP_PLAYER_PREPARE_WOOD_2389
+            Items.OPAL_MACHETE_6313 -> Animations.TBW_CLEANUP_PLAYER_PREPARE_WOOD_OPAL_2429
             Items.JADE_MACHETE_6315 -> 6430
-            Items.RED_TOPAZ_MACHETE_6317 -> Animations.RED_TOPAZ_MACHETE_2431
-            else -> Animations.MAKE_SKEWER_TAI_BWO_WANNAI_CLEANUP_2389
+            Items.RED_TOPAZ_MACHETE_6317 -> Animations.TBW_CLEANUP_PLAYER_PREPARE_WOOD_REDTOPAZ_2431
+            else -> Animations.TBW_CLEANUP_PLAYER_PREPARE_WOOD_2389
         }
     }
 }

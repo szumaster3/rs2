@@ -111,7 +111,7 @@ class RiverLumGrapple : OptionHandler() {
                 when (step++) {
                     1 -> {
                         player.faceLocation(player.location.transform(direction))
-                        player.animate(Animation(Animations.FIRE_CROSSBOW_4230))
+                        player.animate(Animation(Animations.XBOWS_HUMAN_FIRE_AND_RELOAD_4230))
                         handleRopeScenery(true, player)
                     }
                     2 -> {
@@ -119,13 +119,13 @@ class RiverLumGrapple : OptionHandler() {
                         sendMessage(player, "You successfully grapple the raft and tie the rope to a tree.")
                     }
                     4 -> {
-                        visualize(player, -1, Graphics.create(shared.consts.Graphics.WATER_SPLASH_68))
+                        visualize(player, -1, Graphics.create(shared.consts.Graphics.WATERSPLASH_1_68))
                         val target = if (player.location.x > 3258) Location.create(3253, 3179, 0)
                         else Location.create(3251, 3179, 0)
 
                         ForceMovement.run(
                             player, player.location, target,
-                            Animation.create(Animations.PULL_SELF_THROUGH_WATER_4464),
+                            Animation.create(Animations.XBOWS_KARAMJA_NORTH_SWIMMING_ANIM_4464),
                             ForceMovement.WALKING_SPEED
                         )
                     }
@@ -141,7 +141,7 @@ class RiverLumGrapple : OptionHandler() {
                     }
                     16 -> {
                         player.faceLocation(player.location.transform(direction))
-                        animate(player, Animation(Animations.FIRE_CROSSBOW_4230))
+                        animate(player, Animation(Animations.XBOWS_HUMAN_FIRE_AND_RELOAD_4230))
                         sendMessage(
                             player,
                             if (player.location.x <= 3253)
@@ -155,14 +155,14 @@ class RiverLumGrapple : OptionHandler() {
                         startTree?.let { SceneryBuilder.replace(it, it.transform(it.id + 1), 10) }
                         handleRopeScenery(true, player)
                     }
-                    19 -> visualize(player, -1, Graphics.create(shared.consts.Graphics.WATER_SPLASH_68))
+                    19 -> visualize(player, -1, Graphics.create(shared.consts.Graphics.WATERSPLASH_1_68))
                     20 -> {
                         val target = if (player.location.x > 3258) Location.create(3246, 3179, 0)
                         else Location.create(3259, 3179, 0)
 
                         ForceMovement.run(
                             player, player.location, target,
-                            Animation.create(Animations.PULL_SELF_THROUGH_WATER_4466),
+                            Animation.create(Animations.XBOWS_LUMBRIDGE_EAST_SWIMMING_ANIM_4466),
                             ForceMovement.WALKING_SPEED
                         )
                     }

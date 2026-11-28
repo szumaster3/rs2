@@ -32,12 +32,12 @@ class RomettiDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> playerl(FaceAnim.NEUTRAL, "I've no time for fashion.").also { stage = 5 }
             }
             5 -> npcl(FaceAnim.OLD_NORMAL, "Hmm...I did wonder.").also { stage = END_DIALOGUE }
-            6 -> end().also { openNpcShop(player, NPCs.ROMETTI_601) }
+            6 -> end().also { openNpcShop(player, NPCs.GNOME_ROMETTI_601) }
         }
         return true
     }
 
     override fun newInstance(player: Player?): Dialogue = RomettiDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ROMETTI_601)
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_ROMETTI_601)
 }

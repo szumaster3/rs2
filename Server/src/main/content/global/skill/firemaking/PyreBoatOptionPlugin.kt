@@ -131,7 +131,7 @@ class PyreBoatOptionPlugin : OptionHandler() {
                                     player.inventory.add(getRandomItem(player), player)
                                     sendMessages(player, "The ancient barbarian is laid to rest. Your future prayer training is blessed,", "as his spirit ascends to a glorious afterlife. Spirits drop an object into your", "pack.")
                                 } else {
-                                    val npc = NPC.create(NPCs.FEROCIOUS_BARBARIAN_SPIRIT_752, scenery.location.transform(scenery.direction, 1)) as FerociousBarbarianNPC
+                                    val npc = NPC.create(NPCs.BRUT_ANGRY_SPIRIT_BAD_752, scenery.location.transform(scenery.direction, 1)) as FerociousBarbarianNPC
                                     npc.target = player
                                     npc.init()
                                     npc.moveStep()
@@ -271,7 +271,7 @@ class PyreBoatOptionPlugin : OptionHandler() {
 
             override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = FerociousBarbarianNPC(id, location)
 
-            override fun getIds(): IntArray = intArrayOf(NPCs.FEROCIOUS_BARBARIAN_SPIRIT_752)
+            override fun getIds(): IntArray = intArrayOf(NPCs.BRUT_ANGRY_SPIRIT_BAD_752)
         }
 
     companion object {
@@ -280,12 +280,12 @@ class PyreBoatOptionPlugin : OptionHandler() {
             ChanceItem(Items.BLOOD_RUNE_565, 4, 7, DropFrequency.COMMON),
             ChanceItem(Items.DIAMOND_1601, 2, 2, DropFrequency.UNCOMMON),
             ChanceItem(Items.BIG_BONES_532, 10, 10, DropFrequency.RARE),
-            ChanceItem(Items.RANARR_POTIONUNF_100, 2, 2, DropFrequency.COMMON),
+            ChanceItem(Items.RANARR_POTION_UNF_100, 2, 2, DropFrequency.COMMON),
             ChanceItem(Items.SILVER_BOLTS_9145, 5, 5, DropFrequency.COMMON),
-            ChanceItem(Items.RUNE_BOLTS_9144, 10, 10, DropFrequency.UNCOMMON),
+            ChanceItem(Items.RUNITE_BOLTS_9144, 10, 10, DropFrequency.UNCOMMON),
             ChanceItem(Items.RUNE_ARROW_892, 10, 10, DropFrequency.COMMON),
             ChanceItem(Items.ADAMANT_KNIFE_867, 20, 20, DropFrequency.UNCOMMON),
-            ChanceItem(Items.ADAMANT_DARTP_816, 20, 20, DropFrequency.COMMON),
+            ChanceItem(Items.ADAMANT_DART_P_816, 20, 20, DropFrequency.COMMON),
             ChanceItem(Items.MITH_GRAPPLE_9419, 1, 1, DropFrequency.COMMON)
         )
         private val CHEWED_BONES = Item(Items.CHEWED_BONES_11338)

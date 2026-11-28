@@ -594,6 +594,6 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAGGIE_8078)
+        return intArrayOf(NPCs.SWEPT_MAGGIE_8078)
     }
 }

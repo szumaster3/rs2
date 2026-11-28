@@ -745,17 +745,17 @@ class AppearanceInterface : InterfaceListener {
         setAttribute(player, PLAYER_KIT_PAID_ATTRIBUTE, true)
         closeInterface(player)
 
-        val npc = findNPC(NPCs.MAKE_OVER_MAGE_2676)
+        val npc = findNPC(NPCs.MAKEOVER_MAGE_FEMALE_2676)
         if (npc != null && oldGender != newGender) {
 
             when {
                 oldGender == Gender.MALE && newGender == Gender.FEMALE -> {
                     sendChat(npc, "Ooh!")
-                    npc.transform(NPCs.MAKE_OVER_MAGE_2676)
+                    npc.transform(NPCs.MAKEOVER_MAGE_FEMALE_2676)
                 }
                 oldGender == Gender.FEMALE && newGender == Gender.MALE -> {
                     sendChat(npc, "Aha!")
-                    npc.transform(NPCs.MAKE_OVER_MAGE_599)
+                    npc.transform(NPCs.MAKEOVER_MAGE_599)
                 }
             }
 

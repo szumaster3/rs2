@@ -22,7 +22,7 @@ import shared.consts.NPCs
 class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
 
     private var quest: Quest? = null
-    private val ITEMS = arrayOf(Item(Items.SUMMONING_CAPE_12169), Item(Items.SUMMONING_CAPET_12170), Item(Items.SUMMONING_HOOD_12171))
+    private val ITEMS = arrayOf(Item(Items.SUMMONING_CAPE_12169), Item(Items.SUMMONING_CAPE_T_12170), Item(Items.SUMMONING_HOOD_12171))
     private val BONES = Item(Items.WOLF_BONES_2859, 2)
     private val WOLF_ITEMS = arrayOf(Item(Items.GOLD_CHARM_12158, 2), Item(Items.POUCH_12155, 2), Item(Items.SPIRIT_SHARDS_12183, 14), Item(Items.TRAPDOOR_KEY_12528))
     private val HOWL_SCROLL = Item(Items.HOWL_SCROLL_12425)

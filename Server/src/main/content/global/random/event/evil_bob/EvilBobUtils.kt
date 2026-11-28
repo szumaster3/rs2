@@ -17,18 +17,18 @@ import shared.consts.Scenery
  * Utils for Evil Bob rando event.
  */
 object EvilBobUtils {
-    const val EVIL_BOB_NPC_ID = NPCs.EVIL_BOB_2479
-    const val SERVANT_NPC_ID  = NPCs.SERVANT_2481
+    const val EVIL_BOB_NPC_ID = NPCs.MACRO_EVIL_BOB_ISLAND_2479
+    const val SERVANT_NPC_ID  = NPCs.MACRO_EVIL_BOB_FEMALE_SERVANT_2481
     const val EXIT_PORTAL     = Scenery.PORTAL_8987
 
     const val COOKING_POT  = Scenery.UNCOOKING_POT_8985
     const val FISHING_SPOT = Scenery.FISHING_SPOT_8986
 
-    val RAW_FISH_CORRECT_IDS   = intArrayOf(Items.FISHLIKE_THING_6202, Items.FISHLIKE_THING_6206)
-    val RAW_FISh_INCORRECT_IDS = intArrayOf(Items.RAW_FISHLIKE_THING_6200, Items.RAW_FISHLIKE_THING_6204)
+    val RAW_FISH_CORRECT_IDS   = intArrayOf(Items.FISH_LIKE_THING_6202, Items.FISH_LIKE_THING_6206)
+    val RAW_FISh_INCORRECT_IDS = intArrayOf(Items.RAW_FISH_LIKE_THING_6200, Items.RAW_FISH_LIKE_THING_6204)
 
-    val COOK_ANIMATION    = Animation(Animations.OLD_COOK_FIRE_897)
-    val FISHING_ANIMATION = Animation(Animations.NET_FISHING_1903)
+    val COOK_ANIMATION    = Animation(Animations.HUMAN_FIRECOOKING_897)
+    val FISHING_ANIMATION = Animation(Animations.FISHING_TUTORIAL_REBIRTH_1903)
 
     val NORTH_FISHING_ZONE = ZoneBorders(3421, 4789, 3427, 4792)
     val EAST_FISHING_ZONE  = ZoneBorders(3437, 4774, 3440, 4780)
@@ -67,14 +67,14 @@ object EvilBobUtils {
             GameAttributes.RE_BOB_DIAL_INDEX,
             GameAttributes.RE_BOB_START,
         )
-        removeAll(player, Items.FISHLIKE_THING_6202)
-        removeAll(player, Items.FISHLIKE_THING_6202, Container.BANK)
-        removeAll(player, Items.FISHLIKE_THING_6206)
-        removeAll(player, Items.FISHLIKE_THING_6206, Container.BANK)
-        removeAll(player, Items.RAW_FISHLIKE_THING_6200)
-        removeAll(player, Items.RAW_FISHLIKE_THING_6200, Container.BANK)
-        removeAll(player, Items.RAW_FISHLIKE_THING_6204)
-        removeAll(player, Items.RAW_FISHLIKE_THING_6204, Container.BANK)
+        removeAll(player, Items.FISH_LIKE_THING_6202)
+        removeAll(player, Items.FISH_LIKE_THING_6202, Container.BANK)
+        removeAll(player, Items.FISH_LIKE_THING_6206)
+        removeAll(player, Items.FISH_LIKE_THING_6206, Container.BANK)
+        removeAll(player, Items.RAW_FISH_LIKE_THING_6200)
+        removeAll(player, Items.RAW_FISH_LIKE_THING_6200, Container.BANK)
+        removeAll(player, Items.RAW_FISH_LIKE_THING_6204)
+        removeAll(player, Items.RAW_FISH_LIKE_THING_6204, Container.BANK)
     }
 
     fun reward(player: Player) {
@@ -91,7 +91,7 @@ object EvilBobUtils {
         openDialogue(
             player,
             EvilBobDialogue(rewardDialogue = true, rewardXpSkill = skill),
-            NPCs.EVIL_BOB_2479
+            NPCs.MACRO_EVIL_BOB_ISLAND_2479
         )
     }
 }

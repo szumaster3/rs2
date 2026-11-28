@@ -58,7 +58,7 @@ public class WallyCutscenePlugin extends CutscenePlugin {
 
     @Override
     public void fade() {
-        playJingle(player, Music.WALLY_CUTSCENE_196);
+        playJingle(player, Music.MIDI_196);
         player.getQuestRepository().getQuest(Quests.DEMON_SLAYER.getQuestName()).start(player);
         player.getDialogueInterpreter().open(NPCs.GYPSY_ARIS_882, Repository.findNPC(NPCs.GYPSY_ARIS_882), this);
     }

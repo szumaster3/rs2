@@ -60,5 +60,5 @@ class ToolLeprechaunGothDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GOTH_LEPRECHAUN_8000)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SUM1_GOTH_LEPRECHAUN_8000)
 }

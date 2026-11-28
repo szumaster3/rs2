@@ -30,7 +30,7 @@ class LumberYardShortcut : OptionHandler() {
             player,
             start,
             dest,
-            Animation(Animations.LUMBER_YARD_ENTER_9221)
+            Animation(Animations.PLAYER_SNEAKS_THROUGH_FENCE_REVERSED_9221)
         )
 
         return true

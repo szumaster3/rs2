@@ -25,5 +25,5 @@ class TradeRefereeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = TradeRefereeDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.TRADE_REFEREE_2127)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_CITY_TRADER_REFEREE_2127)
 }

@@ -26,7 +26,7 @@ class MonkNPC(
         vararg objects: Any,
     ): AbstractNPC = MonkNPC(id, location)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_281)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_ARDOUGNE_281)
 
     /**
      * Handles drop clue key (medium) required to open locked chest (Treasure Trail).

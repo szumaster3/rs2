@@ -12,7 +12,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class SpiritGraahkNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_GRAAHK_7363) :
+class SpiritGraahkNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_GRAAHK_7363) :
     Familiar(owner, id, 4900, Items.SPIRIT_GRAAHK_POUCH_12810, 3, WeaponInterface.STYLE_AGGRESSIVE) {
 
     init {
@@ -33,6 +33,6 @@ class SpiritGraahkNPC @JvmOverloads constructor(owner: Player? = null, id: Int =
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPIRIT_GRAAHK_7363, NPCs.SPIRIT_GRAAHK_7364)
+        return intArrayOf(NPCs.LORE_GRAAHK_7363, NPCs.LORE_GRAAHK_COMBAT_7364)
     }
 }

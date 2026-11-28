@@ -9,7 +9,7 @@ import shared.consts.Items
 import shared.consts.Sounds
 
 object PatchRaker {
-    val RAKE_ANIM = getAnimation(Animations.RAKE_2273)
+    val RAKE_ANIM = getAnimation(Animations.FARMING_RAKING_2273)
 
     @JvmStatic
     fun rake(player: Player, patch: FarmingPatch) {

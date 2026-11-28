@@ -248,7 +248,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BRUNDT_THE_CHIEFTAIN_1294)
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIKING_BRUNDT_1294)
 
 
     companion object {

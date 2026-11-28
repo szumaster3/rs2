@@ -121,5 +121,5 @@ class CompostMoundDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.COMPOST_MOUND_6871, NPCs.COMPOST_MOUND_6872)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORE_COMPOST_MOUND_6871, NPCs.LORE_COMPOST_MOUND_COMBAT_6872)
 }

@@ -18,7 +18,7 @@ import shared.consts.Sounds
 class MilkingListener : InteractionListener {
 
     companion object {
-        private val ANIMATION = Animation(Animations.MILKING_COW_2305)
+        private val ANIMATION = Animation(Animations.MILKIT_2305)
 
         private const val DAIRY_COW_0 = shared.consts.Scenery.DAIRY_COW_8689
         private const val DAIRY_COW_1 = shared.consts.Scenery.DAIRY_COW_12111
@@ -65,7 +65,7 @@ class MilkingListener : InteractionListener {
         if (!inInventory(player, EMPTY_BUCKET)) {
             // Near Lumbridge cows.
             if (inBorders(player, 3250, 3271, 3256, 3277)) {
-                openDialogue(player, NPCs.GILLIE_GROATS_3807, true, true)
+                openDialogue(player, NPCs.GILLIE_THE_MILKMAID_3807, true, true)
             } else {
                 sendDialogue(player, "You'll need an empty bucket for the milk itself.")
             }

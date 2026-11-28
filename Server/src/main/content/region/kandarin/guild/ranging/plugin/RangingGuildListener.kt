@@ -47,10 +47,10 @@ class RangingGuildListener : InteractionListener, MapArea {
 
     companion object {
         private val towerDirections = mapOf(
-            NPCs.TOWER_ADVISOR_684 to "north",
-            NPCs.TOWER_ADVISOR_685 to "east",
-            NPCs.TOWER_ADVISOR_686 to "south",
-            NPCs.TOWER_ADVISOR_687 to "west"
+            NPCs.RANGING_ADVISOR1_684 to "north",
+            NPCs.RANGING_ADVISOR2_685 to "east",
+            NPCs.RANGING_ADVISOR3_686 to "south",
+            NPCs.RANGING_ADVISOR4_687 to "west"
         )
     }
 
@@ -80,7 +80,7 @@ class RangingGuildListener : InteractionListener, MapArea {
          * Handles dialogue with a Ranging Guild Guard.
          */
 
-        on(NPCs.GUARD_678, IntType.NPC, "talk-to") { player, node ->
+        on(NPCs.RANGING_GUILD_GUARD_678, IntType.NPC, "talk-to") { player, node ->
             sendPlayerDialogue(player, "Hello there.")
             addDialogueAction(player) { _, _ ->
                 sendNPCDialogueLines(

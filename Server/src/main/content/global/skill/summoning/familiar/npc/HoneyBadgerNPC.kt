@@ -14,7 +14,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
-class HoneyBadgerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.HONEY_BADGER_6845) :
+class HoneyBadgerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.LORE_HONEY_BADGER_6845) :
     Familiar(owner, id, 2500, Items.HONEY_BADGER_POUCH_12065, 4, WeaponInterface.STYLE_AGGRESSIVE) {
     override fun construct(owner: Player, id: Int): Familiar {
         return HoneyBadgerNPC(owner, id)
@@ -47,6 +47,6 @@ class HoneyBadgerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HONEY_BADGER_6845, NPCs.HONEY_BADGER_6846)
+        return intArrayOf(NPCs.LORE_HONEY_BADGER_6845, NPCs.LORE_HONEY_BADGER_COMBAT_6846)
     }
 }

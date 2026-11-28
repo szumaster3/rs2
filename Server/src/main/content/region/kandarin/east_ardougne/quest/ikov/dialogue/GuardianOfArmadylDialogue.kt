@@ -25,7 +25,7 @@ class GuardianOfArmadylDialogue(player: Player? = null) : Dialogue(player) {
         return false
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GUARDIAN_OF_ARMADYL_274, NPCs.GUARDIAN_OF_ARMADYL_275)
+    override fun getIds(): IntArray = intArrayOf(NPCs.IKOV_GUARDIANMALE_274, NPCs.IKOV_GUARDIANFEMALE_275)
 }
 
 class GuardianOfArmadylDialogueFile : DialogueFile() {

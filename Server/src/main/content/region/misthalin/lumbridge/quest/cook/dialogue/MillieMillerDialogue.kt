@@ -45,5 +45,5 @@ class MillieMillerDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MILLIE_MILLER_3806)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MILLIE_THE_MILLER_3806)
 }

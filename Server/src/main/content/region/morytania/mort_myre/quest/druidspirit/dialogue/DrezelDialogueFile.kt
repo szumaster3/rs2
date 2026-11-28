@@ -171,7 +171,7 @@ private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse() {
     override fun pulse(): Boolean {
         when (ticks) {
             0 -> {
-                animate(drezel, Animations.WALK_1162)
+                animate(drezel, Animations.FREMSAGA_ARIANE_WALK_1162)
                 spawnProjectile(drezel, player, 268)
                 playAudio(player, Sounds.PRAYER_RECHARGE_2674)
             }
@@ -180,7 +180,7 @@ private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse() {
                 visualize(
                     player,
                     Animation(Animations.HUMAN_PRAY_645),
-                    Graphics(shared.consts.Graphics.BRIGHT_GREEN_PUFF_OF_STUFF_267, 100),
+                    Graphics(shared.consts.Graphics.SMOKEPUFF_6_267, 100),
                 )
 
             4 -> {

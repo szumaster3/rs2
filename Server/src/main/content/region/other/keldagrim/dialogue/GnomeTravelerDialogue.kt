@@ -17,7 +17,7 @@ class GnomeTravelerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(npc.id == NPCs.GNOME_TRAVELLER_2139) {
+        if(npc.id == NPCs.DWARF_CITY_GNOME_MALE_EMISSARY_2139) {
             player(FaceAnim.HALF_ASKING,"Hello there! What are you doing in the city?")
         } else {
             player("Hello there mister gnome!")
@@ -43,7 +43,7 @@ class GnomeTravelerDialogue(player: Player? = null) : Dialogue(player) {
             10 -> npcl(FaceAnim.OLD_DEFAULT, "We are the companions of the leader of our expedition. We have come here to bargain for much needed supplies for our people.").also { stage++ }
             11 -> player(FaceAnim.HALF_ASKING, "Oh yes, where are you from?").also { stage++ }
             12 -> npcl(FaceAnim.OLD_DEFAULT, "Ehm... from Tree Gnome Village.").also { stage++ }
-            13 -> sendNPCDialogue(player, NPCs.GNOME_TRAVELLER_2139, "The Grand Tree!",FaceAnim.OLD_DEFAULT).also { stage++ }
+            13 -> sendNPCDialogue(player, NPCs.DWARF_CITY_GNOME_MALE_EMISSARY_2139, "The Grand Tree!",FaceAnim.OLD_DEFAULT).also { stage++ }
             14 -> npcl(FaceAnim.OLD_DEFAULT, "Oh yes, sorry, that's what I meant to say.").also { stage = END_DIALOGUE }
         }
         return true
@@ -52,7 +52,7 @@ class GnomeTravelerDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = GnomeTravelerDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        NPCs.GNOME_TRAVELLER_2138,
-        NPCs.GNOME_TRAVELLER_2139
+        NPCs.DWARF_CITY_GNOME_FEMALE_EMISSARY_2138,
+        NPCs.DWARF_CITY_GNOME_MALE_EMISSARY_2139
     )
 }

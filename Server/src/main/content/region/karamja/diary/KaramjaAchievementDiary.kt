@@ -190,7 +190,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
                 )
             }
 
-            11153 -> if(event.npc.id == NPCs.DEATH_WING_79) {
+            11153 -> if(event.npc.id == NPCs.DEATHWING_79) {
                 finishTask(
                     player = player,
                     level = DiaryLevel.HARD,

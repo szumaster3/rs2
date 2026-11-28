@@ -32,7 +32,7 @@ class GhostGuardDialogue(player: Player? = null) : Dialogue(player) {
                 return true
             }
             isGhostsAhoyComplete && hasGhostspeakAmulet -> {
-                findLocalNPC(player, NPCs.GHOST_GUARD_1706)?.let { face(player, it, 1) }
+                findLocalNPC(player, NPCs.AHOY_GHOST_GUARD_1706)?.let { face(player, it, 1) }
                 npc(FaceAnim.FRIENDLY, "All visitors to Port Phasmatys must pay a toll charge of 2 Ectotokens. However, you have done the ghosts of our town a service that surpasses all value, so you may pass without charge.")
                 stage = 3
                 return true
@@ -79,5 +79,5 @@ class GhostGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = GhostGuardDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_GUARD_1706)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHOY_GHOST_GUARD_1706)
 }

@@ -17,7 +17,7 @@ import shared.consts.NPCs
 @Initializable
 class GnomeWaiterDialogue(player: Player? = null) : Dialogue(player) {
 
-    private val gnomeFood = intArrayOf(Items.PREMADE_WM_BATTA_2219, Items.PREMADE_TD_BATTA_2221, Items.PREMADE_C_PLUST_BATTA_2223, Items.PREMADE_FRT_BATTA_2225, Items.PREMADE_VEG_BATTA_2227, Items.PREMADE_CHOC_BOMB_2229, Items.PREMADE_TTL_2231, Items.PREMADE_WORM_HOLE_2233, Items.PREMADE_VEG_BALL_2235, Items.PREMADE_WM_CRUN_2237, Items.PREMADE_CH_CRUNCH_2239, Items.PREMADE_SY_CRUNCH_2241, Items.PREMADE_TD_CRUNCH_2243)
+    private val gnomeFood = intArrayOf(Items.PREMADE_WM_BATTA_2219, Items.PREMADE_TD_BATTA_2221, Items.PREMADE_C_PLUS_T_BATTA_2223, Items.PREMADE_FRT_BATTA_2225, Items.PREMADE_VEG_BATTA_2227, Items.PREMADE_CHOC_BOMB_2229, Items.PREMADE_TTL_2231, Items.PREMADE_WORM_HOLE_2233, Items.PREMADE_VEG_BALL_2235, Items.PREMADE_WM_CRUN_2237, Items.PREMADE_CH_CRUNCH_2239, Items.PREMADE_SY_CRUNCH_2241, Items.PREMADE_TD_CRUNCH_2243)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC

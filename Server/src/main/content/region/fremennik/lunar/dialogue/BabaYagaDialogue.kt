@@ -35,7 +35,7 @@ class BabaYagaDialogue(player: Player? = null) : Dialogue(player) {
             2 -> when (buttonId) {
                 1 -> {
                     end()
-                    openNpcShop(player, NPCs.BABA_YAGA_4513)
+                    openNpcShop(player, NPCs.LUNAR_MOONCLAN_BABA_YAGA_4513)
                 }
                 2 -> playerl(FaceAnim.ASKING, "It's a very interesting house you have here. Does he have a name?").also { stage = 10 }
                 3 -> end()
@@ -67,5 +67,5 @@ class BabaYagaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = BabaYagaDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.BABA_YAGA_4513)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUNAR_MOONCLAN_BABA_YAGA_4513)
 }

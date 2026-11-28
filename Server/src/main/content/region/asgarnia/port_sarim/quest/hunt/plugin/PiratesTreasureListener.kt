@@ -81,7 +81,7 @@ class PiratesTreasureListener : InteractionListener {
                     quest.finish(player)
                 } else {
                     val npc = core.game.node.entity.npc.
-                    NPC.create(NPCs.GARDENER_1217, player.location.transform(0, 1, 0))
+                    NPC.create(NPCs.FALADOR_GARDENER_1217, player.location.transform(0, 1, 0))
                     npc.setAttribute("target", player)
                     npc.isRespawn = false
                     npc.init()

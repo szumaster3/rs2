@@ -71,7 +71,7 @@ class RagAndBoneManPlugin : InteractionListener {
 
         onUseWith(IntType.SCENERY, Items.TINDERBOX_590, Scenery.POT_BOILER_14007) { player, _, _ ->
             sendMessage(player, "You light the logs under the pot.")
-            animate(player, Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733)
+            animate(player, Animations.HUMAN_CREATEFIRE_733)
             runTask(player, 3) {
                 animate(player, -1, true)
                 setVarbit(player, Vars.VARBIT_RAG_AND_BONE_POT_BOILER_2046, 3)

@@ -53,5 +53,5 @@ class MubarizDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MUBARIZ_957)
+    override fun getIds(): IntArray = intArrayOf(NPCs.DUEL_MUBARIZ_957)
 }

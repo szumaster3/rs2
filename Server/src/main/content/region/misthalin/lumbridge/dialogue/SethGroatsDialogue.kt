@@ -25,5 +25,5 @@ class SethGroatsDialogue(player: Player? = null) : Dialogue(player) {
         buttonId: Int,
     ): Boolean = true
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.SETH_GROATS_452)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAVOUR_SETH_GROATS_452)
 }

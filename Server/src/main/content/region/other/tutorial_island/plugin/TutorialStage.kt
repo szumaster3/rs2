@@ -30,7 +30,7 @@ object TutorialStage {
 
     @JvmField
     val STARTER_PACK = arrayOf(
-        Item(Items.BRONZE_AXE_1351, 1),
+        Item(Items.BRONZE_HATCHET_1351, 1),
         Item(Items.TINDERBOX_590, 1),
         Item(Items.SMALL_FISHING_NET_303, 1),
         Item(Items.SHRIMPS_315, 1),
@@ -257,7 +257,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarp(player, 406, 2)
-                registerHintIcon(player, Repository.findNPC(NPCs.TUTORIAL_FISHING_SPOT_952)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NPC_0_48_48_NEWBIEFISHING_952)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Catch some shrimp",
@@ -483,7 +483,7 @@ object TutorialStage {
             27 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.QUEST_GUIDE_949)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_QUEST_INSTRUCTOR_949)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlainMessage(
                     true,
@@ -498,7 +498,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Repository.findNPC(NPCs.QUEST_GUIDE_949)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_QUEST_INSTRUCTOR_949)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Your Quest Journal",
@@ -528,7 +528,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Repository.findNPC(NPCs.MINING_INSTRUCTOR_948)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_MINING_INSTRUCTOR_948)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Mining and Smithing",
@@ -588,7 +588,7 @@ object TutorialStage {
             34 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.MINING_INSTRUCTOR_948)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_MINING_INSTRUCTOR_948)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "It's copper.",
@@ -656,7 +656,7 @@ object TutorialStage {
             40 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.MINING_INSTRUCTOR_948)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_MINING_INSTRUCTOR_948)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "You've made a bronze bar!",
@@ -711,7 +711,7 @@ object TutorialStage {
             44 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.COMBAT_INSTRUCTOR_944)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_COMBAT_INSTRUCTOR_944)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Combat",
@@ -765,7 +765,7 @@ object TutorialStage {
             47 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.COMBAT_INSTRUCTOR_944)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_COMBAT_INSTRUCTOR_944)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "You're now holding your dagger.",
@@ -829,7 +829,7 @@ object TutorialStage {
             51 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.GIANT_RAT_950)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIEGIANTRAT_950)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Attacking",
@@ -858,7 +858,7 @@ object TutorialStage {
             53 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.COMBAT_INSTRUCTOR_944)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_COMBAT_INSTRUCTOR_944)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Well done, you've made your first kill!",
@@ -872,7 +872,7 @@ object TutorialStage {
             54 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.GIANT_RAT_950)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIEGIANTRAT_950)!!)
                 Component.setUnclosable(
                     player,
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -904,7 +904,7 @@ object TutorialStage {
             56 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.BANKER_953)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NOOBBANKER_953)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Banking.",
@@ -932,7 +932,7 @@ object TutorialStage {
             58 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.FINANCIAL_ADVISOR_947)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_FINANCIAL_ADVISOR_947)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Financial advice",
@@ -960,7 +960,7 @@ object TutorialStage {
             60 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_BRACE_954)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_NOOB_954)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Prayer",
@@ -990,7 +990,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_BRACE_954)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_NOOB_954)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlainMessage(
                     true,
@@ -1033,7 +1033,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_BRACE_954)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_NOOB_954)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "This is your Ignore List.",
@@ -1061,7 +1061,7 @@ object TutorialStage {
             67 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.MAGIC_INSTRUCTOR_946)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_MAGIC_INSTRUCTOR_946)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Your final instructor!",
@@ -1091,7 +1091,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Repository.findNPC(NPCs.MAGIC_INSTRUCTOR_946)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_MAGIC_INSTRUCTOR_946)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlainMessage(
                     true,
@@ -1104,7 +1104,7 @@ object TutorialStage {
             70 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Repository.findNPC(NPCs.CHICKEN_951)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIECHICKEN_951)!!)
                 Component.setUnclosable(
                     player,
                 player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
@@ -1121,7 +1121,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 player.interfaceManager.restoreTabs()
-                registerHintIcon(player, Repository.findNPC(NPCs.MAGIC_INSTRUCTOR_946)!!)
+                registerHintIcon(player, Repository.findNPC(NPCs.NEWBIE_MAGIC_INSTRUCTOR_946)!!)
                 Component.setUnclosable(
                     player,
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(

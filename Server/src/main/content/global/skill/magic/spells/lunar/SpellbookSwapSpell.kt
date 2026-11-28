@@ -39,7 +39,7 @@ class SpellbookSwapSpell : MagicSpell(SpellBook.LUNAR, 96, 130.0, null, null, nu
 
         player.lock(5)
 
-        visualize(player, Animation(6299), Graphics(shared.consts.Graphics.SPELLBOOK_SWAP_GFX_1062))
+        visualize(player, Animation(6299), Graphics(shared.consts.Graphics.DREAM_SPELLBOOK_SPOTANIM_1062))
         playAudio(player, Sounds.LUNAR_CHANGE_SPELLBOOK_3613)
 
         onCastDuringSwap(player)

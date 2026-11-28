@@ -106,13 +106,13 @@ class SeedlingListener : InteractionListener {
         Items.SPIRIT_SEEDLING_5363,
     )
     private val WATERING_CANS = intArrayOf(
-        Items.WATERING_CAN8_5340,
-        Items.WATERING_CAN7_5339,
-        Items.WATERING_CAN6_5338,
-        Items.WATERING_CAN5_5337,
-        Items.WATERING_CAN4_5336,
-        Items.WATERING_CAN3_5335,
-        Items.WATERING_CAN2_5334,
-        Items.WATERING_CAN1_5333,
+        Items.WATERING_CAN_8_5340,
+        Items.WATERING_CAN_7_5339,
+        Items.WATERING_CAN_6_5338,
+        Items.WATERING_CAN_5_5337,
+        Items.WATERING_CAN_4_5336,
+        Items.WATERING_CAN_3_5335,
+        Items.WATERING_CAN_2_5334,
+        Items.WATERING_CAN_1_5333,
     )
 }
